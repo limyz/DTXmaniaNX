@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="checkBox小節範囲指定.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="checkBox小節範囲指定.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 105</value>
+  </data>
+  <data name="checkBox小節範囲指定.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 16</value>
+  </data>
+  <data name="checkBox小節範囲指定.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="checkBox小節範囲指定.Text" xml:space="preserve">
+    <value>&amp;Bar range</value>
+  </data>
+  <data name="checkBox小節範囲指定.ToolTip" xml:space="preserve">
+    <value>Search chip(s) within this part range.</value>
+  </data>
+  <data name="&gt;&gt;checkBox小節範囲指定.Name" xml:space="preserve">
+    <value>checkBox小節範囲指定</value>
+  </data>
+  <data name="&gt;&gt;checkBox小節範囲指定.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox小節範囲指定.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBox小節範囲指定.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 38</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 16</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.Text" xml:space="preserve">
+    <value>&amp;Chip range</value>
+  </data>
+  <data name="checkBoxチップ範囲指定.ToolTip" xml:space="preserve">
+    <value>Search chip(s) within this range.</value>
+  </data>
+  <data name="&gt;&gt;checkBoxチップ範囲指定.Name" xml:space="preserve">
+    <value>checkBoxチップ範囲指定</value>
+  </data>
+  <data name="&gt;&gt;checkBoxチップ範囲指定.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxチップ範囲指定.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxチップ範囲指定.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="checkBoxレーン指定.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBoxレーン指定.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 38</value>
+  </data>
+  <data name="checkBoxレーン指定.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 16</value>
+  </data>
+  <data name="checkBoxレーン指定.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="checkBoxレーン指定.Text" xml:space="preserve">
+    <value>&amp;Lane select</value>
+  </data>
+  <data name="checkBoxレーン指定.ToolTip" xml:space="preserve">
+    <value>Search in selected lane(s) only.</value>
+  </data>
+  <data name="&gt;&gt;checkBoxレーン指定.Name" xml:space="preserve">
+    <value>checkBoxレーン指定</value>
+  </data>
+  <data name="&gt;&gt;checkBoxレーン指定.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBoxレーン指定.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBoxレーン指定.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="checkedListBoxレーン選択リスト.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="checkedListBoxレーン選択リスト.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 83</value>
+  </data>
+  <data name="checkedListBoxレーン選択リスト.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 102</value>
+  </data>
+  <data name="checkedListBoxレーン選択リスト.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="checkedListBoxレーン選択リスト.ToolTip" xml:space="preserve">
+    <value>検索したいレーンにチェックを入れます。
+</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxレーン選択リスト.Name" xml:space="preserve">
+    <value>checkedListBoxレーン選択リスト</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxレーン選択リスト.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxレーン選択リスト.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkedListBoxレーン選択リスト.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="checkBox表チップ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox表チップ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 61</value>
+  </data>
+  <data name="checkBox表チップ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 16</value>
+  </data>
+  <data name="checkBox表チップ.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="checkBox表チップ.Text" xml:space="preserve">
+    <value>Select from &amp;front chips</value>
+  </data>
+  <data name="checkBox表チップ.ToolTip" xml:space="preserve">
+    <value>Search only front chip(s).</value>
+  </data>
+  <data name="&gt;&gt;checkBox表チップ.Name" xml:space="preserve">
+    <value>checkBox表チップ</value>
+  </data>
+  <data name="&gt;&gt;checkBox表チップ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox表チップ.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBox表チップ.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="checkBox裏チップ.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox裏チップ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 83</value>
+  </data>
+  <data name="checkBox裏チップ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 16</value>
+  </data>
+  <data name="checkBox裏チップ.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="checkBox裏チップ.Text" xml:space="preserve">
+    <value>Select from &amp;back chips</value>
+  </data>
+  <data name="checkBox裏チップ.ToolTip" xml:space="preserve">
+    <value>Search only back chip(s).</value>
+  </data>
+  <data name="&gt;&gt;checkBox裏チップ.Name" xml:space="preserve">
+    <value>checkBox裏チップ</value>
+  </data>
+  <data name="&gt;&gt;checkBox裏チップ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox裏チップ.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;checkBox裏チップ.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonNONE.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="buttonNONE.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 8.25pt</value>
+  </data>
+  <data name="buttonNONE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 61</value>
+  </data>
+  <data name="buttonNONE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 19</value>
+  </data>
+  <data name="buttonNONE.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="buttonNONE.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="buttonNONE.ToolTip" xml:space="preserve">
+    <value>全レーンのチェックをはずします。
+</value>
+  </data>
+  <data name="&gt;&gt;buttonNONE.Name" xml:space="preserve">
+    <value>buttonNONE</value>
+  </data>
+  <data name="&gt;&gt;buttonNONE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonNONE.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonNONE.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonALL.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
+  <data name="buttonALL.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 8.25pt</value>
+  </data>
+  <data name="buttonALL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 61</value>
+  </data>
+  <data name="buttonALL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 19</value>
+  </data>
+  <data name="buttonALL.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="buttonALL.Text" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="buttonALL.ToolTip" xml:space="preserve">
+    <value>全レーンにチェックを付けます。
+</value>
+  </data>
+  <data name="&gt;&gt;buttonALL.Name" xml:space="preserve">
+    <value>buttonALL</value>
+  </data>
+  <data name="&gt;&gt;buttonALL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonALL.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonALL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonキャンセル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>307, 165</value>
+  </data>
+  <data name="buttonキャンセル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonキャンセル.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="buttonキャンセル.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;buttonキャンセル.Name" xml:space="preserve">
+    <value>buttonキャンセル</value>
+  </data>
+  <data name="&gt;&gt;buttonキャンセル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonキャンセル.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonキャンセル.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="buttonOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 165</value>
+  </data>
+  <data name="buttonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="buttonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="buttonOK.Text" xml:space="preserve">
+    <value>&amp;Find</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Name" xml:space="preserve">
+    <value>buttonOK</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOK.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 39</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>～</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="textBoxチップ範囲開始.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 36</value>
+  </data>
+  <data name="textBoxチップ範囲開始.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 19</value>
+  </data>
+  <data name="textBoxチップ範囲開始.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲開始.Name" xml:space="preserve">
+    <value>textBoxチップ範囲開始</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲開始.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲開始.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲開始.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="textBoxチップ範囲終了.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 36</value>
+  </data>
+  <data name="textBoxチップ範囲終了.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 19</value>
+  </data>
+  <data name="textBoxチップ範囲終了.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲終了.Name" xml:space="preserve">
+    <value>textBoxチップ範囲終了</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲終了.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲終了.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBoxチップ範囲終了.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 106</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 12</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>～</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="textBox小節範囲開始.Location" type="System.Drawing.Point, System.Drawing">
+    <value>257, 103</value>
+  </data>
+  <data name="textBox小節範囲開始.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 19</value>
+  </data>
+  <data name="textBox小節範囲開始.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲開始.Name" xml:space="preserve">
+    <value>textBox小節範囲開始</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲開始.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲開始.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲開始.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="textBox小節範囲終了.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 103</value>
+  </data>
+  <data name="textBox小節範囲終了.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 19</value>
+  </data>
+  <data name="textBox小節範囲終了.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲終了.Name" xml:space="preserve">
+    <value>textBox小節範囲終了</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲終了.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲終了.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;textBox小節範囲終了.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="label説明.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label説明.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 11</value>
+  </data>
+  <data name="label説明.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 12</value>
+  </data>
+  <data name="label説明.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="label説明.Text" xml:space="preserve">
+    <value>Select chip(s) which meet following conditions:</value>
+  </data>
+  <data name="&gt;&gt;label説明.Name" xml:space="preserve">
+    <value>label説明</value>
+  </data>
+  <data name="&gt;&gt;label説明.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label説明.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label説明.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>394, 200</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Find and select</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
+    <value>toolTip1</value>
+  </data>
+  <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>C検索ダイアログ</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

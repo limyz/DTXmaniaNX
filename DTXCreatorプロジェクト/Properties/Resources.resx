@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BGMのみ再生" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\datacontainer_newrecordhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dtxcreator" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\DTXC.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DTXC_VERSION" xml:space="preserve">
+    <value>025(verK)</value>
+  </data>
+  <data name="Redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\edit_redohs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="strBPM選択ダイアログの説明文" xml:space="preserve">
+    <value>Specify a BPM value.</value>
+  </data>
+  <data name="strDTXファイルではありませんMSG" xml:space="preserve">
+    <value>It is not DTX file.</value>
+  </data>
+  <data name="strDTXファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Open a DTX file</value>
+  </data>
+  <data name="strDTXファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>DTX file (*.dtx;*.gda;*.g2d;*.bms;*.bme)|*.dtx;*.gda;*.g2d;*.bms;*.bme|All files(*.*)|*.*</value>
+  </data>
+  <data name="strしばらくお待ち下さいMSG" xml:space="preserve">
+    <value>Wait a moment...</value>
+  </data>
+  <data name="strエラーダイアログのタイトル" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="strコンフィグ読み込み失敗エラーMSG" xml:space="preserve">
+    <value>Failed to load DTXCreator.config.</value>
+  </data>
+  <data name="strサウンドファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select a sound file</value>
+  </data>
+  <data name="strサウンドファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>Sound files(*.wav;*.ogg;*.mp3;*.xa)|*.wav;*.ogg;*.mp3;*.xa|All files(*.*)|*.*</value>
+  </data>
+  <data name="strステージ画像ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select a loading image file</value>
+  </data>
+  <data name="strチップ番号に誤りがありますMSG" xml:space="preserve">
+    <value>Illegal chip number </value>
+  </data>
+  <data name="strデフォルトウィンドウタイトル" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="strファイルが存在しませんMSG" xml:space="preserve">
+    <value>Specified file is not found.</value>
+  </data>
+  <data name="strプレビュー画像ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select a preview image file</value>
+  </data>
+  <data name="strプレビュー音ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select a preview sound file</value>
+  </data>
+  <data name="strプロセスの起動に失敗しましたMSG" xml:space="preserve">
+    <value>Failed to boot.</value>
+  </data>
+  <data name="str保存中ですMSG" xml:space="preserve">
+    <value>Saving...</value>
+  </data>
+  <data name="str個のチップが選択されましたMSG" xml:space="preserve">
+    <value> chip(s) are selected.</value>
+  </data>
+  <data name="str個のチップを置換しましたMSG" xml:space="preserve">
+    <value> chip(s) are replaced.</value>
+  </data>
+  <data name="str初期化中ですMSG" xml:space="preserve">
+    <value>Initializing...</value>
+  </data>
+  <data name="str動画ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select an Movie file</value>
+  </data>
+  <data name="str動画ファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>Movie files(*.avi;*.mp4)|*.avi;*.mp4|All files(*.*)|*.*</value>
+  </data>
+  <data name="str名前を付けて保存ダイアログのタイトル" xml:space="preserve">
+    <value>Save As</value>
+  </data>
+  <data name="str小節番号に誤りがありますMSG" xml:space="preserve">
+    <value>Illegal bar number.</value>
+  </data>
+  <data name="str検索結果ダイアログのタイトル" xml:space="preserve">
+    <value>Find results</value>
+  </data>
+  <data name="str画像ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select Image File</value>
+  </data>
+  <data name="str画像ファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>Image files(*.bmp;*.jpg;*.jpeg;*.png)|*.bmp;*.jpg;*.jpeg;*.png|All files(*.*)|*.*</value>
+  </data>
+  <data name="str確認ダイアログのタイトル" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="str結果画像ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select Reult Screen image file</value>
+  </data>
+  <data name="str編集中のデータを保存しますかMSG" xml:space="preserve">
+    <value>The dtx data has changed.
+Do you want to save the changes?</value>
+  </data>
+  <data name="str置換結果ダイアログのタイトル" xml:space="preserve">
+    <value>Replace result</value>
+  </data>
+  <data name="str背景画像ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>Select background image file</value>
+  </data>
+  <data name="str該当するチップはありませんでしたMSG" xml:space="preserve">
+    <value>No chips are found in the specified conditions.</value>
+  </data>
+  <data name="str読み込み中ですMSG" xml:space="preserve">
+    <value>Now loading...</value>
+  </data>
+  <data name="Undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\edit_undohs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="りらちょー" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\りらちょー.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="コピー" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\copyhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="スピーカー" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\audiohs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="バージョン情報" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\バージョン情報.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ヘルプ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="上移動" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\moveup.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="下移動" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\movedown.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="保存" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\savehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="再生" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\datacontainer_movenexths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="再生一時停止" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\pausehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="再生停止" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\stophs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="切り取り" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\cuths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="削除" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\deletehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="動画ドキュメント" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\videodoc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="新規作成" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\documenths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="最初から再生" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\最初から再生.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="画像ドキュメント" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\picdoc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="矢印ポインタ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\pointerhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="表示形式選択" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\表示形式.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="貼り付け" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\pastehs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="鉛筆" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\pencil.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="開く" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\openhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="音楽ドキュメント" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\musicdoc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ﾁｯﾌﾟﾊﾟﾚｯﾄ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\コード\99.リソース\editinformationhs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="str名前を付けて保存ダイアログのフィルタ" xml:space="preserve">
+    <value>DTX files(*.dtx)|*.dtx</value>
+  </data>
+</root>

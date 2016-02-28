@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">Advanced operations</th></tr>
+<tr><td class="pageHeader">Search</td></tr>
+</table>
+<p>Click [Edit(<u>E</u>)] - [Find(<u>F</u>)] in the menubar to open Find dialog.</p>
+<p>
+<img border="0" src="images/search_e_.png" width="410" height="238"></p>
+<blockquote>
+	<p><a href="#lane">Lane select</a><br>
+	<a href="#chip">Chip range</a><br>
+	<a href="#chip_omote">Select from front chips</a><br>
+	<a href="#chip_ura">Selrct from back chips</a><br>
+	<a href="#syousetu">Bar range</a><br clear="all"></p>
+</blockquote>
+
+
+<p>Specify the search conditions and click [Find].
+<b>The chips that satisfy conditions are selected.</b>
+</p>
+
+<h2><a name="lane"></a>Lane select</h2>
+<p>If you want to limit the target lanes, check it.<br>
+And check the lane you'd like to use as target lanes. Click [All] to select all lanes. Click [None] to cancel all lanes.</p>
+
+<h2><a name="chip"></a>Chip range</h2>
+<p>To specify the range of chip number to search.
+<br>
+Specify &quot;from&quot; and &quot;to&quot; number.
+Both numbers are 36-decimal expression (01-ZZ).
+If you specify one of them, the chips would be specified which has that chip number.
+If you don't specify both of them, all ranges (01-ZZ) would be specified.
+</p>
+
+<h2><a name="chip_omote"></a>Select from front chips</h2>
+<p>Check it if you want to select only front chips.</p>
+
+<h2><a name="chip_ura"></a>Select from back chips</h2>
+<p>Check it if you want to select only back chips.</p>
+
+<h2><a name="syousetu"></a>Bar range</h2>
+<p>Specify bar ranges where you want to select.<br>
+Bar number should be 000-Z99
+(the hundred's digit should be 0-9 and A-Z, and 
+the ten's digit and the one's digit should be 0-9).
+
+If you specify one of them, the chips would be specified in that bar.
+If you don't specify both of them, all ranges (000-Z99) would be specified.
+</p>
+
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">譜面</td></tr>
+</table>
+</p>
+
+<p>
+　譜面では、チップを配置することで演奏データを作り上げます。</p>
+<h1>
+画面構成</h1>
+<p align="center">
+<img border="0" src="images/譜面.jpg"></p>
+<h2>
+<a name="lane"></a>レーン、レーン名</h2>
+<p>
+　チップを配置する列とその名前です。各レーンは、DTXファイルフォーマットの「チャンネル」に対応しています。たとえば、スネアドラムレーン（SD）は、DTXファイルフォーマットのスネアドラムチャンネル（12）に対応しており、ここに配置されたチップはチャンネル12のオブジェクトとして出力されます。</p>
+<ul>
+	<li><b>BPM</b> - BPMを指定するレーンです。</li>
+	<li><b>LC, HH, SD, BD, HT, LT, FT, CY</b> - 
+	ドラムレーンです。順番に、左シンバル、ハイハットClose、スネア、バス、ハイタム、ロータム、フロアタム、シンバルのチップを配置します。</li>
+	<li><b>FI</b> - フィルインレーンです。01 のチップを置くとフィルイン開始、02のチップを置くとフィルイン終了を意味します。</li>
+	<li><b>BGM</b> - 
+	BGMレーンです。BGM用のサウンドチップを配置します。チップの発声の前にはそれまで再生されていた直前のサウンドが自動的に消音されます。</li>
+	<li><b>SE1～SE5</b> - 
+	効果音レーンです。効果音として鳴らしたいサウンドチップを配置します。チップの発生時にはそれまで再生されていたサウンドを消音しません。（ただし多重再生は１レーン２音まで）</li>
+	<li><b>AVI</b> - 動画レーンです。動画チップを配置します。</li>
+	<li><b>BG1～8</b> - 
+	BGAレーンです。それぞれ、８つのBGAレイヤに相当します（BG1が一番下、BG8が一番上のレイヤ）。裏チャンネルはスコープ変更チャンネルに割り当てられています。</li>
+</ul>
+<p>
+　また各レーンは、<b>表チャンネル</b>と<b>裏チャンネル</b>の２種類に対応しており、通常のチップ配置では表チャンネルの、裏チップ配置（Ctrl 
+を押しながらチップを配置する）では裏チャンネルのオブジェクトとして出力されます。</p>
+<p>　各レーンの表チャンネルと裏チャンネルの割当は以下のようになります。</p>
+<table border="1" id="table1" width="652" height="91" cellspacing="0" cellpadding="2">
+	<tr>
+	<td align="center" bgcolor="#D2DCFF">　</td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">BPM</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">LC</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">HH</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">SD</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">BD</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">HT</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">LT</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">FT</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">CY</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">FI</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">BGM</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">SE1～5</font></td>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">AVI</font></td>
+	<td height="27" align="center" bgcolor="#D2DCFF">
+	<font face="serif" size="2">BG1</font></td>
+	<td height="27" align="center" bgcolor="#D2DCFF">
+	<font face="serif" size="2">BG2</font></td>
+	<td height="27" align="center" bgcolor="#D2DCFF">
+	<font face="serif" size="2">BG3～BG7</font></td>
+	<td height="27" align="center" bgcolor="#D2DCFF">
+	<font face="serif" size="2">BG8</font></td>
+	</tr>
+	<tr>
+	<td align="center" bgcolor="#D2DCFF"><font face="serif" size="2">表Ch.</font></td>
+	<td align="center"><font face="serif" size="2">08</font></td>
+	<td align="center"><font face="serif" size="2">1A</font></td>
+	<td align="center"><font face="serif" size="2">11</font></td>
+	<td align="center"><font face="serif" size="2">12</font></td>
+	<td align="center"><font face="serif" size="2">13</font></td>
+	<td align="center"><font face="serif" size="2">14</font></td>
+	<td align="center"><font face="serif" size="2">15</font></td>
+	<td align="center"><font face="serif" size="2">17</font></td>
+	<td align="center"><font face="serif" size="2">16</font></td>
+	<td align="center"><font face="serif" size="2">53</font></td>
+	<td align="center"><font face="serif" size="2">01</font></td>
+	<td align="center"><font face="serif" size="2">61～65</font></td>
+	<td align="center"><font face="serif" size="2">54</font></td>
+	<td height="27" align="center"><font face="serif" size="2">04</font></td>
+	<td height="27" align="center"><font face="serif" size="2">07</font></td>
+	<td height="27" align="center"><font face="serif" size="2">55～59</font></td>
+	<td height="27" align="center"><font face="serif" size="2">60</font></td>
+	</tr>
+	<tr>
+	<td width="54" align="center" bgcolor="#D2DCFF"><font face="serif" size="2">
+	裏Ch.</font></td>
+	<td width="39" align="center"><font face="serif" size="2">08</font></td>
+	<td width="29" align="center"><font face="serif" size="2">1A</font></td>
+	<td width="29" align="center"><font face="serif" size="2">18</font></td>
+	<td width="29" align="center"><font face="serif" size="2">12</font></td>
+	<td width="29" align="center"><font face="serif" size="2">13</font></td>
+	<td width="28" align="center"><font face="serif" size="2">14</font></td>
+	<td width="27" align="center"><font face="serif" size="2">15</font></td>
+	<td width="22" align="center"><font face="serif" size="2">17</font></td>
+	<td width="29" align="center"><font face="serif" size="2">19</font></td>
+	<td width="20" align="center"><font face="serif" size="2">53</font></td>
+	<td width="35" align="center"><font face="serif" size="2">01</font></td>
+	<td width="58" align="center"><font face="serif" size="2">61～65</font></td>
+	<td width="26" align="center"><font face="serif" size="2">54</font></td>
+	<td height="27" width="30" align="center"><font face="serif" size="2">C4</font></td>
+	<td height="27" width="30" align="center"><font face="serif" size="2">C7</font></td>
+	<td height="27" width="49" align="center"><font face="serif" size="2">D5～D9</font></td>
+	<td height="27" width="29" align="center"><font face="serif" size="2">E0</font></td>
+	</tr>
+</table>
+
+<p>
+主なポイント：</p>
+<ul>
+	<li>ハイハットレーン（HH）の表が HH-Close、裏が HH-Open になっています。</li>
+	<li>シンバルレーン（CY）の表が Cymbal 、裏が Ride-Cymbal になっています。</li>
+	<li>BGレーン（BG1～8）の表がレイヤチャンネル、裏がスコープ画像置き換えチャンネルになっています。</li>
+</ul>
+<h2>
+小節番号</h2>
+<p>
+　小節の番号を示します。小節番号は、000～Z99 まで使用できます。</p>
+<h2>
+小節線</h2>
+<p>
+　小節同士を区切る線です。</p>
+<h2>
+拍線</h2>
+<p>
+　１拍（４分音符）に相当する間隔で引かれる線です。小節長が変更された場合も、拍線の表示間隔は変わらず一定です。</p>
+<h2>
+ガイド線</h2>
+<p>
+　現在の入力解像度を表す線です。チップが配置されるときは<b>ガイド線に沿って配置</b>されます。ガイド線の間隔は、メニューバー（[表示(<u>V</u>)]→[ガイド間隔(<u>G</u>)]→…）またはツールバーから変更できます。小節長が変更された場合も、ガイド線の表示間隔は変わらず一定です。</p>
+
+</body>
+
+</html>

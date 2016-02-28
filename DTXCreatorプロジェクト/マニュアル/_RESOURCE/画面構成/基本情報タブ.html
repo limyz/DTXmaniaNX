@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">[基本情報]タブ</td></tr>
+</table>
+</p>
+
+<p>
+　曲データに関する諸情報の設定を行います。</p>
+<h1>
+画面構成</h1>
+<p align="center">
+<img border="0" src="images/edit_tab.jpg" width="250" height="367" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#title">曲名、製作者、コメント</a><br>
+<a href="#bpm">BMP</a><br>
+<a href="#level">DrumLv., GuitarLv., BassLv</a><br>
+<a href="#panel">パネル</a><br>
+<a href="#preview">プレビュー音</a><br>
+<a href="#preimage">選曲画像</a><br>
+<a href="#stagefile">Loading 画像</a><br>
+<a href="#background">背景画像</a><br>
+<a href="#resultimage">結果画像</a><br clear="all">
+</p>
+<h2><a name="title"></a>曲名、製作者、コメント</h2>
+<p>　曲データの曲名、製作者名、ならびにコメント文を記述します。<br>
+　これらは、DTXManiaの選曲画面で表示されます。</p>
+<p>　製作者名としては、DTXファイルの作者ではなく、元になった曲のアーティストの名前（歌手名等）を書くことが主流ですが、別にどっちでもいいです。</p>
+<h2><a name="bpm"></a>BPM</h2>
+<p>　曲データの演奏速度を BPM (Beats/Minute）で指定します。BPM 
+は”１分間における拍（４分音符）の数”を意味し、数値が大きいほど速い曲になります。<br>
+　BPM はここで指定した値が初期値となりますが、譜面の BPx レーンでこれを変更することが出来ます。</p>
+<h2><a name="level"></a>DrumLv., GuitarLv., BassLv.</h2>
+<p>　ドラム、ギター、ベースの難易度を、（易しい）1～100 （難しい）の数値で指定します。<br>
+　<b>DTXManiaでは、この数値を設定しなければ演奏可能な譜面として認識されません。</b></p>
+<h2><a name="panel"></a>パネル</h2>
+<p>　DTXMania の演奏画面に表示するコメントを記述します。</p>
+<p align="center"><img border="0" src="images/panel_desc.jpg" width="344" height="273"></p>
+<p align="left">　パネル文を記述しなかった場合は、曲名がそのままパネル文として表示されます。</p>
+<h2 align="left"><a name="preview"></a>プレビュー音</h2>
+<p align="left">　選曲画面で曲が選択されているときに演奏される音声ファイル（WAV,XA,MP3,Oggファイル）を指定します。 </p>
+<h2 align="left"><a name="preimage"></a>選曲画像</h2>
+<p align="left">　選曲画面で曲が選択されているときに表示される画像ファイル（204x269ドットのBMP, PNG, 
+JPEGファイル）を指定します。 </p>
+<h2><a name="stagefile"></a>Loading画像</h2>
+<p>　曲が選択されて演奏データがロードされている間に表示する画像（640x480ドットのBMP, JPEG, 
+PNGファイル；それ以上のサイズは右下方からカット）を指定します。 </p>
+<h2><a name="background"></a>背景画像</h2>
+<p>　演奏画面の背景となる画像（640x480ドットの BMP, PNG, JPEG ファイル）を指定します。 この画像は、DTXMania 
+の演奏画面と半透明合成されて表示されます。画像サイズが 640x480 より小さい場合には、同じ画像が繰り返し並べて（タイル並びで）表示されます。 </p>
+<h2><a name="resultimage"></a>結果画像</h2>
+<p>　結果表示画面で表示する画像（204x269ドットの BMP, PNG, JPEG ファイル）を指定します。これが指定されない時は、<a href="#preimage">選曲画像</a>で指定した画像が表示されます。 </p>
+
+</body>
+
+</html>

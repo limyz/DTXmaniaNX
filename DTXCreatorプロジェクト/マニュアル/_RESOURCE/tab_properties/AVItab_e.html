@@ -1,0 +1,65 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">Tab properties</th></tr>
+<tr><td class="pageHeader">[AVI] tab</td></tr>
+</table>
+</p>
+
+<p>
+&quot;AVI tab&quot; manages <b>AVI cell list</b> used in DTX score<br>
+AVI can handle 1295 AVI files(<b>AVI cell</b>).
+Each AVI cells have the number 01-ZZ (36-decimal expression), and each cells have one label and one filename.</p>
+<p>
+Please see &quot;Movie property&quot; to know how to specify these items.</p>
+<h1>
+Movie and CODEC</h1>
+<p>
+To playback the movie in DTXMania, you have to install the CODEC related to the movie file in advance.
+Roughly speaking, there are two type of CODECs ... VFW (Video for Windows) and DirectShow. DTXMania supports VFW only.</p>
+
+<h1>AVI tab layouts</h1>
+<p>
+</p>
+<p>
+<img border="0" src="images/avi_tab_e_.png" width="292" height="364" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#label">Label</a><br>
+<a href="#No">No</a><br>
+<a href="#file">File</a><br>
+<a href="#move">Move up</a>（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#move">Move down</a>（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）<br clear="all">
+</p>
+
+<h2><a name="label"></a>Label</h2>
+<p>It shows the lavel named to the AVI cell.<br>
+In the DTX file, the lavel strings are used to the comments of #AVI command.</p>
+
+<h2><a name="No"></a>No</h2>
+<p>The number of AVI cell. It has the value 01-ZZ (36-decimal expression).<br>
+The chips drawn on the score are distinguished by the number.</p>
+
+<h2><a name="file"></a>File</h2>
+<p>The movie filename related to the AVI cell.<br>
+It is represented as the relative path from the DTX file you're making.</p>
+
+<h2><a name="move"></a>Move up (<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">), Move down (<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">)</h2>
+<p>It move up/down the AVI cell in the AVI cell list.<br>
+It causes the decrement/increment the number of the AVI cell,
+and the chip's number on the score are also changed automatically.</p>
+
+</body>
+
+</html>

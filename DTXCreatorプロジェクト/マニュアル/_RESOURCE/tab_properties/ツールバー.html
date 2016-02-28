@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">ツールバー</td></tr>
+</table>
+</p>
+
+<h1>
+画面構成</h1>
+<p>
+</p>
+<p align="center"><img border="0" src="images/ツールバー.jpg" width="569" height="182"></p>
+<ul>
+	<li><b><span style="font-weight: 400">
+	<img border="0" src="images/DocumentHS.png" width="16" height="16" style="margin: 0">
+	</span>新規作成<span style="font-weight: 400"> - </span></b>新しい譜面を作成します。</li>
+	<li><b>
+	<img border="0" src="images/openHS.png" width="16" height="16" style="margin: 0"> 開く<span style="font-weight: 400"> 
+	- </span></b>DTXファイルを読み込みます。</li>
+	<li><b>
+	<img border="0" src="images/saveHS.png" width="16" height="16" style="margin: 0"> 上書き保存<span style="font-weight: 400"> 
+	- </span></b>現在編集中の譜面をDTXファイルとして保存します。<br>
+
+　<hr></li>
+	<li><b>
+	<img border="0" src="images/CutHS.png" width="16" height="16" style="margin: 0"> 
+	切り取り </b>- 現在選択中のチップをクリップボードに切り取ります。選択されているチップが１つもない間は、このメニューは使用できません。</li>
+	<li><b>
+	<img border="0" src="images/CopyHS.png" width="16" height="16" style="margin: 0"> 
+	コピー</b> - 現在選択中のチップをクリップボードにコピーします。選択されているチップが１つもない間は、このメニューは使用できません。</li>
+	<li><b>
+	<img border="0" src="images/PasteHS.png" width="16" height="16" style="margin: 0"> 
+	貼り付け</b>&nbsp;- 
+	クリップボードにあるチップ群を、現在表示されている譜面の最下層位置を先頭として貼り付けます。クリップボードにチップがない間は、このメニューは使用できません。</li>
+	<li><b>
+	<img border="0" src="images/deleteHS.png" width="16" height="16" style="margin: 0"> 
+	削除</b>&nbsp;- 現在選択中のチップを削除します。選択されているチップが１つもない間は、このメニューは使用できません。<br>
+
+　<hr></li>
+	<li><b>
+	<img border="0" src="images/Edit_UndoHS.png" width="16" height="16" style="margin: 0"> 
+	元に戻す（Undo）</b>&nbsp;- 直前に行った作業を取り消して、元に戻します。<br>
+	<li><b>
+	<img border="0" src="images/Edit_RedoHS.png" width="16" height="16" style="margin: 0"> 
+	やり直し（Redo）</b>&nbsp;- 元に戻した作業を、もう一度実行し直します。<br>
+
+　<hr></li>
+	<li><b>
+	<img border="0" src="images/EditInformationHS.png" width="16" height="16" style="margin: 0"> 
+	チップパレット</b>&nbsp;- チップパレットの表示のON・OFFを指定します。</li>
+	<li><b>
+	<img border="0" src="images/縦方向倍率.jpg" width="79" height="24" style="margin: 0"> 
+	縦方向倍率</b> - 譜面の縦方向の表示倍率を指定します。</li>
+	<li><b>
+	<img border="0" src="images/ガイド幅.jpg" width="79" height="23" style="margin: 0"> 
+	ガイド幅</b>&nbsp;- ガイド線の間隔を指定します。<br>
+
+　<hr></li>
+	<li><b>
+	<img border="0" src="images/PointerHS.png" width="16" height="16" style="margin: 0"> 
+	選択モード</b>&nbsp;- 選択モードに切り替えます。</li>
+	<li><b>
+	<img border="0" src="images/pencil.gif" width="16" height="16" style="margin: 0"> 
+	編集モード</b>&nbsp;- 編集モードに切り替えます。<br>
+
+　<hr></li>
+	<li><b>
+	<img border="0" src="images/最初から再生.png" width="16" height="16" style="margin: 0"> 
+	最初から再生</b>&nbsp;- DTXViewerで、譜面の先頭から再生を開始します。この機能は、DTXViewer が DTXCreator 
+	と同じフォルダに存在しない場合は使用できません。</li>
+	<li><b>
+	<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0"> 
+	現在位置から再生</b>&nbsp;- DTXViewer で、現在表示されている譜面の最下層の小節から再生を開始します。この機能は、DTXViewer が 
+	DTXCreator と同じフォルダに存在しない場合は使用できません。</li>
+	<li><b>
+	<img border="0" src="images/DataContainer_NewRecordHS.png" width="16" height="16" style="margin: 0"> 
+	現在位置からBGMのみ再生</b>&nbsp;- DTXViewer で、現在表示されている譜面の最下層の小節から再生を開始します。
+	ただし、BGMサウンド以外のWAVセル（チップ）は発音されません。またこの機能は、DTXViewer が 
+	DTXCreator と同じフォルダに存在しない場合は使用できません。</li>
+	<li><b>
+	<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0"> 
+	再生停止</b>&nbsp;- DTXViewer が再生中であれば、停止します。この機能は、DTXViewer が DTXCreator 
+	と同じフォルダに存在しない場合は使用できません。</li>
+	<li><b>
+	<img border="0" src="images/再生速度.jpg" width="79" height="24" style="margin: 0"> 
+	再生速度</b>&nbsp;- DTXViewer での再生速度（#DTXVPLAYSPEED）を指定します。</li>
+</ul>
+
+</body>
+
+</html>

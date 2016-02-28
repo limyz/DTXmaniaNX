@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">[AVI]タブ</td></tr>
+</table>
+</p>
+
+<p>
+　AVIタブでは、譜面で使用する動画の一覧（<b>AVIリスト</b>）を管理します。<br>
+　AVIリストには最大 1295個の画像（<b>AVIセル</b>）を含めることができます。AVIセルは 01 ～ ZZ 
+（36進数表記）の番号（No）で区別され、１つのラベル名とファイル名を指定することができます。</p>
+<p>
+　AVIセルのこれらの値の設定方法については、「動画プロパティ」の項を参照して下さい。</p>
+<h1>
+動画とCODEC</h1>
+<p>
+　動画を DTXMania で表示するには、どの動画フォーマットに対応した CODEC をパソコンにインストールしておく必要があります。動画の CODEC 
+には大きく VFW （Video for Windows） 形式と DirectShow 形式のものがありますが、DTXMania では VFW 
+のみ対応しています。</p>
+<h1>
+画面構成</h1>
+<p>
+</p>
+<p>
+<img border="0" src="images/avi_tab.jpg" width="280" height="365" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#label">ラベル</a><br>
+<a href="#No">No</a><br>
+<a href="#file">ファイル</a><br>
+<a href="#move">上移動</a>（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#move">下移動</a>（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）<br clear="all">
+</p>
+<h2><a name="label"></a>ラベル</h2>
+<p>　AVIセルに対して付けられている名前（ラベル）を表示します。<br>
+　DTXファイルでは、ラベル文字列は、対応する #AVI 命令へのコメント文として出力されます。</p>
+<h2><a name="No"></a>No</h2>
+<p>　AVIセルの番号です。36進数表記で 01～ZZ と表示されます。<br>
+　譜面上に描かれるチップは、この番号により区別されます。</p>
+<h2><a name="file"></a>ファイル</h2>
+<p>　AVIセルに対応する動画ファイル名です。<br>
+　作成しているDTXファイルに対する相対パスで表示されます。</p>
+<h2><a name="move"></a>上移動（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）、下移動（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）</h2>
+<p>　現在選択中のAVIセルを、１行上または下へ移動します。<br>
+　このとき、そのAVIセルの番号（No）は１つ増加または減少し、同時に、譜面上に配置済みのチップの番号も自動的に修正され、セルの移動に追従します。</p>
+
+</body>
+
+</html>

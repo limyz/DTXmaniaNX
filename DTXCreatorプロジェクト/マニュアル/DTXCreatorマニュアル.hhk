@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD>
+<meta name="GENERATOR" content="HelpMachine 2.5.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="はじめに">
+<param name="Local" value="_RESOURCE\はじめに.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\譜面.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\基本情報タブ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\WAVタブ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\BMPタブ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\AVIタブ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\自由入力タブ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\メニューバー.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\ツールバー.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\サウンドプロパティ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\動画プロパティ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\画面構成\画像プロパティ.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\選択モードと編集モード.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="選択モード">
+<param name="Local" value="_RESOURCE\使い方\選択モード.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="編集モード">
+<param name="Local" value="_RESOURCE\使い方\編集モード.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="基本的な使い方">
+<param name="Local" value="_RESOURCE\使い方\基本的な使い方.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\チップを置く、削除する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\ギター、ベースチップを作る.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\チップを移動する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\チップを切り取り、コピー、貼り付けする.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\小節を挿入、削除する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\小節長を変更する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\自由入力-未対応の命令を記述する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\DTXViewerで再生する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="便利な使い方">
+<param name="Local" value="_RESOURCE\使い方\便利な使い方.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\チップをレーンに割り付ける.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\チップパレットを使う.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\検索する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\置換する.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="その他">
+<param name="Local" value="_RESOURCE\使い方\その他.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\使い方\オプション.html">
+</OBJECT>
+<LI><OBJECT type="text/sitemap">
+<param name="Name" value="DTXCreator Reference Manual">
+<param name="Local" value="_RESOURCE\最後に.html">
+</OBJECT>
+</UL>
+</BODY></HTML>

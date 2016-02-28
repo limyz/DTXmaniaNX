@@ -1,0 +1,3798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="splitContainerタブと譜面を分割.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="splitContainerタブと譜面を分割.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 52</value>
+  </data>
+  <data name="buttonRESULTIMAGE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonRESULTIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 308</value>
+  </data>
+  <data name="buttonRESULTIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="buttonRESULTIMAGE参照.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="buttonRESULTIMAGE参照.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <metadata name="toolTipツールチップ.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>572, 17</value>
+  </metadata>
+  <data name="buttonRESULTIMAGE参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonRESULTIMAGE参照.Name" xml:space="preserve">
+    <value>buttonRESULTIMAGE参照</value>
+  </data>
+  <data name="&gt;&gt;buttonRESULTIMAGE参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonRESULTIMAGE参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonRESULTIMAGE参照.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonBACKGROUND参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonBACKGROUND参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 283</value>
+  </data>
+  <data name="buttonBACKGROUND参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="buttonBACKGROUND参照.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="buttonBACKGROUND参照.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="buttonBACKGROUND参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonBACKGROUND参照.Name" xml:space="preserve">
+    <value>buttonBACKGROUND参照</value>
+  </data>
+  <data name="&gt;&gt;buttonBACKGROUND参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonBACKGROUND参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonBACKGROUND参照.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 258</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonSTAGEFILE参照.Name" xml:space="preserve">
+    <value>buttonSTAGEFILE参照</value>
+  </data>
+  <data name="&gt;&gt;buttonSTAGEFILE参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonSTAGEFILE参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonSTAGEFILE参照.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="buttonPREIMAGE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonPREIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 233</value>
+  </data>
+  <data name="buttonPREIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="buttonPREIMAGE参照.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="buttonPREIMAGE参照.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="buttonPREIMAGE参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonPREIMAGE参照.Name" xml:space="preserve">
+    <value>buttonPREIMAGE参照</value>
+  </data>
+  <data name="&gt;&gt;buttonPREIMAGE参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonPREIMAGE参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonPREIMAGE参照.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="buttonPREVIEW参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonPREVIEW参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 208</value>
+  </data>
+  <data name="buttonPREVIEW参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="buttonPREVIEW参照.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="buttonPREVIEW参照.Text" xml:space="preserve">
+    <value>...
+</value>
+  </data>
+  <data name="buttonPREVIEW参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonPREVIEW参照.Name" xml:space="preserve">
+    <value>buttonPREVIEW参照</value>
+  </data>
+  <data name="&gt;&gt;buttonPREVIEW参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonPREVIEW参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonPREVIEW参照.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="labeRESULTIMAGE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labeRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 311</value>
+  </data>
+  <data name="labeRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 12</value>
+  </data>
+  <data name="labeRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="labeRESULTIMAGE.Text" xml:space="preserve">
+    <value>ResultImage</value>
+  </data>
+  <data name="labeRESULTIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labeRESULTIMAGE.ToolTip" xml:space="preserve">
+    <value>An image file shown in result screen.
+The image size is 204x269.</value>
+  </data>
+  <data name="&gt;&gt;labeRESULTIMAGE.Name" xml:space="preserve">
+    <value>labeRESULTIMAGE</value>
+  </data>
+  <data name="&gt;&gt;labeRESULTIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labeRESULTIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labeRESULTIMAGE.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelBACKGROUND.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 286</value>
+  </data>
+  <data name="labelBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 12</value>
+  </data>
+  <data name="labelBACKGROUND.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="labelBACKGROUND.Text" xml:space="preserve">
+    <value>BackImage</value>
+  </data>
+  <data name="labelBACKGROUND.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelBACKGROUND.ToolTip" xml:space="preserve">
+    <value>A background image file drawn on play screen.
+The image size is 640x480.</value>
+  </data>
+  <data name="&gt;&gt;labelBACKGROUND.Name" xml:space="preserve">
+    <value>labelBACKGROUND</value>
+  </data>
+  <data name="&gt;&gt;labelBACKGROUND.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBACKGROUND.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelBACKGROUND.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="labelSTAGEFILE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 261</value>
+  </data>
+  <data name="labelSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>74, 12</value>
+  </data>
+  <data name="labelSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="labelSTAGEFILE.Text" xml:space="preserve">
+    <value>LoadingImage</value>
+  </data>
+  <data name="labelSTAGEFILE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelSTAGEFILE.ToolTip" xml:space="preserve">
+    <value>A background image file drawn at loading song.
+The image size is 640x480.</value>
+  </data>
+  <data name="&gt;&gt;labelSTAGEFILE.Name" xml:space="preserve">
+    <value>labelSTAGEFILE</value>
+  </data>
+  <data name="&gt;&gt;labelSTAGEFILE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSTAGEFILE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelSTAGEFILE.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelPREIMAGE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 236</value>
+  </data>
+  <data name="labelPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 12</value>
+  </data>
+  <data name="labelPREIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="labelPREIMAGE.Text" xml:space="preserve">
+    <value>Preimage</value>
+  </data>
+  <data name="labelPREIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelPREIMAGE.ToolTip" xml:space="preserve">
+    <value>Preview image shown when song selected.
+The image size is 204x269.</value>
+  </data>
+  <data name="&gt;&gt;labelPREIMAGE.Name" xml:space="preserve">
+    <value>labelPREIMAGE</value>
+  </data>
+  <data name="&gt;&gt;labelPREIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPREIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelPREIMAGE.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="labelPREVIEW.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 213</value>
+  </data>
+  <data name="labelPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 12</value>
+  </data>
+  <data name="labelPREVIEW.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="labelPREVIEW.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="labelPREVIEW.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelPREVIEW.ToolTip" xml:space="preserve">
+    <value>Preview sound played when song selected</value>
+  </data>
+  <data name="&gt;&gt;labelPREVIEW.Name" xml:space="preserve">
+    <value>labelPREVIEW</value>
+  </data>
+  <data name="&gt;&gt;labelPREVIEW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPREVIEW.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelPREVIEW.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 308</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 19</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.ToolTip" xml:space="preserve">
+    <value>An image file shown in result screen.
+The image size is 204x269.</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Name" xml:space="preserve">
+    <value>textBoxRESULTIMAGE</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="textBoxBACKGROUND.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 283</value>
+  </data>
+  <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 19</value>
+  </data>
+  <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="textBoxBACKGROUND.ToolTip" xml:space="preserve">
+    <value>A background image file drawn on play screen.
+The image size is 640x480.</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Name" xml:space="preserve">
+    <value>textBoxBACKGROUND</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 258</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 19</value>
+  </data>
+  <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="textBoxSTAGEFILE.ToolTip" xml:space="preserve">
+    <value>An image file shown in result screen.
+The image size is 204x269.</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Name" xml:space="preserve">
+    <value>textBoxSTAGEFILE</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="textBoxPREIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 233</value>
+  </data>
+  <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 19</value>
+  </data>
+  <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="textBoxPREIMAGE.ToolTip" xml:space="preserve">
+    <value>Preview image shown when song selected.
+The image size is 204x269.</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Name" xml:space="preserve">
+    <value>textBoxPREIMAGE</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="textBoxPREVIEW.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 208</value>
+  </data>
+  <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 19</value>
+  </data>
+  <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="textBoxPREVIEW.ToolTip" xml:space="preserve">
+    <value>Preview sound played when song selected</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Name" xml:space="preserve">
+    <value>textBoxPREVIEW</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="textBoxパネル.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 182</value>
+  </data>
+  <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="textBoxパネル.ToolTip" xml:space="preserve">
+    <value>Panel message shown in playing screen.</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Name" xml:space="preserve">
+    <value>textBoxパネル</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="labelパネル.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelパネル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 185</value>
+  </data>
+  <data name="labelパネル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 12</value>
+  </data>
+  <data name="labelパネル.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="labelパネル.Text" xml:space="preserve">
+    <value>Panel msg.</value>
+  </data>
+  <data name="labelパネル.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelパネル.ToolTip" xml:space="preserve">
+    <value>Panel message shown in playing screen.</value>
+  </data>
+  <data name="&gt;&gt;labelパネル.Name" xml:space="preserve">
+    <value>labelパネル</value>
+  </data>
+  <data name="&gt;&gt;labelパネル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelパネル.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelパネル.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="labelBLEVEL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 157</value>
+  </data>
+  <data name="labelBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 12</value>
+  </data>
+  <data name="labelBLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="labelBLEVEL.Text" xml:space="preserve">
+    <value>BassLv.</value>
+  </data>
+  <data name="labelBLEVEL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelBLEVEL.ToolTip" xml:space="preserve">
+    <value>Bass level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;labelBLEVEL.Name" xml:space="preserve">
+    <value>labelBLEVEL</value>
+  </data>
+  <data name="&gt;&gt;labelBLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelBLEVEL.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 154</value>
+  </data>
+  <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="textBoxBLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxBLEVEL.ToolTip" xml:space="preserve">
+    <value>Bass level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Name" xml:space="preserve">
+    <value>textBoxBLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="hScrollBarBLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 154</value>
+  </data>
+  <data name="hScrollBarBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="hScrollBarBLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="hScrollBarBLEVEL.ToolTip" xml:space="preserve">
+    <value>Bass level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLEVEL.Name" xml:space="preserve">
+    <value>hScrollBarBLEVEL</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLEVEL.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="labelGLEVEL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>29, 136</value>
+  </data>
+  <data name="labelGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 12</value>
+  </data>
+  <data name="labelGLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="labelGLEVEL.Text" xml:space="preserve">
+    <value>GuitarLv.
+</value>
+  </data>
+  <data name="labelGLEVEL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelGLEVEL.ToolTip" xml:space="preserve">
+    <value>Guitar level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;labelGLEVEL.Name" xml:space="preserve">
+    <value>labelGLEVEL</value>
+  </data>
+  <data name="&gt;&gt;labelGLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelGLEVEL.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 133</value>
+  </data>
+  <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="textBoxGLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxGLEVEL.ToolTip" xml:space="preserve">
+    <value>Guitar level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Name" xml:space="preserve">
+    <value>textBoxGLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="hScrollBarGLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 133</value>
+  </data>
+  <data name="hScrollBarGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="hScrollBarGLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="hScrollBarGLEVEL.ToolTip" xml:space="preserve">
+    <value>Guitar level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLEVEL.Name" xml:space="preserve">
+    <value>hScrollBarGLEVEL</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLEVEL.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="labelDLEVEL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>33, 115</value>
+  </data>
+  <data name="labelDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 12</value>
+  </data>
+  <data name="labelDLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="labelDLEVEL.Text" xml:space="preserve">
+    <value>DrumLv.</value>
+  </data>
+  <data name="labelDLEVEL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelDLEVEL.ToolTip" xml:space="preserve">
+    <value>Drums level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;labelDLEVEL.Name" xml:space="preserve">
+    <value>labelDLEVEL</value>
+  </data>
+  <data name="&gt;&gt;labelDLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelDLEVEL.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 112</value>
+  </data>
+  <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="textBoxDLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxDLEVEL.ToolTip" xml:space="preserve">
+    <value>Drums level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Name" xml:space="preserve">
+    <value>textBoxDLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="hScrollBarDLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 112</value>
+  </data>
+  <data name="hScrollBarDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 17</value>
+  </data>
+  <data name="hScrollBarDLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="hScrollBarDLEVEL.ToolTip" xml:space="preserve">
+    <value>Drums level, (easy) 1 to 100 (Hard). 
+0 means no drums.</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLEVEL.Name" xml:space="preserve">
+    <value>hScrollBarDLEVEL</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLEVEL.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="labelBPM.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBPM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 83</value>
+  </data>
+  <data name="labelBPM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 12</value>
+  </data>
+  <data name="labelBPM.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="labelBPM.Text" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="labelBPM.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelBPM.ToolTip" xml:space="preserve">
+    <value>Song's BGM (Beats Per Minute)</value>
+  </data>
+  <data name="&gt;&gt;labelBPM.Name" xml:space="preserve">
+    <value>labelBPM</value>
+  </data>
+  <data name="&gt;&gt;labelBPM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBPM.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelBPM.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="labelコメント.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelコメント.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 59</value>
+  </data>
+  <data name="labelコメント.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 12</value>
+  </data>
+  <data name="labelコメント.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="labelコメント.Text" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="labelコメント.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelコメント.ToolTip" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="&gt;&gt;labelコメント.Name" xml:space="preserve">
+    <value>labelコメント</value>
+  </data>
+  <data name="&gt;&gt;labelコメント.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelコメント.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelコメント.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="label製作者.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label製作者.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 34</value>
+  </data>
+  <data name="label製作者.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 12</value>
+  </data>
+  <data name="label製作者.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="label製作者.Text" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="label製作者.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="label製作者.ToolTip" xml:space="preserve">
+    <value>Artist name</value>
+  </data>
+  <data name="&gt;&gt;label製作者.Name" xml:space="preserve">
+    <value>label製作者</value>
+  </data>
+  <data name="&gt;&gt;label製作者.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label製作者.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;label製作者.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="label曲名.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label曲名.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 9</value>
+  </data>
+  <data name="label曲名.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 12</value>
+  </data>
+  <data name="label曲名.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="label曲名.Text" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="label曲名.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="label曲名.ToolTip" xml:space="preserve">
+    <value>Song title</value>
+  </data>
+  <data name="&gt;&gt;label曲名.Name" xml:space="preserve">
+    <value>label曲名</value>
+  </data>
+  <data name="&gt;&gt;label曲名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label曲名.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;label曲名.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="numericUpDownBPM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 81</value>
+  </data>
+  <data name="numericUpDownBPM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 19</value>
+  </data>
+  <data name="numericUpDownBPM.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="numericUpDownBPM.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="numericUpDownBPM.ToolTip" xml:space="preserve">
+    <value>Song's BGM (Beats Per Minute)</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownBPM.Name" xml:space="preserve">
+    <value>numericUpDownBPM</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownBPM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownBPM.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;numericUpDownBPM.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="textBoxコメント.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 56</value>
+  </data>
+  <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="textBoxコメント.ToolTip" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Name" xml:space="preserve">
+    <value>textBoxコメント</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="textBox製作者.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 31</value>
+  </data>
+  <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBox製作者.ToolTip" xml:space="preserve">
+    <value>Artist name</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Name" xml:space="preserve">
+    <value>textBox製作者</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="textBox曲名.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 6</value>
+  </data>
+  <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
+    <value>187, 19</value>
+  </data>
+  <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBox曲名.ToolTip" xml:space="preserve">
+    <value>Song title</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Name" xml:space="preserve">
+    <value>textBox曲名</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="tabPage基本情報.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage基本情報.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage基本情報.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 415</value>
+  </data>
+  <data name="tabPage基本情報.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage基本情報.Text" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="&gt;&gt;tabPage基本情報.Name" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;tabPage基本情報.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage基本情報.Parent" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabPage基本情報.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="columnHeaderWAV_ラベル.Text" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="columnHeaderWAV_ラベル.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="columnHeaderWAV_番号.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="columnHeaderWAV_番号.Width" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="columnHeaderWAV_ファイル名.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="columnHeaderWAV_ファイル名.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="columnHeaderWAV_音量.Text" xml:space="preserve">
+    <value>Vol.</value>
+  </data>
+  <data name="columnHeaderWAV_音量.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="columnHeaderWAV_位置.Text" xml:space="preserve">
+    <value>Pos.</value>
+  </data>
+  <data name="columnHeaderWAV_位置.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="columnHeaderWAV_BGM.Text" xml:space="preserve">
+    <value>BGM</value>
+  </data>
+  <data name="columnHeaderWAV_BGM.Width" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="listViewWAVリスト.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="listViewWAVリスト.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 9pt</value>
+  </data>
+  <data name="listViewWAVリスト.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="listViewWAVリスト.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 384</value>
+  </data>
+  <data name="listViewWAVリスト.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;listViewWAVリスト.Name" xml:space="preserve">
+    <value>listViewWAVリスト</value>
+  </data>
+  <data name="&gt;&gt;listViewWAVリスト.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewWAVリスト.Parent" xml:space="preserve">
+    <value>tabPageWAV</value>
+  </data>
+  <data name="&gt;&gt;listViewWAVリスト.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="toolStripWAVツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>3, 387</value>
+  </metadata>
+  <data name="toolStripWAVツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="toolStripButtonWAVリスト上移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonWAVリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonWAVリスト上移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonWAVリスト上移動.ToolTipText" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="toolStripButtonWAVリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonWAVリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonWAVリスト下移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonWAVリスト下移動.ToolTipText" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生開始.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生開始.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生開始.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生開始.ToolTipText" xml:space="preserve">
+    <value>Play the current wave sound</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生停止.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生停止.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュー再生停止.ToolTipText" xml:space="preserve">
+    <value>Stop sound</value>
+  </data>
+  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュースイッチ.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュースイッチ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュースイッチ.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonWAVリストプレビュースイッチ.ToolTipText" xml:space="preserve">
+    <value>Play sound on click</value>
+  </data>
+  <data name="toolStripWAVツールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 387</value>
+  </data>
+  <data name="toolStripWAVツールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 25</value>
+  </data>
+  <data name="toolStripWAVツールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="toolStripWAVツールバー.Text" xml:space="preserve">
+    <value>WAVリストパネル
+</value>
+  </data>
+  <data name="&gt;&gt;toolStripWAVツールバー.Name" xml:space="preserve">
+    <value>toolStripWAVツールバー</value>
+  </data>
+  <data name="&gt;&gt;toolStripWAVツールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripWAVツールバー.Parent" xml:space="preserve">
+    <value>tabPageWAV</value>
+  </data>
+  <data name="&gt;&gt;toolStripWAVツールバー.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPageWAV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageWAV.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageWAV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 415</value>
+  </data>
+  <data name="tabPageWAV.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageWAV.Text" xml:space="preserve">
+    <value>WAV</value>
+  </data>
+  <data name="&gt;&gt;tabPageWAV.Name" xml:space="preserve">
+    <value>tabPageWAV</value>
+  </data>
+  <data name="&gt;&gt;tabPageWAV.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageWAV.Parent" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabPageWAV.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="columnHeaderBMP_TEX.Text" xml:space="preserve">
+    <value>Tex</value>
+  </data>
+  <data name="columnHeaderBMP_TEX.Width" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="columnHeaderBMP_ラベル.Text" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="columnHeaderBMP_ラベル.Width" type="System.Int32, mscorlib">
+    <value>127</value>
+  </data>
+  <data name="columnHeaderBMP_BMP番号.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="columnHeaderBMP_BMP番号.Width" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="columnHeaderBMP_ファイル名.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="columnHeaderBMP_ファイル名.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="listViewBMPリスト.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="listViewBMPリスト.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 9pt</value>
+  </data>
+  <data name="listViewBMPリスト.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="listViewBMPリスト.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 384</value>
+  </data>
+  <data name="listViewBMPリスト.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;listViewBMPリスト.Name" xml:space="preserve">
+    <value>listViewBMPリスト</value>
+  </data>
+  <data name="&gt;&gt;listViewBMPリスト.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewBMPリスト.Parent" xml:space="preserve">
+    <value>tabPageBMP</value>
+  </data>
+  <data name="&gt;&gt;listViewBMPリスト.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="toolStripBMPツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>3, 387</value>
+  </metadata>
+  <data name="toolStripBMPツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="toolStripButtonBMPリスト上移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonBMPリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonBMPリスト上移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonBMPリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonBMPリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonBMPリスト下移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripBMPツールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 387</value>
+  </data>
+  <data name="toolStripBMPツールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 25</value>
+  </data>
+  <data name="toolStripBMPツールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="toolStripBMPツールバー.Text" xml:space="preserve">
+    <value>BMPリストツールバー
+</value>
+  </data>
+  <data name="&gt;&gt;toolStripBMPツールバー.Name" xml:space="preserve">
+    <value>toolStripBMPツールバー</value>
+  </data>
+  <data name="&gt;&gt;toolStripBMPツールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripBMPツールバー.Parent" xml:space="preserve">
+    <value>tabPageBMP</value>
+  </data>
+  <data name="&gt;&gt;toolStripBMPツールバー.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPageBMP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageBMP.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageBMP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 415</value>
+  </data>
+  <data name="tabPageBMP.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageBMP.Text" xml:space="preserve">
+    <value>BMP</value>
+  </data>
+  <data name="&gt;&gt;tabPageBMP.Name" xml:space="preserve">
+    <value>tabPageBMP</value>
+  </data>
+  <data name="&gt;&gt;tabPageBMP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageBMP.Parent" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabPageBMP.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="columnHeaderAVI_ラベル.Text" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="columnHeaderAVI_ラベル.Width" type="System.Int32, mscorlib">
+    <value>127</value>
+  </data>
+  <data name="columnHeaderAVI_AVI番号.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="columnHeaderAVI_AVI番号.Width" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="columnHeaderAVI_ファイル名.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="columnHeaderAVI_ファイル名.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="listViewAVIリスト.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="listViewAVIリスト.Font" type="System.Drawing.Font, System.Drawing">
+    <value>ＭＳ ゴシック, 9pt</value>
+  </data>
+  <data name="listViewAVIリスト.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="listViewAVIリスト.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 384</value>
+  </data>
+  <data name="listViewAVIリスト.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;listViewAVIリスト.Name" xml:space="preserve">
+    <value>listViewAVIリスト</value>
+  </data>
+  <data name="&gt;&gt;listViewAVIリスト.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;listViewAVIリスト.Parent" xml:space="preserve">
+    <value>tabPageAVI</value>
+  </data>
+  <data name="&gt;&gt;listViewAVIリスト.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="toolStripAVIツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>3, 387</value>
+  </metadata>
+  <data name="toolStripAVIツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="toolStripButtonAVIリスト上移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonAVIリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonAVIリスト上移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonAVIリスト上移動.ToolTipText" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="toolStripButtonAVIリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonAVIリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripButtonAVIリスト下移動.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonAVIリスト下移動.ToolTipText" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="toolStripAVIツールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 387</value>
+  </data>
+  <data name="toolStripAVIツールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 25</value>
+  </data>
+  <data name="toolStripAVIツールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="toolStripAVIツールバー.Text" xml:space="preserve">
+    <value>AVIリストツールバー</value>
+  </data>
+  <data name="&gt;&gt;toolStripAVIツールバー.Name" xml:space="preserve">
+    <value>toolStripAVIツールバー</value>
+  </data>
+  <data name="&gt;&gt;toolStripAVIツールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripAVIツールバー.Parent" xml:space="preserve">
+    <value>tabPageAVI</value>
+  </data>
+  <data name="&gt;&gt;toolStripAVIツールバー.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPageAVI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageAVI.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageAVI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 415</value>
+  </data>
+  <data name="tabPageAVI.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tabPageAVI.Text" xml:space="preserve">
+    <value>AVI</value>
+  </data>
+  <data name="&gt;&gt;tabPageAVI.Name" xml:space="preserve">
+    <value>tabPageAVI</value>
+  </data>
+  <data name="&gt;&gt;tabPageAVI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageAVI.Parent" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabPageAVI.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBox自由入力欄.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="textBox自由入力欄.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="textBox自由入力欄.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 10, 10, 10</value>
+  </data>
+  <data name="textBox自由入力欄.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="textBox自由入力欄.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
+  </data>
+  <data name="textBox自由入力欄.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 409</value>
+  </data>
+  <data name="textBox自由入力欄.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;textBox自由入力欄.Name" xml:space="preserve">
+    <value>textBox自由入力欄</value>
+  </data>
+  <data name="&gt;&gt;textBox自由入力欄.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox自由入力欄.Parent" xml:space="preserve">
+    <value>tabPage自由入力</value>
+  </data>
+  <data name="&gt;&gt;textBox自由入力欄.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPage自由入力.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage自由入力.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage自由入力.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 415</value>
+  </data>
+  <data name="tabPage自由入力.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tabPage自由入力.Text" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="&gt;&gt;tabPage自由入力.Name" xml:space="preserve">
+    <value>tabPage自由入力</value>
+  </data>
+  <data name="&gt;&gt;tabPage自由入力.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage自由入力.Parent" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabPage自由入力.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabControl情報パネル.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tabControl情報パネル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabControl情報パネル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 441</value>
+  </data>
+  <data name="tabControl情報パネル.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabControl情報パネル.Name" xml:space="preserve">
+    <value>tabControl情報パネル</value>
+  </data>
+  <data name="&gt;&gt;tabControl情報パネル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl情報パネル.Parent" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tabControl情報パネル.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.Name" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.Parent" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="pictureBox譜面パネル.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left</value>
+  </data>
+  <data name="pictureBox譜面パネル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="pictureBox譜面パネル.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="pictureBox譜面パネル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 424</value>
+  </data>
+  <data name="pictureBox譜面パネル.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;pictureBox譜面パネル.Name" xml:space="preserve">
+    <value>pictureBox譜面パネル</value>
+  </data>
+  <data name="&gt;&gt;pictureBox譜面パネル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pictureBox譜面パネル.Parent" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割.Panel2</value>
+  </data>
+  <data name="&gt;&gt;pictureBox譜面パネル.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="hScrollBar譜面用水平スクロールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Bottom</value>
+  </data>
+  <data name="hScrollBar譜面用水平スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 424</value>
+  </data>
+  <data name="hScrollBar譜面用水平スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>424, 17</value>
+  </data>
+  <data name="hScrollBar譜面用水平スクロールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.Name" xml:space="preserve">
+    <value>hScrollBar譜面用水平スクロールバー</value>
+  </data>
+  <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.Parent" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割.Panel2</value>
+  </data>
+  <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Name" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Parent" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.Size" type="System.Drawing.Size, System.Drawing">
+    <value>714, 441</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.SplitterDistance" type="System.Int32, mscorlib">
+    <value>286</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Name" xml:space="preserve">
+    <value>splitContainerタブと譜面を分割</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;splitContainerタブと譜面を分割.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="statusStripステータスバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 493</value>
+  </metadata>
+  <data name="statusStripステータスバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 493</value>
+  </data>
+  <data name="statusStripステータスバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>731, 22</value>
+  </data>
+  <data name="statusStripステータスバー.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="statusStripステータスバー.Text" xml:space="preserve">
+    <value>ステータスバー</value>
+  </data>
+  <data name="&gt;&gt;statusStripステータスバー.Name" xml:space="preserve">
+    <value>statusStripステータスバー</value>
+  </data>
+  <data name="&gt;&gt;statusStripステータスバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStripステータスバー.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;statusStripステータスバー.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="menuStripメニューバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <data name="toolStripMenuItem新規.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+N</value>
+  </data>
+  <data name="toolStripMenuItem新規.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="toolStripMenuItem新規.Text" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="toolStripMenuItem開く.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="toolStripMenuItem開く.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="toolStripMenuItem開く.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="toolStripMenuItem上書き保存.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="toolStripMenuItem上書き保存.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="toolStripMenuItem上書き保存.Text" xml:space="preserve">
+    <value>&amp;Save</value>
+  </data>
+  <data name="toolStripMenuItem名前を付けて保存.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="toolStripMenuItem名前を付けて保存.Text" xml:space="preserve">
+    <value>Save &amp;As ...</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 6</value>
+  </data>
+  <data name="toolStripMenuItem終了.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="toolStripMenuItem終了.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="toolStripMenuItemファイル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 22</value>
+  </data>
+  <data name="toolStripMenuItemファイル.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="toolStripMenuItemアンドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Z</value>
+  </data>
+  <data name="toolStripMenuItemアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItemアンドゥ.Text" xml:space="preserve">
+    <value>&amp;Undo</value>
+  </data>
+  <data name="toolStripMenuItemリドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+Y</value>
+  </data>
+  <data name="toolStripMenuItemリドゥ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItemリドゥ.Text" xml:space="preserve">
+    <value>&amp;Redo</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="toolStripMenuItem切り取り.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItem切り取り.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+X</value>
+  </data>
+  <data name="toolStripMenuItem切り取り.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem切り取り.Text" xml:space="preserve">
+    <value>Cu&amp;t</value>
+  </data>
+  <data name="toolStripMenuItemコピー.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItemコピー.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
+  </data>
+  <data name="toolStripMenuItemコピー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItemコピー.Text" xml:space="preserve">
+    <value>&amp;Copy</value>
+  </data>
+  <data name="toolStripMenuItem貼り付け.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItem貼り付け.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+V</value>
+  </data>
+  <data name="toolStripMenuItem貼り付け.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem貼り付け.Text" xml:space="preserve">
+    <value>&amp;Paste</value>
+  </data>
+  <data name="toolStripMenuItem削除.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripMenuItem削除.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Del</value>
+  </data>
+  <data name="toolStripMenuItem削除.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem削除.Text" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="toolStripMenuItemすべて選択.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+A</value>
+  </data>
+  <data name="toolStripMenuItemすべて選択.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItemすべて選択.Text" xml:space="preserve">
+    <value>Select &amp;All</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="toolStripMenuItem選択モード.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem選択モード.Text" xml:space="preserve">
+    <value>&amp;Select mode</value>
+  </data>
+  <data name="toolStripMenuItem編集モード.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem編集モード.Text" xml:space="preserve">
+    <value>&amp;Edit mode</value>
+  </data>
+  <data name="toolStripMenuItemモード切替.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F8</value>
+  </data>
+  <data name="toolStripMenuItemモード切替.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItemモード切替.Text" xml:space="preserve">
+    <value>Switch &amp;Mode</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="toolStripMenuItem検索.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
+  <data name="toolStripMenuItem検索.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem検索.Text" xml:space="preserve">
+    <value>&amp;Find...</value>
+  </data>
+  <data name="toolStripMenuItem置換.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+H</value>
+  </data>
+  <data name="toolStripMenuItem置換.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="toolStripMenuItem置換.Text" xml:space="preserve">
+    <value>Replace(&amp;Q)</value>
+  </data>
+  <data name="toolStripMenuItem編集.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 22</value>
+  </data>
+  <data name="toolStripMenuItem編集.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="toolStripMenuItemチップパレット.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="toolStripMenuItemチップパレット.Text" xml:space="preserve">
+    <value>Chip &amp;palette</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔4分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔4分.Text" xml:space="preserve">
+    <value>1/&amp;4</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔8分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔8分.Text" xml:space="preserve">
+    <value>1/&amp;8</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔12分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔12分.Text" xml:space="preserve">
+    <value>1/1&amp;2</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔16分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔16分.Text" xml:space="preserve">
+    <value>1/1&amp;6</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔24分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔24分.Text" xml:space="preserve">
+    <value>1/24</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔32分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔32分.Text" xml:space="preserve">
+    <value>1/&amp;32</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔48分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔48分.Text" xml:space="preserve">
+    <value>1/48</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔64分.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔64分.Text" xml:space="preserve">
+    <value>1/64</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔フリー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔フリー.Text" xml:space="preserve">
+    <value>&amp;Free</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 6</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔拡大.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F3</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔拡大.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔拡大.Text" xml:space="preserve">
+    <value>&amp;Wide</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔縮小.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F4</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔縮小.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔縮小.Text" xml:space="preserve">
+    <value>&amp;Narrow</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="toolStripMenuItemガイド間隔.Text" xml:space="preserve">
+    <value>&amp;Guide margin</value>
+  </data>
+  <data name="toolStripMenuItem表示.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 22</value>
+  </data>
+  <data name="toolStripMenuItem表示.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="toolStripMenuItem先頭から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F5</value>
+  </data>
+  <data name="toolStripMenuItem先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="toolStripMenuItem先頭から再生.Text" xml:space="preserve">
+    <value>Play from &amp;top</value>
+  </data>
+  <data name="toolStripMenuItem現在位置から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F6</value>
+  </data>
+  <data name="toolStripMenuItem現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="toolStripMenuItem現在位置から再生.Text" xml:space="preserve">
+    <value>&amp;Play from current part</value>
+  </data>
+  <data name="toolStripMenuItem現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="toolStripMenuItem現在位置からBGMのみ再生.Text" xml:space="preserve">
+    <value>Play &amp;BGM from current part</value>
+  </data>
+  <data name="toolStripMenuItem再生停止.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F7</value>
+  </data>
+  <data name="toolStripMenuItem再生停止.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="toolStripMenuItem再生停止.Text" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="toolStripMenuItem再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 22</value>
+  </data>
+  <data name="toolStripMenuItem再生.Text" xml:space="preserve">
+    <value>&amp;Play</value>
+  </data>
+  <data name="toolStripMenuItemオプション.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 22</value>
+  </data>
+  <data name="toolStripMenuItemオプション.Text" xml:space="preserve">
+    <value>&amp;Option</value>
+  </data>
+  <data name="toolStripMenuItemツール.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 22</value>
+  </data>
+  <data name="toolStripMenuItemツール.Text" xml:space="preserve">
+    <value>&amp;Tool</value>
+  </data>
+  <data name="toolStripMenuItemDTXCreaterマニュアル.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>F1</value>
+  </data>
+  <data name="toolStripMenuItemDTXCreaterマニュアル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="toolStripMenuItemDTXCreaterマニュアル.Text" xml:space="preserve">
+    <value>DTXCreator &amp;Manual</value>
+  </data>
+  <data name="toolStripMenuItemバージョン.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 22</value>
+  </data>
+  <data name="toolStripMenuItemバージョン.Text" xml:space="preserve">
+    <value>&amp;Version</value>
+  </data>
+  <data name="toolStripMenuItemヘルプ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 22</value>
+  </data>
+  <data name="toolStripMenuItemヘルプ.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="menuStripメニューバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStripメニューバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>731, 26</value>
+  </data>
+  <data name="menuStripメニューバー.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="menuStripメニューバー.Text" xml:space="preserve">
+    <value>メニューバー</value>
+  </data>
+  <data name="&gt;&gt;menuStripメニューバー.Name" xml:space="preserve">
+    <value>menuStripメニューバー</value>
+  </data>
+  <data name="&gt;&gt;menuStripメニューバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStripメニューバー.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStripメニューバー.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="toolStripツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 26</value>
+  </metadata>
+  <data name="toolStripButton新規作成.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton新規作成.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton新規作成.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton新規作成.ToolTipText" xml:space="preserve">
+    <value>Create a new file</value>
+  </data>
+  <data name="toolStripButton開く.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton開く.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton開く.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton開く.ToolTipText" xml:space="preserve">
+    <value>Open a file
+</value>
+  </data>
+  <data name="toolStripButton上書き保存.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton上書き保存.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton上書き保存.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton上書き保存.ToolTipText" xml:space="preserve">
+    <value>Save to file</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButton切り取り.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButton切り取り.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton切り取り.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton切り取り.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton切り取り.ToolTipText" xml:space="preserve">
+    <value>Cut selected chip(s)
+</value>
+  </data>
+  <data name="toolStripButtonコピー.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButtonコピー.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonコピー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButtonコピー.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonコピー.ToolTipText" xml:space="preserve">
+    <value>Copy selected chip(s)
+</value>
+  </data>
+  <data name="toolStripButton貼り付け.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButton貼り付け.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton貼り付け.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton貼り付け.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton貼り付け.ToolTipText" xml:space="preserve">
+    <value>Paste chip(s)
+</value>
+  </data>
+  <data name="toolStripButton削除.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButton削除.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton削除.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton削除.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton削除.ToolTipText" xml:space="preserve">
+    <value>Delete selected chip(s)
+</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButtonアンドゥ.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButtonアンドゥ.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButtonアンドゥ.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonアンドゥ.ToolTipText" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="toolStripButtonリドゥ.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripButtonリドゥ.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonリドゥ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButtonリドゥ.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonリドゥ.ToolTipText" xml:space="preserve">
+    <value>Redo
+</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButtonチップパレット.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButtonチップパレット.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButtonチップパレット.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButtonチップパレット.ToolTipText" xml:space="preserve">
+    <value>Chip palette</value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items1" xml:space="preserve">
+    <value>x2</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items2" xml:space="preserve">
+    <value>x3</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items3" xml:space="preserve">
+    <value>x4</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items4" xml:space="preserve">
+    <value>x5</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items5" xml:space="preserve">
+    <value>x6</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items6" xml:space="preserve">
+    <value>x7</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items7" xml:space="preserve">
+    <value>x8</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items8" xml:space="preserve">
+    <value>x9</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Items9" xml:space="preserve">
+    <value>x10</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
+  </data>
+  <data name="toolStripComboBox譜面拡大率.ToolTipText" xml:space="preserve">
+    <value>Vertical sizing</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items" xml:space="preserve">
+    <value>1/4</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items1" xml:space="preserve">
+    <value>1/8</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items2" xml:space="preserve">
+    <value>1/12</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items3" xml:space="preserve">
+    <value>1/16</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items4" xml:space="preserve">
+    <value>1/24</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items5" xml:space="preserve">
+    <value>1/32</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items6" xml:space="preserve">
+    <value>1/48</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items7" xml:space="preserve">
+    <value>1/64</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Items8" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.MaxDropDownItems" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
+  </data>
+  <data name="toolStripComboBoxガイド間隔.ToolTipText" xml:space="preserve">
+    <value>Guide margin</value>
+  </data>
+  <data name="toolStripButton選択モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton選択モード.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton選択モード.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton選択モード.ToolTipText" xml:space="preserve">
+    <value>Select mode
+</value>
+  </data>
+  <data name="toolStripButton編集モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton編集モード.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton編集モード.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton編集モード.ToolTipText" xml:space="preserve">
+    <value>Edit mode</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripButton先頭から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton先頭から再生.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton先頭から再生.ToolTipText" xml:space="preserve">
+    <value>Play from top with a viewer</value>
+  </data>
+  <data name="toolStripButton現在位置から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton現在位置から再生.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton現在位置から再生.ToolTipText" xml:space="preserve">
+    <value>Play from current part with a viewer</value>
+  </data>
+  <data name="toolStripButton現在位置からBGMのみ再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton現在位置からBGMのみ再生.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton現在位置からBGMのみ再生.ToolTipText" xml:space="preserve">
+    <value>Play BGM from currect part with a viewer</value>
+  </data>
+  <data name="toolStripButton再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripButton再生停止.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 23</value>
+  </data>
+  <data name="toolStripButton再生停止.Text" xml:space="preserve">
+    <value>toolStripButton1</value>
+  </data>
+  <data name="toolStripButton再生停止.ToolTipText" xml:space="preserve">
+    <value>Stop playing</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items" xml:space="preserve">
+    <value>x1.5</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items1" xml:space="preserve">
+    <value>x1.4</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items2" xml:space="preserve">
+    <value>x1.3</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items3" xml:space="preserve">
+    <value>x1.2</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items4" xml:space="preserve">
+    <value>x1.1</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items5" xml:space="preserve">
+    <value>x1.0</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items6" xml:space="preserve">
+    <value>x0.9</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items7" xml:space="preserve">
+    <value>x0.8</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items8" xml:space="preserve">
+    <value>x0.7</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items9" xml:space="preserve">
+    <value>x0.6</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Items10" xml:space="preserve">
+    <value>x0.5</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 26</value>
+  </data>
+  <data name="toolStripComboBox演奏速度.ToolTipText" xml:space="preserve">
+    <value>Play speed (#DTXVPLAYSPEED)</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 26</value>
+  </data>
+  <data name="toolStripツールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 26</value>
+  </data>
+  <data name="toolStripツールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>731, 26</value>
+  </data>
+  <data name="toolStripツールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="toolStripツールバー.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStripツールバー.Name" xml:space="preserve">
+    <value>toolStripツールバー</value>
+  </data>
+  <data name="&gt;&gt;toolStripツールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripツールバー.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripツールバー.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="vScrollBar譜面用垂直スクロールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="vScrollBar譜面用垂直スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 52</value>
+  </data>
+  <data name="vScrollBar譜面用垂直スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>17, 441</value>
+  </data>
+  <data name="vScrollBar譜面用垂直スクロールバー.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.Name" xml:space="preserve">
+    <value>vScrollBar譜面用垂直スクロールバー</value>
+  </data>
+  <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.VScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="contextMenuStrip譜面右メニュー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>203, 39</value>
+  </metadata>
+  <data name="toolStripMenuItem選択チップの切り取り.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem選択チップの切り取り.Text" xml:space="preserve">
+    <value>Cu&amp;t selected chip(s)</value>
+  </data>
+  <data name="toolStripMenuItem選択チップのコピー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem選択チップのコピー.Text" xml:space="preserve">
+    <value>&amp;Copy selected chip(s)</value>
+  </data>
+  <data name="toolStripMenuItem選択チップの貼り付け.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem選択チップの貼り付け.Text" xml:space="preserve">
+    <value>&amp;Paste chip(s)</value>
+  </data>
+  <data name="toolStripMenuItem選択チップの削除.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem選択チップの削除.Text" xml:space="preserve">
+    <value>&amp;Delete selected chip(s)</value>
+  </data>
+  <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 6</value>
+  </data>
+  <data name="toolStripMenuItemすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItemすべてのチップの選択.Text" xml:space="preserve">
+    <value>Select &amp;All</value>
+  </data>
+  <data name="toolStripMenuItemレーン内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItemレーン内のすべてのチップの選択.Text" xml:space="preserve">
+    <value>Select all in the &amp;lane []</value>
+  </data>
+  <data name="toolStripMenuItem小節内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem小節内のすべてのチップの選択.Text" xml:space="preserve">
+    <value>Select all in the pa&amp;rt []</value>
+  </data>
+  <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 6</value>
+  </data>
+  <data name="toolStripMenuItem小節長変更.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem小節長変更.Text" xml:space="preserve">
+    <value>Change part length(&amp;B)</value>
+  </data>
+  <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 6</value>
+  </data>
+  <data name="toolStripMenuItem小節の挿入.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem小節の挿入.Text" xml:space="preserve">
+    <value>&amp;Insert part</value>
+  </data>
+  <data name="toolStripMenuItem小節の削除.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 22</value>
+  </data>
+  <data name="toolStripMenuItem小節の削除.Text" xml:space="preserve">
+    <value>D&amp;elete part</value>
+  </data>
+  <data name="contextMenuStrip譜面右メニュー.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 198</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Name" xml:space="preserve">
+    <value>contextMenuStrip譜面右メニュー</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>731, 515</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAkAMDAQAAEABABoBgAAlgAAACAgEAABAAQA6AIAAP4GAAAQEBAAAQAEACgBAADmCQAAMDAAAAEA
+        CACoDgAADgsAACAgAAABAAgAqAgAALYZAAAQEAAAAQAIAGgFAABeIgAAMDAAAAEAIACoJQAAxicAACAg
+        AAABACAAqBAAAG5NAAAQEAAAAQAgAGgEAAAWXgAAKAAAADAAAABgAAAAAQAEAAAAAAAABgAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAD///8A+vr6APjDxQDyjo8A4Q8PAHIICADvUFEAfmlpAPHn5wDKxsYAnZqaACrp
+        7wB58PQAyvn7AP///wAREREREREREREREiEhERERERERERERERERERERERIiIiERIi4iEiERERERERER
+        EREREREhESIiIiLu7d3u4iIREREiIiIRERERISIiLu7d3e3dzMzM3e7u7u4iIiIhIhESLu7t7dzMzMzM
+        zMzMzN3d3d3d3e7iIhEiLu3dzMzMzMzMzMzMzMzMzMzM3N3d4iERLu3czMzMzMzM3buM3d3d3d3d3d3e
+        4iEREi7t3MzMzMzd6riKru7u7u7u7u7uIhERERIu7u7u7u7umoaKqRERIREhIRERERERERERESEpkpKS
+        pIZoqZIRERERERERERERERERERk5ozmaSGZmizIREREREREREREREREREZk3RLOkZmZmaLqRERERERER
+        EREREREREpl1Z3RGVmZmYIqZERERERERERERERERIpN1VYd2ZmZmZmipIhERERERERERERERKTRFVVdl
+        ZWZmZmaqmqqpmSERERERERERmTRHVVZVZmZmZma0uIu6qZkhEREREREikzR0VVVWVWZmZmiIZgYIi6qS
+        IRERIpOTNHdVVVVlZlVmZmZgYGBgAIuikRESKTNEdVVVVVVVVWZWZmZmZgYAYAi6mRESk3d1dVVVVVVV
+        ZWVmVmZmYGYGAGBoopERmTR3VVVVVVVVVlZWZmZmZmBgYAAAipESKZNFdVVVVVVVVVVlZWZmZgYGBgBg
+        C6ERIiNHdXVVVVVVVWVWVmZmZmZmBgYACKERESk3dVVVVVVVVXVlZWVmZmZgYAAACKIREik3d3VVVVVV
+        d3R3ZWZmZmZmZmZoupERESmUd3V1VVVVczREREt4eIiIi7uqqZERESKUd3dVVVVVczM0QzMzo6OqOpmZ
+        mSERERKTR3d1VVVXQ5mTOZKSmSKSkpGRkREREREpNEd3VVVXQ5kpkpGRkpkZkREREREREREpk0d3dVVX
+        Q5kpERESIRIREiIiEREREREpNHR3dXVUQ5kiIiIiIiIiIikiIhERERIpNEd3d1d0qpkimZkimZkpKZmZ
+        kiERERKZRER3d1VLq6qZmamqmqqqqqqqmSIRESKTRERHd3eLi7qqqqqqu7u6uru7qSIRERKTNERHR3iI
+        iIuqq7qruIi7u4i7upIRERKTREREd3oimou7mrupqLqripmrqpIRESKTM0RER0kiIqu7IruiKCK4kiIq
+        qpIRESKTMzREREkqgiiLIruyKS6LIooiqpIRERKTMzQ0RKkriiq7Iou6IiiKKouqqpIRERIjMzNEQ6kr
+        ixqIIou7IpiKKoi7upIRERGZMzM0Oakqiiq7IoiLIii5KriqqpIRERIpkzMzmZkqsiu7Iou5Iiq6Kbsi
+        qZIREREpk5MzkpIiIpoiIimiKhKqIpIpqSEREREimTOZIiIiKZkiIiKSmZKZkiKZkiEREREimTmSIRIi
+        IiIikpKSIiIiIiIiIRERERESKZkiIRERERERERERERERERERERERERERIiIhERERERERERERERERERER
+        EREREREREREREREREREREREREREREREREREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAIAAAAEAA
+        AAABAAQAAAAAAIACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wD6+voA9Ly+APKMjgDhEBEAdQ0NAO1R
+        UgDu5OQAf3p6AKmmpgDR0NAAOenvAIjz9wDP+vsA////ABERERERESIiEhERERERERERERERIiIu7eIR
+        EREREREREiEi7d3d3MzN3u7u7iIhERLt3czMzMzMzM3c3d3d7iEe7czMzMzMyZzMzMzNzd4hES7c3MzM
+        25ab7u7u7u7iERERIu67uIRmaYIREREREREREREjekuWZmabIREREREREREShFV0VmZmaoIiESERERER
+        IoRVVlZmZma+u7giERERERg0dVVWVmZplmaauBEREog0dVVVZWZmZmYGAGq4IihHd1VVVVVWZmZgYGAA
+        myEoN1VVVVVWVWVmZmYGAAmyIiN1VVVVVVZWZmZgYAYAkhEjd1VVVVVVZmZmZmBgAKIRI0d1VVVXRHd3
+        ZmZmmZqyESJHd1VVVIhDizszu7iIIhEShEdXVXSIiIIogigiIiERESNHdVV0u4iIiIi4uIgiERKER3dV
+        dLu4i7u7u7u7ghEihER3d6qqqqq6qqqqq7gREjREd3eqmZqqqZmZmaq4ERgzREd6i6mbqbubqbuquxEi
+        M0RESygqkrmyspIhGrgRIjMzRDgpK5G5kiiRqbu4ERKDM0OIKiiRuZgroZqquBESiDM4iCsrooqiKKK7
+        K4gREYgziCIiKCIigYGyIiiCERIoiCESIigoKIiIKCKCIhERIoIhEREREiIiIiIiERERERERERERERER
+        ERERERERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAoAAAAEAAAACAAAAABAAQAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAA////AAD/
+        /wD/AP8AAAD/AP//AAAA/wAA/wAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAGcAAAAAAAYGd2AAAAAABnZ2cHAAAABmZmdnZ3AABmZmZ2d3dwAGZmZmZ2
+        d3AABmZgAAAAAAAAZmAAAAAAAAZgAAAAAAAABgYAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAACgAAAAwAAAAYAAAAAEACAAAAAAAgAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////APr6
+        +gBoZ2gA//z9AP319wD/+/wA/vr7APLu7wD76u0ATEZHAPrn6gD99vcA8uvsAPvh5AD7294A++XnAP/1
+        9gD+9PUA/fP0APvHygD5ztEA+9fZAP/v8AD87u8A+Z6hAPuusQD7ur0A+b/CAPvCxQD019gA+uHiAP7m
+        5wD96OkA/uvsAPlUVgD6b3EA+nd5AO9zdQD6fH4A121uAPqChQD6hogA+ouOAPqOkQD7kpQA+paZAPqb
+        nQD6pacA+bO1APq2uAD7zM0A+9LTAPkGBgD2BgYA8QYGAOsGBgDkBgYA+gcHANoGBgDSBgYAywYGAMQG
+        BgC8BgYAtAYGAKwGBgCkBgYAnAYGAPoKCgCTBgYAjAYGAIQGBgD6DA0AewYGAHIGBgBqBgYA4Q4OAGIG
+        BgD6EBAA2w4OANcODgBaBgYAyw8PAL8ODgBSBgYA+hUVAEcGBgCbDg4APAYGAPkaGgDpGRkAgg4OAHoO
+        DgA0BgYA2BoaAPohIgDHGhoAaw4OAO4gIAAsBgYAuhsbAKgZGQD6KCgAkhcXAPInJwBWDg4A3iYnACMG
+        BgD6LCwA+i8wAPAuLwD6MzQA+js7AOY4OQDOMzMAeB4eAPpAQQD1Pz8AZRsbABkHBwD6SEkATxcXAL44
+        OAD4T1AAzkVGAOZPTwD4Xl8A3VRUAEYbGwD6Z2gA62hpAIs/PwCkT08AcTs7APKEhAA2Hh4A84iIAIhP
+        TwC6bW0ATi8vAN6IiADxlJQA0YiIAPGengCUaGgA3J6eAPO1tQDzwMAAq4iIAJZ6egDbtrYA8czMALmd
+        nQD209MA68zMAP7f3wBeU1MA/eLiAP7k5ADItrYA3cvLAPTi4gB0bGwA/u7uAPjo6AD66+sA49XVALes
+        rAD+8fEA3dPTAPvx8QD57+8Avra2AP/39wD27u4A//j4AOfg4ADo4uIA/vn5APDt7QDPzMwAoqCgAI2L
+        iwDV09MA//7+AK+urgAdExIAKiAfAPP+/gD6//8A/f//AP7//wAK5+8ADejwABHo8AAU2+EAGenwACXq
+        8QAj3OIAJcLIADHr8gA67PIARe3zAFbv9ABm8fYAbvH2AGfi5gB58vYAiPT3AGasrgCX9fgAq/f6ALPq
+        7ADD+fsAyfr7AM77/ADH7O0A1fv8AN38/QDT7O0A4/z9AHTi5wBpxckAvPj7AOv9/gC30dMA+P7/AP39
+        /QD7+/sA+Pj4APf39wD09PQA8fHxAPDw8ADv7+8A7OzsAOrq6gDn5+cA5OTkAOHh4QDb29sA1dXVANLS
+        0gDQ0NAAysrKAMXFxQDAwMAAurq6ALW1tQCpqakAm5ubAJKSkgCGhoYAgICAAHl5eQD///8AAQEBAQEB
+        AQEBAQEBAQEBAQEBAQG/vr6+vr8BAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAb++vr6+vr6+
+        vr284Nra4Ly9vr8BAQEBAQEBAQEBAQEBAQEBAQEBAQEBAb+/v76+vbzg3Nrc3ODg2tff0tDS09XZ3ODi
+        vb29vb29vb6+vr++AQEBAQEBAb++4uK8vLzg2tfT0tLS0tPS0M3LycjIyszP0t/X2dnZ2dnZ2trc4ODi
+        vb6+vwEBvr3g2tnW39PT0s/LysjIycrJyMXEwcDBw8TFycvNz8/Pzc/P0NDS0tPf19rg4r4Bvbzc1tPQ
+        zMvKyMXEwsDAwMHBwcTFxcbHx8bGxcjJycnJycnJysrKy8vN0NPX4L2/vr283NXSzMnFxMLBwMDAwMDC
+        xcrO3d7RCt7Ozc3NzczMzM3Nzc3Nz8/Q0tPW4L2/Ab++4uDZ09DMy8rKysrKysrLzNLU4bWFouHh2NfX
+        19fX19fX19fX2dnZ2drg4r4BAQG/v77i4NrX1dXf39/f39/V1tvvn5RUiZ+36r29vb3ivb29vb29vb29
+        vb6+vwEBAQEBAQG/vr694uLi4g0ICAji6+ugmINNdpCfsQgBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+        AQEBAQEYmZeXl5qhoZqRhEpLTXaJrKkIAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBARgfkiiMkYya
+        lo5nR0pKTVFRiZipCAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAR+Xgj1gfCiRjmVFR0dKSk1RVIWf
+        7wgBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBF50zgjw9U3x8ekNDRkdJSktNUWmQoLG/CL8BAQEBAQEB
+        AQEBAQEBAQEBAQEBAQGjozSPiF48PXJ8ZEFDQ0ZHSUpLTVGFn6mpt6C0t+7p6QEBAQEBAQEBAQEBAQEB
+        AQEXnTOIiH1QPT1gZEFCQ0VGR0lKS012lJ+YkKK2mKy0t+/qAQEBAQEBAQEBAQEBARedMzIqgoJxPD1S
+        U0BBQkNFRklJSmGJkIV5WF1jh5yitfjy6QEBAQEBAQEBqCAWFjMyL4F1Wm5aTzxSPj9AQUJDRkZJXHNz
+        UVRWWFhdY2trh6K19OrqAQEBARESmxQaLi0kXzU2Nzg5TDs8PT4/QEFCQ0VHW1xLTVFUVlZYXWNrd7oK
+        trTv6gEBAREiM4F7cHBmTkQ1Njc4OTs7PD4+P0BCQkVGR0lKS01RVFZYWF1ja3d3uwO06uoBAQGjmzMs
+        dGxfWU5ENTc3ODk7Ozw9Pz9AQkNFRkdJSktNUVRWWF1dY2t3d7oDtO8BAa2to5sbJ3BsX1VOOjY3Nzg5
+        Ozw8Pj8/QUJDRUZHSkpNTVRUVlhdY2trd3e6tfIBAQGtERGbLXRvZl9VSDo2Nzg4OTs8PT4/QEFCQ0VG
+        R0lKS1FUVlZYXWNra3d3nPIBAQEBARGeGnt0b2ZZVUg1Njc4OTk7XnJgU0BBQkNFR0lKS01RVFZWWF1j
+        a2t3orQBAQEBra0gHYF4cG1mWU5ENTY3ODlxgoIoKHJ6ZWVXRUZJSktNUVFWeYCAi5y2rO8BAQEBAa0X
+        NCojeHBtX1lORDY2N1qCkpKPjIyMjI6OioSEhISEkJCQlJiYrKy07+oBAQEBAa2onjCBI3hwbF9VTjo1
+        N2KCMzSZlyiPl5eampqWlpagoKCgoKmxsLEICAgBAQEBAQGvITMrfnt0dGxfVUg6NnWIMx8fH5mZoaur
+        q6urrq6urq6urggBCAEIAQEBAQEBAQEBrSAUMCuBeHBmX1VINXsqMZ0YGBgfGBgBqwGrq66uAa6uAQEB
+        AQEBAQEBAQEBAQEBr6gWGy1+eHRvZllOVYEqMZ2joxgBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB
+        siI0GSSBI3hwbV9ZaIaNl6Sl4+Pj5ALkAgICAgICAgICAuXm5gLjuAEBAQEBAQGyEp0aKiUkfiN4cG5i
+        f5GWoKbr5+fn6urq6uvs7e3t7Ovr7O7v7+3p5uMBAQEBAQEHqDQuLCklgX57dHFqjpinp5/w7u3u8PDw
+        8PDy9PT087e38/X29rTw6+bjAQEBAQatITMZLispJYF+e3FyipX9trX38/K09vb19fa5tbW1+fj4ubX6
+        +rn17+nkAQEBAQESnhswGS0rJySBI3yKlaKiov21+Pf3+fn4+Ln7/f79tvr6tvz9/Pr48uwCAQEBAQQS
+        IRwaMC8tiCckfn+gAgLp+P62tfnu8vr58+74A/ny+Pz89Ozv9vr48+3lAQEBAQQREB0yGhkvLCongiiw
+        AgICAvH8+voCAvv58wLknAIC+/3vAgICArf38u3lAQEBAQStDhQcMRoZLiwpJpGwArn+AgL9tvsCAvy1
+        +QIC7gLuorUCAv33AgL2t+3lAQEBAQSyIhUUGzEwGS4rjZbuArkD8gL4tvwCAv62+vUCAgL9ovIC9v22
+        9vP38u3lAQEBAQSyqBYzHRsxMBkuk6DtArkD+QL3tvwCAqL8+/sCAu4D/vAC9/39trX48+3lAQEBAbgE
+        Ew+ZMx0bGjAdHqnsAvgD8QL2+/wCAqL9/LUCAgL+tvAC9vz9+PX48uwCAQEBAbgEDBAWNBQcMjEPpLGz
+        AvX6AgL5+foCAv22++8CAgL1+fMC7Pq1AgL18OnkAQEBAQEErQkPFhUUHA8gqg3nAgICAuv0AgICAgLr
+        9gIC8QIC9PICAugCAu7w6+bjAQEBAbi4BxMODx4VFiCosgLmAgLl6+/uAgICAgLn7ALo7+cC6+zr5gIC
+        6+7q5uMBAQEBAQG4BgUJHw8WIhMGAePk5ufn5+bl5efn6Ono6Ofn5ubm5uXl5ebn5+Xk4wEBAQEBAQEB
+        uAcTCw4YDLIGAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAeMHsgyyBwQGAQEB
+        AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAbjjBAQEAQEBAQEBAQEBAQEBAQEBAQEB
+        AQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAACAAAABAAAAAAQAIAAAA
+        AACABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8A+vr6AP/6+wD++foA++nrAP309QD07O0A+trdAPmw
+        tAD5w8cA+8fKAPrO0QD8290A+9/hAP3t7gD5naAA+qOmAPm1uAD6vsEA+dLUAP3k5QDr2NkAXRITAPpO
+        UAD1WVsA+l9hAPl0dgD6f4IA1G5vAPSFhgD7i40A+I+QAPuTlQDhhIUA+ZWYAPqanAD7qKoA/Le5APzM
+        zQDzBgYA7AYGAOMGBgD5BwcA2wYGANMGBgDOBgYAxgYGAOYICAC7BgYAsgYGAKsGBgCkBgYAnQYGAJMG
+        BgCMBgYAywkJAIQGBgD6DAwA6QsLALYJCQB5BgYAdQYGAG4GBgDwDg4ArAoKAGkGBgDRDQ0AYQYGAF0G
+        BgB/CQkAUwYGAPoTEwDHDw8AuQ8PAEwGBgDaExMARAYGAFkICADDExMAOwYGAPobGwDhGBgA8xsbADIG
+        BgCOEhIA+iIjAC0GBgDpIyQA+igpAPImJgAmBgYAVg4OAKgcHADxKSoA+i0tAMonJwD6NDUA5TExAPI1
+        NQD6PT4AchwcABoHBwCNJycA+UhJAOJERAD6VVYA+lpbAMNNTQB0Li4A+WprAN5eXgDsZmYAJBQUAHxJ
+        SQDxl5cATTExAPCdnQDilZUAxoyMAOmsrACZdHQAnn19AMuhoQB5YGAA9MPDANy0tACrkJAA/tfXAOfF
+        xQD+3t4A8dLSAPrc3AD03NwA3MnJAP3o6AD25OQAzMHBAKyjowD98fEA39XVAJyVlQD/9fUAkIqKAP/2
+        9gDm3t4A//j4AIB8fAD48vIA6uXlAMzIyAD08PAA//39AP78/AD59/cA9fPzAO3r6wDn5eUA//7+AP38
+        /AD29fUA7+7uAOfm5gDh4OAA2djYAM7NzQCPjo4AIwgHAGtqaQDt/v4A9f7+APT9/QD2/v4A+f//APv/
+        /wD8//8ABOfvAA7c4wAQ5+8AFr/FAB3p8QAc4+sAFrK3ACbr8QA36/EAQO7zAE7u9ABR7/UAUO3yAE3h
+        5gBU7/UATd3iAFfw9QBa7/QAZvH1AHLx9gBQpqkAgvP3AIft7wCW9fgAp/f5AML5+wDO/P0Az/r7ANX8
+        /QDO9PUAt9bXANr8/QBb7fMAXe/1ALf4+wDJ+fsAzfr8ANL7/QDl/P0A2+ztAPL+/wD3/v8A1tncANna
+        3ABUVFUA+/v7APn5+QD4+PgA9vb2APX19QDy8vIA8PDwAOzs7ADo6OgA5OTkAOPj4wDe3t4A29vbANbW
+        1gDU1NQA0dHRAMrKygDIyMgAx8fHAMHBwQC+vr4Au7u7ALi4uACxsbEAra2tAKqqqgClpaUAoaGhAJyc
+        nACUlJQAioqKAISEhAB6enoAc3NzAP///wABAQEBAQEBAQEBAQEBAa6uAQEBAQEBAQEBAQEBAQEBAQEB
+        AQEBAa+s2KutqqnP0tLMqa0BAQEBAQEBAQEBAQEBAa6srKqpz9LHx8jIxdG4uNDFyNTPzMzMz9apqq8B
+        AQGt1tPIx8XCube0t7e0srG2s7W4vtHBwdHCw8XH0s/ZAa3WycW5tLKwsLCwsLe9xNzEvby+u7q8vsDR
+        wsPHyakBAa/Y1MfCwLu6vLzBxs56F4/OzcvK1MrLy8vVzM/WrQEBAQGv2NbW19rq2tfpe2dEZX+R3wEB
+        AQEBAQEBAQEBAQEBAQEBAYt9byJ2gXdVPT9EF3mM3gEBAQEBAQEBAQEBAQEBAQGZh3VDSWwdXTY5PUJF
+        XH+Vn58BAQEBAQEBAQEBAQEBmIsMc2IuYGBBNTY5PkJFcoaMiaXooeEBAQEBAQEBAQGSFRMccEwuTzwz
+        NTc5PkJyenJ0dHyN8KOfAQEBnpAVgAsQa1pYUi04MTI0NTdGZWVOS01UV6d0puninwGQgh9ua1krKCkw
+        LC0vMTI0NjdGP0RHS1BUW2ZxqOygnwMVJhpfUUgrKCkqLC0vMTM0Njk9P0RHTVBUW2Zm3OvgA44PJWRZ
+        UTorKCkqLC4vMTM1Njk9QkVHTVBXW2Zmpt8BnpILamRZUTorKCkqTGBgSjM1Nzk9QkVHTVRXW3GP3wGY
+        kA0baGFWSDorKDtwcyIdbGxsZ2dnZW1tcnyTiqQCAQGSDxFraGFWSCsoUyCEFHZ4g4OBfn6GhoaMlZWc
+        l90BAQGQgCFuGGFWSCtjc4OIiIUHlJSXBweXnJvg4JqfngEBAZiLJyBqZF9TQGkigZGRnJycnKKdoubn
+        5uei5OICAQEBAxUlGxoYZF5YHXuJluyk6urqpaXt7+7v76XqouIBAZ6QJyEcGxpoYml7ior39PLz8/L1
+        9vf5+Pj39PCk5AEBmA8TECAcbhlpHX+m+/ym+fn5+Pr7k/2Tk/v59aXmAQGZDxMlJCAccG9+6KT0qP7t
+        8/ul8P7r9pPtpPX376MBAZgPChIRJB8bIowC5QL4qALq/aQC7QL8AgICAvTuowEBmIsMEwkRIx5+kQL7
+        Aur+Aur9kwICov0C9vro8e3nAQGYkAgnEwkREhaiAvcC6PsC6fz86QLy8gKm+vfz7OUBAZ4EFRQLExIO
+        B6EC6wLo9ALn9/QCAqH1AqTvAqSj4wEBAQMPCBQLDYua4AICAugCAgIC5ALkAuniAgLh6OTgAQEBmAYV
+        CA6LmZ7d3+Hi4+LioeTkoeXioeTi4qHi358BAQEBmYsFBgOYAQEBAQGen90C3t4CAt2fn5+fn56eAQEB
+        AQGemZmYAZ4BAQEBAQEBAQEBAQEBAQEBAQEBAQEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAEAAAACAAAAABAAgAAAAAAEAB
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP///wD99PYAzMfIAPro6wD+9/gA+tfaAPzn6QD/9fYA+cbJAP7s
+        7QD6hYkA+ZyfAPqsrwD5srUA+sjKAPvR0wD71NYA/uLjAPpJSwD6TE4A+l9hAPplZwD6enwA+oKEAPuF
+        hgD5lpgA/bGyAPyyswD9yMkA/M3OAPkGBgD2BgYA9QYGAO8GBgDtBgYA6gYGANwGBgDPBgYAxwYGALUG
+        BgCyBgYAoQYGAJ8GBgCaBgYAywgIAK0HBwCVBgYAjQYGAPoMCwCJBgYAhQYGAIEGBgB7BgYAdgYGAHAG
+        BgBoBgYA+g8QANkNDQBjBgYAYgYGAF4GBgBZBgYAVAYGAOAREQBQBgYA+hQUAEsGBgD6GBgAPgYGADoG
+        BgA2BgYAKgYGAPomJwDKHx8AJwYGAPorLAB1FRUAwSMjAPowMQD6PD0A+0JCAPpCQwD8UVEAzkJCABUI
+        CADlbm4A84iIAPmSkgDxjo4A4YmJAP27uwDfpaUApoKCANuvrwDMo6MApIWFAPbKygDpwcEAsJKSANm4
+        uADTu7sA/uPjAJ6NjQD+5eUA/+rqAP7r6wDVxsYA+OnpANjMzAD98PAA/fLyAP709ACJhIQA8+vrAODa
+        2gD/+voA/fj4APv29gDs5+cA//v7AP76+gD8+PgA/Pn5AP/9/QD49vYA7+3tAP/+/gD+/f0AIwgHADAi
+        IQD5+fkA6enpAM/PzwDOzs4A////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQFyXXcBAQEBAQEBAQEBdWx2
+        ZDxjfQEBAQEBAQEBeVZUXDA2PWB9AQEBAQEBAWhZJk4qMjc+bWcDhAEBZltTIkAtKCszTT9FSIKGgxJQ
+        RB8jJScpLDQ4QUZLVYV4GU9CICQ6Si4vNTtDR4FxdB0UTDkhV2FaYl5fZWtzfgEIHBNJMVhub4ABensB
+        AQEBCgsWUlFpAQEBAQEBAQEBARAMGBUbAQEBAQEBAQEBAX8RDhoXagEBAQEBAQEBAQF/BwkNHnQBAQEB
+        AQEBAQEBAQIGD3ABAQEBAQEBAQEBAQF8BAV/AQEBAQEBAQEBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAADAAAABgAAAAAQAgAAAA
+        AACAJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAADAAAAAwAA
+        AAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAMAAAADAAAAAwAAAAIAAAACAAAAAgAAAAMAAAAGAOvrDQDf
+        6hgA6PAhAO73HgDk8hMA5uYKAAAABQAAAAIAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAABAAAAAQAAAAEAAAABAAAAAgAAAAQA5uYKAObyFADl7R0A5u8fAO3tHADg6xkA5/MVAOn0FwDo
+        8CEA6e8vBOXwRQPl7WEC5+52AujvcAPn8FUA5u48AObzKQDs9hsA3+8QAAAABwAAAAQAAAAEAAAABAAA
+        AAQAAAAEAAAABAAAAAMAAAADAAAAAwAAAAIAAAABAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAABAAAAAwAAAAcAAAAJAObmCgDo6AsA7e0OAObyFADm7x8A5vAyAOjyTgLp8GgC6PFwAujvbQPo
+        8GQD6e5bA+fvYQLl7nYC6PGOAufwqAPm7sMC5+/TAubuzwHm7rkC6O+eAubwhALn7mkD5O5LAObwMgDm
+        7CkA5vMpAOftKwDn8ysA5/MqAObsKADj6iUA6PAhAOXtHQDp9BcA4fARAOjoCwAAAAYAAAADAAAAAgAA
+        AAEAAAAAAAAAAAAAAAIAAAAGAN/vEADe7x8A6O4sAOjxNwTn70ED6O5MA+jxWgLo724C5u6HAubupQPn
+        778D5/DMAubvzgPn8McB5+/AAejuxQLn7tMC5+/fAufv6QLn7vIC5u73Aubu9gXZ3/AC6O/lAubv2QPn
+        7sYC5u+qAubvjwLm7oUC6PCGAufuigLn7osC5+6JAubuhALn730C5+52AuXvbQPn72EA5u9SAOfvQQDq
+        7zAA5+8gAOPjEgAAAAcAAAACAAAAAAAAAAQA6OgLAOPsGwDm6zQA5u1TAufwdwLo8JgB5u+wAefwwALn
+        784C5+/bAufu5gLo7+8C5+72Aufv+ALm7vcC5+/0Aufu9QLn7vMC5/DqAufv4QLn790H19/gD7vB5g29
+        wukG19/lBdff4gLo79oC5+7RAefuyAHo78UB5+7HAefvyQHn78kB5+7HAebuxAHn78AB5++8AefwtgHo
+        764C5u6jAubvkQLo7ngD6PBXAOrvMQDm8hQAAAAFAAAAAQAAAAIAAAAGAO3tDgDm7h4A5e06AubwZwLo
+        8J0D5+7HAufv3QLn7+oC5+/xAufv9ALm7vYC5u73Aubv+ALm7/gC5+/2Aufu8ALn79sD6O+6DNHYoA3N
+        1JIcn6OhIYeKsDYzNeARq7KpB87VmwLn7pIC6O+RAufvkwLp8JUC5/CXAubumQLo7pgC5/CVAufvkwLo
+        75IC5u+RAufvjQLn8IkC5u6FAujxfALm728D5/BWAObrNADo6BYAAAAFAAAAAQAAAAAAAAABAAAAAwAA
+        AAcA4/ESAOfzKgPp71EC6PB6AujwmALn8KoB5+61AejwuQHm77sB5++8AejvvAHo77wB5u+7AebvsALn
+        7pQC5+5sFb3EUzRxdlZHNzh+TRITz0EgIbAlaG1dGIiOSA6srzsA6e4uAOTvMADq7zEA6/AyAOvwMwDm
+        8DMA6u8xAOrvMADk7zAA6e8vAOPuLgDo8ywA5+0rAOftKgDl6ycA5+cgAObmFAAAAAgAAAACAAAAAAAA
+        AAAAAAAAAAAAAQAAAAEAAAADAAAACADm8hQA4/EkAOXvMQTl7ToE5+8/BOfvQQTo8EIE5OxDBOTwQwTk
+        8EME6PBCBOfvQADo7TgpoKU0SF9fMGIZGVJgCwx9WQYG/1AJCbZEExZQOxoaMis1NRUAAAAFAAAABQAA
+        AAUAAAAFAAAABgAAAAUAAAAFAAAABQAAAAUAAAAFAAAABQAAAAQAAAAEAAAABAAAAAQAAAADAAAAAgAA
+        AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAADAAAABQAAAAYAAAAHAAAABwAA
+        AAeDRE4YfUROGHdEThhwRE4YAAAACFpXVxleREQYdg8PNnEJCWRpBgbFYAYG/1gGBudPBgabRwYGTD8G
+        Bh44BgYQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAzgYGEMYGBi2/BgY1tgYGNK4GBjSmBgY0nQYGHo8ODh+LBgY0ggYGY3kGBrRwBgb/aAYG/18G
+        Bv9WBgbvTQYGtEUGBks+BgYtNgYGEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAADbBgYQ1AYGHswGBkzFBgabvgYGerUGBmOtBgZ6pAYGNJsGBkuTBgZ6igYG7oEG
+        Bv94Bgb/bwYG/2UGBv9dBgb/VQYG/0wGBrNEBgZjPAYGLTQGBhEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgBgYf2gYGNNMGBpvLBgb/xAYG77wGBrSzBgaarAYGY6IG
+        BnqaBgbmkAYG/4gGBv9/Bgb/dgYG/20GBv9kBgb/XAYG/1MGBv9KBgbFQwYGTDoGBh80BgYQAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOsGBhDlBgYe3wYGNNkGBpvRBgb/ygYG/8IG
+        Bu+6BgbEsgYGtKkGBsWhBgb/mAYG/48GBv+GBgb/fQYG/3UGBv9rBgb/YgYG/1oGBv9RBgb3SQYGm0EG
+        BjU6BgYeAAAAACsGBhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9AYGEe8GBhHqBgYt5AYGY94G
+        BnrYBgbv0AYG/8gGBv/BBgbVuAYGxLAGBuaoBgb/nwYG/5cGBv+OBgb/hAYG/3sGBv9zBgb/aQYG/2EG
+        Bv9YBgb/UAYG1UgGBktABgYtOAYGLTEGBi0pBgY1IwcHNB0HBy0XBwceEQgHEA0ICBAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+AYGEPMG
+        Bh7uBgY06QYGeuMGBnrcBga01gYG988GBv/HBgb/vwYG57cGBu6vBgb/pgYG/54GBv+VBgb/iwYG/4IG
+        Bv96Bgb/cQYG/2gGBv9gBgb/VwYG5k4GBnpHBgZLPgYGYzYGBpsvBgaaKAYGeiIGBmMcBgdLFgcHNBEH
+        CC0NCAceCAgIEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAD6DQ4Q+gcHHvcGBjXyBgZL7QYGeugGBpriBgab3AYG1NQGBv/OBgb/xgYG9r0GBve2Bgb/rQYG/6UG
+        Bv+cBgb/lAYG/4oGBv+BBgb/eAYG/3AGBv9mBgb3XgYGs1UGBptMBgbFRAYG7jwGBv81Bgb/LQYG/ycG
+        BucgBwe0GgcHmhUHB2MQBwhLCwgILQgICBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPpB
+        QhH6NDUe+ikpLfodHi36FBQ0+gwMS/oGBmP3Bgab8gYGxewGBu/nBgbV4QYG5toGBvfTBgb/zAYG98QG
+        Bv+9Bgb/tAYG/6wGBv+jBgb/mwYG/5EGBv+IBgb/fwYG/3cGBvduBgbmZQYG5l0GBv9UBgb/SwYG/0MG
+        Bv87Bgb/NAYG/ywGBv8mBgb/IAcG/xoHB+cUCAeaDwgIYwsICDUJCAgRDQgIEQAAAAAAAAAAAAAAAAAA
+        AAD6ZWcQ+llaEfpLTS36P0BL+jIzY/omJ3r6HB16+hMTm/oLC+b5Bgb/9QYG//EGBv/sBgb/5gYG/+AG
+        BvfZBgb/0gYG/8oGBv/CBgb/uwYG/7MGBv+qBgb/ogYG/5kGBv+QBgb/hwYG/34GBvd1Bgb3bAYG/2MG
+        Bv9aBgb/UgYG/0oGBv9CBgb/OgYG/zMGBv8rBgb/JAYG/x4HB/8YBwf2EwgIxQ4ICHoKCAg0CggIHg4I
+        CBEAAAAAAAAAAAAAAAD6b3IR+mNkH/pWV0v6SUrV+js95vowMO/6JSbn+hoa7voREv/6Cgr/+QYG//UG
+        Bv/wBgb/6gYG/+QGBv/eBgb/2AYG/9EGBv/JBgb/wgYG/7kGBv+yBgb/qQYG/6AGBv+XBgb/jgYG/4YG
+        Bv98Bgb/dAYG/2sGBv9hBgb/WQYG/1AGBv9IBgb/QAYG/zkGBv8xBgb/KgYG/yMGBv8eBgf/FwcH/xMI
+        B+YNCAiaCQgINAsICBEPBwcRAAAAAAAAAAAAAAAA+m1vHvpgYjT6U1VM+kZIm/o5O/f6Li7/+iMj//oY
+        GP/6EA//+gkJ//gGBv/zBgb/7gYG/+kGBv/kBgb/3QYG/9cGBv/QBgb/yAYG/78GBv+4Bgb/sAYG/6cG
+        Bv+eBgb/lgYG/4wGBv+EBgb/ewYG/3EGBv9pBgb/YAYG/1cGBv9PBgb/RwYG/z8GBv83Bgb/MAYG/ykG
+        Bv8jBgb/HAcH/xYHCP8RCAf2DAcImgkICDQLCAgeAAAAAAAAAAD6g4YR+nd6EPpqbR76XWA0+lFTY/pE
+        RbP6ODj/+iwt//ogIf/6Fxf/+g8P//oIB//3Bgb/8wYG/+4GBv/oBgb/4gYG/9wGBv/VBgb/zgYG/8YG
+        Bv++Bgb/twYG/64GBv+lBgb/nQYG/5QGBv+LBgb/ggYG/3kGBv9wBgb/ZwYG/18GBv9WBgb/TgYG/0UG
+        Bv89Bgb/NQYG/y8GBv8nBgb/IQYH/xsHB/8VBwf/EAgH7wwICGMICAgtAAAAAAAAAAAAAAAA+oGDEPp1
+        dxD6aGoQ+lxeNPpOUJv6QkP/+jU3//opKv/6Hx//+hUV//oNDf/6Bgf/9wYG//IGBv/tBgb/6AYG/+EG
+        Bv/aBgb/1AYG/80GBv/FBgb/vQYG/7UGBv+sBgb/pAYG/5sGBv+SBgb/iQYG/4AGBv94Bgb/bwYG/2YG
+        Bv9dBgb/VQYG/0wGBv9EBgb/PAYG/zQGBv8tBgb/JgYG/yAGB/8aBwf/FQgH/w8ICLMLCAgtAAAAAAAA
+        AAAAAAAAAAAAAAAAAAD6c3UQ+mZoLfpZW3r6TU32+j9A//ozNP/6Jyj/+h0d//oUFP/6Cwz/+QYG//UG
+        Bv/xBgb/7AYG/+cGBv/gBgb/2gYG/9IGBufLBgbVxAYG5rwGBvezBgb/qwYG/6IGBv+aBgb/kQYG/4cG
+        Bv9/Bgb/dQYG/2wGBv9kBgb/WwYG/1MGBv9KBgb/QgYG/zsGBv8zBgb/LAYG/yUHBv8fBwf/GQcH/xQI
+        CJoPCAg0AAAAAAAAAAAAAAAAAAAAAPmIixH6fX8Q+nFyLfpkZWP6V1nu+kpL//o9P//6MTL/+iYm//ob
+        G//6ERL/+goK//kGBv/1Bgb/8AYG/+sGBv/lBgb/3wYGxdgGBpvRBgaayQYGmsIGBpq6BgbFsgYG1KkG
+        Bu6gBgbumAYG948GBv+GBgb/fQYG/3QGBv9sBgb/YwYG/1oGBv9SBgb/SQYG/0EGBu85BgbmMgYG7isG
+        BtUjBga0HgYGehgHB0sSCAceAAAAAAAAAAAAAAAAAAAAAAAAAAD6hokR+np9HvpucEv6YmTE+lVW//pH
+        Sf/6Ozz/+i8w//ojJP/6GRr/+hAR//oJCf/4Bgb/9AYG//AGBv/qBgbu5AYGm94GBkvYBgZM0AYGY8kG
+        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
+        AGOtra2s+vr6//r6+v/6+vr/WVlZvgAAAI/IyMjU+vr6/62trcUAAAB/AAAAdZ2dnaO0tLSlAAAARAAA
+        AC0AAAAYAAAABwAAAAAAAAAAAAAAAAAAAAD64+cR+t/iLfrZ3GP609bu+szP//rEx//6ur7/+bG0//mn
+        qf/5naD/+ZSX9+eBgn+KRkhR4+Hh0fr6+v+ZmZnDAAAAnJSUlMn6+vr/n5+fuwAAAHQAAAB8+vr6//r6
+        +v8AAACPAAAAewAAAG8AAABs+vr6//r6+v/j4+PzAAAAmwAAAIbX19fa+vr6/6CgoLoAAACBAAAAfQAA
+        AHIAAABhAAAASgAAAC8AAAAYAAAABwAAAAAAAAAAAAAAAAAAAAD65ukR+uLlHvre4WP62Nzm+tLV//nK
+        zf/6wcX/+bm8//qvsv/5paj/+Zuemt6ChVFzP0A55uPkz/r6+v+dnZ2+AAAAk9DQ0OH6+vr/paWltQAA
+        AGwAAAB4+vr6//r6+v8AAACRAAAAggAAAHdCQkKC+vr6//r6+v/6+vr/AAAAhgAAAHXR0dHM+vr6/6en
+        p7MAAAB7AAAAf5KSkq6tra2sAAAASQAAACwAAAAVAAAABgAAAAAAAAAAAAAAAAAAAAD66OwQ+uXpHvri
+        5Uv63eDE+tfa//nQ1P/6yMz/+cDD//m3uv/5rbHu+aOnY9qGiTJfNzkm6ujozPr6+v+pqamwPz8/iPr6
+        +v/6+vr/AAAAWAAAAFQAAABi+vr6//r6+v8AAAB9AAAAcwAAAGrc3NzV+vr6//r6+v/6+vr/rKysrQAA
+        AFmtra2U+vr6/+bm5t0AAABjQ0NDf/r6+v/6+vr/AAAAOwAAACIAAAAPAAAABAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA+ujrHvrk6Ev64eWz+tzf//rW2f/5z9P/+sfL//m/wv/5tbh6+aquS+GSlCGHUlQc8PDww/r6
+        +v/6+vr/+vr6//r6+v/l5eXMAAAANfr6+v/6+vr/+vr6//r6+v/6+vr/6enp21lZWV/6+vr/+vr6/7S0
+        tI36+vr/+vr6/wAAADUAAAAu+vr6//r6+v/x8fHl+vr6//r6+v/T09OhAAAAJAAAABQAAAAIAAAAAgAA
+        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
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvIGBg/qBgYu4gYGa9kGBtfOBgb/wwYG47YG
+        BtWrBgb7ngYG/5EGBv+DBgb/dgYG/2kGBv9cBgb/UAYGwkQGBjE4BgYpLQYGPSMHBzQbBwcjEggHEQsI
+        CAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH9wYGHPAGBkLpBgaB4AYGodcG
+        BvHMBgb/wAYG8rUGBvyoBgb/nAYG/44GBv+BBgb/cwYG/2cGBv9aBga+TQYGiUAGBrk1BgbfKwYGzSIG
+        Bp4YBwdtEQcHQAoICB8AAAACAAAAAAAAAAAAAAAAAAAAAfpHSAz6NDQe+iMjLfoUFDn6CQhl9wYGqPAG
+        Bt7oBgbe3wYG7dUGBv7KBgb8vgYG/7MGBv+nBgb/mQYG/4wGBv9+Bgb+cgYG7mUGBudYBgb9SwYG/0AG
+        Bv80Bgb/KgYG/yAHBv4XBwfNDwgIdgoICCUMCAgMAAAAAwAAAAD6aWoQ+lZYMfpDRJ76MDG9+iAhu/oS
+        Eub6CAj/9QYG/+4GBv/mBgb93QYG/tMGBv/IBgb/vAYG/7AGBv+kBgb/lwYG/4kGBv58Bgb7bwYG/2IG
+        Bv9VBgb/SQYG/z0GBv8yBgb/JwYG/x4GBv8WBwfxDwgHngkICDENCAgKAAAAAvp4egr6Zmgq+lJUavo/
+        Qdf6Li7/+h0e//oQEP/5Bwf/9AYG/+wGBv/lBgb/2wYG/9IGBv/GBgb/ugYG/64GBv+hBgb/lAYG/4cG
+        Bv96Bgb/bQYG/2AGBv9TBgb/RwYG/zsGBv8wBgb/JgYG/x0HB/8VBwj/DQcIsQkICCwAAAAJ+oWICvp0
+        dxL6YmQf+k9RfPo8Pfz6Kyz/+hsb//oODv/5Bgb/8wYG/+wGBv/jBgb/2gYG/88GBv/EBgb/uAYG/6wG
+        Bv+fBgb/kgYG/4UGBv94Bgb/awYG/14GBv9SBgb/RQYG/zoGBv8vBgb/JQYG/xwGB/8UCAf/CwgIdQAA
+        AAcAAAAAAAAAA/pycw36X2BX+kxN8vo5Ov/6Jyj/+hkY//oLDP/4Bgb/8gYG/+oGBv/iBgb/2AYG880G
+        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
+        AACH/wAAh/8AAI//AAA=
+</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>16, 38</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>DTXCreator</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_ラベル.Name" xml:space="preserve">
+    <value>columnHeaderWAV_ラベル</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_ラベル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_番号.Name" xml:space="preserve">
+    <value>columnHeaderWAV_番号</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_番号.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_ファイル名.Name" xml:space="preserve">
+    <value>columnHeaderWAV_ファイル名</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_ファイル名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_音量.Name" xml:space="preserve">
+    <value>columnHeaderWAV_音量</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_音量.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_位置.Name" xml:space="preserve">
+    <value>columnHeaderWAV_位置</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_位置.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_BGM.Name" xml:space="preserve">
+    <value>columnHeaderWAV_BGM</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderWAV_BGM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリスト上移動.Name" xml:space="preserve">
+    <value>toolStripButtonWAVリスト上移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリスト上移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリスト下移動.Name" xml:space="preserve">
+    <value>toolStripButtonWAVリスト下移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリスト下移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
+    <value>toolStripSeparator13</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生開始.Name" xml:space="preserve">
+    <value>toolStripButtonWAVリストプレビュー再生開始</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生開始.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生停止.Name" xml:space="preserve">
+    <value>toolStripButtonWAVリストプレビュー再生停止</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生停止.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
+    <value>toolStripSeparator14</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュースイッチ.Name" xml:space="preserve">
+    <value>toolStripButtonWAVリストプレビュースイッチ</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonWAVリストプレビュースイッチ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_TEX.Name" xml:space="preserve">
+    <value>columnHeaderBMP_TEX</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_TEX.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_ラベル.Name" xml:space="preserve">
+    <value>columnHeaderBMP_ラベル</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_ラベル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_BMP番号.Name" xml:space="preserve">
+    <value>columnHeaderBMP_BMP番号</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_BMP番号.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_ファイル名.Name" xml:space="preserve">
+    <value>columnHeaderBMP_ファイル名</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderBMP_ファイル名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonBMPリスト上移動.Name" xml:space="preserve">
+    <value>toolStripButtonBMPリスト上移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonBMPリスト上移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonBMPリスト下移動.Name" xml:space="preserve">
+    <value>toolStripButtonBMPリスト下移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonBMPリスト下移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_ラベル.Name" xml:space="preserve">
+    <value>columnHeaderAVI_ラベル</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_ラベル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_AVI番号.Name" xml:space="preserve">
+    <value>columnHeaderAVI_AVI番号</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_AVI番号.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_ファイル名.Name" xml:space="preserve">
+    <value>columnHeaderAVI_ファイル名</value>
+  </data>
+  <data name="&gt;&gt;columnHeaderAVI_ファイル名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonAVIリスト上移動.Name" xml:space="preserve">
+    <value>toolStripButtonAVIリスト上移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonAVIリスト上移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonAVIリスト下移動.Name" xml:space="preserve">
+    <value>toolStripButtonAVIリスト下移動</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonAVIリスト下移動.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemファイル.Name" xml:space="preserve">
+    <value>toolStripMenuItemファイル</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemファイル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem新規.Name" xml:space="preserve">
+    <value>toolStripMenuItem新規</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem新規.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem開く.Name" xml:space="preserve">
+    <value>toolStripMenuItem開く</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem開く.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem上書き保存.Name" xml:space="preserve">
+    <value>toolStripMenuItem上書き保存</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem上書き保存.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem名前を付けて保存.Name" xml:space="preserve">
+    <value>toolStripMenuItem名前を付けて保存</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem名前を付けて保存.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem終了.Name" xml:space="preserve">
+    <value>toolStripMenuItem終了</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem終了.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem編集.Name" xml:space="preserve">
+    <value>toolStripMenuItem編集</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem編集.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemアンドゥ.Name" xml:space="preserve">
+    <value>toolStripMenuItemアンドゥ</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemアンドゥ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemリドゥ.Name" xml:space="preserve">
+    <value>toolStripMenuItemリドゥ</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemリドゥ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem切り取り.Name" xml:space="preserve">
+    <value>toolStripMenuItem切り取り</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem切り取り.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemコピー.Name" xml:space="preserve">
+    <value>toolStripMenuItemコピー</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemコピー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem貼り付け.Name" xml:space="preserve">
+    <value>toolStripMenuItem貼り付け</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem貼り付け.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem削除.Name" xml:space="preserve">
+    <value>toolStripMenuItem削除</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem削除.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemすべて選択.Name" xml:space="preserve">
+    <value>toolStripMenuItemすべて選択</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemすべて選択.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択モード.Name" xml:space="preserve">
+    <value>toolStripMenuItem選択モード</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択モード.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem編集モード.Name" xml:space="preserve">
+    <value>toolStripMenuItem編集モード</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem編集モード.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemモード切替.Name" xml:space="preserve">
+    <value>toolStripMenuItemモード切替</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemモード切替.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem検索.Name" xml:space="preserve">
+    <value>toolStripMenuItem検索</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem検索.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem置換.Name" xml:space="preserve">
+    <value>toolStripMenuItem置換</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem置換.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem表示.Name" xml:space="preserve">
+    <value>toolStripMenuItem表示</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem表示.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemチップパレット.Name" xml:space="preserve">
+    <value>toolStripMenuItemチップパレット</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemチップパレット.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔4分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔4分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔4分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔8分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔8分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔8分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔12分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔12分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔12分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔16分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔16分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔16分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔24分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔24分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔24分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔32分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔32分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔32分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔48分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔48分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔48分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔64分.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔64分</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔64分.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔フリー.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔フリー</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔フリー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔拡大.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔拡大</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔拡大.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔縮小.Name" xml:space="preserve">
+    <value>toolStripMenuItemガイド間隔縮小</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemガイド間隔縮小.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem再生.Name" xml:space="preserve">
+    <value>toolStripMenuItem再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem先頭から再生.Name" xml:space="preserve">
+    <value>toolStripMenuItem先頭から再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem先頭から再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem現在位置から再生.Name" xml:space="preserve">
+    <value>toolStripMenuItem現在位置から再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem現在位置から再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem現在位置からBGMのみ再生.Name" xml:space="preserve">
+    <value>toolStripMenuItem現在位置からBGMのみ再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem現在位置からBGMのみ再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem再生停止.Name" xml:space="preserve">
+    <value>toolStripMenuItem再生停止</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem再生停止.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemツール.Name" xml:space="preserve">
+    <value>toolStripMenuItemツール</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemツール.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemオプション.Name" xml:space="preserve">
+    <value>toolStripMenuItemオプション</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemオプション.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemヘルプ.Name" xml:space="preserve">
+    <value>toolStripMenuItemヘルプ</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemヘルプ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemDTXCreaterマニュアル.Name" xml:space="preserve">
+    <value>toolStripMenuItemDTXCreaterマニュアル</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemDTXCreaterマニュアル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemバージョン.Name" xml:space="preserve">
+    <value>toolStripMenuItemバージョン</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemバージョン.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton新規作成.Name" xml:space="preserve">
+    <value>toolStripButton新規作成</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton新規作成.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton開く.Name" xml:space="preserve">
+    <value>toolStripButton開く</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton開く.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton上書き保存.Name" xml:space="preserve">
+    <value>toolStripButton上書き保存</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton上書き保存.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
+    <value>toolStripSeparator7</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton切り取り.Name" xml:space="preserve">
+    <value>toolStripButton切り取り</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton切り取り.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonコピー.Name" xml:space="preserve">
+    <value>toolStripButtonコピー</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonコピー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton貼り付け.Name" xml:space="preserve">
+    <value>toolStripButton貼り付け</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton貼り付け.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton削除.Name" xml:space="preserve">
+    <value>toolStripButton削除</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton削除.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
+    <value>toolStripSeparator8</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonアンドゥ.Name" xml:space="preserve">
+    <value>toolStripButtonアンドゥ</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonアンドゥ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonリドゥ.Name" xml:space="preserve">
+    <value>toolStripButtonリドゥ</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonリドゥ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonチップパレット.Name" xml:space="preserve">
+    <value>toolStripButtonチップパレット</value>
+  </data>
+  <data name="&gt;&gt;toolStripButtonチップパレット.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBox譜面拡大率.Name" xml:space="preserve">
+    <value>toolStripComboBox譜面拡大率</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBox譜面拡大率.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBoxガイド間隔.Name" xml:space="preserve">
+    <value>toolStripComboBoxガイド間隔</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBoxガイド間隔.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton選択モード.Name" xml:space="preserve">
+    <value>toolStripButton選択モード</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton選択モード.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton編集モード.Name" xml:space="preserve">
+    <value>toolStripButton編集モード</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton編集モード.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
+    <value>toolStripSeparator11</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton先頭から再生.Name" xml:space="preserve">
+    <value>toolStripButton先頭から再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton先頭から再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton現在位置から再生.Name" xml:space="preserve">
+    <value>toolStripButton現在位置から再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton現在位置から再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton現在位置からBGMのみ再生.Name" xml:space="preserve">
+    <value>toolStripButton現在位置からBGMのみ再生</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton現在位置からBGMのみ再生.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton再生停止.Name" xml:space="preserve">
+    <value>toolStripButton再生停止</value>
+  </data>
+  <data name="&gt;&gt;toolStripButton再生停止.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBox演奏速度.Name" xml:space="preserve">
+    <value>toolStripComboBox演奏速度</value>
+  </data>
+  <data name="&gt;&gt;toolStripComboBox演奏速度.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+    <value>toolStripSeparator12</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolTipツールチップ.Name" xml:space="preserve">
+    <value>toolTipツールチップ</value>
+  </data>
+  <data name="&gt;&gt;toolTipツールチップ.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの切り取り.Name" xml:space="preserve">
+    <value>toolStripMenuItem選択チップの切り取り</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの切り取り.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップのコピー.Name" xml:space="preserve">
+    <value>toolStripMenuItem選択チップのコピー</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップのコピー.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの貼り付け.Name" xml:space="preserve">
+    <value>toolStripMenuItem選択チップの貼り付け</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの貼り付け.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの削除.Name" xml:space="preserve">
+    <value>toolStripMenuItem選択チップの削除</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem選択チップの削除.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
+    <value>toolStripSeparator15</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemすべてのチップの選択.Name" xml:space="preserve">
+    <value>toolStripMenuItemすべてのチップの選択</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemすべてのチップの選択.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator16.Name" xml:space="preserve">
+    <value>toolStripSeparator16</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節長変更.Name" xml:space="preserve">
+    <value>toolStripMenuItem小節長変更</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節長変更.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
+    <value>toolStripSeparator17</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節の挿入.Name" xml:space="preserve">
+    <value>toolStripMenuItem小節の挿入</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節の挿入.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節の削除.Name" xml:space="preserve">
+    <value>toolStripMenuItem小節の削除</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節の削除.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Cメインフォーム</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

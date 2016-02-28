@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML><HEAD>
+<meta name="GENERATOR" content="HelpMachine 2.5.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="ImageType" value="Folder">
+<param name="Window Styles" value="0x800027">
+</OBJECT><UL>
+		<LI><OBJECT type="text/sitemap">
+		<param name="Name" value="DTXCreator Reference Manual">
+		<param name="Local" value="_RESOURCE\タイトル.html">
+		<param name="ImageNumber" value="5">
+		</OBJECT>
+			<UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="はじめに">
+			<param name="Local" value="_RESOURCE\はじめに.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="画面構成">
+			<param name="Local" value="_RESOURCE\画面構成\画面構成.html">
+			<param name="ImageNumber" value="5">
+			</OBJECT>
+				<UL>
+
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="譜面">
+				<param name="Local" value="_RESOURCE\画面構成\譜面.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="[基本情報] タブ">
+				<param name="Local" value="_RESOURCE\画面構成\基本情報タブ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="[WAV] タブ">
+				<param name="Local" value="_RESOURCE\画面構成\WAVタブ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="[BMP] タブ">
+				<param name="Local" value="_RESOURCE\画面構成\BMPタブ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="[AVI] タブ">
+				<param name="Local" value="_RESOURCE\画面構成\AVIタブ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="[自由入力] タブ">
+				<param name="Local" value="_RESOURCE\画面構成\自由入力タブ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="メニューバー">
+				<param name="Local" value="_RESOURCE\画面構成\メニューバー.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="ツールバー">
+				<param name="Local" value="_RESOURCE\画面構成\ツールバー.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="サウンドプロパティ画面">
+				<param name="Local" value="_RESOURCE\画面構成\サウンドプロパティ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="動画プロパティ画面">
+				<param name="Local" value="_RESOURCE\画面構成\動画プロパティ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="画像プロパティ画面">
+				<param name="Local" value="_RESOURCE\画面構成\画像プロパティ.html">
+				<param name="ImageNumber" value="11">
+				</OBJECT>
+				</UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="使い方">
+			<param name="Local" value="_RESOURCE\使い方.html">
+			<param name="ImageNumber" value="5">
+			</OBJECT>
+				<UL>
+
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="選択モードと編集モード">
+				<param name="Local" value="_RESOURCE\使い方\選択モードと編集モード.html">
+				<param name="ImageNumber" value="5">
+				</OBJECT>
+					<UL>
+
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="選択モード">
+					<param name="Local" value="_RESOURCE\使い方\選択モード.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="編集モード">
+					<param name="Local" value="_RESOURCE\使い方\編集モード.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					</UL>
+
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="基本的な使い方">
+				<param name="Local" value="_RESOURCE\使い方\基本的な使い方.html">
+				<param name="ImageNumber" value="5">
+				</OBJECT>
+					<UL>
+
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="チップを置く、削除する">
+					<param name="Local" value="_RESOURCE\使い方\チップを置く、削除する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="ギター、ベースチップを作る">
+					<param name="Local" value="_RESOURCE\使い方\ギター、ベースチップを作る.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="チップを移動する">
+					<param name="Local" value="_RESOURCE\使い方\チップを移動する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="チップを切り取り、コピー、削除、貼り付けする">
+					<param name="Local" value="_RESOURCE\使い方\チップを切り取り、コピー、貼り付けする.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="小節を挿入、削除する">
+					<param name="Local" value="_RESOURCE\使い方\小節を挿入、削除する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="小節長を変更する">
+					<param name="Local" value="_RESOURCE\使い方\小節長を変更する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="自由入力 - 未対応の命令を記述する">
+					<param name="Local" value="_RESOURCE\使い方\自由入力-未対応の命令を記述する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="DTXViewerで確認する">
+					<param name="Local" value="_RESOURCE\使い方\DTXViewerで再生する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					</UL>
+
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="便利な使い方">
+				<param name="Local" value="_RESOURCE\使い方\便利な使い方.html">
+				<param name="ImageNumber" value="5">
+				</OBJECT>
+					<UL>
+
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="チップをレーンに割り付ける">
+					<param name="Local" value="_RESOURCE\使い方\チップをレーンに割り付ける.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="チップパレットを使う">
+					<param name="Local" value="_RESOURCE\使い方\チップパレットを使う.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="検索する">
+					<param name="Local" value="_RESOURCE\使い方\検索する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="置換する">
+					<param name="Local" value="_RESOURCE\使い方\置換する.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					</UL>
+
+				<LI><OBJECT type="text/sitemap">
+				<param name="Name" value="その他">
+				<param name="Local" value="_RESOURCE\使い方\その他.html">
+				<param name="ImageNumber" value="5">
+				</OBJECT>
+					<UL>
+
+					<LI><OBJECT type="text/sitemap">
+					<param name="Name" value="オプション設定">
+					<param name="Local" value="_RESOURCE\使い方\オプション.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+					</UL>
+			</UL>
+
+			<LI><OBJECT type="text/sitemap">
+			<param name="Name" value="最後に">
+			<param name="Local" value="_RESOURCE\最後に.html">
+			<param name="ImageNumber" value="11">
+			</OBJECT>
+</UL>
+</UL>
+</BODY></HTML>

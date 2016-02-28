@@ -1,0 +1,134 @@
+[OPTIONS]
+Auto Index=Yes
+Binary Index=Yes
+Compatibility=1.1 or later
+Compiled file=Manual.chm
+Contents file=DTXCreatorマニュアル.hhc
+Index file=DTXCreatorマニュアル.hhk
+Default Font=MS UI Gothic,10,128
+Default Window=XHP
+Default topic=_RESOURCE\タイトル.html
+Display compile progress=No
+Error log file=d:\home\programfiles\dtxcreator\@作成資料\マニュアル\Compile.Log
+Flat=No
+Full-text search=Yes
+Language=0x0411 Japanese
+Title=DTXCreatorマニュアル
+
+[WINDOWS]
+XHP="DTXCreatorマニュアル","d:\home\programfiles\dtxcreator\@作成資料\マニュアル\DTXCreatorマニュアル.hhc","d:\home\programfiles\dtxcreator\@作成資料\マニュアル\DTXCreatorマニュアル.hhk","_RESOURCE\タイトル.html",,,,,,0x60720,200,0xE,[200,200,800,600],0x0,0x0,,,,,0
+$global_Web="Remote URL",,,,,,,,,,,0x383c,[125,144,721,602],,,,,,,0
+
+[FILES]
+_RESOURCE\タイトル.html
+_RESOURCE\はじめに.html
+_RESOURCE\画面構成\画面構成.html
+_RESOURCE\画面構成\譜面.html
+_RESOURCE\画面構成\基本情報タブ.html
+_RESOURCE\画面構成\WAVタブ.html
+_RESOURCE\画面構成\BMPタブ.html
+_RESOURCE\画面構成\AVIタブ.html
+_RESOURCE\画面構成\自由入力タブ.html
+_RESOURCE\画面構成\メニューバー.html
+_RESOURCE\画面構成\ツールバー.html
+_RESOURCE\画面構成\サウンドプロパティ.html
+_RESOURCE\画面構成\動画プロパティ.html
+_RESOURCE\画面構成\画像プロパティ.html
+_RESOURCE\使い方.html
+_RESOURCE\使い方\選択モードと編集モード.html
+_RESOURCE\使い方\選択モード.html
+_RESOURCE\使い方\編集モード.html
+_RESOURCE\使い方\基本的な使い方.html
+_RESOURCE\使い方\チップを置く、削除する.html
+_RESOURCE\使い方\ギター、ベースチップを作る.html
+_RESOURCE\使い方\チップを移動する.html
+_RESOURCE\使い方\チップを切り取り、コピー、貼り付けする.html
+_RESOURCE\使い方\小節を挿入、削除する.html
+_RESOURCE\使い方\小節長を変更する.html
+_RESOURCE\使い方\自由入力-未対応の命令を記述する.html
+_RESOURCE\使い方\DTXViewerで再生する.html
+_RESOURCE\使い方\便利な使い方.html
+_RESOURCE\使い方\チップをレーンに割り付ける.html
+_RESOURCE\使い方\チップパレットを使う.html
+_RESOURCE\使い方\検索する.html
+_RESOURCE\使い方\置換する.html
+_RESOURCE\使い方\その他.html
+_RESOURCE\使い方\オプション.html
+_RESOURCE\最後に.html
+_RESOURCE\DTXC.CSS
+_RESOURCE\IMAGES\DTXC.JPG
+_RESOURCE\IMAGES\DTXMANIA_BN.JPG
+_RESOURCE\IMAGES\HEADBACK.BMP
+_RESOURCE\IMAGES\LOGO.JPG
+_RESOURCE\IMAGES\SUBHEADBACK.BMP
+_RESOURCE\画面構成\IMAGES\AUDIOHS.PNG
+_RESOURCE\画面構成\IMAGES\AVI_TAB.JPG
+_RESOURCE\画面構成\IMAGES\BMP_TAB.JPG
+_RESOURCE\画面構成\IMAGES\COPYHS.PNG
+_RESOURCE\画面構成\IMAGES\CUTHS.PNG
+_RESOURCE\画面構成\IMAGES\DATACONTAINER_MOVENEXTHS.PNG
+_RESOURCE\画面構成\IMAGES\DATACONTAINER_NEWRECORDHS.PNG
+_RESOURCE\画面構成\IMAGES\DELETEHS.PNG
+_RESOURCE\画面構成\IMAGES\DOCUMENTHS.PNG
+_RESOURCE\画面構成\IMAGES\EDIT_TAB.JPG
+_RESOURCE\画面構成\IMAGES\EDITINFORMATIONHS.PNG
+_RESOURCE\画面構成\IMAGES\FREE_TAB.JPG
+_RESOURCE\画面構成\IMAGES\MAIN_FORM.JPG
+_RESOURCE\画面構成\IMAGES\MOVEDOWN.PNG
+_RESOURCE\画面構成\IMAGES\MOVEUP.PNG
+_RESOURCE\画面構成\IMAGES\OPENHS.PNG
+_RESOURCE\画面構成\IMAGES\PANEL_DESC.JPG
+_RESOURCE\画面構成\IMAGES\PASTEHS.PNG
+_RESOURCE\画面構成\IMAGES\PENCIL.GIF
+_RESOURCE\画面構成\IMAGES\POINTERHS.PNG
+_RESOURCE\画面構成\IMAGES\SAVEHS.PNG
+_RESOURCE\画面構成\IMAGES\STOPHS.PNG
+_RESOURCE\画面構成\IMAGES\WAV_TAB.JPG
+_RESOURCE\画面構成\IMAGES\ガイド幅.JPG
+_RESOURCE\画面構成\IMAGES\サウンドプロパティ.JPG
+_RESOURCE\画面構成\IMAGES\ツールバー.JPG
+_RESOURCE\画面構成\IMAGES\メニューバー.JPG
+_RESOURCE\画面構成\IMAGES\画像プロパティ.JPG
+_RESOURCE\画面構成\IMAGES\再生速度.JPG
+_RESOURCE\画面構成\IMAGES\最初から再生.PNG
+_RESOURCE\画面構成\IMAGES\縦方向倍率.JPG
+_RESOURCE\画面構成\IMAGES\動画プロパティ.JPG
+_RESOURCE\画面構成\IMAGES\譜面.JPG
+_RESOURCE\使い方\IMAGES\DATACONTAINER_MOVENEXTHS.PNG
+_RESOURCE\使い方\IMAGES\DATACONTAINER_NEWRECORDHS.PNG
+_RESOURCE\使い方\IMAGES\DTXVPLAYSPEED.JPG
+_RESOURCE\使い方\IMAGES\EDITINFORMATIONHS.PNG
+_RESOURCE\使い方\IMAGES\PENCIL.GIF
+_RESOURCE\使い方\IMAGES\POINTERHS.PNG
+_RESOURCE\使い方\IMAGES\STOPHS.PNG
+_RESOURCE\使い方\IMAGES\オプション.JPG
+_RESOURCE\使い方\IMAGES\ガイド幅4分の1.JPG
+_RESOURCE\使い方\IMAGES\ガイド幅32分の1.JPG
+_RESOURCE\使い方\IMAGES\ガイド幅を変える.JPG
+_RESOURCE\使い方\IMAGES\コンテクストメニュー.JPG
+_RESOURCE\使い方\IMAGES\チップがレーンに割り付けられた.JPG
+_RESOURCE\使い方\IMAGES\チップパレット.JPG
+_RESOURCE\使い方\IMAGES\チップパレットからの削除.JPG
+_RESOURCE\使い方\IMAGES\チップパレットへの追加.JPG
+_RESOURCE\使い方\IMAGES\チップパレット表示・非表示（ツールバー）.JPG
+_RESOURCE\使い方\IMAGES\チップをレーンに割り付けた結果.JPG
+_RESOURCE\使い方\IMAGES\チップを割り付ける.JPG
+_RESOURCE\使い方\IMAGES\チップを置く.JPG
+_RESOURCE\使い方\IMAGES\ツールバーからモード切替.JPG
+_RESOURCE\使い方\IMAGES\ドラッグでチップを選択（結果）.JPG
+_RESOURCE\使い方\IMAGES\ドラッグでチップを選択.JPG
+_RESOURCE\使い方\IMAGES\メニューバーからモード切替.JPG
+_RESOURCE\使い方\IMAGES\リストからセルを選択.JPG
+_RESOURCE\使い方\IMAGES\レーン割り付けの解除.JPG
+_RESOURCE\使い方\IMAGES\検索ダイアログ.JPG
+_RESOURCE\使い方\IMAGES\最初から再生.PNG
+_RESOURCE\使い方\IMAGES\自由入力タブを選択.JPG
+_RESOURCE\使い方\IMAGES\小節の削除.JPG
+_RESOURCE\使い方\IMAGES\小節の挿入.JPG
+_RESOURCE\使い方\IMAGES\小節長の変更.JPG
+_RESOURCE\使い方\IMAGES\小節長変更ダイアログ.JPG
+_RESOURCE\使い方\IMAGES\選択モードにする.JPG
+_RESOURCE\使い方\IMAGES\置換ダイアログ.JPG
+_RESOURCE\使い方\IMAGES\貼り付け.JPG
+_RESOURCE\使い方\IMAGES\編集モードにする.JPG
+_RESOURCE\使い方\IMAGES\裏チャンネルに置く.JPG

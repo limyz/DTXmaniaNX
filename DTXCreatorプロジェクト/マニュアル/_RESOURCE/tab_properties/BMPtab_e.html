@@ -1,0 +1,96 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">Tab properties</th></tr>
+<tr><td class="pageHeader">[BMP] tab</td></tr>
+</table>
+</p>
+
+<p>
+&quot;BMP tab&quot; manages <b>BMP cell list</b> used in DTX score<br>
+BMP can handle 1295 BMP files(<b>BMP cell</b>).
+Each BMP cells have the number 01-ZZ (36-decimal expression), and each cells have one label and one filename.</p>
+<p>
+Please see &quot;Image property&quot; to know how to specify these items.</p>
+
+<h1>
+<a name="SurfaceAndTexture"></a>Surface and Texture</h1>
+<p>
+DTXMania supports two ways to show images ... <b>by Surface</b> and <b>by Texture</b>.
+The differences are below;
+</p>
+<table border="1" width="100%" id="table1" cellspacing="0" cellpadding="3">
+	<tr>
+	<td bgcolor="#D2DCFF">　</td>
+	<td bgcolor="#D2DCFF" align="center">Surface</td>
+	<td bgcolor="#D2DCFF" align="center">Texture</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">Technology</td>
+	<td>DirectDraw</td>
+	<td>Direct3D</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">Transparency</td>
+	<td>Complete black(RGB=0,0,0) is used as the transparent key color</td>
+	<td>Alpha value is used</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">Supported image formats</td>
+	<td>bmp, jpeg, png</td>
+	<td>PNG only (RGB24bit+Alpha)</td>
+	</tr>
+</table>
+<p>
+If you use Texture, you can use half-transparented image.
+However, the usage of Texture is limited (by width/height, VRAM size etc..).
+So you should not to use MANY Textures.</p>
+<h1>
+BMP tab layouts</h1>
+<p>
+<img border="0" src="images/bmp_tab_e_.png" width="295" height="361" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#tex">Tex</a><br>
+<a href="#label">Label</a><br>
+<a href="#No">No</a><br>
+<a href="#file">File</a><br>
+<a href="#move">Move up</a> (<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">)<br>
+<a href="#move">Move down</a> (<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">)<br clear="all">
+</p>
+<h2><span style="background-repeat: repeat; background-position: 0 0">
+<a name="tex"></a>Tex</span></h2>
+<p>&quot;o&quot; is shown if the BMP ceil is handled as a texture.</p>
+
+<h2><a name="label"></a>Label</h2>
+<p>It shows the lavel named to the AVI cell.<br>
+In the DTX file, the lavel strings are used to the comments of #AVI command.</p>
+
+<h2><a name="No"></a>No</h2>
+<p>The number of BMP cell. It has the value 01-ZZ (36-decimal expression).<br>
+The chips drawn on the score are distinguished by the number.</p>
+
+<h2><a name="file"></a>File</h2>
+<p>The image filename related to the BMP cell.<br>
+It is represented as the relative path from the DTX file you're making.</p>
+
+<h2><a name="move"></a>Move up (<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">), Move down (<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">)</h2>
+<p>It move up/down the BMP cell in the BMP cell list.<br>
+It causes the decrement/increment the number of the BMP cell,
+and the chip's number on the score are also changed automatically.</p>
+
+
+</body>
+
+</html>

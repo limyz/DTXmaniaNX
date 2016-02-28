@@ -1,0 +1,85 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">[BMP]タブ</td></tr>
+</table>
+</p>
+
+<p>
+　BMPタブでは、譜面で使用する画像の一覧（<b>BMPリスト</b>）を管理します。<br>
+　BMPリストには最大 1295個の画像（<b>BMPセル</b>）を含めることができます。BMPセルは 01 ～ ZZ 
+（36進数表記）の番号（No）で区別され、１つのラベル名とファイル名を指定することができます。</p>
+<p>
+　BMPセルのこれらの値の設定方法については、「画像プロパティ」の項を参照して下さい。</p>
+<h1>
+<a name="SurfaceAndTexture"></a>サーフェイスとテクスチャ</h1>
+<p>
+　BMPには、<b>サーフェイス</b>として表示されるものと<b>テクスチャ</b>として表示されるものの２種類があります。それぞれには以下のような違いがあります。</p>
+<table border="1" width="100%" id="table1" cellspacing="0" cellpadding="3">
+	<tr>
+	<td bgcolor="#D2DCFF">　</td>
+	<td bgcolor="#D2DCFF" align="center">サーフェイス</td>
+	<td bgcolor="#D2DCFF" align="center">テクスチャ</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">使用技術</td>
+	<td>DirectDraw</td>
+	<td>Direct3D</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">色の透過</td>
+	<td>完全な黒（RGB=0,0,0）を透過</td>
+	<td>アルファ情報に従う</td>
+	</tr>
+	<tr>
+	<td bgcolor="#D2DCFF">対応フォーマット</td>
+	<td>bmp, jpeg, png</td>
+	<td>RGB24bit＋透過情報付きのpngのみ</td>
+	</tr>
+</table>
+<p>
+　テクスチャを使用すると半透明画像を使うことができますが、サイズやビデオメモリ等に機種依存の制限があり、多用することは推奨されません。</p>
+<h1>
+画面構成</h1>
+<p>
+<img border="0" src="images/bmp_tab.jpg" width="279" height="365" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#tex">Tex</a><br>
+<a href="#label">ラベル</a><br>
+<a href="#No">No</a><br>
+<a href="#file">ファイル</a><br>
+<a href="#move">上移動</a>（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#move">下移動</a>（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）<br clear="all">
+</p>
+<h2><span style="background-repeat: repeat; background-position: 0 0">
+<a name="tex"></a>Tex</span></h2>
+<p>　BMPセルをテクスチャとして扱う場合、ここに「○」印が表示されます。</p>
+<h2><a name="label"></a>ラベル</h2>
+<p>　BMPセルに対して付けられている名前（ラベル）を表示します。<br>
+　DTXファイルでは、ラベル文字列は、対応する #BMP 命令へのコメント文として出力されます。</p>
+<h2><a name="No"></a>No</h2>
+<p>　BMPセルの番号です。36進数表記で 01～ZZ と表示されます。<br>
+　譜面上に描かれるチップは、この番号により区別されます。</p>
+<h2><a name="file"></a>ファイル</h2>
+<p>　BMPセルに対応する画像ファイル名です。<br>
+　作成しているDTXファイルに対する相対パスで表示されます。</p>
+<h2><a name="move"></a>上移動（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）、下移動（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）</h2>
+<p>　現在選択中のBMPセルを、１行上または下へ移動します。<br>
+　このとき、そのBMPセルの番号（No）は１つ増加または減少し、同時に、譜面上に配置済みのチップの番号も自動的に修正され、セルの移動に追従します。</p>
+
+</body>
+
+</html>

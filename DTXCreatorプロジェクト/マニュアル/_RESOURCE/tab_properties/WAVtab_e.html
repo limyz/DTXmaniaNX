@@ -1,0 +1,86 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">Tab properties</th></tr>
+<tr><td class="pageHeader">[WAV] tab</td></tr>
+</table>
+</p>
+
+<p>
+&quot;WAV tab&quot; manages <b>WAV cell list</b> used in DTX score<br>
+WAV can handle 1295 WAV files(<b>WAV cell</b>).
+Each WAV cells have the number 01-ZZ (36-decimal expression), and each cells have one label and one filename, volume and panpot value.</p>
+<p>
+Please see &quot;Sound property&quot; to know how to specify these items.</p>
+<h1>
+WAV tab layouts</h1>
+<p>
+<img border="0" src="images/wav_tab_e_.png" align="left" width="293" height="359" /></p>
+<p>
+　</p>
+<p>
+<a href="#label">Label</a><br>
+<a href="#No">No</a><br>
+<a href="#file">File</a><br>
+<a href="#volume">Vol.</a><br>
+<a href="#pan">Pan</a><br>
+<a href="#bgm">BGM</a><br>
+<a href="#move">Move up</a> (<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#move">Move down</a> (<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">)<br>
+<a href="#preview">Start Preview</a> (<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0">)<br>
+<a href="#preview">Stop PreviewStop</a> (<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0">)<br>
+<a href="#preview">Enable/Disable Preview</a> (<img border="0" src="images/AudioHS.png" width="16" height="16" style="margin: 0">)<br clear="all">
+</p>
+
+<h2><a name="label"></a>Label</h2>
+<p>It shows the lavel named to the WAV cell.<br>
+In the DTX file, the lavel strings are used to the comments of #WAV command.</p>
+
+<h2><a name="No"></a>No</h2>
+<p>The number of WAV cell. It has the value 01-ZZ (36-decimal expression).<br>
+The chips drawn on the score are distinguished by the number.</p>
+
+<h2><a name="file"></a>File</h2>
+<p>The sound filename related to the WAV cell.<br>
+It is represented as the relative path from the DTX file you're making.</p>
+
+<h2><a name="volume"></a>Volume</h2>
+<p>The volume value (0-100 [%]).<br>
+100% means the original sound volume. You can't specify the value over 100.
+</p>
+
+<h2><a name="pan"></a>Pan</h2>
+<p>The panpot value (Left:-100 - Center:0 - Right:100) for the WAV cell.<br>
+Note that DTXMania uses DirectSound to change panpot.
+So the changing panpot means simply the changing of the volume of Left/RIght channel independently.
+</p>
+
+<h2><a name="bgm"></a>BGM</h2>
+<p>&quot;o&quot; is shown if the WAV ceil is handled as a BGM.</p>
+
+<h2><a name="move"></a>Move up (<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">), Move down (<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">)</h2>
+<p>It move up/down the WAV cell in the AVI cell list.<br>
+It causes the decrement/increment the number of the WAV cell,
+and the chip's number on the score are also changed automatically.</p>
+
+<h2><a name="preview"></a>Start Preview (<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0">), Stop Preview (<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0">), Enable/Disable Preview (<img border="0" src="images/AudioHS.png" width="16" height="16" style="margin: 0">)</h2>
+<p>
+You can preview the WAV sound by left-clicking the WAV cell.
+You can also start/stop preview it by clicking </a>Start Preview (<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0">) / Stop Preview (<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0">).
+<br>
+And you can enable/disable preview feature by Enable/Disable Preview (<img border="0" src="images/AudioHS.png" width="16" height="16" style="margin: 0">) button.
+</p>
+
+</body>
+
+</html>

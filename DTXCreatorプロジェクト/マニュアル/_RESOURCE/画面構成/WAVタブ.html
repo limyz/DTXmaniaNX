@@ -1,0 +1,71 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link rel="stylesheet" href="../dtxc.css" type="text/css">
+<title>DTXCreator Reference Manual</title>
+</head>
+
+<body>
+
+<p>
+<table class="pageHeader">
+<tr><th class="pageHeader">画面構成</th></tr>
+<tr><td class="pageHeader">[WAV]タブ</td></tr>
+</table>
+</p>
+
+<p>
+　WAVタブでは、譜面で使用するサウンドの一覧（<b>WAVリスト</b>）を管理します。<br>
+　WAVリストには最大 1295個のサウンド（<b>WAVセル</b>）を含めることができます。WAVセルは 01 ～ ZZ 
+（36進数表記）の番号（No）で区別され、１つのラベル名とファイル名、音量、位置を指定することができます。</p>
+<p>
+　WAVセルのこれらの値の設定方法については、「サウンドプロパティ」の項を参照して下さい。</p>
+<h1>
+画面構成</h1>
+<p>
+<img border="0" src="images/wav_tab.jpg" align="left"></p>
+<p>
+　</p>
+<p>
+<a href="#label">ラベル</a><br>
+<a href="#No">No</a><br>
+<a href="#file">ファイル</a><br>
+<a href="#volume">音量</a><br>
+<a href="#pan">位置</a><br>
+<a href="#bgm">BGM</a><br>
+<a href="#move">上移動</a>（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#move">下移動</a>（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#preview">試聴</a>（<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#preview">試聴停止</a>（<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0">）<br>
+<a href="#preview">試聴有効・無効</a>（<img border="0" src="images/AudioHS.png" width="16" height="16" style="margin: 0">）<br clear="all">
+</p>
+<h2><a name="label"></a>ラベル</h2>
+<p>　WAVセルに対して付けられている名前（ラベル）を表示します。<br>
+　DTXファイルでは、ラベル文字列は、対応する #WAV 命令へのコメント文として出力されます。</p>
+<h2><a name="No"></a>No</h2>
+<p>　WAVセルの番号です。36進数表記で 01～ZZ と表示されます。<br>
+　譜面上に描かれるチップは、この番号により区別されます。</p>
+<h2><a name="file"></a>ファイル</h2>
+<p>　WAVセルに対応するサウンドファイル名です。<br>
+　作成しているDTXファイルに対する相対パスで表示されます。</p>
+<h2><a name="volume"></a>音量</h2>
+<p>　WAVセルの音量をパーセンテージ（0～100 [%]）で指定します。<br>
+　サウンドファイルの持つ本来の音量（原音量）を 100% とし、それを越える音量は設定できません。</p>
+<h2><a name="pan"></a>位置</h2>
+<p>　WAVセルの再生位置（左；-100 ～ 中央；0 ～ 右；100）を指定します。<br>
+　DirectSound を使用しているDTXManiaでは、再生位置の変更は左右のサウンド出力の音量を単純に増減するだけで実現されることにご注意下さい。</p>
+<h2><a name="bgm"></a>BGM</h2>
+<p>　WAVセルをBGMサウンドとして扱う場合、ここに「○」印が表示されます。</p>
+<h2><a name="move"></a>上移動（<img border="0" src="images/MoveUp.png" width="16" height="16" style="margin: 0">）、下移動（<img border="0" src="images/MoveDown.png" width="16" height="16" style="margin: 0">）</h2>
+<p>　現在選択中のWAVセルを、１行上または下へ移動します。<br>
+　このとき、そのWAVセルの番号（No）は１つ増加または減少し、同時に、譜面上に配置済みのチップの番号も自動的に修正され、セルの移動に追従します。</p>
+<h2><a name="preview"></a>試聴（<img border="0" src="images/DataContainer_MoveNextHS.png" width="16" height="16" style="margin: 0">）、試聴停止（<img border="0" src="images/StopHS.png" width="16" height="16" style="margin: 0">）、試聴有効・無効（<img border="0" src="images/AudioHS.png" width="16" height="16" style="margin: 0">）</h2>
+<p>
+　任意のWAVセルをマウスで左クリックすると、そのサウンドを試聴することができますが、これらのボタンで現在選択中のWAVセルを試聴／試聴停止することもできます。<br>
+　試聴有効・無効ボタンで、これらの機能の ON/OFF を行うことができます。</p>
+
+</body>
+
+</html>
