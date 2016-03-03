@@ -195,3 +195,7 @@ ModelManifest.xml
 /実行時フォルダ/songlist.db
 /実行時フォルダ/songs.db
 /実行時フォルダ/DTXFiles
+/DTXCreatorプロジェクト/obj
+/DTXCreatorプロジェクト/UpgradeLog.htm
+/DTXCreatorプロジェクト/Backup
+/DTXCreatorプロジェクト/bin
