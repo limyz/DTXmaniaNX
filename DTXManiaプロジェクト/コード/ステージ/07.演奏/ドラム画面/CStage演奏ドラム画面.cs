@@ -310,6 +310,7 @@ namespace DTXMania
                             this.txLaneCover.t2D描画(CDTXMania.app.Device, 690, 0, new Rectangle(71, 0, 52, 720));
                         }
                         //if (CDTXMania.DTX.bチップがある.Ride == false)
+                        /*
                         {
                             //RDPositionで入れ替わり
                             if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RCRD)
@@ -321,6 +322,7 @@ namespace DTXMania
                                 this.txLaneCover.t2D描画(CDTXMania.app.Device, 743, 0, new Rectangle(178, 0, 38, 720));
                             }
                         }
+                        */
                     }
                 }
 
@@ -3665,10 +3667,13 @@ namespace DTXMania
                     case 0x16: //CY
                         this.actPad.Start( 8, true, pChip.nチャンネル番号 );
                         break;
-
+                    
+                    /*
                     case 0x19: //RD
                         this.actPad.Start( 9, true, pChip.nチャンネル番号 );
                         break;
+                    */
+
                     default:
                         break;
                 }
@@ -3794,6 +3799,7 @@ namespace DTXMania
 				}
                 if (((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.b可視) && (this.txチップ != null))
 				{
+                    // 27/02/2016 limyz shorten the dtx score line to duplicate Gitadora gameplay
                     this.txチップ.t2D描画(CDTXMania.app.Device, 295, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 769, 0x207, 2));
 				}
               
