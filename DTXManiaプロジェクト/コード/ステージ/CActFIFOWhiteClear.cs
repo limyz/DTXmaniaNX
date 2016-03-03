@@ -156,13 +156,16 @@ namespace DTXMania
 		#region [ private ]
 		//-----------------
 		public CCounter counter;
-		private EFIFOモード mode;
 		private CTexture tx白タイル64x64;
         private CTexture txFullCombo;
         private CTexture txExcellent;
         private CTexture tx黒幕;
         private CTexture txボーナス花火;
         private CTexture txリザルト画像;
+
+        #pragma warning disable 414
+        private EFIFOモード mode;
+        #pragma warning restore 414
 
         [StructLayout(LayoutKind.Sequential)]
         private struct ST青い星

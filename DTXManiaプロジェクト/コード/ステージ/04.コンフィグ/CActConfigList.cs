@@ -2663,7 +2663,7 @@ namespace DTXMania
         private CItemToggle iSystemSoundMonitorGuitar;
         private CItemToggle iSystemStageFailed;
         private CItemToggle iSystemStageEffect;
-        private CItemToggle iSystemStoicMode;
+        //private CItemToggle iSystemStoicMode;
         private CItemToggle iSystemVSyncWait;
         private CItemList iSystemShowLag;					// #25370 2011.6.3 yyagi
         private CItemToggle iSystemAutoResultCapture;		// #25399 2011.6.9 yyagi
@@ -2771,7 +2771,7 @@ namespace DTXMania
 
         private CItemThreeState iDrumsAutoPlayAll;
         private CItemToggle iDrumsBass;
-        private CItemList iDrumsComboPosition;
+        //private CItemList iDrumsComboPosition;
         private CItemToggle iDrumsCymbal;
         private CItemToggle iDrumsRide;
         private CItemToggle iDrumsFloorTom;

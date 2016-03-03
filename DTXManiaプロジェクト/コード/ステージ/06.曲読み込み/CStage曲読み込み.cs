@@ -378,7 +378,9 @@ namespace DTXMania
                     this.txジャケット = CDTXMania.tテクスチャの生成( path );
                 }
             }
-            catch( Exception ex )
+            #pragma warning disable 0168 // variable declared but not used.
+            catch (Exception ex)
+            #pragma warning restore 0168 // variable declared but not used.
             {
             }
 
