@@ -189,13 +189,10 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 # DTX songs
-<<<<<<< HEAD
 実行時フォルダ/Songs/*
-=======
-実行時フォルダ/Songs/*
-/DTXManiaプロジェクト/obj
-/DTXManiaプロジェクト/bin
-/実行時フォルダ/songlist.db
-/実行時フォルダ/songs.db
-/実行時フォルダ/DTXFiles
->>>>>>> parent of efbf988... Convert DTXCreator solution to VS 2013 Express For Windows Desktop
+
+# DTX specific files
+実行時フォルダ/config.ini
+実行時フォルダ/dtxmanialog.txt
+実行時フォルダ/songlist.db
+実行時フォルダ/songs.db

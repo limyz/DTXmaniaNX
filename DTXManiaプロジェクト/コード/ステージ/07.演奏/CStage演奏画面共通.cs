@@ -2900,6 +2900,7 @@ namespace DTXMania
                         }
                         if ((ePlayMode == E楽器パート.DRUMS) && (configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.b可視 && (this.txチップ != null))
                         {
+                            // 27/02/2016 limyz shorten the judge line to duplicate Gitadora gameplay
                             this.txチップ.t2D描画(CDTXMania.app.Device, 0x127, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((this.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 772, 0x207, 2));
                         }
                         break;
@@ -4093,6 +4094,7 @@ namespace DTXMania
                 if (CDTXMania.ConfigIni.bJudgeLineDisp.Drums)
                 {
                     // #31602 2013.6.23 yyagi 描画遅延対策として、判定ラインの表示位置をオフセット調整できるようにする
+                    // 27/02/2016 limyz shorten the judge line to duplicate Gitadora gameplay
                     this.txヒットバー.t2D描画(CDTXMania.app.Device, 295, y, new Rectangle(0, 0, 0x207, 6));
                 }
                 if (CDTXMania.ConfigIni.b演奏情報を表示する)

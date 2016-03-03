@@ -757,7 +757,9 @@ namespace DTXMania
                                     if( this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ] != null )
                                         this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ].t2D描画( CDTXMania.app.Device, 0, 0 );
                                     }
-                                    catch( Exception ex )
+                                    #pragma warning disable 0168 // variable declared but not used.
+                                    catch ( Exception ex)
+                                    #pragma warning restore 0168 // variable declared but not used.
                                     {
                                     }
                                 }
