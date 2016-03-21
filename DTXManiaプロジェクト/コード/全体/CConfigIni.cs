@@ -549,14 +549,14 @@ namespace DTXMania
 		public int n自動再生音量;
 		public int n手動再生音量;
 		public int n選曲リストフォントのサイズdot;
-        public int nNameColor;
+        public int[] nNameColor;
 		public STDGBVALUE<int> n表示可能な最小コンボ数;
 		public STDGBVALUE<int> n譜面スクロール速度;
 		public string strDTXManiaのバージョン;
 		public string str曲データ検索パス;
 		public string str選曲リストフォント;
-        public string strCardName;
-        public string strGroupName;
+        public string[] strCardName; //2015.12.3 kaiera0467 DrumとGuitarとBassで名前を別々にするため、string[3]に変更。
+        public string[] strGroupName;
 		public Eドラムコンボ文字の表示位置 ドラムコンボ文字の表示位置;
         public bool bドラムコンボ文字の表示;
         public STDGBVALUE<Eタイプ> 判定文字表示位置;
@@ -613,9 +613,12 @@ namespace DTXMania
 		public bool bIsEnabledSystemMenu;			// #28200 2012.5.1 yyagi System Menuの使用可否切替
 		public string strSystemSkinSubfolderFullName;	// #28195 2012.5.2 yyagi Skin切替用 System/以下のサブフォルダ名
 		public bool bUseBoxDefSkin;						// #28195 2012.5.6 yyagi Skin切替用 box.defによるスキン変更機能を使用するか否か
+
+        //つまみ食い
+        public STDGBVALUE<EAutoGhostData> eAutoGhost;               // #35411 2015.8.18 chnmr0 プレー時使用ゴーストデータ種別
+        public STDGBVALUE<ETargetGhostData> eTargetGhost;               // #35411 2015.8.18 chnmr0 ゴーストデータ再生方法
+
         public bool bConfigIniがないかDTXManiaのバージョンが異なる
-
-
 		{
 			get
 			{
@@ -1078,6 +1081,10 @@ namespace DTXMania
             this.bLaneFlush.Guitar = true;
             this.bLaneFlush.Bass = true;
 
+            this.strCardName = new string[ 3 ];
+            this.strGroupName = new string[ 3 ];
+            this.nNameColor = new int[ 3 ];
+
             #region[ 画像関連 ]
             this.nJudgeAnimeType = 1;
             this.nJudgeFrames = 24;
@@ -1310,17 +1317,23 @@ namespace DTXMania
             sw.WriteLine(@"; 演奏中のネームプレートに表示される名前を設定できます。");
             sw.WriteLine("; 英字、数字の他、ひらがな、カタカナ、半角カナ、漢字なども入力できます。");
             sw.WriteLine("; 入力されていない場合は「GUEST」と表示されます。");
-            sw.WriteLine("CardName={0}", this.strCardName );
+            sw.WriteLine("CardNameDrums={0}", this.strCardName[ 0 ] );
+            sw.WriteLine("CardNameGuitar={0}", this.strCardName[ 1 ] );
+            sw.WriteLine("CardNameBass={0}", this.strCardName[ 2 ] );
             sw.WriteLine();
             sw.WriteLine("; グループ名っぽいあれ。");
             sw.WriteLine(@"; 演奏中のネームプレートに表示されるXG2でいうグループ名を設定できます。");
             sw.WriteLine("; 英字、数字の他、ひらがな、カタカナ、半角カナ、漢字なども入力できます。");
             sw.WriteLine("; 入力されていない場合は何も表示されません。");
-            sw.WriteLine("GroupName={0}", this.strGroupName);
+            sw.WriteLine("GroupNameDrums={0}", this.strGroupName[ 0 ]);
+            sw.WriteLine("GroupNameGuitar={0}", this.strGroupName[ 1 ]);
+            sw.WriteLine("GroupNameBass={0}", this.strGroupName[ 2 ]);
             sw.WriteLine();
             sw.WriteLine("; ネームカラー");
             sw.WriteLine("; 0=白, 1=薄黄色, 2=黄色, 3=緑, 4=青, 5=紫 以下略。");
-            sw.WriteLine("NameColor={0}", this.nNameColor);
+            sw.WriteLine("NameColorDrums={0}", this.nNameColor[ 0 ]);
+            sw.WriteLine("NameColorGuitar={0}", this.nNameColor[ 1 ]);
+            sw.WriteLine("NameColorBass={0}", this.nNameColor[ 2 ]);
             sw.WriteLine();
             sw.WriteLine("; クリップの表示位置");
             sw.WriteLine("; 0=表示しない, 1=全画面, 2=ウインドウ, 3=全画面&ウインドウ");
@@ -1764,6 +1777,19 @@ namespace DTXMania
             sw.WriteLine( "DrumComboDisp={0}", this.bドラムコンボ文字の表示 ? 1 : 0 );				//
             sw.WriteLine();
 
+            //fork
+            // #35411 2015.8.18 chnmr0 add
+            sw.WriteLine("; AUTOゴースト種別 (0:PERFECT, 1:LAST_PLAY, 2:HI_SKILL, 3:HI_SCORE)" );
+            sw.WriteLine("DrumAutoGhost={0}", (int)eAutoGhost.Drums);
+            sw.WriteLine("GuitarAutoGhost={0}", (int)eAutoGhost.Guitar);
+            sw.WriteLine("BassAutoGhost={0}", (int)eAutoGhost.Bass);
+            sw.WriteLine();
+            sw.WriteLine("; ターゲットゴースト種別 (0:NONE, 1:PERFECT, 2:LAST_PLAY, 3:HI_SKILL, 4:HI_SCORE)");
+            sw.WriteLine("DrumTargetGhost={0}", (int)eTargetGhost.Drums);
+            sw.WriteLine("GuitarTargetGhost={0}", (int)eTargetGhost.Guitar);
+            sw.WriteLine("BassTargetGhost={0}", (int)eTargetGhost.Bass);
+            sw.WriteLine();
+
             #region[DTXManiaXG追加オプション]
             sw.WriteLine("; 譜面仕様変更(0:デフォルト10レーン, 1:XG9レーン, 2:CLASSIC6レーン)");
             sw.WriteLine("NumOfLanes={0}", (int)this.eNumOfLanes.Drums);
@@ -2128,18 +2154,10 @@ namespace DTXMania
 			if( this.bConfigIniが存在している )
 			{
 				string str;
-				//this.tキーアサインを全部クリアする();
 				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "Shift_JIS" ) );
 				str = reader.ReadToEnd();
 				t文字列から読み込み( str );
 				CDTXVersion version = new CDTXVersion( this.strDTXManiaのバージョン );
-				if( version.n整数部 <= 69 )
-				{
-                    //Ver.Kでは公式とバージョンの書き方が違う影響で、
-                    //この分岐文では正常に分岐してくれない(?)
-                    
-					//this.tデフォルトのキーアサインに設定する();
-				}
 			}
 		}
 
@@ -2286,17 +2304,41 @@ namespace DTXMania
 												}
 												this.strSystemSkinSubfolderFullName = absSkinPath;
 											}
-                                            else if (str3.Equals("CardName"))
+                                            else if( str3.Equals( "CardNameDrums" ) )
                                             {
-                                                this.strCardName = str4;
+                                                this.strCardName[0] = str4;
                                             }
-                                            else if (str3.Equals("GroupName"))
+                                            else if( str3.Equals( "CardNameGuitar" ) )
                                             {
-                                                this.strGroupName = str4;
+                                                this.strCardName[1] = str4;
                                             }
-                                            else if (str3.Equals("NameColor"))
+                                            else if( str3.Equals( "CardNameBass" ) )
                                             {
-                                                this.nNameColor = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                                this.strCardName[2] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameDrums" ) )
+                                            {
+                                                this.strGroupName[0] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameGuitar" ) )
+                                            {
+                                                this.strGroupName[1] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameBass" ) )
+                                            {
+                                                this.strGroupName[2] = str4;
+                                            }
+                                            else if( str3.Equals( "NameColorDrums" ) )
+                                            {
+                                                this.nNameColor[ 0 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                            }
+                                            else if( str3.Equals( "NameColorGuitar" ) )
+                                            {
+                                                this.nNameColor[ 1 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                            }
+                                            else if( str3.Equals( "NameColorBass" ) )
+                                            {
+                                                this.nNameColor[ 2 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
                                             }
                                             else if (str3.Equals("SkinChangeByBoxDef"))
                                             {
@@ -3044,6 +3086,32 @@ namespace DTXMania
                                             else if ( str3.Equals( "DrumComboDisp" ) )				// #29500 2012.9.11 kairera0467
                                             {
                                                 this.bドラムコンボ文字の表示 = C変換.bONorOFF(str4[0]);
+                                            }
+
+                                            //fork
+                                            else if (str3.Equals("DrumAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Drums = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("GuitarAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Guitar = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("BassAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Bass = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("DrumTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Drums = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                            }
+                                            else if (str3.Equals("GuitarTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Guitar = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                            }
+                                            else if (str3.Equals("BassTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Bass = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
                                             }
 											continue;
 										}

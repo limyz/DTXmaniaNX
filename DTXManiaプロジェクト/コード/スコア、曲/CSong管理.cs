@@ -854,8 +854,12 @@ namespace DTXMania
 									c曲リストノード.arスコア[ i ].譜面情報.レベル.Guitar = cdtx.LEVEL.Guitar;
 									c曲リストノード.arスコア[ i ].譜面情報.レベル.Bass = cdtx.LEVEL.Bass;
                                     c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Drums = cdtx.LEVELDEC.Drums;
+                                    c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Guitar = cdtx.LEVELDEC.Guitar;
+                                    c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Bass = cdtx.LEVELDEC.Bass;
 									c曲リストノード.arスコア[ i ].譜面情報.レベルを非表示にする = cdtx.HIDDENLEVEL;
                                     c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Drums = (cdtx2.bチップがある.LeftCymbal == false && cdtx2.bチップがある.LP == false && cdtx2.bチップがある.LBD == false && cdtx2.bチップがある.FT == false && cdtx2.bチップがある.Ride == false) ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Guitar = !cdtx2.bチップがある.YPGuitar ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Bass = !cdtx2.bチップがある.YPBass ? true : false;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Drums = cdtx2.bチップがある.Drums;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Guitar = cdtx2.bチップがある.Guitar;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Bass = cdtx2.bチップがある.Bass;
