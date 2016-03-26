@@ -116,38 +116,37 @@ namespace FDK
 					{
 						foreach ( JoystickState data in bufferedData )
 						{
-                            #if false
-                            //if ( 0 < data.X && data.X < 128 && 0 < data.Y && data.Y < 128 && 0 < data.Z && data.Z < 128 )
-                            {
-                            Trace.TraceInformation( "TS={0}: offset={4}, X={1},Y={2},Z={3}", data.TimeStamp, data.X, data.Y, data.Z, data.JoystickDeviceType);
-                            if ( data.JoystickDeviceType == (int) JoystickDeviceType.POV0 ||
-	                             data.JoystickDeviceType == (int) JoystickDeviceType.POV1 ||
-	                             data.JoystickDeviceType == (int) JoystickDeviceType.POV2 ||
-	                             data.JoystickDeviceType == (int) JoystickDeviceType.POV3) {
+#if false
+//if ( 0 < data.X && data.X < 128 && 0 < data.Y && data.Y < 128 && 0 < data.Z && data.Z < 128 )
+{
+Trace.TraceInformation( "TS={0}: offset={4}, X={1},Y={2},Z={3}", data.TimeStamp, data.X, data.Y, data.Z, data.JoystickDeviceType);
+if ( data.JoystickDeviceType == (int) JoystickDeviceType.POV0 ||
+	 data.JoystickDeviceType == (int) JoystickDeviceType.POV1 ||
+	 data.JoystickDeviceType == (int) JoystickDeviceType.POV2 ||
+	 data.JoystickDeviceType == (int) JoystickDeviceType.POV3) {
 
-                            //if ( data.JoystickDeviceType== (int)JoystickDeviceType.POV0 )
-                            //{
-	                             Debug.WriteLine( "POV0です!!" );
-                            }
-                            //Trace.TraceInformation( "TS={0}: X={1},Y={2},Z={3}", data.TimeStamp, data.X, data.Y, data.Z );
-                            string pp = "";
-                            int[] pp0 = data.GetPointOfViewControllers();
-                            for ( int ii = 0; ii < pp0.Length; ii++ )
-                            {
-                            pp += pp0[ ii ];
-                            }
-                            Trace.TraceInformation( "TS={0}: povs={1}", data.TimeStamp, pp );
-                            string pp2 = "", pp3 = "";
-                            for ( int ii = 0; ii < 32; ii++ )
-                            {
-                            pp2 += ( data.IsPressed( ii ) ) ? "1" : "0";
-                            pp3 += ( data.IsReleased( ii ) ) ? "1" : "0";
-                            }
-                            Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp, pp2, pp3 );
-                            }
-                            #endif
-                            /*
-                            switch (data.JoystickDeviceType)
+//if ( data.JoystickDeviceType== (int)JoystickDeviceType.POV0 )
+//{
+	 Debug.WriteLine( "POV0です!!" );
+}
+//Trace.TraceInformation( "TS={0}: X={1},Y={2},Z={3}", data.TimeStamp, data.X, data.Y, data.Z );
+string pp = "";
+int[] pp0 = data.GetPointOfViewControllers();
+for ( int ii = 0; ii < pp0.Length; ii++ )
+{
+pp += pp0[ ii ];
+}
+Trace.TraceInformation( "TS={0}: povs={1}", data.TimeStamp, pp );
+string pp2 = "", pp3 = "";
+for ( int ii = 0; ii < 32; ii++ )
+{
+pp2 += ( data.IsPressed( ii ) ) ? "1" : "0";
+pp3 += ( data.IsReleased( ii ) ) ? "1" : "0";
+}
+Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp, pp2, pp3 );
+}
+#endif
+							switch ( data.JoystickDeviceType )
 							{
 								case (int)JoystickDeviceType.X:
 									#region [ X軸－ ]
@@ -597,7 +596,6 @@ namespace FDK
 									this.bButtonPullUp[ nWay ] = true;
 								}
 							}
-                             */
 						}
 						#endregion
 					}
@@ -624,6 +622,7 @@ namespace FDK
 			return !this.bButtonState[ nButton ];
 		}
 		//-----------------
+		#endregion
 
 		#region [ IDisposable 実装 ]
 		//-----------------
@@ -708,7 +707,7 @@ namespace FDK
 				{
 					nKey = target,
 					b押された = !lastMode,
-					//nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+					nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 					nVelocity = ( lastMode ) ? 0 : CInput管理.n通常音量
 				};
 				this.list入力イベント.Add( e );
