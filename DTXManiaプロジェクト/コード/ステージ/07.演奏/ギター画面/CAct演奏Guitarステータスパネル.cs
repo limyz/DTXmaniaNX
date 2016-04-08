@@ -205,9 +205,11 @@ namespace DTXMania
                 }
             }
             #endregion
+            this.strPlayerName = new string[ 2 ];
+            this.strTitleName = new string[ 2 ];
             
-            this.ft称号フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);
+            this.ft称号フォント = new Font( CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel );
+            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
@@ -234,103 +236,108 @@ namespace DTXMania
         {
             if (!base.b活性化してない)
             {
-                this.strPlayerName = string.IsNullOrEmpty(CDTXMania.ConfigIni.strCardName) ? "GUEST" : CDTXMania.ConfigIni.strCardName;
-                this.strTitleName = string.IsNullOrEmpty(CDTXMania.ConfigIni.strGroupName) ? "" : CDTXMania.ConfigIni.strGroupName;
+                this.txネームプレート用文字 = new CTexture[ 2 ];
+                this.strPlayerName[ 0 ] = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 1 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 1 ];
+                this.strPlayerName[ 1 ] = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 2 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 2 ];
+                this.strTitleName[ 0 ] = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 1 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 1 ];
+                this.strTitleName[ 1 ] = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 2 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 2 ];
 
-                Bitmap image2 = new Bitmap(200, 100);
-                Graphics graネームプレート用 = Graphics.FromImage(image2);
-
-                #region[ ネームカラー ]
-                //--------------------
-                Color clNameColor = Color.White;
-                Color clNameColorLower = Color.White;
-                switch (CDTXMania.ConfigIni.nNameColor)
+                for( int i = 0; i < 2; i++ )
                 {
-                    case 0:
-                        clNameColor = Color.White;
-                        break;
-                    case 1:
-                        clNameColor = Color.LightYellow;
-                        break;
-                    case 2:
-                        clNameColor = Color.Yellow;
-                        break;
-                    case 3:
-                        clNameColor = Color.Green;
-                        break;
-                    case 4:
-                        clNameColor = Color.Blue;
-                        break;
-                    case 5:
-                        clNameColor = Color.Purple;
-                        break;
-                    case 6:
-                        clNameColor = Color.Red;
-                        break;
-                    case 7:
-                        clNameColor = Color.Brown;
-                        break;
-                    case 8:
-                        clNameColor = Color.Silver;
-                        break;
-                    case 9:
-                        clNameColor = Color.Gold;
-                        break;
+                    Bitmap image2 = new Bitmap( 200, 100 );
+                    Graphics graネームプレート用 = Graphics.FromImage(image2);
 
-                    case 10:
-                        clNameColor = Color.White;
+                    #region[ ネームカラー ]
+                    //--------------------
+                    Color clNameColor = Color.White;
+                    Color clNameColorLower = Color.White;
+                    switch( CDTXMania.ConfigIni.nNameColor[ 0 ] )
+                    {
+                        case 0:
+                            clNameColor = Color.White;
+                            break;
+                        case 1:
+                            clNameColor = Color.LightYellow;
+                            break;
+                        case 2:
+                            clNameColor = Color.Yellow;
+                            break;
+                        case 3:
+                            clNameColor = Color.Green;
+                            break;
+                        case 4:
+                            clNameColor = Color.Blue;
+                            break;
+                        case 5:
+                            clNameColor = Color.Purple;
+                            break;
+                        case 6:
+                            clNameColor = Color.Red;
+                            break;
+                        case 7:
+                            clNameColor = Color.Brown;
+                            break;
+                        case 8:
+                            clNameColor = Color.Silver;
+                            break;
+                        case 9:
+                            clNameColor = Color.Gold;
+                            break;
+
+                        case 10:
+                            clNameColor = Color.White;
+                            break;
+                        case 11:
+                            clNameColor = Color.LightYellow;
+                            clNameColorLower = Color.White;
+                            break;
+                        case 12:
+                            clNameColor = Color.Yellow;
+                            clNameColorLower = Color.White;
+                            break;
+                        case 13:
+                            clNameColor = Color.FromArgb(0, 255, 33);
+                            clNameColorLower = Color.White;
                         break;
-                    case 11:
-                        clNameColor = Color.LightYellow;
-                        clNameColorLower = Color.White;
-                        break;
-                    case 12:
-                        clNameColor = Color.Yellow;
-                        clNameColorLower = Color.White;
-                        break;
-                    case 13:
-                        clNameColor = Color.FromArgb(0, 255, 33);
-                        clNameColorLower = Color.White;
-                        break;
-                    case 14:
-                        clNameColor = Color.FromArgb(0, 38, 255);
-                        clNameColorLower = Color.White;
-                        break;
-                    case 15:
-                        clNameColor = Color.FromArgb(72, 0, 255);
-                        clNameColorLower = Color.White;
-                        break;
-                    case 16:
-                        clNameColor = Color.FromArgb(255, 255, 0, 0);
-                        clNameColorLower = Color.White;
-                        break;
-                    case 17:
-                        clNameColor = Color.FromArgb(255, 232, 182, 149);
-                        clNameColorLower = Color.FromArgb(255, 122, 69, 26);
-                        break;
-                    case 18:
-                        clNameColor = Color.FromArgb(246, 245, 255);
-                        clNameColorLower = Color.FromArgb(125, 128, 137);
-                        break;
-                    case 19:
-                        clNameColor = Color.FromArgb(255, 238, 196, 85);
-                        clNameColorLower = Color.FromArgb(255, 255, 241, 200);
-                        break;
+                        case 14:
+                            clNameColor = Color.FromArgb(0, 38, 255);
+                            clNameColorLower = Color.White;
+                            break;
+                        case 15:
+                            clNameColor = Color.FromArgb(72, 0, 255);
+                            clNameColorLower = Color.White;
+                            break;
+                        case 16:
+                            clNameColor = Color.FromArgb(255, 255, 0, 0);
+                            clNameColorLower = Color.White;
+                            break;
+                        case 17:
+                            clNameColor = Color.FromArgb(255, 232, 182, 149);
+                            clNameColorLower = Color.FromArgb(255, 122, 69, 26);
+                            break;
+                        case 18:
+                            clNameColor = Color.FromArgb(246, 245, 255);
+                            clNameColorLower = Color.FromArgb(125, 128, 137);
+                            break;
+                        case 19:
+                            clNameColor = Color.FromArgb(255, 238, 196, 85);
+                            clNameColorLower = Color.FromArgb(255, 255, 241, 200);
+                            break;
+                    }
+                    //--------------------
+                    #endregion
+                    #region[ 名前とか ]
+                    Bitmap bmpCardName = new Bitmap(1, 1);
+                    bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName[ i ], Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 1 ] > 11 ? clNameColorLower : clNameColor));
+
+                    graネームプレート用.DrawImage(bmpCardName, -2f, 26f);
+                    graネームプレート用.DrawString(this.strTitleName[ i ], this.ft称号フォント, Brushes.White, (float)8f, (float)12f);
+                    #endregion
+
+                    this.txネームプレート用文字[ i ] = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
+                    image2.Dispose();
                 }
-                //--------------------
-                #endregion
-                #region[ 名前とか ]
-                Bitmap bmpCardName = new Bitmap(1, 1);
-                bmpCardName = this.prv表示用フォント.DrawPrivateFont(this.strPlayerName, Color.White, Color.Transparent, clNameColor, (CDTXMania.ConfigIni.nNameColor > 11 ? clNameColorLower : clNameColor));
-
-                graネームプレート用.DrawImage(bmpCardName, -2f, 26f);
-                graネームプレート用.DrawString(this.strTitleName, this.ft称号フォント, Brushes.White, (float)8f, (float)12f);
-                #endregion
-
                 this.prv表示用フォント.Dispose();
-
-                this.txネームプレート用文字 = new CTexture(CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false);
-                image2.Dispose();
 
                 base.OnManagedリソースの作成();
             }
@@ -339,7 +346,8 @@ namespace DTXMania
         {
             if (!base.b活性化してない)
             {
-                CDTXMania.tテクスチャの解放(ref this.txネームプレート用文字);
+                CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字[ 0 ] );
+                CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字[ 1 ] );
                 base.OnManagedリソースの解放();
             }
         }
@@ -355,80 +363,79 @@ namespace DTXMania
                 double dbMISS率 = 0;
                 double dbMAXCOMBO率 = 0;
 
-                for (int i = 1; i < 3; i++)
+                for( int i = 1; i < 3; i++ )
                 {
-                    if (this.n本体X[i] != 0)
+                    if (this.n本体X[ i ] != 0)
                     {
-                        string str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10f);
+                        string str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ] ) / 10f );
                         bool bCLASSIC = false;
-                        if (CDTXMania.DTX.LEVEL[i] > 100)
+                        if( CDTXMania.DTX.LEVEL[ i ] > 100 )
                         {
-                            str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 100f);
+                            str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ] ) / 100f );
                         }
                         else
                         {
-                            str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10.0f + (CDTXMania.DTX.LEVELDEC[i] != 0 ? CDTXMania.DTX.LEVELDEC[i] / 100.0f : 0));
+                            str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ] ) / 10.0f + ( CDTXMania.DTX.LEVELDEC[ i ] != 0 ? CDTXMania.DTX.LEVELDEC[ i ] / 100.0f : 0 ) );
                         }
 
-                        if (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
-                            (CDTXMania.DTX.bチップがある.YPGuitar == false) &&
-                            (CDTXMania.DTX.bチップがある.YPBass == false) &&
-                            (CDTXMania.DTX.b強制的にXG譜面にする == false))
+                        if( CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                            ( i == 1 ? !CDTXMania.DTX.bチップがある.YPGuitar : !CDTXMania.DTX.bチップがある.YPBass ) &&
+                            ( CDTXMania.DTX.b強制的にXG譜面にする == false ) )
                         {
-                            str = string.Format("{0:00}", CDTXMania.DTX.LEVEL[i]);
+                            str = string.Format( "{0:00}", CDTXMania.DTX.LEVEL[ i ] );
                             bCLASSIC = true;
                         }
 
-                        this.txスキルパネル.t2D描画(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
-                        this.txネームプレート用文字.t2D描画(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
+                        this.txスキルパネル.t2D描画( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
+                        this.txネームプレート用文字[ i - 1 ].t2D描画( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
 
-                        this.t小文字表示(80 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Perfect));
-                        this.t小文字表示(80 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Great));
-                        this.t小文字表示(80 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Good));
-                        this.t小文字表示(80 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Poor));
-                        this.t小文字表示(80 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Miss));
-                        this.t小文字表示(80 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ギター画面.actCombo.n現在のコンボ数.最高値[i]));
+                        this.t小文字表示( 80 + this.n本体X[ i ], 72 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Perfect ) );
+                        this.t小文字表示( 80 + this.n本体X[ i ], 102 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Great ) );
+                        this.t小文字表示( 80 + this.n本体X[ i ], 132 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Good ) );
+                        this.t小文字表示( 80 + this.n本体X[ i ], 162 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Poor ) );
+                        this.t小文字表示( 80 + this.n本体X[ i ], 192 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Miss ) );
+                        this.t小文字表示( 80 + this.n本体X[ i ], 222 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.actCombo.n現在のコンボ数.最高値[ i ] ) );
 
                         int n現在のノーツ数 =
-                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[i].Perfect +
-                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[i].Great +
-                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[i].Good +
-                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[i].Poor +
-                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[i].Miss;
+                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[ i ].Perfect +
+                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[ i ].Great +
+                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[ i ].Good +
+                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[ i ].Poor +
+                            CDTXMania.stage演奏ギター画面.nヒット数・Auto含む[ i ].Miss;
 
-                        dbPERFECT率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Perfect) / n現在のノーツ数);
-                        dbGREAT率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Great / n現在のノーツ数));
-                        dbGOOD率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Good / n現在のノーツ数));
-                        dbPOOR率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Poor / n現在のノーツ数));
-                        dbMISS率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[i].Miss / n現在のノーツ数));
-                        dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stage演奏ギター画面.actCombo.n現在のコンボ数.最高値[i] / n現在のノーツ数));
+                        dbPERFECT率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Perfect) / n現在のノーツ数 );
+                        dbGREAT率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Great / n現在のノーツ数 ) );
+                        dbGOOD率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Good / n現在のノーツ数 ) );
+                        dbPOOR率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Poor / n現在のノーツ数 ) );
+                        dbMISS率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.nヒット数・Auto含まない[ i ].Miss / n現在のノーツ数 ) );
+                        dbMAXCOMBO率 = Math.Round( ( 100.0 * CDTXMania.stage演奏ギター画面.actCombo.n現在のコンボ数.最高値[ i ] / n現在のノーツ数 ) );
 
-                        if (double.IsNaN(dbPERFECT率))
+                        if( double.IsNaN( dbPERFECT率 ) )
                             dbPERFECT率 = 0;
-                        if (double.IsNaN(dbGREAT率))
+                        if( double.IsNaN( dbGREAT率 ) )
                             dbGREAT率 = 0;
-                        if (double.IsNaN(dbGOOD率))
+                        if( double.IsNaN( dbGOOD率 ) )
                             dbGOOD率 = 0;
-                        if (double.IsNaN(dbPOOR率))
+                        if( double.IsNaN( dbPOOR率 ) )
                             dbPOOR率 = 0;
-                        if (double.IsNaN(dbMISS率))
+                        if( double.IsNaN( dbMISS率 ) )
                             dbMISS率 = 0;
-                        if (double.IsNaN(dbMAXCOMBO率))
+                        if( double.IsNaN( dbMAXCOMBO率 ) )
                             dbMAXCOMBO率 = 0;
 
-                        this.t小文字表示(167 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,3:##0}%", dbPERFECT率));
-                        this.t小文字表示(167 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,3:##0}%", dbGREAT率));
-                        this.t小文字表示(167 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,3:##0}%", dbGOOD率));
-                        this.t小文字表示(167 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,3:##0}%", dbPOOR率));
-                        this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
-                        this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
+                        this.t小文字表示( 167 + this.n本体X[ i ], 72 + this.n本体Y, string.Format( "{0,3:##0}%", dbPERFECT率 ) );
+                        this.t小文字表示( 167 + this.n本体X[ i ], 102 + this.n本体Y, string.Format( "{0,3:##0}%", dbGREAT率 ) );
+                        this.t小文字表示( 167 + this.n本体X[ i ], 132 + this.n本体Y, string.Format( "{0,3:##0}%", dbGOOD率 ) );
+                        this.t小文字表示( 167 + this.n本体X[ i ], 162 + this.n本体Y, string.Format( "{0,3:##0}%", dbPOOR率 ) );
+                        this.t小文字表示( 167 + this.n本体X[ i ], 192 + this.n本体Y, string.Format( "{0,3:##0}%", dbMISS率 ) );
+                        this.t小文字表示( 167 + this.n本体X[ i ], 222 + this.n本体Y, string.Format( "{0,3:##0}%", dbMAXCOMBO率 ) );
 
-                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
-                this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
+                this.t大文字表示(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 ) );
+                this.t大文字表示(88 + this.n本体X[ i ], 363 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * ( CDTXMania.DTX.LEVEL[ i ] / 10.0 ) * 0.2 ) );
 
-                if (this.tx難易度パネル != null)
-                    this.tx難易度パネル.t2D描画(CDTXMania.app.Device, 14 + this.n本体X[i], 266 + this.n本体Y, new Rectangle(0, 60 * nIndex, 60, 60));
-                this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[i], 290 + this.n本体Y, str);
+                if( this.tx難易度パネル != null )
+                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( 0, 60 * nIndex, 60, 60 ) );
+                this.tレベル数字描画( ( bCLASSIC == true ? 26 : 18 ) + this.n本体X[ i ], 290 + this.n本体Y, str );
                     }
                 }
             }
@@ -456,9 +463,9 @@ namespace DTXMania
         private CTexture[] txパネル文字;
         private CPrivateFastFont prv表示用フォント;
         private Font ft称号フォント;
-        private string strPlayerName;
-        private string strTitleName;
-        private CTexture txネームプレート用文字;
+        private string[] strPlayerName;
+        private string[] strTitleName;
+        private CTexture[] txネームプレート用文字;
         private CTexture tx難易度パネル;
         private CTexture tx難易度用数字;
 

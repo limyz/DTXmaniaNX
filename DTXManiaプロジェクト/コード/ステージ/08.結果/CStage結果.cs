@@ -152,24 +152,27 @@ namespace DTXMania
                             ini.stファイル.BestRank[i] = this.nランク値[i];
                         }
 
-                        // 新記録スコアチェック
-                        if (this.st演奏記録[i].nスコア > ini.stセクション[i * 2].nスコア)
-                        {
-                            this.b新記録スコア[i] = true;
-                            ini.stセクション[i * 2] = this.st演奏記録[i];
-                        }
+			    		// 新記録スコアチェック
+				    	if( this.st演奏記録[ i ].nスコア > ini.stセクション[ i * 2 ].nスコア )
+					    {
+					        this.b新記録スコア[ i ] = true;
+					        ini.stセクション[ i * 2 ] = this.st演奏記録[ i ];
+                            this.SaveGhost( i * 2 ); // #35411 chnmr0 add
+					    }
 
                         // 新記録スキルチェック
-                        if (this.st演奏記録[i].db演奏型スキル値 > ini.stセクション[(i * 2) + 1].db演奏型スキル値)
+                        if ( this.st演奏記録[ i ].db演奏型スキル値 > ini.stセクション[ ( i * 2 ) + 1 ].db演奏型スキル値 )
                         {
-                            this.b新記録スキル[i] = true;
-                            ini.stセクション[(i * 2) + 1] = this.st演奏記録[i];
+                            this.b新記録スキル[ i ] = true;
+                            ini.stセクション[ ( i * 2 ) + 1 ] = this.st演奏記録[ i ];
+                            this.SaveGhost( ( i * 2 ) + 1 ); // #35411 chnmr0 add
                         }
-                        // ラストプレイ #23595 2011.1.9 ikanick
+
+			    		// ラストプレイ #23595 2011.1.9 ikanick
                         // オートじゃなければプレイ結果を書き込む
-                        if (this.bオート[i] == false)
-                        {
-                            ini.stセクション[i + 6] = this.st演奏記録[i];
+                        if( this.bオート[ i ] == false ) {
+                            ini.stセクション[ i + 6 ] = this.st演奏記録[ i ];
+                            this.SaveGhost(i + 6); // #35411 chnmr0 add
                         }
 
                         // #23596 10.11.16 add ikanick オートじゃないならクリア回数を1増やす
@@ -248,6 +251,148 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
+        //fork
+        // #35411 chnmr0 add
+        private void SaveGhost(int sectionIndex)
+        {
+            //return; //2015.12.31 kairera0467 以下封印
+
+            STDGBVALUE<bool> saveCond = new STDGBVALUE<bool>();
+            saveCond.Drums = true;
+            saveCond.Guitar = true;
+            saveCond.Bass = true;
+            
+            foreach( CDTX.CChip chip in CDTXMania.DTX.listChip )
+            {
+                if( chip.bIsAutoPlayed )
+                {
+					if (chip.nチャンネル番号 != 0x28 && chip.nチャンネル番号 != 0xA8) // Guitar/Bass Wailing は OK
+					{
+						saveCond[(int)(chip.e楽器パート)] = false;
+					}
+                }
+            }
+            for(int instIndex = 0; instIndex < 3; ++instIndex)
+            {
+                saveCond[instIndex] &= CDTXMania.listAutoGhostLag.Drums == null;
+            }
+
+            string directory = CDTXMania.DTX.strフォルダ名;
+            string filename = CDTXMania.DTX.strファイル名 + ".";
+            E楽器パート inst = E楽器パート.UNKNOWN;
+
+            if ( sectionIndex == 0 )
+            {
+                filename += "hiscore.dr.ghost";
+                inst = E楽器パート.DRUMS;
+            }
+            else if (sectionIndex == 1 )
+            {
+                filename += "hiskill.dr.ghost";
+                inst = E楽器パート.DRUMS;
+            }
+            if (sectionIndex == 2 )
+            {
+                filename += "hiscore.gt.ghost";
+                inst = E楽器パート.GUITAR;
+            }
+            else if (sectionIndex == 3 )
+            {
+                filename += "hiskill.gt.ghost";
+                inst = E楽器パート.GUITAR;
+            }
+            if (sectionIndex == 4 )
+            {
+                filename += "hiscore.bs.ghost";
+                inst = E楽器パート.BASS;
+            }
+            else if (sectionIndex == 5)
+            {
+                filename += "hiskill.bs.ghost";
+                inst = E楽器パート.BASS;
+            }
+            else if (sectionIndex == 6)
+            {
+                filename += "lastplay.dr.ghost";
+                inst = E楽器パート.DRUMS;
+            }
+            else if (sectionIndex == 7 )
+            {
+                filename += "lastplay.gt.ghost";
+                inst = E楽器パート.GUITAR;
+            }
+            else if (sectionIndex == 8)
+            {
+                filename += "lastplay.bs.ghost";
+                inst = E楽器パート.BASS;
+            }
+
+            if (inst == E楽器パート.UNKNOWN)
+            {
+                return;
+            }
+
+            int cnt = 0;
+            foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+            {
+                if (chip.e楽器パート == inst)
+                {
+                    ++cnt;
+                }
+            }
+
+            if( saveCond[(int)inst] )
+            //if(false)
+            {
+                using (FileStream fs = new FileStream(directory + "\\" + filename, FileMode.Create, FileAccess.Write))
+                {
+                    using (BinaryWriter bw = new BinaryWriter(fs))
+                    {
+                        bw.Write((Int32)cnt);
+                        foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        {
+                            if (chip.e楽器パート == inst)
+                            {
+                            	// -128 ms から 127 ms までのラグしか保存しない
+                            	// その範囲を超えているラグはクランプ
+								// ラグデータの 上位８ビットでそのチップの前でギター空打ちBADがあったことを示す
+								int lag = chip.nLag;
+								if (lag < -128)
+								{
+									lag = -128;
+								}
+								if (lag > 127)
+								{
+									lag = 127;
+								}
+								byte lower = (byte)(lag + 128);
+								int upper = chip.nCurrentComboForGhost == 0 ? 1 : 0;
+								bw.Write((short)( (upper<<8) | lower));
+                            }
+                        }
+                    }
+                }
+
+                //Ver.K追加 演奏結果の記録
+                CScoreIni.C演奏記録 cScoreData;
+                cScoreData = this.st演奏記録[ (int)inst ];
+                using (FileStream fs = new FileStream(directory + "\\" + filename + ".score", FileMode.Create, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs))
+                    {
+                        sw.WriteLine( "Score=" + cScoreData.nスコア );
+                        sw.WriteLine( "PlaySkill=" + cScoreData.db演奏型スキル値 );
+                        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
+                        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数・Auto含まない );
+                        sw.WriteLine( "Great=" + cScoreData.nGreat数・Auto含まない );
+                        sw.WriteLine( "Good=" + cScoreData.nGood数・Auto含まない );
+                        sw.WriteLine( "Poor=" + cScoreData.nPoor数・Auto含まない );
+                        sw.WriteLine( "Miss=" + cScoreData.nMiss数・Auto含まない );
+                        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
+                    }
+                }
+            }
+        }
 		public override void On非活性化()
 		{
 			if( this.rResultSound != null )

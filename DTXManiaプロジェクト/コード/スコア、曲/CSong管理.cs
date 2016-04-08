@@ -854,8 +854,12 @@ namespace DTXMania
 									c曲リストノード.arスコア[ i ].譜面情報.レベル.Guitar = cdtx.LEVEL.Guitar;
 									c曲リストノード.arスコア[ i ].譜面情報.レベル.Bass = cdtx.LEVEL.Bass;
                                     c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Drums = cdtx.LEVELDEC.Drums;
+                                    c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Guitar = cdtx.LEVELDEC.Guitar;
+                                    c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Bass = cdtx.LEVELDEC.Bass;
 									c曲リストノード.arスコア[ i ].譜面情報.レベルを非表示にする = cdtx.HIDDENLEVEL;
                                     c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Drums = (cdtx2.bチップがある.LeftCymbal == false && cdtx2.bチップがある.LP == false && cdtx2.bチップがある.LBD == false && cdtx2.bチップがある.FT == false && cdtx2.bチップがある.Ride == false) ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Guitar = !cdtx2.bチップがある.YPGuitar ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Bass = !cdtx2.bチップがある.YPBass ? true : false;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Drums = cdtx2.bチップがある.Drums;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Guitar = cdtx2.bチップがある.Guitar;
                                     c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Bass = cdtx2.bチップがある.Bass;
@@ -1379,10 +1383,20 @@ namespace DTXMania
 					if ( n1.arスコア[ nL12345 ] != null )
 					{
 						nSumPlayCountN1 = n1.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ];
+                        //KSM added: If less than 100, multiply by 10 to get 3 digits for proper comparison
+                        if (nSumPlayCountN1 < 100)
+                        {
+                            nSumPlayCountN1 *= 10;
+                        }
 					}
 					if ( n2.arスコア[ nL12345 ] != null )
 					{
 						nSumPlayCountN2 = n2.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ];
+                        //KSM added: Same, if less than 100, multiply by 10 to get 3 digits for proper comparison
+                        if (nSumPlayCountN2 < 100)
+                        {
+                            nSumPlayCountN2 *= 10;
+                        }
 					}
 					num = nSumPlayCountN2 - nSumPlayCountN1;
 					if ( num != 0 )
@@ -1391,15 +1405,16 @@ namespace DTXMania
 					}
 					return order * n1.strタイトル.CompareTo( n2.strタイトル );
 				} );
-				foreach ( C曲リストノード c曲リストノード in ノードリスト )
-				{
-					int nSumPlayCountN1 = 0;
-					if ( c曲リストノード.arスコア[ nL12345 ] != null )
-					{
-						nSumPlayCountN1 = c曲リストノード.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ];
-					}
-// Debug.WriteLine( nSumPlayCountN1 + ":" + c曲リストノード.strタイトル );
-				}
+                //KSM: Comment redundant code.
+                //foreach (C曲リストノード c曲リストノード in ノードリスト)
+                //{
+                //    int nSumPlayCountN1 = 0;
+                //    if (c曲リストノード.arスコア[nL12345] != null)
+                //    {
+                //        nSumPlayCountN1 = c曲リストノード.arスコア[nL12345].譜面情報.レベル[(int)part];
+                //    }
+                //    // Debug.WriteLine( nSumPlayCountN1 + ":" + c曲リストノード.strタイトル );
+                //}
 			}
 		}
 		public void t曲リストのソート5_BestRank順( List<C曲リストノード> ノードリスト, E楽器パート part, int order, params object[] p )

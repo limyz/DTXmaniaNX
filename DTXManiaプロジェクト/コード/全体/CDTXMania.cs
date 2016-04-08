@@ -323,6 +323,10 @@ namespace DTXMania
         {
             get { return base.Window.Handle; }
         }
+        //fork
+        public static STDGBVALUE< List<int> > listAutoGhostLag = new STDGBVALUE<List<int>>();
+        public static STDGBVALUE< List<int> > listTargetGhsotLag = new STDGBVALUE<List<int>>();
+        public static STDGBVALUE< CScoreIni.C演奏記録 > listTargetGhostScoreData = new STDGBVALUE< CScoreIni.C演奏記録 >();
 
         // コンストラクタ
 
