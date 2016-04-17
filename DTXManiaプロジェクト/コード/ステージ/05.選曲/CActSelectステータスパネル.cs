@@ -338,7 +338,7 @@ namespace DTXMania
                                 if (db変数 < 0)
                                     db変数 = 0;
 
-                                if (db変数 > 100)
+                                if (db変数 >= 100)
                                     db変数 = 100;
 
                                 if (db変数 != 0.00)
@@ -370,7 +370,9 @@ namespace DTXMania
                                     }
                                     #region [ 選択曲の 最高スキル値ゲージ＋数値の描画 ]
                                     if (this.tx達成率MAX != null && db変数 == 100)
-                                        this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 155, nBoxY + nPanelH - 27);
+                                    {
+                                        this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 145, nBoxY + nPanelH - 27);
+                                    }                                        
                                     else
                                         this.t達成率表示(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                     #endregion
@@ -424,7 +426,7 @@ namespace DTXMania
                             if (db変数 < 0)
                                 db変数 = 0;
 
-                            if (db変数 > 100)
+                            if (db変数 >= 100)
                                 db変数 = 100;
 
                             if (db変数 != 0.00)
@@ -456,7 +458,9 @@ namespace DTXMania
                                 }
                                 #region [ 選択曲の 最高スキル値ゲージ＋数値の描画 ]
                                 if (this.tx達成率MAX != null && this.db現在選択中の曲の最高スキル値[j] == 100.00)
-                                    this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 155, nBoxY + nPanelH - 27);
+                                {
+                                    this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 145, nBoxY + nPanelH - 27);
+                                }                                    
                                 else
                                     this.t達成率表示(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                 #endregion
