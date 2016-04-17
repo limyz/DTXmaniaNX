@@ -16,7 +16,7 @@ namespace DTXMania
         public CActResultParameterPanel()
         {
             this.tx文字 = new CTexture[3];
-            ST文字位置[] st文字位置Array = new ST文字位置[11];
+            ST文字位置[] st文字位置Array = new ST文字位置[12];
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
             st文字位置.pt = new Point(0, 0);
@@ -61,6 +61,11 @@ namespace DTXMania
             st文字位置11.ch = '.';
             st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
+            //Added by KSM 17/04/2016:
+            ST文字位置 st文字位置Percent = new ST文字位置();
+            st文字位置Percent.ch = '%';
+            st文字位置Percent.pt = new Point(291, 0);
+            st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[11];
@@ -420,7 +425,7 @@ namespace DTXMania
                     this.t小文字表示(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fMiss率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stage結果.st演奏記録[j].n最大コンボ数 / CDTXMania.stage結果.st演奏記録[j].n全チップ数))));
 
-                    this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].db演奏型スキル値));
+                    this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}%", CDTXMania.stage結果.st演奏記録[j].db演奏型スキル値));
                     this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].dbゲーム型スキル値));
                     
                     if(this.tx難易度パネル != null)
@@ -574,6 +579,11 @@ namespace DTXMania
 						{
 							rectangle.Width -= 18;
 						}
+                        //KSM added: '%' has width of 30 
+                        else if( ch == '%') 
+                        {
+                            rectangle.Width += 2;
+                        }
 						if( this.tx文字[ 1 ] != null )
 						{
 							this.tx文字[ 1 ].t2D描画( CDTXMania.app.Device, x, y, rectangle );
@@ -581,7 +591,7 @@ namespace DTXMania
 						break;
 					}
 				}
-                x += (ch == '.' ? 12 : 28);
+                x += (ch == '.' ? 12 : 29);//Was 28
 			}
 		}
         private void t特大文字表示(int x, int y, string str)

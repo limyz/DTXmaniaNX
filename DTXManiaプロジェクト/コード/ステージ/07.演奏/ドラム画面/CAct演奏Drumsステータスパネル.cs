@@ -15,7 +15,7 @@ namespace DTXMania
         public CAct演奏Drumsステータスパネル()
         {
             this.txパネル文字 = new CTexture[2];
-            ST文字位置[] st文字位置Array = new ST文字位置[11];
+            ST文字位置[] st文字位置Array = new ST文字位置[12];//Change to 12
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
             st文字位置.pt = new Point(0, 0);
@@ -60,6 +60,11 @@ namespace DTXMania
             st文字位置11.ch = '.';
             st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
+            //Added by KSM 17/04/2016:
+            ST文字位置 st文字位置Percent = new ST文字位置();
+            st文字位置Percent.ch = '%';
+            st文字位置Percent.pt = new Point(291, 0);
+            st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[12];
@@ -396,7 +401,7 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
+                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}%", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
 
                 // 060316 limyz added if/else conditions to detect if DLEVEL is <100 or >100 to determine its 0.05 decimal point value
                 if (CDTXMania.DTX.LEVEL[i] < 100) {
@@ -470,6 +475,11 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                         if (ch == '.')
                         {
                             rectangle.Width -= 18;
+                        }
+                        //KSM added: '%' has width of 30 
+                        else if(ch == '%')
+                        {
+                            rectangle.Width += 2;
                         }
                         if (this.txパネル文字[1] != null)
                         {
