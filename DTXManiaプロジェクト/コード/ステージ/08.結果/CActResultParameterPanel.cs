@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Diagnostics;//Temp
 using System.IO;
 using SlimDX;
 using FDK;
@@ -443,8 +444,17 @@ namespace DTXMania
                         }
                         else
                         {
-                            int num4 = int.Parse(strScore.Substring(i, 1));
-                            rectangle = new Rectangle(num4 * 36, 0, 36, 50);
+                            int num4 = 0;
+                            rectangle = new Rectangle(0, 0, 0, 0);
+                            try
+                            {
+                                num4 = int.Parse(strScore.Substring(i, 1));
+                                rectangle = new Rectangle(num4 * 36, 0, 36, 50);
+                            }
+                            catch (System.FormatException fe)
+                            {
+                                Trace.TraceWarning(fe.Message);
+                            }                            
                         }
                         if (this.txスコア != null)
                         {
