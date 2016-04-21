@@ -51,19 +51,14 @@ namespace DTXMania
                     {
                         rectangle = new Rectangle(0, 0, 0, 0);
                     }
+                    else if(ch.Equals('-'))
+                    {
+                        rectangle = new Rectangle(0, 0, 0, 0);
+                    }
                     else
                     {
-                        int num4 = 0;
-                        rectangle = new Rectangle(0, 0, 0, 0);
-                        try 
-                        { 
-                            num4 = int.Parse(str.Substring(i, 1));
-                            rectangle = new Rectangle(num4 * 36, 0, 36, 50);
-                        }
-                        catch(System.FormatException fe)
-                        {
-                            Trace.TraceWarning(fe.Message + " Substring: " + str.Substring(i, 1) + " Full string: " + str);
-                        }
+                        int num4 = int.Parse(str.Substring(i, 1));
+                        rectangle = new Rectangle(num4 * 36, 0, 36, 50);
                     }
                     if( base.txScore != null )
                     {
