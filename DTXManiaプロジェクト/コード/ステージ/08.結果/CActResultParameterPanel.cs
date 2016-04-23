@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Diagnostics;//Temp
 using System.IO;
 using SlimDX;
 using FDK;
@@ -16,7 +17,7 @@ namespace DTXMania
         public CActResultParameterPanel()
         {
             this.tx文字 = new CTexture[3];
-            ST文字位置[] st文字位置Array = new ST文字位置[11];
+            ST文字位置[] st文字位置Array = new ST文字位置[12];
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
             st文字位置.pt = new Point(0, 0);
@@ -61,6 +62,11 @@ namespace DTXMania
             st文字位置11.ch = '.';
             st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
+            //Added by KSM 17/04/2016:
+            ST文字位置 st文字位置Percent = new ST文字位置();
+            st文字位置Percent.ch = '%';
+            st文字位置Percent.pt = new Point(291, 0);
+            st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[11];
@@ -325,6 +331,8 @@ namespace DTXMania
                 this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
                 this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Difficulty.png"));
                 this.tx難易度用数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_LevelNumber.png"));
+                //KSM Added 21/04/2016
+                this.txスキルMAX = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
 
                 this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 1 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 1 ];
                 this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 1 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 1 ];
@@ -355,6 +363,8 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放(ref this.txネームプレート用文字);
                 CDTXMania.tテクスチャの解放(ref this.tx難易度パネル);
                 CDTXMania.tテクスチャの解放(ref this.tx難易度用数字);
+                //KSM Added 21/04/2016
+                CDTXMania.tテクスチャの解放(ref this.txスキルMAX);
                 base.OnManagedリソースの解放();
             }
         }
@@ -420,7 +430,16 @@ namespace DTXMania
                     this.t小文字表示(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fMiss率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stage結果.st演奏記録[j].n最大コンボ数 / CDTXMania.stage結果.st演奏記録[j].n全チップ数))));
 
-                    this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].db演奏型スキル値));
+                    //KSM Added 21/04/2016: Shows the word MAX instead of 100.00% when 100.00%
+                    if (CDTXMania.stage結果.st演奏記録[j].db演奏型スキル値 >= 100.0 && this.txスキルMAX != null)
+                    {
+                        this.txスキルMAX.t2D描画(CDTXMania.app.Device, 120 + this.n本体X[j], 277 + this.n本体Y);
+                    }
+                    else
+                    {
+                        this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}%", CDTXMania.stage結果.st演奏記録[j].db演奏型スキル値));
+                    }
+
                     this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].dbゲーム型スキル値));
                     
                     if(this.tx難易度パネル != null)
@@ -436,10 +455,14 @@ namespace DTXMania
                         {
                             rectangle = new Rectangle(0, 0, 0, 0);
                         }
+                        else if (ch.Equals('-'))
+                        {
+                            rectangle = new Rectangle(0, 0, 0, 0);
+                        }
                         else
                         {
                             int num4 = int.Parse(strScore.Substring(i, 1));
-                            rectangle = new Rectangle(num4 * 36, 0, 36, 50);
+                            rectangle = new Rectangle(num4 * 36, 0, 36, 50);                           
                         }
                         if (this.txスコア != null)
                         {
@@ -512,6 +535,8 @@ namespace DTXMania
 
         private CTexture tx難易度パネル;
         private CTexture tx難易度用数字;
+        //KSM Added 21/04/2016: New Texture for Skill Max
+        private CTexture txスキルMAX;
 
 
         private void t小文字表示(int x, int y, string str)
@@ -574,6 +599,11 @@ namespace DTXMania
 						{
 							rectangle.Width -= 18;
 						}
+                        //KSM added: '%' has width of 30 
+                        else if( ch == '%') 
+                        {
+                            rectangle.Width += 2;
+                        }
 						if( this.tx文字[ 1 ] != null )
 						{
 							this.tx文字[ 1 ].t2D描画( CDTXMania.app.Device, x, y, rectangle );
@@ -581,7 +611,7 @@ namespace DTXMania
 						break;
 					}
 				}
-                x += (ch == '.' ? 12 : 28);
+                x += (ch == '.' ? 12 : 29);//Was 28
 			}
 		}
         private void t特大文字表示(int x, int y, string str)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Diagnostics;//Temp
 using SlimDX;
 using FDK;
 
@@ -47,6 +48,10 @@ namespace DTXMania
                     Rectangle rectangle;
                     char ch = str[i];
                     if (ch.Equals(' '))
+                    {
+                        rectangle = new Rectangle(0, 0, 0, 0);
+                    }
+                    else if(ch.Equals('-'))
                     {
                         rectangle = new Rectangle(0, 0, 0, 0);
                     }

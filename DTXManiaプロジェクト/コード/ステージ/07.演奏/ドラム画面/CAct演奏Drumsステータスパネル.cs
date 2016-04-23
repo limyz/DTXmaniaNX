@@ -15,7 +15,7 @@ namespace DTXMania
         public CAct演奏Drumsステータスパネル()
         {
             this.txパネル文字 = new CTexture[2];
-            ST文字位置[] st文字位置Array = new ST文字位置[11];
+            ST文字位置[] st文字位置Array = new ST文字位置[12];//Change to 12
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
             st文字位置.pt = new Point(0, 0);
@@ -60,6 +60,11 @@ namespace DTXMania
             st文字位置11.ch = '.';
             st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
+            //Added by KSM 17/04/2016:
+            ST文字位置 st文字位置Percent = new ST文字位置();
+            st文字位置Percent.ch = '%';
+            st文字位置Percent.pt = new Point(291, 0);
+            st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[12];
@@ -183,7 +188,8 @@ namespace DTXMania
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
             this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Difficulty.png"));
             this.tx難易度用数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_LevelNumber.png"));
-
+            //KSM Added 21/04/2016
+            this.txスキルMAX = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
             base.On活性化();
         }
         public override void On非活性化()
@@ -198,6 +204,8 @@ namespace DTXMania
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[1]);
             CDTXMania.tテクスチャの解放(ref this.tx難易度パネル);
             CDTXMania.tテクスチャの解放(ref this.tx難易度用数字);
+            //KSM Added 21/04/2016
+            CDTXMania.tテクスチャの解放(ref this.txスキルMAX);
             base.On非活性化();
         }
         public override void OnManagedリソースの作成()
@@ -396,7 +404,15 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
+                //KSM Added 21/04/2016: Shows the word MAX instead of 100.00% when 100.00%
+                if (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 >= 100.0 && this.txスキルMAX != null)
+                {
+                    this.txスキルMAX.t2D描画(CDTXMania.app.Device, 120 + this.n本体X[i], 277 + this.n本体Y);
+                }
+                else
+                {
+                    this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}%", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
+                }
 
                 // 060316 limyz added if/else conditions to detect if DLEVEL is <100 or >100 to determine its 0.05 decimal point value
                 if (CDTXMania.DTX.LEVEL[i] < 100) {
@@ -438,6 +454,8 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
         private CTexture txネームプレート用文字;
         private CTexture tx難易度パネル;
         private CTexture tx難易度用数字;
+        //KSM Added 21/04/2016: New Texture for Skill Max
+        private CTexture txスキルMAX;
 
         private void t小文字表示(int x, int y, string str)
         {
@@ -470,6 +488,11 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                         if (ch == '.')
                         {
                             rectangle.Width -= 18;
+                        }
+                        //KSM added: '%' has width of 30 
+                        else if(ch == '%')
+                        {
+                            rectangle.Width += 2;
                         }
                         if (this.txパネル文字[1] != null)
                         {
