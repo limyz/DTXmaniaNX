@@ -22,99 +22,100 @@ namespace DTXMania
             st文字位置Array[0] = st文字位置;
             ST文字位置 st文字位置2 = new ST文字位置();
             st文字位置2.ch = '1';
-            st文字位置2.pt = new Point(28, 0);
+            st文字位置2.pt = new Point(31, 0);//Change all to width of 31
             st文字位置Array[1] = st文字位置2;
             ST文字位置 st文字位置3 = new ST文字位置();
             st文字位置3.ch = '2';
-            st文字位置3.pt = new Point(56, 0);
+            st文字位置3.pt = new Point(62, 0);
             st文字位置Array[2] = st文字位置3;
             ST文字位置 st文字位置4 = new ST文字位置();
             st文字位置4.ch = '3';
-            st文字位置4.pt = new Point(84, 0);
+            st文字位置4.pt = new Point(93, 0);
             st文字位置Array[3] = st文字位置4;
             ST文字位置 st文字位置5 = new ST文字位置();
             st文字位置5.ch = '4';
-            st文字位置5.pt = new Point(112, 0);
+            st文字位置5.pt = new Point(124, 0);
             st文字位置Array[4] = st文字位置5;
             ST文字位置 st文字位置6 = new ST文字位置();
             st文字位置6.ch = '5';
-            st文字位置6.pt = new Point(140, 0);
+            st文字位置6.pt = new Point(155, 0);
             st文字位置Array[5] = st文字位置6;
             ST文字位置 st文字位置7 = new ST文字位置();
             st文字位置7.ch = '6';
-            st文字位置7.pt = new Point(168, 0);
+            st文字位置7.pt = new Point(186, 0);
             st文字位置Array[6] = st文字位置7;
             ST文字位置 st文字位置8 = new ST文字位置();
             st文字位置8.ch = '7';
-            st文字位置8.pt = new Point(196, 0);
+            st文字位置8.pt = new Point(217, 0);
             st文字位置Array[7] = st文字位置8;
             ST文字位置 st文字位置9 = new ST文字位置();
             st文字位置9.ch = '8';
-            st文字位置9.pt = new Point(224, 0);
+            st文字位置9.pt = new Point(248, 0);
             st文字位置Array[8] = st文字位置9;
             ST文字位置 st文字位置10 = new ST文字位置();
             st文字位置10.ch = '9';
-            st文字位置10.pt = new Point(252, 0);
+            st文字位置10.pt = new Point(279, 0);
             st文字位置Array[9] = st文字位置10;
             ST文字位置 st文字位置11 = new ST文字位置();
             st文字位置11.ch = '.';
-            st文字位置11.pt = new Point(280, 0);
+            st文字位置11.pt = new Point(319, 0);
             st文字位置Array[10] = st文字位置11;
             //Added by KSM 17/04/2016:
+            //Change width to all 31 01/05/2016
             ST文字位置 st文字位置Percent = new ST文字位置();
             st文字位置Percent.ch = '%';
-            st文字位置Percent.pt = new Point(291, 0);
+            st文字位置Percent.pt = new Point(341, 0);
             st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[12];
-            ST文字位置 st文字位置13 = new ST文字位置();
+            ST文字位置 st文字位置13 = new ST文字位置();//Change all width to multiples of 21
             st文字位置13.ch = '0';
             st文字位置13.pt = new Point(0, 0);
             st文字位置Array2[0] = st文字位置13;
             ST文字位置 st文字位置14 = new ST文字位置();
             st文字位置14.ch = '1';
-            st文字位置14.pt = new Point(20, 0);
+            st文字位置14.pt = new Point(21, 0);
             st文字位置Array2[1] = st文字位置14;
             ST文字位置 st文字位置15 = new ST文字位置();
             st文字位置15.ch = '2';
-            st文字位置15.pt = new Point(40, 0);
+            st文字位置15.pt = new Point(42, 0);
             st文字位置Array2[2] = st文字位置15;
             ST文字位置 st文字位置16 = new ST文字位置();
             st文字位置16.ch = '3';
-            st文字位置16.pt = new Point(60, 0);
+            st文字位置16.pt = new Point(63, 0);
             st文字位置Array2[3] = st文字位置16;
             ST文字位置 st文字位置17 = new ST文字位置();
             st文字位置17.ch = '4';
-            st文字位置17.pt = new Point(80, 0);
+            st文字位置17.pt = new Point(84, 0);
             st文字位置Array2[4] = st文字位置17;
             ST文字位置 st文字位置18 = new ST文字位置();
             st文字位置18.ch = '5';
-            st文字位置18.pt = new Point(100, 0);
+            st文字位置18.pt = new Point(105, 0);
             st文字位置Array2[5] = st文字位置18;
             ST文字位置 st文字位置19 = new ST文字位置();
             st文字位置19.ch = '6';
-            st文字位置19.pt = new Point(120, 0);
+            st文字位置19.pt = new Point(126, 0);
             st文字位置Array2[6] = st文字位置19;
             ST文字位置 st文字位置20 = new ST文字位置();
             st文字位置20.ch = '7';
-            st文字位置20.pt = new Point(140, 0);
+            st文字位置20.pt = new Point(147, 0);
             st文字位置Array2[7] = st文字位置20;
             ST文字位置 st文字位置21 = new ST文字位置();
             st文字位置21.ch = '8';
-            st文字位置21.pt = new Point(160, 0);
+            st文字位置21.pt = new Point(168, 0);
             st文字位置Array2[8] = st文字位置21;
             ST文字位置 st文字位置22 = new ST文字位置();
             st文字位置22.ch = '9';
-            st文字位置22.pt = new Point(180, 0);
+            st文字位置22.pt = new Point(189, 0);
             st文字位置Array2[9] = st文字位置22;
             ST文字位置 st文字位置23 = new ST文字位置();
-            st文字位置23.ch = '%';
-            st文字位置23.pt = new Point(200, 0);
+            st文字位置23.ch = '.';
+            st文字位置23.pt = new Point(210, 0);
             st文字位置Array2[10] = st文字位置23;
             ST文字位置 st文字位置24 = new ST文字位置();
-            st文字位置24.ch = '.';
-            st文字位置24.pt = new Point(210, 0);
+            st文字位置24.ch = '%';
+            st文字位置24.pt = new Point(231, 0);
             st文字位置Array2[11] = st文字位置24;
             this.st小文字位置 = st文字位置Array2;
 
@@ -181,8 +182,8 @@ namespace DTXMania
             
             #endregion
 
-            this.ft称号フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);
+            this.ft称号フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel);//Regular
+            this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);//Regular
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
@@ -465,7 +466,7 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 {
                     if (this.st小文字位置[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 26);
+                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 28);
                         if (this.txパネル文字[0] != null)
                         {
                             this.txパネル文字[0].t2D描画(CDTXMania.app.Device, x, y, rectangle);
@@ -484,16 +485,16 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 {
                     if (this.st大文字位置[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(this.st大文字位置[i].pt.X, this.st大文字位置[i].pt.Y, 28, 42);
+                        Rectangle rectangle = new Rectangle(this.st大文字位置[i].pt.X, this.st大文字位置[i].pt.Y, 30, 42);
                         if (ch == '.')
                         {
                             rectangle.Width -= 18;
                         }
                         //KSM added: '%' has width of 30 
-                        else if(ch == '%')
-                        {
-                            rectangle.Width += 2;
-                        }
+                        //else if(ch == '%')
+                        //{
+                        //    rectangle.Width += 2;
+                        //}
                         if (this.txパネル文字[1] != null)
                         {
                             this.txパネル文字[1].t2D描画(CDTXMania.app.Device, x, y, rectangle);
@@ -501,7 +502,7 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                         break;
                     }
                 }
-                x += (ch == '.' ? 12 : 29);
+                x += (ch == '.' ? 12 : 30);
             }
         }
         private void tレベル数字描画(int x, int y, string str)
