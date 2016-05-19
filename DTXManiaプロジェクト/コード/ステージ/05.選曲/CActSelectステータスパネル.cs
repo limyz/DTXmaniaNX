@@ -539,6 +539,7 @@ namespace DTXMania
         private int n現在選択中の曲の難易度;
         private int n難易度開始文字位置;
         private const int n難易度表示可能文字数 = 0x24;
+        private const int nSkillPercentFontWidth = 12;
         /*
         private readonly Rectangle[] rcランク = new Rectangle[]
         {
@@ -589,18 +590,18 @@ namespace DTXMania
         };
         private readonly ST達成率数字[] st達成率数字 = new ST達成率数字[]
         {
-            new ST達成率数字('0', new Rectangle(0 * 12, 0, 12, 20)),
-            new ST達成率数字('1', new Rectangle(1 * 12, 0, 12, 20)),
-            new ST達成率数字('2', new Rectangle(2 * 12, 0, 12, 20)),
-            new ST達成率数字('3', new Rectangle(3 * 12, 0, 12, 20)),
-            new ST達成率数字('4', new Rectangle(4 * 12, 0, 12, 20)),
-            new ST達成率数字('5', new Rectangle(5 * 12, 0, 12, 20)),
-            new ST達成率数字('6', new Rectangle(6 * 12, 0, 12, 20)),
-            new ST達成率数字('7', new Rectangle(7 * 12, 0, 12, 20)),
-            new ST達成率数字('8', new Rectangle(8 * 12, 0, 12, 20)),
-            new ST達成率数字('9', new Rectangle(9 * 12, 0, 12, 20)),
-            new ST達成率数字('.', new Rectangle(10 * 12, 0, 6, 20)),
-            new ST達成率数字('%', new Rectangle(11 * 12 - 6, 0, 12, 20))
+            new ST達成率数字('0', new Rectangle(0 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('1', new Rectangle(1 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('2', new Rectangle(2 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('3', new Rectangle(3 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('4', new Rectangle(4 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('5', new Rectangle(5 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('6', new Rectangle(6 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('7', new Rectangle(7 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('8', new Rectangle(8 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('9', new Rectangle(9 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20)),
+            new ST達成率数字('.', new Rectangle(10 * nSkillPercentFontWidth + 3, 0, 6, 20)),
+            new ST達成率数字('%', new Rectangle(11 * nSkillPercentFontWidth, 0, nSkillPercentFontWidth, 20))
         };
         private readonly Rectangle rcunused = new Rectangle(0, 0x21, 80, 15);
         public CTexture txパネル本体;
@@ -658,10 +659,10 @@ namespace DTXMania
                 {
                     if (this.st達成率数字[i].ch == c)
                     {
-                        Rectangle rectangle = new Rectangle(this.st達成率数字[i].rc.X, this.st達成率数字[i].rc.Y, 12, 20);
+                        Rectangle rectangle = new Rectangle(this.st達成率数字[i].rc.X, this.st達成率数字[i].rc.Y, nSkillPercentFontWidth, 20);
                         if (c == '.')
                         {
-                            rectangle.Width -= 6;
+                            rectangle.Width = 6;
                         }
                         if (this.tx達成率数字 != null)
                         {
@@ -676,7 +677,7 @@ namespace DTXMania
                 }
                 else
                 {
-                    x += 12;
+                    x += nSkillPercentFontWidth;
                 }
             }
         }
