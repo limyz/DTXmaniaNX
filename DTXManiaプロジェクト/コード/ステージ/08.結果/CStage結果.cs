@@ -483,10 +483,20 @@ namespace DTXMania
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
 
-                    // Added conditions for excellent/fullcombo audio playback - limyz / 210516
-                    if (fPerfect率[0] == 100.0 && bオート[0].Equals(false)) CDTXMania.Skin.soundExcellent.t再生する();
-                    else if (fPoor率[0] == 0.0 && fMiss率[0] == 0.0 && bオート[0].Equals(false)) CDTXMania.Skin.soundフルコンボ音.t再生する();
-                    else CDTXMania.Skin.soundステージクリア音.t再生する();
+                    //KSM 21052016: Added a check on game mode selected and play the sound clip for the correct game mode accordingly
+                    //May still not work correctly with Guitar/Bass mode...
+                    for (int i = 0; i < 3;++i )
+                    {
+                        if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
+                        ((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
+                        ((i != 2) || CDTXMania.DTX.bチップがある.Bass))
+                        {
+                            // Added conditions for excellent/fullcombo audio playback - limyz / 210516
+                            if (fPerfect率[i] == 100.0 && bオート[i].Equals(false)) CDTXMania.Skin.soundExcellent.t再生する();
+                            else if (fPoor率[i] == 0.0 && fMiss率[i] == 0.0 && bオート[i].Equals(false)) CDTXMania.Skin.soundフルコンボ音.t再生する();
+                            else CDTXMania.Skin.soundステージクリア音.t再生する();
+                        }
+                    }
 
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
