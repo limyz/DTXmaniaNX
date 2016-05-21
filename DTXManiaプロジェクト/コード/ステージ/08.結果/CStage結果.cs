@@ -482,7 +482,10 @@ namespace DTXMania
 				if( base.b初めての進行描画 )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-                    CDTXMania.Skin.soundステージクリア音.t再生する();
+                    // Added new audio files for excellent - limyz / 210516
+                    if (fPerfect率[0] == 100.0) CDTXMania.Skin.soundExcellent.t再生する();
+                    else CDTXMania.Skin.soundステージクリア音.t再生する();
+
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
 					base.b初めての進行描画 = false;
