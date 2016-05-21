@@ -443,7 +443,8 @@ namespace DTXMania
                             #region [ Up ]
                             this.ctキー反復用.Up.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
                             this.ctキー反復用.R.tキー反復(CDTXMania.Pad.b押されているGB(Eパッド.R), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
-                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.SD))
+                            //SN changed to HT by WJ
+                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.HT))
                             {
                                 this.tカーソルを上へ移動する();
                             }
@@ -451,7 +452,8 @@ namespace DTXMania
                             #region [ Down ]
                             this.ctキー反復用.Down.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
                             this.ctキー反復用.B.tキー反復(CDTXMania.Pad.b押されているGB(Eパッド.G), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
-                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.FT))
+                            //Wj change ft to lt
+                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.LT))
                             {
                                 this.tカーソルを下へ移動する();
                             }
@@ -591,12 +593,13 @@ namespace DTXMania
                                 this.actSortSongs.tActivatePopupMenu(E楽器パート.BASS, ref this.act曲リスト);
                             }
                             #endregion
-                            #region [ HTx2 Drums: ソート画面 ]
-                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.HT))
+                            #region [ FTx2 Drums: ソート画面 ]
+                            //wj changed HT to FT
+                            if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.FT))
                             {	// [HT]x2 ソート画面        2013.12.31.kairera0467
                                 //
-                                CommandHistory.Add(E楽器パート.DRUMS, EパッドFlag.HT);
-                                EパッドFlag[] comSort = new EパッドFlag[] { EパッドFlag.HT, EパッドFlag.HT };
+                                CommandHistory.Add(E楽器パート.DRUMS, EパッドFlag.FT);
+                                EパッドFlag[] comSort = new EパッドFlag[] { EパッドFlag.FT, EパッドFlag.FT };
                                 if (CommandHistory.CheckCommand(comSort, E楽器パート.DRUMS))
                                 {
                                     CDTXMania.Skin.sound変更音.t再生する();
