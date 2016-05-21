@@ -484,7 +484,7 @@ namespace DTXMania
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
 
                     // Added conditions for excellent/fullcombo audio playback - limyz / 210516
-                    if (fPerfect率[0] == 100.0) CDTXMania.Skin.soundExcellent.t再生する();
+                    if (fPerfect率[0] == 100.0 && bオート[0].Equals(false)) CDTXMania.Skin.soundExcellent.t再生する();
                     else if (fPoor率[0] == 0.0 && fMiss率[0] == 0.0 && bオート[0].Equals(false)) CDTXMania.Skin.soundフルコンボ音.t再生する();
                     else CDTXMania.Skin.soundステージクリア音.t再生する();
 
