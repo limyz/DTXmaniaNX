@@ -67,7 +67,7 @@ namespace DTXMania
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
-                    this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.strSongName = CDTXMania.stage選曲.r確定された曲.strタイトル;//CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 

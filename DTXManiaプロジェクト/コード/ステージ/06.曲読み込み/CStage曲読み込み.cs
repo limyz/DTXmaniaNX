@@ -200,7 +200,8 @@ namespace DTXMania
                 CDTX cdtx = new CDTX( strDTXファイルパス, true );
 
                 if( !CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
-                    this.str曲タイトル = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    //this.str曲タイトル = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.str曲タイトル = CDTXMania.stage選曲.r確定された曲.strタイトル;
                 else
                     this.str曲タイトル = cdtx.TITLE;
 
