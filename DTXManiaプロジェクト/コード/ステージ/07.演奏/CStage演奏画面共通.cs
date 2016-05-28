@@ -359,6 +359,42 @@ namespace DTXMania
             this.sw2 = new Stopwatch();
             //			this.gclatencymode = GCSettings.LatencyMode;
             //          GCSettings.LatencyMode = GCLatencyMode.Batch; // 演奏画面中はGCを抑止する
+        
+            //KSM Compute Scoring Multiplier for Drum, Guitar and Bass
+            //1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))
+            float maxNoteCount = 0;
+            //Set for Drum
+            maxNoteCount = (float)CDTXMania.DTX.n可視チップ数.Drums;
+            if (CDTXMania.DTX.n可視チップ数.Drums >= 50)
+            {
+                this.scoreMultiplier_Drum = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (maxNoteCount - 24.5f);
+            }
+            else
+            {
+                this.scoreMultiplier_Drum = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) * 2 / (maxNoteCount + 1);
+            }
+            //Set for Bass
+            maxNoteCount = (float)CDTXMania.DTX.n可視チップ数.Bass;
+            if (CDTXMania.DTX.n可視チップ数.Bass >= 50)
+            {
+                this.scoreMultiplier_Bass = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (maxNoteCount - 24.5f);
+            }
+            else
+            {
+                this.scoreMultiplier_Bass = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) * 2 / (maxNoteCount + 1);
+            }
+            //Set for Guitar
+            maxNoteCount = (float)CDTXMania.DTX.n可視チップ数.Guitar;
+            if (CDTXMania.DTX.n可視チップ数.Bass >= 50)
+            {
+                this.scoreMultiplier_Guitar = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (maxNoteCount - 24.5f);
+            }
+            else
+            {
+                this.scoreMultiplier_Guitar = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) * 2 / (maxNoteCount + 1);
+            }
+            
+        
         }
         public override void On非活性化()
         {
@@ -721,6 +757,13 @@ namespace DTXMania
         protected Stopwatch sw;		// 2011.6.13 最適化検討用のストップウォッチ
         protected Stopwatch sw2;
         //		protected GCLatencyMode gclatencymode;
+
+        //
+        //(1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))
+        //
+        private float scoreMultiplier_Drum = 0.0f;
+        private float scoreMultiplier_Guitar = 0.0f;
+        private float scoreMultiplier_Bass = 0.0f;
 
         public void AddMixer(CSound cs, bool _b演奏終了後も再生が続くチップである)
         {
@@ -1389,7 +1432,7 @@ namespace DTXMania
             }
             #region[スコア]
             //!bPChipIsAutoPlayを入れるとオート時にスコアを加算しなくなる。
-            if (CDTXMania.ConfigIni.nSkillMode == 1)
+            if (CDTXMania.ConfigIni.nSkillMode == 1)//XG mode scoring
             {
                 int nRate = this.bブーストボーナス == true ? 2 : 1;
                 if (CDTXMania.ConfigIni.bAutoAddGage == true)
@@ -1401,11 +1444,18 @@ namespace DTXMania
                         float nScoreDelta = 0;
                         float nComboMax;
                         nComboMax = CDTXMania.DTX.n可視チップ数.Drums;
+
+                        //SubFactor is 50.0f most of the time
+                        float combosubFactor = nComboMax >= 50 ? 50.0f : nComboMax;
+                        //1/sf, 2/sf, 3/sf for less than 50, 1.0f for 50 or more
+                        float comboFactor = nCombos >= 50 ? 1.0f : nCombos / combosubFactor;
                         if (eJudgeResult == E判定.Perfect)//ここでパフェ基準を作成。
                         {
                             if (nCombos < nComboMax)
                             {
-                                nScoreDelta = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f));
+                                nScoreDelta = this.scoreMultiplier_Drum * comboFactor;                                
+                                //nScoreDelta = 1000000.0f/nComboMax;
+                                //nScoreDelta = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f));
                             }
                             //1000000÷50÷(その曲のMAXCOMBO-24.5)
                             else if (this.nヒット数・Auto含む.Drums.Perfect >= nComboMax)
@@ -1418,24 +1468,27 @@ namespace DTXMania
                         }
                         else if (eJudgeResult == E判定.Great)
                         {
-                            nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))) * 0.5f;
+                            nScoreDelta = this.scoreMultiplier_Drum * comboFactor * 0.5f;
+                            //nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))) * 0.5f;
                         }
                         else if (eJudgeResult == E判定.Good)
                         {
-                            nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))) * 0.2f;
+                            nScoreDelta = this.scoreMultiplier_Drum * comboFactor * 0.2f;
+                            //nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f))) * 0.2f;
                         }
 
-                        if (nCombos < 50)
-                        {
-                            nScoreDelta = nScoreDelta * nCombos;
-                        }
-                        else if (nCombos == nComboMax || this.nヒット数・Auto含まない.Drums.Perfect == nComboMax)
-                        {
-                        }
-                        else
-                        {
-                            nScoreDelta = nScoreDelta * 50;
-                        }
+                        //KSM Combo Factor already computed in so this section is redundant
+                        //if (nCombos < 50)
+                        //{
+                        //    //nScoreDelta = nScoreDelta * nCombos;
+                        //}
+                        //else if (nCombos == nComboMax || this.nヒット数・Auto含まない.Drums.Perfect == nComboMax)
+                        //{
+                        //}
+                        //else
+                        //{
+                        //    //nScoreDelta = nScoreDelta * 50;
+                        //}
 
                         this.actScore.Add(pChip.e楽器パート, bIsAutoPlay, (long)nScoreDelta);
                         this.actStatusPanels.nCurrentScore += (long)nScoreDelta;
@@ -1447,11 +1500,19 @@ namespace DTXMania
                         int nCombos = this.actCombo.n現在のコンボ数[(int)pChip.e楽器パート];
                         float nScoreDelta = 0;
                         float nComboMax = (pChip.e楽器パート == E楽器パート.GUITAR ? CDTXMania.DTX.n可視チップ数.Guitar : CDTXMania.DTX.n可視チップ数.Bass);
+                        float scoreMultiplier = (pChip.e楽器パート == E楽器パート.GUITAR ? this.scoreMultiplier_Guitar : this.scoreMultiplier_Bass);
+
+                        //SubFactor is 50.0f most of the time
+                        float combosubFactor = nComboMax >= 50 ? 50.0f : nComboMax;
+                        //1/sf, 2/sf, 3/sf for less than 50, 1.0f for 50 or more
+                        float comboFactor = nCombos >= 50 ? 1.0f : nCombos / combosubFactor;
+                        
                         if (eJudgeResult == E判定.Perfect || eJudgeResult == E判定.Auto)//ここでパフェ基準を作成。
                         {
                             if (nCombos < nComboMax)
                             {
-                                nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f));
+                                nScoreDelta = scoreMultiplier * comboFactor;
+                                //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f));
                             }
                             // 100万/{1275+50×(総ノーツ数-50)}
                             else if (this.nヒット数・Auto含む[(int)pChip.e楽器パート].Perfect >= nComboMax)
@@ -1464,25 +1525,27 @@ namespace DTXMania
                         }
                         else if (eJudgeResult == E判定.Great)
                         {
-                            nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.5f;
+                            nScoreDelta = scoreMultiplier * comboFactor * 0.5f;
+                            //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.5f;
                         }
                         else if (eJudgeResult == E判定.Good)
                         {
-                            nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.2f;
+                            nScoreDelta = scoreMultiplier * comboFactor * 0.2f;
+                            //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.2f;
                         }
 
-
-                        if (nCombos < 50)
-                        {
-                            nScoreDelta = nScoreDelta * nCombos;
-                        }
-                        else if (nCombos == nComboMax || this.nヒット数・Auto含まない[(int)pChip.e楽器パート].Perfect == nComboMax)
-                        {
-                        }
-                        else
-                        {
-                            nScoreDelta = nScoreDelta * 50.0f;
-                        }
+                        //KSM Combo Factor already computed in so this section is redundant
+                        //if (nCombos < 50)
+                        //{
+                        //    nScoreDelta = nScoreDelta * nCombos;
+                        //}
+                        //else if (nCombos == nComboMax || this.nヒット数・Auto含まない[(int)pChip.e楽器パート].Perfect == nComboMax)
+                        //{
+                        //}
+                        //else
+                        //{
+                        //    nScoreDelta = nScoreDelta * 50.0f;
+                        //}
 
                         this.actScore.Add(pChip.e楽器パート, bIsAutoPlay, (long)nScoreDelta);
                         //this.actStatusPanels.nCurrentScore += (long)nScoreDelta;
@@ -1502,11 +1565,17 @@ namespace DTXMania
                         float nScoreDelta = 0;
                         float nComboMax;
                         nComboMax = CDTXMania.DTX.n可視チップ数.Drums;
+
+                        //SubFactor is 50.0f most of the time
+                        float combosubFactor = nComboMax >= 50 ? 50.0f : nComboMax;
+                        //1/sf, 2/sf, 3/sf for less than 50, 1.0f for 50 or more
+                        float comboFactor = nCombos >= 50 ? 1.0f : nCombos / combosubFactor;
                         if (eJudgeResult == E判定.Perfect)//ここでパフェ基準を作成。
                         {
                             if (nCombos < nComboMax)
                             {
-                                nScoreDelta = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f));
+                                nScoreDelta = this.scoreMultiplier_Drum * comboFactor;
+                                //nScoreDelta = (1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50f));
                             }
                             //1000000÷50÷(その曲のMAXCOMBO-24.5)
                             else if (this.nヒット数・Auto含む.Drums.Perfect >= nComboMax)
@@ -1518,24 +1587,27 @@ namespace DTXMania
                         }
                         else if (eJudgeResult == E判定.Great)
                         {
-                            nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50.0f))) * 0.5f;
+                            nScoreDelta = this.scoreMultiplier_Drum * comboFactor * 0.5f;
+                            //nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50.0f))) * 0.5f;
                         }
                         else if (eJudgeResult == E判定.Good)
                         {
-                            nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50.0f))) * 0.2f;
+                            nScoreDelta = this.scoreMultiplier_Drum * comboFactor * 0.2f;
+                            //nScoreDelta = ((1000000.0f - 500.0f * CDTXMania.DTX.nボーナスチップ数) / (1275.0f + 50.0f * (nComboMax - 50.0f))) * 0.2f;
                         }
 
-                        if (nCombos < 50)
-                        {
-                            nScoreDelta = nScoreDelta * nCombos;
-                        }
-                        else if (nCombos == nComboMax || this.nヒット数・Auto含まない.Drums.Perfect == nComboMax)
-                        {
-                        }
-                        else
-                        {
-                            nScoreDelta = nScoreDelta * 50;
-                        }
+                        //KSM Combo Factor already computed in so this section is redundant
+                        //if (nCombos < 50)
+                        //{
+                        //    nScoreDelta = nScoreDelta * nCombos;
+                        //}
+                        //else if (nCombos == nComboMax || this.nヒット数・Auto含まない.Drums.Perfect == nComboMax)
+                        //{
+                        //}
+                        //else
+                        //{
+                        //    nScoreDelta = nScoreDelta * 50;
+                        //}
 
                         this.actScore.Add(pChip.e楽器パート, bIsAutoPlay, (long)nScoreDelta);
                         this.actStatusPanels.nCurrentScore += (long)nScoreDelta;
@@ -1547,11 +1619,19 @@ namespace DTXMania
                         int nCombos = this.actCombo.n現在のコンボ数[(int)pChip.e楽器パート];
                         float nScoreDelta = 0;
                         float nComboMax = (pChip.e楽器パート == E楽器パート.GUITAR ? CDTXMania.DTX.n可視チップ数.Guitar : CDTXMania.DTX.n可視チップ数.Bass);
+                        float scoreMultiplier = (pChip.e楽器パート == E楽器パート.GUITAR ? this.scoreMultiplier_Guitar : this.scoreMultiplier_Bass);
+
+                        //SubFactor is 50.0f most of the time
+                        float combosubFactor = nComboMax >= 50 ? 50.0f : nComboMax;
+                        //1/sf, 2/sf, 3/sf for less than 50, 1.0f for 50 or more
+                        float comboFactor = nCombos >= 50 ? 1.0f : nCombos / combosubFactor;
+                        
                         if (eJudgeResult == E判定.Perfect || eJudgeResult == E判定.Auto)//ここでパフェ基準を作成。
                         {
                             if (nCombos < nComboMax)
                             {
-                                nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f));
+                                nScoreDelta = scoreMultiplier * comboFactor;
+                                //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f));
                             }
                             // 100万/{1275+50×(総ノーツ数-50)}
                             else if (this.nヒット数・Auto含む[(int)pChip.e楽器パート].Perfect >= nComboMax)
@@ -1564,25 +1644,27 @@ namespace DTXMania
                         }
                         else if (eJudgeResult == E判定.Great)
                         {
-                            nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.5f;
+                            nScoreDelta = scoreMultiplier * comboFactor * 0.5f;
+                            //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.5f;
                         }
                         else if (eJudgeResult == E判定.Good)
                         {
-                            nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.2f;
+                            nScoreDelta = scoreMultiplier * comboFactor * 0.2f;
+                            //nScoreDelta = 1000000.0f / (1275.0f + 50.0f * (nComboMax - 50.0f)) * 0.2f;
                         }
 
-
-                        if (nCombos < 50)
-                        {
-                            nScoreDelta = nScoreDelta * nCombos;
-                        }
-                        else if (nCombos == nComboMax || this.nヒット数・Auto含まない[(int)pChip.e楽器パート].Perfect == nComboMax)
-                        {
-                        }
-                        else
-                        {
-                            nScoreDelta = nScoreDelta * 50.0f;
-                        }
+                        //KSM Combo Factor already computed in so this section is redundant
+                        //if (nCombos < 50)
+                        //{
+                        //    nScoreDelta = nScoreDelta * nCombos;
+                        //}
+                        //else if (nCombos == nComboMax || this.nヒット数・Auto含まない[(int)pChip.e楽器パート].Perfect == nComboMax)
+                        //{
+                        //}
+                        //else
+                        //{
+                        //    nScoreDelta = nScoreDelta * 50.0f;
+                        //}
 
                         this.actScore.Add(pChip.e楽器パート, bIsAutoPlay, (long)nScoreDelta);
                         //this.actStatusPanels.nCurrentScore += (long)nScoreDelta;
@@ -1593,7 +1675,7 @@ namespace DTXMania
                     }
                 }
             }
-            else if (CDTXMania.ConfigIni.nSkillMode == 0)
+            else if (CDTXMania.ConfigIni.nSkillMode == 0)//Classic Mode scoring
             {
                 if (CDTXMania.ConfigIni.bAutoAddGage)
                 {
