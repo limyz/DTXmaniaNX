@@ -605,6 +605,20 @@ namespace DTXMania
                             }
                             #endregion
                         }
+                        //if( CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.F6) )
+                        //{
+                        //    if (CDTXMania.EnumSongs.IsEnumerating)
+                        //    {
+                        //        // Debug.WriteLine( "バックグラウンドでEnumeratingSongs中だったので、一旦中断します。" );
+                        //        CDTXMania.EnumSongs.Abort();
+                        //        CDTXMania.actEnumSongs.On非活性化();
+                        //    }
+
+                        //    CDTXMania.EnumSongs.StartEnumFromDisk();
+                        //    //CDTXMania.EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);
+                        //    CDTXMania.actEnumSongs.bコマンドでの曲データ取得 = true;
+                        //    CDTXMania.actEnumSongs.On活性化();
+                        //}
 					}
 					this.actSortSongs.t進行描画();
 					this.actQuickConfig.t進行描画();

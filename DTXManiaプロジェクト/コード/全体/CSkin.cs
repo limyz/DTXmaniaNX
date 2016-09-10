@@ -888,6 +888,244 @@ namespace DTXMania
             }
 
         }
+
+        public void tReadSkinConfig()
+        {
+            if( File.Exists( CSkin.Path( @"SkinConfig.ini" ) ) )
+            {
+                string str;
+				//this.tキーアサインを全部クリアする();
+				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding( "unicode" ) ) )
+                {
+				    str = reader.ReadToEnd();
+                }
+                this.t文字列から読み込み( str );
+            }
+        }
+
+        /// <summary>
+        /// 2016.07.30 kairera0467 #36413
+        /// </summary>
+        public void tSaveSkinConfig()
+        {
+            if( File.Exists( CSkin.Path( @"SkinConfig.ini" ) ) )
+            {
+                StreamWriter sw = new StreamWriter( CSkin.Path( @"SkinConfig.ini" ), false, Encoding.GetEncoding( "unicode" ) );
+                sw.WriteLine( "; スキンごとでの設定ファイル。現在テスト段階です。" );
+                sw.WriteLine( "; ここで設定した数値が優先的に使用されます。" );
+                sw.WriteLine( ";" );
+                sw.WriteLine( "; 読み込み画面、演奏画面、ネームプレート、リザルト画面の曲名で使用するフォント名" );
+                sw.WriteLine( "DisplayFontName={0}", CDTXMania.ConfigIni.str曲名表示フォント );
+                sw.WriteLine();
+                sw.WriteLine( "; 選曲リストのフォント名" );
+                sw.WriteLine( "; Font name for select song item." );
+                sw.WriteLine( "SelectListFontName={0}", CDTXMania.ConfigIni.str選曲リストフォント );
+                sw.WriteLine();
+                sw.WriteLine( "; 選曲リストのフォントのサイズ[dot]" );
+                sw.WriteLine( "; Font size[dot] for select song item." );
+                sw.WriteLine( "SelectListFontSize={0}", CDTXMania.ConfigIni.n選曲リストフォントのサイズdot );
+                sw.WriteLine();
+                sw.WriteLine( "; ネームプレートタイプ" );
+                sw.WriteLine( "; 0:タイプA XG2風の表示がされます。" );
+                sw.WriteLine( "; 1:タイプB XG風の表示がされます。このタイプでは7_NamePlate_XG.png、7_Difficlty_XG.pngが読み込まれます。" );
+                sw.WriteLine( "NamePlateType={0}", (int)CDTXMania.ConfigIni.eNamePlate );
+                sw.WriteLine();
+                sw.WriteLine( "; 動くドラムセット(0:ON, 1:OFF, 2:NONE)" );
+                sw.WriteLine( "DrumSetMoves={0}", (int)CDTXMania.ConfigIni.eドラムセットを動かす );
+                sw.WriteLine();
+                sw.WriteLine( "; BPMバーの表示(0:表示する, 1:左のみ表示, 2:動くバーを表示しない, 3:表示しない)" );
+                sw.WriteLine( "BPMBar={0}", (int)CDTXMania.ConfigIni.eBPMbar );
+                sw.WriteLine();
+                sw.WriteLine( "; LivePointの表示(0:OFF, 1:ON)" );
+                sw.WriteLine( "LivePoint={0}", CDTXMania.ConfigIni.bLivePoint ? 1 : 0 );
+                sw.WriteLine();
+                sw.WriteLine( "; スピーカーの表示(0:OFF, 1:ON)" );
+                sw.WriteLine( "Speaker={0}", CDTXMania.ConfigIni.bSpeaker ? 1 : 0 );
+                sw.WriteLine();
+                sw.WriteLine( ";判定画像のアニメーション方式" );
+                sw.WriteLine( ";(0:旧DTXMania方式 1:コマ方式 2:擬似XG方式)" );
+                sw.WriteLine( "JudgeAnimeType={0}", CDTXMania.ConfigIni.nJudgeAnimeType );
+                sw.WriteLine();
+                sw.WriteLine( ";判定画像のコマ数" );
+                sw.WriteLine( "JudgeFrames={0}", CDTXMania.ConfigIni.nJudgeFrames );
+                sw.WriteLine();
+                sw.WriteLine( ";判定画像の1コマのフレーム数" );
+                sw.WriteLine( "JudgeInterval={0}", CDTXMania.ConfigIni.nJudgeInterval );
+                sw.WriteLine();
+                sw.WriteLine( ";判定画像の1コマの幅" );
+                sw.WriteLine( "JudgeWidgh={0}", CDTXMania.ConfigIni.nJudgeWidgh );
+                sw.WriteLine();
+                sw.WriteLine( ";判定画像の1コマの高さ" );
+                sw.WriteLine( "JudgeHeight={0}", CDTXMania.ConfigIni.nJudgeHeight );
+                sw.WriteLine();
+                sw.WriteLine( ";アタックエフェクトのコマ数" );
+                sw.WriteLine( "ExplosionFrames={0}", CDTXMania.ConfigIni.nExplosionFrames );
+                sw.WriteLine();
+                sw.WriteLine( ";アタックエフェクトの1コマのフレーム数" );
+                sw.WriteLine( "ExplosionInterval={0}", CDTXMania.ConfigIni.nExplosionInterval );
+                sw.WriteLine();
+                sw.WriteLine( ";アタックエフェクトの1コマの幅" );
+                sw.WriteLine( "ExplosionWidgh={0}", CDTXMania.ConfigIni.nExplosionWidgh );
+                sw.WriteLine();
+                sw.WriteLine( ";アタックエフェクトの1コマの高さ" );
+                sw.WriteLine( "ExplosionHeight={0}", CDTXMania.ConfigIni.nExplosionHeight );
+                sw.WriteLine();
+                sw.WriteLine( "ワイリングエフェクトのコマ数;" );
+                sw.WriteLine( "WailingFireFrames={0}", CDTXMania.ConfigIni.nWailingFireFrames );
+                sw.WriteLine();
+                sw.WriteLine( ";ワイリングエフェクトの1コマのフレーム数" );
+                sw.WriteLine( "WailingFireInterval={0}", CDTXMania.ConfigIni.nWailingFireInterval );
+                sw.WriteLine();
+                sw.WriteLine( ";ワイリングエフェクトの1コマの幅" );
+                sw.WriteLine( "WailingFireWidgh={0}", CDTXMania.ConfigIni.nWailingFireWidgh );
+                sw.WriteLine();
+                sw.WriteLine( ";ワイリングエフェクトの1コマの高さ" );
+                sw.WriteLine( "WailingFireHeight={0}", CDTXMania.ConfigIni.nWailingFireHeight );
+                sw.WriteLine();
+                sw.WriteLine( ";ワイリングエフェクトのX座標" );
+                sw.WriteLine( "WailingFirePosXGuitar={0}", CDTXMania.ConfigIni.nWailingFireX.Guitar );
+                sw.WriteLine( "WailingFirePosXBass={0}", CDTXMania.ConfigIni.nWailingFireX.Bass );
+                sw.WriteLine();
+                sw.WriteLine( ";ワイリングエフェクトのY座標(Guitar、Bass共通)" );
+                sw.WriteLine( "WailingFirePosY={0}", CDTXMania.ConfigIni.nWailingFireY );
+                sw.WriteLine();
+
+                sw.Close();
+            }
+        }
+
+        private void t文字列から読み込み(string strAllSettings)	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
+        {
+            string[] delimiter = { "\n" };
+            string[] strSingleLine = strAllSettings.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string s in strSingleLine)
+            {
+                string str = s.Replace('\t', ' ').TrimStart(new char[] { '\t', ' ' });
+                if ((str.Length != 0) && (str[0] != ';'))
+                {
+                    try
+                    {
+                        string str3;
+                        string str4;
+                        string[] strArray = str.Split(new char[] { '=' });
+                        if (strArray.Length == 2)
+                        {
+                            str3 = strArray[0].Trim();
+                            str4 = strArray[1].Trim();
+                            //-----------------------------
+                            if (str3.Equals("SelectListFontName"))
+                            {
+                                CDTXMania.ConfigIni.str選曲リストフォント = str4;
+                            }
+                            else if (str3.Equals("DisplayFontName"))
+                            {
+                                CDTXMania.ConfigIni.str曲名表示フォント = str4;
+                            }
+                            else if (str3.Equals("SelectListFontSize"))
+                            {
+                                CDTXMania.ConfigIni.n選曲リストフォントのサイズdot = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 0x3e7, CDTXMania.ConfigIni.n選曲リストフォントのサイズdot);
+                            }
+                            else if (str3.Equals("SelectListFontBold"))
+                            {
+                                CDTXMania.ConfigIni.b選曲リストフォントを太字にする = C変換.bONorOFF(str4[0]);
+                            }
+                            else if (str3.Equals("NamePlateType"))
+                            {
+                                CDTXMania.ConfigIni.eNamePlate = (Eタイプ)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)CDTXMania.ConfigIni.eNamePlate);
+                            }
+                            else if (str3.Equals("DrumSetMoves"))
+                            {
+                                CDTXMania.ConfigIni.eドラムセットを動かす = (Eタイプ)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)CDTXMania.ConfigIni.eドラムセットを動かす);
+                            }
+                            else if (str3.Equals("BPMBar"))
+                            {
+                                CDTXMania.ConfigIni.eBPMbar = (Eタイプ)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)CDTXMania.ConfigIni.eBPMbar);
+                            }
+                            else if (str3.Equals("LivePoint"))
+                            {
+                                CDTXMania.ConfigIni.bLivePoint = C変換.bONorOFF(str4[0]);
+                            }
+                            else if (str3.Equals("Speaker"))
+                            {
+                                CDTXMania.ConfigIni.bSpeaker = C変換.bONorOFF(str4[0]);
+                            }
+                            else if (str3.Equals("JudgeAnimeType"))
+                            {
+                                CDTXMania.ConfigIni.nJudgeAnimeType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, CDTXMania.ConfigIni.nJudgeAnimeType);
+                            }
+                            else if (str3.Equals("JudgeFrames"))
+                            {
+                                CDTXMania.ConfigIni.nJudgeFrames = C変換.n値を文字列から取得して返す(str4, CDTXMania.ConfigIni.nJudgeFrames);
+                            }
+                            else if (str3.Equals("JudgeInterval"))
+                            {
+                                CDTXMania.ConfigIni.nJudgeInterval = C変換.n値を文字列から取得して返す(str4, CDTXMania.ConfigIni.nJudgeInterval);
+                            }
+                            else if (str3.Equals("JudgeWidgh"))
+                            {
+                                CDTXMania.ConfigIni.nJudgeWidgh = C変換.n値を文字列から取得して返す(str4, CDTXMania.ConfigIni.nJudgeWidgh);
+                            }
+                            else if (str3.Equals("JudgeHeight"))
+                            {
+                                CDTXMania.ConfigIni.nJudgeHeight = C変換.n値を文字列から取得して返す(str4, CDTXMania.ConfigIni.nJudgeHeight);
+                            }
+                            else if (str3.Equals("ExplosionFrames"))
+                            {
+                                CDTXMania.ConfigIni.nExplosionFrames = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nExplosionFrames);
+                            }
+                            else if (str3.Equals("ExplosionInterval"))
+                            {
+                                CDTXMania.ConfigIni.nExplosionInterval = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nExplosionInterval);
+                            }
+                            else if (str3.Equals("ExplosionWidgh"))
+                            {
+                                CDTXMania.ConfigIni.nExplosionWidgh = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nExplosionWidgh);
+                            }
+                            else if (str3.Equals("ExplosionHeight"))
+                            {
+                                CDTXMania.ConfigIni.nExplosionHeight = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nExplosionHeight);
+                            }
+                            else if (str3.Equals("WailingFireFrames"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireFrames = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireFrames);
+                            }
+                            else if (str3.Equals("WailingFireInterval"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireInterval = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireInterval);
+                            }
+                            else if (str3.Equals("WailingFireWidgh"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireWidgh = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireWidgh);
+                            }
+                            else if (str3.Equals("WailingFireHeight"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireHeight = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireHeight);
+                            }
+                            else if (str3.Equals("WailingFirePositionXGuitar"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireX.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireX.Guitar);
+                            }
+                            else if (str3.Equals("WailingFirePositionXBass"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireX.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireX.Bass);
+                            }
+                            else if (str3.Equals("WailingFirePosY"))
+                            {
+                                CDTXMania.ConfigIni.nWailingFireX.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)CDTXMania.ConfigIni.nWailingFireY);
+                            }
+                            //-----------------------------
+                        }
+                        continue;
+                    }
+                    catch (Exception exception)
+                    {
+                        Trace.TraceError(exception.Message);
+                        continue;
+                    }
+                }
+            }
+        }
+
 		#region [ IDisposable 実装 ]
 		//-----------------
 		public void Dispose()

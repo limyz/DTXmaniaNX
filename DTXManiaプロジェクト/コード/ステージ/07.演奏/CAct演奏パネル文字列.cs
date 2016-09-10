@@ -65,7 +65,6 @@ namespace DTXMania
                 this.n曲名Y = 630;
             }
 
-            this.ft表示用フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 26f, FontStyle.Regular, GraphicsUnit.Pixel);
 //          this.n文字列の長さdot = 0;
 //          this.txPanel = null;
             this.ct進行用 = new CCounter();
@@ -73,11 +72,8 @@ namespace DTXMania
         }
         public override void On非活性化()
         {
-            if (this.ft表示用フォント != null)
-            {
-                this.ft表示用フォント.Dispose();
-                this.ft表示用フォント = null;
-            }
+            CDTXMania.t安全にDisposeする( ref this.pfタイトル );
+            CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
 //          CDTXMania.tテクスチャの解放(ref this.txPanel);
             this.ct進行用 = null;
             base.On非活性化();
@@ -105,15 +101,15 @@ namespace DTXMania
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
-                bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                bmpSongName = this.pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
-                bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                bmpArtistName = this.pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
                 bmpArtistName.Dispose();
                 #endregion
@@ -214,7 +210,6 @@ namespace DTXMania
         #region [ private ]
         //-----------------
         private CCounter ct進行用;
-        private Font ft表示用フォント;
 //      private int n文字列の長さdot;
         private int n曲名X;
         private int n曲名Y;

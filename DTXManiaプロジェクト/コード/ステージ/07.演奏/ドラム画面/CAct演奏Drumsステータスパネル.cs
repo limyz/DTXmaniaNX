@@ -176,8 +176,8 @@ namespace DTXMania
             
             #endregion
 
-            this.ft称号フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);
+            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
+            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
@@ -188,11 +188,6 @@ namespace DTXMania
         }
         public override void On非活性化()
         {
-            if (this.ft称号フォント != null)
-            {
-                this.ft称号フォント.Dispose();
-                this.ft称号フォント = null;
-            }
             CDTXMania.tテクスチャの解放(ref this.txスキルパネル);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[0]);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[1]);
@@ -204,17 +199,17 @@ namespace DTXMania
         {
             if( !base.b活性化してない )
             {
-                this.strPlayerName = string.IsNullOrEmpty(CDTXMania.ConfigIni.strCardName) ? "GUEST" : CDTXMania.ConfigIni.strCardName;
-                this.strTitleName = string.IsNullOrEmpty(CDTXMania.ConfigIni.strGroupName) ? "" : CDTXMania.ConfigIni.strGroupName;
+                this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 0 ];
+                this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 0 ];
 
-                Bitmap image2 = new Bitmap(200, 100);
-                Graphics graネームプレート用 = Graphics.FromImage(image2);
+                Bitmap image2 = new Bitmap( 257, 100 );
+                Graphics graネームプレート用 = Graphics.FromImage( image2 );
 
                 #region[ ネームカラー ]
                 //--------------------
                 Color clNameColor = Color.White;
                 Color clNameColorLower = Color.White;
-                switch (CDTXMania.ConfigIni.nNameColor)
+                switch( CDTXMania.ConfigIni.nNameColor[ 0 ] )
                 {
                     case 0:
                         clNameColor = Color.White;
@@ -291,15 +286,19 @@ namespace DTXMania
                 #endregion
                 #region[ 名前とか ]
                 Bitmap bmpCardName = new Bitmap(1, 1);
-                bmpCardName = this.prv表示用フォント.DrawPrivateFont(this.strPlayerName, Color.White, Color.Transparent, clNameColor, (CDTXMania.ConfigIni.nNameColor > 11 ? clNameColorLower : clNameColor));
+                bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
+                Bitmap bmpTitleName = new Bitmap(1, 1);
+                bmpTitleName = this.prv称号フォント.DrawPrivateFont( this.strTitleName, Color.White, Color.Transparent );
 
-                graネームプレート用.DrawImage(bmpCardName, -2f, 26f);
-                graネームプレート用.DrawString(this.strTitleName, this.ft称号フォント, Brushes.White, (float)8f, (float)12f);
+                graネームプレート用.DrawImage( bmpCardName, -2f, 26f );
+                graネームプレート用.DrawImage( bmpTitleName, 6f, 8f );
                 #endregion
 
                 this.prv表示用フォント.Dispose();
+                this.prv称号フォント.Dispose();
                 bmpCardName.Dispose();
-                this.txネームプレート用文字 = new CTexture(CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false);
+                bmpTitleName.Dispose();
+                this.txネームプレート用文字 = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
                 image2.Dispose();
 
                 graネームプレート用.Dispose();
@@ -311,7 +310,7 @@ namespace DTXMania
         {
             if( !base.b活性化してない )
             {
-                CDTXMania.tテクスチャの解放(ref this.txネームプレート用文字);
+                CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字 );
                 base.OnManagedリソースの解放();
             }
         }
@@ -329,16 +328,8 @@ namespace DTXMania
 
                 int i = 0;
 
-                string str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10f);
+                string str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ]) / 10.0f + ( CDTXMania.DTX.LEVELDEC[ i ] != 0 ? CDTXMania.DTX.LEVELDEC[ i ] / 100.0f : 0 ) );
                 bool bCLASSIC = false;
-                if (CDTXMania.DTX.LEVEL[i] > 100)
-                {
-                    str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 100f);
-                }
-                else
-                {
-                    str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10.0f + (CDTXMania.DTX.LEVELDEC[i] != 0 ? CDTXMania.DTX.LEVELDEC[i] / 100.0f : 0));
-                }
 
                 if (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
                     (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
@@ -396,11 +387,11 @@ namespace DTXMania
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
-                this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
+                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums ) );
+                this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
 
-                if (this.tx難易度パネル != null)
-                    this.tx難易度パネル.t2D描画(CDTXMania.app.Device, 14 + this.n本体X[i], 266 + this.n本体Y, new Rectangle(0, 60 * nIndex, 60, 60));
+                if( this.tx難易度パネル != null )
+                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );
                 this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[i], 290 + this.n本体Y, str);
             }
             return 0;
@@ -426,7 +417,7 @@ namespace DTXMania
         private CTexture txスキルパネル;
         private CTexture[] txパネル文字;
         private CPrivateFastFont prv表示用フォント;
-        private Font ft称号フォント;
+        private CPrivateFastFont prv称号フォント;
         private string strPlayerName;
         private string strTitleName;
         private CTexture txネームプレート用文字;

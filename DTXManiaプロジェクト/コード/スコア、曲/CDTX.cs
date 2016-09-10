@@ -74,7 +74,7 @@ namespace DTXMania
 				if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 					strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 				else
-					strAVIファイル名 = CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+					strAVIファイル名 = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
 				//-----------------
 				#endregion
 
@@ -159,7 +159,7 @@ namespace DTXMania
 				if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 					str動画ファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 				else
-					str動画ファイル名 = CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+					str動画ファイル名 = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
 				//-----------------
 				#endregion
 
@@ -353,7 +353,7 @@ namespace DTXMania
                         if ( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 						    return CDTXMania.DTX.PATH_WAV + this.strファイル名;
 					    else
-						    return CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+						    return CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
                     }
                     return "";
 				}
@@ -503,6 +503,7 @@ namespace DTXMania
 			public int n発声時刻ms;
             public bool bボーナスチップ;
 			public int nLag;				// 2011.2.1 yyagi
+            public int nCurrentComboForGhost; // 2015.9.29 chnmr0 fork
 			public CDTX.CAVI rAVI;
             public CDTX.CDirectShow rDShow;
 			public CDTX.CAVIPAN rAVIPan;
@@ -687,6 +688,10 @@ namespace DTXMania
 			}
 			public bool bIsAutoPlayed;						// 2011.6.10 yyagi
             public bool b演奏終了後も再生が続くチップである; // #32248 2013.10.14 yyagi
+
+            //fork
+            public int n楽器パートでの出現順;                // #35411 2015.08.20 chnmr0
+            public bool bTargetGhost判定済み;               // #35411 2015.08.22 chnmr0
 			
 			public CChip()
 			{
@@ -706,6 +711,8 @@ namespace DTXMania
 				this.n発声時刻ms = 0;
                 this.bボーナスチップ = false;
 				this.nLag = -999;
+                this.n楽器パートでの出現順 = -1;
+                this.bTargetGhost判定済み = false;
 				this.bIsAutoPlayed = false;
                 this.b演奏終了後も再生が続くチップである = false;
 				this.dbチップサイズ倍率 = 1.0;
@@ -1345,6 +1352,7 @@ namespace DTXMania
 		public const int n小節の解像度 = 384;
 		public string PANEL;
 		public string PATH_WAV;
+        public string PATH;
 		public string PREIMAGE;
 		public string PREMOVIE;
 		public string PREVIEW;
@@ -1386,6 +1394,7 @@ namespace DTXMania
 			this.BACKGROUND = "";
 			this.BACKGROUND_GR = "";
 			this.PATH_WAV = "";
+            this.PATH = "";
 			this.MIDIFILE = "";
 			this.SOUND_STAGEFAILED = "";
 			this.SOUND_FULLCOMBO = "";
@@ -2881,7 +2890,7 @@ namespace DTXMania
 //				count++;
 
 				string str = string.IsNullOrEmpty(this.PATH_WAV) ? this.strフォルダ名 : this.PATH_WAV;
-				str = str + cwav.strファイル名;
+				str = str + this.PATH + cwav.strファイル名;
 				bool bIsDirectSound = ( CDTXMania.Sound管理.GetCurrentSoundDeviceType() == "DirectSound" );
 				try
 				{
@@ -3201,7 +3210,15 @@ namespace DTXMania
 		}
 		public void t各自動再生音チップの再生時刻を変更する( int nBGMAdjustの増減値 )
 		{
-			this.nBGMAdjust += nBGMAdjustの増減値;
+            this.t各自動再生音チップの再生時刻を変更する( nBGMAdjustの増減値, true, false );
+		}
+		public void t各自動再生音チップの再生時刻を変更する( int nBGMAdjustの増減値, bool bScoreIni保存, bool bConfig保存 )
+		{
+            if( bScoreIni保存 )
+			    this.nBGMAdjust += nBGMAdjustの増減値;
+            if( bConfig保存 )
+                CDTXMania.ConfigIni.nCommonBGMAdjustMs = nBGMAdjustの増減値;
+
 			for( int i = 0; i < this.listChip.Count; i++ )
 			{
 				int nChannelNumber = this.listChip[ i ].nチャンネル番号;
@@ -3738,7 +3755,8 @@ namespace DTXMania
 						//Trace.TraceInformation( "発声時刻計算:             {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
 						this.nBGMAdjust = 0;
-						this.t各自動再生音チップの再生時刻を変更する( nBGMAdjust );
+                        if( CDTXMania.ConfigIni.nCommonBGMAdjustMs != 0 )
+                            this.t各自動再生音チップの再生時刻を変更する( CDTXMania.ConfigIni.nCommonBGMAdjustMs, false, true );
 						//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 						//Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
@@ -4565,6 +4583,15 @@ namespace DTXMania
 				}
 				//-----------------
 				#endregion
+				#region [ PATH ]
+				//----------------- #36034 ikanick add 16.2.18
+				else if( strコマンド.StartsWith( "PATH", StringComparison.OrdinalIgnoreCase ) )
+				{
+					this.t入力・パラメータ食い込みチェック( "PATH", ref strコマンド, ref strパラメータ );
+					this.PATH = ( strパラメータ != "PATH_WAV" ) ? strパラメータ : "";
+				}
+				//-----------------
+				#endregion
 				#region [ TITLE ]
 				//-----------------
 				else if( strコマンド.StartsWith( "TITLE", StringComparison.OrdinalIgnoreCase ) )
@@ -4605,6 +4632,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out dlevel ) )
 					{
 						this.LEVEL.Drums = Math.Min( Math.Max( dlevel, 0 ), 1000 );	// 0～100 に丸める
+                        if( this.LEVEL.Drums >= 100 )
+                        {
+                            int dlevelTemp = this.LEVEL.Drums;
+                            this.LEVEL.Drums = (int)( this.LEVEL.Drums / 10.0f );
+                            this.LEVELDEC.Drums = dlevelTemp - this.LEVEL.Drums * 10;
+                        }
 					}
 				}
 				//-----------------
@@ -4619,6 +4652,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out glevel ) )
 					{
 						this.LEVEL.Guitar = Math.Min( Math.Max( glevel, 0 ), 1000 );		// 0～100 に丸める
+                        if( this.LEVEL.Guitar >= 100 )
+                        {
+                            int glevelTemp = this.LEVEL.Guitar;
+                            this.LEVEL.Guitar = (int)( this.LEVEL.Guitar / 10.0f );
+                            this.LEVELDEC.Guitar = glevelTemp - this.LEVEL.Guitar * 10;
+                        }
 					}
 				}
 				//-----------------
@@ -4633,6 +4672,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out blevel ) )
 					{
 						this.LEVEL.Bass = Math.Min( Math.Max( blevel, 0 ), 1000 );		// 0～100 に丸める
+                        if( this.LEVEL.Bass >= 100 )
+                        {
+                            int blevelTemp = this.LEVEL.Bass;
+                            this.LEVEL.Bass = (int)( this.LEVEL.Bass / 10.0f );
+                            this.LEVELDEC.Bass = blevelTemp - this.LEVEL.Bass * 10;
+                        }
 					}
 				}
 				//-----------------

@@ -23,7 +23,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "Ver3.40GD(150919)";
+        public static readonly string VERSION = "Ver3.61GD(160820)";
         public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
@@ -323,6 +323,10 @@ namespace DTXMania
         {
             get { return base.Window.Handle; }
         }
+        //fork
+        public static STDGBVALUE< List<int> > listAutoGhostLag = new STDGBVALUE<List<int>>();
+        public static STDGBVALUE< List<int> > listTargetGhsotLag = new STDGBVALUE<List<int>>();
+        public static STDGBVALUE< CScoreIni.C演奏記録 > listTargetGhostScoreData = new STDGBVALUE< CScoreIni.C演奏記録 >();
 
         // コンストラクタ
 
@@ -484,12 +488,9 @@ namespace DTXMania
             this.Device.SetRenderState(RenderState.AlphaTestEnable, true);
             this.Device.SetRenderState(RenderState.AlphaRef, 10);
 
-            if (CDTXMania.ConfigIni.b縮小文字のアンチエイリアスを有効にする == true)
-            {
-                this.Device.SetRenderState(RenderState.MultisampleAntialias, true);
-                this.Device.SetSamplerState(0, SamplerState.MinFilter, TextureFilter.Linear);
-                this.Device.SetSamplerState(0, SamplerState.MagFilter, TextureFilter.Linear);
-            }
+            this.Device.SetRenderState(RenderState.MultisampleAntialias, true);
+            this.Device.SetSamplerState(0, SamplerState.MinFilter, TextureFilter.Linear);
+            this.Device.SetSamplerState(0, SamplerState.MagFilter, TextureFilter.Linear);
 
             this.Device.SetRenderState<Compare>(RenderState.AlphaFunc, Compare.Greater);
             this.Device.SetRenderState(RenderState.AlphaBlendEnable, true);
@@ -2199,6 +2200,7 @@ for (int i = 0; i < 3; i++) {
                     Trace.Indent();
                     try
                     {
+                        CDTXMania.Skin.tSaveSkinConfig(); //2016.07.30 kairera0467 #36413
                         Skin.Dispose();
                         Skin = null;
                         Trace.TraceInformation("スキンの終了処理を完了しました。");

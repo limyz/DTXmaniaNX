@@ -481,7 +481,7 @@ namespace DTXMania
 		public bool bSTAGEFAILED有効;
 		public STDGBVALUE<bool> bSudden;
 		public bool bTight;
-		public bool bGraph有効;     // #24074 2011.01.23 add ikanick
+		public STDGBVALUE<bool> bGraph有効;     // #24074 2011.01.23 add ikanick
 		public bool bWave再生位置自動調整機能有効;
 		public bool bシンバルフリー;
 		public bool bストイックモード;
@@ -494,7 +494,6 @@ namespace DTXMania
         public bool bAutoAddGage; //2012.9.18
 		public bool b歓声を発声する;
 		public bool b垂直帰線待ちを行う;
-        public bool b縮小文字のアンチエイリアスを有効にする;
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
         public bool bDirectShowMode;
@@ -549,14 +548,14 @@ namespace DTXMania
 		public int n自動再生音量;
 		public int n手動再生音量;
 		public int n選曲リストフォントのサイズdot;
-        public int nNameColor;
+        public int[] nNameColor;
 		public STDGBVALUE<int> n表示可能な最小コンボ数;
 		public STDGBVALUE<int> n譜面スクロール速度;
 		public string strDTXManiaのバージョン;
 		public string str曲データ検索パス;
 		public string str選曲リストフォント;
-        public string strCardName;
-        public string strGroupName;
+        public string[] strCardName; //2015.12.3 kaiera0467 DrumとGuitarとBassで名前を別々にするため、string[3]に変更。
+        public string[] strGroupName;
 		public Eドラムコンボ文字の表示位置 ドラムコンボ文字の表示位置;
         public bool bドラムコンボ文字の表示;
         public STDGBVALUE<Eタイプ> 判定文字表示位置;
@@ -604,8 +603,10 @@ namespace DTXMania
         #endregion
 
         public STDGBVALUE<int> nInputAdjustTimeMs;	// #23580 2011.1.3 yyagi タイミングアジャスト機能
+        public int nCommonBGMAdjustMs;              // #36372 2016.06.19 kairera0467 全曲共通のBGMオフセット
         public STDGBVALUE<int> nJudgeLinePosOffset; // #31602 2013.6.23 yyagi 判定ライン表示位置のオフセット
         public int nShowLagType;					// #25370 2011.6.5 yyagi ズレ時間表示機能
+        public int nShowLagTypeColor;
         public STDGBVALUE<int> nHidSud;
         public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
 		public int nPoliphonicSounds;				// #28228 2012.5.1 yyagi レーン毎の最大同時発音数
@@ -613,9 +614,12 @@ namespace DTXMania
 		public bool bIsEnabledSystemMenu;			// #28200 2012.5.1 yyagi System Menuの使用可否切替
 		public string strSystemSkinSubfolderFullName;	// #28195 2012.5.2 yyagi Skin切替用 System/以下のサブフォルダ名
 		public bool bUseBoxDefSkin;						// #28195 2012.5.6 yyagi Skin切替用 box.defによるスキン変更機能を使用するか否か
+
+        //つまみ食い
+        public STDGBVALUE<EAutoGhostData> eAutoGhost;               // #35411 2015.8.18 chnmr0 プレー時使用ゴーストデータ種別
+        public STDGBVALUE<ETargetGhostData> eTargetGhost;               // #35411 2015.8.18 chnmr0 ゴーストデータ再生方法
+
         public bool bConfigIniがないかDTXManiaのバージョンが異なる
-
-
 		{
 			get
 			{
@@ -1011,7 +1015,6 @@ namespace DTXMania
 			this.str曲データ検索パス = @".\";
 			this.b全画面モード = false;
 			this.b垂直帰線待ちを行う = true;
-            this.b縮小文字のアンチエイリアスを有効にする = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
             this.bDirectShowMode = false;
@@ -1078,6 +1081,10 @@ namespace DTXMania
             this.bLaneFlush.Guitar = true;
             this.bLaneFlush.Bass = true;
 
+            this.strCardName = new string[ 3 ];
+            this.strGroupName = new string[ 3 ];
+            this.nNameColor = new int[ 3 ];
+
             #region[ 画像関連 ]
             this.nJudgeAnimeType = 1;
             this.nJudgeFrames = 24;
@@ -1129,6 +1136,7 @@ namespace DTXMania
             this.判定文字表示位置 = new STDGBVALUE<Eタイプ>();
 			this.n譜面スクロール速度 = new STDGBVALUE<int>();
 			this.nInputAdjustTimeMs = new STDGBVALUE<int>();	// #23580 2011.1.3 yyagi
+            this.nCommonBGMAdjustMs = 0; // #36372 2016.06.19 kairera0467
             this.nJudgeLinePosOffset = new STDGBVALUE<int>(); // #31602 2013.6.23 yyagi
 			for ( int i = 0; i < 3; i++ )
 			{
@@ -1205,6 +1213,7 @@ namespace DTXMania
             this.bHAZARD = false;
 			this.nRisky = 0;							// #23539 2011.7.26 yyagi RISKYモード
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
+            this.nShowLagTypeColor = 0;
 			this.bIsAutoResultCapture = false;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
             #region [ XGオプション ]
@@ -1310,17 +1319,23 @@ namespace DTXMania
             sw.WriteLine(@"; 演奏中のネームプレートに表示される名前を設定できます。");
             sw.WriteLine("; 英字、数字の他、ひらがな、カタカナ、半角カナ、漢字なども入力できます。");
             sw.WriteLine("; 入力されていない場合は「GUEST」と表示されます。");
-            sw.WriteLine("CardName={0}", this.strCardName );
+            sw.WriteLine("CardNameDrums={0}", this.strCardName[ 0 ] );
+            sw.WriteLine("CardNameGuitar={0}", this.strCardName[ 1 ] );
+            sw.WriteLine("CardNameBass={0}", this.strCardName[ 2 ] );
             sw.WriteLine();
             sw.WriteLine("; グループ名っぽいあれ。");
             sw.WriteLine(@"; 演奏中のネームプレートに表示されるXG2でいうグループ名を設定できます。");
             sw.WriteLine("; 英字、数字の他、ひらがな、カタカナ、半角カナ、漢字なども入力できます。");
             sw.WriteLine("; 入力されていない場合は何も表示されません。");
-            sw.WriteLine("GroupName={0}", this.strGroupName);
+            sw.WriteLine("GroupNameDrums={0}", this.strGroupName[ 0 ]);
+            sw.WriteLine("GroupNameGuitar={0}", this.strGroupName[ 1 ]);
+            sw.WriteLine("GroupNameBass={0}", this.strGroupName[ 2 ]);
             sw.WriteLine();
             sw.WriteLine("; ネームカラー");
             sw.WriteLine("; 0=白, 1=薄黄色, 2=黄色, 3=緑, 4=青, 5=紫 以下略。");
-            sw.WriteLine("NameColor={0}", this.nNameColor);
+            sw.WriteLine("NameColorDrums={0}", this.nNameColor[ 0 ]);
+            sw.WriteLine("NameColorGuitar={0}", this.nNameColor[ 1 ]);
+            sw.WriteLine("NameColorBass={0}", this.nNameColor[ 2 ]);
             sw.WriteLine();
             sw.WriteLine("; クリップの表示位置");
             sw.WriteLine("; 0=表示しない, 1=全画面, 2=ウインドウ, 3=全画面&ウインドウ");
@@ -1450,10 +1465,6 @@ namespace DTXMania
 			sw.WriteLine( "Drums={0}", this.bDrums有効 ? 1 : 0 );
 			sw.WriteLine();
             #endregion
-            sw.WriteLine( "; 縮小文字のアンチエイリアスの有無 (0:OFF, 1:ON)");
-            sw.WriteLine( "; 文字やネームプレートなどの縮小している画像に対してアンチエイリアス処理をします。" );
-            sw.WriteLine( "Antialias={0}", this.b縮小文字のアンチエイリアスを有効にする ? 1 : 0);
-            sw.WriteLine();
             sw.WriteLine( "; DirectShowでのワイドクリップ再生 (0:OFF, 1:ON)");
             sw.WriteLine( "DirectShowMode={0}", this.bDirectShowMode ? 1 : 0);
             sw.WriteLine();
@@ -1630,6 +1641,9 @@ namespace DTXMania
 			sw.WriteLine( "; Whether displaying the lag times from the just timing or not." );	//
 			sw.WriteLine( "ShowLagTime={0}", this.nShowLagType );							//
 			sw.WriteLine();
+			sw.WriteLine( "; 判定ズレ時間表示の色(0:Slow青、Fast赤, 1:Slow赤、Fast青)" );
+			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );							//
+			sw.WriteLine();
 			sw.WriteLine( "; リザルト画像自動保存機能(0:OFF, 1:ON)" );						// #25399 2011.6.9 yyagi
 			sw.WriteLine( "; Set ON if you'd like to save result screen image automatically");	//
 			sw.WriteLine( "; when you get hiscore/hiskill.");								//
@@ -1643,11 +1657,16 @@ namespace DTXMania
             sw.WriteLine("TimeStretch={0}", this.bTimeStretch ? 1 : 0);					//
             sw.WriteLine();
             #region [ Adjust ]
-            sw.WriteLine("; 判定タイミング調整(ドラム, ギター, ベース)(-99～0)[ms]");		// #23580 2011.1.3 yyagi
+            sw.WriteLine("; 判定タイミング調整(ドラム, ギター, ベース)(-99～99)[ms]");		// #23580 2011.1.3 yyagi
             sw.WriteLine("; Revision value to adjust judgement timing for the drums, guitar and bass.");	//
             sw.WriteLine("InputAdjustTimeDrums={0}", this.nInputAdjustTimeMs.Drums);		//
             sw.WriteLine("InputAdjustTimeGuitar={0}", this.nInputAdjustTimeMs.Guitar);		//
             sw.WriteLine("InputAdjustTimeBass={0}", this.nInputAdjustTimeMs.Bass);			//
+            sw.WriteLine();
+
+            sw.WriteLine( "; BGMタイミング調整(-99～99)[ms]" );                              // #36372 2016.06.19 kairera0467
+            sw.WriteLine( "; Revision value to adjust judgement timing for BGM." );	        //
+            sw.WriteLine( "BGMAdjustTime={0}", this.nCommonBGMAdjustMs );		            //
             sw.WriteLine();
 
             sw.WriteLine("; 判定ラインの表示位置調整(ドラム, ギター, ベース)(-99～99)[px]"); // #31602 2013.6.23 yyagi 判定ラインの表示位置オフセット
@@ -1756,12 +1775,27 @@ namespace DTXMania
 
             // #24074 2011.01.23 add ikanick
 			sw.WriteLine( "; グラフ表示(0:OFF, 1:ON)" );
-			sw.WriteLine( "SkillMater={0}", this.bGraph有効 ? 1 : 0 );
+			sw.WriteLine( "DrumGraph={0}", this.bGraph有効.Drums ? 1 : 0 );
+			sw.WriteLine( "GuitarGraph={0}", this.bGraph有効.Guitar ? 1 : 0 );
+			sw.WriteLine( "BassGraph={0}", this.bGraph有効.Bass ? 1 : 0 );
 			sw.WriteLine();
 
             sw.WriteLine( "; ドラムコンボの表示(0:OFF, 1:ON)" );									// #29500 2012.9.11 kairera0467
             sw.WriteLine( ": DrumPart Display Combo. 0=OFF, 1=ON " );
             sw.WriteLine( "DrumComboDisp={0}", this.bドラムコンボ文字の表示 ? 1 : 0 );				//
+            sw.WriteLine();
+
+            //fork
+            // #35411 2015.8.18 chnmr0 add
+            sw.WriteLine("; AUTOゴースト種別 (0:PERFECT, 1:LAST_PLAY, 2:HI_SKILL, 3:HI_SCORE)" );
+            sw.WriteLine("DrumAutoGhost={0}", (int)eAutoGhost.Drums);
+            sw.WriteLine("GuitarAutoGhost={0}", (int)eAutoGhost.Guitar);
+            sw.WriteLine("BassAutoGhost={0}", (int)eAutoGhost.Bass);
+            sw.WriteLine();
+            sw.WriteLine("; ターゲットゴースト種別 (0:NONE, 1:PERFECT, 2:LAST_PLAY, 3:HI_SKILL, 4:HI_SCORE)");
+            sw.WriteLine("DrumTargetGhost={0}", (int)eTargetGhost.Drums);
+            sw.WriteLine("GuitarTargetGhost={0}", (int)eTargetGhost.Guitar);
+            sw.WriteLine("BassTargetGhost={0}", (int)eTargetGhost.Bass);
             sw.WriteLine();
 
             #region[DTXManiaXG追加オプション]
@@ -2128,18 +2162,10 @@ namespace DTXMania
 			if( this.bConfigIniが存在している )
 			{
 				string str;
-				//this.tキーアサインを全部クリアする();
 				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "Shift_JIS" ) );
 				str = reader.ReadToEnd();
 				t文字列から読み込み( str );
 				CDTXVersion version = new CDTXVersion( this.strDTXManiaのバージョン );
-				if( version.n整数部 <= 69 )
-				{
-                    //Ver.Kでは公式とバージョンの書き方が違う影響で、
-                    //この分岐文では正常に分岐してくれない(?)
-                    
-					//this.tデフォルトのキーアサインに設定する();
-				}
 			}
 		}
 
@@ -2286,17 +2312,41 @@ namespace DTXMania
 												}
 												this.strSystemSkinSubfolderFullName = absSkinPath;
 											}
-                                            else if (str3.Equals("CardName"))
+                                            else if( str3.Equals( "CardNameDrums" ) )
                                             {
-                                                this.strCardName = str4;
+                                                this.strCardName[0] = str4;
                                             }
-                                            else if (str3.Equals("GroupName"))
+                                            else if( str3.Equals( "CardNameGuitar" ) )
                                             {
-                                                this.strGroupName = str4;
+                                                this.strCardName[1] = str4;
                                             }
-                                            else if (str3.Equals("NameColor"))
+                                            else if( str3.Equals( "CardNameBass" ) )
                                             {
-                                                this.nNameColor = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                                this.strCardName[2] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameDrums" ) )
+                                            {
+                                                this.strGroupName[0] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameGuitar" ) )
+                                            {
+                                                this.strGroupName[1] = str4;
+                                            }
+                                            else if( str3.Equals( "GroupNameBass" ) )
+                                            {
+                                                this.strGroupName[2] = str4;
+                                            }
+                                            else if( str3.Equals( "NameColorDrums" ) )
+                                            {
+                                                this.nNameColor[ 0 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                            }
+                                            else if( str3.Equals( "NameColorGuitar" ) )
+                                            {
+                                                this.nNameColor[ 1 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                            }
+                                            else if( str3.Equals( "NameColorBass" ) )
+                                            {
+                                                this.nNameColor[ 2 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
                                             }
                                             else if (str3.Equals("SkinChangeByBoxDef"))
                                             {
@@ -2400,10 +2450,6 @@ namespace DTXMania
                                             else if (str3.Equals("Drums"))
                                             {
                                                 this.bDrums有効 = C変換.bONorOFF(str4[0]);
-                                            }
-                                            else if (str3.Equals("Antialias"))
-                                            {
-                                                this.b縮小文字のアンチエイリアスを有効にする = C変換.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("DirectShowMode"))
                                             {
@@ -2595,6 +2641,10 @@ namespace DTXMania
                                             {
                                                 this.nShowLagType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, this.nShowLagType);
                                             }
+                                            else if (str3.Equals("ShowLagTimeColor"))				// #25370 2011.6.3 yyagi
+                                            {
+                                                this.nShowLagTypeColor = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 1, this.nShowLagTypeColor );
+                                            }
                                             else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
                                             {
                                                 this.bTimeStretch = C変換.bONorOFF(str4[0]);
@@ -2615,6 +2665,10 @@ namespace DTXMania
                                             else if ( str3.Equals( "InputAdjustTimeBass" ) )		// #23580 2011.1.3 yyagi
                                             {
                                                 this.nInputAdjustTimeMs.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, -99, 99, this.nInputAdjustTimeMs.Bass);
+                                            }
+                                            else if ( str3.Equals( "BGMAdjustTime" ) )              // #36372 2016.06.19 kairera0467
+                                            {
+                                                this.nCommonBGMAdjustMs = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nCommonBGMAdjustMs );
                                             }
                                             else if ( str3.Equals( "JudgeLinePosOffsetDrums" ) ) // #31602 2013.6.23 yyagi
                                             {
@@ -2719,9 +2773,17 @@ namespace DTXMania
 									//-----------------------------
 									case Eセクション種別.PlayOption:
 										{
-											if( str3.Equals( "SkillMater" ) )  // #24074 2011.01.23 addikanick
+                                            if( str3.Equals( "DrumGraph" ) )  // #24074 2011.01.23 addikanick
 											{
-												this.bGraph有効 = C変換.bONorOFF( str4[ 0 ] );
+												this.bGraph有効.Drums = C変換.bONorOFF( str4[ 0 ] );
+											}
+											else if( str3.Equals( "GuitarGraph" ) )  // #24074 2011.01.23 addikanick
+											{
+												this.bGraph有効.Guitar = C変換.bONorOFF( str4[ 0 ] );
+											}
+											else if( str3.Equals( "BassGraph" ) )  // #24074 2011.01.23 addikanick
+											{
+												this.bGraph有効.Bass = C変換.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "DrumsReverse" ) )
 											{
@@ -3044,6 +3106,32 @@ namespace DTXMania
                                             else if ( str3.Equals( "DrumComboDisp" ) )				// #29500 2012.9.11 kairera0467
                                             {
                                                 this.bドラムコンボ文字の表示 = C変換.bONorOFF(str4[0]);
+                                            }
+
+                                            //fork
+                                            else if (str3.Equals("DrumAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Drums = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("GuitarAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Guitar = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("BassAutoGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eAutoGhost.Bass = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                            }
+                                            else if (str3.Equals("DrumTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Drums = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                            }
+                                            else if (str3.Equals("GuitarTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Guitar = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                            }
+                                            else if (str3.Equals("BassTargetGhost")) // #35411 2015.08.18 chnmr0 add
+                                            {
+                                                this.eTargetGhost.Bass = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
                                             }
 											continue;
 										}

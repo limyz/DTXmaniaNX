@@ -66,6 +66,7 @@ namespace DTXMania
                 }																				//
                 this.bメニューにフォーカス中 = true;											// ここまでOPTIONと共通
                 this.eItemPanelモード = EItemPanelモード.パッド一覧;
+                this.ct表示待機 = new CCounter( 0, 350, 1, CDTXMania.Timer );
             }
             finally
             {
@@ -90,6 +91,7 @@ namespace DTXMania
                 {
                     this.ctキー反復用[i] = null;
                 }
+                this.ct表示待機 = null;
                 base.On非活性化();
             }
             catch (UnauthorizedAccessException e)
@@ -176,6 +178,7 @@ namespace DTXMania
                 this.actFIFO.tフェードイン開始();
                 base.b初めての進行描画 = false;
             }
+            this.ct表示待機.t進行();
 
             // 描画
 
@@ -252,7 +255,7 @@ namespace DTXMania
             #endregion
             #region [ 説明文パネル ]
             //---------------------
-            if( this.tx説明文パネル != null && !this.bメニューにフォーカス中 && this.actList.n目標のスクロールカウンタ == 0 )
+            if( this.tx説明文パネル != null && !this.bメニューにフォーカス中 && this.actList.n目標のスクロールカウンタ == 0 && this.ct表示待機.b終了値に達した )
                 this.tx説明文パネル.t2D描画(CDTXMania.app.Device, 620, 270);
             //---------------------
             #endregion
@@ -298,7 +301,6 @@ namespace DTXMania
             #region [ Enumerating Songs ]
             // CActEnumSongs側で表示する
             #endregion
-
             // キー入力
 
             if ((base.eフェーズID != CStage.Eフェーズ.共通_通常状態)
@@ -468,6 +470,7 @@ namespace DTXMania
         private CTexture txItemBar;
         private CPrivateFastFont prvFont;
         private CTexture[,] txMenuItemLeft;
+        public CCounter ct表示待機;
 
         private void tカーソルを下へ移動する()
         {
@@ -487,6 +490,7 @@ namespace DTXMania
             else
             {
                 CDTXMania.Skin.soundカーソル移動音.t再生する();
+                this.ct表示待機.n現在の値 = 0;
                 this.n現在のメニュー番号 = (this.n現在のメニュー番号 + 1) % 5;
                 switch (this.n現在のメニュー番号)
                 {
@@ -543,6 +547,7 @@ namespace DTXMania
             else
             {
                 CDTXMania.Skin.soundカーソル移動音.t再生する();
+                this.ct表示待機.n現在の値 = 0;
                 this.n現在のメニュー番号 = ((this.n現在のメニュー番号 - 1) + 5) % 5;
                 switch (this.n現在のメニュー番号)
                 {
