@@ -86,15 +86,6 @@ namespace DTXMania
                 {
                     this.txStageFailed.t2D描画(CDTXMania.app.Device, 0, 0);
                 }
-                if (this.ct進行.n現在の値 <= 250)
-                {
-                    int num2 = CDTXMania.Random.Next(5) - 2;
-                    int y = CDTXMania.Random.Next(5) - 2;
-                    if (this.txStageFailed != null)
-                    {
-                        this.txStageFailed.t2D描画(CDTXMania.app.Device, num2, y);
-                    }
-                }
                 if (!this.b効果音再生済み)
                 {
                     if (((CDTXMania.DTX.SOUND_STAGEFAILED != null) && (CDTXMania.DTX.SOUND_STAGEFAILED.Length > 0)) && File.Exists(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED))

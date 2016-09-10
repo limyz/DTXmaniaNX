@@ -69,23 +69,29 @@ namespace DTXMania
 
 		public override void On活性化()
 		{
+            int nGraphUsePart = CDTXMania.ConfigIni.bGraph有効.Guitar ? 1 : 2;
             this.ct登場用 = new CCounter(0, 12, 16, CDTXMania.Timer);
             dtLastQueueOperation = DateTime.MinValue;
-            if (CDTXMania.bコンパクトモード)
+            if( CDTXMania.bコンパクトモード )
             {
                 var score = new Cスコア();
                 CDTXMania.Songs管理.tScoreIniを読み込んで譜面情報を設定する(CDTXMania.strコンパクトモードファイル + ".score.ini", ref score);
-                if (CDTXMania.ConfigIni.bGraph有効 && ((CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && !CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値目標_渡 = score.譜面情報.最大スキル[1];
-                else if (CDTXMania.ConfigIni.bGraph有効 && ((!CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値目標_渡 = score.譜面情報.最大スキル[2];
+                this.actGraph.dbグラフ値目標_渡 = score.譜面情報.最大スキル[ nGraphUsePart ];
             }
             else
             {
-                if (CDTXMania.ConfigIni.bGraph有効 && ((CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && !CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値目標_渡 = CDTXMania.stage選曲.r確定されたスコア.譜面情報.最大スキル[1];	// #24074 2011.01.23 add ikanick
-                else if (CDTXMania.ConfigIni.bGraph有効 && ((!CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値目標_渡 = CDTXMania.stage選曲.r確定されたスコア.譜面情報.最大スキル[2];	// #24074 2011.01.23 add ikanick
+				this.actGraph.dbグラフ値目標_渡 = CDTXMania.stage選曲.r確定されたスコア.譜面情報.最大スキル[ nGraphUsePart ];	// #24074 2011.01.23 add ikanick
+                this.actGraph.dbグラフ値自己ベスト = CDTXMania.stage選曲.r確定されたスコア.譜面情報.最大スキル[ nGraphUsePart ];
+
+                // #35411 2015.08.21 chnmr0 add
+                // ゴースト利用可のなとき、0で初期化
+                if (CDTXMania.ConfigIni.eTargetGhost[ nGraphUsePart ] != ETargetGhostData.NONE)
+                {
+                    if (CDTXMania.listTargetGhsotLag[ nGraphUsePart ] != null)
+                    {
+                        this.actGraph.dbグラフ値目標_渡 = 0;
+                    }
+                }
             }
 			base.On活性化();
 		}
@@ -179,8 +185,7 @@ namespace DTXMania
 				    this.t進行描画・ステータスパネル();
                 if (CDTXMania.ConfigIni.bShowScore)
                     this.t進行描画・スコア();
-                if (CDTXMania.ConfigIni.bGraph有効)
-                    this.t進行描画・グラフ();
+                this.t進行描画・グラフ();
                 this.t進行描画・コンボ();
 				this.t進行描画・演奏情報();
 				//this.t進行描画・Wailing枠();
@@ -221,26 +226,59 @@ namespace DTXMania
 		#region [ private ]
 		//-----------------
         private CTexture txレーン;
-        public CAct演奏スキルメーター actGraph;
         public bool bサビ区間;
         public double UnitTime;
 
 		protected override E判定 tチップのヒット処理( long nHitTime, CDTX.CChip pChip, bool bCorrectLane )
 		{
 			E判定 eJudgeResult = tチップのヒット処理( nHitTime, pChip, E楽器パート.GUITAR, bCorrectLane );
-            if (CDTXMania.ConfigIni.nSkillMode == 0)
+            if( pChip.e楽器パート == E楽器パート.GUITAR && CDTXMania.ConfigIni.bGraph有効.Guitar )
             {
-                if (CDTXMania.ConfigIni.bGraph有効 && ((CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && !CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数・Auto含まない.Guitar.Perfect, this.nヒット数・Auto含まない.Guitar.Great, this.nヒット数・Auto含まない.Guitar.Good, this.nヒット数・Auto含まない.Guitar.Poor, this.nヒット数・Auto含まない.Guitar.Miss, E楽器パート.GUITAR, bIsAutoPlay);
-                else if (CDTXMania.ConfigIni.bGraph有効 && ((!CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数・Auto含まない.Bass.Perfect, this.nヒット数・Auto含まない.Bass.Great, this.nヒット数・Auto含まない.Bass.Good, this.nヒット数・Auto含まない.Bass.Poor, this.nヒット数・Auto含まない.Bass.Miss, E楽器パート.BASS, bIsAutoPlay);
+                if( CDTXMania.ConfigIni.nSkillMode == 0 )
+			        this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す( CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数・Auto含まない.Guitar.Perfect, this.nヒット数・Auto含まない.Guitar.Great, this.nヒット数・Auto含まない.Guitar.Good, this.nヒット数・Auto含まない.Guitar.Poor, this.nヒット数・Auto含まない.Guitar.Miss, E楽器パート.GUITAR,  bIsAutoPlay );
+                else
+	    		    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t演奏型スキルを計算して返す( CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数・Auto含まない.Guitar.Perfect, this.nヒット数・Auto含まない.Guitar.Great, this.nヒット数・Auto含まない.Guitar.Good, this.nヒット数・Auto含まない.Guitar.Poor, this.nヒット数・Auto含まない.Guitar.Miss, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR,  bIsAutoPlay );
+
+		    	if( CDTXMania.listTargetGhsotLag.Guitar != null &&
+                    CDTXMania.ConfigIni.eTargetGhost.Guitar == ETargetGhostData.ONLINE &&
+				    CDTXMania.DTX.n可視チップ数.Guitar > 0 )
+    			{
+
+	    			this.actGraph.dbグラフ値現在_渡 = 100 *
+		    						(this.nヒット数・Auto含まない.Guitar.Perfect * 17 +
+			    					 this.nヒット数・Auto含まない.Guitar.Great * 7 +
+				    				 this.actCombo.n現在のコンボ数.最高値.Guitar * 3) / (20.0 * CDTXMania.DTX.n可視チップ数.Guitar );
+    			}
+
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 0 ] = this.nヒット数・Auto含まない.Guitar.Perfect;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 1 ] = this.nヒット数・Auto含まない.Guitar.Great;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 2 ] = this.nヒット数・Auto含まない.Guitar.Good;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 3 ] = this.nヒット数・Auto含まない.Guitar.Poor;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 4 ] = this.nヒット数・Auto含まない.Guitar.Miss;
             }
-            else if (CDTXMania.ConfigIni.nSkillMode == 1)
+            else if( pChip.e楽器パート == E楽器パート.BASS && CDTXMania.ConfigIni.bGraph有効.Bass )
             {
-                if (CDTXMania.ConfigIni.bGraph有効 && ((CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && !CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数・Auto含まない.Guitar.Perfect, this.nヒット数・Auto含まない.Guitar.Great, this.nヒット数・Auto含まない.Guitar.Good, this.nヒット数・Auto含まない.Guitar.Poor, this.nヒット数・Auto含まない.Guitar.Miss, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR, bIsAutoPlay);
-                else if (CDTXMania.ConfigIni.bGraph有効 && ((!CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-                    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数・Auto含まない.Bass.Perfect, this.nヒット数・Auto含まない.Bass.Great, this.nヒット数・Auto含まない.Bass.Good, this.nヒット数・Auto含まない.Bass.Poor, this.nヒット数・Auto含まない.Bass.Miss, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS, bIsAutoPlay);
+                if( CDTXMania.ConfigIni.nSkillMode == 0 )
+			        this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す( CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数・Auto含まない.Bass.Perfect, this.nヒット数・Auto含まない.Bass.Great, this.nヒット数・Auto含まない.Bass.Good, this.nヒット数・Auto含まない.Bass.Poor, this.nヒット数・Auto含まない.Bass.Miss, E楽器パート.BASS,  bIsAutoPlay );
+                else
+	    		    this.actGraph.dbグラフ値現在_渡 = CScoreIni.t演奏型スキルを計算して返す( CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数・Auto含まない.Bass.Perfect, this.nヒット数・Auto含まない.Bass.Great, this.nヒット数・Auto含まない.Bass.Good, this.nヒット数・Auto含まない.Bass.Poor, this.nヒット数・Auto含まない.Bass.Miss, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS,  bIsAutoPlay );
+
+		    	if( CDTXMania.listTargetGhsotLag.Bass != null &&
+                    CDTXMania.ConfigIni.eTargetGhost.Bass == ETargetGhostData.ONLINE &&
+				    CDTXMania.DTX.n可視チップ数.Bass > 0 )
+    			{
+
+	    			this.actGraph.dbグラフ値現在_渡 = 100 *
+		    						(this.nヒット数・Auto含まない.Bass.Perfect * 17 +
+			    					 this.nヒット数・Auto含まない.Bass.Great * 7 +
+				    				 this.actCombo.n現在のコンボ数.最高値.Bass * 3) / (20.0 * CDTXMania.DTX.n可視チップ数.Bass );
+    			}
+
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 0 ] = this.nヒット数・Auto含まない.Bass.Perfect;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 1 ] = this.nヒット数・Auto含まない.Bass.Great;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 2 ] = this.nヒット数・Auto含まない.Bass.Good;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 3 ] = this.nヒット数・Auto含まない.Bass.Poor;
+                this.actGraph.n現在のAutoを含まない判定数_渡[ 4 ] = this.nヒット数・Auto含まない.Bass.Miss;
             }
 			return eJudgeResult;
 		}
@@ -270,15 +308,9 @@ namespace DTXMania
 		}
         private void t進行描画・グラフ()
         {
-            if (CDTXMania.ConfigIni.bGraph有効 && ((CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && !CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-            {
+			if ( !CDTXMania.ConfigIni.bストイックモード && ( CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass ) )
+			{
                 this.actGraph.On進行描画();
-                this.actGraph.db現在の判定数合計 = this.nヒット数・Auto含む.Guitar.Perfect + this.nヒット数・Auto含む.Guitar.Great + this.nヒット数・Auto含む.Guitar.Good + this.nヒット数・Auto含む.Guitar.Miss + this.nヒット数・Auto含む.Guitar.Poor;
-            }
-            else if (CDTXMania.ConfigIni.bGraph有効 && ((!CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)))
-            {
-                this.actGraph.On進行描画();
-                this.actGraph.db現在の判定数合計 = this.nヒット数・Auto含む.Bass.Perfect + this.nヒット数・Auto含む.Bass.Great + this.nヒット数・Auto含む.Bass.Good + this.nヒット数・Auto含む.Bass.Miss + this.nヒット数・Auto含む.Bass.Poor;
             }
         }
 		protected override void t進行描画・Wailing枠()

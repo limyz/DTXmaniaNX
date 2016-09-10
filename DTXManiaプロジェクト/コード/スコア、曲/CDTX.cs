@@ -3210,7 +3210,15 @@ namespace DTXMania
 		}
 		public void t各自動再生音チップの再生時刻を変更する( int nBGMAdjustの増減値 )
 		{
-			this.nBGMAdjust += nBGMAdjustの増減値;
+            this.t各自動再生音チップの再生時刻を変更する( nBGMAdjustの増減値, true, false );
+		}
+		public void t各自動再生音チップの再生時刻を変更する( int nBGMAdjustの増減値, bool bScoreIni保存, bool bConfig保存 )
+		{
+            if( bScoreIni保存 )
+			    this.nBGMAdjust += nBGMAdjustの増減値;
+            if( bConfig保存 )
+                CDTXMania.ConfigIni.nCommonBGMAdjustMs = nBGMAdjustの増減値;
+
 			for( int i = 0; i < this.listChip.Count; i++ )
 			{
 				int nChannelNumber = this.listChip[ i ].nチャンネル番号;
@@ -3747,7 +3755,8 @@ namespace DTXMania
 						//Trace.TraceInformation( "発声時刻計算:             {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
 						this.nBGMAdjust = 0;
-						this.t各自動再生音チップの再生時刻を変更する( nBGMAdjust );
+                        if( CDTXMania.ConfigIni.nCommonBGMAdjustMs != 0 )
+                            this.t各自動再生音チップの再生時刻を変更する( CDTXMania.ConfigIni.nCommonBGMAdjustMs, false, true );
 						//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 						//Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
@@ -4623,6 +4632,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out dlevel ) )
 					{
 						this.LEVEL.Drums = Math.Min( Math.Max( dlevel, 0 ), 1000 );	// 0～100 に丸める
+                        if( this.LEVEL.Drums >= 100 )
+                        {
+                            int dlevelTemp = this.LEVEL.Drums;
+                            this.LEVEL.Drums = (int)( this.LEVEL.Drums / 10.0f );
+                            this.LEVELDEC.Drums = dlevelTemp - this.LEVEL.Drums * 10;
+                        }
 					}
 				}
 				//-----------------
@@ -4637,6 +4652,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out glevel ) )
 					{
 						this.LEVEL.Guitar = Math.Min( Math.Max( glevel, 0 ), 1000 );		// 0～100 に丸める
+                        if( this.LEVEL.Guitar >= 100 )
+                        {
+                            int glevelTemp = this.LEVEL.Guitar;
+                            this.LEVEL.Guitar = (int)( this.LEVEL.Guitar / 10.0f );
+                            this.LEVELDEC.Guitar = glevelTemp - this.LEVEL.Guitar * 10;
+                        }
 					}
 				}
 				//-----------------
@@ -4651,6 +4672,12 @@ namespace DTXMania
 					if( int.TryParse( strパラメータ, out blevel ) )
 					{
 						this.LEVEL.Bass = Math.Min( Math.Max( blevel, 0 ), 1000 );		// 0～100 に丸める
+                        if( this.LEVEL.Bass >= 100 )
+                        {
+                            int blevelTemp = this.LEVEL.Bass;
+                            this.LEVEL.Bass = (int)( this.LEVEL.Bass / 10.0f );
+                            this.LEVELDEC.Bass = blevelTemp - this.LEVEL.Bass * 10;
+                        }
 					}
 				}
 				//-----------------

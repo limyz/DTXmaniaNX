@@ -200,7 +200,6 @@ namespace DTXMania
                 CDTX cdtx = new CDTX( strDTXファイルパス, true );
 
                 if( !CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
-                    //this.str曲タイトル = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                     this.str曲タイトル = CDTXMania.stage選曲.r確定された曲.strタイトル;
                 else
                     this.str曲タイトル = cdtx.TITLE;
@@ -218,7 +217,63 @@ namespace DTXMania
                         Trace.TraceError( "#SOUND_NOWLOADING に指定されたサウンドファイルの読み込みに失敗しました。({0})", strNowLoadingサウンドファイルパス );
                     }
                 }
-                int LEVEL = cdtx.LEVEL.Drums;
+                // 2015.12.26 kairera0467 本家DTXからつまみ食い。
+                // #35411 2015.08.19 chnmr0 add
+                // Read ghost data by config
+                // It does not exist a ghost file for 'perfect' actually
+                string [] inst = {"dr", "gt", "bs"};
+				if( CDTXMania.ConfigIni.bIsSwappedGuitarBass )
+				{
+					inst[1] = "bs";
+					inst[2] = "gt";
+				}
+
+                for(int instIndex = 0; instIndex < inst.Length; ++instIndex)
+                {
+                    //break; //2016.01.03 kairera0467 以下封印。
+                    bool readAutoGhostCond = false;
+                    readAutoGhostCond |= instIndex == 0 ? CDTXMania.ConfigIni.bドラムが全部オートプレイである : false;
+                    readAutoGhostCond |= instIndex == 1 ? CDTXMania.ConfigIni.bギターが全部オートプレイである : false;
+                    readAutoGhostCond |= instIndex == 2 ? CDTXMania.ConfigIni.bベースが全部オートプレイである : false;
+
+                    CDTXMania.listTargetGhsotLag[instIndex] = null;
+                    CDTXMania.listAutoGhostLag[instIndex] = null;
+                    CDTXMania.listTargetGhostScoreData[instIndex] = null;
+                    this.nCurrentInst = instIndex;
+
+                    if ( readAutoGhostCond )
+                    {
+                        string[] prefix = { "perfect", "lastplay", "hiskill", "hiscore", "online" };
+                        int indPrefix = (int)CDTXMania.ConfigIni.eAutoGhost[ instIndex ];
+                        string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ instIndex ] + ".ghost";
+                        if( File.Exists( filename ) )
+                        {
+                            CDTXMania.listAutoGhostLag[ instIndex ] = new List<int>();
+                            CDTXMania.listTargetGhostScoreData[ instIndex ] = new CScoreIni.C演奏記録();
+                            ReadGhost(filename, CDTXMania.listAutoGhostLag[ instIndex ]);
+                        }
+                    }
+
+                    if( CDTXMania.ConfigIni.eTargetGhost[instIndex] != ETargetGhostData.NONE )
+                    {
+                        string[] prefix = { "none", "perfect", "lastplay", "hiskill", "hiscore", "online" };
+                        int indPrefix = (int)CDTXMania.ConfigIni.eTargetGhost[ instIndex ];
+                        string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ instIndex ] + ".ghost";
+                        if( File.Exists( filename ) )
+                        {
+                            CDTXMania.listTargetGhsotLag[instIndex] = new List<int>();
+                            CDTXMania.listTargetGhostScoreData[ instIndex ] = new CScoreIni.C演奏記録();
+                            this.stGhostLag[instIndex] = new List<STGhostLag>();
+                            ReadGhost(filename, CDTXMania.listTargetGhsotLag[instIndex]);
+                        }
+                        else if( CDTXMania.ConfigIni.eTargetGhost[instIndex] == ETargetGhostData.PERFECT )
+                        {
+                            // All perfect
+                            CDTXMania.listTargetGhsotLag[instIndex] = new List<int>();
+                        }
+                    }
+                }
+
                 cdtx.On非活性化();
                 base.On活性化();
                 if( !CDTXMania.bコンパクトモード )
@@ -379,9 +434,7 @@ namespace DTXMania
                     this.txジャケット = CDTXMania.tテクスチャの生成( path );
                 }
             }
-            #pragma warning disable 0168 // variable declared but not used.
-            catch (Exception ex)
-            #pragma warning restore 0168 // variable declared but not used.
+            catch( Exception ex )
             {
             }
 
@@ -395,7 +448,7 @@ namespace DTXMania
                 mat *= Matrix.Translation(206f, 66f, 0f);
                 mat *= Matrix.RotationZ(0.28f);
 
-            this.txジャケット.t3D描画(CDTXMania.app.Device, mat);
+                this.txジャケット.t3D描画(CDTXMania.app.Device, mat);
             }
 
             if (this.txタイトル != null)
@@ -460,8 +513,7 @@ namespace DTXMania
                             this.txパートパネル.t2D描画(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
 
                         //this.txジャケット.Dispose();
-                        if (this.tx難易度パネル != null)
-                            this.tx難易度パネル.t2D描画(CDTXMania.app.Device, 191 + k, 102, new Rectangle(0, this.nIndex * 50, 262, 50));
+                        this.t難易度パネルを描画する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ], 191 + k, 102 );
 
                         k = 700;
                     }
@@ -510,6 +562,116 @@ namespace DTXMania
                         Trace.TraceInformation("FILE: {0}", CDTXMania.DTX.strファイル名の絶対パス);
                         Trace.TraceInformation("---------------------------");
 
+                       // #35411 2015.08.19 chnmr0 add ゴースト機能のためList chip 読み込み後楽器パート出現順インデックスを割り振る
+                        int[] curCount = new int[(int)E楽器パート.UNKNOWN];
+                        for (int i = 0; i < curCount.Length; ++i)
+                        {
+                            curCount[i] = 0;
+                        }
+                        foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        {
+                            if (chip.e楽器パート != E楽器パート.UNKNOWN)
+                            {
+                                chip.n楽器パートでの出現順 = curCount[(int)chip.e楽器パート]++;
+                                if( CDTXMania.listTargetGhsotLag[ (int)chip.e楽器パート ] != null )
+                                {
+                                    var lag = new STGhostLag();
+                                    lag.index = chip.n楽器パートでの出現順;
+                                    lag.nJudgeTime = chip.n発声時刻ms + CDTXMania.listTargetGhsotLag[ (int)chip.e楽器パート ][ chip.n楽器パートでの出現順 ];
+                                    lag.nLagTime = CDTXMania.listTargetGhsotLag[ (int)chip.e楽器パート ][ chip.n楽器パートでの出現順 ];
+
+                                    this.stGhostLag[ (int)chip.e楽器パート ].Add( lag );
+                                }
+                            }
+                        }
+                        
+                        string [] inst = {"dr", "gt", "bs"};
+        				if( CDTXMania.ConfigIni.bIsSwappedGuitarBass )
+				        {
+		        			inst[1] = "bs";
+        					inst[2] = "gt";
+				        }
+                        //演奏記録をゴーストから逆生成
+                        for( int i = 0; i < 3; i++ )
+                        {
+                            int nNowCombo = 0;
+                            int nMaxCombo = 0;
+
+                            //2016.06.18 kairera0467 「.ghost.score」ファイルが無かった場合ghostファイルから逆算を行う形に変更。
+                            string[] prefix = { "none", "perfect", "lastplay", "hiskill", "hiscore", "online" };
+                            int indPrefix = (int)CDTXMania.ConfigIni.eTargetGhost[ i ];
+                            string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ i ] + ".ghost";
+
+                            if( this.stGhostLag[ i ] == null || File.Exists( filename + ".score" ) )
+                                continue;
+                            CDTXMania.listTargetGhostScoreData[ i ] = new CScoreIni.C演奏記録();
+
+                            for( int n = 0; n < this.stGhostLag[ i ].Count; n++ )
+                            {
+                                int ghostLag = 128;
+                                ghostLag = this.stGhostLag[ i ][ n ].nLagTime;
+                                // 上位８ビットが１ならコンボが途切れている（ギターBAD空打ちでコンボ数を再現するための措置）
+                                if (ghostLag > 255)
+                                {
+                                    nNowCombo = 0;
+                                }
+                                ghostLag = (ghostLag & 255) - 128;
+
+                                if( ghostLag <= 127 )
+                                {
+                                    E判定 eJudge = this.e指定時刻からChipのJUDGEを返す( ghostLag, 0 );
+
+                                    switch( eJudge )
+                                    {
+                                        case E判定.Perfect:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nPerfect数++;
+                                            break;
+                                        case E判定.Great:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nGreat数++;
+                                            break;
+                                        case E判定.Good:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nGood数++;
+                                            break;
+                                        case E判定.Poor:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nPoor数++;
+                                            break;
+                                        case E判定.Miss:
+                                        case E判定.Bad:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nMiss数++;
+                                            break;
+                                    }
+                                    switch( eJudge )
+                                    {
+                                        case E判定.Perfect:
+                                        case E判定.Great:
+                                        case E判定.Good:
+                                            nNowCombo++;
+                                            CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 );
+                                            break;
+                                        case E判定.Poor:
+                                        case E判定.Miss:
+                                        case E判定.Bad:
+                                            CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 );
+                                            nNowCombo = 0;
+                                            break;
+                                    }
+                                    //Trace.WriteLine( eJudge.ToString() + " " + nNowCombo.ToString() + "Combo Max:" + nMaxCombo.ToString() + "Combo" );
+                                }
+                            }
+                            //CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = nMaxCombo;
+                            int nTotal = CDTXMania.DTX.n可視チップ数.Drums;
+                            if( i == 1 ) nTotal = CDTXMania.DTX.n可視チップ数.Guitar;
+                            else if( i == 2 ) nTotal = CDTXMania.DTX.n可視チップ数.Bass;
+                            if( CDTXMania.ConfigIni.nSkillMode == 0 )
+                            {
+                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                            }
+                            else
+                            {
+                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                            }
+                        }
+
                         span = (TimeSpan)(DateTime.Now - timeBeginLoad);
                         Trace.TraceInformation("DTX読込所要時間:           {0}", span.ToString());
 
@@ -552,11 +714,11 @@ namespace DTXMania
                             {
                                 CDTXMania.DTX.PlanToAddMixerChannel();
                             }
-                            CDTXMania.DTX.t譜面仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigIni.eNumOfLanes.Drums);
                             CDTXMania.DTX.t旧仕様のドコドコチップを振り分ける(E楽器パート.DRUMS, CDTXMania.ConfigIni.bAssignToLBD.Drums);
                             CDTXMania.DTX.tドコドコ仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigIni.eDkdkType.Drums);
                             CDTXMania.DTX.tドラムのランダム化(E楽器パート.DRUMS, CDTXMania.ConfigIni.eRandom.Drums);
                             CDTXMania.DTX.tドラムの足ランダム化(E楽器パート.DRUMS, CDTXMania.ConfigIni.eRandomPedal.Drums);
+                            CDTXMania.DTX.t譜面仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigIni.eNumOfLanes.Drums);
                             CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.GUITAR, CDTXMania.ConfigIni.eRandom.Guitar);
                             CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.BASS, CDTXMania.ConfigIni.eRandom.Bass);
 
@@ -674,6 +836,7 @@ namespace DTXMania
 
         private readonly ST文字位置[] st小文字位置;
         private readonly ST文字位置[] st大文字位置;
+        private int nCurrentInst;
         private long nBGMの総再生時間ms;
         private long nBGM再生開始時刻;
         private CSound sd読み込み音;
@@ -708,8 +871,145 @@ namespace DTXMania
         }
         public int nIndex;
         public STATUSPANEL[] stパネルマップ;
-        //-----------------
 
+        private STDGBVALUE<List<STGhostLag>> stGhostLag;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct STGhostLag
+        {
+            public int index;
+            public int nJudgeTime;
+            public int nLagTime;
+            public STGhostLag( int index, int nJudgeTime, int nLagTime )
+            {
+                this.index = index;
+                this.nJudgeTime = nJudgeTime;
+                this.nLagTime = nLagTime;
+            }
+        }
+        protected E判定 e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime )
+		{
+			//if ( pChip != null )
+			{
+                int nDeltaTime = Math.Abs((int)nTime + nInputAdjustTime);
+				if ( nDeltaTime <= CDTXMania.nPerfect範囲ms )
+				{
+					return E判定.Perfect;
+				}
+				if ( nDeltaTime <= CDTXMania.nGreat範囲ms )
+				{
+					return E判定.Great;
+				}
+				if ( nDeltaTime <= CDTXMania.nGood範囲ms )
+				{
+					return E判定.Good;
+				}
+				if ( nDeltaTime <= CDTXMania.nPoor範囲ms )
+				{
+					return E判定.Poor;
+				}
+			}
+			return E判定.Miss;
+		}
+        //-----------------
+        private void ReadGhost( string filename, List<int> list ) // #35411 2015.08.19 chnmr0 add
+        {
+            //return; //2015.12.31 kairera0467 以下封印
+
+            if( File.Exists( filename ) )
+            {
+                using( FileStream fs = new FileStream( filename, FileMode.Open, FileAccess.Read ) )
+                {
+                    using( BinaryReader br = new BinaryReader( fs ) )
+                    {
+                        try
+                        {
+                            int cnt = br.ReadInt32();
+                            for( int i = 0; i < cnt; ++i )
+                            {
+                                short lag = br.ReadInt16();
+                                list.Add( lag );
+                            }
+                        }
+                        catch( EndOfStreamException )
+                        {
+                            Trace.TraceInformation("ゴーストデータは正しく読み込まれませんでした。");
+                            list.Clear();
+                        }
+                    }
+                }
+            }
+
+            if( File.Exists( filename + ".score" ) )
+            {
+                using( FileStream fs = new FileStream( filename + ".score", FileMode.Open, FileAccess.Read ) )
+                {
+                    using( StreamReader sr = new StreamReader( fs ) )
+                    {
+                        try
+                        {
+                            string strScoreDataFile = sr.ReadToEnd();
+
+                            strScoreDataFile = strScoreDataFile.Replace( Environment.NewLine, "\n" );
+                            string[] delimiter = { "\n" };
+                            string[] strSingleLine = strScoreDataFile.Split( delimiter, StringSplitOptions.RemoveEmptyEntries );
+
+                            for( int i = 0; i < strSingleLine.Length; i++ )
+                            {
+                                string[] strA = strSingleLine[ i ].Split( '=' );
+                                if (strA.Length != 2)
+                                    continue;
+
+                                switch( strA[ 0 ] )
+                                {
+                                    case "Score":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nスコア = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "PlaySkill":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].db演奏型スキル値 = Convert.ToDouble( strA[ 1 ] );
+                                        continue;
+                                    case "Skill":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbゲーム型スキル値 = Convert.ToDouble( strA[ 1 ] );
+                                        continue;
+                                    case "Perfect":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPerfect数・Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "Great":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGreat数・Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "Good":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGood数・Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "Poor":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPoor数・Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "Miss":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nMiss数・Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    case "MaxCombo":
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].n最大コンボ数 = Convert.ToInt32( strA[ 1 ] );
+                                        continue;
+                                    default:
+                                        continue;
+                                }
+                            }
+                        }
+                        catch( NullReferenceException )
+                        {
+                            Trace.TraceInformation("ゴーストデータの記録が正しく読み込まれませんでした。");
+                        }
+                        catch( EndOfStreamException )
+                        {
+                            Trace.TraceInformation("ゴーストデータの記録が正しく読み込まれませんでした。");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ] = null;
+            }
+        }
         private void t小文字表示(int x, int y, string str)
         {
             this.t小文字表示(x, y, str, false);
@@ -767,6 +1067,65 @@ namespace DTXMania
                     x += 90;
                 }
             }
+        }
+        private void t難易度パネルを描画する( string strラベル名, int nX, int nY )
+        {
+            string strRawScriptFile;
+
+            Rectangle rect = new Rectangle( 0, 0, 262, 50 );
+
+            //ファイルの存在チェック
+            if( File.Exists( CSkin.Path( @"Script\difficult.dtxs" ) ) )
+            {
+                //スクリプトを開く
+                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding( "Shift_JIS" ) );
+                strRawScriptFile = reader.ReadToEnd();
+
+                strRawScriptFile = strRawScriptFile.Replace( Environment.NewLine, "\n" );
+                string[] delimiter = { "\n" };
+                string[] strSingleLine = strRawScriptFile.Split( delimiter, StringSplitOptions.RemoveEmptyEntries );
+
+                for( int i = 0; i < strSingleLine.Length; i++ )
+                {
+                    if( strSingleLine[ i ].StartsWith( "//" ) )
+                        continue; //コメント行の場合は無視
+
+                    //まずSplit
+                    string[] arScriptLine = strSingleLine[ i ].Split( ',' );
+
+                    if( ( arScriptLine.Length >= 4 && arScriptLine.Length <= 5 ) == false )
+                        continue; //引数が4つか5つじゃなければ無視。
+
+                    if( arScriptLine[ 0 ] != "6" )
+                        continue; //使用するシーンが違うなら無視。
+
+                    if( arScriptLine.Length == 4 )
+                    {
+                        if( String.Compare( arScriptLine[ 1 ], strラベル名, true ) != 0 )
+                            continue; //ラベル名が違うなら無視。大文字小文字区別しない
+                    }
+                    else if( arScriptLine.Length == 5 )
+                    {
+                        if( arScriptLine[ 4 ] == "1" )
+                        {
+                            if( arScriptLine[ 1 ] != strラベル名 )
+                                continue; //ラベル名が違うなら無視。
+                        }
+                        else
+                        {
+                            if( String.Compare( arScriptLine[ 1 ], strラベル名, true ) != 0 )
+                                continue; //ラベル名が違うなら無視。大文字小文字区別しない
+                        }
+                    }
+                    rect.X = Convert.ToInt32( arScriptLine[ 2 ] );
+                    rect.Y = Convert.ToInt32( arScriptLine[ 3 ] );
+
+                    break;
+                }
+            }
+
+            if( this.tx難易度パネル != null )
+                this.tx難易度パネル.t2D描画( CDTXMania.app.Device, nX, nY, rect );
         }
         #endregion
     }

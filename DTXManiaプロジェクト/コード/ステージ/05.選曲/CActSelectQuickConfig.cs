@@ -57,7 +57,7 @@ namespace DTXMania
             List<int> automode = tConfigureAuto_DefaultSettings();
             if (nInst == (int)E楽器パート.DRUMS)
             {
-                l.Add(new CItemList("Auto Mode", CItemBase.Eパネル種別.通常, automode[nInst], "", "", new string[] { "All Auto", "Auto LP", "Auto BD", "2Pedal Auto", "XGLaneAuto", "Custom", "OFF" }));
+                l.Add(new CItemList("Auto Mode", CItemBase.Eパネル種別.通常, automode[nInst], "", "", new string[] { "All Auto", "Auto LP", "Auto BD", "2PedalAuto", "XGLaneAuto", "Custom", "OFF" }));
             }
             else
             {
@@ -117,8 +117,20 @@ namespace DTXMania
                 new string[] { "OFF", "HIDDEN", "SUDDEN", "HID/SUD", "STEALTH" }));
             //ドラム、ギター、ベースでのHIDDEN/SUDDENの設定の分離を考えなければならない。
             #endregion
+            #region [ 個別 Ghost ]
+            l.Add( new CItemList("AUTO Ghost", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eAutoGhost[ nInst ],
+                "AUTOプレーのゴーストを指定します。\n",
+                "Specify Play Ghost data.\n",
+                new string[] {"Perfect", "Last Play", "Hi Skill", "Hi Score", "Online" }
+                ));
+            l.Add(new CItemList("Target Ghost", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eTargetGhost[ nInst ],
+                "ターゲットゴーストを指定します。\n",
+                "Specify Target Ghost data.\n",
+                new string[] {"None", "Perfect", "Last Play", "Hi Skill", "Hi Score", "Online" }
+                ));
+            #endregion
             #region [ 共通 SET切り替え/More/Return ]
-            l.Add(new CSwitchItemList("Config Set", CItemBase.Eパネル種別.通常, nCurrentConfigSet, "", "", new string[] { "SET-1", "SET-2", "SET-3" }));
+            //l.Add(new CSwitchItemList("Config Set", CItemBase.Eパネル種別.通常, nCurrentConfigSet, "", "", new string[] { "SET-1", "SET-2", "SET-3" }));
             l.Add(new CSwitchItemList("More...", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" }));
             l.Add(new CSwitchItemList("Return", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "", "" }));
             #endregion
@@ -274,16 +286,15 @@ namespace DTXMania
                     MakeAutoPanel();
                 }
 
-                if (this.txパネル本体 != null)
-                {
-                    this.txパネル本体.t2D描画(CDTXMania.app.Device, 520, 100);
-                }
-                if (this.tx文字列パネル != null)
-                {
-                    int x = (nCurrentTarget == (int)E楽器パート.DRUMS) ? 520 : 100;
-                    this.tx文字列パネル.t2D描画(CDTXMania.app.Device, x + 50, 380);
-
-                }
+				if ( this.txパネル本体 != null )
+				{
+					this.txパネル本体.t2D描画( CDTXMania.app.Device, 486, 320 );
+				}
+				if ( this.tx文字列パネル != null )
+				{
+					int x = ( nCurrentTarget == (int) E楽器パート.DRUMS ) ? 486 : 100;
+					this.tx文字列パネル.t2D描画( CDTXMania.app.Device, x + 20, 330 );
+				}
             }
         }
 
@@ -420,10 +431,19 @@ namespace DTXMania
                     }
                     //CDTXMania.ConfigIni.nHidSud = (int) GetObj現在値((int) EOrder.SuddenHidden);
                     break;
-                case (int)EOrder.ConfSet:			// CONF-SET切り替え
-                    nCurrentConfigSet = (int)GetIndex((int)EOrder.ConfSet);
-                    //Initialize( lci[ nCurrentConfigSet ], true, QuickCfgTitle, pos );
+                case (int) EOrder.AutoGhost: // #35411 chnmr0 AUTOゴーストデータ
+                    EAutoGhostData gd = (EAutoGhostData)GetIndex((int)EOrder.AutoGhost);
+                    CDTXMania.ConfigIni.eAutoGhost[ nCurrentTarget ] = gd;
                     break;
+
+                case (int)EOrder.TargetGhost: // #35411 chnmr0 ターゲットゴーストデータ
+                    ETargetGhostData gtd = (ETargetGhostData)GetIndex((int)EOrder.TargetGhost);
+                    CDTXMania.ConfigIni.eTargetGhost[ nCurrentTarget ] = gtd;
+                    break;
+                //case (int)EOrder.ConfSet:			// CONF-SET切り替え
+                //    nCurrentConfigSet = (int)GetIndex((int)EOrder.ConfSet);
+                //    //Initialize( lci[ nCurrentConfigSet ], true, QuickCfgTitle, pos );
+                //    break;
 
                 case (int)EOrder.More:
                     SetAutoParameters();			// 簡易CONFIGメニュー脱出に伴い、簡易CONFIG内のAUTOの設定をConfigIniクラスに反映する
@@ -621,7 +641,9 @@ namespace DTXMania
             Risky,
             PlaySpeed,
             SuddenHidden,
-            ConfSet,
+            AutoGhost,
+            TargetGhost,
+            //ConfSet,
             More,
             Return, END,
             Default = 99

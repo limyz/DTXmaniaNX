@@ -374,23 +374,23 @@ namespace DTXMania
                 }
 
                 //Ver.K追加 演奏結果の記録
-                CScoreIni.C演奏記録 cScoreData;
-                cScoreData = this.st演奏記録[ (int)inst ];
-                using (FileStream fs = new FileStream(directory + "\\" + filename + ".score", FileMode.Create, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine( "Score=" + cScoreData.nスコア );
-                        sw.WriteLine( "PlaySkill=" + cScoreData.db演奏型スキル値 );
-                        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
-                        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数・Auto含まない );
-                        sw.WriteLine( "Great=" + cScoreData.nGreat数・Auto含まない );
-                        sw.WriteLine( "Good=" + cScoreData.nGood数・Auto含まない );
-                        sw.WriteLine( "Poor=" + cScoreData.nPoor数・Auto含まない );
-                        sw.WriteLine( "Miss=" + cScoreData.nMiss数・Auto含まない );
-                        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
-                    }
-                }
+                //CScoreIni.C演奏記録 cScoreData;
+                //cScoreData = this.st演奏記録[ (int)inst ];
+                //using (FileStream fs = new FileStream(directory + "\\" + filename + ".score", FileMode.Create, FileAccess.Write))
+                //{
+                //    using (StreamWriter sw = new StreamWriter(fs))
+                //    {
+                //        sw.WriteLine( "Score=" + cScoreData.nスコア );
+                //        sw.WriteLine( "PlaySkill=" + cScoreData.db演奏型スキル値 );
+                //        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
+                //        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数・Auto含まない );
+                //        sw.WriteLine( "Great=" + cScoreData.nGreat数・Auto含まない );
+                //        sw.WriteLine( "Good=" + cScoreData.nGood数・Auto含まない );
+                //        sw.WriteLine( "Poor=" + cScoreData.nPoor数・Auto含まない );
+                //        sw.WriteLine( "Miss=" + cScoreData.nMiss数・Auto含まない );
+                //        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
+                //    }
+                //}
             }
         }
 		public override void On非活性化()

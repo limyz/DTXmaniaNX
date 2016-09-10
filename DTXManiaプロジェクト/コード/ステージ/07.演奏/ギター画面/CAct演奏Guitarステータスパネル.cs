@@ -169,7 +169,7 @@ namespace DTXMania
             this.n本体X[0] = 0;
             this.n本体X[1] = 373;
             this.n本体X[2] = 665;
-            this.n本体Y = 270;
+            this.n本体Y = 254;
 
             if (!CDTXMania.DTX.bチップがある.Bass)
             {
@@ -193,7 +193,7 @@ namespace DTXMania
                     this.n本体X[1] = 0;
                 }
             }
-            else if (CDTXMania.ConfigIni.bGraph有効)
+            else if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
             {
                 if (!CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)
                 {
@@ -208,8 +208,8 @@ namespace DTXMania
             this.strPlayerName = new string[ 2 ];
             this.strTitleName = new string[ 2 ];
             
-            this.ft称号フォント = new Font( CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel );
             this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
+            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
@@ -225,6 +225,8 @@ namespace DTXMania
                 this.ft称号フォント.Dispose();
                 this.ft称号フォント = null;
             }
+            CDTXMania.t安全にDisposeする( ref this.prv表示用フォント );
+            CDTXMania.t安全にDisposeする( ref this.prv称号フォント );
             CDTXMania.tテクスチャの解放(ref this.txスキルパネル);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[0]);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[1]);
@@ -328,11 +330,16 @@ namespace DTXMania
                     #endregion
                     #region[ 名前とか ]
                     Bitmap bmpCardName = new Bitmap(1, 1);
-                    bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName[ i ], Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 1 ] > 11 ? clNameColorLower : clNameColor));
+                    bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName[ i ], Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
+                    Bitmap bmpTitleName = new Bitmap(1, 1);
+                    bmpTitleName = this.prv称号フォント.DrawPrivateFont( this.strTitleName[ i ], Color.White, Color.Transparent );
 
-                    graネームプレート用.DrawImage(bmpCardName, -2f, 26f);
-                    graネームプレート用.DrawString(this.strTitleName[ i ], this.ft称号フォント, Brushes.White, (float)8f, (float)12f);
+                    graネームプレート用.DrawImage( bmpCardName, -2f, 26f );
+                    graネームプレート用.DrawImage( bmpTitleName, 6f, 8f );
                     #endregion
+
+                    bmpCardName.Dispose();
+                    bmpTitleName.Dispose();
 
                     this.txネームプレート用文字[ i ] = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
                     image2.Dispose();
@@ -430,11 +437,11 @@ namespace DTXMania
                         this.t小文字表示( 167 + this.n本体X[ i ], 192 + this.n本体Y, string.Format( "{0,3:##0}%", dbMISS率 ) );
                         this.t小文字表示( 167 + this.n本体X[ i ], 222 + this.n本体Y, string.Format( "{0,3:##0}%", dbMAXCOMBO率 ) );
 
-                this.t大文字表示(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 ) );
-                this.t大文字表示(88 + this.n本体X[ i ], 363 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * ( CDTXMania.DTX.LEVEL[ i ] / 10.0 ) * 0.2 ) );
+                this.t大文字表示(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar ) );
+                this.t大文字表示(88 + this.n本体X[ i ], 363 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar * ( CDTXMania.DTX.LEVEL[ i ] / 10.0 ) * 0.2 ) );
 
                 if( this.tx難易度パネル != null )
-                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( 0, 60 * nIndex, 60, 60 ) );
+                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );
                 this.tレベル数字描画( ( bCLASSIC == true ? 26 : 18 ) + this.n本体X[ i ], 290 + this.n本体Y, str );
                     }
                 }
@@ -462,6 +469,7 @@ namespace DTXMania
         private CTexture txスキルパネル;
         private CTexture[] txパネル文字;
         private CPrivateFastFont prv表示用フォント;
+        private CPrivateFastFont prv称号フォント;
         private Font ft称号フォント;
         private string[] strPlayerName;
         private string[] strTitleName;
