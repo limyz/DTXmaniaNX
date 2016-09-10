@@ -678,7 +678,7 @@ namespace DTXMania
         public CAct演奏ステータスパネル共通 actStatusPanels;
         protected CAct演奏WailingBonus共通 actWailingBonus;
         public CAct演奏スクロール速度 act譜面スクロール速度;
-        public CAct演奏スキルメーター actGraph;
+        protected CAct演奏スキルメーター actGraph;
         protected bool bPAUSE;
         protected STDGBVALUE<bool> b演奏にMIDI入力を使った;
         protected STDGBVALUE<bool> b演奏にキーボードを使った;
