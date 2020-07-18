@@ -1210,6 +1210,7 @@ namespace DTXMania
                 this.bAUTOでないチップが１つでもバーを通過した = true;
             }
             bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
+            //bool bPChipIsAutoPlay = false; // Test code only Fisyher
             pChip.bIsAutoPlayed = bPChipIsAutoPlay;			// 2011.6.10 yyagi
             E判定 eJudgeResult = E判定.Auto;
             switch (pChip.e楽器パート)
