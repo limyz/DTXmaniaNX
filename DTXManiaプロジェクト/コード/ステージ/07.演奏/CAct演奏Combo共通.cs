@@ -203,7 +203,7 @@ namespace DTXMania
                 public int n現在表示中のCOMBO値;
                 public int n最高COMBO値;
                 public int n残像表示中のCOMBO値;
-                public long n前回の時刻・ジャンプ用;
+                public long n前回の時刻_ジャンプ用;
             }
         }
 
@@ -232,10 +232,10 @@ namespace DTXMania
 
         // メソッド
 
-        protected virtual void tコンボ表示・ドラム(int nCombo値, int nジャンプインデックス)
+        protected virtual void tコンボ表示_ドラム(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected virtual void tコンボ表示・ドラム(int nCombo値, int nジャンプインデックス, int nX中央位置px, int nY上辺位置px)
+        protected virtual void tコンボ表示_ドラム(int nCombo値, int nジャンプインデックス, int nX中央位置px, int nY上辺位置px)
         {
 
             #region [ 事前チェック。]
@@ -391,13 +391,13 @@ namespace DTXMania
             //-----------------
             #endregion
         }
-        protected virtual void tコンボ表示・ギター(int nCombo値, int nジャンプインデックス)
+        protected virtual void tコンボ表示_ギター(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected virtual void tコンボ表示・ベース(int nCombo値, int nジャンプインデックス)
+        protected virtual void tコンボ表示_ベース(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected void tコンボ表示・ギター(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
+        protected void tコンボ表示_ギター(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
         {
             #region [ 事前チェック。]
             //-----------------
@@ -500,7 +500,7 @@ namespace DTXMania
                 #endregion
             }
         }
-        protected void tコンボ表示・ベース(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
+        protected void tコンボ表示_ベース(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
         {
             #region [ 事前チェック。]
             //-----------------
@@ -622,7 +622,7 @@ namespace DTXMania
                 this.status[i].n現在表示中のCOMBO値 = 0;
                 this.status[i].n残像表示中のCOMBO値 = 0;
                 this.status[i].nジャンプインデックス値 = 99999;
-                this.status[i].n前回の時刻・ジャンプ用 = -1;
+                this.status[i].n前回の時刻_ジャンプ用 = -1;
                 this.status[i].nコンボが切れた時刻 = -1;
             }
             this.nUnitTime = (float)((60 / CDTXMania.DTX.BPM) / 4) * 10;
@@ -704,16 +704,16 @@ namespace DTXMania
                 //-----------------
                 if (this.status[i].nジャンプインデックス値 < 360)
                 {
-                    if ((this.status[i].n前回の時刻・ジャンプ用 == -1) || (CDTXMania.Timer.n現在時刻 < this.status[i].n前回の時刻・ジャンプ用))
-                        this.status[i].n前回の時刻・ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                    if ((this.status[i].n前回の時刻_ジャンプ用 == -1) || (CDTXMania.Timer.n現在時刻 < this.status[i].n前回の時刻_ジャンプ用))
+                        this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
 
                     const long INTERVAL = 2;
-                    while ((CDTXMania.Timer.n現在時刻 - this.status[i].n前回の時刻・ジャンプ用) >= INTERVAL)
+                    while ((CDTXMania.Timer.n現在時刻 - this.status[i].n前回の時刻_ジャンプ用) >= INTERVAL)
                     {
                         if (this.status[i].nジャンプインデックス値 < 2000)
                             this.status[i].nジャンプインデックス値 += 3;
 
-                        this.status[i].n前回の時刻・ジャンプ用 += INTERVAL;
+                        this.status[i].n前回の時刻_ジャンプ用 += INTERVAL;
                     }
                 }
             //-----------------
@@ -733,7 +733,7 @@ namespace DTXMania
                             // モード変更
                             this.status[i].e現在のモード = EMode.進行表示中;
                             this.status[i].nジャンプインデックス値 = 0;
-                            this.status[i].n前回の時刻・ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
                             goto Retry;
                         }
 
@@ -758,22 +758,22 @@ namespace DTXMania
                         if (e今回の状態遷移イベント == EEvent.数値更新)
                         {
                             this.status[i].nジャンプインデックス値 = 0;
-                            this.status[i].n前回の時刻・ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
                         }
 
                         this.status[i].n現在表示中のCOMBO値 = this.status[i].nCOMBO値;
                         switch (i)
                         {
                             case 0:
-                                this.tコンボ表示・ドラム(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tコンボ表示_ドラム(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
 
                             case 1:
-                                this.tコンボ表示・ギター(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tコンボ表示_ギター(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
 
                             case 2:
-                                this.tコンボ表示・ベース(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tコンボ表示_ベース(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
                         }
                         break;

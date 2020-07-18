@@ -236,7 +236,7 @@ namespace DTXMania
 			//this.actオプションパネル.On進行描画();
 			//---------------------
 			#endregion
-			#region [ フェードイン・アウト ]
+			#region [ フェードイン_アウト ]
 			//---------------------
 			switch( base.eフェーズID )
 			{
@@ -441,35 +441,35 @@ namespace DTXMania
 				switch( this.n現在のメニュー番号 )
 				{
 					case 0:
-						this.actList.t項目リストの設定・System();
+						this.actList.t項目リストの設定_System();
 						break;
 
 					//case 1:
-					//    this.actList.t項目リストの設定・KeyAssignDrums();
+					//    this.actList.t項目リストの設定_KeyAssignDrums();
 					//    break;
 
 					//case 2:
-					//    this.actList.t項目リストの設定・KeyAssignGuitar();
+					//    this.actList.t項目リストの設定_KeyAssignGuitar();
 					//    break;
 
 					//case 3:
-					//    this.actList.t項目リストの設定・KeyAssignBass();
+					//    this.actList.t項目リストの設定_KeyAssignBass();
 					//    break;
 
 					case 1:
-						this.actList.t項目リストの設定・Drums();
+						this.actList.t項目リストの設定_Drums();
 						break;
 
 					case 2:
-						this.actList.t項目リストの設定・Guitar();
+						this.actList.t項目リストの設定_Guitar();
 						break;
 
 					case 3:
-						this.actList.t項目リストの設定・Bass();
+						this.actList.t項目リストの設定_Bass();
 						break;
 
 					case 4:
-						this.actList.t項目リストの設定・Exit();
+						this.actList.t項目リストの設定_Exit();
 						break;
 				}
 				this.t説明文パネルに現在選択されているメニューの説明を描画する();
@@ -497,34 +497,34 @@ namespace DTXMania
 				switch( this.n現在のメニュー番号 )
 				{
 					case 0:
-						this.actList.t項目リストの設定・System();
+						this.actList.t項目リストの設定_System();
 						break;
 
 					//case 1:
-					//    this.actList.t項目リストの設定・KeyAssignDrums();
+					//    this.actList.t項目リストの設定_KeyAssignDrums();
 					//    break;
 
 					//case 2:
-					//    this.actList.t項目リストの設定・KeyAssignGuitar();
+					//    this.actList.t項目リストの設定_KeyAssignGuitar();
 					//    break;
 
 					//case 3:
-					//    this.actList.t項目リストの設定・KeyAssignBass();
+					//    this.actList.t項目リストの設定_KeyAssignBass();
 					//    break;
 					case 1:
-						this.actList.t項目リストの設定・Drums();
+						this.actList.t項目リストの設定_Drums();
 						break;
 
 					case 2:
-						this.actList.t項目リストの設定・Guitar();
+						this.actList.t項目リストの設定_Guitar();
 						break;
 
 					case 3:
-						this.actList.t項目リストの設定・Bass();
+						this.actList.t項目リストの設定_Bass();
 						break;
 
 					case 4:
-						this.actList.t項目リストの設定・Exit();
+						this.actList.t項目リストの設定_Exit();
 						break;
 				}
 				this.t説明文パネルに現在選択されているメニューの説明を描画する();

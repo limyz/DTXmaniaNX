@@ -238,7 +238,7 @@ namespace DTXMania
         {
             if (!base.b活性化してない && this.bIsActivePopupMenu)
             {
-                n本体X = 500;
+                n本体X = 460; //XG選曲画面の中心点はX=646 Y=358
                 n本体Y = 150;
 
 
@@ -352,31 +352,31 @@ namespace DTXMania
                 }
                 #endregion
                 #region [ ソートメニュータイトル描画 ]
-                int x = n本体X + 80, y = n本体Y + 4;
+                int x = n本体X + 96, y = n本体Y + 4;
                 font.t文字列描画(x, y, strMenuTitle, false, 1.0f);
                 #endregion
                 #region [ カーソル描画 ]
-                if (this.txCursor != null)
-                {
-                    int height = 32;
-                    int curX = n本体X + 20;
+				if ( this.txCursor != null )
+				{
+					int height = 32;
+                    int curX = n本体X + 12;
                     int curY = n本体Y + 6 + (height * (this.n現在の選択行 + 1));
-                    this.txCursor.t2D描画(CDTXMania.app.Device, curX, curY, new Rectangle(0, 0, 16, 32));
-                    curX += 0x10;
-                    Rectangle rectangle = new Rectangle(8, 0, 0x10, 0x20);
-                    for (int j = 0; j < 16; j++)
-                    {
-                        this.txCursor.t2D描画(CDTXMania.app.Device, curX, curY, rectangle);
-                        curX += 16;
-                    }
-                    this.txCursor.t2D描画(CDTXMania.app.Device, curX, curY, new Rectangle(0x10, 0, 16, 32));
-                }
+					this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, new Rectangle( 0, 0, 16, 32 ) );
+					curX += 0x10;
+					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
+					for ( int j = 0; j < 19; j++ )
+					{
+						this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, rectangle );
+						curX += 16;
+					}
+					this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, new Rectangle( 0x10, 0, 16, 32 ) );
+				}
                 #endregion
                 #region [ ソート候補文字列描画 ]
                 for (int i = 0; i < lciMenuItems.Count; i++)
                 {
                     bool bItemBold = (i == nItemSelecting && !bShowAllItems) ? true : false;
-                    font.t文字列描画(n本体X + 30, n本体Y + 40 + i * 32, lciMenuItems[i].str項目名, bItemBold, 1.0f);
+                    font.t文字列描画(n本体X + 18, n本体Y + 40 + i * 32, lciMenuItems[i].str項目名, bItemBold, 1.0f);
 
                     bool bValueBold = (bItemBold || (i == nItemSelecting && bIsSelectingIntItem)) ? true : false;
                     if (bItemBold || bShowAllItems)
@@ -401,7 +401,7 @@ namespace DTXMania
                                 s = lciMenuItems[i].obj現在値().ToString();
                                 break;
                         }
-                        font.t文字列描画(n本体X + 180, n本体Y + 40 + i * 32, s, bValueBold, 1.0f);
+                        font.t文字列描画(n本体X + 200, n本体Y + 40 + i * 32, s, bValueBold, 1.0f);
                     }
                 }
                 #endregion

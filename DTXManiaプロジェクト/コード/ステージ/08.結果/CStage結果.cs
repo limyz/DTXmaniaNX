@@ -109,12 +109,11 @@ namespace DTXMania
                         this.fMiss率[i] = bIsAutoPlay ? 0f : ((100f * part.nMiss数) / ((float)part.n全チップ数));
                         this.bオート[i] = bIsAutoPlay;	// #23596 10.11.16 add ikanick そのパートがオートなら1
                         //        10.11.17 change (int to bool) ikanick
-                        //04032016: Change first condition check to 1, XG mode is 1, not 0. KSM
-                        if (CDTXMania.ConfigIni.nSkillMode == 1)//was 0, which is incorrect
+                        if (CDTXMania.ConfigIni.nSkillMode == 0)
                         {
                             this.nランク値[i] = CScoreIni.tランク値を計算して返す(part);
                         }
-                        else if (CDTXMania.ConfigIni.nSkillMode == 0)
+                        else if (CDTXMania.ConfigIni.nSkillMode == 1)
                         {
                             this.nランク値[i] = CScoreIni.t旧ランク値を計算して返す(part);
                         }
@@ -161,7 +160,7 @@ namespace DTXMania
 					    }
 
                         // 新記録スキルチェック
-                        if ( this.st演奏記録[ i ].db演奏型スキル値 > ini.stセクション[ ( i * 2 ) + 1 ].db演奏型スキル値 )
+                        if ( ( this.st演奏記録[ i ].db演奏型スキル値 > ini.stセクション[ ( i * 2 ) + 1 ].db演奏型スキル値 ) && !this.bオート[ i ] )
                         {
                             this.b新記録スキル[ i ] = true;
                             ini.stセクション[ ( i * 2 ) + 1 ] = this.st演奏記録[ i ];
@@ -374,23 +373,23 @@ namespace DTXMania
                 }
 
                 //Ver.K追加 演奏結果の記録
-                CScoreIni.C演奏記録 cScoreData;
-                cScoreData = this.st演奏記録[ (int)inst ];
-                using (FileStream fs = new FileStream(directory + "\\" + filename + ".score", FileMode.Create, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine( "Score=" + cScoreData.nスコア );
-                        sw.WriteLine( "PlaySkill=" + cScoreData.db演奏型スキル値 );
-                        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
-                        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数・Auto含まない );
-                        sw.WriteLine( "Great=" + cScoreData.nGreat数・Auto含まない );
-                        sw.WriteLine( "Good=" + cScoreData.nGood数・Auto含まない );
-                        sw.WriteLine( "Poor=" + cScoreData.nPoor数・Auto含まない );
-                        sw.WriteLine( "Miss=" + cScoreData.nMiss数・Auto含まない );
-                        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
-                    }
-                }
+                //CScoreIni.C演奏記録 cScoreData;
+                //cScoreData = this.st演奏記録[ (int)inst ];
+                //using (FileStream fs = new FileStream(directory + "\\" + filename + ".score", FileMode.Create, FileAccess.Write))
+                //{
+                //    using (StreamWriter sw = new StreamWriter(fs))
+                //    {
+                //        sw.WriteLine( "Score=" + cScoreData.nスコア );
+                //        sw.WriteLine( "PlaySkill=" + cScoreData.db演奏型スキル値 );
+                //        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
+                //        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数_Auto含まない );
+                //        sw.WriteLine( "Great=" + cScoreData.nGreat数_Auto含まない );
+                //        sw.WriteLine( "Good=" + cScoreData.nGood数_Auto含まない );
+                //        sw.WriteLine( "Poor=" + cScoreData.nPoor数_Auto含まない );
+                //        sw.WriteLine( "Miss=" + cScoreData.nMiss数_Auto含まない );
+                //        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
+                //    }
+                //}
             }
         }
 		public override void On非活性化()
@@ -482,22 +481,7 @@ namespace DTXMania
 				if( base.b初めての進行描画 )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-
-                    //KSM 21052016: Added a check on game mode selected and play the sound clip for the correct game mode accordingly
-                    //May still not work correctly with Guitar/Bass mode...
-                    for (int i = 0; i < 3;++i )
-                    {
-                        if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-                        ((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
-                        ((i != 2) || CDTXMania.DTX.bチップがある.Bass))
-                        {
-                            // Added conditions for excellent/fullcombo audio playback - limyz / 210516
-                            if (fPerfect率[i] == 100.0 && bオート[i].Equals(false)) CDTXMania.Skin.soundExcellent.t再生する();
-                            else if (fPoor率[i] == 0.0 && fMiss率[i] == 0.0 && bオート[i].Equals(false)) CDTXMania.Skin.soundフルコンボ音.t再生する();
-                            else CDTXMania.Skin.soundステージクリア音.t再生する();
-                        }
-                    }
-
+                    CDTXMania.Skin.soundステージクリア音.t再生する();
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
 					base.b初めての進行描画 = false;
@@ -662,7 +646,7 @@ namespace DTXMania
 										if( ( nLane == 1 ) && ( ( rChip.nチャンネル番号 == 0x11 ) || ( ( rChip.nチャンネル番号 == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
 										{
 											CDTXMania.DTX.tWavの再生停止( this.n最後に再生したHHのWAV番号 );
-											this.n最後に再生したHHのWAV番号 = rChip.n整数値・内部番号;
+											this.n最後に再生したHHのWAV番号 = rChip.n整数値_内部番号;
 											this.n最後に再生したHHのチャンネル番号 = rChip.nチャンネル番号;
 										}
 										CDTXMania.DTX.tチップの再生( rChip, CDTXMania.Timer.nシステム時刻, nLane, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );

@@ -58,15 +58,19 @@ namespace DTXMania
                 this.tx黒幕.n透明度 = (this.mode == EFIFOモード.フェードイン) ? (((100 - this.counter.n現在の値) * 0xff) / 100) : ((this.counter.n現在の値 * 0xff) / 100);
                 this.tx黒幕.t2D描画(CDTXMania.app.Device, 0, 0);
                 string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
-                if (!File.Exists(path))
+                if( this.txジャケット == null ) // 2019.04.26 kairera0467
                 {
-                    //Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
-                    this.txジャケット = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\5_preimage default.png"));
+                    if (!File.Exists(path))
+                    {
+                        //Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
+                        this.txジャケット = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\5_preimage default.png"));
+                    }
+                    else
+                    {
+                        this.txジャケット = CDTXMania.tテクスチャの生成(path);
+                    }
                 }
-                else
-                {
-                    this.txジャケット = CDTXMania.tテクスチャの生成(path);
-                }
+
                 if( this.txジャケット != null )
                 {
                     this.txジャケット.vc拡大縮小倍率.X = 0.96f;

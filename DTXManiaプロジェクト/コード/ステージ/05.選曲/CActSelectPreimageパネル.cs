@@ -67,7 +67,7 @@ namespace DTXMania
 				this.n前回描画したフレーム番号 = -1;
 				this.b動画フレームを作成した = false;
 				this.pAVIBmp = IntPtr.Zero;
-				this.tプレビュー画像・動画の変更();
+				this.tプレビュー画像_動画の変更();
 				base.OnManagedリソースの作成();
 			}
 		}
@@ -106,7 +106,7 @@ namespace DTXMania
 					}
 					else if( ( this.ct遅延表示.n現在の値 >= 0 ) && this.b新しいプレビューファイルをまだ読み込んでいない )
 					{
-						this.tプレビュー画像・動画の変更();
+						this.tプレビュー画像_動画の変更();
 						CDTXMania.Timer.t更新();
 						this.ct遅延表示.n現在の経過時間ms = CDTXMania.Timer.n現在時刻;
 						this.b新しいプレビューファイルを読み込んだ = true;
@@ -131,15 +131,15 @@ namespace DTXMania
                 {
                     if( this.b新しいプレビューファイルをまだ読み込んでいない )
                     {
-						this.tプレビュー画像・動画の変更();
+						this.tプレビュー画像_動画の変更();
 						CDTXMania.Timer.t更新();
 						this.ct遅延表示.n現在の経過時間ms = CDTXMania.Timer.n現在時刻;
 						this.b新しいプレビューファイルを読み込んだ = true;
                     }
                 }
-				this.t描画処理・パネル本体();
-//				this.t描画処理・ジャンル文字列();
-				this.t描画処理・プレビュー画像();
+				this.t描画処理_パネル本体();
+//				this.t描画処理_ジャンル文字列();
+				this.t描画処理_プレビュー画像();
 			}
 			return 0;
 		}
@@ -211,7 +211,7 @@ namespace DTXMania
 			}
 			sf.UnlockRectangle();
 		}
-		private void tプレビュー画像・動画の変更()
+		private void tプレビュー画像_動画の変更()
 		{
 			if( this.avi != null )
 			{
@@ -371,7 +371,7 @@ namespace DTXMania
 			}
 			return true;
 		}
-		private void t描画処理・ジャンル文字列()
+		private void t描画処理_ジャンル文字列()
 		{
 			C曲リストノード c曲リストノード = CDTXMania.stage選曲.r現在選択中の曲;
 			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
@@ -441,7 +441,7 @@ namespace DTXMania
 				CDTXMania.act文字コンソール.tPrint( this.n本体X + 0x12, this.n本体Y - 30, C文字コンソール.Eフォント種別.赤細, str );
 			}
 		}
-		private void t描画処理・パネル本体()
+		private void t描画処理_パネル本体()
 		{
             int n基X = 0x12;
             int n基Y = 0x58;
@@ -469,7 +469,7 @@ namespace DTXMania
 				this.txパネル本体.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y );
 			}
 		}
-		private unsafe void t描画処理・プレビュー画像()
+		private unsafe void t描画処理_プレビュー画像()
 		{
 			if( !CDTXMania.stage選曲.bスクロール中 && ( ( ( this.ct遅延表示 != null ) && ( this.ct遅延表示.n現在の値 > 0 ) ) && !this.b新しいプレビューファイルをまだ読み込んでいない ) )
 			{

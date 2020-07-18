@@ -703,6 +703,7 @@ namespace DTXMania
 											for( int i = 0; i < 3; i++ )
 											{
 												int nSectionHiSkill = ( i * 2 ) + 1;
+                                                int nSectionHiScore = i * 2;
 												if(    scoreIni.stセクション[ nSectionHiSkill ].b演奏にMIDI入力を使用した
 													|| scoreIni.stセクション[ nSectionHiSkill ].b演奏にキーボードを使用した
 													|| scoreIni.stセクション[ nSectionHiSkill ].b演奏にジョイパッドを使用した
@@ -726,7 +727,7 @@ namespace DTXMania
 													node.arスコア[ lv ].譜面情報.最大ランク[ i ] = (int)CScoreIni.ERANK.UNKNOWN;
 												}
 												node.arスコア[ lv ].譜面情報.最大スキル[ i ] = scoreIni.stセクション[ nSectionHiSkill ].db演奏型スキル値;
-												node.arスコア[ lv ].譜面情報.フルコンボ[ i ] = scoreIni.stセクション[ nSectionHiSkill ].bフルコンボである;
+												node.arスコア[ lv ].譜面情報.フルコンボ[ i ] = scoreIni.stセクション[ nSectionHiSkill ].bフルコンボである | scoreIni.stセクション[ nSectionHiScore ].bフルコンボである;
 											}
 											node.arスコア[ lv ].譜面情報.演奏回数.Drums = scoreIni.stファイル.PlayCountDrums;
 											node.arスコア[ lv ].譜面情報.演奏回数.Guitar = scoreIni.stファイル.PlayCountGuitar;
@@ -840,8 +841,8 @@ namespace DTXMania
 							{
 								try
 								{
-									CDTX cdtx = new CDTX( c曲リストノード.arスコア[ i ].ファイル情報.ファイルの絶対パス, true );    //2013.06.04 kairera0467 ここの「ヘッダのみ読み込む」をfalseにすると、選曲画面のBPM表示が狂う場合があるので注意。
-                                    CDTX cdtx2 = new CDTX( c曲リストノード.arスコア[ i ].ファイル情報.ファイルの絶対パス, false );
+									CDTX cdtx = new CDTX( c曲リストノード.arスコア[ i ].ファイル情報.ファイルの絶対パス, false );    //2013.06.04 kairera0467 ここの「ヘッダのみ読み込む」をfalseにすると、選曲画面のBPM表示が狂う場合があるので注意。
+                                    //CDTX cdtx2 = new CDTX( c曲リストノード.arスコア[ i ].ファイル情報.ファイルの絶対パス, false );
 									c曲リストノード.arスコア[ i ].譜面情報.タイトル = cdtx.TITLE;
 									c曲リストノード.arスコア[ i ].譜面情報.アーティスト名 = cdtx.ARTIST;
 									c曲リストノード.arスコア[ i ].譜面情報.コメント = cdtx.COMMENT;
@@ -857,12 +858,12 @@ namespace DTXMania
                                     c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Guitar = cdtx.LEVELDEC.Guitar;
                                     c曲リストノード.arスコア[ i ].譜面情報.レベルDec.Bass = cdtx.LEVELDEC.Bass;
 									c曲リストノード.arスコア[ i ].譜面情報.レベルを非表示にする = cdtx.HIDDENLEVEL;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Drums = (cdtx2.bチップがある.LeftCymbal == false && cdtx2.bチップがある.LP == false && cdtx2.bチップがある.LBD == false && cdtx2.bチップがある.FT == false && cdtx2.bチップがある.Ride == false) ? true : false;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Guitar = !cdtx2.bチップがある.YPGuitar ? true : false;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Bass = !cdtx2.bチップがある.YPBass ? true : false;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Drums = cdtx2.bチップがある.Drums;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Guitar = cdtx2.bチップがある.Guitar;
-                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Bass = cdtx2.bチップがある.Bass;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Drums = (cdtx.bチップがある.LeftCymbal == false && cdtx.bチップがある.LP == false && cdtx.bチップがある.LBD == false && cdtx.bチップがある.FT == false && cdtx.bチップがある.Ride == false) ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Guitar = !cdtx.bチップがある.YPGuitar ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b完全にCLASSIC譜面である.Bass = !cdtx.bチップがある.YPBass ? true : false;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Drums = cdtx.bチップがある.Drums;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Guitar = cdtx.bチップがある.Guitar;
+                                    c曲リストノード.arスコア[ i ].譜面情報.b譜面がある.Bass = cdtx.bチップがある.Bass;
 									c曲リストノード.arスコア[ i ].譜面情報.曲種別 = cdtx.e種別;
 									c曲リストノード.arスコア[ i ].譜面情報.Bpm = cdtx.BPM;
 									c曲リストノード.arスコア[ i ].譜面情報.Duration = 0;	//  (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].n発声時刻ms;
@@ -1362,59 +1363,49 @@ namespace DTXMania
 			int nL12345 = (int)p[ 0 ];
 			if ( part != E楽器パート.UNKNOWN )
 			{
-				ノードリスト.Sort( delegate( C曲リストノード n1, C曲リストノード n2 )
+                Trace.WriteLine( "----------ソート開始------------" );
+				ノードリスト.Sort( delegate( C曲リストノード n1, C曲リストノード n2 ) //2016.03.12 kairera0467 少数第2位も考慮するようにするテスト。
 				{
 					#region [ 共通処理 ]
 					if ( n1 == n2 )
 					{
 						return 0;
 					}
-					int num = this.t比較0_共通( n1, n2 );
+					float num = this.t比較0_共通( n1, n2 ); //2016.06.17 kairera0467 ソートが正確に行われるよう修正。(int→float)
 					if ( num != 0 )
 					{
-						return order * num;
+						return (int)(order * num);
 					}
 					if ( ( n1.eノード種別 == C曲リストノード.Eノード種別.BOX ) && ( n2.eノード種別 == C曲リストノード.Eノード種別.BOX ) )
 					{
 						return order * n1.arスコア[ 0 ].ファイル情報.フォルダの絶対パス.CompareTo( n2.arスコア[ 0 ].ファイル情報.フォルダの絶対パス );
 					}
 					#endregion
-					int nSumPlayCountN1 = 0, nSumPlayCountN2 = 0;
+					float nSumPlayCountN1 = 0, nSumPlayCountN2 = 0;
 					if ( n1.arスコア[ nL12345 ] != null )
 					{
-						nSumPlayCountN1 = n1.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ];
-                        //KSM added: If less than 100, multiply by 10 to get 3 digits for proper comparison
-                        if (nSumPlayCountN1 < 100)
-                        {
-                            nSumPlayCountN1 *= 10;
-                        }
+						nSumPlayCountN1 = ( n1.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ] / 10.0f ) + ( n1.arスコア[ nL12345 ].譜面情報.レベルDec[ (int) part ] / 100.0f );
 					}
 					if ( n2.arスコア[ nL12345 ] != null )
 					{
-						nSumPlayCountN2 = n2.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ];
-                        //KSM added: Same, if less than 100, multiply by 10 to get 3 digits for proper comparison
-                        if (nSumPlayCountN2 < 100)
-                        {
-                            nSumPlayCountN2 *= 10;
-                        }
+						nSumPlayCountN2 = ( n2.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ] / 10.0f ) + ( n2.arスコア[ nL12345 ].譜面情報.レベルDec[ (int) part ] / 100.0f );
 					}
 					num = nSumPlayCountN2 - nSumPlayCountN1;
 					if ( num != 0 )
 					{
-						return order * num;
+						return (int)( (order * num) * 100 );
 					}
 					return order * n1.strタイトル.CompareTo( n2.strタイトル );
 				} );
-                //KSM: Comment redundant code.
-                //foreach (C曲リストノード c曲リストノード in ノードリスト)
-                //{
-                //    int nSumPlayCountN1 = 0;
-                //    if (c曲リストノード.arスコア[nL12345] != null)
-                //    {
-                //        nSumPlayCountN1 = c曲リストノード.arスコア[nL12345].譜面情報.レベル[(int)part];
-                //    }
-                //    // Debug.WriteLine( nSumPlayCountN1 + ":" + c曲リストノード.strタイトル );
-                //}
+				foreach ( C曲リストノード c曲リストノード in ノードリスト )
+				{
+					int nSumPlayCountN1 = 0;
+					if ( c曲リストノード.arスコア[ nL12345 ] != null )
+					{
+						nSumPlayCountN1 = c曲リストノード.arスコア[ nL12345 ].譜面情報.レベル[ (int) part ] + c曲リストノード.arスコア[ nL12345 ].譜面情報.レベルDec[ (int) part ];
+					}
+// Debug.WriteLine( nSumPlayCountN1 + ":" + c曲リストノード.strタイトル );
+				}
 			}
 		}
 		public void t曲リストのソート5_BestRank順( List<C曲リストノード> ノードリスト, E楽器パート part, int order, params object[] p )
@@ -1724,7 +1715,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 					#endregion
 					score.譜面情報.最大スキル[ n楽器番号 ] = ini.stセクション[ n ].db演奏型スキル値;
                     score.譜面情報.最大曲別スキル[ n楽器番号 ] = ini.stセクション[ n ].dbゲーム型スキル値;
-					score.譜面情報.フルコンボ[ n楽器番号 ] = ini.stセクション[ n ].bフルコンボである;
+					score.譜面情報.フルコンボ[ n楽器番号 ] = ini.stセクション[ n ].bフルコンボである | ini.stセクション[ n楽器番号 * 2 ].bフルコンボである;
 				}
 				score.譜面情報.演奏回数.Drums = ini.stファイル.PlayCountDrums;
 				score.譜面情報.演奏回数.Guitar = ini.stファイル.PlayCountGuitar;
@@ -1778,7 +1769,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 		}
 
 		/// <summary>
-		/// 検索を中断・スローダウンする
+		/// 検索を中断_スローダウンする
 		/// </summary>
 		private void SlowOrSuspendSearchTask()
 		{

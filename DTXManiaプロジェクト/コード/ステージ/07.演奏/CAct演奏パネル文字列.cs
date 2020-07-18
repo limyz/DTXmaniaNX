@@ -65,7 +65,6 @@ namespace DTXMania
                 this.n曲名Y = 630;
             }
 
-            this.ft表示用フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 26f, FontStyle.Regular, GraphicsUnit.Pixel);
 //          this.n文字列の長さdot = 0;
 //          this.txPanel = null;
             this.ct進行用 = new CCounter();
@@ -73,11 +72,6 @@ namespace DTXMania
         }
         public override void On非活性化()
         {
-            if (this.ft表示用フォント != null)
-            {
-                this.ft表示用フォント.Dispose();
-                this.ft表示用フォント = null;
-            }
 //          CDTXMania.tテクスチャの解放(ref this.txPanel);
             this.ct進行用 = null;
             base.On非活性化();
@@ -101,19 +95,19 @@ namespace DTXMania
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
-                    this.strSongName = CDTXMania.stage選曲.r確定された曲.strタイトル;//CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
-                bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                bmpSongName = this.pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
-                bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                bmpArtistName = this.pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
                 bmpArtistName.Dispose();
                 #endregion
@@ -130,6 +124,8 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放( ref this.txArtistName );
                 CDTXMania.tテクスチャの解放( ref this.txジャケットパネル );
                 CDTXMania.tテクスチャの解放( ref this.txジャケット画像 );
+                CDTXMania.t安全にDisposeする( ref this.pfタイトル );
+                CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
                 base.OnManagedリソースの解放();
             }
         }
@@ -214,7 +210,6 @@ namespace DTXMania
         #region [ private ]
         //-----------------
         private CCounter ct進行用;
-        private Font ft表示用フォント;
 //      private int n文字列の長さdot;
         private int n曲名X;
         private int n曲名Y;
@@ -233,8 +228,8 @@ namespace DTXMania
 
         //2014.04.05.kairera0467 GITADORAグラデーションの色。
         //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
-        private Color clGITADORAgradationTopColor = Color.FromArgb(0, 211, 199);
-        private Color clGITADORAgradationBottomColor = Color.FromArgb(250, 232, 45);
+        private Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
+        private Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
         //-----------------
         #endregion
     }

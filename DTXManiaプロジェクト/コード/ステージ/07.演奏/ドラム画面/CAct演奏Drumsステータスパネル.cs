@@ -15,107 +15,101 @@ namespace DTXMania
         public CAct演奏Drumsステータスパネル()
         {
             this.txパネル文字 = new CTexture[2];
-            ST文字位置[] st文字位置Array = new ST文字位置[12];//Change to 12
+            ST文字位置[] st文字位置Array = new ST文字位置[11];
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
             st文字位置.pt = new Point(0, 0);
             st文字位置Array[0] = st文字位置;
             ST文字位置 st文字位置2 = new ST文字位置();
             st文字位置2.ch = '1';
-            st文字位置2.pt = new Point(31, 0);//Change all to width of 31
+            st文字位置2.pt = new Point(28, 0);
             st文字位置Array[1] = st文字位置2;
             ST文字位置 st文字位置3 = new ST文字位置();
             st文字位置3.ch = '2';
-            st文字位置3.pt = new Point(62, 0);
+            st文字位置3.pt = new Point(56, 0);
             st文字位置Array[2] = st文字位置3;
             ST文字位置 st文字位置4 = new ST文字位置();
             st文字位置4.ch = '3';
-            st文字位置4.pt = new Point(93, 0);
+            st文字位置4.pt = new Point(84, 0);
             st文字位置Array[3] = st文字位置4;
             ST文字位置 st文字位置5 = new ST文字位置();
             st文字位置5.ch = '4';
-            st文字位置5.pt = new Point(124, 0);
+            st文字位置5.pt = new Point(112, 0);
             st文字位置Array[4] = st文字位置5;
             ST文字位置 st文字位置6 = new ST文字位置();
             st文字位置6.ch = '5';
-            st文字位置6.pt = new Point(155, 0);
+            st文字位置6.pt = new Point(140, 0);
             st文字位置Array[5] = st文字位置6;
             ST文字位置 st文字位置7 = new ST文字位置();
             st文字位置7.ch = '6';
-            st文字位置7.pt = new Point(186, 0);
+            st文字位置7.pt = new Point(168, 0);
             st文字位置Array[6] = st文字位置7;
             ST文字位置 st文字位置8 = new ST文字位置();
             st文字位置8.ch = '7';
-            st文字位置8.pt = new Point(217, 0);
+            st文字位置8.pt = new Point(196, 0);
             st文字位置Array[7] = st文字位置8;
             ST文字位置 st文字位置9 = new ST文字位置();
             st文字位置9.ch = '8';
-            st文字位置9.pt = new Point(248, 0);
+            st文字位置9.pt = new Point(224, 0);
             st文字位置Array[8] = st文字位置9;
             ST文字位置 st文字位置10 = new ST文字位置();
             st文字位置10.ch = '9';
-            st文字位置10.pt = new Point(279, 0);
+            st文字位置10.pt = new Point(252, 0);
             st文字位置Array[9] = st文字位置10;
             ST文字位置 st文字位置11 = new ST文字位置();
             st文字位置11.ch = '.';
-            st文字位置11.pt = new Point(319, 0);
+            st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
-            //Added by KSM 17/04/2016:
-            //Change width to all 31 01/05/2016
-            ST文字位置 st文字位置Percent = new ST文字位置();
-            st文字位置Percent.ch = '%';
-            st文字位置Percent.pt = new Point(341, 0);
-            st文字位置Array[11] = st文字位置Percent;
             this.st大文字位置 = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[12];
-            ST文字位置 st文字位置13 = new ST文字位置();//Change all width to multiples of 21
+            ST文字位置 st文字位置13 = new ST文字位置();
             st文字位置13.ch = '0';
             st文字位置13.pt = new Point(0, 0);
             st文字位置Array2[0] = st文字位置13;
             ST文字位置 st文字位置14 = new ST文字位置();
             st文字位置14.ch = '1';
-            st文字位置14.pt = new Point(21, 0);
+            st文字位置14.pt = new Point(20, 0);
             st文字位置Array2[1] = st文字位置14;
             ST文字位置 st文字位置15 = new ST文字位置();
             st文字位置15.ch = '2';
-            st文字位置15.pt = new Point(42, 0);
+            st文字位置15.pt = new Point(40, 0);
             st文字位置Array2[2] = st文字位置15;
             ST文字位置 st文字位置16 = new ST文字位置();
             st文字位置16.ch = '3';
-            st文字位置16.pt = new Point(63, 0);
+            st文字位置16.pt = new Point(60, 0);
             st文字位置Array2[3] = st文字位置16;
             ST文字位置 st文字位置17 = new ST文字位置();
             st文字位置17.ch = '4';
-            st文字位置17.pt = new Point(84, 0);
+            st文字位置17.pt = new Point(80, 0);
             st文字位置Array2[4] = st文字位置17;
             ST文字位置 st文字位置18 = new ST文字位置();
             st文字位置18.ch = '5';
-            st文字位置18.pt = new Point(105, 0);
+            st文字位置18.pt = new Point(100, 0);
             st文字位置Array2[5] = st文字位置18;
             ST文字位置 st文字位置19 = new ST文字位置();
             st文字位置19.ch = '6';
-            st文字位置19.pt = new Point(126, 0);
+            st文字位置19.pt = new Point(120, 0);
             st文字位置Array2[6] = st文字位置19;
             ST文字位置 st文字位置20 = new ST文字位置();
             st文字位置20.ch = '7';
-            st文字位置20.pt = new Point(147, 0);
+            st文字位置20.pt = new Point(140, 0);
             st文字位置Array2[7] = st文字位置20;
             ST文字位置 st文字位置21 = new ST文字位置();
             st文字位置21.ch = '8';
-            st文字位置21.pt = new Point(168, 0);
+            st文字位置21.pt = new Point(160, 0);
             st文字位置Array2[8] = st文字位置21;
             ST文字位置 st文字位置22 = new ST文字位置();
             st文字位置22.ch = '9';
-            st文字位置22.pt = new Point(189, 0);
+            st文字位置22.pt = new Point(180, 0);
             st文字位置Array2[9] = st文字位置22;
             ST文字位置 st文字位置23 = new ST文字位置();
-            st文字位置23.ch = '.';
-            st文字位置23.pt = new Point(210, 0);
+            st文字位置23.ch = '%';
+            st文字位置23.pt = new Point(200, 0);
             st文字位置Array2[10] = st文字位置23;
             ST文字位置 st文字位置24 = new ST文字位置();
-            st文字位置24.ch = '%';
-            st文字位置24.pt = new Point(231, 0);
+            st文字位置24.ch = '.';
+            st文字位置24.pt = new Point(210, 0);
             st文字位置Array2[11] = st文字位置24;
             this.st小文字位置 = st文字位置Array2;
 
@@ -182,31 +176,23 @@ namespace DTXMania
             
             #endregion
 
-            this.ft称号フォント = new Font(CDTXMania.ConfigIni.str曲名表示フォント, 16f, FontStyle.Regular, GraphicsUnit.Pixel);//Regular
-            this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);//Regular
+            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
+            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
             this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Difficulty.png"));
             this.tx難易度用数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_LevelNumber.png"));
-            //KSM Added 21/04/2016
-            this.txスキルMAX = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
+
             base.On活性化();
         }
         public override void On非活性化()
         {
-            if (this.ft称号フォント != null)
-            {
-                this.ft称号フォント.Dispose();
-                this.ft称号フォント = null;
-            }
             CDTXMania.tテクスチャの解放(ref this.txスキルパネル);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[0]);
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[1]);
             CDTXMania.tテクスチャの解放(ref this.tx難易度パネル);
             CDTXMania.tテクスチャの解放(ref this.tx難易度用数字);
-            //KSM Added 21/04/2016
-            CDTXMania.tテクスチャの解放(ref this.txスキルMAX);
             base.On非活性化();
         }
         public override void OnManagedリソースの作成()
@@ -216,7 +202,7 @@ namespace DTXMania
                 this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 0 ];
                 this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 0 ];
 
-                Bitmap image2 = new Bitmap( 200, 100 );
+                Bitmap image2 = new Bitmap( 257, 100 );
                 Graphics graネームプレート用 = Graphics.FromImage( image2 );
 
                 #region[ ネームカラー ]
@@ -300,14 +286,18 @@ namespace DTXMania
                 #endregion
                 #region[ 名前とか ]
                 Bitmap bmpCardName = new Bitmap(1, 1);
-bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
+                bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
+                Bitmap bmpTitleName = new Bitmap(1, 1);
+                bmpTitleName = this.prv称号フォント.DrawPrivateFont( this.strTitleName, Color.White, Color.Transparent );
 
                 graネームプレート用.DrawImage( bmpCardName, -2f, 26f );
-                graネームプレート用.DrawString( this.strTitleName, this.ft称号フォント, Brushes.White, (float)8f, (float)12f );
+                graネームプレート用.DrawImage( bmpTitleName, 6f, 8f );
                 #endregion
 
                 this.prv表示用フォント.Dispose();
+                this.prv称号フォント.Dispose();
                 bmpCardName.Dispose();
+                bmpTitleName.Dispose();
                 this.txネームプレート用文字 = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
                 image2.Dispose();
 
@@ -338,16 +328,8 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
 
                 int i = 0;
 
-                string str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10f);
+                string str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ]) / 10.0f + ( CDTXMania.DTX.LEVELDEC[ i ] != 0 ? CDTXMania.DTX.LEVELDEC[ i ] / 100.0f : 0 ) );
                 bool bCLASSIC = false;
-                if (CDTXMania.DTX.LEVEL[i] > 100)
-                {
-                    str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 100f);
-                }
-                else
-                {
-                    str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[i]) / 10.0f + (CDTXMania.DTX.LEVELDEC[i] != 0 ? CDTXMania.DTX.LEVELDEC[i] / 100.0f : 0));
-                }
 
                 if (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
                     (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
@@ -364,25 +346,25 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 this.txスキルパネル.t2D描画(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
                 this.txネームプレート用文字.t2D描画(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
 
-                this.t小文字表示(80 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Perfect));
-                this.t小文字表示(80 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Great));
-                this.t小文字表示(80 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Good));
-                this.t小文字表示(80 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Poor));
-                this.t小文字表示(80 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Miss));
+                this.t小文字表示(80 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Perfect));
+                this.t小文字表示(80 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Great));
+                this.t小文字表示(80 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Good));
+                this.t小文字表示(80 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Poor));
+                this.t小文字表示(80 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Miss));
                 this.t小文字表示(80 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[i]));
 
                 int n現在のノーツ数 =
-                    CDTXMania.stage演奏ドラム画面.nヒット数・Auto含む[i].Perfect +
-                    CDTXMania.stage演奏ドラム画面.nヒット数・Auto含む[i].Great +
-                    CDTXMania.stage演奏ドラム画面.nヒット数・Auto含む[i].Good +
-                    CDTXMania.stage演奏ドラム画面.nヒット数・Auto含む[i].Poor +
-                    CDTXMania.stage演奏ドラム画面.nヒット数・Auto含む[i].Miss;
+                    CDTXMania.stage演奏ドラム画面.nヒット数_Auto含む[i].Perfect +
+                    CDTXMania.stage演奏ドラム画面.nヒット数_Auto含む[i].Great +
+                    CDTXMania.stage演奏ドラム画面.nヒット数_Auto含む[i].Good +
+                    CDTXMania.stage演奏ドラム画面.nヒット数_Auto含む[i].Poor +
+                    CDTXMania.stage演奏ドラム画面.nヒット数_Auto含む[i].Miss;
 
-                dbPERFECT率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Perfect) / n現在のノーツ数);
-                dbGREAT率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Great / n現在のノーツ数));
-                dbGOOD率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Good / n現在のノーツ数));
-                dbPOOR率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Poor / n現在のノーツ数));
-                dbMISS率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数・Auto含まない[i].Miss / n現在のノーツ数));
+                dbPERFECT率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Perfect) / n現在のノーツ数);
+                dbGREAT率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Great / n現在のノーツ数));
+                dbGOOD率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Good / n現在のノーツ数));
+                dbPOOR率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Poor / n現在のノーツ数));
+                dbMISS率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.nヒット数_Auto含まない[i].Miss / n現在のノーツ数));
                 dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stage演奏ドラム画面.actCombo.n現在のコンボ数.最高値[i] / n現在のノーツ数));
 
                 if (double.IsNaN(dbPERFECT率))
@@ -405,25 +387,11 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                //KSM Added 21/04/2016: Shows the word MAX instead of 100.00% when 100.00%
-                if (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 >= 100.0 && this.txスキルMAX != null)
-                {
-                    this.txスキルMAX.t2D描画(CDTXMania.app.Device, 120 + this.n本体X[i], 277 + this.n本体Y);
-                }
-                else
-                {
-                    this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}%", CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡));
-                }
+                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums ) );
+                this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
 
-                // 060316 limyz added if/else conditions to detect if DLEVEL is <100 or >100 to determine its 0.05 decimal point value
-                if (CDTXMania.DTX.LEVEL[i] < 100) {
-                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
-                } else {
-                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 * (CDTXMania.DTX.LEVEL[i] / 100.0) * 0.2)));
-                }
-
-                if (this.tx難易度パネル != null)
-                    this.tx難易度パネル.t2D描画(CDTXMania.app.Device, 14 + this.n本体X[i], 266 + this.n本体Y, new Rectangle(0, 60 * nIndex, 60, 60));
+                if( this.tx難易度パネル != null )
+                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );
                 this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[i], 290 + this.n本体Y, str);
             }
             return 0;
@@ -449,14 +417,12 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
         private CTexture txスキルパネル;
         private CTexture[] txパネル文字;
         private CPrivateFastFont prv表示用フォント;
-        private Font ft称号フォント;
+        private CPrivateFastFont prv称号フォント;
         private string strPlayerName;
         private string strTitleName;
         private CTexture txネームプレート用文字;
         private CTexture tx難易度パネル;
         private CTexture tx難易度用数字;
-        //KSM Added 21/04/2016: New Texture for Skill Max
-        private CTexture txスキルMAX;
 
         private void t小文字表示(int x, int y, string str)
         {
@@ -466,7 +432,7 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 {
                     if (this.st小文字位置[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 28);
+                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 26);
                         if (this.txパネル文字[0] != null)
                         {
                             this.txパネル文字[0].t2D描画(CDTXMania.app.Device, x, y, rectangle);
@@ -485,16 +451,11 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                 {
                     if (this.st大文字位置[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(this.st大文字位置[i].pt.X, this.st大文字位置[i].pt.Y, 30, 42);
+                        Rectangle rectangle = new Rectangle(this.st大文字位置[i].pt.X, this.st大文字位置[i].pt.Y, 28, 42);
                         if (ch == '.')
                         {
                             rectangle.Width -= 18;
                         }
-                        //KSM added: '%' has width of 30 
-                        //else if(ch == '%')
-                        //{
-                        //    rectangle.Width += 2;
-                        //}
                         if (this.txパネル文字[1] != null)
                         {
                             this.txパネル文字[1].t2D描画(CDTXMania.app.Device, x, y, rectangle);
@@ -502,7 +463,7 @@ bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName,
                         break;
                     }
                 }
-                x += (ch == '.' ? 12 : 30);
+                x += (ch == '.' ? 12 : 29);
             }
         }
         private void tレベル数字描画(int x, int y, string str)

@@ -54,16 +54,16 @@ namespace FDK
 
 		/// <summary>
 		/// ABMsg 送るAppBarメッセージの識別子（以下のいずれか1つ）
-		/// ・ABM_ACTIVATE---AppBarがアクティブになった事をシステムに通知
-		/// ・ABM_GETAUTOHIDEBAR---スクリーンの特定の端に関連付けられているオートハイドAppBarのハンドルを返す
-		/// ・ABM_GETSTATE---タスクバーがオートハイドか常に最前面のどちらの常態にあるかを返す
-		/// ・ABM_GETTASKBARPOS---タスクバーの使用領域を返す
-		/// ・ABM_NEW---新しいAppBarを登録し、システムが通知に使用するメッセージIDを指定する
-		/// ・ABM_QUERYPOS---AppBarのためのサイズとスクリーン位置を要求する
-		/// ・ABM_REMOVE---AppBarの登録を削除する
-		/// ・ABM_SETAUTOHIDEBAR---スクリーンの端にオートハイドAppBarを登録または削除する
-		/// ・ABM_SETPOS---AppBarのサイズとスクリーン座標を設定する
-		/// ・ABM_WINDOWPOSCHANGED---AppBarの位置が変更されたことをシステムに通知する
+		/// _ABM_ACTIVATE---AppBarがアクティブになった事をシステムに通知
+		/// _ABM_GETAUTOHIDEBAR---スクリーンの特定の端に関連付けられているオートハイドAppBarのハンドルを返す
+		/// _ABM_GETSTATE---タスクバーがオートハイドか常に最前面のどちらの常態にあるかを返す
+		/// _ABM_GETTASKBARPOS---タスクバーの使用領域を返す
+		/// _ABM_NEW---新しいAppBarを登録し、システムが通知に使用するメッセージIDを指定する
+		/// _ABM_QUERYPOS---AppBarのためのサイズとスクリーン位置を要求する
+		/// _ABM_REMOVE---AppBarの登録を削除する
+		/// _ABM_SETAUTOHIDEBAR---スクリーンの端にオートハイドAppBarを登録または削除する
+		/// _ABM_SETPOS---AppBarのサイズとスクリーン座標を設定する
+		/// _ABM_WINDOWPOSCHANGED---AppBarの位置が変更されたことをシステムに通知する
 		/// pData： TAppBarData構造体（各フィールドはdwMessageに依存する）
 		/// </summary>
 		private enum ABMsg : int
@@ -87,10 +87,10 @@ namespace FDK
 		/// hWnd.....AppBarのハンドル
 		/// uCallbackMessage.....任意のメッセージID（hWndのAppBarにメッセージを通知する際（ABM_NEWメッセージを送る際）に使用）
 		/// uEdge.....スクリーンの端を指定するフラグ（ABM_GETAUTOHIDEBAR、ABM_QUERYPOS、ABM_SETAUTOHIDEBAR、ABM_SETPOSメッセージを送る際に使用し、以下のいずれか1つ）
-		/// ・ABE_BOTTOM---下サイド
-		/// ・ABE_LEFT--- 左サイド
-		/// ・ABE_RIGHT---右サイド
-		/// ・ABE_TOP---上サイド
+		/// _ABE_BOTTOM---下サイド
+		/// _ABE_LEFT--- 左サイド
+		/// _ABE_RIGHT---右サイド
+		/// _ABE_TOP---上サイド
 		/// rc.....AppBarやタスクバーのスクリーン座標での表示領域（ABM_GETTASKBARPOS、ABM_QUERYPOS、ABM_SETPOSメッセージを送る際に使用する）
 		/// lParam.....メッセージ依存のパラメータ（ABM_SETAUTOHIDEBARメッセージと共に使用される）
 		/// </summary>

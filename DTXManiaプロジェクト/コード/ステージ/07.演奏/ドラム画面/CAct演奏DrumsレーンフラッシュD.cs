@@ -69,7 +69,7 @@ namespace DTXMania
         @"Graphics\ScreenPlayDrums lane flush floortom.png",
         @"Graphics\ScreenPlayDrums lane flush cymbal.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal.png",
-        @"Graphics\ScreenPlayDrums lane flush hihat.png",
+        @"Graphics\ScreenPlayDrums lane flush ridecymbal.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal.png",
 
         @"Graphics\ScreenPlayDrums lane flush leftcymbal reverse.png",
@@ -81,7 +81,7 @@ namespace DTXMania
         @"Graphics\ScreenPlayDrums lane flush floortom reverse.png",
         @"Graphics\ScreenPlayDrums lane flush cymbal reverse.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal reverse.png",
-        @"Graphics\ScreenPlayDrums lane flush hihat reverse.png",
+        @"Graphics\ScreenPlayDrums lane flush ridecymbal reverse.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal reverse.png"
      };
 

@@ -123,9 +123,9 @@ namespace DTXMania
 
 		/// <summary>
 		/// <para>指定されたパスを絶対パスに変換して返す。</para>
-		/// <para>・path が相対パス指定であれば、str相対パス時のルートからの相対パスと見なす。</para>
-		/// <para>・path が空文字列 or null であれば空文字列を返す。</para>
-		/// <para>・path に問題があれば例外を発出する。</para>
+		/// <para>_path が相対パス指定であれば、str相対パス時のルートからの相対パスと見なす。</para>
+		/// <para>_path が空文字列 or null であれば空文字列を返す。</para>
+		/// <para>_path に問題があれば例外を発出する。</para>
 		/// </summary>
 		public string tパスを絶対パスに変換しパスとしての正当性を確認する( string path, string str相対パス時のルート )
 		{
