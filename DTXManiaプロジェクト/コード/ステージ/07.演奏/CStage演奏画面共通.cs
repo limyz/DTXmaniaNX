@@ -2924,7 +2924,7 @@ namespace DTXMania
             double ScrollSpeedBass = (this.act譜面スクロール速度.db現在の譜面スクロール速度.Bass + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
 
             CDTX dTX = CDTXMania.DTX;
-            CConfigIni configIni = CDTXMania.ConfigIni;
+            CConfigIni configIni = CDTXMania.ConfigIni;            
             for (int nCurrentTopChip = this.n現在のトップChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
                 CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
@@ -2966,7 +2966,18 @@ namespace DTXMania
                         }
                         if ((ePlayMode == E楽器パート.DRUMS) && (configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.b可視 && (this.txチップ != null))
                         {
-                            this.txチップ.t2D描画(CDTXMania.app.Device, 0x127, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((this.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 772, 0x22f, 2));
+                            int l_drumPanelWidth = 0x22f;
+                            int l_xOffset = 0;
+                            if(configIni.eNumOfLanes.Drums == Eタイプ.B)
+                            {
+                                l_drumPanelWidth = 0x207;
+                            }
+                            else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                            {
+                                l_drumPanelWidth = 447;
+                                l_xOffset = 72;
+                            }
+                            this.txチップ.t2D描画(CDTXMania.app.Device, 0x127 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((this.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 772, l_drumPanelWidth, 2));
                         }
                         break;
                     #endregion
@@ -4308,7 +4319,19 @@ namespace DTXMania
                 if (CDTXMania.ConfigIni.bJudgeLineDisp.Drums)
                 {
                     // #31602 2013.6.23 yyagi 描画遅延対策として、判定ラインの表示位置をオフセット調整できるようにする
-                    this.txヒットバー.t2D描画(CDTXMania.app.Device, 295, y, new Rectangle(0, 0, 0x22f, 6));
+                    // Check for numofLanes config to decide on the length to draw
+                    int l_drumPanelWidth = 0x22f;
+                    int l_xOffset = 0;
+                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B)
+                    {
+                        l_drumPanelWidth = 0x207;
+                    }
+                    else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                    {
+                        l_drumPanelWidth = 447;
+                        l_xOffset = 72;
+                    }
+                    this.txヒットバー.t2D描画(CDTXMania.app.Device, 295 + l_xOffset, y, new Rectangle(0, 0, l_drumPanelWidth, 6));
                 }
                 if (CDTXMania.ConfigIni.b演奏情報を表示する)
                     this.actLVFont.t文字列描画(295, (CDTXMania.ConfigIni.bReverse.Drums ? y - 20 : y + 8), CDTXMania.ConfigIni.nJudgeLine.Drums.ToString());

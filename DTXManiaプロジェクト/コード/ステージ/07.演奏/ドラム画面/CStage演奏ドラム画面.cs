@@ -3760,7 +3760,7 @@ namespace DTXMania
                         break;
 
                     case 0x19: //RD
-                        this.actPad.Start( 9, true, pChip.nチャンネル番号 );
+                        this.actPad.Start(9, true, pChip.nチャンネル番号);
                         break;
                     default:
                         break;
@@ -3887,7 +3887,19 @@ namespace DTXMania
 				}
                 if (((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.b可視) && (this.txチップ != null))
 				{
-                    this.txチップ.t2D描画(CDTXMania.app.Device, 295, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 769, 0x22f, 2));
+                    int l_drumPanelWidth = 0x22f;
+                    int l_xOffset = 0;
+                    if (configIni.eNumOfLanes.Drums == Eタイプ.B)
+                    {
+                        l_drumPanelWidth = 0x207;
+                    }
+                    else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                    {
+                        l_drumPanelWidth = 447;
+                        l_xOffset = 72;
+                    }
+
+                this.txチップ.t2D描画(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
 				}
               
             /*
