@@ -11,6 +11,7 @@ namespace DTXMania
 {
 	internal class CStageタイトル : CStage
 	{
+		public static readonly string VERSION_DISPLAY = "DTX:J:A:A:2020072800";
 		// コンストラクタ
 
 		public CStageタイトル()
@@ -184,7 +185,7 @@ namespace DTXMania
 				if( this.tx背景 != null )
 					this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
 
-                CDTXMania.act文字コンソール.tPrint( 2, 2, C文字コンソール.Eフォント種別.白, "DTX:J:A:A:2019060800" );
+                CDTXMania.act文字コンソール.tPrint( 2, 2, C文字コンソール.Eフォント種別.白, VERSION_DISPLAY);
 
 				if( this.txメニュー != null )
 				{
