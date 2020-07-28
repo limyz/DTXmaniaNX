@@ -109,25 +109,50 @@ namespace DTXMania
 
 			// 指定されたフォントスタイルが適用できない場合は、フォント内で定義されているスタイルから候補を選んで使用する
 			// 何もスタイルが使えないようなフォントなら、例外を出す。
-			if ( !_fontfamily.IsStyleAvailable( style ) )
+			if ( _fontfamily != null )
 			{
-				FontStyle[] FS = { FontStyle.Regular, FontStyle.Bold, FontStyle.Italic, FontStyle.Underline, FontStyle.Strikeout };
-				style = FontStyle.Regular | FontStyle.Bold | FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout;	// null非許容型なので、代わりに全盛をNGワードに設定
-				foreach ( FontStyle ff in FS )
+				if ( !_fontfamily.IsStyleAvailable( style ) )
 				{
-					if ( this._fontfamily.IsStyleAvailable( ff ) )
+					FontStyle[] FS = { FontStyle.Regular, FontStyle.Bold, FontStyle.Italic, FontStyle.Underline, FontStyle.Strikeout };
+					style = FontStyle.Regular | FontStyle.Bold | FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout;	// null非許容型なので、代わりに全盛をNGワードに設定
+					foreach ( FontStyle ff in FS )
 					{
-						style = ff;
-						Trace.TraceWarning( "フォント{0}へのスタイル指定を、{1}に変更しました。", Path.GetFileName( fontpath ), style.ToString() );
-						break;
+						if ( this._fontfamily.IsStyleAvailable( ff ) )
+						{
+							style = ff;
+							Trace.TraceWarning( "フォント{0}へのスタイル指定を、{1}に変更しました。", Path.GetFileName( fontpath ), style.ToString() );
+							break;
+						}
+					}
+					if ( style == ( FontStyle.Regular | FontStyle.Bold | FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout ) )
+					{
+						Trace.TraceWarning( "フォント{0}は適切なスタイル{1}を選択できませんでした。", Path.GetFileName( fontpath ), style.ToString() );
 					}
 				}
-				if ( style == ( FontStyle.Regular | FontStyle.Bold | FontStyle.Italic | FontStyle.Underline | FontStyle.Strikeout ) )
-				{
-					throw new ArgumentException( "フォント{0}は適切なスタイルを選択できず、使用できません。", Path.GetFileName( fontpath ) );
-				}
+				//this._font = new Font(this._fontfamily, pt, style);			//PrivateFontCollectionの先頭のフォントのFontオブジェクトを作成する
+				float emSize = pt * 96.0f / 72.0f;
+				this._font = new Font( this._fontfamily, emSize, style, GraphicsUnit.Pixel );	//PrivateFontCollectionの先頭のフォントのFontオブジェクトを作成する
+				//HighDPI対応のため、pxサイズで指定
 			}
-			this._font = new Font( this._fontfamily, pt, style );			//PrivateFontCollectionの先頭のフォントのFontオブジェクトを作成する
+			else
+			// フォントファイルが見つからなかった場合 (MS PGothicを代わりに指定する)
+			{
+				float emSize = pt * 96.0f / 72.0f;
+				this._font = new Font( "MS PGothic", emSize, style, GraphicsUnit.Pixel );	//MS PGothicのFontオブジェクトを作成する
+				FontFamily[] ffs = new System.Drawing.Text.InstalledFontCollection().Families;
+				int lcid = System.Globalization.CultureInfo.GetCultureInfo( "en-us" ).LCID;
+				foreach ( FontFamily ff in ffs )
+				{
+					// Trace.WriteLine( lcid ) );
+					if ( ff.GetName( lcid  ) == "MS PGothic" )
+					{
+						this._fontfamily = ff;
+						Trace.TraceInformation( "MS PGothicを代わりに指定しました。" );
+						return;
+					}
+				}
+				throw new FileNotFoundException( "プライベートフォントの追加に失敗し、MS PGothicでの代替処理にも失敗しました。({0})", Path.GetFileName( fontpath ) );
+			}
 		}
 
 		[Flags]
@@ -263,7 +288,7 @@ namespace DTXMania
 		{
 			if ( this._fontfamily == null || drawstr == null || drawstr == "" )
 			{
-				// nullを返すと、その後bmp→texture処理や、textureのサイズを見て・・の処理で全部例外が発生することになる。
+				// nullを返すと、その後bmp→texture処理や、textureのサイズを見て__の処理で全部例外が発生することになる。
 				// それは非常に面倒なので、最小限のbitmapを返してしまう。
 				// まずはこの仕様で進めますが、問題有れば(上位側からエラー検出が必要であれば)例外を出したりエラー状態であるプロパティを定義するなり検討します。
 Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返します。" );
@@ -275,13 +300,12 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 			bool bGradation = ( ( drawmode & DrawMode.Gradation ) == DrawMode.Gradation );
 
 			// 縁取りの縁のサイズは、とりあえずフォントの大きさの1/4とする
-			int nEdgePt = (bEdge)? _pt / 6 : 0;//Change to 6 from 4
+			int nEdgePt = (bEdge)? _pt / 4 : 0;
 
 			// 描画サイズを測定する
 			Size stringSize = System.Windows.Forms.TextRenderer.MeasureText( drawstr, this._font, new Size( int.MaxValue, int.MaxValue ),
                 System.Windows.Forms.TextFormatFlags.NoPrefix |
                 System.Windows.Forms.TextFormatFlags.NoPadding
-                | System.Windows.Forms.TextFormatFlags.SingleLine//KSM 04052016: Force to draw single line
                 );
 
 			//取得した描画サイズを基に、描画先のbitmapを作成する
@@ -365,7 +389,7 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 		{
 			if ( this._fontfamily == null || drawstr == null || drawstr == "" )
 			{
-				// nullを返すと、その後bmp→texture処理や、textureのサイズを見て・・の処理で全部例外が発生することになる。
+				// nullを返すと、その後bmp→texture処理や、textureのサイズを見て__の処理で全部例外が発生することになる。
 				// それは非常に面倒なので、最小限のbitmapを返してしまう。
 				// まずはこの仕様で進めますが、問題有れば(上位側からエラー検出が必要であれば)例外を出したりエラー状態であるプロパティを定義するなり検討します。
 Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返します。" );
@@ -377,14 +401,12 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 			bool bGradation = ( ( drawmode & DrawMode.Gradation ) == DrawMode.Gradation );
 
 			// 縁取りの縁のサイズは、とりあえずフォントの大きさの1/4とする
-            int nEdgePt = (bEdge) ? _pt / 6 : 0;//Change from 1/4 to 1/5
+			int nEdgePt = (bEdge)? _pt / 4 : 0;
 
 			// 描画サイズを測定する
 			Size stringSize = System.Windows.Forms.TextRenderer.MeasureText( drawstr, this._font, new Size( int.MaxValue, int.MaxValue ),
                 System.Windows.Forms.TextFormatFlags.NoPrefix |
                 System.Windows.Forms.TextFormatFlags.NoPadding
-                | System.Windows.Forms.TextFormatFlags.SingleLine//KSM 04052016: Force to draw single line
-                //System.Windows.Forms.TextFormatFlags.NoPadding
                 );
 
 			//取得した描画サイズを基に、描画先のbitmapを作成する
@@ -399,6 +421,7 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 
 			// レイアウト枠
 			Rectangle r = new Rectangle( 0, 0, stringSize.Width + nEdgePt * 2, stringSize.Height + nEdgePt * 2 );
+            r = new Rectangle( 0, 0, stringSize.Width + nEdgePt * 3, stringSize.Height + nEdgePt * 2 ); // 2016.06.12 kairera0467 改行防止
 
 			if( bEdge && bEdgeGradation )	// 縁取り有りの描画
 			{

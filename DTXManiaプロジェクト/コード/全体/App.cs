@@ -68,7 +68,7 @@ namespace DTXMania
 
         /// <summary>
         /// <para>Direct3Dデバイス（this.Device）に対するデフォルト設定を行う。</para>
-        /// <para>Direct3Dデバイスのリセット・変更・再作成時に呼び出される。</para>
+        /// <para>Direct3Dデバイスのリセット_変更_再作成時に呼び出される。</para>
         /// </summary>
         protected override void OnD3Dデバイスステータスの初期化()
         {
@@ -134,7 +134,7 @@ namespace DTXMania
                         {
                             var newSettings = this.currentD3DSettings.Clone();
 
-                            this.tDirect3Dデバイスを生成・変更・リセットする(		// 例外はキャッチしない。準正常じゃなくて異常なので。
+                            this.tDirect3Dデバイスを生成_変更_リセットする(		// 例外はキャッチしない。準正常じゃなくて異常なので。
                                 newSettings,
                                 this.LogicalDisplaySize,
                                 CApplicationForm.wsウィンドウスタイル,
@@ -234,8 +234,8 @@ namespace DTXMania
             終了,
             CLEAR,
             //STAGEFAILED,
-            GUI割込・演奏停止,
-            GUI割込・演奏開始,
+            GUI割込_演奏停止,
+            GUI割込_演奏開始,
         }
         public volatile bool bWM_CLOSEを受け取った = false;
 
@@ -248,7 +248,7 @@ namespace DTXMania
         private volatile Eアプリ状態[] e現在の状態 = new Eアプリ状態[3] { Eアプリ状態.待機, Eアプリ状態.待機, Eアプリ状態.待機 };
 
         /// <summary>
-        /// <para>進行・描画スレッドの処理が完了したら、このイベントを Set() する。</para>
+        /// <para>進行_描画スレッドの処理が完了したら、このイベントを Set() する。</para>
         /// </summary>
         private ManualResetEvent[] ev状態処理完了通知 = new ManualResetEvent[2] { 
 			new ManualResetEvent( false ),	// [THREAD_進行]

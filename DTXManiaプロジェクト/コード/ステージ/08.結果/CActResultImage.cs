@@ -67,17 +67,17 @@ namespace DTXMania
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
-                    this.strSongName = CDTXMania.stage選曲.r確定された曲.strタイトル;//CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
@@ -143,6 +143,9 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放(ref this.txSongLevel);
                 CDTXMania.tテクスチャの解放(ref this.txSongDifficulty);
                 CDTXMania.tテクスチャの解放(ref this.txDrumSpeed);
+
+                CDTXMania.t安全にDisposeする( ref this.pfタイトル );
+                CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
                 base.OnManagedリソースの解放();
             }
         }
@@ -215,8 +218,8 @@ namespace DTXMania
 
         //2014.04.05.kairera0467 GITADORAグラデーションの色。
         //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
-        private Color clGITADORAgradationTopColor = Color.FromArgb(0, 211, 199);
-        private Color clGITADORAgradationBottomColor = Color.FromArgb(250, 232, 45);
+        private Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
+        private Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
 
         private bool tプレビュー画像の指定があれば構築する()
         {

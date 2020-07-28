@@ -198,11 +198,11 @@ namespace DTXMania
 			public int nPerfect数;
 			public int nPoorになる範囲ms;
 			public int nPoor数;
-			public int nPerfect数・Auto含まない;
-			public int nGreat数・Auto含まない;
-			public int nGood数・Auto含まない;
-			public int nPoor数・Auto含まない;
-			public int nMiss数・Auto含まない;
+			public int nPerfect数_Auto含まない;
+			public int nGreat数_Auto含まない;
+			public int nGood数_Auto含まない;
+			public int nPoor数_Auto含まない;
+			public int nMiss数_Auto含まない;
 			public long nスコア;
 			public int n演奏速度分子;
 			public int n演奏速度分母;
@@ -314,7 +314,7 @@ namespace DTXMania
 			{
 				get
 				{
-					return (this.n全チップ数 - this.nPerfect数・Auto含まない - this.nGreat数・Auto含まない - this.nGood数・Auto含まない - this.nPoor数・Auto含まない - this.nMiss数・Auto含まない) == this.n全チップ数;
+					return (this.n全チップ数 - this.nPerfect数_Auto含まない - this.nGreat数_Auto含まない - this.nGood数_Auto含まない - this.nPoor数_Auto含まない - this.nMiss数_Auto含まない) == this.n全チップ数;
 				}
 			}
 #if false
@@ -1456,7 +1456,7 @@ namespace DTXMania
         }
         internal static double tゲーム型スキルを計算して返す(double dbLevel, int nLevelDec, int nTotal, int nPerfect, int nGreat, int nCombo, E楽器パート inst, STAUTOPLAY bAutoPlay)
         {
-            //こちらはプレイヤースキル・全曲スキルに加算される得点。いわゆる曲別スキル。
+            //こちらはプレイヤースキル_全曲スキルに加算される得点。いわゆる曲別スキル。
             double dbPERFECT率 = (100.0 * nPerfect / nTotal);
             double dbGREAT率 = (100.0 * nGreat / nTotal);
             double dbCOMBO率 = (100.0 * nCombo / nTotal);
@@ -1780,11 +1780,11 @@ namespace DTXMania
         internal static int t総合ランク値を計算して返す(C演奏記録 Drums, C演奏記録 Guitar, C演奏記録 Bass)
         {
             int nTotal = Drums.n全チップ数 + Guitar.n全チップ数 + Bass.n全チップ数;
-            int nPerfect = Drums.nPerfect数・Auto含まない + Guitar.nPerfect数・Auto含まない + Bass.nPerfect数・Auto含まない;	// #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
-            int nGreat = Drums.nGreat数・Auto含まない + Guitar.nGreat数・Auto含まない + Bass.nGreat数・Auto含まない;		//
-            int nGood = Drums.nGood数・Auto含まない + Guitar.nGood数・Auto含まない + Bass.nGood数・Auto含まない;		//
-            int nPoor = Drums.nPoor数・Auto含まない + Guitar.nPoor数・Auto含まない + Bass.nPoor数・Auto含まない;		//
-            int nMiss = Drums.nMiss数・Auto含まない + Guitar.nMiss数・Auto含まない + Bass.nMiss数・Auto含まない;		//
+            int nPerfect = Drums.nPerfect数_Auto含まない + Guitar.nPerfect数_Auto含まない + Bass.nPerfect数_Auto含まない;	// #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
+            int nGreat = Drums.nGreat数_Auto含まない + Guitar.nGreat数_Auto含まない + Bass.nGreat数_Auto含まない;		//
+            int nGood = Drums.nGood数_Auto含まない + Guitar.nGood数_Auto含まない + Bass.nGood数_Auto含まない;		//
+            int nPoor = Drums.nPoor数_Auto含まない + Guitar.nPoor数_Auto含まない + Bass.nPoor数_Auto含まない;		//
+            int nMiss = Drums.nMiss数_Auto含まない + Guitar.nMiss数_Auto含まない + Bass.nMiss数_Auto含まない;		//
             int nCombo = Drums.n最大コンボ数 + Guitar.n最大コンボ数 + Bass.n最大コンボ数;		//
             if (CDTXMania.ConfigIni.nSkillMode == 0)
             {

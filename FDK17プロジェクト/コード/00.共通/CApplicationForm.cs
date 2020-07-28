@@ -100,7 +100,7 @@ namespace FDK
 
 			// 各スレッドの実行開始。
 
-			#region [ 進行スレッドの生成・実行開始。]
+			#region [ 進行スレッドの生成_実行開始。]
 			//-----------------
 			var h進行スレッド = new Thread( this.t進行スレッド処理 );
 			h進行スレッド.Priority = ThreadPriority.Normal;
@@ -108,7 +108,7 @@ namespace FDK
 			while( !h進行スレッド.IsAlive ) ;		// 起動するまでスピンロック；MSDN にこうしろと書いてある。
 			//-----------------
 			#endregion
-			#region [ フロー制御スレッドの生成・実行開始。]
+			#region [ フロー制御スレッドの生成_実行開始。]
 			//-----------------
 			var hフロー制御スレッド = new Thread( this.tフロー制御スレッド処理 );
 			hフロー制御スレッド.Priority = ThreadPriority.Normal;
@@ -179,7 +179,7 @@ namespace FDK
 		/// <para>ウィンドウのクライアントサイズはバックバッファに等しく設定される。</para>
 		/// <para>処理に成功すれば true を返す。処理に失敗すれば、準正常系は false を返し、異常系は例外を発出する。</para>
 		/// </summary>
-		public bool tDirect3Dデバイスを生成・変更・リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル, bool bマウスカーソルの表示を制御する )
+		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル, bool bマウスカーソルの表示を制御する )
 		{
 			if( this.Window == null )
 				throw new InvalidOperationException( "ウィンドウが未生成のままDirect3D9デバイスを生成しようとしました。" );
@@ -328,7 +328,7 @@ namespace FDK
 			//-----------------
 			#endregion
 			
-			#region [ マウスカーソルの表示・非表示 ]
+			#region [ マウスカーソルの表示_非表示 ]
 			//-----------------
 			if( bマウスカーソルの表示を制御する )
 			{
@@ -384,17 +384,17 @@ namespace FDK
 
 			return true;
 		}
-		public bool tDirect3Dデバイスを生成・変更・リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル )
+		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル )
 		{
-			return this.tDirect3Dデバイスを生成・変更・リセットする( newD3DSettings, sz論理画面, wsウィンドウモード時のウィンドウスタイル, ws全画面モード時のウィンドウスタイル, true );
+			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, sz論理画面, wsウィンドウモード時のウィンドウスタイル, ws全画面モード時のウィンドウスタイル, true );
 		}
-		public bool tDirect3Dデバイスを生成・変更・リセットする( CD3DSettings newD3DSettings, Size sz論理画面 )
+		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面 )
 		{
-			return this.tDirect3Dデバイスを生成・変更・リセットする( newD3DSettings, sz論理画面, uint.MaxValue, uint.MaxValue, true );
+			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, sz論理画面, uint.MaxValue, uint.MaxValue, true );
 		}
-		public bool tDirect3Dデバイスを生成・変更・リセットする( CD3DSettings newD3DSettings )
+		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings )
 		{
-			return this.tDirect3Dデバイスを生成・変更・リセットする( newD3DSettings, Size.Empty, uint.MaxValue, uint.MaxValue, true );
+			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, Size.Empty, uint.MaxValue, uint.MaxValue, true );
 		}
 
 		public void tDirect3Dデバイスをクリアする()
@@ -528,7 +528,7 @@ namespace FDK
 
 							try
 							{
-								if( this.tDirect3Dデバイスを生成・変更・リセットする( newSettings, CTexture.sz論理画面 ) )
+								if( this.tDirect3Dデバイスを生成_変更_リセットする( newSettings, CTexture.sz論理画面 ) )
 								{
 									// 作成成功。
 

@@ -66,6 +66,7 @@ namespace FDK
 			protected set;
 		}
 		public Vector3 vc拡大縮小倍率;
+        public string filename;
 
         	// 画面が変わるたび以下のプロパティを設定し治すこと。
 
@@ -86,10 +87,12 @@ namespace FDK
 			this.szテクスチャサイズ = new Size( 0, 0 );
 			this._透明度 = 0xff;
 			this.texture = null;
+            this.bSlimDXTextureDispose完了済み = true;
 			this.cvPositionColoredVertexies = null;
 			this.b加算合成 = false;
 			this.fZ軸中心回転 = 0f;
 			this.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+            this.filename = ""; // DTXMania rev:693bf14b0d83efc770235c788117190d08a4e531
 //			this._txData = null;
 		}
 		
@@ -120,6 +123,7 @@ namespace FDK
 					stream.Seek( 0L, SeekOrigin.Begin );
 					int colorKey = unchecked( (int) 0xFF000000 );
 					this.texture = Texture.FromStream( device, stream, this.szテクスチャサイズ.Width, this.szテクスチャサイズ.Height, 1, Usage.None, format, poolvar, Filter.Point, Filter.None, colorKey );
+                    this.bSlimDXTextureDispose完了済み = false;
 				}
 			}
 			catch ( Exception e )
@@ -213,6 +217,7 @@ namespace FDK
 #endif
 						// 中で更にメモリ読み込みし直していて無駄なので、Streamを使うのは止めたいところ
 						this.texture = Texture.FromStream( device, stream, n幅, n高さ, 1, usage, format, pool, Filter.Point, Filter.None, 0 );
+                        this.bSlimDXTextureDispose完了済み = false;
 					}
 				}
 			}
@@ -247,6 +252,7 @@ namespace FDK
 				throw new FileNotFoundException( string.Format( "ファイルが存在しません。\n[{0}]", strファイル名 ) );
 
 			Byte[] _txData = File.ReadAllBytes( strファイル名 );
+            this.filename = Path.GetFileName( strファイル名 );
 			MakeTexture( device, _txData, format, b黒を透過する, pool );
 		}
 
@@ -272,6 +278,7 @@ namespace FDK
 				//				{
 				//Trace.TraceInformation( "CTexture() start: " );
 				this.texture = Texture.FromMemory( device, txData, this.sz画像サイズ.Width, this.sz画像サイズ.Height, 1, Usage.None, format, pool, Filter.Point, Filter.None, colorKey );
+                this.bSlimDXTextureDispose完了済み = false;
 				//Trace.TraceInformation( "CTexture() end:   " );
 				//				}
 			}
@@ -337,6 +344,7 @@ namespace FDK
 #endif
 					texture.UnlockRectangle( 0 );
 					bitmap.UnlockBits( srcBufData );
+                    this.bSlimDXTextureDispose完了済み = false;
 				}
 				//Trace.TraceInformation( "CTExture() End: " );
 			}
@@ -679,7 +687,7 @@ namespace FDK
 		/// </summary>
 		public void t3D左上基準描画( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
 		{
-			//とりあえず補正値などは無し。にしても使う機会少なさそうだなー・・・・
+			//とりあえず補正値などは無し。にしても使う機会少なさそうだなー____
 			if( this.texture == null )
 				return;
 
@@ -738,17 +746,40 @@ namespace FDK
 		//-----------------
 		public void Dispose()
 		{
-			if( !this.bDispose完了済み )
+			this.Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		protected void Dispose(bool disposeManagedObjects)
+		{
+			if (this.bDispose完了済み)
+				return;
+
+			if (disposeManagedObjects)
 			{
-				// テクスチャの破棄
-				if( this.texture != null )
+				// (A) Managed リソースの解放
+				// テクスチャの破棄 (SharpDXのテクスチャは、SharpDX側で管理されるため、FDKからはmanagedリソースと見做す)
+				if (this.texture != null)
 				{
 					this.texture.Dispose();
 					this.texture = null;
+					this.bSlimDXTextureDispose完了済み = true;
 				}
-
-				this.bDispose完了済み = true;
 			}
+
+			// (B) Unamanaged リソースの解放
+
+
+			this.bDispose完了済み = true;
+		}
+		~CTexture()
+		{
+			// ファイナライザの動作時にtextureのDisposeがされていない場合は、
+			// CTextureのDispose漏れと見做して警告をログ出力する
+			if (!this.bSlimDXTextureDispose完了済み)
+			{
+                Trace.TraceWarning("CTexture: Dispose漏れを検出しました。(Size=({0}, {1}), filename={2})", sz画像サイズ.Width, sz画像サイズ.Height, filename );
+			}
+			this.Dispose(false);
 		}
 		//-----------------
 		#endregion
@@ -759,7 +790,7 @@ namespace FDK
 		#region [ private ]
 		//-----------------
 		private int _透明度;
-		private bool bDispose完了済み;
+        private bool bDispose完了済み, bSlimDXTextureDispose完了済み;
 		private PositionColoredTexturedVertex[] cvPositionColoredVertexies;
         protected TransformedColoredTexturedVertex[] cvTransformedColoredVertexies = new TransformedColoredTexturedVertex[]
 		{

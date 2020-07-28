@@ -71,6 +71,7 @@ namespace DTXMania
 		// t選択曲が変更された()内で使う、直前の選曲の保持
 		// (前と同じ曲なら選択曲変更に掛かる再計算を省略して高速化するため)
 		private C曲リストノード song_last = null;
+
 		
 		// コンストラクタ
 
@@ -420,7 +421,8 @@ namespace DTXMania
 			}
 			this.On非活性化();
 			this.r現在選択中の曲 = null;
-			this.On活性化();
+            if( CDTXMania.r現在のステージ.eステージID == CStage.Eステージ.選曲 )
+			    this.On活性化();
 		}
 
 
@@ -536,10 +538,9 @@ namespace DTXMania
             this.tx上部パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_header song list.png"), false);
             this.tx下部パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_footer song list.png"), false);
 
-            prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 30, FontStyle.Regular );//30
-            prvFontSmall = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 15, FontStyle.Regular );//15
-            //KSM
-            prvFontSongSelect = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 17, FontStyle.Regular);
+            this.prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 30, FontStyle.Regular );
+            this.prvFontSmall = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 15, FontStyle.Regular );
+
 			for( int i = 0; i < 13; i++ )
 				this.t曲名バーの生成( i, this.stバー情報[ i ].strタイトル文字列, this.stバー情報[ i ].col文字色 );
 
@@ -621,10 +622,9 @@ namespace DTXMania
 			CDTXMania.t安全にDisposeする( ref this.tx選曲バー.Other );
             CDTXMania.t安全にDisposeする( ref this.tx上部パネル );
             CDTXMania.t安全にDisposeする( ref this.tx下部パネル );
-            prvFont.Dispose();
-            prvFontSmall.Dispose();
-            //KSM
-            prvFontSongSelect.Dispose();
+
+            CDTXMania.t安全にDisposeする( ref this.prvFont );
+            CDTXMania.t安全にDisposeする( ref this.prvFontSmall );
             if( this.tx選択中の曲名テクスチャ != null )
             {
                 this.tx選択中の曲名テクスチャ.Dispose();
@@ -918,8 +918,8 @@ namespace DTXMania
 				return 0;
 			}
 
-            int i選曲バーX座標 = 660; //選曲バーの座標用
-            int i選択曲バーX座標 = 660; //選択曲バーの座標用
+            int i選曲バーX座標 = 673; //選曲バーの座標用
+            int i選択曲バーX座標 = 665; //選択曲バーの座標用
 
 			if( !this.b登場アニメ全部完了 )
 			{
@@ -940,21 +940,21 @@ namespace DTXMania
 							#region [ バーテクスチャを描画。]
 							//-----------------
 							int width = (int) ( 425.0 / Math.Sin( Math.PI * 3 / 5 ) );
-							int x = 660 - ( (int) ( width * db回転率 ) );
-							int y = 269;//269
+							int x = 665 - ( (int) ( width * db回転率 ) );
+							int y = 269;
                             this.tバーの描画(i選択曲バーX座標, y - 30, this.stバー情報[nパネル番号].eバー種別, true);
 							//-----------------
 							#endregion
 							#region [ タイトル名テクスチャを描画。]
 							//-----------------
 							if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
-                                this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画(CDTXMania.app.Device, i選択曲バーX座標 + 23, y);
+                                this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画(CDTXMania.app.Device, i選択曲バーX座標 + 65, y);
 							//-----------------
 							#endregion
 							#region [ スキル値を描画。]
 							//-----------------
 							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
-                                this.tスキル値の描画( i選択曲バーX座標 -20, y + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
+                                this.tスキル値の描画( i選択曲バーX座標 + 25, y + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
 							//-----------------
 							#endregion
 						}
@@ -974,13 +974,13 @@ namespace DTXMania
 							#region [ タイトル名テクスチャを描画。]
 							//-----------------
 							if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
-								this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, x + 33, y + 8 );//KSM Change to +10 from +6
+								this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, x + 88, y + 6 );
 							//-----------------
 							#endregion
 							#region [ スキル値を描画。]
 							//-----------------
 							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
-								this.tスキル値の描画( x -10, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
+								this.tスキル値の描画( x + 34, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
 							//-----------------
 							#endregion
 						}
@@ -1014,7 +1014,7 @@ namespace DTXMania
 					{
 						// (A) スクロールが停止しているときの選択曲バーの描画。
 
-                        int y選曲 = 269;//269
+                        int y選曲 = 269;
 
 						#region [ バーテクスチャを描画。]
 						//-----------------
@@ -1024,7 +1024,7 @@ namespace DTXMania
 						#region [ タイトル名テクスチャを描画。]
 						//-----------------
 						if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
-                            this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, i選択曲バーX座標 + 23, y選曲 );
+                            this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, i選択曲バーX座標 + 65, y選曲 );
 
                         if (CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == C曲リストノード.Eノード種別.SCORE && this.actステータスパネル.txパネル本体 == null)
                         {
@@ -1054,7 +1054,7 @@ namespace DTXMania
 						#region [ スキル値を描画。]
 						//-----------------
 						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
-                            this.tスキル値の描画(i選択曲バーX座標 - 20, y選曲 + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
+                            this.tスキル値の描画(i選択曲バーX座標 + 25, y選曲 + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
 						//-----------------
 						#endregion
 					}
@@ -1070,13 +1070,13 @@ namespace DTXMania
 						#region [ タイトル名テクスチャを描画。]
 						//-----------------
 						if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
-							this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, x + 33, y + 8 );//KSM Change to +10 from +6
+							this.stバー情報[ nパネル番号 ].txタイトル名.t2D描画( CDTXMania.app.Device, x + 0x58, y + 6 );
 						//-----------------
 						#endregion
 						#region [ スキル値を描画。]
 						//-----------------
 						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
-							this.tスキル値の描画( x - 10, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
+							this.tスキル値の描画( x + 34, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
 						//-----------------
 						#endregion
 					}
@@ -1249,15 +1249,10 @@ namespace DTXMania
         private CPrivateFastFont prvFont;
         private CPrivateFastFont prvFontSmall;
 
-        //KSM New private member
-        private CPrivateFastFont prvFontSongSelect;
-
         //2014.04.05.kairera0467 GITADORAグラデーションの色。
         //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
-        public Color clGITADORAgradationTopColor = Color.FromArgb(0, 211, 199);
-        public Color clGITADORAgradationBottomColor = Color.FromArgb(250, 232, 45);
-        //public Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);//Original Value
-        //public Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
+        public Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
+        public Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
 
 		private int nCurrentPosition = 0;
 		private int nNumOfItems = 0;
@@ -1329,20 +1324,20 @@ namespace DTXMania
 			// 百の位の描画。
 
 			if( n百の位 > 0 )
-				this.tスキル値の描画・１桁描画( x, y, n百の位, color );
+				this.tスキル値の描画_１桁描画( x, y, n百の位, color );
 
 
 			// 十の位の描画。
 
 			if( n百の位 != 0 || n十の位 != 0 )
-				this.tスキル値の描画・１桁描画( x + 14, y, n十の位, color );
+				this.tスキル値の描画_１桁描画( x + 14, y, n十の位, color );
 
 
 			// 一の位の描画。
 
-			this.tスキル値の描画・１桁描画( x + 0x1c, y, n一の位, color );
+			this.tスキル値の描画_１桁描画( x + 0x1c, y, n一の位, color );
 		}
-		private void tスキル値の描画・１桁描画( int x, int y, int n数値, int color )
+		private void tスキル値の描画_１桁描画( int x, int y, int n数値, int color )
 		{
 			int dx = ( n数値 % 5 ) * 9;
 			int dy = ( n数値 / 5 ) * 12;
@@ -1466,8 +1461,6 @@ namespace DTXMania
 				//-----------------
 				#endregion
 
-                
-
 				int n最大幅px = 0x310;
 				int height = 0x25;
 				int width = (int) ( ( sz曲名.Width + 2 ) * 0.5f );
@@ -1476,35 +1469,21 @@ namespace DTXMania
 
 				float f拡大率X = ( width <= n最大幅px ) ? 0.5f : ( ( (float) n最大幅px / (float) width ) * 0.5f );	// 長い文字列は横方向に圧縮。
 
-                //Bitmap bmpSongName = new Bitmap( width * 2, height * 2, PixelFormat.Format32bppArgb );
-                //Bitmap bmpSongName = new Bitmap(1,1);
-                using(Bitmap bmpSongName = this.prvFontSongSelect.DrawPrivateFont(str曲名, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true))
-                {
-                    this.stバー情報[nバー番号].txタイトル名 = CDTXMania.tテクスチャの生成(bmpSongName, false);
-                    bmpSongName.Dispose();
-                }
-                //bmpSongName = this.prvFontSongSelect.DrawPrivateFont(str曲名, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
-                
-                //KSM Commented off to test
-                //using( var bmp = new Bitmap( width * 2, height * 2, PixelFormat.Format32bppArgb ) )		// 2倍（面積4倍）のBitmapを確保。（0.5倍で表示する前提。）
-                //using( var g = Graphics.FromImage( bmp ) )
-                //{
-                //    g.TextRenderingHint = TextRenderingHint.AntiAlias;
-                //    float y = ( ( ( float ) bmp.Height ) / 2f ) - ( ( CDTXMania.ConfigIni.n選曲リストフォントのサイズdot * 2f ) / 2f );
-                //    //KSM Testing
-                //    //g.DrawString( str曲名, this.ft曲リスト用フォント, new SolidBrush( this.color文字影 ), (float) 2f, (float) ( y + 2f ) );
-                //    g.DrawString(str曲名, this.ft曲リスト用フォント, new SolidBrush(Color.Yellow), (float)0f, (float)(y));
-                //    //g.DrawString( str曲名, this.ft曲リスト用フォント, new SolidBrush( color ), 0f, y );
-                //    g.DrawString(str曲名, this.ft曲リスト用フォント, new SolidBrush(Color.Black), 0f, y);
-                //    CDTXMania.t安全にDisposeする( ref this.stバー情報[ nバー番号 ].txタイトル名 );
+				using( var bmp = new Bitmap( width * 2, height * 2, PixelFormat.Format32bppArgb ) )		// 2倍（面積4倍）のBitmapを確保。（0.5倍で表示する前提。）
+				using( var g = Graphics.FromImage( bmp ) )
+				{
+					g.TextRenderingHint = TextRenderingHint.AntiAlias;
+					float y = ( ( ( float ) bmp.Height ) / 2f ) - ( ( CDTXMania.ConfigIni.n選曲リストフォントのサイズdot * 2f ) / 2f );
+					g.DrawString( str曲名, this.ft曲リスト用フォント, new SolidBrush( this.color文字影 ), (float) 2f, (float) ( y + 2f ) );
+					g.DrawString( str曲名, this.ft曲リスト用フォント, new SolidBrush( color ), 0f, y );
 
-                //    this.stバー情報[ nバー番号 ].txタイトル名 = new CTexture( CDTXMania.app.Device, bmp, CDTXMania.TextureFormat );
-                //    this.stバー情報[ nバー番号 ].txタイトル名.vc拡大縮小倍率 = new Vector3( f拡大率X, 0.5f, 1f );
+					CDTXMania.t安全にDisposeする( ref this.stバー情報[ nバー番号 ].txタイトル名 );
 
-                //    g.Dispose();
-                //}
+					this.stバー情報[ nバー番号 ].txタイトル名 = new CTexture( CDTXMania.app.Device, bmp, CDTXMania.TextureFormat );
+					this.stバー情報[ nバー番号 ].txタイトル名.vc拡大縮小倍率 = new Vector3( f拡大率X, 0.5f, 1f );
 
-
+                    g.Dispose();
+				}
 			}
 			catch( CTextureCreateFailedException )
 			{
@@ -1520,11 +1499,11 @@ namespace DTXMania
 
             for (int p = s.Length - 1; p >= 0; p--)
             {
-                tアイテム数の描画・１桁描画(x, y, s[p]);
+                tアイテム数の描画_１桁描画(x, y, s[p]);
                 x -= 16;
             }
         }
-        private void tアイテム数の描画・１桁描画(int x, int y, char s数値)
+        private void tアイテム数の描画_１桁描画(int x, int y, char s数値)
         {
             int dx, dy;
             if (s数値 == '/')

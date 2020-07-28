@@ -61,16 +61,16 @@ namespace DTXMania
             }
         }
 
-		protected override void tコンボ表示・ギター( int nCombo値, int nジャンプインデックス )
+		protected override void tコンボ表示_ギター( int nCombo値, int nジャンプインデックス )
 		{
 		}
-		protected override void tコンボ表示・ドラム( int nCombo値, int nジャンプインデックス )
+		protected override void tコンボ表示_ドラム( int nCombo値, int nジャンプインデックス )
 		{
             bool guitar = CDTXMania.DTX.bチップがある.Guitar;
             bool bass = CDTXMania.DTX.bチップがある.Bass;
 
             if( CDTXMania.ConfigIni.bドラムコンボ文字の表示 )
-                base.tコンボ表示・ドラム(nCombo値, nジャンプインデックス, 1245, 60);
+                base.tコンボ表示_ドラム(nCombo値, nジャンプインデックス, 1245, 60);
 
             this.n火薬カウント = (nCombo値 / 100);
 
@@ -107,7 +107,7 @@ namespace DTXMania
             }
 
 		}
-		protected override void tコンボ表示・ベース( int nCombo値, int nジャンプインデックス )
+		protected override void tコンボ表示_ベース( int nCombo値, int nジャンプインデックス )
 		{
 		}
 	}

@@ -27,7 +27,7 @@ namespace DTXMania
                 this.n本体Y = 12;
             }
 
-            if (CDTXMania.ConfigIni.bGraph有効)
+            if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
             {
                 if (!CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)
                 {

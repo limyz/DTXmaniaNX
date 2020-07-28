@@ -66,6 +66,7 @@ namespace DTXMania
                 }																				//
                 this.bメニューにフォーカス中 = true;											// ここまでOPTIONと共通
                 this.eItemPanelモード = EItemPanelモード.パッド一覧;
+                this.ct表示待機 = new CCounter( 0, 350, 1, CDTXMania.Timer );
             }
             finally
             {
@@ -90,6 +91,7 @@ namespace DTXMania
                 {
                     this.ctキー反復用[i] = null;
                 }
+                this.ct表示待機 = null;
                 base.On非活性化();
             }
             catch (UnauthorizedAccessException e)
@@ -117,7 +119,7 @@ namespace DTXMania
                 this.txMenuパネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_menu panel.png" ) );
                 this.txItemBar = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_item bar.png" ) );
 
-				prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 18 );
+				this.prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 18 );
 				string[] strMenuItem = { "System", "Drums", "Guitar", "Bass", "Exit" };
 				txMenuItemLeft = new CTexture[ strMenuItem.Length, 2 ];
 				for ( int i = 0; i < strMenuItem.Length; i++ )
@@ -176,6 +178,7 @@ namespace DTXMania
                 this.actFIFO.tフェードイン開始();
                 base.b初めての進行描画 = false;
             }
+            this.ct表示待機.t進行();
 
             // 描画
 
@@ -252,7 +255,7 @@ namespace DTXMania
             #endregion
             #region [ 説明文パネル ]
             //---------------------
-            if( this.tx説明文パネル != null && !this.bメニューにフォーカス中 && this.actList.n目標のスクロールカウンタ == 0 )
+            if( this.tx説明文パネル != null && !this.bメニューにフォーカス中 && this.actList.n目標のスクロールカウンタ == 0 && this.ct表示待機.b終了値に達した )
                 this.tx説明文パネル.t2D描画(CDTXMania.app.Device, 620, 270);
             //---------------------
             #endregion
@@ -273,7 +276,7 @@ namespace DTXMania
             //this.actオプションパネル.On進行描画();
             //---------------------
             #endregion
-            #region [ フェードイン・アウト ]
+            #region [ フェードイン_アウト ]
             //---------------------
             switch (base.eフェーズID)
             {
@@ -298,7 +301,6 @@ namespace DTXMania
             #region [ Enumerating Songs ]
             // CActEnumSongs側で表示する
             #endregion
-
             // キー入力
 
             if ((base.eフェーズID != CStage.Eフェーズ.共通_通常状態)
@@ -468,6 +470,7 @@ namespace DTXMania
         private CTexture txItemBar;
         private CPrivateFastFont prvFont;
         private CTexture[,] txMenuItemLeft;
+        public CCounter ct表示待機;
 
         private void tカーソルを下へ移動する()
         {
@@ -487,39 +490,40 @@ namespace DTXMania
             else
             {
                 CDTXMania.Skin.soundカーソル移動音.t再生する();
+                this.ct表示待機.n現在の値 = 0;
                 this.n現在のメニュー番号 = (this.n現在のメニュー番号 + 1) % 5;
                 switch (this.n現在のメニュー番号)
                 {
                     case 0:
-                        this.actList.t項目リストの設定・System();
+                        this.actList.t項目リストの設定_System();
                         break;
 
                     //case 1:
-                    //    this.actList.t項目リストの設定・KeyAssignDrums();
+                    //    this.actList.t項目リストの設定_KeyAssignDrums();
                     //    break;
 
                     //case 2:
-                    //    this.actList.t項目リストの設定・KeyAssignGuitar();
+                    //    this.actList.t項目リストの設定_KeyAssignGuitar();
                     //    break;
 
                     //case 3:
-                    //    this.actList.t項目リストの設定・KeyAssignBass();
+                    //    this.actList.t項目リストの設定_KeyAssignBass();
                     //    break;
 
                     case 1:
-                        this.actList.t項目リストの設定・Drums();
+                        this.actList.t項目リストの設定_Drums();
                         break;
 
                     case 2:
-                        this.actList.t項目リストの設定・Guitar();
+                        this.actList.t項目リストの設定_Guitar();
                         break;
 
                     case 3:
-                        this.actList.t項目リストの設定・Bass();
+                        this.actList.t項目リストの設定_Bass();
                         break;
 
                     case 4:
-                        this.actList.t項目リストの設定・Exit();
+                        this.actList.t項目リストの設定_Exit();
                         break;
                 }
                 this.t説明文パネルに現在選択されているメニューの説明を描画する();
@@ -543,38 +547,39 @@ namespace DTXMania
             else
             {
                 CDTXMania.Skin.soundカーソル移動音.t再生する();
+                this.ct表示待機.n現在の値 = 0;
                 this.n現在のメニュー番号 = ((this.n現在のメニュー番号 - 1) + 5) % 5;
                 switch (this.n現在のメニュー番号)
                 {
                     case 0:
-                        this.actList.t項目リストの設定・System();
+                        this.actList.t項目リストの設定_System();
                         break;
 
                     //case 1:
-                    //    this.actList.t項目リストの設定・KeyAssignDrums();
+                    //    this.actList.t項目リストの設定_KeyAssignDrums();
                     //    break;
 
                     //case 2:
-                    //    this.actList.t項目リストの設定・KeyAssignGuitar();
+                    //    this.actList.t項目リストの設定_KeyAssignGuitar();
                     //    break;
 
                     //case 3:
-                    //    this.actList.t項目リストの設定・KeyAssignBass();
+                    //    this.actList.t項目リストの設定_KeyAssignBass();
                     //    break;
                     case 1:
-                        this.actList.t項目リストの設定・Drums();
+                        this.actList.t項目リストの設定_Drums();
                         break;
 
                     case 2:
-                        this.actList.t項目リストの設定・Guitar();
+                        this.actList.t項目リストの設定_Guitar();
                         break;
 
                     case 3:
-                        this.actList.t項目リストの設定・Bass();
+                        this.actList.t項目リストの設定_Bass();
                         break;
 
                     case 4:
-                        this.actList.t項目リストの設定・Exit();
+                        this.actList.t項目リストの設定_Exit();
                         break;
                 }
                 this.t説明文パネルに現在選択されているメニューの説明を描画する();
@@ -671,7 +676,7 @@ namespace DTXMania
 		{
 			try
 			{
-				var image = new Bitmap( (int)(400), (int)(192) );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する・・・のは中止。処理速度向上のため。）
+				var image = new Bitmap( (int)(400), (int)(192) );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する___のは中止。処理速度向上のため。）
 				var graphics = Graphics.FromImage( image );
 				graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 

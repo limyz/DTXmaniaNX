@@ -43,7 +43,7 @@ namespace DTXMania
 								CDTXMania.DTX.tチップの再生( r歓声Chip, CSound管理.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( E楽器パート.UNKNOWN ) );
 								return;
 							}
-							CDTXMania.Skin.sound歓声音.n位置・次に鳴るサウンド = ( part == E楽器パート.GUITAR ) ? -50 : 50;
+							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == E楽器パート.GUITAR ) ? -50 : 50;
 							CDTXMania.Skin.sound歓声音.t再生する();
 							return;
 						}

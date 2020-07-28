@@ -481,7 +481,7 @@ namespace DTXMania
 		public bool bSTAGEFAILED有効;
 		public STDGBVALUE<bool> bSudden;
 		public bool bTight;
-		public bool bGraph有効;     // #24074 2011.01.23 add ikanick
+		public STDGBVALUE<bool> bGraph有効;     // #24074 2011.01.23 add ikanick
 		public bool bWave再生位置自動調整機能有効;
 		public bool bシンバルフリー;
 		public bool bストイックモード;
@@ -494,7 +494,6 @@ namespace DTXMania
         public bool bAutoAddGage; //2012.9.18
 		public bool b歓声を発声する;
 		public bool b垂直帰線待ちを行う;
-        public bool b縮小文字のアンチエイリアスを有効にする;
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
         public bool bDirectShowMode;
@@ -604,8 +603,10 @@ namespace DTXMania
         #endregion
 
         public STDGBVALUE<int> nInputAdjustTimeMs;	// #23580 2011.1.3 yyagi タイミングアジャスト機能
+        public int nCommonBGMAdjustMs;              // #36372 2016.06.19 kairera0467 全曲共通のBGMオフセット
         public STDGBVALUE<int> nJudgeLinePosOffset; // #31602 2013.6.23 yyagi 判定ライン表示位置のオフセット
         public int nShowLagType;					// #25370 2011.6.5 yyagi ズレ時間表示機能
+        public int nShowLagTypeColor;
         public STDGBVALUE<int> nHidSud;
         public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
 		public int nPoliphonicSounds;				// #28228 2012.5.1 yyagi レーン毎の最大同時発音数
@@ -978,7 +979,7 @@ namespace DTXMania
             //CDTXMania.ConfigIni.bAutoPlay.Guitar = ts;
 
             int looptime = (int)Eレーン.GtW - (int)Eレーン.GtR + 1;		// #29390 2013.1.25 yyagi ギターのAutoLane/AutoPick対応に伴い、FLIPもこれに対応
-            for (int i = 0; i < looptime; i++)							// こんなに離れたところを独立して修正しなければならない設計ではいけませんね・・・
+            for (int i = 0; i < looptime; i++)							// こんなに離れたところを独立して修正しなければならない設計ではいけませんね___
             {
                 bool b = CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.BsR];
                 CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.BsR] = CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.GtR];
@@ -1014,7 +1015,6 @@ namespace DTXMania
 			this.str曲データ検索パス = @".\";
 			this.b全画面モード = false;
 			this.b垂直帰線待ちを行う = true;
-            this.b縮小文字のアンチエイリアスを有効にする = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
             this.bDirectShowMode = false;
@@ -1136,6 +1136,7 @@ namespace DTXMania
             this.判定文字表示位置 = new STDGBVALUE<Eタイプ>();
 			this.n譜面スクロール速度 = new STDGBVALUE<int>();
 			this.nInputAdjustTimeMs = new STDGBVALUE<int>();	// #23580 2011.1.3 yyagi
+            this.nCommonBGMAdjustMs = 0; // #36372 2016.06.19 kairera0467
             this.nJudgeLinePosOffset = new STDGBVALUE<int>(); // #31602 2013.6.23 yyagi
 			for ( int i = 0; i < 3; i++ )
 			{
@@ -1212,6 +1213,7 @@ namespace DTXMania
             this.bHAZARD = false;
 			this.nRisky = 0;							// #23539 2011.7.26 yyagi RISKYモード
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
+            this.nShowLagTypeColor = 0;
 			this.bIsAutoResultCapture = false;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
             #region [ XGオプション ]
@@ -1463,10 +1465,6 @@ namespace DTXMania
 			sw.WriteLine( "Drums={0}", this.bDrums有効 ? 1 : 0 );
 			sw.WriteLine();
             #endregion
-            sw.WriteLine( "; 縮小文字のアンチエイリアスの有無 (0:OFF, 1:ON)");
-            sw.WriteLine( "; 文字やネームプレートなどの縮小している画像に対してアンチエイリアス処理をします。" );
-            sw.WriteLine( "Antialias={0}", this.b縮小文字のアンチエイリアスを有効にする ? 1 : 0);
-            sw.WriteLine();
             sw.WriteLine( "; DirectShowでのワイドクリップ再生 (0:OFF, 1:ON)");
             sw.WriteLine( "DirectShowMode={0}", this.bDirectShowMode ? 1 : 0);
             sw.WriteLine();
@@ -1643,6 +1641,9 @@ namespace DTXMania
 			sw.WriteLine( "; Whether displaying the lag times from the just timing or not." );	//
 			sw.WriteLine( "ShowLagTime={0}", this.nShowLagType );							//
 			sw.WriteLine();
+			sw.WriteLine( "; 判定ズレ時間表示の色(0:Slow青、Fast赤, 1:Slow赤、Fast青)" );
+			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );							//
+			sw.WriteLine();
 			sw.WriteLine( "; リザルト画像自動保存機能(0:OFF, 1:ON)" );						// #25399 2011.6.9 yyagi
 			sw.WriteLine( "; Set ON if you'd like to save result screen image automatically");	//
 			sw.WriteLine( "; when you get hiscore/hiskill.");								//
@@ -1656,11 +1657,16 @@ namespace DTXMania
             sw.WriteLine("TimeStretch={0}", this.bTimeStretch ? 1 : 0);					//
             sw.WriteLine();
             #region [ Adjust ]
-            sw.WriteLine("; 判定タイミング調整(ドラム, ギター, ベース)(-99～0)[ms]");		// #23580 2011.1.3 yyagi
+            sw.WriteLine("; 判定タイミング調整(ドラム, ギター, ベース)(-99～99)[ms]");		// #23580 2011.1.3 yyagi
             sw.WriteLine("; Revision value to adjust judgement timing for the drums, guitar and bass.");	//
             sw.WriteLine("InputAdjustTimeDrums={0}", this.nInputAdjustTimeMs.Drums);		//
             sw.WriteLine("InputAdjustTimeGuitar={0}", this.nInputAdjustTimeMs.Guitar);		//
             sw.WriteLine("InputAdjustTimeBass={0}", this.nInputAdjustTimeMs.Bass);			//
+            sw.WriteLine();
+
+            sw.WriteLine( "; BGMタイミング調整(-99～99)[ms]" );                              // #36372 2016.06.19 kairera0467
+            sw.WriteLine( "; Revision value to adjust judgement timing for BGM." );	        //
+            sw.WriteLine( "BGMAdjustTime={0}", this.nCommonBGMAdjustMs );		            //
             sw.WriteLine();
 
             sw.WriteLine("; 判定ラインの表示位置調整(ドラム, ギター, ベース)(-99～99)[px]"); // #31602 2013.6.23 yyagi 判定ラインの表示位置オフセット
@@ -1704,7 +1710,7 @@ namespace DTXMania
 			sw.WriteLine( "; 曲データ検索に関するLog出力(0:OFF, 1:ON)" );
 			sw.WriteLine( "TraceSongSearch={0}", this.bLog曲検索ログ出力 ? 1 : 0 );
 			sw.WriteLine();
-			sw.WriteLine( "; 画像やサウンドの作成・解放に関するLog出力(0:OFF, 1:ON)" );
+			sw.WriteLine( "; 画像やサウンドの作成_解放に関するLog出力(0:OFF, 1:ON)" );
 			sw.WriteLine( "TraceCreatedDisposed={0}", this.bLog作成解放ログ出力 ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; DTX読み込み詳細に関するLog出力(0:OFF, 1:ON)" );
@@ -1769,7 +1775,9 @@ namespace DTXMania
 
             // #24074 2011.01.23 add ikanick
 			sw.WriteLine( "; グラフ表示(0:OFF, 1:ON)" );
-			sw.WriteLine( "SkillMater={0}", this.bGraph有効 ? 1 : 0 );
+			sw.WriteLine( "DrumGraph={0}", this.bGraph有効.Drums ? 1 : 0 );
+			sw.WriteLine( "GuitarGraph={0}", this.bGraph有効.Guitar ? 1 : 0 );
+			sw.WriteLine( "BassGraph={0}", this.bGraph有効.Bass ? 1 : 0 );
 			sw.WriteLine();
 
             sw.WriteLine( "; ドラムコンボの表示(0:OFF, 1:ON)" );									// #29500 2012.9.11 kairera0467
@@ -2443,10 +2451,6 @@ namespace DTXMania
                                             {
                                                 this.bDrums有効 = C変換.bONorOFF(str4[0]);
                                             }
-                                            else if (str3.Equals("Antialias"))
-                                            {
-                                                this.b縮小文字のアンチエイリアスを有効にする = C変換.bONorOFF(str4[0]);
-                                            }
                                             else if (str3.Equals("DirectShowMode"))
                                             {
                                                 this.bDirectShowMode = C変換.bONorOFF(str4[0]);
@@ -2637,6 +2641,10 @@ namespace DTXMania
                                             {
                                                 this.nShowLagType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, this.nShowLagType);
                                             }
+                                            else if (str3.Equals("ShowLagTimeColor"))				// #25370 2011.6.3 yyagi
+                                            {
+                                                this.nShowLagTypeColor = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 1, this.nShowLagTypeColor );
+                                            }
                                             else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
                                             {
                                                 this.bTimeStretch = C変換.bONorOFF(str4[0]);
@@ -2657,6 +2665,10 @@ namespace DTXMania
                                             else if ( str3.Equals( "InputAdjustTimeBass" ) )		// #23580 2011.1.3 yyagi
                                             {
                                                 this.nInputAdjustTimeMs.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, -99, 99, this.nInputAdjustTimeMs.Bass);
+                                            }
+                                            else if ( str3.Equals( "BGMAdjustTime" ) )              // #36372 2016.06.19 kairera0467
+                                            {
+                                                this.nCommonBGMAdjustMs = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nCommonBGMAdjustMs );
                                             }
                                             else if ( str3.Equals( "JudgeLinePosOffsetDrums" ) ) // #31602 2013.6.23 yyagi
                                             {
@@ -2719,7 +2731,7 @@ namespace DTXMania
                                             {
                                                 this.nVelocityMin.LP = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LP);
                                             }
-                                            else if (str3.Equals("RDVelocityMin"))			// #23857 2011.1.31 yyagi
+                                            else if (str3.Equals("LBDVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
                                                 this.nVelocityMin.LBD = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LBD);
                                             }
@@ -2761,9 +2773,17 @@ namespace DTXMania
 									//-----------------------------
 									case Eセクション種別.PlayOption:
 										{
-											if( str3.Equals( "SkillMater" ) )  // #24074 2011.01.23 addikanick
+                                            if( str3.Equals( "DrumGraph" ) )  // #24074 2011.01.23 addikanick
 											{
-												this.bGraph有効 = C変換.bONorOFF( str4[ 0 ] );
+												this.bGraph有効.Drums = C変換.bONorOFF( str4[ 0 ] );
+											}
+											else if( str3.Equals( "GuitarGraph" ) )  // #24074 2011.01.23 addikanick
+											{
+												this.bGraph有効.Guitar = C変換.bONorOFF( str4[ 0 ] );
+											}
+											else if( str3.Equals( "BassGraph" ) )  // #24074 2011.01.23 addikanick
+											{
+												this.bGraph有効.Bass = C変換.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "DrumsReverse" ) )
 											{
@@ -3604,17 +3624,17 @@ namespace DTXMania
 			string strDefaultKeyAssign = @"
 [DrumsKeyAssign]
 
-HH=K033,M142
-SD=K012,K013,M138
-BD=K0126,K048,M044,M136
-HT=K031,K015,M148
-LT=K011,K016,M048
-FT=K023,K017,M038
-CY=K022,K019,M151
-HO=K028,M146
-RD=K020,K021
-LC=K035,K010,M049
-LP=K087,M144
+HH=K033,M042,M093
+SD=K012,K013,M025,M026,M027,M028,M029,M031,M032,M034,M037,M038,M040,M0113
+BD=K0126,K048,M033,M035,M036,M0112
+HT=K031,K015,M048,M050
+LT=K011,K016,M047
+FT=K023,K017,M041,M043,M045
+CY=K022,K019,M049,M052,M055,M057,M091
+HO=K028,M046,M092
+RD=K047,K020,M051,M053,M059,M089
+LC=K035,K010
+LP=K087
 LBD=K077
 
 [GuitarKeyAssign]

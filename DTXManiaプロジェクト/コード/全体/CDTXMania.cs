@@ -23,7 +23,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "Ver3.40GD(150919)";
+        public static readonly string VERSION = "Ver3.62bGD(200728)";
         public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
@@ -290,7 +290,7 @@ namespace DTXMania
             get;
             set;
         }
-        public bool b次のタイミングで全画面・ウィンドウ切り替えを行う
+        public bool b次のタイミングで全画面_ウィンドウ切り替えを行う
         {
             get;
             set;
@@ -339,7 +339,7 @@ namespace DTXMania
 
         // メソッド
 
-        public void t全画面・ウィンドウモード切り替え()
+        public void t全画面_ウィンドウモード切り替え()
         {
 #if WindowedFullscreen
             if ( ConfigIni != null )
@@ -488,12 +488,9 @@ namespace DTXMania
             this.Device.SetRenderState(RenderState.AlphaTestEnable, true);
             this.Device.SetRenderState(RenderState.AlphaRef, 10);
 
-            if (CDTXMania.ConfigIni.b縮小文字のアンチエイリアスを有効にする == true)
-            {
-                this.Device.SetRenderState(RenderState.MultisampleAntialias, true);
-                this.Device.SetSamplerState(0, SamplerState.MinFilter, TextureFilter.Linear);
-                this.Device.SetSamplerState(0, SamplerState.MagFilter, TextureFilter.Linear);
-            }
+            this.Device.SetRenderState(RenderState.MultisampleAntialias, true);
+            this.Device.SetSamplerState(0, SamplerState.MinFilter, TextureFilter.Linear);
+            this.Device.SetSamplerState(0, SamplerState.MagFilter, TextureFilter.Linear);
 
             this.Device.SetRenderState<Compare>(RenderState.AlphaFunc, Compare.Greater);
             this.Device.SetRenderState(RenderState.AlphaBlendEnable, true);
@@ -618,7 +615,7 @@ namespace DTXMania
                     case CStage.Eステージ.曲読み込み:
                         if (EnumSongs != null)
                         {
-                            #region [ (特定条件時) 曲検索スレッドの起動・開始 ]
+                            #region [ (特定条件時) 曲検索スレッドの起動_開始 ]
                             if (r現在のステージ.eステージID == CStage.Eステージ.タイトル &&
                                  r直前のステージ.eステージID == CStage.Eステージ.起動 &&
                                  this.n進行描画の戻り値 == (int)CStageタイトル.E戻り値.継続 &&
@@ -627,7 +624,7 @@ namespace DTXMania
                                 actEnumSongs.On活性化();
                                 CDTXMania.stage選曲.bIsEnumeratingSongs = true;
                                 EnumSongs.Init(CDTXMania.Songs管理.listSongsDB, CDTXMania.Songs管理.nSongsDBから取得できたスコア数);	// songs.db情報と、取得した曲数を、新インスタンスにも与える
-                                EnumSongs.StartEnumFromDisk();		// 曲検索スレッドの起動・開始
+                                EnumSongs.StartEnumFromDisk();		// 曲検索スレッドの起動_開始
                                 if (CDTXMania.Songs管理.nSongsDBから取得できたスコア数 == 0)	// もし初回起動なら、検索スレッドのプライオリティをLowestでなくNormalにする
                                 {
                                     EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);
@@ -733,73 +730,77 @@ namespace DTXMania
                     case CStage.Eステージ.タイトル:
                         #region [ *** ]
                         //-----------------------------
-                        switch (this.n進行描画の戻り値)
+                        if( this.n進行描画の戻り値 != 0 )
                         {
-                            case (int)CStageタイトル.E戻り値.GAMESTART:
-                                #region [ 選曲処理へ ]
-                                //-----------------------------
-                                r現在のステージ.On非活性化();
-                                Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 選曲");
-                                stage選曲.On活性化();
-                                r直前のステージ = r現在のステージ;
-                                r現在のステージ = stage選曲;
-                                //-----------------------------
-                                #endregion
-                                break;
+                            switch (this.n進行描画の戻り値)
+                            {
+                                case (int)CStageタイトル.E戻り値.GAMESTART:
+                                    #region [ 選曲処理へ ]
+                                    //-----------------------------
+                                    r現在のステージ.On非活性化();
+                                    Trace.TraceInformation("----------------------");
+                                    Trace.TraceInformation("■ 選曲");
+                                    stage選曲.On活性化();
+                                    r直前のステージ = r現在のステージ;
+                                    r現在のステージ = stage選曲;
+                                    //-----------------------------
+                                    #endregion
+                                    break;
 
-                            #region [ OPTION: 廃止済 ]
-                            /*
-							case 2:									// #24525 OPTIONとCONFIGの統合に伴い、OPTIONは廃止
-								#region [ *** ]
-								//-----------------------------
-								r現在のステージ.On非活性化();
-								Trace.TraceInformation( "----------------------" );
-								Trace.TraceInformation( "■ オプション" );
-								stageオプション.On活性化();
-								r直前のステージ = r現在のステージ;
-								r現在のステージ = stageオプション;
-								//-----------------------------
-								#endregion
-								break;
-                                */
-                            #endregion
-
-                            case (int)CStageタイトル.E戻り値.CONFIG:
-                                #region [ *** ]
-                                //-----------------------------
-                                r現在のステージ.On非活性化();
-                                Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ コンフィグ");
-                                stageコンフィグ.On活性化();
-                                r直前のステージ = r現在のステージ;
-                                r現在のステージ = stageコンフィグ;
-                                //-----------------------------
+                                #region [ OPTION: 廃止済 ]
+                                /*
+							    case 2:									// #24525 OPTIONとCONFIGの統合に伴い、OPTIONは廃止
+								    #region [ *** ]
+								    //-----------------------------
+								    r現在のステージ.On非活性化();
+								    Trace.TraceInformation( "----------------------" );
+								    Trace.TraceInformation( "■ オプション" );
+								    stageオプション.On活性化();
+								    r直前のステージ = r現在のステージ;
+								    r現在のステージ = stageオプション;
+								    //-----------------------------
+								    #endregion
+								    break;
+                                    */
                                 #endregion
-                                break;
 
-                            case (int)CStageタイトル.E戻り値.EXIT:
-                                #region [ *** ]
-                                //-----------------------------
-                                r現在のステージ.On非活性化();
-                                Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 終了");
-                                stage終了.On活性化();
-                                r直前のステージ = r現在のステージ;
-                                r現在のステージ = stage終了;
-                                //-----------------------------
-                                #endregion
-                                break;
+                                case (int)CStageタイトル.E戻り値.CONFIG:
+                                    #region [ *** ]
+                                    //-----------------------------
+                                    r現在のステージ.On非活性化();
+                                    Trace.TraceInformation("----------------------");
+                                    Trace.TraceInformation("■ コンフィグ");
+                                    stageコンフィグ.On活性化();
+                                    r直前のステージ = r現在のステージ;
+                                    r現在のステージ = stageコンフィグ;
+                                    //-----------------------------
+                                    #endregion
+                                    break;
+
+                                case (int)CStageタイトル.E戻り値.EXIT:
+                                    #region [ *** ]
+                                    //-----------------------------
+                                    r現在のステージ.On非活性化();
+                                    Trace.TraceInformation("----------------------");
+                                    Trace.TraceInformation("■ 終了");
+                                    stage終了.On活性化();
+                                    r直前のステージ = r現在のステージ;
+                                    r現在のステージ = stage終了;
+                                    //-----------------------------
+                                    #endregion
+                                    break;
+                            }
+
+                            foreach (STPlugin pg in this.listプラグイン)
+                            {
+                                Directory.SetCurrentDirectory(pg.strプラグインフォルダ);
+                                pg.plugin.Onステージ変更();
+                                Directory.SetCurrentDirectory(CDTXMania.strEXEのあるフォルダ);
+                            }
+
+                            this.tガベージコレクションを実行する();       // #31980 2013.9.3 yyagi タイトル画面でだけ、毎フレームGCを実行して重くなっていた問題の修正
                         }
 
-                        foreach (STPlugin pg in this.listプラグイン)
-                        {
-                            Directory.SetCurrentDirectory(pg.strプラグインフォルダ);
-                            pg.plugin.Onステージ変更();
-                            Directory.SetCurrentDirectory(CDTXMania.strEXEのあるフォルダ);
-                        }
-
-                        //this.tガベージコレクションを実行する();       // #31980 2013.9.3 yyagi タイトル画面でだけ、毎フレームGCを実行して重くなっていた問題の修正
                         //-----------------------------
                         #endregion
                         break;
@@ -1414,12 +1415,12 @@ for (int i = 0; i < 3; i++) {
 #if !GPUFlushAfterPresent
             actFlushGPU.On進行描画();		// Flush GPU	// EndScene()～Present()間 (つまりVSync前) でFlush実行
 #endif
-            #region [ 全画面・ウインドウ切り替え ]
-            if (this.b次のタイミングで全画面・ウィンドウ切り替えを行う)
+            #region [ 全画面_ウインドウ切り替え ]
+            if (this.b次のタイミングで全画面_ウィンドウ切り替えを行う)
             {
                 ConfigIni.b全画面モード = !ConfigIni.b全画面モード;
-                app.t全画面・ウィンドウモード切り替え();
-                this.b次のタイミングで全画面・ウィンドウ切り替えを行う = false;
+                app.t全画面_ウィンドウモード切り替え();
+                this.b次のタイミングで全画面_ウィンドウ切り替えを行う = false;
             }
             #endregion
             #region [ 垂直基線同期切り替え ]
@@ -1457,6 +1458,7 @@ for (int i = 0; i < 3; i++) {
 			}
 			try
 			{
+                //Trace.WriteLine("CTextureをFileから生成 + Filename:" + fileName);
 				return new CTexture( app.Device, fileName, TextureFormat, b黒を透過する );
 			}
 			catch ( CTextureCreateFailedException )
@@ -1472,8 +1474,10 @@ for (int i = 0; i < 3; i++) {
 		}
 		public static void tテクスチャの解放( ref CTexture tx )
 		{
-            if( tx != null )
+            if (tx != null) {
+                //Trace.WriteLine( "CTextureを解放 Size W:" + tx.sz画像サイズ.Width + " H:" + tx.sz画像サイズ.Height );
 			    CDTXMania.t安全にDisposeする( ref tx );
+            }
 		}
         public static void tテクスチャの解放( ref CTextureAf tx )
 		{
@@ -1512,6 +1516,7 @@ for (int i = 0; i < 3; i++) {
 			}
 			try
 			{
+                //Trace.WriteLine( "CTextureをBitmapから生成" );
 				return new CTexture( app.Device, bitmap, TextureFormat, b黒を透過する );
 			}
 			catch ( CTextureCreateFailedException )
@@ -1758,7 +1763,7 @@ for (int i = 0; i < 3; i++) {
             base.InactiveSleepTime = TimeSpan.FromMilliseconds((float)(ConfigIni.n非フォーカス時スリープms));	// #23568 2010.11.3 yyagi: to support valiable sleep value when !IsActive
             // #23568 2010.11.4 ikanick changed ( 1 -> ConfigIni )
 #if WindowedFullscreen
-			this.t全画面・ウィンドウモード切り替え();				// #30666 2013.2.2 yyagi: finalize settings for "Maximized window mode"
+			this.t全画面_ウィンドウモード切り替え();				// #30666 2013.2.2 yyagi: finalize settings for "Maximized window mode"
 #endif
             actFlushGPU = new CActFlushGPU();
             //---------------------
@@ -2203,6 +2208,7 @@ for (int i = 0; i < 3; i++) {
                     Trace.Indent();
                     try
                     {
+                        CDTXMania.Skin.tSaveSkinConfig(); //2016.07.30 kairera0467 #36413
                         Skin.Dispose();
                         Skin = null;
                         Trace.TraceInformation("スキンの終了処理を完了しました。");
@@ -2535,7 +2541,7 @@ for (int i = 0; i < 3; i++) {
                 if (ConfigIni != null)
                 {
                     ConfigIni.bウィンドウモード = !ConfigIni.bウィンドウモード;
-                    this.t全画面・ウィンドウモード切り替え();
+                    this.t全画面_ウィンドウモード切り替え();
                 }
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -2566,7 +2572,7 @@ for (int i = 0; i < 3; i++) {
             if (mb.Equals(MouseButtons.Left) && ConfigIni.bIsAllowedDoubleClickFullscreen)	// #26752 2011.11.27 yyagi
             {
                 ConfigIni.bウィンドウモード = false;
-                this.t全画面・ウィンドウモード切り替え();
+                this.t全画面_ウィンドウモード切り替え();
             }
         }
         private void Window_ResizeEnd(object sender, EventArgs e)				// #23510 2010.11.20 yyagi: to get resized window size

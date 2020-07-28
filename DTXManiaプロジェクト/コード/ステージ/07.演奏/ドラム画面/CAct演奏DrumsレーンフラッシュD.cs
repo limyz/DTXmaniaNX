@@ -69,7 +69,7 @@ namespace DTXMania
         @"Graphics\ScreenPlayDrums lane flush floortom.png",
         @"Graphics\ScreenPlayDrums lane flush cymbal.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal.png",
-        @"Graphics\ScreenPlayDrums lane flush hihat.png",
+        @"Graphics\ScreenPlayDrums lane flush ridecymbal.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal.png",
 
         @"Graphics\ScreenPlayDrums lane flush leftcymbal reverse.png",
@@ -81,7 +81,7 @@ namespace DTXMania
         @"Graphics\ScreenPlayDrums lane flush floortom reverse.png",
         @"Graphics\ScreenPlayDrums lane flush cymbal reverse.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal reverse.png",
-        @"Graphics\ScreenPlayDrums lane flush hihat reverse.png",
+        @"Graphics\ScreenPlayDrums lane flush ridecymbal reverse.png",
         @"Graphics\ScreenPlayDrums lane flush leftpedal reverse.png"
      };
 
@@ -175,15 +175,18 @@ namespace DTXMania
 				}
                 for ( int i = 0; i < 10; i++ )
                 {
-                        int index = this.n描画順[i];
-                        int x2 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
-                        int x3 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
-                        int xHH = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
-                        int xLC = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
-                        int xCY = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 79 : 79));
-                        int nAlpha = 255 - ((int)(((float)(CDTXMania.ConfigIni.nMovieAlpha * 255)) / 10f));
-                        //if (CDTXMania.ConfigIni.eDark == Eダークモード.OFF) //2013.02.17 kairera0467 ダークOFF以外でも透明度を有効にした。
-                    if (this.txLine != null)
+                    int index = this.n描画順[i];
+                    int numOfLanesflagIndex = (int)CDTXMania.ConfigIni.eNumOfLanes.Drums;
+
+                    int x2 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
+                    int x3 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
+                    int xHH = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
+                    int xLC = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
+                    int xCY = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 79 : 79));
+                    int nAlpha = 255 - ((int)(((float)(CDTXMania.ConfigIni.nMovieAlpha * 255)) / 10f));
+                    //if (CDTXMania.ConfigIni.eDark == Eダークモード.OFF) //2013.02.17 kairera0467 ダークOFF以外でも透明度を有効にした。
+                    //26072020: Check flag before drawing
+                    if (this.nDrawFlags[numOfLanesflagIndex, index] == 1 && this.txLine != null)
                     {
                         this.txLine.n透明度 = nAlpha;
                         this.txBass.n透明度 = nAlpha;
@@ -275,7 +278,7 @@ namespace DTXMania
                                 else if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC)
                                 {
                                     this.txLine.t2D描画(CDTXMania.app.Device, xCY - 124, 0, new Rectangle(520, 0, 38, 720));
-                                }
+                                }                                
                             }
                             if (index == 9) //LP
                             {
@@ -297,13 +300,24 @@ namespace DTXMania
                         else
                         {
 
-                            if (index == 0) //LC
+                            if (index == 1) //HH
                             {
-                                this.txLine.t2D描画(CDTXMania.app.Device, 295, 0, new Rectangle(0, 0, 558, 720));
+                                int l_drumPanelWidth = 558;
+                                int l_xOffset = 0;
+                                if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B)
+                                {
+                                    l_drumPanelWidth = 519; // 0x207
+                                }
+                                else if(CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                                {
+                                    l_drumPanelWidth = 447;
+                                    l_xOffset = 72;
+                                }
+                                this.txLine.t2D描画(CDTXMania.app.Device, 295 + l_xOffset, 0, new Rectangle(0, 0, l_drumPanelWidth, 720));
                             }
-                        }
+                        }                        
                     }
-                    
+
                     #endregion
                 }
                 for (int j = 0; j < 11; j++)
@@ -429,8 +443,10 @@ namespace DTXMania
         private readonly STレーンサイズ[] stレーンサイズ;
 		private CCounter[] ct進行 = new CCounter[ 11 ];
 		private readonly string[] strファイル名;
-        private readonly int[] n描画順 = new int[] { 9, 2, 4, 6, 5, 3, 1, 8, 7, 0};
-		private CTexture[] txFlush = new CTexture[ 0x16 ];
+        private readonly int[] n描画順 = new int[] { 9, 2, 4, 6, 5, 3, 1, 8, 7, 0}; //new int[] { 9, 3, 2, 6, 5, 4, 8, 7, 1, 0 };
+        //26072020: New array Fisyher
+        private readonly int[,] nDrawFlags = new int[3, 10] { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, { 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, { 0, 1, 1, 1, 1, 1, 1, 1, 0, 1 } };
+        private CTexture[] txFlush = new CTexture[ 0x16 ];
         private CTexture txLC;
         private CTexture txLine;
         private CTexture txBass;

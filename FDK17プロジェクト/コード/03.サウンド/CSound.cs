@@ -734,7 +734,7 @@ namespace FDK
 			wfx.SamplesPerSecond = (int) cw32wfx.nSamplesPerSec;
 
 			// セカンダリバッファを作成し、PCMデータを書き込む。
-			tDirectSoundサウンドを作成する・セカンダリバッファの作成とWAVデータ書き込み
+			tDirectSoundサウンドを作成する_セカンダリバッファの作成とWAVデータ書き込み
 				( ref this.byArrWAVファイルイメージ, DirectSound, CSoundDeviceDirectSound.DefaultFlags, wfx,
 				  nPCMサイズbyte, nPCMデータの先頭インデックス );
 		}
@@ -844,11 +844,11 @@ namespace FDK
 
 
 			// セカンダリバッファを作成し、PCMデータを書き込む。
-			tDirectSoundサウンドを作成する・セカンダリバッファの作成とWAVデータ書き込み(
+			tDirectSoundサウンドを作成する_セカンダリバッファの作成とWAVデータ書き込み(
 				ref byArrWAVファイルイメージ, DirectSound, flags, wfx, nPCMサイズbyte, nPCMデータの先頭インデックス );
 		}
 
-		private void tDirectSoundサウンドを作成する・セカンダリバッファの作成とWAVデータ書き込み
+		private void tDirectSoundサウンドを作成する_セカンダリバッファの作成とWAVデータ書き込み
 			( ref byte[] byArrWAVファイルイメージ, DirectSound DirectSound, BufferFlags flags, WaveFormat wfx,
 			int nPCMサイズbyte, int nPCMデータの先頭インデックス )
 		{
@@ -1256,7 +1256,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		protected int _hTempoStream = 0;
 		protected int _hBassStream = -1;					// ASIO, WASAPI 用
 		protected int hBassStream = 0;						// #31076 2013.4.1 yyagi; プロパティとして実装すると動作が低速になったため、
-															// tBASSサウンドを作成する・ストリーム生成後の共通処理()のタイミングと、
+															// tBASSサウンドを作成する_ストリーム生成後の共通処理()のタイミングと、
 															// 再生速度を変更したタイミングでのみ、
 															// hBassStreamを更新するようにした。
 		//{
@@ -1329,7 +1329,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			
 			nBytes = Bass.BASS_ChannelGetLength( this._hBassStream );
 			
-			tBASSサウンドを作成する・ストリーム生成後の共通処理( hMixer );
+			tBASSサウンドを作成する_ストリーム生成後の共通処理( hMixer );
 		}
 		private void tBASSサウンドを作成する( byte[] byArrWAVファイルイメージ, int hMixer, BASSFlag flags )
 		{
@@ -1346,7 +1346,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 
 			nBytes = Bass.BASS_ChannelGetLength( this._hBassStream );
 	
-			tBASSサウンドを作成する・ストリーム生成後の共通処理( hMixer );
+			tBASSサウンドを作成する_ストリーム生成後の共通処理( hMixer );
 		}
 		private void tBASSサウンドを作成するXA( string strファイル名, int hMixer, BASSFlag flags )
 		{
@@ -1376,11 +1376,11 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 				throw new Exception( string.Format( "サウンドストリームの生成に失敗しました。(BASS_SampleCreate)[{0}]", Bass.BASS_ErrorGetCode().ToString() ) );
 			}
 
-			tBASSサウンドを作成する・ストリーム生成後の共通処理( hMixer );
+			tBASSサウンドを作成する_ストリーム生成後の共通処理( hMixer );
 		}
 
 
-		private void tBASSサウンドを作成する・ストリーム生成後の共通処理( int hMixer )
+		private void tBASSサウンドを作成する_ストリーム生成後の共通処理( int hMixer )
 		{
 			CSound管理.nStreams++;
 

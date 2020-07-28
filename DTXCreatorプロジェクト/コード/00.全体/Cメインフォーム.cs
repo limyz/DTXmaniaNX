@@ -2233,27 +2233,6 @@ namespace DTXCreator
 				e.Effect = DragDropEffects.None;
 			}
 		}
-        //KSM: Hotkeys without GUI can be processed here
-        //07/05/2016: Added space shortcut key for F8: Switch mode
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == Keys.Space)
-            {
-                //KSM: Copied from toolStripMenuItemモード切替_Click handler
-                if (this.b選択モードである)
-                {
-                    this.t編集モードにする();
-                }
-                else
-                {
-                    this.t選択モードにする();
-                }
-                //
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-        //
 		private void Cメインフォーム_FormClosing( object sender, FormClosingEventArgs e )
 		{
 			if( this.t未保存なら保存する() == DialogResult.Cancel )

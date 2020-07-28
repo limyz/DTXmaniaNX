@@ -7,11 +7,11 @@ namespace DTXMania
 	/// <summary>
 	/// <para>Activity プラグインへのインターフェース。</para>
 	/// <para>DTXMania は、IPluginActivity に対して、以下のライフサイクルを実行します。</para>
-	/// <para>(1) DTXMania の起動処理の最後（セットアップ画面が表示される直前）に一度だけ、On初期化()・OnManagedリソースの作成()・OnUnmanagedリソースの作成() をこの順番で1回ずつ呼び出します。</para>
-	/// <para>(2) DTXMania の終了処理の最初（Thank you for playing が消えた直後）に一度だけ、OnUnmanagedリソースの解放()・OnManagedリソースの解放()・On終了() をこの順番で1回ずつ呼び出します。</para>
+	/// <para>(1) DTXMania の起動処理の最後（セットアップ画面が表示される直前）に一度だけ、On初期化()_OnManagedリソースの作成()_OnUnmanagedリソースの作成() をこの順番で1回ずつ呼び出します。</para>
+	/// <para>(2) DTXMania の終了処理の最初（Thank you for playing が消えた直後）に一度だけ、OnUnmanagedリソースの解放()_OnManagedリソースの解放()_On終了() をこの順番で1回ずつ呼び出します。</para>
 	/// <para>(3) DTXMania の起動中、すなわち(1)～(2)の間は、どんなシーンであっても、常に On進行描画() を1フレームにつき1回ずつ呼び出します。</para>
 	/// <para>(4) Direct3D デバイスのリセット時には、デバイスのリセット前に OnUnmanagedリソースの解放() を1回呼び出し、デバイスをリセットしたのち、OnUnmanagedリソースの作成() を1回呼び出します。</para>
-	/// <para>(5) Direct3D デバイスのロスト時には、デバイスの再生成前に OnUnmanagedリソースの解放()・OnManagedリソースの解放() を1回ずつ呼び出し、デバイスを再生成したのち、OnManagedリソースの作成()・OnUnmanagedリソースの作成() を1回ずつ呼び出します。</para>
+	/// <para>(5) Direct3D デバイスのロスト時には、デバイスの再生成前に OnUnmanagedリソースの解放()_OnManagedリソースの解放() を1回ずつ呼び出し、デバイスを再生成したのち、OnManagedリソースの作成()_OnUnmanagedリソースの作成() を1回ずつ呼び出します。</para>
 	/// </summary>
     public interface IPluginActivity
 	{
