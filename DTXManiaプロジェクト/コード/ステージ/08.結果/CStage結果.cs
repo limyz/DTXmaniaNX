@@ -468,6 +468,11 @@ namespace DTXMania
 				{
 					this.ct登場用 = null;
 				}
+				//
+				if(this.ctPlayNewRecord != null)
+                {
+					this.ctPlayNewRecord = null;
+                }
                 CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
 				CDTXMania.tテクスチャの解放( ref this.tx上部パネル );
@@ -486,6 +491,7 @@ namespace DTXMania
 
 					//Check result to select the correct sound to play
 					int l_outputSoundEnum = 0; //0: Stage Clear 1: FC 2: EXC
+					bool l_newRecord = false;
 					for (int i = 0; i < 3; i++)
 					{
 						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
@@ -503,6 +509,11 @@ namespace DTXMania
 									l_outputSoundEnum = 1; //Full Combo
 								}
                             }
+
+							if(this.b新記録スキル[i] == true)
+                            {
+								l_newRecord = true;
+							}
 						}
 					}
 
@@ -518,6 +529,12 @@ namespace DTXMania
 					else
                     {
 						CDTXMania.Skin.soundステージクリア音.t再生する();
+					}
+
+					//Create the delay timer of 150 x 10 = 1500 ms to play New Record
+					if(l_newRecord)
+                    {
+						this.ctPlayNewRecord = new CCounter(0, 150, 10, CDTXMania.Timer);
 					}
 						
                     this.actFI.tフェードイン開始(false);
@@ -552,6 +569,17 @@ namespace DTXMania
 					else
 					{
 						this.bアニメが完了 = false;
+					}
+				}
+
+				//Play new record if available
+				if(this.ctPlayNewRecord != null && this.ctPlayNewRecord.b進行中)
+                {
+					this.ctPlayNewRecord.t進行();
+					if (this.ctPlayNewRecord.b終了値に達した)
+					{
+						CDTXMania.Skin.sound新記録音.t再生する();
+						this.ctPlayNewRecord.t停止();
 					}
 				}
 
@@ -742,6 +770,8 @@ namespace DTXMania
 		#region [ private ]
 		//-----------------
 		private CCounter ct登場用;
+		//New Counter
+		private CCounter ctPlayNewRecord;
 		private E戻り値 eフェードアウト完了時の戻り値;
 		private CActFIFOWhite actFI;
 		private CActFIFOBlack actFO;
