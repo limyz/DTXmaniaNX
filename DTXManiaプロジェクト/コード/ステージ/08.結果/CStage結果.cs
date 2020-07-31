@@ -483,7 +483,43 @@ namespace DTXMania
 				if( base.b初めての進行描画 )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-                    CDTXMania.Skin.soundステージクリア音.t再生する();
+
+					//Check result to select the correct sound to play
+					int l_outputSoundEnum = 0; //0: Stage Clear 1: FC 2: EXC
+					for (int i = 0; i < 3; i++)
+					{
+						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
+							((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
+							((i != 2) || CDTXMania.DTX.bチップがある.Bass))
+						{ 
+							if(bオート[i] == false)
+                            {
+								if(fPerfect率[i] == 100.0)
+                                {
+									l_outputSoundEnum = 2; //Excellent
+								}
+								else if(fPoor率[i] == 0.0 && fMiss率[i] == 0.0)
+                                {
+									l_outputSoundEnum = 1; //Full Combo
+								}
+                            }
+						}
+					}
+
+					//Play the corresponding sound
+					if(l_outputSoundEnum == 1)
+                    {
+						CDTXMania.Skin.soundフルコンボ音.t再生する();
+					}
+					else if(l_outputSoundEnum == 2)
+                    {
+						CDTXMania.Skin.soundエクセレント音.t再生する();
+					}
+					else
+                    {
+						CDTXMania.Skin.soundステージクリア音.t再生する();
+					}
+						
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
 					base.b初めての進行描画 = false;
