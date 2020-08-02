@@ -183,6 +183,9 @@ namespace DTXMania
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
             this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Difficulty.png"));
             this.tx難易度用数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_LevelNumber.png"));
+            //Load new textures
+            this.txPercent = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
+            this.txSkillMax = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
 
             base.On活性化();
         }
@@ -193,6 +196,9 @@ namespace DTXMania
             CDTXMania.tテクスチャの解放(ref this.txパネル文字[1]);
             CDTXMania.tテクスチャの解放(ref this.tx難易度パネル);
             CDTXMania.tテクスチャの解放(ref this.tx難易度用数字);
+            //Free new texture
+            CDTXMania.tテクスチャの解放(ref this.txPercent);
+            CDTXMania.tテクスチャの解放(ref this.txSkillMax);
             base.On非活性化();
         }
         public override void OnManagedリソースの作成()
@@ -387,7 +393,20 @@ namespace DTXMania
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums ) );
+                //this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums ) );
+                //Conditional checks for MAX
+                if (this.txSkillMax != null && CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums >= 100.0)
+                {
+                    this.txSkillMax.t2D描画(CDTXMania.app.Device, 127 + this.n本体X[i], 277 + this.n本体Y);
+                }
+                else
+                {
+                    this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums));
+                    if (this.txPercent != null)
+                        this.txPercent.t2D描画(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
+                }
+
+
                 this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
 
                 if( this.tx難易度パネル != null )
@@ -423,6 +442,9 @@ namespace DTXMania
         private CTexture txネームプレート用文字;
         private CTexture tx難易度パネル;
         private CTexture tx難易度用数字;
+        //New texture % and MAX
+        private CTexture txPercent;
+        private CTexture txSkillMax;
 
         private void t小文字表示(int x, int y, string str)
         {
