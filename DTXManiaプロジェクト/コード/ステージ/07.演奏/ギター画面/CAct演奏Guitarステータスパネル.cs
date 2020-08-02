@@ -382,10 +382,10 @@ namespace DTXMania
                     {
                         string str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ] ) / 10.0f + ( CDTXMania.DTX.LEVELDEC[ i ] != 0 ? CDTXMania.DTX.LEVELDEC[ i ] / 100.0f : 0 ) );
                         bool bCLASSIC = false;
-
-                        if( CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                        //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                        if( CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
                             ( i == 1 ? !CDTXMania.DTX.bチップがある.YPGuitar : !CDTXMania.DTX.bチップがある.YPBass ) &&
-                            ( CDTXMania.DTX.b強制的にXG譜面にする == false ) )
+                            ( CDTXMania.DTX.b強制的にXG譜面にする == false )) )
                         {
                             str = string.Format( "{0:00}", CDTXMania.DTX.LEVEL[ i ] );
                             bCLASSIC = true;
@@ -447,7 +447,15 @@ namespace DTXMania
                                 this.txPercent.t2D描画(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
                         }
 
-                        this.t大文字表示(88 + this.n本体X[ i ], 363 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar * ( CDTXMania.DTX.LEVEL[ i ] / 10.0 ) * 0.2 ) );
+                        if (bCLASSIC)
+                        {
+                            this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar * (CDTXMania.DTX.LEVEL[i]) * 0.0033));
+                        }
+                        else
+                        {
+                            this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2));
+                        }
+                            
 
                 if( this.tx難易度パネル != null )
                     this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );

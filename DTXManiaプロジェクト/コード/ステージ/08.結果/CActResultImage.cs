@@ -93,8 +93,13 @@ namespace DTXMania
                 Bitmap bitmap3 = new Bitmap(100, 100);
                 graphics = Graphics.FromImage(bitmap3);
                 float num;
-
-                if (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && (CDTXMania.DTX.bチップがある.LeftCymbal == false) && (CDTXMania.DTX.bチップがある.LP == false) && (CDTXMania.DTX.bチップがある.LBD == false) && (CDTXMania.DTX.bチップがある.FT == false) && (CDTXMania.DTX.bチップがある.Ride == false))
+                //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                    (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
+                    (CDTXMania.DTX.bチップがある.LP == false) && 
+                    (CDTXMania.DTX.bチップがある.LBD == false) && 
+                    (CDTXMania.DTX.bチップがある.FT == false) && 
+                    (CDTXMania.DTX.bチップがある.Ride == false)))
                 {
                     num = ((float)CDTXMania.stage選曲.r確定されたスコア.譜面情報.レベル.Drums);
                 }
@@ -109,8 +114,14 @@ namespace DTXMania
                         num = ((float)CDTXMania.stage選曲.r確定されたスコア.譜面情報.レベル.Drums) / 10f;
                     }
                 }
-
-                if (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && (CDTXMania.DTX.bチップがある.LeftCymbal == false) && (CDTXMania.DTX.bチップがある.LP == false) && (CDTXMania.DTX.bチップがある.LBD == false) && (CDTXMania.DTX.bチップがある.FT == false) && (CDTXMania.DTX.bチップがある.Ride == false))
+                //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                    (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
+                    (CDTXMania.DTX.bチップがある.LP == false) && 
+                    (CDTXMania.DTX.bチップがある.LBD == false) && 
+                    (CDTXMania.DTX.bチップがある.FT == false) && 
+                    (CDTXMania.DTX.bチップがある.Ride == false) &&
+                    (CDTXMania.DTX.b強制的にXG譜面にする == false)))
                 {
                     graphics.DrawString(string.Format("{0:00}", num), this.ftSongDifficultyFont, new SolidBrush(Color.FromArgb(0xba, 0xba, 0xba)), (float)0f, (float)-4f);
                 }

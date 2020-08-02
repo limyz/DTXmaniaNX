@@ -494,7 +494,10 @@ namespace DTXMania
 
                     if (DTXLevel != 0 || DTXLevelDeci != 0)
                     {
-                        if (CDTXMania.stage選曲.r確定されたスコア.譜面情報.b完全にCLASSIC譜面である[j] && !cdtx.b強制的にXG譜面にする)
+                        //Always display CLASSIC style if Skill Mode is Classic
+                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                            CDTXMania.stage選曲.r確定されたスコア.譜面情報.b完全にCLASSIC譜面である[j] && 
+                            !cdtx.b強制的にXG譜面にする))
                         {
                             this.t大文字表示(187 + k, 152, string.Format("{0:00}", DTXLevel));
                         }
@@ -672,7 +675,7 @@ namespace DTXMania
                             else if( i == 2 ) nTotal = CDTXMania.DTX.n可視チップ数.Bass;
                             if( CDTXMania.ConfigIni.nSkillMode == 0 )
                             {
-                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[i].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
                             else
                             {

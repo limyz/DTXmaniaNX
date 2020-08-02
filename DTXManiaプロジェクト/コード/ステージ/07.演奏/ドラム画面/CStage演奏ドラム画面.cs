@@ -290,7 +290,14 @@ namespace DTXMania
                 bIsFinishedPlaying = this.t進行描画_チップ( E楽器パート.DRUMS );
                 #region[ シャッター ]
                 //シャッターを使うのはLC、LP、FT、RDレーンのみ。その他のレーンでは一切使用しない。
-                if ((CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする == true ) && ((CDTXMania.DTX.bチップがある.LeftCymbal == false) && ( CDTXMania.DTX.bチップがある.FT == false ) && ( CDTXMania.DTX.bチップがある.Ride == false ) && ( CDTXMania.DTX.bチップがある.LP == false ) && ( CDTXMania.DTX.b強制的にXG譜面にする == false)))
+                //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                if (CDTXMania.ConfigIni.nSkillMode == 0 || ((CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする == true ) && 
+                    ((CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
+                    ( CDTXMania.DTX.bチップがある.FT == false ) && 
+                    ( CDTXMania.DTX.bチップがある.Ride == false ) && 
+                    ( CDTXMania.DTX.bチップがある.LP == false ) &&
+                    ( CDTXMania.DTX.bチップがある.LBD == false) &&
+                    ( CDTXMania.DTX.b強制的にXG譜面にする == false))) )
                 {
                     if ( this.txLaneCover != null )
                     {
@@ -584,7 +591,7 @@ namespace DTXMania
 			// #24074 2011.01.23 add ikanick
             if (CDTXMania.ConfigIni.nSkillMode == 0)
             {
-                this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, E楽器パート.DRUMS, bIsAutoPlay);
+                this.actGraph.dbグラフ値現在_渡 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, this.actCombo.n現在のコンボ数.最高値.Drums, E楽器パート.DRUMS, bIsAutoPlay);
             }
             else if (CDTXMania.ConfigIni.nSkillMode == 1)
             {
@@ -3474,6 +3481,7 @@ namespace DTXMania
                                 this.nヒット数_TargetGhost.Drums.Good,
                                 this.nヒット数_TargetGhost.Drums.Poor,
                                 this.nヒット数_TargetGhost.Drums.Miss,
+                                this.n最大コンボ数_TargetGhost.Drums,
                                 E楽器パート.DRUMS, new STAUTOPLAY());
                         }
                         else
