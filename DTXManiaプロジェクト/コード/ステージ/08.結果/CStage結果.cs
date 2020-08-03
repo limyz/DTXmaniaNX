@@ -83,8 +83,8 @@ namespace DTXMania
                     this.nランク値[i] = -1;
                     this.fPerfect率[i] = this.fGreat率[i] = this.fGood率[i] = this.fPoor率[i] = this.fMiss率[i] = 0.0f;	// #28500 2011.5.24 yyagi
                     if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-                        ((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
-                        ((i != 2) || CDTXMania.DTX.bチップがある.Bass))
+                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
+                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
                     {
                         CScoreIni.C演奏記録 part = this.st演奏記録[i];
                         bool bIsAutoPlay = true;
@@ -495,8 +495,8 @@ namespace DTXMania
 					for (int i = 0; i < 3; i++)
 					{
 						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-							((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
-							((i != 2) || CDTXMania.DTX.bチップがある.Bass))
+							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
+							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
 						{ 
 							if(bオート[i] == false)
                             {
