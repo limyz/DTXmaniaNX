@@ -373,13 +373,15 @@ namespace DTXMania
                 }
                 this.ctキー反復用.Up.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
                 this.ctキー反復用.R.tキー反復(CDTXMania.Pad.b押されているGB(Eパッド.HH), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
-                if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.SD))
+                //Change to HT
+                if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.HT))
                 {
                     this.tカーソルを上へ移動する();
                 }
                 this.ctキー反復用.Down.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
                 this.ctキー反復用.B.tキー反復(CDTXMania.Pad.b押されているGB(Eパッド.SD), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
-                if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.FT))
+                //Change to LT
+                if (CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.LT))
                 {
                     this.tカーソルを下へ移動する();
                 }

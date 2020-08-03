@@ -468,6 +468,11 @@ namespace DTXMania
 				{
 					this.ct登場用 = null;
 				}
+				//
+				if(this.ctPlayNewRecord != null)
+                {
+					this.ctPlayNewRecord = null;
+                }
                 CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
 				CDTXMania.tテクスチャの解放( ref this.tx上部パネル );
@@ -483,7 +488,55 @@ namespace DTXMania
 				if( base.b初めての進行描画 )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-                    CDTXMania.Skin.soundステージクリア音.t再生する();
+
+					//Check result to select the correct sound to play
+					int l_outputSoundEnum = 0; //0: Stage Clear 1: FC 2: EXC
+					bool l_newRecord = false;
+					for (int i = 0; i < 3; i++)
+					{
+						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
+							((i != 1) || CDTXMania.DTX.bチップがある.Guitar)) &&
+							((i != 2) || CDTXMania.DTX.bチップがある.Bass))
+						{ 
+							if(bオート[i] == false)
+                            {
+								if(fPerfect率[i] == 100.0)
+                                {
+									l_outputSoundEnum = 2; //Excellent
+								}
+								else if(fPoor率[i] == 0.0 && fMiss率[i] == 0.0)
+                                {
+									l_outputSoundEnum = 1; //Full Combo
+								}
+                            }
+
+							if(this.b新記録スキル[i] == true)
+                            {
+								l_newRecord = true;
+							}
+						}
+					}
+
+					//Play the corresponding sound
+					if(l_outputSoundEnum == 1)
+                    {
+						CDTXMania.Skin.soundフルコンボ音.t再生する();
+					}
+					else if(l_outputSoundEnum == 2)
+                    {
+						CDTXMania.Skin.soundエクセレント音.t再生する();
+					}
+					else
+                    {
+						CDTXMania.Skin.soundステージクリア音.t再生する();
+					}
+
+					//Create the delay timer of 150 x 10 = 1500 ms to play New Record
+					if(l_newRecord)
+                    {
+						this.ctPlayNewRecord = new CCounter(0, 150, 10, CDTXMania.Timer);
+					}
+						
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
 					base.b初めての進行描画 = false;
@@ -516,6 +569,17 @@ namespace DTXMania
 					else
 					{
 						this.bアニメが完了 = false;
+					}
+				}
+
+				//Play new record if available
+				if(this.ctPlayNewRecord != null && this.ctPlayNewRecord.b進行中)
+                {
+					this.ctPlayNewRecord.t進行();
+					if (this.ctPlayNewRecord.b終了値に達した)
+					{
+						CDTXMania.Skin.sound新記録音.t再生する();
+						this.ctPlayNewRecord.t停止();
 					}
 				}
 
@@ -706,6 +770,8 @@ namespace DTXMania
 		#region [ private ]
 		//-----------------
 		private CCounter ct登場用;
+		//New Counter
+		private CCounter ctPlayNewRecord;
 		private E戻り値 eフェードアウト完了時の戻り値;
 		private CActFIFOWhite actFI;
 		private CActFIFOBlack actFO;

@@ -369,7 +369,7 @@ namespace DTXMania
                                     }
                                     #region [ 選択曲の 最高スキル値ゲージ＋数値の描画 ]
                                     if (this.tx達成率MAX != null && db変数 == 100)
-                                        this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 155, nBoxY + nPanelH - 27);
+                                        this.tx達成率MAX.t2D描画(CDTXMania.app.Device, nBoxX + nPanelW - 142, nBoxY + nPanelH - 27);
                                     else
                                         this.t達成率表示(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                     #endregion

@@ -1568,13 +1568,36 @@ namespace DTXMania
             }
             return (int)ERANK.E;
         }
-        internal static double t旧ゲーム型スキルを計算して返す( double dbLevel, int nLevelDec, int nTotal, int nPerfect, int nCombo, E楽器パート inst, STAUTOPLAY bAutoPlay )
+        internal static double t旧ゲーム型スキルを計算して返す( double dbLevel, int nLevelDec, int nTotal, int nPerfect, int nGreat, int nCombo, E楽器パート inst, STAUTOPLAY bAutoPlay )
         {
             double ret;
-            if ( ( nTotal == 0 ) || ( ( nPerfect == 0 ) && ( nCombo == 0 ) ) )
+			double rate = 0.0;
+            if ( ( nTotal == 0 ) || ( ( nPerfect == 0 ) && ( nCombo == 0 ) && (nGreat == 0) ) )
                 ret = 0.0;
 
-            ret = ( ( dbLevel * ( ( nPerfect * 0.8 + nCombo * 0.2 ) / ( ( double )nTotal ) ) ) / 2.0 );
+			//Drums: Perfect% x 0.80 + Great% x 0.30 + Combo% + 0.20 (percents as decimals)
+			//Guitar: Perfect% x 0.80 + Great% x 0.20 + Combo% + 0.20 (percents as decimals)
+			switch (inst)
+			{
+				#region [ Unknown ]
+				case E楽器パート.UNKNOWN:
+					throw new ArgumentException();
+				#endregion
+				#region [ Drums ]
+				case E楽器パート.DRUMS:
+					rate = ((nPerfect * 0.8 + nGreat * 0.3 + nCombo * 0.2) / ((double)nTotal));
+					break;
+				#endregion
+				#region [ Bass and Guitar ]
+				case E楽器パート.BASS:
+				case E楽器パート.GUITAR:
+					rate = ((nPerfect * 0.8 + nGreat * 0.2 + nCombo * 0.2) / ((double)nTotal));
+					break;
+                #endregion
+            }
+
+			//Skill Ratio x Song Level x 0.33 x (0.5 if using Auto-anything, 1 otherwise)
+			ret = dbLevel * rate * 0.33;
             ret *= dbCalcReviseValForDrGtBsAutoLanes( inst, bAutoPlay );
             if ( CDTXMania.ConfigIni.bドラムが全部オートプレイである )
             {
@@ -1583,27 +1606,67 @@ namespace DTXMania
 
             return ret;
         }
-        internal static double t旧演奏型スキルを計算して返す(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, E楽器パート inst, STAUTOPLAY bAutoPlay)
+        internal static double t旧演奏型スキルを計算して返す(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, E楽器パート inst, STAUTOPLAY bAutoPlay)
         {
             if (nTotal == 0)
                 return 0.0;
 
-            int nAuto = nTotal - (nPerfect + nGreat + nGood + nPoor + nMiss);
-            double y = ((nPerfect * 1.0 + nGreat * 0.8 + nGood * 0.5 + nPoor * 0.2 + nMiss * 0.0 + nAuto * 0.0) * 100.0) / ((double)nTotal);
-            double ret = (100.0 * ((Math.Pow(1.03, y) - 1.0) / (Math.Pow(1.03, 100.0) - 1.0)));
+            //int nAuto = nTotal - (nPerfect + nGreat + nGood + nPoor + nMiss);
+			//double y = ((nPerfect * 1.0 + nGreat * 0.8 + nGood * 0.5 + nPoor * 0.2 + nMiss * 0.0 + nAuto * 0.0) * 100.0) / ((double)nTotal);
+			//double ret = (100.0 * ((Math.Pow(1.03, y) - 1.0) / (Math.Pow(1.03, 100.0) - 1.0)));
+			double ret = 0.0;
+			//Drums: Perfect% x 0.80 + Great% x 0.30 + Combo% + 0.20 (percents as decimals)
+			//Guitar: Perfect% x 0.80 + Great% x 0.20 + Combo% + 0.20 (percents as decimals)
+			switch (inst)
+			{
+				#region [ Unknown ]
+				case E楽器パート.UNKNOWN:
+					throw new ArgumentException();
+				#endregion
+				#region [ Drums ]
+				case E楽器パート.DRUMS:
+					ret = ((nPerfect * 0.8 + nGreat * 0.3 + nCombo * 0.2) / ((double)nTotal)) * 100.0;
+					break;
+				#endregion
+				#region [ Bass and Guitar ]
+				case E楽器パート.BASS:
+				case E楽器パート.GUITAR:
+					ret = ((nPerfect * 0.8 + nGreat * 0.2 + nCombo * 0.2) / ((double)nTotal)) * 100.0;
+					break;
+					#endregion
+			}
 
-            ret *= dbCalcReviseValForDrGtBsAutoLanes(inst, bAutoPlay);
+			ret *= dbCalcReviseValForDrGtBsAutoLanes(inst, bAutoPlay);
             return ret;
         }
-        internal static double t旧ゴーストスキルを計算して返す(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, E楽器パート inst)
+        internal static double t旧ゴーストスキルを計算して返す(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, E楽器パート inst)
         {
             if (nTotal == 0)
                 return 0.0;
-            int nAuto = nTotal - (nPerfect + nGreat + nGood + nPoor + nMiss);
-            double y = ((nPerfect * 1.0 + nGreat * 0.8 + nGood * 0.5 + nPoor * 0.2 + nMiss * 0.0 + nAuto * 0.0) * 100.0) / ((double)nTotal);
-            double ret = (100.0 * ((Math.Pow(1.03, y) - 1.0) / (Math.Pow(1.03, 100.0) - 1.0)));
+			//int nAuto = nTotal - (nPerfect + nGreat + nGood + nPoor + nMiss);
+			//double y = ((nPerfect * 1.0 + nGreat * 0.8 + nGood * 0.5 + nPoor * 0.2 + nMiss * 0.0 + nAuto * 0.0) * 100.0) / ((double)nTotal);
+			//double ret = (100.0 * ((Math.Pow(1.03, y) - 1.0) / (Math.Pow(1.03, 100.0) - 1.0)));
+			double ret = 0.0;
+			switch (inst)
+			{
+				#region [ Unknown ]
+				case E楽器パート.UNKNOWN:
+					throw new ArgumentException();
+				#endregion
+				#region [ Drums ]
+				case E楽器パート.DRUMS:
+					ret = ((nPerfect * 0.8 + nGreat * 0.3 + nCombo * 0.2) / ((double)nTotal)) * 100.0;
+					break;
+				#endregion
+				#region [ Bass and Guitar ]
+				case E楽器パート.BASS:
+				case E楽器パート.GUITAR:
+					ret = ((nPerfect * 0.8 + nGreat * 0.2 + nCombo * 0.2) / ((double)nTotal)) * 100.0;
+					break;
+					#endregion
+			}
 
-            return ret;
+			return ret;
         }
         internal static double dbCalcReviseValForDrGtBsAutoLanes(E楽器パート inst, STAUTOPLAY bAutoPlay)	// #28607 2012.6.7 yyagi
         {
