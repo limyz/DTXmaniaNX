@@ -1477,7 +1477,7 @@ namespace DTXMania
 
             ret = ((dbRate * dbLevel * 0.2));
             ret *= dbCalcReviseValForDrGtBsAutoLanes(inst, bAutoPlay);
-            if (CDTXMania.ConfigIni.bドラムが全部オートプレイである)
+            if (CDTXMania.ConfigDB.bドラムが全部オートプレイである)
             {
                 return 0;
             }
@@ -1599,7 +1599,7 @@ namespace DTXMania
 			//Skill Ratio x Song Level x 0.33 x (0.5 if using Auto-anything, 1 otherwise)
 			ret = dbLevel * rate * 0.33;
             ret *= dbCalcReviseValForDrGtBsAutoLanes( inst, bAutoPlay );
-            if ( CDTXMania.ConfigIni.bドラムが全部オートプレイである )
+            if ( CDTXMania.ConfigDB.bドラムが全部オートプレイである )
             {
                 return 0;
             }
@@ -1680,7 +1680,7 @@ namespace DTXMania
                 #endregion
                 #region [ Drums ]
                 case E楽器パート.DRUMS:
-                    if (!CDTXMania.ConfigIni.bドラムが全部オートプレイである)
+                    if (!CDTXMania.ConfigDB.bドラムが全部オートプレイである)
                     {
                         #region [ Auto BD ]
                         if (bAutoPlay.BD && bAutoPlay.LP == false && bAutoPlay.LBD == false)
@@ -1707,7 +1707,7 @@ namespace DTXMania
                 #endregion
                 #region [ Guitar ]
                 case E楽器パート.GUITAR:
-                    if (!CDTXMania.ConfigIni.bギターが全部オートプレイである)
+                    if (!CDTXMania.ConfigDB.bギターが全部オートプレイである)
                     {
                         #region [ Auto Pick ]
                         if (bAutoPlay.GtPick)
@@ -1736,7 +1736,7 @@ namespace DTXMania
                 #endregion
                 #region [ Bass ]
                 case E楽器パート.BASS:
-                    if (!CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                    if (!CDTXMania.ConfigDB.bベースが全部オートプレイである)
                     {
                         #region [ Auto Pick ]
                         if (bAutoPlay.BsPick)
@@ -1836,9 +1836,9 @@ namespace DTXMania
 		}
 		internal static void t更新条件を取得する( out bool bDrumsを更新する, out bool bGuitarを更新する, out bool bBassを更新する )
 		{
-			bDrumsを更新する =  CDTXMania.ConfigIni.bDrums有効  && CDTXMania.DTX.bチップがある.Drums  && !CDTXMania.ConfigIni.bドラムが全部オートプレイである;
-			bGuitarを更新する = CDTXMania.ConfigIni.bGuitar有効 && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigIni.bギターが全部オートプレイである;
-			bBassを更新する =   CDTXMania.ConfigIni.bGuitar有効 && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigIni.bベースが全部オートプレイである;
+			bDrumsを更新する =  CDTXMania.ConfigDB.bDrums有効  && CDTXMania.DTX.bチップがある.Drums  && !CDTXMania.ConfigDB.bドラムが全部オートプレイである;
+			bGuitarを更新する = CDTXMania.ConfigDB.bGuitar有効 && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigDB.bギターが全部オートプレイである;
+			bBassを更新する =   CDTXMania.ConfigDB.bGuitar有効 && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigDB.bベースが全部オートプレイである;
 		}
         internal static int t総合ランク値を計算して返す(C演奏記録 Drums, C演奏記録 Guitar, C演奏記録 Bass)
         {
@@ -1849,7 +1849,7 @@ namespace DTXMania
             int nPoor = Drums.nPoor数_Auto含まない + Guitar.nPoor数_Auto含まない + Bass.nPoor数_Auto含まない;		//
             int nMiss = Drums.nMiss数_Auto含まない + Guitar.nMiss数_Auto含まない + Bass.nMiss数_Auto含まない;		//
             int nCombo = Drums.n最大コンボ数 + Guitar.n最大コンボ数 + Bass.n最大コンボ数;		//
-            if (CDTXMania.ConfigIni.nSkillMode == 0)
+            if (CDTXMania.ConfigDB.nSkillMode == 0)
             {
                 return t旧ランク値を計算して返す(nTotal, nPerfect, nGreat, nGood, nPoor, nMiss);
             }

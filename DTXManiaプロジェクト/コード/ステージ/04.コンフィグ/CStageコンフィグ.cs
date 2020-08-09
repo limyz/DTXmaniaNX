@@ -81,7 +81,8 @@ namespace DTXMania
             Trace.Indent();
             try
             {
-                CDTXMania.ConfigIni.t書き出し(CDTXMania.strEXEのあるフォルダ + "Config.ini");	// CONFIGだけ
+                //CDTXMania.ConfigDB.t書き出し(CDTXMania.strEXEのあるフォルダ + "Config.ini");	// CONFIGだけ
+                CDTXMania.ConfigDB.t書き出し(CDTXMania.strEXEのあるフォルダ + "config_db.sqlite");
                 if (this.ftフォント != null)													// 以下OPTIONと共通
                 {
                     this.ftフォント.Dispose();
@@ -119,7 +120,7 @@ namespace DTXMania
                 this.txMenuパネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_menu panel.png" ) );
                 this.txItemBar = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_item bar.png" ) );
 
-				this.prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 18 );
+				this.prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigDB.str選曲リストフォント ), 18 );
 				string[] strMenuItem = { "System", "Drums", "Guitar", "Bass", "Exit" };
 				txMenuItemLeft = new CTexture[ strMenuItem.Length, 2 ];
 				for ( int i = 0; i < strMenuItem.Length; i++ )
@@ -334,7 +335,7 @@ namespace DTXMania
                         base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
                     }
                 }
-                else if ((CDTXMania.Pad.b押されたDGB(Eパッド.CY) || CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD) || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))
+                else if ((CDTXMania.Pad.b押されたDGB(Eパッド.CY) || CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD) || (CDTXMania.ConfigDB.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))
                 {
                     if (this.n現在のメニュー番号 == 4)
                     {

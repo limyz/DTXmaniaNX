@@ -27,13 +27,13 @@ namespace DTXMania
                 this.n本体Y = 12;
             }
 
-            if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
+            if (CDTXMania.ConfigDB.bGraph有効.Guitar || CDTXMania.ConfigDB.bGraph有効.Bass )
             {
-                if (!CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                if (!CDTXMania.ConfigDB.bギターが全部オートプレイである && CDTXMania.ConfigDB.bベースが全部オートプレイである)
                 {
                     this.n本体X[2] = 0;
                 }
-                else if (CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                else if (CDTXMania.ConfigDB.bギターが全部オートプレイである && !CDTXMania.ConfigDB.bベースが全部オートプレイである)
                 {
                     this.n本体X[1] = 0;
                 }

@@ -176,8 +176,8 @@ namespace DTXMania
             
             #endregion
 
-            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
-            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
+            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigDB.str曲名表示フォント ), 20, FontStyle.Regular );
+            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigDB.str曲名表示フォント ), 12, FontStyle.Regular );
             this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
             this.txパネル文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
             this.txパネル文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
@@ -205,8 +205,8 @@ namespace DTXMania
         {
             if( !base.b活性化してない )
             {
-                this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 0 ];
-                this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 0 ];
+                this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigDB.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigDB.strCardName[ 0 ];
+                this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigDB.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigDB.strGroupName[ 0 ];
 
                 Bitmap image2 = new Bitmap( 257, 100 );
                 Graphics graネームプレート用 = Graphics.FromImage( image2 );
@@ -215,7 +215,7 @@ namespace DTXMania
                 //--------------------
                 Color clNameColor = Color.White;
                 Color clNameColorLower = Color.White;
-                switch( CDTXMania.ConfigIni.nNameColor[ 0 ] )
+                switch( CDTXMania.ConfigDB.nNameColor[ 0 ] )
                 {
                     case 0:
                         clNameColor = Color.White;
@@ -292,7 +292,7 @@ namespace DTXMania
                 #endregion
                 #region[ 名前とか ]
                 Bitmap bmpCardName = new Bitmap(1, 1);
-                bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
+                bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigDB.nNameColor[ 0 ] > 11 ? clNameColorLower : clNameColor ) );
                 Bitmap bmpTitleName = new Bitmap(1, 1);
                 bmpTitleName = this.prv称号フォント.DrawPrivateFont( this.strTitleName, Color.White, Color.Transparent );
 
@@ -337,7 +337,7 @@ namespace DTXMania
                 string str = string.Format( "{0:0.00}", ( (float)CDTXMania.DTX.LEVEL[ i ]) / 10.0f + ( CDTXMania.DTX.LEVELDEC[ i ] != 0 ? CDTXMania.DTX.LEVELDEC[ i ] / 100.0f : 0 ) );
                 bool bCLASSIC = false;
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                if (CDTXMania.ConfigDB.nSkillMode == 0 || (CDTXMania.ConfigDB.bCLASSIC譜面判別を有効にする &&
                     (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
                     (CDTXMania.DTX.bチップがある.LP == false) &&
                     (CDTXMania.DTX.bチップがある.LBD == false) &&

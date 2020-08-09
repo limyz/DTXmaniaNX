@@ -240,7 +240,7 @@ namespace DTXMania
 
             #region [ 事前チェック。]
             //-----------------
-            if (CDTXMania.ConfigIni.ドラムコンボ文字の表示位置 == Eドラムコンボ文字の表示位置.OFF)
+            if (CDTXMania.ConfigDB.ドラムコンボ文字の表示位置 == Eドラムコンボ文字の表示位置.OFF)
                 return;		// 表示OFF。
 
             if (nCombo値 == 0)
@@ -401,7 +401,7 @@ namespace DTXMania
         {
             #region [ 事前チェック。]
             //-----------------
-            if ( CDTXMania.ConfigIni.n表示可能な最小コンボ数.Guitar == 0 )
+            if ( CDTXMania.ConfigDB.n表示可能な最小コンボ数.Guitar == 0 )
                 return;		// 表示OFF。
 
             if (nCombo値 == 0)
@@ -437,8 +437,8 @@ namespace DTXMania
             //CDTXMania.act文字コンソール.tPrint(1200, 48, C文字コンソール.Eフォント種別.白, this.ctコンボアニメ.n終了値.ToString());
             if( this.nY1の位座標差分値 > 0 )
             {
-                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? 16 : 4);
-                this.nY1の位座標差分値 = this.nY1の位座標差分値 - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ.db現在の値 : this.ctコンボアニメ.n現在の値);
+                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigDB.b垂直帰線待ちを行う ? 16 : 4);
+                this.nY1の位座標差分値 = this.nY1の位座標差分値 - ( CDTXMania.ConfigDB.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ.db現在の値 : this.ctコンボアニメ.n現在の値);
             }
             else
             {
@@ -504,7 +504,7 @@ namespace DTXMania
         {
             #region [ 事前チェック。]
             //-----------------
-            if ( CDTXMania.ConfigIni.n表示可能な最小コンボ数.Bass == 0 )
+            if ( CDTXMania.ConfigDB.n表示可能な最小コンボ数.Bass == 0 )
                 return;		// 表示OFF。
 
             if (nCombo値 == 0)
@@ -540,8 +540,8 @@ namespace DTXMania
             //CDTXMania.act文字コンソール.tPrint(1200, 48, C文字コンソール.Eフォント種別.白, this.ctコンボアニメ.n終了値.ToString());
             if( this.nY1の位座標差分値_2P > 0 )
             {
-                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? 16 : 4);
-                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ_2P.db現在の値 : this.ctコンボアニメ_2P.n現在の値);
+                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigDB.b垂直帰線待ちを行う ? 16 : 4);
+                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigDB.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ_2P.db現在の値 : this.ctコンボアニメ_2P.n現在の値);
             }
             else
             {
@@ -630,7 +630,7 @@ namespace DTXMania
 
             this.ctコンボアニメ = new CCounter( 0, 130, 4, CDTXMania.Timer );
             this.ctコンボアニメ_2P = new CCounter( 0, 130, 4, CDTXMania.Timer );
-            if(CDTXMania.ConfigIni.b垂直帰線待ちを行う)
+            if(CDTXMania.ConfigDB.b垂直帰線待ちを行う)
             {
                 this.ctコンボアニメ = new CCounter( 0.0, 130.0, 0.003, CSound管理.rc演奏用タイマ );
                 this.ctコンボアニメ_2P = new CCounter( 0.0, 130.0, 0.003, CSound管理.rc演奏用タイマ );
@@ -689,7 +689,7 @@ namespace DTXMania
                 {
                     e今回の状態遷移イベント = EEvent.ミス通知;
                 }
-                else if ((this.status[i].n現在表示中のCOMBO値 < CDTXMania.ConfigIni.n表示可能な最小コンボ数[i]) && (this.status[i].nCOMBO値 < CDTXMania.ConfigIni.n表示可能な最小コンボ数[i]))
+                else if ((this.status[i].n現在表示中のCOMBO値 < CDTXMania.ConfigDB.n表示可能な最小コンボ数[i]) && (this.status[i].nCOMBO値 < CDTXMania.ConfigDB.n表示可能な最小コンボ数[i]))
                 {
                     e今回の状態遷移イベント = EEvent.非表示;
                 }

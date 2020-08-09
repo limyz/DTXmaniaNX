@@ -33,7 +33,7 @@ namespace DTXMania
             this.rAVI = rAVI;
             #region[ アスペクト比からどっちを使うか判別 ]
             // 旧DShowモードを使っていて、旧規格クリップだったら新DShowモードを使う。
-            if( CDTXMania.ConfigIni.bDirectShowMode == false )
+            if( CDTXMania.ConfigDB.bDirectShowMode == false )
             {
                 this.fClipアスペクト比 = ( (float)rAVI.avi.nフレーム幅 / (float)rAVI.avi.nフレーム高さ );
                 this.bUseMRenderer = false;
@@ -353,7 +353,7 @@ namespace DTXMania
             {
                 this.n移動開始時刻ms = -1;
             }
-            if (this.dsBGV != null && CDTXMania.ConfigIni.bDirectShowMode == true)
+            if (this.dsBGV != null && CDTXMania.ConfigDB.bDirectShowMode == true)
             {
                 this.dsBGV.dshow.MediaCtrl.Stop();
                 this.bDShowクリップを再生している = false;
@@ -361,7 +361,7 @@ namespace DTXMania
         }
         public void MovieMode()
         {
-            this.nCurrentMovieMode = CDTXMania.ConfigIni.nMovieMode;
+            this.nCurrentMovieMode = CDTXMania.ConfigDB.nMovieMode;
             if ((this.nCurrentMovieMode == 1) || (this.nCurrentMovieMode == 3))
             {
                 this.bFullScreen = true;
@@ -401,7 +401,7 @@ namespace DTXMania
             this.bDShowクリップを再生している = false;
             this.pBmp = IntPtr.Zero;
             this.MovieMode();
-            this.nAlpha = 255 - ((int)(((float)(CDTXMania.ConfigIni.nMovieAlpha * 255)) / 10f));
+            this.nAlpha = 255 - ((int)(((float)(CDTXMania.ConfigDB.nMovieAlpha * 255)) / 10f));
             if (File.Exists(CSkin.Path(@"Graphics\7_Movie.mp4")))
             {
                 this.ds汎用 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\7_Movie.mp4"), CDTXMania.app.WindowHandle, true);
@@ -419,11 +419,11 @@ namespace DTXMania
             if (!base.b活性化してない)
             {
                 //this.txドラム = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Drums.png"));
-                if (CDTXMania.ConfigIni.bGuitar有効)
+                if (CDTXMania.ConfigDB.bGuitar有効)
                 {
                     this.txクリップパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_ClipPanelC.png"));
                 }
-                else if (CDTXMania.ConfigIni.bGraph有効.Drums && CDTXMania.ConfigIni.bDrums有効)
+                else if (CDTXMania.ConfigDB.bGraph有効.Drums && CDTXMania.ConfigDB.bDrums有効)
                 {
                     this.txクリップパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_ClipPanelB.png"));
                 }
@@ -494,7 +494,7 @@ namespace DTXMania
         }
         public unsafe int t進行描画(int x, int y)
         {
-            if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrums有効 ? CDTXMania.stage演奏ドラム画面.ct登場用.b終了値に達した : CDTXMania.stage演奏ギター画面.ct登場用.b終了値に達した))
+            if (this.txDShow汎用 != null && (CDTXMania.ConfigDB.bDrums有効 ? CDTXMania.stage演奏ドラム画面.ct登場用.b終了値に達した : CDTXMania.stage演奏ギター画面.ct登場用.b終了値に達した))
             {
                 #region[ 汎用動画 ]
                 if (this.ds汎用 != null)
@@ -538,7 +538,7 @@ namespace DTXMania
                     Rectangle rectangle2;
 
                     #region[ frameNoFromTime ]
-                    int time = (int)( ( CSound管理.rc演奏用タイマ.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
+                    int time = (int)( ( CSound管理.rc演奏用タイマ.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigDB.n演奏速度 ) / 20.0 ) );
                     int frameNoFromTime = 0;
                     if( this.bUseMRenderer )
                     {
@@ -696,13 +696,13 @@ namespace DTXMania
                                 }
                                 else
                                 {
-                                    if( CDTXMania.ConfigIni.bDrums有効 )
+                                    if( CDTXMania.ConfigDB.bDrums有効 )
                                     {
                                         this.tx描画用.vc拡大縮小倍率 = this.vclip;
                                         //this.tx描画用.t2D描画( CDTXMania.app.Device, 882, 0 );
                                         this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, 882, 0 );
                                     }
-                                    else if( CDTXMania.ConfigIni.bGuitar有効 )
+                                    else if( CDTXMania.ConfigDB.bGuitar有効 )
                                     {
                                         this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
                                         this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f);
@@ -751,12 +751,12 @@ namespace DTXMania
                             }
                             else
                             {
-                                if( CDTXMania.ConfigIni.bDrums有効 )
+                                if( CDTXMania.ConfigDB.bDrums有効 )
                                 {
                                     this.tx描画用.vc拡大縮小倍率 = this.vclip;
                                     this.tx描画用.t2D描画(CDTXMania.app.Device, 882, 0);
                                 }
-                                else if( CDTXMania.ConfigIni.bGuitar有効 )
+                                else if( CDTXMania.ConfigDB.bGuitar有効 )
                                 {
                                     this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
                                     this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f );
@@ -772,15 +772,15 @@ namespace DTXMania
 
             #endregion
 
-                if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigIni.bBGA有効 == true)
+                if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigDB.bBGA有効 == true)
                 {
-                    if (CDTXMania.ConfigIni.bDrums有効)
+                    if (CDTXMania.ConfigDB.bDrums有効)
                         CDTXMania.stage演奏ドラム画面.actBGA.t進行描画(980, 0);
                     else
                         CDTXMania.stage演奏ギター画面.actBGA.t進行描画(501, 0);
                 }
 
-                if( CDTXMania.ConfigIni.ボーナス演出を表示する == true )
+                if( CDTXMania.ConfigDB.ボーナス演出を表示する == true )
                 {
                     for( int i = 0; i < 1; i++ )
                     {
@@ -797,13 +797,13 @@ namespace DTXMania
                             CStage演奏ドラム画面 stageDrum = CDTXMania.stage演奏ドラム画面;
                             //CStage演奏ギター画面 stageGuitar = CDTXMania.stage演奏ギター画面;
 
-                            //if( ( CDTXMania.ConfigIni.bDrums有効 ? stageDrum.txボーナスエフェクト : stageGuitar.txボーナスエフェクト ) != null )
+                            //if( ( CDTXMania.ConfigDB.bDrums有効 ? stageDrum.txボーナスエフェクト : stageGuitar.txボーナスエフェクト ) != null )
                             {
                                 //this.txフィルインエフェクト.vc拡大縮小倍率.X = 2.0f;
                                 //this.txフィルインエフェクト.vc拡大縮小倍率.Y = 2.0f;
                                 //this.txフィルインエフェクト.b加算合成 = true;
                                 //this.txフィルインエフェクト.t2D描画(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
-                                if( CDTXMania.ConfigIni.bDrums有効 )
+                                if( CDTXMania.ConfigDB.bDrums有効 )
                                 {
                                     stageDrum.txボーナスエフェクト.vc拡大縮小倍率 = new Vector3( 2.0f, 2.0f, 1.0f );
                                     stageDrum.txボーナスエフェクト.b加算合成 = true;
@@ -823,18 +823,18 @@ namespace DTXMania
                     }
                 }
 
-                if (CDTXMania.ConfigIni.bShowMusicInfo)
+                if (CDTXMania.ConfigDB.bShowMusicInfo)
                     this.actPanel.t進行描画();
 
-                if( ( ( this.bWindowMode ) && this.tx描画用 != null && ( CDTXMania.ConfigIni.bAVI有効 ) ) )
+                if( ( ( this.bWindowMode ) && this.tx描画用 != null && ( CDTXMania.ConfigDB.bAVI有効 ) ) )
                 {
                     this.vector = this.tx描画用.vc拡大縮小倍率;
                     this.tx描画用.vc拡大縮小倍率 = this.smallvc;
                     this.tx描画用.n透明度 = 0xff;
 
-                    if( CDTXMania.ConfigIni.bDrums有効 )
+                    if( CDTXMania.ConfigDB.bDrums有効 )
                     {
-                        if( CDTXMania.ConfigIni.bGraph有効.Drums )
+                        if( CDTXMania.ConfigDB.bGraph有効.Drums )
                         {
                             #region[ スキルメーター有効 ]
                             this.n本体X = 2;
@@ -922,7 +922,7 @@ namespace DTXMania
                             #endregion
                         }
                     }
-                    else if( CDTXMania.ConfigIni.bGuitar有効 )
+                    else if( CDTXMania.ConfigDB.bGuitar有効 )
                     {
                         #region[ ギター時 ]
                         #region[ 本体位置 ]
@@ -930,9 +930,9 @@ namespace DTXMania
                         this.n本体Y = 50;
                         int nグラフX = 267;
 
-                        if( CDTXMania.ConfigIni.bGraph有効.Bass && !CDTXMania.DTX.bチップがある.Bass )
+                        if( CDTXMania.ConfigDB.bGraph有効.Bass && !CDTXMania.DTX.bチップがある.Bass )
                             this.n本体X = this.n本体X + nグラフX;
-                        if( CDTXMania.ConfigIni.bGraph有効.Guitar && !CDTXMania.DTX.bチップがある.Guitar )
+                        if( CDTXMania.ConfigDB.bGraph有効.Guitar && !CDTXMania.DTX.bチップがある.Guitar )
                             this.n本体X = this.n本体X - nグラフX;
                         #endregion
 

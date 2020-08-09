@@ -82,24 +82,24 @@ namespace DTXMania
                 {
                     this.nランク値[i] = -1;
                     this.fPerfect率[i] = this.fGreat率[i] = this.fGood率[i] = this.fPoor率[i] = this.fMiss率[i] = 0.0f;	// #28500 2011.5.24 yyagi
-                    if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
-                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
+                    if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigDB.bギタレボモード)) &&
+                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigDB.bギタレボモード))) &&
+                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigDB.bギタレボモード)))
                     {
                         CScoreIni.C演奏記録 part = this.st演奏記録[i];
                         bool bIsAutoPlay = true;
                         switch (i)
                         {
                             case 0:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bドラムが全部オートプレイである;
+                                bIsAutoPlay = CDTXMania.ConfigDB.bドラムが全部オートプレイである;
                                 break;
 
                             case 1:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bギターが全部オートプレイである;
+                                bIsAutoPlay = CDTXMania.ConfigDB.bギターが全部オートプレイである;
                                 break;
 
                             case 2:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bベースが全部オートプレイである;
+                                bIsAutoPlay = CDTXMania.ConfigDB.bベースが全部オートプレイである;
                                 break;
                         }		
 
@@ -111,11 +111,11 @@ namespace DTXMania
                         this.bオート[i] = bIsAutoPlay; // #23596 10.11.16 add ikanick そのパートがオートなら1
 						//        10.11.17 change (int to bool) ikanick
 						//18072020: Change first condition check to 1, XG mode is 1, not 0. Fisyher
-						if (CDTXMania.ConfigIni.nSkillMode == 1)
+						if (CDTXMania.ConfigDB.nSkillMode == 1)
                         {
                             this.nランク値[i] = CScoreIni.tランク値を計算して返す(part);
                         }
-                        else if (CDTXMania.ConfigIni.nSkillMode == 0)
+                        else if (CDTXMania.ConfigDB.nSkillMode == 0)
                         {
                             this.nランク値[i] = CScoreIni.t旧ランク値を計算して返す(part);
                         }
@@ -131,7 +131,7 @@ namespace DTXMania
 				CScoreIni ini = new CScoreIni( str );
 
 				bool[] b今までにフルコンボしたことがある = new bool[] { false, false, false };
-                if (!CDTXMania.ConfigIni.bドラムが全部オートプレイである || !CDTXMania.ConfigIni.bギターが全部オートプレイである || !CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                if (!CDTXMania.ConfigDB.bドラムが全部オートプレイである || !CDTXMania.ConfigDB.bギターが全部オートプレイである || !CDTXMania.ConfigDB.bベースが全部オートプレイである)
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -201,7 +201,7 @@ namespace DTXMania
 
                         //---------------------------------------------------------------------/
                     }
-                    if( CDTXMania.ConfigIni.bScoreIniを出力する )
+                    if( CDTXMania.ConfigDB.bScoreIniを出力する )
                     {
                         ini.t書き出し(str);
                     }
@@ -494,9 +494,9 @@ namespace DTXMania
 					bool l_newRecord = false;
 					for (int i = 0; i < 3; i++)
 					{
-						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
-							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
+						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigDB.bギタレボモード)) &&
+							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigDB.bギタレボモード))) &&
+							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigDB.bギタレボモード)))
 						{ 
 							if(bオート[i] == false)
                             {
@@ -639,8 +639,8 @@ namespace DTXMania
 				}
 				#region [ #24609 2011.3.14 yyagi ランク更新or演奏型スキル更新時、リザルト画像をpngで保存する ]
 				if ( this.bアニメが完了 == true && this.bIsCheckedWhetherResultScreenShouldSaveOrNot == false	// #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
-					&& CDTXMania.ConfigIni.bScoreIniを出力する
-					&& CDTXMania.ConfigIni.bIsAutoResultCapture)												// #25399 2011.6.9 yyagi
+					&& CDTXMania.ConfigDB.bScoreIniを出力する
+					&& CDTXMania.ConfigDB.bIsAutoResultCapture)												// #25399 2011.6.9 yyagi
 				{
 					CheckAndSaveResultScreen(true);
 					this.bIsCheckedWhetherResultScreenShouldSaveOrNot = true;
@@ -651,7 +651,7 @@ namespace DTXMania
 
 				if( CDTXMania.act現在入力を占有中のプラグイン == null )
 				{
-					if( CDTXMania.ConfigIni.bドラム打音を発声する && CDTXMania.ConfigIni.bDrums有効 )
+					if( CDTXMania.ConfigDB.bドラム打音を発声する && CDTXMania.ConfigDB.bDrums有効 )
 					{
 						for( int i = 0; i < 11; i++ )
 						{
@@ -715,7 +715,7 @@ namespace DTXMania
 											this.n最後に再生したHHのWAV番号 = rChip.n整数値_内部番号;
 											this.n最後に再生したHHのチャンネル番号 = rChip.nチャンネル番号;
 										}
-										CDTXMania.DTX.tチップの再生( rChip, CDTXMania.Timer.nシステム時刻, nLane, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
+										CDTXMania.DTX.tチップの再生( rChip, CDTXMania.Timer.nシステム時刻, nLane, CDTXMania.ConfigDB.n手動再生音量, CDTXMania.ConfigDB.b演奏音を強調する.Drums );
 									}
 								}
 							}
@@ -731,7 +731,7 @@ namespace DTXMania
 					}
 					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
 //					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
-//						CDTXMania.ConfigIni.bScoreIniを出力する )
+//						CDTXMania.ConfigDB.bScoreIniを出力する )
 //					{
 //						CheckAndSaveResultScreen(false);
 //						this.bIsCheckedWhetherResultScreenShouldSaveOrNot = true;

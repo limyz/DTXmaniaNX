@@ -199,7 +199,7 @@ namespace DTXMania
 
                 CDTX cdtx = new CDTX( strDTXファイルパス, true );
 
-                if( !CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
+                if( !CDTXMania.bコンパクトモード && CDTXMania.ConfigDB.b曲名表示をdefのものにする )
                     this.str曲タイトル = CDTXMania.stage選曲.r確定された曲.strタイトル;
                 else
                     this.str曲タイトル = cdtx.TITLE;
@@ -222,7 +222,7 @@ namespace DTXMania
                 // Read ghost data by config
                 // It does not exist a ghost file for 'perfect' actually
                 string [] inst = {"dr", "gt", "bs"};
-				if( CDTXMania.ConfigIni.bIsSwappedGuitarBass )
+				if( CDTXMania.ConfigDB.bIsSwappedGuitarBass )
 				{
 					inst[1] = "bs";
 					inst[2] = "gt";
@@ -232,9 +232,9 @@ namespace DTXMania
                 {
                     //break; //2016.01.03 kairera0467 以下封印。
                     bool readAutoGhostCond = false;
-                    readAutoGhostCond |= instIndex == 0 ? CDTXMania.ConfigIni.bドラムが全部オートプレイである : false;
-                    readAutoGhostCond |= instIndex == 1 ? CDTXMania.ConfigIni.bギターが全部オートプレイである : false;
-                    readAutoGhostCond |= instIndex == 2 ? CDTXMania.ConfigIni.bベースが全部オートプレイである : false;
+                    readAutoGhostCond |= instIndex == 0 ? CDTXMania.ConfigDB.bドラムが全部オートプレイである : false;
+                    readAutoGhostCond |= instIndex == 1 ? CDTXMania.ConfigDB.bギターが全部オートプレイである : false;
+                    readAutoGhostCond |= instIndex == 2 ? CDTXMania.ConfigDB.bベースが全部オートプレイである : false;
 
                     CDTXMania.listTargetGhsotLag[instIndex] = null;
                     CDTXMania.listAutoGhostLag[instIndex] = null;
@@ -244,7 +244,7 @@ namespace DTXMania
                     if ( readAutoGhostCond )
                     {
                         string[] prefix = { "perfect", "lastplay", "hiskill", "hiscore", "online" };
-                        int indPrefix = (int)CDTXMania.ConfigIni.eAutoGhost[ instIndex ];
+                        int indPrefix = (int)CDTXMania.ConfigDB.eAutoGhost[ instIndex ];
                         string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ instIndex ] + ".ghost";
                         if( File.Exists( filename ) )
                         {
@@ -254,10 +254,10 @@ namespace DTXMania
                         }
                     }
 
-                    if( CDTXMania.ConfigIni.eTargetGhost[instIndex] != ETargetGhostData.NONE )
+                    if( CDTXMania.ConfigDB.eTargetGhost[instIndex] != ETargetGhostData.NONE )
                     {
                         string[] prefix = { "none", "perfect", "lastplay", "hiskill", "hiscore", "online" };
-                        int indPrefix = (int)CDTXMania.ConfigIni.eTargetGhost[ instIndex ];
+                        int indPrefix = (int)CDTXMania.ConfigDB.eTargetGhost[ instIndex ];
                         string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ instIndex ] + ".ghost";
                         if( File.Exists( filename ) )
                         {
@@ -266,7 +266,7 @@ namespace DTXMania
                             this.stGhostLag[instIndex] = new List<STGhostLag>();
                             ReadGhost(filename, CDTXMania.listTargetGhsotLag[instIndex]);
                         }
-                        else if( CDTXMania.ConfigIni.eTargetGhost[instIndex] == ETargetGhostData.PERFECT )
+                        else if( CDTXMania.ConfigDB.eTargetGhost[instIndex] == ETargetGhostData.PERFECT )
                         {
                             // All perfect
                             CDTXMania.listTargetGhsotLag[instIndex] = new List<int>();
@@ -314,7 +314,7 @@ namespace DTXMania
                     #region[ 曲名、アーティスト名テクスチャの生成 ]
                     if ((this.str曲タイトル != null) && (this.str曲タイトル.Length > 0))
                     {
-                        this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 40, FontStyle.Regular);
+                        this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 40, FontStyle.Regular);
                         Bitmap bmpSongName = new Bitmap(1, 1);
                         bmpSongName = this.pfタイトル.DrawPrivateFont(this.str曲タイトル, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                         this.txタイトル = CDTXMania.tテクスチャの生成(bmpSongName, false);
@@ -328,7 +328,7 @@ namespace DTXMania
 
                     if ((this.strアーティスト名 != null) && (this.strアーティスト名.Length > 0))
                     {
-                        pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 30, FontStyle.Regular);
+                        pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 30, FontStyle.Regular);
                         Bitmap bmpArtistName = new Bitmap(1, 1);
                         bmpArtistName = pfアーティスト.DrawPrivateFont(this.strアーティスト名, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                         this.txアーティスト = CDTXMania.tテクスチャの生成(bmpArtistName, false);
@@ -475,7 +475,7 @@ namespace DTXMania
                 this.txアーティスト.t2D描画(CDTXMania.app.Device, 190, 360);
             }
 
-            int[] iPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
+            int[] iPart = { 0, CDTXMania.ConfigDB.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigDB.bIsSwappedGuitarBass ? 1 : 2 };
 
             int j = 0;
             int k = 0;
@@ -489,13 +489,13 @@ namespace DTXMania
                 DTXLevel = cdtx.LEVEL[j];
                 DTXLevelDeci = cdtx.LEVELDEC[j];
 
-                if ((CDTXMania.ConfigIni.bDrums有効 && i == 0) || (CDTXMania.ConfigIni.bGuitar有効 && i != 0))
+                if ((CDTXMania.ConfigDB.bDrums有効 && i == 0) || (CDTXMania.ConfigDB.bGuitar有効 && i != 0))
                 {
 
                     if (DTXLevel != 0 || DTXLevelDeci != 0)
                     {
                         //Always display CLASSIC style if Skill Mode is Classic
-                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                        if (CDTXMania.ConfigDB.nSkillMode == 0 || (CDTXMania.ConfigDB.bCLASSIC譜面判別を有効にする && 
                             CDTXMania.stage選曲.r確定されたスコア.譜面情報.b完全にCLASSIC譜面である[j] && 
                             !cdtx.b強制的にXG譜面にする))
                         {
@@ -532,7 +532,7 @@ namespace DTXMania
 
                 if (i == 2 && k == 0)
                 {
-                    if (this.txパートパネル != null && CDTXMania.ConfigIni.bDrums有効)
+                    if (this.txパートパネル != null && CDTXMania.ConfigDB.bDrums有効)
                         this.txパートパネル.t2D描画(CDTXMania.app.Device, 191, 52, new Rectangle(0, 0, 262, 50));
 
                     if (this.tx難易度パネル != null)
@@ -567,7 +567,7 @@ namespace DTXMania
                         if ((CDTXMania.DTX != null) && CDTXMania.DTX.b活性化してる)
                             CDTXMania.DTX.On非活性化();
 
-                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigIni.n演奏速度) / 20.0, ini.stファイル.BGMAdjust);
+                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigDB.n演奏速度) / 20.0, ini.stファイル.BGMAdjust);
                         Trace.TraceInformation("----曲情報-----------------");
                         Trace.TraceInformation("TITLE: {0}", CDTXMania.DTX.TITLE);
                         Trace.TraceInformation("FILE: {0}", CDTXMania.DTX.strファイル名の絶対パス);
@@ -597,7 +597,7 @@ namespace DTXMania
                         }
                         
                         string [] inst = {"dr", "gt", "bs"};
-        				if( CDTXMania.ConfigIni.bIsSwappedGuitarBass )
+        				if( CDTXMania.ConfigDB.bIsSwappedGuitarBass )
 				        {
 		        			inst[1] = "bs";
         					inst[2] = "gt";
@@ -610,7 +610,7 @@ namespace DTXMania
 
                             //2016.06.18 kairera0467 「.ghost.score」ファイルが無かった場合ghostファイルから逆算を行う形に変更。
                             string[] prefix = { "none", "perfect", "lastplay", "hiskill", "hiscore", "online" };
-                            int indPrefix = (int)CDTXMania.ConfigIni.eTargetGhost[ i ];
+                            int indPrefix = (int)CDTXMania.ConfigDB.eTargetGhost[ i ];
                             string filename = cdtx.strフォルダ名 + "\\" + cdtx.strファイル名 + "." + prefix[ indPrefix ] + "." + inst[ i ] + ".ghost";
 
                             if( this.stGhostLag[ i ] == null || File.Exists( filename + ".score" ) )
@@ -673,7 +673,7 @@ namespace DTXMania
                             int nTotal = CDTXMania.DTX.n可視チップ数.Drums;
                             if( i == 1 ) nTotal = CDTXMania.DTX.n可視チップ数.Guitar;
                             else if( i == 2 ) nTotal = CDTXMania.DTX.n可視チップ数.Bass;
-                            if( CDTXMania.ConfigIni.nSkillMode == 0 )
+                            if( CDTXMania.ConfigDB.nSkillMode == 0 )
                             {
                                 CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[i].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
@@ -702,7 +702,7 @@ namespace DTXMania
                         {
                             //ShowProgressByFilename(CDTXMania.DTX.listWAV[nWAVcount].strファイル名);
                         }
-                        int looptime = (CDTXMania.ConfigIni.b垂直帰線待ちを行う) ? 3 : 1;	// VSyncWait=ON時は1frame(1/60s)あたり3つ読むようにする
+                        int looptime = (CDTXMania.ConfigDB.b垂直帰線待ちを行う) ? 3 : 1;	// VSyncWait=ON時は1frame(1/60s)あたり3つ読むようにする
                         for (int i = 0; i < looptime && nWAVcount <= CDTXMania.DTX.listWAV.Count; i++)
                         {
                             if (CDTXMania.DTX.listWAV[nWAVcount].listこのWAVを使用するチャンネル番号の集合.Count > 0)	// #28674 2012.5.8 yyagi
@@ -721,19 +721,19 @@ namespace DTXMania
                             Trace.TraceInformation("WAV読込所要時間({0,4}):     {1}", CDTXMania.DTX.listWAV.Count, span.ToString());
                             timeBeginLoadWAV = DateTime.Now;
 
-                            if (CDTXMania.ConfigIni.bDynamicBassMixerManagement)
+                            if (CDTXMania.ConfigDB.bDynamicBassMixerManagement)
                             {
                                 CDTXMania.DTX.PlanToAddMixerChannel();
                             }
-                            CDTXMania.DTX.t旧仕様のドコドコチップを振り分ける(E楽器パート.DRUMS, CDTXMania.ConfigIni.bAssignToLBD.Drums);
-                            CDTXMania.DTX.tドコドコ仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigIni.eDkdkType.Drums);
-                            CDTXMania.DTX.tドラムのランダム化(E楽器パート.DRUMS, CDTXMania.ConfigIni.eRandom.Drums);
-                            CDTXMania.DTX.tドラムの足ランダム化(E楽器パート.DRUMS, CDTXMania.ConfigIni.eRandomPedal.Drums);
-                            CDTXMania.DTX.t譜面仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigIni.eNumOfLanes.Drums);
-                            CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.GUITAR, CDTXMania.ConfigIni.eRandom.Guitar);
-                            CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.BASS, CDTXMania.ConfigIni.eRandom.Bass);
+                            CDTXMania.DTX.t旧仕様のドコドコチップを振り分ける(E楽器パート.DRUMS, CDTXMania.ConfigDB.bAssignToLBD.Drums);
+                            CDTXMania.DTX.tドコドコ仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigDB.eDkdkType.Drums);
+                            CDTXMania.DTX.tドラムのランダム化(E楽器パート.DRUMS, CDTXMania.ConfigDB.eRandom.Drums);
+                            CDTXMania.DTX.tドラムの足ランダム化(E楽器パート.DRUMS, CDTXMania.ConfigDB.eRandomPedal.Drums);
+                            CDTXMania.DTX.t譜面仕様変更(E楽器パート.DRUMS, CDTXMania.ConfigDB.eNumOfLanes.Drums);
+                            CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.GUITAR, CDTXMania.ConfigDB.eRandom.Guitar);
+                            CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.BASS, CDTXMania.ConfigDB.eRandom.Bass);
 
-                            if (CDTXMania.ConfigIni.bギタレボモード)
+                            if (CDTXMania.ConfigDB.bギタレボモード)
                                 CDTXMania.stage演奏ギター画面.On活性化();
                             else
                                 CDTXMania.stage演奏ドラム画面.On活性化();
@@ -750,10 +750,10 @@ namespace DTXMania
                     {
                         TimeSpan span;
                         DateTime timeBeginLoadBMPAVI = DateTime.Now;
-                        if (CDTXMania.ConfigIni.bBGA有効)
+                        if (CDTXMania.ConfigDB.bBGA有効)
                             CDTXMania.DTX.tBMP_BMPTEXの読み込み();
 
-                        if (CDTXMania.ConfigIni.bAVI有効)
+                        if (CDTXMania.ConfigDB.bAVI有効)
                             CDTXMania.DTX.tAVIの読み込み();
                         span = (TimeSpan)(DateTime.Now - timeBeginLoadBMPAVI);
                         Trace.TraceInformation("BMP/AVI読込所要時間({0,4}): {1}", (CDTXMania.DTX.listBMP.Count + CDTXMania.DTX.listBMPTEX.Count + CDTXMania.DTX.listAVI.Count), span.ToString());
@@ -802,7 +802,7 @@ namespace DTXMania
             IInputDevice keyboard = CDTXMania.Input管理.Keyboard;
             if ( keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )		// escape (exit)
             {
-                if ( CDTXMania.ConfigIni.bギタレボモード )
+                if ( CDTXMania.ConfigDB.bギタレボモード )
                 {
                     if (CDTXMania.stage演奏ギター画面.b活性化してる == true)
                         CDTXMania.stage演奏ギター画面.On非活性化();

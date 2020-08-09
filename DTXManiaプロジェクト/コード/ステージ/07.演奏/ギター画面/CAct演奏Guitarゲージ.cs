@@ -82,7 +82,7 @@ namespace DTXMania
             if (base.txフレーム.Guitar != null && CDTXMania.DTX.bチップがある.Guitar)
             {
                 base.txフレーム.Guitar.t2D描画(CDTXMania.app.Device, base.n本体X.Guitar, 0, new Rectangle(0, 0, base.txフレーム.Guitar.sz画像サイズ.Width, 68));
-                base.txハイスピ.t2D描画(CDTXMania.app.Device, - 36 + base.n本体X.Guitar + base.txフレーム.Guitar.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Guitar * 48, 42, 48));
+                base.txハイスピ.t2D描画(CDTXMania.app.Device, - 36 + base.n本体X.Guitar + base.txフレーム.Guitar.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigDB.n譜面スクロール速度.Guitar * 48, 42, 48));
                 if (base.db現在のゲージ値.Guitar == 1.0 && base.txフルゲージ != null)
                 {
                     base.txフルゲージ.t2D描画(CDTXMania.app.Device, 6 + base.n本体X.Guitar, 31, new Rectangle(0, 0, base.txフレーム.Guitar.sz画像サイズ.Width - 48, 30));
@@ -110,7 +110,7 @@ namespace DTXMania
             if (base.txフレーム.Bass != null && CDTXMania.DTX.bチップがある.Bass)
             {
                 base.txフレーム.Bass.t2D描画(CDTXMania.app.Device, base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 0, new Rectangle(0, 0, base.txフレーム.Bass.sz画像サイズ.Width, 68));
-                base.txハイスピ.t2D描画(CDTXMania.app.Device, 4 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Bass * 48, 42, 48));
+                base.txハイスピ.t2D描画(CDTXMania.app.Device, 4 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigDB.n譜面スクロール速度.Bass * 48, 42, 48));
                 if (base.db現在のゲージ値.Bass == 1.0 && base.txフルゲージ != null)
                 {
                     base.txフルゲージ.t2D描画(CDTXMania.app.Device, 42 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 31, new Rectangle(0, 0, base.txフレーム.Bass.sz画像サイズ.Width - 48, 30));

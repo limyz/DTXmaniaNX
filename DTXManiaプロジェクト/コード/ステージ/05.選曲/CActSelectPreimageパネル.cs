@@ -21,7 +21,7 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			this.ct遅延表示 = new CCounter( -CDTXMania.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms, 100, 1, CDTXMania.Timer );
+			this.ct遅延表示 = new CCounter( -CDTXMania.ConfigDB.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms, 100, 1, CDTXMania.Timer );
 			this.b新しいプレビューファイルを読み込んだ = false;
 		}
 
@@ -114,7 +114,7 @@ namespace DTXMania
 				}
 				else if( ( ( this.avi != null ) && ( this.sfAVI画像 != null ) ) && ( this.nAVI再生開始時刻 != -1 ) )
 				{
-					int time = (int) ( ( CDTXMania.Timer.n現在時刻 - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
+					int time = (int) ( ( CDTXMania.Timer.n現在時刻 - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigDB.n演奏速度 ) / 20.0 ) );
 					int frameNoFromTime = this.avi.GetFrameNoFromTime( time );
 					if( frameNoFromTime >= this.avi.GetMaxFrameCount() )
 					{
@@ -220,7 +220,7 @@ namespace DTXMania
 			}
 			this.pAVIBmp = IntPtr.Zero;
 			this.nAVI再生開始時刻 = -1;
-			if( !CDTXMania.ConfigIni.bストイックモード )
+			if( !CDTXMania.ConfigDB.bストイックモード )
 			{
 				if( this.tプレビュー動画の指定があれば構築する() )
 				{
@@ -270,7 +270,7 @@ namespace DTXMania
 		private bool tプレビュー動画の指定があれば構築する()
 		{
 			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( CDTXMania.ConfigIni.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.譜面情報.Premovie ) )
+			if( ( CDTXMania.ConfigDB.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.譜面情報.Premovie ) )
 			{
 				string filename = cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Premovie;
 				if( filename.Equals( this.str現在のファイル名 ) )

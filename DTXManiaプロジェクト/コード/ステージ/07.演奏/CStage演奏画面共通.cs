@@ -40,24 +40,24 @@ namespace DTXMania
         {
             Drums = new CScoreIni.C演奏記録();
 
-            if (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)
+            if (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigDB.bギタレボモード)
             {
                 Drums.nスコア = (long)this.actScore.Get(E楽器パート.DRUMS);
-                if (CDTXMania.ConfigIni.nSkillMode == 0)
+                if (CDTXMania.ConfigDB.nSkillMode == 0)
                 {
                     Drums.dbゲーム型スキル値 = CScoreIni.t旧ゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Drums, CDTXMania.DTX.LEVELDEC.Drums, CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.actCombo.n現在のコンボ数.最高値.Drums, E楽器パート.DRUMS, bIsAutoPlay);
                     Drums.db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, this.actCombo.n現在のコンボ数.最高値.Drums, E楽器パート.DRUMS, bIsAutoPlay);
                 }
-                else if (CDTXMania.ConfigIni.nSkillMode == 1)
+                else if (CDTXMania.ConfigDB.nSkillMode == 1)
                 {
                     Drums.dbゲーム型スキル値 = CScoreIni.tゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Drums, CDTXMania.DTX.LEVELDEC.Drums, CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.actCombo.n現在のコンボ数.最高値.Drums, E楽器パート.DRUMS, bIsAutoPlay);
                     Drums.db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Drums, this.nヒット数_Auto含まない.Drums.Perfect, this.nヒット数_Auto含まない.Drums.Great, this.nヒット数_Auto含まない.Drums.Good, this.nヒット数_Auto含まない.Drums.Poor, this.nヒット数_Auto含まない.Drums.Miss, this.actCombo.n現在のコンボ数.最高値.Drums, E楽器パート.DRUMS, bIsAutoPlay);
                 }
-                Drums.nPerfect数 = CDTXMania.ConfigIni.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Perfect : this.nヒット数_Auto含まない.Drums.Perfect;
-                Drums.nGreat数 = CDTXMania.ConfigIni.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Great : this.nヒット数_Auto含まない.Drums.Great;
-                Drums.nGood数 = CDTXMania.ConfigIni.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Good : this.nヒット数_Auto含まない.Drums.Good;
-                Drums.nPoor数 = CDTXMania.ConfigIni.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Poor : this.nヒット数_Auto含まない.Drums.Poor;
-                Drums.nMiss数 = CDTXMania.ConfigIni.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Miss : this.nヒット数_Auto含まない.Drums.Miss;
+                Drums.nPerfect数 = CDTXMania.ConfigDB.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Perfect : this.nヒット数_Auto含まない.Drums.Perfect;
+                Drums.nGreat数 = CDTXMania.ConfigDB.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Great : this.nヒット数_Auto含まない.Drums.Great;
+                Drums.nGood数 = CDTXMania.ConfigDB.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Good : this.nヒット数_Auto含まない.Drums.Good;
+                Drums.nPoor数 = CDTXMania.ConfigDB.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Poor : this.nヒット数_Auto含まない.Drums.Poor;
+                Drums.nMiss数 = CDTXMania.ConfigDB.bドラムが全部オートプレイである ? this.nヒット数_Auto含む.Drums.Miss : this.nヒット数_Auto含まない.Drums.Miss;
                 Drums.nPerfect数_Auto含まない = this.nヒット数_Auto含まない.Drums.Perfect;
                 Drums.nGreat数_Auto含まない = this.nヒット数_Auto含まない.Drums.Great;
                 Drums.nGood数_Auto含まない = this.nヒット数_Auto含まない.Drums.Good;
@@ -69,30 +69,30 @@ namespace DTXMania
                 {
                     Drums.bAutoPlay[i] = bIsAutoPlay[i];
                 }
-                Drums.bTight = CDTXMania.ConfigIni.bTight;
+                Drums.bTight = CDTXMania.ConfigDB.bTight;
                 for (int i = 0; i < 3; i++)
                 {
-                    Drums.bSudden[i] = CDTXMania.ConfigIni.bSudden[i];
-                    Drums.bHidden[i] = CDTXMania.ConfigIni.bHidden[i];
-                    Drums.bReverse[i] = CDTXMania.ConfigIni.bReverse[i];
-                    Drums.eRandom[i] = CDTXMania.ConfigIni.eRandom[i];
-                    Drums.bLight[i] = CDTXMania.ConfigIni.bLight[i];
-                    Drums.bLeft[i] = CDTXMania.ConfigIni.bLeft[i];
-                    Drums.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigIni.n譜面スクロール速度[i] + 1)) * 0.5f;
+                    Drums.bSudden[i] = CDTXMania.ConfigDB.bSudden[i];
+                    Drums.bHidden[i] = CDTXMania.ConfigDB.bHidden[i];
+                    Drums.bReverse[i] = CDTXMania.ConfigDB.bReverse[i];
+                    Drums.eRandom[i] = CDTXMania.ConfigDB.eRandom[i];
+                    Drums.bLight[i] = CDTXMania.ConfigDB.bLight[i];
+                    Drums.bLeft[i] = CDTXMania.ConfigDB.bLeft[i];
+                    Drums.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigDB.n譜面スクロール速度[i] + 1)) * 0.5f;
                 }
-                Drums.eDark = CDTXMania.ConfigIni.eDark;
-                Drums.n演奏速度分子 = CDTXMania.ConfigIni.n演奏速度;
+                Drums.eDark = CDTXMania.ConfigDB.eDark;
+                Drums.n演奏速度分子 = CDTXMania.ConfigDB.n演奏速度;
                 Drums.n演奏速度分母 = 20;
-                Drums.eHHGroup = CDTXMania.ConfigIni.eHHGroup;
-                Drums.eFTGroup = CDTXMania.ConfigIni.eFTGroup;
-                Drums.eCYGroup = CDTXMania.ConfigIni.eCYGroup;
-                Drums.eHitSoundPriorityHH = CDTXMania.ConfigIni.eHitSoundPriorityHH;
-                Drums.eHitSoundPriorityFT = CDTXMania.ConfigIni.eHitSoundPriorityFT;
-                Drums.eHitSoundPriorityCY = CDTXMania.ConfigIni.eHitSoundPriorityCY;
-                Drums.bGuitar有効 = CDTXMania.ConfigIni.bGuitar有効;
-                Drums.bDrums有効 = CDTXMania.ConfigIni.bDrums有効;
-                Drums.bSTAGEFAILED有効 = CDTXMania.ConfigIni.bSTAGEFAILED有効;
-                Drums.eダメージレベル = CDTXMania.ConfigIni.eダメージレベル;
+                Drums.eHHGroup = CDTXMania.ConfigDB.eHHGroup;
+                Drums.eFTGroup = CDTXMania.ConfigDB.eFTGroup;
+                Drums.eCYGroup = CDTXMania.ConfigDB.eCYGroup;
+                Drums.eHitSoundPriorityHH = CDTXMania.ConfigDB.eHitSoundPriorityHH;
+                Drums.eHitSoundPriorityFT = CDTXMania.ConfigDB.eHitSoundPriorityFT;
+                Drums.eHitSoundPriorityCY = CDTXMania.ConfigDB.eHitSoundPriorityCY;
+                Drums.bGuitar有効 = CDTXMania.ConfigDB.bGuitar有効;
+                Drums.bDrums有効 = CDTXMania.ConfigDB.bDrums有効;
+                Drums.bSTAGEFAILED有効 = CDTXMania.ConfigDB.bSTAGEFAILED有効;
+                Drums.eダメージレベル = CDTXMania.ConfigDB.eダメージレベル;
                 Drums.b演奏にキーボードを使用した = this.b演奏にキーボードを使った.Drums;
                 Drums.b演奏にMIDI入力を使用した = this.b演奏にMIDI入力を使った.Drums;
                 Drums.b演奏にジョイパッドを使用した = this.b演奏にジョイパッドを使った.Drums;
@@ -115,21 +115,21 @@ namespace DTXMania
             if (CDTXMania.DTX.bチップがある.Guitar)
             {
                 Guitar.nスコア = (long)this.actScore.Get(E楽器パート.GUITAR);
-                if (CDTXMania.ConfigIni.nSkillMode == 0)
+                if (CDTXMania.ConfigDB.nSkillMode == 0)
                 {
                     Guitar.dbゲーム型スキル値 = CScoreIni.t旧ゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Guitar, CDTXMania.DTX.LEVELDEC.Guitar, CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数_Auto含まない.Guitar.Perfect, this.nヒット数_Auto含まない.Guitar.Great, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR, bIsAutoPlay);
                     Guitar.db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数_Auto含まない.Guitar.Perfect, this.nヒット数_Auto含まない.Guitar.Great, this.nヒット数_Auto含まない.Guitar.Good, this.nヒット数_Auto含まない.Guitar.Poor, this.nヒット数_Auto含まない.Guitar.Miss, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR, bIsAutoPlay);
                 }
-                else if (CDTXMania.ConfigIni.nSkillMode == 1)
+                else if (CDTXMania.ConfigDB.nSkillMode == 1)
                 {
                     Guitar.dbゲーム型スキル値 = CScoreIni.tゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Guitar, CDTXMania.DTX.LEVELDEC.Guitar, CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数_Auto含まない.Guitar.Perfect, this.nヒット数_Auto含まない.Guitar.Great, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR, bIsAutoPlay);
                     Guitar.db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Guitar, this.nヒット数_Auto含まない.Guitar.Perfect, this.nヒット数_Auto含まない.Guitar.Great, this.nヒット数_Auto含まない.Guitar.Good, this.nヒット数_Auto含まない.Guitar.Poor, this.nヒット数_Auto含まない.Guitar.Miss, this.actCombo.n現在のコンボ数.最高値.Guitar, E楽器パート.GUITAR, bIsAutoPlay);
                 }
-                Guitar.nPerfect数 = CDTXMania.ConfigIni.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Perfect : this.nヒット数_Auto含まない.Guitar.Perfect;
-                Guitar.nGreat数 = CDTXMania.ConfigIni.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Great : this.nヒット数_Auto含まない.Guitar.Great;
-                Guitar.nGood数 = CDTXMania.ConfigIni.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Good : this.nヒット数_Auto含まない.Guitar.Good;
-                Guitar.nPoor数 = CDTXMania.ConfigIni.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Poor : this.nヒット数_Auto含まない.Guitar.Poor;
-                Guitar.nMiss数 = CDTXMania.ConfigIni.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Miss : this.nヒット数_Auto含まない.Guitar.Miss;
+                Guitar.nPerfect数 = CDTXMania.ConfigDB.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Perfect : this.nヒット数_Auto含まない.Guitar.Perfect;
+                Guitar.nGreat数 = CDTXMania.ConfigDB.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Great : this.nヒット数_Auto含まない.Guitar.Great;
+                Guitar.nGood数 = CDTXMania.ConfigDB.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Good : this.nヒット数_Auto含まない.Guitar.Good;
+                Guitar.nPoor数 = CDTXMania.ConfigDB.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Poor : this.nヒット数_Auto含まない.Guitar.Poor;
+                Guitar.nMiss数 = CDTXMania.ConfigDB.bギターが全部オートプレイである ? this.nヒット数_Auto含む.Guitar.Miss : this.nヒット数_Auto含まない.Guitar.Miss;
                 Guitar.nPerfect数_Auto含まない = this.nヒット数_Auto含まない.Guitar.Perfect;
                 Guitar.nGreat数_Auto含まない = this.nヒット数_Auto含まない.Guitar.Great;
                 Guitar.nGood数_Auto含まない = this.nヒット数_Auto含まない.Guitar.Good;
@@ -141,30 +141,30 @@ namespace DTXMania
                 {
                     Guitar.bAutoPlay[i] = bIsAutoPlay[i];
                 }
-                Guitar.bTight = CDTXMania.ConfigIni.bTight;
+                Guitar.bTight = CDTXMania.ConfigDB.bTight;
                 for (int i = 0; i < 3; i++)
                 {
-                    Guitar.bSudden[i] = CDTXMania.ConfigIni.bSudden[i];
-                    Guitar.bHidden[i] = CDTXMania.ConfigIni.bHidden[i];
-                    Guitar.bReverse[i] = CDTXMania.ConfigIni.bReverse[i];
-                    Guitar.eRandom[i] = CDTXMania.ConfigIni.eRandom[i];
-                    Guitar.bLight[i] = CDTXMania.ConfigIni.bLight[i];
-                    Guitar.bLeft[i] = CDTXMania.ConfigIni.bLeft[i];
-                    Guitar.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigIni.n譜面スクロール速度[i] + 1)) * 0.5f;
+                    Guitar.bSudden[i] = CDTXMania.ConfigDB.bSudden[i];
+                    Guitar.bHidden[i] = CDTXMania.ConfigDB.bHidden[i];
+                    Guitar.bReverse[i] = CDTXMania.ConfigDB.bReverse[i];
+                    Guitar.eRandom[i] = CDTXMania.ConfigDB.eRandom[i];
+                    Guitar.bLight[i] = CDTXMania.ConfigDB.bLight[i];
+                    Guitar.bLeft[i] = CDTXMania.ConfigDB.bLeft[i];
+                    Guitar.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigDB.n譜面スクロール速度[i] + 1)) * 0.5f;
                 }
-                Guitar.eDark = CDTXMania.ConfigIni.eDark;
-                Guitar.n演奏速度分子 = CDTXMania.ConfigIni.n演奏速度;
+                Guitar.eDark = CDTXMania.ConfigDB.eDark;
+                Guitar.n演奏速度分子 = CDTXMania.ConfigDB.n演奏速度;
                 Guitar.n演奏速度分母 = 20;
-                Guitar.eHHGroup = CDTXMania.ConfigIni.eHHGroup;
-                Guitar.eFTGroup = CDTXMania.ConfigIni.eFTGroup;
-                Guitar.eCYGroup = CDTXMania.ConfigIni.eCYGroup;
-                Guitar.eHitSoundPriorityHH = CDTXMania.ConfigIni.eHitSoundPriorityHH;
-                Guitar.eHitSoundPriorityFT = CDTXMania.ConfigIni.eHitSoundPriorityFT;
-                Guitar.eHitSoundPriorityCY = CDTXMania.ConfigIni.eHitSoundPriorityCY;
-                Guitar.bGuitar有効 = CDTXMania.ConfigIni.bGuitar有効;
-                Guitar.bDrums有効 = CDTXMania.ConfigIni.bDrums有効;
-                Guitar.bSTAGEFAILED有効 = CDTXMania.ConfigIni.bSTAGEFAILED有効;
-                Guitar.eダメージレベル = CDTXMania.ConfigIni.eダメージレベル;
+                Guitar.eHHGroup = CDTXMania.ConfigDB.eHHGroup;
+                Guitar.eFTGroup = CDTXMania.ConfigDB.eFTGroup;
+                Guitar.eCYGroup = CDTXMania.ConfigDB.eCYGroup;
+                Guitar.eHitSoundPriorityHH = CDTXMania.ConfigDB.eHitSoundPriorityHH;
+                Guitar.eHitSoundPriorityFT = CDTXMania.ConfigDB.eHitSoundPriorityFT;
+                Guitar.eHitSoundPriorityCY = CDTXMania.ConfigDB.eHitSoundPriorityCY;
+                Guitar.bGuitar有効 = CDTXMania.ConfigDB.bGuitar有効;
+                Guitar.bDrums有効 = CDTXMania.ConfigDB.bDrums有効;
+                Guitar.bSTAGEFAILED有効 = CDTXMania.ConfigDB.bSTAGEFAILED有効;
+                Guitar.eダメージレベル = CDTXMania.ConfigDB.eダメージレベル;
                 Guitar.b演奏にキーボードを使用した = this.b演奏にキーボードを使った.Guitar;
                 Guitar.b演奏にMIDI入力を使用した = this.b演奏にMIDI入力を使った.Guitar;
                 Guitar.b演奏にジョイパッドを使用した = this.b演奏にジョイパッドを使った.Guitar;
@@ -187,21 +187,21 @@ namespace DTXMania
             if (CDTXMania.DTX.bチップがある.Bass)
             {
                 Bass.nスコア = (long)this.actScore.Get(E楽器パート.BASS);
-                if (CDTXMania.ConfigIni.nSkillMode == 0)
+                if (CDTXMania.ConfigDB.nSkillMode == 0)
                 {
                     Bass.dbゲーム型スキル値 = CScoreIni.t旧ゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Bass, CDTXMania.DTX.LEVELDEC.Bass, CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数_Auto含まない.Bass.Perfect, this.nヒット数_Auto含まない.Bass.Great, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS, bIsAutoPlay);
                     Bass.db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数_Auto含まない.Bass.Perfect, this.nヒット数_Auto含まない.Bass.Great, this.nヒット数_Auto含まない.Bass.Good, this.nヒット数_Auto含まない.Bass.Poor, this.nヒット数_Auto含まない.Bass.Miss, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS, bIsAutoPlay);
                 }
-                else if (CDTXMania.ConfigIni.nSkillMode == 1)
+                else if (CDTXMania.ConfigDB.nSkillMode == 1)
                 {
                     Bass.dbゲーム型スキル値 = CScoreIni.tゲーム型スキルを計算して返す(CDTXMania.DTX.LEVEL.Bass, CDTXMania.DTX.LEVELDEC.Bass, CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数_Auto含まない.Bass.Perfect, this.nヒット数_Auto含まない.Bass.Great, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS, bIsAutoPlay);
                     Bass.db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す(CDTXMania.DTX.n可視チップ数.Bass, this.nヒット数_Auto含まない.Bass.Perfect, this.nヒット数_Auto含まない.Bass.Great, this.nヒット数_Auto含まない.Bass.Good, this.nヒット数_Auto含まない.Bass.Poor, this.nヒット数_Auto含まない.Bass.Miss, this.actCombo.n現在のコンボ数.最高値.Bass, E楽器パート.BASS, bIsAutoPlay);
                 }
-                Bass.nPerfect数 = CDTXMania.ConfigIni.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Perfect : this.nヒット数_Auto含まない.Bass.Perfect;
-                Bass.nGreat数 = CDTXMania.ConfigIni.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Great : this.nヒット数_Auto含まない.Bass.Great;
-                Bass.nGood数 = CDTXMania.ConfigIni.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Good : this.nヒット数_Auto含まない.Bass.Good;
-                Bass.nPoor数 = CDTXMania.ConfigIni.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Poor : this.nヒット数_Auto含まない.Bass.Poor;
-                Bass.nMiss数 = CDTXMania.ConfigIni.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Miss : this.nヒット数_Auto含まない.Bass.Miss;
+                Bass.nPerfect数 = CDTXMania.ConfigDB.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Perfect : this.nヒット数_Auto含まない.Bass.Perfect;
+                Bass.nGreat数 = CDTXMania.ConfigDB.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Great : this.nヒット数_Auto含まない.Bass.Great;
+                Bass.nGood数 = CDTXMania.ConfigDB.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Good : this.nヒット数_Auto含まない.Bass.Good;
+                Bass.nPoor数 = CDTXMania.ConfigDB.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Poor : this.nヒット数_Auto含まない.Bass.Poor;
+                Bass.nMiss数 = CDTXMania.ConfigDB.bベースが全部オートプレイである ? this.nヒット数_Auto含む.Bass.Miss : this.nヒット数_Auto含まない.Bass.Miss;
                 Bass.nPerfect数_Auto含まない = this.nヒット数_Auto含まない.Bass.Perfect;
                 Bass.nGreat数_Auto含まない = this.nヒット数_Auto含まない.Bass.Great;
                 Bass.nGood数_Auto含まない = this.nヒット数_Auto含まない.Bass.Good;
@@ -213,30 +213,30 @@ namespace DTXMania
                 {
                     Bass.bAutoPlay[i] = bIsAutoPlay[i];
                 }
-                Bass.bTight = CDTXMania.ConfigIni.bTight;
+                Bass.bTight = CDTXMania.ConfigDB.bTight;
                 for (int i = 0; i < 3; i++)
                 {
-                    Bass.bSudden[i] = CDTXMania.ConfigIni.bSudden[i];
-                    Bass.bHidden[i] = CDTXMania.ConfigIni.bHidden[i];
-                    Bass.bReverse[i] = CDTXMania.ConfigIni.bReverse[i];
-                    Bass.eRandom[i] = CDTXMania.ConfigIni.eRandom[i];
-                    Bass.bLight[i] = CDTXMania.ConfigIni.bLight[i];
-                    Bass.bLeft[i] = CDTXMania.ConfigIni.bLeft[i];
-                    Bass.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigIni.n譜面スクロール速度[i] + 1)) * 0.5f;
+                    Bass.bSudden[i] = CDTXMania.ConfigDB.bSudden[i];
+                    Bass.bHidden[i] = CDTXMania.ConfigDB.bHidden[i];
+                    Bass.bReverse[i] = CDTXMania.ConfigDB.bReverse[i];
+                    Bass.eRandom[i] = CDTXMania.ConfigDB.eRandom[i];
+                    Bass.bLight[i] = CDTXMania.ConfigDB.bLight[i];
+                    Bass.bLeft[i] = CDTXMania.ConfigDB.bLeft[i];
+                    Bass.f譜面スクロール速度[i] = ((float)(CDTXMania.ConfigDB.n譜面スクロール速度[i] + 1)) * 0.5f;
                 }
-                Bass.eDark = CDTXMania.ConfigIni.eDark;
-                Bass.n演奏速度分子 = CDTXMania.ConfigIni.n演奏速度;
+                Bass.eDark = CDTXMania.ConfigDB.eDark;
+                Bass.n演奏速度分子 = CDTXMania.ConfigDB.n演奏速度;
                 Bass.n演奏速度分母 = 20;
-                Bass.eHHGroup = CDTXMania.ConfigIni.eHHGroup;
-                Bass.eFTGroup = CDTXMania.ConfigIni.eFTGroup;
-                Bass.eCYGroup = CDTXMania.ConfigIni.eCYGroup;
-                Bass.eHitSoundPriorityHH = CDTXMania.ConfigIni.eHitSoundPriorityHH;
-                Bass.eHitSoundPriorityFT = CDTXMania.ConfigIni.eHitSoundPriorityFT;
-                Bass.eHitSoundPriorityCY = CDTXMania.ConfigIni.eHitSoundPriorityCY;
-                Bass.bGuitar有効 = CDTXMania.ConfigIni.bGuitar有効;
-                Bass.bDrums有効 = CDTXMania.ConfigIni.bDrums有効;
-                Bass.bSTAGEFAILED有効 = CDTXMania.ConfigIni.bSTAGEFAILED有効;
-                Bass.eダメージレベル = CDTXMania.ConfigIni.eダメージレベル;
+                Bass.eHHGroup = CDTXMania.ConfigDB.eHHGroup;
+                Bass.eFTGroup = CDTXMania.ConfigDB.eFTGroup;
+                Bass.eCYGroup = CDTXMania.ConfigDB.eCYGroup;
+                Bass.eHitSoundPriorityHH = CDTXMania.ConfigDB.eHitSoundPriorityHH;
+                Bass.eHitSoundPriorityFT = CDTXMania.ConfigDB.eHitSoundPriorityFT;
+                Bass.eHitSoundPriorityCY = CDTXMania.ConfigDB.eHitSoundPriorityCY;
+                Bass.bGuitar有効 = CDTXMania.ConfigDB.bGuitar有効;
+                Bass.bDrums有効 = CDTXMania.ConfigDB.bDrums有効;
+                Bass.bSTAGEFAILED有効 = CDTXMania.ConfigDB.bSTAGEFAILED有効;
+                Bass.eダメージレベル = CDTXMania.ConfigDB.eダメージレベル;
                 Bass.b演奏にキーボードを使用した = this.b演奏にキーボードを使った.Bass;			// #24280 2011.1.29 yyagi
                 Bass.b演奏にMIDI入力を使用した = this.b演奏にMIDI入力を使った.Bass;				//
                 Bass.b演奏にジョイパッドを使用した = this.b演奏にジョイパッドを使った.Bass;		//
@@ -302,39 +302,39 @@ namespace DTXMania
             base.On活性化();
             this.tステータスパネルの選択();
             //this.tパネル文字列の設定();
-            this.nJudgeLinePosY.Drums = (CDTXMania.ConfigIni.bReverse.Drums ? 159 + CDTXMania.ConfigIni.nJudgeLine.Drums : 561 - CDTXMania.ConfigIni.nJudgeLine.Drums);
-            this.nJudgeLinePosY.Guitar = (CDTXMania.ConfigIni.bReverse.Guitar ? 611 - CDTXMania.ConfigIni.nJudgeLine.Guitar : 154 + CDTXMania.ConfigIni.nJudgeLine.Guitar);
-            this.nJudgeLinePosY.Bass = (CDTXMania.ConfigIni.bReverse.Bass ? 611 - CDTXMania.ConfigIni.nJudgeLine.Bass : 154 + CDTXMania.ConfigIni.nJudgeLine.Bass);
+            this.nJudgeLinePosY.Drums = (CDTXMania.ConfigDB.bReverse.Drums ? 159 + CDTXMania.ConfigDB.nJudgeLine.Drums : 561 - CDTXMania.ConfigDB.nJudgeLine.Drums);
+            this.nJudgeLinePosY.Guitar = (CDTXMania.ConfigDB.bReverse.Guitar ? 611 - CDTXMania.ConfigDB.nJudgeLine.Guitar : 154 + CDTXMania.ConfigDB.nJudgeLine.Guitar);
+            this.nJudgeLinePosY.Bass = (CDTXMania.ConfigDB.bReverse.Bass ? 611 - CDTXMania.ConfigDB.nJudgeLine.Bass : 154 + CDTXMania.ConfigDB.nJudgeLine.Bass);
 
-            this.nShutterInPosY.Drums = CDTXMania.ConfigIni.nShutterInSide.Drums;
-            this.nShutterOutPosY.Drums = CDTXMania.ConfigIni.nShutterOutSide.Drums;
-            this.nShutterInPosY.Guitar = CDTXMania.ConfigIni.nShutterInSide.Guitar;
-            this.nShutterOutPosY.Guitar = CDTXMania.ConfigIni.nShutterOutSide.Guitar;
-            this.nShutterInPosY.Bass = CDTXMania.ConfigIni.nShutterInSide.Bass;
-            this.nShutterOutPosY.Bass = CDTXMania.ConfigIni.nShutterOutSide.Bass;
+            this.nShutterInPosY.Drums = CDTXMania.ConfigDB.nShutterInSide.Drums;
+            this.nShutterOutPosY.Drums = CDTXMania.ConfigDB.nShutterOutSide.Drums;
+            this.nShutterInPosY.Guitar = CDTXMania.ConfigDB.nShutterInSide.Guitar;
+            this.nShutterOutPosY.Guitar = CDTXMania.ConfigDB.nShutterOutSide.Guitar;
+            this.nShutterInPosY.Bass = CDTXMania.ConfigDB.nShutterInSide.Bass;
+            this.nShutterOutPosY.Bass = CDTXMania.ConfigDB.nShutterOutSide.Bass;
 
-            this.actJudgeString.iP_A = CDTXMania.ConfigIni.bReverse.Drums ? 159 + 0xbd : 561 - 0xbd;
-            this.actJudgeString.iP_B = CDTXMania.ConfigIni.bReverse.Drums ? 159 - 0x17 : 561 + 0x17;
+            this.actJudgeString.iP_A = CDTXMania.ConfigDB.bReverse.Drums ? 159 + 0xbd : 561 - 0xbd;
+            this.actJudgeString.iP_B = CDTXMania.ConfigDB.bReverse.Drums ? 159 - 0x17 : 561 + 0x17;
 
-            this.nInputAdjustTimeMs.Drums = CDTXMania.ConfigIni.nInputAdjustTimeMs.Drums;		// #23580 2011.1.3 yyagi
-            this.nInputAdjustTimeMs.Guitar = CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar;		//        2011.1.7 ikanick 修正
-            this.nInputAdjustTimeMs.Bass = CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass;			//
-            this.nJudgeLinePosY_delta.Drums = CDTXMania.ConfigIni.nJudgeLinePosOffset.Drums;    // #31602 2013.6.23 yyagi
-            this.nJudgeLinePosY_delta.Guitar = CDTXMania.ConfigIni.nJudgeLinePosOffset.Guitar;  //
-            this.nJudgeLinePosY_delta.Bass = CDTXMania.ConfigIni.nJudgeLinePosOffset.Bass;      //
-            this.bIsAutoPlay = CDTXMania.ConfigIni.bAutoPlay;									// #24239 2011.1.23 yyagi
-            //this.bIsAutoPlay.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
-            //this.bIsAutoPlay.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;										// #23559 2011.7.28 yyagi
-            actGauge.Init(CDTXMania.ConfigIni.nRisky);									// #23559 2011.7.28 yyagi
+            this.nInputAdjustTimeMs.Drums = CDTXMania.ConfigDB.nInputAdjustTimeMs.Drums;		// #23580 2011.1.3 yyagi
+            this.nInputAdjustTimeMs.Guitar = CDTXMania.ConfigDB.nInputAdjustTimeMs.Guitar;		//        2011.1.7 ikanick 修正
+            this.nInputAdjustTimeMs.Bass = CDTXMania.ConfigDB.nInputAdjustTimeMs.Bass;			//
+            this.nJudgeLinePosY_delta.Drums = CDTXMania.ConfigDB.nJudgeLinePosOffset.Drums;    // #31602 2013.6.23 yyagi
+            this.nJudgeLinePosY_delta.Guitar = CDTXMania.ConfigDB.nJudgeLinePosOffset.Guitar;  //
+            this.nJudgeLinePosY_delta.Bass = CDTXMania.ConfigDB.nJudgeLinePosOffset.Bass;      //
+            this.bIsAutoPlay = CDTXMania.ConfigDB.bAutoPlay;									// #24239 2011.1.23 yyagi
+            //this.bIsAutoPlay.Guitar = CDTXMania.ConfigDB.bギターが全部オートプレイである;
+            //this.bIsAutoPlay.Bass = CDTXMania.ConfigDB.bベースが全部オートプレイである;										// #23559 2011.7.28 yyagi
+            actGauge.Init(CDTXMania.ConfigDB.nRisky);									// #23559 2011.7.28 yyagi
 
-            this.nPolyphonicSounds = CDTXMania.ConfigIni.nPoliphonicSounds;
+            this.nPolyphonicSounds = CDTXMania.ConfigDB.nPoliphonicSounds;
 
             CDTXMania.Skin.tRemoveMixerAll();	// 効果音のストリームをミキサーから解除しておく
 
             //lockmixer = new object();
             queueMixerSound = new Queue<stmixer>(64);
             bIsDirectSound = (CDTXMania.Sound管理.GetCurrentSoundDeviceType() == "DirectSound");
-            db再生速度 = ((double)CDTXMania.ConfigIni.n演奏速度) / 20.0;
+            db再生速度 = ((double)CDTXMania.ConfigDB.n演奏速度) / 20.0;
             bValidScore = true;
             bDTXVmode = false; // とりあえずfalse固定
 
@@ -368,7 +368,7 @@ namespace DTXMania
                 }
             }
             #endregion
-            if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)	// #24063 2011.1.24 yyagi Gt/Bsの譜面情報入れ替え
+            if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)	// #24063 2011.1.24 yyagi Gt/Bsの譜面情報入れ替え
             {
                 CDTXMania.DTX.SwapGuitarBassInfos();
             }
@@ -408,9 +408,9 @@ namespace DTXMania
 
 				this.txWailing枠 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay wailing cursor.png" ) );
                 this.txボーナスエフェクト = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Fillin Effect.png" ) );
-                if( CDTXMania.ConfigIni.nJudgeAnimeType == 1 )
+                if( CDTXMania.ConfigDB.nJudgeAnimeType == 1 )
                     this.tx判定画像anime = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_judge strings.png" ) );
-                else if( CDTXMania.ConfigIni.nJudgeAnimeType == 2 )
+                else if( CDTXMania.ConfigDB.nJudgeAnimeType == 2 )
                 {
                     this.tx判定画像anime = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_JudgeStrings_XG.png" ) );
                     this.tx判定画像anime_2 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_JudgeStrings_XG.png" ) );
@@ -503,8 +503,8 @@ namespace DTXMania
 
         static CStage演奏画面共通()
         {
-            nJudgeLineMinPosY = 461;//(CDTXMania.ConfigIni.bReverse.Drums ? 259 : 461);
-            nJudgeLineMaxPosY = 561;//(CDTXMania.ConfigIni.bReverse.Drums ? 159 : 561);
+            nJudgeLineMinPosY = 461;//(CDTXMania.ConfigDB.bReverse.Drums ? 259 : 461);
+            nJudgeLineMaxPosY = 561;//(CDTXMania.ConfigDB.bReverse.Drums ? 159 : 561);
             nShutterMinPosY = 0;
             nShutterMaxPosY = 100;
         }
@@ -683,7 +683,7 @@ namespace DTXMania
         protected readonly float[,] fDamageGaugeDelta = new float[,] { { 0.004f, 0.006f, 0.006f }, { 0.002f, 0.003f, 0.003f }, { 0f, 0f, 0f }, { -0.02f, -0.03f, -0.03f }, { -0.05f, -0.05f, -0.05f } };
         protected readonly float[] fDamageLevelFactor = new float[] { 0.5f, 1f, 1.5f };
 
-        public STDGBVALUE<int> nJudgeLinePosY = new STDGBVALUE<int>();//(CDTXMania.ConfigIni.bReverse.Drums ? 159 : 561);
+        public STDGBVALUE<int> nJudgeLinePosY = new STDGBVALUE<int>();//(CDTXMania.ConfigDB.bReverse.Drums ? 159 : 561);
         public STDGBVALUE<int> nShutterInPosY = new STDGBVALUE<int>();
         public STDGBVALUE<int> nShutterOutPosY = new STDGBVALUE<int>();
         public long n現在のスコア = 0;
@@ -843,9 +843,9 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.HH;
                             }
-                            if (CDTXMania.ConfigIni.eHHGroup != EHHGroup.ハイハットのみ打ち分ける)
+                            if (CDTXMania.ConfigDB.eHHGroup != EHHGroup.ハイハットのみ打ち分ける)
                             {
-                                if (CDTXMania.ConfigIni.eHHGroup == EHHGroup.左シンバルのみ打ち分ける)
+                                if (CDTXMania.ConfigDB.eHHGroup == EHHGroup.左シンバルのみ打ち分ける)
                                 {
                                     return this.r現在の空うちドラムChip.HHO;
                                 }
@@ -870,7 +870,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.LT;
                             }
-                            if (CDTXMania.ConfigIni.eFTGroup == EFTGroup.共通)
+                            if (CDTXMania.ConfigDB.eFTGroup == EFTGroup.共通)
                             {
                                 return this.r現在の空うちドラムChip.FT;
                             }
@@ -881,7 +881,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.FT;
                             }
-                            if (CDTXMania.ConfigIni.eFTGroup == EFTGroup.共通)
+                            if (CDTXMania.ConfigDB.eFTGroup == EFTGroup.共通)
                             {
                                 return this.r現在の空うちドラムChip.LT;
                             }
@@ -892,7 +892,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.CY;
                             }
-                            if (CDTXMania.ConfigIni.eCYGroup == ECYGroup.共通)
+                            if (CDTXMania.ConfigDB.eCYGroup == ECYGroup.共通)
                             {
                                 return this.r現在の空うちドラムChip.RD;
                             }
@@ -903,9 +903,9 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.HHO;
                             }
-                            if (CDTXMania.ConfigIni.eHHGroup != EHHGroup.ハイハットのみ打ち分ける)
+                            if (CDTXMania.ConfigDB.eHHGroup != EHHGroup.ハイハットのみ打ち分ける)
                             {
-                                if (CDTXMania.ConfigIni.eHHGroup == EHHGroup.左シンバルのみ打ち分ける)
+                                if (CDTXMania.ConfigDB.eHHGroup == EHHGroup.左シンバルのみ打ち分ける)
                                 {
                                     return this.r現在の空うちドラムChip.HH;
                                 }
@@ -921,7 +921,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.RD;
                             }
-                            if (CDTXMania.ConfigIni.eCYGroup == ECYGroup.共通)
+                            if (CDTXMania.ConfigDB.eCYGroup == ECYGroup.共通)
                             {
                                 return this.r現在の空うちドラムChip.CY;
                             }
@@ -932,7 +932,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.LC;
                             }
-                            if ((CDTXMania.ConfigIni.eHHGroup != EHHGroup.ハイハットのみ打ち分ける) && (CDTXMania.ConfigIni.eHHGroup != EHHGroup.全部共通))
+                            if ((CDTXMania.ConfigDB.eHHGroup != EHHGroup.ハイハットのみ打ち分ける) && (CDTXMania.ConfigDB.eHHGroup != EHHGroup.全部共通))
                             {
                                 return null;
                             }
@@ -947,7 +947,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.LP;
                             }
-                            if (CDTXMania.ConfigIni.eBDGroup != EBDGroup.左右ペダルのみ打ち分ける)
+                            if (CDTXMania.ConfigDB.eBDGroup != EBDGroup.左右ペダルのみ打ち分ける)
                             {
                                 if (this.r現在の空うちドラムChip.LBD != null)
                                 {
@@ -961,7 +961,7 @@ namespace DTXMania
                             {
                                 return this.r現在の空うちドラムChip.LBD;
                             }
-                            if (CDTXMania.ConfigIni.eBDGroup != EBDGroup.左右ペダルのみ打ち分ける)
+                            if (CDTXMania.ConfigDB.eBDGroup != EBDGroup.左右ペダルのみ打ち分ける)
                             {
                                 if (this.r現在の空うちドラムChip.LP != null)
                                 {
@@ -1093,7 +1093,7 @@ namespace DTXMania
         }
         protected void tサウンド再生(CDTX.CChip rChip, long n再生開始システム時刻ms, E楽器パート part)
         {
-            this.tサウンド再生(rChip, n再生開始システム時刻ms, part, CDTXMania.ConfigIni.n手動再生音量, false, false);
+            this.tサウンド再生(rChip, n再生開始システム時刻ms, part, CDTXMania.ConfigDB.n手動再生音量, false, false);
         }
         protected void tサウンド再生(CDTX.CChip rChip, long n再生開始システム時刻ms, E楽器パート part, int n音量)
         {
@@ -1147,7 +1147,7 @@ namespace DTXMania
                             }
 
                             int nLane = this.nチャンネル0Atoレーン07[index];
-                            if (((((nLane == 1) && (index == 0)) && ((this.n最後に再生したHHのチャンネル番号 != 0x18) && (this.n最後に再生したHHのチャンネル番号 != 0x38))) || ((((nLane == 8)) && ((index == 10) && (this.n最後に再生したHHのチャンネル番号 != 0x18))) && (this.n最後に再生したHHのチャンネル番号 != 0x38))) && CDTXMania.ConfigIni.bMutingLP)
+                            if (((((nLane == 1) && (index == 0)) && ((this.n最後に再生したHHのチャンネル番号 != 0x18) && (this.n最後に再生したHHのチャンネル番号 != 0x38))) || ((((nLane == 8)) && ((index == 10) && (this.n最後に再生したHHのチャンネル番号 != 0x18))) && (this.n最後に再生したHHのチャンネル番号 != 0x38))) && CDTXMania.ConfigDB.bMutingLP)
                             {
                                 for (int i = 0; i < this.L最後に再生したHHの実WAV番号.Count; i++)
                                 {
@@ -1266,7 +1266,7 @@ namespace DTXMania
                     break;
             }
 
-            if (CDTXMania.ConfigIni.bAutoAddGage == false)
+            if (CDTXMania.ConfigDB.bAutoAddGage == false)
             {
                 if (!bPChipIsAutoPlay && (pChip.e楽器パート != E楽器パート.UNKNOWN))
                 {
@@ -1274,7 +1274,7 @@ namespace DTXMania
                     actGauge.Damage(screenmode, pChip.e楽器パート, eJudgeResult);
                 }
             }
-            else if (CDTXMania.ConfigIni.bAutoAddGage == true)
+            else if (CDTXMania.ConfigDB.bAutoAddGage == true)
             {
                 if ((pChip.e楽器パート != E楽器パート.UNKNOWN))
                 {
@@ -1335,7 +1335,7 @@ namespace DTXMania
                         #endregion
                     }
 
-                    if (CDTXMania.ConfigIni.bドラムが全部オートプレイである || !bPChipIsAutoPlay)
+                    if (CDTXMania.ConfigDB.bドラムが全部オートプレイである || !bPChipIsAutoPlay)
                     {
                         switch (eJudgeResult)
                         {
@@ -1353,7 +1353,7 @@ namespace DTXMania
                     }
 
                     if( eJudgeResult == E判定.Great || eJudgeResult == E判定.Perfect || eJudgeResult == E判定.Auto )
-                        CDTXMania.stage演奏ドラム画面.tボーナスチップのヒット処理( CDTXMania.ConfigIni, CDTXMania.DTX, pChip );
+                        CDTXMania.stage演奏ドラム画面.tボーナスチップのヒット処理( CDTXMania.ConfigDB, CDTXMania.DTX, pChip );
                     break;
 
                 case E楽器パート.GUITAR:
@@ -1425,10 +1425,10 @@ namespace DTXMania
             }
             #region[スコア]
             //!bPChipIsAutoPlayを入れるとオート時にスコアを加算しなくなる。
-            if (CDTXMania.ConfigIni.nSkillMode == 1)
+            if (CDTXMania.ConfigDB.nSkillMode == 1)
             {
                 int nRate = this.bブーストボーナス == true ? 2 : 1;
-                if (CDTXMania.ConfigIni.bAutoAddGage == true)
+                if (CDTXMania.ConfigDB.bAutoAddGage == true)
                 {
                     if (((pChip.e楽器パート == E楽器パート.DRUMS)) && (eJudgeResult != E判定.Miss) && (eJudgeResult != E判定.Bad))
                     {
@@ -1629,9 +1629,9 @@ namespace DTXMania
                     }
                 }
             }
-            else if (CDTXMania.ConfigIni.nSkillMode == 0)
+            else if (CDTXMania.ConfigDB.nSkillMode == 0)
             {
-                if (CDTXMania.ConfigIni.bAutoAddGage)
+                if (CDTXMania.ConfigDB.bAutoAddGage)
                 {
                     if (((pChip.e楽器パート != E楽器パート.UNKNOWN)) && (eJudgeResult != E判定.Miss) && (eJudgeResult != E判定.Bad))
                     {
@@ -1902,7 +1902,7 @@ namespace DTXMania
             {
                 this.nInputAdjustTimeMs[part] = -99;
             }
-            CDTXMania.ConfigIni.nInputAdjustTimeMs[part] = this.nInputAdjustTimeMs[part];
+            CDTXMania.ConfigDB.nInputAdjustTimeMs[part] = this.nInputAdjustTimeMs[part];
         }
 
         protected abstract void t入力処理_ドラム();
@@ -1956,7 +1956,7 @@ namespace DTXMania
 
                 else if (CDTXMania.Pad.b押された(E楽器パート.GUITAR, Eパッド.Help))
                 {	// del (debug info)
-                    CDTXMania.ConfigIni.b演奏情報を表示する = !CDTXMania.ConfigIni.b演奏情報を表示する;
+                    CDTXMania.ConfigDB.b演奏情報を表示する = !CDTXMania.ConfigDB.b演奏情報を表示する;
                 }
                 else if (!this.bPAUSE && keyboard.bキーが押された((int)SlimDX.DirectInput.Key.LeftArrow))		// #24243 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
                 {
@@ -1973,7 +1973,7 @@ namespace DTXMania
                     this.eフェードアウト完了時の戻り値 = E演奏画面の戻り値.演奏中断;
                 }
 
-                if (!CDTXMania.ConfigIni.bReverse.Drums && keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.PageUp))
+                if (!CDTXMania.ConfigDB.bReverse.Drums && keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.PageUp))
                 {
                     if (!this.sw.IsRunning)
                     {
@@ -2003,10 +2003,10 @@ namespace DTXMania
                             this.sw.Start();
                         }
                     }
-                    CDTXMania.ConfigIni.nJudgeLine.Drums = nJudgeLineMaxPosY - this.nJudgeLinePosY.Drums;
+                    CDTXMania.ConfigDB.nJudgeLine.Drums = nJudgeLineMaxPosY - this.nJudgeLinePosY.Drums;
                     CDTXMania.stage演奏ドラム画面.tJudgeLineMovingUpandDown();
                 }
-                if (!CDTXMania.ConfigIni.bReverse.Drums && keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.PageDown))
+                if (!CDTXMania.ConfigDB.bReverse.Drums && keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.PageDown))
                 {
                     if (!this.sw.IsRunning)
                     {
@@ -2033,7 +2033,7 @@ namespace DTXMania
                         this.sw.Reset();
                         this.sw.Start();
                     }
-                    CDTXMania.ConfigIni.nJudgeLine.Drums = nJudgeLineMaxPosY - this.nJudgeLinePosY.Drums;
+                    CDTXMania.ConfigDB.nJudgeLine.Drums = nJudgeLineMaxPosY - this.nJudgeLinePosY.Drums;
                     CDTXMania.stage演奏ドラム画面.tJudgeLineMovingUpandDown();
                 }
 
@@ -2064,7 +2064,7 @@ namespace DTXMania
                         this.sw.Reset();
                         this.sw.Start();
                     }
-                    CDTXMania.ConfigIni.nShutterInSide.Drums = this.nShutterInPosY.Drums;
+                    CDTXMania.ConfigDB.nShutterInSide.Drums = this.nShutterInPosY.Drums;
                 }
                 if (keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.NumberPad2))
                 {
@@ -2095,7 +2095,7 @@ namespace DTXMania
                         this.sw.Reset();
                         this.sw.Start();
                     }
-                    CDTXMania.ConfigIni.nShutterInSide = this.nShutterInPosY;
+                    CDTXMania.ConfigDB.nShutterInSide = this.nShutterInPosY;
                 }
                 if (keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.NumberPad4))
                 {
@@ -2126,7 +2126,7 @@ namespace DTXMania
                         this.sw.Reset();
                         this.sw.Start();
                     }
-                    CDTXMania.ConfigIni.nShutterOutSide.Drums = this.nShutterOutPosY.Drums;
+                    CDTXMania.ConfigDB.nShutterOutSide.Drums = this.nShutterOutPosY.Drums;
                 }
                 if (keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.NumberPad6))
                 {
@@ -2155,26 +2155,26 @@ namespace DTXMania
                         this.sw.Reset();
                         this.sw.Start();
                     }
-                    CDTXMania.ConfigIni.nShutterOutSide.Drums = this.nShutterOutPosY.Drums;
+                    CDTXMania.ConfigDB.nShutterOutSide.Drums = this.nShutterOutPosY.Drums;
                 }
 
                 if (keyboard.bキーが押された(0x3a))
                 {
-                    CConfigIni configIni = CDTXMania.ConfigIni;
+                    CConfigDB configIni = CDTXMania.ConfigDB;
                     configIni.nMovieMode++;
-                    if (CDTXMania.ConfigIni.nMovieMode >= 4)
+                    if (CDTXMania.ConfigDB.nMovieMode >= 4)
                     {
-                        CDTXMania.ConfigIni.nMovieMode = 0;
+                        CDTXMania.ConfigDB.nMovieMode = 0;
                     }
                     this.actAVI.MovieMode();
                 }
                 if (keyboard.bキーが押された(0x3b))
                 {
-                    CConfigIni configIni = CDTXMania.ConfigIni;
+                    CConfigDB configIni = CDTXMania.ConfigDB;
                     configIni.nInfoType++;
-                    if (CDTXMania.ConfigIni.nInfoType >= 2)
+                    if (CDTXMania.ConfigDB.nInfoType >= 2)
                     {
-                        CDTXMania.ConfigIni.nInfoType = 0;
+                        CDTXMania.ConfigDB.nInfoType = 0;
                     }
                 }
                 if ((keyboard.bキーが押されている(0x3c)))
@@ -2182,7 +2182,7 @@ namespace DTXMania
                     //F7
                     //CDTXMania.stage演奏ドラム画面.actGauge.db現在のゲージ値.Drums = 1.0;
                     //CDTXMania.stage演奏ドラム画面.actGraph.dbグラフ値現在_渡 = 100.0;
-                    //CDTXMania.ConfigIni.nヒット範囲ms.Perfect = 1000;
+                    //CDTXMania.ConfigDB.nヒット範囲ms.Perfect = 1000;
                 }
                 if (keyboard.bキーが押された(0x3d))
                 {
@@ -2216,7 +2216,7 @@ namespace DTXMania
 //      protected abstract void t進行描画_AVI();
         protected void t進行描画_AVI()
         {
-            if (((base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED) && (base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト)) && (!CDTXMania.ConfigIni.bストイックモード))
+            if (((base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED) && (base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト)) && (!CDTXMania.ConfigDB.bストイックモード))
             {
                 this.actAVI.t進行描画(0, 0);
             }
@@ -2225,7 +2225,7 @@ namespace DTXMania
         protected abstract void t進行描画_BGA();
         protected void t進行描画_BGA(int x, int y)
         {
-            if (((base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED) && (base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト)) && (CDTXMania.ConfigIni.bBGA有効))
+            if (((base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED) && (base.eフェーズID != CStage.Eフェーズ.演奏_STAGE_FAILED_フェードアウト)) && (CDTXMania.ConfigDB.bBGA有効))
             {
                 this.actBGA.t進行描画(x, y);
             }
@@ -2263,7 +2263,7 @@ namespace DTXMania
         protected abstract void t進行描画_Wailing枠();
         protected void t進行描画_Wailing枠(int GtWailingFrameX, int BsWailingFrameX, int GtWailingFrameY, int BsWailingFrameY)
         {
-            if (this.txWailing枠 != null && CDTXMania.ConfigIni.bGuitar有効)
+            if (this.txWailing枠 != null && CDTXMania.ConfigDB.bGuitar有効)
             {
                 if (CDTXMania.DTX.bチップがある.Guitar)
                 {
@@ -2336,7 +2336,7 @@ namespace DTXMania
             double ScrollSpeedBass = (this.act譜面スクロール速度.db現在の譜面スクロール速度.Bass + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
 
             CDTX dTX = CDTXMania.DTX;
-            CConfigIni configIni = CDTXMania.ConfigIni;
+            CConfigDB configIni = CDTXMania.ConfigDB;
             for (int nCurrentTopChip = this.n現在のトップChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
                 CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
@@ -2369,7 +2369,7 @@ namespace DTXMania
 				}
 
                 // #35411 chnmr0 add (ターゲットゴースト)
-                if ( CDTXMania.ConfigIni.eTargetGhost[instIndex] != ETargetGhostData.NONE &&
+                if ( CDTXMania.ConfigDB.eTargetGhost[instIndex] != ETargetGhostData.NONE &&
                      CDTXMania.listTargetGhsotLag[instIndex] != null &&
                      pChip.e楽器パート != E楽器パート.UNKNOWN &&
                      pChip.nバーからの距離dot[instIndex] < 0 )
@@ -2389,7 +2389,7 @@ namespace DTXMania
 							}
 							ghostLag = (ghostLag & 255) - 128;
 						}
-                        else if( CDTXMania.ConfigIni.eTargetGhost[instIndex] == ETargetGhostData.PERFECT )
+                        else if( CDTXMania.ConfigDB.eTargetGhost[instIndex] == ETargetGhostData.PERFECT )
                         {
                             ghostLag = 0;
                         }
@@ -2452,12 +2452,12 @@ namespace DTXMania
                             pChip.bHit = true;
                             this.actPlayInfo.dbBPM = (pChip.n整数値 * (((double)configIni.n演奏速度) / 20.0)) + dTX.BASEBPM;
 
-                            if (CDTXMania.ConfigIni.bDrums有効)
+                            if (CDTXMania.ConfigDB.bDrums有効)
                             {
                                 CDTXMania.stage演奏ドラム画面.UnitTime = ((60.0 / (CDTXMania.stage演奏ドラム画面.actPlayInfo.dbBPM) / 14.0));
                                 CDTXMania.stage演奏ドラム画面.ctコンボ動作タイマ = new CCounter(1.0, 16.0, ((60.0 / (CDTXMania.stage演奏ドラム画面.actPlayInfo.dbBPM) / 16)), CSound管理.rc演奏用タイマ);
                             }
-                            else if (CDTXMania.ConfigIni.bGuitar有効)
+                            else if (CDTXMania.ConfigDB.bGuitar有効)
                             {
                                 CDTXMania.stage演奏ギター画面.UnitTime = ((60.0 / (CDTXMania.stage演奏ギター画面.actPlayInfo.dbBPM) / 14.0));
                                 CDTXMania.stage演奏ギター画面.ctコンボ動作タイマ = new CCounter(1.0, 16.0, ((60.0 / (CDTXMania.stage演奏ギター画面.actPlayInfo.dbBPM) / 16)), CSound管理.rc演奏用タイマ);
@@ -2522,12 +2522,12 @@ namespace DTXMania
                             {
                                 this.actPlayInfo.dbBPM = (dTX.listBPM[pChip.n整数値_内部番号].dbBPM値 * (((double)configIni.n演奏速度) / 20.0)) + dTX.BASEBPM;
 
-                                if (CDTXMania.ConfigIni.bDrums有効)
+                                if (CDTXMania.ConfigDB.bDrums有効)
                                 {
                                     CDTXMania.stage演奏ドラム画面.UnitTime = ((60.0 / (CDTXMania.stage演奏ドラム画面.actPlayInfo.dbBPM) / 14.0));
                                     CDTXMania.stage演奏ドラム画面.ctコンボ動作タイマ = new CCounter(1.0, 16.0, ((60.0 / (CDTXMania.stage演奏ドラム画面.actPlayInfo.dbBPM) / 16)), CSound管理.rc演奏用タイマ);
                                 }
-                                else if (CDTXMania.ConfigIni.bGuitar有効)
+                                else if (CDTXMania.ConfigDB.bGuitar有効)
                                 {
                                     CDTXMania.stage演奏ギター画面.UnitTime = ((60.0 / (CDTXMania.stage演奏ギター画面.actPlayInfo.dbBPM) / 14.0));
                                     CDTXMania.stage演奏ギター画面.ctコンボ動作タイマ = new CCounter(1.0, 16.0, ((60.0 / (CDTXMania.stage演奏ギター画面.actPlayInfo.dbBPM) / 16)), CSound管理.rc演奏用タイマ);
@@ -2940,7 +2940,7 @@ namespace DTXMania
             double ScrollSpeedBass = (this.act譜面スクロール速度.db現在の譜面スクロール速度.Bass + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
 
             CDTX dTX = CDTXMania.DTX;
-            CConfigIni configIni = CDTXMania.ConfigIni;            
+            CConfigDB configIni = CDTXMania.ConfigDB;            
             for (int nCurrentTopChip = this.n現在のトップChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
                 CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
@@ -2988,7 +2988,7 @@ namespace DTXMania
                             {
                                 l_drumPanelWidth = 0x207;
                             }
-                            else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                            else if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.C)
                             {
                                 l_drumPanelWidth = 447;
                                 l_xOffset = 72;
@@ -3024,7 +3024,7 @@ namespace DTXMania
             double ScrollSpeedBass = (this.act譜面スクロール速度.db現在の譜面スクロール速度.Bass + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
 
             CDTX dTX = CDTXMania.DTX;
-            CConfigIni configIni = CDTXMania.ConfigIni;
+            CConfigDB configIni = CDTXMania.ConfigDB;
             for (int nCurrentTopChip = this.n現在のトップChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
                 CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
@@ -3449,12 +3449,12 @@ namespace DTXMania
         }
 
 
-        protected abstract void t進行描画_チップ_ドラムス(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        protected abstract void t進行描画_チップ_模様のみ_ドラムス(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        //protected abstract void t進行描画_チップ_ギター( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip );
-        protected abstract void t進行描画_チップ_ギターベース(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst);
+        protected abstract void t進行描画_チップ_ドラムス(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void t進行描画_チップ_模様のみ_ドラムス(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        //protected abstract void t進行描画_チップ_ギター( CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip );
+        protected abstract void t進行描画_チップ_ギターベース(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst);
 
-        protected void t進行描画_チップ_ギターベース(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst,
+        protected void t進行描画_チップ_ギターベース(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst,
             int barYNormal, int barYReverse, int showRangeY0, int showRangeY1, int openXg, int openXb,
             int rectOpenOffsetX, int rectOpenOffsetY, int openChipWidth, int chipHeight,
             int chipWidth, int guitarNormalX, int guitarLeftyX, int bassNormalX, int bassLeftyX, int drawDeltaX, int chipTexDeltaX)
@@ -3464,7 +3464,7 @@ namespace DTXMania
             {
                 #region [ Hidden/Sudden処理 ]
                 #region [ Sudden処理 ]
-                if ((CDTXMania.ConfigIni.nHidSud[instIndex] == 2) || (CDTXMania.ConfigIni.nHidSud[instIndex] == 3))
+                if ((CDTXMania.ConfigDB.nHidSud[instIndex] == 2) || (CDTXMania.ConfigDB.nHidSud[instIndex] == 3))
                 {
                     if (pChip.nバーからの距離dot[instIndex] < 250)
                     {
@@ -3484,7 +3484,7 @@ namespace DTXMania
                 }
                 #endregion
                 #region [ Hidden処理 ]
-                if ((CDTXMania.ConfigIni.nHidSud[instIndex] == 1) || (CDTXMania.ConfigIni.nHidSud[instIndex] == 3))
+                if ((CDTXMania.ConfigDB.nHidSud[instIndex] == 1) || (CDTXMania.ConfigDB.nHidSud[instIndex] == 3))
                 {
                     if (pChip.nバーからの距離dot[instIndex] < 150)
                     {
@@ -3498,7 +3498,7 @@ namespace DTXMania
                 }
                 #endregion
                 #region [ ステルス処理 ]
-                if (CDTXMania.ConfigIni.nHidSud[instIndex] == 4)
+                if (CDTXMania.ConfigDB.nHidSud[instIndex] == 4)
                 {
                     pChip.b可視 = false;
                 }
@@ -3862,22 +3862,22 @@ namespace DTXMania
                             {
                                 if (inst == E楽器パート.GUITAR)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 244 : 88), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Guitar ? 244 : 88), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
                                 }
                                 else if (inst == E楽器パート.BASS)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1115 : 959), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Bass ? 1115 : 959), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
                                 }
                             }
                             if (bChipHasG)
                             {
                                 if (inst == E楽器パート.GUITAR)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Guitar ? 205 : 127), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
                                 }
                                 else if (inst == E楽器パート.BASS)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1076 : 998), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Bass ? 1076 : 998), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
                                 }
                             }
                             if (bChipHasB)
@@ -3895,22 +3895,22 @@ namespace DTXMania
                             {
                                 if (inst == E楽器パート.GUITAR)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Guitar ? 127 : 205), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
                                 }
                                 else if (inst == E楽器パート.BASS)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 998 : 1076), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Bass ? 998 : 1076), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
                                 }
                             }
                             if (bChipHasP)
                             {
                                 if (inst == E楽器パート.GUITAR)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Guitar ? 88 : 244), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
                                 }
                                 else if (inst == E楽器パート.BASS)
                                 {
-                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 959 : 1115), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
+                                    this.txチップ.t2D描画(CDTXMania.app.Device, (CDTXMania.ConfigDB.bLeft.Bass ? 959 : 1115), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
                                 }
                             }
                         }
@@ -3934,7 +3934,7 @@ namespace DTXMania
                 bool bUsePerfectGhost = true;
 
                 if ( (pChip.e楽器パート == E楽器パート.GUITAR || pChip.e楽器パート == E楽器パート.BASS ) &&
-                    CDTXMania.ConfigIni.eAutoGhost[(int)(pChip.e楽器パート)] != EAutoGhostData.PERFECT &&
+                    CDTXMania.ConfigDB.eAutoGhost[(int)(pChip.e楽器パート)] != EAutoGhostData.PERFECT &&
                     CDTXMania.listAutoGhostLag[(int)pChip.e楽器パート] != null &&
                     0 <= pChip.n楽器パートでの出現順 &&
                     pChip.n楽器パートでの出現順 < CDTXMania.listAutoGhostLag[(int)pChip.e楽器パート].Count)
@@ -4038,14 +4038,14 @@ namespace DTXMania
 					// #35411 modify end
 				}
 
-                if( pChip.e楽器パート == E楽器パート.GUITAR && CDTXMania.ConfigIni.bGraph有効.Guitar )
+                if( pChip.e楽器パート == E楽器パート.GUITAR && CDTXMania.ConfigDB.bGraph有効.Guitar )
                 {
                     #region[ ギターゴースト ]
-                    if (CDTXMania.ConfigIni.eTargetGhost.Guitar != ETargetGhostData.NONE &&
+                    if (CDTXMania.ConfigDB.eTargetGhost.Guitar != ETargetGhostData.NONE &&
                         CDTXMania.listTargetGhsotLag.Guitar != null)
                     {
                         double val = 0;
-                        if (CDTXMania.ConfigIni.eTargetGhost.Guitar == ETargetGhostData.ONLINE)
+                        if (CDTXMania.ConfigDB.eTargetGhost.Guitar == ETargetGhostData.ONLINE)
                         {
                             if (CDTXMania.DTX.n可視チップ数.Guitar > 0)
                             {
@@ -4058,7 +4058,7 @@ namespace DTXMania
                         }
                         else
                         {
-                            if( CDTXMania.ConfigIni.nSkillMode == 0 )
+                            if( CDTXMania.ConfigDB.nSkillMode == 0 )
                             {
                                 val = CScoreIni.t旧演奏型スキルを計算して返す(
                                     CDTXMania.DTX.n可視チップ数.Guitar,
@@ -4090,14 +4090,14 @@ namespace DTXMania
                     }
                     #endregion
                 }
-                else if( pChip.e楽器パート == E楽器パート.BASS && CDTXMania.ConfigIni.bGraph有効.Bass )
+                else if( pChip.e楽器パート == E楽器パート.BASS && CDTXMania.ConfigDB.bGraph有効.Bass )
                 {
                     #region[ ベースゴースト ]
-                    if (CDTXMania.ConfigIni.eTargetGhost.Bass != ETargetGhostData.NONE &&
+                    if (CDTXMania.ConfigDB.eTargetGhost.Bass != ETargetGhostData.NONE &&
                         CDTXMania.listTargetGhsotLag.Bass != null)
                     {
                         double val = 0;
-                        if (CDTXMania.ConfigIni.eTargetGhost.Bass == ETargetGhostData.ONLINE)
+                        if (CDTXMania.ConfigDB.eTargetGhost.Bass == ETargetGhostData.ONLINE)
                         {
                             if (CDTXMania.DTX.n可視チップ数.Bass > 0)
                             {
@@ -4110,7 +4110,7 @@ namespace DTXMania
                         }
                         else
                         {
-                            if( CDTXMania.ConfigIni.nSkillMode == 0 )
+                            if( CDTXMania.ConfigDB.nSkillMode == 0 )
                             {
                                 val = CScoreIni.t旧演奏型スキルを計算して返す(
                                     CDTXMania.DTX.n可視チップ数.Bass,
@@ -4153,14 +4153,14 @@ namespace DTXMania
         }
 
 
-        protected virtual void t進行描画_チップ_ギターベース_ウェイリング(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst)
+        protected virtual void t進行描画_チップ_ギターベース_ウェイリング(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst)
         {
             int indexInst = (int)inst;
             if (configIni.bGuitar有効)
             {
                 #region [ Hidden/Sudden処理 ]
                 #region [ Sudden処理 ]
-                if ((CDTXMania.ConfigIni.nHidSud[indexInst] == 2) || (CDTXMania.ConfigIni.nHidSud[indexInst] == 3))
+                if ((CDTXMania.ConfigDB.nHidSud[indexInst] == 2) || (CDTXMania.ConfigDB.nHidSud[indexInst] == 3))
                 {
                     if (pChip.nバーからの距離dot[indexInst] < 250)
                     {
@@ -4180,7 +4180,7 @@ namespace DTXMania
                 }
                 #endregion
                 #region [ Hidden処理 ]
-                if ((CDTXMania.ConfigIni.nHidSud[indexInst] == 1) || (CDTXMania.ConfigIni.nHidSud[indexInst] == 3))
+                if ((CDTXMania.ConfigDB.nHidSud[indexInst] == 1) || (CDTXMania.ConfigDB.nHidSud[indexInst] == 3))
                 {
                     if (pChip.nバーからの距離dot[indexInst] < 150)
                     {
@@ -4194,7 +4194,7 @@ namespace DTXMania
                 }
                 #endregion
                 #region [ ステルス処理 ]
-                if (CDTXMania.ConfigIni.nHidSud[indexInst] == 4)
+                if (CDTXMania.ConfigDB.nHidSud[indexInst] == 4)
                 {
                     pChip.b可視 = false;
                 }
@@ -4229,23 +4229,23 @@ namespace DTXMania
             }
             pChip.bHit = true;
         }
-        protected virtual void t進行描画_チップ_ギター_ウェイリング(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected virtual void t進行描画_チップ_ギター_ウェイリング(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip)
         {
             t進行描画_チップ_ギターベース_ウェイリング(configIni, ref dTX, ref pChip, E楽器パート.GUITAR);
         }
-        protected abstract void t進行描画_チップ_フィルイン(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        protected abstract void t進行描画_チップ_ボーナス(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void t進行描画_チップ_フィルイン(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void t進行描画_チップ_ボーナス(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
         protected void t進行描画_フィルインエフェクト()
         {
             this.actFillin.On進行描画();
         }
-        protected abstract void t進行描画_チップ_小節線(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        //protected abstract void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip );
-        protected virtual void t進行描画_チップ_ベース_ウェイリング(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected abstract void t進行描画_チップ_小節線(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        //protected abstract void t進行描画_チップ_ベース( CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip );
+        protected virtual void t進行描画_チップ_ベース_ウェイリング(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip)
         {
             t進行描画_チップ_ギターベース_ウェイリング(configIni, ref dTX, ref pChip, E楽器パート.BASS);
         }
-        protected abstract void t進行描画_チップ_空打ち音設定_ドラム(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void t進行描画_チップ_空打ち音設定_ドラム(CConfigDB configIni, ref CDTX dTX, ref CDTX.CChip pChip);
         protected void t進行描画_チップアニメ()
         {
             for (int i = 0; i < 3; i++)			// 0=drums, 1=guitar, 2=bass
@@ -4264,7 +4264,7 @@ namespace DTXMania
                 this.ctBPMバー.t進行LoopDb();
                 this.ctコンボ動作タイマ.t進行LoopDb();
             }
-            if (CDTXMania.ConfigIni.bDrums有効)  //2013.05.16.kairera0467 ギター側のアニメーションは未実装なのでとりあえず。
+            if (CDTXMania.ConfigDB.bDrums有効)  //2013.05.16.kairera0467 ギター側のアニメーションは未実装なのでとりあえず。
                 this.ct登場用.t進行();
         }
 
@@ -4306,7 +4306,7 @@ namespace DTXMania
         }
         protected void t進行描画_レーンフラッシュGB()
         {
-            if (CDTXMania.ConfigIni.bGuitar有効)
+            if (CDTXMania.ConfigDB.bGuitar有効)
             {
                 this.actLaneFlushGB.On進行描画();
             }
@@ -4314,7 +4314,7 @@ namespace DTXMania
         protected abstract void t進行描画_演奏情報();
         protected void t進行描画_演奏情報(int x, int y)
         {
-            if (!CDTXMania.ConfigIni.b演奏情報を表示しない)
+            if (!CDTXMania.ConfigDB.b演奏情報を表示しない)
             {
                 this.actPlayInfo.t進行描画(x, y);
             }
@@ -4331,28 +4331,28 @@ namespace DTXMania
 
         protected void t進行描画_判定ライン()
         {
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigDB.bDrums有効)
             {
-                int y = CDTXMania.ConfigIni.bReverse.Drums ? nJudgeLinePosY.Drums - nJudgeLinePosY_delta.Drums : nJudgeLinePosY.Drums + nJudgeLinePosY_delta.Drums;
-                if (CDTXMania.ConfigIni.bJudgeLineDisp.Drums)
+                int y = CDTXMania.ConfigDB.bReverse.Drums ? nJudgeLinePosY.Drums - nJudgeLinePosY_delta.Drums : nJudgeLinePosY.Drums + nJudgeLinePosY_delta.Drums;
+                if (CDTXMania.ConfigDB.bJudgeLineDisp.Drums)
                 {
                     // #31602 2013.6.23 yyagi 描画遅延対策として、判定ラインの表示位置をオフセット調整できるようにする
                     // Check for numofLanes config to decide on the length to draw
                     int l_drumPanelWidth = 0x22f;
                     int l_xOffset = 0;
-                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B)
+                    if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.B)
                     {
                         l_drumPanelWidth = 0x207;
                     }
-                    else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C)
+                    else if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.C)
                     {
                         l_drumPanelWidth = 447;
                         l_xOffset = 72;
                     }
                     this.txヒットバー.t2D描画(CDTXMania.app.Device, 295 + l_xOffset, y, new Rectangle(0, 0, l_drumPanelWidth, 6));
                 }
-                if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                    this.actLVFont.t文字列描画(295, (CDTXMania.ConfigIni.bReverse.Drums ? y - 20 : y + 8), CDTXMania.ConfigIni.nJudgeLine.Drums.ToString());
+                if (CDTXMania.ConfigDB.b演奏情報を表示する)
+                    this.actLVFont.t文字列描画(295, (CDTXMania.ConfigDB.bReverse.Drums ? y - 20 : y + 8), CDTXMania.ConfigDB.nJudgeLine.Drums.ToString());
             }
         }
 
@@ -4362,14 +4362,14 @@ namespace DTXMania
         }
         protected void t進行描画_判定文字列1_通常位置指定の場合()
         {
-            if (((Eタイプ)CDTXMania.ConfigIni.判定文字表示位置.Drums) != Eタイプ.B)
+            if (((Eタイプ)CDTXMania.ConfigDB.判定文字表示位置.Drums) != Eタイプ.B)
             {
                 this.actJudgeString.On進行描画();
             }
         }
         protected void t進行描画_判定文字列2_判定ライン上指定の場合()
         {
-            if (((Eタイプ)CDTXMania.ConfigIni.判定文字表示位置.Drums) == Eタイプ.B)
+            if (((Eタイプ)CDTXMania.ConfigDB.判定文字表示位置.Drums) == Eタイプ.B)
             {
                 this.actJudgeString.On進行描画();
             }
@@ -4417,7 +4417,7 @@ namespace DTXMania
                     matrix2.Matrix00 = 1f;
                     matrix2.Matrix11 = 1f;
                     matrix2.Matrix22 = 1f;
-                    matrix2.Matrix33 = ((float)CDTXMania.ConfigIni.n背景の透過度) / 255f;
+                    matrix2.Matrix33 = ((float)CDTXMania.ConfigDB.n背景の透過度) / 255f;
                     matrix2.Matrix44 = 1f;
                     ColorMatrix newColorMatrix = matrix2;
                     ImageAttributes imageAttr = new ImageAttributes();
@@ -4482,15 +4482,15 @@ namespace DTXMania
             #region [ スクロール速度変更 ]
             if (CDTXMania.Pad.b押されている(inst, Eパッド.Decide) && CDTXMania.Pad.b押された(inst, Eパッド.B))
             {
-                CDTXMania.ConfigIni.n譜面スクロール速度[indexInst] = Math.Min(CDTXMania.ConfigIni.n譜面スクロール速度[indexInst] + 1, 0x7cf);
+                CDTXMania.ConfigDB.n譜面スクロール速度[indexInst] = Math.Min(CDTXMania.ConfigDB.n譜面スクロール速度[indexInst] + 1, 0x7cf);
             }
             if (CDTXMania.Pad.b押されている(inst, Eパッド.Decide) && CDTXMania.Pad.b押された(inst, Eパッド.R))
             {
-                CDTXMania.ConfigIni.n譜面スクロール速度[indexInst] = Math.Max(CDTXMania.ConfigIni.n譜面スクロール速度[indexInst] - 1, 0);
+                CDTXMania.ConfigDB.n譜面スクロール速度[indexInst] = Math.Max(CDTXMania.ConfigDB.n譜面スクロール速度[indexInst] - 1, 0);
             }
             #endregion
 
-            if (!CDTXMania.ConfigIni.bGuitar有効 || !CDTXMania.DTX.bチップがある[indexInst])
+            if (!CDTXMania.ConfigDB.bGuitar有効 || !CDTXMania.DTX.bチップがある[indexInst])
             {
                 return;
             }
@@ -5307,7 +5307,7 @@ namespace DTXMania
                                     this.actChipFireGB.Start(P);
                                 }
                                 this.tチップのヒット処理(nTime, pChip);
-                                this.tサウンド再生(pChip, CSound管理.rc演奏用タイマ.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], e判定 == E判定.Poor);
+                                this.tサウンド再生(pChip, CSound管理.rc演奏用タイマ.nシステム時刻, inst, CDTXMania.ConfigDB.n手動再生音量, CDTXMania.ConfigDB.b演奏音を強調する[indexInst], e判定 == E判定.Poor);
                                 int chWailingChip = (inst == E楽器パート.GUITAR) ? 0x28 : 0xA8;
                                 CDTX.CChip item = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingChip, this.nInputAdjustTimeMs[indexInst], 140);
                                 if (item != null)
@@ -5322,9 +5322,9 @@ namespace DTXMania
                         CDTX.CChip NoChipPicked = (inst == E楽器パート.GUITAR) ? this.r現在の空うちギターChip : this.r現在の空うちベースChip;
                         if ((NoChipPicked != null) || ((NoChipPicked = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst])) != null))
                         {
-                            this.tサウンド再生(NoChipPicked, CSound管理.rc演奏用タイマ.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], true);
+                            this.tサウンド再生(NoChipPicked, CSound管理.rc演奏用タイマ.nシステム時刻, inst, CDTXMania.ConfigDB.n手動再生音量, CDTXMania.ConfigDB.b演奏音を強調する[indexInst], true);
                         }
-                        if (!CDTXMania.ConfigIni.bLight[indexInst])
+                        if (!CDTXMania.ConfigDB.bLight[indexInst])
                         {
                             this.tチップのヒット処理_BadならびにTight時のMiss(inst);
                         }
@@ -5359,7 +5359,7 @@ namespace DTXMania
                     //if ( !bIsAutoPlay[indexInst] )
                     if (!autoW)
                     {
-                        if (CDTXMania.ConfigIni.nSkillMode == 0)
+                        if (CDTXMania.ConfigDB.nSkillMode == 0)
                         {
                             int nCombo = (this.actCombo.n現在のコンボ数[indexInst] < 500) ? this.actCombo.n現在のコンボ数[indexInst] : 500;
                             this.actScore.Add(inst, bIsAutoPlay, nCombo * 3000L);		// #24245 2011.1.26 yyagi changed DRUMS->BASS, add nCombo conditions

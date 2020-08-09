@@ -379,7 +379,7 @@ namespace DTXMania
 				if ( this.tx画像 != null )
 				{
 					// 作成成功。
-					if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+					if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 						PutLog( strテクスチャファイル名 );
 					txData = null;
 					this.bUse = true;
@@ -407,7 +407,7 @@ namespace DTXMania
 				if ( this.tx画像 != null )
 				{
 					// 作成成功。
-					if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+					if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 						PutLog( strテクスチャファイル名 );
 					this.bUse = true;
 				}
@@ -448,7 +448,7 @@ namespace DTXMania
 
 					CDTXMania.tテクスチャの解放( ref this.tx画像 );
 
-					if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+					if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 						Trace.TraceInformation( "テクスチャを解放しました。({0})({1})", this.strコメント文, strテクスチャファイル名 );
 				}
 				this.bUse = false;
@@ -869,13 +869,13 @@ namespace DTXMania
 			public List<int> listこのWAVを使用するチャンネル番号の集合 = new List<int>( 16 );
 			public int nチップサイズ = 100;
 			public int n位置;
-			public long[] n一時停止時刻 = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
+			public long[] n一時停止時刻 = new long[ CDTXMania.ConfigDB.nPoliphonicSounds ];	// 4
 			public int n音量 = 100;
 			public int n現在再生中のサウンド番号;
-			public long[] n再生開始時刻 = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
+			public long[] n再生開始時刻 = new long[ CDTXMania.ConfigDB.nPoliphonicSounds ];	// 4
 			public int n内部番号;
 			public int n表記上の番号;
-			public CSound[] rSound = new CSound[ CDTXMania.ConfigIni.nPoliphonicSounds ];		// 4
+			public CSound[] rSound = new CSound[ CDTXMania.ConfigDB.nPoliphonicSounds ];		// 4
 			public string strコメント文 = "";
 			public string strファイル名 = "";
 			public bool bBGMとして使わない
@@ -927,13 +927,13 @@ namespace DTXMania
 
 				if( bManagedリソースの解放も行う )
 				{
-					for ( int i = 0; i < CDTXMania.ConfigIni.nPoliphonicSounds; i++ )	// 4
+					for ( int i = 0; i < CDTXMania.ConfigDB.nPoliphonicSounds; i++ )	// 4
 					{
 						if( this.rSound[ i ] != null )
 							CDTXMania.Sound管理.tサウンドを破棄する( this.rSound[ i ] );
 						this.rSound[ i ] = null;
 
-						if( ( i == 0 ) && CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+						if( ( i == 0 ) && CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 							Trace.TraceInformation( "サウンドを解放しました。({0})({1})", this.strコメント文, this.strファイル名 );
 					}
 				}
@@ -1472,7 +1472,7 @@ namespace DTXMania
 			this.stGDAParam = stgdaparamArray;
 			#endregion
 			this.nBGMAdjust = 0;
-			this.nPolyphonicSounds = CDTXMania.ConfigIni.nPoliphonicSounds;
+			this.nPolyphonicSounds = CDTXMania.ConfigDB.nPoliphonicSounds;
             this.dbDTXVPlaySpeed = 1.0f;
 #if TEST_NOTEOFFMODE
 			this.bHH演奏で直前のHHを消音する = true;
@@ -1511,7 +1511,7 @@ namespace DTXMania
 
 		public int nモニタを考慮した音量( E楽器パート part )
 		{
-			CConfigIni configIni = CDTXMania.ConfigIni;
+			CConfigDB configIni = CDTXMania.ConfigDB;
 			switch( part )
 			{
 				case E楽器パート.DRUMS:
@@ -1550,7 +1550,7 @@ namespace DTXMania
 					cavi.OnDeviceCreated();
 				}
 			}
-            if( this.listDS != null && CDTXMania.ConfigIni.bDirectShowMode == true)
+            if( this.listDS != null && CDTXMania.ConfigDB.bDirectShowMode == true)
             {
                 foreach( CDirectShow cds in this.listDS.Values)
                 {
@@ -1574,7 +1574,7 @@ namespace DTXMania
 							{
 								chip.eAVI種別 = EAVI種別.AVIPAN;
 								chip.rAVI = this.listAVI[ cavipan.nAVI番号 ];
-                                if(CDTXMania.ConfigIni.bDirectShowMode == true)
+                                if(CDTXMania.ConfigDB.bDirectShowMode == true)
                                     chip.rDShow = this.listDS[ cavipan.nAVI番号 ];
 								chip.rAVIPan = cavipan;
 								continue;
@@ -1584,7 +1584,7 @@ namespace DTXMania
 						{
 							chip.eAVI種別 = EAVI種別.AVI;
 							chip.rAVI = this.listAVI[ chip.n整数値 ];
-                            if( CDTXMania.ConfigIni.bDirectShowMode == true )
+                            if( CDTXMania.ConfigDB.bDirectShowMode == true )
                                 chip.rDShow = this.listDS[ chip.n整数値 ];
 						}
 					}
@@ -2144,34 +2144,34 @@ namespace DTXMania
             {
                 case 0x11:
                 case 0x18:
-                    if ( CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.B )
+                    if ( CDTXMania.ConfigDB.eNumOfLanes.Drums != Eタイプ.B )
                     {
-                        chip.nチャンネル番号 = ( ( CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.A ) ? 0x19 : 0x16 );
+                        chip.nチャンネル番号 = ( ( CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.A ) ? 0x19 : 0x16 );
                         return;
                     }
                     break;
                 case 0x12:
-                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C ) ? 21 : 23 );
+                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.C ) ? 21 : 23 );
                     return;
                 case 0x13:
-                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
+                    if (CDTXMania.ConfigDB.eNumOfLanes.Drums != Eタイプ.C)
                     {
                         chip.nチャンネル番号 = 0x1C;
                         return;
                     }
                     break;
                 case 0x14:
-                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
+                    if (CDTXMania.ConfigDB.eNumOfLanes.Drums != Eタイプ.C)
                     {
                         chip.nチャンネル番号 = 0x15;
                         return;
                     }
                     break;
                 case 0x15:
-                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C ) ? 0x12 : 0x14);
+                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.C ) ? 0x12 : 0x14);
                     return;
                 case 0x16:
-                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.C ) ? 0x11 : 0x1A);
+                    chip.nチャンネル番号 = ( ( CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.C ) ? 0x11 : 0x1A);
                     return;
                 case 0x17:
                     chip.nチャンネル番号 = 0x12;
@@ -2205,7 +2205,7 @@ namespace DTXMania
             }
             else if (part == E楽器パート.DRUMS && eRandom != Eランダムモード.OFF)
             {
-                if (CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
+                if (CDTXMania.ConfigDB.eNumOfLanes.Drums != Eタイプ.C)
                 {
                     int num = 0;
                     int num2 = 0;
@@ -2354,7 +2354,7 @@ namespace DTXMania
                                                 }
                                                 else
                                                 {
-                                                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.A && (nチャンネル番号 == 22 || nチャンネル番号 == 25))
+                                                    if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.A && (nチャンネル番号 == 22 || nチャンネル番号 == 25))
                                                     {
                                                         if (num2 != 6 || num3 != current.n発声位置)
                                                         {
@@ -2554,7 +2554,7 @@ namespace DTXMania
                     }
                 }
             }
-            else if (part == E楽器パート.DRUMS && eRandomPedal != Eランダムモード.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
+            else if (part == E楽器パート.DRUMS && eRandomPedal != Eランダムモード.OFF && CDTXMania.ConfigDB.eNumOfLanes.Drums != Eタイプ.C)
             {
                 int num = CDTXMania.Random.Next(2);
                 int num2 = 0;
@@ -2898,7 +2898,7 @@ namespace DTXMania
 					//{
 					//    cwav.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( str );
 					//    cwav.rSound[ 0 ].n音量 = 100;
-					//    if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+					//    if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 					//    {
 					//        Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
 					//    }
@@ -2929,7 +2929,7 @@ namespace DTXMania
 					{
 						cwav.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( str );
 						cwav.rSound[ 0 ].n音量 = 100;
-						if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+						if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 						{
 							Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
 						}
@@ -2974,7 +2974,7 @@ namespace DTXMania
 							{
 								cwav.rSound[ i ] = CDTXMania.Sound管理.tサウンドを生成する( str );
 								cwav.rSound[ i ].n音量 = 100;
-								if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
+								if ( CDTXMania.ConfigDB.bLog作成解放ログ出力 )
 								{
 									Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
 								}
@@ -3159,7 +3159,7 @@ namespace DTXMania
         #region [ チップの再生と停止 ]
         public void tチップの再生( CChip rChip, long n再生開始システム時刻ms, int nLane )
 		{
-			this.tチップの再生( rChip, n再生開始システム時刻ms, nLane, CDTXMania.ConfigIni.n自動再生音量, false, false );
+			this.tチップの再生( rChip, n再生開始システム時刻ms, nLane, CDTXMania.ConfigDB.n自動再生音量, false, false );
 		}
 		public void tチップの再生( CChip rChip, long n再生開始システム時刻ms, int nLane, int nVol )
 		{
@@ -3197,7 +3197,7 @@ namespace DTXMania
 						{
 							sound.db周波数倍率 = 1.0;
 						}
-						sound.db再生速度 = ( (double) CDTXMania.ConfigIni.n演奏速度 ) / 20.0;
+						sound.db再生速度 = ( (double) CDTXMania.ConfigDB.n演奏速度 ) / 20.0;
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
 						sound.n音量 = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
 						sound.n位置 = wc.n位置;
@@ -3217,7 +3217,7 @@ namespace DTXMania
             if( bScoreIni保存 )
 			    this.nBGMAdjust += nBGMAdjustの増減値;
             if( bConfig保存 )
-                CDTXMania.ConfigIni.nCommonBGMAdjustMs = nBGMAdjustの増減値;
+                CDTXMania.ConfigDB.nCommonBGMAdjustMs = nBGMAdjustの増減値;
 
 			for( int i = 0; i < this.listChip.Count; i++ )
 			{
@@ -3756,8 +3756,8 @@ namespace DTXMania
 						//timeBeginLoad = DateTime.Now;
 						this.nBGMAdjust = 0;
                         this.t各自動再生音チップの再生時刻を変更する( nBGMAdjust );
-                        if( CDTXMania.ConfigIni.nCommonBGMAdjustMs != 0 )
-                            this.t各自動再生音チップの再生時刻を変更する( CDTXMania.ConfigIni.nCommonBGMAdjustMs, false, true );
+                        if( CDTXMania.ConfigDB.nCommonBGMAdjustMs != 0 )
+                            this.t各自動再生音チップの再生時刻を変更する( CDTXMania.ConfigDB.nCommonBGMAdjustMs, false, true );
 						//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 						//Trace.TraceInformation( "再生時刻変更:             {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
@@ -3857,7 +3857,7 @@ namespace DTXMania
 						//Trace.TraceInformation( "hash計算:                 {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
 						#region [ bLogDTX詳細ログ出力 ]
-						if ( CDTXMania.ConfigIni.bLogDTX詳細ログ出力 )
+						if ( CDTXMania.ConfigDB.bLogDTX詳細ログ出力 )
 						{
 							foreach ( CWAV cwav in this.listWAV.Values )
 							{

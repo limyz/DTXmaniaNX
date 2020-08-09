@@ -318,7 +318,7 @@ namespace DTXMania
                     else if (
                         CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.Decide)	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
                         || CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)
-                        || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
+                        || (CDTXMania.ConfigDB.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
                     {
                         eInst = E楽器パート.DRUMS;
                         eAction = ESortAction.Decide;

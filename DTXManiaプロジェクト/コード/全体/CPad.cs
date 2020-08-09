@@ -30,7 +30,7 @@ namespace DTXMania
 
 		// コンストラクタ
 
-		internal CPad( CConfigIni configIni, CInput管理 mgrInput )
+		internal CPad( CConfigDB configIni, CInput管理 mgrInput )
 		{
 			this.rConfigIni = configIni;
 			this.rInput管理 = mgrInput;
@@ -42,7 +42,7 @@ namespace DTXMania
 
 		public List<STInputEvent> GetEvents( E楽器パート part, Eパッド pad )
 		{
-			CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
+			CConfigDB.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
 			List<STInputEvent> list = new List<STInputEvent>();
 
 			// すべての入力デバイスについて…
@@ -100,7 +100,7 @@ namespace DTXMania
 			if( part != E楽器パート.UNKNOWN )
 			{
 				
-				CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
+				CConfigDB.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
 				for( int i = 0; i < stkeyassignArray.Length; i++ )
 				{
 					switch( stkeyassignArray[ i ].入力デバイス )
@@ -164,7 +164,7 @@ namespace DTXMania
 		{
 			if( part != E楽器パート.UNKNOWN )
 			{
-				CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
+				CConfigDB.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[ (int) part ][ (int) pad ];
 				for( int i = 0; i < stkeyassignArray.Length; i++ )
 				{
 					switch( stkeyassignArray[ i ].入力デバイス )
@@ -217,7 +217,7 @@ namespace DTXMania
 
 		#region [ private ]
 		//-----------------
-		private CConfigIni rConfigIni;
+		private CConfigDB rConfigIni;
 		private CInput管理 rInput管理;
 		//-----------------
 		#endregion

@@ -9,13 +9,13 @@ namespace DTXMania
 	internal class CAct演奏GuitarWailingBonus : CAct演奏WailingBonus共通
 	{
 		// メソッド
-        private int posXGuitar = CDTXMania.ConfigIni.nWailingFireX.Guitar;
-        private int posXBass = CDTXMania.ConfigIni.nWailingFireX.Bass;
-        private int posY = CDTXMania.ConfigIni.nWailingFireY;
-        private int rectW = CDTXMania.ConfigIni.nWailingFireWidgh;
-        private int rectH = CDTXMania.ConfigIni.nWailingFireHeight;
-        private int frames = CDTXMania.ConfigIni.nWailingFireFrames;
-        private int interval = CDTXMania.ConfigIni.nWailingFireInterval;
+        private int posXGuitar = CDTXMania.ConfigDB.nWailingFireX.Guitar;
+        private int posXBass = CDTXMania.ConfigDB.nWailingFireX.Bass;
+        private int posY = CDTXMania.ConfigDB.nWailingFireY;
+        private int rectW = CDTXMania.ConfigDB.nWailingFireWidgh;
+        private int rectH = CDTXMania.ConfigDB.nWailingFireHeight;
+        private int frames = CDTXMania.ConfigDB.nWailingFireFrames;
+        private int interval = CDTXMania.ConfigDB.nWailingFireInterval;
 
 
 		public CAct演奏GuitarWailingBonus()
@@ -36,7 +36,7 @@ namespace DTXMania
 					{
 						this.ct進行用[ (int) part, i ] = new CCounter( 0, 300, 2, CDTXMania.Timer );
                         this.ctWailing炎[ (int) part, i ] = new CCounter( 0, this.frames, this.interval, CDTXMania.Timer );
-						if( CDTXMania.ConfigIni.b歓声を発声する )
+						if( CDTXMania.ConfigDB.b歓声を発声する )
 						{
 							if( r歓声Chip != null )
 							{
@@ -131,7 +131,7 @@ namespace DTXMania
 							{
 								num6 = (int) ( 64.0 - ( ( (double) ( 290 * ( num8 - 200 ) ) ) / 100.0 ) );
 							}
-							if( CDTXMania.ConfigIni.bReverse[ (int) e楽器パート2 ] )
+							if( CDTXMania.ConfigDB.bReverse[ (int) e楽器パート2 ] )
 							{
 								num6 = ( 670 - num6 ) - 244;
 							}
@@ -162,12 +162,12 @@ namespace DTXMania
 								rectangle.Height -= rectangle.Y;
 								num7 = -( num6 + 122 );
 							}
-							if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) && CDTXMania.ConfigIni.nWailingFireFrames == 0 )
+							if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) && CDTXMania.ConfigDB.nWailingFireFrames == 0 )
 							{
 								this.txWailingBonus.t2D描画( CDTXMania.app.Device, x, ( num6 + num7 ) + 122, rectangle );
 							}
 
-                            if( this.txWailingFlush != null && CDTXMania.ConfigIni.nWailingFireFrames == 0 )
+                            if( this.txWailingFlush != null && CDTXMania.ConfigDB.nWailingFireFrames == 0 )
                             {
                                 for( int i = 0; i <= 12; i++ )
                                 {

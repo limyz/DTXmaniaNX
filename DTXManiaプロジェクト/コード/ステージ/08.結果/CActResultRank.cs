@@ -49,12 +49,12 @@ namespace DTXMania
             this.n本体X[2] = 0;
             this.n本体Y[2] = 0;
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigDB.bDrums有効)
             {
                 this.n本体X[0] = n中X;
                 this.n本体Y[0] = n中Y;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigDB.bGuitar有効)
             {
                 if (!CDTXMania.DTX.bチップがある.Bass)
                 {
@@ -66,7 +66,7 @@ namespace DTXMania
                     this.n本体X[2] = n中X;
                     this.n本体Y[2] = n中Y;
                 }
-                else if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                else if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)
                 {
                     this.n本体X[1] = n右X;
                     this.n本体Y[1] = n右Y;
@@ -83,9 +83,9 @@ namespace DTXMania
             }
             #endregion
 
-            this.b全オート.Drums = CDTXMania.ConfigIni.bドラムが全部オートプレイである;
-            this.b全オート.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
-            this.b全オート.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
+            this.b全オート.Drums = CDTXMania.ConfigDB.bドラムが全部オートプレイである;
+            this.b全オート.Guitar = CDTXMania.ConfigDB.bギターが全部オートプレイである;
+            this.b全オート.Bass = CDTXMania.ConfigDB.bベースが全部オートプレイである;
 
             base.On活性化();
         }

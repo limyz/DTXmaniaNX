@@ -29,7 +29,7 @@ namespace DTXMania
             {
                 int index = 0;
                 #region[ 座標など定義 ]
-                if( CDTXMania.ConfigIni.nJudgeAnimeType == 1 )
+                if( CDTXMania.ConfigDB.nJudgeAnimeType == 1 )
                 {
                     #region[ コマ方式 ]
                     for (int i = 0; i < 12; i++)
@@ -47,7 +47,7 @@ namespace DTXMania
                     }
                     #endregion
                 }
-                else if( CDTXMania.ConfigIni.nJudgeAnimeType == 2 )
+                else if( CDTXMania.ConfigDB.nJudgeAnimeType == 2 )
                 {
                     #region[ 新しいやつ ]
                     for (int i = 0; i < 12; i++)
@@ -1255,26 +1255,26 @@ namespace DTXMania
                     if (!base.st状態[j].ct進行.b停止中)
                     {
                         #region[ 以前まで ]
-                        if (CDTXMania.ConfigIni.nJudgeAnimeType < 2)
+                        if (CDTXMania.ConfigDB.nJudgeAnimeType < 2)
                         {
-                            int num4 = CDTXMania.ConfigIni.nJudgeFrames > 1 ? 0 : base.st判定文字列[(int)base.st状態[j].judge].n画像番号;
+                            int num4 = CDTXMania.ConfigDB.nJudgeFrames > 1 ? 0 : base.st判定文字列[(int)base.st状態[j].judge].n画像番号;
                             int num5 = 0;
                             int num6 = 0;
                             if (j < 10)
                             {
                                 num5 = base.stレーンサイズ[j].x;
-                                if( CDTXMania.ConfigIni.判定文字表示位置.Drums == Eタイプ.A )
+                                if( CDTXMania.ConfigDB.判定文字表示位置.Drums == Eタイプ.A )
                                 {
-                                    num6 = CDTXMania.ConfigIni.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
+                                    num6 = CDTXMania.ConfigDB.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
                                 }
                                 else
                                 {
-                                    num6 = ( CDTXMania.ConfigIni.bReverse.Drums ? 80 + this.n文字の縦表示位置[j] * 0x20 : 583 + this.n文字の縦表示位置[j] * 0x20 );
+                                    num6 = ( CDTXMania.ConfigDB.bReverse.Drums ? 80 + this.n文字の縦表示位置[j] * 0x20 : 583 + this.n文字の縦表示位置[j] * 0x20 );
                                 }
                             }
 
-                            int nRectX = CDTXMania.ConfigIni.nJudgeWidgh;
-                            int nRectY = CDTXMania.ConfigIni.nJudgeHeight;
+                            int nRectX = CDTXMania.ConfigDB.nJudgeWidgh;
+                            int nRectY = CDTXMania.ConfigDB.nJudgeHeight;
 
                             int xc = (num5 + base.st状態[j].n相対X座標) + (this.stレーンサイズ[j].w / 2);
                             int x = (xc - ((int)((110f * base.st状態[j].fX方向拡大率)))) - ((nRectX - 225) / 2);
@@ -1282,7 +1282,7 @@ namespace DTXMania
 
                             //if (base.tx判定文字列[num4] != null)
                             {
-                                if (CDTXMania.ConfigIni.nJudgeFrames > 1 && CDTXMania.stage演奏ドラム画面.tx判定画像anime != null)
+                                if (CDTXMania.ConfigDB.nJudgeFrames > 1 && CDTXMania.stage演奏ドラム画面.tx判定画像anime != null)
                                 {
                                     if (base.st状態[j].judge == E判定.Perfect)
                                     {
@@ -1353,7 +1353,7 @@ namespace DTXMania
                         }
                         #endregion
                         #region[ さいしんばん ]
-                        else if( CDTXMania.ConfigIni.nJudgeAnimeType == 2 )
+                        else if( CDTXMania.ConfigDB.nJudgeAnimeType == 2 )
                         {
                             int num4 = 0;
                             int num5 = 0;
@@ -1361,13 +1361,13 @@ namespace DTXMania
                             if (j < 10)
                             {
                                 num5 = base.stレーンサイズ[j].x;
-                                if( CDTXMania.ConfigIni.判定文字表示位置.Drums == Eタイプ.A )
+                                if( CDTXMania.ConfigDB.判定文字表示位置.Drums == Eタイプ.A )
                                 {
-                                    num6 = CDTXMania.ConfigIni.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
+                                    num6 = CDTXMania.ConfigDB.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
                                 }
                                 else
                                 {
-                                    num6 = ( CDTXMania.ConfigIni.bReverse.Drums ? 80 + this.n文字の縦表示位置[j] * 0x20 : 583 + this.n文字の縦表示位置[j] * 0x20 );
+                                    num6 = ( CDTXMania.ConfigDB.bReverse.Drums ? 80 + this.n文字の縦表示位置[j] * 0x20 : 583 + this.n文字の縦表示位置[j] * 0x20 );
                                 }
                             }
 

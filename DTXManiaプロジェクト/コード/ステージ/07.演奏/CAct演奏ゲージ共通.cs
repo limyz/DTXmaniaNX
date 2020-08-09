@@ -153,7 +153,7 @@ namespace DTXMania
 			double fDamage;
 
 #if true	// DAMAGELEVELTUNING
-            if (CDTXMania.ConfigIni.nSkillMode == 1)
+            if (CDTXMania.ConfigDB.nSkillMode == 1)
             {
                 fDamageGaugeDelta[0, 0] =  0.005f;
                 fDamageGaugeDelta[1, 0] =  0.001f;
@@ -169,7 +169,7 @@ namespace DTXMania
                     }
 				case E判定.Great:
 
-                    if (CDTXMania.ConfigIni.bHAZARD)
+                    if (CDTXMania.ConfigDB.bHAZARD)
                     {
                         if (bRisky)
                         {
@@ -188,7 +188,7 @@ namespace DTXMania
                     break;
 				case E判定.Good:
 
-                    if (CDTXMania.ConfigIni.bHAZARD)
+                    if (CDTXMania.ConfigDB.bHAZARD)
                     {
                         if (bRisky)
                         {
@@ -218,7 +218,7 @@ namespace DTXMania
 					}
 					if ( e今回の判定 == E判定.Miss && !bRisky )
 					{
-						fDamage *= fDamageLevelFactor[ (int) CDTXMania.ConfigIni.eダメージレベル ];
+						fDamage *= fDamageLevelFactor[ (int) CDTXMania.ConfigDB.eダメージレベル ];
 					}
 					break;
 
@@ -247,7 +247,7 @@ namespace DTXMania
 
 				case E判定.Miss:
 					fDamage = ( part == E楽器パート.DRUMS ) ? -0.035 : -0.035;
-					switch( CDTXMania.ConfigIni.eダメージレベル )
+					switch( CDTXMania.ConfigDB.eダメージレベル )
 					{
 						case Eダメージレベル.少ない:
 							fDamage *= 0.6;

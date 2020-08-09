@@ -17,13 +17,13 @@ namespace DTXMania
 			}
 			E楽器パート e楽器パート = ( nLane < 3 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
 			int index = nLane;
-			if( CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] )
+			if( CDTXMania.ConfigDB.bLeft[ (int) e楽器パート ] )
 			{
 				index = ( ( index / 3 ) * 3 ) + ( 2 - ( index % 3 ) );
 			}
 			int x = this.pt中央[ index ].X;
 			int y = this.pt中央[ index ].Y;
-			if( CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] )
+			if( CDTXMania.ConfigDB.bReverse[ (int) e楽器パート ] )
 			{
 				y = ( nLane < 3 ) ? 0x176 : 0x176;
 			}

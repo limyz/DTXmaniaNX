@@ -27,14 +27,14 @@ namespace DTXMania
 			int index = nLane;
 
             //LEFT時のY座標
-			if( CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] )
+			if( CDTXMania.ConfigDB.bLeft[ (int) e楽器パート ] )
 			{
 				index = ( ( index / 5 ) * 5 ) + ( 4 - ( index % 5 ) );
 			}
 			int x = this.pt中央[ index ].X;
-            int y = (CDTXMania.ConfigIni.bReverse[(int)e楽器パート] ? 611 - CDTXMania.ConfigIni.nJudgeLine[(int)e楽器パート] : 155 + CDTXMania.ConfigIni.nJudgeLine[(int)e楽器パート]);
+            int y = (CDTXMania.ConfigDB.bReverse[(int)e楽器パート] ? 611 - CDTXMania.ConfigDB.nJudgeLine[(int)e楽器パート] : 155 + CDTXMania.ConfigDB.nJudgeLine[(int)e楽器パート]);
 
-            if ( CDTXMania.ConfigIni.eAttackEffect[ (int) e楽器パート ] != Eタイプ.B )
+            if ( CDTXMania.ConfigDB.eAttackEffect[ (int) e楽器パート ] != Eタイプ.B )
 			    base.Start( nLane, x, y );
 		}
 

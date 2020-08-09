@@ -250,7 +250,7 @@ namespace DTXMania
 
 				try
 				{
-					if ( !CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる )
+					if ( !CDTXMania.ConfigDB.bConfigIniがないかDTXManiaのバージョンが異なる )
 					{
 						try
 						{
@@ -293,7 +293,7 @@ namespace DTXMania
 
 				try
 				{
-					if ( !CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる )
+					if ( !CDTXMania.ConfigDB.bConfigIniがないかDTXManiaのバージョンが異なる )
 					{
 						try
 						{

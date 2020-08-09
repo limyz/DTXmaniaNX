@@ -80,7 +80,8 @@ namespace DTXMania
 			Trace.Indent();
 			try
 			{
-				CDTXMania.ConfigIni.t書き出し( CDTXMania.strEXEのあるフォルダ + "Config.ini" );	// CONFIGだけ
+				//CDTXMania.ConfigDB.t書き出し( CDTXMania.strEXEのあるフォルダ + "Config.ini" );    // CONFIGだけ
+				CDTXMania.ConfigDB.t書き出し(CDTXMania.strEXEのあるフォルダ + "config_db.sqlite");
 				if( this.ftフォント != null )													// 以下OPTIONと共通
 				{
 					this.ftフォント.Dispose();
@@ -288,7 +289,7 @@ namespace DTXMania
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
 				}
 			}
-			else if( ( CDTXMania.Pad.b押されたDGB( Eパッド.CY ) || CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return) ) ) )
+			else if( ( CDTXMania.Pad.b押されたDGB( Eパッド.CY ) || CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.LC ) || ( CDTXMania.ConfigDB.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return) ) ) )
 			{
 				if( this.n現在のメニュー番号 == 4 )
 				{

@@ -56,7 +56,7 @@ namespace DTXMania
             if (!base.b活性化してない)
             {
                 this.txリザルト画像がないときの画像 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_preimage default.png"));
-                if (CDTXMania.ConfigIni.bストイックモード)
+                if (CDTXMania.ConfigDB.bストイックモード)
                 {
                     this.txリザルト画像 = this.txリザルト画像がないときの画像;
                 }
@@ -66,18 +66,18 @@ namespace DTXMania
                 }
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
-                if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
+                if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigDB.b曲名表示をdefのものにする))
                     this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
@@ -94,7 +94,7 @@ namespace DTXMania
                 graphics = Graphics.FromImage(bitmap3);
                 float num;
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                if (CDTXMania.ConfigDB.nSkillMode == 0 || (CDTXMania.ConfigDB.bCLASSIC譜面判別を有効にする && 
                     (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
                     (CDTXMania.DTX.bチップがある.LP == false) && 
                     (CDTXMania.DTX.bチップがある.LBD == false) && 
@@ -115,7 +115,7 @@ namespace DTXMania
                     }
                 }
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
+                if (CDTXMania.ConfigDB.nSkillMode == 0 || (CDTXMania.ConfigDB.bCLASSIC譜面判別を有効にする && 
                     (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
                     (CDTXMania.DTX.bチップがある.LP == false) && 
                     (CDTXMania.DTX.bチップがある.LBD == false) && 
@@ -134,7 +134,7 @@ namespace DTXMania
                 bitmap3.Dispose();
                 Bitmap bitmap4 = new Bitmap(0x2a, 0x30);
                 graphics = Graphics.FromImage(bitmap4);
-                graphics.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Drums * 0x30, 0x2a, 0x30), GraphicsUnit.Pixel);
+                graphics.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, CDTXMania.ConfigDB.n譜面スクロール速度.Drums * 0x30, 0x2a, 0x30), GraphicsUnit.Pixel);
                 this.txDrumSpeed = new CTexture(CDTXMania.app.Device, bitmap4, CDTXMania.TextureFormat, false);
                 graphics.Dispose();
                 //graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;

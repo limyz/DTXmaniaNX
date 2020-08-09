@@ -271,63 +271,63 @@ namespace DTXMania
                 for (int i = 0; i < 10; i++)
                 {
                     int index = this.n描画順[i];
-                    int numOfLanesflagIndex = (int)CDTXMania.ConfigIni.eNumOfLanes.Drums;
+                    int numOfLanesflagIndex = (int)CDTXMania.ConfigDB.eNumOfLanes.Drums;
                     //26072020: Check DrawFlags array before even compute positions for drawing
                     if (this.nDrawFlags[numOfLanesflagIndex, index] == 1)
                     {
                         #region[レーン切り替え]                    
                         int x = this.st基本位置[index].x;
-                        int x2 = (this.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? -10 : 32)) + this.stパッド状態[index].nX座標オフセットdot;
-                        int x3 = (this.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? -10 : 79)) - this.stパッド状態[index].nX座標オフセットdotFLIP;
-                        int y = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 60 : 560)) + this.stパッド状態[index].nY座標オフセットdot2;
-                        int y2 = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 0 : 482)) + this.stパッド状態[index].nY座標オフセットdot;
-                        int yh = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 0 : 495)) + this.stパッド状態[index].nY座標オフセットdot;
-                        int yb = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 0 : 570)) - this.stパッド状態[index].nY座標オフセットdot;
-                        int yl = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 0 : 486)) + this.stパッド状態[index].nY座標オフセットdot;
-                        int yf = (this.st基本位置[index].y + (CDTXMania.ConfigIni.bReverse.Drums ? 0 : 470)) + this.stパッド状態[index].nY座標オフセットdot;
+                        int x2 = (this.st基本位置[index].x + (CDTXMania.ConfigDB.bReverse.Drums ? -10 : 32)) + this.stパッド状態[index].nX座標オフセットdot;
+                        int x3 = (this.st基本位置[index].x + (CDTXMania.ConfigDB.bReverse.Drums ? -10 : 79)) - this.stパッド状態[index].nX座標オフセットdotFLIP;
+                        int y = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 60 : 560)) + this.stパッド状態[index].nY座標オフセットdot2;
+                        int y2 = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 0 : 482)) + this.stパッド状態[index].nY座標オフセットdot;
+                        int yh = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 0 : 495)) + this.stパッド状態[index].nY座標オフセットdot;
+                        int yb = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 0 : 570)) - this.stパッド状態[index].nY座標オフセットdot;
+                        int yl = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 0 : 486)) + this.stパッド状態[index].nY座標オフセットdot;
+                        int yf = (this.st基本位置[index].y + (CDTXMania.ConfigDB.bReverse.Drums ? 0 : 470)) + this.stパッド状態[index].nY座標オフセットdot;
 
-                        if ((index == 2) && ((CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B) || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D))
+                        if ((index == 2) && ((CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.B) || CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.D))
                         {
                             x = this.st基本位置[9].x - 4;
                         }
                         if (index == 3)
                         {
-                            if ((CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B) || (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C))
+                            if ((CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.B) || (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.C))
                             {
                                 x = this.st基本位置[4].x + 7;
                             }
                         }
                         if (index == 4)
                         {
-                            if ((CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B) || (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C))
+                            if ((CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.B) || (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.C))
                             {
                                 x = this.st基本位置[3].x + 15;
                             }
-                            else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
+                            else if (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.D)
                             {
                                 x = this.st基本位置[3].x - 108;
                             }
                         }
                         if (index == 9)
                         {
-                            if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B)
+                            if (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.B)
                             {
                                 x = this.st基本位置[2].x + 10;
                             }
-                            else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
+                            else if (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.D)
                             {
                                 x = this.st基本位置[2].x + 50;
                             }
                         }
-                        if ((index == 5) && (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B))
+                        if ((index == 5) && (CDTXMania.ConfigDB.eLaneType.Drums == Eタイプ.B))
                         {
                             x = this.st基本位置[5].x + 2;
                         }
-                        if ((index == 8) && (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC))
+                        if ((index == 8) && (CDTXMania.ConfigDB.eRDPosition == ERDPosition.RDRC))
                         {
                             x = this.st基本位置[7].x - 15;
                         }
-                        if ((index == 7) && (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC))
+                        if ((index == 7) && (CDTXMania.ConfigDB.eRDPosition == ERDPosition.RDRC))
                         {
                             x = this.st基本位置[8].x - 15;
                         }
@@ -335,7 +335,7 @@ namespace DTXMania
                         {
                             this.txパッド.t2D描画(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
 
-                            //if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B && index == 8)
+                            //if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.B && index == 8)
                             //{
                             //    // Do not draw RD if numOfLanes is 9
                             //}
@@ -350,7 +350,7 @@ namespace DTXMania
                             this.tx光るパッド.n透明度 = (this.stパッド状態[index].n明るさ * 50) + 0;
                             this.tx光るパッド.t2D描画(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
 
-                            //if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B && index == 8)
+                            //if (CDTXMania.ConfigDB.eNumOfLanes.Drums == Eタイプ.B && index == 8)
                             //{
                             //    // Do not draw RD if numOfLanes is 9
                             //}
@@ -378,7 +378,7 @@ namespace DTXMania
                             this.stボーナス[i].ct進行.t停止();
                             this.stボーナス[i].b使用中 = false;
                         }
-                        if (this.txボーナス文字 != null && CDTXMania.ConfigIni.bShowScore)
+                        if (this.txボーナス文字 != null && CDTXMania.ConfigDB.bShowScore)
                         {
                             this.txボーナス文字.t2D描画(CDTXMania.app.Device, 160, 80);
                             //if (this.stボーナス[i].ct進行.n現在の値 >= 765)

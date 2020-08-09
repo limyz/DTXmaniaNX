@@ -392,7 +392,7 @@ namespace DTXMania
                         {
                             #region [ Decide ]
                             if ((CDTXMania.Pad.b押されたDGB(Eパッド.Decide) || CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.CY) || CDTXMania.Pad.b押された(E楽器パート.DRUMS, Eパッド.RD)) ||
-                                (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
+                                (CDTXMania.ConfigDB.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
                             {
                                 if (this.act曲リスト.r現在選択中の曲 != null)
                                 {
@@ -475,7 +475,7 @@ namespace DTXMania
                                 if (CommandHistory.CheckCommand(comChangeScrollSpeed, E楽器パート.DRUMS))
                                 {
                                     // Debug.WriteLine( "ドラムススクロール速度変更" );
-                                    // CDTXMania.ConfigIni.n譜面スクロール速度.Drums = ( CDTXMania.ConfigIni.n譜面スクロール速度.Drums + 1 ) % 0x10;
+                                    // CDTXMania.ConfigDB.n譜面スクロール速度.Drums = ( CDTXMania.ConfigDB.n譜面スクロール速度.Drums + 1 ) % 0x10;
                                     CDTXMania.Skin.sound変更音.t再生する();
                                     this.actQuickConfig.tActivatePopupMenu(E楽器パート.DRUMS);
                                 }
@@ -530,8 +530,8 @@ namespace DTXMania
                                     Debug.WriteLine("ギターとベースの入れ替え1");
                                     CDTXMania.Skin.sound変更音.t再生する();
                                     // ギターとベースのキーを入れ替え
-                                    //CDTXMania.ConfigIni.SwapGuitarBassKeyAssign();
-                                    CDTXMania.ConfigIni.bIsSwappedGuitarBass = !CDTXMania.ConfigIni.bIsSwappedGuitarBass;
+                                    //CDTXMania.ConfigDB.SwapGuitarBassKeyAssign();
+                                    CDTXMania.ConfigDB.bIsSwappedGuitarBass = !CDTXMania.ConfigDB.bIsSwappedGuitarBass;
                                 }
                             }
                             #endregion
@@ -546,8 +546,8 @@ namespace DTXMania
                                     Debug.WriteLine("ギターとベースの入れ替え2");
                                     CDTXMania.Skin.sound変更音.t再生する();
                                     // ギターとベースのキーを入れ替え
-                                    //CDTXMania.ConfigIni.SwapGuitarBassKeyAssign();
-                                    CDTXMania.ConfigIni.bIsSwappedGuitarBass = !CDTXMania.ConfigIni.bIsSwappedGuitarBass;
+                                    //CDTXMania.ConfigDB.SwapGuitarBassKeyAssign();
+                                    CDTXMania.ConfigDB.bIsSwappedGuitarBass = !CDTXMania.ConfigDB.bIsSwappedGuitarBass;
                                 }
                             }
                             #endregion
@@ -559,7 +559,7 @@ namespace DTXMania
                                 if (CommandHistory.CheckCommand(comChangeScrollSpeed, E楽器パート.GUITAR))
                                 {
                                     // Debug.WriteLine( "ドラムススクロール速度変更" );
-                                    // CDTXMania.ConfigIni.n譜面スクロール速度.Drums = ( CDTXMania.ConfigIni.n譜面スクロール速度.Drums + 1 ) % 0x10;
+                                    // CDTXMania.ConfigDB.n譜面スクロール速度.Drums = ( CDTXMania.ConfigDB.n譜面スクロール速度.Drums + 1 ) % 0x10;
                                     CDTXMania.Skin.sound変更音.t再生する();
                                     this.actQuickConfig.tActivatePopupMenu(E楽器パート.GUITAR);
                                 }
@@ -573,7 +573,7 @@ namespace DTXMania
                                 if (CommandHistory.CheckCommand(comChangeScrollSpeed, E楽器パート.BASS))
                                 {
                                     // Debug.WriteLine( "ドラムススクロール速度変更" );
-                                    // CDTXMania.ConfigIni.n譜面スクロール速度.Drums = ( CDTXMania.ConfigIni.n譜面スクロール速度.Drums + 1 ) % 0x10;
+                                    // CDTXMania.ConfigDB.n譜面スクロール速度.Drums = ( CDTXMania.ConfigDB.n譜面スクロール速度.Drums + 1 ) % 0x10;
                                     CDTXMania.Skin.sound変更音.t再生する();
                                     this.actQuickConfig.tActivatePopupMenu(E楽器パート.BASS);
                                 }
@@ -851,7 +851,7 @@ namespace DTXMania
 				{
 					song.stackランダム演奏番号.Push( numArray[ k ] );
 				}
-				if( CDTXMania.ConfigIni.bLogDTX詳細ログ出力 )
+				if( CDTXMania.ConfigDB.bLogDTX詳細ログ出力 )
 				{
 					StringBuilder builder = new StringBuilder( 0x400 );
 					builder.Append( string.Format( "ランダムインデックスリストを作成しました: {0}曲: ", song.stackランダム演奏番号.Count ) );
@@ -868,7 +868,7 @@ namespace DTXMania
 			this.eフェードアウト完了時の戻り値 = E戻り値.選曲した;
 		//	this.actFOtoNowLoading.tフェードアウト開始();					// #27787 2012.3.10 yyagi 曲決定時の画面フェードアウトの省略
 			base.eフェーズID = CStage.Eフェーズ.選曲_NowLoading画面へのフェードアウト;
-			if( CDTXMania.ConfigIni.bLogDTX詳細ログ出力 )
+			if( CDTXMania.ConfigDB.bLogDTX詳細ログ出力 )
 			{
 				int[] numArray2 = song.stackランダム演奏番号.ToArray();
 				StringBuilder builder2 = new StringBuilder( 0x400 );
@@ -913,7 +913,7 @@ namespace DTXMania
 					{
 						list.Add( c曲リストノード );
 					}
-					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする )
+					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigDB.bランダムセレクトで子BOXを検索対象とする )
 					{
 						this.t指定された曲の子リストの曲を列挙する_孫リスト含む( c曲リストノード, ref list );
 					}
@@ -933,7 +933,7 @@ namespace DTXMania
 					{
 						list.Add( c曲リストノード );
 					}
-					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする )
+					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigDB.bランダムセレクトで子BOXを検索対象とする )
 					{
 						this.t指定された曲の子リストの曲を列挙する_孫リスト含む( c曲リストノード, ref list );
 					}

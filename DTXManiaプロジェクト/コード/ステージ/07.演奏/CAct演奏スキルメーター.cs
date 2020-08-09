@@ -101,11 +101,11 @@ namespace DTXMania
 
                 //if( this.pfNameFont != null )
                 //{
-                //    if( CDTXMania.ConfigIni.eTargetGhost.Drums == ETargetGhostData.PERFECT )
+                //    if( CDTXMania.ConfigDB.eTargetGhost.Drums == ETargetGhostData.PERFECT )
                 //    {
                 //        this.txPlayerName = this.t指定された文字テクスチャを生成する( "DJ AUTO" );
                 //    }
-                //    else if( CDTXMania.ConfigIni.eTargetGhost.Drums == ETargetGhostData.LAST_PLAY )
+                //    else if( CDTXMania.ConfigDB.eTargetGhost.Drums == ETargetGhostData.LAST_PLAY )
                 //    {
                 //        this.txPlayerName = this.t指定された文字テクスチャを生成する( "LAST PLAY" );
                 //    }
@@ -132,23 +132,23 @@ namespace DTXMania
                     //座標などの定義は初回だけにする。
                     //2016.03.29 kairera0467 非セッション譜面で、譜面が無いパートでグラフを有効にしている場合、譜面があるパートに一時的にグラフを切り替える。
                     //                       時間がなくて雑なコードになったため、後日最適化を行う。
-                    if( CDTXMania.ConfigIni.bDrums有効 )
+                    if( CDTXMania.ConfigDB.bDrums有効 )
                     {
                         this.nPart = 0;
                         this.nGraphUsePart = 0;
                     }
-                    else if( CDTXMania.ConfigIni.bGuitar有効 )
+                    else if( CDTXMania.ConfigDB.bGuitar有効 )
                     {
-                        this.nGraphUsePart = ( CDTXMania.ConfigIni.bGraph有効.Guitar == true ) ? 1 : 2;
+                        this.nGraphUsePart = ( CDTXMania.ConfigDB.bGraph有効.Guitar == true ) ? 1 : 2;
                         if( CDTXMania.DTX.bチップがある.Guitar )
-                            this.nPart = CDTXMania.ConfigIni.bGraph有効.Guitar ? 0 : 1;
-                        else if( !CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bGraph有効.Guitar )
+                            this.nPart = CDTXMania.ConfigDB.bGraph有効.Guitar ? 0 : 1;
+                        else if( !CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigDB.bGraph有効.Guitar )
                         {
                             this.nPart = 1;
                             this.nGraphUsePart = 2;
                         }
 
-                        if( !CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bGraph有効.Bass )
+                        if( !CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigDB.bGraph有効.Bass )
                             this.nPart = 0;
                     }
 
@@ -157,13 +157,13 @@ namespace DTXMania
                     this.nGraphBG_XPos.Bass = 647;
                     this.nGraphBG_YPos = this.nGraphUsePart == 0 ? 50 : 110;
                     //2016.06.24 kairera0467 StatusPanelとSkillMaterの場合はX座標を調整する。
-                    if( CDTXMania.ConfigIni.nInfoType == 1 )
+                    if( CDTXMania.ConfigDB.nInfoType == 1 )
                     {
                         this.nGraphBG_XPos.Guitar = 629 + 9;
                         this.nGraphBG_XPos.Bass = 403;
                     }
 
-                    if( CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] != ETargetGhostData.NONE )
+                    if( CDTXMania.ConfigDB.eTargetGhost[ this.nGraphUsePart ] != ETargetGhostData.NONE )
                     {
                         if( CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ] != null )
                         {
@@ -214,7 +214,7 @@ namespace DTXMania
                         //現在
                         this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45, nGraphBG_YPos + 357, new Rectangle( 260, 2, 30, 120 ) );
                         //比較対象
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
+                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigDB.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
 
                         //以下使用予定
                         //最終プレイ

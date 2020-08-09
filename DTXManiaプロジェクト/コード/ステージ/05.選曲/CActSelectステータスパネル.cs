@@ -25,11 +25,11 @@ namespace DTXMania
                 this.n現在選択中の曲の難易度 = CDTXMania.stage選曲.n現在選択中の曲の難易度;
                 for (int i = 0; i < 3; i++)
                 {
-                    if (CDTXMania.ConfigIni.nSkillMode == 0)
+                    if (CDTXMania.ConfigDB.nSkillMode == 0)
                     {
                         this.n現在選択中の曲の最高ランク[i] = cスコア.譜面情報.最大ランク[i];
                     }
-                    else if (CDTXMania.ConfigIni.nSkillMode == 1)
+                    else if (CDTXMania.ConfigDB.nSkillMode == 1)
                     {
                         this.n現在選択中の曲の最高ランク[i] = DTXMania.CScoreIni.tランク値を計算して返す(0, cスコア.譜面情報.最大スキル[i]);
                     }
@@ -47,11 +47,11 @@ namespace DTXMania
                             this.n現在選択中の曲のレベル難易度毎DGB[j][i] = c曲リストノード.arスコア[j].譜面情報.レベル[i];
                             this.n現在選択中の曲のレベル小数点難易度毎DGB[j][i] = c曲リストノード.arスコア[j].譜面情報.レベルDec[i];
                             //this.n現在選択中の曲の最高ランク難易度毎[j][i] = c曲リストノード.arスコア[j].譜面情報.最大ランク[i];
-                            if (CDTXMania.ConfigIni.nSkillMode == 0)
+                            if (CDTXMania.ConfigDB.nSkillMode == 0)
                             {
                                 this.n現在選択中の曲の最高ランク難易度毎[j][i] = c曲リストノード.arスコア[j].譜面情報.最大ランク[i];
                             }
-                            else if (CDTXMania.ConfigIni.nSkillMode == 1)
+                            else if (CDTXMania.ConfigDB.nSkillMode == 1)
                             {
                                 this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) >= 95 ? DTXMania.CScoreIni.tランク値を計算して返す(0, cスコア.譜面情報.最大スキル[i]) : c曲リストノード.arスコア[j].譜面情報.最大ランク[i]);
                             }
@@ -246,7 +246,7 @@ namespace DTXMania
 
                 //-----------------
 
-                int[] nPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
+                int[] nPart = { 0, CDTXMania.ConfigDB.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigDB.bIsSwappedGuitarBass ? 1 : 2 };
 
                 int nBaseX = 30;
                 int nBaseY = 350;
@@ -302,7 +302,7 @@ namespace DTXMania
 
                                 if (this.n現在選択中の曲の難易度 == i && this.tx難易度枠 != null)
                                 {
-                                    if ((CDTXMania.ConfigIni.bDrums有効 && j == 0) || (CDTXMania.ConfigIni.bGuitar有効 && j != 0))
+                                    if ((CDTXMania.ConfigDB.bDrums有効 && j == 0) || (CDTXMania.ConfigDB.bGuitar有効 && j != 0))
                                         this.tx難易度枠.t2D描画(CDTXMania.app.Device, nBoxX, nBoxY);
                                 }
 
@@ -388,7 +388,7 @@ namespace DTXMania
 
                             if (this.tx難易度枠 != null)
                             {
-                                if ((CDTXMania.ConfigIni.bDrums有効 && j == 0) || (CDTXMania.ConfigIni.bGuitar有効 && j != 0))
+                                if ((CDTXMania.ConfigDB.bDrums有効 && j == 0) || (CDTXMania.ConfigDB.bGuitar有効 && j != 0))
                                     this.tx難易度枠.t2D描画(CDTXMania.app.Device, nBoxX, nBoxY);
                             }
 

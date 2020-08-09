@@ -23,7 +23,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "Ver3.62cGD(200803)";
+        public static readonly string VERSION = "Ver3.63-alphaTest";
         public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
@@ -54,11 +54,18 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CConfigIni ConfigIni
+        //public static CConfigIni ConfigIni
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        public static CConfigDB ConfigDB
         {
             get;
             private set;
         }
+
         public static CDTX DTX
         {
             get
@@ -112,7 +119,7 @@ namespace DTXMania
                         return c曲リストノード.nPerfect範囲ms;
                     }
                 }
-                return ConfigIni.nヒット範囲ms.Perfect;
+                return ConfigDB.nヒット範囲ms.Perfect;
             }
         }
         public static int nGreat範囲ms
@@ -127,7 +134,7 @@ namespace DTXMania
                         return c曲リストノード.nGreat範囲ms;
                     }
                 }
-                return ConfigIni.nヒット範囲ms.Great;
+                return ConfigDB.nヒット範囲ms.Great;
             }
         }
         public static int nGood範囲ms
@@ -142,7 +149,7 @@ namespace DTXMania
                         return c曲リストノード.nGood範囲ms;
                     }
                 }
-                return ConfigIni.nヒット範囲ms.Good;
+                return ConfigDB.nヒット範囲ms.Good;
             }
         }
         public static int nPoor範囲ms
@@ -157,7 +164,7 @@ namespace DTXMania
                         return c曲リストノード.nPoor範囲ms;
                     }
                 }
-                return ConfigIni.nヒット範囲ms.Poor;
+                return ConfigDB.nヒット範囲ms.Poor;
             }
         }
         public static CPad Pad
@@ -342,33 +349,33 @@ namespace DTXMania
         public void t全画面_ウィンドウモード切り替え()
         {
 #if WindowedFullscreen
-            if ( ConfigIni != null )
+            if ( ConfigDB != null )
 #else
             DeviceSettings settings = base.GraphicsDeviceManager.CurrentSettings.Clone();
-            if ((ConfigIni != null) && (ConfigIni.bウィンドウモード != settings.Windowed))
+            if ((ConfigDB != null) && (ConfigDB.bウィンドウモード != settings.Windowed))
 #endif
             {
 #if !WindowedFullscreen
-                settings.Windowed = ConfigIni.bウィンドウモード;
+                settings.Windowed = ConfigDB.bウィンドウモード;
 #endif
-                if (ConfigIni.bウィンドウモード == false)	// #23510 2010.10.27 yyagi: backup current window size before going fullscreen mode
+                if (ConfigDB.bウィンドウモード == false)	// #23510 2010.10.27 yyagi: backup current window size before going fullscreen mode
                 {
                     currentClientSize = this.Window.ClientSize;
-                    ConfigIni.nウインドウwidth = this.Window.ClientSize.Width;
-                    ConfigIni.nウインドウheight = this.Window.ClientSize.Height;
+                    ConfigDB.nウインドウwidth = this.Window.ClientSize.Width;
+                    ConfigDB.nウインドウheight = this.Window.ClientSize.Height;
                     //                  FDK.CTaskBar.ShowTaskBar( false );
                 }
 #if !WindowedFullscreen
                 base.GraphicsDeviceManager.ChangeDevice(settings);
 #endif
-                if (ConfigIni.bウィンドウモード == true)	// #23510 2010.10.27 yyagi: to resume window size from backuped value
+                if (ConfigDB.bウィンドウモード == true)	// #23510 2010.10.27 yyagi: to resume window size from backuped value
                 {
 #if WindowedFullscreen
                     base.Window.ClientSize =
                         new Size(currentClientSize.Width, currentClientSize.Height);
                 }
             }
-				if ( ConfigIni.bウィンドウモード == true )	// #23510 2010.10.27 yyagi: to resume window size from backuped value
+				if ( ConfigDB.bウィンドウモード == true )	// #23510 2010.10.27 yyagi: to resume window size from backuped value
 				{
 															// #30666 2013.2.2 yyagi Don't use Fullscreen mode becasue NVIDIA GeForce is
 															// tend to delay drawing on Fullscreen mode. So DTXMania uses Maximized window
@@ -388,7 +395,7 @@ namespace DTXMania
 					app.Window.FormBorderStyle = FormBorderStyle.None;
 					app.Window.WindowState = FormWindowState.Maximized;
 				}
-            if ( ConfigIni.bウィンドウモード )
+            if ( ConfigDB.bウィンドウモード )
             {
                 if ( !this.bマウスカーソル表示中 )
                 {
@@ -467,7 +474,7 @@ namespace DTXMania
 #endif
         protected override void LoadContent()
         {
-            if (ConfigIni.bウィンドウモード)
+            if (ConfigDB.bウィンドウモード)
             {
                 if (!this.bマウスカーソル表示中)
                 {
@@ -547,7 +554,7 @@ namespace DTXMania
                 CSound管理.rc演奏用タイマ.t更新();
 
             if (Input管理 != null)
-                Input管理.tポーリング(this.bApplicationActive, CDTXMania.ConfigIni.bバッファ入力を行う);
+                Input管理.tポーリング(this.bApplicationActive, CDTXMania.ConfigDB.bバッファ入力を行う);
 
             if (FPS != null)
                 FPS.tカウンタ更新();
@@ -563,9 +570,9 @@ namespace DTXMania
 
             // #xxxxx 2013.4.8 yyagi; sleepの挿入位置を、EndScnene～Present間から、BeginScene前に移動。描画遅延を小さくするため。
             #region [ スリープ ]
-            if (ConfigIni.nフレーム毎スリープms >= 0)			// #xxxxx 2011.11.27 yyagi
+            if (ConfigDB.nフレーム毎スリープms >= 0)			// #xxxxx 2011.11.27 yyagi
             {
-                Thread.Sleep(ConfigIni.nフレーム毎スリープms);
+                Thread.Sleep(ConfigDB.nフレーム毎スリープms);
             }
             #endregion
 
@@ -1064,7 +1071,7 @@ namespace DTXMania
                             #endregion
 
 
-                            if (!ConfigIni.bギタレボモード)
+                            if (!ConfigDB.bギタレボモード)
                             {
                                 Trace.TraceInformation("----------------------");
                                 Trace.TraceInformation("■ 演奏（ドラム画面）");
@@ -1073,11 +1080,11 @@ for (int i = 0; i < 5; i++)
 {
 	for (int j = 0; j < 2; j++)
 	{
-		stage演奏ドラム画面.fDamageGaugeDelta[i, j] = ConfigIni.fGaugeFactor[i, j];
+		stage演奏ドラム画面.fDamageGaugeDelta[i, j] = ConfigDB.fGaugeFactor[i, j];
 	}
 }
 for (int i = 0; i < 3; i++) {
-	stage演奏ドラム画面.fDamageLevelFactor[i] = ConfigIni.fDamageLevelFactor[i];
+	stage演奏ドラム画面.fDamageLevelFactor[i] = ConfigDB.fDamageLevelFactor[i];
 }		
 #endif
                                 r直前のステージ = r現在のステージ;
@@ -1092,11 +1099,11 @@ for (int i = 0; i < 5; i++)
 {
 	for (int j = 0; j < 2; j++)
 	{
-		stage演奏ギター画面.fDamageGaugeDelta[i, j] = ConfigIni.fGaugeFactor[i, j];
+		stage演奏ギター画面.fDamageGaugeDelta[i, j] = ConfigDB.fGaugeFactor[i, j];
 	}
 }
 for (int i = 0; i < 3; i++) {
-	stage演奏ギター画面.fDamageLevelFactor[i] = ConfigIni.fDamageLevelFactor[i];
+	stage演奏ギター画面.fDamageLevelFactor[i] = ConfigDB.fDamageLevelFactor[i];
 }		
 #endif
                                 r直前のステージ = r現在のステージ;
@@ -1225,7 +1232,7 @@ for (int i = 0; i < 3; i++) {
                                 //-----------------------------
                                 CScoreIni.C演奏記録 c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass;
                                 CDTX.CChip[] chipArray = new CDTX.CChip[10];
-                                if (ConfigIni.bギタレボモード)
+                                if (ConfigDB.bギタレボモード)
                                 {
                                     stage演奏ギター画面.t演奏結果を格納する(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass);
                                 }
@@ -1234,7 +1241,7 @@ for (int i = 0; i < 3; i++) {
                                     stage演奏ドラム画面.t演奏結果を格納する(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out chipArray);
                                 }
 
-                                if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
+                                if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
                                 {
                                     CScoreIni.C演奏記録 t;
                                     t = c演奏記録_Guitar;
@@ -1242,7 +1249,7 @@ for (int i = 0; i < 3; i++) {
                                     c演奏記録_Bass = t;
 
                                     CDTXMania.DTX.SwapGuitarBassInfos();			// 譜面情報も元に戻す
-                                    CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // #24415 2011.2.27 yyagi
+                                    CDTXMania.ConfigDB.SwapGuitarBassInfos_AutoFlags(); // #24415 2011.2.27 yyagi
                                     // リザルト集計時のみ、Auto系のフラグも元に戻す。
                                     // これを戻すのは、リザルト集計後。
                                 }													// "case CStage.Eステージ.結果:"のところ。
@@ -1347,9 +1354,9 @@ for (int i = 0; i < 3; i++) {
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
-                            if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24415 2011.2.27 yyagi Gt/Bsを入れ替えていたなら、Auto状態をリザルト画面終了後に元に戻す
+                            if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)		// #24415 2011.2.27 yyagi Gt/Bsを入れ替えていたなら、Auto状態をリザルト画面終了後に元に戻す
                             {
-                                CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // Auto入れ替え
+                                CDTXMania.ConfigDB.SwapGuitarBassInfos_AutoFlags(); // Auto入れ替え
                             }
 
                             DTX.t全チップの再生一時停止();
@@ -1418,7 +1425,7 @@ for (int i = 0; i < 3; i++) {
             #region [ 全画面_ウインドウ切り替え ]
             if (this.b次のタイミングで全画面_ウィンドウ切り替えを行う)
             {
-                ConfigIni.b全画面モード = !ConfigIni.b全画面モード;
+                ConfigDB.b全画面モード = !ConfigDB.b全画面モード;
                 app.t全画面_ウィンドウモード切り替え();
                 this.b次のタイミングで全画面_ウィンドウ切り替えを行う = false;
             }
@@ -1429,7 +1436,7 @@ for (int i = 0; i < 3; i++) {
                 bool bIsMaximized = this.Window.IsMaximized;											// #23510 2010.11.3 yyagi: to backup current window mode before changing VSyncWait
                 currentClientSize = this.Window.ClientSize;												// #23510 2010.11.3 yyagi: to backup current window size before changing VSyncWait
                 DeviceSettings currentSettings = app.GraphicsDeviceManager.CurrentSettings;
-                currentSettings.EnableVSync = ConfigIni.b垂直帰線待ちを行う;
+                currentSettings.EnableVSync = ConfigDB.b垂直帰線待ちを行う;
                 app.GraphicsDeviceManager.ChangeDevice(currentSettings);
                 this.b次のタイミングで垂直帰線同期切り替えを行う = false;
                 base.Window.ClientSize = new Size(currentClientSize.Width, currentClientSize.Height);	// #23510 2010.11.3 yyagi: to resume window size after changing VSyncWait
@@ -1635,20 +1642,34 @@ for (int i = 0; i < 3; i++) {
 
             #region [ Config.ini の読込み ]
             //---------------------
-            ConfigIni = new CConfigIni();
-            string path = strEXEのあるフォルダ + "Config.ini";
-            if (File.Exists(path))
+            //ConfigIni = new CConfigIni();
+            //string path = strEXEのあるフォルダ + "Config.ini";
+            ConfigDB = new CConfigDB();
+            string dbPath = strEXEのあるフォルダ + "config_db.sqlite";
+
+            //if (File.Exists(path))
+            //{
+            //    try
+            //    {
+            //        ConfigIni.tファイルから読み込み(path);
+            //    }
+            //    catch
+            //    {
+            //        //ConfigIni = new CConfigIni();	// 存在してなければ新規生成
+            //    }
+            //}
+
+            try
             {
-                try
-                {
-                    ConfigIni.tファイルから読み込み(path);
-                }
-                catch
-                {
-                    //ConfigIni = new CConfigIni();	// 存在してなければ新規生成
-                }
+                ConfigDB.tファイルから読み込み(dbPath);
             }
-            this.Window.EnableSystemMenu = CDTXMania.ConfigIni.bIsEnabledSystemMenu;	// #28200 2011.5.1 yyagi
+            catch(Exception e)
+            {
+                Trace.TraceError(e.Message);
+                //ConfigIni = new CConfigIni();	// 存在してなければ新規生成
+            }
+
+            this.Window.EnableSystemMenu = CDTXMania.ConfigDB.bIsEnabledSystemMenu;	// #28200 2011.5.1 yyagi
             // 2012.8.22 Config.iniが無いときに初期値が適用されるよう、この設定行をifブロック外に移動
 
             //---------------------
@@ -1656,7 +1677,7 @@ for (int i = 0; i < 3; i++) {
             #region [ ログ出力開始 ]
             //---------------------
             Trace.AutoFlush = true;
-            if (ConfigIni.bログ出力)
+            if (ConfigDB.bログ出力)
             {
                 try
                 {
@@ -1702,15 +1723,15 @@ for (int i = 0; i < 3; i++) {
             //---------------------
             this.strWindowTitle = "DTXMania .NET style release " + VERSION;
             base.Window.StartPosition = FormStartPosition.Manual;                                                       // #30675 2013.02.04 ikanick add
-            base.Window.Location = new Point(ConfigIni.n初期ウィンドウ開始位置X, ConfigIni.n初期ウィンドウ開始位置Y);   // #30675 2013.02.04 ikanick add
+            base.Window.Location = new Point(ConfigDB.n初期ウィンドウ開始位置X, ConfigDB.n初期ウィンドウ開始位置Y);   // #30675 2013.02.04 ikanick add
 
             base.Window.Text = this.strWindowTitle;
-            base.Window.ClientSize = new Size(ConfigIni.nウインドウwidth, ConfigIni.nウインドウheight);	// #34510 yyagi 2010.10.31 to change window size got from Config.ini
+            base.Window.ClientSize = new Size(ConfigDB.nウインドウwidth, ConfigDB.nウインドウheight);	// #34510 yyagi 2010.10.31 to change window size got from Config.ini
 #if !WindowedFullscreen
-            if (!ConfigIni.bウィンドウモード)						// #23510 2010.11.02 yyagi: add; to recover window size in case bootup with fullscreen mode
+            if (!ConfigDB.bウィンドウモード)						// #23510 2010.11.02 yyagi: add; to recover window size in case bootup with fullscreen mode
             {
 #endif
-                currentClientSize = new Size(ConfigIni.nウインドウwidth, ConfigIni.nウインドウheight);
+                currentClientSize = new Size(ConfigDB.nウインドウwidth, ConfigDB.nウインドウheight);
 #if !WindowedFullscreen
             }
 #endif
@@ -1734,12 +1755,12 @@ for (int i = 0; i < 3; i++) {
 #if WindowedFullscreen
 			settings.Windowed = true;								// #30666 2013.2.2 yyagi: Fullscreenmode is "Maximized window" mode
 #else
-            settings.Windowed = ConfigIni.bウィンドウモード;
+            settings.Windowed = ConfigDB.bウィンドウモード;
 #endif
             settings.BackBufferWidth = SampleFramework.GameWindowSize.Width;
             settings.BackBufferHeight = SampleFramework.GameWindowSize.Height;
             //			settings.BackBufferCount = 3;
-            settings.EnableVSync = ConfigIni.b垂直帰線待ちを行う;
+            settings.EnableVSync = ConfigDB.b垂直帰線待ちを行う;
             //			settings.BackBufferFormat = Format.A8R8G8B8;
             //			settings.MultisampleType = MultisampleType.FourSamples;
             //			settings.MultisampleQuality = 4;
@@ -1759,8 +1780,8 @@ for (int i = 0; i < 3; i++) {
 
             base.IsFixedTimeStep = false;
             //			base.TargetElapsedTime = TimeSpan.FromTicks( 10000000 / 75 );
-            base.Window.ClientSize = new Size(ConfigIni.nウインドウwidth, ConfigIni.nウインドウheight);	// #23510 2010.10.31 yyagi: to recover window size. width and height are able to get from Config.ini.
-            base.InactiveSleepTime = TimeSpan.FromMilliseconds((float)(ConfigIni.n非フォーカス時スリープms));	// #23568 2010.11.3 yyagi: to support valiable sleep value when !IsActive
+            base.Window.ClientSize = new Size(ConfigDB.nウインドウwidth, ConfigDB.nウインドウheight);	// #23510 2010.10.31 yyagi: to recover window size. width and height are able to get from Config.ini.
+            base.InactiveSleepTime = TimeSpan.FromMilliseconds((float)(ConfigDB.n非フォーカス時スリープms));	// #23568 2010.11.3 yyagi: to support valiable sleep value when !IsActive
             // #23568 2010.11.4 ikanick changed ( 1 -> ConfigIni )
 #if WindowedFullscreen
 			this.t全画面_ウィンドウモード切り替え();				// #30666 2013.2.2 yyagi: finalize settings for "Maximized window mode"
@@ -1777,8 +1798,8 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Skin = new CSkin(CDTXMania.ConfigIni.strSystemSkinSubfolderFullName, CDTXMania.ConfigIni.bUseBoxDefSkin);
-                CDTXMania.ConfigIni.strSystemSkinSubfolderFullName = CDTXMania.Skin.GetCurrentSkinSubfolderFullName(true);	// 旧指定のSkinフォルダが消滅していた場合に備える
+                Skin = new CSkin(CDTXMania.ConfigDB.strSystemSkinSubfolderFullName, CDTXMania.ConfigDB.bUseBoxDefSkin);
+                CDTXMania.ConfigDB.strSystemSkinSubfolderFullName = CDTXMania.Skin.GetCurrentSkinSubfolderFullName(true);	// 旧指定のSkinフォルダが消滅していた場合に備える
                 Trace.TraceInformation("スキンの初期化を完了しました。");
             }
             catch
@@ -1854,21 +1875,21 @@ for (int i = 0; i < 3; i++) {
                 Input管理 = new CInput管理(base.Window.Handle);
                 foreach (IInputDevice device in Input管理.list入力デバイス)
                 {
-                    if ((device.e入力デバイス種別 == E入力デバイス種別.Joystick) && !ConfigIni.dicJoystick.ContainsValue(device.GUID))
+                    if ((device.e入力デバイス種別 == E入力デバイス種別.Joystick) && !ConfigDB.dicJoystick.ContainsValue(device.GUID))
                     {
                         int key = 0;
-                        while (ConfigIni.dicJoystick.ContainsKey(key))
+                        while (ConfigDB.dicJoystick.ContainsKey(key))
                         {
                             key++;
                         }
-                        ConfigIni.dicJoystick.Add(key, device.GUID);
+                        ConfigDB.dicJoystick.Add(key, device.GUID);
                     }
                 }
                 foreach (IInputDevice device2 in Input管理.list入力デバイス)
                 {
                     if (device2.e入力デバイス種別 == E入力デバイス種別.Joystick)
                     {
-                        foreach (KeyValuePair<int, string> pair in ConfigIni.dicJoystick)
+                        foreach (KeyValuePair<int, string> pair in ConfigDB.dicJoystick)
                         {
                             if (device2.GUID.Equals(pair.Value))
                             {
@@ -1899,7 +1920,7 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Pad = new CPad(ConfigIni, Input管理);
+                Pad = new CPad(ConfigDB, Input管理);
                 Trace.TraceInformation("パッドの初期化を完了しました。");
             }
             catch (Exception exception3)
@@ -1921,7 +1942,7 @@ for (int i = 0; i < 3; i++) {
             {
                 {
                     ESoundDeviceType soundDeviceType;
-                    switch (CDTXMania.ConfigIni.nSoundDeviceType)
+                    switch (CDTXMania.ConfigDB.nSoundDeviceType)
                     {
                         case 0:
                             soundDeviceType = ESoundDeviceType.DirectSound;
@@ -1938,12 +1959,12 @@ for (int i = 0; i < 3; i++) {
                     }
                     Sound管理 = new CSound管理(base.Window.Handle,
                                                 soundDeviceType,
-                                                CDTXMania.ConfigIni.nWASAPIBufferSizeMs,
+                                                CDTXMania.ConfigDB.nWASAPIBufferSizeMs,
                                                 0,
-                                                CDTXMania.ConfigIni.nASIODevice
+                                                CDTXMania.ConfigDB.nASIODevice
                     );
                     AddSoundTypeToWindowTitle();
-                    FDK.CSound管理.bIsTimeStretch = CDTXMania.ConfigIni.bTimeStretch;
+                    FDK.CSound管理.bIsTimeStretch = CDTXMania.ConfigDB.bTimeStretch;
                     Trace.TraceInformation("サウンドデバイスの初期化を完了しました。");
                 }
             }
@@ -2367,22 +2388,24 @@ for (int i = 0; i < 3; i++) {
                 #region [ Config.iniの出力 ]
                 //---------------------
                 Trace.TraceInformation("Config.ini を出力します。");
-                //				if ( ConfigIni.bIsSwappedGuitarBass )			// #24063 2011.1.16 yyagi ギターベースがスワップしているときは元に戻す
-                if (ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped)	// #24415 2011.2.21 yyagi FLIP中かつ演奏中にalt-f4で終了したときは、AUTOのフラグをswapして戻す
+                //				if ( ConfigDB.bIsSwappedGuitarBass )			// #24063 2011.1.16 yyagi ギターベースがスワップしているときは元に戻す
+                if (ConfigDB.bIsSwappedGuitarBass_AutoFlagsAreSwapped)	// #24415 2011.2.21 yyagi FLIP中かつ演奏中にalt-f4で終了したときは、AUTOのフラグをswapして戻す
                 {
-                    ConfigIni.SwapGuitarBassInfos_AutoFlags();
+                    ConfigDB.SwapGuitarBassInfos_AutoFlags();
                 }
-                string str = strEXEのあるフォルダ + "Config.ini";
+                //string str = strEXEのあるフォルダ + "Config.ini";
+                string str2 = strEXEのあるフォルダ + "config_db.sqlite";
                 Trace.Indent();
                 try
                 {
-                    ConfigIni.t書き出し(str);
-                    Trace.TraceInformation("保存しました。({0})", new object[] { str });
+                    //ConfigIni.t書き出し(str);
+                    ConfigDB.t書き出し(str2);
+                    Trace.TraceInformation("保存しました。({0})", new object[] { str2 });
                 }
                 catch (Exception e)
                 {
                     Trace.TraceError(e.Message);
-                    Trace.TraceError("Config.ini の出力に失敗しました。({0})", new object[] { str });
+                    Trace.TraceError("Config.ini の出力に失敗しました。({0})", new object[] { str2 });
                 }
                 finally
                 {
@@ -2443,7 +2466,7 @@ for (int i = 0; i < 3; i++) {
                     }
                 }
             }
-            if (ConfigIni.bScoreIniを出力する)
+            if (ConfigDB.bScoreIniを出力する)
             {
                 ini.t書き出し(strFilename);
             }
@@ -2538,9 +2561,9 @@ for (int i = 0; i < 3; i++) {
             }
             else if ((e.KeyCode == Keys.Return) && e.Alt)
             {
-                if (ConfigIni != null)
+                if (ConfigDB != null)
                 {
-                    ConfigIni.bウィンドウモード = !ConfigIni.bウィンドウモード;
+                    ConfigDB.bウィンドウモード = !ConfigDB.bウィンドウモード;
                     this.t全画面_ウィンドウモード切り替え();
                 }
                 e.Handled = true;
@@ -2550,8 +2573,8 @@ for (int i = 0; i < 3; i++) {
             {
                 for (int i = 0; i < 0x10; i++)
                 {
-                    if (ConfigIni.KeyAssign.System.Capture[i].コード > 0 &&
-                         e.KeyCode == DeviceConstantConverter.KeyToKeyCode((SlimDX.DirectInput.Key)ConfigIni.KeyAssign.System.Capture[i].コード))
+                    if (ConfigDB.KeyAssign.System.Capture[i].コード > 0 &&
+                         e.KeyCode == DeviceConstantConverter.KeyToKeyCode((SlimDX.DirectInput.Key)ConfigDB.KeyAssign.System.Capture[i].コード))
                     {
                         // Debug.WriteLine( "capture: " + string.Format( "{0:2x}", (int) e.KeyCode ) + " " + (int) e.KeyCode );
                         string strFullPath =
@@ -2569,22 +2592,22 @@ for (int i = 0; i < 3; i++) {
 
         private void Window_MouseDoubleClick(object sender, MouseEventArgs e)	// #23510 2010.11.13 yyagi: to go full screen mode
         {
-            if (mb.Equals(MouseButtons.Left) && ConfigIni.bIsAllowedDoubleClickFullscreen)	// #26752 2011.11.27 yyagi
+            if (mb.Equals(MouseButtons.Left) && ConfigDB.bIsAllowedDoubleClickFullscreen)	// #26752 2011.11.27 yyagi
             {
-                ConfigIni.bウィンドウモード = false;
+                ConfigDB.bウィンドウモード = false;
                 this.t全画面_ウィンドウモード切り替え();
             }
         }
         private void Window_ResizeEnd(object sender, EventArgs e)				// #23510 2010.11.20 yyagi: to get resized window size
         {
-            if (ConfigIni.bウィンドウモード)
+            if (ConfigDB.bウィンドウモード)
             {
-                ConfigIni.n初期ウィンドウ開始位置X = base.Window.Location.X;	// #30675 2013.02.04 ikanick add
-                ConfigIni.n初期ウィンドウ開始位置Y = base.Window.Location.Y;	//
+                ConfigDB.n初期ウィンドウ開始位置X = base.Window.Location.X;	// #30675 2013.02.04 ikanick add
+                ConfigDB.n初期ウィンドウ開始位置Y = base.Window.Location.Y;	//
             }
 
-            ConfigIni.nウインドウwidth = (ConfigIni.bウィンドウモード) ? base.Window.ClientSize.Width : currentClientSize.Width;	// #23510 2010.10.31 yyagi add
-            ConfigIni.nウインドウheight = (ConfigIni.bウィンドウモード) ? base.Window.ClientSize.Height : currentClientSize.Height;
+            ConfigDB.nウインドウwidth = (ConfigDB.bウィンドウモード) ? base.Window.ClientSize.Width : currentClientSize.Width;	// #23510 2010.10.31 yyagi add
+            ConfigDB.nウインドウheight = (ConfigDB.bウィンドウモード) ? base.Window.ClientSize.Height : currentClientSize.Height;
         }
         #endregion
 

@@ -32,7 +32,7 @@ namespace DTXMania
             if (!base.b活性化してない)
             {
                 Device device = CDTXMania.app.Device;
-                CConfigIni configIni = CDTXMania.ConfigIni;
+                CConfigDB configIni = CDTXMania.ConfigDB;
                 if (this.txオプションパネル != null)
                 {
                     int drums = configIni.n譜面スクロール速度.Drums;

@@ -241,16 +241,16 @@ namespace DTXMania
                 this.nスコアX[j] = 0;
             }
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigDB.bDrums有効)
             {
                 this.n本体X[0] = n左1X;
                 this.nスコアX[0] = n左2X;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigDB.bGuitar有効)
             {
                 if (CDTXMania.DTX.bチップがある.Guitar)
                 {
-                    if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                    if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)
                     {
                         this.n本体X[1] = n右1X;
                         this.nスコアX[1] = n右2X;
@@ -264,7 +264,7 @@ namespace DTXMania
 
                 if (CDTXMania.DTX.bチップがある.Bass)
                 {
-                    if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                    if (CDTXMania.ConfigDB.bIsSwappedGuitarBass)
                     {
                         this.n本体X[2] = n左1X;
                         this.nスコアX[2] = n左2X;
@@ -279,8 +279,8 @@ namespace DTXMania
             }
             #endregion
 
-            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
-            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
+            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigDB.str曲名表示フォント ), 20, FontStyle.Regular );
+            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigDB.str曲名表示フォント ), 12, FontStyle.Regular );
 
 			this.sdDTXで指定されたフルコンボ音 = null;
 			base.On活性化();
@@ -321,8 +321,8 @@ namespace DTXMania
 
                 for ( int i = 0; i < 3; i++ )
                 {
-                    this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ i ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ i ];
-                    this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ i ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ i ];
+                    this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigDB.strCardName[ i ] ) ? "GUEST" : CDTXMania.ConfigDB.strCardName[ i ];
+                    this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigDB.strGroupName[ i ] ) ? "" : CDTXMania.ConfigDB.strGroupName[ i ];
                     Bitmap image2 = new Bitmap( 257, 100 );
                     Graphics graネームプレート用 = Graphics.FromImage( image2 );
 
@@ -330,7 +330,7 @@ namespace DTXMania
                     //--------------------
                     Color clNameColor = Color.White;
                     Color clNameColorLower = Color.White;
-                    switch( CDTXMania.ConfigIni.nNameColor[ 0 ] )
+                    switch( CDTXMania.ConfigDB.nNameColor[ 0 ] )
                     {
                         case 0:
                             clNameColor = Color.White;
@@ -407,7 +407,7 @@ namespace DTXMania
                     #endregion
                     #region[ 名前とか ]
                     Bitmap bmpCardName = new Bitmap(1, 1);
-                    bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigIni.nNameColor[ i ] > 11 ? clNameColorLower : clNameColor ) );
+                    bmpCardName = this.prv表示用フォント.DrawPrivateFont( this.strPlayerName, Color.White, Color.Transparent, clNameColor, ( CDTXMania.ConfigDB.nNameColor[ i ] > 11 ? clNameColorLower : clNameColor ) );
                     Bitmap bmpTitleName = new Bitmap(1, 1);
                     bmpTitleName = this.prv称号フォント.DrawPrivateFont( this.strTitleName, Color.White, Color.Transparent );
 
@@ -472,7 +472,7 @@ namespace DTXMania
                     string str = string.Format("{0:0.00}", ((float)CDTXMania.DTX.LEVEL[j]) / 10.0f + (CDTXMania.DTX.LEVELDEC[j] != 0 ? CDTXMania.DTX.LEVELDEC[j] / 100.0f : 0));
                     bool bCLASSIC = false;
                     //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                    if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                    if (CDTXMania.ConfigDB.nSkillMode == 0 || (CDTXMania.ConfigDB.bCLASSIC譜面判別を有効にする &&
                         (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
                         (CDTXMania.DTX.bチップがある.LP == false) &&
                         (CDTXMania.DTX.bチップがある.LBD == false) &&

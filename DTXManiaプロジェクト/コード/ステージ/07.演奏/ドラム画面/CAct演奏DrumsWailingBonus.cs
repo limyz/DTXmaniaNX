@@ -32,7 +32,7 @@ namespace DTXMania
 					if( this.ct進行用[ num, i ].b停止中 )
 					{
 						this.ct進行用[ num, i ] = new CCounter( 0, 300, 2, CDTXMania.Timer );
-						if( CDTXMania.ConfigIni.b歓声を発声する )
+						if( CDTXMania.ConfigDB.b歓声を発声する )
 						{
 							if( r歓声Chip != null )
 							{
@@ -112,7 +112,7 @@ namespace DTXMania
 								{
 									num4 = (int) ( 64f - ( ( (float) ( 290 * ( num6 - 200 ) ) ) / 100f ) );
 								}
-								if( CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] )
+								if( CDTXMania.ConfigDB.bReverse[ (int) e楽器パート ] )
 								{
 									num4 = ( 0x163 - num4 ) - 0xf4;
 								}

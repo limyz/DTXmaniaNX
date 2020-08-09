@@ -306,7 +306,7 @@ namespace DTXMania
 
                 try
                 {
-                    if (!CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる)
+                    if (!CDTXMania.ConfigDB.bConfigIniがないかDTXManiaのバージョンが異なる)
                     {
                         CSongs管理 s = new CSongs管理();
                         s = Deserialize(strPathSongList);		// 直接this.Songs管理にdeserialize()結果を代入するのは避ける。nullにされてしまうことがあるため。
@@ -347,7 +347,7 @@ namespace DTXMania
 
                 try
                 {
-                    if (!CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる)
+                    if (!CDTXMania.ConfigDB.bConfigIniがないかDTXManiaのバージョンが異なる)
                     {
                         try
                         {
@@ -423,9 +423,9 @@ namespace DTXMania
 
                 try
                 {
-                    if (!string.IsNullOrEmpty(CDTXMania.ConfigIni.str曲データ検索パス))
+                    if (!string.IsNullOrEmpty(CDTXMania.ConfigDB.str曲データ検索パス))
                     {
-                        string[] strArray = CDTXMania.ConfigIni.str曲データ検索パス.Split(new char[] { ';' });
+                        string[] strArray = CDTXMania.ConfigDB.str曲データ検索パス.Split(new char[] { ';' });
                         if (strArray.Length > 0)
                         {
                             // 全パスについて…

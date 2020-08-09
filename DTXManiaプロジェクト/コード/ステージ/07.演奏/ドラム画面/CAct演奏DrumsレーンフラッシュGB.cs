@@ -19,8 +19,8 @@ namespace DTXMania
 					if( !base.ct進行[ i ].b停止中 )
 					{
 						E楽器パート e楽器パート = ( i < 3 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
-						CTexture texture = CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] ? base.txFlush[ ( i % 3 ) + 3 ] : base.txFlush[ i % 3 ];
-						int num2 = CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] ? 1 : 0;
+						CTexture texture = CDTXMania.ConfigDB.bReverse[ (int) e楽器パート ] ? base.txFlush[ ( i % 3 ) + 3 ] : base.txFlush[ i % 3 ];
+						int num2 = CDTXMania.ConfigDB.bLeft[ (int) e楽器パート ] ? 1 : 0;
 						for( int j = 0; j < 3; j++ )
 						{
 							int x = ( ( ( i < 3 ) ? 0x1fb : 0x18e ) + this.nRGBのX座標[ num2, i ] ) + ( ( 0x10 * base.ct進行[ i ].n現在の値 ) / 100 );

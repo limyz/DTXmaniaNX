@@ -13,7 +13,7 @@ namespace DTXMania
 		{
 			if( !base.b活性化してない )
 			{
-				if( !CDTXMania.ConfigIni.bGuitar有効 )
+				if( !CDTXMania.ConfigDB.bGuitar有効 )
 				{
 					return 0;
 				}
@@ -21,7 +21,7 @@ namespace DTXMania
 				{
 					for( int j = 0; j < 3; j++ )
 					{
-						int index = CDTXMania.ConfigIni.bLeft.Guitar ? ( 2 - j ) : j;
+						int index = CDTXMania.ConfigDB.bLeft.Guitar ? ( 2 - j ) : j;
 						Rectangle rectangle = new Rectangle( index * 0x18, 0, 0x18, 0x20 );
 						if( base.b押下状態[ index ] )
 						{
@@ -37,7 +37,7 @@ namespace DTXMania
 				{
 					for( int k = 0; k < 3; k++ )
 					{
-						int num4 = CDTXMania.ConfigIni.bLeft.Bass ? ( 2 - k ) : k;
+						int num4 = CDTXMania.ConfigDB.bLeft.Bass ? ( 2 - k ) : k;
 						Rectangle rectangle2 = new Rectangle( num4 * 0x18, 0, 0x18, 0x20 );
 						if( base.b押下状態[ num4 + 3 ] )
 						{

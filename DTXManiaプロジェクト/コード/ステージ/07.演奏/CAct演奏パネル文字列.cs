@@ -54,12 +54,12 @@ namespace DTXMania
         public override void On活性化()
         {
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigDB.bDrums有効)
             {
                 this.n曲名X = 950;
                 this.n曲名Y = 630;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigDB.bGuitar有効)
             {
                 this.n曲名X = 500;
                 this.n曲名Y = 630;
@@ -94,18 +94,18 @@ namespace DTXMania
 //              this.SetPanelString(this.strパネル文字列);
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
-                if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
+                if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bコンパクトモード && CDTXMania.ConfigDB.b曲名表示をdefのものにする))
                     this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = this.pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigDB.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = this.pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
@@ -159,7 +159,7 @@ namespace DTXMania
 
                 SlimDX.Matrix mat = SlimDX.Matrix.Identity;
 
-                if (CDTXMania.ConfigIni.bDrums有効)
+                if (CDTXMania.ConfigDB.bDrums有効)
                 {
                     this.nジャケットX = 915;
                     this.nジャケットY = 287;
@@ -176,7 +176,7 @@ namespace DTXMania
                     mat *= SlimDX.Matrix.RotationZ(0.3f);
                 }
 
-                if (CDTXMania.ConfigIni.bGuitar有効)
+                if (CDTXMania.ConfigDB.bGuitar有効)
                 {
                     this.nジャケットX = 467;
                     this.nジャケットY = 287;
