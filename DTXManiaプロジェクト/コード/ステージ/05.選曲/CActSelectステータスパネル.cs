@@ -53,7 +53,9 @@ namespace DTXMania
                             }
                             else if (CDTXMania.ConfigIni.nSkillMode == 1)
                             {
-                                this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) >= 95 ? DTXMania.CScoreIni.tランク値を計算して返す(0, cスコア.譜面情報.最大スキル[i]) : c曲リストノード.arスコア[j].譜面情報.最大ランク[i]);
+                                // Fix github.com/limyz/DTXmaniaXG/issues/33
+                                //this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]) >= 95 ? DTXMania.CScoreIni.tランク値を計算して返す(0, cスコア.譜面情報.最大スキル[i]) : c曲リストノード.arスコア[j].譜面情報.最大ランク[i]);
+                                this.n現在選択中の曲の最高ランク難易度毎[j][i] = DTXMania.CScoreIni.tランク値を計算して返す(0, c曲リストノード.arスコア[j].譜面情報.最大スキル[i]);
                             }
 
                             this.db現在選択中の曲の最高スキル値難易度毎[j][i] = c曲リストノード.arスコア[j].譜面情報.最大スキル[i];
