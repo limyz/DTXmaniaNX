@@ -100,7 +100,7 @@ namespace DTXMania
 			}
 
 			this.stLag数値 = new STlag数値[ 12 * 2 ];		// #25370 2011.2.1 yyagi
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -149,7 +149,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 15; i++ )
 			{
@@ -214,20 +214,20 @@ namespace DTXMania
                         }
                     }
                 }
-			base.On活性化();
+			base.OnActivate();
 			this.nShowLagType = CDTXMania.ConfigIni.nShowLagType;
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i < 15; i++ )
 			{
 				this.st状態[ i ].ct進行 = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 if(CDTXMania.ConfigIni.nJudgeAnimeType == 1)
                 {
@@ -248,18 +248,18 @@ namespace DTXMania
                 }
 
                 this.txlag数値 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_lag numbers.png"));
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 0 ] );
 				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 1 ] );
 				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 2 ] );
 				CDTXMania.tテクスチャの解放( ref this.txlag数値 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 	}

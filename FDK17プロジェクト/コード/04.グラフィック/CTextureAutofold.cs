@@ -222,13 +222,13 @@ namespace FDK
 				{
 					int currentHeight = n * _orgHeight;
 					r = new Rectangle( 0, currentHeight, this.rc全画像.Width, _orgHeight );
-					base.t2D描画( device, x + n * this.rc全画像.Width, y, 1f, r );
+					base.tDraw2D( device, x + n * this.rc全画像.Width, y, 1f, r );
 				}
 				else
 				{
 					int currentWidth = n * _orgWidth;
 					r = new Rectangle( currentWidth, 0, _orgWidth, this.rc全画像.Height );
-					base.t2D描画( device, x, y + n * this.rc全画像.Height, 1f, r );
+					base.tDraw2D( device, x, y + n * this.rc全画像.Height, 1f, r );
 				}
 			}
 #endif
@@ -249,7 +249,7 @@ namespace FDK
 					int newRcWidth = ( newRcX + rc.Width > rc全画像.Width ) ? rc全画像.Width - newRcX : rc.Width;
 
 					r = new Rectangle( newRcX, newRcY, newRcWidth, rc.Height );
-					base.t2D描画( device, x, y, 1f, r );
+					base.tDraw2D( device, x, y, 1f, r );
 
 					int deltaX = ( i == beginFold ) ? ( i + 1 ) * rc全画像.Width - rc.X : rc全画像.Width;
 					int newWidth = rc.Width - deltaX;
@@ -270,7 +270,7 @@ namespace FDK
 					int newRcHeight = ( newRcY + rc.Height > rc全画像.Height ) ? rc全画像.Height - newRcY : rc.Height;
 
 					r = new Rectangle( newRcX, newRcY, rc.Width, newRcHeight );
-					base.t2D描画( device, x, y, 1f, r );
+					base.tDraw2D( device, x, y, 1f, r );
 
 					int deltaY = ( i == beginFold ) ? ( i + 1 ) * rc全画像.Height - rc.Y : rc全画像.Height;
 					int newHeight = rc.Height - deltaY;

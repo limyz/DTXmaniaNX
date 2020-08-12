@@ -20,7 +20,7 @@ namespace DTXMania
 
 		public CAct演奏GuitarWailingBonus()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		//public override void Start( E楽器パート part )
 		//{
@@ -56,7 +56,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 3; i++ )
 			{
@@ -66,11 +66,11 @@ namespace DTXMania
                     this.ctWailing炎[ i, j  ] = null;
 				}
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 2; i++ )
 				{
@@ -148,7 +148,7 @@ namespace DTXMania
 							}
 							if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) )
 							{
-								this.txWailingBonus.t2D描画( CDTXMania.app.Device, x, num6 + num7, rectangle );
+								this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, num6 + num7, rectangle );
 							}
 							num7 = 0;
 							rectangle = new Rectangle( 26, 0, 26, 122 );
@@ -164,18 +164,18 @@ namespace DTXMania
 							}
 							if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) && CDTXMania.ConfigIni.nWailingFireFrames == 0 )
 							{
-								this.txWailingBonus.t2D描画( CDTXMania.app.Device, x, ( num6 + num7 ) + 122, rectangle );
+								this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( num6 + num7 ) + 122, rectangle );
 							}
 
                             if( this.txWailingFlush != null && CDTXMania.ConfigIni.nWailingFireFrames == 0 )
                             {
                                 for( int i = 0; i <= 12; i++ )
                                 {
-                                    this.txWailingFlush.t2D描画( CDTXMania.app.Device, ( e楽器パート2 == E楽器パート.GUITAR ) ? 283 : 1153, 64 * i, new Rectangle( 0, 0, 42, 64 ) );
+                                    this.txWailingFlush.tDraw2D( CDTXMania.app.Device, ( e楽器パート2 == E楽器パート.GUITAR ) ? 283 : 1153, 64 * i, new Rectangle( 0, 0, 42, 64 ) );
                                 }
 
                                 int count = this.ct進行用[ (int)e楽器パート2, m ].n現在の値;
-                                this.txWailingFlush.n透明度 = ( count <= 55 ? 255 : 255 - count );
+                                this.txWailingFlush.nTransparency = ( count <= 55 ? 255 : 255 - count );
                             }
 						}
 

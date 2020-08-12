@@ -17,14 +17,14 @@ namespace DTXMania
 		public CStage起動()
 		{
 			base.eステージID = CStage.Eステージ.起動;
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 		public List<string> list進行文字列;
 
 		// CStage 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			Trace.TraceInformation( "起動ステージを活性化します。" );
 			Trace.Indent();
@@ -32,7 +32,7 @@ namespace DTXMania
 			{
 				this.list進行文字列 = new List<string>();
 				base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
-				base.On活性化();
+				base.OnActivate();
 				Trace.TraceInformation( "起動ステージの活性化を完了しました。" );
 			}
 			finally
@@ -40,7 +40,7 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			Trace.TraceInformation( "起動ステージを非活性化します。" );
 			Trace.Indent();
@@ -56,7 +56,7 @@ namespace DTXMania
 						es.thDTXFileEnumerate.Join();
 					}
 				}
-				base.On非活性化();
+				base.OnDeactivate();
 				Trace.TraceInformation( "起動ステージの非活性化を完了しました。" );
 			}
 			finally
@@ -64,25 +64,25 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.tx背景 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\1_background.jpg"), false);
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -95,10 +95,10 @@ namespace DTXMania
 					return 0;
 				}
 
-				// CSongs管理 s管理 = CDTXMania.Songs管理;
+				// CSongManager s管理 = CDTXMania.SongManager;
 
 				if( this.tx背景 != null )
-					this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
+					this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
 				#region [ this.str現在進行中 の決定 ]
 				//-----------------
@@ -117,15 +117,15 @@ namespace DTXMania
 						break;
 
 					case CStage.Eフェーズ.起動2_曲を検索してリストを作成する:
-						this.str現在進行中 = string.Format( "{0} ... {1}", "Enumerating songs", es.Songs管理.n検索されたスコア数 );
+						this.str現在進行中 = string.Format( "{0} ... {1}", "Enumerating songs", es.Songs管理.nNbScoresFound );
 						break;
 
 					case CStage.Eフェーズ.起動3_スコアキャッシュをリストに反映する:
-						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from songs.db", es.Songs管理.nスコアキャッシュから反映できたスコア数, es.Songs管理.n検索されたスコア数 );
+						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from songs.db", es.Songs管理.nNbScoresFromScoreCache, es.Songs管理.nNbScoresFound );
 						break;
 
 					case CStage.Eフェーズ.起動4_スコアキャッシュになかった曲をファイルから読み込んで反映する:
-						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from files", es.Songs管理.nファイルから反映できたスコア数, es.Songs管理.n検索されたスコア数 - es.Songs管理.nスコアキャッシュから反映できたスコア数 );
+						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from files", es.Songs管理.nNbScoresFromFile, es.Songs管理.nNbScoresFound - es.Songs管理.nNbScoresFromScoreCache );
 						break;
 
 					case CStage.Eフェーズ.起動5_曲リストへ後処理を適用する:
@@ -160,7 +160,7 @@ namespace DTXMania
 
 				if( es != null && es.IsSongListEnumCompletelyDone )							// 曲リスト作成が終わったら
 				{
-					CDTXMania.Songs管理 = ( es != null ) ? es.Songs管理 : null;		// 最後に、曲リストを拾い上げる
+					CDTXMania.SongManager = ( es != null ) ? es.Songs管理 : null;		// 最後に、曲リストを拾い上げる
 					return 1;
 				}
 			}

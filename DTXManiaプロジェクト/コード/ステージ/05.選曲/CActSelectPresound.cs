@@ -12,7 +12,7 @@ namespace DTXMania
 
 		public CActSelectPresound()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		public void tサウンド停止()
 		{
@@ -25,12 +25,12 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( cスコア != null ) && ( ( !( cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Presound ).Equals( this.str現在のファイル名 ) || ( this.sound == null ) ) || !this.sound.b再生中 ) )
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			if( ( cスコア != null ) && ( ( !( cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound ).Equals( this.str現在のファイル名 ) || ( this.sound == null ) ) || !this.sound.b再生中 ) )
 			{
 				this.tサウンド停止();
 				this.tBGMフェードイン開始();
-				if( ( cスコア.譜面情報.Presound != null ) && ( cスコア.譜面情報.Presound.Length > 0 ) )
+				if( ( cスコア.SongInformation.Presound != null ) && ( cスコア.SongInformation.Presound.Length > 0 ) )
 				{
 					this.ct再生待ちウェイト = new CCounter( 0, CDTXMania.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms, 1, CDTXMania.Timer );
 				}
@@ -40,26 +40,26 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.sound = null;
 			this.str現在のファイル名 = "";
 			this.ct再生待ちウェイト = null;
 			this.ctBGMフェードアウト用 = null;
 			this.ctBGMフェードイン用 = null;
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			this.tサウンド停止();
 			this.ct再生待ちウェイト = null;
 			this.ctBGMフェードイン用 = null;
 			this.ctBGMフェードアウト用 = null;
-			base.On非活性化();
+			base.OnDeactivate();
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( ( this.ctBGMフェードイン用 != null ) && this.ctBGMフェードイン用.b進行中 )
 				{
@@ -115,10 +115,10 @@ namespace DTXMania
 		}
 		private void tプレビューサウンドの作成()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( cスコア != null ) && !string.IsNullOrEmpty( cスコア.譜面情報.Presound ) )
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			if( ( cスコア != null ) && !string.IsNullOrEmpty( cスコア.SongInformation.Presound ) )
 			{
-				string strPreviewFilename = cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Presound;
+				string strPreviewFilename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound;
 				try
 				{
 					this.sound = CDTXMania.Sound管理.tサウンドを生成する( strPreviewFilename );

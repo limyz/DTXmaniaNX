@@ -2,7 +2,7 @@
 {
 	/// <summary>
 	/// <para>プラグインホスト情報提供インターフェース。</para>
-	/// <para>プラグインでは、On初期化() で渡されるこのインターフェースオブジェクトを通じて、
+	/// <para>プラグインでは、OnInitialize() で渡されるこのインターフェースオブジェクトを通じて、
 	/// DTXMania の持つ様々なリソースにアクセスできます。</para>
 	/// </summary>
 	public interface IPluginHost

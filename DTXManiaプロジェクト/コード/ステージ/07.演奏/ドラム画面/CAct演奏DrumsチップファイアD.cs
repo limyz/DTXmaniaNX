@@ -14,7 +14,7 @@ namespace DTXMania
 
 		public CAct演奏DrumsチップファイアD()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		
@@ -321,7 +321,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < FIRE_MAX; i++ )
 			{
@@ -351,9 +351,9 @@ namespace DTXMania
 				this.st細波[ i ].ct進行 = new CCounter();
 			}
             int iPosY = 0x177;
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i <FIRE_MAX; i++ )
 			{
@@ -372,11 +372,11 @@ namespace DTXMania
 				this.st大波[ i ].ct進行 = null;
 				this.st細波[ i ].ct進行 = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 if (CDTXMania.ConfigIni.nExplosionFrames >= 2)
                 {
@@ -504,15 +504,15 @@ namespace DTXMania
                 this.txNotes = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Chips_drums.png"));
                 if (this.txNotes != null)
                 {
-                    this.txNotes.n透明度 = 120;
+                    this.txNotes.nTransparency = 120;
                     this.txNotes.b加算合成 = true;
                 }
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 for (int tx1 = 0; tx1 < 10; tx1++)
                 {
@@ -525,12 +525,12 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放( ref this.txボーナス花火 );
                 if (this.tx火花2 != null)
                     CDTXMania.tテクスチャの解放( ref this.tx火花2 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 for (int i = 0; i < STAR_MAX; i++)
                 {
@@ -559,7 +559,7 @@ namespace DTXMania
 
                         if (this.tx青い星[ this.st青い星[i].nLane ] != null)
                         {
-                            this.tx青い星[ this.st青い星[i].nLane ].t3D描画(CDTXMania.app.Device, mat);
+                            this.tx青い星[ this.st青い星[i].nLane ].tDraw3D(CDTXMania.app.Device, mat);
 
                         }
                     }
@@ -641,8 +641,8 @@ namespace DTXMania
 
                             if (this.txNotes != null)
                             {
-                                this.txNotes.t3D描画(CDTXMania.app.Device, mat, new Rectangle((nノーツの左上X座標[this.st飛び散るチップ[i].nLane]), 640, (nノーツの幅[this.st飛び散るチップ[i].nLane] + 10) / 2, 64));
-                                this.txNotes.t3D描画(CDTXMania.app.Device, mat2, new Rectangle((nノーツの左上X座標[this.st飛び散るチップ[i].nLane]), 640, (nノーツの幅[this.st飛び散るチップ[i].nLane] + 10) / 2, 64));
+                                this.txNotes.tDraw3D(CDTXMania.app.Device, mat, new Rectangle((nノーツの左上X座標[this.st飛び散るチップ[i].nLane]), 640, (nノーツの幅[this.st飛び散るチップ[i].nLane] + 10) / 2, 64));
+                                this.txNotes.tDraw3D(CDTXMania.app.Device, mat2, new Rectangle((nノーツの左上X座標[this.st飛び散るチップ[i].nLane]), 640, (nノーツの幅[this.st飛び散るチップ[i].nLane] + 10) / 2, 64));
                             }
                         }
 
@@ -715,9 +715,9 @@ namespace DTXMania
                             }
                             if (this.tx火花[this.st火花[i].nLane] != null)
                             {
-                                this.tx火花[this.st火花[i].nLane].t3D描画(CDTXMania.app.Device, identity);
+                                this.tx火花[this.st火花[i].nLane].tDraw3D(CDTXMania.app.Device, identity);
                                 if (CDTXMania.stage演奏ドラム画面.bサビ区間 == true && this.txボーナス花火 != null)
-                                    this.txボーナス花火.t3D描画(CDTXMania.app.Device, identity);
+                                    this.txボーナス花火.tDraw3D(CDTXMania.app.Device, identity);
                             }
                         }
                         else
@@ -772,9 +772,9 @@ namespace DTXMania
                                 int n幅 = CDTXMania.ConfigIni.nExplosionWidgh;
                                 int n高さ = CDTXMania.ConfigIni.nExplosionHeight;
 
-                                this.tx火花2.t3D描画(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.n現在の値, this.st火花[i].nLane * n高さ, n幅, n高さ));
+                                this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.n現在の値, this.st火花[i].nLane * n高さ, n幅, n高さ));
                                 if (CDTXMania.stage演奏ドラム画面.bサビ区間 == true && this.txボーナス花火 != null)
-                                    this.tx火花2.t3D描画(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.n現在の値 * n幅, 10 * n高さ, n幅, n高さ));
+                                    this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.n現在の値 * n幅, 10 * n高さ, n幅, n高さ));
                             }
                         }
 					}
@@ -866,8 +866,8 @@ namespace DTXMania
                             }
 							if( this.tx大波 != null )
 							{
-								this.tx大波.n透明度 = num13;
-								this.tx大波.t3D描画( CDTXMania.app.Device, matrix3 );
+								this.tx大波.nTransparency = num13;
+								this.tx大波.tDraw3D( CDTXMania.app.Device, matrix3 );
 							}
 						}
 					}
@@ -941,8 +941,8 @@ namespace DTXMania
                             }
 							if (this.tx細波 != null)
 							{
-								this.tx細波.n透明度 = num17;
-								this.tx細波.t3D描画( CDTXMania.app.Device, matrix4 );
+								this.tx細波.nTransparency = num17;
+								this.tx細波.tDraw3D( CDTXMania.app.Device, matrix4 );
 							}
 						}
 					}

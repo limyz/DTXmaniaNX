@@ -81,7 +81,7 @@ namespace DTXMania
 		
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.part = EKeyConfigPart.UNKNOWN;
 			this.pad = EKeyConfigPad.UNKNOWN;
@@ -89,29 +89,29 @@ namespace DTXMania
 			this.n現在の選択行 = 0;
 			this.bキー入力待ち = false;
 			this.structReset用KeyAssign = new CConfigIni.CKeyAssign.STKEYASSIGN[ 0x10 ];
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txカーソル );
 				CDTXMania.tテクスチャの解放( ref this.txHitKeyダイアログ );
-				base.On非活性化();
+				base.OnDeactivate();
 			}
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.txカーソル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenConfig menu cursor.png" ), false );
 				this.txHitKeyダイアログ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenConfig hit key to assign dialog.png" ), false );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( this.bキー入力待ち )
 				{
@@ -139,15 +139,15 @@ namespace DTXMania
 					int num = 20;
 					int num2 = 0x144;
 					int num3 = 0x3e + ( num * ( this.n現在の選択行 + 1 ) );
-					this.txカーソル.t2D描画( CDTXMania.app.Device, num2, num3, new Rectangle( 0, 0, 0x10, 0x20 ) );
+					this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, new Rectangle( 0, 0, 0x10, 0x20 ) );
 					num2 += 0x10;
 					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
 					for( int j = 0; j < 14; j++ )
 					{
-						this.txカーソル.t2D描画( CDTXMania.app.Device, num2, num3, rectangle );
+						this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, rectangle );
 						num2 += 0x10;
 					}
-					this.txカーソル.t2D描画( CDTXMania.app.Device, num2, num3, new Rectangle( 0x10, 0, 0x10, 0x20 ) );
+					this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, new Rectangle( 0x10, 0, 0x10, 0x20 ) );
 				}
 				int num5 = 20;
 				int x = 0x134;
@@ -187,7 +187,7 @@ namespace DTXMania
 				y += num5;
 				if( this.bキー入力待ち && ( this.txHitKeyダイアログ != null ) )
 				{
-					this.txHitKeyダイアログ.t2D描画( CDTXMania.app.Device, 0x185, 0xd7 );
+					this.txHitKeyダイアログ.tDraw2D( CDTXMania.app.Device, 0x185, 0xd7 );
 				}
 			}
 			return 0;

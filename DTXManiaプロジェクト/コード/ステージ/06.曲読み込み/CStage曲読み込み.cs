@@ -20,7 +20,7 @@ namespace DTXMania
         {
             base.eステージID = CStage.Eステージ.曲読み込み;
             base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
-            base.b活性化してない = true;
+            base.bNotActivated = true;
             //			base.list子Activities.Add( this.actFI = new CActFIFOBlack() );	// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
             base.list子Activities.Add(this.actFO = new CActFIFOBlackStart());
 
@@ -176,7 +176,7 @@ namespace DTXMania
             }
         }
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             Trace.TraceInformation( "曲読み込みステージを活性化します。" );
             Trace.Indent();
@@ -194,12 +194,12 @@ namespace DTXMania
                     this.sd読み込み音 = null;
                 }
 
-                string strDTXファイルパス = ( CDTXMania.bコンパクトモード ) ?
-                    CDTXMania.strコンパクトモードファイル : CDTXMania.stage選曲.r確定されたスコア.ファイル情報.ファイルの絶対パス;
+                string strDTXファイルパス = ( CDTXMania.bCompactMode ) ?
+                    CDTXMania.strCompactModeFile : CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
 
                 CDTX cdtx = new CDTX( strDTXファイルパス, true );
 
-                if( !CDTXMania.bコンパクトモード && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
+                if( !CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
                     this.str曲タイトル = CDTXMania.stage選曲.r確定された曲.strタイトル;
                 else
                     this.str曲タイトル = cdtx.TITLE;
@@ -274,9 +274,9 @@ namespace DTXMania
                     }
                 }
 
-                cdtx.On非活性化();
-                base.On活性化();
-                if( !CDTXMania.bコンパクトモード )
+                cdtx.OnDeactivate();
+                base.OnActivate();
+                if( !CDTXMania.bCompactMode )
                     this.tラベル名からステータスパネルを決定する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ] );
             }
             finally
@@ -285,13 +285,13 @@ namespace DTXMania
                 Trace.Unindent();
             }
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             Trace.TraceInformation("曲読み込みステージを非活性化します。");
             Trace.Indent();
             try
             {
-                base.On非活性化();
+                base.OnDeactivate();
             }
             finally
             {
@@ -299,9 +299,9 @@ namespace DTXMania
                 Trace.Unindent();
             }
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\6_background.jpg" ) );
                 this.txLevel = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\6_LevelNumber.png" ) );
@@ -348,12 +348,12 @@ namespace DTXMania
                     this.tx背景 = null;
                 }
                 #endregion
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if( !base.b活性化してない )
+            if( !base.bNotActivated )
             {
                 //テクスチャ11枚
                 //2018.03.15 kairera0467 PrivateFontが抜けていた＆フォント生成直後に解放するようにしてみる
@@ -364,21 +364,21 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放( ref this.tx難易度パネル );
                 CDTXMania.tテクスチャの解放( ref this.txパートパネル );
                 CDTXMania.tテクスチャの解放( ref this.txLevel );
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
         public override int On進行描画()
         {
             string str;
 
-            if( base.b活性化してない )
+            if( base.bNotActivated )
                 return 0;
 
             #region [ 初めての進行描画 ]
             //-----------------------------
             if (base.b初めての進行描画)
             {
-                Cスコア cスコア1 = CDTXMania.stage選曲.r確定されたスコア;
+                CScore cスコア1 = CDTXMania.stage選曲.r確定されたスコア;
                 if (this.sd読み込み音 != null)
                 {
                     if (CDTXMania.Skin.sound曲読込開始音.b排他 && (CSkin.Cシステムサウンド.r最後に再生した排他システムサウンド != null))
@@ -420,10 +420,10 @@ namespace DTXMania
             #region [ 背景、レベル、タイトル表示 ]
             //-----------------------------
             if( this.tx背景 != null )
-                this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
+                this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
-            string strDTXファイルパス = (CDTXMania.bコンパクトモード) ?
-            CDTXMania.strコンパクトモードファイル : CDTXMania.stage選曲.r確定されたスコア.ファイル情報.ファイルの絶対パス;
+            string strDTXファイルパス = (CDTXMania.bCompactMode) ?
+            CDTXMania.strCompactModeFile : CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
             CDTX cdtx = new CDTX(strDTXファイルパス, true);
 
             string path = cdtx.strフォルダ名 + cdtx.PREIMAGE;
@@ -456,7 +456,7 @@ namespace DTXMania
                 mat *= Matrix.Translation(206f, 66f, 0f);
                 mat *= Matrix.RotationZ(0.28f);
 
-                this.txジャケット.t3D描画(CDTXMania.app.Device, mat);
+                this.txジャケット.tDraw3D(CDTXMania.app.Device, mat);
             }
 
             if (this.txタイトル != null)
@@ -464,7 +464,7 @@ namespace DTXMania
                 if (this.txタイトル.sz画像サイズ.Width > 625)
                     this.txタイトル.vc拡大縮小倍率.X = 625f / this.txタイトル.sz画像サイズ.Width;
 
-                this.txタイトル.t2D描画(CDTXMania.app.Device, 190, 285);
+                this.txタイトル.tDraw2D(CDTXMania.app.Device, 190, 285);
             }
 
             if (this.txアーティスト != null)
@@ -472,7 +472,7 @@ namespace DTXMania
                 if (this.txアーティスト.sz画像サイズ.Width > 625)
                     this.txアーティスト.vc拡大縮小倍率.X = 625f / this.txアーティスト.sz画像サイズ.Width;
 
-                this.txアーティスト.t2D描画(CDTXMania.app.Device, 190, 360);
+                this.txアーティスト.tDraw2D(CDTXMania.app.Device, 190, 360);
             }
 
             int[] iPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
@@ -496,7 +496,7 @@ namespace DTXMania
                     {
                         //Always display CLASSIC style if Skill Mode is Classic
                         if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
-                            CDTXMania.stage選曲.r確定されたスコア.譜面情報.b完全にCLASSIC譜面である[j] && 
+                            CDTXMania.stage選曲.r確定されたスコア.SongInformation.b完全にCLASSIC譜面である[j] && 
                             !cdtx.b強制的にXG譜面にする))
                         {
                             this.t大文字表示(187 + k, 152, string.Format("{0:00}", DTXLevel));
@@ -514,14 +514,14 @@ namespace DTXMania
                                 DTXLevelDeci = ((cdtx.LEVEL[j] - DTXLevel * 10) * 10) + cdtx.LEVELDEC[j];
                             }
 
-                            this.txLevel.t2D描画(CDTXMania.app.Device, 307 + k, 243, new Rectangle(1000, 92, 30, 38));
+                            this.txLevel.tDraw2D(CDTXMania.app.Device, 307 + k, 243, new Rectangle(1000, 92, 30, 38));
                             this.t大文字表示(187 + k, 152, string.Format("{0:0}", DTXLevel));
                             this.t大文字表示(357 + k, 152, string.Format("{0:00}", DTXLevelDeci));
 
                         }
 
                         if (this.txパートパネル != null)
-                            this.txパートパネル.t2D描画(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
+                            this.txパートパネル.tDraw2D(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
 
                         //this.txジャケット.Dispose();
                         this.t難易度パネルを描画する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ], 191 + k, 102 );
@@ -533,10 +533,10 @@ namespace DTXMania
                 if (i == 2 && k == 0)
                 {
                     if (this.txパートパネル != null && CDTXMania.ConfigIni.bDrums有効)
-                        this.txパートパネル.t2D描画(CDTXMania.app.Device, 191, 52, new Rectangle(0, 0, 262, 50));
+                        this.txパートパネル.tDraw2D(CDTXMania.app.Device, 191, 52, new Rectangle(0, 0, 262, 50));
 
                     if (this.tx難易度パネル != null)
-                        this.tx難易度パネル.t2D描画(CDTXMania.app.Device, 191, 102, new Rectangle(0, this.nIndex * 50, 262, 50));
+                        this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 191, 102, new Rectangle(0, this.nIndex * 50, 262, 50));
                 }
             }
             //-----------------------------
@@ -556,18 +556,18 @@ namespace DTXMania
                         timeBeginLoad = DateTime.Now;
                         TimeSpan span;
                         str = null;
-                        if (!CDTXMania.bコンパクトモード)
-                            str = CDTXMania.stage選曲.r確定されたスコア.ファイル情報.ファイルの絶対パス;
+                        if (!CDTXMania.bCompactMode)
+                            str = CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
                         else
-                            str = CDTXMania.strコンパクトモードファイル;
+                            str = CDTXMania.strCompactModeFile;
 
                         CScoreIni ini = new CScoreIni(str + ".score.ini");
-                        ini.t全演奏記録セクションの整合性をチェックし不整合があればリセットする();
+                        ini.tCheckIntegrity();
 
                         if ((CDTXMania.DTX != null) && CDTXMania.DTX.b活性化してる)
-                            CDTXMania.DTX.On非活性化();
+                            CDTXMania.DTX.OnDeactivate();
 
-                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigIni.n演奏速度) / 20.0, ini.stファイル.BGMAdjust);
+                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigIni.n演奏速度) / 20.0, ini.stFile.BGMAdjust);
                         Trace.TraceInformation("----曲情報-----------------");
                         Trace.TraceInformation("TITLE: {0}", CDTXMania.DTX.TITLE);
                         Trace.TraceInformation("FILE: {0}", CDTXMania.DTX.strファイル名の絶対パス);
@@ -675,21 +675,21 @@ namespace DTXMania
                             else if( i == 2 ) nTotal = CDTXMania.DTX.n可視チップ数.Bass;
                             if( CDTXMania.ConfigIni.nSkillMode == 0 )
                             {
-                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[i].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.t旧演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[i].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
                             else
                             {
-                                CDTXMania.listTargetGhostScoreData[ i ].db演奏型スキル値 = CScoreIni.t演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.t演奏型スキルを計算して返す( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数, (E楽器パート)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
                         }
 
                         span = (TimeSpan)(DateTime.Now - timeBeginLoad);
                         Trace.TraceInformation("DTX読込所要時間:           {0}", span.ToString());
 
-                        if (CDTXMania.bコンパクトモード)
+                        if (CDTXMania.bCompactMode)
                             CDTXMania.DTX.MIDIレベル = 1;
                         else
-                            CDTXMania.DTX.MIDIレベル = (CDTXMania.stage選曲.r確定された曲.eノード種別 == C曲リストノード.Eノード種別.SCORE_MIDI) ? CDTXMania.stage選曲.n現在選択中の曲の難易度 : 0;
+                            CDTXMania.DTX.MIDIレベル = (CDTXMania.stage選曲.r確定された曲.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI) ? CDTXMania.stage選曲.n現在選択中の曲の難易度 : 0;
 
                         base.eフェーズID = CStage.Eフェーズ.NOWLOADING_WAVファイルを読み込む;
                         timeBeginLoadWAV = DateTime.Now;
@@ -734,9 +734,9 @@ namespace DTXMania
                             CDTXMania.DTX.tギターとベースのランダム化(E楽器パート.BASS, CDTXMania.ConfigIni.eRandom.Bass);
 
                             if (CDTXMania.ConfigIni.bギタレボモード)
-                                CDTXMania.stage演奏ギター画面.On活性化();
+                                CDTXMania.stage演奏ギター画面.OnActivate();
                             else
-                                CDTXMania.stage演奏ドラム画面.On活性化();
+                                CDTXMania.stage演奏ドラム画面.OnActivate();
 
                             span = (TimeSpan)(DateTime.Now - timeBeginLoadWAV);
                             Trace.TraceInformation("WAV/譜面後処理時間({0,4}):  {1}", (CDTXMania.DTX.listBMP.Count + CDTXMania.DTX.listBMPTEX.Count + CDTXMania.DTX.listAVI.Count), span.ToString());
@@ -805,12 +805,12 @@ namespace DTXMania
                 if ( CDTXMania.ConfigIni.bギタレボモード )
                 {
                     if (CDTXMania.stage演奏ギター画面.b活性化してる == true)
-                        CDTXMania.stage演奏ギター画面.On非活性化();
+                        CDTXMania.stage演奏ギター画面.OnDeactivate();
                 }
                 else
                 {
                     if (CDTXMania.stage演奏ドラム画面.b活性化してる == true)
-                        CDTXMania.stage演奏ドラム画面.On非活性化();
+                        CDTXMania.stage演奏ドラム画面.OnDeactivate();
                 }
 
                 return true;
@@ -977,7 +977,7 @@ namespace DTXMania
                                         CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nスコア = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "PlaySkill":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].db演奏型スキル値 = Convert.ToDouble( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbPerformanceSkill = Convert.ToDouble( strA[ 1 ] );
                                         continue;
                                     case "Skill":
                                         CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbゲーム型スキル値 = Convert.ToDouble( strA[ 1 ] );
@@ -1036,7 +1036,7 @@ namespace DTXMania
                         Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 13, 22);
                         if (this.txLevel != null)
                         {
-                            this.txLevel.t2D描画(CDTXMania.app.Device, x, y, rectangle);
+                            this.txLevel.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }
@@ -1064,7 +1064,7 @@ namespace DTXMania
                         Rectangle rc画像内の描画領域 = new Rectangle(this.st大文字位置[j].pt.X, this.st大文字位置[j].pt.Y, 100, 130);
                         if (this.txLevel != null)
                         {
-                            this.txLevel.t2D描画(CDTXMania.app.Device, x, y, rc画像内の描画領域);
+                            this.txLevel.tDraw2D(CDTXMania.app.Device, x, y, rc画像内の描画領域);
                         }
                         break;
                     }
@@ -1136,7 +1136,7 @@ namespace DTXMania
             }
 
             if( this.tx難易度パネル != null )
-                this.tx難易度パネル.t2D描画( CDTXMania.app.Device, nX, nY, rect );
+                this.tx難易度パネル.tDraw2D( CDTXMania.app.Device, nX, nY, rect );
         }
         #endregion
     }

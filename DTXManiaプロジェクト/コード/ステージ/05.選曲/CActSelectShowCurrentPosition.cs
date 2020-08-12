@@ -15,36 +15,36 @@ namespace DTXMania
 
 		public CActSelectShowCurrentPosition()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			if ( this.b活性化してる )
 				return;
 
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
                 this.txScrollBar = CDTXMania.tテクスチャの生成( CSkin.Path(@"Graphics\5_scrollbar.png"), false );
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				CDTXMania.t安全にDisposeする( ref this.txScrollBar );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
@@ -55,13 +55,13 @@ namespace DTXMania
 			if ( this.txScrollBar != null )
 			{
 			#region [ スクロールバーの描画 #27648 ]
-                this.txScrollBar.t2D描画(CDTXMania.app.Device, x - (CDTXMania.stage選曲.ct登場時アニメ用共通.n現在の値 / 2f), y, new Rectangle(0, 0, 12, 492));	// 本当のy座標は88なんだが、なぜか約30のバイアスが掛かる___
+                this.txScrollBar.tDraw2D(CDTXMania.app.Device, x - (CDTXMania.stage選曲.ct登場時アニメ用共通.n現在の値 / 2f), y, new Rectangle(0, 0, 12, 492));	// 本当のy座標は88なんだが、なぜか約30のバイアスが掛かる___
 			#endregion
 			#region [ スクロール地点の描画 (計算はCActSelect曲リストで行う。スクロール位置と選曲項目の同期のため。)#27648 ]
 				int py = CDTXMania.stage選曲.nスクロールバー相対y座標;
                 if ( py <= 492 - 12 && py >= 0 )
 				{
-                    this.txScrollBar.t2D描画(CDTXMania.app.Device, x - (CDTXMania.stage選曲.ct登場時アニメ用共通.n現在の値 / 2f), y + py, new Rectangle(0, 492, 12, 12));
+                    this.txScrollBar.tDraw2D(CDTXMania.app.Device, x - (CDTXMania.stage選曲.ct登場時アニメ用共通.n現在の値 / 2f), y + py, new Rectangle(0, 492, 12, 12));
 				}
 			#endregion
 			}

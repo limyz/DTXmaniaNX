@@ -474,7 +474,7 @@ namespace DTXMania
 		public STDGBVALUE<bool> bLeft;
 		public STDGBVALUE<bool> bLight;
 		public bool bLogDTX詳細ログ出力;
-		public bool bLog曲検索ログ出力;
+		public bool bLogSongSearch;
 		public bool bLog作成解放ログ出力;
 		public STDGBVALUE<bool> bReverse;
 		public bool bScoreIniを出力する;
@@ -1708,7 +1708,7 @@ namespace DTXMania
 			sw.WriteLine( "OutputLog={0}", this.bログ出力 ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; 曲データ検索に関するLog出力(0:OFF, 1:ON)" );
-			sw.WriteLine( "TraceSongSearch={0}", this.bLog曲検索ログ出力 ? 1 : 0 );
+			sw.WriteLine( "TraceSongSearch={0}", this.bLogSongSearch ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; 画像やサウンドの作成_解放に関するLog出力(0:OFF, 1:ON)" );
 			sw.WriteLine( "TraceCreatedDisposed={0}", this.bLog作成解放ログ出力 ? 1 : 0 );
@@ -2762,7 +2762,7 @@ namespace DTXMania
 											}
 											else if( str3.Equals( "TraceSongSearch" ) )
 											{
-												this.bLog曲検索ログ出力 = C変換.bONorOFF( str4[ 0 ] );
+												this.bLogSongSearch = C変換.bONorOFF( str4[ 0 ] );
 											}
 											continue;
 										}

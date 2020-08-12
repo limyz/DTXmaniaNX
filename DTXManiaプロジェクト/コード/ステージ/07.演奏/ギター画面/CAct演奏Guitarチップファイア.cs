@@ -11,7 +11,7 @@ namespace DTXMania
 
 		public CAct演奏Guitarチップファイア()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		

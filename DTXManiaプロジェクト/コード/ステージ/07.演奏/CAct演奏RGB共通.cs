@@ -27,7 +27,7 @@ namespace DTXMania
 		public CAct演奏RGB共通()
 		{
             base.list子Activities.Add(this.actLVFont = new CActLVLNFont());
-            base.b活性化してない = true;
+            base.bNotActivated = true;
 		}
 		
 		
@@ -41,30 +41,30 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 10; i++ )
 			{
 				this.b押下状態[ i ] = false;
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.txRGB = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_RGB buttons.png"));
                 this.txシャッター = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_shutter_GB.png"));
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txRGB );
                 CDTXMania.tテクスチャの解放(ref this.txシャッター);
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
 			}
 		}
 	}

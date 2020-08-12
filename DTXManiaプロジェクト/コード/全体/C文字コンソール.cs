@@ -31,7 +31,7 @@ namespace DTXMania
 
 		public void tPrint( int x, int y, Eフォント種別 font, string str英数字文字列 )
 		{
-			if( !base.b活性化してない && !string.IsNullOrEmpty( str英数字文字列 ) )
+			if( !base.bNotActivated && !string.IsNullOrEmpty( str英数字文字列 ) )
 			{
 				int BOL = x;
 				for( int i = 0; i < str英数字文字列.Length; i++ )
@@ -53,7 +53,7 @@ namespace DTXMania
 						{
 							if( this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ] != null )
 							{
-								this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ].t2D描画( CDTXMania.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) Eフォント種別.白細 ), index ] );
+								this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ].tDraw2D( CDTXMania.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) Eフォント種別.白細 ), index ] );
 							}
 							x += nFontWidth;
 						}
@@ -65,7 +65,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.rc文字の矩形領域 = new Rectangle[3, str表記可能文字.Length ];
 			for( int i = 0; i < 3; i++ )
@@ -79,27 +79,27 @@ namespace DTXMania
 					this.rc文字の矩形領域[ i, j ].Height = nFontHeight;
 				}
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			if( this.rc文字の矩形領域 != null )
 				this.rc文字の矩形領域 = null;
 
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.txフォント8x16[ 0 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Console font 8x16.png" ) );
 				this.txフォント8x16[ 1 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Console font 2 8x16.png" ) );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 2; i++ )
 				{
@@ -109,7 +109,7 @@ namespace DTXMania
 						this.txフォント8x16[ i ] = null;
 					}
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 

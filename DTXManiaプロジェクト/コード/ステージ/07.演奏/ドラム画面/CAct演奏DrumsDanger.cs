@@ -8,20 +8,20 @@ namespace DTXMania
 {
 	internal class CAct演奏DrumsDanger : CAct演奏Danger共通
 	{
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.tx黒 = CDTXMania.tテクスチャの生成(CSkin.Path( @"Graphics\7_Danger.png" ) );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 CDTXMania.tテクスチャの解放(ref this.tx黒);
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
@@ -37,7 +37,7 @@ namespace DTXMania
 		/// <returns></returns>
 		public override int t進行描画( bool bIsDangerDrums, bool bIsDangerGuitar, bool bIsDangerBass )
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( !bIsDangerDrums )
 				{
@@ -57,12 +57,12 @@ namespace DTXMania
                         return 0;
                     }
                     int num = this.ct透明度用.n現在の値;
-                    this.tx黒.n透明度 = num;　　//
+                    this.tx黒.nTransparency = num;　　//
                     num = this.ct移動用.n現在の値;
                     int num2 = num;
                     for (int i = 0; i < 2; i++)
                     {
-                        this.tx黒.t2D描画(CDTXMania.app.Device, 0, 0);
+                        this.tx黒.tDraw2D(CDTXMania.app.Device, 0, 0);
                     }
                 
 			}

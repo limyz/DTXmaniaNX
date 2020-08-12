@@ -12,23 +12,23 @@ namespace DTXMania
 
         public CAct演奏Drumsフィルインエフェクト()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
         }
         public override int On進行描画()

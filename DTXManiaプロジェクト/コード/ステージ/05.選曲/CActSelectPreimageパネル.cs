@@ -16,8 +16,8 @@ namespace DTXMania
 
 		public CActSelectPreimageパネル()
 		{
-            base.list子Activities.Add( this.actステータスパネル = new CActSelectステータスパネル() );
-            base.b活性化してない = true;
+            base.list子Activities.Add( this.actステータスパネル = new CActSelectStatusPanel() );
+            base.bNotActivated = true;
 		}
 		public void t選択曲が変更された()
 		{
@@ -35,16 +35,16 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.n本体X = 8;
 			this.n本体Y = 57;
 			this.r表示するプレビュー画像 = this.txプレビュー画像がないときの画像;
 			this.str現在のファイル名 = "";
 			this.b新しいプレビューファイルを読み込んだ = false;
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			this.ct登場アニメ用 = null;
 			this.ct遅延表示 = null;
@@ -53,11 +53,11 @@ namespace DTXMania
 				this.avi.Dispose();
 				this.avi = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.txパネル本体 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_preimage panel.png" ), false );
 				this.txプレビュー画像 = null;
@@ -68,12 +68,12 @@ namespace DTXMania
 				this.b動画フレームを作成した = false;
 				this.pAVIBmp = IntPtr.Zero;
 				this.tプレビュー画像_動画の変更();
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txパネル本体 );
 				CDTXMania.tテクスチャの解放( ref this.txプレビュー画像 );
@@ -84,12 +84,12 @@ namespace DTXMania
 					this.sfAVI画像.Dispose();
 					this.sfAVI画像 = null;
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -164,7 +164,7 @@ namespace DTXMania
 		private CTexture txプレビュー画像;
 		private CTexture txプレビュー画像がないときの画像;
 		private CTexture r表示するプレビュー画像;
-        private CActSelectステータスパネル actステータスパネル;
+        private CActSelectStatusPanel actステータスパネル;
         private bool b新しいプレビューファイルを読み込んだ;
 		private bool b新しいプレビューファイルをまだ読み込んでいない
 		{
@@ -240,12 +240,12 @@ namespace DTXMania
 		}
 		private bool tプレビュー画像の指定があれば構築する()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.譜面情報.Preimage ) )
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Preimage ) )
 			{
 				return false;
 			}
-			string str = cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Preimage;
+			string str = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Preimage;
 			if( !str.Equals( this.str現在のファイル名 ) )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txプレビュー画像 );
@@ -269,10 +269,10 @@ namespace DTXMania
 		}
 		private bool tプレビュー動画の指定があれば構築する()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( CDTXMania.ConfigIni.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.譜面情報.Premovie ) )
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			if( ( CDTXMania.ConfigIni.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.SongInformation.Premovie ) )
 			{
-				string filename = cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Premovie;
+				string filename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Premovie;
 				if( filename.Equals( this.str現在のファイル名 ) )
 				{
 					return true;
@@ -308,12 +308,12 @@ namespace DTXMania
 		}
 		private bool t背景画像があればその一部からプレビュー画像を構築する()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.譜面情報.Backgound ) )
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Backgound ) )
 			{
 				return false;
 			}
-			string path = cスコア.ファイル情報.フォルダの絶対パス + cスコア.譜面情報.Backgound;
+			string path = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Backgound;
 			if( !path.Equals( this.str現在のファイル名 ) )
 			{
 				if( !File.Exists( path ) )
@@ -373,41 +373,41 @@ namespace DTXMania
 		}
 		private void t描画処理_ジャンル文字列()
 		{
-			C曲リストノード c曲リストノード = CDTXMania.stage選曲.r現在選択中の曲;
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CSongListNode c曲リストノード = CDTXMania.stage選曲.r現在選択中の曲;
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
 			if( ( c曲リストノード != null ) && ( cスコア != null ) )
 			{
 				string str = "";
 				switch( c曲リストノード.eノード種別 )
 				{
-					case C曲リストノード.Eノード種別.SCORE:
+					case CSongListNode.Eノード種別.SCORE:
 						if( ( c曲リストノード.strジャンル == null ) || ( c曲リストノード.strジャンル.Length <= 0 ) )
 						{
-							if( ( cスコア.譜面情報.ジャンル != null ) && ( cスコア.譜面情報.ジャンル.Length > 0 ) )
+							if( ( cスコア.SongInformation.Genre != null ) && ( cスコア.SongInformation.Genre.Length > 0 ) )
 							{
-								str = cスコア.譜面情報.ジャンル;
+								str = cスコア.SongInformation.Genre;
 							}
 							else
 							{
-								switch( cスコア.譜面情報.曲種別 )
+								switch( cスコア.SongInformation.SongType )
 								{
-									case CDTX.E種別.DTX:
+									case CDTX.EType.DTX:
 										str = "DTX";
 										break;
 
-									case CDTX.E種別.GDA:
+									case CDTX.EType.GDA:
 										str = "GDA";
 										break;
 
-									case CDTX.E種別.G2D:
+									case CDTX.EType.G2D:
 										str = "G2D";
 										break;
 
-									case CDTX.E種別.BMS:
+									case CDTX.EType.BMS:
 										str = "BMS";
 										break;
 
-									case CDTX.E種別.BME:
+									case CDTX.EType.BME:
 										str = "BME";
 										break;
 								}
@@ -418,19 +418,19 @@ namespace DTXMania
 						str = c曲リストノード.strジャンル;
 						break;
 
-					case C曲リストノード.Eノード種別.SCORE_MIDI:
+					case CSongListNode.Eノード種別.SCORE_MIDI:
 						str = "MIDI";
 						break;
 
-					case C曲リストノード.Eノード種別.BOX:
+					case CSongListNode.Eノード種別.BOX:
 						str = "MusicBox";
 						break;
 
-					case C曲リストノード.Eノード種別.BACKBOX:
+					case CSongListNode.Eノード種別.BACKBOX:
 						str = "BackBox";
 						break;
 
-					case C曲リストノード.Eノード種別.RANDOM:
+					case CSongListNode.Eノード種別.RANDOM:
 						str = "Random";
 						break;
 
@@ -466,7 +466,7 @@ namespace DTXMania
 			}
 			if( this.txパネル本体 != null )
 			{
-				this.txパネル本体.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y );
+				this.txパネル本体.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
 			}
 		}
 		private unsafe void t描画処理_プレビュー画像()
@@ -536,10 +536,10 @@ namespace DTXMania
                     }
                     x += (z - ((int)(width * num4 * f倍率))) / 2;
                     y += (z - ((int)(height * num4 * f倍率))) / 2;
-                    this.r表示するプレビュー画像.n透明度 = (int)(255f * num3);
+                    this.r表示するプレビュー画像.nTransparency = (int)(255f * num3);
                     this.r表示するプレビュー画像.vc拡大縮小倍率.X = num4 * f倍率;
                     this.r表示するプレビュー画像.vc拡大縮小倍率.Y = num4 * f倍率;
-                    this.r表示するプレビュー画像.t2D描画(CDTXMania.app.Device, x, y);
+                    this.r表示するプレビュー画像.tDraw2D(CDTXMania.app.Device, x, y);
                 }
 			}
 		}

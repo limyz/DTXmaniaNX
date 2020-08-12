@@ -14,12 +14,12 @@ namespace DTXMania
 
 		public CActSelect演奏履歴パネル()
 		{
-            base.list子Activities.Add( this.actステータスパネル = new CActSelectステータスパネル() );
-            base.b活性化してない = true;
+            base.list子Activities.Add( this.actステータスパネル = new CActSelectStatusPanel() );
+            base.bNotActivated = true;
 		}
 		public void t選択曲が変更された()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
 			if( ( cスコア != null ) && !CDTXMania.stage選曲.bスクロール中 )
 			{
 				try
@@ -29,9 +29,9 @@ namespace DTXMania
 					graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					for ( int i = 0; i < 5; i++ )
 					{
-						if( ( cスコア.譜面情報.演奏履歴[ i ] != null ) && ( cスコア.譜面情報.演奏履歴[ i ].Length > 0 ) )
+						if( ( cスコア.SongInformation.PerformanceHistory[ i ] != null ) && ( cスコア.SongInformation.PerformanceHistory[ i ].Length > 0 ) )
 						{
-							graphics.DrawString( cスコア.譜面情報.演奏履歴[ i ], this.ft表示用フォント, Brushes.Yellow, (float) 0f, (float) ( i * 36f ) );
+							graphics.DrawString( cスコア.SongInformation.PerformanceHistory[ i ], this.ft表示用フォント, Brushes.Yellow, (float) 0f, (float) ( i * 36f ) );
 						}
 					}
 					graphics.Dispose();
@@ -54,12 +54,12 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.ft表示用フォント = new Font( "メイリオ", 26f, FontStyle.Bold, GraphicsUnit.Pixel );
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			if( this.ft表示用フォント != null )
 			{
@@ -67,29 +67,29 @@ namespace DTXMania
 				this.ft表示用フォント = null;
 			}
 			this.ct登場アニメ用 = null;
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.txパネル本体 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_play history panel.png" ), true );
                 this.t選択曲が変更された();
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txパネル本体 );
 				CDTXMania.tテクスチャの解放( ref this.tx文字列パネル );
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -116,10 +116,10 @@ namespace DTXMania
 
 				if( this.txパネル本体 != null )
 				{
-					this.txパネル本体.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y );
+					this.txパネル本体.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
 
                     if ( this.tx文字列パネル != null )
-                        this.tx文字列パネル.t2D描画( CDTXMania.app.Device, this.n本体X + 0x20, this.n本体Y + 0x20 );
+                        this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, this.n本体X + 0x20, this.n本体Y + 0x20 );
 				}
 			}
 			return 0;
@@ -136,7 +136,7 @@ namespace DTXMania
 		private int n本体Y;
 		private CTexture txパネル本体;
 		private CTexture tx文字列パネル;
-        private CActSelectステータスパネル actステータスパネル;
+        private CActSelectStatusPanel actステータスパネル;
         //-----------------
 		#endregion
 	}

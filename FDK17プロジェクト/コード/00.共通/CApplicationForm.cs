@@ -79,7 +79,7 @@ namespace FDK
 			//-----------------
 			try
 			{
-				this.On初期化();	// この中でウィンドウを作成すること。
+				this.OnInitialize();	// この中でウィンドウを作成すること。
 
 				if( this.Window == null )
 					return;			// 作ってない。アプリ終了。
@@ -110,7 +110,7 @@ namespace FDK
 			#endregion
 			#region [ フロー制御スレッドの生成_実行開始。]
 			//-----------------
-			var hフロー制御スレッド = new Thread( this.tフロー制御スレッド処理 );
+			var hフロー制御スレッド = new Thread( this.tProcessFlowControlThread );
 			hフロー制御スレッド.Priority = ThreadPriority.Normal;
 			hフロー制御スレッド.Start();
 			while( !hフロー制御スレッド.IsAlive ) ;		// 起動するまでスピンロック；MSDN にこうしろと書いてある。
@@ -179,7 +179,7 @@ namespace FDK
 		/// <para>ウィンドウのクライアントサイズはバックバッファに等しく設定される。</para>
 		/// <para>処理に成功すれば true を返す。処理に失敗すれば、準正常系は false を返し、異常系は例外を発出する。</para>
 		/// </summary>
-		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル, bool bマウスカーソルの表示を制御する )
+		public bool tGenerateChangeResetDirect3DDevice( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル, bool bマウスカーソルの表示を制御する )
 		{
 			if( this.Window == null )
 				throw new InvalidOperationException( "ウィンドウが未生成のままDirect3D9デバイスを生成しようとしました。" );
@@ -297,7 +297,7 @@ namespace FDK
 
 			this.currentD3DSettings = newD3DSettings.Clone();	// 成功したので設定を正式に保存する。
 
-			this.OnD3Dデバイスステータスの初期化();
+			this.OnInitializeD3DDeviceStatus();
 
 
 			// D3Dデバイスに連動する設定。
@@ -355,10 +355,10 @@ namespace FDK
 			{
 				// (A) 物理と論理の横幅を一致させる。
 
-				CTexture.f画面比率 = vc論理画面を1とする場合の物理画面の倍率.X;		// X
+				CTexture.fScreenRatio = vc論理画面を1とする場合の物理画面の倍率.X;		// X
 				CTexture.rc物理画面描画領域 = new Rectangle();
 				CTexture.rc物理画面描画領域.Width = CTexture.sz物理画面.Width;
-				CTexture.rc物理画面描画領域.Height = (int) ( CTexture.sz論理画面.Height * CTexture.f画面比率 );
+				CTexture.rc物理画面描画領域.Height = (int) ( CTexture.sz論理画面.Height * CTexture.fScreenRatio );
 				CTexture.rc物理画面描画領域.X = 0;
 				CTexture.rc物理画面描画領域.Y = ( CTexture.sz物理画面.Height - CTexture.rc物理画面描画領域.Height ) / 2;
 			}
@@ -366,9 +366,9 @@ namespace FDK
 			{
 				// (B) 物理と論理の縦幅を一致させる。
 
-				CTexture.f画面比率 = vc論理画面を1とする場合の物理画面の倍率.Y;		// Y
+				CTexture.fScreenRatio = vc論理画面を1とする場合の物理画面の倍率.Y;		// Y
 				CTexture.rc物理画面描画領域 = new Rectangle();
-				CTexture.rc物理画面描画領域.Width = (int) ( CTexture.sz論理画面.Width * CTexture.f画面比率 );
+				CTexture.rc物理画面描画領域.Width = (int) ( CTexture.sz論理画面.Width * CTexture.fScreenRatio );
 				CTexture.rc物理画面描画領域.Height = CTexture.sz物理画面.Height;
 				CTexture.rc物理画面描画領域.X = ( CTexture.sz物理画面.Width - CTexture.rc物理画面描画領域.Width ) / 2;
 				CTexture.rc物理画面描画領域.Y = 0;
@@ -377,24 +377,24 @@ namespace FDK
 			Trace.TraceInformation( "Direct3D9 デバイス：論理画面:{0}x{1}, 物理画面:{2}x{3}, 画面比率:{4}, 物理画面描画領域:({5},{6})-({7}x{8})",
 				CTexture.sz論理画面.Width, CTexture.sz論理画面.Height,
 				CTexture.sz物理画面.Width, CTexture.sz物理画面.Height,
-				CTexture.f画面比率,
+				CTexture.fScreenRatio,
 				CTexture.rc物理画面描画領域.Left, CTexture.rc物理画面描画領域.Top, CTexture.rc物理画面描画領域.Right, CTexture.rc物理画面描画領域.Bottom );
 			//-----------------
 			#endregion
 
 			return true;
 		}
-		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル )
+		public bool tGenerateChangeResetDirect3DDevice( CD3DSettings newD3DSettings, Size sz論理画面, uint wsウィンドウモード時のウィンドウスタイル, uint ws全画面モード時のウィンドウスタイル )
 		{
-			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, sz論理画面, wsウィンドウモード時のウィンドウスタイル, ws全画面モード時のウィンドウスタイル, true );
+			return this.tGenerateChangeResetDirect3DDevice( newD3DSettings, sz論理画面, wsウィンドウモード時のウィンドウスタイル, ws全画面モード時のウィンドウスタイル, true );
 		}
-		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings, Size sz論理画面 )
+		public bool tGenerateChangeResetDirect3DDevice( CD3DSettings newD3DSettings, Size sz論理画面 )
 		{
-			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, sz論理画面, uint.MaxValue, uint.MaxValue, true );
+			return this.tGenerateChangeResetDirect3DDevice( newD3DSettings, sz論理画面, uint.MaxValue, uint.MaxValue, true );
 		}
-		public bool tDirect3Dデバイスを生成_変更_リセットする( CD3DSettings newD3DSettings )
+		public bool tGenerateChangeResetDirect3DDevice( CD3DSettings newD3DSettings )
 		{
-			return this.tDirect3Dデバイスを生成_変更_リセットする( newD3DSettings, Size.Empty, uint.MaxValue, uint.MaxValue, true );
+			return this.tGenerateChangeResetDirect3DDevice( newD3DSettings, Size.Empty, uint.MaxValue, uint.MaxValue, true );
 		}
 
 		public void tDirect3Dデバイスをクリアする()
@@ -528,7 +528,7 @@ namespace FDK
 
 							try
 							{
-								if( this.tDirect3Dデバイスを生成_変更_リセットする( newSettings, CTexture.sz論理画面 ) )
+								if( this.tGenerateChangeResetDirect3DDevice( newSettings, CTexture.sz論理画面 ) )
 								{
 									// 作成成功。
 
@@ -562,7 +562,7 @@ namespace FDK
 
 					try
 					{
-						this.On描画();				// BeginScene～EndScene はこの中で。
+						this.OnDraw();				// BeginScene～EndScene はこの中で。
 					}
 					catch( Direct3D9Exception e )	// デバイス関連以外の例外はそのまま発出する。
 					{
@@ -658,9 +658,9 @@ namespace FDK
 				}
 			}
 		}
-		protected void tフロー制御スレッド処理()
+		protected void tProcessFlowControlThread()
 		{
-			this.Onフロー制御();	// ループごと子クラスに丸投げ。
+			this.OnControlFlow();	// ループごと子クラスに丸投げ。
 		}
 
 	
@@ -671,13 +671,13 @@ namespace FDK
 		/// <para>Direct3D の生成の後に呼び出される。</para>
 		/// <para>エラー等でアプリを終了したい場合は例外を発生させ、正常に（無言で）終了したい場合は this.Window を null にして return すること。</para>
 		/// </summary>
-		protected virtual void On初期化() { }
+		protected virtual void OnInitialize() { }
 
 		/// <summary>
 		/// <para>Direct3Dデバイスに対する設定を行う。</para>
 		/// <para>デバイスのリセット時や再作成時に呼び出される。</para>
 		/// </summary>
-		protected virtual void OnD3Dデバイスステータスの初期化()
+		protected virtual void OnInitializeD3DDeviceStatus()
 		{
 			// this.Device.SetTransform()
 			// this.Device.SetRenderState()
@@ -699,12 +699,12 @@ namespace FDK
 		/// <para>BeginScene() と EndScene() の間に呼び出される。</para>
 		/// <para>そのため、Direct3Dデバイスの変更を伴うような操作は行わないこと。</para>
 		/// </summary>
-		protected virtual void On描画() { }
+		protected virtual void OnDraw() { }
 
 		/// <summary>
-		/// <para>アプリケーション全体のフローについて、現在の状態を管理し、状態に応じて各スレッドに指示を出す。</para>
+		/// <para>Manages the current state of the flow of the entire application and gives instructions to each thread according to the state.</para>
 		/// </summary>
-		protected virtual void Onフロー制御() { }
+		protected virtual void OnControlFlow() { }
 
 
 
@@ -755,7 +755,7 @@ namespace FDK
 		protected volatile bool bアプリケーションを終了する = false;
 		protected volatile bool bWindowClose済み = false;
 		/// <summary>
-		/// <para>On描画()の後にPresent()を行うか否かを指定する。</para>
+		/// <para>OnDraw()の後にPresent()を行うか否かを指定する。</para>
 		/// <para>例えば、Direct3Dデバイスの切替え中にはPresentは停止しなければならない。</para>
 		/// </summary>
 		protected volatile bool bPresent停止 = false;

@@ -703,7 +703,7 @@ namespace DTXMania
 				if ( !this[ i ].b排他 )	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
 				{
 					Cシステムサウンド cシステムサウンド = this[ i ];
-					if ( !CDTXMania.bコンパクトモード || cシステムサウンド.bCompact対象 )
+					if ( !CDTXMania.bCompactMode || cシステムサウンド.bCompact対象 )
 					{
 						try
 						{

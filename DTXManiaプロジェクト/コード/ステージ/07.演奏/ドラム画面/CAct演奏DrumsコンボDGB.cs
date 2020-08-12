@@ -10,7 +10,7 @@ namespace DTXMania
 	internal class CAct演奏DrumsコンボDGB : CAct演奏Combo共通
 	{
 		// CAct演奏Combo共通 実装
-        public override void On活性化()
+        public override void OnActivate()
         {
             for( int i = 0; i < 256; i++ )
             {
@@ -19,9 +19,9 @@ namespace DTXMania
             }
             base.nコンボカウント.Drums = 0;
             this.n火薬カウント = 0;
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             for( int i = 0; i < 256; i++ )
             {
@@ -30,7 +30,7 @@ namespace DTXMania
             }
             base.nコンボカウント.Drums = 0;
             this.n火薬カウント = 0;
-            base.On非活性化();
+            base.OnDeactivate();
         }
 
         public void Start( int nCombo値 )
@@ -99,7 +99,7 @@ namespace DTXMania
                         }
                         if ( this.txComboBom != null && CDTXMania.ConfigIni.bドラムコンボ文字の表示 != false )
                         {
-                            this.txComboBom.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, (340 * num1), 360, 340));
+                            this.txComboBom.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, (340 * num1), 360, 340));
                             this.txComboBom.vc拡大縮小倍率 = new SlimDX.Vector3(1.5f, 1.5f, 1f);
                         }
                     }

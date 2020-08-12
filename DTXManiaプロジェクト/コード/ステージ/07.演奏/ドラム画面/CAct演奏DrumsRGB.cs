@@ -11,7 +11,7 @@ namespace DTXMania
 
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( !CDTXMania.ConfigIni.bGuitar有効 )
 				{
@@ -29,7 +29,7 @@ namespace DTXMania
 						}
 						if( base.txRGB != null )
 						{
-							base.txRGB.t2D描画( CDTXMania.app.Device, 0x1fd + ( j * 0x1a ), 0x39, rectangle );
+							base.txRGB.tDraw2D( CDTXMania.app.Device, 0x1fd + ( j * 0x1a ), 0x39, rectangle );
 						}
 					}
 				}
@@ -45,7 +45,7 @@ namespace DTXMania
 						}
 						if( base.txRGB != null )
 						{
-							base.txRGB.t2D描画( CDTXMania.app.Device, 400 + ( k * 0x1a ), 0x39, rectangle2 );
+							base.txRGB.tDraw2D( CDTXMania.app.Device, 400 + ( k * 0x1a ), 0x39, rectangle2 );
 						}
 					}
 				}

@@ -13,7 +13,7 @@ namespace DTXMania
 
 		public CAct演奏チップファイアGB()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -33,26 +33,26 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 10; i++ )
 			{
 				this.pt中央位置[ i ] = new Point( 0, 0 );
 				this.ct進行[ i ] = new CCounter();
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i < 10; i++ )
 			{
 				this.ct進行[ i ] = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tx火花[ 0 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay chip fire red.png" ) );
 				if( this.tx火花[ 0 ] != null )
@@ -80,12 +80,12 @@ namespace DTXMania
 					this.tx火花[ 4 ].b加算合成 = true;
 				}
                 this.txレーンの線 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_guitar line.png"));
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx火花[ 0 ] );
 				CDTXMania.tテクスチャの解放( ref this.tx火花[ 1 ] );
@@ -93,12 +93,12 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放( ref this.tx火花[ 3 ] );
                 CDTXMania.tテクスチャの解放( ref this.tx火花[ 4 ] );
                 CDTXMania.tテクスチャの解放( ref this.txレーンの線 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 10; i++ )
 				{
@@ -115,9 +115,9 @@ namespace DTXMania
 						float scale = (float) ( 3.0 * Math.Cos( ( Math.PI * ( 90.0 - ( 90.0 * ( ( (double) this.ct進行[ j ].n現在の値 ) / 56.0 ) ) ) ) / 180.0 ) );
 						int x = this.pt中央位置[ j ].X - ( (int) ( ( this.tx火花[ j % 3 ].sz画像サイズ.Width * scale ) / 2f ) );
 						int y = this.pt中央位置[ j ].Y - ( (int) ( ( this.tx火花[ j % 3 ].sz画像サイズ.Height * scale ) / 2f ) );
-						this.tx火花[ j % 5 ].n透明度 = ( this.ct進行[ j ].n現在の値 < 0x1c ) ? 0xff : ( 0xff - ( (int) ( 255.0 * Math.Cos( ( Math.PI * ( 90.0 - ( 90.0 * ( ( (double) ( this.ct進行[ j ].n現在の値 - 0x1c ) ) / 28.0 ) ) ) ) / 180.0 ) ) ) );
+						this.tx火花[ j % 5 ].nTransparency = ( this.ct進行[ j ].n現在の値 < 0x1c ) ? 0xff : ( 0xff - ( (int) ( 255.0 * Math.Cos( ( Math.PI * ( 90.0 - ( 90.0 * ( ( (double) ( this.ct進行[ j ].n現在の値 - 0x1c ) ) / 28.0 ) ) ) ) / 180.0 ) ) ) );
 						this.tx火花[ j % 5 ].vc拡大縮小倍率 = new Vector3( scale, scale, 1f );
-						this.tx火花[ j % 5 ].t2D描画( CDTXMania.app.Device, x, y );
+						this.tx火花[ j % 5 ].tDraw2D( CDTXMania.app.Device, x, y );
 					}
 				}
 			}

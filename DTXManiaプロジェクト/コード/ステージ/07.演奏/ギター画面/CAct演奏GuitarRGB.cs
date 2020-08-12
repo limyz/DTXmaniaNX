@@ -11,7 +11,7 @@ namespace DTXMania
 
 		public CAct演奏GuitarRGB()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -19,7 +19,7 @@ namespace DTXMania
 
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
             {
                 if (!CDTXMania.ConfigIni.bGuitar有効)
                 {
@@ -32,41 +32,41 @@ namespace DTXMania
                     //if ( this.txLaneCover != null )
                     {
                         //旧画像
-                        //this.txLaneCover.t2D描画(CDTXMania.app.Device, 295, 0);
+                        //this.txLaneCover.tDraw2D(CDTXMania.app.Device, 295, 0);
                         //if (CDTXMania.DTX.bチップがある.LeftCymbal == false)
                         {
-                            //this.txLaneCover.t2D描画(CDTXMania.app.Device, 295, 0, new Rectangle(0, 0, 70, 720));
+                            //this.txLaneCover.tDraw2D(CDTXMania.app.Device, 295, 0, new Rectangle(0, 0, 70, 720));
                         }
                         //if ((CDTXMania.DTX.bチップがある.LP == false) && (CDTXMania.DTX.bチップがある.LBD == false))
                         {
                             //レーンタイプでの入れ替わりあり
                             //if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.A || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C)
                             {
-                                //    this.txLaneCover.t2D描画(CDTXMania.app.Device, 416, 0, new Rectangle(124, 0, 54, 720));
+                                //    this.txLaneCover.tDraw2D(CDTXMania.app.Device, 416, 0, new Rectangle(124, 0, 54, 720));
                             }
                             //else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B)
                             {
-                                //    this.txLaneCover.t2D描画(CDTXMania.app.Device, 470, 0, new Rectangle(124, 0, 54, 720));
+                                //    this.txLaneCover.tDraw2D(CDTXMania.app.Device, 470, 0, new Rectangle(124, 0, 54, 720));
                             }
                             //else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
                             {
-                                //    this.txLaneCover.t2D描画(CDTXMania.app.Device, 522, 0, new Rectangle(124, 0, 54, 720));
+                                //    this.txLaneCover.tDraw2D(CDTXMania.app.Device, 522, 0, new Rectangle(124, 0, 54, 720));
                             }
                         }
                         //if (CDTXMania.DTX.bチップがある.FT == false)
                         {
-                            //this.txLaneCover.t2D描画(CDTXMania.app.Device, 690, 0, new Rectangle(71, 0, 52, 720));
+                            //this.txLaneCover.tDraw2D(CDTXMania.app.Device, 690, 0, new Rectangle(71, 0, 52, 720));
                         }
                         //if (CDTXMania.DTX.bチップがある.Ride == false)
                         {
                             //RDPositionで入れ替わり
                             //if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RCRD)
                             {
-                                //    this.txLaneCover.t2D描画(CDTXMania.app.Device, 815, 0, new Rectangle(178, 0, 38, 720));
+                                //    this.txLaneCover.tDraw2D(CDTXMania.app.Device, 815, 0, new Rectangle(178, 0, 38, 720));
                             }
                             //else if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC)
                             {
-                                //    this.txLaneCover.t2D描画(CDTXMania.app.Device, 743, 0, new Rectangle(178, 0, 38, 720));
+                                //    this.txLaneCover.tDraw2D(CDTXMania.app.Device, 743, 0, new Rectangle(178, 0, 38, 720));
                             }
                         }
                     }
@@ -115,7 +115,7 @@ namespace DTXMania
 						}
 						if( base.txRGB != null )
 						{
-							//base.txRGB.t2D描画( CDTXMania.app.Device, 0x1f + ( j * 0x24 ), 3, rectangle );
+							//base.txRGB.tDraw2D( CDTXMania.app.Device, 0x1f + ( j * 0x24 ), 3, rectangle );
 						}
 					}
                      */
@@ -123,24 +123,24 @@ namespace DTXMania
                     if (base.txRGB != null)
                     {
                         if (this.nシャッター下.Guitar == 0)
-                            base.txRGB.t2D描画(CDTXMania.app.Device, 67, 670, new Rectangle(0, 128, 277, 50));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 67, 670, new Rectangle(0, 128, 277, 50));
 
                         if (this.nシャッター上.Guitar == 0)
-                            base.txRGB.t2D描画(CDTXMania.app.Device, 67, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Guitar ? 64 : 0), 277, 64));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 67, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Guitar ? 64 : 0), 277, 64));
                     }
 
                     if (base.txシャッター != null)
                     {
                         if (this.nシャッター下.Guitar != 0)
                         {
-                            base.txシャッター.t2D描画(CDTXMania.app.Device, 80, (int)this.dbシャッター下.Guitar);
+                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbシャッター下.Guitar);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
                                 this.actLVFont.t文字列描画(195, (int)this.dbシャッター下.Guitar + 5, this.nシャッター下.Guitar.ToString());
                         }
                         if (this.nシャッター上.Guitar != 0)
                         {
-                            base.txシャッター.t2D描画(CDTXMania.app.Device, 80, (int)this.dbシャッター上.Guitar);
+                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbシャッター上.Guitar);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
                                 this.actLVFont.t文字列描画(195, (int)this.dbシャッター上.Guitar - 25 + base.txシャッター.sz画像サイズ.Height, this.nシャッター上.Guitar.ToString());
@@ -162,7 +162,7 @@ namespace DTXMania
 						}
 						if( base.txRGB != null )
 						{
-							//base.txRGB.t2D描画( CDTXMania.app.Device, 0x1f + ( j * 0x24 ), 3, rectangle );
+							//base.txRGB.tDraw2D( CDTXMania.app.Device, 0x1f + ( j * 0x24 ), 3, rectangle );
 						}
 					}
                      */
@@ -170,24 +170,24 @@ namespace DTXMania
                     if (base.txRGB != null)
                     {
                         if (this.nシャッター下.Bass == 0)
-                            base.txRGB.t2D描画(CDTXMania.app.Device, 937, 670, new Rectangle(0, 128, 277, 50));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 937, 670, new Rectangle(0, 128, 277, 50));
 
                         if (this.nシャッター上.Bass == 0)
-                            base.txRGB.t2D描画(CDTXMania.app.Device, 937, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Bass ? 64 : 0), 277, 64));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 937, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Bass ? 64 : 0), 277, 64));
                     }
 
                     if (base.txシャッター != null)
                     {
                         if (this.nシャッター下.Bass != 0)
                         {
-                            base.txシャッター.t2D描画(CDTXMania.app.Device, 950, (int)this.dbシャッター下.Bass);
+                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbシャッター下.Bass);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
                                 this.actLVFont.t文字列描画(1065, (int)this.dbシャッター下.Bass + 5, this.nシャッター下.Bass.ToString());
                         }
                         if (this.nシャッター上.Bass != 0)
                         {
-                            base.txシャッター.t2D描画(CDTXMania.app.Device, 950, (int)this.dbシャッター上.Bass);
+                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbシャッター上.Bass);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
                                 this.actLVFont.t文字列描画(1065, (int)this.dbシャッター上.Bass - 25 + base.txシャッター.sz画像サイズ.Height, this.nシャッター上.Bass.ToString());

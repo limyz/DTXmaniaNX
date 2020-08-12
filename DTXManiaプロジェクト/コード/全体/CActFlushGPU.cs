@@ -17,9 +17,9 @@ namespace DTXMania
 	{
 		// CActivity 実装
 
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				try			// #xxxxx 2012.12.31 yyagi: to prepare flush, first of all, I create q queue to the GPU.
 				{
@@ -29,18 +29,18 @@ namespace DTXMania
 				{
 					Trace.TraceError( e.Message );
 				}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void  OnManagedリソースの解放()
+		public override void  OnManagedReleaseResources()
 		{
 			IDirect3DQuery9.Dispose();
 			IDirect3DQuery9 = null;
-			base.OnManagedリソースの解放();
+			base.OnManagedReleaseResources();
 		}
 		public override int On進行描画()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				IDirect3DQuery9.Issue( Issue.End );
 				DWM.Flush();

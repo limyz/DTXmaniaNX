@@ -12,7 +12,7 @@ namespace DTXMania
 
 		public CAct演奏DrumsWailingBonus()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		
@@ -51,7 +51,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 3; i++ )
 			{
@@ -60,9 +60,9 @@ namespace DTXMania
 					this.ct進行用[ i, j ] = new CCounter();
 				}
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i < 3; i++ )
 			{
@@ -71,12 +71,12 @@ namespace DTXMania
 					this.ct進行用[ i, j ] = null;
 				}
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
 
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 2; i++ )
 				{
@@ -128,7 +128,7 @@ namespace DTXMania
 								}
 								if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) )
 								{
-									this.txWailingBonus.t2D描画( CDTXMania.app.Device, x, ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5, rectangle );
+									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5, rectangle );
 								}
 								num5 = 0;
 								rectangle = new Rectangle( 0x1a, 0, 0x1a, 0x7a );
@@ -143,7 +143,7 @@ namespace DTXMania
 								}
 								if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) )
 								{
-									this.txWailingBonus.t2D描画( CDTXMania.app.Device, x, ( ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5 ) + 0x7a, rectangle );
+									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5 ) + 0x7a, rectangle );
 								}
 							}
 						}

@@ -43,7 +43,7 @@ namespace DTXMania
 		}
 		public void t文字列描画(int x, int y, string str, EFontColor efc, EFontAlign efa)
 		{
-			if (!base.b活性化してない && !string.IsNullOrEmpty(str))
+			if (!base.bNotActivated && !string.IsNullOrEmpty(str))
 			{
 				if (this.tx数値 != null)
 				{
@@ -62,7 +62,7 @@ namespace DTXMania
 						ST数字 s = st数字[p, (int)efc];
 						int sw = s.rc.Width;
 						int delta = bRightAlign ? 0 : -sw;
-						this.tx数値.t2D描画(CDTXMania.app.Device, x + delta, y, s.rc);
+						this.tx数値.tDraw2D(CDTXMania.app.Device, x + delta, y, s.rc);
 						x += bRightAlign ? -sw : sw;
 					}
 				}
@@ -72,24 +72,24 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if (!base.b活性化してない)
+			if (!base.bNotActivated)
 			{
 				this.tx数値 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenSelect level numbers.png"));
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if (!base.b活性化してない)
+			if (!base.bNotActivated)
 			{
 				if ( this.tx数値 != null )
 				{
 					this.tx数値.Dispose();
 					this.tx数値 = null;
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 

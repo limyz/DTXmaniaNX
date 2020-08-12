@@ -1794,13 +1794,13 @@ namespace DTXMania
                     {
                         // Debug.WriteLine( "バックグラウンドでEnumeratingSongs中だったので、一旦中断します。" );
                         CDTXMania.EnumSongs.Abort();
-                        CDTXMania.actEnumSongs.On非活性化();
+                        CDTXMania.actEnumSongs.OnDeactivate();
                     }
 
                     CDTXMania.EnumSongs.StartEnumFromDisk();
                     CDTXMania.EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);
                     CDTXMania.actEnumSongs.bコマンドでの曲データ取得 = true;
-                    CDTXMania.actEnumSongs.On活性化();
+                    CDTXMania.actEnumSongs.OnActivate();
                 }
                 #endregion
             }
@@ -2087,7 +2087,7 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             if (this.b活性化してる)
                 return;
@@ -2134,11 +2134,11 @@ namespace DTXMania
             this.iSystemWASAPIBufferSizeMs_initial = this.iSystemWASAPIBufferSizeMs.n現在の値; // CONFIG脱出時にこの値から変更されているようなら
             //this.iSystemASIOBufferSizeMs_initial = this.iSystemASIOBufferSizeMs.n現在の値; // サウンドデバイスを再構築する
             this.iSystemASIODevice_initial = this.iSystemASIODevice.n現在選択されている項目番号; //
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
 
             this.tConfigIniへ記録する();
@@ -2148,7 +2148,7 @@ namespace DTXMania
             OnListMenuの解放();
             prvFont.Dispose();
 
-            base.On非活性化();
+            base.OnDeactivate();
 
             #region [ Skin変更 ]
             if (CDTXMania.Skin.GetCurrentSkinSubfolderFullName(true) != this.skinSubFolder_org)
@@ -2193,9 +2193,9 @@ namespace DTXMania
             FDK.CSound管理.bIsTimeStretch = this.iSystemTimeStretch.bON;
             #endregion
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
 
             this.tx通常項目行パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\4_itembox.png"), false);
@@ -2208,11 +2208,11 @@ namespace DTXMania
             this.txレーン = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret.png"));
             this.txシャッター = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_shutter.png"));
             this.txSkinSample1 = null;		// スキン選択時に動的に設定するため、ここでは初期化しない
-            base.OnManagedリソースの作成();
+            base.OnManagedCreateResources();
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
 
             CDTXMania.tテクスチャの解放(ref this.txSkinSample1);
@@ -2225,7 +2225,7 @@ namespace DTXMania
             CDTXMania.tテクスチャの解放(ref this.txレーン);
             CDTXMania.tテクスチャの解放(ref this.tx判定ライン);
             CDTXMania.tテクスチャの解放(ref this.txシャッター);
-            base.OnManagedリソースの解放();
+            base.OnManagedReleaseResources();
         }
 
 		private void OnListMenuの初期化()
@@ -2261,7 +2261,7 @@ namespace DTXMania
         }
         public int t進行描画(bool b項目リスト側にフォーカスがある)
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return 0;
 
             // 進行
@@ -2409,12 +2409,12 @@ namespace DTXMania
                 {
                     case CItemBase.Eパネル種別.通常:
                         if (this.tx通常項目行パネル != null)
-                            this.tx通常項目行パネル.t2D描画(CDTXMania.app.Device, n新項目パネルX, y);
+                            this.tx通常項目行パネル.tDraw2D(CDTXMania.app.Device, n新項目パネルX, y);
                         break;
 
                     case CItemBase.Eパネル種別.その他:
                         if (this.txその他項目行パネル != null)
-                            this.txその他項目行パネル.t2D描画(CDTXMania.app.Device, n新項目パネルX, y);
+                            this.txその他項目行パネル.tDraw2D(CDTXMania.app.Device, n新項目パネルX, y);
                         break;
                 }
                 //-----------------
@@ -2423,13 +2423,13 @@ namespace DTXMania
                 //-----------------
 				if ( listMenu[ nItem ].txMenuItemRight != null )	// 自前のキャッシュに含まれているようなら、再レンダリングせずキャッシュを使用
 				{
-					listMenu[ nItem ].txMenuItemRight.t2D描画( CDTXMania.app.Device, ( n新項目パネルX + 20 ), ( y + 24 ) );
+					listMenu[ nItem ].txMenuItemRight.tDraw2D( CDTXMania.app.Device, ( n新項目パネルX + 20 ), ( y + 24 ) );
 				}
 				else
 				{
 					Bitmap bmpItem = prvFont.DrawPrivateFont( this.list項目リスト[ nItem ].str項目名, Color.White, Color.Transparent );
 					listMenu[ nItem ].txMenuItemRight = CDTXMania.tテクスチャの生成( bmpItem );
-//					ctItem.t2D描画( CDTXMania.app.Device, ( x + 0x12 ) * Scale.X, ( y + 12 ) * Scale.Y - 20 );
+//					ctItem.tDraw2D( CDTXMania.app.Device, ( x + 0x12 ) * Scale.X, ( y + 12 ) * Scale.Y - 20 );
 //					CDTXMania.tテクスチャの解放( ref ctItem );
 					CDTXMania.t安全にDisposeする( ref bmpItem );
 				}
@@ -2524,7 +2524,7 @@ namespace DTXMania
 						prvFont.DrawPrivateFont( strParam, Color.White, Color.Black, Color.Yellow, Color.OrangeRed ) :
 						prvFont.DrawPrivateFont( strParam, Color.Black, Color.Transparent );
 					CTexture txStr = CDTXMania.tテクスチャの生成( bmpStr, false );
-					txStr.t2D描画( CDTXMania.app.Device, ( n新項目パネルX + 260 ) , ( y + 20 ) );
+					txStr.tDraw2D( CDTXMania.app.Device, ( n新項目パネルX + 260 ) , ( y + 20 ) );
 					CDTXMania.tテクスチャの解放( ref txStr );
 					CDTXMania.t安全にDisposeする( ref bmpStr );
 				}
@@ -2545,7 +2545,7 @@ namespace DTXMania
 
 				        listMenu[ nItem ] = stm;
 				    }
-				    listMenu[ nItem ].txParam.t2D描画( CDTXMania.app.Device, ( n新項目パネルX + 260 ) , ( y + 24 ) );
+				    listMenu[ nItem ].txParam.tDraw2D( CDTXMania.app.Device, ( n新項目パネルX + 260 ) , ( y + 24 ) );
 				}
 				//-----------------
                 #endregion
@@ -2558,17 +2558,17 @@ namespace DTXMania
             #region[ カーソル ]
             if( this.b項目リスト側にフォーカスがある )
             {
-                this.txカーソル.t2D描画( CDTXMania.app.Device, 413, 193 );
+                this.txカーソル.tDraw2D( CDTXMania.app.Device, 413, 193 );
             }
             #endregion
 
             #region[ 説明文パネル ]
             if( this.b項目リスト側にフォーカスがある && this.n目標のスクロールカウンタ == 0 && CDTXMania.stageコンフィグ.ct表示待機.b終了値に達した )
             {
-                this.tx説明文パネル.t2D描画( CDTXMania.app.Device, 601, 252 );
+                this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 601, 252 );
                 if ( txSkinSample1 != null && this.n目標のスクロールカウンタ == 0 && this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemSkinSubfolder )
 				{
-					txSkinSample1.t2D描画( CDTXMania.app.Device, 615 - 60, 442 - 106 );
+					txSkinSample1.tDraw2D( CDTXMania.app.Device, 615 - 60, 442 - 106 );
 				}
             }
             #endregion
@@ -2603,8 +2603,8 @@ namespace DTXMania
                 //新矢印
                 if( this.tx矢印 != null )
                 {
-                    this.tx矢印.t2D描画(CDTXMania.app.Device, n新カーソルX, n新カーソル上Y, new Rectangle(0, 0, 40, 40));
-                    this.tx矢印.t2D描画(CDTXMania.app.Device, n新カーソルX, n新カーソル下Y, new Rectangle(0, 40, 40, 40));
+                    this.tx矢印.tDraw2D(CDTXMania.app.Device, n新カーソルX, n新カーソル上Y, new Rectangle(0, 0, 40, 40));
+                    this.tx矢印.tDraw2D(CDTXMania.app.Device, n新カーソルX, n新カーソル下Y, new Rectangle(0, 40, 40, 40));
                 }
             }
             //-----------------

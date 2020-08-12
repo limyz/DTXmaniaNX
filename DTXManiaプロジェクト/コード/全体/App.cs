@@ -40,7 +40,7 @@ namespace DTXMania
         /// <para>Direct3D の生成の後に呼び出される。</para>
         /// <para>エラー等でアプリを終了したい場合は例外を発生させ、正常に（無言で）終了したい場合は this.Window を null にして return すること。</para>
         /// </summary>
-        protected override void On初期化()
+        protected override void OnInitialize()
         {
             #region [ プライマリアダプタのHALとフォーマットのチェックを行う。]
             //-----------------
@@ -70,7 +70,7 @@ namespace DTXMania
         /// <para>Direct3Dデバイス（this.Device）に対するデフォルト設定を行う。</para>
         /// <para>Direct3Dデバイスのリセット_変更_再作成時に呼び出される。</para>
         /// </summary>
-        protected override void OnD3Dデバイスステータスの初期化()
+        protected override void OnInitializeD3DDeviceStatus()
         {
 
             float f視野角 = 45.0f;		// [度]																				// z（遠）
@@ -99,7 +99,7 @@ namespace DTXMania
         /// </summary>
         protected override void On進行()
         {
-            switch ( CDTXMania.r現在のステージ.eステージID )
+            switch ( CDTXMania.rCurrentStage.eステージID )
             {
 
                 case CStage.Eステージ.演奏:
@@ -122,19 +122,19 @@ namespace DTXMania
         /// <para>BeginScene() と EndScene() の間に呼び出される。</para>
         /// <para>そのため、Direct3Dデバイスの変更を伴うような操作は行わないこと。</para>
         /// </summary>
-        protected override void On描画()
+        protected override void OnDraw()
         {
             switch (this.e現在の状態[THREAD_描画])
             {
                 #region [ D3Dデバイスの変更 ]
                 //-----------------
-                case Eアプリ状態.D3Dデバイスの変更:
+                case EAppStatus.D3Dデバイスの変更:
                     {
                         if (this.bD3Dデバイスを変更する)
                         {
                             var newSettings = this.currentD3DSettings.Clone();
 
-                            this.tDirect3Dデバイスを生成_変更_リセットする(		// 例外はキャッチしない。準正常じゃなくて異常なので。
+                            this.tGenerateChangeResetDirect3DDevice(		// 例外はキャッチしない。準正常じゃなくて異常なので。
                                 newSettings,
                                 this.LogicalDisplaySize,
                                 CApplicationForm.wsウィンドウスタイル,
@@ -145,7 +145,7 @@ namespace DTXMania
                         }
                     }
                     this.bPresent停止 = true;
-                    this.t完了(THREAD_描画);
+                    this.tComplete(THREAD_描画);
                     break;
                 //-----------------
                 #endregion
@@ -153,7 +153,7 @@ namespace DTXMania
                 //-----------------
                 default:
                     this.bPresent停止 = true;
-                    this.t完了(THREAD_描画);
+                    this.tComplete(THREAD_描画);
                     break;
                 //-----------------
                 #endregion
@@ -163,7 +163,7 @@ namespace DTXMania
         /// <summary>
         /// <para>アプリケーション全体のフローについて、現在の状態を管理し、状態に応じて各スレッドに指示を出す。</para>
         /// </summary>
-        protected override void Onフロー制御()
+        protected override void OnControlFlow()
         {
             // アプリの状態遷移図にそってフローが流れるようプログラミングする。
             // lock してないことに注意。
@@ -172,9 +172,9 @@ namespace DTXMania
         }
 
 
-        #region [| フロー制御用 |]
+        #region [| For Flow Control |]
         //-----------------
-        public enum Eアプリ状態
+        public enum EAppStatus
         {
             待機,
             アプリ起動,
@@ -220,7 +220,7 @@ namespace DTXMania
         /// 無理やり適合させるためNG、OKがSSTと逆になっています。
         /// 2013.02.13.kairera0467
         /// </summary>
-        public enum E状態処理結果 : int
+        public enum EStateProcessingResult : int
         {
             NG,
             OK,
@@ -245,7 +245,7 @@ namespace DTXMania
         /// <summary>
         /// <para>現在のスレッドの状態。処理完了時に「待機」に設定される。</para>
         /// </summary>
-        private volatile Eアプリ状態[] e現在の状態 = new Eアプリ状態[3] { Eアプリ状態.待機, Eアプリ状態.待機, Eアプリ状態.待機 };
+        private volatile EAppStatus[] e現在の状態 = new EAppStatus[3] { EAppStatus.待機, EAppStatus.待機, EAppStatus.待機 };
 
         /// <summary>
         /// <para>進行_描画スレッドの処理が完了したら、このイベントを Set() する。</para>
@@ -256,7 +256,7 @@ namespace DTXMania
 		};
         private class FlowThreadAbortException : Exception { };
 
-        private void t遷移(Eアプリ状態 e次の状態)
+        private void tTransition(EAppStatus e次の状態)
         {
             lock (this.obj排他用)
             {
@@ -278,15 +278,15 @@ namespace DTXMania
             ManualResetEvent.WaitAll(this.ev状態処理完了通知);
             Debug.WriteLine(e次の状態 + ": 待ち終了。");
         }
-        private void t完了(int threadID)
+        private void tComplete(int threadID)
         {
-            this.e現在の状態[threadID] = Eアプリ状態.待機;
+            this.e現在の状態[threadID] = EAppStatus.待機;
             this.ev状態処理完了通知[threadID].Set();
         }
-        private void t全完了()
+        private void tCompleteAll()
         {
-            this.t完了(THREAD_進行);
-            this.t完了(THREAD_描画);
+            this.tComplete(THREAD_進行);
+            this.tComplete(THREAD_描画);
         }
         //public int n進行描画の戻り値;
         //private void t現在のステージの進行()

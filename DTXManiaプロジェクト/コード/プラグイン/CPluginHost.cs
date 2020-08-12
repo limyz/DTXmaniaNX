@@ -47,11 +47,11 @@ namespace DTXMania
 		}
 		public CStage.Eステージ e現在のステージ
 		{
-			get { return ( CDTXMania.r現在のステージ != null ) ? CDTXMania.r現在のステージ.eステージID : CStage.Eステージ.何もしない; }
+			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eステージID : CStage.Eステージ.何もしない; }
 		}
 		public CStage.Eフェーズ e現在のフェーズ
 		{
-			get { return ( CDTXMania.r現在のステージ != null ) ? CDTXMania.r現在のステージ.eフェーズID : CStage.Eフェーズ.共通_通常状態; }
+			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eフェーズID : CStage.Eフェーズ.共通_通常状態; }
 		}
 		public bool t入力を占有する(IPluginActivity act)
 		{

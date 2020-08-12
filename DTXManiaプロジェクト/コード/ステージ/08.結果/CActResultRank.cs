@@ -13,7 +13,7 @@ namespace DTXMania
 
         public CActResultRank()
         {
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
 
@@ -27,7 +27,7 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             #region [ 本体位置 ]
 
@@ -87,19 +87,19 @@ namespace DTXMania
             this.b全オート.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
             this.b全オート.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
 
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             if (this.ctランク表示 != null)
             {
                 this.ctランク表示 = null;
             }
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
 
                 this.txStageCleared = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenResult StageCleared.png"));
@@ -146,23 +146,23 @@ namespace DTXMania
                             break;
                     }
                 }
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放(ref this.txStageCleared);
                 CDTXMania.tテクスチャの解放(ref this.txFullCombo);
                 CDTXMania.tテクスチャの解放(ref this.txExcellent);
                 CDTXMania.t安全にDisposeする(ref this.txランク文字);
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
         public override int On進行描画()
         {
-            if (base.b活性化してない)
+            if (base.bNotActivated)
             {
                 return 0;
             }
@@ -183,7 +183,7 @@ namespace DTXMania
                         double num2 = ((double)this.ctランク表示.n現在の値 - 200.0) / 300.0;
 
                         if (this.ctランク表示.n現在の値 >= 200.0)
-                            this.txランク文字[j].t2D描画(CDTXMania.app.Device, this.n本体X[j], this.n本体Y[j] + ((int)((double)this.txランク文字[j].sz画像サイズ.Height * (1.0 - num2))), new Rectangle(0, 0, txランク文字[j].sz画像サイズ.Width, (int)((double)this.txランク文字[j].sz画像サイズ.Height * num2)));
+                            this.txランク文字[j].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y[j] + ((int)((double)this.txランク文字[j].sz画像サイズ.Height * (1.0 - num2))), new Rectangle(0, 0, txランク文字[j].sz画像サイズ.Width, (int)((double)this.txランク文字[j].sz画像サイズ.Height * num2)));
                     }
                     #endregion
 
@@ -194,17 +194,17 @@ namespace DTXMania
                     if (CDTXMania.stage結果.st演奏記録[j].nPerfect数 == CDTXMania.stage結果.st演奏記録[j].n全チップ数)
                     {
                         if (this.txExcellent != null)
-                            this.txExcellent.t2D描画(CDTXMania.app.Device, num14, num15);
+                            this.txExcellent.tDraw2D(CDTXMania.app.Device, num14, num15);
                     }
-                    else if (CDTXMania.stage結果.st演奏記録[j].bフルコンボである)
+                    else if (CDTXMania.stage結果.st演奏記録[j].bIsFullCombo)
                     {
                         if (this.txFullCombo != null)
-                            this.txFullCombo.t2D描画(CDTXMania.app.Device, num14, num15);
+                            this.txFullCombo.tDraw2D(CDTXMania.app.Device, num14, num15);
                     }
                     else
                     {
                         if (this.txStageCleared != null)
-                            this.txStageCleared.t2D描画(CDTXMania.app.Device, num14, num15);
+                            this.txStageCleared.tDraw2D(CDTXMania.app.Device, num14, num15);
                     }
                     #endregion
                 }

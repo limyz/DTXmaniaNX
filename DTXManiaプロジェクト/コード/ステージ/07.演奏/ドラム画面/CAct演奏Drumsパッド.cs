@@ -89,7 +89,7 @@ namespace DTXMania
             st基本位置Array[9] = st基本位置10;
 
             this.st基本位置 = st基本位置Array;
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
 
@@ -102,14 +102,14 @@ namespace DTXMania
             this.stパッド状態[nLane].nY座標加速度dot2 = 2;
         }
 
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
 
-            base.On非活性化();
+            base.OnDeactivate();
         }
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.nフラッシュ制御タイマ = -1L;
             this.nY座標制御タイマ = -1L;
@@ -124,31 +124,31 @@ namespace DTXMania
                 stパッド状態.n明るさ = 0;
                 this.stパッド状態[i] = stパッド状態;
             }
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 this.txパッド = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_pads.png"));
                 this.tx光るパッド = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums pads flush.png"));
                 this.txボーナス文字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Bonus.png"));
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放(ref this.txパッド);
                 CDTXMania.tテクスチャの解放(ref this.tx光るパッド);
                 CDTXMania.tテクスチャの解放(ref this.txボーナス文字);
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
         public override int On進行描画()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 int num1 = CDTXMania.stage演奏ドラム画面.ctBPMバー.n現在の値;
 
@@ -333,7 +333,7 @@ namespace DTXMania
                         }
                         if (this.txパッド != null)
                         {
-                            this.txパッド.t2D描画(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
+                            this.txパッド.tDraw2D(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
 
                             //if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B && index == 8)
                             //{
@@ -347,8 +347,8 @@ namespace DTXMania
                         }
                         if (this.tx光るパッド != null)
                         {
-                            this.tx光るパッド.n透明度 = (this.stパッド状態[index].n明るさ * 50) + 0;
-                            this.tx光るパッド.t2D描画(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
+                            this.tx光るパッド.nTransparency = (this.stパッド状態[index].n明るさ * 50) + 0;
+                            this.tx光るパッド.tDraw2D(CDTXMania.app.Device, x, y, this.st基本位置[index].rc);
 
                             //if (CDTXMania.ConfigIni.eNumOfLanes.Drums == Eタイプ.B && index == 8)
                             //{
@@ -380,11 +380,11 @@ namespace DTXMania
                         }
                         if (this.txボーナス文字 != null && CDTXMania.ConfigIni.bShowScore)
                         {
-                            this.txボーナス文字.t2D描画(CDTXMania.app.Device, 160, 80);
+                            this.txボーナス文字.tDraw2D(CDTXMania.app.Device, 160, 80);
                             //if (this.stボーナス[i].ct進行.n現在の値 >= 765)
                             //{
                             //    int n = this.stボーナス[i].ct進行.n現在の値 - 765;
-                            //    this.txボーナス文字.n透明度 = 255 - n;
+                            //    this.txボーナス文字.nTransparency = 255 - n;
                             //}
                         }
                     }

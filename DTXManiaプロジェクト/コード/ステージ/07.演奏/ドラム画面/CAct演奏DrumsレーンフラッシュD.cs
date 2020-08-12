@@ -88,7 +88,7 @@ namespace DTXMania
 
            
 
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		
@@ -103,25 +103,25 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 11; i++ )
 			{
 				this.ct進行[ i ] = new CCounter();
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i < 11; i++ )
 			{
 				this.ct進行[ i ] = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 if (CDTXMania.ConfigIni.nLaneDisp.Drums == 0 || CDTXMania.ConfigIni.nLaneDisp.Drums == 2)
                 {
@@ -140,12 +140,12 @@ namespace DTXMania
 				{
 					this.txFlush[ i ] = CDTXMania.tテクスチャの生成( CSkin.Path( this.strファイル名[ i ] ) );
 				}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 22; i++ )
 				{
@@ -155,12 +155,12 @@ namespace DTXMania
                 CDTXMania.tテクスチャの解放(ref this.txLine);
                 CDTXMania.tテクスチャの解放(ref this.txBass);
                 CDTXMania.tテクスチャの解放(ref this.txHitom);
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 11; i++ )
 				{
@@ -188,72 +188,72 @@ namespace DTXMania
                     //26072020: Check flag before drawing
                     if (this.nDrawFlags[numOfLanesflagIndex, index] == 1 && this.txLine != null)
                     {
-                        this.txLine.n透明度 = nAlpha;
-                        this.txBass.n透明度 = nAlpha;
-                        this.txHitom.n透明度 = nAlpha;
+                        this.txLine.nTransparency = nAlpha;
+                        this.txBass.nTransparency = nAlpha;
+                        this.txHitom.nTransparency = nAlpha;
                         #region[ 動くレーン ]
                         if (CDTXMania.ConfigIni.nLaneDisp.Drums == 0 || CDTXMania.ConfigIni.nLaneDisp.Drums == 2)
                         {
                             if (index == 0) //LC
                             {
-                                this.txLine.t2D描画(CDTXMania.app.Device, 295, 0, new Rectangle(0, 0, 72, 720)); //左の棒
+                                this.txLine.tDraw2D(CDTXMania.app.Device, 295, 0, new Rectangle(0, 0, 72, 720)); //左の棒
                             }
                             if (index == 1) //HH
                             {
-                                this.txLine.t2D描画(CDTXMania.app.Device, 367, 0, new Rectangle(72, 0, 49, 720)); //左の棒
+                                this.txLine.tDraw2D(CDTXMania.app.Device, 367, 0, new Rectangle(72, 0, 49, 720)); //左の棒
                             }
                             if (index == 2) //SD
                             {
                                 if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.A || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 467, 0, new Rectangle(172, 0, 57, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 467, 0, new Rectangle(172, 0, 57, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 416, 0, new Rectangle(172, 0, 57, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 416, 0, new Rectangle(172, 0, 57, 720));
                                 }
                             }
                             if (index == 3) //BD
                             {
                                 if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.A || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 573, 0, new Rectangle(278, 0, 69, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 573, 0, new Rectangle(278, 0, 69, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 524, 0, new Rectangle(278, 0, 69, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 524, 0, new Rectangle(278, 0, 69, 720));
                                 }
                             }
                             if (index == 4) //HT
                             {
                                 if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.A)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 524, 0, new Rectangle(229, 0, 49, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 524, 0, new Rectangle(229, 0, 49, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 593, 0, new Rectangle(229, 0, 49, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 593, 0, new Rectangle(229, 0, 49, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 473, 0, new Rectangle(229, 0, 49, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 473, 0, new Rectangle(229, 0, 49, 720));
                                 }
                             }
 
                             if (index == 5) //LT
                             {
-                                this.txLine.t2D描画(CDTXMania.app.Device, 642, 0, new Rectangle(347, 0, 49, 720));
+                                this.txLine.tDraw2D(CDTXMania.app.Device, 642, 0, new Rectangle(347, 0, 49, 720));
                             }
                             if (index == 6) //FT
                             {
-                                this.txLine.t2D描画(CDTXMania.app.Device, 691, 0, new Rectangle(396, 0, 54, 720));
+                                this.txLine.tDraw2D(CDTXMania.app.Device, 691, 0, new Rectangle(396, 0, 54, 720));
                                 //if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RCRD)
                                 {
-                                    //this.txLine.t2D描画(CDTXMania.app.Device, 742, 0, new Rectangle(447, 0, 5, 720));
+                                    //this.txLine.tDraw2D(CDTXMania.app.Device, 742, 0, new Rectangle(447, 0, 5, 720));
                                 }
                                 //else
                                 {
-                                    //this.txLine.t2D描画(CDTXMania.app.Device, 742, 0, new Rectangle(447, 0, 4, 720));
+                                    //this.txLine.tDraw2D(CDTXMania.app.Device, 742, 0, new Rectangle(447, 0, 4, 720));
                                 }
 
                             }
@@ -262,38 +262,38 @@ namespace DTXMania
                             {
                                 if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RCRD)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 745, 0, new Rectangle(450, 0, 70, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 745, 0, new Rectangle(450, 0, 70, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, xCY - 31, 0, new Rectangle(450, 0, 70, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, xCY - 31, 0, new Rectangle(450, 0, 70, 720));
                                 }
                             }
                             if (index == 8) //RD
                             {
                                 if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RCRD)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, xCY - 55, 0, new Rectangle(520, 0, 38, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, xCY - 55, 0, new Rectangle(520, 0, 38, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eRDPosition == ERDPosition.RDRC)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, xCY - 124, 0, new Rectangle(520, 0, 38, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, xCY - 124, 0, new Rectangle(520, 0, 38, 720));
                                 }                                
                             }
                             if (index == 9) //LP
                             {
                                 if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.A || CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.C)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, x2 - 12, 0, new Rectangle(121, 0, 51, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, x2 - 12, 0, new Rectangle(121, 0, 51, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.B)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, x2 + 45, 0, new Rectangle(121, 0, 51, 720));
-                                    //this.txLine.t2D描画(CDTXMania.app.Device, 524, 0, new Rectangle(278, 0, 6, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, x2 + 45, 0, new Rectangle(121, 0, 51, 720));
+                                    //this.txLine.tDraw2D(CDTXMania.app.Device, 524, 0, new Rectangle(278, 0, 6, 720));
                                 }
                                 else if (CDTXMania.ConfigIni.eLaneType.Drums == Eタイプ.D)
                                 {
-                                    this.txLine.t2D描画(CDTXMania.app.Device, 522, 0, new Rectangle(121, 0, 51, 720));
+                                    this.txLine.tDraw2D(CDTXMania.app.Device, 522, 0, new Rectangle(121, 0, 51, 720));
                                 }
                             }
                         }
@@ -313,7 +313,7 @@ namespace DTXMania
                                     l_drumPanelWidth = 447;
                                     l_xOffset = 72;
                                 }
-                                this.txLine.t2D描画(CDTXMania.app.Device, 295 + l_xOffset, 0, new Rectangle(0, 0, l_drumPanelWidth, 720));
+                                this.txLine.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, 0, new Rectangle(0, 0, l_drumPanelWidth, 720));
                             }
                         }                        
                     }
@@ -401,7 +401,7 @@ namespace DTXMania
                                     {
                                         if (this.txFlush[j + 11] != null)
                                         {
-                                            this.txFlush[j + 11].t2D描画(CDTXMania.app.Device, x + m, y, new Rectangle((k * 42), 0, ((w - m) < 42) ? (w - m) : 42, 128));
+                                            this.txFlush[j + 11].tDraw2D(CDTXMania.app.Device, x + m, y, new Rectangle((k * 42), 0, ((w - m) < 42) ? (w - m) : 42, 128));
                                         }
                                     }
                                 }
@@ -414,8 +414,8 @@ namespace DTXMania
                                         {
                                             if (this.txFlush[j] != null)
                                             {
-                                                this.txFlush[j].n透明度 = (num8);
-                                                this.txFlush[j].t2D描画(CDTXMania.app.Device, x + n, num8, new Rectangle(k * 42, 0, ((w - n) < 42) ? (w - n) : 42, 128));
+                                                this.txFlush[j].nTransparency = (num8);
+                                                this.txFlush[j].tDraw2D(CDTXMania.app.Device, x + n, num8, new Rectangle(k * 42, 0, ((w - n) < 42) ? (w - n) : 42, 128));
                                             }
                                         }
                                     }

@@ -17,7 +17,7 @@ namespace DTXMania
 
 		public CAct演奏レーンフラッシュGB共通()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -35,25 +35,25 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 10; i++ )
 			{
 				this.ct進行[ i ] = new CCounter();
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			for( int i = 0; i < 10; i++ )
 			{
 				this.ct進行[ i ] = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.txFlush[ 0 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay lane flush red.png" ) );
 				this.txFlush[ 1 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay lane flush green.png" ) );
@@ -66,18 +66,18 @@ namespace DTXMania
 				this.txFlush[ 7 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay lane flush blue reverse.png" ) );
                 this.txFlush[ 8 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay lane flush yellow reverse.png" ) );
 				this.txFlush[ 9 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay lane flush purple reverse.png" ) );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 10; i++ )
 				{
 					CDTXMania.tテクスチャの解放( ref this.txFlush[ i ] );
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 	}

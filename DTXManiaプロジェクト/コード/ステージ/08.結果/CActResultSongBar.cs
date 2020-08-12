@@ -14,7 +14,7 @@ namespace DTXMania
 
 		public CActResultSongBar()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -28,14 +28,14 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.n本体X = 0;
 			this.n本体Y = 0x18b;
 			this.ft曲名用フォント = new Font( "MS PGothic", 44f, FontStyle.Regular, GraphicsUnit.Pixel );
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			if( this.ft曲名用フォント != null )
 			{
@@ -46,11 +46,11 @@ namespace DTXMania
 			{
 				this.ct登場用 = null;
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				//this.txバー = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenResult song bar.png" ) );
 				try
@@ -69,21 +69,21 @@ namespace DTXMania
 					Trace.TraceError( "曲名テクスチャの生成に失敗しました。" );
 					this.tx曲名 = null;
 				}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txバー );
 				CDTXMania.tテクスチャの解放( ref this.tx曲名 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( base.b活性化してない )
+			if( base.bNotActivated )
 			{
 				return 0;
 			}
@@ -135,7 +135,7 @@ namespace DTXMania
 			}
 			if( this.tx曲名 != null )
 			{
-				this.tx曲名.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y + 20 );
+				this.tx曲名.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y + 20 );
 			}
 			if( !this.ct登場用.b終了値に達した )
 			{

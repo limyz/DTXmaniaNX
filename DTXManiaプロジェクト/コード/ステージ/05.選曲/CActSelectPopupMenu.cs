@@ -167,7 +167,7 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             //		this.n現在の選択行 = 0;
             this.bキー入力待ち = true;
@@ -175,7 +175,7 @@ namespace DTXMania
             {
                 this.ctキー反復用[i] = new CCounter(0, 0, 0, CDTXMania.Timer);
             }
-            base.b活性化してない = true;
+            base.bNotActivated = true;
 
             this.bIsActivePopupMenu = false;
             this.font = new CActDFPFont();
@@ -183,14 +183,14 @@ namespace DTXMania
             nItemSelecting = -1;
 
             this.CommandHistory = new DTXMania.CStage選曲.CCommandHistory();
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 base.list子Activities.Remove(this.font);
-                this.font.On非活性化();
+                this.font.OnDeactivate();
                 this.font = null;
 
                 CDTXMania.tテクスチャの解放(ref this.txCursor);
@@ -199,12 +199,12 @@ namespace DTXMania
                 {
                     this.ctキー反復用[i] = null;
                 }
-                base.On非活性化();
+                base.OnDeactivate();
             }
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 string pathCursor = CSkin.Path(@"Graphics\ScreenConfig menu cursor.png"); ;
                 string pathPopupMenuBackground = CSkin.Path(@"Graphics\ScreenSelect sort menu background.png");
@@ -216,17 +216,17 @@ namespace DTXMania
                 {
                     this.txPopupMenuBackground = CDTXMania.tテクスチャの生成(pathPopupMenuBackground, false);
                 }
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放(ref this.txPopupMenuBackground);
                 CDTXMania.tテクスチャの解放(ref this.txCursor);
             }
-            base.OnManagedリソースの解放();
+            base.OnManagedReleaseResources();
         }
 
         public override int On進行描画()
@@ -236,7 +236,7 @@ namespace DTXMania
 
         public int t進行描画()
         {
-            if (!base.b活性化してない && this.bIsActivePopupMenu)
+            if (!base.bNotActivated && this.bIsActivePopupMenu)
             {
                 n本体X = 460; //XG選曲画面の中心点はX=646 Y=358
                 n本体Y = 150;
@@ -350,7 +350,7 @@ namespace DTXMania
                 #region [ ポップアップメニュー 背景描画 ]
                 if (this.txPopupMenuBackground != null)
                 {
-                    this.txPopupMenuBackground.t2D描画(CDTXMania.app.Device, n本体X, n本体Y);
+                    this.txPopupMenuBackground.tDraw2D(CDTXMania.app.Device, n本体X, n本体Y);
                 }
                 #endregion
                 #region [ ソートメニュータイトル描画 ]
@@ -363,15 +363,15 @@ namespace DTXMania
 					int height = 32;
                     int curX = n本体X + 12;
                     int curY = n本体Y + 6 + (height * (this.n現在の選択行 + 1));
-					this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, new Rectangle( 0, 0, 16, 32 ) );
+					this.txCursor.tDraw2D( CDTXMania.app.Device, curX, curY, new Rectangle( 0, 0, 16, 32 ) );
 					curX += 0x10;
 					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
 					for ( int j = 0; j < 19; j++ )
 					{
-						this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, rectangle );
+						this.txCursor.tDraw2D( CDTXMania.app.Device, curX, curY, rectangle );
 						curX += 16;
 					}
-					this.txCursor.t2D描画( CDTXMania.app.Device, curX, curY, new Rectangle( 0x10, 0, 16, 32 ) );
+					this.txCursor.tDraw2D( CDTXMania.app.Device, curX, curY, new Rectangle( 0x10, 0, 16, 32 ) );
 				}
                 #endregion
                 #region [ ソート候補文字列描画 ]

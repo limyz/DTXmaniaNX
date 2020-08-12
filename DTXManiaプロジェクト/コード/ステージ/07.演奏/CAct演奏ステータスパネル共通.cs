@@ -42,7 +42,7 @@ namespace DTXMania
                 this.stパネルマップ[i].status = status[i];
                 this.stパネルマップ[i].label = labels[i];
             }
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
 
@@ -78,7 +78,7 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.nCurrentScore = 0L;
             this.n現在のスコアGuitar = 0L;
@@ -91,7 +91,7 @@ namespace DTXMania
                 this.db現在の達成率[ i ] = 0.0;
             }
 
-            base.On活性化();
+            base.OnActivate();
         }
 
         public void tスクリプトから難易度ラベルを取得する( string strラベル名 )

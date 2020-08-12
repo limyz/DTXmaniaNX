@@ -13,7 +13,7 @@ namespace DTXMania
 
         public CAct演奏ステージ失敗()
         {
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
 
@@ -27,14 +27,14 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.sd効果音 = null;
             this.b効果音再生済み = false;
             this.ct進行 = new CCounter();
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             this.ct進行 = null;
             if (this.sd効果音 != null)
@@ -42,27 +42,27 @@ namespace DTXMania
                 CDTXMania.Sound管理.tサウンドを破棄する(this.sd効果音);
                 this.sd効果音 = null;
             }
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 this.txStageFailed = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_stage_failed.jpg"));
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放(ref this.txStageFailed);
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
         public override int On進行描画()
         {
-            if (base.b活性化してない)
+            if (base.bNotActivated)
             {
                 return 0;
             }
@@ -76,15 +76,15 @@ namespace DTXMania
                 int x = (int)(640.0 * Math.Cos((Math.PI / 2 * this.ct進行.n現在の値) / 100.0));
                 if ((x != 1280) && (this.txStageFailed != null))
                 {
-                    this.txStageFailed.t2D描画(CDTXMania.app.Device, 0, 0, new Rectangle(x, 0, 640 - x, 720));
-                    this.txStageFailed.t2D描画(CDTXMania.app.Device, 640 + x, 0, new Rectangle(640, 0, 640 - x, 720));
+                    this.txStageFailed.tDraw2D(CDTXMania.app.Device, 0, 0, new Rectangle(x, 0, 640 - x, 720));
+                    this.txStageFailed.tDraw2D(CDTXMania.app.Device, 640 + x, 0, new Rectangle(640, 0, 640 - x, 720));
                 }
             }
             else
             {
                 if (this.txStageFailed != null)
                 {
-                    this.txStageFailed.t2D描画(CDTXMania.app.Device, 0, 0);
+                    this.txStageFailed.tDraw2D(CDTXMania.app.Device, 0, 0);
                 }
                 if (!this.b効果音再生済み)
                 {

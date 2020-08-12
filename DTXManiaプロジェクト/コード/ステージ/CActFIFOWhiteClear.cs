@@ -31,20 +31,20 @@ namespace DTXMania
 		}
 
 		// CActivity 実装
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 for (int i = 0; i < 16; i++)
                 {
                     this.st青い星[i].ct進行 = null;
                 }
-				base.On非活性化();
+				base.OnDeactivate();
 			}
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 
 				this.tx白タイル64x64 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Tile white 64x64.png" ), false );
@@ -66,14 +66,14 @@ namespace DTXMania
                     this.st青い星[i].ct進行 = new CCounter();
                 }
 
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
         
         
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
 
             CDTXMania.tテクスチャの解放( ref this.txボーナス花火 );
@@ -83,13 +83,13 @@ namespace DTXMania
             CDTXMania.tテクスチャの解放( ref this.txExcellent );
             CDTXMania.tテクスチャの解放( ref this.tx黒幕 );
 
-            base.OnManagedリソースの解放();
+            base.OnManagedReleaseResources();
         }
 
         /*
         public override unsafe int On進行描画(Device D3D9Device)
 		{
-            if (base.b活性化してない || (this.counter == null))
+            if (base.bNotActivated || (this.counter == null))
 				return 0;
 
 			// 進行。
@@ -124,7 +124,7 @@ namespace DTXMania
 
 				this.ds背景動画.t現時点における最新のスナップイメージをTextureに転写する( this.tx描画用 );
                 Trace.TraceInformation("テクスチャにスナップイメージを転写しました。");
-				this.tx描画用.t2D描画( CDTXMania.app.Device, 0, 0 );
+				this.tx描画用.tDraw2D( CDTXMania.app.Device, 0, 0 );
 			}
 			//-----------------
 			#endregion
@@ -137,7 +137,7 @@ namespace DTXMania
         */
 		public override unsafe int On進行描画()
         {
-            if (base.b活性化してない || (this.counter == null))
+            if (base.bNotActivated || (this.counter == null))
             {
                 return 0;
             }

@@ -72,28 +72,28 @@ namespace DTXMania
 
 		public CAct演奏スキルメーター()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
         {
             this.dbグラフ値目標 = 0f;
             this.dbグラフ値現在 = 0f;
 
             this.n現在のAutoを含まない判定数 = new int[ 6 ];
 
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 //this.pfNameFont = new CPrivateFastFont( new FontFamily( "Arial" ), 16, FontStyle.Bold );
                 this.txグラフ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Graph_Main.png" ) );
@@ -110,22 +110,22 @@ namespace DTXMania
                 //        this.txPlayerName = this.t指定された文字テクスチャを生成する( "LAST PLAY" );
                 //    }
                 //}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txグラフ );
                 CDTXMania.tテクスチャの解放( ref this.txグラフ_ゲージ );
                 CDTXMania.tテクスチャの解放( ref this.txグラフ値自己ベストライン );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -167,8 +167,8 @@ namespace DTXMania
                     {
                         if( CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ] != null )
                         {
-                            //this.dbグラフ値目標 = CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ].db演奏型スキル値;
-                            this.dbグラフ値目標_表示 = CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ].db演奏型スキル値;
+                            //this.dbグラフ値目標 = CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ].dbPerformanceSkill;
+                            this.dbグラフ値目標_表示 = CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ].dbPerformanceSkill;
                         }
                     }
 
@@ -185,7 +185,7 @@ namespace DTXMania
                 {
                     //背景
 					this.txグラフ.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
-                    this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos, new Rectangle( 2, 2, 251, 584 ) );
+                    this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos, new Rectangle( 2, 2, 251, 584 ) );
                     
                     //自己ベスト数値表示
                     this.t達成率文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 501, string.Format( "{0,6:##0.00}" + "%", this.dbグラフ値自己ベスト ) );
@@ -197,32 +197,32 @@ namespace DTXMania
                     //ゲージ本体
                     int nGaugeSize = (int)( 434.0f * (float)this.dbグラフ値現在 / 100.0f );
                     int nPosY = this.nGraphUsePart == 0 ? 527 - nGaugeSize : 587 - nGaugeSize;
-                    this.txグラフ_ゲージ.n透明度 = 255;
-                    this.txグラフ_ゲージ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45, nPosY, new Rectangle( 2, 2, 30, nGaugeSize ) );
+                    this.txグラフ_ゲージ.nTransparency = 255;
+                    this.txグラフ_ゲージ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45, nPosY, new Rectangle( 2, 2, 30, nGaugeSize ) );
                     
                     //ゲージ比較
                     int nTargetGaugeSize = (int)( 434.0f * ( (float)this.dbグラフ値目標 / 100.0f ) );
                     int nTargetGaugePosY = this.nGraphUsePart == 0 ? 527 - nTargetGaugeSize : 587 - nTargetGaugeSize;
                     int nTargetGaugeRectX = this.dbグラフ値現在 > this.dbグラフ値目標 ? 38 : 74;
-                    this.txグラフ_ゲージ.n透明度 = 255;
-                    this.txグラフ_ゲージ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nTargetGaugePosY, new Rectangle( nTargetGaugeRectX, 2, 30, nTargetGaugeSize ) );
+                    this.txグラフ_ゲージ.nTransparency = 255;
+                    this.txグラフ_ゲージ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nTargetGaugePosY, new Rectangle( nTargetGaugeRectX, 2, 30, nTargetGaugeSize ) );
                     if( this.txグラフ != null )
                     {
                         //ターゲット達成率数値
 
                         //ターゲット名
                         //現在
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45, nGraphBG_YPos + 357, new Rectangle( 260, 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45, nGraphBG_YPos + 357, new Rectangle( 260, 2, 30, 120 ) );
                         //比較対象
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75, nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
 
                         //以下使用予定
                         //最終プレイ
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 106, nGraphBG_YPos + 357, new Rectangle( 260 + 60, 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 106, nGraphBG_YPos + 357, new Rectangle( 260 + 60, 2, 30, 120 ) );
                         //自己ベスト
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 357, new Rectangle( 260 + 90, 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 357, new Rectangle( 260 + 90, 2, 30, 120 ) );
                         //最高スコア
-                        this.txグラフ.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 164, nGraphBG_YPos + 357, new Rectangle( 260 + 120, 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 164, nGraphBG_YPos + 357, new Rectangle( 260 + 120, 2, 30, 120 ) );
                     }
                     this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 44, nPosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値現在 ) ) );
                     this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 74, nTargetGaugePosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値目標 ) ) );
@@ -306,8 +306,8 @@ namespace DTXMania
 						Rectangle rectangle = new Rectangle( 260 + this.st比較数字位置[ i ].pt.X, 162, RectX, 10 );
 						if( this.txグラフ != null )
 						{
-                            this.txグラフ.n透明度 = 255;
-							this.txグラフ.t2D描画( CDTXMania.app.Device, x, y, rectangle );
+                            this.txグラフ.nTransparency = 255;
+							this.txグラフ.tDraw2D( CDTXMania.app.Device, x, y, rectangle );
 						}
 						break;
 					}
@@ -329,8 +329,8 @@ namespace DTXMania
 						Rectangle rectangle = new Rectangle( 260 + this.st達成率数字位置[ i ].pt.X, 128, RectX, 28 );
 						if( this.txグラフ != null )
 						{
-                            this.txグラフ.n透明度 = 255;
-							this.txグラフ.t2D描画( CDTXMania.app.Device, x, y, rectangle );
+                            this.txグラフ.nTransparency = 255;
+							this.txグラフ.tDraw2D( CDTXMania.app.Device, x, y, rectangle );
 						}
 						break;
 					}
@@ -415,7 +415,7 @@ namespace DTXMania
                 this.txグラフ値自己ベストライン = new CTexture( CDTXMania.app.Device, canvas, CDTXMania.TextureFormat, false );
             }
             if( this.txグラフ値自己ベストライン != null )
-                this.txグラフ値自己ベストライン.t2D描画( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos );
+                this.txグラフ値自己ベストライン.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos );
         }
 		//-----------------
 		#endregion

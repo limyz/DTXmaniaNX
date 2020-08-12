@@ -288,12 +288,12 @@ namespace DTXMania
 
 				if ( this.txパネル本体 != null )
 				{
-					this.txパネル本体.t2D描画( CDTXMania.app.Device, 486, 320 );
+					this.txパネル本体.tDraw2D( CDTXMania.app.Device, 486, 320 );
 				}
 				if ( this.tx文字列パネル != null )
 				{
 					int x = ( nCurrentTarget == (int) E楽器パート.DRUMS ) ? 486 : 100;
-					this.tx文字列パネル.t2D描画( CDTXMania.app.Device, x + 20, 330 );
+					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 20, 330 );
 				}
             }
         }
@@ -589,40 +589,40 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.ft表示用フォント = new Font("Arial", 26f, FontStyle.Bold, GraphicsUnit.Pixel);
-            base.On活性化();
+            base.OnActivate();
             this.bGotoDetailConfig = false;
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             if (this.ft表示用フォント != null)
             {
                 this.ft表示用フォント.Dispose();
                 this.ft表示用フォント = null;
             }
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 string pathパネル本体 = CSkin.Path(@"Graphics\ScreenSelect popup auto settings.png");
                 if (File.Exists(pathパネル本体))
                 {
                     this.txパネル本体 = CDTXMania.tテクスチャの生成(pathパネル本体, false);
                 }
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放(ref this.txパネル本体);
                 CDTXMania.tテクスチャの解放(ref this.tx文字列パネル);
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
 

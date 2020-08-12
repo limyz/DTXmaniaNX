@@ -91,7 +91,7 @@ namespace DTXMania
 				this.stレーンサイズ[ i ].x = sizeXW[ i, 0 ];
 				this.stレーンサイズ[ i ].w = sizeXW[ i, 1 ];
 			}
-			base.b活性化してない = true; 
+			base.bNotActivated = true; 
 		}
 
 
@@ -99,7 +99,7 @@ namespace DTXMania
 
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 int index = 0;
                 #region[ 座標など定義 ]
@@ -143,7 +143,7 @@ namespace DTXMania
                             base.st状態[i].fY方向拡大率 = 1.0f;
                             base.st状態[i].n相対X座標 = 0;
                             base.st状態[i].n相対Y座標 = 0;
-                            base.st状態[i].n透明度 = 0;
+                            base.st状態[i].nTransparency = 0;
                             */
 
                             //base.st状態[i].judge = E判定.Perfect;
@@ -1374,33 +1374,33 @@ namespace DTXMania
                                 {
                                     if (base.st状態[j].judge == E判定.Perfect)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                     if (base.st状態[j].judge == E判定.Great)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                     if (base.st状態[j].judge == E判定.Good)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                     if (base.st状態[j].judge == E判定.Poor)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                     if (base.st状態[j].judge == E判定.Miss)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                     if (base.st状態[j].judge == E判定.Auto)
                                     {
-                                        //base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                 }
                                 else if (base.tx判定文字列[num4] != null)
@@ -1408,9 +1408,9 @@ namespace DTXMania
                                     x = xc - ((int)((64f * base.st状態[j].fX方向拡大率)));
                                     y = (num6 + base.st状態[j].n相対Y座標) - ((int)(((43f * base.st状態[j].fY方向拡大率)) / 2.0));
 
-                                    base.tx判定文字列[num4].n透明度 = base.st状態[j].n透明度;
+                                    base.tx判定文字列[num4].nTransparency = base.st状態[j].n透明度;
                                     base.tx判定文字列[num4].vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率, base.st状態[j].fY方向拡大率, 1f);
-                                    base.tx判定文字列[num4].t2D描画(CDTXMania.app.Device, x, y, base.st判定文字列[(int)base.st状態[j].judge].rc);
+                                    base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, base.st判定文字列[(int)base.st状態[j].judge].rc);
                                 }
 
 
@@ -1431,7 +1431,7 @@ namespace DTXMania
                                         {
                                             int p = (strDispLag[i] == '-') ? 11 : (int)(strDispLag[i] - '0');	//int.Parse(strDispLag[i]);
                                             p += minus ? 0 : 12;		// change color if it is minus value
-                                            base.txlag数値.t2D描画(CDTXMania.app.Device, x + offsetX, y + 34, base.stLag数値[p].rc);
+                                            base.txlag数値.tDraw2D(CDTXMania.app.Device, x + offsetX, y + 34, base.stLag数値[p].rc);
                                             offsetX += 15;
                                         }
                                     }
@@ -1495,60 +1495,60 @@ namespace DTXMania
                                 {
 
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime_2.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率_棒, base.st状態[j].fY方向拡大率_棒, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.fZ軸中心回転 = base.st状態[j].fZ軸回転度_棒;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.t2D描画(CDTXMania.app.Device, x_棒, y_棒, new Rectangle(0, 110, 210, 20));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.fZAxisRotation = base.st状態[j].fZ軸回転度_棒;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.tDraw2D(CDTXMania.app.Device, x_棒, y_棒, new Rectangle(0, 110, 210, 20));
 
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率, base.st状態[j].fY方向拡大率, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = 255;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, 0, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = 255;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, 0, nRectX, nRectY));
 
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime_3.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率B, base.st状態[j].fY方向拡大率B, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.n透明度 = base.st状態[j].n透明度B;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.nTransparency = base.st状態[j].n透明度B;
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime_3.b加算合成 = true;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, 0, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_3.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, 0, nRectX, nRectY));
 
 
                                 }
                                 if (base.st状態[j].judge == E判定.Great)
                                 {
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime_2.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率_棒, base.st状態[j].fY方向拡大率_棒, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.fZ軸中心回転 = base.st状態[j].fZ軸回転度_棒;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.t2D描画(CDTXMania.app.Device, x_棒, y_棒, new Rectangle(0, 130, 210, 20));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.fZAxisRotation = base.st状態[j].fZ軸回転度_棒;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime_2.tDraw2D(CDTXMania.app.Device, x_棒, y_棒, new Rectangle(0, 130, 210, 20));
 
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率, base.st状態[j].fY方向拡大率, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = 255;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX + 5, 0, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = 255;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX + 5, 0, nRectX, nRectY));
                                 }
                                 if (base.st状態[j].judge == E判定.Good)
                                 {
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率, base.st状態[j].fY方向拡大率, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = 0;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = 255;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY + 2, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = 0;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = 255;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY + 2, nRectX, nRectY));
                                 }
                                 if (base.st状態[j].judge == E判定.Poor)
                                 {
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(1f, 1f, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = base.st状態[j].n透明度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(nRectX + 5, nRectY + 2, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = base.st状態[j].n透明度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX + 5, nRectY + 2, nRectX, nRectY));
                                 }
                                 if (base.st状態[j].judge == E判定.Miss)
                                 {
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(1f, 1f, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = base.st状態[j].n透明度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * 2 + 4, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = base.st状態[j].n透明度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * 2 + 4, nRectX, nRectY));
                                 }
                                 if (base.st状態[j].judge == E判定.Auto)
                                 {
                                     CDTXMania.stage演奏ギター画面.tx判定画像anime.vc拡大縮小倍率 = new Vector3(base.st状態[j].fX方向拡大率, base.st状態[j].fY方向拡大率, 1f);
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZ軸中心回転 = base.st状態[j].fZ軸回転度;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.n透明度 = 255;
-                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.t2D描画(CDTXMania.app.Device, x + 5, y, new Rectangle(nRectX * 2 + 3, nRectY * 2 + 4, nRectX, nRectY));
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.fZAxisRotation = base.st状態[j].fZ軸回転度;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.nTransparency = 255;
+                                    CDTXMania.stage演奏ギター画面.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x + 5, y, new Rectangle(nRectX * 2 + 3, nRectY * 2 + 4, nRectX, nRectY));
                                 }
 
 
@@ -1570,7 +1570,7 @@ namespace DTXMania
                                         {
                                             int p = (strDispLag[i] == '-') ? 11 : (int)(strDispLag[i] - '0');	//int.Parse(strDispLag[i]);
                                             p += minus ? 0 : 12;		// change color if it is minus value
-                                            base.txlag数値.t2D描画(CDTXMania.app.Device, x + offsetX, y + 34, base.stLag数値[p].rc);
+                                            base.txlag数値.tDraw2D(CDTXMania.app.Device, x + offsetX, y + 34, base.stLag数値[p].rc);
                                             offsetX += 15;
                                         }
                                     }

@@ -7,71 +7,71 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace DTXMania
 {
     [Serializable]
-    internal class Cスコア
+    internal class CScore
     {
         // プロパティ
 
-        public STScoreIni情報 ScoreIni情報;
+        public STScoreIniInformation ScoreIniInformation;
         [Serializable]
         [StructLayout(LayoutKind.Sequential)]
-        public struct STScoreIni情報
+        public struct STScoreIniInformation
         {
-            public DateTime 最終更新日時;
+            public DateTime LastModified;
             public long ファイルサイズ;
 
-            public STScoreIni情報(DateTime 最終更新日時, long ファイルサイズ)
+            public STScoreIniInformation(DateTime 最終更新日時, long ファイルサイズ)
             {
-                this.最終更新日時 = 最終更新日時;
+                this.LastModified = 最終更新日時;
                 this.ファイルサイズ = ファイルサイズ;
             }
         }
 
-        public STファイル情報 ファイル情報;
+        public STFileInformation FileInformation;
         [Serializable]
         [StructLayout(LayoutKind.Sequential)]
-        public struct STファイル情報
+        public struct STFileInformation
         {
-            public string ファイルの絶対パス;
-            public string フォルダの絶対パス;
-            public DateTime 最終更新日時;
-            public long ファイルサイズ;
+            public string AbsoluteFilePath;
+            public string AbsoluteFolderPath;
+            public DateTime LastModified;
+            public long FileSize;
 
-            public STファイル情報(string ファイルの絶対パス, string フォルダの絶対パス, DateTime 最終更新日時, long ファイルサイズ)
+            public STFileInformation(string AbsoluteFilePath, string AbsoluteFolderPath, DateTime LastModified, long FileSize)
             {
-                this.ファイルの絶対パス = ファイルの絶対パス;
-                this.フォルダの絶対パス = フォルダの絶対パス;
-                this.最終更新日時 = 最終更新日時;
-                this.ファイルサイズ = ファイルサイズ;
+                this.AbsoluteFilePath = AbsoluteFilePath;
+                this.AbsoluteFolderPath = AbsoluteFolderPath;
+                this.LastModified = LastModified;
+                this.FileSize = FileSize;
             }
         }
 
-        public ST譜面情報 譜面情報;
+        public STMusicInformation SongInformation;
         [Serializable]
         [StructLayout(LayoutKind.Sequential)]
-        public struct ST譜面情報
+        public struct STMusicInformation
         {
-            public string タイトル;
-            public string アーティスト名;
-            public string コメント;
-            public string ジャンル;
+            public string Title;
+            public string ArtistName;
+            public string Comment;
+            public string Genre;
             public string Preimage;
             public string Premovie;
             public string Presound;
             public string Backgound;
-            public STDGBVALUE<int> レベル;
-            public STDGBVALUE<int> レベルDec;
-            public STRANK 最大ランク;
-            public STSKILL 最大スキル;
-            public STSKILL 最大曲別スキル;
-            public STDGBVALUE<bool> フルコンボ;
-            public STDGBVALUE<int> 演奏回数;
-            public STHISTORY 演奏履歴;
-            public bool レベルを非表示にする;
-            public CDTX.E種別 曲種別;
+            public STDGBVALUE<int> Level;
+            public STDGBVALUE<int> LevelDec;
+            public STRANK BestRank;
+            public STSKILL HighSkill;
+            public STSKILL HighSongSkill;
+            public STDGBVALUE<bool> FullCombo;
+            public STDGBVALUE<int> NbPerformances;
+            public STHISTORY PerformanceHistory;
+            public bool bHiddenLevel;
+            public CDTX.EType SongType;
             public double Bpm;
             public int Duration;
             public STDGBVALUE<bool> b完全にCLASSIC譜面である;
-            public STDGBVALUE<bool> b譜面がある;
+            public STDGBVALUE<bool> bScoreExists;
 
             [Serializable]
             [StructLayout(LayoutKind.Sequential)]
@@ -233,58 +233,58 @@ namespace DTXMania
             }
         }
 
-        public bool bSongDBにキャッシュがあった;
+        public bool bHadACacheInSongDB;
         public bool bスコアが有効である
         {
             get
             {
-                return (((this.譜面情報.レベル[0] + this.譜面情報.レベル[1]) + this.譜面情報.レベル[2]) != 0);
+                return (((this.SongInformation.Level[0] + this.SongInformation.Level[1]) + this.SongInformation.Level[2]) != 0);
             }
         }
 
 
-        // コンストラクタ
+        // Constructor
 
-        public Cスコア()
+        public CScore()
         {
-            this.ScoreIni情報 = new STScoreIni情報(DateTime.MinValue, 0L);
-            this.bSongDBにキャッシュがあった = false;
-            this.ファイル情報 = new STファイル情報("", "", DateTime.MinValue, 0L);
-            this.譜面情報 = new ST譜面情報();
-            this.譜面情報.タイトル = "";
-            this.譜面情報.アーティスト名 = "";
-            this.譜面情報.コメント = "";
-            this.譜面情報.ジャンル = "";
-            this.譜面情報.Preimage = "";
-            this.譜面情報.Premovie = "";
-            this.譜面情報.Presound = "";
-            this.譜面情報.Backgound = "";
-            this.譜面情報.レベル = new STDGBVALUE<int>();
-            this.譜面情報.レベルDec = new STDGBVALUE<int>();
-            this.譜面情報.最大ランク = new ST譜面情報.STRANK();
-            this.譜面情報.最大ランク.Drums = (int)CScoreIni.ERANK.UNKNOWN;
-            this.譜面情報.最大ランク.Guitar = (int)CScoreIni.ERANK.UNKNOWN;
-            this.譜面情報.最大ランク.Bass = (int)CScoreIni.ERANK.UNKNOWN;
-            this.譜面情報.フルコンボ = new STDGBVALUE<bool>();
-            this.譜面情報.演奏回数 = new STDGBVALUE<int>();
-            this.譜面情報.演奏履歴 = new ST譜面情報.STHISTORY();
-            this.譜面情報.演奏履歴.行1 = "";
-            this.譜面情報.演奏履歴.行2 = "";
-            this.譜面情報.演奏履歴.行3 = "";
-            this.譜面情報.演奏履歴.行4 = "";
-            this.譜面情報.演奏履歴.行5 = "";
-            this.譜面情報.レベルを非表示にする = false;
-            this.譜面情報.最大スキル = new ST譜面情報.STSKILL();
-            this.譜面情報.最大曲別スキル = new ST譜面情報.STSKILL();
-            this.譜面情報.曲種別 = CDTX.E種別.DTX;
-            this.譜面情報.Bpm = 120.0;
-            this.譜面情報.Duration = 0;
-            this.譜面情報.b完全にCLASSIC譜面である.Drums = false;
-            this.譜面情報.b完全にCLASSIC譜面である.Guitar = false;
-            this.譜面情報.b完全にCLASSIC譜面である.Bass = false;
-            this.譜面情報.b譜面がある.Drums = false;
-            this.譜面情報.b譜面がある.Guitar = false;
-            this.譜面情報.b譜面がある.Bass = false;
+            this.ScoreIniInformation = new STScoreIniInformation(DateTime.MinValue, 0L);
+            this.bHadACacheInSongDB = false;
+            this.FileInformation = new STFileInformation("", "", DateTime.MinValue, 0L);
+            this.SongInformation = new STMusicInformation();
+            this.SongInformation.Title = "";
+            this.SongInformation.ArtistName = "";
+            this.SongInformation.Comment = "";
+            this.SongInformation.Genre = "";
+            this.SongInformation.Preimage = "";
+            this.SongInformation.Premovie = "";
+            this.SongInformation.Presound = "";
+            this.SongInformation.Backgound = "";
+            this.SongInformation.Level = new STDGBVALUE<int>();
+            this.SongInformation.LevelDec = new STDGBVALUE<int>();
+            this.SongInformation.BestRank = new STMusicInformation.STRANK();
+            this.SongInformation.BestRank.Drums = (int)CScoreIni.ERANK.UNKNOWN;
+            this.SongInformation.BestRank.Guitar = (int)CScoreIni.ERANK.UNKNOWN;
+            this.SongInformation.BestRank.Bass = (int)CScoreIni.ERANK.UNKNOWN;
+            this.SongInformation.FullCombo = new STDGBVALUE<bool>();
+            this.SongInformation.NbPerformances = new STDGBVALUE<int>();
+            this.SongInformation.PerformanceHistory = new STMusicInformation.STHISTORY();
+            this.SongInformation.PerformanceHistory.行1 = "";
+            this.SongInformation.PerformanceHistory.行2 = "";
+            this.SongInformation.PerformanceHistory.行3 = "";
+            this.SongInformation.PerformanceHistory.行4 = "";
+            this.SongInformation.PerformanceHistory.行5 = "";
+            this.SongInformation.bHiddenLevel = false;
+            this.SongInformation.HighSkill = new STMusicInformation.STSKILL();
+            this.SongInformation.HighSongSkill = new STMusicInformation.STSKILL();
+            this.SongInformation.SongType = CDTX.EType.DTX;
+            this.SongInformation.Bpm = 120.0;
+            this.SongInformation.Duration = 0;
+            this.SongInformation.b完全にCLASSIC譜面である.Drums = false;
+            this.SongInformation.b完全にCLASSIC譜面である.Guitar = false;
+            this.SongInformation.b完全にCLASSIC譜面である.Bass = false;
+            this.SongInformation.bScoreExists.Drums = false;
+            this.SongInformation.bScoreExists.Guitar = false;
+            this.SongInformation.bScoreExists.Bass = false;
         }
     }
 }

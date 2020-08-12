@@ -11,17 +11,17 @@ namespace DTXMania
     {
         // CActivity 実装（共通クラスからの差分のみ）
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.n本体X[0] = 40;
             this.n本体Y = 13;
 
-            base.On活性化();
+            base.OnActivate();
         }
 
         public override unsafe int On進行描画()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 if (base.b初めての進行描画)
                 {
@@ -57,12 +57,12 @@ namespace DTXMania
                     }
                     if( base.txScore != null )
                     {
-                        base.txScore.t2D描画(CDTXMania.app.Device, this.n本体X[0] + (i * 34), 28 + this.n本体Y, rectangle);
+                        base.txScore.tDraw2D(CDTXMania.app.Device, this.n本体X[0] + (i * 34), 28 + this.n本体Y, rectangle);
                     }
                 }
                 if( base.txScore != null )
                 {
-                    base.txScore.t2D描画(CDTXMania.app.Device, this.n本体X[0], this.n本体Y, new Rectangle(0, 50, 86, 28));
+                    base.txScore.tDraw2D(CDTXMania.app.Device, this.n本体X[0], this.n本体Y, new Rectangle(0, 50, 86, 28));
                 }
             }
             return 0;

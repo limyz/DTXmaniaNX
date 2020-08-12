@@ -23,7 +23,7 @@ namespace DTXMania
 
 		public CAct演奏スコア共通()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
@@ -118,7 +118,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.n進行用タイマ = -1;
 			for( int i = 0; i < 3; i++ )
@@ -127,22 +127,22 @@ namespace DTXMania
 				this.n現在の本当のスコア[ i ] = 0L;
 				this.nスコアの増分[ i ] = 0L;
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.txScore = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_score numbersGD.png"));
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txScore );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 	}

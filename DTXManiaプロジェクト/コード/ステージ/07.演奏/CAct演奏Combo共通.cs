@@ -212,7 +212,7 @@ namespace DTXMania
 
         public CAct演奏Combo共通()
         {
-            this.b活性化してない = true;
+            this.bNotActivated = true;
 
             // 180度分のジャンプY座標差分を取得。(0度: 0 → 90度:-15 → 180度: 0)
             for (int i = 0; i < 180; i++)
@@ -322,7 +322,7 @@ namespace DTXMania
                     //-----------------
                     #endregion
 
-                    this.txCOMBOドラム.t2D描画(CDTXMania.app.Device, nコンボx, nコンボy + y動作差分, new Rectangle(0, 320, 250, 60));
+                    this.txCOMBOドラム.tDraw2D(CDTXMania.app.Device, nコンボx, nコンボy + y動作差分, new Rectangle(0, 320, 250, 60));
                 }
 
             // COMBO値を1の位から順に表示。
@@ -368,7 +368,7 @@ namespace DTXMania
                 {
                     if( this.txCOMBOドラム != null )
                     {
-                        this.txCOMBOドラム.t2D描画(CDTXMania.app.Device, x, y + y動作差分,
+                        this.txCOMBOドラム.tDraw2D(CDTXMania.app.Device, x, y + y動作差分,
                             new Rectangle((n位の数[i] % 5) * nドラムコンボの幅, (n位の数[i] / 5) * nドラムコンボの高さ, nドラムコンボの幅, nドラムコンボの高さ));
                     }
                 }
@@ -381,7 +381,7 @@ namespace DTXMania
                     }
                     if( this.txCOMBOドラム1000 != null )
                     {
-                        this.txCOMBOドラム1000.t2D描画(CDTXMania.app.Device, x, y + y動作差分,
+                        this.txCOMBOドラム1000.tDraw2D(CDTXMania.app.Device, x, y + y動作差分,
                             new Rectangle((n位の数[i] % 5) * 96, (n位の数[i] / 5) * 128, 96, 128));
                     }
                 }
@@ -465,7 +465,7 @@ namespace DTXMania
             //-----------------
             int x = nコンボx - 100; // -((int)((nギターコンボのCOMBO文字の幅 * f拡大率) / 2.0f));
 
-                this.txCOMBOギター.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, 230, 200, 64));
+                this.txCOMBOギター.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, 230, 200, 64));
             //-----------------
             #endregion
 
@@ -490,7 +490,7 @@ namespace DTXMania
                 }
                 if (this.txCOMBOギター != null)
                 {
-                    this.txCOMBOギター.t2D描画(
+                    this.txCOMBOギター.tDraw2D(
                         CDTXMania.app.Device,
                         x - ((int)((nギターコンボの幅) / 2.0f)),
                         y,
@@ -567,7 +567,7 @@ namespace DTXMania
             //-----------------
             int x = nコンボx - 95; // -((int)((nギターコンボのCOMBO文字の幅 * f拡大率) / 2.0f));
 
-                this.txCOMBOギター.t2D描画(CDTXMania.app.Device, x, y, new Rectangle(0, 230, 200, 64));
+                this.txCOMBOギター.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, 230, 200, 64));
             //-----------------
             #endregion
 
@@ -596,7 +596,7 @@ namespace DTXMania
                 }
                 if (this.txCOMBOギター != null)
                 {
-                    this.txCOMBOギター.t2D描画(
+                    this.txCOMBOギター.tDraw2D(
                         CDTXMania.app.Device,
                         x - ((int)((nギターコンボの幅) / 2.0f)),
                         y,
@@ -610,7 +610,7 @@ namespace DTXMania
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.n現在のコンボ数 = new STCOMBO() { act = this };
             this.status = new CSTATUS();
@@ -636,18 +636,18 @@ namespace DTXMania
                 this.ctコンボアニメ_2P = new CCounter( 0.0, 130.0, 0.003, CSound管理.rc演奏用タイマ );
             }
 
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             if (this.status != null)
                 this.status = null;
 
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if( this.b活性化してない )
+            if( this.bNotActivated )
                 return;
 
             this.txCOMBOドラム = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums combo.png" ) );
@@ -656,11 +656,11 @@ namespace DTXMania
             if( this.txComboBom != null )
                 this.txComboBom.b加算合成 = true;
             this.txCOMBOギター = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayGuitar combo.png" ) );
-            base.OnManagedリソースの作成();
+            base.OnManagedCreateResources();
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if( this.b活性化してない )
+            if( this.bNotActivated )
                 return;
 
             CDTXMania.tテクスチャの解放( ref this.txCOMBOドラム );
@@ -668,11 +668,11 @@ namespace DTXMania
             CDTXMania.tテクスチャの解放( ref this.txCOMBOギター );
             CDTXMania.tテクスチャの解放( ref this.txComboBom );
 
-            base.OnManagedリソースの解放();
+            base.OnManagedReleaseResources();
         }
         public override int On進行描画()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return 0;
 
             for (int i = 2; i >= 0; i--)

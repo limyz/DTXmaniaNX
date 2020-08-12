@@ -12,10 +12,10 @@ namespace DTXMania
 
 		public CAct演奏Guitarスコア()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
-        public override void On活性化()
+        public override void OnActivate()
         {
 
             #region [ 本体位置 ]
@@ -41,14 +41,14 @@ namespace DTXMania
 
             #endregion
 
-            base.On活性化();
+            base.OnActivate();
         }
 
 		// CActivity 実装（共通クラスからの差分のみ）
 
 		public override unsafe int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -91,12 +91,12 @@ namespace DTXMania
                             }
                             if (base.txScore != null)
                             {
-                                base.txScore.t2D描画(CDTXMania.app.Device, n本体X[j] + (i * 34), 28 + this.n本体Y, rectangle);
+                                base.txScore.tDraw2D(CDTXMania.app.Device, n本体X[j] + (i * 34), 28 + this.n本体Y, rectangle);
                             }
                         }
                         if (base.txScore != null)
                         {
-                            base.txScore.t2D描画(CDTXMania.app.Device, this.n本体X[j], this.n本体Y, new Rectangle(0, 50, 86, 28));
+                            base.txScore.tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y, new Rectangle(0, 50, 86, 28));
                         }
                     }
                 }

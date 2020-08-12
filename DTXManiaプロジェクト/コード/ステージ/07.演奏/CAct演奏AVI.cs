@@ -20,7 +20,7 @@ namespace DTXMania
         {
             base.list子Activities.Add( this.actFill = new CAct演奏Drumsフィルインエフェクト() );
             base.list子Activities.Add( this.actPanel = new CAct演奏パネル文字列() );
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
 
@@ -67,7 +67,7 @@ namespace DTXMania
                             }
                             catch ( CTextureCreateFailedException e )
                             {
-                                Trace.TraceError( "CActAVI: OnManagedリソースの作成(): " + e.Message );
+                                Trace.TraceError( "CActAVI: OnManagedCreateResources(): " + e.Message );
                                 this.tx描画用 = null;
                             }
                         }
@@ -390,7 +390,7 @@ namespace DTXMania
 
 
         // CActivity 実装
-        public override void On活性化()
+        public override void OnActivate()
         {
             this.rAVI = null;
             this.dsBGV = null;
@@ -406,17 +406,17 @@ namespace DTXMania
             {
                 this.ds汎用 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\7_Movie.mp4"), CDTXMania.app.WindowHandle, true);
             }
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             if (this.dsBGV != null)
                 this.dsBGV.Dispose();
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 //this.txドラム = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Drums.png"));
                 if (CDTXMania.ConfigIni.bGuitar有効)
@@ -452,12 +452,12 @@ namespace DTXMania
                 //    this.txフィルインエフェクト[ fill ].vc拡大縮小倍率 = new Vector3( 2.0f, 2.0f, 1.0f );
                 //}
 
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 //特殊テクスチャ 3枚
                 if (this.tx描画用 != null)
@@ -489,7 +489,7 @@ namespace DTXMania
                 //{
                 //    CDTXMania.tテクスチャの解放( ref this.txフィルインエフェクト[ ar ] );
                 //}
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
         public unsafe int t進行描画(int x, int y)
@@ -510,9 +510,9 @@ namespace DTXMania
                     this.ds汎用.t再生開始();
                     this.ds汎用.t現時点における最新のスナップイメージをTextureに転写する(this.txDShow汎用);
                     if (this.ds汎用.b上下反転)
-                        this.txDShow汎用.t2D上下反転描画(CDTXMania.app.Device, 0, 0);
+                        this.txDShow汎用.tDraw2DUpsideDown(CDTXMania.app.Device, 0, 0);
                     else
-                        this.txDShow汎用.t2D描画(CDTXMania.app.Device, 0, 0);
+                        this.txDShow汎用.tDraw2D(CDTXMania.app.Device, 0, 0);
 
                     long l汎用位置;
                     long l汎用終了位置;
@@ -530,7 +530,7 @@ namespace DTXMania
                 #endregion
             }
             #region[ムービーのフレーム作成処理]
-            if ((!base.b活性化してない))
+            if ((!base.bNotActivated))
             {
                 if( ( ( this.tx描画用 != null )) && ( this.dsBGV != null || this.rAVI != null ) ) //クリップ無し曲での進入防止。
                 {
@@ -672,9 +672,9 @@ namespace DTXMania
                             if( this.bFullScreen )
                             {
                                 if( this.dsBGV.dshow.b上下反転 )
-                                    this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, this.position, y );
+                                    this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, this.position, y );
                                 else
-                                    this.tx描画用.t2D描画( CDTXMania.app.Device, x, y );
+                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, x, y );
                             }
                             #endregion
                         }
@@ -692,22 +692,22 @@ namespace DTXMania
                                 #region[ 動画の描画 ]
                                 if( fClipアスペクト比 > 1.77f )
                                 {
-                                    this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, this.position, 0 );
+                                    this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, this.position, 0 );
                                 }
                                 else
                                 {
                                     if( CDTXMania.ConfigIni.bDrums有効 )
                                     {
                                         this.tx描画用.vc拡大縮小倍率 = this.vclip;
-                                        //this.tx描画用.t2D描画( CDTXMania.app.Device, 882, 0 );
-                                        this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, 882, 0 );
+                                        //this.tx描画用.tDraw2D( CDTXMania.app.Device, 882, 0 );
+                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 882, 0 );
                                     }
                                     else if( CDTXMania.ConfigIni.bGuitar有効 )
                                     {
                                         this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
                                         this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f);
-                                        //this.tx描画用.t2D描画( CDTXMania.app.Device, this.PositionG, 0 );
-                                        this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, this.PositionG, 0);
+                                        //this.tx描画用.tDraw2D( CDTXMania.app.Device, this.PositionG, 0 );
+                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, this.PositionG, 0);
                                     }
                                 }
                                 #endregion
@@ -746,21 +746,21 @@ namespace DTXMania
                             #region[ 動画の描画 ]
                             if( fClipアスペクト比 > 1.77f )
                             {
-                                this.tx描画用.t2D描画( CDTXMania.app.Device, this.position, 0 );
-                                this.tx描画用.t2D描画( CDTXMania.app.Device, 0, this.position );
+                                this.tx描画用.tDraw2D( CDTXMania.app.Device, this.position, 0 );
+                                this.tx描画用.tDraw2D( CDTXMania.app.Device, 0, this.position );
                             }
                             else
                             {
                                 if( CDTXMania.ConfigIni.bDrums有効 )
                                 {
                                     this.tx描画用.vc拡大縮小倍率 = this.vclip;
-                                    this.tx描画用.t2D描画(CDTXMania.app.Device, 882, 0);
+                                    this.tx描画用.tDraw2D(CDTXMania.app.Device, 882, 0);
                                 }
                                 else if( CDTXMania.ConfigIni.bGuitar有効 )
                                 {
                                     this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
                                     this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f );
-                                    this.tx描画用.t2D描画( CDTXMania.app.Device, this.PositionG, 0 );
+                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, this.PositionG, 0 );
                                 }
                             }
                             #endregion
@@ -802,16 +802,16 @@ namespace DTXMania
                                 //this.txフィルインエフェクト.vc拡大縮小倍率.X = 2.0f;
                                 //this.txフィルインエフェクト.vc拡大縮小倍率.Y = 2.0f;
                                 //this.txフィルインエフェクト.b加算合成 = true;
-                                //this.txフィルインエフェクト.t2D描画(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
+                                //this.txフィルインエフェクト.tDraw2D(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
                                 if( CDTXMania.ConfigIni.bDrums有効 )
                                 {
                                     stageDrum.txボーナスエフェクト.vc拡大縮小倍率 = new Vector3( 2.0f, 2.0f, 1.0f );
                                     stageDrum.txボーナスエフェクト.b加算合成 = true;
-                                    stageDrum.txボーナスエフェクト.t2D描画( CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + ( 360 * numf ), 640, 360 )) ;
+                                    stageDrum.txボーナスエフェクト.tDraw2D( CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + ( 360 * numf ), 640, 360 )) ;
                                     try
                                     {
                                     //if( this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ] != null )
-                                    //    this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ].t2D描画( CDTXMania.app.Device, 0, 0 );
+                                    //    this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ].tDraw2D( CDTXMania.app.Device, 0, 0 );
                                     }
                                     catch( Exception ex )
                                     {
@@ -830,7 +830,7 @@ namespace DTXMania
                 {
                     this.vector = this.tx描画用.vc拡大縮小倍率;
                     this.tx描画用.vc拡大縮小倍率 = this.smallvc;
-                    this.tx描画用.n透明度 = 0xff;
+                    this.tx描画用.nTransparency = 0xff;
 
                     if( CDTXMania.ConfigIni.bDrums有効 )
                     {
@@ -851,7 +851,7 @@ namespace DTXMania
                                 this.position2 = 5 + this.n本体X + (int)( ( 260 - ( this.framewidth * this.ratio2 ) ) / 2f );
                             }
                             if( this.txクリップパネル != null )
-                                this.txクリップパネル.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y );
+                                this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
 
                             this.smallvc = new Vector3( this.ratio2, this.ratio2, 1f );
                             
@@ -861,9 +861,9 @@ namespace DTXMania
                                 {
                                     this.dsBGV.dshow.t現時点における最新のスナップイメージをTextureに転写する( this.tx描画用 );
                                     if( this.dsBGV.dshow.b上下反転 )
-                                        this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                     else if( this.dsBGV != null )
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                 }
                             }
                             else
@@ -871,9 +871,9 @@ namespace DTXMania
                                 if( this.n総移動時間ms != -1 && this.rAVI != null )
                                 {
                                     if( this.fClipアスペクト比 < 0.96f )
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, this.position2, 20 + this.n本体Y );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, this.position2, 20 + this.n本体Y );
                                     else
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                 }
                             }
                         }
@@ -895,7 +895,7 @@ namespace DTXMania
                                 this.position2 = 5 + this.n本体X + (int)((416f - (this.framewidth * this.ratio2)) / 2f);
                             }
                             if( this.txクリップパネル != null )
-                                this.txクリップパネル.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y ); 
+                                this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y ); 
                             this.smallvc = new Vector3( this.ratio2, this.ratio2, 1f );
                             this.tx描画用.vc拡大縮小倍率 = this.smallvc;
                             if( this.bUseMRenderer )
@@ -904,9 +904,9 @@ namespace DTXMania
                                 {
                                     this.dsBGV.dshow.t現時点における最新のスナップイメージをTextureに転写する( this.tx描画用 );
                                     if( this.dsBGV.dshow.b上下反転 )
-                                        this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                     else if( this.dsBGV != null )
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                 }
                             }
                             else
@@ -914,9 +914,9 @@ namespace DTXMania
                                 if( this.n総移動時間ms != -1 && this.rAVI != null )
                                 {
                                     if( this.fClipアスペクト比 < 1.77f )
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, this.position2, 30 + this.n本体Y );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, this.position2, 30 + this.n本体Y );
                                     else
-                                        this.tx描画用.t2D描画( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
+                                        this.tx描画用.tDraw2D( CDTXMania.app.Device, 5 + this.n本体X, this.position2 );
                                 }
                             }
                             #endregion
@@ -947,7 +947,7 @@ namespace DTXMania
                             this.position2 = 30 + this.n本体X + (int)( ( 460f - ( this.framewidth * this.ratio2 ) ) / 2f );
                         }
                         if( this.txクリップパネル != null )
-                            this.txクリップパネル.t2D描画( CDTXMania.app.Device, this.n本体X, this.n本体Y );
+                            this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
                         this.smallvc = new Vector3( this.ratio2, this.ratio2, 1f );
                         this.tx描画用.vc拡大縮小倍率 = this.smallvc;
                         if( this.bUseMRenderer )
@@ -956,9 +956,9 @@ namespace DTXMania
                             {
                                 this.dsBGV.dshow.t現時点における最新のスナップイメージをTextureに転写する( this.tx描画用 );
                                 if( this.dsBGV.dshow.b上下反転 )
-                                    this.tx描画用.t2D上下反転描画( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
+                                    this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
                                 else if( this.dsBGV != null )
-                                    this.tx描画用.t2D描画(CDTXMania.app.Device, 30 + this.n本体X, this.position2);
+                                    this.tx描画用.tDraw2D(CDTXMania.app.Device, 30 + this.n本体X, this.position2);
                             }
                         }
                         else
@@ -966,9 +966,9 @@ namespace DTXMania
                             if( this.rAVI != null )
                             {
                                 if( this.fClipアスペクト比 < 1.77f )
-                                    this.tx描画用.t2D描画( CDTXMania.app.Device, this.position2, 5 + this.n本体Y );
+                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, this.position2, 5 + this.n本体Y );
                                 else
-                                    this.tx描画用.t2D描画( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
+                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
                             }
                         }
                         #endregion

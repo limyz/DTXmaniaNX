@@ -50,7 +50,7 @@ namespace DTXMania
 				string newLine = Environment.NewLine;
 				bool flag = false;
 
-				#region [DLLの存在チェック]
+				#region [Check DLLs present]
 				if (!tDLLの存在チェック("SlimDX" + CDTXMania.SLIMDXDLL,
 					"SlimDX" + CDTXMania.SLIMDXDLL + ".dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"SlimDX" + CDTXMania.SLIMDXDLL + ".dll, or its depended DLL, is not found." + newLine + "Please download DTXMania again."

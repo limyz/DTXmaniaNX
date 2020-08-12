@@ -528,7 +528,7 @@ namespace DTXMania
 		}
 		public void t文字列描画( int x, int y, string str, bool b強調, float fScale )
 		{
-			if( !base.b活性化してない && !string.IsNullOrEmpty( str ) )
+			if( !base.bNotActivated && !string.IsNullOrEmpty( str ) )
 			{
 				CTexture texture = b強調 ? this.tx強調文字 : this.tx通常文字;
 				if( texture != null )
@@ -540,7 +540,7 @@ namespace DTXMania
 						{
 							if( st文字領域.ch == ch )
 							{
-								texture.t2D描画( CDTXMania.app.Device, x, y, st文字領域.rc );
+								texture.tDraw2D( CDTXMania.app.Device, x, y, st文字領域.rc );
 								x += (int) ( ( st文字領域.rc.Width - 5 ) * fScale );
 								break;
 							}
@@ -553,18 +553,18 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tx通常文字 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Screen font dfp.png" ), false );
 				this.tx強調文字 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Screen font dfp em.png" ), false );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( this.tx強調文字 != null )
 				{
@@ -576,7 +576,7 @@ namespace DTXMania
 					this.tx通常文字.Dispose();
 					this.tx通常文字 = null;
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		

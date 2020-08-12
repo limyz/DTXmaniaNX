@@ -14,7 +14,7 @@ namespace DTXMania
 
 		public CAct演奏BGA()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		
@@ -113,7 +113,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 8; i++ )
 			{
@@ -124,23 +124,23 @@ namespace DTXMania
 				stlayer.n移動開始時刻ms = -1;
 				this.stLayer[ i ] = stlayer;
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.txBGAバックパネル = new CTexture(CDTXMania.app.Device, 278, 355, CDTXMania.app.GraphicsDeviceManager.CurrentSettings.BackBufferFormat, Pool.Managed);
 				using( Surface surface = CDTXMania.app.Device.GetBackBuffer( 0, 0 ) )
 				{
 					this.sfBackBuffer = Surface.CreateOffscreenPlain( CDTXMania.app.Device, surface.Description.Width, surface.Description.Height, surface.Description.Format, Pool.SystemMemory );
 				}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 CDTXMania.tテクスチャの解放( ref this.txBGAバックパネル );
 				if( this.sfBackBuffer != null )
@@ -148,7 +148,7 @@ namespace DTXMania
 					this.sfBackBuffer.Dispose();
 					this.sfBackBuffer = null;
 				}
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
@@ -157,9 +157,9 @@ namespace DTXMania
 		}
 		public int t進行描画( int x, int y )
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
-                this.txBGAバックパネル.t2D描画(CDTXMania.app.Device, 980, 0);
+                this.txBGAバックパネル.tDraw2D(CDTXMania.app.Device, 980, 0);
 				for( int i = 0; i < 8; i++ )
 				{
 					if( ( ( this.stLayer[ i ].n移動開始時刻ms != -1 ) && ( ( this.stLayer[ i ].rBMP != null ) || ( this.stLayer[ i ].rBMPTEX != null ) ) ) && ( ( ( this.stLayer[ i ].rBMP == null ) || ( this.stLayer[ i ].rBMP.bUse && ( this.stLayer[ i ].rBMP.tx画像 != null ) ) ) && ( ( this.stLayer[ i ].rBMPTEX == null ) || ( this.stLayer[ i ].rBMPTEX.bUse && ( this.stLayer[ i ].rBMPTEX.tx画像 != null ) ) ) ) )
@@ -266,11 +266,11 @@ namespace DTXMania
 							{
 								if( ( this.stLayer[ i ].rBMP != null ) && ( this.stLayer[ i ].rBMP.tx画像 != null ) )
 								{
-									this.stLayer[ i ].rBMP.tx画像.t2D描画( CDTXMania.app.Device, x + rectangle2.X, y + rectangle2.Y, rectangle );
+									this.stLayer[ i ].rBMP.tx画像.tDraw2D( CDTXMania.app.Device, x + rectangle2.X, y + rectangle2.Y, rectangle );
 								}
 								else if( ( this.stLayer[ i ].rBMPTEX != null ) && ( this.stLayer[ i ].rBMPTEX.tx画像 != null ) )
 								{
-									this.stLayer[ i ].rBMPTEX.tx画像.t2D描画( CDTXMania.app.Device, x + rectangle2.X, y + rectangle2.Y, rectangle );
+									this.stLayer[ i ].rBMPTEX.tx画像.tDraw2D( CDTXMania.app.Device, x + rectangle2.X, y + rectangle2.Y, rectangle );
 								}
 							}
 						}

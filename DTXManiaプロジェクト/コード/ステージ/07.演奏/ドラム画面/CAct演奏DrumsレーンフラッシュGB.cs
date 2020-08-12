@@ -12,7 +12,7 @@ namespace DTXMania
 
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				for( int i = 0; i < 6; i++ )
 				{
@@ -27,7 +27,7 @@ namespace DTXMania
 							int y = ( ( i < 3 ) ? 0x39 : 0x39 ) + ( j * 0x76 );
 							if( texture != null )
 							{
-								texture.t2D描画( CDTXMania.app.Device, x, y, new Rectangle( j * 0x20, 0, ( 0x18 * ( 100 - base.ct進行[ i ].n現在の値 ) ) / 100, 0x76 ) );
+								texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( j * 0x20, 0, ( 0x18 * ( 100 - base.ct進行[ i ].n現在の値 ) ) / 100, 0x76 ) );
 							}
 						}
 						base.ct進行[ i ].t進行();

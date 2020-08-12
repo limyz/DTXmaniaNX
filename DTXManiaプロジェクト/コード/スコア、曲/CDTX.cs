@@ -17,7 +17,7 @@ namespace DTXMania
 	{
 		// 定数
 
-		public enum E種別 { DTX, GDA, G2D, BMS, BME, SMF }
+		public enum EType { DTX, GDA, G2D, BMS, BME, SMF }
 		public enum Eレーンビットパターン
 		{
 			OPEN = 0,
@@ -173,7 +173,7 @@ namespace DTXMania
 
 				try
 				{
-                    this.dshow = new FDK.CDirectShow( CDTXMania.stage選曲.r確定されたスコア.ファイル情報.フォルダの絶対パス + this.strファイル名, CDTXMania.app.WindowHandle, true);
+                    this.dshow = new FDK.CDirectShow( CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFolderPath + this.strファイル名, CDTXMania.app.WindowHandle, true);
 					Trace.TraceInformation( "DirectShowを生成しました。({0})({1})({2}byte)", this.strコメント文, str動画ファイル名, this.dshow.nデータサイズbyte );
                     CDTXMania.app.b汎用ムービーである = false;
 				}
@@ -1328,7 +1328,7 @@ namespace DTXMania
 		public STチップがある bチップがある;
 		public string COMMENT;
 		public double db再生速度;
-		public E種別 e種別;
+		public EType e種別;
 		public string GENRE;
 		public bool HIDDENLEVEL;
 		public STDGBVALUE<int> LEVEL;
@@ -1484,25 +1484,25 @@ namespace DTXMania
 		public CDTX( string str全入力文字列 )
 			: this()
 		{
-			this.On活性化();
+			this.OnActivate();
 			this.t入力_全入力文字列から( str全入力文字列 );
 		}
 		public CDTX( string strファイル名, bool bヘッダのみ )
 			: this()
 		{
-			this.On活性化();
+			this.OnActivate();
 			this.t入力( strファイル名, bヘッダのみ );
 		}
 		public CDTX( string str全入力文字列, double db再生速度, int nBGMAdjust )
 			: this()
 		{
-			this.On活性化();
+			this.OnActivate();
 			this.t入力_全入力文字列から( str全入力文字列, db再生速度, nBGMAdjust );
 		}
 		public CDTX( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 			: this()
 		{
-			this.On活性化();
+			this.OnActivate();
 			this.t入力( strファイル名, bヘッダのみ, db再生速度, nBGMAdjust );
 		}
 
@@ -3290,7 +3290,7 @@ namespace DTXMania
 		public void t入力( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 		{
 			this.bヘッダのみ = bヘッダのみ;
-            this.b動画読み込み = (CDTXMania.r現在のステージ.eステージID == CStage.Eステージ.曲読み込み ? true : false);
+            this.b動画読み込み = (CDTXMania.rCurrentStage.eステージID == CStage.Eステージ.曲読み込み ? true : false);
 			this.strファイル名の絶対パス = Path.GetFullPath( strファイル名 );
 			this.strファイル名 = Path.GetFileName( this.strファイル名の絶対パス );
 			this.strフォルダ名 = Path.GetDirectoryName( this.strファイル名の絶対パス ) + @"\";
@@ -3301,31 +3301,31 @@ namespace DTXMania
 				{
 					if ( ext == ".gda" )
 					{
-						this.e種別 = E種別.GDA;
+						this.e種別 = EType.GDA;
 					}
 					else if ( ext == ".g2d" )
 					{
-						this.e種別 = E種別.G2D;
+						this.e種別 = EType.G2D;
 					}
 					else if ( ext == ".bms" )
 					{
-						this.e種別 = E種別.BMS;
+						this.e種別 = EType.BMS;
 					}
 					else if ( ext == ".bme" )
 					{
-						this.e種別 = E種別.BME;
+						this.e種別 = EType.BME;
 					}
 					else if ( ext == ".mid" )
 					{
-						this.e種別 = E種別.SMF;
+						this.e種別 = EType.SMF;
 					}
 				}
 				else
 				{
-					this.e種別 = E種別.DTX;
+					this.e種別 = EType.DTX;
 				}
 			}
-			if ( this.e種別 != E種別.SMF )
+			if ( this.e種別 != EType.SMF )
 			{
 				try
 				{
@@ -3566,7 +3566,7 @@ namespace DTXMania
 									}
 									nChipNo_C1++;
 								}
-								if ( ( this.e種別 == E種別.BMS ) || ( this.e種別 == E種別.BME ) )
+								if ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) )
 								{
 									barlength = 1.0;
 								}
@@ -3650,7 +3650,7 @@ namespace DTXMania
 						foreach ( CChip chip in this.listChip )
 						{
 							chip.n発声時刻ms = ms + ( (int) ( ( ( 0x271 * ( chip.n発声位置 - n発声位置 ) ) * dbBarLength ) / bpm ) );
-							if ( ( ( this.e種別 == E種別.BMS ) || ( this.e種別 == E種別.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.n発声位置 / 384 ) != nBar ) ) )
+							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.n発声位置 / 384 ) != nBar ) ) )
 							{
 								n発声位置 = chip.n発声位置;
 								ms = chip.n発声時刻ms;
@@ -4230,7 +4230,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.listWAV = new Dictionary<int, CWAV>();
 			this.listBMP = new Dictionary<int, CBMP>();
@@ -4242,9 +4242,9 @@ namespace DTXMania
 			this.listAVI = new Dictionary<int, CAVI>();
             this.listDS = new Dictionary<int, CDirectShow>();
 			this.listChip = new List<CChip>();
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			if( this.listWAV != null )
 			{
@@ -4310,20 +4310,20 @@ namespace DTXMania
 			{
 				this.listChip.Clear();
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tBMP_BMPTEXの読み込み();
 				this.tAVIの読み込み();
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( this.listBMP != null )
 				{
@@ -4353,7 +4353,7 @@ namespace DTXMania
                         cds.Dispose();
                     }
                 }
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 
@@ -6412,7 +6412,7 @@ namespace DTXMania
 
 			// ファイルフォーマットによって処理が異なる。
 
-			if( this.e種別 == E種別.GDA || this.e種別 == E種別.G2D )
+			if( this.e種別 == EType.GDA || this.e種別 == EType.G2D )
 			{
 				#region [ (A) GDA, G2D の場合：チャンネル文字列をDTXのチャンネル番号へ置き換える。]
 				//-----------------

@@ -160,10 +160,10 @@ namespace DTXMania
             st難易度文字位置Ar[10] = st難易度文字位置11;
             this.st難易度数字位置 = st難易度文字位置Ar;
 
-            base.b活性化してない = true;
+            base.bNotActivated = true;
         }
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             #region [ 本体位置 ]
             this.n本体X[0] = 0;
@@ -219,9 +219,9 @@ namespace DTXMania
             this.txPercent = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
             this.txSkillMax = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
 
-            base.On活性化();
+            base.OnActivate();
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
             if (this.ft称号フォント != null)
             {
@@ -238,11 +238,11 @@ namespace DTXMania
             //Free new texture
             CDTXMania.tテクスチャの解放(ref this.txPercent);
             CDTXMania.tテクスチャの解放(ref this.txSkillMax);
-            base.On非活性化();
+            base.OnDeactivate();
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 this.txネームプレート用文字 = new CTexture[ 2 ];
                 this.strPlayerName[ 0 ] = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 1 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 1 ];
@@ -352,22 +352,22 @@ namespace DTXMania
                 }
                 this.prv表示用フォント.Dispose();
 
-                base.OnManagedリソースの作成();
+                base.OnManagedCreateResources();
             }
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字[ 0 ] );
                 CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字[ 1 ] );
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
             }
         }
 
         public override int On進行描画()
         {
-            if (!base.b活性化してない)
+            if (!base.bNotActivated)
             {
                 double dbPERFECT率 = 0;
                 double dbGREAT率 = 0;
@@ -391,8 +391,8 @@ namespace DTXMania
                             bCLASSIC = true;
                         }
 
-                        this.txスキルパネル.t2D描画( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
-                        this.txネームプレート用文字[ i - 1 ].t2D描画( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
+                        this.txスキルパネル.tDraw2D( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
+                        this.txネームプレート用文字[ i - 1 ].tDraw2D( CDTXMania.app.Device, this.n本体X[ i ], this.n本体Y );
 
                         this.t小文字表示( 80 + this.n本体X[ i ], 72 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数_Auto含まない[ i ].Perfect ) );
                         this.t小文字表示( 80 + this.n本体X[ i ], 102 + this.n本体Y, string.Format( "{0,4:###0}", CDTXMania.stage演奏ギター画面.nヒット数_Auto含まない[ i ].Great ) );
@@ -438,13 +438,13 @@ namespace DTXMania
                         //this.t大文字表示(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stage演奏ギター画面.actStatusPanels.db現在の達成率.Guitar ) );
                         if (this.txSkillMax != null && CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Guitar >= 100.0)
                         {
-                            this.txSkillMax.t2D描画(CDTXMania.app.Device, 127 + this.n本体X[i], 277 + this.n本体Y);
+                            this.txSkillMax.tDraw2D(CDTXMania.app.Device, 127 + this.n本体X[i], 277 + this.n本体Y);
                         }
                         else
                         {
                             this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage演奏ドラム画面.actStatusPanels.db現在の達成率.Guitar));
                             if (this.txPercent != null)
-                                this.txPercent.t2D描画(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
+                                this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
                         }
 
                         if (bCLASSIC)
@@ -458,7 +458,7 @@ namespace DTXMania
                             
 
                 if( this.tx難易度パネル != null )
-                    this.tx難易度パネル.t2D描画( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );
+                    this.tx難易度パネル.tDraw2D( CDTXMania.app.Device, 14 + this.n本体X[ i ], 266 + this.n本体Y, new Rectangle( base.rectDiffPanelPoint.X, base.rectDiffPanelPoint.Y, 60, 60 ) );
                 this.tレベル数字描画( ( bCLASSIC == true ? 26 : 18 ) + this.n本体X[ i ], 290 + this.n本体Y, str );
                     }
                 }
@@ -508,7 +508,7 @@ namespace DTXMania
                         Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 26);
                         if (this.txパネル文字[0] != null)
                         {
-                            this.txパネル文字[0].t2D描画(CDTXMania.app.Device, x, y, rectangle);
+                            this.txパネル文字[0].tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }
@@ -531,7 +531,7 @@ namespace DTXMania
                         }
                         if (this.txパネル文字[1] != null)
                         {
-                            this.txパネル文字[1].t2D描画(CDTXMania.app.Device, x, y, rectangle);
+                            this.txパネル文字[1].tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }
@@ -554,7 +554,7 @@ namespace DTXMania
                         }
                         if (this.tx難易度用数字 != null)
                         {
-                            this.tx難易度用数字.t2D描画(CDTXMania.app.Device, x, y, rectangle);
+                            this.tx難易度用数字.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }

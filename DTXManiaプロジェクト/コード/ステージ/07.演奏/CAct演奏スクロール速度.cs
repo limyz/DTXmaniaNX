@@ -16,24 +16,24 @@ namespace DTXMania
 
 		public CAct演奏スクロール速度()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			for( int i = 0; i < 3; i++ )
 			{
 				this.db譜面スクロール速度[ i ] = this.db現在の譜面スクロール速度[ i ] = (double) CDTXMania.ConfigIni.n譜面スクロール速度[ i ];
 				this.n速度変更制御タイマ[ i ] = -1;
 			}
-			base.On活性化();
+			base.OnActivate();
 		}
 		public override unsafe int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{

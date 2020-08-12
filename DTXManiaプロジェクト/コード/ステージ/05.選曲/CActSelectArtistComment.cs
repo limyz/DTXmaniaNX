@@ -14,16 +14,16 @@ namespace DTXMania
 
 		public CActSelectArtistComment()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		public void t選択曲が変更された()
 		{
-			Cスコア cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
 			if( cスコア != null )
 			{
 				Bitmap image = new Bitmap( 1, 1 );
 				CDTXMania.tテクスチャの解放( ref this.txArtist );
-				this.strArtist = cスコア.譜面情報.アーティスト名;
+				this.strArtist = cスコア.SongInformation.ArtistName;
 				if( ( this.strArtist != null ) && ( this.strArtist.Length > 0 ) )
 				{
 					Graphics graphics = Graphics.FromImage( image );
@@ -52,7 +52,7 @@ namespace DTXMania
 					}
 				}
 				CDTXMania.tテクスチャの解放( ref this.txComment );
-				this.strComment = cスコア.譜面情報.コメント;
+				this.strComment = cスコア.SongInformation.Comment;
 				if( ( this.strComment != null ) && ( this.strComment.Length > 0 ) )
 				{
 					Graphics graphics2 = Graphics.FromImage( image );
@@ -120,7 +120,7 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.ft描画用フォント = new Font( "MS PGothic", 40f, GraphicsUnit.Pixel );
 			this.txArtist = null;
@@ -131,9 +131,9 @@ namespace DTXMania
 			this.nComment行数 = 0;
 			this.nテクスチャの最大幅 = 0;
 			this.ctComment = new CCounter();
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			CDTXMania.tテクスチャの解放( ref this.txArtist );
 			CDTXMania.tテクスチャの解放( ref this.txComment );
@@ -143,33 +143,33 @@ namespace DTXMania
 				this.ft描画用フォント = null;
 			}
 			this.ctComment = null;
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 this.txコメントバー = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_comment bar.png"), true);
                 this.t選択曲が変更された();
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txArtist );
 				CDTXMania.tテクスチャの解放( ref this.txComment );
                 CDTXMania.tテクスチャの解放( ref this.txコメントバー );
-                base.OnManagedリソースの解放();
+                base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                 if (this.txコメントバー != null)
-                    this.txコメントバー.t2D描画(CDTXMania.app.Device, 560, 257);
+                    this.txコメントバー.tDraw2D(CDTXMania.app.Device, 560, 257);
 
                 if (this.ctComment.b進行中)
 				{
@@ -179,8 +179,8 @@ namespace DTXMania
 				{
 					int x = 1260 - 25 - ( (int) ( this.txArtist.szテクスチャサイズ.Width * this.txArtist.vc拡大縮小倍率.X ) );		// #27648 2012.3.14 yyagi: -12 for scrollbar
 					int y = 320;
-					this.txArtist.t2D描画( CDTXMania.app.Device, x, y );
-                    //this.txArtist.t2D描画(CDTXMania.app.Device, 64, 570);
+					this.txArtist.tDraw2D( CDTXMania.app.Device, x, y );
+                    //this.txArtist.tDraw2D(CDTXMania.app.Device, 64, 570);
                 }
 
                     int num3 = 683;
@@ -188,7 +188,7 @@ namespace DTXMania
 
                 if ((this.txComment != null) && ((this.txComment.szテクスチャサイズ.Width * this.txComment.vc拡大縮小倍率.X) < (1250 - num3)))
                 {
-                    this.txComment.t2D描画(CDTXMania.app.Device, num3, num4);
+                    this.txComment.tDraw2D(CDTXMania.app.Device, num3, num4);
                 }
                 else if (this.txComment != null)
                 {
@@ -209,7 +209,7 @@ namespace DTXMania
                         int num7 = num6 - rectangle2.X;
                         rectangle2.Width = num7;
                         rectangle2.Height = (int)this.ft描画用フォント.Size;
-                        this.txComment.t2D描画(CDTXMania.app.Device, num3, num4, rectangle2);
+                        this.txComment.tDraw2D(CDTXMania.app.Device, num3, num4, rectangle2);
                         if (++num5 == this.nComment行数)
                         {
                             break;

@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace DTXMania
 {
 	[Serializable]
-	internal class C曲リストノード
+	internal class CSongListNode
 	{
 		// プロパティ
 
@@ -22,7 +22,7 @@ namespace DTXMania
 			UNKNOWN
 		}
 		public int nID { get; private set; }
-		public Cスコア[] arスコア = new Cスコア[ 5 ];
+		public CScore[] arScore = new CScore[ 5 ];
 		public string[] ar難易度ラベル = new string[ 5 ];
 		public bool bDTXFilesで始まるフォルダ名のBOXである;
 		public bool bBoxDefで作成されたBOXである
@@ -37,15 +37,15 @@ namespace DTXMania
 			}
 		}
 		public Color col文字色 = Color.White;
-		public List<C曲リストノード> listランダム用ノードリスト;
-		public List<C曲リストノード> list子リスト;
+		public List<CSongListNode> listランダム用ノードリスト;
+		public List<CSongListNode> list子リスト;
 		public int nGood範囲ms = -1;
 		public int nGreat範囲ms = -1;
 		public int nPerfect範囲ms = -1;
 		public int nPoor範囲ms = -1;
 		public int nスコア数;
 		public string pathSetDefの絶対パス = "";
-		public C曲リストノード r親ノード;
+		public CSongListNode r親ノード;
 		public int SetDefのブロック番号;
 		public Stack<int> stackランダム演奏番号 = new Stack<int>();
 		public string strジャンル = "";
@@ -56,7 +56,7 @@ namespace DTXMania
 		
 		// コンストラクタ
 
-		public C曲リストノード()
+		public CSongListNode()
 		{
 			this.nID = id++;
 		}

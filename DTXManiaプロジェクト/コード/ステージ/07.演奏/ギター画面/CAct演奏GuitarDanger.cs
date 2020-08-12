@@ -10,20 +10,20 @@ namespace DTXMania
 	internal class CAct演奏GuitarDanger : CAct演奏Danger共通
 	{
 
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				this.txDANGER = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayGuitar danger.png" ) );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txDANGER );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
@@ -41,7 +41,7 @@ namespace DTXMania
 		{
 			bool[] bIsDanger = { bIsDangerDrums, bIsDangerGuitar, bIsDangerBass };
 
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				if ( this.ct透明度用 == null )
 				{
@@ -61,8 +61,8 @@ namespace DTXMania
 						if ( this.txDANGER != null )
 						{
 							int d = this.ct透明度用.n現在の値;
-							this.txDANGER.n透明度 = n透明度MIN + ( ( d < n波長 / 2 ) ? ( n透明度MAX - n透明度MIN ) * d / ( n波長 / 2 ) : ( n透明度MAX - n透明度MIN ) * ( n波長 - d ) / ( n波長 / 2 ) );		// 60-200
-							this.txDANGER.t2D描画( CDTXMania.app.Device, nGaugeX[ nPart ], 0 );
+							this.txDANGER.nTransparency = n透明度MIN + ( ( d < n波長 / 2 ) ? ( n透明度MAX - n透明度MIN ) * d / ( n波長 / 2 ) : ( n透明度MAX - n透明度MIN ) * ( n波長 - d ) / ( n波長 / 2 ) );		// 60-200
+							this.txDANGER.tDraw2D( CDTXMania.app.Device, nGaugeX[ nPart ], 0 );
 						}
 					}
 				}

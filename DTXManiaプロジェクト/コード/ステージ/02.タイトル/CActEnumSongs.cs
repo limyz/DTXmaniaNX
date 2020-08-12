@@ -34,17 +34,17 @@ namespace DTXMania
         }
         private void Init(bool _bコマンドでの曲データ取得)
         {
-            base.b活性化してない = true;
+            base.bNotActivated = true;
             bコマンドでの曲データ取得 = _bコマンドでの曲データ取得;
         }
 
         // CActivity 実装
 
-        public override void On活性化()
+        public override void OnActivate()
         {
             if (this.b活性化してる)
                 return;
-            base.On活性化();
+            base.OnActivate();
 
             try
             {
@@ -55,16 +55,16 @@ namespace DTXMania
             {
             }
         }
-        public override void On非活性化()
+        public override void OnDeactivate()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
-            base.On非活性化();
+            base.OnDeactivate();
             this.ctNowEnumeratingSongs = null;
         }
-        public override void OnManagedリソースの作成()
+        public override void OnManagedCreateResources()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
             string pathNowEnumeratingSongs = CSkin.Path(@"Graphics\ScreenTitle NowEnumeratingSongs.png");
             if (File.Exists(pathNowEnumeratingSongs))
@@ -123,35 +123,35 @@ namespace DTXMania
                 this.txMessage = null;
             }
 
-            base.OnManagedリソースの作成();
+            base.OnManagedCreateResources();
         }
-        public override void OnManagedリソースの解放()
+        public override void OnManagedReleaseResources()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
                 return;
 
             CDTXMania.t安全にDisposeする(ref this.txDialogNowEnumeratingSongs);
             CDTXMania.t安全にDisposeする(ref this.txNowEnumeratingSongs);
             CDTXMania.t安全にDisposeする(ref this.txMessage);
-            base.OnManagedリソースの解放();
+            base.OnManagedReleaseResources();
         }
 
         public override int On進行描画()
         {
-            if (this.b活性化してない)
+            if (this.bNotActivated)
             {
                 return 0;
             }
             this.ctNowEnumeratingSongs.t進行Loop();
             if (this.txNowEnumeratingSongs != null)
             {
-                this.txNowEnumeratingSongs.n透明度 = (int)(176.0 + 80.0 * Math.Sin((double)(2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0)));
-                this.txNowEnumeratingSongs.t2D描画(CDTXMania.app.Device, 18, 7);
+                this.txNowEnumeratingSongs.nTransparency = (int)(176.0 + 80.0 * Math.Sin((double)(2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0)));
+                this.txNowEnumeratingSongs.tDraw2D(CDTXMania.app.Device, 18, 7);
             }
             if (bコマンドでの曲データ取得 && this.txDialogNowEnumeratingSongs != null)
             {
-                this.txDialogNowEnumeratingSongs.t2D描画(CDTXMania.app.Device, 360, 177);
-                this.txMessage.t2D描画(CDTXMania.app.Device, 450, 240);
+                this.txDialogNowEnumeratingSongs.tDraw2D(CDTXMania.app.Device, 360, 177);
+                this.txMessage.tDraw2D(CDTXMania.app.Device, 450, 240);
             }
 
             return 0;

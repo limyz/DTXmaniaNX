@@ -18,12 +18,12 @@ namespace FDK
 			get;
 			set; 
 		}
-		public float fZ軸中心回転
+		public float fZAxisRotation
 		{
 			get;
 			set;
 		}
-		public int n透明度
+		public int nTransparency
 		{
 			get
 			{
@@ -77,7 +77,7 @@ namespace FDK
         	/// <para>論理画面を1とする場合の物理画面の倍率。</para>
         	/// <para>論理値×画面比率＝物理値。</para>
         	/// </summary>
-        	public static float f画面比率 = 1.0f;
+        	public static float fScreenRatio = 1.0f;
 
 		// コンストラクタ
 
@@ -90,7 +90,7 @@ namespace FDK
             this.bSlimDXTextureDispose完了済み = true;
 			this.cvPositionColoredVertexies = null;
 			this.b加算合成 = false;
-			this.fZ軸中心回転 = 0f;
+			this.fZAxisRotation = 0f;
 			this.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
             this.filename = ""; // DTXMania rev:693bf14b0d83efc770235c788117190d08a4e531
 //			this._txData = null;
@@ -363,30 +363,30 @@ namespace FDK
 		/// <param name="device">Direct3D9 デバイス。</param>
 		/// <param name="x">描画位置（テクスチャの左上位置の X 座標[dot]）。</param>
 		/// <param name="y">描画位置（テクスチャの左上位置の Y 座標[dot]）。</param>
-		public void t2D描画( Device device, int x, int y )
+		public void tDraw2D( Device device, int x, int y )
 		{
-			this.t2D描画( device, x, y, 1f, this.rc全画像 );
+			this.tDraw2D( device, x, y, 1f, this.rc全画像 );
 		}
-		public void t2D描画( Device device, int x, int y, Rectangle rc画像内の描画領域 )
+		public void tDraw2D( Device device, int x, int y, Rectangle rc画像内の描画領域 )
 		{
-			this.t2D描画( device, x, y, 1f, rc画像内の描画領域 );
+			this.tDraw2D( device, x, y, 1f, rc画像内の描画領域 );
 		}
-        public void t2D描画( Device device, float x, float y )
+        public void tDraw2D( Device device, float x, float y )
 		{
-			this.t2D描画( device, (int)x, (int)y, 1f, this.rc全画像 );
+			this.tDraw2D( device, (int)x, (int)y, 1f, this.rc全画像 );
 		}
-		public void t2D描画( Device device, float x, float y, Rectangle rc画像内の描画領域 )
+		public void tDraw2D( Device device, float x, float y, Rectangle rc画像内の描画領域 )
 		{
-			this.t2D描画( device, (int)x, (int)y, 1f, rc画像内の描画領域 );
+			this.tDraw2D( device, (int)x, (int)y, 1f, rc画像内の描画領域 );
 		}
-		public void t2D描画( Device device, int x, int y, float depth, Rectangle rc画像内の描画領域 )
+		public void tDraw2D( Device device, int x, int y, float depth, Rectangle rc画像内の描画領域 )
 		{
             if (this.texture == null)
                 return;
 
-			this.tレンダリングステートの設定( device );
+			this.tRenderStateSettings( device );
 
-			if( this.fZ軸中心回転 == 0f )
+			if( this.fZAxisRotation == 0f )
 			{
 				#region [ (A) 回転なし ]
 				//-----------------
@@ -497,7 +497,7 @@ namespace FDK
 				var vc3移動量 = new Vector3( n描画領域内X - ( ( (float) device.Viewport.Width ) / 2f ), -( n描画領域内Y - ( ( (float) device.Viewport.Height ) / 2f ) ), 0f );
 				
 				var matrix = Matrix.Identity * Matrix.Scaling( this.vc拡大縮小倍率 );
-				matrix *= Matrix.RotationZ( this.fZ軸中心回転 );
+				matrix *= Matrix.RotationZ( this.fZAxisRotation );
 				matrix *= Matrix.Translation( vc3移動量 );
 				device.SetTransform( TransformState.World, matrix );
 
@@ -508,25 +508,25 @@ namespace FDK
 				#endregion
 			}
 		}
-		public void t2D上下反転描画( Device device, int x, int y )
+		public void tDraw2DUpsideDown( Device device, int x, int y )
 		{
-			this.t2D上下反転描画( device, x, y, 1f, this.rc全画像 );
+			this.tDraw2DUpsideDown( device, x, y, 1f, this.rc全画像 );
 		}
-		public void t2D上下反転描画( Device device, int x, int y, Rectangle rc画像内の描画領域 )
+		public void tDraw2DUpsideDown( Device device, int x, int y, Rectangle rc画像内の描画領域 )
 		{
-			this.t2D上下反転描画( device, x, y, 1f, rc画像内の描画領域 );
+			this.tDraw2DUpsideDown( device, x, y, 1f, rc画像内の描画領域 );
 		}
-		public void t2D上下反転描画( Device device, int x, int y, float depth, Rectangle rc画像内の描画領域 )
+		public void tDraw2DUpsideDown( Device device, int x, int y, float depth, Rectangle rc画像内の描画領域 )
 		{
             if( this.texture == null )
 				throw new InvalidOperationException( "テクスチャは生成されていません。" );
 
-			this.tレンダリングステートの設定( device );
+			this.tRenderStateSettings( device );
 
-			float fx = x * CTexture.f画面比率 + CTexture.rc物理画面描画領域.X - 0.5f;	// -0.5 は座標とピクセルの誤差を吸収するための座標補正値。(MSDN参照)
-			float fy = y * CTexture.f画面比率 + CTexture.rc物理画面描画領域.Y - 0.5f;	//
-			float w = rc画像内の描画領域.Width * this.vc拡大縮小倍率.X * CTexture.f画面比率;
-			float h = rc画像内の描画領域.Height * this.vc拡大縮小倍率.Y * CTexture.f画面比率;
+			float fx = x * CTexture.fScreenRatio + CTexture.rc物理画面描画領域.X - 0.5f;	// -0.5 は座標とピクセルの誤差を吸収するための座標補正値。(MSDN参照)
+			float fy = y * CTexture.fScreenRatio + CTexture.rc物理画面描画領域.Y - 0.5f;	//
+			float w = rc画像内の描画領域.Width * this.vc拡大縮小倍率.X * CTexture.fScreenRatio;
+			float h = rc画像内の描画領域.Height * this.vc拡大縮小倍率.Y * CTexture.fScreenRatio;
 			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
 			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
 			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
@@ -575,17 +575,17 @@ namespace FDK
 			device.VertexFormat = TransformedColoredTexturedVertex.Format;
 			device.DrawUserPrimitives( PrimitiveType.TriangleStrip, 2, this.cvTransformedColoredVertexies );
 		}
-		public void t2D上下反転描画( Device device, Point pt )
+		public void tDraw2DUpsideDown( Device device, Point pt )
 		{
-			this.t2D上下反転描画( device, pt.X, pt.Y, 1f, this.rc全画像 );
+			this.tDraw2DUpsideDown( device, pt.X, pt.Y, 1f, this.rc全画像 );
 		}
-		public void t2D上下反転描画( Device device, Point pt, Rectangle rc画像内の描画領域 )
+		public void tDraw2DUpsideDown( Device device, Point pt, Rectangle rc画像内の描画領域 )
 		{
-			this.t2D上下反転描画( device, pt.X, pt.Y, 1f, rc画像内の描画領域 );
+			this.tDraw2DUpsideDown( device, pt.X, pt.Y, 1f, rc画像内の描画領域 );
 		}
-		public void t2D上下反転描画( Device device, Point pt, float depth, Rectangle rc画像内の描画領域 )
+		public void tDraw2DUpsideDown( Device device, Point pt, float depth, Rectangle rc画像内の描画領域 )
 		{
-			this.t2D上下反転描画( device, pt.X, pt.Y, depth, rc画像内の描画領域 );
+			this.tDraw2DUpsideDown( device, pt.X, pt.Y, depth, rc画像内の描画領域 );
 		}
 
         public static Vector3 t論理画面座標をワールド座標へ変換する(int x, int y)
@@ -607,19 +607,19 @@ namespace FDK
         public static Vector3 t論理画面座標をワールド座標へ変換する(Vector3 v3論理画面座標)
         {
             return new Vector3(
-                (v3論理画面座標.X - (CTexture.sz論理画面.Width / 2.0f)) * CTexture.f画面比率,
-                (-(v3論理画面座標.Y - (CTexture.sz論理画面.Height / 2.0f)) * CTexture.f画面比率),
+                (v3論理画面座標.X - (CTexture.sz論理画面.Width / 2.0f)) * CTexture.fScreenRatio,
+                (-(v3論理画面座標.Y - (CTexture.sz論理画面.Height / 2.0f)) * CTexture.fScreenRatio),
                 v3論理画面座標.Z);
         }
 
 		/// <summary>
 		/// テクスチャを 3D 画像と見なして描画する。
 		/// </summary>
-		public void t3D描画( Device device, Matrix mat )
+		public void tDraw3D( Device device, Matrix mat )
 		{
-			this.t3D描画( device, mat, this.rc全画像 );
+			this.tDraw3D( device, mat, this.rc全画像 );
 		}
-		public void t3D描画( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
+		public void tDraw3D( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
 		{
 			if( this.texture == null )
 				return;
@@ -667,7 +667,7 @@ namespace FDK
 			this.cvPositionColoredVertexies[ 3 ].TextureCoordinates.X = f右U値;
 			this.cvPositionColoredVertexies[ 3 ].TextureCoordinates.Y = f下V値;
 
-			this.tレンダリングステートの設定( device );
+			this.tRenderStateSettings( device );
 
 			device.SetTransform( TransformState.World, mat );
 			device.SetTexture( 0, this.texture );
@@ -675,9 +675,9 @@ namespace FDK
 			device.DrawUserPrimitives( PrimitiveType.TriangleStrip, 2, this.cvPositionColoredVertexies );
 		}
 
-        public void t3D左上基準描画( Device device, Matrix mat )
+        public void tDraw3DTopLeftReference( Device device, Matrix mat )
 		{
-			this.t3D左上基準描画( device, mat, this.rc全画像 );
+			this.tDraw3DTopLeftReference( device, mat, this.rc全画像 );
 		}
 		/// <summary>
 		/// ○覚書
@@ -685,7 +685,7 @@ namespace FDK
 		///   mat *= SlimDX.Matrix.Translation( x, y, z );
 		/// 「mat =」ではなく「mat *=」であることを忘れないこと。
 		/// </summary>
-		public void t3D左上基準描画( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
+		public void tDraw3DTopLeftReference( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
 		{
 			//とりあえず補正値などは無し。にしても使う機会少なさそうだなー____
 			if( this.texture == null )
@@ -734,7 +734,7 @@ namespace FDK
 			this.cvPositionColoredVertexies[ 3 ].TextureCoordinates.X = f右U値;
 			this.cvPositionColoredVertexies[ 3 ].TextureCoordinates.Y = f下V値;
 
-			this.tレンダリングステートの設定( device );
+			this.tRenderStateSettings( device );
 
 			device.SetTransform( TransformState.World, mat );
 			device.SetTexture( 0, this.texture );
@@ -808,7 +808,7 @@ namespace FDK
 //		byte[] _txData;
 		static object lockobj = new object();
 
-		private void tレンダリングステートの設定( Device device )
+		private void tRenderStateSettings( Device device )
 		{
 			if( this.b加算合成 )
 			{

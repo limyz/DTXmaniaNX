@@ -15,26 +15,26 @@ namespace DTXMania
 
 		public CActSelectInformation()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			this.n画像Index上 = -1;
 			this.n画像Index下 = 0;
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			this.ctスクロール用 = null;
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				string[] infofiles = {		// #25381 2011.6.4 yyagi
 				   @"Graphics\5_information.png" ,
@@ -42,20 +42,20 @@ namespace DTXMania
 				};
 				int c = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1; 
 				this.txInfo = CDTXMania.tテクスチャの生成( CSkin.Path( infofiles[ c ] ), false );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txInfo );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -79,7 +79,7 @@ namespace DTXMania
 						Rectangle rectangle = new Rectangle( stinfo.pt左上座標.X, stinfo.pt左上座標.Y + ( (int) ( 42.0 * n現在の割合 ) ), 240, Convert.ToInt32(42.0 * (1.0 - n現在の割合)) );
 						if( this.txInfo != null )
 						{
-							this.txInfo.t2D描画( CDTXMania.app.Device, 4, 0, rectangle );
+							this.txInfo.tDraw2D( CDTXMania.app.Device, 4, 0, rectangle );
 						}
 					}
 					if( this.n画像Index下 >= 0 )
@@ -88,7 +88,7 @@ namespace DTXMania
 						Rectangle rectangle = new Rectangle( stinfo.pt左上座標.X, stinfo.pt左上座標.Y, 240, (int) ( 42.0 * n現在の割合 ) );
 						if( this.txInfo != null )
 						{
-							this.txInfo.t2D描画( CDTXMania.app.Device, 4, 0 + ( (int) ( 42.0 * ( 1.0 - n現在の割合 ) ) ), rectangle );
+							this.txInfo.tDraw2D( CDTXMania.app.Device, 4, 0 + ( (int) ( 42.0 * ( 1.0 - n現在の割合 ) ) ), rectangle );
 						}
 					}
 				}
@@ -98,7 +98,7 @@ namespace DTXMania
 					Rectangle rectangle = new Rectangle( stinfo.pt左上座標.X, stinfo.pt左上座標.Y, 240, 42 );
 					if( this.txInfo != null )
 					{
-						this.txInfo.t2D描画( CDTXMania.app.Device, 4, 0, rectangle );
+						this.txInfo.tDraw2D( CDTXMania.app.Device, 4, 0, rectangle );
 					}
 				}
 			}

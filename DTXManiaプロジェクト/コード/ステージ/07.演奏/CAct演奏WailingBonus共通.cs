@@ -12,7 +12,7 @@ namespace DTXMania
 
 		public CAct演奏WailingBonus共通()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 		public void Start( E楽器パート part )
@@ -25,33 +25,33 @@ namespace DTXMania
 
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
-			base.On活性化();
+			base.OnActivate();
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
-			base.On非活性化();
+			base.OnDeactivate();
 		}
 
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				this.txWailingBonus = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay wailing bonus.png" ) );
                 this.txWailingFlush = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_WailingFlush.png" ) );
                 this.txWailingFire = CDTXMania.tテクスチャの生成Af( CSkin.Path( @"Graphics\7_WailingFire.png" ) );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if ( !base.b活性化してない )
+			if ( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.txWailingBonus );
                 CDTXMania.tテクスチャの解放( ref this.txWailingFlush );
                 CDTXMania.tテクスチャの解放( ref this.txWailingFire );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 

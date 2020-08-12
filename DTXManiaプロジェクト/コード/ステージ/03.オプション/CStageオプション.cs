@@ -29,7 +29,7 @@ namespace DTXMania
 			base.list子Activities.Add( this.actList = new CActConfigList() );
 			base.list子Activities.Add( this.actKeyAssign = new CActConfigKeyAssign() );
 			//base.list子Activities.Add( this.actオプションパネル = new CActオプションパネル() );
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 		
 		
@@ -52,7 +52,7 @@ namespace DTXMania
 		
 		// CStage 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			Trace.TraceInformation( "オプションステージを活性化します。" );
 			Trace.Indent();
@@ -72,9 +72,9 @@ namespace DTXMania
 				Trace.TraceInformation( "オプションステージの活性化を完了しました。" );
 				Trace.Unindent();
 			}
-			base.On活性化();		// 2011.3.14 yyagi: On活性化()をtryの中から外に移動
+			base.OnActivate();		// 2011.3.14 yyagi: OnActivate()をtryの中から外に移動
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			Trace.TraceInformation( "オプションステージを非活性化します。" );
 			Trace.Indent();
@@ -90,7 +90,7 @@ namespace DTXMania
 				{
 					this.ctキー反復用[ i ] = null;
 				}
-				base.On非活性化();
+				base.OnDeactivate();
 			}
 			finally
 			{
@@ -98,9 +98,9 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void OnManagedリソースの作成()											// OPTIONと画像以外共通
+		public override void OnManagedCreateResources()											// OPTIONと画像以外共通
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_background.jpg" ), false );
 				this.tx上部パネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_header panel.png" ), true );
@@ -114,24 +114,24 @@ namespace DTXMania
 				{
 					this.t説明文パネルに現在選択されている項目の説明を描画する();
 				}
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()											// OPTIONと同じ(COnfig.iniの書き出しタイミングのみ異なるが、無視して良い)
+		public override void OnManagedReleaseResources()											// OPTIONと同じ(COnfig.iniの書き出しタイミングのみ異なるが、無視して良い)
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
 				CDTXMania.tテクスチャの解放( ref this.tx上部パネル );
 				CDTXMania.tテクスチャの解放( ref this.tx下部パネル );
 				CDTXMania.tテクスチャの解放( ref this.txMenuカーソル );
 				CDTXMania.tテクスチャの解放( ref this.tx説明文パネル );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( base.b活性化してない )
+			if( base.bNotActivated )
 				return 0;
 
 			if( base.b初めての進行描画 )
@@ -146,7 +146,7 @@ namespace DTXMania
 			#region [ 背景 ]
 			//---------------------
 			if( this.tx背景 != null )
-				this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
+				this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 			//---------------------
 			#endregion
 			#region [ メニューカーソル ]
@@ -154,12 +154,12 @@ namespace DTXMania
 			if( this.txMenuカーソル != null )
 			{
 				Rectangle rectangle;
-				this.txMenuカーソル.n透明度 = this.bメニューにフォーカス中 ? 0xff : 0x80;
+				this.txMenuカーソル.nTransparency = this.bメニューにフォーカス中 ? 0xff : 0x80;
 				int x = 111;
 				int y = 144 + ( this.n現在のメニュー番号 * 38 );
 				int num3 = 340;
-				this.txMenuカーソル.t2D描画( CDTXMania.app.Device, x, y, new Rectangle( 0, 0, 0x20, 0x30 ) );
-				this.txMenuカーソル.t2D描画( CDTXMania.app.Device, ( x + num3 ) - 0x20, y, new Rectangle( 20, 0, 0x20, 0x30 ) );
+				this.txMenuカーソル.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( 0, 0, 0x20, 0x30 ) );
+				this.txMenuカーソル.tDraw2D( CDTXMania.app.Device, ( x + num3 ) - 0x20, y, new Rectangle( 20, 0, 0x20, 0x30 ) );
 				x += 0x20;
 				for( num3 -= 0x40; num3 > 0; num3 -= rectangle.Width )
 				{
@@ -168,7 +168,7 @@ namespace DTXMania
 					{
 						rectangle.Width -= 0x20 - num3;
 					}
-					this.txMenuカーソル.t2D描画( CDTXMania.app.Device, x, y, rectangle );
+					this.txMenuカーソル.tDraw2D( CDTXMania.app.Device, x, y, rectangle );
 					x += rectangle.Width;
 				}
 			}
@@ -202,7 +202,7 @@ namespace DTXMania
 			#region [ 説明文パネル ]
 			//---------------------
 			if( this.tx説明文パネル != null )
-				this.tx説明文パネル.t2D描画( CDTXMania.app.Device, 0x43, 0x17e );
+				this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 0x43, 0x17e );
 			//---------------------
 			#endregion
 			#region [ アイテム ]
@@ -222,13 +222,13 @@ namespace DTXMania
 			#region [ 上部パネル ]
 			//---------------------
 			if( this.tx上部パネル != null )
-				this.tx上部パネル.t2D描画( CDTXMania.app.Device, 0, 0 );
+				this.tx上部パネル.tDraw2D( CDTXMania.app.Device, 0, 0 );
 			//---------------------
 			#endregion
 			#region [ 下部パネル ]
 			//---------------------
 			if( this.tx下部パネル != null )
-				this.tx下部パネル.t2D描画( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szテクスチャサイズ.Height );
+				this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szテクスチャサイズ.Height );
 			//---------------------
 			#endregion
 			#region [ オプションパネル ]

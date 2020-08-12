@@ -17,7 +17,7 @@ namespace DTXMania
 		public CStageタイトル()
 		{
 			base.eステージID = CStage.Eステージ.タイトル;
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 			base.list子Activities.Add( this.actFIfromSetup = new CActFIFOWhite() );
 			base.list子Activities.Add( this.actFI = new CActFIFOWhite() );
 			base.list子Activities.Add( this.actFO = new CActFIFOWhite() );
@@ -26,7 +26,7 @@ namespace DTXMania
 
 		// CStage 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			Trace.TraceInformation( "タイトルステージを活性化します。" );
 			Trace.Indent();
@@ -39,7 +39,7 @@ namespace DTXMania
 				this.ct上移動用 = new CCounter();
 				this.ct下移動用 = new CCounter();
 				this.ctカーソルフラッシュ用 = new CCounter();
-				base.On活性化();
+				base.OnActivate();
 			}
 			finally
 			{
@@ -47,7 +47,7 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			Trace.TraceInformation( "タイトルステージを非活性化します。" );
 			Trace.Indent();
@@ -66,35 +66,35 @@ namespace DTXMania
 				Trace.TraceInformation( "タイトルステージの非活性化を完了しました。" );
 				Trace.Unindent();
 			}
-			base.On非活性化();
+			base.OnDeactivate();
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\2_background.jpg" ), false );
 				this.txメニュー = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\2_menu.png" ), false );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
 				CDTXMania.tテクスチャの解放( ref this.txメニュー );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				#region [ 初めての進行描画 ]
 				//---------------------
 				if( base.b初めての進行描画 )
 				{
-					if( CDTXMania.r直前のステージ == CDTXMania.stage起動 )
+					if( CDTXMania.r直前のステージ == CDTXMania.stageStartup )
 					{
 						this.actFIfromSetup.tフェードイン開始();
 						base.eフェーズID = CStage.Eフェーズ.タイトル_起動画面からのフェードイン;
@@ -185,7 +185,7 @@ namespace DTXMania
 				// 描画
 
 				if( this.tx背景 != null )
-					this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
+					this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
                 CDTXMania.act文字コンソール.tPrint( 2, 2, C文字コンソール.Eフォント種別.白, VERSION_DISPLAY);
 
@@ -206,22 +206,22 @@ namespace DTXMania
 						float nMag = (float) ( 1.0 + ( ( ( (double) this.ctカーソルフラッシュ用.n現在の値 ) / 100.0 ) * 0.5 ) );
 						this.txメニュー.vc拡大縮小倍率.X = nMag;
 						this.txメニュー.vc拡大縮小倍率.Y = nMag;
-						this.txメニュー.n透明度 = (int) ( 255.0 * ( 1.0 - ( ( (double) this.ctカーソルフラッシュ用.n現在の値 ) / 100.0 ) ) );
+						this.txメニュー.nTransparency = (int) ( 255.0 * ( 1.0 - ( ( (double) this.ctカーソルフラッシュ用.n現在の値 ) / 100.0 ) ) );
 						int x_magnified = x + ( (int) ( ( MENU_W * ( 1.0 - nMag ) ) / 2.0 ) );
 						int y_magnified = y + ( (int) ( ( MENU_H * ( 1.0 - nMag ) ) / 2.0 ) );
-						this.txメニュー.t2D描画( CDTXMania.app.Device, x_magnified, y_magnified, new Rectangle( 0, MENU_H * 5, MENU_W, MENU_H ) );
+						this.txメニュー.tDraw2D( CDTXMania.app.Device, x_magnified, y_magnified, new Rectangle( 0, MENU_H * 5, MENU_W, MENU_H ) );
 					}
 					this.txメニュー.vc拡大縮小倍率.X = 1f;
 					this.txメニュー.vc拡大縮小倍率.Y = 1f;
-					this.txメニュー.n透明度 = 0xff;
-					this.txメニュー.t2D描画( CDTXMania.app.Device, x, y, new Rectangle( 0, MENU_H * 4, MENU_W, MENU_H ) );
+					this.txメニュー.nTransparency = 0xff;
+					this.txメニュー.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( 0, MENU_H * 4, MENU_W, MENU_H ) );
 				}
 				if( this.txメニュー != null )
 				{
-					//this.txメニュー.t2D描画( CDTXMania.app.Device, 0xce, 0xcb, new Rectangle( 0, 0, MENU_W, MENU_H ) );
+					//this.txメニュー.tDraw2D( CDTXMania.app.Device, 0xce, 0xcb, new Rectangle( 0, 0, MENU_W, MENU_H ) );
 					// #24525 2011.3.16 yyagi: "OPTION"を省いて描画。従来スキンとの互換性確保のため。
-					this.txメニュー.t2D描画( CDTXMania.app.Device, MENU_X, MENU_Y, new Rectangle( 0, 0, MENU_W, MENU_H ) );
-					this.txメニュー.t2D描画( CDTXMania.app.Device, MENU_X, MENU_Y + MENU_H, new Rectangle( 0, MENU_H * 2, MENU_W, MENU_H * 2 ) );
+					this.txメニュー.tDraw2D( CDTXMania.app.Device, MENU_X, MENU_Y, new Rectangle( 0, 0, MENU_W, MENU_H ) );
+					this.txメニュー.tDraw2D( CDTXMania.app.Device, MENU_X, MENU_Y + MENU_H, new Rectangle( 0, MENU_H * 2, MENU_W, MENU_H * 2 ) );
 				}
 				CStage.Eフェーズ eフェーズid = base.eフェーズID;
 				switch( eフェーズid )

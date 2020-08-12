@@ -24,13 +24,13 @@ namespace DTXMania
 
 		public CAct演奏演奏情報()
 		{
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 				
 		// CActivity 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
             this.jl = 0;
 			this.n小節番号 = 0;
@@ -41,7 +41,7 @@ namespace DTXMania
             this.nGOOD数 = 0;
             this.nPOOR数 = 0;
             this.nMISS数 = 0;
-			base.On活性化();
+			base.OnActivate();
 		}
 		public override int On進行描画()
 		{
@@ -49,7 +49,7 @@ namespace DTXMania
 		}
 		public void t進行描画( int x, int y )
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
                     y += 0x143;
                     CDTXMania.act文字コンソール.tPrint(x, y, C文字コンソール.Eフォント種別.白, string.Format("BGM/D/G/B Adj: {0:####0}/{1:####0}/{2:####0}/{3:####0} ms", CDTXMania.DTX.nBGMAdjust, CDTXMania.ConfigIni.nInputAdjustTimeMs.Drums, CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar, CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass));

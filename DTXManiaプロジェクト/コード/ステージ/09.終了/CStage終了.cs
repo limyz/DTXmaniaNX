@@ -14,20 +14,20 @@ namespace DTXMania
 		{
 			base.eステージID = CStage.Eステージ.終了;
 			base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
-			base.b活性化してない = true;
+			base.bNotActivated = true;
 		}
 
 
 		// CStage 実装
 
-		public override void On活性化()
+		public override void OnActivate()
 		{
 			Trace.TraceInformation( "終了ステージを活性化します。" );
 			Trace.Indent();
 			try
 			{
 				this.ct時間稼ぎ = new CCounter();
-				base.On活性化();
+				base.OnActivate();
 			}
 			finally
 			{
@@ -35,13 +35,13 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void On非活性化()
+		public override void OnDeactivate()
 		{
 			Trace.TraceInformation( "終了ステージを非活性化します。" );
 			Trace.Indent();
 			try
 			{
-				base.On非活性化();
+				base.OnDeactivate();
 			}
 			finally
 			{
@@ -49,25 +49,25 @@ namespace DTXMania
 				Trace.Unindent();
 			}
 		}
-		public override void OnManagedリソースの作成()
+		public override void OnManagedCreateResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\9_background.jpg" ), false );
-				base.OnManagedリソースの作成();
+				base.OnManagedCreateResources();
 			}
 		}
-		public override void OnManagedリソースの解放()
+		public override void OnManagedReleaseResources()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				CDTXMania.tテクスチャの解放( ref this.tx背景 );
-				base.OnManagedリソースの解放();
+				base.OnManagedReleaseResources();
 			}
 		}
 		public override int On進行描画()
 		{
-			if( !base.b活性化してない )
+			if( !base.bNotActivated )
 			{
 				if( base.b初めての進行描画 )
 				{
@@ -82,7 +82,7 @@ namespace DTXMania
 				}
 				if( this.tx背景 != null )
 				{
-					this.tx背景.t2D描画( CDTXMania.app.Device, 0, 0 );
+					this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 				}
 			}
 			return 0;
