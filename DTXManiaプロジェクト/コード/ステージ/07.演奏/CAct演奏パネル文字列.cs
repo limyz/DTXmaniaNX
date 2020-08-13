@@ -18,9 +18,9 @@ namespace DTXMania
         public void SetPanelString(string str)
         {
             this.strパネル文字列 = str;
-            if (base.b活性化してる)
+            if (base.bActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txPanel);
+                CDTXMania.tReleaseTexture(ref this.txPanel);
                 if ((this.strパネル文字列 != null) && (this.strパネル文字列.Length > 0))
                 {
                     Bitmap image = new Bitmap(1, 1);
@@ -72,7 +72,7 @@ namespace DTXMania
         }
         public override void OnDeactivate()
         {
-//          CDTXMania.tテクスチャの解放(ref this.txPanel);
+//          CDTXMania.tReleaseTexture(ref this.txPanel);
             this.ct進行用 = null;
             base.OnDeactivate();
         }
@@ -80,15 +80,15 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txジャケットパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_JacketPanel.png"));
+                this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
                 string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
                 if (!File.Exists(path))
                 {
-                    this.txジャケット画像 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_preimage default.png"));
+                    this.txジャケット画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_preimage default.png"));
                 }
                 else
                 {
-                    this.txジャケット画像 = CDTXMania.tテクスチャの生成(path);
+                    this.txジャケット画像 = CDTXMania.tGenerateTexture(path);
                 }
 
 //              this.SetPanelString(this.strパネル文字列);
@@ -102,13 +102,13 @@ namespace DTXMania
                 this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = this.pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
-                this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
+                this.txSongName = CDTXMania.tGenerateTexture(bmpSongName, false);
                 bmpSongName.Dispose();
 
                 this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = this.pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
-                this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
+                this.txArtistName = CDTXMania.tGenerateTexture(bmpArtistName, false);
                 bmpArtistName.Dispose();
                 #endregion
 
@@ -119,11 +119,11 @@ namespace DTXMania
         {
             if ( !base.bNotActivated )
             {
-//              CDTXMania.tテクスチャの解放( ref this.txPanel );
-                CDTXMania.tテクスチャの解放( ref this.txSongName );
-                CDTXMania.tテクスチャの解放( ref this.txArtistName );
-                CDTXMania.tテクスチャの解放( ref this.txジャケットパネル );
-                CDTXMania.tテクスチャの解放( ref this.txジャケット画像 );
+//              CDTXMania.tReleaseTexture( ref this.txPanel );
+                CDTXMania.tReleaseTexture( ref this.txSongName );
+                CDTXMania.tReleaseTexture( ref this.txArtistName );
+                CDTXMania.tReleaseTexture( ref this.txジャケットパネル );
+                CDTXMania.tReleaseTexture( ref this.txジャケット画像 );
                 CDTXMania.t安全にDisposeする( ref this.pfタイトル );
                 CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
                 base.OnManagedReleaseResources();

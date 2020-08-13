@@ -96,8 +96,8 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 //this.pfNameFont = new CPrivateFastFont( new FontFamily( "Arial" ), 16, FontStyle.Bold );
-                this.txグラフ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Graph_Main.png" ) );
-                this.txグラフ_ゲージ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Graph_Gauge.png" ) );
+                this.txグラフ = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_Graph_Main.png" ) );
+                this.txグラフ_ゲージ = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_Graph_Gauge.png" ) );
 
                 //if( this.pfNameFont != null )
                 //{
@@ -117,9 +117,9 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txグラフ );
-                CDTXMania.tテクスチャの解放( ref this.txグラフ_ゲージ );
-                CDTXMania.tテクスチャの解放( ref this.txグラフ値自己ベストライン );
+				CDTXMania.tReleaseTexture( ref this.txグラフ );
+                CDTXMania.tReleaseTexture( ref this.txグラフ_ゲージ );
+                CDTXMania.tReleaseTexture( ref this.txグラフ値自己ベストライン );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -344,7 +344,7 @@ namespace DTXMania
             Bitmap bmp;
             bmp = this.pfNameFont.DrawPrivateFont( str文字, Color.White, Color.Transparent );
 
-            CTexture tx文字テクスチャ = CDTXMania.tテクスチャの生成( bmp, false );
+            CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
 
             if( tx文字テクスチャ != null )
                 tx文字テクスチャ.vc拡大縮小倍率 = new Vector3( 1.0f, 1.0f, 1f );

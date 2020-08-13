@@ -9,19 +9,19 @@ namespace FDK
 	{
 		// プロパティ
 
-		public bool b活性化してる { get; private set; }
+		public bool bActivated { get; private set; }
 		public bool bNotActivated
 		{
 			get
 			{
-				return !this.b活性化してる;
+				return !this.bActivated;
 			}
 			set
 			{
-				this.b活性化してる = !value;
+				this.bActivated = !value;
 			}
 		}
-		public List<CActivity> list子Activities;
+		public List<CActivity> listChildActivities;
 
 		/// <summary>
 		/// <para>初めて On進行描画() を呼び出す場合に true を示す。（On活性化() 内で true にセットされる。）</para>
@@ -36,7 +36,7 @@ namespace FDK
 		public CActivity()
 		{
 			this.bNotActivated = true;
-			this.list子Activities = new List<CActivity>();
+			this.listChildActivities = new List<CActivity>();
 		}
 
 
@@ -48,17 +48,17 @@ namespace FDK
 		public virtual void OnActivate()
 		{
 			// すでに活性化してるなら何もしない。
-			if( this.b活性化してる )
+			if( this.bActivated )
 				return;
 
-			this.b活性化してる = true;		// このフラグは、以下の処理をする前にセットする。
+			this.bActivated = true;		// このフラグは、以下の処理をする前にセットする。
 
 			// 自身のリソースを作成する。
 			this.OnManagedCreateResources();
-			this.OnUnmanagedリソースの作成();
+			this.OnUnmanagedCreateResource();
 
 			// すべての子 Activity を活性化する。
-			foreach( CActivity activity in this.list子Activities )
+			foreach( CActivity activity in this.listChildActivities )
 				activity.OnActivate();
 
 			// その他の初期化
@@ -75,7 +75,7 @@ namespace FDK
 			this.OnManagedReleaseResources();
 
 			// すべての 子Activity を非活性化する。
-			foreach( CActivity activity in this.list子Activities )
+			foreach( CActivity activity in this.listChildActivities )
 				activity.OnDeactivate();
 
 			this.bNotActivated = true;	// このフラグは、以上のメソッドを呼び出した後にセットする。
@@ -95,7 +95,7 @@ namespace FDK
 				return;
 
 			// すべての 子Activity の Managed リソースを作成する。
-			foreach( CActivity activity in this.list子Activities )
+			foreach( CActivity activity in this.listChildActivities )
 				activity.OnManagedCreateResources();
 		}
 
@@ -106,15 +106,15 @@ namespace FDK
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが再作成またはリセットされるか）分からないので、
 		/// いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnUnmanagedリソースの作成()
+		public virtual void OnUnmanagedCreateResource()
 		{
 			// 活性化してないなら何もしない。
 			if( this.bNotActivated )
 				return;
 
 			// すべての 子Activity の Unmanaged リソースを作成する。
-			foreach( CActivity activity in this.list子Activities )
-				activity.OnUnmanagedリソースの作成();
+			foreach( CActivity activity in this.listChildActivities )
+				activity.OnUnmanagedCreateResource();
 		}
 		
 		/// <summary>
@@ -130,7 +130,7 @@ namespace FDK
 				return;
 
 			// すべての 子Activity の Unmanaged リソースを解放する。
-			foreach( CActivity activity in this.list子Activities )
+			foreach( CActivity activity in this.listChildActivities )
 				activity.OnUnmanagedリソースの解放();
 		}
 
@@ -148,15 +148,15 @@ namespace FDK
 				return;
 
 			// すべての 子Activity の Managed リソースを解放する。
-			foreach( CActivity activity in this.list子Activities )
+			foreach( CActivity activity in this.listChildActivities )
 				activity.OnManagedReleaseResources();
 		}
 
 		/// <summary>
-		/// <para>進行と描画を行う。（これらは分離されず、この１つのメソッドだけで実装する。）</para>
-		/// <para>このメソッドは BeginScene() の後に呼び出されるので、メソッド内でいきなり描画を行ってかまわない。</para>
+		/// <para>Make progress and draw. (These are not separated, only one method is implemented.</para>
+		/// <para>This method is called after BeginScene(), so it doesn't matter which drawing method is used.</para>
 		/// </summary>
-		/// <returns>任意の整数。呼び出し元との整合性を合わせておくこと。</returns>
+		/// <returns>Any integer. Be consistent with the caller.</returns>
 		public virtual int On進行描画()
 		{
 			// 活性化してないなら何もしない。
@@ -195,21 +195,21 @@ namespace FDK
         /// </summary>
         public virtual void On活性化(SlimDX.Direct3D9.Device D3D9Device)
         {
-            if (this.b活性化してる)
+            if (this.bActivated)
                 return;
 
-            this.b活性化してる = true;		// このフラグは、以下の処理をする前にセットする。
+            this.bActivated = true;		// このフラグは、以下の処理をする前にセットする。
 
 
             // 自身のリソースを作成する。
 
-            this.OnManagedリソースの作成(D3D9Device);
-            this.OnUnmanagedリソースの作成(D3D9Device);
+            this.OnManagedCreateResource(D3D9Device);
+            this.OnUnmanagedCreateResource(D3D9Device);
 
 
             // すべての子Activityを活性化する。
 
-            foreach (CActivity activity in this.list子Activities)
+            foreach (CActivity activity in this.listChildActivities)
                 activity.On活性化(D3D9Device);
 
 
@@ -223,7 +223,7 @@ namespace FDK
 		/// <para>Direct3D デバイスが作成された直後に呼び出されるので、自分が活性化している時に限り、Managed リソースを作成（または再構築）すること。</para>
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが再作成されるか）分からないので、いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnManagedリソースの作成( SlimDX.Direct3D9.Device D3D9Device )
+		public virtual void OnManagedCreateResource( SlimDX.Direct3D9.Device D3D9Device )
 		{
 			if( this.bNotActivated )
 				return;
@@ -231,8 +231,8 @@ namespace FDK
 
 			// すべての 子Activity の Managed リソースを作成する。
 			
-			foreach( CActivity activity in this.list子Activities )
-				activity.OnManagedリソースの作成( D3D9Device );
+			foreach( CActivity activity in this.listChildActivities )
+				activity.OnManagedCreateResource( D3D9Device );
 		}
 
 		/// <summary>
@@ -240,7 +240,7 @@ namespace FDK
 		/// <para>Direct3D デバイスが作成またはリセットされた直後に呼び出されるので、自分が活性化している時に限り、Unmanaged リソースを作成（または再構築）すること。</para>
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが再作成またはリセットされるか）分からないので、いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnUnmanagedリソースの作成( SlimDX.Direct3D9.Device D3D9Device )
+		public virtual void OnUnmanagedCreateResource( SlimDX.Direct3D9.Device D3D9Device )
 		{
 			if( this.bNotActivated )
 				return;
@@ -248,8 +248,8 @@ namespace FDK
 
 			// すべての 子Activity の Unmanaged リソースを作成する。
 
-			foreach( CActivity activity in this.list子Activities )
-				activity.OnUnmanagedリソースの作成( D3D9Device );
+			foreach( CActivity activity in this.listChildActivities )
+				activity.OnUnmanagedCreateResource( D3D9Device );
 		}
 
         /// <summary>

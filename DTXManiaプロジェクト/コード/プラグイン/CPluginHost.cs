@@ -45,9 +45,9 @@ namespace DTXMania
 		{
 			get { return CDTXMania.app.Window.ClientSize; }
 		}
-		public CStage.Eステージ e現在のステージ
+		public CStage.EStage e現在のステージ
 		{
-			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eステージID : CStage.Eステージ.何もしない; }
+			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eステージID : CStage.EStage.DoNothing; }
 		}
 		public CStage.Eフェーズ e現在のフェーズ
 		{
@@ -69,7 +69,7 @@ namespace DTXMania
 			CDTXMania.act現在入力を占有中のプラグイン = null;
 			return true;
 		}
-		public void tシステムサウンドを再生する( Eシステムサウンド sound )
+		public void tシステムサウンドを再生する( ESystemSound sound )
 		{
 			if( CDTXMania.Skin != null )
 				CDTXMania.Skin[ sound ].t再生する();

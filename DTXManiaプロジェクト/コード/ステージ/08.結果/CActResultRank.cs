@@ -83,7 +83,7 @@ namespace DTXMania
             }
             #endregion
 
-            this.b全オート.Drums = CDTXMania.ConfigIni.bドラムが全部オートプレイである;
+            this.b全オート.Drums = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
             this.b全オート.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
             this.b全オート.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
 
@@ -102,43 +102,43 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
 
-                this.txStageCleared = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenResult StageCleared.png"));
-                this.txFullCombo = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenResult fullcombo.png"));
-                this.txExcellent = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenResult Excellent.png"));
+                this.txStageCleared = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenResult StageCleared.png"));
+                this.txFullCombo = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenResult fullcombo.png"));
+                this.txExcellent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenResult Excellent.png"));
 
                 for (int j = 0; j < 3; j++)
                 {
-                    switch (CDTXMania.stage結果.nランク値[j])
+                    switch (CDTXMania.stage結果.nRankValue[j])
                     {
                         case 0:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankSS.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankSS.png"));
                             break;
 
                         case 1:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankS.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankS.png"));
                             break;
 
                         case 2:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankA.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankA.png"));
                             break;
 
                         case 3:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankB.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankB.png"));
                             break;
 
                         case 4:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankC.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankC.png"));
                             break;
 
                         case 5:
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankD.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankD.png"));
                             break;
 
                         case 6:
                         case 99:	// #23534 2010.10.28 yyagi: 演奏チップが0個のときは、rankEと見なす
-                            this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankE.png"));
+                            this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankE.png"));
                             if (this.b全オート[j])
-                                this.txランク文字[j] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_rankSS.png"));
+                                this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankSS.png"));
                             break;
 
                         default:
@@ -153,9 +153,9 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txStageCleared);
-                CDTXMania.tテクスチャの解放(ref this.txFullCombo);
-                CDTXMania.tテクスチャの解放(ref this.txExcellent);
+                CDTXMania.tReleaseTexture(ref this.txStageCleared);
+                CDTXMania.tReleaseTexture(ref this.txFullCombo);
+                CDTXMania.tReleaseTexture(ref this.txExcellent);
                 CDTXMania.t安全にDisposeする(ref this.txランク文字);
                 base.OnManagedReleaseResources();
             }
@@ -191,12 +191,12 @@ namespace DTXMania
                     int num14 = -165 + this.n本体X[j];
                     int num15 = 100 + this.n本体Y[j];
 
-                    if (CDTXMania.stage結果.st演奏記録[j].nPerfect数 == CDTXMania.stage結果.st演奏記録[j].n全チップ数)
+                    if (CDTXMania.stage結果.stPerformanceEntry[j].nPerfect数 == CDTXMania.stage結果.stPerformanceEntry[j].n全チップ数)
                     {
                         if (this.txExcellent != null)
                             this.txExcellent.tDraw2D(CDTXMania.app.Device, num14, num15);
                     }
-                    else if (CDTXMania.stage結果.st演奏記録[j].bIsFullCombo)
+                    else if (CDTXMania.stage結果.stPerformanceEntry[j].bIsFullCombo)
                     {
                         if (this.txFullCombo != null)
                             this.txFullCombo.tDraw2D(CDTXMania.app.Device, num14, num15);
@@ -210,7 +210,7 @@ namespace DTXMania
                 }
             }
 
-            if (!this.ctランク表示.b終了値に達した)
+            if (!this.ctランク表示.bReachedEndValue)
             {
                 return 0;
             }

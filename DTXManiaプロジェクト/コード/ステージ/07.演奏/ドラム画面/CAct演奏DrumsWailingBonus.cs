@@ -18,13 +18,13 @@ namespace DTXMania
 		
 		// メソッド
 
-		//public override void Start( E楽器パート part )
+		//public override void Start( EInstrumentPart part )
 		//{
 		//    this.Start( part, null );
 		//}
-		public override void Start( E楽器パート part, CDTX.CChip r歓声Chip )
+		public override void Start( EInstrumentPart part, CDTX.CChip r歓声Chip )
 		{
-			if( ( part == E楽器パート.GUITAR ) || ( part == E楽器パート.BASS ) )
+			if( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) )
 			{
 				int num = (int) part;
 				for( int i = 0; i < 4; i++ )
@@ -36,7 +36,7 @@ namespace DTXMania
 						{
 							if( r歓声Chip != null )
 							{
-								CDTXMania.DTX.tチップの再生( r歓声Chip, CDTXMania.Timer.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( E楽器パート.UNKNOWN ) );
+								CDTXMania.DTX.tチップの再生( r歓声Chip, CDTXMania.Timer.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
 							CDTXMania.Skin.sound歓声音.t再生する();
@@ -80,19 +80,19 @@ namespace DTXMania
 			{
 				for( int i = 0; i < 2; i++ )
 				{
-					E楽器パート e楽器パート = ( i == 0 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+					EInstrumentPart e楽器パート = ( i == 0 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 					for( int j = 0; j < 4; j++ )
 					{
 						if( !this.ct進行用[ (int) e楽器パート, j ].b停止中 )
 						{
-							if( this.ct進行用[ (int) e楽器パート, j ].b終了値に達した )
+							if( this.ct進行用[ (int) e楽器パート, j ].bReachedEndValue )
 							{
 								this.ct進行用[ (int) e楽器パート, j ].t停止();
 							}
 							else
 							{
 								this.ct進行用[ (int) e楽器パート, j ].t進行();
-								int x = ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x1fb : 0x18e ) + 0x4e;
+								int x = ( ( e楽器パート == EInstrumentPart.GUITAR ) ? 0x1fb : 0x18e ) + 0x4e;
 								int num4 = 0;
 								int num5 = 0;
 								int num6 = this.ct進行用[ (int) e楽器パート, j ].n現在の値;
@@ -128,7 +128,7 @@ namespace DTXMania
 								}
 								if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) )
 								{
-									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5, rectangle );
+									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( e楽器パート == EInstrumentPart.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5, rectangle );
 								}
 								num5 = 0;
 								rectangle = new Rectangle( 0x1a, 0, 0x1a, 0x7a );
@@ -143,7 +143,7 @@ namespace DTXMania
 								}
 								if( ( rectangle.Top < rectangle.Bottom ) && ( this.txWailingBonus != null ) )
 								{
-									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( ( e楽器パート == E楽器パート.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5 ) + 0x7a, rectangle );
+									this.txWailingBonus.tDraw2D( CDTXMania.app.Device, x, ( ( ( ( e楽器パート == EInstrumentPart.GUITAR ) ? 0x39 : 0x39 ) + num4 ) + num5 ) + 0x7a, rectangle );
 								}
 							}
 						}

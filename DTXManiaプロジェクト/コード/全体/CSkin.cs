@@ -9,7 +9,7 @@ namespace DTXMania
 {
 	// グローバル定数
 
-	public enum Eシステムサウンド
+	public enum ESystemSound
 	{
 		BGMオプション画面 = 0,
 		BGMコンフィグ画面,
@@ -46,20 +46,20 @@ namespace DTXMania
 	{
 		// クラス
 
-		public class Cシステムサウンド : IDisposable
+		public class CSystemSound : IDisposable
 		{
 			// static フィールド
 
-			public static CSkin.Cシステムサウンド r最後に再生した排他システムサウンド;
+			public static CSkin.CSystemSound rLastPlayedExclusiveSystemSound;
 
 			// フィールド、プロパティ
 
 			public bool bCompact対象;
 			public bool bループ;
-			public bool b読み込み未試行;
+			public bool bReadNotTried;
 			public bool b読み込み成功;
 			public bool b排他;
-			public string strファイル名 = "";
+			public string strFilename = "";
 			public bool b再生中
 			{
 				get
@@ -141,7 +141,7 @@ namespace DTXMania
 					}
 				}
 			}
-			public int n長さ_現在のサウンド
+			public int nLength_CurrentSound
 			{
 				get
 				{
@@ -153,7 +153,7 @@ namespace DTXMania
 					return sound.n総演奏時間ms;
 				}
 			}
-			public int n長さ_次に鳴るサウンド
+			public int nLength_NextSound
 			{
 				get
 				{
@@ -174,38 +174,38 @@ namespace DTXMania
 			/// <param name="bループ"></param>
 			/// <param name="b排他"></param>
 			/// <param name="bCompact対象"></param>
-			public Cシステムサウンド(string strファイル名, bool bループ, bool b排他, bool bCompact対象)
+			public CSystemSound(string strファイル名, bool bループ, bool b排他, bool bCompact対象)
 			{
-				this.strファイル名 = strファイル名;
+				this.strFilename = strファイル名;
 				this.bループ = bループ;
 				this.b排他 = b排他;
 				this.bCompact対象 = bCompact対象;
-				this.b読み込み未試行 = true;
+				this.bReadNotTried = true;
 			}
-			public Cシステムサウンド()
+			public CSystemSound()
 			{
-				this.b読み込み未試行 = true;
+				this.bReadNotTried = true;
 			}
 			
 
 			// メソッド
 
-			public void t読み込み()
+			public void tRead()
 			{
-				this.b読み込み未試行 = false;
+				this.bReadNotTried = false;
 				this.b読み込み成功 = false;
-				if( string.IsNullOrEmpty( this.strファイル名 ) )
+				if( string.IsNullOrEmpty( this.strFilename ) )
 					throw new InvalidOperationException( "ファイル名が無効です。" );
 
-				if( !File.Exists( CSkin.Path( this.strファイル名 ) ) )
+				if( !File.Exists( CSkin.Path( this.strFilename ) ) )
 				{
-					throw new FileNotFoundException( this.strファイル名 );
+					throw new FileNotFoundException( this.strFilename );
 				}
 ////				for( int i = 0; i < 2; i++ )		// #27790 2012.3.10 yyagi 2回読み出しを、1回読みだし＋1回メモリコピーに変更
 ////				{
 //                    try
 //                    {
-//                        this.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( CSkin.Path( this.strファイル名 ) );
+//                        this.rSound[ 0 ] = CDTXMania.Sound管理.tGenerateSound( CSkin.Path( this.strFilename ) );
 //                    }
 //                    catch
 //                    {
@@ -228,7 +228,7 @@ namespace DTXMania
 				{
 					try
 					{
-						this.rSound[ i ] = CDTXMania.Sound管理.tサウンドを生成する( CSkin.Path( this.strファイル名 ) );
+						this.rSound[ i ] = CDTXMania.Sound管理.tGenerateSound( CSkin.Path( this.strFilename ) );
 					}
 					catch
 					{
@@ -240,27 +240,27 @@ namespace DTXMania
 			}
 			public void t再生する()
 			{
-				if ( this.b読み込み未試行 )
+				if ( this.bReadNotTried )
 				{
 					try
 					{
-						t読み込み();
+						tRead();
 					}
 					catch
 					{
-						this.b読み込み未試行 = false;
+						this.bReadNotTried = false;
 					}
 				}
 				if( this.b排他 )
 				{
-					if( r最後に再生した排他システムサウンド != null )
-						r最後に再生した排他システムサウンド.t停止する();
+					if( rLastPlayedExclusiveSystemSound != null )
+						rLastPlayedExclusiveSystemSound.t停止する();
 
-					r最後に再生した排他システムサウンド = this;
+					rLastPlayedExclusiveSystemSound = this;
 				}
 				CSound sound = this.rSound[ this.n次に鳴るサウンド番号 ];
 				if( sound != null )
-					sound.t再生を開始する( this.bループ );
+					sound.tStartPlaying( this.bループ );
 
 				this.n次に鳴るサウンド番号 = 1 - this.n次に鳴るサウンド番号;
 			}
@@ -272,8 +272,8 @@ namespace DTXMania
 				if( this.rSound[ 1 ] != null )
 					this.rSound[ 1 ].t再生を停止する();
 
-				if( r最後に再生した排他システムサウンド == this )
-					r最後に再生した排他システムサウンド = null;
+				if( rLastPlayedExclusiveSystemSound == this )
+					rLastPlayedExclusiveSystemSound = null;
 			}
 
 			public void tRemoveMixer()
@@ -323,129 +323,129 @@ namespace DTXMania
 	
 		// プロパティ
 
-		public Cシステムサウンド bgmオプション画面 = null;
-		public Cシステムサウンド bgmコンフィグ画面 = null;
-		public Cシステムサウンド bgm起動画面 = null;
-		public Cシステムサウンド bgm選曲画面 = null;
-        public Cシステムサウンド bgm結果画面 = null;
-		public Cシステムサウンド soundSTAGEFAILED音 = null;
-		public Cシステムサウンド soundカーソル移動音 = null;
-		public Cシステムサウンド soundゲーム開始音 = null;
-		public Cシステムサウンド soundゲーム終了音 = null;
-		public Cシステムサウンド soundステージクリア音 = null;
-		public Cシステムサウンド soundタイトル音 = null;
-		public Cシステムサウンド soundフルコンボ音 = null;
-		public Cシステムサウンド sound歓声音 = null;
-		public Cシステムサウンド sound曲読込開始音 = null;
-		public Cシステムサウンド sound決定音 = null;
-		public Cシステムサウンド sound取消音 = null;
-		public Cシステムサウンド sound変更音 = null;
-        public Cシステムサウンド sound曲決定 = null;
-        public Cシステムサウンド soundエクセレント音 = null;
-        public Cシステムサウンド sound新記録音 = null;
-        public Cシステムサウンド soundSelectMusic = null;
-        public Cシステムサウンド soundNovice = null;
-        public Cシステムサウンド soundRegular = null;
-        public Cシステムサウンド soundExpert = null;
-        public Cシステムサウンド soundMaster = null;
-        public Cシステムサウンド soundBasic = null;
-        public Cシステムサウンド soundAdvanced = null;
-        public Cシステムサウンド soundExtreme = null;
-		public readonly int nシステムサウンド数 = (int)Eシステムサウンド.Count;
-		public Cシステムサウンド this[ Eシステムサウンド sound ]
+		public CSystemSound bgmオプション画面 = null;
+		public CSystemSound bgmコンフィグ画面 = null;
+		public CSystemSound bgm起動画面 = null;
+		public CSystemSound bgm選曲画面 = null;
+        public CSystemSound bgm結果画面 = null;
+		public CSystemSound soundSTAGEFAILED音 = null;
+		public CSystemSound soundカーソル移動音 = null;
+		public CSystemSound soundゲーム開始音 = null;
+		public CSystemSound soundGameEnd = null;
+		public CSystemSound soundステージクリア音 = null;
+		public CSystemSound soundタイトル音 = null;
+		public CSystemSound soundフルコンボ音 = null;
+		public CSystemSound sound歓声音 = null;
+		public CSystemSound sound曲読込開始音 = null;
+		public CSystemSound sound決定音 = null;
+		public CSystemSound sound取消音 = null;
+		public CSystemSound sound変更音 = null;
+        public CSystemSound sound曲決定 = null;
+        public CSystemSound soundエクセレント音 = null;
+        public CSystemSound sound新記録音 = null;
+        public CSystemSound soundSelectMusic = null;
+        public CSystemSound soundNovice = null;
+        public CSystemSound soundRegular = null;
+        public CSystemSound soundExpert = null;
+        public CSystemSound soundMaster = null;
+        public CSystemSound soundBasic = null;
+        public CSystemSound soundAdvanced = null;
+        public CSystemSound soundExtreme = null;
+		public readonly int nシステムサウンド数 = (int)ESystemSound.Count;
+		public CSystemSound this[ ESystemSound sound ]
 		{
 			get
 			{
 				switch( sound )
 				{
-					case Eシステムサウンド.SOUNDカーソル移動音:
+					case ESystemSound.SOUNDカーソル移動音:
 						return this.soundカーソル移動音;
 
-					case Eシステムサウンド.SOUND決定音:
+					case ESystemSound.SOUND決定音:
 						return this.sound決定音;
 
-					case Eシステムサウンド.SOUND変更音:
+					case ESystemSound.SOUND変更音:
 						return this.sound変更音;
 
-					case Eシステムサウンド.SOUND取消音:
+					case ESystemSound.SOUND取消音:
 						return this.sound取消音;
 
-					case Eシステムサウンド.SOUND歓声音:
+					case ESystemSound.SOUND歓声音:
 						return this.sound歓声音;
 
-					case Eシステムサウンド.SOUNDステージ失敗音:
+					case ESystemSound.SOUNDステージ失敗音:
 						return this.soundSTAGEFAILED音;
 
-					case Eシステムサウンド.SOUNDゲーム開始音:
+					case ESystemSound.SOUNDゲーム開始音:
 						return this.soundゲーム開始音;
 
-					case Eシステムサウンド.SOUNDゲーム終了音:
-						return this.soundゲーム終了音;
+					case ESystemSound.SOUNDゲーム終了音:
+						return this.soundGameEnd;
 
-					case Eシステムサウンド.SOUNDステージクリア音:
+					case ESystemSound.SOUNDステージクリア音:
 						return this.soundステージクリア音;
 
-					case Eシステムサウンド.SOUNDフルコンボ音:
+					case ESystemSound.SOUNDフルコンボ音:
 						return this.soundフルコンボ音;
 
-                    case Eシステムサウンド.SOUNDエクセレント音:
+                    case ESystemSound.SOUNDエクセレント音:
                         return this.soundエクセレント音;
 
-                    case Eシステムサウンド.SOUND新記録音:
+                    case ESystemSound.SOUND新記録音:
                         return this.sound新記録音;
 
-					case Eシステムサウンド.SOUND曲読込開始音:
+					case ESystemSound.SOUND曲読込開始音:
 						return this.sound曲読込開始音;
 
-					case Eシステムサウンド.SOUNDタイトル音:
+					case ESystemSound.SOUNDタイトル音:
 						return this.soundタイトル音;
 
-                    case Eシステムサウンド.SOUND曲決定:
+                    case ESystemSound.SOUND曲決定:
                         return this.sound曲決定;
 
-                    case Eシステムサウンド.SOUNDNOVICE:
+                    case ESystemSound.SOUNDNOVICE:
                         return this.soundNovice;
 
-                    case Eシステムサウンド.SOUNDREGULAR:
+                    case ESystemSound.SOUNDREGULAR:
                         return this.soundRegular;
 
-                    case Eシステムサウンド.SOUNDEXPERT:
+                    case ESystemSound.SOUNDEXPERT:
                         return this.soundExpert;
 
-                    case Eシステムサウンド.SOUNDMASTER:
+                    case ESystemSound.SOUNDMASTER:
                         return this.soundMaster;
 
-                    case Eシステムサウンド.SOUNDBASIC:
+                    case ESystemSound.SOUNDBASIC:
                         return this.soundBasic;
 
-                    case Eシステムサウンド.SOUNDADVANCED:
+                    case ESystemSound.SOUNDADVANCED:
                         return this.soundAdvanced;
 
-                    case Eシステムサウンド.SOUNDEXTREME:
+                    case ESystemSound.SOUNDEXTREME:
                         return this.soundExtreme;
 
-                    case Eシステムサウンド.SOUNDSELECTMUSIC:
+                    case ESystemSound.SOUNDSELECTMUSIC:
                         return this.soundSelectMusic;
 
-					case Eシステムサウンド.BGM起動画面:
+					case ESystemSound.BGM起動画面:
 						return this.bgm起動画面;
 
-					case Eシステムサウンド.BGMオプション画面:
+					case ESystemSound.BGMオプション画面:
 						return this.bgmオプション画面;
 
-					case Eシステムサウンド.BGMコンフィグ画面:
+					case ESystemSound.BGMコンフィグ画面:
 						return this.bgmコンフィグ画面;
 
-					case Eシステムサウンド.BGM選曲画面:
+					case ESystemSound.BGM選曲画面:
 						return this.bgm選曲画面;
 
-                    case Eシステムサウンド.BGM結果画面:
+                    case ESystemSound.BGM結果画面:
 						return this.bgm結果画面;
 				}
 				throw new IndexOutOfRangeException();
 			}
 		}
-		public Cシステムサウンド this[ int index ]
+		public CSystemSound this[ int index ]
 		{
 			get
 			{
@@ -473,7 +473,7 @@ namespace DTXMania
 						return this.soundゲーム開始音;
 
 					case 7:
-						return this.soundゲーム終了音;
+						return this.soundGameEnd;
 
 					case 8:
 						return this.soundフルコンボ音;
@@ -666,34 +666,34 @@ namespace DTXMania
 					this[ i ].Dispose();
 				}
 			}
-			this.soundカーソル移動音	= new Cシステムサウンド( @"Sounds\Move.ogg",			false, false, false );
-			this.sound決定音			= new Cシステムサウンド( @"Sounds\Decide.ogg",			false, false, false );
-			this.sound変更音			= new Cシステムサウンド( @"Sounds\Change.ogg",			false, false, false );
-			this.sound取消音			= new Cシステムサウンド( @"Sounds\Cancel.ogg",			false, false, true  );
-			this.sound歓声音			= new Cシステムサウンド( @"Sounds\Audience.ogg",		false, false,  true  );
-			this.soundSTAGEFAILED音		= new Cシステムサウンド( @"Sounds\Stage failed.ogg",	false, true,  true  );
-			this.soundゲーム開始音		= new Cシステムサウンド( @"Sounds\Game start.ogg",		false, false, false );
-			this.soundゲーム終了音		= new Cシステムサウンド( @"Sounds\Game end.ogg",		false, true,  false );
-			this.soundステージクリア音	= new Cシステムサウンド( @"Sounds\Stage clear.ogg",		false, true,  false );
-			this.soundフルコンボ音		= new Cシステムサウンド( @"Sounds\Full combo.ogg",		false, false, true  );
-            this.sound新記録音          = new Cシステムサウンド( @"Sounds\New Record.ogg",      false, false, true  );
-            this.soundエクセレント音    = new Cシステムサウンド( @"Sounds\Excellent.ogg",       false, false, true  );
-			this.sound曲読込開始音		= new Cシステムサウンド( @"Sounds\Now loading.ogg",		false, true,  true  );
-			this.soundタイトル音		= new Cシステムサウンド( @"Sounds\Title.ogg",			false, true,  false );
-            this.sound曲決定            = new Cシステムサウンド( @"Sounds\MusicDecide.ogg",     false, false, false );
-            this.soundNovice            = new Cシステムサウンド( @"Sounds\Novice.ogg",          false, false, false );
-            this.soundRegular           = new Cシステムサウンド( @"Sounds\Regular.ogg",         false, false, false );
-			this.soundExpert		    = new Cシステムサウンド( @"Sounds\Expert.ogg",		    false, false, false );
-            this.soundBasic             = new Cシステムサウンド( @"Sounds\Basic.ogg",           false, false, false );
-            this.soundAdvanced          = new Cシステムサウンド( @"Sounds\Advanced.ogg",        false, false, false );
-			this.soundExtreme	        = new Cシステムサウンド( @"Sounds\Extreme.ogg",		    false, false, false );
-			this.soundMaster		    = new Cシステムサウンド( @"Sounds\Master.ogg",			false, false, false );
-            this.soundSelectMusic       = new Cシステムサウンド( @"Sounds\SelectMusic.ogg",     false, false, false );
-			this.bgm起動画面			= new Cシステムサウンド( @"Sounds\Setup BGM.ogg",		true,  true,  false );
-			this.bgmオプション画面		= new Cシステムサウンド( @"Sounds\Option BGM.ogg",		true,  true,  false );
-			this.bgmコンフィグ画面		= new Cシステムサウンド( @"Sounds\Config BGM.ogg",		true,  true,  false );
-			this.bgm選曲画面			= new Cシステムサウンド( @"Sounds\Select BGM.ogg",		true,  true,  false );
-            this.bgm結果画面            = new Cシステムサウンド( @"Sounds\Result BGM.ogg",      true,  true,  false);
+			this.soundカーソル移動音	= new CSystemSound( @"Sounds\Move.ogg",			false, false, false );
+			this.sound決定音			= new CSystemSound( @"Sounds\Decide.ogg",			false, false, false );
+			this.sound変更音			= new CSystemSound( @"Sounds\Change.ogg",			false, false, false );
+			this.sound取消音			= new CSystemSound( @"Sounds\Cancel.ogg",			false, false, true  );
+			this.sound歓声音			= new CSystemSound( @"Sounds\Audience.ogg",		false, false,  true  );
+			this.soundSTAGEFAILED音		= new CSystemSound( @"Sounds\Stage failed.ogg",	false, true,  true  );
+			this.soundゲーム開始音		= new CSystemSound( @"Sounds\Game start.ogg",		false, false, false );
+			this.soundGameEnd		= new CSystemSound( @"Sounds\Game end.ogg",		false, true,  false );
+			this.soundステージクリア音	= new CSystemSound( @"Sounds\Stage clear.ogg",		false, true,  false );
+			this.soundフルコンボ音		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
+            this.sound新記録音          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
+            this.soundエクセレント音    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
+			this.sound曲読込開始音		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
+			this.soundタイトル音		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
+            this.sound曲決定            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );
+            this.soundNovice            = new CSystemSound( @"Sounds\Novice.ogg",          false, false, false );
+            this.soundRegular           = new CSystemSound( @"Sounds\Regular.ogg",         false, false, false );
+			this.soundExpert		    = new CSystemSound( @"Sounds\Expert.ogg",		    false, false, false );
+            this.soundBasic             = new CSystemSound( @"Sounds\Basic.ogg",           false, false, false );
+            this.soundAdvanced          = new CSystemSound( @"Sounds\Advanced.ogg",        false, false, false );
+			this.soundExtreme	        = new CSystemSound( @"Sounds\Extreme.ogg",		    false, false, false );
+			this.soundMaster		    = new CSystemSound( @"Sounds\Master.ogg",			false, false, false );
+            this.soundSelectMusic       = new CSystemSound( @"Sounds\SelectMusic.ogg",     false, false, false );
+			this.bgm起動画面			= new CSystemSound( @"Sounds\Setup BGM.ogg",		true,  true,  false );
+			this.bgmオプション画面		= new CSystemSound( @"Sounds\Option BGM.ogg",		true,  true,  false );
+			this.bgmコンフィグ画面		= new CSystemSound( @"Sounds\Config BGM.ogg",		true,  true,  false );
+			this.bgm選曲画面			= new CSystemSound( @"Sounds\Select BGM.ogg",		true,  true,  false );
+            this.bgm結果画面            = new CSystemSound( @"Sounds\Result BGM.ogg",      true,  true,  false);
 		}
 
 		public void ReloadSkin()
@@ -702,22 +702,22 @@ namespace DTXMania
 			{
 				if ( !this[ i ].b排他 )	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
 				{
-					Cシステムサウンド cシステムサウンド = this[ i ];
+					CSystemSound cシステムサウンド = this[ i ];
 					if ( !CDTXMania.bCompactMode || cシステムサウンド.bCompact対象 )
 					{
 						try
 						{
-							cシステムサウンド.t読み込み();
-							Trace.TraceInformation( "システムサウンドを読み込みました。({0})", cシステムサウンド.strファイル名 );
+							cシステムサウンド.tRead();
+							Trace.TraceInformation( "システムサウンドを読み込みました。({0})", cシステムサウンド.strFilename );
 						}
 						catch ( FileNotFoundException )
 						{
-							Trace.TraceWarning( "システムサウンドが存在しません。({0})", cシステムサウンド.strファイル名 );
+							Trace.TraceWarning( "システムサウンドが存在しません。({0})", cシステムサウンド.strFilename );
 						}
 						catch ( Exception e )
 						{
 							Trace.TraceError( e.Message );
-							Trace.TraceWarning( "システムサウンドの読み込みに失敗しました。({0})", cシステムサウンド.strファイル名 );
+							Trace.TraceWarning( "システムサウンドの読み込みに失敗しました。({0})", cシステムサウンド.strFilename );
 						}
 					}
 				}
@@ -899,7 +899,7 @@ namespace DTXMania
                 {
 				    str = reader.ReadToEnd();
                 }
-                this.t文字列から読み込み( str );
+                this.tReadFromString( str );
             }
         }
 
@@ -994,7 +994,7 @@ namespace DTXMania
             }
         }
 
-        private void t文字列から読み込み(string strAllSettings)	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
+        private void tReadFromString(string strAllSettings)	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
         {
             string[] delimiter = { "\n" };
             string[] strSingleLine = strAllSettings.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);

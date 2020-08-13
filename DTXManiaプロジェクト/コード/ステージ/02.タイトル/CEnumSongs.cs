@@ -255,13 +255,13 @@ namespace DTXMania
                     {
                         if (!CDTXMania.Skin[i].b排他)	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
                         {
-                            CSkin.Cシステムサウンド cシステムサウンド = CDTXMania.Skin[i];
+                            CSkin.CSystemSound cシステムサウンド = CDTXMania.Skin[i];
                             if (!CDTXMania.bCompactMode || cシステムサウンド.bCompact対象)
                             {
                                 try
                                 {
-                                    cシステムサウンド.t読み込み();
-                                    Trace.TraceInformation("システムサウンドを読み込みました。({0})", cシステムサウンド.strファイル名);
+                                    cシステムサウンド.tRead();
+                                    Trace.TraceInformation("システムサウンドを読み込みました。({0})", cシステムサウンド.strFilename);
                                     //if ( ( cシステムサウンド == CDTXMania.Skin.bgm起動画面 ) && cシステムサウンド.b読み込み成功 )
                                     //{
                                     //	cシステムサウンド.t再生する();
@@ -269,12 +269,12 @@ namespace DTXMania
                                 }
                                 catch (FileNotFoundException)
                                 {
-                                    Trace.TraceWarning("システムサウンドが存在しません。({0})", cシステムサウンド.strファイル名);
+                                    Trace.TraceWarning("システムサウンドが存在しません。({0})", cシステムサウンド.strFilename);
                                 }
                                 catch (Exception e)
                                 {
                                     Trace.TraceError(e.Message);
-                                    Trace.TraceWarning("システムサウンドの読み込みに失敗しました。({0})", cシステムサウンド.strファイル名);
+                                    Trace.TraceWarning("システムサウンドの読み込みに失敗しました。({0})", cシステムサウンド.strFilename);
                                 }
                             }
                         }

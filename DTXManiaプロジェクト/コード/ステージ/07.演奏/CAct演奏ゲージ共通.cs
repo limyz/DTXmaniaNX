@@ -60,7 +60,7 @@ namespace DTXMania
 			get;
 			private set;
 		}
-		public bool IsFailed( E楽器パート part )	// 閉店状態になったかどうか
+		public bool IsFailed( EInstrumentPart part )	// 閉店状態になったかどうか
 		{
 			if ( bRisky ) 
             {
@@ -68,7 +68,7 @@ namespace DTXMania
 			}
 			return this.db現在のゲージ値[ (int) part ] <= GAUGE_MIN;
 		}
-		public bool IsDanger( E楽器パート part )	// DANGERかどうか
+		public bool IsDanger( EInstrumentPart part )	// DANGERかどうか
 		{
 			if ( bRisky )
 			{
@@ -148,7 +148,7 @@ namespace DTXMania
 #endregion
 #endif
 
-		public void Damage( E楽器パート screenmode, E楽器パート part, E判定 e今回の判定 )
+		public void Damage( EInstrumentPart screenmode, EInstrumentPart part, E判定 e今回の判定 )
 		{
 			double fDamage;
 
@@ -268,17 +268,17 @@ namespace DTXMania
 					break;
 			}
 #endif
-			if ( screenmode == E楽器パート.DRUMS )		// ドラム演奏画面なら、ギター/ベースのダメージも全部ドラムのゲージに集約する
+			if ( screenmode == EInstrumentPart.DRUMS )		// ドラム演奏画面なら、ギター/ベースのダメージも全部ドラムのゲージに集約する
 			{
-				part = E楽器パート.DRUMS;
+				part = EInstrumentPart.DRUMS;
 				this.db現在のゲージ値[ (int) part ] += fDamage;
 			}
 			else
 			{
 				if ( this.bRisky )						// ギター画面且つRISKYなら、ギターとベースのゲージをセットで減少
 				{
-					this.db現在のゲージ値[ (int) E楽器パート.GUITAR ] += fDamage;
-					this.db現在のゲージ値[ (int) E楽器パート.BASS   ] += fDamage;
+					this.db現在のゲージ値[ (int) EInstrumentPart.GUITAR ] += fDamage;
+					this.db現在のゲージ値[ (int) EInstrumentPart.BASS   ] += fDamage;
 				}
 				else
 				{

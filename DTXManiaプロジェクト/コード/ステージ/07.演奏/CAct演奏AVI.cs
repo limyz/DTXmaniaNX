@@ -18,8 +18,8 @@ namespace DTXMania
 
         public CAct演奏AVI()
         {
-            base.list子Activities.Add( this.actFill = new CAct演奏Drumsフィルインエフェクト() );
-            base.list子Activities.Add( this.actPanel = new CAct演奏パネル文字列() );
+            base.listChildActivities.Add( this.actFill = new CAct演奏Drumsフィルインエフェクト() );
+            base.listChildActivities.Add( this.actPanel = new CAct演奏パネル文字列() );
             base.bNotActivated = true;
         }
 
@@ -418,18 +418,18 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                //this.txドラム = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Drums.png"));
+                //this.txドラム = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Drums.png"));
                 if (CDTXMania.ConfigIni.bGuitar有効)
                 {
-                    this.txクリップパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_ClipPanelC.png"));
+                    this.txクリップパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_ClipPanelC.png"));
                 }
                 else if (CDTXMania.ConfigIni.bGraph有効.Drums && CDTXMania.ConfigIni.bDrums有効)
                 {
-                    this.txクリップパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_ClipPanelB.png"));
+                    this.txクリップパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_ClipPanelB.png"));
                 }
                 else
                 {
-                    this.txクリップパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_ClipPanel.png"));
+                    this.txクリップパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_ClipPanel.png"));
                 }
                 this.txDShow汎用 = new CTexture(CDTXMania.app.Device, 1280, 720, CDTXMania.app.GraphicsDeviceManager.CurrentSettings.BackBufferFormat, Pool.Managed);
 
@@ -439,12 +439,12 @@ namespace DTXMania
                     this.stフィルイン[i].ct進行 = new CCounter(0, 30, 30, CDTXMania.Timer);
                     this.stフィルイン[i].b使用中 = false;
                 }
-                this.txフィルインエフェクト = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Fillin Effect.png" ) );
+                this.txフィルインエフェクト = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_Fillin Effect.png" ) );
 
                 //this.txフィルインエフェクト = new CTexture[ 31 ];
                 //for( int fill = 0; fill < 31; fill++ )
                 //{
-                //    this.txフィルインエフェクト[ fill ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\StageEffect\7_StageEffect_" + fill.ToString() + ".png" ) );
+                //    this.txフィルインエフェクト[ fill ] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\StageEffect\7_StageEffect_" + fill.ToString() + ".png" ) );
                 //    if( this.txフィルインエフェクト[ fill ] == null )
                 //        continue;
 
@@ -482,19 +482,19 @@ namespace DTXMania
                 }
                 CDTXMania.t安全にDisposeする(ref this.ds汎用);
                 //テクスチャ 17枚
-                //CDTXMania.tテクスチャの解放(ref this.txドラム);
-                CDTXMania.tテクスチャの解放(ref this.txクリップパネル);
-                CDTXMania.tテクスチャの解放( ref this.txフィルインエフェクト );
+                //CDTXMania.tReleaseTexture(ref this.txドラム);
+                CDTXMania.tReleaseTexture(ref this.txクリップパネル);
+                CDTXMania.tReleaseTexture( ref this.txフィルインエフェクト );
                 //for( int ar = 0; ar < 31; ar++ )
                 //{
-                //    CDTXMania.tテクスチャの解放( ref this.txフィルインエフェクト[ ar ] );
+                //    CDTXMania.tReleaseTexture( ref this.txフィルインエフェクト[ ar ] );
                 //}
                 base.OnManagedReleaseResources();
             }
         }
         public unsafe int t進行描画(int x, int y)
         {
-            if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrums有効 ? CDTXMania.stage演奏ドラム画面.ct登場用.b終了値に達した : CDTXMania.stage演奏ギター画面.ct登場用.b終了値に達した))
+            if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrums有効 ? CDTXMania.stage演奏ドラム画面.ct登場用.bReachedEndValue : CDTXMania.stage演奏ギター画面.ct登場用.bReachedEndValue))
             {
                 #region[ 汎用動画 ]
                 if (this.ds汎用 != null)
@@ -788,7 +788,7 @@ namespace DTXMania
                         {
                             int numf = this.stフィルイン[ i ].ct進行.n現在の値;
                             this.stフィルイン[ i ].ct進行.t進行();
-                            if( this.stフィルイン[ i ].ct進行.b終了値に達した )
+                            if( this.stフィルイン[ i ].ct進行.bReachedEndValue )
                             {
                                 this.stフィルイン[ i ].ct進行.t停止();
                                 this.stフィルイン[ i ].b使用中 = false;
@@ -976,7 +976,7 @@ namespace DTXMania
                     this.tx描画用.vc拡大縮小倍率 = this.vector;
                 }
                 IInputDevice keyboard = CDTXMania.Input管理.Keyboard;
-                if( CDTXMania.Pad.b押された( E楽器パート.BASS, Eパッド.Help ) )
+                if( CDTXMania.Pad.b押された( EInstrumentPart.BASS, Eパッド.Help ) )
                 {
                     if( this.b再生トグル == false )
                     {

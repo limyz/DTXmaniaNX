@@ -146,7 +146,7 @@ namespace DTXMania
 
 		public override void tEnter押下()
 		{
-			// this.t項目値を次へ移動();	// 何もしない
+			// this.t項目値を次へ移動();	// DoNothing
 		}
 	}
 

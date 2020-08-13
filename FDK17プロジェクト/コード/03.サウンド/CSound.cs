@@ -264,7 +264,7 @@ namespace FDK
 
 			CSound.tすべてのサウンドを再構築する( SoundDevice );		// すでに生成済みのサウンドがあれば作り直す。
 		}
-		public CSound tサウンドを生成する( string filename )
+		public CSound tGenerateSound( string filename )
 		{
 			if ( SoundDeviceType == ESoundDeviceType.Unknown )
 			{
@@ -885,12 +885,12 @@ namespace FDK
 		{
 			cs.t解放する();
 		}
-		public void t再生を開始する()
+		public void tStartPlaying()
 		{
 			t再生位置を先頭に戻す();
 			tサウンドを再生する();
 		}
-		public void t再生を開始する( bool bループする )
+		public void tStartPlaying( bool bループする )
 		{
 			if ( bBASSサウンドである )
 			{
@@ -993,7 +993,7 @@ namespace FDK
 		}
 		public void tサウンドを再生する( bool bループする )
 		{
-			if ( this.bBASSサウンドである )			// BASSサウンド時のループ処理は、t再生を開始する()側に実装。ここでは「bループする」は未使用。
+			if ( this.bBASSサウンドである )			// BASSサウンド時のループ処理は、tStartPlaying()側に実装。ここでは「bループする」は未使用。
 			{
 //Debug.WriteLine( "再生中?: " +  System.IO.Path.GetFileName(this.strファイル名) + " status=" + BassMix.BASS_Mixer_ChannelIsActive( this.hBassStream ) + " current=" + BassMix.BASS_Mixer_ChannelGetPosition( this.hBassStream ) + " nBytes=" + nBytes );
 				bool b = BassMix.BASS_Mixer_ChannelPlay( this.hBassStream );

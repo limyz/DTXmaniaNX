@@ -6,13 +6,13 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CStage終了 : CStage
+	internal class CStageEnd : CStage
 	{
-		// コンストラクタ
+		// Constructor
 
-		public CStage終了()
+		public CStageEnd()
 		{
-			base.eステージID = CStage.Eステージ.終了;
+			base.eステージID = CStage.EStage.End;
 			base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 			base.bNotActivated = true;
 		}
@@ -53,7 +53,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\9_background.jpg" ), false );
+				this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\9_background.jpg" ), false );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -61,7 +61,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx背景 );
+				CDTXMania.tReleaseTexture( ref this.txBackground );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -71,18 +71,18 @@ namespace DTXMania
 			{
 				if( base.b初めての進行描画 )
 				{
-					CDTXMania.Skin.soundゲーム終了音.t再生する();
-					this.ct時間稼ぎ.t開始( 0, 1, 0x3e8, CDTXMania.Timer );
+					CDTXMania.Skin.soundGameEnd.t再生する();
+					this.ct時間稼ぎ.tStart( 0, 1, 0x3e8, CDTXMania.Timer );
                     base.b初めての進行描画 = false;
 				}
 				this.ct時間稼ぎ.t進行();
-				if( this.ct時間稼ぎ.b終了値に達した && !CDTXMania.Skin.soundゲーム終了音.b再生中 )
+				if( this.ct時間稼ぎ.bReachedEndValue && !CDTXMania.Skin.soundGameEnd.b再生中 )
 				{
 					return 1;
 				}
-				if( this.tx背景 != null )
+				if( this.txBackground != null )
 				{
-					this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
+					this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
 				}
 			}
 			return 0;
@@ -94,7 +94,7 @@ namespace DTXMania
 		#region [ private ]
 		//-----------------
 		private CCounter ct時間稼ぎ;
-		private CTexture tx背景;
+		private CTexture txBackground;
 		//-----------------
 		#endregion
 	}

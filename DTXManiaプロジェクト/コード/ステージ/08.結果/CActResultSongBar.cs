@@ -52,7 +52,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				//this.txバー = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenResult song bar.png" ) );
+				//this.txバー = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenResult song bar.png" ) );
 				try
 				{
 					Bitmap image = new Bitmap( 0x3a8, 0x36 );
@@ -76,8 +76,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txバー );
-				CDTXMania.tテクスチャの解放( ref this.tx曲名 );
+				CDTXMania.tReleaseTexture( ref this.txバー );
+				CDTXMania.tReleaseTexture( ref this.tx曲名 );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -137,7 +137,7 @@ namespace DTXMania
 			{
 				this.tx曲名.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y + 20 );
 			}
-			if( !this.ct登場用.b終了値に達した )
+			if( !this.ct登場用.bReachedEndValue )
 			{
 				return 0;
 			}

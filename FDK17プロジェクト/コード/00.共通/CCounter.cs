@@ -75,13 +75,13 @@ namespace FDK
 		{
 			get { return !this.b進行中; }
 		}
-		public bool b終了値に達した
+		public bool bReachedEndValue
 		{
 			get { return ( this.n現在の値 >= this.n終了値 ); }
 		}
 		public bool b終了値に達してない
 		{
-			get { return !this.b終了値に達した; }
+			get { return !this.bReachedEndValue; }
 		}
 
         /// <summary>通常のCCounterでは使用できません。</summary>
@@ -131,14 +131,14 @@ namespace FDK
 		public CCounter( int n開始値, int n終了値, int n間隔ms, CTimer timer )
 			: this()
 		{
-			this.t開始( n開始値, n終了値, n間隔ms, timer );
+			this.tStart( n開始値, n終了値, n間隔ms, timer );
 		}
 
         /// <summary>生成と同時に開始する。(double版)</summary>
         public CCounter( double db開始値, double db終了値, double db間隔, CSoundTimer timer )
             : this()
         {
-            this.t開始( db開始値, db終了値, db間隔 * 1000.0, timer );
+            this.tStart( db開始値, db終了値, db間隔 * 1000.0, timer );
         }
 
 
@@ -151,7 +151,7 @@ namespace FDK
 		/// <param name="n終了値">最後のカウント値。</param>
 		/// <param name="n間隔ms">カウント値を１増加させるのにかける時間（ミリ秒単位）。</param>
 		/// <param name="timer">カウントに使用するタイマ。</param>
-		public void t開始( int n開始値, int n終了値, int n間隔ms, CTimer timer )
+		public void tStart( int n開始値, int n終了値, int n間隔ms, CTimer timer )
 		{
 			this.n開始値 = n開始値;
 			this.n終了値 = n終了値;
@@ -168,7 +168,7 @@ namespace FDK
 		/// <param name="db終了値">最後のカウント値。</param>
 		/// <param name="db間隔">カウント値を１増加させるのにかける時間（秒単位）。</param>
 		/// <param name="timer">カウントに使用するタイマ。</param>
-		public void t開始( double db開始値, double db終了値, double db間隔, CSoundTimer timer )
+		public void tStart( double db開始値, double db終了値, double db間隔, CSoundTimer timer )
 		{
 			this.db開始値 = db開始値;
 			this.db終了値 = db終了値;

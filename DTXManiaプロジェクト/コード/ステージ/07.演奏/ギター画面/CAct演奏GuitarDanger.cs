@@ -14,7 +14,7 @@ namespace DTXMania
 		{
 			if ( !base.bNotActivated )
 			{
-				this.txDANGER = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayGuitar danger.png" ) );
+				this.txDANGER = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayGuitar danger.png" ) );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -22,7 +22,7 @@ namespace DTXMania
 		{
 			if ( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txDANGER );
+				CDTXMania.tReleaseTexture( ref this.txDANGER );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -53,7 +53,7 @@ namespace DTXMania
 					//this.ct移動用.t進行Loop();
 					this.ct透明度用.t進行Loop();
 				}
-				for ( int nPart = (int) E楽器パート.GUITAR; nPart <= (int) E楽器パート.BASS; nPart++ )
+				for ( int nPart = (int) EInstrumentPart.GUITAR; nPart <= (int) EInstrumentPart.BASS; nPart++ )
 				{
 				//	this.bDanger中[nPart] = bIsDanger[nPart];
 					if ( bIsDanger[ nPart ] )

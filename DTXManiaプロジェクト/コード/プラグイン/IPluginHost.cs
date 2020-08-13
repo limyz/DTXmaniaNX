@@ -32,7 +32,7 @@
 		/// <summary>
 		/// 現在のステージのIDを表します。
 		/// </summary>
-		DTXMania.CStage.Eステージ e現在のステージ { get; }
+		DTXMania.CStage.EStage e現在のステージ { get; }
 
 		/// <summary>
 		/// 現在のステージにおけるフェーズのIDを表します。
@@ -59,6 +59,6 @@
 		/// 指定されたシステムサウンド／BGMを再生します。
 		/// </summary>
 		/// <param name="sound">再生するシステムサウンドの識別子。</param>
-		void tシステムサウンドを再生する( Eシステムサウンド sound );
+		void tシステムサウンドを再生する( ESystemSound sound );
 	}
 }

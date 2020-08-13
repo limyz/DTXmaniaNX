@@ -21,17 +21,17 @@ namespace DTXMania
 
         public override void OnManagedCreateResources()
         {
-            this.txレーン = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret_Guitar.png"));
-            this.txレーンダーク = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret_Guitar_Dark.png"));
-            this.txレーンフラッシュ = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_guitar line.png"));
+            this.txレーン = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret_Guitar.png"));
+            this.txレーンダーク = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret_Guitar_Dark.png"));
+            this.txレーンフラッシュ = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_guitar line.png"));
 
             base.OnManagedCreateResources();
         }
         public override void OnManagedReleaseResources()
         {
-            CDTXMania.tテクスチャの解放( ref this.txレーン );
-            CDTXMania.tテクスチャの解放( ref this.txレーンダーク );
-            CDTXMania.tテクスチャの解放( ref this.txレーンフラッシュ );
+            CDTXMania.tReleaseTexture( ref this.txレーン );
+            CDTXMania.tReleaseTexture( ref this.txレーンダーク );
+            CDTXMania.tReleaseTexture( ref this.txレーンフラッシュ );
             base.OnManagedReleaseResources();
         }
 
@@ -63,7 +63,7 @@ namespace DTXMania
 				{
 					if( !base.ct進行[ i ].b停止中 )
 					{
-						E楽器パート e楽器パート = ( i < 5 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+						EInstrumentPart e楽器パート = ( i < 5 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 						CTexture texture = CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] ? base.txFlush[ ( i % 5 ) + 5 ] : base.txFlush[ i % 5 ];
 						int num2 = CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] ? 1 : 0;
 						//int x = ( ( ( i < 5 ) ? 88 : 480 ) + this.nRGBのX座標[ num2, i ] ) + ( ( 37 * base.ct進行[ i ].n現在の値 ) / 100 );
@@ -78,7 +78,7 @@ namespace DTXMania
                                 //this.txレーンフラッシュ.tDraw2D( CDTXMania.app.Device, x2 + ( ( i < 5 ? i : i - 5 ) * 39 ), y2, new Rectangle( i * 39, 0, 41, 566 ) );
 				        }
                         base.ct進行[ i ].t進行();
-						if( base.ct進行[ i ].b終了値に達した )
+						if( base.ct進行[ i ].bReachedEndValue )
 						{
 							base.ct進行[ i ].t停止();
 						}

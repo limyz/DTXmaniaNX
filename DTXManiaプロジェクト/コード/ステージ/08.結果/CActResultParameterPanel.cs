@@ -302,22 +302,22 @@ namespace DTXMania
 		{
             if (!base.bNotActivated)
             {
-                this.tx文字[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
-                this.tx文字[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
-                this.tx文字[2] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_numbers_large.png"));
-                this.txNewRecord = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\8_New Record.png"));
-                this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.tx文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
+                this.tx文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
+                this.tx文字[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_numbers_large.png"));
+                this.txNewRecord = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_New Record.png"));
+                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
                 this.txエキサイトゲージ = new CTexture[3];
-                this.txエキサイトゲージ[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Gauge.png"));
-                this.txエキサイトゲージ[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_gauge_bar.png"));
-                this.txエキサイトゲージ[2] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
-                this.txスコア = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_score numbersGD.png"));
-                this.txスキルパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_SkillPanel.png"));
-                this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Difficulty.png"));
-                this.tx難易度用数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_LevelNumber.png"));
+                this.txエキサイトゲージ[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge.png"));
+                this.txエキサイトゲージ[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
+                this.txエキサイトゲージ[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
+                this.txスコア = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_score numbersGD.png"));
+                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
+                this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
                 //Load new textures
-                this.txPercent = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
-                this.txSkillMax = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_skill max.png"));
+                this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
+                this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
 
                 for ( int i = 0; i < 3; i++ )
                 {
@@ -433,20 +433,20 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放( ref this.txパネル本体 );
-                CDTXMania.tテクスチャの解放( ref this.txNewRecord );
-                CDTXMania.tテクスチャの解放( ref this.txスキルパネル );
-                CDTXMania.tテクスチャの解放( ref this.txスコア );
-                CDTXMania.tテクスチャの解放( ref this.tx難易度パネル );
-                CDTXMania.tテクスチャの解放( ref this.tx難易度用数字 );
+                CDTXMania.tReleaseTexture( ref this.txパネル本体 );
+                CDTXMania.tReleaseTexture( ref this.txNewRecord );
+                CDTXMania.tReleaseTexture( ref this.txスキルパネル );
+                CDTXMania.tReleaseTexture( ref this.txスコア );
+                CDTXMania.tReleaseTexture( ref this.tx難易度パネル );
+                CDTXMania.tReleaseTexture( ref this.tx難易度用数字 );
                 //Free new texture
-                CDTXMania.tテクスチャの解放(ref this.txPercent);
-                CDTXMania.tテクスチャの解放(ref this.txSkillMax);
+                CDTXMania.tReleaseTexture(ref this.txPercent);
+                CDTXMania.tReleaseTexture(ref this.txSkillMax);
                 for ( int i = 0; i < 3; i++ )
                 {
-                    CDTXMania.tテクスチャの解放( ref this.txネームプレート用文字[ i ] );
-                    CDTXMania.tテクスチャの解放( ref this.txエキサイトゲージ[ i ] );
-                    CDTXMania.tテクスチャの解放( ref this.tx文字[ i ] );
+                    CDTXMania.tReleaseTexture( ref this.txネームプレート用文字[ i ] );
+                    CDTXMania.tReleaseTexture( ref this.txエキサイトゲージ[ i ] );
+                    CDTXMania.tReleaseTexture( ref this.tx文字[ i ] );
                 }
                 base.OnManagedReleaseResources();
             }
@@ -487,12 +487,12 @@ namespace DTXMania
                     this.txスキルパネル.tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
                     this.txネームプレート用文字[ j ].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
 
-                    this.t小文字表示(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].nPerfect数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].nGreat数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].nGood数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].nPoor数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].nMiss数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.st演奏記録[j].n最大コンボ数));
+                    this.t小文字表示(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].nPerfect数_Auto含まない));
+                    this.t小文字表示(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].nGreat数_Auto含まない));
+                    this.t小文字表示(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].nGood数_Auto含まない));
+                    this.t小文字表示(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].nPoor数_Auto含まない));
+                    this.t小文字表示(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].nMiss数_Auto含まない));
+                    this.t小文字表示(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stage結果.stPerformanceEntry[j].n最大コンボ数));
 
 
                     this.t小文字表示(167 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fPerfect率[j])));
@@ -500,28 +500,28 @@ namespace DTXMania
                     this.t小文字表示(167 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fGood率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fPoor率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stage結果.fMiss率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stage結果.st演奏記録[j].n最大コンボ数 / CDTXMania.stage結果.st演奏記録[j].n全チップ数))));
+                    this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stage結果.stPerformanceEntry[j].n最大コンボ数 / CDTXMania.stage結果.stPerformanceEntry[j].n全チップ数))));
 
-                    //this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].dbPerformanceSkill));
+                    //this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.stPerformanceEntry[j].dbPerformanceSkill));
                     //Conditional checks for MAX
-                    if(this.txSkillMax != null && CDTXMania.stage結果.st演奏記録[j].dbPerformanceSkill >= 100.0)
+                    if(this.txSkillMax != null && CDTXMania.stage結果.stPerformanceEntry[j].dbPerformanceSkill >= 100.0)
                     {
                         this.txSkillMax.tDraw2D(CDTXMania.app.Device, 127 + this.n本体X[j], 277 + this.n本体Y);
                     }
                     else
                     {
-                        this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].dbPerformanceSkill));
+                        this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.stPerformanceEntry[j].dbPerformanceSkill));
                         if(this.txPercent != null)
                             this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[j], 287 + this.n本体Y);
                     }
 
-                    this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.st演奏記録[j].dbゲーム型スキル値));
+                    this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stage結果.stPerformanceEntry[j].dbゲーム型スキル値));
                     
                     if(this.tx難易度パネル != null)
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
                     this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[j], 290 + this.n本体Y, str);
 
-                    string strScore = string.Format("{0,7:######0}", CDTXMania.stage結果.st演奏記録[j].nスコア);
+                    string strScore = string.Format("{0,7:######0}", CDTXMania.stage結果.stPerformanceEntry[j].nスコア);
                     for (int i = 0; i < 7; i++)
                     {
                         Rectangle rectangle;
@@ -547,25 +547,25 @@ namespace DTXMania
 
                     for (int i = 0; i < 1; i++)
                     {
-                        if (CDTXMania.stage結果.b新記録スキル[i])
+                        if (CDTXMania.stage結果.bNewRecordSkill[i])
                         {
                             this.txNewRecord.tDraw2D( CDTXMania.app.Device, 118 + this.n本体X[j], 322 + this.n本体Y );
                         }
                     }
                     if (this.ct表示用.n現在の値 >= 900)
                     {
-                        if (CDTXMania.stage結果.st演奏記録[j].nPerfect数 == CDTXMania.stage結果.st演奏記録[j].n全チップ数)
+                        if (CDTXMania.stage結果.stPerformanceEntry[j].nPerfect数 == CDTXMania.stage結果.stPerformanceEntry[j].n全チップ数)
                         {
                             //えくせ
                         }
-                        else if (CDTXMania.stage結果.st演奏記録[j].bIsFullCombo && CDTXMania.stage結果.st演奏記録[j].nPerfect数 != CDTXMania.stage結果.st演奏記録[j].n全チップ数)
+                        else if (CDTXMania.stage結果.stPerformanceEntry[j].bIsFullCombo && CDTXMania.stage結果.stPerformanceEntry[j].nPerfect数 != CDTXMania.stage結果.stPerformanceEntry[j].n全チップ数)
                         {
                             //ふるこん
                         }
                     }
                 }
             }
-            if (!this.ct表示用.b終了値に達した)
+            if (!this.ct表示用.bReachedEndValue)
             {
                 return 0;
             }

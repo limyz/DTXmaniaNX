@@ -23,7 +23,7 @@ namespace DTXMania
 			{
 				throw new IndexOutOfRangeException();
 			}
-			E楽器パート e楽器パート = ( nLane < 5 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+			EInstrumentPart e楽器パート = ( nLane < 5 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 			int index = nLane;
 
             //LEFT時のY座標

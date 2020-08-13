@@ -30,9 +30,9 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx黒タイル64x64 );
-                CDTXMania.tテクスチャの解放( ref this.tx黒幕 );
-                CDTXMania.tテクスチャの解放( ref this.txジャケット );
+				CDTXMania.tReleaseTexture( ref this.tx黒タイル64x64 );
+                CDTXMania.tReleaseTexture( ref this.tx黒幕 );
+                CDTXMania.tReleaseTexture( ref this.txジャケット );
 				base.OnDeactivate();
 			}
 		}
@@ -40,8 +40,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.tx黒タイル64x64 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Tile black 64x64.png" ), false );
-                this.tx黒幕 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\6_FadeOut.jpg"), false);
+				this.tx黒タイル64x64 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\Tile black 64x64.png" ), false );
+                this.tx黒幕 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\6_FadeOut.jpg"), false);
 				base.OnManagedCreateResources();
 			}
 		}
@@ -63,11 +63,11 @@ namespace DTXMania
                     if (!File.Exists(path))
                     {
                         //Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
-                        this.txジャケット = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\5_preimage default.png"));
+                        this.txジャケット = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\\5_preimage default.png"));
                     }
                     else
                     {
-                        this.txジャケット = CDTXMania.tテクスチャの生成(path);
+                        this.txジャケット = CDTXMania.tGenerateTexture(path);
                     }
                 }
 

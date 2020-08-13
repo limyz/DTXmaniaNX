@@ -15,7 +15,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txオプションパネル);
+                CDTXMania.tReleaseTexture(ref this.txオプションパネル);
                 base.OnDeactivate();
             }
         }
@@ -23,7 +23,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txオプションパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\Screen option panels.png"), false);
+                this.txオプションパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\Screen option panels.png"), false);
                 base.OnManagedCreateResources();
             }
         }

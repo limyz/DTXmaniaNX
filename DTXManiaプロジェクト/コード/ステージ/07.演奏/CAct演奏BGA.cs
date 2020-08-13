@@ -142,7 +142,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                CDTXMania.tテクスチャの解放( ref this.txBGAバックパネル );
+                CDTXMania.tReleaseTexture( ref this.txBGAバックパネル );
 				if( this.sfBackBuffer != null )
 				{
 					this.sfBackBuffer.Dispose();

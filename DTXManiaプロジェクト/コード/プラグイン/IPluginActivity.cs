@@ -10,7 +10,7 @@ namespace DTXMania
 	/// <para>(1) DTXMania の起動処理の最後（セットアップ画面が表示される直前）に一度だけ、OnInitialize()_OnManagedリソースの作成()_OnUnmanagedリソースの作成() をこの順番で1回ずつ呼び出します。</para>
 	/// <para>(2) DTXMania の終了処理の最初（Thank you for playing が消えた直後）に一度だけ、OnUnmanagedリソースの解放()_OnManagedリソースの解放()_On終了() をこの順番で1回ずつ呼び出します。</para>
 	/// <para>(3) DTXMania の起動中、すなわち(1)～(2)の間は、どんなシーンであっても、常に On進行描画() を1フレームにつき1回ずつ呼び出します。</para>
-	/// <para>(4) Direct3D デバイスのリセット時には、デバイスのリセット前に OnUnmanagedリソースの解放() を1回呼び出し、デバイスをリセットしたのち、OnUnmanagedリソースの作成() を1回呼び出します。</para>
+	/// <para>(4) Direct3D デバイスのリセット時には、デバイスのリセット前に OnUnmanagedリソースの解放() を1回呼び出し、デバイスをリセットしたのち、OnUnmanagedCreateResource() を1回呼び出します。</para>
 	/// <para>(5) Direct3D デバイスのロスト時には、デバイスの再生成前に OnUnmanagedリソースの解放()_OnManagedリソースの解放() を1回ずつ呼び出し、デバイスを再生成したのち、OnManagedCreateResources()_OnUnmanagedリソースの作成() を1回ずつ呼び出します。</para>
 	/// </summary>
     public interface IPluginActivity
@@ -52,7 +52,7 @@ namespace DTXMania
 		/// <para>プラグインの進行と描画を行います。</para>
 		/// <para>※現在の DTXMania では、進行と描画は分離されていません。</para>
 		/// <para>※BeginScene()/EndScene() は DTXMania 側で行うため、プラグイン側では不要です。</para>
-		/// <para>※keyboard.tポーリング() は DTXMania 側で行いますのでプラグイン側では行わないで下さい。</para>
+		/// <para>※keyboard.tDoPolling() は DTXMania 側で行いますのでプラグイン側では行わないで下さい。</para>
 		/// <param name="pad">パッド入力。他のプラグインが入力占有中である場合は null が渡されます。</param>
 		/// <param name="keyboard">キーボード入力。他のプラグインが入力占有中である場合は null が渡されます。</param>
 		/// </summary>

@@ -42,14 +42,14 @@ namespace DTXMania
 
         public override void OnActivate()
         {
-            if (this.b活性化してる)
+            if (this.bActivated)
                 return;
             base.OnActivate();
 
             try
             {
                 this.ctNowEnumeratingSongs = new CCounter();	// 0, 1000, 17, CDTXMania.Timer );
-                this.ctNowEnumeratingSongs.t開始(0, 100, 17, CDTXMania.Timer);
+                this.ctNowEnumeratingSongs.tStart(0, 100, 17, CDTXMania.Timer);
             }
             finally
             {
@@ -69,7 +69,7 @@ namespace DTXMania
             string pathNowEnumeratingSongs = CSkin.Path(@"Graphics\ScreenTitle NowEnumeratingSongs.png");
             if (File.Exists(pathNowEnumeratingSongs))
             {
-                this.txNowEnumeratingSongs = CDTXMania.tテクスチャの生成(pathNowEnumeratingSongs, false);
+                this.txNowEnumeratingSongs = CDTXMania.tGenerateTexture(pathNowEnumeratingSongs, false);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace DTXMania
             string pathDialogNowEnumeratingSongs = CSkin.Path(@"Graphics\ScreenConfig NowEnumeratingSongs.png");
             if (File.Exists(pathDialogNowEnumeratingSongs))
             {
-                this.txDialogNowEnumeratingSongs = CDTXMania.tテクスチャの生成(pathDialogNowEnumeratingSongs, false);
+                this.txDialogNowEnumeratingSongs = CDTXMania.tGenerateTexture(pathDialogNowEnumeratingSongs, false);
             }
             else
             {

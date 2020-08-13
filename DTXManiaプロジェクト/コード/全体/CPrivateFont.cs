@@ -26,7 +26,7 @@ namespace DTXMania
 	/// とか
 	/// Bitmap bmp = prvFont.DrawPrivateFont( "ABCDE", Color.White, Color.Black, Color.Yellow, Color.OrangeRed ); // 上下グラデーション(Yellow→OrangeRed)
 	/// とかして、
-	/// CTexture ctBmp = CDTXMania.tテクスチャの生成( bmp, false );
+	/// CTexture ctBmp = CDTXMania.tGenerateTexture( bmp, false );
 	/// ctBMP.tDraw2D( ～～～ );
 	/// で表示してください。
 	/// 

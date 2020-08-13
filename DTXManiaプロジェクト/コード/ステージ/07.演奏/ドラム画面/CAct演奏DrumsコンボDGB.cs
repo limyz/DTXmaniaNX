@@ -91,7 +91,7 @@ namespace DTXMania
                     {
                         int num1 = this.st爆発[i].ct進行.n現在の値;
                         this.st爆発[i].ct進行.t進行();
-                        if (this.st爆発[i].ct進行.b終了値に達した)
+                        if (this.st爆発[i].ct進行.bReachedEndValue)
                         {
                             this.st爆発[i].ct進行.t停止();
                             this.st爆発[i].b使用中 = false;

@@ -125,20 +125,20 @@ namespace DTXMania
 			{
                 if (CDTXMania.ConfigIni.nLaneDisp.Drums == 0 || CDTXMania.ConfigIni.nLaneDisp.Drums == 2)
                 {
-                    this.txLine = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret.png"));
-                    this.txBass = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret.png"));
-                    this.txHitom = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret.png"));
+                    this.txLine = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret.png"));
+                    this.txBass = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret.png"));
+                    this.txHitom = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret.png"));
                 }
                 else
                 {
-                    this.txLine = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
-                    this.txBass = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
-                    this.txHitom = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
+                    this.txLine = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
+                    this.txBass = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
+                    this.txHitom = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret_Dark.png"));
                 }
 
 				for( int i = 0; i < 22; i++ )
 				{
-					this.txFlush[ i ] = CDTXMania.tテクスチャの生成( CSkin.Path( this.strファイル名[ i ] ) );
+					this.txFlush[ i ] = CDTXMania.tGenerateTexture( CSkin.Path( this.strファイル名[ i ] ) );
 				}
 				base.OnManagedCreateResources();
 			}
@@ -149,12 +149,12 @@ namespace DTXMania
 			{
 				for( int i = 0; i < 22; i++ )
 				{
-					CDTXMania.tテクスチャの解放( ref this.txFlush[ i ] );
+					CDTXMania.tReleaseTexture( ref this.txFlush[ i ] );
 				}
-                CDTXMania.tテクスチャの解放(ref this.txLC);
-                CDTXMania.tテクスチャの解放(ref this.txLine);
-                CDTXMania.tテクスチャの解放(ref this.txBass);
-                CDTXMania.tテクスチャの解放(ref this.txHitom);
+                CDTXMania.tReleaseTexture(ref this.txLC);
+                CDTXMania.tReleaseTexture(ref this.txLine);
+                CDTXMania.tReleaseTexture(ref this.txBass);
+                CDTXMania.tReleaseTexture(ref this.txHitom);
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -167,7 +167,7 @@ namespace DTXMania
 					if( !this.ct進行[ i ].b停止中 )
 					{
 						this.ct進行[ i ].t進行();
-						if( this.ct進行[ i ].b終了値に達した )
+						if( this.ct進行[ i ].bReachedEndValue )
 						{
 							this.ct進行[ i ].t停止();
 						}

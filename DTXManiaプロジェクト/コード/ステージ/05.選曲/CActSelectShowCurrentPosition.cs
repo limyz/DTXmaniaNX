@@ -22,7 +22,7 @@ namespace DTXMania
 
 		public override void OnActivate()
 		{
-			if ( this.b活性化してる )
+			if ( this.bActivated )
 				return;
 
 			base.OnActivate();
@@ -35,7 +35,7 @@ namespace DTXMania
 		{
 			if ( !base.bNotActivated )
 			{
-                this.txScrollBar = CDTXMania.tテクスチャの生成( CSkin.Path(@"Graphics\5_scrollbar.png"), false );
+                this.txScrollBar = CDTXMania.tGenerateTexture( CSkin.Path(@"Graphics\5_scrollbar.png"), false );
                 base.OnManagedCreateResources();
 			}
 		}

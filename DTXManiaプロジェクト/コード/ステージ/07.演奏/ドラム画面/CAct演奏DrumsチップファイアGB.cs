@@ -15,7 +15,7 @@ namespace DTXMania
 			{
 				throw new IndexOutOfRangeException();
 			}
-			E楽器パート e楽器パート = ( nLane < 3 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+			EInstrumentPart e楽器パート = ( nLane < 3 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 			int index = nLane;
 			if( CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] )
 			{

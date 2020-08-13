@@ -22,13 +22,13 @@ namespace DTXMania
 		{
 			base.bNotActivated = true;
 		}
-		//public override void Start( E楽器パート part )
+		//public override void Start( EInstrumentPart part )
 		//{
 		//    this.Start( part, null );
 		//}
-		public override void Start( E楽器パート part, CDTX.CChip r歓声Chip )
+		public override void Start( EInstrumentPart part, CDTX.CChip r歓声Chip )
 		{
-			if( part != E楽器パート.DRUMS )
+			if( part != EInstrumentPart.DRUMS )
 			{
 				for( int i = 0; i < 4; i++ )
 				{
@@ -40,10 +40,10 @@ namespace DTXMania
 						{
 							if( r歓声Chip != null )
 							{
-								CDTXMania.DTX.tチップの再生( r歓声Chip, CSound管理.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( E楽器パート.UNKNOWN ) );
+								CDTXMania.DTX.tチップの再生( r歓声Chip, CSound管理.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
-							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == E楽器パート.GUITAR ) ? -50 : 50;
+							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == EInstrumentPart.GUITAR ) ? -50 : 50;
 							CDTXMania.Skin.sound歓声音.t再生する();
 							return;
 						}
@@ -74,12 +74,12 @@ namespace DTXMania
 			{
 				for( int i = 0; i < 2; i++ )
 				{
-					E楽器パート e楽器パート = ( i == 0 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+					EInstrumentPart e楽器パート = ( i == 0 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 					for( int k = 0; k < 4; k++ )
 					{
 						if( ( this.ct進行用[ (int) e楽器パート, k ] != null ) && !this.ct進行用[ (int) e楽器パート, k ].b停止中 )
 						{
-							if( this.ct進行用[ (int) e楽器パート, k ].b終了値に達した )
+							if( this.ct進行用[ (int) e楽器パート, k ].bReachedEndValue )
 							{
 								this.ct進行用[ (int) e楽器パート, k ].t停止();
 							}
@@ -91,7 +91,7 @@ namespace DTXMania
 
                         if( ( this.ctWailing炎[ (int) e楽器パート, k ] != null ) && ( !this.ctWailing炎[ (int) e楽器パート, k ].b停止中 ) )
                         {
-                            if( this.ctWailing炎[ (int) e楽器パート, k ].b終了値に達した )
+                            if( this.ctWailing炎[ (int) e楽器パート, k ].bReachedEndValue )
                             {
                                 this.ctWailing炎[ (int) e楽器パート, k ].t停止();
                             }
@@ -105,13 +105,13 @@ namespace DTXMania
 				}
 				for( int j = 0; j < 2; j++ )
 				{
-					E楽器パート e楽器パート2 = ( j == 0 ) ? E楽器パート.GUITAR : E楽器パート.BASS;
+					EInstrumentPart e楽器パート2 = ( j == 0 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 					for( int m = 0; m < 4; m++ )
 					{
 						if( ( this.ct進行用[ (int) e楽器パート2, m ] != null ) && !this.ct進行用[ (int) e楽器パート2, m ].b停止中 )
 						{
                             //XGではWailingレーンの幅が42px
-							int x = ( ( e楽器パート2 == E楽器パート.GUITAR ) ? 160 : 1030 ) + 133;
+							int x = ( ( e楽器パート2 == EInstrumentPart.GUITAR ) ? 160 : 1030 ) + 133;
 							int num6 = 0;
 							int num7 = 0;
 							int num8 = this.ct進行用[ (int) e楽器パート2, m ].n現在の値;
@@ -171,7 +171,7 @@ namespace DTXMania
                             {
                                 for( int i = 0; i <= 12; i++ )
                                 {
-                                    this.txWailingFlush.tDraw2D( CDTXMania.app.Device, ( e楽器パート2 == E楽器パート.GUITAR ) ? 283 : 1153, 64 * i, new Rectangle( 0, 0, 42, 64 ) );
+                                    this.txWailingFlush.tDraw2D( CDTXMania.app.Device, ( e楽器パート2 == EInstrumentPart.GUITAR ) ? 283 : 1153, 64 * i, new Rectangle( 0, 0, 42, 64 ) );
                                 }
 
                                 int count = this.ct進行用[ (int)e楽器パート2, m ].n現在の値;
@@ -183,11 +183,11 @@ namespace DTXMania
                         {
                             if( this.txWailingFire != null )
                             {
-                                if( e楽器パート2 == E楽器パート.GUITAR )
+                                if( e楽器パート2 == EInstrumentPart.GUITAR )
                                 {
                                     this.txWailingFire.t2D描画( CDTXMania.app.Device, this.posXGuitar, this.posY, new Rectangle( this.rectW * this.ctWailing炎[ (int) e楽器パート2, m ].n現在の値, 0, this.rectW, this.rectH ) );
                                 }
-                                if( e楽器パート2 == E楽器パート.BASS )
+                                if( e楽器パート2 == EInstrumentPart.BASS )
                                 {
                                     this.txWailingFire.t2D描画( CDTXMania.app.Device, this.posXBass, this.posY, new Rectangle( this.rectW * this.ctWailing炎[ (int) e楽器パート2, m ].n現在の値, 0, this.rectW, this.rectH ) );
                                 }

@@ -22,7 +22,7 @@ namespace DTXMania
 			if( cスコア != null )
 			{
 				Bitmap image = new Bitmap( 1, 1 );
-				CDTXMania.tテクスチャの解放( ref this.txArtist );
+				CDTXMania.tReleaseTexture( ref this.txArtist );
 				this.strArtist = cスコア.SongInformation.ArtistName;
 				if( ( this.strArtist != null ) && ( this.strArtist.Length > 0 ) )
 				{
@@ -51,7 +51,7 @@ namespace DTXMania
 						this.txArtist = null;
 					}
 				}
-				CDTXMania.tテクスチャの解放( ref this.txComment );
+				CDTXMania.tReleaseTexture( ref this.txComment );
 				this.strComment = cスコア.SongInformation.Comment;
 				if( ( this.strComment != null ) && ( this.strComment.Length > 0 ) )
 				{
@@ -135,8 +135,8 @@ namespace DTXMania
 		}
 		public override void OnDeactivate()
 		{
-			CDTXMania.tテクスチャの解放( ref this.txArtist );
-			CDTXMania.tテクスチャの解放( ref this.txComment );
+			CDTXMania.tReleaseTexture( ref this.txArtist );
+			CDTXMania.tReleaseTexture( ref this.txComment );
 			if( this.ft描画用フォント != null )
 			{
 				this.ft描画用フォント.Dispose();
@@ -149,7 +149,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                this.txコメントバー = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_comment bar.png"), true);
+                this.txコメントバー = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_comment bar.png"), true);
                 this.t選択曲が変更された();
 				base.OnManagedCreateResources();
 			}
@@ -158,9 +158,9 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txArtist );
-				CDTXMania.tテクスチャの解放( ref this.txComment );
-                CDTXMania.tテクスチャの解放( ref this.txコメントバー );
+				CDTXMania.tReleaseTexture( ref this.txArtist );
+				CDTXMania.tReleaseTexture( ref this.txComment );
+                CDTXMania.tReleaseTexture( ref this.txコメントバー );
                 base.OnManagedReleaseResources();
 			}
 		}

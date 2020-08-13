@@ -95,8 +95,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txカーソル );
-				CDTXMania.tテクスチャの解放( ref this.txHitKeyダイアログ );
+				CDTXMania.tReleaseTexture( ref this.txカーソル );
+				CDTXMania.tReleaseTexture( ref this.txHitKeyダイアログ );
 				base.OnDeactivate();
 			}
 		}
@@ -104,8 +104,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.txカーソル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenConfig menu cursor.png" ), false );
-				this.txHitKeyダイアログ = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenConfig hit key to assign dialog.png" ), false );
+				this.txカーソル = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenConfig menu cursor.png" ), false );
+				this.txHitKeyダイアログ = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenConfig hit key to assign dialog.png" ), false );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -119,12 +119,12 @@ namespace DTXMania
 					{
 						CDTXMania.Skin.sound取消音.t再生する();
 						this.bキー入力待ち = false;
-						CDTXMania.Input管理.tポーリング( CDTXMania.app.bApplicationActive, false );
+						CDTXMania.Input管理.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
 					else if( ( this.tキーチェックとアサイン_Keyboard() || this.tキーチェックとアサイン_MidiIn() ) || ( this.tキーチェックとアサイン_Joypad() || this.tキーチェックとアサイン_Mouse() ) )
 					{
 						this.bキー入力待ち = false;
-						CDTXMania.Input管理.tポーリング( CDTXMania.app.bApplicationActive, false );
+						CDTXMania.Input管理.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
 				}
 				else if( ( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Delete ) && ( this.n現在の選択行 >= 0 ) ) && ( this.n現在の選択行 <= 15 ) )
@@ -426,9 +426,9 @@ namespace DTXMania
 		}
 		private bool tキーチェックとアサイン_Joypad()
 		{
-			foreach( IInputDevice device in CDTXMania.Input管理.list入力デバイス )
+			foreach( IInputDevice device in CDTXMania.Input管理.listInputDevices )
 			{
-				if( device.e入力デバイス種別 == E入力デバイス種別.Joystick )
+				if( device.eInputDeviceType == EInputDeviceType.Joystick )
 				{
 					for( int i = 0; i < 6 + 0x80 + 8; i++ )		// +6 for Axis, +8 for HAT
 					{
@@ -470,9 +470,9 @@ namespace DTXMania
 		}
 		private bool tキーチェックとアサイン_MidiIn()
 		{
-			foreach( IInputDevice device in CDTXMania.Input管理.list入力デバイス )
+			foreach( IInputDevice device in CDTXMania.Input管理.listInputDevices )
 			{
-				if( device.e入力デバイス種別 == E入力デバイス種別.MidiIn )
+				if( device.eInputDeviceType == EInputDeviceType.MidiIn )
 				{
 					for( int i = 0; i < 0x100; i++ )
 					{

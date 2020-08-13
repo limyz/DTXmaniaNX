@@ -13,7 +13,7 @@ namespace FDK
 
 		public CInputKeyboard( IntPtr hWnd, DirectInput directInput )
 		{
-			this.e入力デバイス種別 = E入力デバイス種別.Keyboard;
+			this.eInputDeviceType = EInputDeviceType.Keyboard;
 			this.GUID = "";
 			this.ID = 0;
 			try
@@ -54,7 +54,7 @@ namespace FDK
 
 		#region [ IInputDevice 実装 ]
 		//-----------------
-		public E入力デバイス種別 e入力デバイス種別 { get; private set; }
+		public EInputDeviceType eInputDeviceType { get; private set; }
 		public string GUID { get; private set; }
 		public int ID { get; private set; }
 		public List<STInputEvent> list入力イベント { get; private set; }
@@ -91,7 +91,7 @@ namespace FDK
 									b押された = true,
 									b離された = false,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
-									nVelocity = CInput管理.n通常音量
+									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( item );
 
@@ -111,7 +111,7 @@ namespace FDK
 									b押された = false,
 									b離された = true,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
-									nVelocity = CInput管理.n通常音量
+									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( item );
 
@@ -140,7 +140,7 @@ namespace FDK
 									b押された = true,
 									b離された = false,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
-									nVelocity = CInput管理.n通常音量,
+									nVelocity = CInputManager.n通常音量,
 								};
 								this.list入力イベント.Add( ev );
 
@@ -163,7 +163,7 @@ namespace FDK
 									b押された = false,
 									b離された = true,
 									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
-									nVelocity = CInput管理.n通常音量,
+									nVelocity = CInputManager.n通常音量,
 								};
 								this.list入力イベント.Add( ev );
 

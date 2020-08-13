@@ -29,11 +29,11 @@ namespace DTXMania
 
 		// メソッド
 
-		public double Get( E楽器パート part )
+		public double Get( EInstrumentPart part )
 		{
 			return this.n現在の本当のスコア[ (int) part ];
 		}
-		public void Set( E楽器パート part, double nScore )
+		public void Set( EInstrumentPart part, double nScore )
 		{
 			int nPart = (int) part;
 			if( this.n現在の本当のスコア[ nPart ] != nScore )
@@ -52,17 +52,17 @@ namespace DTXMania
 		/// <param name="part"></param>
 		/// <param name="bAutoPlay"></param>
 		/// <param name="delta"></param>
-		public void Add( E楽器パート part, STAUTOPLAY bAutoPlay, long delta )
+		public void Add( EInstrumentPart part, STAUTOPLAY bAutoPlay, long delta )
 		{
 			double rev = 1.0 ;
 			switch ( part )
 			{
 				#region [ Unknown ]
-				case E楽器パート.UNKNOWN:
+				case EInstrumentPart.UNKNOWN:
 					throw new ArgumentException();
 				#endregion
 				#region [ Gutiar ]
-				case E楽器パート.GUITAR:
+				case EInstrumentPart.GUITAR:
 					if ( !CDTXMania.ConfigIni.bギターが全部オートプレイである )
 					{
 						#region [ Auto Wailing ]
@@ -87,7 +87,7 @@ namespace DTXMania
 					break;
 				#endregion
 				#region [ Bass ]
-				case E楽器パート.BASS:
+				case EInstrumentPart.BASS:
 					if ( !CDTXMania.ConfigIni.bベースが全部オートプレイである )
 					{
 						#region [ Auto Wailing ]
@@ -133,7 +133,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                this.txScore = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_score numbersGD.png"));
+                this.txScore = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_score numbersGD.png"));
 				base.OnManagedCreateResources();
 			}
 		}
@@ -141,7 +141,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txScore );
+				CDTXMania.tReleaseTexture( ref this.txScore );
 				base.OnManagedReleaseResources();
 			}
 		}

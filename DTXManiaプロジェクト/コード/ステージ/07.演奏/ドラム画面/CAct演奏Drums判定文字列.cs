@@ -37,7 +37,7 @@ namespace DTXMania
                         if (!base.st状態[i].ct進行.b停止中)
                         {
                             base.st状態[i].ct進行.t進行();
-                            if (base.st状態[i].ct進行.b終了値に達した)
+                            if (base.st状態[i].ct進行.bReachedEndValue)
                             {
                                 base.st状態[i].ct進行.t停止();
                             }
@@ -55,7 +55,7 @@ namespace DTXMania
                         if (!base.st状態[i].ct進行.b停止中)
                         {
                             base.st状態[i].ct進行.t進行();
-                            if (base.st状態[i].ct進行.b終了値に達した)
+                            if (base.st状態[i].ct進行.bReachedEndValue)
                             {
                                 base.st状態[i].ct進行.t停止();
                             }
@@ -1180,7 +1180,7 @@ namespace DTXMania
                         if (!base.st状態[i].ct進行.b停止中)
                         {
                             base.st状態[i].ct進行.t進行();
-                            if (base.st状態[i].ct進行.b終了値に達した)
+                            if (base.st状態[i].ct進行.bReachedEndValue)
                             {
                                 base.st状態[i].ct進行.t停止();
                             }

@@ -650,12 +650,12 @@ namespace DTXMania
             if( this.bNotActivated )
                 return;
 
-            this.txCOMBOドラム = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums combo.png" ) );
-            this.txCOMBOドラム1000 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums combo_2.png" ) );
-            this.txComboBom = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_Combobomb.png" ) );
+            this.txCOMBOドラム = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums combo.png" ) );
+            this.txCOMBOドラム1000 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums combo_2.png" ) );
+            this.txComboBom = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_Combobomb.png" ) );
             if( this.txComboBom != null )
                 this.txComboBom.b加算合成 = true;
-            this.txCOMBOギター = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayGuitar combo.png" ) );
+            this.txCOMBOギター = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayGuitar combo.png" ) );
             base.OnManagedCreateResources();
         }
         public override void OnManagedReleaseResources()
@@ -663,10 +663,10 @@ namespace DTXMania
             if( this.bNotActivated )
                 return;
 
-            CDTXMania.tテクスチャの解放( ref this.txCOMBOドラム );
-            CDTXMania.tテクスチャの解放( ref this.txCOMBOドラム1000 );
-            CDTXMania.tテクスチャの解放( ref this.txCOMBOギター );
-            CDTXMania.tテクスチャの解放( ref this.txComboBom );
+            CDTXMania.tReleaseTexture( ref this.txCOMBOドラム );
+            CDTXMania.tReleaseTexture( ref this.txCOMBOドラム1000 );
+            CDTXMania.tReleaseTexture( ref this.txCOMBOギター );
+            CDTXMania.tReleaseTexture( ref this.txComboBom );
 
             base.OnManagedReleaseResources();
         }
@@ -805,9 +805,9 @@ namespace DTXMania
             return 0;
         }
 
-        public void tComboAnime( E楽器パート ePart )
+        public void tComboAnime( EInstrumentPart ePart )
         {
-            if( ePart == E楽器パート.DRUMS || ePart == E楽器パート.GUITAR )
+            if( ePart == EInstrumentPart.DRUMS || ePart == EInstrumentPart.GUITAR )
             {
                 this.ctコンボアニメ.n現在の値 = 0;
                 this.ctコンボアニメ.db現在の値 = 0;

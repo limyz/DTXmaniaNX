@@ -84,7 +84,7 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CInput管理 Input管理
+        public static CInputManager Input管理
         {
             get;
             private set;
@@ -240,12 +240,12 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CStage演奏画面共通 stage演奏画面共通
+        public static CStagePlayingScreenCommon stage演奏画面共通
         {
             get;
             private set;
         }
-        public static CStage結果 stage結果
+        public static CStageResult stage結果
         {
             get;
             private set;
@@ -255,7 +255,7 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CStage終了 stage終了
+        public static CStageEnd stage終了
         {
             get;
             private set;
@@ -326,7 +326,7 @@ namespace DTXMania
         //fork
         public static STDGBVALUE< List<int> > listAutoGhostLag = new STDGBVALUE<List<int>>();
         public static STDGBVALUE< List<int> > listTargetGhsotLag = new STDGBVALUE<List<int>>();
-        public static STDGBVALUE< CScoreIni.C演奏記録 > listTargetGhostScoreData = new STDGBVALUE< CScoreIni.C演奏記録 >();
+        public static STDGBVALUE< CScoreIni.CPerformanceEntry > listTargetGhostScoreData = new STDGBVALUE< CScoreIni.CPerformanceEntry >();
 
         // Constructor
 
@@ -503,7 +503,7 @@ namespace DTXMania
             if (this.listTopLevelActivities != null)
             {
                 foreach (CActivity activity in this.listTopLevelActivities)
-                    activity.OnUnmanagedリソースの作成();
+                    activity.OnUnmanagedCreateResource();
             }
 
             foreach (STPlugin st in this.listPlugins)
@@ -547,7 +547,7 @@ namespace DTXMania
                 CSound管理.rc演奏用タイマ.t更新();
 
             if (Input管理 != null)
-                Input管理.tポーリング(this.bApplicationActive, CDTXMania.ConfigIni.bバッファ入力を行う);
+                Input管理.tDoPolling(this.bApplicationActive, CDTXMania.ConfigIni.bバッファ入力を行う);
 
             if (FPS != null)
                 FPS.tカウンタ更新();
@@ -608,16 +608,16 @@ namespace DTXMania
                 }							// "Enumerating Songs..."アイコンの描画
                 switch (rCurrentStage.eステージID)
                 {
-                    case CStage.Eステージ.タイトル:
-                    case CStage.Eステージ.コンフィグ:
-                    case CStage.Eステージ.オプション:
-                    case CStage.Eステージ.選曲:
-                    case CStage.Eステージ.曲読み込み:
+                    case CStage.EStage.Title:
+                    case CStage.EStage.Config:
+                    case CStage.EStage.Option:
+                    case CStage.EStage.SongSelection:
+                    case CStage.EStage.SongLoading:
                         if (EnumSongs != null)
                         {
                             #region [ (特定条件時) 曲検索スレッドの起動_開始 ]
-                            if (rCurrentStage.eステージID == CStage.Eステージ.タイトル &&
-                                 r直前のステージ.eステージID == CStage.Eステージ.起動 &&
+                            if (rCurrentStage.eステージID == CStage.EStage.Title &&
+                                 r直前のステージ.eステージID == CStage.EStage.Startup &&
                                  this.n進行描画の戻り値 == (int)CStageタイトル.E戻り値.継続 &&
                                  !EnumSongs.IsSongListEnumStarted)
                             {
@@ -633,7 +633,7 @@ namespace DTXMania
                             #endregion
 
                             #region [ 曲検索の中断と再開 ]
-                            if (rCurrentStage.eステージID == CStage.Eステージ.選曲 && !EnumSongs.IsSongListEnumCompletelyDone)
+                            if (rCurrentStage.eステージID == CStage.EStage.SongSelection && !EnumSongs.IsSongListEnumCompletelyDone)
                             {
                                 switch (this.n進行描画の戻り値)
                                 {
@@ -661,7 +661,7 @@ namespace DTXMania
                             #endregion
 
                             #region [ 曲探索中断待ち待機 ]
-                            if (rCurrentStage.eステージID == CStage.Eステージ.曲読み込み && !EnumSongs.IsSongListEnumCompletelyDone &&
+                            if (rCurrentStage.eステージID == CStage.EStage.SongLoading && !EnumSongs.IsSongListEnumCompletelyDone &&
                                 EnumSongs.thDTXFileEnumerate != null)							// #28700 2012.6.12 yyagi; at Compact mode, enumerating thread does not exist.
                             {
                                 EnumSongs.WaitUntilSuspended();									// 念のため、曲検索が一時中断されるまで待機
@@ -675,7 +675,7 @@ namespace DTXMania
                                 actEnumSongs.OnDeactivate();
                                 CDTXMania.stage選曲.bIsEnumeratingSongs = false;
 
-                                bool bRemakeSongTitleBar = (rCurrentStage.eステージID == CStage.Eステージ.選曲) ? true : false;
+                                bool bRemakeSongTitleBar = (rCurrentStage.eステージID == CStage.EStage.SongSelection) ? true : false;
                                 CDTXMania.stage選曲.Refresh(EnumSongs.Songs管理, bRemakeSongTitleBar);
                                 EnumSongs.SongListEnumCompletelyDone();
                             }
@@ -687,10 +687,10 @@ namespace DTXMania
 
                 switch (rCurrentStage.eステージID)
                 {
-                    case CStage.Eステージ.何もしない:
+                    case CStage.EStage.DoNothing:
                         break;
 
-                    case CStage.Eステージ.起動:
+                    case CStage.EStage.Startup:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
@@ -708,7 +708,7 @@ namespace DTXMania
                             {
                                 rCurrentStage.OnDeactivate();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 曲読み込み");
+                                Trace.TraceInformation("■ SongLoading");
                                 stageSongLoading.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stageSongLoading;
@@ -727,7 +727,7 @@ namespace DTXMania
                         #endregion
                         break;
 
-                    case CStage.Eステージ.タイトル:
+                    case CStage.EStage.Title:
                         #region [ *** ]
                         //-----------------------------
                         if( this.n進行描画の戻り値 != 0 )
@@ -739,7 +739,7 @@ namespace DTXMania
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 選曲");
+                                    Trace.TraceInformation("■ SongSelection");
                                     stage選曲.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage選曲;
@@ -754,7 +754,7 @@ namespace DTXMania
 								    //-----------------------------
 								    rCurrentStage.OnDeactivate();
 								    Trace.TraceInformation( "----------------------" );
-								    Trace.TraceInformation( "■ オプション" );
+								    Trace.TraceInformation( "■ Option" );
 								    stageオプション.OnActivate();
 								    r直前のステージ = rCurrentStage;
 								    rCurrentStage = stageオプション;
@@ -769,7 +769,7 @@ namespace DTXMania
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ コンフィグ");
+                                    Trace.TraceInformation("■ Config");
                                     stageコンフィグ.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stageコンフィグ;
@@ -782,7 +782,7 @@ namespace DTXMania
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 終了");
+                                    Trace.TraceInformation("■ End");
                                     stage終了.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage終了;
@@ -806,14 +806,14 @@ namespace DTXMania
                         break;
 
 
-                    case CStage.Eステージ.オプション:
+                    case CStage.EStage.Option:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
                             switch (r直前のステージ.eステージID)
                             {
-                                case CStage.Eステージ.タイトル:
+                                case CStage.EStage.Title:
                                     #region [ *** ]
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
@@ -835,12 +835,12 @@ namespace DTXMania
                                 //-----------------------------
                                     #endregion
 
-                                case CStage.Eステージ.選曲:
+                                case CStage.EStage.SongSelection:
                                     #region [ *** ]
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 選曲");
+                                    Trace.TraceInformation("■ SongSelection");
                                     stage選曲.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage選曲;
@@ -863,14 +863,14 @@ namespace DTXMania
                         break;
 
 
-                    case CStage.Eステージ.コンフィグ:
+                    case CStage.EStage.Config:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
                             switch (r直前のステージ.eステージID)
                             {
-                                case CStage.Eステージ.タイトル:
+                                case CStage.EStage.Title:
                                     #region [ *** ]
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
@@ -892,12 +892,12 @@ namespace DTXMania
                                 //-----------------------------
                                     #endregion
 
-                                case CStage.Eステージ.選曲:
+                                case CStage.EStage.SongSelection:
                                     #region [ *** ]
                                     //-----------------------------
                                     rCurrentStage.OnDeactivate();
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 選曲");
+                                    Trace.TraceInformation("■ SongSelection");
                                     stage選曲.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage選曲;
@@ -919,7 +919,7 @@ namespace DTXMania
                         #endregion
                         break;
 
-                    case CStage.Eステージ.選曲:
+                    case CStage.EStage.SongSelection:
                         #region [ *** ]
                         //-----------------------------
                         switch (this.n進行描画の戻り値)
@@ -951,7 +951,7 @@ namespace DTXMania
                                 //-----------------------------
                                 rCurrentStage.OnDeactivate();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 曲読み込み");
+                                Trace.TraceInformation("■ SongLoading");
                                 stageSongLoading.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stageSongLoading;
@@ -975,7 +975,7 @@ namespace DTXMania
 
                                 rCurrentStage.OnDeactivate();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ オプション");
+                                Trace.TraceInformation("■ Option");
                                 stageオプション.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stageオプション;
@@ -997,7 +997,7 @@ namespace DTXMania
                                 //-----------------------------
                                 rCurrentStage.OnDeactivate();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ コンフィグ");
+                                Trace.TraceInformation("■ Config");
                                 stageコンフィグ.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stageコンフィグ;
@@ -1032,7 +1032,7 @@ namespace DTXMania
                         #endregion
                         break;
 
-                    case CStage.Eステージ.曲読み込み:
+                    case CStage.EStage.SongLoading:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
@@ -1049,7 +1049,7 @@ namespace DTXMania
                                 Trace.TraceInformation("曲の読み込みを中止しました。");
                                 this.tガベージコレクションを実行する();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 選曲");
+                                Trace.TraceInformation("■ SongSelection");
                                 stage選曲.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stage選曲;
@@ -1067,7 +1067,7 @@ namespace DTXMania
                             if (!ConfigIni.bギタレボモード)
                             {
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 演奏（ドラム画面）");
+                                Trace.TraceInformation("■ Playing（ドラム画面）");
 #if false		// #23625 2011.1.11 Config.iniからダメージ/回復値の定数変更を行う場合はここを有効にする 087リリースに合わせ機能無効化
 for (int i = 0; i < 5; i++)
 {
@@ -1086,7 +1086,7 @@ for (int i = 0; i < 3; i++) {
                             else
                             {
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 演奏（ギター画面）");
+                                Trace.TraceInformation("■ Playing（ギター画面）");
 #if false		// #23625 2011.1.11 Config.iniからダメージ/回復値の定数変更を行う場合はここを有効にする 087リリースに合わせ機能無効化
 for (int i = 0; i < 5; i++)
 {
@@ -1116,7 +1116,7 @@ for (int i = 0; i < 3; i++) {
                         #endregion
                         break;
 
-                    case CStage.Eステージ.演奏:
+                    case CStage.EStage.Playing:
                         #region [ *** ]
                         //-----------------------------
                         switch (this.n進行描画の戻り値)
@@ -1150,7 +1150,7 @@ for (int i = 0; i < 3; i++) {
                                 else
                                 {
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 選曲");
+                                    Trace.TraceInformation("■ SongSelection");
                                     stage選曲.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage選曲;
@@ -1198,7 +1198,7 @@ for (int i = 0; i < 3; i++) {
                                 else
                                 {
                                     Trace.TraceInformation("----------------------");
-                                    Trace.TraceInformation("■ 選曲");
+                                    Trace.TraceInformation("■ SongSelection");
                                     stage選曲.OnActivate();
                                     r直前のステージ = rCurrentStage;
                                     rCurrentStage = stage選曲;
@@ -1223,7 +1223,7 @@ for (int i = 0; i < 3; i++) {
                             case (int)E演奏画面の戻り値.ステージクリア:
                                 #region [ 演奏クリア ]
                                 //-----------------------------
-                                CScoreIni.C演奏記録 c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass;
+                                CScoreIni.CPerformanceEntry c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass;
                                 CDTX.CChip[] chipArray = new CDTX.CChip[10];
                                 if (ConfigIni.bギタレボモード)
                                 {
@@ -1236,7 +1236,7 @@ for (int i = 0; i < 3; i++) {
 
                                 if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
                                 {
-                                    CScoreIni.C演奏記録 t;
+                                    CScoreIni.CPerformanceEntry t;
                                     t = c演奏記録_Guitar;
                                     c演奏記録_Guitar = c演奏記録_Bass;
                                     c演奏記録_Bass = t;
@@ -1245,7 +1245,7 @@ for (int i = 0; i < 3; i++) {
                                     CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // #24415 2011.2.27 yyagi
                                     // リザルト集計時のみ、Auto系のフラグも元に戻す。
                                     // これを戻すのは、リザルト集計後。
-                                }													// "case CStage.Eステージ.結果:"のところ。
+                                }													// "case CStage.EStage.Result:"のところ。
 
                                 double ps = 0.0, gs = 0.0;
                                 if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.n全チップ数 > 0)
@@ -1264,7 +1264,7 @@ for (int i = 0; i < 3; i++) {
                                     gs = c演奏記録_Bass.dbゲーム型スキル値;
                                 }
                                 string str = "Cleared";
-                                switch (CScoreIni.t総合ランク値を計算して返す(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
+                                switch (CScoreIni.tCalculateOverallRankValue(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
                                 {
                                     case (int)CScoreIni.ERANK.SS:
                                         str = string.Format("Cleared (SS: {0:F2})", ps);
@@ -1314,11 +1314,11 @@ for (int i = 0; i < 3; i++) {
 
                                 rCurrentStage.OnDeactivate();
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 結果");
-                                stage結果.st演奏記録.Drums = c演奏記録_Drums;
-                                stage結果.st演奏記録.Guitar = c演奏記録_Guitar;
-                                stage結果.st演奏記録.Bass = c演奏記録_Bass;
-                                stage結果.r空うちドラムチップ = chipArray;
+                                Trace.TraceInformation("■ Result");
+                                stage結果.stPerformanceEntry.Drums = c演奏記録_Drums;
+                                stage結果.stPerformanceEntry.Guitar = c演奏記録_Guitar;
+                                stage結果.stPerformanceEntry.Bass = c演奏記録_Bass;
+                                stage結果.rEmptyDrumChip = chipArray;
                                 stage結果.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stage結果;
@@ -1342,7 +1342,7 @@ for (int i = 0; i < 3; i++) {
                         #endregion
                         break;
 
-                    case CStage.Eステージ.結果:
+                    case CStage.EStage.Result:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
@@ -1358,7 +1358,7 @@ for (int i = 0; i < 3; i++) {
                             if (!bCompactMode)
                             {
                                 Trace.TraceInformation("----------------------");
-                                Trace.TraceInformation("■ 選曲");
+                                Trace.TraceInformation("■ SongSelection");
                                 stage選曲.OnActivate();
                                 r直前のステージ = rCurrentStage;
                                 rCurrentStage = stage選曲;
@@ -1381,14 +1381,14 @@ for (int i = 0; i < 3; i++) {
                         #endregion
                         break;
 
-                    case CStage.Eステージ.ChangeSkin:
+                    case CStage.EStage.ChangeSkin:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
                             rCurrentStage.OnDeactivate();
                             Trace.TraceInformation("----------------------");
-                            Trace.TraceInformation("■ 選曲");
+                            Trace.TraceInformation("■ SongSelection");
                             stage選曲.OnActivate();
                             r直前のステージ = rCurrentStage;
                             rCurrentStage = stage選曲;
@@ -1398,7 +1398,7 @@ for (int i = 0; i < 3; i++) {
                         #endregion
                         break;
 
-                    case CStage.Eステージ.終了:
+                    case CStage.EStage.End:
                         #region [ *** ]
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
@@ -1446,11 +1446,11 @@ for (int i = 0; i < 3; i++) {
 
 		#region [ 汎用ヘルパー ]
 		//-----------------
-		public static CTexture tテクスチャの生成( string fileName )
+		public static CTexture tGenerateTexture( string fileName )
 		{
-			return tテクスチャの生成( fileName, false );
+			return tGenerateTexture( fileName, false );
 		}
-		public static CTexture tテクスチャの生成( string fileName, bool b黒を透過する )
+		public static CTexture tGenerateTexture( string fileName, bool b黒を透過する )
 		{
 			if ( app == null )
 			{
@@ -1472,22 +1472,22 @@ for (int i = 0; i < 3; i++) {
 				return null;
 			}
 		}
-		public static void tテクスチャの解放( ref CTexture tx )
+		public static void tReleaseTexture( ref CTexture tx )
 		{
             if (tx != null) {
                 //Trace.WriteLine( "CTextureを解放 Size W:" + tx.sz画像サイズ.Width + " H:" + tx.sz画像サイズ.Height );
 			    CDTXMania.t安全にDisposeする( ref tx );
             }
 		}
-        public static void tテクスチャの解放( ref CTextureAf tx )
+        public static void tReleaseTexture( ref CTextureAf tx )
 		{
 			CDTXMania.t安全にDisposeする( ref tx );
 		}
-		public static CTexture tテクスチャの生成( byte[] txData )
+		public static CTexture tGenerateTexture( byte[] txData )
 		{
-			return tテクスチャの生成( txData, false );
+			return tGenerateTexture( txData, false );
 		}
-		public static CTexture tテクスチャの生成( byte[] txData, bool b黒を透過する )
+		public static CTexture tGenerateTexture( byte[] txData, bool b黒を透過する )
 		{
 			if ( app == null )
 			{
@@ -1504,11 +1504,11 @@ for (int i = 0; i < 3; i++) {
 			}
 		}
 
-		public static CTexture tテクスチャの生成( Bitmap bitmap )
+		public static CTexture tGenerateTexture( Bitmap bitmap )
 		{
-			return tテクスチャの生成( bitmap, false );
+			return tGenerateTexture( bitmap, false );
 		}
-		public static CTexture tテクスチャの生成( Bitmap bitmap, bool b黒を透過する )
+		public static CTexture tGenerateTexture( Bitmap bitmap, bool b黒を透過する )
 		{
 			if ( app == null )
 			{
@@ -1849,10 +1849,10 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Input管理 = new CInput管理(base.Window.Handle);
-                foreach (IInputDevice device in Input管理.list入力デバイス)
+                Input管理 = new CInputManager(base.Window.Handle);
+                foreach (IInputDevice device in Input管理.listInputDevices)
                 {
-                    if ((device.e入力デバイス種別 == E入力デバイス種別.Joystick) && !ConfigIni.dicJoystick.ContainsValue(device.GUID))
+                    if ((device.eInputDeviceType == EInputDeviceType.Joystick) && !ConfigIni.dicJoystick.ContainsValue(device.GUID))
                     {
                         int key = 0;
                         while (ConfigIni.dicJoystick.ContainsKey(key))
@@ -1862,9 +1862,9 @@ for (int i = 0; i < 3; i++) {
                         ConfigIni.dicJoystick.Add(key, device.GUID);
                     }
                 }
-                foreach (IInputDevice device2 in Input管理.list入力デバイス)
+                foreach (IInputDevice device2 in Input管理.listInputDevices)
                 {
-                    if (device2.e入力デバイス種別 == E入力デバイス種別.Joystick)
+                    if (device2.eInputDeviceType == EInputDeviceType.Joystick)
                     {
                         foreach (KeyValuePair<int, string> pair in ConfigIni.dicJoystick)
                         {
@@ -2001,9 +2001,9 @@ for (int i = 0; i < 3; i++) {
             stageSongLoading = new CStage曲読み込み();
             stage演奏ドラム画面 = new CStage演奏ドラム画面();
             stage演奏ギター画面 = new CStage演奏ギター画面();
-            stage結果 = new CStage結果();
+            stage結果 = new CStageResult();
             stageChangeSkin = new CStageChangeSkin();
-            stage終了 = new CStage終了();
+            stage終了 = new CStageEnd();
             this.listTopLevelActivities = new List<CActivity>();
             this.listTopLevelActivities.Add(actEnumSongs);
             this.listTopLevelActivities.Add(act文字コンソール);
@@ -2076,7 +2076,7 @@ for (int i = 0; i < 3; i++) {
             #region [ Launch First stage ]
             //---------------------
             Trace.TraceInformation("----------------------");
-            Trace.TraceInformation("■ 起動");
+            Trace.TraceInformation("■ Startup");
 
             if (CDTXMania.bCompactMode)
             {
@@ -2132,7 +2132,7 @@ for (int i = 0; i < 3; i++) {
                 #endregion
                 #region [ 現在のステージの終了処理 ]
                 //---------------------
-                if (CDTXMania.rCurrentStage != null && CDTXMania.rCurrentStage.b活性化してる)		// #25398 2011.06.07 MODIFY FROM
+                if (CDTXMania.rCurrentStage != null && CDTXMania.rCurrentStage.bActivated)		// #25398 2011.06.07 MODIFY FROM
                 {
                     Trace.TraceInformation("現在のステージを終了します。");
                     Trace.Indent();
@@ -2404,7 +2404,7 @@ for (int i = 0; i < 3; i++) {
             {
                 ini.stFile.Title = DTX.TITLE;
                 ini.stFile.Name = DTX.strファイル名;
-                ini.stFile.Hash = CScoreIni.tファイルのMD5を求めて返す(DTX.strファイル名の絶対パス);
+                ini.stFile.Hash = CScoreIni.tComputeFileMD5(DTX.strファイル名の絶対パス);
                 for (int i = 0; i < 6; i++)
                 {
                     ini.stSection[i].nPerfectになる範囲ms = nPerfect範囲ms;
@@ -2414,7 +2414,7 @@ for (int i = 0; i < 3; i++) {
                 }
             }
             ini.stFile.BGMAdjust = DTX.nBGMAdjust;
-            CScoreIni.t更新条件を取得する(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);
+            CScoreIni.tGetIsUpdateNeeded(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);
             if (bIsUpdatedDrums || bIsUpdatedGuitar || bIsUpdatedBass)
             {
                 if (bIsUpdatedDrums)
@@ -2429,7 +2429,7 @@ for (int i = 0; i < 3; i++) {
                 {
                     ini.stFile.PlayCountBass++;
                 }
-                ini.tヒストリを追加する(str新ヒストリ行);
+                ini.tAddHistory(str新ヒストリ行);
                 if (!bCompactMode)
                 {
                     stage選曲.r現在選択中のスコア.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;
@@ -2443,7 +2443,7 @@ for (int i = 0; i < 3; i++) {
             }
             if (ConfigIni.bScoreIniを出力する)
             {
-                ini.t書き出し(strFilename);
+                ini.tExport(strFilename);
             }
 
             return ini;

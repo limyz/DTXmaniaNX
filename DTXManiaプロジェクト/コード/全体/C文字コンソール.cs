@@ -92,8 +92,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.txフォント8x16[ 0 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Console font 8x16.png" ) );
-				this.txフォント8x16[ 1 ] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Console font 2 8x16.png" ) );
+				this.txフォント8x16[ 0 ] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\Console font 8x16.png" ) );
+				this.txフォント8x16[ 1 ] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\Console font 2 8x16.png" ) );
 				base.OnManagedCreateResources();
 			}
 		}

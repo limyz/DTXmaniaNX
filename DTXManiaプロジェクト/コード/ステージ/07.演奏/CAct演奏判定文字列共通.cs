@@ -231,9 +231,9 @@ namespace DTXMania
 			{
                 if(CDTXMania.ConfigIni.nJudgeAnimeType == 1)
                 {
-                    //this.tx判定文字列[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_judge strings.png"));
-                    //this.tx判定文字列[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_judge strings.png"));
-                    //this.tx判定文字列[2] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_judge strings.png"));
+                    //this.tx判定文字列[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_judge strings.png"));
+                    //this.tx判定文字列[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_judge strings.png"));
+                    //this.tx判定文字列[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_judge strings.png"));
                     //2013.8.2 kairera0467 CStage演奏画面共通側で読み込むテスト。
                 }
                 else if( CDTXMania.ConfigIni.nJudgeAnimeType == 2 )
@@ -242,12 +242,12 @@ namespace DTXMania
                 }
                 else
                 {
-                    this.tx判定文字列[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlay judge strings 1.png"));
-                    this.tx判定文字列[1] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlay judge strings 2.png"));
-                    this.tx判定文字列[2] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlay judge strings 3.png"));
+                    this.tx判定文字列[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlay judge strings 1.png"));
+                    this.tx判定文字列[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlay judge strings 2.png"));
+                    this.tx判定文字列[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlay judge strings 3.png"));
                 }
 
-                this.txlag数値 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_lag numbers.png"));
+                this.txlag数値 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_lag numbers.png"));
 				base.OnManagedCreateResources();
 			}
 		}
@@ -255,10 +255,10 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 0 ] );
-				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 1 ] );
-				CDTXMania.tテクスチャの解放( ref this.tx判定文字列[ 2 ] );
-				CDTXMania.tテクスチャの解放( ref this.txlag数値 );
+				CDTXMania.tReleaseTexture( ref this.tx判定文字列[ 0 ] );
+				CDTXMania.tReleaseTexture( ref this.tx判定文字列[ 1 ] );
+				CDTXMania.tReleaseTexture( ref this.tx判定文字列[ 2 ] );
+				CDTXMania.tReleaseTexture( ref this.txlag数値 );
 				base.OnManagedReleaseResources();
 			}
 		}

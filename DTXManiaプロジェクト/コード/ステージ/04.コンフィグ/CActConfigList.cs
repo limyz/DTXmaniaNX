@@ -1823,7 +1823,7 @@ namespace DTXMania
                 {
                     CDTXMania.t安全にDisposeする(ref txSkinSample1);
                 }
-                txSkinSample1 = CDTXMania.tテクスチャの生成(bmDest, false);
+                txSkinSample1 = CDTXMania.tGenerateTexture(bmDest, false);
                 g.Dispose();
                 bmDest.Dispose();
                 bmSrc.Dispose();
@@ -2089,7 +2089,7 @@ namespace DTXMania
 
         public override void OnActivate()
         {
-            if (this.b活性化してる)
+            if (this.bActivated)
                 return;
 
             this.list項目リスト = new List<CItemBase>();
@@ -2198,15 +2198,15 @@ namespace DTXMania
             if (this.bNotActivated)
                 return;
 
-            this.tx通常項目行パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\4_itembox.png"), false);
-            this.txその他項目行パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\4_itembox other.png"), false);
-            this.tx三角矢印 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\4_triangle arrow.png"), false);
-            this.tx説明文パネル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_Description Panel.png" ) );
-            this.tx矢印 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_Arrow.png" ) );
-            this.txカーソル = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\4_itembox cursor.png" ) );
-            this.tx判定ライン = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums hit-bar.png"));
-            this.txレーン = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Paret.png"));
-            this.txシャッター = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_shutter.png"));
+            this.tx通常項目行パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\4_itembox.png"), false);
+            this.txその他項目行パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\4_itembox other.png"), false);
+            this.tx三角矢印 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\4_triangle arrow.png"), false);
+            this.tx説明文パネル = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\4_Description Panel.png" ) );
+            this.tx矢印 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\4_Arrow.png" ) );
+            this.txカーソル = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\4_itembox cursor.png" ) );
+            this.tx判定ライン = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums hit-bar.png"));
+            this.txレーン = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret.png"));
+            this.txシャッター = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_shutter.png"));
             this.txSkinSample1 = null;		// スキン選択時に動的に設定するため、ここでは初期化しない
             base.OnManagedCreateResources();
         }
@@ -2215,16 +2215,16 @@ namespace DTXMania
             if (this.bNotActivated)
                 return;
 
-            CDTXMania.tテクスチャの解放(ref this.txSkinSample1);
-            CDTXMania.tテクスチャの解放(ref this.tx通常項目行パネル);
-            CDTXMania.tテクスチャの解放(ref this.txその他項目行パネル);
-            CDTXMania.tテクスチャの解放(ref this.tx三角矢印);
-            CDTXMania.tテクスチャの解放( ref this.tx説明文パネル );
-            CDTXMania.tテクスチャの解放( ref this.tx矢印 );
-            CDTXMania.tテクスチャの解放( ref this.txカーソル );
-            CDTXMania.tテクスチャの解放(ref this.txレーン);
-            CDTXMania.tテクスチャの解放(ref this.tx判定ライン);
-            CDTXMania.tテクスチャの解放(ref this.txシャッター);
+            CDTXMania.tReleaseTexture(ref this.txSkinSample1);
+            CDTXMania.tReleaseTexture(ref this.tx通常項目行パネル);
+            CDTXMania.tReleaseTexture(ref this.txその他項目行パネル);
+            CDTXMania.tReleaseTexture(ref this.tx三角矢印);
+            CDTXMania.tReleaseTexture( ref this.tx説明文パネル );
+            CDTXMania.tReleaseTexture( ref this.tx矢印 );
+            CDTXMania.tReleaseTexture( ref this.txカーソル );
+            CDTXMania.tReleaseTexture(ref this.txレーン);
+            CDTXMania.tReleaseTexture(ref this.tx判定ライン);
+            CDTXMania.tReleaseTexture(ref this.txシャッター);
             base.OnManagedReleaseResources();
         }
 
@@ -2271,7 +2271,7 @@ namespace DTXMania
             if (base.b初めての進行描画)
             {
                 this.nスクロール用タイマ値 = CSound管理.rc演奏用タイマ.n現在時刻;
-                this.ct三角矢印アニメ.t開始(0, 9, 50, CDTXMania.Timer);
+                this.ct三角矢印アニメ.tStart(0, 9, 50, CDTXMania.Timer);
 
                 base.b初めての進行描画 = false;
             }
@@ -2428,9 +2428,9 @@ namespace DTXMania
 				else
 				{
 					Bitmap bmpItem = prvFont.DrawPrivateFont( this.list項目リスト[ nItem ].str項目名, Color.White, Color.Transparent );
-					listMenu[ nItem ].txMenuItemRight = CDTXMania.tテクスチャの生成( bmpItem );
+					listMenu[ nItem ].txMenuItemRight = CDTXMania.tGenerateTexture( bmpItem );
 //					ctItem.tDraw2D( CDTXMania.app.Device, ( x + 0x12 ) * Scale.X, ( y + 12 ) * Scale.Y - 20 );
-//					CDTXMania.tテクスチャの解放( ref ctItem );
+//					CDTXMania.tReleaseTexture( ref ctItem );
 					CDTXMania.t安全にDisposeする( ref bmpItem );
 				}
 				//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 0x12, y + 12, this.list項目リスト[ nItem ].str項目名 );
@@ -2523,9 +2523,9 @@ namespace DTXMania
 					Bitmap bmpStr = b強調 ?
 						prvFont.DrawPrivateFont( strParam, Color.White, Color.Black, Color.Yellow, Color.OrangeRed ) :
 						prvFont.DrawPrivateFont( strParam, Color.Black, Color.Transparent );
-					CTexture txStr = CDTXMania.tテクスチャの生成( bmpStr, false );
+					CTexture txStr = CDTXMania.tGenerateTexture( bmpStr, false );
 					txStr.tDraw2D( CDTXMania.app.Device, ( n新項目パネルX + 260 ) , ( y + 20 ) );
-					CDTXMania.tテクスチャの解放( ref txStr );
+					CDTXMania.tReleaseTexture( ref txStr );
 					CDTXMania.t安全にDisposeする( ref bmpStr );
 				}
 				else
@@ -2540,7 +2540,7 @@ namespace DTXMania
 
 				        Bitmap bmpStr =
 				            prvFont.DrawPrivateFont( strParam, Color.Black, Color.Transparent );
-				        stm.txParam = CDTXMania.tテクスチャの生成( bmpStr, false );
+				        stm.txParam = CDTXMania.tGenerateTexture( bmpStr, false );
 				        CDTXMania.t安全にDisposeする( ref bmpStr );
 
 				        listMenu[ nItem ] = stm;
@@ -2563,7 +2563,7 @@ namespace DTXMania
             #endregion
 
             #region[ 説明文パネル ]
-            if( this.b項目リスト側にフォーカスがある && this.n目標のスクロールカウンタ == 0 && CDTXMania.stageコンフィグ.ct表示待機.b終了値に達した )
+            if( this.b項目リスト側にフォーカスがある && this.n目標のスクロールカウンタ == 0 && CDTXMania.stageコンフィグ.ct表示待機.bReachedEndValue )
             {
                 this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 601, 252 );
                 if ( txSkinSample1 != null && this.n目標のスクロールカウンタ == 0 && this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemSkinSubfolder )

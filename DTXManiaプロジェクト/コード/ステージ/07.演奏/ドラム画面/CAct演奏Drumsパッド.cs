@@ -130,9 +130,9 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txパッド = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_pads.png"));
-                this.tx光るパッド = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums pads flush.png"));
-                this.txボーナス文字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Bonus.png"));
+                this.txパッド = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_pads.png"));
+                this.tx光るパッド = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums pads flush.png"));
+                this.txボーナス文字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Bonus.png"));
                 base.OnManagedCreateResources();
             }
         }
@@ -140,9 +140,9 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txパッド);
-                CDTXMania.tテクスチャの解放(ref this.tx光るパッド);
-                CDTXMania.tテクスチャの解放(ref this.txボーナス文字);
+                CDTXMania.tReleaseTexture(ref this.txパッド);
+                CDTXMania.tReleaseTexture(ref this.tx光るパッド);
+                CDTXMania.tReleaseTexture(ref this.txボーナス文字);
                 base.OnManagedReleaseResources();
             }
         }
@@ -373,7 +373,7 @@ namespace DTXMania
                     {
                         int numf = this.stボーナス[i].ct進行.n現在の値;
                         this.stボーナス[i].ct進行.t進行();
-                        if (this.stボーナス[i].ct進行.b終了値に達した)
+                        if (this.stボーナス[i].ct進行.bReachedEndValue)
                         {
                             this.stボーナス[i].ct進行.t停止();
                             this.stボーナス[i].b使用中 = false;

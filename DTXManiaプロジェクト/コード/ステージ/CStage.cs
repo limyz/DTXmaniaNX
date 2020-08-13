@@ -9,7 +9,7 @@ namespace DTXMania
 	{
 		// プロパティ
 
-		internal enum Eヒット判定
+		internal enum EHitJudgement
 		{
 			PERFECT,
 			GREAT,
@@ -20,20 +20,20 @@ namespace DTXMania
 			AUTO
 		}
 
-		internal Eステージ eステージID;
-		public enum Eステージ
+		internal EStage eステージID;
+		public enum EStage
 		{
-			何もしない,
-			起動,
-			タイトル,
-			オプション,
-			コンフィグ,
-			選曲,
-			曲読み込み,
-			演奏,
-			結果,
+			DoNothing,
+			Startup,
+			Title,
+			Option,
+			Config,
+			SongSelection,
+			SongLoading,
+			Playing,
+			Result,
 			ChangeSkin,						// #28195 2011.5.4 yyagi
-			終了
+			End
 		}
 		
 		internal Eフェーズ eフェーズID;

@@ -31,7 +31,7 @@ namespace DTXMania
                     }
                     else if (CDTXMania.ConfigIni.nSkillMode == 1)
                     {
-                        this.n現在選択中の曲の最高ランク[i] = DTXMania.CScoreIni.tCalculateRankValue(0, cスコア.SongInformation.HighSkill[i]);
+                        this.n現在選択中の曲の最高ランク[i] = DTXMania.CScoreIni.tCalculateRank(0, cスコア.SongInformation.HighSkill[i]);
                     }
 
                     this.b現在選択中の曲がフルコンボ[i] = cスコア.SongInformation.FullCombo[i];
@@ -54,8 +54,8 @@ namespace DTXMania
                             else if (CDTXMania.ConfigIni.nSkillMode == 1)
                             {
                                 // Fix github.com/limyz/DTXmaniaXG/issues/33
-                                //this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tCalculateRankValue(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tCalculateRankValue(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) >= 95 ? DTXMania.CScoreIni.tCalculateRankValue(0, cスコア.SongInformation.HighSkill[i]) : c曲リストノード.arScore[j].SongInformation.BestRank[i]);
-                                this.n現在選択中の曲の最高ランク難易度毎[j][i] = DTXMania.CScoreIni.tCalculateRankValue(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]);
+                                //this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) >= 95 ? DTXMania.CScoreIni.tCalculateRank(0, cスコア.SongInformation.HighSkill[i]) : c曲リストノード.arScore[j].SongInformation.BestRank[i]);
+                                this.n現在選択中の曲の最高ランク難易度毎[j][i] = DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]);
                             }
 
                             this.db現在選択中の曲の最高スキル値難易度毎[j][i] = c曲リストノード.arScore[j].SongInformation.HighSkill[i];
@@ -142,15 +142,15 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txパネル本体 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_status panel.png"));
-                this.tx難易度パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_difficulty panel.png"));
-                this.tx難易度枠 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_difficulty frame.png"));
-                this.txランク = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_skill icon.png"));
-                this.tx達成率MAX = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_skill max.png"));
-                this.txDifficultyNumber = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_level number.png"));
-                this.tx達成率数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_skill number.png"));
-                this.txBPM数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_bpm font.png"));
-                this.txBPM画像 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_bpm icon.png"));
+                this.txパネル本体 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_status panel.png"));
+                this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_difficulty panel.png"));
+                this.tx難易度枠 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_difficulty frame.png"));
+                this.txランク = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill icon.png"));
+                this.tx達成率MAX = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill max.png"));
+                this.txDifficultyNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_level number.png"));
+                this.txAchievementRateNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill number.png"));
+                this.txBPM数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm font.png"));
+                this.txBPM画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm icon.png"));
                 base.OnManagedCreateResources();
             }
         }
@@ -158,15 +158,15 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txパネル本体);
-                CDTXMania.tテクスチャの解放(ref this.tx難易度パネル);
-                CDTXMania.tテクスチャの解放(ref this.tx難易度枠);
-                CDTXMania.tテクスチャの解放(ref this.txランク);
-                CDTXMania.tテクスチャの解放(ref this.tx達成率MAX);
-                CDTXMania.tテクスチャの解放(ref this.txDifficultyNumber);
-                CDTXMania.tテクスチャの解放(ref this.tx達成率数字);
-                CDTXMania.tテクスチャの解放(ref this.txBPM数字);
-                CDTXMania.tテクスチャの解放(ref this.txBPM画像);
+                CDTXMania.tReleaseTexture(ref this.txパネル本体);
+                CDTXMania.tReleaseTexture(ref this.tx難易度パネル);
+                CDTXMania.tReleaseTexture(ref this.tx難易度枠);
+                CDTXMania.tReleaseTexture(ref this.txランク);
+                CDTXMania.tReleaseTexture(ref this.tx達成率MAX);
+                CDTXMania.tReleaseTexture(ref this.txDifficultyNumber);
+                CDTXMania.tReleaseTexture(ref this.txAchievementRateNumber);
+                CDTXMania.tReleaseTexture(ref this.txBPM数字);
+                CDTXMania.tReleaseTexture(ref this.txBPM画像);
                 base.OnManagedReleaseResources();
             }
         }
@@ -192,7 +192,7 @@ namespace DTXMania
                 this.ct登場アニメ用.t進行();
 
                 this.ct難易度スクロール用.t進行();
-                if (this.ct難易度スクロール用.b終了値に達した)
+                if (this.ct難易度スクロール用.bReachedEndValue)
                 {
                     int num = this.nCheckDifficultyLabelDisplayAndReturnScrollDirection();
                     if (num < 0)
@@ -598,7 +598,7 @@ namespace DTXMania
         private CTexture tx難易度パネル;
         private CTexture tx難易度枠;
         private CTexture txDifficultyNumber;
-        private CTexture tx達成率数字;
+        private CTexture txAchievementRateNumber;
         private CTexture txBPM数字;
         private CTexture txBPM画像;
         private int nCheckDifficultyLabelDisplayAndReturnScrollDirection()
@@ -652,9 +652,9 @@ namespace DTXMania
                         {
                             rectangle.Width -= 6;
                         }
-                        if (this.tx達成率数字 != null)
+                        if (this.txAchievementRateNumber != null)
                         {
-                            this.tx達成率数字.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
+                            this.txAchievementRateNumber.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }

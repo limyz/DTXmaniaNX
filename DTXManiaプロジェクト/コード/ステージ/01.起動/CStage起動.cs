@@ -16,7 +16,7 @@ namespace DTXMania
 
 		public CStage起動()
 		{
-			base.eステージID = CStage.Eステージ.起動;
+			base.eステージID = CStage.EStage.Startup;
 			base.bNotActivated = true;
 		}
 
@@ -68,7 +68,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                this.tx背景 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\1_background.jpg"), false);
+                this.tx背景 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\1_background.jpg"), false);
 				base.OnManagedCreateResources();
 			}
 		}
@@ -76,7 +76,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx背景 );
+				CDTXMania.tReleaseTexture( ref this.tx背景 );
 				base.OnManagedReleaseResources();
 			}
 		}

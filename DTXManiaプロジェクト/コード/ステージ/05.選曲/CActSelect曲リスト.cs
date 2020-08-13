@@ -82,7 +82,7 @@ namespace DTXMania
 			base.bNotActivated = true;
 			this.bIsEnumeratingSongs = false;
 
-            base.list子Activities.Add( this.actステータスパネル = new CActSelectStatusPanel() );
+            base.listChildActivities.Add( this.actステータスパネル = new CActSelectStatusPanel() );
 
             this.stパネルマップ = null;
             this.stパネルマップ = new STATUSPANEL[12];		// yyagi: 以下、手抜きの初期化でスマン
@@ -191,9 +191,9 @@ namespace DTXMania
 		}
 
 
-		public delegate void DGSortFunc( List<CSongListNode> songList, E楽器パート eInst, int order, params object[] p);
+		public delegate void DGSortFunc( List<CSongListNode> songList, EInstrumentPart eInst, int order, params object[] p);
 
-		public void t曲リストのソート( DGSortFunc sf, E楽器パート eInst, int order, params object[] p )
+		public void t曲リストのソート( DGSortFunc sf, EInstrumentPart eInst, int order, params object[] p )
 		{
 			List<CSongListNode> songList = GetSongListWithinMe( this.r現在選択中の曲 );
 			if ( songList == null )
@@ -421,7 +421,7 @@ namespace DTXMania
 			}
 			this.OnDeactivate();
 			this.r現在選択中の曲 = null;
-            if( CDTXMania.rCurrentStage.eステージID == CStage.Eステージ.選曲 )
+            if( CDTXMania.rCurrentStage.eステージID == CStage.EStage.SongSelection )
 			    this.OnActivate();
 		}
 
@@ -479,10 +479,10 @@ namespace DTXMania
 
 		public override void OnActivate()
 		{
-			if( this.b活性化してる )
+			if( this.bActivated )
 				return;
 
-			this.e楽器パート = E楽器パート.DRUMS;
+			this.e楽器パート = EInstrumentPart.DRUMS;
 			this.b登場アニメ全部完了 = false;
 			this.n目標のスクロールカウンタ = 0;
 			this.n現在のスクロールカウンタ = 0;
@@ -528,15 +528,15 @@ namespace DTXMania
 			if( this.bNotActivated )
 				return;
 
-			this.tx曲名バー.Score = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar score.png" ), false );
-			this.tx曲名バー.Box = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar box.png" ), false );
-			this.tx曲名バー.Other = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar other.png" ), false );
-			this.tx選曲バー.Score = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar score selected.png" ), false );
-			this.tx選曲バー.Box = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar box selected.png" ), false );
-			this.tx選曲バー.Other = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\5_bar other selected.png" ), false );
-            this.txスキル数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenSelect skill number on list.png"), false);
-            this.tx上部パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_header song list.png"), false);
-            this.tx下部パネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_footer song list.png"), false);
+			this.tx曲名バー.Score = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar score.png" ), false );
+			this.tx曲名バー.Box = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar box.png" ), false );
+			this.tx曲名バー.Other = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar other.png" ), false );
+			this.tx選曲バー.Score = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar score selected.png" ), false );
+			this.tx選曲バー.Box = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar box selected.png" ), false );
+			this.tx選曲バー.Other = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar other selected.png" ), false );
+            this.txスキル数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenSelect skill number on list.png"), false);
+            this.tx上部パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_header song list.png"), false);
+            this.tx下部パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_footer song list.png"), false);
 
             this.prvFont = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 30, FontStyle.Regular );
             this.prvFontSmall = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str選曲リストフォント ), 15, FontStyle.Regular );
@@ -597,7 +597,7 @@ namespace DTXMania
 			}
 			#endregion
 			#region [ 曲数表示 ]
-            this.txアイテム数数字 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_skill number on gauge etc.png"), false);
+            this.txアイテム数数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill number on gauge etc.png"), false);
 			#endregion
 			base.OnManagedCreateResources();
 		}
@@ -679,7 +679,7 @@ namespace DTXMania
 				{
 					this.ct登場アニメ用[ i ].t進行();
 
-					if( this.ct登場アニメ用[ i ].b終了値に達した )
+					if( this.ct登場アニメ用[ i ].bReachedEndValue )
 						this.ct登場アニメ用[ i ].t停止();
 				}
 
@@ -953,7 +953,7 @@ namespace DTXMania
 							#endregion
 							#region [ スキル値を描画。]
 							//-----------------
-							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
+							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != EInstrumentPart.UNKNOWN ) )
                                 this.tスキル値の描画( i選択曲バーX座標 + 25, y + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
 							//-----------------
 							#endregion
@@ -979,7 +979,7 @@ namespace DTXMania
 							#endregion
 							#region [ スキル値を描画。]
 							//-----------------
-							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
+							if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != EInstrumentPart.UNKNOWN ) )
 								this.tスキル値の描画( x + 34, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
 							//-----------------
 							#endregion
@@ -1053,7 +1053,7 @@ namespace DTXMania
 						#endregion
 						#region [ スキル値を描画。]
 						//-----------------
-						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
+						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != EInstrumentPart.UNKNOWN ) )
                             this.tスキル値の描画(i選択曲バーX座標 + 25, y選曲 + 12, this.stバー情報[nパネル番号].nスキル値[(int)this.e楽器パート]);
 						//-----------------
 						#endregion
@@ -1075,7 +1075,7 @@ namespace DTXMania
 						#endregion
 						#region [ スキル値を描画。]
 						//-----------------
-						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != E楽器パート.UNKNOWN ) )
+						if( ( this.stバー情報[ nパネル番号 ].eバー種別 == Eバー種別.Score ) && ( this.e楽器パート != EInstrumentPart.UNKNOWN ) )
 							this.tスキル値の描画( x + 34, y + 18, this.stバー情報[ nパネル番号 ].nスキル値[ (int) this.e楽器パート ] );
 						//-----------------
 						#endregion
@@ -1228,7 +1228,7 @@ namespace DTXMania
 		private bool b登場アニメ全部完了;
 		private Color color文字影 = Color.FromArgb( 0x40, 10, 10, 10 );
 		private CCounter[] ct登場アニメ用 = new CCounter[ 13 ];
-		private E楽器パート e楽器パート;
+		private EInstrumentPart e楽器パート;
 		private Font ft曲リスト用フォント;
 		private long nスクロールタイマ;
 		private int n現在のスクロールカウンタ;
@@ -1424,7 +1424,7 @@ namespace DTXMania
             
             Bitmap bmp;
             bmp = prvFont.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true );
-            CTexture tx文字テクスチャ = CDTXMania.tテクスチャの生成( bmp, false );
+            CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
             bmp.Dispose();
 
             return tx文字テクスチャ;
@@ -1433,7 +1433,7 @@ namespace DTXMania
         {
             Bitmap bmp;
             bmp = prvFontSmall.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true );
-            CTexture tx文字テクスチャ = CDTXMania.tテクスチャの生成( bmp, false );
+            CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
             bmp.Dispose();
 
             return tx文字テクスチャ;

@@ -16,11 +16,11 @@ namespace DTXMania
 
 		public CStageタイトル()
 		{
-			base.eステージID = CStage.Eステージ.タイトル;
+			base.eステージID = CStage.EStage.Title;
 			base.bNotActivated = true;
-			base.list子Activities.Add( this.actFIfromSetup = new CActFIFOWhite() );
-			base.list子Activities.Add( this.actFI = new CActFIFOWhite() );
-			base.list子Activities.Add( this.actFO = new CActFIFOWhite() );
+			base.listChildActivities.Add( this.actFIfromSetup = new CActFIFOWhite() );
+			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
+			base.listChildActivities.Add( this.actFO = new CActFIFOWhite() );
 		}
 
 
@@ -72,8 +72,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.tx背景 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\2_background.jpg" ), false );
-				this.txメニュー = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\2_menu.png" ), false );
+				this.tx背景 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\2_background.jpg" ), false );
+				this.txメニュー = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\2_menu.png" ), false );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -81,8 +81,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx背景 );
-				CDTXMania.tテクスチャの解放( ref this.txメニュー );
+				CDTXMania.tReleaseTexture( ref this.tx背景 );
+				CDTXMania.tReleaseTexture( ref this.txメニュー );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -104,7 +104,7 @@ namespace DTXMania
 						this.actFI.tフェードイン開始();
 						base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
 					}
-					this.ctカーソルフラッシュ用.t開始( 0, 700, 5, CDTXMania.Timer );
+					this.ctカーソルフラッシュ用.tStart( 0, 700, 5, CDTXMania.Timer );
 					this.ctカーソルフラッシュ用.n現在の値 = 100;
 					base.b初めての進行描画 = false;
 				}
@@ -118,7 +118,7 @@ namespace DTXMania
 				if( this.ct上移動用.b進行中 )
 				{
 					this.ct上移動用.t進行();
-					if( this.ct上移動用.b終了値に達した )
+					if( this.ct上移動用.bReachedEndValue )
 					{
 						this.ct上移動用.t停止();
 					}
@@ -130,7 +130,7 @@ namespace DTXMania
 				if( this.ct下移動用.b進行中 )
 				{
 					this.ct下移動用.t進行();
-					if( this.ct下移動用.b終了値に達した )
+					if( this.ct下移動用.bReachedEndValue )
 					{
 						this.ct下移動用.t停止();
 					}
@@ -154,16 +154,16 @@ namespace DTXMania
 					this.ctキー反復用.Up.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					this.ctキー反復用.R.tキー反復( CDTXMania.Pad.b押されているGB( Eパッド.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					//Change to HT
-					if( CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.HT ) )
+					if( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, Eパッド.HT ) )
 						this.tカーソルを上へ移動する();
 
 					this.ctキー反復用.Down.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					this.ctキー反復用.B.tキー反復( CDTXMania.Pad.b押されているGB( Eパッド.SD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					//Change to LT
-					if ( CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.LT ) )
+					if ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, Eパッド.LT ) )
 						this.tカーソルを下へ移動する();
 
-					if( ( CDTXMania.Pad.b押されたDGB( Eパッド.CY ) || CDTXMania.Pad.b押された( E楽器パート.DRUMS, Eパッド.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) 
+					if( ( CDTXMania.Pad.b押されたDGB( Eパッド.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, Eパッド.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) 
 					{
 						if ( ( this.n現在のカーソル行 == (int) E戻り値.GAMESTART - 1 ) && CDTXMania.Skin.soundゲーム開始音.b読み込み成功 )
 						{
@@ -352,7 +352,7 @@ namespace DTXMania
 			{
 				CDTXMania.Skin.soundカーソル移動音.t再生する();
 				this.n現在のカーソル行++;
-				this.ct下移動用.t開始( 0, 100, 1, CDTXMania.Timer );
+				this.ct下移動用.tStart( 0, 100, 1, CDTXMania.Timer );
 				if( this.ct上移動用.b進行中 )
 				{
 					this.ct下移動用.n現在の値 = 100 - this.ct上移動用.n現在の値;
@@ -366,7 +366,7 @@ namespace DTXMania
 			{
 				CDTXMania.Skin.soundカーソル移動音.t再生する();
 				this.n現在のカーソル行--;
-				this.ct上移動用.t開始( 0, 100, 1, CDTXMania.Timer );
+				this.ct上移動用.tStart( 0, 100, 1, CDTXMania.Timer );
 				if( this.ct下移動用.b進行中 )
 				{
 					this.ct上移動用.n現在の値 = 100 - this.ct下移動用.n現在の値;

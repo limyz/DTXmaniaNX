@@ -26,7 +26,7 @@ namespace DTXMania
 
 		public CAct演奏RGB共通()
 		{
-            base.list子Activities.Add(this.actLVFont = new CActLVLNFont());
+            base.listChildActivities.Add(this.actLVFont = new CActLVLNFont());
             base.bNotActivated = true;
 		}
 		
@@ -53,8 +53,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                this.txRGB = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_RGB buttons.png"));
-                this.txシャッター = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_shutter_GB.png"));
+                this.txRGB = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RGB buttons.png"));
+                this.txシャッター = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_shutter_GB.png"));
                 base.OnManagedCreateResources();
 			}
 		}
@@ -62,8 +62,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txRGB );
-                CDTXMania.tテクスチャの解放(ref this.txシャッター);
+				CDTXMania.tReleaseTexture( ref this.txRGB );
+                CDTXMania.tReleaseTexture(ref this.txシャッター);
                 base.OnManagedReleaseResources();
 			}
 		}

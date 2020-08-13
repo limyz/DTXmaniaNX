@@ -15,11 +15,11 @@ namespace DTXMania
 			base.bNotActivated = true;
 		}
 
-		public void Start( E楽器パート part )
+		public void Start( EInstrumentPart part )
 		{
 			this.Start( part, null );
 		}
-		public abstract void Start( E楽器パート part, CDTX.CChip r歓声Chip );
+		public abstract void Start( EInstrumentPart part, CDTX.CChip r歓声Chip );
 
 
 
@@ -38,8 +38,8 @@ namespace DTXMania
 		{
 			if ( !base.bNotActivated )
 			{
-				this.txWailingBonus = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlay wailing bonus.png" ) );
-                this.txWailingFlush = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\7_WailingFlush.png" ) );
+				this.txWailingBonus = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlay wailing bonus.png" ) );
+                this.txWailingFlush = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_WailingFlush.png" ) );
                 this.txWailingFire = CDTXMania.tテクスチャの生成Af( CSkin.Path( @"Graphics\7_WailingFire.png" ) );
 				base.OnManagedCreateResources();
 			}
@@ -48,9 +48,9 @@ namespace DTXMania
 		{
 			if ( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txWailingBonus );
-                CDTXMania.tテクスチャの解放( ref this.txWailingFlush );
-                CDTXMania.tテクスチャの解放( ref this.txWailingFire );
+				CDTXMania.tReleaseTexture( ref this.txWailingBonus );
+                CDTXMania.tReleaseTexture( ref this.txWailingFlush );
+                CDTXMania.tReleaseTexture( ref this.txWailingFire );
 				base.OnManagedReleaseResources();
 			}
 		}

@@ -334,7 +334,7 @@ namespace DTXMania
 					}
 					else if( strExt.Equals( ".mid" ) || strExt.Equals( ".smf" ))
 					{
-						// 何もしない
+						// DoNothing
 					}
 				}
 			}
@@ -713,13 +713,13 @@ namespace DTXMania
                                                     {
                                                         node.arScore[lv].SongInformation.BestRank[i] =
                                                             (scoreIni.stFile.BestRank[i] != (int)CScoreIni.ERANK.UNKNOWN) ?
-                                                            (int)scoreIni.stFile.BestRank[i] : CScoreIni.tCalculateRankValueOld(scoreIni.stSection[nSectionHiSkill]);
+                                                            (int)scoreIni.stFile.BestRank[i] : CScoreIni.tCalculateRankOld(scoreIni.stSection[nSectionHiSkill]);
                                                     }
                                                     else
                                                     {
                                                         node.arScore[lv].SongInformation.BestRank[i] =
                                                             (scoreIni.stFile.BestRank[i] != (int)CScoreIni.ERANK.UNKNOWN) ?
-                                                            (int)scoreIni.stFile.BestRank[i] : CScoreIni.tCalculateRankValue(scoreIni.stSection[nSectionHiSkill]);
+                                                            (int)scoreIni.stFile.BestRank[i] : CScoreIni.tCalculateRank(scoreIni.stSection[nSectionHiSkill]);
                                                     }
 												}
 												else
@@ -1264,7 +1264,7 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t曲リストのソート2_タイトル順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート2_タイトル順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
 			{
@@ -1293,11 +1293,11 @@ namespace DTXMania
 		/// <param name="ノードリスト"></param>
 		/// <param name="part"></param>
 		/// <param name="order">1=Ascend -1=Descend</param>
-		public void t曲リストのソート3_演奏回数の多い順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート3_演奏回数の多い順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			order = -order;
 			int nL12345 = (int) p[ 0 ];
-			if ( part != E楽器パート.UNKNOWN )
+			if ( part != EInstrumentPart.UNKNOWN )
 			{
 				ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
 				{
@@ -1357,11 +1357,11 @@ namespace DTXMania
 //				}
 			}
 		}
-		public void t曲リストのソート4_LEVEL順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート4_LEVEL順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			order = -order;
 			int nL12345 = (int)p[ 0 ];
-			if ( part != E楽器パート.UNKNOWN )
+			if ( part != EInstrumentPart.UNKNOWN )
 			{
                 Trace.WriteLine( "----------ソート開始------------" );
 				ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 ) //2016.03.12 kairera0467 少数第2位も考慮するようにするテスト。
@@ -1408,11 +1408,11 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t曲リストのソート5_BestRank順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート5_BestRank順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			order = -order;
 			int nL12345 = (int) p[ 0 ];
-			if ( part != E楽器パート.UNKNOWN )
+			if ( part != EInstrumentPart.UNKNOWN )
 			{
 				ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
 				{
@@ -1465,11 +1465,11 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t曲リストのソート6_SkillPoint順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート6_SkillPoint順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			order = -order;
 			int nL12345 = (int) p[ 0 ];
-			if ( part != E楽器パート.UNKNOWN )
+			if ( part != EInstrumentPart.UNKNOWN )
 			{
 				ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
 				{
@@ -1515,10 +1515,10 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t曲リストのソート7_更新日時順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート7_更新日時順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			int nL12345 = (int) p[ 0 ];
-			if ( part != E楽器パート.UNKNOWN )
+			if ( part != EInstrumentPart.UNKNOWN )
 			{
 				ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
 				{
@@ -1565,7 +1565,7 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t曲リストのソート8_アーティスト名順( List<CSongListNode> ノードリスト, E楽器パート part, int order, params object[] p )
+		public void t曲リストのソート8_アーティスト名順( List<CSongListNode> ノードリスト, EInstrumentPart part, int order, params object[] p )
 		{
 			int nL12345 = (int) p[ 0 ]; 
 			ノードリスト.Sort( delegate( CSongListNode n1, CSongListNode n2 )
@@ -1683,7 +1683,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
                         if ( CDTXMania.ConfigIni.nSkillMode == 0 )
                         {
                             score.SongInformation.BestRank[ n楽器番号 ] =
-                            CScoreIni.tCalculateRankValueOld(
+                            CScoreIni.tCalculateRankOld(
                                 ini.stSection[n].n全チップ数,
                                 ini.stSection[n].nPerfect数,
                                 ini.stSection[n].nGreat数,
@@ -1695,7 +1695,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
                         else if( CDTXMania.ConfigIni.nSkillMode == 1 )
                         {
                             score.SongInformation.BestRank[ n楽器番号 ] =
-                            CScoreIni.tCalculateRankValue(
+                            CScoreIni.tCalculateRank(
                                 ini.stSection[ n ].n全チップ数,
                                 ini.stSection[ n ].nPerfect数,
                                 ini.stSection[ n ].nGreat数,

@@ -76,7 +76,7 @@ namespace DTXMania
 		{
 			if (!base.bNotActivated)
 			{
-				this.tx数値 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenSelect level numbers.png"));
+				this.tx数値 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenSelect level numbers.png"));
 				base.OnManagedCreateResources();
 			}
 		}

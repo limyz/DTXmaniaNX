@@ -33,7 +33,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.tx黒タイル64x64 );
+				CDTXMania.tReleaseTexture( ref this.tx黒タイル64x64 );
 				base.OnDeactivate();
 			}
 		}
@@ -41,7 +41,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.tx黒タイル64x64 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Tile black 64x64.png" ), false );
+				this.tx黒タイル64x64 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\Tile black 64x64.png" ), false );
 				base.OnManagedCreateResources();
 			}
 		}

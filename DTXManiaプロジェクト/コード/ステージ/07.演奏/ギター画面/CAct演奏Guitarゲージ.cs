@@ -36,14 +36,14 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txフレーム.Guitar = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Gauge_Guitar.png"));
-                this.txフレーム.Bass = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Gauge_Bass.png"));
-                this.txフルゲージ = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
-                this.txゲージ = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_gauge_bar.png"));
+                this.txフレーム.Guitar = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge_Guitar.png"));
+                this.txフレーム.Bass = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge_Bass.png"));
+                this.txフルゲージ = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
+                this.txゲージ = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
 
-                //this.txマスクF = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Dummy.png"));
-                //this.txマスクD = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Dummy.png"));
-                this.txハイスピ = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Panel_icons.jpg"));
+                //this.txマスクF = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Dummy.png"));
+                //this.txマスクD = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Dummy.png"));
+                this.txハイスピ = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Panel_icons.jpg"));
 
                 base.OnManagedCreateResources();
             }
@@ -52,14 +52,14 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txゲージ);
-                CDTXMania.tテクスチャの解放(ref this.txフルゲージ);
-                CDTXMania.tテクスチャの解放(ref this.txフレーム.Guitar);
-                CDTXMania.tテクスチャの解放(ref this.txフレーム.Bass);
+                CDTXMania.tReleaseTexture(ref this.txゲージ);
+                CDTXMania.tReleaseTexture(ref this.txフルゲージ);
+                CDTXMania.tReleaseTexture(ref this.txフレーム.Guitar);
+                CDTXMania.tReleaseTexture(ref this.txフレーム.Bass);
 
-                //CDTXMania.tテクスチャの解放(ref this.txマスクF);
-                //CDTXMania.tテクスチャの解放(ref this.txマスクD);
-                CDTXMania.tテクスチャの解放(ref this.txハイスピ);
+                //CDTXMania.tReleaseTexture(ref this.txマスクF);
+                //CDTXMania.tReleaseTexture(ref this.txマスクD);
+                CDTXMania.tReleaseTexture(ref this.txハイスピ);
 
                 base.OnManagedReleaseResources();
             }
@@ -94,7 +94,7 @@ namespace DTXMania
                 }
                 base.txフレーム.Guitar.tDraw2D(CDTXMania.app.Device, base.n本体X.Guitar, 0, new Rectangle(0, 68, base.txフレーム.Guitar.sz画像サイズ.Width, 68));
                 /*
-                if (base.IsDanger(E楽器パート.GUITAR) && base.db現在のゲージ値.Guitar >= 0.0 && this.txマスクD != null)
+                if (base.IsDanger(EInstrumentPart.GUITAR) && base.db現在のゲージ値.Guitar >= 0.0 && this.txマスクD != null)
                 {
                     this.txマスクD.tDraw2D(CDTXMania.app.Device, base.n本体X.Guitar, 0);
                 }
@@ -122,7 +122,7 @@ namespace DTXMania
                 }
                 base.txフレーム.Bass.tDraw2D(CDTXMania.app.Device, base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 0, new Rectangle(0, 68, base.txフレーム.Bass.sz画像サイズ.Width, 68));
                 /*
-                if (base.IsDanger(E楽器パート.BASS) && base.db現在のゲージ値.Bass >= 0.0 && this.txマスクD != null)
+                if (base.IsDanger(EInstrumentPart.BASS) && base.db現在のゲージ値.Bass >= 0.0 && this.txマスクD != null)
                 {
                     this.txマスクD.tDraw2D(CDTXMania.app.Device, base.n本体X.Bass, 0);
                 }

@@ -694,7 +694,7 @@ namespace DTXMania
 				return ( !this.bDrums有効 && this.bGuitar有効 );
 			}
 		}
-		public bool bドラムが全部オートプレイである
+		public bool bAllDrumsAreAutoPlay
 		{
 			get
 			{

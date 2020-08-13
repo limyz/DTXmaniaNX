@@ -48,7 +48,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txStageFailed = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_stage_failed.jpg"));
+                this.txStageFailed = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_stage_failed.jpg"));
                 base.OnManagedCreateResources();
             }
         }
@@ -56,7 +56,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txStageFailed);
+                CDTXMania.tReleaseTexture(ref this.txStageFailed);
                 base.OnManagedReleaseResources();
             }
         }
@@ -97,8 +97,8 @@ namespace DTXMania
                                 CDTXMania.Sound管理.tサウンドを破棄する(this.sd効果音);
                                 this.sd効果音 = null;
                             }
-                            this.sd効果音 = CDTXMania.Sound管理.tサウンドを生成する(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED);
-                            this.sd効果音.t再生を開始する();
+                            this.sd効果音 = CDTXMania.Sound管理.tGenerateSound(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED);
+                            this.sd効果音.tStartPlaying();
                         }
                         catch
                         {
@@ -111,7 +111,7 @@ namespace DTXMania
                     this.b効果音再生済み = true;
                 }
             }
-            if (!this.ct進行.b終了値に達した)
+            if (!this.ct進行.bReachedEndValue)
             {
                 return 0;
             }

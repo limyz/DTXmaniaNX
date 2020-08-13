@@ -55,7 +55,7 @@ namespace DTXMania
             #region [ 共通 Target/AutoMode/AutoLane ]
             l.Add(new CSwitchItemList("Target", CItemBase.Eパネル種別.通常, nInst, "", "", new string[] { "Drums", "Guitar", "Bass" }));
             List<int> automode = tConfigureAuto_DefaultSettings();
-            if (nInst == (int)E楽器パート.DRUMS)
+            if (nInst == (int)EInstrumentPart.DRUMS)
             {
                 l.Add(new CItemList("Auto Mode", CItemBase.Eパネル種別.通常, automode[nInst], "", "", new string[] { "All Auto", "Auto LP", "Auto BD", "2PedalAuto", "XGLaneAuto", "Custom", "OFF" }));
             }
@@ -148,7 +148,7 @@ namespace DTXMania
             int automode;
             #region [ Drums ]
             // "All Auto", "Auto LP", "Auto BD", "2Pedal Auto", "3 Auto", "Custom", "OFF"
-            if (CDTXMania.ConfigIni.bドラムが全部オートプレイである)
+            if (CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
             {
                 automode = 0;	// All Auto
             }
@@ -263,7 +263,7 @@ namespace DTXMania
         }
 
         // メソッド
-        public override void tActivatePopupMenu(E楽器パート einst)
+        public override void tActivatePopupMenu(EInstrumentPart einst)
         {
             this.CActSelectQuickConfigMain();
             base.tActivatePopupMenu(einst);
@@ -292,7 +292,7 @@ namespace DTXMania
 				}
 				if ( this.tx文字列パネル != null )
 				{
-					int x = ( nCurrentTarget == (int) E楽器パート.DRUMS ) ? 486 : 100;
+					int x = ( nCurrentTarget == (int) EInstrumentPart.DRUMS ) ? 486 : 100;
 					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 20, 330 );
 				}
             }
@@ -309,11 +309,11 @@ namespace DTXMania
             string header = "", s = "";
             switch (nCurrentTarget)
             {
-                case (int)E楽器パート.DRUMS:
+                case (int)EInstrumentPart.DRUMS:
                     header = "LHSBHLFCPRB";
                     break;
-                case (int)E楽器パート.GUITAR:
-                case (int)E楽器パート.BASS:
+                case (int)EInstrumentPart.GUITAR:
+                case (int)EInstrumentPart.BASS:
                     header = "RGBYPPW";
                     break;
                 default:
@@ -350,7 +350,7 @@ namespace DTXMania
             {
                 case (int)EOrder.Target:
                     nCurrentTarget = (nCurrentTarget + 1) % 3;
-                    // eInst = (E楽器パート) nCurrentTarget;	// ここではeInstは変えない。メニューを開いたタイミングでのみeInstを使う
+                    // eInst = (EInstrumentPart) nCurrentTarget;	// ここではeInstは変えない。メニューを開いたタイミングでのみeInstを使う
                     Initialize(lci[nCurrentConfigSet][nCurrentTarget], true, QuickCfgTitle, n現在の選択行);
                     MakeAutoPanel();
                     break;
@@ -516,7 +516,7 @@ namespace DTXMania
             switch (target)
             {
                 #region [ DRUMS ]
-                case (int)E楽器パート.DRUMS:
+                case (int)EInstrumentPart.DRUMS:
                     switch (lci[nCurrentConfigSet][target][(int)EOrder.AutoMode].GetIndex())
                     {
                         //LHPSBHLFCR
@@ -550,8 +550,8 @@ namespace DTXMania
                     break;
                 #endregion
                 #region [ Guitar / Bass ]
-                case (int)E楽器パート.GUITAR:
-                case (int)E楽器パート.BASS:
+                case (int)EInstrumentPart.GUITAR:
+                case (int)EInstrumentPart.BASS:
                     //					s = ( lci[ nCurrentConfigSet ][ target ][ (int) EOrder.AutoMode ].GetIndex() ) == 1 ? "A" : "_";
                     switch (lci[nCurrentConfigSet][target][(int)EOrder.AutoMode].GetIndex())
                     {
@@ -565,7 +565,7 @@ namespace DTXMania
                             s = "_____A_";
                             break;
                         case 3:	// Custom
-                            int p = (target == (int)E楽器パート.GUITAR) ? (int)Eレーン.GtR : (int)Eレーン.BsR;
+                            int p = (target == (int)EInstrumentPart.GUITAR) ? (int)Eレーン.GtR : (int)Eレーン.BsR;
                             int len = (int)Eレーン.GtW - (int)Eレーン.GtR + 1;
                             for (int i = p; i < p + len; i++)
                             {
@@ -611,7 +611,7 @@ namespace DTXMania
                 string pathパネル本体 = CSkin.Path(@"Graphics\ScreenSelect popup auto settings.png");
                 if (File.Exists(pathパネル本体))
                 {
-                    this.txパネル本体 = CDTXMania.tテクスチャの生成(pathパネル本体, false);
+                    this.txパネル本体 = CDTXMania.tGenerateTexture(pathパネル本体, false);
                 }
                 base.OnManagedCreateResources();
             }
@@ -620,8 +620,8 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txパネル本体);
-                CDTXMania.tテクスチャの解放(ref this.tx文字列パネル);
+                CDTXMania.tReleaseTexture(ref this.txパネル本体);
+                CDTXMania.tReleaseTexture(ref this.tx文字列パネル);
                 base.OnManagedReleaseResources();
             }
         }

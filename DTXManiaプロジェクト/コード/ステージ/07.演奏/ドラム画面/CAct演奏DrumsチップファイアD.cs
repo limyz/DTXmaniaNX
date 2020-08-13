@@ -380,128 +380,128 @@ namespace DTXMania
 			{
                 if (CDTXMania.ConfigIni.nExplosionFrames >= 2)
                 {
-                    this.tx火花2 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire.png"));
+                    this.tx火花2 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire.png"));
                     if (this.tx火花2 != null)
                     {
                         this.tx火花2.b加算合成 = true;
                     }
                 }
-                this.tx火花[0] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LC.png"));
+                this.tx火花[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LC.png"));
                 if (this.tx火花[0] != null)
                 {
                     this.tx火花[0].b加算合成 = true;
                 }
-				this.tx火花[1] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip fire_HH.png" ) );
+				this.tx火花[1] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip fire_HH.png" ) );
 				if( this.tx火花[1] != null )
 				{
 					this.tx火花[1].b加算合成 = true;
 				}
-                this.tx火花[2] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_SD.png"));
+                this.tx火花[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_SD.png"));
                 if (this.tx火花[2] != null)
                 {
                     this.tx火花[2].b加算合成 = true;
                 }
-                this.tx火花[3] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_BD.png"));
+                this.tx火花[3] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_BD.png"));
                 if (this.tx火花[3] != null)
                 {
                     this.tx火花[3].b加算合成 = true;
                 }
-                this.tx火花[4] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_HT.png"));
+                this.tx火花[4] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_HT.png"));
                 if (this.tx火花[4] != null)
                 {
                     this.tx火花[4].b加算合成 = true;
                 }
-                this.tx火花[5] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LT.png"));
+                this.tx火花[5] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LT.png"));
                 if (this.tx火花[5] != null)
                 {
                     this.tx火花[5].b加算合成 = true;
                 }
-                this.tx火花[6] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_FT.png"));
+                this.tx火花[6] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_FT.png"));
                 if (this.tx火花[6] != null)
                 {
                     this.tx火花[6].b加算合成 = true;
                 }
-                this.tx火花[7] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_CY.png"));
+                this.tx火花[7] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_CY.png"));
                 if (this.tx火花[7] != null)
                 {
                     this.tx火花[7].b加算合成 = true;
                 }
-                this.tx火花[8] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LP.png"));
+                this.tx火花[8] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LP.png"));
                 if (this.tx火花[8] != null)
                 {
                     this.tx火花[8].b加算合成 = true;
                 }
-                this.tx火花[9] = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_RD.png"));
+                this.tx火花[9] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_RD.png"));
                 if (this.tx火花[9] != null)
                 {
                     this.tx火花[9].b加算合成 = true;
                 }
-				this.tx青い星[0] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LC.png" ) );
+				this.tx青い星[0] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LC.png" ) );
 				if( this.tx青い星[0] != null )
 				{
 					this.tx青い星[0].b加算合成 = true;
 				}
-                this.tx青い星[1] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HH.png" ) );
+                this.tx青い星[1] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HH.png" ) );
 				if( this.tx青い星[1] != null )
 				{
 					this.tx青い星[1].b加算合成 = true;
 				}
-                this.tx青い星[2] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_SD.png" ) );
+                this.tx青い星[2] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_SD.png" ) );
 				if( this.tx青い星[2] != null )
 				{
 					this.tx青い星[2].b加算合成 = true;
 				}
-                this.tx青い星[3] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_BD.png" ) );
+                this.tx青い星[3] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_BD.png" ) );
 				if( this.tx青い星[3] != null )
 				{
 					this.tx青い星[3].b加算合成 = true;
 				}
-                this.tx青い星[4] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HT.png" ) );
+                this.tx青い星[4] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HT.png" ) );
 				if( this.tx青い星[4] != null )
 				{
 					this.tx青い星[4].b加算合成 = true;
 				}
-                this.tx青い星[5] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LT.png" ) );
+                this.tx青い星[5] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LT.png" ) );
 				if( this.tx青い星[5] != null )
 				{
 					this.tx青い星[5].b加算合成 = true;
 				}
-                this.tx青い星[6] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_FT.png" ) );
+                this.tx青い星[6] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_FT.png" ) );
 				if( this.tx青い星[6] != null )
 				{
 					this.tx青い星[6].b加算合成 = true;
 				}
-                this.tx青い星[7] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_CY.png" ) );
+                this.tx青い星[7] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_CY.png" ) );
 				if( this.tx青い星[7] != null )
 				{
 					this.tx青い星[7].b加算合成 = true;
 				}
-                this.tx青い星[8] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LP.png" ) );
+                this.tx青い星[8] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LP.png" ) );
 				if( this.tx青い星[8] != null )
 				{
 					this.tx青い星[8].b加算合成 = true;
 				}
-                this.tx青い星[9] = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_RD.png" ) );
+                this.tx青い星[9] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_RD.png" ) );
 				if( this.tx青い星[9] != null )
 				{
 					this.tx青い星[9].b加算合成 = true;
 				}
-				this.tx大波 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave.png" ) );
+				this.tx大波 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave.png" ) );
 				if( this.tx大波 != null )
 				{
 					this.tx大波.b加算合成 = true;
 				}
-				this.tx細波 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave2.png" ) );
+				this.tx細波 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave2.png" ) );
 				if( this.tx細波 != null )
 				{
 					this.tx細波.b加算合成 = true;
 				}
-                this.txボーナス花火 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_Bonus.png"));
+                this.txボーナス花火 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_Bonus.png"));
                 if (this.txボーナス花火 != null)
                 {
                     this.txボーナス花火.b加算合成 = true;
                 }
-                this.txNotes = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_Chips_drums.png"));
+                this.txNotes = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Chips_drums.png"));
                 if (this.txNotes != null)
                 {
                     this.txNotes.nTransparency = 120;
@@ -516,15 +516,15 @@ namespace DTXMania
 			{
                 for (int tx1 = 0; tx1 < 10; tx1++)
                 {
-                    CDTXMania.tテクスチャの解放(ref this.tx火花[tx1]);
-                    CDTXMania.tテクスチャの解放(ref this.tx青い星[tx1]);
+                    CDTXMania.tReleaseTexture(ref this.tx火花[tx1]);
+                    CDTXMania.tReleaseTexture(ref this.tx青い星[tx1]);
                 }
-				CDTXMania.tテクスチャの解放( ref this.tx大波 );
-				CDTXMania.tテクスチャの解放( ref this.tx細波 );
-                CDTXMania.tテクスチャの解放( ref this.txNotes);
-                CDTXMania.tテクスチャの解放( ref this.txボーナス花火 );
+				CDTXMania.tReleaseTexture( ref this.tx大波 );
+				CDTXMania.tReleaseTexture( ref this.tx細波 );
+                CDTXMania.tReleaseTexture( ref this.txNotes);
+                CDTXMania.tReleaseTexture( ref this.txボーナス花火 );
                 if (this.tx火花2 != null)
-                    CDTXMania.tテクスチャの解放( ref this.tx火花2 );
+                    CDTXMania.tReleaseTexture( ref this.tx火花2 );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -538,7 +538,7 @@ namespace DTXMania
                     {
                         this.st青い星[i].n前回のValue = this.st青い星[i].ct進行.n現在の値;
                         this.st青い星[i].ct進行.t進行();
-                        if (this.st青い星[i].ct進行.b終了値に達した)
+                        if (this.st青い星[i].ct進行.bReachedEndValue)
                         {
                             this.st青い星[i].ct進行.t停止();
                             this.st青い星[i].b使用中 = false;
@@ -574,7 +574,7 @@ namespace DTXMania
                         {
                             this.st飛び散るチップ[i].n前回のValue = this.st飛び散るチップ[i].ct進行.n現在の値;
                             this.st飛び散るチップ[i].ct進行.t進行();
-                            if (this.st飛び散るチップ[i].ct進行.b終了値に達した)
+                            if (this.st飛び散るチップ[i].ct進行.bReachedEndValue)
                             {
                                 this.st飛び散るチップ[i].ct進行.t停止();
                                 this.st飛び散るチップ[i].b使用中 = false;
@@ -654,7 +654,7 @@ namespace DTXMania
 					if( this.st火花[ i ].b使用中 )
 					{
 						this.st火花[ i ].ct進行.t進行();
-						if( this.st火花[ i ].ct進行.b終了値に達した )
+						if( this.st火花[ i ].ct進行.bReachedEndValue )
 						{
 							this.st火花[ i ].ct進行.t停止();
 							this.st火花[ i ].b使用中 = false;
@@ -784,7 +784,7 @@ namespace DTXMania
 					if( this.st大波[ i ].b使用中 )
 					{
 						this.st大波[ i ].ct進行.t進行();
-						if( this.st大波[ i ].ct進行.b終了値に達した )
+						if( this.st大波[ i ].ct進行.bReachedEndValue )
 						{
 							this.st大波[ i ].ct進行.t停止();
 							this.st大波[ i ].b使用中 = false;
@@ -877,7 +877,7 @@ namespace DTXMania
 					if( this.st細波[ i ].b使用中 )
 					{
 						this.st細波[ i ].ct進行.t進行();
-						if( this.st細波[ i ].ct進行.b終了値に達した )
+						if( this.st細波[ i ].ct進行.bReachedEndValue )
 						{
 							this.st細波[ i ].ct進行.t停止();
 							this.st細波[ i ].b使用中 = false;

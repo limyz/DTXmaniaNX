@@ -102,7 +102,7 @@ namespace DTXMania
             switch ( CDTXMania.rCurrentStage.eステージID )
             {
 
-                case CStage.Eステージ.演奏:
+                case CStage.EStage.Playing:
                     {
                         break;
                     }

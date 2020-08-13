@@ -12,7 +12,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                this.tx黒 = CDTXMania.tテクスチャの生成(CSkin.Path( @"Graphics\7_Danger.png" ) );
+                this.tx黒 = CDTXMania.tGenerateTexture(CSkin.Path( @"Graphics\7_Danger.png" ) );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -20,7 +20,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                CDTXMania.tテクスチャの解放(ref this.tx黒);
+                CDTXMania.tReleaseTexture(ref this.tx黒);
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -41,18 +41,18 @@ namespace DTXMania
 			{
 				if( !bIsDangerDrums )
 				{
-					this.bDanger中[(int)E楽器パート.DRUMS] = false;
+					this.bDanger中[(int)EInstrumentPart.DRUMS] = false;
 					return 0;
 				}
-                if (!this.bDanger中[(int)E楽器パート.DRUMS])
+                if (!this.bDanger中[(int)EInstrumentPart.DRUMS])
                 {
                     this.ct移動用 = new CCounter(0, 0x7f, 7, CDTXMania.Timer);
                     this.ct透明度用 = new CCounter(0, 250, 4, CDTXMania.Timer);
                 }
-                    this.bDanger中[(int)E楽器パート.DRUMS] = bIsDangerDrums;
+                    this.bDanger中[(int)EInstrumentPart.DRUMS] = bIsDangerDrums;
                     this.ct移動用.t進行Loop();
                     this.ct透明度用.t進行Loop();
-                    if (!this.bDanger中[(int)E楽器パート.DRUMS])
+                    if (!this.bDanger中[(int)EInstrumentPart.DRUMS])
                     {
                         return 0;
                     }

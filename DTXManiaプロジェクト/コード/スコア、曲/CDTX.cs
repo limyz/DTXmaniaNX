@@ -374,7 +374,7 @@ namespace DTXMania
 
 				// テクスチャを作成。
 				byte[] txData = File.ReadAllBytes( strテクスチャファイル名 );
-				this.tx画像 = CDTXMania.tテクスチャの生成( txData, b黒を透過する );
+				this.tx画像 = CDTXMania.tGenerateTexture( txData, b黒を透過する );
 
 				if ( this.tx画像 != null )
 				{
@@ -402,7 +402,7 @@ namespace DTXMania
 				{
 					bitmap.MakeTransparent( Color.Black );		// 黒を透過色にする
 				}
-				this.tx画像 = CDTXMania.tテクスチャの生成( bitmap, b黒を透過する );
+				this.tx画像 = CDTXMania.tGenerateTexture( bitmap, b黒を透過する );
 
 				if ( this.tx画像 != null )
 				{
@@ -440,13 +440,13 @@ namespace DTXMania
 					//-----------------
 					string strテクスチャファイル名 = this.GetFullPathname;
 					//if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
-					//    strテクスチャファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
+					//    strテクスチャファイル名 = CDTXMania.DTX.PATH_WAV + this.strFilename;
 					//else
-					//    strテクスチャファイル名 = CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+					//    strテクスチャファイル名 = CDTXMania.DTX.strフォルダ名 + this.strFilename;
 					//-----------------
 					#endregion
 
-					CDTXMania.tテクスチャの解放( ref this.tx画像 );
+					CDTXMania.tReleaseTexture( ref this.tx画像 );
 
 					if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 						Trace.TraceInformation( "テクスチャを解放しました。({0})({1})", this.strコメント文, strテクスチャファイル名 );
@@ -492,7 +492,7 @@ namespace DTXMania
 			public double db実数値;
 			public EAVI種別 eAVI種別;
 			public EBGA種別 eBGA種別;
-			public E楽器パート e楽器パート = E楽器パート.UNKNOWN;
+			public EInstrumentPart e楽器パート = EInstrumentPart.UNKNOWN;
 			public int nチャンネル番号;
 			public STDGBVALUE<int> nバーからの距離dot;
 			public int n整数値;
@@ -718,7 +718,7 @@ namespace DTXMania
 				this.dbチップサイズ倍率 = 1.0;
 				this.bHit = false;
 				this.b可視 = true;
-				this.e楽器パート = E楽器パート.UNKNOWN;
+				this.e楽器パート = EInstrumentPart.UNKNOWN;
 				this.n透明度 = 0xff;
 				this.nバーからの距離dot.Drums = 0;
 				this.nバーからの距離dot.Guitar = 0;
@@ -1509,26 +1509,26 @@ namespace DTXMania
 
 		// メソッド
 
-		public int nモニタを考慮した音量( E楽器パート part )
+		public int nモニタを考慮した音量( EInstrumentPart part )
 		{
 			CConfigIni configIni = CDTXMania.ConfigIni;
 			switch( part )
 			{
-				case E楽器パート.DRUMS:
+				case EInstrumentPart.DRUMS:
 					if( configIni.b演奏音を強調する.Drums )
 					{
 						return configIni.n自動再生音量;
 					}
 					return configIni.n手動再生音量;
 
-				case E楽器パート.GUITAR:
+				case EInstrumentPart.GUITAR:
 					if( configIni.b演奏音を強調する.Guitar )
 					{
 						return configIni.n自動再生音量;
 					}
 					return configIni.n手動再生音量;
 
-				case E楽器パート.BASS:
+				case EInstrumentPart.BASS:
 					if( configIni.b演奏音を強調する.Bass )
 					{
 						return configIni.n自動再生音量;
@@ -1616,7 +1616,7 @@ namespace DTXMania
 				lock ( lockQueue )
 				{
 					queueCBMPbaseDone.Enqueue( cbmp );
-					//  Trace.TraceInformation( "Back: Enqueued(" + queueCBMPbaseDone.Count + "): " + cbmp.strファイル名 );
+					//  Trace.TraceInformation( "Back: Enqueued(" + queueCBMPbaseDone.Count + "): " + cbmp.strFilename );
 				}
 				if ( queueCBMPbaseDone.Count > 8 )
 				{
@@ -1633,7 +1633,7 @@ namespace DTXMania
 				lock ( lockQueue )
 				{
 					queueCBMPbaseDone.Enqueue( cbmp );
-					//  Trace.TraceInformation( "Back: Enqueued(" + queueCBMPbaseDone.Count + "): " + cbmp.strファイル名 );
+					//  Trace.TraceInformation( "Back: Enqueued(" + queueCBMPbaseDone.Count + "): " + cbmp.strFilename );
 				}
 				if ( queueCBMPbaseDone.Count > 8 )
 				{
@@ -1685,11 +1685,11 @@ namespace DTXMania
 							lock ( lockQueue )
 							{
 								cbmp = (CBMP) queueCBMPbaseDone.Dequeue();
-								//  Trace.TraceInformation( "Main: Dequeued(" + queueCBMPbaseDone.Count + "): " + cbmp.strファイル名 );
+								//  Trace.TraceInformation( "Main: Dequeued(" + queueCBMPbaseDone.Count + "): " + cbmp.strFilename );
 							}
 							cbmp.OnDeviceCreated( cbmp.bitmap, cbmp.GetFullPathname );
 							nLoadDone++;
-							//Trace.TraceInformation( "Main: OnDeviceCreated: " + cbmp.strファイル名 );
+							//Trace.TraceInformation( "Main: OnDeviceCreated: " + cbmp.strFilename );
 						}
 						else
 						{
@@ -1729,11 +1729,11 @@ namespace DTXMania
 							lock ( lockQueue )
 							{
 								cbmptex = (CBMPTEX) queueCBMPbaseDone.Dequeue();
-								//  Trace.TraceInformation( "Main: Dequeued(" + queueCBMPbaseDone.Count + "): " + cbmp.strファイル名 );
+								//  Trace.TraceInformation( "Main: Dequeued(" + queueCBMPbaseDone.Count + "): " + cbmp.strFilename );
 							}
 							cbmptex.OnDeviceCreated( cbmptex.bitmap, cbmptex.GetFullPathname );
 							nLoadDone++;
-							//Trace.TraceInformation( "Main: OnDeviceCreated: " + cbmp.strファイル名 );
+							//Trace.TraceInformation( "Main: OnDeviceCreated: " + cbmp.strFilename );
 						}
 						else
 						{
@@ -1838,14 +1838,14 @@ namespace DTXMania
 				}
 			}
 		}
-        public void t旧仕様のドコドコチップを振り分ける(E楽器パート part, bool bAssignToLBD)
+        public void t旧仕様のドコドコチップを振り分ける(EInstrumentPart part, bool bAssignToLBD)
         {
-            if (part == E楽器パート.DRUMS && bAssignToLBD)
+            if (part == EInstrumentPart.DRUMS && bAssignToLBD)
             {
                 bool flag = false;
                 foreach (CDTX.CChip current in this.listChip)
                 {
-                    if (part == E楽器パート.DRUMS && (current.nチャンネル番号 == 27 || current.nチャンネル番号 == 28))
+                    if (part == EInstrumentPart.DRUMS && (current.nチャンネル番号 == 27 || current.nチャンネル番号 == 28))
                     {
                         flag = true;
                         break;
@@ -1857,7 +1857,7 @@ namespace DTXMania
                     bool flag2 = false;
                     foreach (CDTX.CChip current2 in this.listChip)
                     {
-                        if (part == E楽器パート.DRUMS && current2.nチャンネル番号 == 19)
+                        if (part == EInstrumentPart.DRUMS && current2.nチャンネル番号 == 19)
                         {
                             if (!flag2 && current2.n発声時刻ms - num < 150)
                             {
@@ -1870,9 +1870,9 @@ namespace DTXMania
                 }
             }
         }
-        public void tドコドコ仕様変更(E楽器パート part, Eタイプ eDkdkType)
+        public void tドコドコ仕様変更(EInstrumentPart part, Eタイプ eDkdkType)
         {
-            if ((part == E楽器パート.DRUMS) && (eDkdkType != Eタイプ.A))
+            if ((part == EInstrumentPart.DRUMS) && (eDkdkType != Eタイプ.A))
             {
                 if (eDkdkType == Eタイプ.B)
                 {
@@ -1893,7 +1893,7 @@ namespace DTXMania
                     {
                         bool flag2 = false;
                         int num9 = chip.nチャンネル番号;
-                        if ((part == E楽器パート.DRUMS) && ((num9 == 0x13) || (num9 == 0x1c)))
+                        if ((part == EInstrumentPart.DRUMS) && ((num9 == 0x13) || (num9 == 0x1c)))
                         {
                             num++;
                             if (((num6 == 0x13) && (chip.n発声位置 == num3)) || ((num6 == 0x1c) && (chip.n発声位置 == num4)))
@@ -1980,7 +1980,7 @@ namespace DTXMania
                     foreach (CChip chip2 in this.listChip)
                     {
                         int num10 = chip2.nチャンネル番号;
-                        if ((part == E楽器パート.DRUMS) && ((num10 == 0x13) || (num10 == 0x1c)))
+                        if ((part == EInstrumentPart.DRUMS) && ((num10 == 0x13) || (num10 == 0x1c)))
                         {
                             num++;
                             if (num == numArray[index])
@@ -1997,7 +1997,7 @@ namespace DTXMania
                     foreach (CChip chip3 in this.listChip)
                     {
                         int num12 = chip3.nチャンネル番号;
-                        if ((part == E楽器パート.DRUMS) && ((num12 == 0x13) || (num12 == 0x1c)))
+                        if ((part == EInstrumentPart.DRUMS) && ((num12 == 0x13) || (num12 == 0x1c)))
                         {
                             if (num11 == chip3.n発声位置)
                             {
@@ -2016,9 +2016,9 @@ namespace DTXMania
  
 
 
-        public void t譜面仕様変更(E楽器パート part, Eタイプ eNumOfLanes)
+        public void t譜面仕様変更(EInstrumentPart part, Eタイプ eNumOfLanes)
         {
-            if ((part == E楽器パート.DRUMS) && (eNumOfLanes != Eタイプ.A))
+            if ((part == EInstrumentPart.DRUMS) && (eNumOfLanes != Eタイプ.A))
             {
                 int num = 0;
                 if (eNumOfLanes == Eタイプ.B)
@@ -2026,7 +2026,7 @@ namespace DTXMania
                     foreach (CChip chip in this.listChip)
                     {
                         int nチャンネル番号 = chip.nチャンネル番号;
-                        if ((part == E楽器パート.DRUMS) && ((nチャンネル番号 == 0x19) || (nチャンネル番号 == 0x16)))
+                        if ((part == EInstrumentPart.DRUMS) && ((nチャンネル番号 == 0x19) || (nチャンネル番号 == 0x16)))
                         {
                             if (num == chip.n発声位置)
                             {
@@ -2051,7 +2051,7 @@ namespace DTXMania
                     foreach (CChip chip in this.listChip)
                     {
                         int num7 = chip.nチャンネル番号;
-                        if ((part == E楽器パート.DRUMS) && ((num7 >= 0x11) || (num7 <= 0x1c)))
+                        if ((part == EInstrumentPart.DRUMS) && ((num7 >= 0x11) || (num7 <= 0x1c)))
                         {
                             switch (num7)
                             {
@@ -2190,20 +2190,20 @@ namespace DTXMania
                     return;
             }
         }
-        public void tドラムのランダム化(E楽器パート part, Eランダムモード eRandom)
+        public void tドラムのランダム化(EInstrumentPart part, Eランダムモード eRandom)
         {
-            if (part == E楽器パート.DRUMS && eRandom == Eランダムモード.MIRROR)
+            if (part == EInstrumentPart.DRUMS && eRandom == Eランダムモード.MIRROR)
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
                     int nチャンネル番号 = current.nチャンネル番号;
-                    if (part == E楽器パート.DRUMS && 0x11 <= nチャンネル番号 && nチャンネル番号 != 0x13 && nチャンネル番号 <= 0x1A)
+                    if (part == EInstrumentPart.DRUMS && 0x11 <= nチャンネル番号 && nチャンネル番号 != 0x13 && nチャンネル番号 <= 0x1A)
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
                     }
                 }
             }
-            else if (part == E楽器パート.DRUMS && eRandom != Eランダムモード.OFF)
+            else if (part == EInstrumentPart.DRUMS && eRandom != Eランダムモード.OFF)
             {
                 if (CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
                 {
@@ -2220,7 +2220,7 @@ namespace DTXMania
                         {
                             CDTX.CChip current = enumerator.Current;
                             int nチャンネル番号 = current.nチャンネル番号;
-                            if (part == E楽器パート.DRUMS && 17 <= nチャンネル番号 && nチャンネル番号 <= 26 && nチャンネル番号 != 19)
+                            if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号 && nチャンネル番号 <= 26 && nチャンネル番号 != 19)
                             {
                                 switch (eRandom)
                                 {
@@ -2389,7 +2389,7 @@ namespace DTXMania
                 foreach (CDTX.CChip current2 in this.listChip)
                 {
                     int nチャンネル番号2 = current2.nチャンネル番号;
-                    if (part == E楽器パート.DRUMS && 17 <= nチャンネル番号2 && nチャンネル番号2 <= 24 && nチャンネル番号2 != 19)
+                    if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号2 && nチャンネル番号2 <= 24 && nチャンネル番号2 != 19)
                     {
                         switch (eRandom)
                         {
@@ -2541,20 +2541,20 @@ namespace DTXMania
                 }
             }
         }
-        public void tドラムの足ランダム化(E楽器パート part, Eランダムモード eRandomPedal)
+        public void tドラムの足ランダム化(EInstrumentPart part, Eランダムモード eRandomPedal)
         {
-            if (part == E楽器パート.DRUMS && eRandomPedal == Eランダムモード.MIRROR)
+            if (part == EInstrumentPart.DRUMS && eRandomPedal == Eランダムモード.MIRROR)
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
                     int nチャンネル番号 = current.nチャンネル番号;
-                    if (part == E楽器パート.DRUMS && (nチャンネル番号 == 0x13 || nチャンネル番号 == 0x1B || nチャンネル番号 == 0x1C))
+                    if (part == EInstrumentPart.DRUMS && (nチャンネル番号 == 0x13 || nチャンネル番号 == 0x1B || nチャンネル番号 == 0x1C))
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
                     }
                 }
             }
-            else if (part == E楽器パート.DRUMS && eRandomPedal != Eランダムモード.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
+            else if (part == EInstrumentPart.DRUMS && eRandomPedal != Eランダムモード.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != Eタイプ.C)
             {
                 int num = CDTXMania.Random.Next(2);
                 int num2 = 0;
@@ -2563,7 +2563,7 @@ namespace DTXMania
                 foreach (CDTX.CChip current in this.listChip)
                 {
                     int num5 = current.nチャンネル番号;
-                    if (part == E楽器パート.DRUMS && (num5 == 19 || num5 == 27 || num5 == 28))
+                    if (part == EInstrumentPart.DRUMS && (num5 == 19 || num5 == 27 || num5 == 28))
                     {
                         if (num5 == 28)
                         {
@@ -2853,7 +2853,7 @@ namespace DTXMania
 						{
 							long nAbsTimeFromStartPlaying = nCurrentTime - wc.n再生開始時刻[ i ];
 							//Trace.TraceInformation( "再生位置自動補正: {0}, seek先={1}ms, 全音長={2}ms",
-							//    Path.GetFileName( wc.rSound[ 0 ].strファイル名 ),
+							//    Path.GetFileName( wc.rSound[ 0 ].strFilename ),
 							//    nAbsTimeFromStartPlaying,
 							//    wc.rSound[ 0 ].n総演奏時間ms
 							//);
@@ -2896,7 +2896,7 @@ namespace DTXMania
 				{
 					//try
 					//{
-					//    cwav.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( str );
+					//    cwav.rSound[ 0 ] = CDTXMania.Sound管理.tGenerateSound( str );
 					//    cwav.rSound[ 0 ].n音量 = 100;
 					//    if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 					//    {
@@ -2927,7 +2927,7 @@ namespace DTXMania
 					// まず1つめを登録する
 					try
 					{
-						cwav.rSound[ 0 ] = CDTXMania.Sound管理.tサウンドを生成する( str );
+						cwav.rSound[ 0 ] = CDTXMania.Sound管理.tGenerateSound( str );
 						cwav.rSound[ 0 ].n音量 = 100;
 						if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 						{
@@ -2972,7 +2972,7 @@ namespace DTXMania
 						{
 							try
 							{
-								cwav.rSound[ i ] = CDTXMania.Sound管理.tサウンドを生成する( str );
+								cwav.rSound[ i ] = CDTXMania.Sound管理.tGenerateSound( str );
 								cwav.rSound[ i ].n音量 = 100;
 								if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 								{
@@ -3009,9 +3009,9 @@ namespace DTXMania
 			string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			return new string( new char[] { str[ n / 36 ], str[ n % 36 ] } );
 		}
-		public void tギターとベースのランダム化(E楽器パート part, Eランダムモード eRandom)
+		public void tギターとベースのランダム化(EInstrumentPart part, Eランダムモード eRandom)
 		{
-			if( ( ( part == E楽器パート.GUITAR ) || ( part == E楽器パート.BASS ) ) && ( eRandom != Eランダムモード.OFF ) )
+			if( ( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) ) && ( eRandom != Eランダムモード.OFF ) )
 			{
 				int[,] nランダムレーン候補 = new int[ , ] { { 0, 1, 2, 3, 4, 5, 6, 7 }, { 0, 2, 1, 3, 4, 6, 5, 7 }, { 0, 1, 4, 5, 2, 3, 6, 7 }, { 0, 2, 4, 6, 1, 3, 5, 7 }, { 0, 4, 1, 5, 2, 6, 3, 7 }, { 0, 4, 2, 6, 1, 5, 3, 7 } };
 				int n小節番号 = -10000;
@@ -3028,8 +3028,8 @@ namespace DTXMania
 						n小節内乱数6通り = CDTXMania.Random.Next( 6 );
 					}
 					int nランダム化前チャンネル番号 = chip.nチャンネル番号;
-					if(		( ( ( part != E楽器パート.GUITAR ) || ( 0x20 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0x27 ) )
-						&&	( ( ( part != E楽器パート.BASS )   || ( 0xA0 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0xa7 ) )
+					if(		( ( ( part != EInstrumentPart.GUITAR ) || ( 0x20 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0x27 ) )
+						&&	( ( ( part != EInstrumentPart.BASS )   || ( 0xA0 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0xa7 ) )
 					)
 					{
 						continue;
@@ -3047,7 +3047,7 @@ namespace DTXMania
 						case Eランダムモード.HYPERRANDOM:	// レーンの本数も変わる
 							nRGBレーンビットパターン = nランダム化前チャンネル番号 & 7;
 							// n新RGBレーンビットパターン = (int)Eレーンビットパターン.OPEN;	// この値は結局未使用なので削除
-							flag = ((part == E楽器パート.GUITAR) && this.bチップがある.OpenGuitar) || ((part == E楽器パート.BASS) && this.bチップがある.OpenBass);	// #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
+							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);	// #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
 							if (((nRGBレーンビットパターン != (int)Eレーンビットパターン.xxB) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.xGx)) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.Rxx))		// xxB, xGx, Rxx レーン1本相当
 							{
 								break;															// レーン1本相当でなければ、とりあえず先に進む
@@ -3201,7 +3201,7 @@ namespace DTXMania
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
 						sound.n音量 = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
 						sound.n位置 = wc.n位置;
-						sound.t再生を開始する();
+						sound.tStartPlaying();
 					}
 					wc.n再生開始時刻[ wc.n現在再生中のサウンド番号 ] = n再生開始システム時刻ms;
 					this.tWave再生位置自動補正( wc );
@@ -3290,7 +3290,7 @@ namespace DTXMania
 		public void t入力( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 		{
 			this.bヘッダのみ = bヘッダのみ;
-            this.b動画読み込み = (CDTXMania.rCurrentStage.eステージID == CStage.Eステージ.曲読み込み ? true : false);
+            this.b動画読み込み = (CDTXMania.rCurrentStage.eステージID == CStage.EStage.SongLoading ? true : false);
 			this.strファイル名の絶対パス = Path.GetFullPath( strファイル名 );
 			this.strファイル名 = Path.GetFileName( this.strファイル名の絶対パス );
 			this.strフォルダ名 = Path.GetDirectoryName( this.strファイル名の絶対パス ) + @"\";
@@ -4165,9 +4165,9 @@ namespace DTXMania
 		{
 			for( int i = this.listChip.Count - 1; i >= 0; i-- )
             {
-				if( listChip[ i ].e楽器パート == E楽器パート.BASS )
+				if( listChip[ i ].e楽器パート == EInstrumentPart.BASS )
                 {
-					listChip[ i ].e楽器パート = E楽器パート.GUITAR;
+					listChip[ i ].e楽器パート = EInstrumentPart.GUITAR;
                     if( listChip[ i ].nチャンネル番号 >= 0xA0 && listChip[ i ].nチャンネル番号 <= 0xA8 )
 					    listChip[ i ].nチャンネル番号 -= ( 0xA0 - 0x20 );
                     else if( listChip[ i ].nチャンネル番号 == 0xC5 || listChip[ i ].nチャンネル番号 == 0xC6 )
@@ -4181,9 +4181,9 @@ namespace DTXMania
                     else if( listChip[ i ].nチャンネル番号 >= 0xE1 && listChip[ i ].nチャンネル番号 <= 0xE8 )
                         listChip[ i ].nチャンネル番号 -= 0x35;
 				}
-				else if( listChip[i].e楽器パート == E楽器パート.GUITAR )
+				else if( listChip[i].e楽器パート == EInstrumentPart.GUITAR )
 				{
-					listChip[ i ].e楽器パート = E楽器パート.BASS;
+					listChip[ i ].e楽器パート = EInstrumentPart.BASS;
 
                     if( listChip[ i ].nチャンネル番号 >= 0x20 && listChip[ i ].nチャンネル番号 <= 0x28 )
 					    listChip[ i ].nチャンネル番号 += ( 0xA0 - 0x20 );
@@ -6661,15 +6661,15 @@ namespace DTXMania
 				//-----------------
 				if( ( nチャンネル番号 >= 0x11 ) && ( nチャンネル番号 <= 0x1C ) )
 				{
-					chip.e楽器パート = E楽器パート.DRUMS;
+					chip.e楽器パート = EInstrumentPart.DRUMS;
 				}
                 if ( ( nチャンネル番号 >= 0x20 && nチャンネル番号 <= 0x27 ) || ( nチャンネル番号 >= 0x93 && nチャンネル番号 <= 0x9F ) || ( nチャンネル番号 >= 0xA9 && nチャンネル番号 <= 0xAF ) || ( nチャンネル番号 >= 0xD0 && nチャンネル番号 <= 0xD3 ) )
                 {
-                    chip.e楽器パート = E楽器パート.GUITAR;
+                    chip.e楽器パート = EInstrumentPart.GUITAR;
                 }
                 if ( ( nチャンネル番号 >= 0xA0 && nチャンネル番号 <= 0xA7 ) || ( nチャンネル番号 == 0xC5 ) || ( nチャンネル番号 == 0xC6 ) || ( nチャンネル番号 >= 0xC8 && nチャンネル番号 <= 0xCF ) || ( nチャンネル番号 >= 0xDA && nチャンネル番号 <= 0xDF ) || ( nチャンネル番号 >= 0xE1 && nチャンネル番号 <= 0xE8 ) )
                 {
-                    chip.e楽器パート = E楽器パート.BASS;
+                    chip.e楽器パート = EInstrumentPart.BASS;
                 }
 				//-----------------
 				#endregion
@@ -6763,7 +6763,7 @@ namespace DTXMania
 						decimalStr.Append(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
 					}
 				} else if (GroupSeparators.IndexOf(c) >= 0) {		// 桁区切り文字だったら
-					continue;										// 何もしない(スキップ)
+					continue;										// DoNothing(スキップ)
 				} else {
 					break;
 				}

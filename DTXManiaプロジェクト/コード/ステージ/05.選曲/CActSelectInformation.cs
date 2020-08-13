@@ -41,7 +41,7 @@ namespace DTXMania
 				   @"Graphics\5_informatione.png"
 				};
 				int c = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1; 
-				this.txInfo = CDTXMania.tテクスチャの生成( CSkin.Path( infofiles[ c ] ), false );
+				this.txInfo = CDTXMania.tGenerateTexture( CSkin.Path( infofiles[ c ] ), false );
 				base.OnManagedCreateResources();
 			}
 		}
@@ -49,7 +49,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				CDTXMania.tテクスチャの解放( ref this.txInfo );
+				CDTXMania.tReleaseTexture( ref this.txInfo );
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -63,7 +63,7 @@ namespace DTXMania
 					base.b初めての進行描画 = false;
 				}
 				this.ctスクロール用.t進行();
-				if( this.ctスクロール用.b終了値に達した )
+				if( this.ctスクロール用.bReachedEndValue )
 				{
 					this.n画像Index上 = this.n画像Index下;
 					this.n画像Index下 = ( this.n画像Index下 + 1 ) % stInfo.GetLength( 0 );		//8;

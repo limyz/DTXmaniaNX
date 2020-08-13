@@ -47,13 +47,13 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 
-				this.tx白タイル64x64 = CDTXMania.tテクスチャの生成( CSkin.Path( @"Graphics\Tile white 64x64.png" ), false );
-                this.txリザルト画像 = CDTXMania.tテクスチャの生成( CSkin.Path(@"Graphics\8_background.jpg"), false );
-                this.txFullCombo = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\7_FullCombo.png"));
-                this.txExcellent = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\7_Excellent.png"));
-                this.tx黒幕 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\\7_Drums_black.png"));
+				this.tx白タイル64x64 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\Tile white 64x64.png" ), false );
+                this.txリザルト画像 = CDTXMania.tGenerateTexture( CSkin.Path(@"Graphics\8_background.jpg"), false );
+                this.txFullCombo = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\\7_FullCombo.png"));
+                this.txExcellent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\\7_Excellent.png"));
+                this.tx黒幕 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\\7_Drums_black.png"));
 
-                this.txボーナス花火 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\ScreenPlayDrums chip star.png"));
+                this.txボーナス花火 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip star.png"));
                 if (this.txボーナス花火 != null)
                 {
                     this.txボーナス花火.b加算合成 = true;
@@ -76,12 +76,12 @@ namespace DTXMania
             if (this.bNotActivated)
                 return;
 
-            CDTXMania.tテクスチャの解放( ref this.txボーナス花火 );
-            CDTXMania.tテクスチャの解放( ref this.tx白タイル64x64 );
-            CDTXMania.tテクスチャの解放( ref this.txリザルト画像 );
-            CDTXMania.tテクスチャの解放( ref this.txFullCombo );
-            CDTXMania.tテクスチャの解放( ref this.txExcellent );
-            CDTXMania.tテクスチャの解放( ref this.tx黒幕 );
+            CDTXMania.tReleaseTexture( ref this.txボーナス花火 );
+            CDTXMania.tReleaseTexture( ref this.tx白タイル64x64 );
+            CDTXMania.tReleaseTexture( ref this.txリザルト画像 );
+            CDTXMania.tReleaseTexture( ref this.txFullCombo );
+            CDTXMania.tReleaseTexture( ref this.txExcellent );
+            CDTXMania.tReleaseTexture( ref this.tx黒幕 );
 
             base.OnManagedReleaseResources();
         }

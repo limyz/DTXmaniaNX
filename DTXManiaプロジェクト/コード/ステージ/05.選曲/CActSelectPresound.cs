@@ -65,7 +65,7 @@ namespace DTXMania
 				{
 					this.ctBGMフェードイン用.t進行();
 					CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド = this.ctBGMフェードイン用.n現在の値;
-					if( this.ctBGMフェードイン用.b終了値に達した )
+					if( this.ctBGMフェードイン用.bReachedEndValue )
 					{
 						this.ctBGMフェードイン用.t停止();
 					}
@@ -74,7 +74,7 @@ namespace DTXMania
 				{
 					this.ctBGMフェードアウト用.t進行();
 					CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド = 100 - this.ctBGMフェードアウト用.n現在の値;
-					if( this.ctBGMフェードアウト用.b終了値に達した )
+					if( this.ctBGMフェードアウト用.bReachedEndValue )
 					{
 						this.ctBGMフェードアウト用.t停止();
 					}
@@ -121,9 +121,9 @@ namespace DTXMania
 				string strPreviewFilename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound;
 				try
 				{
-					this.sound = CDTXMania.Sound管理.tサウンドを生成する( strPreviewFilename );
+					this.sound = CDTXMania.Sound管理.tGenerateSound( strPreviewFilename );
 					this.sound.n音量 = 80;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
-					this.sound.t再生を開始する( true );
+					this.sound.tStartPlaying( true );
 					this.str現在のファイル名 = strPreviewFilename;
 					this.tBGMフェードアウト開始();
 					Trace.TraceInformation( "プレビューサウンドを生成しました。({0})", strPreviewFilename );

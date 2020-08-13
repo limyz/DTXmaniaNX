@@ -38,7 +38,7 @@ namespace DTXMania
             this.ftSongDifficultyFont = new System.Drawing.Font("Impact", 15f, FontStyle.Regular);
             this.ftSongNameFont = new System.Drawing.Font("ＤＦＧ平成ゴシック体W7", 21f, FontStyle.Regular, GraphicsUnit.Pixel);
             this.iDrumSpeed = Image.FromFile(CSkin.Path(@"Graphics\7_panel_icons.jpg"));
-            this.txジャケットパネル = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\7_JacketPanel.png"));
+            this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
             base.OnActivate();
 
         }
@@ -48,14 +48,14 @@ namespace DTXMania
             {
                 this.ct登場用 = null;
             }
-            CDTXMania.tテクスチャの解放(ref this.txジャケットパネル);
+            CDTXMania.tReleaseTexture(ref this.txジャケットパネル);
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
         {
             if (!base.bNotActivated)
             {
-                this.txリザルト画像がないときの画像 = CDTXMania.tテクスチャの生成(CSkin.Path(@"Graphics\5_preimage default.png"));
+                this.txリザルト画像がないときの画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_preimage default.png"));
                 if (CDTXMania.ConfigIni.bストイックモード)
                 {
                     this.txリザルト画像 = this.txリザルト画像がないときの画像;
@@ -74,13 +74,13 @@ namespace DTXMania
                 this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
-                this.txSongName = CDTXMania.tテクスチャの生成(bmpSongName, false);
+                this.txSongName = CDTXMania.tGenerateTexture(bmpSongName, false);
                 bmpSongName.Dispose();
 
                 this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
-                this.txArtistName = CDTXMania.tテクスチャの生成(bmpArtistName, false);
+                this.txArtistName = CDTXMania.tGenerateTexture(bmpArtistName, false);
                 bmpArtistName.Dispose();
                 #endregion
 
@@ -146,14 +146,14 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                CDTXMania.tテクスチャの解放(ref this.txリザルト画像);
-                CDTXMania.tテクスチャの解放(ref this.txリザルト画像がないときの画像);
-                CDTXMania.tテクスチャの解放(ref this.txSongName);
-                CDTXMania.tテクスチャの解放(ref this.txArtistName);
-                CDTXMania.tテクスチャの解放(ref this.r表示するリザルト画像);
-                CDTXMania.tテクスチャの解放(ref this.txSongLevel);
-                CDTXMania.tテクスチャの解放(ref this.txSongDifficulty);
-                CDTXMania.tテクスチャの解放(ref this.txDrumSpeed);
+                CDTXMania.tReleaseTexture(ref this.txリザルト画像);
+                CDTXMania.tReleaseTexture(ref this.txリザルト画像がないときの画像);
+                CDTXMania.tReleaseTexture(ref this.txSongName);
+                CDTXMania.tReleaseTexture(ref this.txArtistName);
+                CDTXMania.tReleaseTexture(ref this.r表示するリザルト画像);
+                CDTXMania.tReleaseTexture(ref this.txSongLevel);
+                CDTXMania.tReleaseTexture(ref this.txSongDifficulty);
+                CDTXMania.tReleaseTexture(ref this.txDrumSpeed);
 
                 CDTXMania.t安全にDisposeする( ref this.pfタイトル );
                 CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
@@ -194,7 +194,7 @@ namespace DTXMania
             this.txSongName.tDraw2D(CDTXMania.app.Device, 500, 630);
             this.txArtistName.tDraw2D(CDTXMania.app.Device, 500, 665);
 
-            if (!this.ct登場用.b終了値に達した)
+            if (!this.ct登場用.bReachedEndValue)
             {
                 return 0;
             }
@@ -238,7 +238,7 @@ namespace DTXMania
             {
                 return false;
             }
-            CDTXMania.tテクスチャの解放(ref this.txリザルト画像);
+            CDTXMania.tReleaseTexture(ref this.txリザルト画像);
             this.r表示するリザルト画像 = null;
             string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
             if (!File.Exists(path))
@@ -246,13 +246,13 @@ namespace DTXMania
                 Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
                 return false;
             }
-            this.txリザルト画像 = CDTXMania.tテクスチャの生成(path);
+            this.txリザルト画像 = CDTXMania.tGenerateTexture(path);
             this.r表示するリザルト画像 = this.txリザルト画像;
             return (this.r表示するリザルト画像 != null);
         }
         private bool tリザルト画像の指定があれば構築する()
         {
-            int rank = CScoreIni.t総合ランク値を計算して返す(CDTXMania.stage結果.st演奏記録.Drums, CDTXMania.stage結果.st演奏記録.Guitar, CDTXMania.stage結果.st演奏記録.Bass);
+            int rank = CScoreIni.tCalculateOverallRankValue(CDTXMania.stage結果.stPerformanceEntry.Drums, CDTXMania.stage結果.stPerformanceEntry.Guitar, CDTXMania.stage結果.stPerformanceEntry.Bass);
             if (rank == 99)	// #23534 2010.10.28 yyagi: 演奏チップが0個のときは、rankEと見なす
             {
                 rank = 6;
@@ -261,7 +261,7 @@ namespace DTXMania
             {
                 return false;
             }
-            CDTXMania.tテクスチャの解放(ref this.txリザルト画像);
+            CDTXMania.tReleaseTexture(ref this.txリザルト画像);
             this.r表示するリザルト画像 = null;
             string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.RESULTIMAGE[rank];
             if (!File.Exists(path))
@@ -269,7 +269,7 @@ namespace DTXMania
                 Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
                 return false;
             }
-            this.txリザルト画像 = CDTXMania.tテクスチャの生成(path);
+            this.txリザルト画像 = CDTXMania.tGenerateTexture(path);
             this.r表示するリザルト画像 = this.txリザルト画像;
             return (this.r表示するリザルト画像 != null);
         }
