@@ -9,12 +9,12 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CStageタイトル : CStage
+	internal class CStageTitle : CStage
 	{
 		public static readonly string VERSION_DISPLAY = "DTX:J:A:A:2020080300";
 		// コンストラクタ
 
-		public CStageタイトル()
+		public CStageTitle()
 		{
 			base.eステージID = CStage.EStage.Title;
 			base.bNotActivated = true;
@@ -86,13 +86,13 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
 				#region [ 初めての進行描画 ]
 				//---------------------
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					if( CDTXMania.r直前のステージ == CDTXMania.stageStartup )
 					{
@@ -106,7 +106,7 @@ namespace DTXMania
 					}
 					this.ctカーソルフラッシュ用.tStart( 0, 700, 5, CDTXMania.Timer );
 					this.ctカーソルフラッシュ用.n現在の値 = 100;
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
 				//---------------------
 				#endregion
@@ -227,7 +227,7 @@ namespace DTXMania
 				switch( eフェーズid )
 				{
 					case CStage.Eフェーズ.共通_フェードイン:
-						if( this.actFI.On進行描画() != 0 )
+						if( this.actFI.OnUpdateAndDraw() != 0 )
 						{
 							CDTXMania.Skin.soundタイトル音.t再生する();
 							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
@@ -235,7 +235,7 @@ namespace DTXMania
 						break;
 
 					case CStage.Eフェーズ.共通_フェードアウト:
-						if( this.actFO.On進行描画() == 0 )
+						if( this.actFO.OnUpdateAndDraw() == 0 )
 						{
 							break;
 						}
@@ -255,7 +255,7 @@ namespace DTXMania
 						break;
 
 					case CStage.Eフェーズ.タイトル_起動画面からのフェードイン:
-						if( this.actFIfromSetup.On進行描画() != 0 )
+						if( this.actFIfromSetup.OnUpdateAndDraw() != 0 )
 						{
 							CDTXMania.Skin.soundタイトル音.t再生する();
 							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;

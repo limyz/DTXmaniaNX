@@ -219,7 +219,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 //Debug.WriteLine( "POVS押された" + data.TimeStamp + " " + e.nKey );
 										}
 										//e.nTimeStamp = data.TimeStamp;
-										e.nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp );
+										e.nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp );
 										this.list入力イベント.Add( e );
 									}
 									#endregion
@@ -236,7 +236,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 												nKey = 6 + i,
 												b押された = true,
 												b離された = false,
-												nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+												nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 												nVelocity = CInputManager.n通常音量
 											};
 											this.list入力イベント.Add( e );
@@ -251,7 +251,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 												nKey = 6 + i,
 												b押された = false,
 												b離された = true,
-												nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+												nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 												nVelocity = CInputManager.n通常音量,
 											};
 											this.list入力イベント.Add( ev );
@@ -286,7 +286,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 0,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -303,7 +303,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 0,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -324,7 +324,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 1,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -341,7 +341,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 1,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( event7 );
@@ -362,7 +362,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 2,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -379,7 +379,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 2,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -400,7 +400,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 3,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -417,7 +417,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 3,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -438,7 +438,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 4,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -455,7 +455,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 4,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -476,7 +476,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 5,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( ev );
@@ -493,7 +493,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 5,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( event15 );
@@ -516,7 +516,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 6 + j,
 									b押された = true,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( item );
@@ -531,7 +531,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 								{
 									nKey = 6 + j,
 									b押された = false,
-									nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
 								this.list入力イベント.Add( item );
@@ -561,7 +561,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 										nKey = 6 + 128 + nWay,
 										//Debug.WriteLine( "POVS:" + povs[ 0 ].ToString( CultureInfo.CurrentCulture ) + ", " +stevent.nKey );
 										b押された = true,
-										nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+										nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 										nVelocity = CInputManager.n通常音量
 									};
 									this.list入力イベント.Add( stevent );
@@ -587,7 +587,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									{
 										nKey = nWay,
 										b押された = false,
-										nTimeStamp = CSound管理.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+										nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 										nVelocity = 0
 									};
 									this.list入力イベント.Add( stevent );
@@ -707,7 +707,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 				{
 					nKey = target,
 					b押された = !lastMode,
-					nTimeStamp = CSound管理.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+					nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 					nVelocity = ( lastMode ) ? 0 : CInputManager.n通常音量
 				};
 				this.list入力イベント.Add( e );

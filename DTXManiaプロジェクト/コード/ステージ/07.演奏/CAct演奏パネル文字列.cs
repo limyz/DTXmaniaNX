@@ -95,7 +95,7 @@ namespace DTXMania
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
-                    this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.strSongName = CDTXMania.stageSongSelection.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
@@ -129,7 +129,7 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             throw new InvalidOperationException("t進行描画(x,y)のほうを使用してください。");
         }

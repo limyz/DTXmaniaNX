@@ -146,18 +146,18 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             if (!base.bNotActivated)
             {
-                int num1 = CDTXMania.stage演奏ドラム画面.ctBPMバー.n現在の値;
+                int num1 = CDTXMania.stagePlayingScreenDrums.ctBPMバー.n現在の値;
 
 
-                if (base.b初めての進行描画)
+                if (base.bJustStartedUpdate)
                 {
                     this.nフラッシュ制御タイマ = CDTXMania.Timer.n現在時刻;
                     this.nY座標制御タイマ = CDTXMania.Timer.n現在時刻;
-                    base.b初めての進行描画 = false;
+                    base.bJustStartedUpdate = false;
                 }
                 long num = CDTXMania.Timer.n現在時刻;
                 if (num < this.nフラッシュ制御タイマ)

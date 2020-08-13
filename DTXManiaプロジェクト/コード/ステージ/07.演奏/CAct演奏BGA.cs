@@ -151,7 +151,7 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			throw new InvalidOperationException( "t進行描画(x,y)のほうを使用してください。" );
 		}

@@ -12,11 +12,11 @@ using FDK;
 
 namespace DTXMania
 {
-    internal class CStage曲読み込み : CStage
+    internal class CStageLoading : CStage
     {
         // コンストラクタ
 
-        public CStage曲読み込み()
+        public CStageLoading()
         {
             base.eステージID = CStage.EStage.SongLoading;
             base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
@@ -190,17 +190,17 @@ namespace DTXMania
                 this.nBGMの総再生時間ms = 0;
                 if( this.sd読み込み音 != null )
                 {
-                    CDTXMania.Sound管理.tサウンドを破棄する( this.sd読み込み音 );
+                    CDTXMania.SoundManager.tサウンドを破棄する( this.sd読み込み音 );
                     this.sd読み込み音 = null;
                 }
 
                 string strDTXファイルパス = ( CDTXMania.bCompactMode ) ?
-                    CDTXMania.strCompactModeFile : CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
+                    CDTXMania.strCompactModeFile : CDTXMania.stageSongSelection.r確定されたスコア.FileInformation.AbsoluteFilePath;
 
                 CDTX cdtx = new CDTX( strDTXファイルパス, true );
 
                 if( !CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする )
-                    this.str曲タイトル = CDTXMania.stage選曲.r確定された曲.strタイトル;
+                    this.str曲タイトル = CDTXMania.stageSongSelection.rConfirmedSong.strタイトル;
                 else
                     this.str曲タイトル = cdtx.TITLE;
 
@@ -210,7 +210,7 @@ namespace DTXMania
                     string strNowLoadingサウンドファイルパス = cdtx.strフォルダ名 + cdtx.SOUND_NOWLOADING;
                     try
                     {
-                        this.sd読み込み音 = CDTXMania.Sound管理.tGenerateSound( strNowLoadingサウンドファイルパス );
+                        this.sd読み込み音 = CDTXMania.SoundManager.tGenerateSound( strNowLoadingサウンドファイルパス );
                     }
                     catch
                     {
@@ -277,7 +277,7 @@ namespace DTXMania
                 cdtx.OnDeactivate();
                 base.OnActivate();
                 if( !CDTXMania.bCompactMode )
-                    this.tラベル名からステータスパネルを決定する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ] );
+                    this.tラベル名からステータスパネルを決定する( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
             }
             finally
             {
@@ -367,7 +367,7 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             string str;
 
@@ -376,9 +376,9 @@ namespace DTXMania
 
             #region [ 初めての進行描画 ]
             //-----------------------------
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
-                CScore cスコア1 = CDTXMania.stage選曲.r確定されたスコア;
+                CScore cスコア1 = CDTXMania.stageSongSelection.r確定されたスコア;
                 if (this.sd読み込み音 != null)
                 {
                     if (CDTXMania.Skin.sound曲読込開始音.b排他 && (CSkin.CSystemSound.rLastPlayedExclusiveSystemSound != null))
@@ -386,19 +386,19 @@ namespace DTXMania
                         CSkin.CSystemSound.rLastPlayedExclusiveSystemSound.t停止する();
                     }
                     this.sd読み込み音.tStartPlaying();
-                    this.nBGM再生開始時刻 = CSound管理.rc演奏用タイマ.n現在時刻;
+                    this.nBGM再生開始時刻 = CSoundManager.rc演奏用タイマ.n現在時刻;
                     this.nBGMの総再生時間ms = this.sd読み込み音.n総演奏時間ms;
                 }
                 else
                 {
                     CDTXMania.Skin.sound曲読込開始音.t再生する();
-                    this.nBGM再生開始時刻 = CSound管理.rc演奏用タイマ.n現在時刻;
+                    this.nBGM再生開始時刻 = CSoundManager.rc演奏用タイマ.n現在時刻;
                     this.nBGMの総再生時間ms = CDTXMania.Skin.sound曲読込開始音.nLength_CurrentSound;
                 }
                 //				this.actFI.tフェードイン開始();							// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
                 base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
-                base.b初めての進行描画 = false;
-                this.tラベル名からステータスパネルを決定する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ] );
+                base.bJustStartedUpdate = false;
+                this.tラベル名からステータスパネルを決定する( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
 
                 nWAVcount = 1;
             }
@@ -423,7 +423,7 @@ namespace DTXMania
                 this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
             string strDTXファイルパス = (CDTXMania.bCompactMode) ?
-            CDTXMania.strCompactModeFile : CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
+            CDTXMania.strCompactModeFile : CDTXMania.stageSongSelection.r確定されたスコア.FileInformation.AbsoluteFilePath;
             CDTX cdtx = new CDTX(strDTXファイルパス, true);
 
             string path = cdtx.strフォルダ名 + cdtx.PREIMAGE;
@@ -496,7 +496,7 @@ namespace DTXMania
                     {
                         //Always display CLASSIC style if Skill Mode is Classic
                         if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
-                            CDTXMania.stage選曲.r確定されたスコア.SongInformation.b完全にCLASSIC譜面である[j] && 
+                            CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.b完全にCLASSIC譜面である[j] && 
                             !cdtx.b強制的にXG譜面にする))
                         {
                             this.t大文字表示(187 + k, 152, string.Format("{0:00}", DTXLevel));
@@ -524,7 +524,7 @@ namespace DTXMania
                             this.txパートパネル.tDraw2D(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
 
                         //this.txジャケット.Dispose();
-                        this.t難易度パネルを描画する( CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ], 191 + k, 102 );
+                        this.t難易度パネルを描画する( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ], 191 + k, 102 );
 
                         k = 700;
                     }
@@ -545,7 +545,7 @@ namespace DTXMania
             switch (base.eフェーズID)
             {
                 case CStage.Eフェーズ.共通_フェードイン:
-                    //if( this.actFI.On進行描画() != 0 )					// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
+                    //if( this.actFI.OnUpdateAndDraw() != 0 )					// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
                     // 必ず一度「CStaeg.Eフェーズ.共通_フェードイン」フェーズを経由させること。
                     // さもないと、曲読み込みが完了するまで、曲読み込み画面が描画されない。
                     base.eフェーズID = CStage.Eフェーズ.NOWLOADING_DTXファイルを読み込む;
@@ -557,7 +557,7 @@ namespace DTXMania
                         TimeSpan span;
                         str = null;
                         if (!CDTXMania.bCompactMode)
-                            str = CDTXMania.stage選曲.r確定されたスコア.FileInformation.AbsoluteFilePath;
+                            str = CDTXMania.stageSongSelection.r確定されたスコア.FileInformation.AbsoluteFilePath;
                         else
                             str = CDTXMania.strCompactModeFile;
 
@@ -689,7 +689,7 @@ namespace DTXMania
                         if (CDTXMania.bCompactMode)
                             CDTXMania.DTX.MIDIレベル = 1;
                         else
-                            CDTXMania.DTX.MIDIレベル = (CDTXMania.stage選曲.r確定された曲.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI) ? CDTXMania.stage選曲.n現在選択中の曲の難易度 : 0;
+                            CDTXMania.DTX.MIDIレベル = (CDTXMania.stageSongSelection.rConfirmedSong.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI) ? CDTXMania.stageSongSelection.n現在選択中の曲の難易度 : 0;
 
                         base.eフェーズID = CStage.Eフェーズ.NOWLOADING_WAVファイルを読み込む;
                         timeBeginLoadWAV = DateTime.Now;
@@ -734,9 +734,9 @@ namespace DTXMania
                             CDTXMania.DTX.tギターとベースのランダム化(EInstrumentPart.BASS, CDTXMania.ConfigIni.eRandom.Bass);
 
                             if (CDTXMania.ConfigIni.bギタレボモード)
-                                CDTXMania.stage演奏ギター画面.OnActivate();
+                                CDTXMania.stagePlayingScreenGuitar.OnActivate();
                             else
-                                CDTXMania.stage演奏ドラム画面.OnActivate();
+                                CDTXMania.stagePlayingScreenDrums.OnActivate();
 
                             span = (TimeSpan)(DateTime.Now - timeBeginLoadWAV);
                             Trace.TraceInformation("WAV/譜面後処理時間({0,4}):  {1}", (CDTXMania.DTX.listBMP.Count + CDTXMania.DTX.listBMPTEX.Count + CDTXMania.DTX.listAVI.Count), span.ToString());
@@ -781,7 +781,7 @@ namespace DTXMania
                     }
 
                 case CStage.Eフェーズ.共通_フェードアウト:
-                    //if (this.actFO.On進行描画() == 0)
+                    //if (this.actFO.OnUpdateAndDraw() == 0)
                     //return 0;
                     if (this.sd読み込み音 != null)
                     {
@@ -804,13 +804,13 @@ namespace DTXMania
             {
                 if ( CDTXMania.ConfigIni.bギタレボモード )
                 {
-                    if (CDTXMania.stage演奏ギター画面.bActivated == true)
-                        CDTXMania.stage演奏ギター画面.OnDeactivate();
+                    if (CDTXMania.stagePlayingScreenGuitar.bActivated == true)
+                        CDTXMania.stagePlayingScreenGuitar.OnDeactivate();
                 }
                 else
                 {
-                    if (CDTXMania.stage演奏ドラム画面.bActivated == true)
-                        CDTXMania.stage演奏ドラム画面.OnDeactivate();
+                    if (CDTXMania.stagePlayingScreenDrums.bActivated == true)
+                        CDTXMania.stagePlayingScreenDrums.OnDeactivate();
                 }
 
                 return true;

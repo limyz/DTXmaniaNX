@@ -39,7 +39,7 @@ namespace DTXMania
             this.ct進行 = null;
             if (this.sd効果音 != null)
             {
-                CDTXMania.Sound管理.tサウンドを破棄する(this.sd効果音);
+                CDTXMania.SoundManager.tサウンドを破棄する(this.sd効果音);
                 this.sd効果音 = null;
             }
             base.OnDeactivate();
@@ -60,7 +60,7 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             if (base.bNotActivated)
             {
@@ -94,10 +94,10 @@ namespace DTXMania
                         {
                             if (this.sd効果音 != null)
                             {
-                                CDTXMania.Sound管理.tサウンドを破棄する(this.sd効果音);
+                                CDTXMania.SoundManager.tサウンドを破棄する(this.sd効果音);
                                 this.sd効果音 = null;
                             }
-                            this.sd効果音 = CDTXMania.Sound管理.tGenerateSound(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED);
+                            this.sd効果音 = CDTXMania.SoundManager.tGenerateSound(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED);
                             this.sd効果音.tStartPlaying();
                         }
                         catch

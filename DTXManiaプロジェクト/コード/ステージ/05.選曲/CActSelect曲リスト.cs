@@ -22,13 +22,13 @@ namespace DTXMania
 			get;
 			set;
 		}
-		public bool bスクロール中
+		public bool bScrolling
 		{
 			get
 			{
-				if( this.n目標のスクロールカウンタ == 0 )
+				if( this.nTargetScrollCounter == 0 )
 				{
-					return ( this.n現在のスクロールカウンタ != 0 );
+					return ( this.nCurrentScrollCounter != 0 );
 				}
 				return true;
 			}
@@ -256,14 +256,14 @@ namespace DTXMania
 		{
 			if( this.r現在選択中の曲 != null )
 			{
-				this.n目標のスクロールカウンタ += 100;
+				this.nTargetScrollCounter += 100;
 			}
 		}
 		public void t前に移動()
 		{
 			if( this.r現在選択中の曲 != null )
 			{
-				this.n目標のスクロールカウンタ -= 100;
+				this.nTargetScrollCounter -= 100;
 			}
 		}
 		public void t難易度レベルをひとつ進める()
@@ -300,7 +300,7 @@ namespace DTXMania
 				song = this.r次の曲( song );
 			}
 
-            this.tラベル名からステータスパネルを決定する( this.r現在選択中の曲.ar難易度ラベル[ this.n現在選択中の曲の現在の難易度レベル ] );
+            this.tラベル名からステータスパネルを決定する( this.r現在選択中の曲.arDifficultyLabel[ this.n現在選択中の曲の現在の難易度レベル ] );
 
             switch( this.nIndex  )
             {
@@ -360,7 +360,7 @@ namespace DTXMania
 
 			// 選曲ステージに変更通知を発出し、関係Activityの対応を行ってもらう。
 
-			CDTXMania.stage選曲.t選択曲変更通知();
+			CDTXMania.stageSongSelection.tSelectedSongChanged();
 		}
 
         public void tラベル名からステータスパネルを決定する(string strラベル名)
@@ -455,7 +455,7 @@ namespace DTXMania
 		/// </summary>
 		public void t選択曲が変更された( bool bForce )	// #27648
 		{
-			CSongListNode song = CDTXMania.stage選曲.r現在選択中の曲;
+			CSongListNode song = CDTXMania.stageSongSelection.r現在選択中の曲;
 			if ( song == null )
 				return;
 			if ( song == song_last && bForce == false )
@@ -484,8 +484,8 @@ namespace DTXMania
 
 			this.e楽器パート = EInstrumentPart.DRUMS;
 			this.b登場アニメ全部完了 = false;
-			this.n目標のスクロールカウンタ = 0;
-			this.n現在のスクロールカウンタ = 0;
+			this.nTargetScrollCounter = 0;
+			this.nCurrentScrollCounter = 0;
 			this.nスクロールタイマ = -1;
 
 			// フォント作成。
@@ -638,22 +638,22 @@ namespace DTXMania
 
 			base.OnManagedReleaseResources();
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( this.bNotActivated )
 				return 0;
 
 			#region [ 初めての進行描画 ]
 			//-----------------
-			if( this.b初めての進行描画 )
+			if( this.bJustStartedUpdate )
 			{
 				for( int i = 0; i < 13; i++ )
 					this.ct登場アニメ用[ i ] = new CCounter( -i * 10, 100, 3, CDTXMania.Timer );
 
-				this.nスクロールタイマ = CSound管理.rc演奏用タイマ.n現在時刻;
-				CDTXMania.stage選曲.t選択曲変更通知();
+				this.nスクロールタイマ = CSoundManager.rc演奏用タイマ.n現在時刻;
+				CDTXMania.stageSongSelection.tSelectedSongChanged();
 				
-				base.b初めての進行描画 = false;
+				base.bJustStartedUpdate = false;
 			}
 			//-----------------
 			#endregion
@@ -712,7 +712,7 @@ namespace DTXMania
 				while( ( n現在時刻 - this.nスクロールタイマ ) >= nアニメ間隔 )
 				{
 					int n加速度 = 1;
-					int n残距離 = Math.Abs( (int) ( this.n目標のスクロールカウンタ - this.n現在のスクロールカウンタ ) );
+					int n残距離 = Math.Abs( (int) ( this.nTargetScrollCounter - this.nCurrentScrollCounter ) );
 
 					#region [ 残距離が遠いほどスクロールを速くする（＝n加速度を多くする）。]
 					//-----------------
@@ -737,25 +737,25 @@ namespace DTXMania
 
 					#region [ 加速度を加算し、現在のスクロールカウンタを目標のスクロールカウンタまで近づける。 ]
 					//-----------------
-					if( this.n現在のスクロールカウンタ < this.n目標のスクロールカウンタ )		// (A) 正の方向に未達の場合：
+					if( this.nCurrentScrollCounter < this.nTargetScrollCounter )		// (A) 正の方向に未達の場合：
 					{
-						this.n現在のスクロールカウンタ += n加速度;								// カウンタを正方向に移動する。
+						this.nCurrentScrollCounter += n加速度;								// カウンタを正方向に移動する。
 
-						if( this.n現在のスクロールカウンタ > this.n目標のスクロールカウンタ )
-							this.n現在のスクロールカウンタ = this.n目標のスクロールカウンタ;	// 到着！スクロール停止！
+						if( this.nCurrentScrollCounter > this.nTargetScrollCounter )
+							this.nCurrentScrollCounter = this.nTargetScrollCounter;	// 到着！スクロール停止！
 					}
 
-					else if( this.n現在のスクロールカウンタ > this.n目標のスクロールカウンタ )	// (B) 負の方向に未達の場合：
+					else if( this.nCurrentScrollCounter > this.nTargetScrollCounter )	// (B) 負の方向に未達の場合：
 					{
-						this.n現在のスクロールカウンタ -= n加速度;								// カウンタを負方向に移動する。
+						this.nCurrentScrollCounter -= n加速度;								// カウンタを負方向に移動する。
 
-						if( this.n現在のスクロールカウンタ < this.n目標のスクロールカウンタ )	// 到着！スクロール停止！
-							this.n現在のスクロールカウンタ = this.n目標のスクロールカウンタ;
+						if( this.nCurrentScrollCounter < this.nTargetScrollCounter )	// 到着！スクロール停止！
+							this.nCurrentScrollCounter = this.nTargetScrollCounter;
 					}
 					//-----------------
 					#endregion
 
-					if( this.n現在のスクロールカウンタ >= 100 )		// １行＝100カウント。
+					if( this.nCurrentScrollCounter >= 100 )		// １行＝100カウント。
 					{
 						#region [ パネルを１行上にシフトする。]
 						//-----------------
@@ -800,8 +800,8 @@ namespace DTXMania
 
 						// 1行(100カウント)移動完了。
 
-						this.n現在のスクロールカウンタ -= 100;
-						this.n目標のスクロールカウンタ -= 100;
+						this.nCurrentScrollCounter -= 100;
+						this.nTargetScrollCounter -= 100;
 
 						this.t選択曲が変更された( false );				// スクロールバー用に今何番目を選択しているかを更新
                         if( this.tx選択中の曲名テクスチャ != null )
@@ -815,13 +815,13 @@ namespace DTXMania
                             this.tx選択中のアーティスト名テクスチャ = null;
                         }
 
-						if( this.n目標のスクロールカウンタ == 0 )
-							CDTXMania.stage選曲.t選択曲変更通知();		// スクロール完了＝選択曲変更！
+						if( this.nTargetScrollCounter == 0 )
+							CDTXMania.stageSongSelection.tSelectedSongChanged();		// スクロール完了＝選択曲変更！
 
 						//-----------------
 						#endregion
 					}
-					else if( this.n現在のスクロールカウンタ <= -100 )
+					else if( this.nCurrentScrollCounter <= -100 )
 					{
 						#region [ パネルを１行下にシフトする。]
 						//-----------------
@@ -866,8 +866,8 @@ namespace DTXMania
 
 						// 1行(100カウント)移動完了。
 
-						this.n現在のスクロールカウンタ += 100;
-						this.n目標のスクロールカウンタ += 100;
+						this.nCurrentScrollCounter += 100;
+						this.nTargetScrollCounter += 100;
 
 						this.t選択曲が変更された( false );				// スクロールバー用に今何番目を選択しているかを更新
                         if( this.tx選択中の曲名テクスチャ != null )
@@ -881,8 +881,8 @@ namespace DTXMania
                             this.tx選択中のアーティスト名テクスチャ = null;
                         }
 						
-						if( this.n目標のスクロールカウンタ == 0 )
-							CDTXMania.stage選曲.t選択曲変更通知();		// スクロール完了＝選択曲変更！
+						if( this.nTargetScrollCounter == 0 )
+							CDTXMania.stageSongSelection.tSelectedSongChanged();		// スクロール完了＝選択曲変更！
 						//-----------------
 						#endregion
 					}
@@ -999,18 +999,18 @@ namespace DTXMania
 				//-----------------
 				for( int i = 0; i < 13; i++ )	// パネルは全13枚。
 				{
-					if( ( i == 0 && this.n現在のスクロールカウンタ > 0 ) ||		// 最上行は、上に移動中なら表示しない。
-						( i == 12 && this.n現在のスクロールカウンタ < 0 ) )		// 最下行は、下に移動中なら表示しない。
+					if( ( i == 0 && this.nCurrentScrollCounter > 0 ) ||		// 最上行は、上に移動中なら表示しない。
+						( i == 12 && this.nCurrentScrollCounter < 0 ) )		// 最下行は、下に移動中なら表示しない。
 						continue;
 
 					int nパネル番号 = ( ( ( this.n現在の選択行 - 5 ) + i ) + 13 ) % 13;
 					int n見た目の行番号 = i;
-					int n次のパネル番号 = ( this.n現在のスクロールカウンタ <= 0 ) ? ( ( i + 1 ) % 13 ) : ( ( ( i - 1 ) + 13 ) % 13 );
-//					int x = this.ptバーの基本座標[ n見た目の行番号 ].X + ( (int) ( ( this.ptバーの基本座標[ n次のパネル番号 ].X - this.ptバーの基本座標[ n見た目の行番号 ].X ) * ( ( (double) Math.Abs( this.n現在のスクロールカウンタ ) ) / 100.0 ) ) );
+					int n次のパネル番号 = ( this.nCurrentScrollCounter <= 0 ) ? ( ( i + 1 ) % 13 ) : ( ( ( i - 1 ) + 13 ) % 13 );
+//					int x = this.ptバーの基本座標[ n見た目の行番号 ].X + ( (int) ( ( this.ptバーの基本座標[ n次のパネル番号 ].X - this.ptバーの基本座標[ n見た目の行番号 ].X ) * ( ( (double) Math.Abs( this.nCurrentScrollCounter ) ) / 100.0 ) ) );
                     int x = i選曲バーX座標;
-					int y = this.ptバーの基本座標[ n見た目の行番号 ].Y + ( (int) ( ( this.ptバーの基本座標[ n次のパネル番号 ].Y - this.ptバーの基本座標[ n見た目の行番号 ].Y ) * ( ( (double) Math.Abs( this.n現在のスクロールカウンタ ) ) / 100.0 ) ) );
+					int y = this.ptバーの基本座標[ n見た目の行番号 ].Y + ( (int) ( ( this.ptバーの基本座標[ n次のパネル番号 ].Y - this.ptバーの基本座標[ n見た目の行番号 ].Y ) * ( ( (double) Math.Abs( this.nCurrentScrollCounter ) ) / 100.0 ) ) );
 
-					if( ( i == 5 ) && ( this.n現在のスクロールカウンタ == 0 ) )
+					if( ( i == 5 ) && ( this.nCurrentScrollCounter == 0 ) )
 					{
 						// (A) スクロールが停止しているときの選択曲バーの描画。
 
@@ -1026,10 +1026,10 @@ namespace DTXMania
 						if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
                             this.stバー情報[ nパネル番号 ].txタイトル名.tDraw2D( CDTXMania.app.Device, i選択曲バーX座標 + 65, y選曲 );
 
-                        if (CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE && this.actステータスパネル.txパネル本体 == null)
+                        if (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE && this.actステータスパネル.txパネル本体 == null)
                         {
                             if( this.tx選択中の曲名テクスチャ == null )
-                                this.tx選択中の曲名テクスチャ = this.t指定された文字テクスチャを生成する( CDTXMania.stage選曲.r現在選択中のスコア.SongInformation.Title );
+                                this.tx選択中の曲名テクスチャ = this.t指定された文字テクスチャを生成する( CDTXMania.stageSongSelection.r現在選択中のスコア.SongInformation.Title );
                             if ( this.tx選択中の曲名テクスチャ != null )
                             {
                                 if ( this.tx選択中の曲名テクスチャ.sz画像サイズ.Width > 600 )
@@ -1039,7 +1039,7 @@ namespace DTXMania
                             }
 
                             if( this.tx選択中のアーティスト名テクスチャ == null )
-                                this.tx選択中のアーティスト名テクスチャ = this.t指定された文字テクスチャを生成する_小( CDTXMania.stage選曲.r現在選択中のスコア.SongInformation.ArtistName );
+                                this.tx選択中のアーティスト名テクスチャ = this.t指定された文字テクスチャを生成する_小( CDTXMania.stageSongSelection.r現在選択中のスコア.SongInformation.ArtistName );
                             if ( this.tx選択中のアーティスト名テクスチャ != null )
                             {
                                 if ( this.tx選択中のアーティスト名テクスチャ.sz画像サイズ.Width > 600 )
@@ -1102,7 +1102,7 @@ namespace DTXMania
 				d = 0;
 				py = 0;
 			}
-			int delta = (int) ( d * this.n現在のスクロールカウンタ / 100 );
+			int delta = (int) ( d * this.nCurrentScrollCounter / 100 );
 			if ( py + delta <= 492 - 12 )
 			{
 				this.nスクロールバー相対y座標 = py + delta;
@@ -1231,9 +1231,9 @@ namespace DTXMania
 		private EInstrumentPart e楽器パート;
 		private Font ft曲リスト用フォント;
 		private long nスクロールタイマ;
-		private int n現在のスクロールカウンタ;
+		private int nCurrentScrollCounter;
 		private int n現在の選択行;
-		private int n目標のスクロールカウンタ;
+		private int nTargetScrollCounter;
         private readonly Point[] ptバーの基本座標 = new Point[] { new Point(0x2c4, 5), new Point(0x272, 56), new Point(0x242, 107), new Point(0x222, 158), new Point(0x210, 209), new Point(0x1d0, 270), new Point(0x224, 362), new Point(0x242, 413), new Point(0x270, 464), new Point(0x2ae, 515), new Point(0x314, 566), new Point(0x3e4, 617), new Point(0x500, 668) };
 		private STバー情報[] stバー情報 = new STバー情報[ 13 ];
 		private CTexture txSongNotFound, txEnumeratingSongs;

@@ -24,11 +24,11 @@ namespace FDK
 		public List<CActivity> listChildActivities;
 
 		/// <summary>
-		/// <para>初めて On進行描画() を呼び出す場合に true を示す。（On活性化() 内で true にセットされる。）</para>
-		/// <para>このフラグは、On活性化() では行えないタイミングのシビアな初期化を On進行描画() で行うために準備されている。利用は必須ではない。</para>
-		/// <para>On進行描画() 側では、必要な初期化を追えたら false をセットすること。</para>
+		/// <para>初めて OnUpdateAndDraw() を呼び出す場合に true を示す。（OnActivate() 内で true にセットされる。）</para>
+		/// <para>このフラグは、OnActivate() では行えないタイミングのシビアな初期化を OnUpdateAndDraw() で行うために準備されている。利用は必須ではない。</para>
+		/// <para>OnUpdateAndDraw() 側では、必要な初期化を追えたら false をセットすること。</para>
 		/// </summary>
-		protected bool b初めての進行描画 = true;
+		protected bool bJustStartedUpdate = true;
 
 	
 		// コンストラクタ
@@ -62,7 +62,7 @@ namespace FDK
 				activity.OnActivate();
 
 			// その他の初期化
-			this.b初めての進行描画 = true;
+			this.bJustStartedUpdate = true;
 		}
 		public virtual void OnDeactivate()
 		{
@@ -153,11 +153,11 @@ namespace FDK
 		}
 
 		/// <summary>
-		/// <para>Make progress and draw. (These are not separated, only one method is implemented.</para>
+		/// <para>Update and draw. (These are not separated, only one method is implemented).</para>
 		/// <para>This method is called after BeginScene(), so it doesn't matter which drawing method is used.</para>
 		/// </summary>
 		/// <returns>Any integer. Be consistent with the caller.</returns>
-		public virtual int On進行描画()
+		public virtual int OnUpdateAndDraw()
 		{
 			// 活性化してないなら何もしない。
 			if( this.bNotActivated )
@@ -176,7 +176,7 @@ namespace FDK
         /// <para>大体はSSTのOn進行とOn描画を合体させたようなものです。</para>
         /// </summary>
         /// <returns>任意の整数。呼び出し元との整合性を合わせておくこと。</returns>
-        public virtual int On進行描画(SlimDX.Direct3D9.Device D3D9Device)
+        public virtual int OnUpdateAndDraw(SlimDX.Direct3D9.Device D3D9Device)
         {
             // 活性化してないなら何もしない。
             if (this.bNotActivated)
@@ -193,7 +193,7 @@ namespace FDK
         /// <para>この Activity を活性化（有効化）する。</para>
         /// <para>具体的には内部リソースの初期化などを行う。</para>
         /// </summary>
-        public virtual void On活性化(SlimDX.Direct3D9.Device D3D9Device)
+        public virtual void OnActivate(SlimDX.Direct3D9.Device D3D9Device)
         {
             if (this.bActivated)
                 return;
@@ -210,12 +210,12 @@ namespace FDK
             // すべての子Activityを活性化する。
 
             foreach (CActivity activity in this.listChildActivities)
-                activity.On活性化(D3D9Device);
+                activity.OnActivate(D3D9Device);
 
 
             // その他
 
-            this.b初めての進行描画 = true;
+            this.bJustStartedUpdate = true;
         }
 
 		/// <summary>
@@ -253,15 +253,15 @@ namespace FDK
 		}
 
         /// <summary>
-        /// <para>進行のみ行う。描画は行わない。</para>
+        /// <para>Update only. Do not draw.</para>
         /// <para>Direct3DDeviceを使ってはならない。</para>
         /// </summary>
-        public virtual int On進行()
+        public virtual int OnUpdate()
         {
             if (this.bNotActivated)
                 return 0;
 
-            this.b初めての進行描画 = true;
+            this.bJustStartedUpdate = true;
 
 
             /* ここで進行を行う。*/
@@ -272,11 +272,11 @@ namespace FDK
         }
 
         /// <summary>
-        /// <para>描画のみを行う。</para>
-        /// <para>このメソッドは BeginScene() ～ EndScene() の間に呼び出されるので、メソッド内でいきなり描画を行ってかまわない。</para>
+        /// <para>Only draw。</para>
+        /// <para>This method is called between BeginScene() and EndScene(). メソッド内でいきなり描画を行ってかまわない。</para>
         /// <para>ただし、Direct3D デバイスの変更は行ってはならない。</para>
         /// </summary>
-        public virtual void On描画(SlimDX.Direct3D9.Device D3D9Device)
+        public virtual void OnDraw(SlimDX.Direct3D9.Device D3D9Device)
         {
             if (this.bNotActivated)
                 return;

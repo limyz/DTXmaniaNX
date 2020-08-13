@@ -158,7 +158,7 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
@@ -178,11 +178,11 @@ namespace DTXMania
                     int index = this.n描画順[i];
                     int numOfLanesflagIndex = (int)CDTXMania.ConfigIni.eNumOfLanes.Drums;
 
-                    int x2 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
-                    int x3 = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
-                    int xHH = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + 32);
-                    int xLC = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
-                    int xCY = (CDTXMania.stage演奏ドラム画面.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 79 : 79));
+                    int x2 = (CDTXMania.stagePlayingScreenDrums.actPad.st基本位置[index].x + 32);
+                    int x3 = (CDTXMania.stagePlayingScreenDrums.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
+                    int xHH = (CDTXMania.stagePlayingScreenDrums.actPad.st基本位置[index].x + 32);
+                    int xLC = (CDTXMania.stagePlayingScreenDrums.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 32 : 32));
+                    int xCY = (CDTXMania.stagePlayingScreenDrums.actPad.st基本位置[index].x + (CDTXMania.ConfigIni.bReverse.Drums ? 79 : 79));
                     int nAlpha = 255 - ((int)(((float)(CDTXMania.ConfigIni.nMovieAlpha * 255)) / 10f));
                     //if (CDTXMania.ConfigIni.eDark == Eダークモード.OFF) //2013.02.17 kairera0467 ダークOFF以外でも透明度を有効にした。
                     //26072020: Check flag before drawing

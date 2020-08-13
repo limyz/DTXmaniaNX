@@ -65,15 +65,15 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					CDTXMania.Skin.soundGameEnd.t再生する();
 					this.ct時間稼ぎ.tStart( 0, 1, 0x3e8, CDTXMania.Timer );
-                    base.b初めての進行描画 = false;
+                    base.bJustStartedUpdate = false;
 				}
 				this.ct時間稼ぎ.t進行();
 				if( this.ct時間稼ぎ.bReachedEndValue && !CDTXMania.Skin.soundGameEnd.b再生中 )

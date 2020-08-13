@@ -1505,131 +1505,131 @@ namespace DTXMania
             #region [ 個々のキーアサイン ]
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsLC)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LC);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LC);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsHHC)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HH);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HH);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsHHO)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HHO);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HHO);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsSD)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.SD);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.SD);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsBD)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.BD);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.BD);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsHT)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HT);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.HT);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsLT)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LT);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LT);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsFT)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.FT);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.FT);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsCY)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.CY);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.CY);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsRD)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.RD);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.RD);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsLP)			// #27029 2012.1.4 from
             {																							//
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LP);	//
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LP);	//
             }																							//
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignDrumsLBD)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LBD);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.DRUMS, EKeyConfigPad.LBD);
             }
 
 
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarR)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.R);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.R);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarG)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.G);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.G);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarB)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.B);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.B);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarY)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Y);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Y);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarP)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.P);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.P);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarPick)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Pick);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Pick);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarWail)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Wail);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Wail);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarDecide)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Decide);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Decide);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignGuitarHelp)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Help);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.GUITAR, EKeyConfigPad.Help);
             }
 
 
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassR)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.R);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.R);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassG)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.G);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.G);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassB)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.B);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.B);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassY)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Y);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Y);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassP)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.P);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.P);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassPick)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Pick);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Pick);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassWail)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Wail);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Wail);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassDecide)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Decide);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Decide);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignBassHelp)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Help);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.BASS, EKeyConfigPad.Help);
             }
             else if (this.list項目リスト[this.n現在の選択項目] == this.iKeyAssignSystemCapture)
             {
-                CDTXMania.stageコンフィグ.tパッド選択通知(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
+                CDTXMania.stageConfig.tパッド選択通知(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
             }
             #endregion
             else
@@ -2067,7 +2067,7 @@ namespace DTXMania
             else
             {
                 this.n目標のスクロールカウンタ += 100;
-                CDTXMania.stageコンフィグ.ct表示待機.n現在の値 = 0;
+                CDTXMania.stageConfig.ct表示待機.n現在の値 = 0;
             }
         }
         public void t前に移動()
@@ -2080,7 +2080,7 @@ namespace DTXMania
             else
             {
                 this.n目標のスクロールカウンタ -= 100;
-                CDTXMania.stageコンフィグ.ct表示待機.n現在の値 = 0;
+                CDTXMania.stageConfig.ct表示待機.n現在の値 = 0;
             }
         }
 
@@ -2181,7 +2181,7 @@ namespace DTXMania
                         break;
                 }
 
-                FDK.CSound管理.t初期化(soundDeviceType,
+                FDK.CSoundManager.t初期化(soundDeviceType,
                                         this.iSystemWASAPIBufferSizeMs.n現在の値,
                                         0,
                                         this.iSystemASIODevice.n現在選択されている項目番号);
@@ -2190,7 +2190,7 @@ namespace DTXMania
             }
             #endregion
             #region [ サウンドのタイムストレッチモード変更 ]
-            FDK.CSound管理.bIsTimeStretch = this.iSystemTimeStretch.bON;
+            FDK.CSoundManager.bIsTimeStretch = this.iSystemTimeStretch.bON;
             #endregion
         }
         public override void OnManagedCreateResources()
@@ -2255,7 +2255,7 @@ namespace DTXMania
 				this.listMenu = null;
 			}
 		}
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             throw new InvalidOperationException("t進行描画(bool)のほうを使用してください。");
         }
@@ -2268,12 +2268,12 @@ namespace DTXMania
 
             #region [ 初めての進行描画 ]
             //-----------------
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
-                this.nスクロール用タイマ値 = CSound管理.rc演奏用タイマ.n現在時刻;
+                this.nスクロール用タイマ値 = CSoundManager.rc演奏用タイマ.n現在時刻;
                 this.ct三角矢印アニメ.tStart(0, 9, 50, CDTXMania.Timer);
 
-                base.b初めての進行描画 = false;
+                base.bJustStartedUpdate = false;
             }
             //-----------------
             #endregion
@@ -2342,7 +2342,7 @@ namespace DTXMania
                     this.n目標のスクロールカウンタ -= 100;
                     if (this.n目標のスクロールカウンタ == 0)
                     {
-                        CDTXMania.stageコンフィグ.t項目変更通知();
+                        CDTXMania.stageConfig.t項目変更通知();
                     }
                 }
                 else if (this.n現在のスクロールカウンタ <= -100)
@@ -2352,7 +2352,7 @@ namespace DTXMania
                     this.n目標のスクロールカウンタ += 100;
                     if (this.n目標のスクロールカウンタ == 0)
                     {
-                        CDTXMania.stageコンフィグ.t項目変更通知();
+                        CDTXMania.stageConfig.t項目変更通知();
                     }
                 }
                 //-----------------
@@ -2433,7 +2433,7 @@ namespace DTXMania
 //					CDTXMania.tReleaseTexture( ref ctItem );
 					CDTXMania.t安全にDisposeする( ref bmpItem );
 				}
-				//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 0x12, y + 12, this.list項目リスト[ nItem ].str項目名 );
+				//CDTXMania.stageConfig.actFont.t文字列描画( x + 0x12, y + 12, this.list項目リスト[ nItem ].str項目名 );
                 //-----------------
                 #endregion
                 #region [ 現在の行の項目の要素を描画。]
@@ -2445,7 +2445,7 @@ namespace DTXMania
 					case CItemBase.E種別.ONorOFFトグル:
 						#region [ *** ]
 						//-----------------
-						//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, ( (CItemToggle) this.list項目リスト[ nItem ] ).bON ? "ON" : "OFF" );
+						//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, ( (CItemToggle) this.list項目リスト[ nItem ] ).bON ? "ON" : "OFF" );
 						strParam = ( (CItemToggle) this.list項目リスト[ nItem ] ).bON ? "ON" : "OFF";
 						break;
 						//-----------------
@@ -2468,7 +2468,7 @@ namespace DTXMania
 								strParam = "OFF";
 								break;
 						}
-						//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, "ON" );
+						//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, "ON" );
 						break;
 						//-----------------
 						#endregion
@@ -2479,18 +2479,18 @@ namespace DTXMania
 						if( this.list項目リスト[ nItem ] == this.iCommonPlaySpeed )
 						{
 							double d = ( (double) ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値 ) / 20.0;
-							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, d.ToString( "0.000" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
+							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, d.ToString( "0.000" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
 							strParam = d.ToString( "0.000" );
 						}
 						else if( this.list項目リスト[ nItem ] == this.iDrumsScrollSpeed || this.list項目リスト[ nItem ] == this.iGuitarScrollSpeed || this.list項目リスト[ nItem ] == this.iBassScrollSpeed )
 						{
 							float f = ( ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値 + 1 ) * 0.5f;
-							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, f.ToString( "x0.0" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
+							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, f.ToString( "x0.0" ), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
 							strParam = f.ToString( "x0.0" );
 						}
 						else
 						{
-							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値.ToString(), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
+							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値.ToString(), ( n行番号 == 0 ) && this.b要素値にフォーカス中 );
 							strParam = ( (CItemInteger) this.list項目リスト[ nItem ] ).n現在の値.ToString();
 						}
 						b強調 = ( n行番号 == 0 ) && this.b要素値にフォーカス中;
@@ -2503,7 +2503,7 @@ namespace DTXMania
 						//-----------------
 						{
 							CItemList list = (CItemList) this.list項目リスト[ nItem ];
-							//CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 210, y + 12, list.list項目値[ list.n現在選択されている項目番号 ] );
+							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, list.list項目値[ list.n現在選択されている項目番号 ] );
 							strParam = list.list項目値[ list.n現在選択されている項目番号 ];
 
 							#region [ 必要な場合に、Skinのサンプルを生成_描画する。#28195 2012.5.2 yyagi ]
@@ -2563,7 +2563,7 @@ namespace DTXMania
             #endregion
 
             #region[ 説明文パネル ]
-            if( this.b項目リスト側にフォーカスがある && this.n目標のスクロールカウンタ == 0 && CDTXMania.stageコンフィグ.ct表示待機.bReachedEndValue )
+            if( this.b項目リスト側にフォーカスがある && this.n目標のスクロールカウンタ == 0 && CDTXMania.stageConfig.ct表示待機.bReachedEndValue )
             {
                 this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 601, 252 );
                 if ( txSkinSample1 != null && this.n目標のスクロールカウンタ == 0 && this.list項目リスト[ this.n現在の選択項目 ] == this.iSystemSkinSubfolder )
@@ -2575,7 +2575,7 @@ namespace DTXMania
 
             #region [ 項目リストにフォーカスがあって、かつスクロールが停止しているなら、パネルの上下に▲印を描画する。]
             //-----------------
-            if( this.b項目リスト側にフォーカスがある )//&& (this.n目標のスクロールカウンタ == 0))
+            if( this.b項目リスト側にフォーカスがある )//&& (this.nTargetScrollCounter == 0))
             {
                 int x;
                 int y_upper;

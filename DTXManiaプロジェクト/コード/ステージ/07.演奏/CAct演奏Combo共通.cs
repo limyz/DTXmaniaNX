@@ -282,11 +282,11 @@ namespace DTXMania
                 y += this.nジャンプ差分値[nJump];
             }
 
-            if ((int)(CDTXMania.stage演奏ドラム画面.ctコンボ動作タイマ.db現在の値 / 4) != 0)
+            if ((int)(CDTXMania.stagePlayingScreenDrums.ctコンボ動作タイマ.db現在の値 / 4) != 0)
             {
                 y動作差分 = 2;
             }
-            else if ((int)(CDTXMania.stage演奏ドラム画面.ctコンボ動作タイマ.db現在の値 / 16) != 1)
+            else if ((int)(CDTXMania.stagePlayingScreenDrums.ctコンボ動作タイマ.db現在の値 / 16) != 1)
             {
                 y動作差分 = 8;
             }
@@ -632,8 +632,8 @@ namespace DTXMania
             this.ctコンボアニメ_2P = new CCounter( 0, 130, 4, CDTXMania.Timer );
             if(CDTXMania.ConfigIni.b垂直帰線待ちを行う)
             {
-                this.ctコンボアニメ = new CCounter( 0.0, 130.0, 0.003, CSound管理.rc演奏用タイマ );
-                this.ctコンボアニメ_2P = new CCounter( 0.0, 130.0, 0.003, CSound管理.rc演奏用タイマ );
+                this.ctコンボアニメ = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rc演奏用タイマ );
+                this.ctコンボアニメ_2P = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rc演奏用タイマ );
             }
 
             base.OnActivate();
@@ -670,7 +670,7 @@ namespace DTXMania
 
             base.OnManagedReleaseResources();
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             if (this.bNotActivated)
                 return 0;

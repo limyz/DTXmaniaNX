@@ -182,7 +182,7 @@ namespace DTXMania
             base.listChildActivities.Add(this.font);
             nItemSelecting = -1;
 
-            this.CommandHistory = new DTXMania.CStage選曲.CCommandHistory();
+            this.CommandHistory = new DTXMania.CStageSongSelection.CCommandHistory();
             base.OnActivate();
         }
         public override void OnDeactivate()
@@ -229,7 +229,7 @@ namespace DTXMania
             base.OnManagedReleaseResources();
         }
 
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             throw new InvalidOperationException("t進行描画(bool)のほうを使用してください。");
         }
@@ -434,7 +434,7 @@ namespace DTXMania
         private List<CItemBase> lciMenuItems;
         private bool bShowAllItems;
         private bool bIsSelectingIntItem;
-        public DTXMania.CStage選曲.CCommandHistory CommandHistory;
+        public DTXMania.CStageSongSelection.CCommandHistory CommandHistory;
 
         [StructLayout(LayoutKind.Sequential)]
         private struct STキー反復用カウンタ

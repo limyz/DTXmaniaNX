@@ -81,16 +81,16 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( base.bNotActivated )
 			{
 				return 0;
 			}
-			if( base.b初めての進行描画 )
+			if( base.bJustStartedUpdate )
 			{
 				this.ct登場用 = new CCounter( 0, 270, 4, CDTXMania.Timer );
-				base.b初めての進行描画 = false;
+				base.bJustStartedUpdate = false;
 			}
 			this.ct登場用.t進行();
 			int num = 0x1d4;

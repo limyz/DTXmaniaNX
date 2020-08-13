@@ -19,8 +19,8 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
-			if( ( cスコア != null ) && !CDTXMania.stage選曲.bスクロール中 )
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			if( ( cスコア != null ) && !CDTXMania.stageSongSelection.bScrolling )
 			{
 				try
 				{
@@ -87,14 +87,14 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					this.ct登場アニメ用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
 				this.ct登場アニメ用.t進行();
 

@@ -64,14 +64,14 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             //int num9;
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
                 this.ct本体移動 = new CCounter(0, 0x1a, 20, CDTXMania.Timer);
                 this.ct本体振動 = new CCounter(0, 360, 4, CDTXMania.Timer);
-                base.b初めての進行描画 = false;
+                base.bJustStartedUpdate = false;
             }
             this.ct本体移動.t進行Loop();
             this.ct本体振動.t進行Loop();

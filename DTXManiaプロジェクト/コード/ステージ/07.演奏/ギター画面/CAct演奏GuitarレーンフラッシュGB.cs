@@ -35,7 +35,7 @@ namespace DTXMania
             base.OnManagedReleaseResources();
         }
 
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
             {

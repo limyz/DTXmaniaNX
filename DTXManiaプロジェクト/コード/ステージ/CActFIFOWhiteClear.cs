@@ -87,7 +87,7 @@ namespace DTXMania
         }
 
         /*
-        public override unsafe int On進行描画(Device D3D9Device)
+        public override unsafe int OnUpdateAndDraw(Device D3D9Device)
 		{
             if (base.bNotActivated || (this.counter == null))
 				return 0;
@@ -96,7 +96,7 @@ namespace DTXMania
             this.counter.t進行();
 			#region [ 初めての進行処理。]
 			//-----------------
-			if( this.b初めての進行描画 )
+			if( this.bJustStartedUpdate )
 			{
                 if (this.ds背景動画 != null)
                 {
@@ -109,7 +109,7 @@ namespace DTXMania
                     //Trace.TraceError("DShow動画がnullになっています。");
                 }
 
-				this.b初めての進行描画 = false;
+				this.bJustStartedUpdate = false;
 			}
 			//-----------------
 			#endregion
@@ -135,7 +135,7 @@ namespace DTXMania
 			return 1;
 		}
         */
-		public override unsafe int On進行描画()
+		public override unsafe int OnUpdateAndDraw()
         {
             if (base.bNotActivated || (this.counter == null))
             {

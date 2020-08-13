@@ -17,7 +17,7 @@ namespace DTXMania
 
 		// CActivity 実装（共通クラスからの差分のみ）
 
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
             {

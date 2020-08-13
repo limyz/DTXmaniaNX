@@ -11,7 +11,7 @@ namespace DTXMania
 	/// 描画フレーム毎にGPUをフラッシュして、描画遅延を防ぐ。
 	/// DirectX9の、Occlusion Queryを用いる。(Flush属性付きでGetDataする)
 	/// Device Lost対策のため、QueueをCActivitiyのManagedリソースとして扱う。
-	/// On進行描画()を呼び出すことで、GPUをフラッシュする。
+	/// OnUpdateAndDraw()を呼び出すことで、GPUをフラッシュする。
 	/// </summary>
 	internal class CActFlushGPU : CActivity
 	{
@@ -38,7 +38,7 @@ namespace DTXMania
 			IDirect3DQuery9 = null;
 			base.OnManagedReleaseResources();
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if ( !base.bNotActivated )
 			{

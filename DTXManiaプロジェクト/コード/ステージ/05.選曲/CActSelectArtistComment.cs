@@ -18,7 +18,7 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( cスコア != null )
 			{
 				Bitmap image = new Bitmap( 1, 1 );
@@ -164,7 +164,7 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{

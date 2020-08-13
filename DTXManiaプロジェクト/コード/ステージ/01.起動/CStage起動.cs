@@ -10,11 +10,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace DTXMania
 {
-	internal class CStage起動 : CStage
+	internal class CStageStartup : CStage
 	{
 		// コンストラクタ
 
-		public CStage起動()
+		public CStageStartup()
 		{
 			base.eステージID = CStage.EStage.Startup;
 			base.bNotActivated = true;
@@ -80,18 +80,18 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					this.list進行文字列.Add( "DTXMania powered by YAMAHA Silent Session Drums\n" );
 					this.list進行文字列.Add( "Release: " + CDTXMania.VERSION + " [" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString() + "]" );
 
 					es = new CEnumSongs();
 					es.StartEnumFromCache();										// 曲リスト取得(別スレッドで実行される)
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 					return 0;
 				}
 

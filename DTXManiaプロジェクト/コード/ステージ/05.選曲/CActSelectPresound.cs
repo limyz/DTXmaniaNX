@@ -19,13 +19,13 @@ namespace DTXMania
 			if( this.sound != null )
 			{
 				this.sound.t再生を停止する();
-				CDTXMania.Sound管理.tサウンドを破棄する( this.sound );
+				CDTXMania.SoundManager.tサウンドを破棄する( this.sound );
 				this.sound = null;
 			}
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( cスコア != null ) && ( ( !( cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound ).Equals( this.str現在のファイル名 ) || ( this.sound == null ) ) || !this.sound.b再生中 ) )
 			{
 				this.tサウンド停止();
@@ -57,7 +57,7 @@ namespace DTXMania
 			this.ctBGMフェードアウト用 = null;
 			base.OnDeactivate();
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
@@ -115,13 +115,13 @@ namespace DTXMania
 		}
 		private void tプレビューサウンドの作成()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( cスコア != null ) && !string.IsNullOrEmpty( cスコア.SongInformation.Presound ) )
 			{
 				string strPreviewFilename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound;
 				try
 				{
-					this.sound = CDTXMania.Sound管理.tGenerateSound( strPreviewFilename );
+					this.sound = CDTXMania.SoundManager.tGenerateSound( strPreviewFilename );
 					this.sound.n音量 = 80;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
 					this.sound.tStartPlaying( true );
 					this.str現在のファイル名 = strPreviewFilename;
@@ -147,7 +147,7 @@ namespace DTXMania
 				if( !this.ct再生待ちウェイト.b終了値に達してない )
 				{
 					this.ct再生待ちウェイト.t停止();
-					if( !CDTXMania.stage選曲.bスクロール中 )
+					if( !CDTXMania.stageSongSelection.bScrolling )
 					{
 						this.tプレビューサウンドの作成();
 					}

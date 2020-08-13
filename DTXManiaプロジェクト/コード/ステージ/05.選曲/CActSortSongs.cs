@@ -67,7 +67,7 @@ namespace DTXMania
 					);
 					break;
 				case (int) EOrder.PlayCount:
-					// this.act曲リスト.t曲リストのソート3_演奏回数の多い順( eInst, nSortOrder );
+					// this.actSongList.t曲リストのソート3_演奏回数の多い順( eInst, nSortOrder );
 					this.act曲リスト.t曲リストのソート(
 						CDTXMania.SongManager.t曲リストのソート3_演奏回数の多い順, eInst, nSortOrder,
 						this.act曲リスト.n現在のアンカ難易度レベル

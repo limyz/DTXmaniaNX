@@ -9,7 +9,7 @@ using FDK;
 
 namespace DTXMania
 {
-    internal class CStageコンフィグ : CStage
+    internal class CStageConfig : CStage
     {
         // プロパティ
 
@@ -18,7 +18,7 @@ namespace DTXMania
 
         // コンストラクタ
 
-        public CStageコンフィグ()
+        public CStageConfig()
         {
             CActDFPFont font;
             base.eステージID = CStage.EStage.Config;
@@ -167,16 +167,16 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             if (base.bNotActivated)
                 return 0;
 
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
                 base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
                 this.actFIFO.tフェードイン開始();
-                base.b初めての進行描画 = false;
+                base.bJustStartedUpdate = false;
             }
             this.ct表示待機.t進行();
 
@@ -248,7 +248,7 @@ namespace DTXMania
                     break;
 
                 case EItemPanelモード.キーコード一覧:
-                    this.actKeyAssign.On進行描画();
+                    this.actKeyAssign.OnUpdateAndDraw();
                     break;
             }
             //---------------------
@@ -273,7 +273,7 @@ namespace DTXMania
             #endregion
             #region [ オプションパネル ]
             //---------------------
-            //this.actオプションパネル.On進行描画();
+            //this.actオプションパネル.OnUpdateAndDraw();
             //---------------------
             #endregion
             #region [ フェードイン_アウト ]
@@ -281,7 +281,7 @@ namespace DTXMania
             switch (base.eフェーズID)
             {
                 case CStage.Eフェーズ.共通_フェードイン:
-                    if (this.actFIFO.On進行描画() != 0)
+                    if (this.actFIFO.OnUpdateAndDraw() != 0)
                     {
                         CDTXMania.Skin.bgmコンフィグ画面.t再生する();
                         base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
@@ -289,7 +289,7 @@ namespace DTXMania
                     break;
 
                 case CStage.Eフェーズ.共通_フェードアウト:
-                    if (this.actFIFO.On進行描画() == 0)
+                    if (this.actFIFO.OnUpdateAndDraw() == 0)
                     {
                         break;
                     }
@@ -318,7 +318,7 @@ namespace DTXMania
                     {
                         if (this.eItemPanelモード == EItemPanelモード.キーコード一覧)
                         {
-                            CDTXMania.stageコンフィグ.tアサイン完了通知();
+                            CDTXMania.stageConfig.tアサイン完了通知();
                             return 0;
                         }
                         if (!this.actList.bIsKeyAssignSelected && !this.actList.bIsFocusingParameter)	// #24525 2011.3.15 yyagi, #32059 2013.9.17 yyagi

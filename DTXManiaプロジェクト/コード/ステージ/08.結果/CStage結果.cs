@@ -218,7 +218,7 @@ namespace DTXMania
 				//---------------------
 				if( !CDTXMania.bCompactMode )
 				{
-					CScore cScore = CDTXMania.stage選曲.r確定されたスコア;
+					CScore cScore = CDTXMania.stageSongSelection.r確定されたスコア;
 					bool[] b更新が必要か否か = new bool[ 3 ];
 					CScoreIni.tGetIsUpdateNeeded( out b更新が必要か否か[ 0 ], out b更新が必要か否か[ 1 ], out b更新が必要か否か[ 2 ] );
 					for( int m = 0; m < 3; m++ )
@@ -398,7 +398,7 @@ namespace DTXMania
 		{
 			if( this.rResultSound != null )
 			{
-				CDTXMania.Sound管理.tサウンドを破棄する( this.rResultSound );
+				CDTXMania.SoundManager.tサウンドを破棄する( this.rResultSound );
 				this.rResultSound = null;
 			}
 			base.OnDeactivate();
@@ -409,7 +409,7 @@ namespace DTXMania
 			{
                 this.ds背景動画 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\8_background.mp4"), CDTXMania.app.WindowHandle, true);
 				this.tx背景 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\8_background.jpg" ) );
-                switch (CDTXMania.stage結果.n総合ランク値)
+                switch (CDTXMania.stageResult.n総合ランク値)
                 {
                     case 0:
                         if (File.Exists(CSkin.Path(@"Graphics\8_background rankSS.png")))
@@ -480,12 +480,12 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
 				int num;
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					this.ct登場用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
 
@@ -539,7 +539,7 @@ namespace DTXMania
 						
                     this.actFI.tフェードイン開始(false);
 					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
                 if( this.ds背景動画 != null )
                 {
@@ -614,26 +614,26 @@ namespace DTXMania
 				{
 					this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.sz画像サイズ.Height );
 				}
-                if( this.actResultImage.On進行描画() == 0 )
+                if( this.actResultImage.OnUpdateAndDraw() == 0 )
 				{
 					this.bアニメが完了 = false;
 				}
-				if ( this.actParameterPanel.On進行描画() == 0 )
+				if ( this.actParameterPanel.OnUpdateAndDraw() == 0 )
 				{
 					this.bアニメが完了 = false;
 				}
-                if (this.actRank.On進行描画() == 0)
+                if (this.actRank.OnUpdateAndDraw() == 0)
                 {
                     this.bアニメが完了 = false;
                 }
 				if( base.eフェーズID == CStage.Eフェーズ.共通_フェードイン )
 				{
-					if( this.actFI.On進行描画() != 0 )
+					if( this.actFI.OnUpdateAndDraw() != 0 )
 					{
 						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
 					}
 				}
-				else if( ( base.eフェーズID == CStage.Eフェーズ.共通_フェードアウト ) )			//&& ( this.actFO.On進行描画() != 0 ) )
+				else if( ( base.eフェーズID == CStage.Eフェーズ.共通_フェードアウト ) )			//&& ( this.actFO.OnUpdateAndDraw() != 0 ) )
 				{
 					return (int) this.eフェードアウト完了時の戻り値;
 				}
@@ -823,7 +823,7 @@ namespace DTXMania
 //			else
 //			{
 //				// リザルト画像を手動保存するときは、dtxファイル名.yyMMddHHmmss_SS.png という形式で保存。(楽器名無し)
-//				string strRank = ( (CScoreIni.ERANK) ( CDTXMania.stage結果.n総合ランク値 ) ).ToString();
+//				string strRank = ( (CScoreIni.ERANK) ( CDTXMania.stageResult.n総合ランク値 ) ).ToString();
 //				string strSavePath = CDTXMania.strEXEのあるフォルダ + "\\" + "Capture_img";
 //				if ( !Directory.Exists( strSavePath ) )
 //				{
@@ -835,7 +835,7 @@ namespace DTXMania
 //					{
 //					}
 //				}
-//				string strSetDefDifficulty = CDTXMania.stage選曲.r確定された曲.ar難易度ラベル[ CDTXMania.stage選曲.n確定された曲の難易度 ];
+//				string strSetDefDifficulty = CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ];
 //				if ( strSetDefDifficulty != null )
 //				{
 //					strSetDefDifficulty = "(" + strSetDefDifficulty + ")";

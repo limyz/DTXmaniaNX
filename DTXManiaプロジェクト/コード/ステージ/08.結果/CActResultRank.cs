@@ -108,7 +108,7 @@ namespace DTXMania
 
                 for (int j = 0; j < 3; j++)
                 {
-                    switch (CDTXMania.stage結果.nRankValue[j])
+                    switch (CDTXMania.stageResult.nRankValue[j])
                     {
                         case 0:
                             this.txランク文字[j] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_rankSS.png"));
@@ -160,16 +160,16 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             if (base.bNotActivated)
             {
                 return 0;
             }
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
                 this.ctランク表示 = new CCounter(0, 500, 1, CDTXMania.Timer);
-                base.b初めての進行描画 = false;
+                base.bJustStartedUpdate = false;
             }
             this.ctランク表示.t進行();
 
@@ -191,12 +191,12 @@ namespace DTXMania
                     int num14 = -165 + this.n本体X[j];
                     int num15 = 100 + this.n本体Y[j];
 
-                    if (CDTXMania.stage結果.stPerformanceEntry[j].nPerfect数 == CDTXMania.stage結果.stPerformanceEntry[j].n全チップ数)
+                    if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfect数 == CDTXMania.stageResult.stPerformanceEntry[j].n全チップ数)
                     {
                         if (this.txExcellent != null)
                             this.txExcellent.tDraw2D(CDTXMania.app.Device, num14, num15);
                     }
-                    else if (CDTXMania.stage結果.stPerformanceEntry[j].bIsFullCombo)
+                    else if (CDTXMania.stageResult.stPerformanceEntry[j].bIsFullCombo)
                     {
                         if (this.txFullCombo != null)
                             this.txFullCombo.tDraw2D(CDTXMania.app.Device, num14, num15);

@@ -123,11 +123,11 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
                     //座標などの定義は初回だけにする。
                     //2016.03.29 kairera0467 非セッション譜面で、譜面が無いパートでグラフを有効にしている場合、譜面があるパートに一時的にグラフを切り替える。
@@ -174,7 +174,7 @@ namespace DTXMania
 
                     this.nGraphGauge_XPos = new int[] { 3, 205 };
 
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
                 }
 
 				int stYposInImg = 0;

@@ -68,13 +68,13 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if ( base.b初めての進行描画 )
+				if ( base.bJustStartedUpdate )
 				{
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 					return 0;
 				}
 

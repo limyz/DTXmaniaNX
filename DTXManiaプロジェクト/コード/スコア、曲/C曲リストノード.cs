@@ -23,7 +23,7 @@ namespace DTXMania
 		}
 		public int nID { get; private set; }
 		public CScore[] arScore = new CScore[ 5 ];
-		public string[] ar難易度ラベル = new string[ 5 ];
+		public string[] arDifficultyLabel = new string[ 5 ];
 		public bool bDTXFilesで始まるフォルダ名のBOXである;
 		public bool bBoxDefで作成されたBOXである
 		{
@@ -47,7 +47,7 @@ namespace DTXMania
 		public string pathSetDefの絶対パス = "";
 		public CSongListNode r親ノード;
 		public int SetDefのブロック番号;
-		public Stack<int> stackランダム演奏番号 = new Stack<int>();
+		public Stack<int> stackRandomPerformanceNumber = new Stack<int>();
 		public string strジャンル = "";
 		public string strタイトル = "";
 		public string strBreadcrumbs = "";		// #27060 2011.2.27 yyagi; MUSIC BOXのパンくずリスト (曲リスト構造内の絶対位置捕捉のために使う)

@@ -528,7 +528,7 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
@@ -716,7 +716,7 @@ namespace DTXMania
                             if (this.tx火花[this.st火花[i].nLane] != null)
                             {
                                 this.tx火花[this.st火花[i].nLane].tDraw3D(CDTXMania.app.Device, identity);
-                                if (CDTXMania.stage演奏ドラム画面.bサビ区間 == true && this.txボーナス花火 != null)
+                                if (CDTXMania.stagePlayingScreenDrums.bサビ区間 == true && this.txボーナス花火 != null)
                                     this.txボーナス花火.tDraw3D(CDTXMania.app.Device, identity);
                             }
                         }
@@ -773,7 +773,7 @@ namespace DTXMania
                                 int n高さ = CDTXMania.ConfigIni.nExplosionHeight;
 
                                 this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.n現在の値, this.st火花[i].nLane * n高さ, n幅, n高さ));
-                                if (CDTXMania.stage演奏ドラム画面.bサビ区間 == true && this.txボーナス花火 != null)
+                                if (CDTXMania.stagePlayingScreenDrums.bサビ区間 == true && this.txボーナス花火 != null)
                                     this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.n現在の値 * n幅, 10 * n高さ, n幅, n高さ));
                             }
                         }

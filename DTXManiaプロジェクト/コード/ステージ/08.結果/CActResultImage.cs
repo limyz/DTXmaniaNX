@@ -67,7 +67,7 @@ namespace DTXMania
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
-                    this.strSongName = CDTXMania.stage選曲.r現在選択中の曲.strタイトル;
+                    this.strSongName = CDTXMania.stageSongSelection.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
@@ -101,17 +101,17 @@ namespace DTXMania
                     (CDTXMania.DTX.bチップがある.FT == false) && 
                     (CDTXMania.DTX.bチップがある.Ride == false)))
                 {
-                    num = ((float)CDTXMania.stage選曲.r確定されたスコア.SongInformation.Level.Drums);
+                    num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums);
                 }
                 else
                 {
-                    if (CDTXMania.stage選曲.r確定されたスコア.SongInformation.Level.Drums > 100)
+                    if (CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums > 100)
                     {
-                        num = ((float)CDTXMania.stage選曲.r確定されたスコア.SongInformation.Level.Drums);
+                        num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums);
                     }
                     else
                     {
-                        num = ((float)CDTXMania.stage選曲.r確定されたスコア.SongInformation.Level.Drums) / 10f;
+                        num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums) / 10f;
                     }
                 }
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
@@ -160,16 +160,16 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override unsafe int On進行描画()
+        public override unsafe int OnUpdateAndDraw()
         {
             if (base.bNotActivated)
             {
                 return 0;
             }
-            if (base.b初めての進行描画)
+            if (base.bJustStartedUpdate)
             {
                 this.ct登場用 = new CCounter(0, 100, 5, CDTXMania.Timer);
-                base.b初めての進行描画 = false;
+                base.bJustStartedUpdate = false;
             }
             this.ct登場用.t進行();
             int x = this.n本体X;
@@ -252,7 +252,7 @@ namespace DTXMania
         }
         private bool tリザルト画像の指定があれば構築する()
         {
-            int rank = CScoreIni.tCalculateOverallRankValue(CDTXMania.stage結果.stPerformanceEntry.Drums, CDTXMania.stage結果.stPerformanceEntry.Guitar, CDTXMania.stage結果.stPerformanceEntry.Bass);
+            int rank = CScoreIni.tCalculateOverallRankValue(CDTXMania.stageResult.stPerformanceEntry.Drums, CDTXMania.stageResult.stPerformanceEntry.Guitar, CDTXMania.stageResult.stPerformanceEntry.Bass);
             if (rank == 99)	// #23534 2010.10.28 yyagi: 演奏チップが0個のときは、rankEと見なす
             {
                 rank = 6;

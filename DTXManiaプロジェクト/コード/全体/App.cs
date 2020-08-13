@@ -97,7 +97,7 @@ namespace DTXMania
         /// <para>進行処理を行う。</para>
         /// <para>ロックを得た進行スレッドにより実行される。</para>
         /// </summary>
-        protected override void On進行()
+        protected override void OnUpdate()
         {
             switch ( CDTXMania.rCurrentStage.eステージID )
             {

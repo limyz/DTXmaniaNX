@@ -53,14 +53,14 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					this.ctスクロール用 = new CCounter( 0, 6000, 1, CDTXMania.Timer );
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
 				this.ctスクロール用.t進行();
 				if( this.ctスクロール用.bReachedEndValue )

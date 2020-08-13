@@ -31,16 +31,16 @@ namespace DTXMania
 			}
 			base.OnActivate();
 		}
-		public override unsafe int On進行描画()
+		public override unsafe int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
-					this.n速度変更制御タイマ.Drums = this.n速度変更制御タイマ.Guitar = this.n速度変更制御タイマ.Bass = CSound管理.rc演奏用タイマ.nシステム時刻;
-					base.b初めての進行描画 = false;
+					this.n速度変更制御タイマ.Drums = this.n速度変更制御タイマ.Guitar = this.n速度変更制御タイマ.Bass = CSoundManager.rc演奏用タイマ.nシステム時刻;
+					base.bJustStartedUpdate = false;
 				}
-				long num = CSound管理.rc演奏用タイマ.n現在時刻;
+				long num = CSoundManager.rc演奏用タイマ.n現在時刻;
 				for( int i = 0; i < 3; i++ )
 				{
 					double num3 = (double) CDTXMania.ConfigIni.n譜面スクロール速度[ i ];

@@ -87,17 +87,17 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					this.ct登場アニメ用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
 				this.ct登場アニメ用.t進行();
-				if( ( !CDTXMania.stage選曲.bスクロール中 && ( this.ct遅延表示 != null ) ) && this.ct遅延表示.b進行中 )
+				if( ( !CDTXMania.stageSongSelection.bScrolling && ( this.ct遅延表示 != null ) ) && this.ct遅延表示.b進行中 )
 				{
 					this.ct遅延表示.t進行();
 					if( this.ct遅延表示.bReachedEndValue )
@@ -240,7 +240,7 @@ namespace DTXMania
 		}
 		private bool tプレビュー画像の指定があれば構築する()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Preimage ) )
 			{
 				return false;
@@ -269,7 +269,7 @@ namespace DTXMania
 		}
 		private bool tプレビュー動画の指定があれば構築する()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( CDTXMania.ConfigIni.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.SongInformation.Premovie ) )
 			{
 				string filename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Premovie;
@@ -308,7 +308,7 @@ namespace DTXMania
 		}
 		private bool t背景画像があればその一部からプレビュー画像を構築する()
 		{
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Backgound ) )
 			{
 				return false;
@@ -373,8 +373,8 @@ namespace DTXMania
 		}
 		private void t描画処理_ジャンル文字列()
 		{
-			CSongListNode c曲リストノード = CDTXMania.stage選曲.r現在選択中の曲;
-			CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+			CSongListNode c曲リストノード = CDTXMania.stageSongSelection.r現在選択中の曲;
+			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 			if( ( c曲リストノード != null ) && ( cスコア != null ) )
 			{
 				string str = "";
@@ -471,7 +471,7 @@ namespace DTXMania
 		}
 		private unsafe void t描画処理_プレビュー画像()
 		{
-			if( !CDTXMania.stage選曲.bスクロール中 && ( ( ( this.ct遅延表示 != null ) && ( this.ct遅延表示.n現在の値 > 0 ) ) && !this.b新しいプレビューファイルをまだ読み込んでいない ) )
+			if( !CDTXMania.stageSongSelection.bScrolling && ( ( ( this.ct遅延表示 != null ) && ( this.ct遅延表示.n現在の値 > 0 ) ) && !this.b新しいプレビューファイルをまだ読み込んでいない ) )
 			{
                 int n差X = 0x25;
                 int n差Y = 0x18;

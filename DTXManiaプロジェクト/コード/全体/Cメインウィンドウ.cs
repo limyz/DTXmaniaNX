@@ -60,10 +60,10 @@ namespace DTXMania
 				// _仮想ドラムキット
 				// なので、これらを順に見ていって、イベント発信者を特定する。
 
-				if( CDTXMania.stage選曲.r現在演奏中のスコアの背景動画 != null &&
-                    CDTXMania.stage選曲.r現在演奏中のスコアの背景動画.nインスタンスID == nインスタンスID)
+				if( CDTXMania.stageSongSelection.r現在演奏中のスコアの背景動画 != null &&
+                    CDTXMania.stageSongSelection.r現在演奏中のスコアの背景動画.nインスタンスID == nインスタンスID)
 				{
-                    dsイベント発信者 = CDTXMania.stage選曲.r現在演奏中のスコアの背景動画;
+                    dsイベント発信者 = CDTXMania.stageSongSelection.r現在演奏中のスコアの背景動画;
 					b発信者が背景動画である = true;
 				}
 				else

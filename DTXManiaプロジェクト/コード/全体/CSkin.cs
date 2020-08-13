@@ -205,7 +205,7 @@ namespace DTXMania
 ////				{
 //                    try
 //                    {
-//                        this.rSound[ 0 ] = CDTXMania.Sound管理.tGenerateSound( CSkin.Path( this.strFilename ) );
+//                        this.rSound[ 0 ] = CDTXMania.SoundManager.tGenerateSound( CSkin.Path( this.strFilename ) );
 //                    }
 //                    catch
 //                    {
@@ -219,7 +219,7 @@ namespace DTXMania
 //                    else
 //                    {
 //                        this.rSound[ 1 ] = ( CSound ) this.rSound[ 0 ].Clone();	// #27790 2012.3.10 yyagi add: to accelerate loading chip sounds
-//                        CDTXMania.Sound管理.tサウンドを登録する( this.rSound[ 1 ] );	// #28243 2012.5.3 yyagi add (登録漏れによりストリーム再生処理が発生していなかった)
+//                        CDTXMania.SoundManager.tサウンドを登録する( this.rSound[ 1 ] );	// #28243 2012.5.3 yyagi add (登録漏れによりストリーム再生処理が発生していなかった)
 //                    }
 
 ////				}
@@ -228,7 +228,7 @@ namespace DTXMania
 				{
 					try
 					{
-						this.rSound[ i ] = CDTXMania.Sound管理.tGenerateSound( CSkin.Path( this.strFilename ) );
+						this.rSound[ i ] = CDTXMania.SoundManager.tGenerateSound( CSkin.Path( this.strFilename ) );
 					}
 					catch
 					{
@@ -278,13 +278,13 @@ namespace DTXMania
 
 			public void tRemoveMixer()
 			{
-				if ( CDTXMania.Sound管理.GetCurrentSoundDeviceType() != "DirectShow" )
+				if ( CDTXMania.SoundManager.GetCurrentSoundDeviceType() != "DirectShow" )
 				{
 					for ( int i = 0; i < 2; i++ )
 					{
 						if ( this.rSound[ i ] != null )
 						{
-							CDTXMania.Sound管理.RemoveMixer( this.rSound[ i ] );
+							CDTXMania.SoundManager.RemoveMixer( this.rSound[ i ] );
 						}
 					}
 				}
@@ -300,7 +300,7 @@ namespace DTXMania
 					{
 						if( this.rSound[ i ] != null )
 						{
-							CDTXMania.Sound管理.tサウンドを破棄する( this.rSound[ i ] );
+							CDTXMania.SoundManager.tサウンドを破棄する( this.rSound[ i ] );
 							this.rSound[ i ] = null;
 						}
 					}

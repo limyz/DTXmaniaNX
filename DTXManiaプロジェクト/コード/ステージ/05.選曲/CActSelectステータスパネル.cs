@@ -18,11 +18,11 @@ namespace DTXMania
         }
         public void tSelectedSongChanged()
         {
-            CSongListNode c曲リストノード = CDTXMania.stage選曲.r現在選択中の曲;
-            CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+            CSongListNode c曲リストノード = CDTXMania.stageSongSelection.r現在選択中の曲;
+            CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
             if ((c曲リストノード != null) && (cスコア != null))
             {
-                this.n現在選択中の曲の難易度 = CDTXMania.stage選曲.n現在選択中の曲の難易度;
+                this.n現在選択中の曲の難易度 = CDTXMania.stageSongSelection.n現在選択中の曲の難易度;
                 for (int i = 0; i < 3; i++)
                 {
                     if (CDTXMania.ConfigIni.nSkillMode == 0)
@@ -85,7 +85,7 @@ namespace DTXMania
                     {
                         this.n選択中の曲のレベル難易度毎[i] = 0;
                     }
-                    this.str難易度ラベル[i] = c曲リストノード.ar難易度ラベル[i];
+                    this.str難易度ラベル[i] = c曲リストノード.arDifficultyLabel[i];
 
                 }
                 if (this.r直前の曲 != c曲リストノード)
@@ -170,19 +170,19 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
 
             if (!base.bNotActivated)
             {
                 #region [ 初めての進行描画 ]
                 //-----------------
-                if (base.b初めての進行描画)
+                if (base.bJustStartedUpdate)
                 {
                     this.ct登場アニメ用 = new CCounter(0, 100, 5, CDTXMania.Timer);
                     this.ct難易度スクロール用 = new CCounter(0, 20, 1, CDTXMania.Timer);
                     this.ct難易度矢印用 = new CCounter(0, 5, 80, CDTXMania.Timer);
-                    base.b初めての進行描画 = false;
+                    base.bJustStartedUpdate = false;
                 }
                 //-----------------
                 #endregion
@@ -210,10 +210,10 @@ namespace DTXMania
 
                 // 描画
 
-                CScore cスコア = CDTXMania.stage選曲.r現在選択中のスコア;
+                CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
 
                 #region [ 選択曲の BPM の描画 ]
-                if (CDTXMania.stage選曲.r現在選択中の曲 != null && this.txBPM画像 != null)
+                if (CDTXMania.stageSongSelection.r現在選択中の曲 != null && this.txBPM画像 != null)
                 {
 
                     int nBPM位置X = 490;
@@ -226,7 +226,7 @@ namespace DTXMania
                     }
 
                     string strBPM;
-                    switch (CDTXMania.stage選曲.r現在選択中の曲.eノード種別)
+                    switch (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別)
                     {
                         case CSongListNode.Eノード種別.SCORE:
                             {
@@ -296,7 +296,7 @@ namespace DTXMania
                         int[] n難易度小数 = new int[5];
                         for (int i = 0; i < 5; i++)
                         {
-                            if (this.str難易度ラベル[i] != null || CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
+                            if (this.str難易度ラベル[i] != null || CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
                             {
 
                                 int nBoxX = nPanelX;
@@ -328,7 +328,7 @@ namespace DTXMania
                                     {
                                         this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, string.Format("{0,4:0.00}", ((double)n難易度整数[i]) + (((double)n難易度小数[i]) / 100)));
                                     }
-                                    else if ((this.str難易度ラベル[i] != null && !this.b現在選択中の曲に譜面がある[i][j]) || CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
+                                    else if ((this.str難易度ラベル[i] != null && !this.b現在選択中の曲に譜面がある[i][j]) || CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
                                     {
                                         this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, ("-.--"));
                                     }
@@ -378,7 +378,7 @@ namespace DTXMania
                                 }
 
                             }
-                            else if (CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                            else if (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
                             {
                                 flag = flag + 1;
                             }
@@ -401,11 +401,11 @@ namespace DTXMania
                                 n難易度小数[0] = (this.n現在選択中の曲のレベル[ j ] - ( n難易度整数[ 0 ] * 10 ) ) * 10;
                                 n難易度小数[0] += this.n現在選択中の曲のレベル小数点[ j ];
 
-                                if (this.b現在選択中の曲の譜面[j] && CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                                if (this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
                                 {
                                     this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, string.Format("{0,4:0.00}", ((double)n難易度整数[ 0 ]) + (((double)n難易度小数[ 0 ]) / 100)));
                                 }
-                                else if (!this.b現在選択中の曲の譜面[j] && CDTXMania.stage選曲.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                                else if (!this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
                                 {
                                     this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, ("-.--"));
                                 }

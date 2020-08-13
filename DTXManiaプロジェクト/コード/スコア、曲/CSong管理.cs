@@ -184,7 +184,7 @@ namespace DTXMania
 								string str2 = str基点フォルダ + block.File[ j ];
 								if( File.Exists( str2 ) )
 								{
-									item.ar難易度ラベル[ j ] = block.Label[ j ];
+									item.arDifficultyLabel[ j ] = block.Label[ j ];
 									item.arScore[ j ] = new CScore();
 									item.arScore[ j ].FileInformation.AbsoluteFilePath = str2;
 									item.arScore[ j ].FileInformation.AbsoluteFolderPath = Path.GetFullPath( Path.GetDirectoryName( str2 ) ) + @"\";
@@ -246,7 +246,7 @@ namespace DTXMania
 											CScore cスコア = item.arScore[ k ];
 											builder.Remove( 0, builder.Length );
 											builder.Append( string.Format( "ブロック{0}-{1}:", item.SetDefのブロック番号 + 1, k + 1 ) );
-											builder.Append( " Label=" + item.ar難易度ラベル[ k ] );
+											builder.Append( " Label=" + item.arDifficultyLabel[ k ] );
 											builder.Append( ", File=" + cスコア.FileInformation.AbsoluteFilePath );
 											builder.Append( ", Size=" + cスコア.FileInformation.FileSize );
 											builder.Append( ", LastUpdate=" + cスコア.FileInformation.LastModified );
@@ -977,7 +977,7 @@ namespace DTXMania
 						 (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
 						 string.Format("難易度レベル {0} 付近の曲をランダムに選択します。難易度レベルを持たない曲も選択候補となります。", i + 1) :
 						 string.Format("Random select from the songs which has the level about L{0}. Non-leveled songs may also selected.", i + 1);
-					itemRandom.ar難易度ラベル[ i ] = string.Format( "L{0}", i + 1 );
+					itemRandom.arDifficultyLabel[ i ] = string.Format( "L{0}", i + 1 );
 				}
 				ノードリスト.Add( itemRandom );
 

@@ -55,7 +55,7 @@ namespace DTXMania
 						return;
 
 					case 0x11:
-						CDTXMania.stageコンフィグ.tアサイン完了通知();
+						CDTXMania.stageConfig.tアサイン完了通知();
 						return;
 				}
 				this.bキー入力待ち = true;
@@ -109,7 +109,7 @@ namespace DTXMania
 				base.OnManagedCreateResources();
 			}
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
@@ -152,7 +152,7 @@ namespace DTXMania
 				int num5 = 20;
 				int x = 0x134;
 				int y = 0x40;
-				CDTXMania.stageコンフィグ.actFont.t文字列描画( x, y, this.strパッド名, false, 0.75f );
+				CDTXMania.stageConfig.actFont.t文字列描画( x, y, this.strパッド名, false, 0.75f );
 				y += num5;
 				CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ];
 				for( int i = 0; i < 0x10; i++ )
@@ -176,14 +176,14 @@ namespace DTXMania
 							break;
 
 						default:
-							CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 20, y, string.Format( "{0,2}.", i + 1 ), this.n現在の選択行 == i, 0.75f );
+							CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, string.Format( "{0,2}.", i + 1 ), this.n現在の選択行 == i, 0.75f );
 							break;
 					}
 					y += num5;
 				}
-				CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 20, y, "Reset", this.n現在の選択行 == 0x10, 0.75f );
+				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "Reset", this.n現在の選択行 == 0x10, 0.75f );
 				y += num5;
-				CDTXMania.stageコンフィグ.actFont.t文字列描画( x + 20, y, "<< Returnto List", this.n現在の選択行 == 0x11, 0.75f );
+				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "<< Returnto List", this.n現在の選択行 == 0x11, 0.75f );
 				y += num5;
 				if( this.bキー入力待ち && ( this.txHitKeyダイアログ != null ) )
 				{
@@ -397,7 +397,7 @@ namespace DTXMania
 					}
 					break;
 			}
-			CDTXMania.stageコンフィグ.actFont.t文字列描画( x, y, string.Format( "{0,2}. Joypad #{1} ", line, nID ) + str, b強調, 0.75f );
+			CDTXMania.stageConfig.actFont.t文字列描画( x, y, string.Format( "{0,2}. Joypad #{1} ", line, nID ) + str, b強調, 0.75f );
 		}
 		private void tアサインコードの描画_Keyboard( int line, int x, int y, int nID, int nCode, bool b強調 )
 		{
@@ -414,15 +414,15 @@ namespace DTXMania
 			{
 				str = string.Format( "{0,2}. Key 0x{1:X2}", line, nCode );
 			}
-			CDTXMania.stageコンフィグ.actFont.t文字列描画( x, y, str, b強調, 0.75f );
+			CDTXMania.stageConfig.actFont.t文字列描画( x, y, str, b強調, 0.75f );
 		}
 		private void tアサインコードの描画_MidiIn( int line, int x, int y, int nID, int nCode, bool b強調 )
 		{
-			CDTXMania.stageコンフィグ.actFont.t文字列描画( x, y, string.Format( "{0,2}. MidiIn #{1} code.{2}", line, nID, nCode ), b強調, 0.75f );
+			CDTXMania.stageConfig.actFont.t文字列描画( x, y, string.Format( "{0,2}. MidiIn #{1} code.{2}", line, nID, nCode ), b強調, 0.75f );
 		}
 		private void tアサインコードの描画_Mouse( int line, int x, int y, int nID, int nCode, bool b強調 )
 		{
-			CDTXMania.stageコンフィグ.actFont.t文字列描画( x, y, string.Format( "{0,2}. Mouse Button{1}", line, nCode ), b強調, 0.75f );
+			CDTXMania.stageConfig.actFont.t文字列描画( x, y, string.Format( "{0,2}. Mouse Button{1}", line, nCode ), b強調, 0.75f );
 		}
 		private bool tキーチェックとアサイン_Joypad()
 		{

@@ -74,7 +74,7 @@ namespace DTXMania
 			base.OnDeactivate();
 		}
 
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{

@@ -37,9 +37,9 @@ namespace DTXMania
 		{
 			get { return CDTXMania.Timer; }
 		}
-		public CSound管理 Sound管理
+		public CSoundManager Sound管理
 		{
-			get { return CDTXMania.Sound管理; }
+			get { return CDTXMania.SoundManager; }
 		}
 		public Size ClientSize
 		{

@@ -131,7 +131,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSound管理.rc演奏用タイマ.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rc演奏用タイマ.n現在時刻;
 
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -232,7 +232,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSound管理.rc演奏用タイマ.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rc演奏用タイマ.n現在時刻;
                     this.n前回表示したフレーム番号 = -1;
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -494,7 +494,7 @@ namespace DTXMania
         }
         public unsafe int t進行描画(int x, int y)
         {
-            if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrums有効 ? CDTXMania.stage演奏ドラム画面.ct登場用.bReachedEndValue : CDTXMania.stage演奏ギター画面.ct登場用.bReachedEndValue))
+            if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrums有効 ? CDTXMania.stagePlayingScreenDrums.ct登場用.bReachedEndValue : CDTXMania.stagePlayingScreenGuitar.ct登場用.bReachedEndValue))
             {
                 #region[ 汎用動画 ]
                 if (this.ds汎用 != null)
@@ -538,7 +538,7 @@ namespace DTXMania
                     Rectangle rectangle2;
 
                     #region[ frameNoFromTime ]
-                    int time = (int)( ( CSound管理.rc演奏用タイマ.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
+                    int time = (int)( ( CSoundManager.rc演奏用タイマ.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
                     int frameNoFromTime = 0;
                     if( this.bUseMRenderer )
                     {
@@ -588,9 +588,9 @@ namespace DTXMania
                     Point point2 = new Point( this.n画像側終了位置X, this.n画像側終了位置Y );
                     Point point3 = new Point( this.n表示側開始位置X, this.n表示側開始位置Y );
                     Point point4 = new Point( this.n表示側終了位置X, this.n表示側終了位置Y );
-                    if( CSound管理.rc演奏用タイマ.n現在時刻 < this.n移動開始時刻ms )
+                    if( CSoundManager.rc演奏用タイマ.n現在時刻 < this.n移動開始時刻ms )
                     {
-                        this.n移動開始時刻ms = CSound管理.rc演奏用タイマ.n現在時刻;
+                        this.n移動開始時刻ms = CSoundManager.rc演奏用タイマ.n現在時刻;
                     }
                     if( this.n総移動時間ms == 0 )
                     {
@@ -775,9 +775,9 @@ namespace DTXMania
                 if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigIni.bBGA有効 == true)
                 {
                     if (CDTXMania.ConfigIni.bDrums有効)
-                        CDTXMania.stage演奏ドラム画面.actBGA.t進行描画(980, 0);
+                        CDTXMania.stagePlayingScreenDrums.actBGA.t進行描画(980, 0);
                     else
-                        CDTXMania.stage演奏ギター画面.actBGA.t進行描画(501, 0);
+                        CDTXMania.stagePlayingScreenGuitar.actBGA.t進行描画(501, 0);
                 }
 
                 if( CDTXMania.ConfigIni.ボーナス演出を表示する == true )
@@ -794,8 +794,8 @@ namespace DTXMania
                                 this.stフィルイン[ i ].b使用中 = false;
                             }
                             //if ( this.txフィルインエフェクト != null )
-                            CStage演奏ドラム画面 stageDrum = CDTXMania.stage演奏ドラム画面;
-                            //CStage演奏ギター画面 stageGuitar = CDTXMania.stage演奏ギター画面;
+                            CStagePlayingScreenDrums stageDrum = CDTXMania.stagePlayingScreenDrums;
+                            //CStagePlayingScreenGuitar stageGuitar = CDTXMania.stagePlayingScreenGuitar;
 
                             //if( ( CDTXMania.ConfigIni.bDrums有効 ? stageDrum.txボーナスエフェクト : stageGuitar.txボーナスエフェクト ) != null )
                             {
@@ -1038,7 +1038,7 @@ namespace DTXMania
                 }
             }
         }
-        public override int On進行描画()
+        public override int OnUpdateAndDraw()
         {
             throw new InvalidOperationException("t進行描画(int,int)のほうを使用してください。");
         }

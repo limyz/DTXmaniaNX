@@ -40,7 +40,7 @@ namespace DTXMania
 						{
 							if( r歓声Chip != null )
 							{
-								CDTXMania.DTX.tチップの再生( r歓声Chip, CSound管理.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
+								CDTXMania.DTX.tチップの再生( r歓声Chip, CSoundManager.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
 							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == EInstrumentPart.GUITAR ) ? -50 : 50;
@@ -68,7 +68,7 @@ namespace DTXMania
 			}
 			base.OnActivate();
 		}
-		public override int On進行描画()
+		public override int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{

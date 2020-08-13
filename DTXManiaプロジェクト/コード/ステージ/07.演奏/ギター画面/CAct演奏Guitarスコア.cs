@@ -46,14 +46,14 @@ namespace DTXMania
 
 		// CActivity 実装（共通クラスからの差分のみ）
 
-		public override unsafe int On進行描画()
+		public override unsafe int OnUpdateAndDraw()
 		{
 			if( !base.bNotActivated )
 			{
-				if( base.b初めての進行描画 )
+				if( base.bJustStartedUpdate )
 				{
 					base.n進行用タイマ = CDTXMania.Timer.n現在時刻;
-					base.b初めての進行描画 = false;
+					base.bJustStartedUpdate = false;
 				}
 				long num = CDTXMania.Timer.n現在時刻;
 				if( num < base.n進行用タイマ )
