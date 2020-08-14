@@ -102,15 +102,15 @@ namespace DTXMania
 			{
 				for( int i = 0; i < 10; i++ )
 				{
-					this.ct進行[ i ].t進行();
+					this.ct進行[ i ].tUpdate();
 					if( this.ct進行[ i ].bReachedEndValue )
 					{
-						this.ct進行[ i ].t停止();
+						this.ct進行[ i ].tStop();
 					}
 				}
 				for( int j = 0; j < 10; j++ )
 				{
-					if( ( this.ct進行[ j ].n現在の経過時間ms != -1 ) && ( this.tx火花[ j % 5 ] != null ) )
+					if( ( this.ct進行[ j ].nCurrentElapsedTimeMs != -1 ) && ( this.tx火花[ j % 5 ] != null ) )
 					{
 						float scale = (float) ( 3.0 * Math.Cos( ( Math.PI * ( 90.0 - ( 90.0 * ( ( (double) this.ct進行[ j ].n現在の値 ) / 56.0 ) ) ) ) / 180.0 ) );
 						int x = this.pt中央位置[ j ].X - ( (int) ( ( this.tx火花[ j % 3 ].sz画像サイズ.Width * scale ) / 2f ) );

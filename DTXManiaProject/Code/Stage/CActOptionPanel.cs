@@ -35,19 +35,19 @@ namespace DTXMania
                 CConfigIni configIni = CDTXMania.ConfigIni;
                 if (this.txオプションパネル != null)
                 {
-                    int drums = configIni.n譜面スクロール速度.Drums;
+                    int drums = configIni.nScrollSpeed.Drums;
                     if (drums > 15)
                     {
                         drums = 15;
                     }
                     this.txオプションパネル.tDraw2D(device, 0x2e2, 14, this.rc譜面スピード[drums]);
-                    drums = configIni.n譜面スクロール速度.Guitar;
+                    drums = configIni.nScrollSpeed.Guitar;
                     if (drums > 15)
                     {
                         drums = 15;
                     }
                     this.txオプションパネル.tDraw2D(device, 0x2e2, 0x20, this.rc譜面スピード[drums]);
-                    drums = configIni.n譜面スクロール速度.Bass;
+                    drums = configIni.nScrollSpeed.Bass;
                     if (drums > 15)
                     {
                         drums = 15;

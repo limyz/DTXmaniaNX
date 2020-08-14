@@ -148,7 +148,7 @@ namespace DTXMania
 #endregion
 #endif
 
-		public void Damage( EInstrumentPart screenmode, EInstrumentPart part, E判定 e今回の判定 )
+		public void Damage( EInstrumentPart screenmode, EInstrumentPart part, EJudgement e今回の判定 )
 		{
 			double fDamage;
 
@@ -162,12 +162,12 @@ namespace DTXMania
             }
 			switch ( e今回の判定 )
 			{
-                case E判定.Perfect:
+                case EJudgement.Perfect:
                     {
                         fDamage = bRisky ? 0 : fDamageGaugeDelta[(int)e今回の判定, (int)part];
                         break;
                     }
-				case E判定.Great:
+				case EJudgement.Great:
 
                     if (CDTXMania.ConfigIni.bHAZARD)
                     {
@@ -186,7 +186,7 @@ namespace DTXMania
                         fDamage  = bRisky ? 0 : fDamageGaugeDelta[ (int) e今回の判定, (int) part ];
                     }
                     break;
-				case E判定.Good:
+				case EJudgement.Good:
 
                     if (CDTXMania.ConfigIni.bHAZARD)
                     {
@@ -205,8 +205,8 @@ namespace DTXMania
     					fDamage  = bRisky ? 0 : fDamageGaugeDelta[ (int) e今回の判定, (int) part ];
                     }
 					break;
-				case E判定.Poor:
-				case E判定.Miss:
+				case EJudgement.Poor:
+				case EJudgement.Miss:
 					if ( bRisky )
 					{
 						fDamage = (nRiskyTimes == 1)? 0 : -GAUGE_MAX / ( nRiskyTimes_Initial - 1);	// Risky=1のときは1Miss即閉店なのでダメージ計算しない
@@ -216,9 +216,9 @@ namespace DTXMania
 					{
 						fDamage = fDamageGaugeDelta[ (int) e今回の判定, (int) part ];
 					}
-					if ( e今回の判定 == E判定.Miss && !bRisky )
+					if ( e今回の判定 == EJudgement.Miss && !bRisky )
 					{
-						fDamage *= fDamageLevelFactor[ (int) CDTXMania.ConfigIni.eダメージレベル ];
+						fDamage *= fDamageLevelFactor[ (int) CDTXMania.ConfigIni.eDamageLevel ];
 					}
 					break;
 

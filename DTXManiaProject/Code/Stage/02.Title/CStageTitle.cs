@@ -97,12 +97,12 @@ namespace DTXMania
 					if( CDTXMania.r直前のステージ == CDTXMania.stageStartup )
 					{
 						this.actFIfromSetup.tフェードイン開始();
-						base.eフェーズID = CStage.Eフェーズ.タイトル_起動画面からのフェードイン;
+						base.ePhaseID = CStage.EPhase.タイトル_起動画面からのフェードイン;
 					}
 					else
 					{
 						this.actFI.tフェードイン開始();
-						base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
+						base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					}
 					this.ctカーソルフラッシュ用.tStart( 0, 700, 5, CDTXMania.Timer );
 					this.ctカーソルフラッシュ用.n現在の値 = 100;
@@ -117,10 +117,10 @@ namespace DTXMania
 				//---------------------
 				if( this.ct上移動用.b進行中 )
 				{
-					this.ct上移動用.t進行();
+					this.ct上移動用.tUpdate();
 					if( this.ct上移動用.bReachedEndValue )
 					{
-						this.ct上移動用.t停止();
+						this.ct上移動用.tStop();
 					}
 				}
 				//---------------------
@@ -129,36 +129,36 @@ namespace DTXMania
 				//---------------------
 				if( this.ct下移動用.b進行中 )
 				{
-					this.ct下移動用.t進行();
+					this.ct下移動用.tUpdate();
 					if( this.ct下移動用.bReachedEndValue )
 					{
-						this.ct下移動用.t停止();
+						this.ct下移動用.tStop();
 					}
 				}
 				//---------------------
 				#endregion
 				#region [ カーソルフラッシュ ]
 				//---------------------
-				this.ctカーソルフラッシュ用.t進行Loop();
+				this.ctカーソルフラッシュ用.tUpdateLoop();
 				//---------------------
 				#endregion
 
 				// キー入力
 
-				if( base.eフェーズID == CStage.Eフェーズ.共通_通常状態		// 通常状態、かつ
+				if( base.ePhaseID == CStage.EPhase.Common_DefaultState		// 通常状態、かつ
 					&& CDTXMania.act現在入力を占有中のプラグイン == null )	// プラグインの入力占有がない
 				{
 					if( CDTXMania.Input管理.Keyboard.bキーが押された( (int) Key.Escape ) )
 						return (int) E戻り値.EXIT;
 
-					this.ctキー反復用.Up.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
-					this.ctキー反復用.R.tキー反復( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+					this.ctキー反復用.Up.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+					this.ctキー反復用.R.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					//Change to HT
 					if( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.HT ) )
 						this.tカーソルを上へ移動する();
 
-					this.ctキー反復用.Down.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
-					this.ctキー反復用.B.tキー反復( CDTXMania.Pad.b押されているGB( EPad.SD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+					this.ctキー反復用.Down.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+					this.ctキー反復用.B.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.SD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					//Change to LT
 					if ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LT ) )
 						this.tカーソルを下へ移動する();
@@ -178,7 +178,7 @@ namespace DTXMania
 							return (int)E戻り値.EXIT;
 						}
 						this.actFO.tフェードアウト開始();
-						base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+						base.ePhaseID = CStage.EPhase.Common_FadeOut;
 					}
 				}
 
@@ -223,23 +223,23 @@ namespace DTXMania
 					this.txメニュー.tDraw2D( CDTXMania.app.Device, MENU_X, MENU_Y, new Rectangle( 0, 0, MENU_W, MENU_H ) );
 					this.txメニュー.tDraw2D( CDTXMania.app.Device, MENU_X, MENU_Y + MENU_H, new Rectangle( 0, MENU_H * 2, MENU_W, MENU_H * 2 ) );
 				}
-				CStage.Eフェーズ eフェーズid = base.eフェーズID;
+				CStage.EPhase eフェーズid = base.ePhaseID;
 				switch( eフェーズid )
 				{
-					case CStage.Eフェーズ.共通_フェードイン:
+					case CStage.EPhase.Common_FadeIn:
 						if( this.actFI.OnUpdateAndDraw() != 0 )
 						{
 							CDTXMania.Skin.soundタイトル音.t再生する();
-							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;
 
-					case CStage.Eフェーズ.共通_フェードアウト:
+					case CStage.EPhase.Common_FadeOut:
 						if( this.actFO.OnUpdateAndDraw() == 0 )
 						{
 							break;
 						}
-						base.eフェーズID = CStage.Eフェーズ.共通_終了状態;
+						base.ePhaseID = CStage.EPhase.Common_EndStatus;
 						switch ( this.n現在のカーソル行 )
 						{
 							case (int)E戻り値.GAMESTART - 1:
@@ -254,11 +254,11 @@ namespace DTXMania
 						}
 						break;
 
-					case CStage.Eフェーズ.タイトル_起動画面からのフェードイン:
+					case CStage.EPhase.タイトル_起動画面からのフェードイン:
 						if( this.actFIfromSetup.OnUpdateAndDraw() != 0 )
 						{
 							CDTXMania.Skin.soundタイトル音.t再生する();
-							base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;
 				}
@@ -356,7 +356,7 @@ namespace DTXMania
 				if( this.ct上移動用.b進行中 )
 				{
 					this.ct下移動用.n現在の値 = 100 - this.ct上移動用.n現在の値;
-					this.ct上移動用.t停止();
+					this.ct上移動用.tStop();
 				}
 			}
 		}
@@ -370,7 +370,7 @@ namespace DTXMania
 				if( this.ct下移動用.b進行中 )
 				{
 					this.ct上移動用.n現在の値 = 100 - this.ct下移動用.n現在の値;
-					this.ct下移動用.t停止();
+					this.ct下移動用.tStop();
 				}
 			}
 		}

@@ -18,7 +18,7 @@ namespace DTXMania
 		protected struct STSTATUS
 		{
 			public CCounter ct進行;
-			public E判定 judge;
+			public EJudgement judge;
             public float fZ軸回転度_棒;
             public float fX方向拡大率_棒;
 			public float fY方向拡大率_棒;
@@ -106,7 +106,7 @@ namespace DTXMania
 
 		// メソッド
 
-		public virtual void Start( int nLane, E判定 judge, int lag )
+		public virtual void Start( int nLane, EJudgement judge, int lag )
 		{
 			if( ( nLane < 0 ) || ( nLane > 14 ) )
 			{
@@ -181,7 +181,7 @@ namespace DTXMania
                 for (int i = 0; i < 15; i++)
                 {
                     this.stレーンサイズ[i] = new STレーンサイズ();
-                    if( CDTXMania.ConfigIni.bDrums有効 )
+                    if( CDTXMania.ConfigIni.bDrumsEnabled )
                     {
                         this.stレーンサイズ[i] = default(CActPerfDrumsJudgementCharacterString.STレーンサイズ);
                         switch ( CDTXMania.ConfigIni.eLaneType.Drums )

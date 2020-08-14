@@ -6,12 +6,12 @@ namespace FDK
 {
 	/// <summary>
 	/// <para>一定の間隔で処理を行うテンプレートパターンの定義。</para>
-	/// <para>たとえば、t進行() で 5ms ごとに行う処理を前回のt進行()の呼び出しから 15ms 後に呼び出した場合は、処理が 3回 実行される。</para>
+	/// <para>たとえば、tUpdate() で 5ms ごとに行う処理を前回のt進行()の呼び出しから 15ms 後に呼び出した場合は、処理が 3回 実行される。</para>
 	/// </summary>
-	public class C一定間隔処理 : IDisposable
+	public class CFixedIntervalProcessing : IDisposable
 	{
 		public delegate void dg処理();
-		public void t進行( long n間隔ms, dg処理 dg処理 )
+		public void tUpdate( long n間隔ms, dg処理 dg処理 )
 		{
 			// タイマ更新
 
@@ -22,7 +22,7 @@ namespace FDK
 
 			// 初めての進行処理
 
-			if( this.n前回の時刻 == CTimer.n未使用 )
+			if( this.n前回の時刻 == CTimer.nUnused )
 				this.n前回の時刻 = this.timer.n現在時刻ms;
 
 
@@ -46,7 +46,7 @@ namespace FDK
 		//-----------------
 		public void Dispose()
 		{
-			C共通.tDisposeする( ref this.timer );
+			CCommon.tDisposeする( ref this.timer );
 		}
 		//-----------------
 		#endregion
@@ -54,7 +54,7 @@ namespace FDK
 		#region [ protected ]
 		//-----------------
 		protected CTimer timer = new CTimer( CTimer.E種別.MultiMedia );
-		protected long n前回の時刻 = CTimer.n未使用;
+		protected long n前回の時刻 = CTimer.nUnused;
 		//-----------------
 		#endregion
 	}

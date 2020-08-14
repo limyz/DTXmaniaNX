@@ -178,7 +178,7 @@ namespace DTXMania
 						}
 						Size size3 = new Size( 0x116, 0x163 );
 						Size size4 = new Size( ( this.stLayer[ i ].rBMP != null ) ? this.stLayer[ i ].rBMP.n幅 : this.stLayer[ i ].rBMPTEX.tx画像.sz画像サイズ.Width, ( this.stLayer[ i ].rBMP != null ) ? this.stLayer[ i ].rBMP.n高さ : this.stLayer[ i ].rBMPTEX.tx画像.sz画像サイズ.Height );
-						int num4 = (int) ( ( CDTXMania.Timer.n現在時刻 - num3 ) * ( ( (double) CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
+						int num4 = (int) ( ( CDTXMania.Timer.n現在時刻 - num3 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
 						if( ( num2 != 0 ) && ( num2 < num4 ) )
 						{
 							this.stLayer[ i ].pt画像側開始位置 = point = point2;

@@ -55,7 +55,7 @@ namespace FDK
 
 			// 自身のリソースを作成する。
 			this.OnManagedCreateResources();
-			this.OnUnmanagedCreateResource();
+			this.OnUnmanagedCreateResources();
 
 			// すべての子 Activity を活性化する。
 			foreach( CActivity activity in this.listChildActivities )
@@ -71,7 +71,7 @@ namespace FDK
 				return;
 
 			// 自身のリソースを解放する。
-			this.OnUnmanagedリソースの解放();
+			this.OnUnmanagedReleaseResources();
 			this.OnManagedReleaseResources();
 
 			// すべての 子Activity を非活性化する。
@@ -106,7 +106,7 @@ namespace FDK
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが再作成またはリセットされるか）分からないので、
 		/// いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnUnmanagedCreateResource()
+		public virtual void OnUnmanagedCreateResources()
 		{
 			// 活性化してないなら何もしない。
 			if( this.bNotActivated )
@@ -114,7 +114,7 @@ namespace FDK
 
 			// すべての 子Activity の Unmanaged リソースを作成する。
 			foreach( CActivity activity in this.listChildActivities )
-				activity.OnUnmanagedCreateResource();
+				activity.OnUnmanagedCreateResources();
 		}
 		
 		/// <summary>
@@ -123,7 +123,7 @@ namespace FDK
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが解放またはリセットされるか）分からないので、
 		/// いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnUnmanagedリソースの解放()
+		public virtual void OnUnmanagedReleaseResources()
 		{
 			// 活性化してないなら何もしない。
 			if( this.bNotActivated )
@@ -131,7 +131,7 @@ namespace FDK
 
 			// すべての 子Activity の Unmanaged リソースを解放する。
 			foreach( CActivity activity in this.listChildActivities )
-				activity.OnUnmanagedリソースの解放();
+				activity.OnUnmanagedReleaseResources();
 		}
 
 		/// <summary>
@@ -204,7 +204,7 @@ namespace FDK
             // 自身のリソースを作成する。
 
             this.OnManagedCreateResource(D3D9Device);
-            this.OnUnmanagedCreateResource(D3D9Device);
+            this.OnUnmanagedCreateResources(D3D9Device);
 
 
             // すべての子Activityを活性化する。
@@ -240,7 +240,7 @@ namespace FDK
 		/// <para>Direct3D デバイスが作成またはリセットされた直後に呼び出されるので、自分が活性化している時に限り、Unmanaged リソースを作成（または再構築）すること。</para>
 		/// <para>いつどのタイミングで呼び出されるか（いつDirect3Dが再作成またはリセットされるか）分からないので、いつ何時呼び出されても問題無いようにコーディングしておくこと。</para>
 		/// </summary>
-		public virtual void OnUnmanagedCreateResource( SlimDX.Direct3D9.Device D3D9Device )
+		public virtual void OnUnmanagedCreateResources( SlimDX.Direct3D9.Device D3D9Device )
 		{
 			if( this.bNotActivated )
 				return;
@@ -249,7 +249,7 @@ namespace FDK
 			// すべての 子Activity の Unmanaged リソースを作成する。
 
 			foreach( CActivity activity in this.listChildActivities )
-				activity.OnUnmanagedCreateResource( D3D9Device );
+				activity.OnUnmanagedCreateResources( D3D9Device );
 		}
 
         /// <summary>

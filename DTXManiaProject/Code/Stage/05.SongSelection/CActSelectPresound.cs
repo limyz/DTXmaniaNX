@@ -63,20 +63,20 @@ namespace DTXMania
 			{
 				if( ( this.ctBGMフェードイン用 != null ) && this.ctBGMフェードイン用.b進行中 )
 				{
-					this.ctBGMフェードイン用.t進行();
+					this.ctBGMフェードイン用.tUpdate();
 					CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド = this.ctBGMフェードイン用.n現在の値;
 					if( this.ctBGMフェードイン用.bReachedEndValue )
 					{
-						this.ctBGMフェードイン用.t停止();
+						this.ctBGMフェードイン用.tStop();
 					}
 				}
 				if( ( this.ctBGMフェードアウト用 != null ) && this.ctBGMフェードアウト用.b進行中 )
 				{
-					this.ctBGMフェードアウト用.t進行();
+					this.ctBGMフェードアウト用.tUpdate();
 					CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド = 100 - this.ctBGMフェードアウト用.n現在の値;
 					if( this.ctBGMフェードアウト用.bReachedEndValue )
 					{
-						this.ctBGMフェードアウト用.t停止();
+						this.ctBGMフェードアウト用.tStop();
 					}
 				}
 				this.t進行処理_プレビューサウンド();
@@ -99,7 +99,7 @@ namespace DTXMania
 		{
 			if( this.ctBGMフェードイン用 != null )
 			{
-				this.ctBGMフェードイン用.t停止();
+				this.ctBGMフェードイン用.tStop();
 			}
 			this.ctBGMフェードアウト用 = new CCounter( 0, 100, 10, CDTXMania.Timer );
 			this.ctBGMフェードアウト用.n現在の値 = 100 - CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド;
@@ -108,7 +108,7 @@ namespace DTXMania
 		{
 			if( this.ctBGMフェードアウト用 != null )
 			{
-				this.ctBGMフェードアウト用.t停止();
+				this.ctBGMフェードアウト用.tStop();
 			}
 			this.ctBGMフェードイン用 = new CCounter( 0, 100, 20, CDTXMania.Timer );
 			this.ctBGMフェードイン用.n現在の値 = CDTXMania.Skin.bgm選曲画面.n音量_現在のサウンド;
@@ -143,10 +143,10 @@ namespace DTXMania
 		{
 			if( ( this.ct再生待ちウェイト != null ) && !this.ct再生待ちウェイト.b停止中 )
 			{
-				this.ct再生待ちウェイト.t進行();
+				this.ct再生待ちウェイト.tUpdate();
 				if( !this.ct再生待ちウェイト.b終了値に達してない )
 				{
-					this.ct再生待ちウェイト.t停止();
+					this.ct再生待ちウェイト.tStop();
 					if( !CDTXMania.stageSongSelection.bScrolling )
 					{
 						this.tプレビューサウンドの作成();

@@ -352,26 +352,26 @@ namespace DTXMania
                 this.txスキルパネル.tDraw2D(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
                 this.txネームプレート用文字.tDraw2D(CDTXMania.app.Device, this.n本体X[i], this.n本体Y);
 
-                this.t小文字表示(80 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Perfect));
-                this.t小文字表示(80 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Great));
-                this.t小文字表示(80 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Good));
-                this.t小文字表示(80 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Poor));
-                this.t小文字表示(80 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Miss));
-                this.t小文字表示(80 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.actCombo.n現在のコンボ数.最高値[i]));
+                this.t小文字表示(80 + this.n本体X[i], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Perfect));
+                this.t小文字表示(80 + this.n本体X[i], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Great));
+                this.t小文字表示(80 + this.n本体X[i], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Good));
+                this.t小文字表示(80 + this.n本体X[i], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Poor));
+                this.t小文字表示(80 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Miss));
+                this.t小文字表示(80 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[i]));
 
                 int n現在のノーツ数 =
-                    CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含む[i].Perfect +
-                    CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含む[i].Great +
-                    CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含む[i].Good +
-                    CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含む[i].Poor +
-                    CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含む[i].Miss;
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Perfect +
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Great +
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Good +
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Poor +
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Miss;
 
-                dbPERFECT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Perfect) / n現在のノーツ数);
-                dbGREAT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Great / n現在のノーツ数));
-                dbGOOD率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Good / n現在のノーツ数));
-                dbPOOR率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Poor / n現在のノーツ数));
-                dbMISS率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nヒット数_Auto含まない[i].Miss / n現在のノーツ数));
-                dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.actCombo.n現在のコンボ数.最高値[i] / n現在のノーツ数));
+                dbPERFECT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Perfect) / n現在のノーツ数);
+                dbGREAT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Great / n現在のノーツ数));
+                dbGOOD率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Good / n現在のノーツ数));
+                dbPOOR率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Poor / n現在のノーツ数));
+                dbMISS率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Miss / n現在のノーツ数));
+                dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[i] / n現在のノーツ数));
 
                 if (double.IsNaN(dbPERFECT率))
                     dbPERFECT率 = 0;
@@ -393,26 +393,26 @@ namespace DTXMania
                 this.t小文字表示(167 + this.n本体X[i], 192 + this.n本体Y, string.Format("{0,3:##0}%", dbMISS率));
                 this.t小文字表示(167 + this.n本体X[i], 222 + this.n本体Y, string.Format("{0,3:##0}%", dbMAXCOMBO率));
 
-                //this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanels.db現在の達成率.Drums ) );
+                //this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums ) );
                 //Conditional checks for MAX
-                if (this.txSkillMax != null && CDTXMania.stagePerfDrumsScreen.actStatusPanels.db現在の達成率.Drums >= 100.0)
+                if (this.txSkillMax != null && CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums >= 100.0)
                 {
                     this.txSkillMax.tDraw2D(CDTXMania.app.Device, 127 + this.n本体X[i], 277 + this.n本体Y);
                 }
                 else
                 {
-                    this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanels.db現在の達成率.Drums));
+                    this.t大文字表示(58 + this.n本体X[i], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums));
                     if (this.txPercent != null)
                         this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
                 }
 
                 if(bCLASSIC)
                 {
-                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanels.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] * 0.0033) ));
+                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] * 0.0033) ));
                 }
                 else
                 {
-                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stagePerfDrumsScreen.actStatusPanels.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
+                    this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", (CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2)));
                 }
 
                 if ( this.tx難易度パネル != null )

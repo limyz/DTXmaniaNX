@@ -142,7 +142,7 @@ namespace DTXMania
             {
                 return 0;
             }
-            this.ctNowEnumeratingSongs.t進行Loop();
+            this.ctNowEnumeratingSongs.tUpdateLoop();
             if (this.txNowEnumeratingSongs != null)
             {
                 this.txNowEnumeratingSongs.nTransparency = (int)(176.0 + 80.0 * Math.Sin((double)(2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0)));

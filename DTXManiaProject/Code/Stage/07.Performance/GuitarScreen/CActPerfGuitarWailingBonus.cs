@@ -40,7 +40,7 @@ namespace DTXMania
 						{
 							if( r歓声Chip != null )
 							{
-								CDTXMania.DTX.tチップの再生( r歓声Chip, CSoundManager.rc演奏用タイマ.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
+								CDTXMania.DTX.tチップの再生( r歓声Chip, CSoundManager.rc演奏用タイマ.nシステム時刻, (int) ELane.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
 							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == EInstrumentPart.GUITAR ) ? -50 : 50;
@@ -81,11 +81,11 @@ namespace DTXMania
 						{
 							if( this.ct進行用[ (int) e楽器パート, k ].bReachedEndValue )
 							{
-								this.ct進行用[ (int) e楽器パート, k ].t停止();
+								this.ct進行用[ (int) e楽器パート, k ].tStop();
 							}
 							else
 							{
-								this.ct進行用[ (int) e楽器パート, k ].t進行();
+								this.ct進行用[ (int) e楽器パート, k ].tUpdate();
 							}
 						}
 
@@ -93,11 +93,11 @@ namespace DTXMania
                         {
                             if( this.ctWailing炎[ (int) e楽器パート, k ].bReachedEndValue )
                             {
-                                this.ctWailing炎[ (int) e楽器パート, k ].t停止();
+                                this.ctWailing炎[ (int) e楽器パート, k ].tStop();
                             }
                             else
                             {
-                                this.ctWailing炎[ (int) e楽器パート, k ].t進行();
+                                this.ctWailing炎[ (int) e楽器パート, k ].tUpdate();
                             }
                         }
 

@@ -13,7 +13,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				if( !CDTXMania.ConfigIni.bGuitar有効 )
+				if( !CDTXMania.ConfigIni.bGuitarEnabled )
 				{
 					return 0;
 				}

@@ -62,7 +62,7 @@ namespace DTXMania
 					this.ctスクロール用 = new CCounter( 0, 6000, 1, CDTXMania.Timer );
 					base.bJustStartedUpdate = false;
 				}
-				this.ctスクロール用.t進行();
+				this.ctスクロール用.tUpdate();
 				if( this.ctスクロール用.bReachedEndValue )
 				{
 					this.n画像Index上 = this.n画像Index下;

@@ -22,7 +22,7 @@ namespace DTXMania
 		{
 			CActDFPFont font;
 			base.eステージID = CStage.EStage.Option;
-			base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			this.actFont = font = new CActDFPFont();
 			base.listChildActivities.Add( font );
 			base.listChildActivities.Add( this.actFIFO = new CActFIFOWhite() );
@@ -136,7 +136,7 @@ namespace DTXMania
 
 			if( base.bJustStartedUpdate )
 			{
-				base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
+				base.ePhaseID = CStage.EPhase.Common_FadeIn;
 				this.actFIFO.tフェードイン開始();
 				base.bJustStartedUpdate = false;
 			}
@@ -238,17 +238,17 @@ namespace DTXMania
 			#endregion
 			#region [ フェードイン_アウト ]
 			//---------------------
-			switch( base.eフェーズID )
+			switch( base.ePhaseID )
 			{
-				case CStage.Eフェーズ.共通_フェードイン:
+				case CStage.EPhase.Common_FadeIn:
 					if( this.actFIFO.OnUpdateAndDraw() != 0 )
 					{
 						CDTXMania.Skin.bgmコンフィグ画面.t再生する();
-						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+						base.ePhaseID = CStage.EPhase.Common_DefaultState;
 					}
 					break;
 
-				case CStage.Eフェーズ.共通_フェードアウト:
+				case CStage.EPhase.Common_FadeOut:
 					if( this.actFIFO.OnUpdateAndDraw() == 0 )
 					{
 						break;
@@ -260,7 +260,7 @@ namespace DTXMania
 
 			// キー入力
 
-			if( ( base.eフェーズID != CStage.Eフェーズ.共通_通常状態 )
+			if( ( base.ePhaseID != CStage.EPhase.Common_DefaultState )
 				|| this.actKeyAssign.bキー入力待ちの最中である
 				|| CDTXMania.act現在入力を占有中のプラグイン != null )
 				return 0;
@@ -285,7 +285,7 @@ namespace DTXMania
 				else
 				{
 					this.actFIFO.tフェードアウト開始();
-					base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+					base.ePhaseID = CStage.EPhase.Common_FadeOut;
 				}
 			}
 			else if( ( CDTXMania.Pad.b押されたDGB( EPad.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LC ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return) ) ) )
@@ -294,7 +294,7 @@ namespace DTXMania
 				{
 					CDTXMania.Skin.sound曲決定.t再生する();
 					this.actFIFO.tフェードアウト開始();
-					base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+					base.ePhaseID = CStage.EPhase.Common_FadeOut;
 				}
 				else if( this.bメニューにフォーカス中 )
 				{
@@ -325,15 +325,15 @@ namespace DTXMania
 					}
 				}
 			}
-			this.ctキー反復用.Up.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
-			this.ctキー反復用.R.tキー反復( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+			this.ctキー反復用.Up.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+			this.ctキー反復用.R.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 			//Change to HT
 			if( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.HT ) )
 			{
 				this.tカーソルを上へ移動する();
 			}
-			this.ctキー反復用.Down.tキー反復( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
-			this.ctキー反復用.B.tキー反復( CDTXMania.Pad.b押されているGB( EPad.BD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+			this.ctキー反復用.Down.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int) SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+			this.ctキー反復用.B.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.BD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 			//Change to LT
 			if( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LT ) )
 			{

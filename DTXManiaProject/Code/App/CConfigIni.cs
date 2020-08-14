@@ -478,7 +478,7 @@ namespace DTXMania
 		public bool bLog作成解放ログ出力;
 		public STDGBVALUE<bool> bReverse;
 		public bool bScoreIniを出力する;
-		public bool bSTAGEFAILED有効;
+		public bool bSTAGEFAILEDEnabled;
 		public STDGBVALUE<bool> bSudden;
 		public bool bTight;
 		public STDGBVALUE<bool> bGraph有効;     // #24074 2011.01.23 add ikanick
@@ -531,7 +531,7 @@ namespace DTXMania
         public STDGBVALUE<Eランダムモード> eRandom;
         public STDGBVALUE<Eランダムモード> eRandomPedal;
         public STDGBVALUE<bool> bAssignToLBD;
-		public EDamageLevel eダメージレベル;
+		public EDamageLevel eDamageLevel;
         public CKeyAssign KeyAssign;
 
         public STDGBVALUE<int> nLaneDisp;
@@ -542,7 +542,7 @@ namespace DTXMania
 
 		public int n非フォーカス時スリープms;       // #23568 2010.11.04 ikanick add
 		public int nフレーム毎スリープms;			// #xxxxx 2011.11.27 yyagi add
-		public int n演奏速度;
+		public int nPlaySpeed;
 		public int n曲が選択されてからプレビュー音が鳴るまでのウェイトms;
 		public int n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms;
 		public int n自動再生音量;
@@ -550,7 +550,7 @@ namespace DTXMania
 		public int n選曲リストフォントのサイズdot;
         public int[] nNameColor;
 		public STDGBVALUE<int> n表示可能な最小コンボ数;
-		public STDGBVALUE<int> n譜面スクロール速度;
+		public STDGBVALUE<int> nScrollSpeed;
 		public string strDTXManiaのバージョン;
 		public string str曲データ検索パス;
 		public string str選曲リストフォント;
@@ -626,7 +626,7 @@ namespace DTXMania
 				return ( !this.bConfigIniが存在している || !CDTXMania.VERSION.Equals( this.strDTXManiaのバージョン ) );
 			}
 		}
-		public bool bDrums有効
+		public bool bDrumsEnabled
 		{
 			get
 			{
@@ -661,7 +661,7 @@ namespace DTXMania
 				return true;
 			}
 		}
-		public bool bGuitar有効
+		public bool bGuitarEnabled
 		{
 			get
 			{
@@ -691,14 +691,14 @@ namespace DTXMania
 		{
 			get
 			{
-				return ( !this.bDrums有効 && this.bGuitar有効 );
+				return ( !this.bDrumsEnabled && this.bGuitarEnabled );
 			}
 		}
 		public bool bAllDrumsAreAutoPlay
 		{
 			get
 			{
-                for (int i = (int) Eレーン.LC; i < (int) Eレーン.LBD; i++)
+                for (int i = (int) ELane.LC; i < (int) ELane.LBD; i++)
 				{
 					if( !this.bAutoPlay[ i ] )
 					{
@@ -712,7 +712,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) Eレーン.GtR; i <= (int) Eレーン.GtW; i++ )
+				for ( int i = (int) ELane.GtR; i <= (int) ELane.GtW; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{
@@ -726,7 +726,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) Eレーン.BsR; i <= (int) Eレーン.BsW; i++ )
+				for ( int i = (int) ELane.BsR; i <= (int) ELane.BsW; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{
@@ -978,12 +978,12 @@ namespace DTXMania
             //CDTXMania.ConfigIni.bAutoPlay.Bass = CDTXMania.ConfigIni.bAutoPlay.Guitar;
             //CDTXMania.ConfigIni.bAutoPlay.Guitar = ts;
 
-            int looptime = (int)Eレーン.GtW - (int)Eレーン.GtR + 1;		// #29390 2013.1.25 yyagi ギターのAutoLane/AutoPick対応に伴い、FLIPもこれに対応
+            int looptime = (int)ELane.GtW - (int)ELane.GtR + 1;		// #29390 2013.1.25 yyagi ギターのAutoLane/AutoPick対応に伴い、FLIPもこれに対応
             for (int i = 0; i < looptime; i++)							// こんなに離れたところを独立して修正しなければならない設計ではいけませんね___
             {
-                bool b = CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.BsR];
-                CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.BsR] = CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.GtR];
-                CDTXMania.ConfigIni.bAutoPlay[i + (int)Eレーン.GtR] = b;
+                bool b = CDTXMania.ConfigIni.bAutoPlay[i + (int)ELane.BsR];
+                CDTXMania.ConfigIni.bAutoPlay[i + (int)ELane.BsR] = CDTXMania.ConfigIni.bAutoPlay[i + (int)ELane.GtR];
+                CDTXMania.ConfigIni.bAutoPlay[i + (int)ELane.GtR] = b;
             }
 
             CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped = !CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped;
@@ -1034,8 +1034,8 @@ namespace DTXMania
 			this._bGuitar有効 = false;
 			this._bDrums有効 = true;
 			this.nBGAlpha = 100;
-			this.eダメージレベル = EDamageLevel.Normal;
-			this.bSTAGEFAILED有効 = true;
+			this.eDamageLevel = EDamageLevel.Normal;
+			this.bSTAGEFAILEDEnabled = true;
 			this.bAVI有効 = true;
 			this.bBGA有効 = true;
 			this.bフィルイン有効 = true;
@@ -1134,7 +1134,7 @@ namespace DTXMania
 			this.bLight = new STDGBVALUE<bool>();
 			this.bLeft = new STDGBVALUE<bool>();
             this.判定文字表示位置 = new STDGBVALUE<EType>();
-			this.n譜面スクロール速度 = new STDGBVALUE<int>();
+			this.nScrollSpeed = new STDGBVALUE<int>();
 			this.nInputAdjustTimeMs = new STDGBVALUE<int>();	// #23580 2011.1.3 yyagi
             this.nCommonBGMAdjustMs = 0; // #36372 2016.06.19 kairera0467
             this.nJudgeLinePosOffset = new STDGBVALUE<int>(); // #31602 2013.6.23 yyagi
@@ -1148,11 +1148,11 @@ namespace DTXMania
 				this.bLight[ i ] = false;
 				this.bLeft[ i ] = false;
 				this.判定文字表示位置[ i ] = EType.A;
-				this.n譜面スクロール速度[ i ] = 1;
+				this.nScrollSpeed[ i ] = 1;
 				this.nInputAdjustTimeMs[ i ] = 0;
                 this.nJudgeLinePosOffset[i] = 0;
 			}
-			this.n演奏速度 = 20;
+			this.nPlaySpeed = 20;
             this.ドラムコンボ文字の表示位置 = Eドラムコンボ文字の表示位置.RIGHT;
             this.bドラムコンボ文字の表示 = true;
             this.bCLASSIC譜面判別を有効にする = false;
@@ -1458,11 +1458,11 @@ namespace DTXMania
             #region [ ギター/ベース/ドラム 有効/無効 ]
 			sw.WriteLine( "; ギター/ベース有効(0:OFF,1:ON)" );
 			sw.WriteLine( "; Enable Guitar/Bass or not.(0:OFF,1:ON)" );
-			sw.WriteLine( "Guitar={0}", this.bGuitar有効 ? 1 : 0 );
+			sw.WriteLine( "Guitar={0}", this.bGuitarEnabled ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; ドラム有効(0:OFF,1:ON)" );
 			sw.WriteLine( "; Enable Drums or not.(0:OFF,1:ON)" );
-			sw.WriteLine( "Drums={0}", this.bDrums有効 ? 1 : 0 );
+			sw.WriteLine( "Drums={0}", this.bDrumsEnabled ? 1 : 0 );
 			sw.WriteLine();
             #endregion
             sw.WriteLine( "; DirectShowでのワイドクリップ再生 (0:OFF, 1:ON)");
@@ -1473,10 +1473,10 @@ namespace DTXMania
 			sw.WriteLine( "BGAlpha={0}", this.nBGAlpha );
 			sw.WriteLine();
 			sw.WriteLine( "; Missヒット時のゲージ減少割合(0:少, 1:Normal, 2:大)" );
-			sw.WriteLine( "DamageLevel={0}", (int) this.eダメージレベル );
+			sw.WriteLine( "DamageLevel={0}", (int) this.eDamageLevel );
 			sw.WriteLine();
             sw.WriteLine("; ゲージゼロでSTAGE FAILED (0:OFF, 1:ON)");
-            sw.WriteLine("StageFailed={0}", this.bSTAGEFAILED有効 ? 1 : 0);
+            sw.WriteLine("StageFailed={0}", this.bSTAGEFAILEDEnabled ? 1 : 0);
             sw.WriteLine();
             #region [ 打ち分け関連 ]
             sw.WriteLine("; LC/HHC/HHO 打ち分けモード (0:LC|HHC|HHO, 1:LC&(HHC|HHO), 2:LC|(HHC&HHO), 3:LC&HHC&HHO)");
@@ -1765,12 +1765,12 @@ namespace DTXMania
 			sw.WriteLine( "BassPosition={0}", (int) this.判定文字表示位置.Bass );
 			sw.WriteLine();
 			sw.WriteLine( "; 譜面スクロール速度(0:x0.5, 1:x1.0, 2:x1.5,…,1999:x1000.0)" );
-			sw.WriteLine( "DrumsScrollSpeed={0}", this.n譜面スクロール速度.Drums );
-			sw.WriteLine( "GuitarScrollSpeed={0}", this.n譜面スクロール速度.Guitar );
-			sw.WriteLine( "BassScrollSpeed={0}", this.n譜面スクロール速度.Bass );
+			sw.WriteLine( "DrumsScrollSpeed={0}", this.nScrollSpeed.Drums );
+			sw.WriteLine( "GuitarScrollSpeed={0}", this.nScrollSpeed.Guitar );
+			sw.WriteLine( "BassScrollSpeed={0}", this.nScrollSpeed.Bass );
 			sw.WriteLine();
 			sw.WriteLine( "; 演奏速度(5～40)(→x5/20～x40/20)" );
-			sw.WriteLine( "PlaySpeed={0}", this.n演奏速度 );
+			sw.WriteLine( "PlaySpeed={0}", this.nPlaySpeed );
 			sw.WriteLine();
 
             // #24074 2011.01.23 add ikanick
@@ -2338,27 +2338,27 @@ namespace DTXMania
                                             }
                                             else if( str3.Equals( "NameColorDrums" ) )
                                             {
-                                                this.nNameColor[ 0 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                                this.nNameColor[ 0 ] = CConversion.nGetNumberIfInRange(str4, 0, 19, 0);
                                             }
                                             else if( str3.Equals( "NameColorGuitar" ) )
                                             {
-                                                this.nNameColor[ 1 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                                this.nNameColor[ 1 ] = CConversion.nGetNumberIfInRange(str4, 0, 19, 0);
                                             }
                                             else if( str3.Equals( "NameColorBass" ) )
                                             {
-                                                this.nNameColor[ 2 ] = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 19, 0);
+                                                this.nNameColor[ 2 ] = CConversion.nGetNumberIfInRange(str4, 0, 19, 0);
                                             }
                                             else if (str3.Equals("SkinChangeByBoxDef"))
                                             {
-                                                this.bUseBoxDefSkin = C変換.bONorOFF(str4[0]);
+                                                this.bUseBoxDefSkin = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("FullScreen"))
                                             {
-                                                this.b全画面モード = C変換.bONorOFF(str4[0]);
+                                                this.b全画面モード = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("WindowWidth"))		// #23510 2010.10.31 yyagi add
                                             {
-                                                this.nウインドウwidth = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 65535, this.nウインドウwidth);
+                                                this.nウインドウwidth = CConversion.nGetNumberIfInRange(str4, 1, 65535, this.nウインドウwidth);
                                                 if (this.nウインドウwidth <= 0)
                                                 {
                                                     this.nウインドウwidth = SampleFramework.GameWindowSize.Width;
@@ -2366,7 +2366,7 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("WindowHeight"))		// #23510 2010.10.31 yyagi add
                                             {
-                                                this.nウインドウheight = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 65535, this.nウインドウheight);
+                                                this.nウインドウheight = CConversion.nGetNumberIfInRange(str4, 1, 65535, this.nウインドウheight);
                                                 if (this.nウインドウheight <= 0)
                                                 {
                                                     this.nウインドウheight = SampleFramework.GameWindowSize.Height;
@@ -2374,17 +2374,17 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("WindowX"))		// #30675 2013.02.04 ikanick add
                                             {
-                                                this.n初期ウィンドウ開始位置X = C変換.n値を文字列から取得して範囲内に丸めて返す(
+                                                this.n初期ウィンドウ開始位置X = CConversion.nGetNumberIfInRange(
                                                     str4, 0, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width - 1, this.n初期ウィンドウ開始位置X);
                                             }
                                             else if (str3.Equals("WindowY"))		// #30675 2013.02.04 ikanick add
                                             {
-                                                this.n初期ウィンドウ開始位置Y = C変換.n値を文字列から取得して範囲内に丸めて返す(
+                                                this.n初期ウィンドウ開始位置Y = CConversion.nGetNumberIfInRange(
                                                     str4, 0, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height - 1, this.n初期ウィンドウ開始位置Y);
                                             }
                                             else if (str3.Equals("MovieMode"))
                                             {
-                                                this.nMovieMode = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0xffff, this.nMovieMode);
+                                                this.nMovieMode = CConversion.nGetNumberIfInRange(str4, 0, 0xffff, this.nMovieMode);
                                                 if (this.nMovieMode > 3)
                                                 {
                                                     this.nMovieMode = 0;
@@ -2392,7 +2392,7 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("MovieAlpha"))
                                             {
-                                                this.nMovieAlpha = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 10, this.nMovieAlpha);
+                                                this.nMovieAlpha = CConversion.nGetNumberIfInRange(str4, 0, 10, this.nMovieAlpha);
                                                 if (this.nMovieAlpha > 10)
                                                 {
                                                     this.nMovieAlpha = 10;
@@ -2400,193 +2400,193 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("InfoType"))
                                             {
-                                                this.nInfoType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.nInfoType);
+                                                this.nInfoType = CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.nInfoType);
                                             }
                                             else if (str3.Equals("DoubleClickFullScreen"))	// #26752 2011.11.27 yyagi
                                             {
-                                                this.bIsAllowedDoubleClickFullscreen = C変換.bONorOFF(str4[0]);
+                                                this.bIsAllowedDoubleClickFullscreen = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("EnableSystemMenu"))		// #28200 2012.5.1 yyagi
                                             {
-                                                this.bIsEnabledSystemMenu = C変換.bONorOFF(str4[0]);
+                                                this.bIsEnabledSystemMenu = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SoundDeviceType"))
                                             {
-                                                this.nSoundDeviceType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, this.nSoundDeviceType);
+                                                this.nSoundDeviceType = CConversion.nGetNumberIfInRange(str4, 0, 2, this.nSoundDeviceType);
                                             }
                                             else if (str3.Equals("WASAPIBufferSizeMs"))
                                             {
-                                                this.nWASAPIBufferSizeMs = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 9999, this.nWASAPIBufferSizeMs);
+                                                this.nWASAPIBufferSizeMs = CConversion.nGetNumberIfInRange(str4, 0, 9999, this.nWASAPIBufferSizeMs);
                                             }
                                             else if (str3.Equals("ASIODevice"))
                                             {
                                                 string[] asiodev = CEnumerateAllAsioDevices.GetAllASIODevices();
-                                                this.nASIODevice = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, asiodev.Length - 1, this.nASIODevice);
+                                                this.nASIODevice = CConversion.nGetNumberIfInRange(str4, 0, asiodev.Length - 1, this.nASIODevice);
                                             }
                                             //else if (str3.Equals("ASIOBufferSizeMs"))
                                             //{
-                                            //    this.nASIOBufferSizeMs = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 9999, this.nASIOBufferSizeMs);
+                                            //    this.nASIOBufferSizeMs = CConversion.nGetNumberIfInRange(str4, 0, 9999, this.nASIOBufferSizeMs);
                                             //}
                                             //else if (str3.Equals("DynamicBassMixerManagement"))
                                             //{
-                                            //    this.bDynamicBassMixerManagement = C変換.bONorOFF(str4[0]);
+                                            //    this.bDynamicBassMixerManagement = CConversion.bONorOFF(str4[0]);
                                             //}
                                             else if (str3.Equals("VSyncWait"))
                                             {
-                                                this.b垂直帰線待ちを行う = C変換.bONorOFF(str4[0]);
+                                                this.b垂直帰線待ちを行う = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BackSleep"))				// #23568 2010.11.04 ikanick add
                                             {
-                                                this.n非フォーカス時スリープms = C変換.n値を文字列から取得して範囲内にちゃんと丸めて返す(str4, 0, 50, this.n非フォーカス時スリープms);
+                                                this.n非フォーカス時スリープms = CConversion.nRoundToRange(str4, 0, 50, this.n非フォーカス時スリープms);
                                             }
                                             else if (str3.Equals("SleepTimePerFrame"))		// #23568 2011.11.27 yyagi
                                             {
-                                                this.nフレーム毎スリープms = C変換.n値を文字列から取得して範囲内にちゃんと丸めて返す(str4, -1, 50, this.nフレーム毎スリープms);
+                                                this.nフレーム毎スリープms = CConversion.nRoundToRange(str4, -1, 50, this.nフレーム毎スリープms);
                                             }
                                             else if (str3.Equals("Guitar"))
                                             {
-                                                this.bGuitar有効 = C変換.bONorOFF(str4[0]);
+                                                this.bGuitarEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("Drums"))
                                             {
-                                                this.bDrums有効 = C変換.bONorOFF(str4[0]);
+                                                this.bDrumsEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("DirectShowMode"))
                                             {
-                                                this.bDirectShowMode = C変換.bONorOFF(str4[0]);
+                                                this.bDirectShowMode = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BGAlpha"))
                                             {
-                                                this.n背景の透過度 = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0xff, this.n背景の透過度);
+                                                this.n背景の透過度 = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.n背景の透過度);
                                             }
                                             else if (str3.Equals("DamageLevel"))
                                             {
-                                                this.eダメージレベル = (EDamageLevel)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eダメージレベル);
+                                                this.eDamageLevel = (EDamageLevel)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eDamageLevel);
                                             }
                                             else if (str3.Equals("HHGroup"))
                                             {
-                                                this.eHHGroup = (EHHGroup)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.eHHGroup);
+                                                this.eHHGroup = (EHHGroup)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.eHHGroup);
                                             }
                                             else if (str3.Equals("FTGroup"))
                                             {
-                                                this.eFTGroup = (EFTGroup)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eFTGroup);
+                                                this.eFTGroup = (EFTGroup)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eFTGroup);
                                             }
                                             else if (str3.Equals("CYGroup"))
                                             {
-                                                this.eCYGroup = (ECYGroup)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eCYGroup);
+                                                this.eCYGroup = (ECYGroup)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eCYGroup);
                                             }
                                             else if (str3.Equals("BDGroup"))		// #27029 2012.1.4 from
                                             {
-                                                this.eBDGroup = (EBDGroup)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.eBDGroup);
+                                                this.eBDGroup = (EBDGroup)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.eBDGroup);
                                             }
                                             else if (str3.Equals("HitSoundPriorityHH"))
                                             {
-                                                this.eHitSoundPriorityHH = (E打ち分け時の再生の優先順位)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eHitSoundPriorityHH);
+                                                this.eHitSoundPriorityHH = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityHH);
                                             }
                                             else if (str3.Equals("HitSoundPriorityFT"))
                                             {
-                                                this.eHitSoundPriorityFT = (E打ち分け時の再生の優先順位)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eHitSoundPriorityFT);
+                                                this.eHitSoundPriorityFT = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityFT);
                                             }
                                             else if (str3.Equals("HitSoundPriorityCY"))
                                             {
-                                                this.eHitSoundPriorityCY = (E打ち分け時の再生の優先順位)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eHitSoundPriorityCY);
+                                                this.eHitSoundPriorityCY = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityCY);
                                             }
                                             else if (str3.Equals("HitSoundPriorityLP"))
                                             {
-                                                this.eHitSoundPriorityLP = (E打ち分け時の再生の優先順位)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eHitSoundPriorityLP);
+                                                this.eHitSoundPriorityLP = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityLP);
                                             }
                                             else if (str3.Equals("StageFailed"))
                                             {
-                                                this.bSTAGEFAILED有効 = C変換.bONorOFF(str4[0]);
+                                                this.bSTAGEFAILEDEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("AVI"))
                                             {
-                                                this.bAVI有効 = C変換.bONorOFF(str4[0]);
+                                                this.bAVI有効 = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BGA"))
                                             {
-                                                this.bBGA有効 = C変換.bONorOFF(str4[0]);
+                                                this.bBGA有効 = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("FillInEffect"))
                                             {
-                                                this.bフィルイン有効 = C変換.bONorOFF(str4[0]);
+                                                this.bフィルイン有効 = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("PreviewSoundWait"))
                                             {
-                                                this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0x5f5e0ff, this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms);
+                                                this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = CConversion.nGetNumberIfInRange(str4, 0, 0x5f5e0ff, this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms);
                                             }
                                             else if (str3.Equals("PreviewImageWait"))
                                             {
-                                                this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0x5f5e0ff, this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms);
+                                                this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = CConversion.nGetNumberIfInRange(str4, 0, 0x5f5e0ff, this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms);
                                             }
                                             else if (str3.Equals("AdjustWaves"))
                                             {
-                                                this.bWave再生位置自動調整機能有効 = C変換.bONorOFF(str4[0]);
+                                                this.bWave再生位置自動調整機能有効 = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BGMSound"))
                                             {
-                                                this.bBGM音を発声する = C変換.bONorOFF(str4[0]);
+                                                this.bBGM音を発声する = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("HitSound"))
                                             {
-                                                this.bドラム打音を発声する = C変換.bONorOFF(str4[0]);
+                                                this.bドラム打音を発声する = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("AudienceSound"))
                                             {
-                                                this.b歓声を発声する = C変換.bONorOFF(str4[0]);
+                                                this.b歓声を発声する = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SaveScoreIni"))
                                             {
-                                                this.bScoreIniを出力する = C変換.bONorOFF(str4[0]);
+                                                this.bScoreIniを出力する = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("RandomFromSubBox"))
                                             {
-                                                this.bランダムセレクトで子BOXを検索対象とする = C変換.bONorOFF(str4[0]);
+                                                this.bランダムセレクトで子BOXを検索対象とする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SoundMonitorDrums"))
                                             {
-                                                this.b演奏音を強調する.Drums = C変換.bONorOFF(str4[0]);
+                                                this.b演奏音を強調する.Drums = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SoundMonitorGuitar"))
                                             {
-                                                this.b演奏音を強調する.Guitar = C変換.bONorOFF(str4[0]);
+                                                this.b演奏音を強調する.Guitar = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SoundMonitorBass"))
                                             {
-                                                this.b演奏音を強調する.Bass = C変換.bONorOFF(str4[0]);
+                                                this.b演奏音を強調する.Bass = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("MinComboDrums"))
                                             {
-                                                this.n表示可能な最小コンボ数.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 0x1869f, this.n表示可能な最小コンボ数.Drums);
+                                                this.n表示可能な最小コンボ数.Drums = CConversion.nGetNumberIfInRange(str4, 1, 0x1869f, this.n表示可能な最小コンボ数.Drums);
                                             }
                                             else if (str3.Equals("MinComboGuitar"))
                                             {
-                                                this.n表示可能な最小コンボ数.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0x1869f, this.n表示可能な最小コンボ数.Guitar);
+                                                this.n表示可能な最小コンボ数.Guitar = CConversion.nGetNumberIfInRange(str4, 0, 0x1869f, this.n表示可能な最小コンボ数.Guitar);
                                             }
                                             else if (str3.Equals("MinComboBass"))
                                             {
-                                                this.n表示可能な最小コンボ数.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 0x1869f, this.n表示可能な最小コンボ数.Bass);
+                                                this.n表示可能な最小コンボ数.Bass = CConversion.nGetNumberIfInRange(str4, 0, 0x1869f, this.n表示可能な最小コンボ数.Bass);
                                             }
                                             else if( str3.Equals( "MusicNameDispDef" ) )
                                             {
-                                                this.b曲名表示をdefのものにする = C変換.bONorOFF(str4[0]);
+                                                this.b曲名表示をdefのものにする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("ShowDebugStatus"))
                                             {
-                                                this.b演奏情報を表示する = C変換.bONorOFF(str4[0]);
+                                                this.b演奏情報を表示する = CConversion.bONorOFF(str4[0]);
                                             }
                                             #region [ GDオプション ]
                                             else if (str3.Equals("Difficlty"))
                                             {
-                                                this.b難易度表示をXG表示にする = C変換.bONorOFF(str4[0]);
+                                                this.b難易度表示をXG表示にする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("ShowScore"))
                                             {
-                                                this.bShowScore = C変換.bONorOFF(str4[0]);
+                                                this.bShowScore = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("ShowMusicInfo"))
                                             {
-                                                this.bShowMusicInfo = C変換.bONorOFF(str4[0]);
+                                                this.bShowMusicInfo = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("DisplayFontName"))
                                             {
@@ -2599,145 +2599,145 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("SelectListFontSize"))
                                             {
-                                                this.n選曲リストフォントのサイズdot = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 0x3e7, this.n選曲リストフォントのサイズdot);
+                                                this.n選曲リストフォントのサイズdot = CConversion.nGetNumberIfInRange(str4, 1, 0x3e7, this.n選曲リストフォントのサイズdot);
                                             }
                                             else if (str3.Equals("SelectListFontItalic"))
                                             {
-                                                this.b選曲リストフォントを斜体にする = C変換.bONorOFF(str4[0]);
+                                                this.b選曲リストフォントを斜体にする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SelectListFontBold"))
                                             {
-                                                this.b選曲リストフォントを太字にする = C変換.bONorOFF(str4[0]);
+                                                this.b選曲リストフォントを太字にする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("ChipVolume"))
                                             {
-                                                this.n手動再生音量 = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 100, this.n手動再生音量);
+                                                this.n手動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 100, this.n手動再生音量);
                                             }
                                             else if (str3.Equals("AutoChipVolume"))
                                             {
-                                                this.n自動再生音量 = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 100, this.n自動再生音量);
+                                                this.n自動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 100, this.n自動再生音量);
                                             }
                                             else if (str3.Equals("StoicMode"))
                                             {
-                                                this.bストイックモード = C変換.bONorOFF(str4[0]);
+                                                this.bストイックモード = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("CymbalFree"))
                                             {
-                                                this.bシンバルフリー = C変換.bONorOFF(str4[0]);
+                                                this.bシンバルフリー = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("HHOGraphics"))
                                             {
-                                                this.eHHOGraphics.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eHHOGraphics.Drums);
+                                                this.eHHOGraphics.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eHHOGraphics.Drums);
                                             }
                                             else if (str3.Equals("LBDGraphics"))
                                             {
-                                                this.eLBDGraphics.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eLBDGraphics.Drums);
+                                                this.eLBDGraphics.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eLBDGraphics.Drums);
                                             }
                                             else if (str3.Equals("RDPosition"))
                                             {
-                                                this.eRDPosition = (ERDPosition)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eRDPosition);
+                                                this.eRDPosition = (ERDPosition)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eRDPosition);
                                             }
                                             else if (str3.Equals("ShowLagTime"))				// #25370 2011.6.3 yyagi
                                             {
-                                                this.nShowLagType = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, this.nShowLagType);
+                                                this.nShowLagType = CConversion.nGetNumberIfInRange(str4, 0, 2, this.nShowLagType);
                                             }
                                             else if (str3.Equals("ShowLagTimeColor"))				// #25370 2011.6.3 yyagi
                                             {
-                                                this.nShowLagTypeColor = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 1, this.nShowLagTypeColor );
+                                                this.nShowLagTypeColor = CConversion.nGetNumberIfInRange( str4, 0, 1, this.nShowLagTypeColor );
                                             }
                                             else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
                                             {
-                                                this.bTimeStretch = C変換.bONorOFF(str4[0]);
+                                                this.bTimeStretch = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("AutoResultCapture"))			// #25399 2011.6.9 yyagi
                                             {
-                                                this.bIsAutoResultCapture = C変換.bONorOFF(str4[0]);
+                                                this.bIsAutoResultCapture = CConversion.bONorOFF(str4[0]);
                                             }
                                             #region [ AdjustTime ]
                                             else if ( str3.Equals( "InputAdjustTimeDrums" ) )		// #23580 2011.1.3 yyagi
                                             {
-                                                this.nInputAdjustTimeMs.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, -99, 99, this.nInputAdjustTimeMs.Drums);
+                                                this.nInputAdjustTimeMs.Drums = CConversion.nGetNumberIfInRange(str4, -99, 99, this.nInputAdjustTimeMs.Drums);
                                             }
                                             else if ( str3.Equals( "InputAdjustTimeGuitar" ) )	// #23580 2011.1.3 yyagi
                                             {
-                                                this.nInputAdjustTimeMs.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, -99, 99, this.nInputAdjustTimeMs.Guitar);
+                                                this.nInputAdjustTimeMs.Guitar = CConversion.nGetNumberIfInRange(str4, -99, 99, this.nInputAdjustTimeMs.Guitar);
                                             }
                                             else if ( str3.Equals( "InputAdjustTimeBass" ) )		// #23580 2011.1.3 yyagi
                                             {
-                                                this.nInputAdjustTimeMs.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, -99, 99, this.nInputAdjustTimeMs.Bass);
+                                                this.nInputAdjustTimeMs.Bass = CConversion.nGetNumberIfInRange(str4, -99, 99, this.nInputAdjustTimeMs.Bass);
                                             }
                                             else if ( str3.Equals( "BGMAdjustTime" ) )              // #36372 2016.06.19 kairera0467
                                             {
-                                                this.nCommonBGMAdjustMs = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nCommonBGMAdjustMs );
+                                                this.nCommonBGMAdjustMs = CConversion.nGetNumberIfInRange( str4, -99, 99, this.nCommonBGMAdjustMs );
                                             }
                                             else if ( str3.Equals( "JudgeLinePosOffsetDrums" ) ) // #31602 2013.6.23 yyagi
                                             {
-                                                this.nJudgeLinePosOffset.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nJudgeLinePosOffset.Drums );
+                                                this.nJudgeLinePosOffset.Drums = CConversion.nGetNumberIfInRange( str4, -99, 99, this.nJudgeLinePosOffset.Drums );
                                             }
                                             else if ( str3.Equals( "JudgeLinePosOffsetGuitar" ) ) // #31602 2013.6.23 yyagi
                                             {
-                                                this.nJudgeLinePosOffset.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nJudgeLinePosOffset.Guitar );
+                                                this.nJudgeLinePosOffset.Guitar = CConversion.nGetNumberIfInRange( str4, -99, 99, this.nJudgeLinePosOffset.Guitar );
                                             }
                                             else if ( str3.Equals( "JudgeLinePosOffsetBass" ) ) // #31602 2013.6.23 yyagi
                                             {
-                                                this.nJudgeLinePosOffset.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -99, 99, this.nJudgeLinePosOffset.Bass );
+                                                this.nJudgeLinePosOffset.Bass = CConversion.nGetNumberIfInRange( str4, -99, 99, this.nJudgeLinePosOffset.Bass );
                                             }
                                             #endregion
                                             else if (str3.Equals("BufferedInput"))
                                             {
-                                                this.bバッファ入力を行う = C変換.bONorOFF(str4[0]);
+                                                this.bバッファ入力を行う = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("PolyphonicSounds"))		// #28228 2012.5.1 yyagi
                                             {
-                                                this.nPoliphonicSounds = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 1, 8, this.nPoliphonicSounds);
+                                                this.nPoliphonicSounds = CConversion.nGetNumberIfInRange(str4, 1, 8, this.nPoliphonicSounds);
                                             }
                                             else if (str3.Equals("LCVelocityMin"))			// #23857 2010.12.12 yyagi
                                             {
-                                                this.nVelocityMin.LC = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LC);
+                                                this.nVelocityMin.LC = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.LC);
                                             }
                                             else if (str3.Equals("HHVelocityMin"))
                                             {
-                                                this.nVelocityMin.HH = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.HH);
+                                                this.nVelocityMin.HH = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.HH);
                                             }
                                             else if (str3.Equals("SDVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.SD = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.SD);
+                                                this.nVelocityMin.SD = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.SD);
                                             }
                                             else if (str3.Equals("BDVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.BD = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.BD);
+                                                this.nVelocityMin.BD = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.BD);
                                             }
                                             else if (str3.Equals("HTVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.HT = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.HT);
+                                                this.nVelocityMin.HT = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.HT);
                                             }
                                             else if (str3.Equals("LTVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.LT = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LT);
+                                                this.nVelocityMin.LT = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.LT);
                                             }
                                             else if (str3.Equals("FTVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.FT = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.FT);
+                                                this.nVelocityMin.FT = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.FT);
                                             }
                                             else if (str3.Equals("CYVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.CY = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.CY);
+                                                this.nVelocityMin.CY = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.CY);
                                             }
                                             else if (str3.Equals("RDVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.RD = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.RD);
+                                                this.nVelocityMin.RD = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.RD);
                                             }
                                             else if (str3.Equals("LPVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.LP = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LP);
+                                                this.nVelocityMin.LP = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.LP);
                                             }
                                             else if (str3.Equals("LBDVelocityMin"))			// #23857 2011.1.31 yyagi
                                             {
-                                                this.nVelocityMin.LBD = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 127, this.nVelocityMin.LBD);
+                                                this.nVelocityMin.LBD = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nVelocityMin.LBD);
                                             }
                                             else if (str3.Equals("AutoAddGage"))
                                             {
-                                                this.bAutoAddGage = C変換.bONorOFF(str4[0]);
+                                                this.bAutoAddGage = CConversion.bONorOFF(str4[0]);
                                             }
 											continue;
 										}
@@ -2750,19 +2750,19 @@ namespace DTXMania
 										{
 											if( str3.Equals( "OutputLog" ) )
 											{
-												this.bログ出力 = C変換.bONorOFF( str4[ 0 ] );
+												this.bログ出力 = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "TraceCreatedDisposed" ) )
 											{
-												this.bLog作成解放ログ出力 = C変換.bONorOFF( str4[ 0 ] );
+												this.bLog作成解放ログ出力 = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "TraceDTXDetails" ) )
 											{
-												this.bLogDTX詳細ログ出力 = C変換.bONorOFF( str4[ 0 ] );
+												this.bLogDTX詳細ログ出力 = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "TraceSongSearch" ) )
 											{
-												this.bLogSongSearch = C変換.bONorOFF( str4[ 0 ] );
+												this.bLogSongSearch = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											continue;
 										}
@@ -2775,363 +2775,363 @@ namespace DTXMania
 										{
                                             if( str3.Equals( "DrumGraph" ) )  // #24074 2011.01.23 addikanick
 											{
-												this.bGraph有効.Drums = C変換.bONorOFF( str4[ 0 ] );
+												this.bGraph有効.Drums = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "GuitarGraph" ) )  // #24074 2011.01.23 addikanick
 											{
-												this.bGraph有効.Guitar = C変換.bONorOFF( str4[ 0 ] );
+												this.bGraph有効.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "BassGraph" ) )  // #24074 2011.01.23 addikanick
 											{
-												this.bGraph有効.Bass = C変換.bONorOFF( str4[ 0 ] );
+												this.bGraph有効.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "DrumsReverse" ) )
 											{
-												this.bReverse.Drums = C変換.bONorOFF( str4[ 0 ] );
+												this.bReverse.Drums = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "GuitarReverse" ) )
 											{
-												this.bReverse.Guitar = C変換.bONorOFF( str4[ 0 ] );
+												this.bReverse.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "BassReverse" ) )
 											{
-												this.bReverse.Bass = C変換.bONorOFF( str4[ 0 ] );
+												this.bReverse.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "GuitarRandom" ) )
 											{
-												this.eRandom.Guitar = (Eランダムモード) C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 4, (int) this.eRandom.Guitar );
+												this.eRandom.Guitar = (Eランダムモード) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Guitar );
 											}
 											else if( str3.Equals( "BassRandom" ) )
 											{
-												this.eRandom.Bass = (Eランダムモード) C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 4, (int) this.eRandom.Bass );
+												this.eRandom.Bass = (Eランダムモード) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Bass );
 											}
 											else if( str3.Equals( "DrumsTight" ) )
 											{
-												this.bTight = C変換.bONorOFF( str4[ 0 ] );
+												this.bTight = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "GuitarLight" ) )
 											{
-												this.bLight.Guitar = C変換.bONorOFF( str4[ 0 ] );
+												this.bLight.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "BassLight" ) )
 											{
-												this.bLight.Bass = C変換.bONorOFF( str4[ 0 ] );
+												this.bLight.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "GuitarLeft" ) )
 											{
-												this.bLeft.Guitar = C変換.bONorOFF( str4[ 0 ] );
+												this.bLeft.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "BassLeft" ) )
 											{
-												this.bLeft.Bass = C変換.bONorOFF( str4[ 0 ] );
+												this.bLeft.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
                                             else if (str3.Equals( "DrumsHiddenSudden") )
                                             {
-                                                this.nHidSud.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 5, this.nHidSud.Drums);
+                                                this.nHidSud.Drums = CConversion.nGetNumberIfInRange(str4, 0, 5, this.nHidSud.Drums);
                                             }
                                             else if (str3.Equals( "GuitarHiddenSudden") )
                                             {
-                                                this.nHidSud.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 5, this.nHidSud.Guitar);
+                                                this.nHidSud.Guitar = CConversion.nGetNumberIfInRange(str4, 0, 5, this.nHidSud.Guitar);
                                             }
                                             else if (str3.Equals( "BassHiddenSudden") )
                                             {
-                                                this.nHidSud.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 5, this.nHidSud.Bass);
+                                                this.nHidSud.Bass = CConversion.nGetNumberIfInRange(str4, 0, 5, this.nHidSud.Bass);
                                             }
 											else if( str3.Equals( "DrumsPosition" ) )
 											{
-                                                this.判定文字表示位置.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.判定文字表示位置.Drums);
+                                                this.判定文字表示位置.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.判定文字表示位置.Drums);
 											}
 											else if( str3.Equals( "GuitarPosition" ) )
 											{
-                                                this.判定文字表示位置.Guitar = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.判定文字表示位置.Guitar);
+                                                this.判定文字表示位置.Guitar = (EType)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.判定文字表示位置.Guitar);
 											}
 											else if( str3.Equals( "BassPosition" ) )
 											{
-                                                this.判定文字表示位置.Bass = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.判定文字表示位置.Bass);
+                                                this.判定文字表示位置.Bass = (EType)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.判定文字表示位置.Bass);
 											}
 											else if( str3.Equals( "DrumsScrollSpeed" ) )
 											{
-												this.n譜面スクロール速度.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x7cf, this.n譜面スクロール速度.Drums );
+												this.nScrollSpeed.Drums = CConversion.nGetNumberIfInRange( str4, 0, 0x7cf, this.nScrollSpeed.Drums );
 											}
 											else if( str3.Equals( "GuitarScrollSpeed" ) )
 											{
-												this.n譜面スクロール速度.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x7cf, this.n譜面スクロール速度.Guitar );
+												this.nScrollSpeed.Guitar = CConversion.nGetNumberIfInRange( str4, 0, 0x7cf, this.nScrollSpeed.Guitar );
 											}
 											else if( str3.Equals( "BassScrollSpeed" ) )
 											{
-												this.n譜面スクロール速度.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x7cf, this.n譜面スクロール速度.Bass );
+												this.nScrollSpeed.Bass = CConversion.nGetNumberIfInRange( str4, 0, 0x7cf, this.nScrollSpeed.Bass );
 											}
 											else if( str3.Equals( "PlaySpeed" ) )
 											{
-												this.n演奏速度 = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 5, 40, this.n演奏速度 );
+												this.nPlaySpeed = CConversion.nGetNumberIfInRange( str4, 5, 40, this.nPlaySpeed );
 											}
 											else if( str3.Equals( "ComboPosition" ) )
 											{
-												this.ドラムコンボ文字の表示位置 = (Eドラムコンボ文字の表示位置) C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 3, (int) this.ドラムコンボ文字の表示位置 );
+												this.ドラムコンボ文字の表示位置 = (Eドラムコンボ文字の表示位置) CConversion.nGetNumberIfInRange( str4, 0, 3, (int) this.ドラムコンボ文字の表示位置 );
 											}
 											else if( str3.Equals( "Risky" ) )					// #2359 2011.6.23  yyagi
 											{
-												this.nRisky = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 10, this.nRisky );
+												this.nRisky = CConversion.nGetNumberIfInRange( str4, 0, 10, this.nRisky );
 											}
                                             else if( str3.Equals( "HAZARD" ) )				// #29500 2012.9.11 kairera0467
                                             {
-                                                this.bHAZARD = C変換.bONorOFF( str4[ 0 ] );
+                                                this.bHAZARD = CConversion.bONorOFF( str4[ 0 ] );
                                             }
                                             else if( str3.Equals( "AssignToLBD" ) )
                                             {
-                                                this.bAssignToLBD.Drums = C変換.bONorOFF( str4[ 0 ] );
+                                                this.bAssignToLBD.Drums = CConversion.bONorOFF( str4[ 0 ] );
                                             }
                                             else if (str3.Equals("DrumsJudgeLine"))
                                             {
-                                                this.nJudgeLine.Drums = C変換.n値を文字列から取得して範囲内にちゃんと丸めて返す(str4, 0, 100, this.nJudgeLine.Drums);
+                                                this.nJudgeLine.Drums = CConversion.nRoundToRange(str4, 0, 100, this.nJudgeLine.Drums);
                                             }
                                             else if ( str3.Equals( "DrumsShutterIn" ) )
                                             {
-                                                this.nShutterInSide.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 100, this.nShutterInSide.Drums );
+                                                this.nShutterInSide.Drums = CConversion.nGetNumberIfInRange( str4, 0, 100, this.nShutterInSide.Drums );
                                             }
                                             else if ( str3.Equals( "DrumsShutterOut" ) )
                                             {
-                                                this.nShutterOutSide.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -100, 100, this.nShutterOutSide.Drums );
+                                                this.nShutterOutSide.Drums = CConversion.nGetNumberIfInRange( str4, -100, 100, this.nShutterOutSide.Drums );
                                             }
                                             else if ( str3.Equals( "GuitarJudgeLine" ) )
                                             {
-                                                this.nJudgeLine.Guitar = C変換.n値を文字列から取得して範囲内にちゃんと丸めて返す(str4, 0, 100, this.nJudgeLine.Guitar);
+                                                this.nJudgeLine.Guitar = CConversion.nRoundToRange(str4, 0, 100, this.nJudgeLine.Guitar);
                                             }
                                             else if ( str3.Equals( "GuitarShutterIn" ) )
                                             {
-                                                this.nShutterInSide.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 100, this.nShutterInSide.Guitar );
+                                                this.nShutterInSide.Guitar = CConversion.nGetNumberIfInRange( str4, 0, 100, this.nShutterInSide.Guitar );
                                             }
                                             else if ( str3.Equals( "GuitarShutterOut" ) )
                                             {
-                                                this.nShutterOutSide.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -100, 100, this.nShutterOutSide.Guitar );
+                                                this.nShutterOutSide.Guitar = CConversion.nGetNumberIfInRange( str4, -100, 100, this.nShutterOutSide.Guitar );
                                             }
                                             else if ( str3.Equals( "BassJudgeLine" ) )
                                             {
-                                                this.nJudgeLine.Bass = C変換.n値を文字列から取得して範囲内にちゃんと丸めて返す(str4, 0, 100, this.nJudgeLine.Bass);
+                                                this.nJudgeLine.Bass = CConversion.nRoundToRange(str4, 0, 100, this.nJudgeLine.Bass);
                                             }
                                             else if ( str3.Equals( "BassShutterIn" ) )
                                             {
-                                                this.nShutterInSide.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 100, this.nShutterInSide.Bass );
+                                                this.nShutterInSide.Bass = CConversion.nGetNumberIfInRange( str4, 0, 100, this.nShutterInSide.Bass );
                                             }
                                             else if ( str3.Equals( "BassShutterOut" ) )
                                             {
-                                                this.nShutterOutSide.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -100, 100, this.nShutterOutSide.Guitar );
+                                                this.nShutterOutSide.Bass = CConversion.nGetNumberIfInRange( str4, -100, 100, this.nShutterOutSide.Guitar );
                                             }
                                             else if (str3.Equals("DrumsLaneType"))
                                             {
-                                                this.eLaneType.Drums = (EType) C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int) this.eLaneType.Drums);
+                                                this.eLaneType.Drums = (EType) CConversion.nGetNumberIfInRange(str4, 0, 3, (int) this.eLaneType.Drums);
                                             }
                                             else if (str3.Equals("RDPosition"))
                                             {
-                                                this.eRDPosition = (ERDPosition)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eRDPosition);
+                                                this.eRDPosition = (ERDPosition)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eRDPosition);
                                             }
                                             else if (str3.Equals("DrumsTight"))				// #29500 2012.9.11 kairera0467
                                             {
-                                                this.bTight = C変換.bONorOFF(str4[0]);
+                                                this.bTight = CConversion.bONorOFF(str4[0]);
                                             }
                                             #region [ XGオプション ]
                                             else if (str3.Equals("NamePlateType"))
                                             {
-                                                this.eNamePlate = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.eNamePlate);
+                                                this.eNamePlate = (EType)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.eNamePlate);
                                             }
                                             else if (str3.Equals("DrumSetMoves"))
                                             {
-                                                this.eドラムセットを動かす = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eドラムセットを動かす);
+                                                this.eドラムセットを動かす = (EType)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eドラムセットを動かす);
                                             }
                                             else if (str3.Equals("BPMBar"))
                                             {
-                                                this.eBPMbar = ( EType )C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.eBPMbar);
+                                                this.eBPMbar = ( EType )CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.eBPMbar);
                                             }
                                             else if (str3.Equals("LivePoint"))
                                             {
-                                                this.bLivePoint = C変換.bONorOFF(str4[0]);
+                                                this.bLivePoint = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("Speaker"))
                                             {
-                                                this.bSpeaker = C変換.bONorOFF(str4[0]);
+                                                this.bSpeaker = CConversion.bONorOFF(str4[0]);
                                             }
                                             #endregion
                                             else if (str3.Equals("DrumsStageEffect"))
                                             {
-                                                this.ボーナス演出を表示する = C変換.bONorOFF(str4[0]);
+                                                this.ボーナス演出を表示する = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("CLASSIC"))
                                             {
-                                                this.bCLASSIC譜面判別を有効にする = C変換.bONorOFF(str4[0]);
+                                                this.bCLASSIC譜面判別を有効にする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("MutingLP"))
                                             {
-                                                this.bMutingLP = C変換.bONorOFF(str4[0]);
+                                                this.bMutingLP = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("SkillMode"))
                                             {
-                                                this.nSkillMode = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.nSkillMode);
+                                                this.nSkillMode = CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.nSkillMode);
                                             }
                                             else if (str3.Equals("SwitchSkillMode"))
                                             {
-                                                this.bSkillModeを自動切換えする = C変換.bONorOFF(str4[0]);
+                                                this.bSkillModeを自動切換えする = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("NumOfLanes"))
                                             {
-                                                this.eNumOfLanes.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eNumOfLanes.Drums);
+                                                this.eNumOfLanes.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eNumOfLanes.Drums);
                                             }
                                             else if (str3.Equals("DkdkType"))
                                             {
-                                                this.eDkdkType.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 2, (int)this.eDkdkType.Drums);
+                                                this.eDkdkType.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 2, (int)this.eDkdkType.Drums);
                                             }
                                             else if (str3.Equals("DrumsRandomPad"))
                                             {
-                                                this.eRandom.Drums = (Eランダムモード)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 6, (int)this.eRandom.Drums);
+                                                this.eRandom.Drums = (Eランダムモード)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandom.Drums);
                                             }
                                             else if (str3.Equals("DrumsRandomPedal"))
                                             {
-                                                this.eRandomPedal.Drums = (Eランダムモード)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 6, (int)this.eRandomPedal.Drums);
+                                                this.eRandomPedal.Drums = (Eランダムモード)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandomPedal.Drums);
                                             }
                                             else if (str3.Equals("DrumsAttackEffect"))
                                             {
-                                                this.eAttackEffect.Drums = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, (int)this.eAttackEffect.Drums);
+                                                this.eAttackEffect.Drums = (EType)CConversion.nGetNumberIfInRange(str4, 0, 3, (int)this.eAttackEffect.Drums);
                                             }
                                             else if (str3.Equals("GuitarAttackEffect"))
                                             {
-                                                this.eAttackEffect.Guitar = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eAttackEffect.Guitar);
+                                                this.eAttackEffect.Guitar = (EType)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eAttackEffect.Guitar);
                                             }
                                             else if (str3.Equals("BassAttackEffect"))
                                             {
-                                                this.eAttackEffect.Bass = (EType)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 1, (int)this.eAttackEffect.Bass);
+                                                this.eAttackEffect.Bass = (EType)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eAttackEffect.Bass);
                                             }
                                             else if (str3.Equals("DrumsLaneDisp"))
                                             {
-                                                this.nLaneDisp.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, (int)this.nLaneDisp.Drums);
+                                                this.nLaneDisp.Drums = CConversion.nGetNumberIfInRange(str4, 0, 4, (int)this.nLaneDisp.Drums);
                                             }
                                             else if (str3.Equals("GuitarLaneDisp"))
                                             {
-                                                this.nLaneDisp.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, (int)this.nLaneDisp.Guitar);
+                                                this.nLaneDisp.Guitar = CConversion.nGetNumberIfInRange(str4, 0, 4, (int)this.nLaneDisp.Guitar);
                                             }
                                             else if (str3.Equals("BassLaneDisp"))
                                             {
-                                                this.nLaneDisp.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, (int)this.nLaneDisp.Bass);
+                                                this.nLaneDisp.Bass = CConversion.nGetNumberIfInRange(str4, 0, 4, (int)this.nLaneDisp.Bass);
                                             }
                                             else if (str3.Equals("DrumsJudgeLineDisp"))
                                             {
-                                                this.bJudgeLineDisp.Drums = C変換.bONorOFF(str4[0]);
+                                                this.bJudgeLineDisp.Drums = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if( str3.Equals( "GuitarJudgeLineDisp" ) )
                                             {
-                                                this.bJudgeLineDisp.Guitar = C変換.bONorOFF(str4[0]);
+                                                this.bJudgeLineDisp.Guitar = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if( str3.Equals( "BassJudgeLineDisp" ) )
                                             {
-                                                this.bJudgeLineDisp.Bass = C変換.bONorOFF(str4[0]);
+                                                this.bJudgeLineDisp.Bass = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("DrumsLaneFlush"))
                                             {
-                                                this.bLaneFlush.Drums = C変換.bONorOFF(str4[0]);
+                                                this.bLaneFlush.Drums = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("GuitarLaneFlush"))
                                             {
-                                                this.bLaneFlush.Guitar = C変換.bONorOFF(str4[0]);
+                                                this.bLaneFlush.Guitar = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BassLaneFlush"))
                                             {
-                                                this.bLaneFlush.Bass = C変換.bONorOFF(str4[0]);
+                                                this.bLaneFlush.Bass = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if( str3.Equals( "JudgeAnimeType" ) )
                                             {
-                                                this.nJudgeAnimeType = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 2, this.nJudgeAnimeType );
+                                                this.nJudgeAnimeType = CConversion.nGetNumberIfInRange( str4, 0, 2, this.nJudgeAnimeType );
                                             }
                                             else if (str3.Equals( "JudgeFrames"))
                                             {
-                                                this.nJudgeFrames = C変換.n値を文字列から取得して返す( str4, this.nJudgeFrames );
+                                                this.nJudgeFrames = CConversion.nStringToInt( str4, this.nJudgeFrames );
                                             }
                                             else if ( str3.Equals( "JudgeInterval" ))
                                             {
-                                                this.nJudgeInterval = C変換.n値を文字列から取得して返す( str4, this.nJudgeInterval );
+                                                this.nJudgeInterval = CConversion.nStringToInt( str4, this.nJudgeInterval );
                                             }
                                             else if ( str3.Equals( "JudgeWidgh" ))
                                             {
-                                                this.nJudgeWidgh = C変換.n値を文字列から取得して返す( str4, this.nJudgeWidgh );
+                                                this.nJudgeWidgh = CConversion.nStringToInt( str4, this.nJudgeWidgh );
                                             }
                                             else if ( str3.Equals( "JudgeHeight" ))
                                             {
-                                                this.nJudgeHeight = C変換.n値を文字列から取得して返す( str4, this.nJudgeHeight );
+                                                this.nJudgeHeight = CConversion.nStringToInt( str4, this.nJudgeHeight );
                                             }
                                             else if ( str3.Equals( "ExplosionFrames" ))
                                             {
-                                                this.nExplosionFrames = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, int.MaxValue, (int)this.nExplosionFrames );
+                                                this.nExplosionFrames = CConversion.nGetNumberIfInRange( str4, 0, int.MaxValue, (int)this.nExplosionFrames );
                                             }
                                             else if ( str3.Equals( "ExplosionInterval" ))
                                             {
-                                                this.nExplosionInterval = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, int.MaxValue, (int)this.nExplosionInterval );
+                                                this.nExplosionInterval = CConversion.nGetNumberIfInRange( str4, 0, int.MaxValue, (int)this.nExplosionInterval );
                                             }
                                             else if ( str3.Equals( "ExplosionWidgh" ))
                                             {
-                                                this.nExplosionWidgh = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)this.nExplosionWidgh);
+                                                this.nExplosionWidgh = CConversion.nGetNumberIfInRange(str4, 0, int.MaxValue, (int)this.nExplosionWidgh);
                                             }
                                             else if ( str3.Equals( "ExplosionHeight" ))
                                             {
-                                                this.nExplosionHeight = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)this.nExplosionHeight);
+                                                this.nExplosionHeight = CConversion.nGetNumberIfInRange(str4, 0, int.MaxValue, (int)this.nExplosionHeight);
                                             }
                                             else if ( str3.Equals( "PedalLagTime" ) )
                                             {
-                                                this.nPedalLagTime = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, -100, 100, this.nPedalLagTime );
+                                                this.nPedalLagTime = CConversion.nGetNumberIfInRange( str4, -100, 100, this.nPedalLagTime );
                                             }
                                             else if ( str3.Equals( "WailingFireFrames" ))
                                             {
-                                                this.nWailingFireFrames = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, int.MaxValue, (int)this.nWailingFireFrames );
+                                                this.nWailingFireFrames = CConversion.nGetNumberIfInRange( str4, 0, int.MaxValue, (int)this.nWailingFireFrames );
                                             }
                                             else if (str3.Equals("WailingFireInterval"))
                                             {
-                                                this.nWailingFireInterval = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, int.MaxValue, (int)this.nWailingFireInterval );
+                                                this.nWailingFireInterval = CConversion.nGetNumberIfInRange( str4, 0, int.MaxValue, (int)this.nWailingFireInterval );
                                             }
                                             else if (str3.Equals("WailingFireWidgh"))
                                             {
-                                                this.nWailingFireWidgh = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)this.nWailingFireWidgh);
+                                                this.nWailingFireWidgh = CConversion.nGetNumberIfInRange(str4, 0, int.MaxValue, (int)this.nWailingFireWidgh);
                                             }
                                             else if (str3.Equals("WailingFireHeight"))
                                             {
-                                                this.nWailingFireHeight = C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, int.MaxValue, (int)this.nWailingFireHeight);
+                                                this.nWailingFireHeight = CConversion.nGetNumberIfInRange(str4, 0, int.MaxValue, (int)this.nWailingFireHeight);
                                             }
                                             else if (str3.Equals("WailingFirePosXGuitar"))
                                             {
-                                                this.nWailingFireX.Guitar = C変換.n値を文字列から取得して返す( str4, this.nWailingFireX.Guitar );
+                                                this.nWailingFireX.Guitar = CConversion.nStringToInt( str4, this.nWailingFireX.Guitar );
                                             }
                                             else if (str3.Equals("WailingFirePosXBass"))
                                             {
-                                                this.nWailingFireX.Bass = C変換.n値を文字列から取得して返す( str4, this.nWailingFireX.Bass );
+                                                this.nWailingFireX.Bass = CConversion.nStringToInt( str4, this.nWailingFireX.Bass );
                                             }
                                             else if (str3.Equals("WailingFirePosY"))
                                             {
-                                                this.nWailingFireY = C変換.n値を文字列から取得して返す( str4, this.nWailingFireY );
+                                                this.nWailingFireY = CConversion.nStringToInt( str4, this.nWailingFireY );
                                             }
                                             else if ( str3.Equals( "DrumComboDisp" ) )				// #29500 2012.9.11 kairera0467
                                             {
-                                                this.bドラムコンボ文字の表示 = C変換.bONorOFF(str4[0]);
+                                                this.bドラムコンボ文字の表示 = CConversion.bONorOFF(str4[0]);
                                             }
 
                                             //fork
                                             else if (str3.Equals("DrumAutoGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eAutoGhost.Drums = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                                this.eAutoGhost.Drums = (EAutoGhostData)CConversion.nGetNumberIfInRange(str4, 0, 3, 0);
                                             }
                                             else if (str3.Equals("GuitarAutoGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eAutoGhost.Guitar = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                                this.eAutoGhost.Guitar = (EAutoGhostData)CConversion.nGetNumberIfInRange(str4, 0, 3, 0);
                                             }
                                             else if (str3.Equals("BassAutoGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eAutoGhost.Bass = (EAutoGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 3, 0);
+                                                this.eAutoGhost.Bass = (EAutoGhostData)CConversion.nGetNumberIfInRange(str4, 0, 3, 0);
                                             }
                                             else if (str3.Equals("DrumTargetGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eTargetGhost.Drums = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                                this.eTargetGhost.Drums = (ETargetGhostData)CConversion.nGetNumberIfInRange(str4, 0, 4, 0);
                                             }
                                             else if (str3.Equals("GuitarTargetGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eTargetGhost.Guitar = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                                this.eTargetGhost.Guitar = (ETargetGhostData)CConversion.nGetNumberIfInRange(str4, 0, 4, 0);
                                             }
                                             else if (str3.Equals("BassTargetGhost")) // #35411 2015.08.18 chnmr0 add
                                             {
-                                                this.eTargetGhost.Bass = (ETargetGhostData)C変換.n値を文字列から取得して範囲内に丸めて返す(str4, 0, 4, 0);
+                                                this.eTargetGhost.Bass = (ETargetGhostData)CConversion.nGetNumberIfInRange(str4, 0, 4, 0);
                                             }
 											continue;
 										}
@@ -3143,111 +3143,111 @@ namespace DTXMania
 									case Eセクション種別.AutoPlay:
 										if( str3.Equals( "LC" ) )
 										{
-											this.bAutoPlay.LC = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.LC = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										if( str3.Equals( "HH" ) )
 										{
-										this.bAutoPlay.HH = C変換.bONorOFF( str4[ 0 ] );
+										this.bAutoPlay.HH = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "SD" ) )
 										{
-											this.bAutoPlay.SD = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.SD = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "BD" ) )
 										{
-											this.bAutoPlay.BD = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BD = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "HT" ) )
 										{
-											this.bAutoPlay.HT = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.HT = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "LT" ) )
 										{
-											this.bAutoPlay.LT = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.LT = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "FT" ) )
 										{
-										    this.bAutoPlay.FT = C変換.bONorOFF( str4[ 0 ] );
+										    this.bAutoPlay.FT = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if( str3.Equals( "CY" ) )
 										{
-											this.bAutoPlay.CY = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.CY = CConversion.bONorOFF( str4[ 0 ] );
                                         }
                                         else if (str3.Equals("RD"))
                                         {
-                                            this.bAutoPlay.RD= C変換.bONorOFF(str4[0]);
+                                            this.bAutoPlay.RD= CConversion.bONorOFF(str4[0]);
                                         }
                                         else if( str3.Equals( "LP" ) )
                                         {
-                                            this.bAutoPlay.LP = C変換.bONorOFF(str4[0]);
+                                            this.bAutoPlay.LP = CConversion.bONorOFF(str4[0]);
 										}
                                         else if (str3.Equals("LBD"))
                                         {
-                                            this.bAutoPlay.LBD = C変換.bONorOFF(str4[0]);
+                                            this.bAutoPlay.LBD = CConversion.bONorOFF(str4[0]);
                                         }
 										//else if( str3.Equals( "Guitar" ) )
 										//{
-										//    this.bAutoPlay.Guitar = C変換.bONorOFF( str4[ 0 ] );
+										//    this.bAutoPlay.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 										//}
 										else if ( str3.Equals( "GuitarR" ) )
 										{
-											this.bAutoPlay.GtR = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.GtR = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "GuitarG" ) )
 										{
-											this.bAutoPlay.GtG = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.GtG = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "GuitarB" ) )
 										{
-											this.bAutoPlay.GtB = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.GtB = CConversion.bONorOFF( str4[ 0 ] );
 										}
                                         else if ( str3.Equals( "GuitarY" ) )
                                         {
-                                            this.bAutoPlay.GtY = C変換.bONorOFF(str4[0]);
+                                            this.bAutoPlay.GtY = CConversion.bONorOFF(str4[0]);
                                         }
                                         else if ( str3.Equals( "GuitarP" ) )
                                         {
-                                            this.bAutoPlay.GtP = C変換.bONorOFF(str4[0]);
+                                            this.bAutoPlay.GtP = CConversion.bONorOFF(str4[0]);
                                         }
 										else if ( str3.Equals( "GuitarPick" ) )
 										{
-											this.bAutoPlay.GtPick = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.GtPick = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "GuitarWailing" ) )
 										{
-											this.bAutoPlay.GtW = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.GtW = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										//else if ( str3.Equals( "Bass" ) )
 										//{
-										//    this.bAutoPlay.Bass = C変換.bONorOFF( str4[ 0 ] );
+										//    this.bAutoPlay.Bass = CConversion.bONorOFF( str4[ 0 ] );
 										//}
 										else if ( str3.Equals( "BassR" ) )
 										{
-											this.bAutoPlay.BsR = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsR = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "BassG" ) )
 										{
-											this.bAutoPlay.BsG = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsG = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "BassB" ) )
 										{
-											this.bAutoPlay.BsB = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsB = CConversion.bONorOFF( str4[ 0 ] );
 										}
                                         else if ( str3.Equals( "BassY" ) )
 										{
-											this.bAutoPlay.BsY = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsY = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "BassP" ) )
 										{
-											this.bAutoPlay.BsP = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsP = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "BassPick" ) )
 										{
-											this.bAutoPlay.BsPick = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsPick = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										else if ( str3.Equals( "BassWailing" ) )
 										{
-											this.bAutoPlay.BsW = C変換.bONorOFF( str4[ 0 ] );
+											this.bAutoPlay.BsW = CConversion.bONorOFF( str4[ 0 ] );
 										}
 										continue;
 									//-----------------------------
@@ -3258,19 +3258,19 @@ namespace DTXMania
 									case Eセクション種別.HitRange:
 										if( str3.Equals( "Perfect" ) )
 										{
-											this.nヒット範囲ms.Perfect = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x3e7, this.nヒット範囲ms.Perfect );
+											this.nヒット範囲ms.Perfect = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Perfect );
 											}
 										else if( str3.Equals( "Great" ) )
 										{
-											this.nヒット範囲ms.Great = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x3e7, this.nヒット範囲ms.Great );
+											this.nヒット範囲ms.Great = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Great );
 										}
 										else if( str3.Equals( "Good" ) )
 										{
-											this.nヒット範囲ms.Good = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x3e7, this.nヒット範囲ms.Good );
+											this.nヒット範囲ms.Good = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Good );
 										}
 										else if( str3.Equals( "Poor" ) )
 										{
-											this.nヒット範囲ms.Poor = C変換.n値を文字列から取得して範囲内に丸めて返す( str4, 0, 0x3e7, this.nヒット範囲ms.Poor );
+											this.nヒット範囲ms.Poor = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Poor );
 										}
 										continue;
 									//-----------------------------

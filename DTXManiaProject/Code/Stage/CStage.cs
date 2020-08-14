@@ -36,13 +36,13 @@ namespace DTXMania
 			End
 		}
 		
-		internal Eフェーズ eフェーズID;
-		public enum Eフェーズ
+		internal EPhase ePhaseID;
+		public enum EPhase
 		{
-			共通_通常状態,
-			共通_フェードイン,
-			共通_フェードアウト,
-			共通_終了状態,
+			Common_DefaultState,
+			Common_FadeIn,
+			Common_FadeOut,
+			Common_EndStatus,
 			起動0_システムサウンドを構築,
 			起動00_songlistから曲リストを作成する,
 			起動1_SongsDBからスコアキャッシュを構築,

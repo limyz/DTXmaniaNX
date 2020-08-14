@@ -96,7 +96,7 @@ namespace DTXMania
 					this.ct登場アニメ用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
 					base.bJustStartedUpdate = false;
 				}
-				this.ct登場アニメ用.t進行();
+				this.ct登場アニメ用.tUpdate();
 
                 if ( this.actステータスパネル.txパネル本体 != null )
                     this.n本体X = 700;

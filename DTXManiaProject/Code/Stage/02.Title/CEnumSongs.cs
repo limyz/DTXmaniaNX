@@ -243,7 +243,7 @@ namespace DTXMania
             {
                 #region [ 0) システムサウンドの構築  ]
                 //-----------------------------
-                CDTXMania.stageStartup.eフェーズID = CStage.Eフェーズ.起動0_システムサウンドを構築;
+                CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動0_システムサウンドを構築;
 
                 Trace.TraceInformation("0) システムサウンドを構築します。");
                 Trace.Indent();
@@ -299,7 +299,7 @@ namespace DTXMania
 
                 #region [ 00) songlist.dbの読み込みによる曲リストの構築  ]
                 //-----------------------------
-                CDTXMania.stageStartup.eフェーズID = CStage.Eフェーズ.起動00_songlistから曲リストを作成する;
+                CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動00_songlistから曲リストを作成する;
 
                 Trace.TraceInformation("1) songlist.dbを読み込みます。");
                 Trace.Indent();
@@ -340,7 +340,7 @@ namespace DTXMania
 
                 #region [ 1) songs.db の読み込み ]
                 //-----------------------------
-                CDTXMania.stageStartup.eフェーズID = CStage.Eフェーズ.起動1_SongsDBからスコアキャッシュを構築;
+                CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動1_SongsDBからスコアキャッシュを構築;
 
                 Trace.TraceInformation("2) songs.db を読み込みます。");
                 Trace.Indent();
@@ -384,7 +384,7 @@ namespace DTXMania
             }
             finally
             {
-                CDTXMania.stageStartup.eフェーズID = CStage.Eフェーズ.起動7_完了;
+                CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動7_完了;
                 TimeSpan span = (TimeSpan)(DateTime.Now - now);
                 Trace.TraceInformation("起動所要時間: {0}", span.ToString());
                 lock (this)							// #28700 2012.6.12 yyagi; state change must be in finally{} for exiting as of compact mode.
@@ -416,7 +416,7 @@ namespace DTXMania
 
                 #region [ 2) 曲データの検索 ]
                 //-----------------------------
-                //	base.eフェーズID = CStage.Eフェーズ.起動2_曲を検索してリストを作成する;
+                //	base.ePhaseID = CStage.EPhase.起動2_曲を検索してリストを作成する;
 
                 Trace.TraceInformation("enum2) 曲データを検索します。");
                 Trace.Indent();
@@ -478,7 +478,7 @@ namespace DTXMania
                 #endregion
                 #region [ 3) songs.db 情報の曲リストへの反映 ]
                 //-----------------------------
-                //					base.eフェーズID = CStage.Eフェーズ.起動3_スコアキャッシュをリストに反映する;
+                //					base.ePhaseID = CStage.EPhase.起動3_スコアキャッシュをリストに反映する;
                 Trace.TraceInformation("enum3) songs.db の情報を曲リストへ反映します。");
                 Trace.Indent();
 
@@ -508,7 +508,7 @@ namespace DTXMania
                 #endregion
                 #region [ 4) songs.db になかった曲データをファイルから読み込んで反映 ]
                 //-----------------------------
-                //					base.eフェーズID = CStage.Eフェーズ.起動4_スコアキャッシュになかった曲をファイルから読み込んで反映する;
+                //					base.ePhaseID = CStage.EPhase.起動4_スコアキャッシュになかった曲をファイルから読み込んで反映する;
 
                 int num2 = this.Songs管理.nNbScoresFound - this.Songs管理.nNbScoresFromScoreCache;
 
@@ -539,7 +539,7 @@ namespace DTXMania
                 #endregion
                 #region [ 5) 曲リストへの後処理の適用 ]
                 //-----------------------------
-                //					base.eフェーズID = CStage.Eフェーズ.起動5_曲リストへ後処理を適用する;
+                //					base.ePhaseID = CStage.EPhase.起動5_曲リストへ後処理を適用する;
 
                 Trace.TraceInformation("enum5) 曲リストへの後処理を適用します。");
                 Trace.Indent();
@@ -567,7 +567,7 @@ namespace DTXMania
                 #endregion
                 #region [ 6) songs.db への保存 ]
                 //-----------------------------
-                //					base.eフェーズID = CStage.Eフェーズ.起動6_スコアキャッシュをSongsDBに出力する;
+                //					base.ePhaseID = CStage.EPhase.起動6_スコアキャッシュをSongsDBに出力する;
 
                 Trace.TraceInformation("enum6) 曲データの情報を songs.db へ出力します。");
                 Trace.Indent();
@@ -608,7 +608,7 @@ namespace DTXMania
             }
             finally
             {
-                //				base.eフェーズID = CStage.Eフェーズ.起動7_完了;
+                //				base.ePhaseID = CStage.EPhase.起動7_完了;
                 TimeSpan span = (TimeSpan)(DateTime.Now - now);
                 Trace.TraceInformation("曲探索所要時間: {0}", span.ToString());
             }

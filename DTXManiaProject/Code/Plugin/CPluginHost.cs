@@ -49,9 +49,9 @@ namespace DTXMania
 		{
 			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eステージID : CStage.EStage.DoNothing; }
 		}
-		public CStage.Eフェーズ e現在のフェーズ
+		public CStage.EPhase e現在のフェーズ
 		{
-			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eフェーズID : CStage.Eフェーズ.共通_通常状態; }
+			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.ePhaseID : CStage.EPhase.Common_DefaultState; }
 		}
 		public bool t入力を占有する(IPluginActivity act)
 		{

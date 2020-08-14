@@ -329,8 +329,8 @@ namespace DTXMania
                     }
                     #endregion
                     #region [ キー入力: 前に移動 ]
-                    this.ctキー反復用.Up.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.t前に移動));
-                    this.ctキー反復用.R.tキー反復(CDTXMania.Pad.b押されているGB(EPad.R), new CCounter.DGキー処理(this.t前に移動));
+                    this.ctキー反復用.Up.tRepeatKey(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.t前に移動));
+                    this.ctキー反復用.R.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.R), new CCounter.DGキー処理(this.t前に移動));
                     //Change to HT
                     if (CDTXMania.Pad.b押された(EInstrumentPart.DRUMS, EPad.HT))
                     {
@@ -338,8 +338,8 @@ namespace DTXMania
                     }
                     #endregion
                     #region [ キー入力: 次に移動 ]
-                    this.ctキー反復用.Down.tキー反復(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.t次に移動));
-                    this.ctキー反復用.B.tキー反復(CDTXMania.Pad.b押されているGB(EPad.G), new CCounter.DGキー処理(this.t次に移動));
+                    this.ctキー反復用.Down.tRepeatKey(CDTXMania.Input管理.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.t次に移動));
+                    this.ctキー反復用.B.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.G), new CCounter.DGキー処理(this.t次に移動));
                     //Change to LT
                     if (CDTXMania.Pad.b押された(EInstrumentPart.DRUMS, EPad.LT))
                     {

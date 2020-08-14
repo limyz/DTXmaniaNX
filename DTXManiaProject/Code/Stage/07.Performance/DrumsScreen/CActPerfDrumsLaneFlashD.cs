@@ -94,7 +94,7 @@ namespace DTXMania
 		
 		// メソッド
 
-		public void Start( Eレーン lane, float f強弱度合い )
+		public void Start( ELane lane, float f強弱度合い )
 		{
 			int num = (int) ( ( 1f - f強弱度合い ) * 55f );
 			this.ct進行[ (int) lane ] = new CCounter( num, 90, 3, CDTXMania.Timer );
@@ -166,10 +166,10 @@ namespace DTXMania
 				{
 					if( !this.ct進行[ i ].b停止中 )
 					{
-						this.ct進行[ i ].t進行();
+						this.ct進行[ i ].tUpdate();
 						if( this.ct進行[ i ].bReachedEndValue )
 						{
-							this.ct進行[ i ].t停止();
+							this.ct進行[ i ].tStop();
 						}
 					}
 				}

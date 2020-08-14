@@ -20,27 +20,27 @@ namespace DTXMania
 		
 		// メソッド
 
-		public void Start( Eレーン lane )
+		public void Start( ELane lane )
 		{
 			this.Start( lane, false, false, false, 0, true );
 		}
-		public void Start( Eレーン lane, bool bフィルイン )
+		public void Start( ELane lane, bool bフィルイン )
 		{
 			this.Start( lane, bフィルイン, false, false, 0, true );
 		}
-		public void Start( Eレーン lane, bool bフィルイン, bool b大波 )
+		public void Start( ELane lane, bool bフィルイン, bool b大波 )
 		{
 			this.Start( lane, bフィルイン, b大波, false, 0, true );
 		}
-		public void Start( Eレーン lane, bool bフィルイン, bool b大波, bool b細波 )
+		public void Start( ELane lane, bool bフィルイン, bool b大波, bool b細波 )
 		{
             this.Start( lane, bフィルイン, b大波, b細波, 0, true);
         }
-        public void Start( Eレーン lane, bool bフィルイン, bool b大波, bool b細波, int _nJudgeLinePosY_delta_Drums )
+        public void Start( ELane lane, bool bフィルイン, bool b大波, bool b細波, int _nJudgeLinePosY_delta_Drums )
         {
             this.Start( lane, bフィルイン, b大波, b細波, 0, true);
         }
-        public void Start( Eレーン lane, bool bフィルイン, bool b大波, bool b細波, int _nJudgeLinePosY_delta_Drums, bool b表示 )
+        public void Start( ELane lane, bool bフィルイン, bool b大波, bool b細波, int _nJudgeLinePosY_delta_Drums, bool b表示 )
         {
 			if (( this.tx火花 != null ) && CDTXMania.ConfigIni.eAttackEffect.Drums != EType.D)
 			{
@@ -49,7 +49,7 @@ namespace DTXMania
 				{
 					if ( this.st火花[ j ].b使用中 && this.st火花[ j ].nLane == (int) lane )		// yyagi 負荷軽減のつもり___だが、あまり効果なさげ
 					{
-						this.st火花[ j ].ct進行.t停止();
+						this.st火花[ j ].ct進行.tStop();
 						this.st火花[ j ].b使用中 = false;
 					}
 				}
@@ -70,7 +70,7 @@ namespace DTXMania
                             {
                                 this.st火花[j].ct進行 = new CCounter(0, CDTXMania.ConfigIni.nExplosionFrames - 1, CDTXMania.ConfigIni.nExplosionInterval, CDTXMania.Timer);
                             }
-							this.st火花[ j ].f回転単位 = C変換.DegreeToRadian( (float) ( n回転初期値 + ( i * 90f ) ) );
+							this.st火花[ j ].f回転単位 = CConversion.DegreeToRadian( (float) ( n回転初期値 + ( i * 90f ) ) );
 							//this.st火花[ j ].f回転方向 = ( i < 4 ) ? 1f : -2f;
 							//this.st火花[ j ].fサイズ = ( i < 4 ) ? 1f : 0.5f;
                             this.st火花[j].fサイズ = b表示 ? 1f : 0f;
@@ -195,7 +195,7 @@ namespace DTXMania
                             this.st飛び散るチップ[j].f加速度の加速度X = 0.995f;
                             this.st飛び散るチップ[j].f加速度の加速度Y = 1.000f;
                             this.st飛び散るチップ[j].f重力加速度 = 0.03100f;
-                            this.st飛び散るチップ[j].f回転単位 = C変換.DegreeToRadian((float)(n回転初期値 + (i * 90f)));
+                            this.st飛び散るチップ[j].f回転単位 = CConversion.DegreeToRadian((float)(n回転初期値 + (i * 90f)));
                             this.st飛び散るチップ[j].f回転方向 = (i < 4) ? 1f : -2f;
                             this.st飛び散るチップ[j].f半径 = (float)(0.5 + (((double)CDTXMania.Random.Next(30)) / 100.0));
                             if (this.st飛び散るチップ[j].nLane == 0 || this.st飛び散るチップ[j].nLane == 3 || this.st飛び散るチップ[j].nLane == 7)
@@ -284,9 +284,9 @@ namespace DTXMania
 							this.st大波[ j ].n進行速度ms = 10;
 							this.st大波[ j ].ct進行 = new CCounter( 0, 100, this.st大波[ j ].n進行速度ms, CDTXMania.Timer );
 							this.st大波[ j ].ct進行.n現在の値 = i * 10;
-							this.st大波[ j ].f角度X = C変換.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
-							this.st大波[ j ].f角度Y = C変換.DegreeToRadian( this.b大波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
-							this.st大波[ j ].f回転単位 = C変換.DegreeToRadian( (float) 0f );
+							this.st大波[ j ].f角度X = CConversion.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
+							this.st大波[ j ].f角度Y = CConversion.DegreeToRadian( this.b大波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
+							this.st大波[ j ].f回転単位 = CConversion.DegreeToRadian( (float) 0f );
 							this.st大波[ j ].f回転方向 = 1f;
 							this.b大波Balance = !this.b大波Balance;
 							break;
@@ -308,8 +308,8 @@ namespace DTXMania
 							this.st細波[ j ].n進行速度ms = 8;
 							this.st細波[ j ].ct進行 = new CCounter( 0, 100, this.st細波[ j ].n進行速度ms, CDTXMania.Timer );
 							this.st細波[ j ].ct進行.n現在の値 = 0;
-							this.st細波[ j ].f角度X = C変換.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
-							this.st細波[ j ].f角度Y = C変換.DegreeToRadian( this.b細波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
+							this.st細波[ j ].f角度X = CConversion.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
+							this.st細波[ j ].f角度Y = CConversion.DegreeToRadian( this.b細波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
 							this.b細波Balance = !this.b細波Balance;
 							break;
 						}
@@ -537,10 +537,10 @@ namespace DTXMania
                     if (this.st青い星[i].b使用中)
                     {
                         this.st青い星[i].n前回のValue = this.st青い星[i].ct進行.n現在の値;
-                        this.st青い星[i].ct進行.t進行();
+                        this.st青い星[i].ct進行.tUpdate();
                         if (this.st青い星[i].ct進行.bReachedEndValue)
                         {
-                            this.st青い星[i].ct進行.t停止();
+                            this.st青い星[i].ct進行.tStop();
                             this.st青い星[i].b使用中 = false;
                         }
                         for (int n = this.st青い星[i].n前回のValue; n < this.st青い星[i].ct進行.n現在の値; n++)
@@ -573,10 +573,10 @@ namespace DTXMania
                         if (this.st飛び散るチップ[i].b使用中)
                         {
                             this.st飛び散るチップ[i].n前回のValue = this.st飛び散るチップ[i].ct進行.n現在の値;
-                            this.st飛び散るチップ[i].ct進行.t進行();
+                            this.st飛び散るチップ[i].ct進行.tUpdate();
                             if (this.st飛び散るチップ[i].ct進行.bReachedEndValue)
                             {
-                                this.st飛び散るチップ[i].ct進行.t停止();
+                                this.st飛び散るチップ[i].ct進行.tStop();
                                 this.st飛び散るチップ[i].b使用中 = false;
                             }
                             for (int n = this.st飛び散るチップ[i].n前回のValue; n < this.st飛び散るチップ[i].ct進行.n現在の値; n++)
@@ -653,17 +653,17 @@ namespace DTXMania
 				{
 					if( this.st火花[ i ].b使用中 )
 					{
-						this.st火花[ i ].ct進行.t進行();
+						this.st火花[ i ].ct進行.tUpdate();
 						if( this.st火花[ i ].ct進行.bReachedEndValue )
 						{
-							this.st火花[ i ].ct進行.t停止();
+							this.st火花[ i ].ct進行.tStop();
 							this.st火花[ i ].b使用中 = false;
 						}
                         if (CDTXMania.ConfigIni.nExplosionFrames <= 1)
                         {
                             Matrix identity = Matrix.Identity;
                             float num2 = ((float)this.st火花[i].ct進行.n現在の値) / 70f;
-                            float num3 = this.st火花[i].f回転単位 + (this.st火花[i].f回転方向 * C変換.DegreeToRadian((float)(60f * num2)));
+                            float num3 = this.st火花[i].f回転単位 + (this.st火花[i].f回転方向 * CConversion.DegreeToRadian((float)(60f * num2)));
                             float num4 = ((float)(0.2 + (0.8 * Math.Cos((((double)this.st火花[i].ct進行.n現在の値) / 50.0) * 1.5707963267948966)))) * this.st火花[i].fサイズ;
                             identity *= Matrix.Scaling(0.2f + num4, 0.2f + num4, 1f);
                             //identity *= Matrix.RotationZ( num3 + ( (float) Math.PI / 2 ) );
@@ -783,17 +783,17 @@ namespace DTXMania
 				{
 					if( this.st大波[ i ].b使用中 )
 					{
-						this.st大波[ i ].ct進行.t進行();
+						this.st大波[ i ].ct進行.tUpdate();
 						if( this.st大波[ i ].ct進行.bReachedEndValue )
 						{
-							this.st大波[ i ].ct進行.t停止();
+							this.st大波[ i ].ct進行.tStop();
 							this.st大波[ i ].b使用中 = false;
 						}
 						if( this.st大波[ i ].ct進行.n現在の値 >= 0 )
 						{
 							Matrix matrix3 = Matrix.Identity;
 							float num10 = ( (float) this.st大波[ i ].ct進行.n現在の値 ) / 100f;
-							float angle = this.st大波[ i ].f回転単位 + ( this.st大波[ i ].f回転方向 * C変換.DegreeToRadian( (float) ( 60f * num10 ) ) );
+							float angle = this.st大波[ i ].f回転単位 + ( this.st大波[ i ].f回転方向 * CConversion.DegreeToRadian( (float) ( 60f * num10 ) ) );
 							float num12 = 1f;
 							if( num10 < 0.4f )
 							{
@@ -876,10 +876,10 @@ namespace DTXMania
 				{
 					if( this.st細波[ i ].b使用中 )
 					{
-						this.st細波[ i ].ct進行.t進行();
+						this.st細波[ i ].ct進行.tUpdate();
 						if( this.st細波[ i ].ct進行.bReachedEndValue )
 						{
-							this.st細波[ i ].ct進行.t停止();
+							this.st細波[ i ].ct進行.tStop();
 							this.st細波[ i ].b使用中 = false;
 						}
 						if( this.st細波[ i ].ct進行.n現在の値 >= 0 )

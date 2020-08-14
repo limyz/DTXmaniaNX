@@ -65,7 +65,7 @@ namespace FDK
 			this.e出力デバイス = ESoundDeviceType.Unknown;
 			this.n実出力遅延ms = 0;
 			this.n経過時間ms = 0;
-			this.n経過時間を更新したシステム時刻ms = CTimer.n未使用;
+			this.n経過時間を更新したシステム時刻ms = CTimer.nUnused;
 			this.tmシステムタイマ = new CTimer( CTimer.E種別.MultiMedia );
 			this.b最初の実出力遅延算出 = true;
 
@@ -304,7 +304,7 @@ namespace FDK
 			}
 			if( bManagedDispose )
 			{
-				C共通.tDisposeする( this.tmシステムタイマ );
+				CCommon.tDisposeする( this.tmシステムタイマ );
 				this.tmシステムタイマ = null;
 			}
 		}

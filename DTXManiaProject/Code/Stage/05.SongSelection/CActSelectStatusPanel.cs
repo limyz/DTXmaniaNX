@@ -189,9 +189,9 @@ namespace DTXMania
 
                 // 進行
 
-                this.ct登場アニメ用.t進行();
+                this.ct登場アニメ用.tUpdate();
 
-                this.ct難易度スクロール用.t進行();
+                this.ct難易度スクロール用.tUpdate();
                 if (this.ct難易度スクロール用.bReachedEndValue)
                 {
                     int num = this.nCheckDifficultyLabelDisplayAndReturnScrollDirection();
@@ -206,7 +206,7 @@ namespace DTXMania
                     this.ct難易度スクロール用.n現在の値 = 0;
                 }
 
-                this.ct難易度矢印用.t進行Loop();
+                this.ct難易度矢印用.tUpdateLoop();
 
                 // 描画
 
@@ -304,7 +304,7 @@ namespace DTXMania
 
                                 if (this.n現在選択中の曲の難易度 == i && this.tx難易度枠 != null)
                                 {
-                                    if ((CDTXMania.ConfigIni.bDrums有効 && j == 0) || (CDTXMania.ConfigIni.bGuitar有効 && j != 0))
+                                    if ((CDTXMania.ConfigIni.bDrumsEnabled && j == 0) || (CDTXMania.ConfigIni.bGuitarEnabled && j != 0))
                                         this.tx難易度枠.tDraw2D(CDTXMania.app.Device, nBoxX, nBoxY);
                                 }
 
@@ -390,7 +390,7 @@ namespace DTXMania
 
                             if (this.tx難易度枠 != null)
                             {
-                                if ((CDTXMania.ConfigIni.bDrums有効 && j == 0) || (CDTXMania.ConfigIni.bGuitar有効 && j != 0))
+                                if ((CDTXMania.ConfigIni.bDrumsEnabled && j == 0) || (CDTXMania.ConfigIni.bGuitarEnabled && j != 0))
                                     this.tx難易度枠.tDraw2D(CDTXMania.app.Device, nBoxX, nBoxY);
                             }
 

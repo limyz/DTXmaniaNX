@@ -173,7 +173,7 @@ namespace DTXMania
 
                 if (this.ctComment.b進行中)
 				{
-					this.ctComment.t進行Loop();
+					this.ctComment.tUpdateLoop();
 				}
 				if( this.txArtist != null )
 				{

@@ -150,7 +150,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                int num1 = CDTXMania.stagePerfDrumsScreen.ctBPMバー.n現在の値;
+                int num1 = CDTXMania.stagePerfDrumsScreen.ctBPMBar.n現在の値;
 
 
                 if (base.bJustStartedUpdate)
@@ -372,10 +372,10 @@ namespace DTXMania
                     if (this.stボーナス[i].b使用中)
                     {
                         int numf = this.stボーナス[i].ct進行.n現在の値;
-                        this.stボーナス[i].ct進行.t進行();
+                        this.stボーナス[i].ct進行.tUpdate();
                         if (this.stボーナス[i].ct進行.bReachedEndValue)
                         {
-                            this.stボーナス[i].ct進行.t停止();
+                            this.stボーナス[i].ct進行.tStop();
                             this.stボーナス[i].b使用中 = false;
                         }
                         if (this.txボーナス文字 != null && CDTXMania.ConfigIni.bShowScore)
@@ -400,7 +400,7 @@ namespace DTXMania
             {
                 if (this.stボーナス[j].b使用中)
                 {
-                    this.stボーナス[j].ct進行.t停止();
+                    this.stボーナス[j].ct進行.tStop();
                     this.stボーナス[j].b使用中 = false;
                 }
             }
@@ -424,7 +424,7 @@ namespace DTXMania
             {
                 if (this.stボーナス[j].b使用中)
                 {
-                    this.stボーナス[j].ct進行.t停止();
+                    this.stボーナス[j].ct進行.tStop();
                     this.stボーナス[j].b使用中 = false;
                 }
             }

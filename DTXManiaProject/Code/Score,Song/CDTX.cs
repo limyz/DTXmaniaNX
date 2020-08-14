@@ -1346,7 +1346,7 @@ namespace DTXMania
 		public string MIDIFILE;
 		public bool MIDINOTE;
 		public int MIDIレベル;
-		public STLANEINT n可視チップ数;
+		public STLANEINT nVisibleChipsCount;
         public int nボーナスチップ数;
 		public const int n最大音数 = 4;
 		public const int n小節の解像度 = 384;
@@ -3173,7 +3173,7 @@ namespace DTXMania
 		{
 			if( pChip.n整数値_内部番号 >= 0 )
 			{
-				if( ( nLane < (int) Eレーン.LC ) || ( (int) Eレーン.BGM < nLane ) )
+				if( ( nLane < (int) ELane.LC ) || ( (int) ELane.BGM < nLane ) )
 				{
 					throw new ArgumentOutOfRangeException();
 				}
@@ -3197,7 +3197,7 @@ namespace DTXMania
 						{
 							sound.db周波数倍率 = 1.0;
 						}
-						sound.db再生速度 = ( (double) CDTXMania.ConfigIni.n演奏速度 ) / 20.0;
+						sound.db再生速度 = ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0;
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
 						sound.n音量 = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
 						sound.n位置 = wc.n位置;
@@ -3764,22 +3764,22 @@ namespace DTXMania
 						#region [ 可視チップ数カウント ]
 						for ( int n = 0; n < 14; n++ )
 						{
-							this.n可視チップ数[ n ] = 0;
+							this.nVisibleChipsCount[ n ] = 0;
 						}
 						foreach ( CChip chip in this.listChip )
 						{
 							int c = chip.nチャンネル番号;
 							if ( ( 0x11 <= c ) && ( c <= 0x1c ) )
 							{
-								this.n可視チップ数[ c - 0x11 ]++;
+								this.nVisibleChipsCount[ c - 0x11 ]++;
 							}
                             if ( ( 0x20 <= c ) && ( c <= 0x27 ) || ( 0x93 <= c ) && ( c <= 0x9F ) || ( 0xA9 <= c ) && ( c <= 0xAF ) || ( 0xD0 <= c ) && ( c <= 0xD3 ) )
                             {
-								this.n可視チップ数.Guitar++;
+								this.nVisibleChipsCount.Guitar++;
 							}
                             if ( ( 0xA0 <= c ) && ( c <= 0xA7 ) || ( 0xC5 <= c ) && ( c <= 0xC6 ) || ( 0xC8 <= c ) && ( c <= 0xCF ) || ( 0xDA <= c ) && ( c <= 0xDF ) || ( 0xE1 <= c ) && ( c <= 0xE8 ) )
                             {
-								this.n可視チップ数.Bass++;
+								this.nVisibleChipsCount.Bass++;
 							}
                             if ( ( c >= 0x4C ) && ( c <= 0x4F ) )
                             {
@@ -4159,7 +4159,7 @@ namespace DTXMania
 		}
 
 		/// <summary>
-		/// Swap infos between Guitar and Bass (notes, level, n可視チップ数, bチップがある)
+		/// Swap infos between Guitar and Bass (notes, level, nVisibleChipsCount, bチップがある)
 		/// </summary>
 		public void SwapGuitarBassInfos()						// #24063 2011.1.24 yyagi ギターとベースの譜面情報入替
 		{
@@ -4217,9 +4217,9 @@ namespace DTXMania
 			this.LEVELDEC.Bass = this.LEVELDEC.Guitar;
 			this.LEVELDEC.Guitar = t;
 
-			t = this.n可視チップ数.Bass;
-			this.n可視チップ数.Bass = this.n可視チップ数.Guitar;
-			this.n可視チップ数.Guitar = t;
+			t = this.nVisibleChipsCount.Bass;
+			this.nVisibleChipsCount.Bass = this.nVisibleChipsCount.Guitar;
+			this.nVisibleChipsCount.Guitar = t;
 
 			bool ts = this.bチップがある.Bass;
 			this.bチップがある.Bass = this.bチップがある.Guitar;
@@ -5002,7 +5002,7 @@ namespace DTXMania
 
 			#region [ AVI番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "AVI(VIDEO)番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5060,7 +5060,7 @@ namespace DTXMania
 
 			#region [ AVIPAN番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "AVIPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5097,7 +5097,7 @@ namespace DTXMania
 				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			avipan.nAVI番号 = C変換.n36進数2桁の文字列を数値に変換して返す( strParams[ i ] );
+			avipan.nAVI番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
 			if( avipan.nAVI番号 < 1 || avipan.nAVI番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5298,7 +5298,7 @@ namespace DTXMania
 
 			#region [ BGA番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BGA番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5335,7 +5335,7 @@ namespace DTXMania
 				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bga.nBMP番号 = C変換.n36進数2桁の文字列を数値に変換して返す( strParams[ i ] );
+			bga.nBMP番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
 			if( bga.nBMP番号 < 1 || bga.nBMP番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5464,7 +5464,7 @@ namespace DTXMania
 
 			#region [ BGAPAN番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BGAPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5501,7 +5501,7 @@ namespace DTXMania
 				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bgapan.nBMP番号 = C変換.n36進数2桁の文字列を数値に変換して返す( strParams[ i ] );
+			bgapan.nBMP番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
 			if( bgapan.nBMP番号 < 1 || bgapan.nBMP番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5713,7 +5713,7 @@ namespace DTXMania
 			{
 				#region [ (B) "#BMPzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+				zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 				if( zz < 0 || zz >= 36 * 36 )
 				{
 					Trace.TraceError( "BMP番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5763,7 +5763,7 @@ namespace DTXMania
 
 			#region [ BMPTEX番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BMPTEX番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5820,7 +5820,7 @@ namespace DTXMania
 			{
 				#region [ (B) "#BPMzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+				zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 				if( zz < 0 || zz >= 36 * 36 )
 				{
 					Trace.TraceError( "BPM番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6164,7 +6164,7 @@ namespace DTXMania
 
 			#region [ nWAV番号（36進数2桁）を取得。]
 			//-----------------
-			int nWAV番号 = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int nWAV番号 = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 
 			if( nWAV番号 < 0 || nWAV番号 >= 36 * 36 )
 			{
@@ -6224,7 +6224,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6292,7 +6292,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAVPAN(PAN)のWAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6347,7 +6347,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = C変換.n36進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6398,7 +6398,7 @@ namespace DTXMania
 
 			#region [ n小節番号 を取得する。]
 			//-----------------
-			int n小節番号 = C変換.n小節番号の文字列3桁を数値に変換して返す( strコマンド.Substring( 0, 3 ) );
+			int n小節番号 = CConversion.n小節番号の文字列3桁を数値に変換して返す( strコマンド.Substring( 0, 3 ) );
 			if( n小節番号 < 0 )
 				return false;
 
@@ -6435,7 +6435,7 @@ namespace DTXMania
 			{
 				#region [ (B) その他の場合：チャンネル番号は16進数2桁。]
 				//-----------------
-				nチャンネル番号 = C変換.n16進数2桁の文字列を数値に変換して返す( strコマンド.Substring( 3, 2 ) );
+				nチャンネル番号 = CConversion.nGetNumberFrom2DigitHexadecimalString( strコマンド.Substring( 3, 2 ) );
 
 				if( nチャンネル番号 < 0 )
 					return false;
@@ -6606,7 +6606,7 @@ namespace DTXMania
 				if( ce.Current == '_' )		// '_' は無視。
 					continue;
 
-				if( C変換.str36進数文字.IndexOf( ce.Current ) < 0 )	// オブジェクト記述は36進数文字であること。
+				if( CConversion.strBase36Characters.IndexOf( ce.Current ) < 0 )	// オブジェクト記述は36進数文字であること。
 				{
 					Trace.TraceError( "不正なオブジェクト指定があります。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 					return false;
@@ -6635,12 +6635,12 @@ namespace DTXMania
 				if( nチャンネル番号 == 0x03 )
 				{
 					// Ch.03 のみ 16進数2桁。
-					nオブジェクト数値 = C変換.n16進数2桁の文字列を数値に変換して返す( strパラメータ.Substring( i * 2, 2 ) );
+					nオブジェクト数値 = CConversion.nGetNumberFrom2DigitHexadecimalString( strパラメータ.Substring( i * 2, 2 ) );
 				}
 				else
 				{
 					// その他のチャンネルは36進数2桁。
-					nオブジェクト数値 = C変換.n36進数2桁の文字列を数値に変換して返す( strパラメータ.Substring( i * 2, 2 ) );
+					nオブジェクト数値 = CConversion.nGetNumberFrom2DigitBase36String( strパラメータ.Substring( i * 2, 2 ) );
 				}
 
 				if( nオブジェクト数値 == 0x00 )

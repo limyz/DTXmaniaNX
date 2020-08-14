@@ -49,7 +49,7 @@ namespace DTXMania
         // メソッド
         public void tラベル名からステータスパネルを決定する(string strラベル名)
         {
-            this.tスクリプトから難易度ラベルを取得する( strラベル名 );
+            this.tGetDifficultyLabelFromScript( strラベル名 );
 
             if (string.IsNullOrEmpty(strラベル名))
             {
@@ -94,7 +94,7 @@ namespace DTXMania
             base.OnActivate();
         }
 
-        public void tスクリプトから難易度ラベルを取得する( string strラベル名 )
+        public void tGetDifficultyLabelFromScript( string strラベル名 )
         {
             string strRawScriptFile;
 

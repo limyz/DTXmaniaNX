@@ -26,7 +26,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 3; i++ )
 			{
-				this.db譜面スクロール速度[ i ] = this.db現在の譜面スクロール速度[ i ] = (double) CDTXMania.ConfigIni.n譜面スクロール速度[ i ];
+				this.db譜面スクロール速度[ i ] = this.db現在の譜面スクロール速度[ i ] = (double) CDTXMania.ConfigIni.nScrollSpeed[ i ];
 				this.n速度変更制御タイマ[ i ] = -1;
 			}
 			base.OnActivate();
@@ -43,7 +43,7 @@ namespace DTXMania
 				long num = CSoundManager.rc演奏用タイマ.n現在時刻;
 				for( int i = 0; i < 3; i++ )
 				{
-					double num3 = (double) CDTXMania.ConfigIni.n譜面スクロール速度[ i ];
+					double num3 = (double) CDTXMania.ConfigIni.nScrollSpeed[ i ];
 					if( num < this.n速度変更制御タイマ[ i ] )
 					{
 						this.n速度変更制御タイマ[ i ] = num;

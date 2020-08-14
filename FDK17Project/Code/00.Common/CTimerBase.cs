@@ -10,7 +10,7 @@ namespace FDK
 	/// </summary>
 	public abstract class CTimerBase : IDisposable
 	{
-		public const long n未使用 = -1;
+		public const long nUnused = -1;
 
 		// この２つを override する。
 		public abstract long nシステム時刻ms

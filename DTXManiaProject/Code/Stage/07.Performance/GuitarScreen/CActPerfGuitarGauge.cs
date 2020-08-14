@@ -73,8 +73,8 @@ namespace DTXMania
                 this.ct本体振動 = new CCounter(0, 360, 4, CDTXMania.Timer);
                 base.bJustStartedUpdate = false;
             }
-            this.ct本体移動.t進行Loop();
-            this.ct本体振動.t進行Loop();
+            this.ct本体移動.tUpdateLoop();
+            this.ct本体振動.tUpdateLoop();
 
             base.txハイスピ.vc拡大縮小倍率 = new Vector3(0.76190476190476190476190476190476f, 0.66666666666666666666666666666667f, 1.0f);
 
@@ -82,7 +82,7 @@ namespace DTXMania
             if (base.txフレーム.Guitar != null && CDTXMania.DTX.bチップがある.Guitar)
             {
                 base.txフレーム.Guitar.tDraw2D(CDTXMania.app.Device, base.n本体X.Guitar, 0, new Rectangle(0, 0, base.txフレーム.Guitar.sz画像サイズ.Width, 68));
-                base.txハイスピ.tDraw2D(CDTXMania.app.Device, - 36 + base.n本体X.Guitar + base.txフレーム.Guitar.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Guitar * 48, 42, 48));
+                base.txハイスピ.tDraw2D(CDTXMania.app.Device, - 36 + base.n本体X.Guitar + base.txフレーム.Guitar.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.nScrollSpeed.Guitar * 48, 42, 48));
                 if (base.db現在のゲージ値.Guitar == 1.0 && base.txフルゲージ != null)
                 {
                     base.txフルゲージ.tDraw2D(CDTXMania.app.Device, 6 + base.n本体X.Guitar, 31, new Rectangle(0, 0, base.txフレーム.Guitar.sz画像サイズ.Width - 48, 30));
@@ -110,7 +110,7 @@ namespace DTXMania
             if (base.txフレーム.Bass != null && CDTXMania.DTX.bチップがある.Bass)
             {
                 base.txフレーム.Bass.tDraw2D(CDTXMania.app.Device, base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 0, new Rectangle(0, 0, base.txフレーム.Bass.sz画像サイズ.Width, 68));
-                base.txハイスピ.tDraw2D(CDTXMania.app.Device, 4 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Bass * 48, 42, 48));
+                base.txハイスピ.tDraw2D(CDTXMania.app.Device, 4 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 30, new Rectangle(0, CDTXMania.ConfigIni.nScrollSpeed.Bass * 48, 42, 48));
                 if (base.db現在のゲージ値.Bass == 1.0 && base.txフルゲージ != null)
                 {
                     base.txフルゲージ.tDraw2D(CDTXMania.app.Device, 42 + base.n本体X.Bass - base.txフレーム.Bass.sz画像サイズ.Width, 31, new Rectangle(0, 0, base.txフレーム.Bass.sz画像サイズ.Width - 48, 30));

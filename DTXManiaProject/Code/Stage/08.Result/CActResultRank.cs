@@ -49,12 +49,12 @@ namespace DTXMania
             this.n本体X[2] = 0;
             this.n本体Y[2] = 0;
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
                 this.n本体X[0] = n中X;
                 this.n本体Y[0] = n中Y;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigIni.bGuitarEnabled)
             {
                 if (!CDTXMania.DTX.bチップがある.Bass)
                 {
@@ -171,7 +171,7 @@ namespace DTXMania
                 this.ctランク表示 = new CCounter(0, 500, 1, CDTXMania.Timer);
                 base.bJustStartedUpdate = false;
             }
-            this.ctランク表示.t進行();
+            this.ctランク表示.tUpdate();
 
             for (int j = 0; j < 3; j++)
             {
@@ -191,7 +191,7 @@ namespace DTXMania
                     int num14 = -165 + this.n本体X[j];
                     int num15 = 100 + this.n本体Y[j];
 
-                    if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfect数 == CDTXMania.stageResult.stPerformanceEntry[j].n全チップ数)
+                    if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount == CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount)
                     {
                         if (this.txExcellent != null)
                             this.txExcellent.tDraw2D(CDTXMania.app.Device, num14, num15);

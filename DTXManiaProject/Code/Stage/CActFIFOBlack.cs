@@ -51,7 +51,7 @@ namespace DTXMania
 			{
 				return 0;
 			}
-			this.counter.t進行();
+			this.counter.tUpdate();
 			// Size clientSize = CDTXMania.app.Window.ClientSize;	// #23510 2010.10.31 yyagi: delete as of no one use this any longer.
 			if (this.tx黒タイル64x64 != null)
 			{

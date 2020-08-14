@@ -704,10 +704,10 @@ namespace DTXMania
 											{
 												int nSectionHiSkill = ( i * 2 ) + 1;
                                                 int nSectionHiScore = i * 2;
-												if(    scoreIni.stSection[ nSectionHiSkill ].b演奏にMIDI入力を使用した
-													|| scoreIni.stSection[ nSectionHiSkill ].b演奏にキーボードを使用した
-													|| scoreIni.stSection[ nSectionHiSkill ].b演奏にジョイパッドを使用した
-													|| scoreIni.stSection[ nSectionHiSkill ].b演奏にマウスを使用した )
+												if(    scoreIni.stSection[ nSectionHiSkill ].bMIDIUsed
+													|| scoreIni.stSection[ nSectionHiSkill ].bKeyboardUsed
+													|| scoreIni.stSection[ nSectionHiSkill ].bJoypadUsed
+													|| scoreIni.stSection[ nSectionHiSkill ].bMouseUsed )
 												{
                                                     if (CDTXMania.ConfigIni.nSkillMode == 0)
                                                     {
@@ -1674,35 +1674,35 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 
 					#region socre.譜面情報.最大ランク[ n楽器番号 ] = ... 
 					//-----------------
-					if( ini.stSection[ n ].b演奏にMIDI入力を使用した ||
-						ini.stSection[ n ].b演奏にキーボードを使用した ||
-						ini.stSection[ n ].b演奏にジョイパッドを使用した ||
-						ini.stSection[ n ].b演奏にマウスを使用した )
+					if( ini.stSection[ n ].bMIDIUsed ||
+						ini.stSection[ n ].bKeyboardUsed ||
+						ini.stSection[ n ].bJoypadUsed ||
+						ini.stSection[ n ].bMouseUsed )
                     {
                         // (A) 全オートじゃないようなので、演奏結果情報を有効としてランクを算出する。
                         if ( CDTXMania.ConfigIni.nSkillMode == 0 )
                         {
                             score.SongInformation.BestRank[ n楽器番号 ] =
                             CScoreIni.tCalculateRankOld(
-                                ini.stSection[n].n全チップ数,
-                                ini.stSection[n].nPerfect数,
-                                ini.stSection[n].nGreat数,
-                                ini.stSection[n].nGood数,
-                                ini.stSection[n].nPoor数,
-                                ini.stSection[n].nMiss数
+                                ini.stSection[n].nTotalChipsCount,
+                                ini.stSection[n].nPerfectCount,
+                                ini.stSection[n].nGreatCount,
+                                ini.stSection[n].nGoodCount,
+                                ini.stSection[n].nPoorCount,
+                                ini.stSection[n].nMissCount
                                 );
                         }
                         else if( CDTXMania.ConfigIni.nSkillMode == 1 )
                         {
                             score.SongInformation.BestRank[ n楽器番号 ] =
                             CScoreIni.tCalculateRank(
-                                ini.stSection[ n ].n全チップ数,
-                                ini.stSection[ n ].nPerfect数,
-                                ini.stSection[ n ].nGreat数,
-                                ini.stSection[ n ].nGood数,
-                                ini.stSection[ n ].nPoor数,
-                                ini.stSection[ n ].nMiss数,
-                                ini.stSection[ n ].n最大コンボ数
+                                ini.stSection[ n ].nTotalChipsCount,
+                                ini.stSection[ n ].nPerfectCount,
+                                ini.stSection[ n ].nGreatCount,
+                                ini.stSection[ n ].nGoodCount,
+                                ini.stSection[ n ].nPoorCount,
+                                ini.stSection[ n ].nMissCount,
+                                ini.stSection[ n ].nMaxCombo
                                 );
                         }
                     }
@@ -1714,7 +1714,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 					//-----------------
 					#endregion
 					score.SongInformation.HighSkill[ n楽器番号 ] = ini.stSection[ n ].dbPerformanceSkill;
-                    score.SongInformation.HighSongSkill[ n楽器番号 ] = ini.stSection[ n ].dbゲーム型スキル値;
+                    score.SongInformation.HighSongSkill[ n楽器番号 ] = ini.stSection[ n ].dbGameSkill;
 					score.SongInformation.FullCombo[ n楽器番号 ] = ini.stSection[ n ].bIsFullCombo | ini.stSection[ n楽器番号 * 2 ].bIsFullCombo;
 				}
 				score.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;

@@ -83,7 +83,7 @@ namespace DTXMania
                 "Reload song data.");
             this.list項目リスト.Add(this.iSystemReloadDTX);
 
-            int nDGmode = (CDTXMania.ConfigIni.bGuitar有効 ? 1 : 1) + (CDTXMania.ConfigIni.bDrums有効 ? 0 : 1) - 1;
+            int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
             this.iSystemGRmode = new CItemList("Drums & GR ", CItemBase.Eパネル種別.通常, nDGmode,
                 "使用楽器の選択：\nDrOnly: ドラムのみ有効にします。\nGROnly: ギター/ベースのみの専用画面を\n用います。",
                 "DrOnly: Only Drums is available.\nGROnly: Only Guitar/Bass are available.\n You can play them in GR screen.",
@@ -108,7 +108,7 @@ namespace DTXMania
                 new string[] { "0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" });
             this.list項目リスト.Add(this.iSystemMovieAlpha);
 
-            this.iCommonPlaySpeed = new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.n演奏速度,
+            this.iCommonPlaySpeed = new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.nPlaySpeed,
                 "曲の演奏速度を、速くしたり\n"+
                 "遅くしたりすることができます。\n"+
                 "※一部のサウンドカードでは、\n"+
@@ -148,7 +148,7 @@ namespace DTXMania
                 "Fullscreen mode or window mode.");
             this.list項目リスト.Add(this.iSystemFullscreen);
 
-            this.iSystemStageFailed = new CItemToggle("StageFailed", CDTXMania.ConfigIni.bSTAGEFAILED有効,
+            this.iSystemStageFailed = new CItemToggle("StageFailed", CDTXMania.ConfigIni.bSTAGEFAILEDEnabled,
                 "ONにするとゲージが\n" +
                 "なくなった時にSTAGE FAILED" +
                 "となり演奏が中断されます。",
@@ -252,7 +252,7 @@ namespace DTXMania
                 "Turn ON if you want to be cheered\n at the end of fill-in zone or not.");
             this.list項目リスト.Add(this.iSystemAudienceSound);
 
-            this.iSystemDamageLevel = new CItemList("DamageLevel", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eダメージレベル,
+            this.iSystemDamageLevel = new CItemList("DamageLevel", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eDamageLevel,
                 "Miss時のゲージの減少度合い\n"+
                 "を指定します。\n"+
                 "Risky時は無効となります",
@@ -581,7 +581,7 @@ namespace DTXMania
 
             //----------StandardOption----------
 
-            this.iDrumsScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.n譜面スクロール速度.Drums,
+            this.iDrumsScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.nScrollSpeed.Drums,
                 "ノーツの流れるスピードを\n"+
                 "変更します。\n" +
                 "数字が大きくなるほど\n" +
@@ -1108,7 +1108,7 @@ namespace DTXMania
                 "To play wailing automatically.");
             this.list項目リスト.Add(this.iGuitarW);
 
-            this.iGuitarScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.n譜面スクロール速度.Guitar,
+            this.iGuitarScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.nScrollSpeed.Guitar,
                 "演奏時のギター譜面のスクロールの\n速度を指定します。\nx0.5 ～ x1000.0 までを指定可能です。",
                 "To change the scroll speed for the\nguitar lanes.\nYou can set it from x0.5 to x1000.0.\n(ScrollSpeed=x0.5 means half speed)");
             this.list項目リスト.Add(this.iGuitarScrollSpeed);
@@ -1319,7 +1319,7 @@ namespace DTXMania
                 "To play wailing automatically.");
             this.list項目リスト.Add(this.iBassW);
 
-            this.iBassScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.n譜面スクロール速度.Bass,
+            this.iBassScrollSpeed = new CItemInteger("ScrollSpeed", 0, 0x7cf, CDTXMania.ConfigIni.nScrollSpeed.Bass,
                 "演奏時のベース譜面のスクロールの\n速度を指定します。\nx0.5 ～ x1000.0 までを指定可能です。",
                 "To change the scroll speed for the\nbass lanes.\nYou can set it from x0.5 to x1000.0.\n(ScrollSpeed=x0.5 means half speed)");
             this.list項目リスト.Add(this.iBassScrollSpeed);
@@ -2366,7 +2366,7 @@ namespace DTXMania
             #region [ ▲印アニメの進行 ]
             //-----------------
             if (this.b項目リスト側にフォーカスがある && (this.n目標のスクロールカウンタ == 0))
-                this.ct三角矢印アニメ.t進行Loop();
+                this.ct三角矢印アニメ.tUpdateLoop();
             //-----------------
             #endregion
 
@@ -2963,15 +2963,15 @@ namespace DTXMania
         private void tConfigIniへ記録する_System()
         {
             //CDTXMania.ConfigIni.eDark = (EDarkMode) this.iCommonDark.n現在選択されている項目番号;
-            CDTXMania.ConfigIni.n演奏速度 = this.iCommonPlaySpeed.n現在の値;
+            CDTXMania.ConfigIni.nPlaySpeed = this.iCommonPlaySpeed.n現在の値;
 
-            CDTXMania.ConfigIni.bGuitar有効 = (((this.iSystemGRmode.n現在選択されている項目番号 + 1) / 2) == 1);
+            CDTXMania.ConfigIni.bGuitarEnabled = (((this.iSystemGRmode.n現在選択されている項目番号 + 1) / 2) == 1);
             //this.iSystemGuitar.bON;
-            CDTXMania.ConfigIni.bDrums有効 = (((this.iSystemGRmode.n現在選択されている項目番号 + 1) % 2) == 1);
+            CDTXMania.ConfigIni.bDrumsEnabled = (((this.iSystemGRmode.n現在選択されている項目番号 + 1) % 2) == 1);
             //this.iSystemDrums.bON;
 
             CDTXMania.ConfigIni.b全画面モード = this.iSystemFullscreen.bON;
-            CDTXMania.ConfigIni.bSTAGEFAILED有効 = this.iSystemStageFailed.bON;
+            CDTXMania.ConfigIni.bSTAGEFAILEDEnabled = this.iSystemStageFailed.bON;
             CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする = this.iSystemRandomFromSubBox.bON;
 
             CDTXMania.ConfigIni.bWave再生位置自動調整機能有効 = this.iSystemAdjustWaves.bON;
@@ -2988,7 +2988,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.n背景の透過度 = this.iSystemBGAlpha.n現在の値;
             CDTXMania.ConfigIni.bBGM音を発声する = this.iSystemBGMSound.bON;
             CDTXMania.ConfigIni.b歓声を発声する = this.iSystemAudienceSound.bON;
-            CDTXMania.ConfigIni.eダメージレベル = (EDamageLevel)this.iSystemDamageLevel.n現在選択されている項目番号;
+            CDTXMania.ConfigIni.eDamageLevel = (EDamageLevel)this.iSystemDamageLevel.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bScoreIniを出力する = this.iSystemSaveScore.bON;
 
             CDTXMania.ConfigIni.bログ出力 = this.iLogOutputLog.bON;
@@ -3042,7 +3042,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bAutoPlay.BsP = this.iBassP.bON;
             CDTXMania.ConfigIni.bAutoPlay.BsPick = this.iBassPick.bON;
             CDTXMania.ConfigIni.bAutoPlay.BsW = this.iBassW.bON;
-            CDTXMania.ConfigIni.n譜面スクロール速度.Bass = this.iBassScrollSpeed.n現在の値;
+            CDTXMania.ConfigIni.nScrollSpeed.Bass = this.iBassScrollSpeed.n現在の値;
             CDTXMania.ConfigIni.nHidSud.Bass = this.iBassHIDSUD.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bReverse.Bass = this.iBassReverse.bON;
             CDTXMania.ConfigIni.判定文字表示位置.Bass = (EType)this.iBassPosition.n現在選択されている項目番号;
@@ -3076,7 +3076,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bAutoPlay.RD = this.iDrumsRide.bON;
             CDTXMania.ConfigIni.bAutoPlay.LP = this.iDrumsLeftPedal.bON;
             CDTXMania.ConfigIni.bAutoPlay.LBD = this.iDrumsLeftBassDrum.bON;
-            CDTXMania.ConfigIni.n譜面スクロール速度.Drums = this.iDrumsScrollSpeed.n現在の値;
+            CDTXMania.ConfigIni.nScrollSpeed.Drums = this.iDrumsScrollSpeed.n現在の値;
             CDTXMania.ConfigIni.bReverse.Drums = this.iDrumsReverse.bON;
             CDTXMania.ConfigIni.判定文字表示位置.Drums = (EType)this.iDrumsPosition.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bTight = this.iDrumsTight.bON;
@@ -3132,7 +3132,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bAutoPlay.GtP = this.iGuitarP.bON;
             CDTXMania.ConfigIni.bAutoPlay.GtPick = this.iGuitarPick.bON;
             CDTXMania.ConfigIni.bAutoPlay.GtW = this.iGuitarW.bON;
-            CDTXMania.ConfigIni.n譜面スクロール速度.Guitar = this.iGuitarScrollSpeed.n現在の値;
+            CDTXMania.ConfigIni.nScrollSpeed.Guitar = this.iGuitarScrollSpeed.n現在の値;
             CDTXMania.ConfigIni.nHidSud.Guitar = this.iGuitarHIDSUD.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bReverse.Guitar = this.iGuitarReverse.bON;
             CDTXMania.ConfigIni.判定文字表示位置.Guitar = (EType)this.iGuitarPosition.n現在選択されている項目番号;

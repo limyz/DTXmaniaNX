@@ -50,8 +50,8 @@ namespace DTXMania
 				}
 				if ( this.ct透明度用 != null )
 				{
-					//this.ct移動用.t進行Loop();
-					this.ct透明度用.t進行Loop();
+					//this.ct移動用.tUpdateLoop();
+					this.ct透明度用.tUpdateLoop();
 				}
 				for ( int nPart = (int) EInstrumentPart.GUITAR; nPart <= (int) EInstrumentPart.BASS; nPart++ )
 				{

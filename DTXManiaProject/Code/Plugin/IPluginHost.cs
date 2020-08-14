@@ -37,7 +37,7 @@
 		/// <summary>
 		/// 現在のステージにおけるフェーズのIDを表します。
 		/// </summary>
-		DTXMania.CStage.Eフェーズ e現在のフェーズ { get; }
+		DTXMania.CStage.EPhase e現在のフェーズ { get; }
 
 		/// <summary>
 		/// <para>自分以外は入力データを扱ってはならないことを宣言します。</para>

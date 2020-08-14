@@ -50,8 +50,8 @@ namespace DTXMania
                     this.ct透明度用 = new CCounter(0, 250, 4, CDTXMania.Timer);
                 }
                     this.bDanger中[(int)EInstrumentPart.DRUMS] = bIsDangerDrums;
-                    this.ct移動用.t進行Loop();
-                    this.ct透明度用.t進行Loop();
+                    this.ct移動用.tUpdateLoop();
+                    this.ct透明度用.tUpdateLoop();
                     if (!this.bDanger中[(int)EInstrumentPart.DRUMS])
                     {
                         return 0;

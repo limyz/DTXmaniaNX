@@ -93,7 +93,7 @@ namespace DTXMania
 				return 0;
 
 			// 進行。
-            this.counter.t進行();
+            this.counter.tUpdate();
 			#region [ 初めての進行処理。]
 			//-----------------
 			if( this.bJustStartedUpdate )
@@ -141,7 +141,7 @@ namespace DTXMania
             {
                 return 0;
             }
-            this.counter.t進行();
+            this.counter.tUpdate();
             if (this.counter.n現在の値 != 400)
             {
                 return 0;

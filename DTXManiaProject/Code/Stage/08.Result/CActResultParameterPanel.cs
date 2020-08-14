@@ -241,12 +241,12 @@ namespace DTXMania
                 this.nスコアX[j] = 0;
             }
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
                 this.n本体X[0] = n左1X;
                 this.nスコアX[0] = n左2X;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigIni.bGuitarEnabled)
             {
                 if (CDTXMania.DTX.bチップがある.Guitar)
                 {
@@ -462,7 +462,7 @@ namespace DTXMania
                 this.ct表示用 = new CCounter(0, 999, 3, CDTXMania.Timer);
                 base.bJustStartedUpdate = false;
             }
-            this.ct表示用.t進行();
+            this.ct表示用.tUpdate();
 
 
             for (int j = 0; j < 3; j++)
@@ -487,12 +487,12 @@ namespace DTXMania
                     this.txスキルパネル.tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
                     this.txネームプレート用文字[ j ].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
 
-                    this.t小文字表示(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPerfect数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGreat数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGood数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPoor数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMiss数_Auto含まない));
-                    this.t小文字表示(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].n最大コンボ数));
+                    this.t小文字表示(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount_ExclAuto));
+                    this.t小文字表示(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGreatCount_ExclAuto));
+                    this.t小文字表示(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGoodCount_ExclAuto));
+                    this.t小文字表示(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPoorCount_ExclAuto));
+                    this.t小文字表示(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMissCount_ExclAuto));
+                    this.t小文字表示(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo));
 
 
                     this.t小文字表示(167 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPerfect率[j])));
@@ -500,7 +500,7 @@ namespace DTXMania
                     this.t小文字表示(167 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGood率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPoor率[j])));
                     this.t小文字表示(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fMiss率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stageResult.stPerformanceEntry[j].n最大コンボ数 / CDTXMania.stageResult.stPerformanceEntry[j].n全チップ数))));
+                    this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo / CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount))));
 
                     //this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill));
                     //Conditional checks for MAX
@@ -515,7 +515,7 @@ namespace DTXMania
                             this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[j], 287 + this.n本体Y);
                     }
 
-                    this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbゲーム型スキル値));
+                    this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbGameSkill));
                     
                     if(this.tx難易度パネル != null)
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
@@ -554,11 +554,11 @@ namespace DTXMania
                     }
                     if (this.ct表示用.n現在の値 >= 900)
                     {
-                        if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfect数 == CDTXMania.stageResult.stPerformanceEntry[j].n全チップ数)
+                        if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount == CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount)
                         {
                             //えくせ
                         }
-                        else if (CDTXMania.stageResult.stPerformanceEntry[j].bIsFullCombo && CDTXMania.stageResult.stPerformanceEntry[j].nPerfect数 != CDTXMania.stageResult.stPerformanceEntry[j].n全チップ数)
+                        else if (CDTXMania.stageResult.stPerformanceEntry[j].bIsFullCombo && CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount != CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount)
                         {
                             //ふるこん
                         }

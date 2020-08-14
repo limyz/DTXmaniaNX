@@ -77,10 +77,10 @@ namespace DTXMania
                             //if( j == 4 )
                                 //this.txレーンフラッシュ.tDraw2D( CDTXMania.app.Device, x2 + ( ( i < 5 ? i : i - 5 ) * 39 ), y2, new Rectangle( i * 39, 0, 41, 566 ) );
 				        }
-                        base.ct進行[ i ].t進行();
+                        base.ct進行[ i ].tUpdate();
 						if( base.ct進行[ i ].bReachedEndValue )
 						{
-							base.ct進行[ i ].t停止();
+							base.ct進行[ i ].tStop();
 						}
 					}
 				}

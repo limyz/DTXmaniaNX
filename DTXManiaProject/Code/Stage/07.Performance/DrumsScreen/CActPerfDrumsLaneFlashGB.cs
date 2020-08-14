@@ -30,10 +30,10 @@ namespace DTXMania
 								texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( j * 0x20, 0, ( 0x18 * ( 100 - base.ct進行[ i ].n現在の値 ) ) / 100, 0x76 ) );
 							}
 						}
-						base.ct進行[ i ].t進行();
+						base.ct進行[ i ].tUpdate();
 						if( base.ct進行[ i ].bReachedEndValue )
 						{
-							base.ct進行[ i ].t停止();
+							base.ct進行[ i ].tStop();
 						}
 					}
 				}

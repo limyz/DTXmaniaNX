@@ -134,7 +134,7 @@ namespace DTXMania
                 bitmap3.Dispose();
                 Bitmap bitmap4 = new Bitmap(0x2a, 0x30);
                 graphics = Graphics.FromImage(bitmap4);
-                graphics.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, CDTXMania.ConfigIni.n譜面スクロール速度.Drums * 0x30, 0x2a, 0x30), GraphicsUnit.Pixel);
+                graphics.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, CDTXMania.ConfigIni.nScrollSpeed.Drums * 0x30, 0x2a, 0x30), GraphicsUnit.Pixel);
                 this.txDrumSpeed = new CTexture(CDTXMania.app.Device, bitmap4, CDTXMania.TextureFormat, false);
                 graphics.Dispose();
                 //graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
@@ -171,7 +171,7 @@ namespace DTXMania
                 this.ct登場用 = new CCounter(0, 100, 5, CDTXMania.Timer);
                 base.bJustStartedUpdate = false;
             }
-            this.ct登場用.t進行();
+            this.ct登場用.tUpdate();
             int x = this.n本体X;
             int y = this.n本体Y;
             this.txジャケットパネル.tDraw2D(CDTXMania.app.Device, 467, 287);

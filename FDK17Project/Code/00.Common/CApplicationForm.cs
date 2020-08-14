@@ -163,12 +163,12 @@ namespace FDK
 			//-----------------
 			this.OnManageリソースを解放する();
 			this.OnUnmanageリソースを解放する();
-			C共通.tDisposeする( this.D3D9Device );
+			CCommon.tDisposeする( this.D3D9Device );
 			//-----------------
 			#endregion
 			#region [ Direct3D9 を解放。]
 			//-----------------
-			C共通.tDisposeする( this.Direct3D );
+			CCommon.tDisposeする( this.Direct3D );
 			//-----------------
 			#endregion
 		}
@@ -275,7 +275,7 @@ namespace FDK
 				this.OnManageリソースを解放する();
 				this.OnUnmanageリソースを解放する();
 				
-				C共通.tDisposeする( this.D3D9Device );
+				CCommon.tDisposeする( this.D3D9Device );
 				this.D3D9Device = new Device(		// 失敗したら異常系とみなし、そのまま例外をthrow。
 					this.Direct3D,
 					newD3DSettings.nAdaptor,
@@ -336,7 +336,7 @@ namespace FDK
 					this.tマウスカーソルを消す();
 
 				if( b全画面からウィンドウへの切替えである || ( b初めての生成 && bウィンドウモードにする ) )
-					this.tマウスカーソルを表示する();
+					this.tDisplayMouseCursor();
 			}
 			//-----------------
 			#endregion
@@ -402,20 +402,20 @@ namespace FDK
 			this.D3D9Device.Clear( ClearFlags.Target, this.colorデバイスクリア色, 0.0f, 0 );
 		}
 
-		public void tマウスカーソルを表示する()
+		public void tDisplayMouseCursor()
 		{
-			if( !this.bマウスカーソル表示中 )
+			if( !this.bMouseCursorDisplayed )
 			{
 				Cursor.Show();
-				this.bマウスカーソル表示中 = true;
+				this.bMouseCursorDisplayed = true;
 			}
 		}
 		public void tマウスカーソルを消す()
 		{
-			if( this.bマウスカーソル表示中 )
+			if( this.bMouseCursorDisplayed )
 			{
 				Cursor.Hide();
-				this.bマウスカーソル表示中 = false;
+				this.bMouseCursorDisplayed = false;
 			}
 		}
 
@@ -453,9 +453,9 @@ namespace FDK
 			CTimer timer = null;
 			if( b時間計測 )
 				timer = new CTimer( CTimer.E種別.MultiMedia );
-			long n開始 = CTimer.n未使用;
-			long nPresent開始 = CTimer.n未使用;
-			long n終了 = CTimer.n未使用;
+			long n開始 = CTimer.nUnused;
+			long nPresent開始 = CTimer.nUnused;
+			long n終了 = CTimer.nUnused;
 			//-----------------
 			#endregion
 
@@ -744,8 +744,8 @@ namespace FDK
 		//-----------------
 		public void Dispose()
 		{
-			C共通.tDisposeする( this.D3D9Device ); this.D3D9Device = null;
-			C共通.tDisposeする( this.Direct3D ); this.Direct3D = null;
+			CCommon.tDisposeする( this.D3D9Device ); this.D3D9Device = null;
+			CCommon.tDisposeする( this.Direct3D ); this.Direct3D = null;
 		}
 		//-----------------
 		#endregion
@@ -766,7 +766,7 @@ namespace FDK
 			public bool bTopMostWindow;
 		}
 		protected Cウィンドウ状態 mウインドウモード時の状態のバックアップ = null;
-		protected bool bマウスカーソル表示中 = true;
+		protected bool bMouseCursorDisplayed = true;
 		protected readonly Color4 colorデバイスクリア色 = new Color4( 1f, 0f, 0f, 0f );
 		protected const uint wsウィンドウスタイル =
 			(uint)CWin32.WS_OVERLAPPED |		// オーバラップウィンドウ。

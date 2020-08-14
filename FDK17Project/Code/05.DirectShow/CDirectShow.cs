@@ -337,8 +337,8 @@ namespace FDK
 						this.b音声のみ = true;
 					else
 					{
-						C共通.tCOMオブジェクトを解放する( ref videoInputPin );
-						C共通.tCOMオブジェクトを解放する( ref videoRenderer );
+						CCommon.tCOMオブジェクトを解放する( ref videoInputPin );
+						CCommon.tCOMオブジェクトを解放する( ref videoRenderer );
 					}
 				}
 
@@ -358,7 +358,7 @@ namespace FDK
 					this.memoryRenderer.GetBufferSize( out n );
 					this.nデータサイズbyte = (int) n;
 					this.nスキャンライン幅byte = (int) this.nデータサイズbyte / this.n高さpx;
-					// C共通.tCOMオブジェクトを解放する( ref baseFilter );		なんかキャスト元のオブジェクトまで解放されるので解放禁止。
+					// CCommon.tCOMオブジェクトを解放する( ref baseFilter );		なんかキャスト元のオブジェクトまで解放されるので解放禁止。
 				}
 
 
@@ -385,7 +385,7 @@ namespace FDK
 #if !DEBUG
 			catch( Exception e )
 			{
-				C共通.t例外の詳細をログに出力する( e );
+				CCommon.t例外の詳細をログに出力する( e );
 				this.Dispose();
 				throw;	// 例外発出。
 			}
@@ -618,7 +618,7 @@ namespace FDK
 					{
 						Debug.WriteLine( filterInfo.achName );		// フィルタ名表示。
 						if( filterInfo.pGraph != null )
-							C共通.tCOMオブジェクトを解放する( ref filterInfo.pGraph );
+							CCommon.tCOMオブジェクトを解放する( ref filterInfo.pGraph );
 					}
 
 					IEnumPins ePins;
@@ -654,29 +654,29 @@ namespace FDK
 											Debug.Write( "[" + connectFilterInfo.achName + "]." );	// 接続先フィルタ名
 
 											if( connectFilterInfo.pGraph != null )
-												C共通.tCOMオブジェクトを解放する( ref connectFilterInfo.pGraph );
+												CCommon.tCOMオブジェクトを解放する( ref connectFilterInfo.pGraph );
 										}
 
 										Debug.WriteLine( connectPinInfo.name );		// 接続先ピン名
 										if( connectPinInfo.filter != null )
-											C共通.tCOMオブジェクトを解放する( ref connectPinInfo.filter );
+											CCommon.tCOMオブジェクトを解放する( ref connectPinInfo.filter );
 										DsUtils.FreePinInfo( connectPinInfo );
 									}
-									C共通.tCOMオブジェクトを解放する( ref connectPin );
+									CCommon.tCOMオブジェクトを解放する( ref connectPin );
 								}
 								if( pinInfo.filter != null )
-									C共通.tCOMオブジェクトを解放する( ref pinInfo.filter );
+									CCommon.tCOMオブジェクトを解放する( ref pinInfo.filter );
 								DsUtils.FreePinInfo( pinInfo );
 							}
-							C共通.tCOMオブジェクトを解放する( ref pins[ 0 ] );
+							CCommon.tCOMオブジェクトを解放する( ref pins[ 0 ] );
 						}
 					}
-					C共通.tCOMオブジェクトを解放する( ref ePins );
+					CCommon.tCOMオブジェクトを解放する( ref ePins );
 
-					C共通.tCOMオブジェクトを解放する( ref filters[ 0 ] );
+					CCommon.tCOMオブジェクトを解放する( ref filters[ 0 ] );
 				}
 			}
-			C共通.tCOMオブジェクトを解放する( ref eFilters );
+			CCommon.tCOMオブジェクトを解放する( ref eFilters );
 
 			Debug.Flush();
 		}
@@ -828,11 +828,11 @@ namespace FDK
 			}
 			finally
 			{
-				C共通.tCOMオブジェクトを解放する( ref nullRendererInputPin );
-				C共通.tCOMオブジェクトを解放する( ref nullRenderer );
-				C共通.tCOMオブジェクトを解放する( ref rendererConnectedOutputPin );
-				C共通.tCOMオブジェクトを解放する( ref rendererInputPin );
-				C共通.tCOMオブジェクトを解放する( ref audioRenderer );
+				CCommon.tCOMオブジェクトを解放する( ref nullRendererInputPin );
+				CCommon.tCOMオブジェクトを解放する( ref nullRenderer );
+				CCommon.tCOMオブジェクトを解放する( ref rendererConnectedOutputPin );
+				CCommon.tCOMオブジェクトを解放する( ref rendererInputPin );
+				CCommon.tCOMオブジェクトを解放する( ref audioRenderer );
 			}
 		}
 		public static void tビデオレンダラをグラフから除去する( IGraphBuilder graphBuilder )
@@ -873,9 +873,9 @@ namespace FDK
 			}
 			finally
 			{
-				C共通.tCOMオブジェクトを解放する( ref connectedOutputPin );
-				C共通.tCOMオブジェクトを解放する( ref renderInputPin );
-				C共通.tCOMオブジェクトを解放する( ref videoRenderer );
+				CCommon.tCOMオブジェクトを解放する( ref connectedOutputPin );
+				CCommon.tCOMオブジェクトを解放する( ref renderInputPin );
+				CCommon.tCOMオブジェクトを解放する( ref videoRenderer );
 			}
 		}
 
@@ -908,17 +908,17 @@ namespace FDK
 					finally
 					{
 						if( pinfo.filter != null )
-							C共通.tCOMオブジェクトを解放する( ref pinfo.filter );
+							CCommon.tCOMオブジェクトを解放する( ref pinfo.filter );
 						DsUtils.FreePinInfo( pinfo );
 
 						if( firstInputPin == null )
-							C共通.tCOMオブジェクトを解放する( ref pins[ 0 ] );
+							CCommon.tCOMオブジェクトを解放する( ref pins[ 0 ] );
 					}
 				}
 			}
 			finally
 			{
-				C共通.tCOMオブジェクトを解放する( ref ePins );
+				CCommon.tCOMオブジェクトを解放する( ref ePins );
 			}
 
 			return firstInputPin;
@@ -967,13 +967,13 @@ namespace FDK
 								}
 								finally
 								{
-									C共通.tCOMオブジェクトを解放する( ref pins[ 0 ] );
+									CCommon.tCOMオブジェクトを解放する( ref pins[ 0 ] );
 								}
 							}
 						}
 						finally
 						{
-							C共通.tCOMオブジェクトを解放する( ref ePins );
+							CCommon.tCOMオブジェクトを解放する( ref ePins );
 						}
 
 						if( b出力ピンがある )
@@ -1016,7 +1016,7 @@ namespace FDK
 											hr = filters[ 0 ].QueryFilterInfo( out filterInfo );
 											DsError.ThrowExceptionForHR( hr );
 											strフィルタ名 = filterInfo.achName;
-											C共通.tCOMオブジェクトを解放する( ref filterInfo.pGraph );
+											CCommon.tCOMオブジェクトを解放する( ref filterInfo.pGraph );
 											//-----------------
 											#endregion
 											#region [ ピンID取得！]
@@ -1036,13 +1036,13 @@ namespace FDK
 								}
 								finally
 								{
-									C共通.tCOMオブジェクトを解放する( ref pins[ 0 ] );
+									CCommon.tCOMオブジェクトを解放する( ref pins[ 0 ] );
 								}
 							}
 						}
 						finally
 						{
-							C共通.tCOMオブジェクトを解放する( ref ePins );
+							CCommon.tCOMオブジェクトを解放する( ref ePins );
 						}
 
 						//-----------------
@@ -1050,13 +1050,13 @@ namespace FDK
 					}
 					finally
 					{
-						C共通.tCOMオブジェクトを解放する( ref filters[ 0 ] );
+						CCommon.tCOMオブジェクトを解放する( ref filters[ 0 ] );
 					}
 				}
 			}
 			finally
 			{
-				C共通.tCOMオブジェクトを解放する( ref eFilters );
+				CCommon.tCOMオブジェクトを解放する( ref eFilters );
 			}
 
 
@@ -1093,12 +1093,12 @@ namespace FDK
 						break;
 					}
 
-					C共通.tCOMオブジェクトを解放する( ref filters[ 0 ] );
+					CCommon.tCOMオブジェクトを解放する( ref filters[ 0 ] );
 				}
 			}
 			finally
 			{
-				C共通.tCOMオブジェクトを解放する( ref eFilters );
+				CCommon.tCOMオブジェクトを解放する( ref eFilters );
 			}
 			return audioRenderer;
 		}
@@ -1184,14 +1184,14 @@ namespace FDK
 			if( this.BasicAudio != null )
 				this.BasicAudio = null;
 
-			C共通.tCOMオブジェクトを解放する( ref this.nullRenderer );
-			C共通.tCOMオブジェクトを解放する( ref this.memoryRenderer );
-			C共通.tCOMオブジェクトを解放する( ref this.memoryRendererObject );
-			C共通.tCOMオブジェクトを解放する( ref this.graphBuilder );
+			CCommon.tCOMオブジェクトを解放する( ref this.nullRenderer );
+			CCommon.tCOMオブジェクトを解放する( ref this.memoryRenderer );
+			CCommon.tCOMオブジェクトを解放する( ref this.memoryRendererObject );
+			CCommon.tCOMオブジェクトを解放する( ref this.graphBuilder );
 			//-----------------
 			#endregion
 
-			C共通.t完全なガベージコレクションを実施する();
+			CCommon.t完全なガベージコレクションを実施する();
 		}
         ~CDirectShow()
 		{

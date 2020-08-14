@@ -100,7 +100,7 @@ namespace DTXMania
             get;
             set;
         }
-        public static int nPerfect範囲ms
+        public static int nPerfectRangeMs
         {
             get
             {
@@ -115,7 +115,7 @@ namespace DTXMania
                 return ConfigIni.nヒット範囲ms.Perfect;
             }
         }
-        public static int nGreat範囲ms
+        public static int nGreatRangeMs
         {
             get
             {
@@ -130,7 +130,7 @@ namespace DTXMania
                 return ConfigIni.nヒット範囲ms.Great;
             }
         }
-        public static int nGood範囲ms
+        public static int nGoodRangeMs
         {
             get
             {
@@ -145,7 +145,7 @@ namespace DTXMania
                 return ConfigIni.nヒット範囲ms.Good;
             }
         }
-        public static int nPoor範囲ms
+        public static int nPoorRangeMs
         {
             get
             {
@@ -481,7 +481,7 @@ namespace DTXMania
                 this.bマウスカーソル表示中 = false;
             }
             this.Device.SetTransform(TransformState.View, Matrix.LookAtLH(new Vector3(0f, 0f, (float)(-SampleFramework.GameWindowSize.Height / 2 * Math.Sqrt(3.0))), new Vector3(0f, 0f, 0f), new Vector3(0f, 1f, 0f)));
-            this.Device.SetTransform(TransformState.Projection, Matrix.PerspectiveFovLH(C変換.DegreeToRadian((float)60f), ((float)this.Device.Viewport.Width) / ((float)this.Device.Viewport.Height), -100f, 100f));
+            this.Device.SetTransform(TransformState.Projection, Matrix.PerspectiveFovLH(CConversion.DegreeToRadian((float)60f), ((float)this.Device.Viewport.Width) / ((float)this.Device.Viewport.Height), -100f, 100f));
             this.Device.SetRenderState(RenderState.Lighting, false);
             this.Device.SetRenderState(RenderState.ZEnable, false);
             this.Device.SetRenderState(RenderState.AntialiasedLineEnable, false);
@@ -503,7 +503,7 @@ namespace DTXMania
             if (this.listTopLevelActivities != null)
             {
                 foreach (CActivity activity in this.listTopLevelActivities)
-                    activity.OnUnmanagedCreateResource();
+                    activity.OnUnmanagedCreateResources();
             }
 
             foreach (STPlugin st in this.listPlugins)
@@ -518,7 +518,7 @@ namespace DTXMania
             if (this.listTopLevelActivities != null)
             {
                 foreach (CActivity activity in this.listTopLevelActivities)
-                    activity.OnUnmanagedリソースの解放();
+                    activity.OnUnmanagedReleaseResources();
             }
 
             foreach (STPlugin st in this.listPlugins)
@@ -1248,20 +1248,20 @@ for (int i = 0; i < 3; i++) {
                                 }													// "case CStage.EStage.Result:"のところ。
 
                                 double ps = 0.0, gs = 0.0;
-                                if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.n全チップ数 > 0)
+                                if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.nTotalChipsCount > 0)
                                 {
                                     ps = c演奏記録_Drums.dbPerformanceSkill;
-                                    gs = c演奏記録_Drums.dbゲーム型スキル値;
+                                    gs = c演奏記録_Drums.dbGameSkill;
                                 }
-                                else if (!c演奏記録_Guitar.b全AUTOである && c演奏記録_Guitar.n全チップ数 > 0)
+                                else if (!c演奏記録_Guitar.b全AUTOである && c演奏記録_Guitar.nTotalChipsCount > 0)
                                 {
                                     ps = c演奏記録_Guitar.dbPerformanceSkill;
-                                    gs = c演奏記録_Guitar.dbゲーム型スキル値;
+                                    gs = c演奏記録_Guitar.dbGameSkill;
                                 }
                                 else
                                 {
                                     ps = c演奏記録_Bass.dbPerformanceSkill;
-                                    gs = c演奏記録_Bass.dbゲーム型スキル値;
+                                    gs = c演奏記録_Bass.dbGameSkill;
                                 }
                                 string str = "Cleared";
                                 switch (CScoreIni.tCalculateOverallRankValue(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
@@ -2407,10 +2407,10 @@ for (int i = 0; i < 3; i++) {
                 ini.stFile.Hash = CScoreIni.tComputeFileMD5(DTX.strファイル名の絶対パス);
                 for (int i = 0; i < 6; i++)
                 {
-                    ini.stSection[i].nPerfectになる範囲ms = nPerfect範囲ms;
-                    ini.stSection[i].nGreatになる範囲ms = nGreat範囲ms;
-                    ini.stSection[i].nGoodになる範囲ms = nGood範囲ms;
-                    ini.stSection[i].nPoorになる範囲ms = nPoor範囲ms;
+                    ini.stSection[i].nPerfectRangeMs = nPerfectRangeMs;
+                    ini.stSection[i].nGreatRangeMs = nGreatRangeMs;
+                    ini.stSection[i].nGoodRangeMs = nGoodRangeMs;
+                    ini.stSection[i].nPoorRangeMs = nPoorRangeMs;
                 }
             }
             ini.stFile.BGMAdjust = DTX.nBGMAdjust;

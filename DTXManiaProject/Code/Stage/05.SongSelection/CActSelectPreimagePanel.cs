@@ -96,25 +96,25 @@ namespace DTXMania
 					this.ct登場アニメ用 = new CCounter( 0, 100, 5, CDTXMania.Timer );
 					base.bJustStartedUpdate = false;
 				}
-				this.ct登場アニメ用.t進行();
+				this.ct登場アニメ用.tUpdate();
 				if( ( !CDTXMania.stageSongSelection.bScrolling && ( this.ct遅延表示 != null ) ) && this.ct遅延表示.b進行中 )
 				{
-					this.ct遅延表示.t進行();
+					this.ct遅延表示.tUpdate();
 					if( this.ct遅延表示.bReachedEndValue )
 					{
-						this.ct遅延表示.t停止();
+						this.ct遅延表示.tStop();
 					}
 					else if( ( this.ct遅延表示.n現在の値 >= 0 ) && this.b新しいプレビューファイルをまだ読み込んでいない )
 					{
 						this.tプレビュー画像_動画の変更();
 						CDTXMania.Timer.t更新();
-						this.ct遅延表示.n現在の経過時間ms = CDTXMania.Timer.n現在時刻;
+						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.n現在時刻;
 						this.b新しいプレビューファイルを読み込んだ = true;
 					}
 				}
 				else if( ( ( this.avi != null ) && ( this.sfAVI画像 != null ) ) && ( this.nAVI再生開始時刻 != -1 ) )
 				{
-					int time = (int) ( ( CDTXMania.Timer.n現在時刻 - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.n演奏速度 ) / 20.0 ) );
+					int time = (int) ( ( CDTXMania.Timer.n現在時刻 - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
 					int frameNoFromTime = this.avi.GetFrameNoFromTime( time );
 					if( frameNoFromTime >= this.avi.GetMaxFrameCount() )
 					{
@@ -133,7 +133,7 @@ namespace DTXMania
                     {
 						this.tプレビュー画像_動画の変更();
 						CDTXMania.Timer.t更新();
-						this.ct遅延表示.n現在の経過時間ms = CDTXMania.Timer.n現在時刻;
+						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.n現在時刻;
 						this.b新しいプレビューファイルを読み込んだ = true;
                     }
                 }

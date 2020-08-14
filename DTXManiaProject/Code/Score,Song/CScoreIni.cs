@@ -162,20 +162,20 @@ namespace DTXMania
 		public class CPerformanceEntry
 		{
 			public STAUTOPLAY bAutoPlay;
-			public bool bDrums有効;
-			public bool bGuitar有効;
+			public bool bDrumsEnabled;
+			public bool bGuitarEnabled;
 			public STDGBVALUE<bool> bHidden;
 			public STDGBVALUE<bool> bLeft;
 			public STDGBVALUE<bool> bLight;
 			public STDGBVALUE<bool> bReverse;
-			public bool bSTAGEFAILED有効;
+			public bool bSTAGEFAILEDEnabled;
 			public STDGBVALUE<bool> bSudden;
 			public bool bTight;
-			public bool b演奏にMIDI入力を使用した;
-			public bool b演奏にキーボードを使用した;
-			public bool b演奏にジョイパッドを使用した;
-			public bool b演奏にマウスを使用した;
-			public double dbゲーム型スキル値;
+			public bool bMIDIUsed;
+			public bool bKeyboardUsed;
+			public bool bJoypadUsed;
+			public bool bMouseUsed;
+			public double dbGameSkill;
 			public double dbPerformanceSkill;
 			public ECYGroup eCYGroup;
 			public EDarkMode eDark;
@@ -186,32 +186,32 @@ namespace DTXMania
 			public E打ち分け時の再生の優先順位 eHitSoundPriorityFT;
 			public E打ち分け時の再生の優先順位 eHitSoundPriorityHH;
 			public STDGBVALUE<Eランダムモード> eRandom;
-			public EDamageLevel eダメージレベル;
-			public STDGBVALUE<float> f譜面スクロール速度;
+			public EDamageLevel eDamageLevel;
+			public STDGBVALUE<float> fScrollSpeed;
 			public string Hash;
-			public int nGoodになる範囲ms;
-			public int nGood数;
-			public int nGreatになる範囲ms;
-			public int nGreat数;
-			public int nMiss数;
-			public int nPerfectになる範囲ms;
-			public int nPerfect数;
-			public int nPoorになる範囲ms;
-			public int nPoor数;
-			public int nPerfect数_Auto含まない;
-			public int nGreat数_Auto含まない;
-			public int nGood数_Auto含まない;
-			public int nPoor数_Auto含まない;
-			public int nMiss数_Auto含まない;
+			public int nGoodRangeMs;
+			public int nGoodCount;
+			public int nGreatRangeMs;
+			public int nGreatCount;
+			public int nMissCount;
+			public int nPerfectRangeMs;
+			public int nPerfectCount;
+			public int nPoorRangeMs;
+			public int nPoorCount;
+			public int nPerfectCount_ExclAuto;
+			public int nGreatCount_ExclAuto;
+			public int nGoodCount_ExclAuto;
+			public int nPoorCount_ExclAuto;
+			public int nMissCount_ExclAuto;
 			public long nスコア;
-			public int n演奏速度分子;
-			public int n演奏速度分母;
-			public int n最大コンボ数;
-			public int n全チップ数;
-			public string strDTXManiaのバージョン;
+			public int nPlaySpeedNumerator;
+			public int nPlaySpeedDenominator;
+			public int nMaxCombo;
+			public int nTotalChipsCount;
+			public string strDTXManiaVersion;
 			public bool レーン9モード;
 			public int nRisky;		// #23559 2011.6.20 yyagi 0=OFF, 1-10=Risky
-			public string 最終更新日時;
+			public string strDateTime;
 
 			public CPerformanceEntry()
 			{
@@ -267,22 +267,22 @@ namespace DTXMania
 				this.bLeft.Drums = false;
 				this.bLeft.Guitar = false;
 				this.bLeft.Bass = false;
-				this.f譜面スクロール速度 = new STDGBVALUE<float>();
-				this.f譜面スクロール速度.Drums = 1f;
-				this.f譜面スクロール速度.Guitar = 1f;
-				this.f譜面スクロール速度.Bass = 1f;
-				this.n演奏速度分子 = 20;
-				this.n演奏速度分母 = 20;
-				this.bGuitar有効 = true;
-				this.bDrums有効 = true;
-				this.bSTAGEFAILED有効 = true;
-				this.eダメージレベル = EDamageLevel.Normal;
-				this.nPerfectになる範囲ms = 34;
-				this.nGreatになる範囲ms = 67;
-				this.nGoodになる範囲ms = 84;
-				this.nPoorになる範囲ms = 117;
-				this.strDTXManiaのバージョン = "Unknown";
-				this.最終更新日時 = "";
+				this.fScrollSpeed = new STDGBVALUE<float>();
+				this.fScrollSpeed.Drums = 1f;
+				this.fScrollSpeed.Guitar = 1f;
+				this.fScrollSpeed.Bass = 1f;
+				this.nPlaySpeedNumerator = 20;
+				this.nPlaySpeedDenominator = 20;
+				this.bGuitarEnabled = true;
+				this.bDrumsEnabled = true;
+				this.bSTAGEFAILEDEnabled = true;
+				this.eDamageLevel = EDamageLevel.Normal;
+				this.nPerfectRangeMs = 34;
+				this.nGreatRangeMs = 67;
+				this.nGoodRangeMs = 84;
+				this.nPoorRangeMs = 117;
+				this.strDTXManiaVersion = "Unknown";
+				this.strDateTime = "";
 				this.Hash = "00000000000000000000000000000000";
 				this.レーン9モード = true;
 				this.nRisky = 0;									// #23559 2011.6.20 yyagi
@@ -299,7 +299,7 @@ namespace DTXMania
 			{
 				get
 				{
-					return ( ( this.n最大コンボ数 > 0 ) && ( this.n最大コンボ数 == ( this.nPerfect数 + this.nGreat数 + this.nGood数 + this.nPoor数 + this.nMiss数 ) ) );
+					return ( ( this.nMaxCombo > 0 ) && ( this.nMaxCombo == ( this.nPerfectCount + this.nGreatCount + this.nGoodCount + this.nPoorCount + this.nMissCount ) ) );
 				}
 			}
 
@@ -314,7 +314,7 @@ namespace DTXMania
 			{
 				get
 				{
-					return (this.n全チップ数 - this.nPerfect数_Auto含まない - this.nGreat数_Auto含まない - this.nGood数_Auto含まない - this.nPoor数_Auto含まない - this.nMiss数_Auto含まない) == this.n全チップ数;
+					return (this.nTotalChipsCount - this.nPerfectCount_ExclAuto - this.nGreatCount_ExclAuto - this.nGoodCount_ExclAuto - this.nPoorCount_ExclAuto - this.nMissCount_ExclAuto) == this.nTotalChipsCount;
 				}
 			}
 #if false
@@ -697,41 +697,41 @@ namespace DTXMania
 							}
 							else if( item.Equals( "PlayCountDrums" ) )
 							{
-								this.stFile.PlayCountDrums = C変換.n値を文字列から取得して範囲内に丸めて返す( para, 0, 99999999, 0 );
+								this.stFile.PlayCountDrums = CConversion.nGetNumberIfInRange( para, 0, 99999999, 0 );
 							}
 							else if( item.Equals( "PlayCountGuitars" ) )// #23596 11.2.5 changed ikanick
 							{
-								this.stFile.PlayCountGuitar = C変換.n値を文字列から取得して範囲内に丸めて返す( para, 0, 99999999, 0 );
+								this.stFile.PlayCountGuitar = CConversion.nGetNumberIfInRange( para, 0, 99999999, 0 );
 							}
 							else if( item.Equals( "PlayCountBass" ) )
 							{
-								this.stFile.PlayCountBass = C変換.n値を文字列から取得して範囲内に丸めて返す( para, 0, 99999999, 0 );
+								this.stFile.PlayCountBass = CConversion.nGetNumberIfInRange( para, 0, 99999999, 0 );
                             }
                             // #23596 10.11.16 add ikanick------------------------------------/
                             else if (item.Equals("ClearCountDrums"))
                             {
-                                this.stFile.ClearCountDrums = C変換.n値を文字列から取得して範囲内に丸めて返す(para, 0, 99999999, 0);
+                                this.stFile.ClearCountDrums = CConversion.nGetNumberIfInRange(para, 0, 99999999, 0);
                             }
                             else if (item.Equals("ClearCountGuitars"))// #23596 11.2.5 changed ikanick
                             {
-                                this.stFile.ClearCountGuitar = C変換.n値を文字列から取得して範囲内に丸めて返す(para, 0, 99999999, 0);
+                                this.stFile.ClearCountGuitar = CConversion.nGetNumberIfInRange(para, 0, 99999999, 0);
                             }
                             else if (item.Equals("ClearCountBass"))
                             {
-                                this.stFile.ClearCountBass = C変換.n値を文字列から取得して範囲内に丸めて返す(para, 0, 99999999, 0);
+                                this.stFile.ClearCountBass = CConversion.nGetNumberIfInRange(para, 0, 99999999, 0);
                             }
                             // #24459 2011.2.24 yyagi-----------------------------------------/
 							else if ( item.Equals( "BestRankDrums" ) )
 							{
-								this.stFile.BestRank.Drums = C変換.n値を文字列から取得して範囲内に丸めて返す( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
+								this.stFile.BestRank.Drums = CConversion.nGetNumberIfInRange( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
 							}
 							else if ( item.Equals( "BestRankGuitar" ) )
 							{
-								this.stFile.BestRank.Guitar = C変換.n値を文字列から取得して範囲内に丸めて返す( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
+								this.stFile.BestRank.Guitar = CConversion.nGetNumberIfInRange( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
 							}
 							else if ( item.Equals( "BestRankBass" ) )
 							{
-								this.stFile.BestRank.Bass = C変換.n値を文字列から取得して範囲内に丸めて返す( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
+								this.stFile.BestRank.Bass = CConversion.nGetNumberIfInRange( para, (int) ERANK.SS, (int) ERANK.E, (int) ERANK.UNKNOWN );
 							}
 							//----------------------------------------------------------------/
 							else if ( item.Equals( "History0" ) )
@@ -756,11 +756,11 @@ namespace DTXMania
 							}
 							else if( item.Equals( "HistoryCount" ) )
 							{
-								this.stFile.HistoryCount = C変換.n値を文字列から取得して範囲内に丸めて返す( para, 0, 99999999, 0 );
+								this.stFile.HistoryCount = CConversion.nGetNumberIfInRange( para, 0, 99999999, 0 );
 							}
 							else if( item.Equals( "BGMAdjust" ) )
 							{
-								this.stFile.BGMAdjust = C変換.n値を文字列から取得して返す( para, 0 );
+								this.stFile.BGMAdjust = CConversion.nStringToInt( para, 0 );
 							}
 							continue;
 							#endregion
@@ -772,35 +772,35 @@ namespace DTXMania
 							}
 							else if( item.Equals( "Skill" ) )
 							{
-								c演奏記録.dbゲーム型スキル値 = (double) decimal.Parse( para );
+								c演奏記録.dbGameSkill = (double) decimal.Parse( para );
 							}
 							else if( item.Equals( "Perfect" ) )
 							{
-								c演奏記録.nPerfect数 = int.Parse( para );
+								c演奏記録.nPerfectCount = int.Parse( para );
 							}
 							else if( item.Equals( "Great" ) )
 							{
-								c演奏記録.nGreat数 = int.Parse( para );
+								c演奏記録.nGreatCount = int.Parse( para );
 							}
 							else if( item.Equals( "Good" ) )
 							{
-								c演奏記録.nGood数 = int.Parse( para );
+								c演奏記録.nGoodCount = int.Parse( para );
 							}
 							else if( item.Equals( "Poor" ) )
 							{
-								c演奏記録.nPoor数 = int.Parse( para );
+								c演奏記録.nPoorCount = int.Parse( para );
 							}
 							else if( item.Equals( "Miss" ) )
 							{
-								c演奏記録.nMiss数 = int.Parse( para );
+								c演奏記録.nMissCount = int.Parse( para );
 							}
 							else if( item.Equals( "MaxCombo" ) )
 							{
-								c演奏記録.n最大コンボ数 = int.Parse( para );
+								c演奏記録.nMaxCombo = int.Parse( para );
 							}
 							else if( item.Equals( "TotalChips" ) )
 							{
-								c演奏記録.n全チップ数 = int.Parse( para );
+								c演奏記録.nTotalChipsCount = int.Parse( para );
 							}
 							else if( item.Equals( "AutoPlay" ) )
 							{
@@ -819,43 +819,43 @@ namespace DTXMania
 							}
 							else if ( item.Equals( "TightDrums" ) )
 							{
-								c演奏記録.bTight = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bTight = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenDrums" ) )
 							{
-								c演奏記録.bSudden.Drums = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bSudden.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenGuitar" ) )
 							{
-								c演奏記録.bSudden.Guitar = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bSudden.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenBass" ) )
 							{
-								c演奏記録.bSudden.Bass = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bSudden.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenDrums" ) )
 							{
-								c演奏記録.bHidden.Drums = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bHidden.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenGuitar" ) )
 							{
-								c演奏記録.bHidden.Guitar = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bHidden.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenBass" ) )
 							{
-								c演奏記録.bHidden.Bass = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bHidden.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseDrums" ) )
 							{
-								c演奏記録.bReverse.Drums = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bReverse.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseGuitar" ) )
 							{
-								c演奏記録.bReverse.Guitar = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bReverse.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseBass" ) )
 							{
-								c演奏記録.bReverse.Bass = C変換.bONorOFF( para[ 0 ] );
+								c演奏記録.bReverse.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							#endregion
 							else
@@ -921,25 +921,25 @@ namespace DTXMania
 								#region [ LightGuitar ]
 								if ( item.Equals( "LightGuitar" ) )
 								{
-									c演奏記録.bLight.Guitar = C変換.bONorOFF( para[ 0 ] );
+									c演奏記録.bLight.Guitar = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LightBass ]
 								else if ( item.Equals( "LightBass" ) )
 								{
-									c演奏記録.bLight.Bass = C変換.bONorOFF( para[ 0 ] );
+									c演奏記録.bLight.Bass = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LeftGuitar ]
 								else if ( item.Equals( "LeftGuitar" ) )
 								{
-									c演奏記録.bLeft.Guitar = C変換.bONorOFF( para[ 0 ] );
+									c演奏記録.bLeft.Guitar = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LeftBass ]
 								else if ( item.Equals( "LeftBass" ) )
 								{
-									c演奏記録.bLeft.Bass = C変換.bONorOFF( para[ 0 ] );
+									c演奏記録.bLeft.Bass = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								else
@@ -971,19 +971,19 @@ namespace DTXMania
 									#region [ ScrollSpeedDrums ]
 									if ( item.Equals( "ScrollSpeedDrums" ) )
 									{
-										c演奏記録.f譜面スクロール速度.Drums = (float) decimal.Parse( para );
+										c演奏記録.fScrollSpeed.Drums = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ ScrollSpeedGuitar ]
 									else if ( item.Equals( "ScrollSpeedGuitar" ) )
 									{
-										c演奏記録.f譜面スクロール速度.Guitar = (float) decimal.Parse( para );
+										c演奏記録.fScrollSpeed.Guitar = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ ScrollSpeedBass ]
 									else if ( item.Equals( "ScrollSpeedBass" ) )
 									{
-										c演奏記録.f譜面スクロール速度.Bass = (float) decimal.Parse( para );
+										c演奏記録.fScrollSpeed.Bass = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ PlaySpeed ]
@@ -992,8 +992,8 @@ namespace DTXMania
 										string[] strArray2 = para.Split( new char[] { '/' } );
 										if ( strArray2.Length == 2 )
 										{
-											c演奏記録.n演奏速度分子 = int.Parse( strArray2[ 0 ] );
-											c演奏記録.n演奏速度分母 = int.Parse( strArray2[ 1 ] );
+											c演奏記録.nPlaySpeedNumerator = int.Parse( strArray2[ 0 ] );
+											c演奏記録.nPlaySpeedDenominator = int.Parse( strArray2[ 1 ] );
 										}
 									}
 									#endregion
@@ -1150,19 +1150,19 @@ namespace DTXMania
 										#region [ Guitar ]
 										if ( item.Equals( "Guitar" ) )
 										{
-											c演奏記録.bGuitar有効 = C変換.bONorOFF( para[ 0 ] );
+											c演奏記録.bGuitarEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										#region [ Drums ]
 										else if ( item.Equals( "Drums" ) )
 										{
-											c演奏記録.bDrums有効 = C変換.bONorOFF( para[ 0 ] );
+											c演奏記録.bDrumsEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										#region [ StageFailed ]
 										else if ( item.Equals( "StageFailed" ) )
 										{
-											c演奏記録.bSTAGEFAILED有効 = C変換.bONorOFF( para[ 0 ] );
+											c演奏記録.bSTAGEFAILEDEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										else
@@ -1174,17 +1174,17 @@ namespace DTXMania
 												{
 													case 0:
 														{
-															c演奏記録.eダメージレベル = EDamageLevel.Small;
+															c演奏記録.eDamageLevel = EDamageLevel.Small;
 															continue;
 														}
 													case 1:
 														{
-															c演奏記録.eダメージレベル = EDamageLevel.Normal;
+															c演奏記録.eDamageLevel = EDamageLevel.Normal;
 															continue;
 														}
 													case 2:
 														{
-															c演奏記録.eダメージレベル = EDamageLevel.High;
+															c演奏記録.eDamageLevel = EDamageLevel.High;
 															continue;
 														}
 												}
@@ -1193,43 +1193,43 @@ namespace DTXMania
 											#endregion
 											if ( item.Equals( "UseKeyboard" ) )
 											{
-												c演奏記録.b演奏にキーボードを使用した = C変換.bONorOFF( para[ 0 ] );
+												c演奏記録.bKeyboardUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseMIDIIN" ) )
 											{
-												c演奏記録.b演奏にMIDI入力を使用した = C変換.bONorOFF( para[ 0 ] );
+												c演奏記録.bMIDIUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseJoypad" ) )
 											{
-												c演奏記録.b演奏にジョイパッドを使用した = C変換.bONorOFF( para[ 0 ] );
+												c演奏記録.bJoypadUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseMouse" ) )
 											{
-												c演奏記録.b演奏にマウスを使用した = C変換.bONorOFF( para[ 0 ] );
+												c演奏記録.bMouseUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "PerfectRange" ) )
 											{
-												c演奏記録.nPerfectになる範囲ms = int.Parse( para );
+												c演奏記録.nPerfectRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "GreatRange" ) )
 											{
-												c演奏記録.nGreatになる範囲ms = int.Parse( para );
+												c演奏記録.nGreatRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "GoodRange" ) )
 											{
-												c演奏記録.nGoodになる範囲ms = int.Parse( para );
+												c演奏記録.nGoodRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "PoorRange" ) )
 											{
-												c演奏記録.nPoorになる範囲ms = int.Parse( para );
+												c演奏記録.nPoorRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "DTXManiaVersion" ) )
 											{
-												c演奏記録.strDTXManiaのバージョン = para;
+												c演奏記録.strDTXManiaVersion = para;
 											}
 											else if ( item.Equals( "DateTime" ) )
 											{
-												c演奏記録.最終更新日時 = para;
+												c演奏記録.strDateTime = para;
 											}
 											else if ( item.Equals( "Hash" ) )
 											{
@@ -1237,7 +1237,7 @@ namespace DTXMania
 											}
 											else if ( item.Equals( "9LaneMode" ) )
 											{
-												c演奏記録.レーン9モード = C変換.bONorOFF( para[ 0 ] );
+												c演奏記録.レーン9モード = CConversion.bONorOFF( para[ 0 ] );
 											}
 										}
 									}
@@ -1297,16 +1297,16 @@ namespace DTXMania
 				writer.WriteLine( "[{0}]", strArray[ i ] );
 				writer.WriteLine( "Score={0}", this.stSection[ i ].nスコア );
 				writer.WriteLine( "PlaySkill={0}", this.stSection[ i ].dbPerformanceSkill );
-				writer.WriteLine( "Skill={0}", this.stSection[ i ].dbゲーム型スキル値 );
-				writer.WriteLine( "Perfect={0}", this.stSection[ i ].nPerfect数 );
-				writer.WriteLine( "Great={0}", this.stSection[ i ].nGreat数 );
-				writer.WriteLine( "Good={0}", this.stSection[ i ].nGood数 );
-				writer.WriteLine( "Poor={0}", this.stSection[ i ].nPoor数 );
-				writer.WriteLine( "Miss={0}", this.stSection[ i ].nMiss数 );
-				writer.WriteLine( "MaxCombo={0}", this.stSection[ i ].n最大コンボ数 );
-				writer.WriteLine( "TotalChips={0}", this.stSection[ i ].n全チップ数 );
+				writer.WriteLine( "Skill={0}", this.stSection[ i ].dbGameSkill );
+				writer.WriteLine( "Perfect={0}", this.stSection[ i ].nPerfectCount );
+				writer.WriteLine( "Great={0}", this.stSection[ i ].nGreatCount );
+				writer.WriteLine( "Good={0}", this.stSection[ i ].nGoodCount );
+				writer.WriteLine( "Poor={0}", this.stSection[ i ].nPoorCount );
+				writer.WriteLine( "Miss={0}", this.stSection[ i ].nMissCount );
+				writer.WriteLine( "MaxCombo={0}", this.stSection[ i ].nMaxCombo );
+				writer.WriteLine( "TotalChips={0}", this.stSection[ i ].nTotalChipsCount );
 				writer.Write( "AutoPlay=" );
-				for ( int j = 0; j < (int) Eレーン.MAX; j++ )
+				for ( int j = 0; j < (int) ELane.MAX; j++ )
 				{
 					writer.Write( this.stSection[ i ].bAutoPlay[ j ] ? 1 : 0 );
 				}
@@ -1329,10 +1329,10 @@ namespace DTXMania
 				writer.WriteLine( "LeftGuitar={0}", this.stSection[ i ].bLeft.Guitar ? 1 : 0 );
 				writer.WriteLine( "LeftBass={0}", this.stSection[ i ].bLeft.Bass ? 1 : 0 );
 				writer.WriteLine( "Dark={0}", (int) this.stSection[ i ].eDark );
-				writer.WriteLine( "ScrollSpeedDrums={0}", this.stSection[ i ].f譜面スクロール速度.Drums );
-				writer.WriteLine( "ScrollSpeedGuitar={0}", this.stSection[ i ].f譜面スクロール速度.Guitar );
-				writer.WriteLine( "ScrollSpeedBass={0}", this.stSection[ i ].f譜面スクロール速度.Bass );
-				writer.WriteLine( "PlaySpeed={0}/{1}", this.stSection[ i ].n演奏速度分子, this.stSection[ i ].n演奏速度分母 );
+				writer.WriteLine( "ScrollSpeedDrums={0}", this.stSection[ i ].fScrollSpeed.Drums );
+				writer.WriteLine( "ScrollSpeedGuitar={0}", this.stSection[ i ].fScrollSpeed.Guitar );
+				writer.WriteLine( "ScrollSpeedBass={0}", this.stSection[ i ].fScrollSpeed.Bass );
+				writer.WriteLine( "PlaySpeed={0}/{1}", this.stSection[ i ].nPlaySpeedNumerator, this.stSection[ i ].nPlaySpeedDenominator );
 				writer.WriteLine( "HHGroup={0}", (int) this.stSection[ i ].eHHGroup );
 				writer.WriteLine( "FTGroup={0}", (int) this.stSection[ i ].eFTGroup );
 				writer.WriteLine( "CYGroup={0}", (int) this.stSection[ i ].eCYGroup );
@@ -1340,20 +1340,20 @@ namespace DTXMania
 				writer.WriteLine( "HitSoundPriorityHH={0}", (int) this.stSection[ i ].eHitSoundPriorityHH );
 				writer.WriteLine( "HitSoundPriorityFT={0}", (int) this.stSection[ i ].eHitSoundPriorityFT );
 				writer.WriteLine( "HitSoundPriorityCY={0}", (int) this.stSection[ i ].eHitSoundPriorityCY );
-				writer.WriteLine( "Guitar={0}", this.stSection[ i ].bGuitar有効 ? 1 : 0 );
-				writer.WriteLine( "Drums={0}", this.stSection[ i ].bDrums有効 ? 1 : 0 );
-				writer.WriteLine( "StageFailed={0}", this.stSection[ i ].bSTAGEFAILED有効 ? 1 : 0 );
-				writer.WriteLine( "DamageLevel={0}", (int) this.stSection[ i ].eダメージレベル );
-				writer.WriteLine( "UseKeyboard={0}", this.stSection[ i ].b演奏にキーボードを使用した ? 1 : 0 );
-				writer.WriteLine( "UseMIDIIN={0}", this.stSection[ i ].b演奏にMIDI入力を使用した ? 1 : 0 );
-				writer.WriteLine( "UseJoypad={0}", this.stSection[ i ].b演奏にジョイパッドを使用した ? 1 : 0 );
-				writer.WriteLine( "UseMouse={0}", this.stSection[ i ].b演奏にマウスを使用した ? 1 : 0 );
-				writer.WriteLine( "PerfectRange={0}", this.stSection[ i ].nPerfectになる範囲ms );
-				writer.WriteLine( "GreatRange={0}", this.stSection[ i ].nGreatになる範囲ms );
-				writer.WriteLine( "GoodRange={0}", this.stSection[ i ].nGoodになる範囲ms );
-				writer.WriteLine( "PoorRange={0}", this.stSection[ i ].nPoorになる範囲ms );
-				writer.WriteLine( "DTXManiaVersion={0}", this.stSection[ i ].strDTXManiaのバージョン );
-				writer.WriteLine( "DateTime={0}", this.stSection[ i ].最終更新日時 );
+				writer.WriteLine( "Guitar={0}", this.stSection[ i ].bGuitarEnabled ? 1 : 0 );
+				writer.WriteLine( "Drums={0}", this.stSection[ i ].bDrumsEnabled ? 1 : 0 );
+				writer.WriteLine( "StageFailed={0}", this.stSection[ i ].bSTAGEFAILEDEnabled ? 1 : 0 );
+				writer.WriteLine( "DamageLevel={0}", (int) this.stSection[ i ].eDamageLevel );
+				writer.WriteLine( "UseKeyboard={0}", this.stSection[ i ].bKeyboardUsed ? 1 : 0 );
+				writer.WriteLine( "UseMIDIIN={0}", this.stSection[ i ].bMIDIUsed ? 1 : 0 );
+				writer.WriteLine( "UseJoypad={0}", this.stSection[ i ].bJoypadUsed ? 1 : 0 );
+				writer.WriteLine( "UseMouse={0}", this.stSection[ i ].bMouseUsed ? 1 : 0 );
+				writer.WriteLine( "PerfectRange={0}", this.stSection[ i ].nPerfectRangeMs );
+				writer.WriteLine( "GreatRange={0}", this.stSection[ i ].nGreatRangeMs );
+				writer.WriteLine( "GoodRange={0}", this.stSection[ i ].nGoodRangeMs );
+				writer.WriteLine( "PoorRange={0}", this.stSection[ i ].nPoorRangeMs );
+				writer.WriteLine( "DTXManiaVersion={0}", this.stSection[ i ].strDTXManiaVersion );
+				writer.WriteLine( "DateTime={0}", this.stSection[ i ].strDateTime );
 				writer.WriteLine( "Hash={0}", this.stSection[ i ].Hash );
 			}
 			writer.Close();
@@ -1368,10 +1368,10 @@ namespace DTXMania
         }
         internal static int tCalculateRank(CPerformanceEntry part)
         {
-            if (part.b演奏にMIDI入力を使用した || part.b演奏にキーボードを使用した || part.b演奏にジョイパッドを使用した || part.b演奏にマウスを使用した)	// 2010.9.11
+            if (part.bMIDIUsed || part.bKeyboardUsed || part.bJoypadUsed || part.bMouseUsed)	// 2010.9.11
             {
-                int nTotal = part.nPerfect数 + part.nGreat数 + part.nGood数 + part.nPoor数 + part.nMiss数;
-                return tCalculateRank(nTotal, part.nPerfect数, part.nGreat数, part.nGood数, part.nPoor数, part.nMiss数, part.n最大コンボ数);
+                int nTotal = part.nPerfectCount + part.nGreatCount + part.nGoodCount + part.nPoorCount + part.nMissCount;
+                return tCalculateRank(nTotal, part.nPerfectCount, part.nGreatCount, part.nGoodCount, part.nPoorCount, part.nMissCount, part.nMaxCombo);
             }
             return (int)ERANK.UNKNOWN;
         }
@@ -1523,10 +1523,10 @@ namespace DTXMania
         }
         internal static int tCalculateRankOld(CPerformanceEntry part)
         {
-            if (part.b演奏にMIDI入力を使用した || part.b演奏にキーボードを使用した || part.b演奏にジョイパッドを使用した || part.b演奏にマウスを使用した)	// 2010.9.11
+            if (part.bMIDIUsed || part.bKeyboardUsed || part.bJoypadUsed || part.bMouseUsed)	// 2010.9.11
             {
-                int nTotal = part.nPerfect数 + part.nGreat数 + part.nGood数 + part.nPoor数 + part.nMiss数;
-                return tCalculateRankOld(nTotal, part.nPerfect数, part.nGreat数, part.nGood数, part.nPoor数, part.nMiss数);
+                int nTotal = part.nPerfectCount + part.nGreatCount + part.nGoodCount + part.nPoorCount + part.nMissCount;
+                return tCalculateRankOld(nTotal, part.nPerfectCount, part.nGreatCount, part.nGoodCount, part.nPoorCount, part.nMissCount);
             }
             return (int)ERANK.UNKNOWN;
         }
@@ -1770,15 +1770,15 @@ namespace DTXMania
 		{
 			StringBuilder builder = new StringBuilder();
 			builder.Append( cc.nスコア.ToString() );
-			builder.Append( cc.dbゲーム型スキル値.ToString( ".000000" ) );
+			builder.Append( cc.dbGameSkill.ToString( ".000000" ) );
 			builder.Append( cc.dbPerformanceSkill.ToString( ".000000" ) );
-			builder.Append( cc.nPerfect数 );
-			builder.Append( cc.nGreat数 );
-			builder.Append( cc.nGood数 );
-			builder.Append( cc.nPoor数 );
-			builder.Append( cc.nMiss数 );
-			builder.Append( cc.n最大コンボ数 );
-			builder.Append( cc.n全チップ数 );
+			builder.Append( cc.nPerfectCount );
+			builder.Append( cc.nGreatCount );
+			builder.Append( cc.nGoodCount );
+			builder.Append( cc.nPoorCount );
+			builder.Append( cc.nMissCount );
+			builder.Append( cc.nMaxCombo );
+			builder.Append( cc.nTotalChipsCount );
 			for( int i = 0; i < 10; i++ )
 				builder.Append( boolToChar( cc.bAutoPlay[ i ] ) );
 			builder.Append( boolToChar( cc.bTight ) );
@@ -1798,31 +1798,31 @@ namespace DTXMania
 			builder.Append( boolToChar( cc.bLeft.Guitar ) );
 			builder.Append( boolToChar( cc.bLeft.Bass ) );
 			builder.Append( (int) cc.eDark );
-			builder.Append( cc.f譜面スクロール速度.Drums.ToString( ".000000" ) );
-			builder.Append( cc.f譜面スクロール速度.Guitar.ToString( ".000000" ) );
-			builder.Append( cc.f譜面スクロール速度.Bass.ToString( ".000000" ) );
-			builder.Append( cc.n演奏速度分子 );
-			builder.Append( cc.n演奏速度分母 );
+			builder.Append( cc.fScrollSpeed.Drums.ToString( ".000000" ) );
+			builder.Append( cc.fScrollSpeed.Guitar.ToString( ".000000" ) );
+			builder.Append( cc.fScrollSpeed.Bass.ToString( ".000000" ) );
+			builder.Append( cc.nPlaySpeedNumerator );
+			builder.Append( cc.nPlaySpeedDenominator );
 			builder.Append( (int) cc.eHHGroup );
 			builder.Append( (int) cc.eFTGroup );
 			builder.Append( (int) cc.eCYGroup );
 			builder.Append( (int) cc.eHitSoundPriorityHH );
 			builder.Append( (int) cc.eHitSoundPriorityFT );
 			builder.Append( (int) cc.eHitSoundPriorityCY );
-			builder.Append( boolToChar( cc.bGuitar有効 ) );
-			builder.Append( boolToChar( cc.bDrums有効 ) );
-			builder.Append( boolToChar( cc.bSTAGEFAILED有効 ) );
-			builder.Append( (int) cc.eダメージレベル );
-			builder.Append( boolToChar( cc.b演奏にキーボードを使用した ) );
-			builder.Append( boolToChar( cc.b演奏にMIDI入力を使用した ) );
-			builder.Append( boolToChar( cc.b演奏にジョイパッドを使用した ) );
-			builder.Append( boolToChar( cc.b演奏にマウスを使用した ) );
-			builder.Append( cc.nPerfectになる範囲ms );
-			builder.Append( cc.nGreatになる範囲ms );
-			builder.Append( cc.nGoodになる範囲ms );
-			builder.Append( cc.nPoorになる範囲ms );
-			builder.Append( cc.strDTXManiaのバージョン );
-			builder.Append( cc.最終更新日時 );
+			builder.Append( boolToChar( cc.bGuitarEnabled ) );
+			builder.Append( boolToChar( cc.bDrumsEnabled ) );
+			builder.Append( boolToChar( cc.bSTAGEFAILEDEnabled ) );
+			builder.Append( (int) cc.eDamageLevel );
+			builder.Append( boolToChar( cc.bKeyboardUsed ) );
+			builder.Append( boolToChar( cc.bMIDIUsed ) );
+			builder.Append( boolToChar( cc.bJoypadUsed ) );
+			builder.Append( boolToChar( cc.bMouseUsed ) );
+			builder.Append( cc.nPerfectRangeMs );
+			builder.Append( cc.nGreatRangeMs );
+			builder.Append( cc.nGoodRangeMs );
+			builder.Append( cc.nPoorRangeMs );
+			builder.Append( cc.strDTXManiaVersion );
+			builder.Append( cc.strDateTime );
 
 			byte[] bytes = Encoding.GetEncoding( "shift-jis" ).GetBytes( builder.ToString() );
 			StringBuilder builder2 = new StringBuilder(0x21);
@@ -1836,19 +1836,19 @@ namespace DTXMania
 		}
 		internal static void tGetIsUpdateNeeded( out bool bDrumsを更新する, out bool bGuitarを更新する, out bool bBassを更新する )
 		{
-			bDrumsを更新する =  CDTXMania.ConfigIni.bDrums有効  && CDTXMania.DTX.bチップがある.Drums  && !CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
-			bGuitarを更新する = CDTXMania.ConfigIni.bGuitar有効 && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigIni.bギターが全部オートプレイである;
-			bBassを更新する =   CDTXMania.ConfigIni.bGuitar有効 && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigIni.bベースが全部オートプレイである;
+			bDrumsを更新する =  CDTXMania.ConfigIni.bDrumsEnabled  && CDTXMania.DTX.bチップがある.Drums  && !CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
+			bGuitarを更新する = CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigIni.bギターが全部オートプレイである;
+			bBassを更新する =   CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigIni.bベースが全部オートプレイである;
 		}
         internal static int tCalculateOverallRankValue(CPerformanceEntry Drums, CPerformanceEntry Guitar, CPerformanceEntry Bass)
         {
-            int nTotal = Drums.n全チップ数 + Guitar.n全チップ数 + Bass.n全チップ数;
-            int nPerfect = Drums.nPerfect数_Auto含まない + Guitar.nPerfect数_Auto含まない + Bass.nPerfect数_Auto含まない;	// #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
-            int nGreat = Drums.nGreat数_Auto含まない + Guitar.nGreat数_Auto含まない + Bass.nGreat数_Auto含まない;		//
-            int nGood = Drums.nGood数_Auto含まない + Guitar.nGood数_Auto含まない + Bass.nGood数_Auto含まない;		//
-            int nPoor = Drums.nPoor数_Auto含まない + Guitar.nPoor数_Auto含まない + Bass.nPoor数_Auto含まない;		//
-            int nMiss = Drums.nMiss数_Auto含まない + Guitar.nMiss数_Auto含まない + Bass.nMiss数_Auto含まない;		//
-            int nCombo = Drums.n最大コンボ数 + Guitar.n最大コンボ数 + Bass.n最大コンボ数;		//
+            int nTotal = Drums.nTotalChipsCount + Guitar.nTotalChipsCount + Bass.nTotalChipsCount;
+            int nPerfect = Drums.nPerfectCount_ExclAuto + Guitar.nPerfectCount_ExclAuto + Bass.nPerfectCount_ExclAuto;	// #24569 2011.3.1 yyagi: to calculate result rank without AUTO chips
+            int nGreat = Drums.nGreatCount_ExclAuto + Guitar.nGreatCount_ExclAuto + Bass.nGreatCount_ExclAuto;		//
+            int nGood = Drums.nGoodCount_ExclAuto + Guitar.nGoodCount_ExclAuto + Bass.nGoodCount_ExclAuto;		//
+            int nPoor = Drums.nPoorCount_ExclAuto + Guitar.nPoorCount_ExclAuto + Bass.nPoorCount_ExclAuto;		//
+            int nMiss = Drums.nMissCount_ExclAuto + Guitar.nMissCount_ExclAuto + Bass.nMissCount_ExclAuto;		//
+            int nCombo = Drums.nMaxCombo + Guitar.nMaxCombo + Bass.nMaxCombo;		//
             if (CDTXMania.ConfigIni.nSkillMode == 0)
             {
                 return tCalculateRankOld(nTotal, nPerfect, nGreat, nGood, nPoor, nMiss);

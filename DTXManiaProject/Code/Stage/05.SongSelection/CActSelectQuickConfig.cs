@@ -65,7 +65,7 @@ namespace DTXMania
             }
             #endregion
             #region [ 個別 ScrollSpeed ]
-            l.Add(new CItemInteger("ScrollSpeed", 0, 1999, CDTXMania.ConfigIni.n譜面スクロール速度[nInst],
+            l.Add(new CItemInteger("ScrollSpeed", 0, 1999, CDTXMania.ConfigIni.nScrollSpeed[nInst],
                 "演奏時のドラム譜面のスクロールの\n" +
                 "速度を指定します。\n" +
                 "x0.5 ～ x1000.0 を指定可能です。",
@@ -99,7 +99,7 @@ namespace DTXMania
                 " the number of Poor/Miss times to be\n" +
                 " FAILED.\n" +
                 "Set 0 to disable Risky mode."));
-            l.Add(new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.n演奏速度,
+            l.Add(new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.nPlaySpeed,
                 "曲の演奏速度を、速くしたり遅くした\n" +
                 "りすることができます。\n" +
                 "（※一部のサウンドカードでは正しく\n" +
@@ -360,7 +360,7 @@ namespace DTXMania
                     break;
 
                 case (int)EOrder.ScrollSpeed:
-                    CDTXMania.ConfigIni.n譜面スクロール速度[nCurrentTarget] = (int)GetObj現在値((int)EOrder.ScrollSpeed);
+                    CDTXMania.ConfigIni.nScrollSpeed[nCurrentTarget] = (int)GetObj現在値((int)EOrder.ScrollSpeed);
                     break;
 
                 case (int)EOrder.Dark:
@@ -397,7 +397,7 @@ namespace DTXMania
                     }
                     break;
                 case (int)EOrder.PlaySpeed:
-                    CDTXMania.ConfigIni.n演奏速度 = (int)GetObj現在値((int)EOrder.PlaySpeed);
+                    CDTXMania.ConfigIni.nPlaySpeed = (int)GetObj現在値((int)EOrder.PlaySpeed);
                     break;
                 case (int)EOrder.SuddenHidden:
                     {
@@ -495,7 +495,7 @@ namespace DTXMania
             for (int target = 0; target < 3; target++)
             {
                 string str = GetAutoParameters(target);
-                int[] pa = { (int)Eレーン.LC, (int)Eレーン.GtR, (int)Eレーン.BsR };
+                int[] pa = { (int)ELane.LC, (int)ELane.GtR, (int)ELane.BsR };
                 int start = pa[target];
 
                 for (int i = 0; i < str.Length; i++)
@@ -565,8 +565,8 @@ namespace DTXMania
                             s = "_____A_";
                             break;
                         case 3:	// Custom
-                            int p = (target == (int)EInstrumentPart.GUITAR) ? (int)Eレーン.GtR : (int)Eレーン.BsR;
-                            int len = (int)Eレーン.GtW - (int)Eレーン.GtR + 1;
+                            int p = (target == (int)EInstrumentPart.GUITAR) ? (int)ELane.GtR : (int)ELane.BsR;
+                            int len = (int)ELane.GtW - (int)ELane.GtR + 1;
                             for (int i = p; i < p + len; i++)
                             {
                                 s += (CDTXMania.ConfigIni.bAutoPlay[i]) ? "A" : "_";

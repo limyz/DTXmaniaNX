@@ -19,7 +19,7 @@ namespace DTXMania
         public CStageSongLoading()
         {
             base.eステージID = CStage.EStage.SongLoading;
-            base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+            base.ePhaseID = CStage.EPhase.Common_DefaultState;
             base.bNotActivated = true;
             //			base.listChildActivities.Add( this.actFI = new CActFIFOBlack() );	// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
             base.listChildActivities.Add(this.actFO = new CActFIFOBlackStart());
@@ -396,7 +396,7 @@ namespace DTXMania
                     this.nBGMの総再生時間ms = CDTXMania.Skin.sound曲読込開始音.nLength_CurrentSound;
                 }
                 //				this.actFI.tフェードイン開始();							// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
-                base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
+                base.ePhaseID = CStage.EPhase.Common_FadeIn;
                 base.bJustStartedUpdate = false;
                 this.tラベル名からステータスパネルを決定する( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
 
@@ -489,7 +489,7 @@ namespace DTXMania
                 DTXLevel = cdtx.LEVEL[j];
                 DTXLevelDeci = cdtx.LEVELDEC[j];
 
-                if ((CDTXMania.ConfigIni.bDrums有効 && i == 0) || (CDTXMania.ConfigIni.bGuitar有効 && i != 0))
+                if ((CDTXMania.ConfigIni.bDrumsEnabled && i == 0) || (CDTXMania.ConfigIni.bGuitarEnabled && i != 0))
                 {
 
                     if (DTXLevel != 0 || DTXLevelDeci != 0)
@@ -532,7 +532,7 @@ namespace DTXMania
 
                 if (i == 2 && k == 0)
                 {
-                    if (this.txパートパネル != null && CDTXMania.ConfigIni.bDrums有効)
+                    if (this.txパートパネル != null && CDTXMania.ConfigIni.bDrumsEnabled)
                         this.txパートパネル.tDraw2D(CDTXMania.app.Device, 191, 52, new Rectangle(0, 0, 262, 50));
 
                     if (this.tx難易度パネル != null)
@@ -542,16 +542,16 @@ namespace DTXMania
             //-----------------------------
             #endregion
 
-            switch (base.eフェーズID)
+            switch (base.ePhaseID)
             {
-                case CStage.Eフェーズ.共通_フェードイン:
+                case CStage.EPhase.Common_FadeIn:
                     //if( this.actFI.OnUpdateAndDraw() != 0 )					// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
-                    // 必ず一度「CStaeg.Eフェーズ.共通_フェードイン」フェーズを経由させること。
+                    // 必ず一度「CStaeg.EPhase.Common_FadeIn」フェーズを経由させること。
                     // さもないと、曲読み込みが完了するまで、曲読み込み画面が描画されない。
-                    base.eフェーズID = CStage.Eフェーズ.NOWLOADING_DTXファイルを読み込む;
+                    base.ePhaseID = CStage.EPhase.NOWLOADING_DTXファイルを読み込む;
                     return (int)E曲読込画面の戻り値.継続;
 
-                case CStage.Eフェーズ.NOWLOADING_DTXファイルを読み込む:
+                case CStage.EPhase.NOWLOADING_DTXファイルを読み込む:
                     {
                         timeBeginLoad = DateTime.Now;
                         TimeSpan span;
@@ -567,7 +567,7 @@ namespace DTXMania
                         if ((CDTXMania.DTX != null) && CDTXMania.DTX.bActivated)
                             CDTXMania.DTX.OnDeactivate();
 
-                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigIni.n演奏速度) / 20.0, ini.stFile.BGMAdjust);
+                        CDTXMania.DTX = new CDTX(str, false, ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20.0, ini.stFile.BGMAdjust);
                         Trace.TraceInformation("----曲情報-----------------");
                         Trace.TraceInformation("TITLE: {0}", CDTXMania.DTX.TITLE);
                         Trace.TraceInformation("FILE: {0}", CDTXMania.DTX.strファイル名の絶対パス);
@@ -630,56 +630,56 @@ namespace DTXMania
 
                                 if( ghostLag <= 127 )
                                 {
-                                    E判定 eJudge = this.e指定時刻からChipのJUDGEを返す( ghostLag, 0 );
+                                    EJudgement eJudge = this.e指定時刻からChipのJUDGEを返す( ghostLag, 0 );
 
                                     switch( eJudge )
                                     {
-                                        case E判定.Perfect:
-                                            CDTXMania.listTargetGhostScoreData[ i ].nPerfect数++;
+                                        case EJudgement.Perfect:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nPerfectCount++;
                                             break;
-                                        case E判定.Great:
-                                            CDTXMania.listTargetGhostScoreData[ i ].nGreat数++;
+                                        case EJudgement.Great:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nGreatCount++;
                                             break;
-                                        case E判定.Good:
-                                            CDTXMania.listTargetGhostScoreData[ i ].nGood数++;
+                                        case EJudgement.Good:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nGoodCount++;
                                             break;
-                                        case E判定.Poor:
-                                            CDTXMania.listTargetGhostScoreData[ i ].nPoor数++;
+                                        case EJudgement.Poor:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nPoorCount++;
                                             break;
-                                        case E判定.Miss:
-                                        case E判定.Bad:
-                                            CDTXMania.listTargetGhostScoreData[ i ].nMiss数++;
+                                        case EJudgement.Miss:
+                                        case EJudgement.Bad:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nMissCount++;
                                             break;
                                     }
                                     switch( eJudge )
                                     {
-                                        case E判定.Perfect:
-                                        case E判定.Great:
-                                        case E判定.Good:
+                                        case EJudgement.Perfect:
+                                        case EJudgement.Great:
+                                        case EJudgement.Good:
                                             nNowCombo++;
-                                            CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 );
+                                            CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo );
                                             break;
-                                        case E判定.Poor:
-                                        case E判定.Miss:
-                                        case E判定.Bad:
-                                            CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 );
+                                        case EJudgement.Poor:
+                                        case EJudgement.Miss:
+                                        case EJudgement.Bad:
+                                            CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo = Math.Max( nNowCombo, CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo );
                                             nNowCombo = 0;
                                             break;
                                     }
                                     //Trace.WriteLine( eJudge.ToString() + " " + nNowCombo.ToString() + "Combo Max:" + nMaxCombo.ToString() + "Combo" );
                                 }
                             }
-                            //CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数 = nMaxCombo;
-                            int nTotal = CDTXMania.DTX.n可視チップ数.Drums;
-                            if( i == 1 ) nTotal = CDTXMania.DTX.n可視チップ数.Guitar;
-                            else if( i == 2 ) nTotal = CDTXMania.DTX.n可視チップ数.Bass;
+                            //CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo = nMaxCombo;
+                            int nTotal = CDTXMania.DTX.nVisibleChipsCount.Drums;
+                            if( i == 1 ) nTotal = CDTXMania.DTX.nVisibleChipsCount.Guitar;
+                            else if( i == 2 ) nTotal = CDTXMania.DTX.nVisibleChipsCount.Bass;
                             if( CDTXMania.ConfigIni.nSkillMode == 0 )
                             {
-                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.tCalculatePlayingSkillOld( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[i].n最大コンボ数, (EInstrumentPart)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.tCalculatePlayingSkillOld( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfectCount, CDTXMania.listTargetGhostScoreData[ i ].nGreatCount, CDTXMania.listTargetGhostScoreData[ i ].nGoodCount, CDTXMania.listTargetGhostScoreData[ i ].nPoorCount, CDTXMania.listTargetGhostScoreData[ i ].nMissCount, CDTXMania.listTargetGhostScoreData[i].nMaxCombo, (EInstrumentPart)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
                             else
                             {
-                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.tCalculatePlayingSkill( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfect数, CDTXMania.listTargetGhostScoreData[ i ].nGreat数, CDTXMania.listTargetGhostScoreData[ i ].nGood数, CDTXMania.listTargetGhostScoreData[ i ].nPoor数, CDTXMania.listTargetGhostScoreData[ i ].nMiss数, CDTXMania.listTargetGhostScoreData[ i ].n最大コンボ数, (EInstrumentPart)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
+                                CDTXMania.listTargetGhostScoreData[ i ].dbPerformanceSkill = CScoreIni.tCalculatePlayingSkill( nTotal, CDTXMania.listTargetGhostScoreData[ i ].nPerfectCount, CDTXMania.listTargetGhostScoreData[ i ].nGreatCount, CDTXMania.listTargetGhostScoreData[ i ].nGoodCount, CDTXMania.listTargetGhostScoreData[ i ].nPoorCount, CDTXMania.listTargetGhostScoreData[ i ].nMissCount, CDTXMania.listTargetGhostScoreData[ i ].nMaxCombo, (EInstrumentPart)i, CDTXMania.listTargetGhostScoreData[ i ].bAutoPlay );
                             }
                         }
 
@@ -691,12 +691,12 @@ namespace DTXMania
                         else
                             CDTXMania.DTX.MIDIレベル = (CDTXMania.stageSongSelection.rConfirmedSong.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI) ? CDTXMania.stageSongSelection.n現在選択中の曲の難易度 : 0;
 
-                        base.eフェーズID = CStage.Eフェーズ.NOWLOADING_WAVファイルを読み込む;
+                        base.ePhaseID = CStage.EPhase.NOWLOADING_WAVファイルを読み込む;
                         timeBeginLoadWAV = DateTime.Now;
                         return (int)E曲読込画面の戻り値.継続;
                     }
 
-                case CStage.Eフェーズ.NOWLOADING_WAVファイルを読み込む:
+                case CStage.EPhase.NOWLOADING_WAVファイルを読み込む:
                     {
                         if (nWAVcount == 1 && CDTXMania.DTX.listWAV.Count > 0)			// #28934 2012.7.7 yyagi (added checking Count)
                         {
@@ -741,12 +741,12 @@ namespace DTXMania
                             span = (TimeSpan)(DateTime.Now - timeBeginLoadWAV);
                             Trace.TraceInformation("WAV/譜面後処理時間({0,4}):  {1}", (CDTXMania.DTX.listBMP.Count + CDTXMania.DTX.listBMPTEX.Count + CDTXMania.DTX.listAVI.Count), span.ToString());
 
-                            base.eフェーズID = CStage.Eフェーズ.NOWLOADING_BMPファイルを読み込む;
+                            base.ePhaseID = CStage.EPhase.NOWLOADING_BMPファイルを読み込む;
                         }
                         return (int)E曲読込画面の戻り値.継続;
                     }
 
-                case CStage.Eフェーズ.NOWLOADING_BMPファイルを読み込む:
+                case CStage.EPhase.NOWLOADING_BMPファイルを読み込む:
                     {
                         TimeSpan span;
                         DateTime timeBeginLoadBMPAVI = DateTime.Now;
@@ -761,11 +761,11 @@ namespace DTXMania
                         span = (TimeSpan)(DateTime.Now - timeBeginLoad);
                         Trace.TraceInformation("総読込時間:                {0}", span.ToString());
                         CDTXMania.Timer.t更新();
-                        base.eフェーズID = CStage.Eフェーズ.NOWLOADING_システムサウンドBGMの完了を待つ;
+                        base.ePhaseID = CStage.EPhase.NOWLOADING_システムサウンドBGMの完了を待つ;
                         return (int)E曲読込画面の戻り値.継続;
                     }
 
-                case CStage.Eフェーズ.NOWLOADING_システムサウンドBGMの完了を待つ:
+                case CStage.EPhase.NOWLOADING_システムサウンドBGMの完了を待つ:
                     {
                         long nCurrentTime = CDTXMania.Timer.n現在時刻;
                         if (nCurrentTime < this.nBGM再生開始時刻)
@@ -775,12 +775,12 @@ namespace DTXMania
                         if ((nCurrentTime - this.nBGM再生開始時刻) > (this.nBGMの総再生時間ms))	// #27787 2012.3.10 yyagi 1000ms == フェードイン分の時間
                         {
                             this.actFO.tフェードアウト開始();
-                            base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+                            base.ePhaseID = CStage.EPhase.Common_FadeOut;
                         }
                         return (int)E曲読込画面の戻り値.継続;
                     }
 
-                case CStage.Eフェーズ.共通_フェードアウト:
+                case CStage.EPhase.Common_FadeOut:
                     //if (this.actFO.OnUpdateAndDraw() == 0)
                     //return 0;
                     if (this.sd読み込み音 != null)
@@ -898,29 +898,29 @@ namespace DTXMania
                 this.nLagTime = nLagTime;
             }
         }
-        protected E判定 e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime )
+        protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime )
 		{
 			//if ( pChip != null )
 			{
                 int nDeltaTime = Math.Abs((int)nTime + nInputAdjustTime);
-				if ( nDeltaTime <= CDTXMania.nPerfect範囲ms )
+				if ( nDeltaTime <= CDTXMania.nPerfectRangeMs )
 				{
-					return E判定.Perfect;
+					return EJudgement.Perfect;
 				}
-				if ( nDeltaTime <= CDTXMania.nGreat範囲ms )
+				if ( nDeltaTime <= CDTXMania.nGreatRangeMs )
 				{
-					return E判定.Great;
+					return EJudgement.Great;
 				}
-				if ( nDeltaTime <= CDTXMania.nGood範囲ms )
+				if ( nDeltaTime <= CDTXMania.nGoodRangeMs )
 				{
-					return E判定.Good;
+					return EJudgement.Good;
 				}
-				if ( nDeltaTime <= CDTXMania.nPoor範囲ms )
+				if ( nDeltaTime <= CDTXMania.nPoorRangeMs )
 				{
-					return E判定.Poor;
+					return EJudgement.Poor;
 				}
 			}
-			return E判定.Miss;
+			return EJudgement.Miss;
 		}
         //-----------------
         private void ReadGhost( string filename, List<int> list ) // #35411 2015.08.19 chnmr0 add
@@ -980,25 +980,25 @@ namespace DTXMania
                                         CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbPerformanceSkill = Convert.ToDouble( strA[ 1 ] );
                                         continue;
                                     case "Skill":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbゲーム型スキル値 = Convert.ToDouble( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].dbGameSkill = Convert.ToDouble( strA[ 1 ] );
                                         continue;
                                     case "Perfect":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPerfect数_Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPerfectCount_ExclAuto = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "Great":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGreat数_Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGreatCount_ExclAuto = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "Good":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGood数_Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nGoodCount_ExclAuto = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "Poor":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPoor数_Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nPoorCount_ExclAuto = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "Miss":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nMiss数_Auto含まない = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nMissCount_ExclAuto = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     case "MaxCombo":
-                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].n最大コンボ数 = Convert.ToInt32( strA[ 1 ] );
+                                        CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ].nMaxCombo = Convert.ToInt32( strA[ 1 ] );
                                         continue;
                                     default:
                                         continue;

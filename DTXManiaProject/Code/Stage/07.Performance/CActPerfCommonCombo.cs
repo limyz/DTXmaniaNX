@@ -12,7 +12,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public STCOMBO n現在のコンボ数;
+        public STCOMBO nCurrentCombo;
         public struct STCOMBO
         {
             public CActPerfCommonCombo act;
@@ -62,12 +62,12 @@ namespace DTXMania
                 set
                 {
                     this.drums = value;
-                    if (this.drums > this.最高値.Drums)
+                    if (this.drums > this.HighestValue.Drums)
                     {
-                        this.最高値.Drums = this.drums;
+                        this.HighestValue.Drums = this.drums;
                     }
                     this.act.status.Drums.nCOMBO値 = this.drums;
-                    this.act.status.Drums.n最高COMBO値 = this.最高値.Drums;
+                    this.act.status.Drums.n最高COMBO値 = this.HighestValue.Drums;
                 }
             }
             public int Guitar
@@ -79,12 +79,12 @@ namespace DTXMania
                 set
                 {
                     this.guitar = value;
-                    if (this.guitar > this.最高値.Guitar)
+                    if (this.guitar > this.HighestValue.Guitar)
                     {
-                        this.最高値.Guitar = this.guitar;
+                        this.HighestValue.Guitar = this.guitar;
                     }
                     this.act.status.Guitar.nCOMBO値 = this.guitar;
-                    this.act.status.Guitar.n最高COMBO値 = this.最高値.Guitar;
+                    this.act.status.Guitar.n最高COMBO値 = this.HighestValue.Guitar;
                 }
             }
             public int Bass
@@ -96,15 +96,15 @@ namespace DTXMania
                 set
                 {
                     this.bass = value;
-                    if (this.bass > this.最高値.Bass)
+                    if (this.bass > this.HighestValue.Bass)
                     {
-                        this.最高値.Bass = this.bass;
+                        this.HighestValue.Bass = this.bass;
                     }
                     this.act.status.Bass.nCOMBO値 = this.bass;
-                    this.act.status.Bass.n最高COMBO値 = this.最高値.Bass;
+                    this.act.status.Bass.n最高COMBO値 = this.HighestValue.Bass;
                 }
             }
-            public STDGBVALUE<int> 最高値;
+            public STDGBVALUE<int> HighestValue;
 
             private int drums;
             private int guitar;
@@ -132,7 +132,7 @@ namespace DTXMania
         public float nUnitTime;
         public CCounter ctコンボ;
         public CCounter ctコンボアニメ;
-        public CCounter ctコンボアニメ_2P;
+        public CCounter ctComboAnimation_2P;
         public int nY1の位座標差分値 = 0;
         public int nY1の位座標差分値_2P = 0;
 
@@ -232,10 +232,10 @@ namespace DTXMania
 
         // メソッド
 
-        protected virtual void tコンボ表示_ドラム(int nCombo値, int nジャンプインデックス)
+        protected virtual void tDrawCombo_Drums(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected virtual void tコンボ表示_ドラム(int nCombo値, int nジャンプインデックス, int nX中央位置px, int nY上辺位置px)
+        protected virtual void tDrawCombo_Drums(int nCombo値, int nジャンプインデックス, int nX中央位置px, int nY上辺位置px)
         {
 
             #region [ 事前チェック。]
@@ -275,18 +275,18 @@ namespace DTXMania
             int y2 = (nY上辺位置px) - nドラムコンボのCOMBO文字の高さ;
             int nJump = nジャンプインデックス - (n桁数);
             int y動作差分 = 0;
-            //this.ctコンボ.t進行Loop();
+            //this.ctコンボ.tUpdateLoop();
 
             if ((nJump >= 0) && (nJump < 180))
             {
                 y += this.nジャンプ差分値[nJump];
             }
 
-            if ((int)(CDTXMania.stagePerfDrumsScreen.ctコンボ動作タイマ.db現在の値 / 4) != 0)
+            if ((int)(CDTXMania.stagePerfDrumsScreen.ctComboTimer.db現在の値 / 4) != 0)
             {
                 y動作差分 = 2;
             }
-            else if ((int)(CDTXMania.stagePerfDrumsScreen.ctコンボ動作タイマ.db現在の値 / 16) != 1)
+            else if ((int)(CDTXMania.stagePerfDrumsScreen.ctComboTimer.db現在の値 / 16) != 1)
             {
                 y動作差分 = 8;
             }
@@ -296,13 +296,13 @@ namespace DTXMania
 
             if (this.txCOMBOドラム != null)
                 {
-                    this.nコンボカウント.Drums = this.n現在のコンボ数.Drums / 100;
+                    this.nコンボカウント.Drums = this.nCurrentCombo.Drums / 100;
 
                     #region [ "COMBO" の拡大率を設定。]
                     //-----------------
                     float f拡大率 = 1.0f;
 
-                    if ((this.n現在のコンボ数.Drums > (this.n現在のコンボ数.Drums / 100) + 100) && this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false && (nジャンプインデックス >= 0 && nジャンプインデックス < 180))
+                    if ((this.nCurrentCombo.Drums > (this.nCurrentCombo.Drums / 100) + 100) && this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false && (nジャンプインデックス >= 0 && nジャンプインデックス < 180))
                     {
                         f拡大率 = 1.22f - (((float)this.nジャンプ差分値[nジャンプインデックス]) / 180.0f);		// f拡大率 = 1.0 → 1.3333... → 1.0
                     }
@@ -314,7 +314,7 @@ namespace DTXMania
                     int nコンボx = nX中央位置px - 68 - ((int)((nドラムコンボのCOMBO文字の幅 * f拡大率) / 1.3f));
                     int nコンボy = 162 + nY上辺位置px;
 
-                    if ((this.n現在のコンボ数.Drums > (this.n現在のコンボ数.Drums / 100 * 100) && (this.n現在のコンボ数.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false)))
+                    if ((this.nCurrentCombo.Drums > (this.nCurrentCombo.Drums / 100 * 100) && (this.nCurrentCombo.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false)))
                     {
                         //nコンボx += n表示中央X - ((int)(( nドラムコンボのCOMBO文字の幅 * f拡大率 ) / 1.3f));
                         nコンボy += 10;
@@ -332,7 +332,7 @@ namespace DTXMania
             {
                 if( n桁数 < 4 )
                 {
-                    if ((this.n現在のコンボ数.Drums > (this.n現在のコンボ数.Drums / 100 * 100) && (this.n現在のコンボ数.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false) && (nジャンプインデックス >= 0 && nジャンプインデックス < 180)))
+                    if ((this.nCurrentCombo.Drums > (this.nCurrentCombo.Drums / 100 * 100) && (this.nCurrentCombo.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false) && (nジャンプインデックス >= 0 && nジャンプインデックス < 180)))
                     {
                         x -= nドラムコンボの幅 + nドラムコンボの文字間隔 + 20;
                     }
@@ -344,7 +344,7 @@ namespace DTXMania
                 }
                 else if( n桁数 >= 4 )
                 {
-                    if ((this.n現在のコンボ数.Drums > (this.n現在のコンボ数.Drums / 100 * 100) && (this.n現在のコンボ数.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false) && (nジャンプインデックス >= 0 && nジャンプインデックス < 180)))
+                    if ((this.nCurrentCombo.Drums > (this.nCurrentCombo.Drums / 100 * 100) && (this.nCurrentCombo.Drums >= 100 ? this.bn00コンボに到達した[nコンボカウント.Drums].Drums == false : false) && (nジャンプインデックス >= 0 && nジャンプインデックス < 180)))
                     {
                         x -= 96 + nドラムコンボの文字間隔 + 20;
                     }
@@ -391,13 +391,13 @@ namespace DTXMania
             //-----------------
             #endregion
         }
-        protected virtual void tコンボ表示_ギター(int nCombo値, int nジャンプインデックス)
+        protected virtual void tDrawCombo_Guitar(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected virtual void tコンボ表示_ベース(int nCombo値, int nジャンプインデックス)
+        protected virtual void tDrawCombo_Base(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected void tコンボ表示_ギター(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
+        protected void tDrawCombo_Guitar(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
         {
             #region [ 事前チェック。]
             //-----------------
@@ -429,8 +429,8 @@ namespace DTXMania
             int nJump = nジャンプインデックス - (n桁数);
             int y動作差分 = 0;
 
-            this.ctコンボアニメ.t進行();
-            this.ctコンボアニメ.t進行db();
+            this.ctコンボアニメ.tUpdate();
+            this.ctコンボアニメ.tUpdateDb();
             //CDTXMania.act文字コンソール.tPrint(1200, 0, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.n現在の値.ToString());
             //CDTXMania.act文字コンソール.tPrint(1200, 16, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.db現在の値.ToString());
             //CDTXMania.act文字コンソール.tPrint(1200, 32, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.b進行中.ToString());
@@ -500,7 +500,7 @@ namespace DTXMania
                 #endregion
             }
         }
-        protected void tコンボ表示_ベース(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
+        protected void tDrawCombo_Base(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
         {
             #region [ 事前チェック。]
             //-----------------
@@ -532,8 +532,8 @@ namespace DTXMania
             int nJump = nジャンプインデックス - (n桁数);
             int y動作差分 = 0;
 
-            this.ctコンボアニメ_2P.t進行();
-            this.ctコンボアニメ_2P.t進行db();
+            this.ctComboAnimation_2P.tUpdate();
+            this.ctComboAnimation_2P.tUpdateDb();
             //CDTXMania.act文字コンソール.tPrint(1200, 0, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.n現在の値.ToString());
             //CDTXMania.act文字コンソール.tPrint(1200, 16, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.db現在の値.ToString());
             //CDTXMania.act文字コンソール.tPrint(1200, 32, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.b進行中.ToString());
@@ -541,7 +541,7 @@ namespace DTXMania
             if( this.nY1の位座標差分値_2P > 0 )
             {
                 //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? 16 : 4);
-                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ_2P.db現在の値 : this.ctコンボアニメ_2P.n現在の値);
+                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctComboAnimation_2P.db現在の値 : this.ctComboAnimation_2P.n現在の値);
             }
             else
             {
@@ -612,7 +612,7 @@ namespace DTXMania
 
         public override void OnActivate()
         {
-            this.n現在のコンボ数 = new STCOMBO() { act = this };
+            this.nCurrentCombo = new STCOMBO() { act = this };
             this.status = new CSTATUS();
             for (int i = 0; i < 3; i++)
             {
@@ -629,11 +629,11 @@ namespace DTXMania
             this.ctコンボ = new CCounter(0, 1, (int)this.nUnitTime, CDTXMania.Timer);
 
             this.ctコンボアニメ = new CCounter( 0, 130, 4, CDTXMania.Timer );
-            this.ctコンボアニメ_2P = new CCounter( 0, 130, 4, CDTXMania.Timer );
+            this.ctComboAnimation_2P = new CCounter( 0, 130, 4, CDTXMania.Timer );
             if(CDTXMania.ConfigIni.b垂直帰線待ちを行う)
             {
                 this.ctコンボアニメ = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rc演奏用タイマ );
-                this.ctコンボアニメ_2P = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rc演奏用タイマ );
+                this.ctComboAnimation_2P = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rc演奏用タイマ );
             }
 
             base.OnActivate();
@@ -765,15 +765,15 @@ namespace DTXMania
                         switch (i)
                         {
                             case 0:
-                                this.tコンボ表示_ドラム(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tDrawCombo_Drums(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
 
                             case 1:
-                                this.tコンボ表示_ギター(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tDrawCombo_Guitar(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
 
                             case 2:
-                                this.tコンボ表示_ベース(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tDrawCombo_Base(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
                         }
                         break;
@@ -815,8 +815,8 @@ namespace DTXMania
             }
             else
             {
-                this.ctコンボアニメ_2P.n現在の値 = 0;
-                this.ctコンボアニメ_2P.db現在の値 = 0;
+                this.ctComboAnimation_2P.n現在の値 = 0;
+                this.ctComboAnimation_2P.db現在の値 = 0;
                 this.nY1の位座標差分値_2P = 130;
             }
         }

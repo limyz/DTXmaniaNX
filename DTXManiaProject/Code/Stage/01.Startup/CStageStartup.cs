@@ -31,7 +31,7 @@ namespace DTXMania
 			try
 			{
 				this.list進行文字列 = new List<string>();
-				base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+				base.ePhaseID = CStage.EPhase.Common_DefaultState;
 				base.OnActivate();
 				Trace.TraceInformation( "起動ステージの活性化を完了しました。" );
 			}
@@ -102,41 +102,41 @@ namespace DTXMania
 
 				#region [ this.str現在進行中 の決定 ]
 				//-----------------
-				switch( base.eフェーズID )
+				switch( base.ePhaseID )
 				{
-					case CStage.Eフェーズ.起動0_システムサウンドを構築:
+					case CStage.EPhase.起動0_システムサウンドを構築:
 						this.str現在進行中 = "Loading system sounds ... ";
 						break;
 
-					case CStage.Eフェーズ.起動00_songlistから曲リストを作成する:
+					case CStage.EPhase.起動00_songlistから曲リストを作成する:
 						this.str現在進行中 = "Loading songlist.db ... ";
 						break;
 
-					case CStage.Eフェーズ.起動1_SongsDBからスコアキャッシュを構築:
+					case CStage.EPhase.起動1_SongsDBからスコアキャッシュを構築:
 						this.str現在進行中 = "Loading songs.db ... ";
 						break;
 
-					case CStage.Eフェーズ.起動2_曲を検索してリストを作成する:
+					case CStage.EPhase.起動2_曲を検索してリストを作成する:
 						this.str現在進行中 = string.Format( "{0} ... {1}", "Enumerating songs", es.Songs管理.nNbScoresFound );
 						break;
 
-					case CStage.Eフェーズ.起動3_スコアキャッシュをリストに反映する:
+					case CStage.EPhase.起動3_スコアキャッシュをリストに反映する:
 						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from songs.db", es.Songs管理.nNbScoresFromScoreCache, es.Songs管理.nNbScoresFound );
 						break;
 
-					case CStage.Eフェーズ.起動4_スコアキャッシュになかった曲をファイルから読み込んで反映する:
+					case CStage.EPhase.起動4_スコアキャッシュになかった曲をファイルから読み込んで反映する:
 						this.str現在進行中 = string.Format( "{0} ... {1}/{2}", "Loading score properties from files", es.Songs管理.nNbScoresFromFile, es.Songs管理.nNbScoresFound - es.Songs管理.nNbScoresFromScoreCache );
 						break;
 
-					case CStage.Eフェーズ.起動5_曲リストへ後処理を適用する:
+					case CStage.EPhase.起動5_曲リストへ後処理を適用する:
 						this.str現在進行中 = string.Format( "{0} ... ", "Building songlists" );
 						break;
 
-					case CStage.Eフェーズ.起動6_スコアキャッシュをSongsDBに出力する:
+					case CStage.EPhase.起動6_スコアキャッシュをSongsDBに出力する:
 						this.str現在進行中 = string.Format( "{0} ... ", "Saving songs.db" );
 						break;
 
-					case CStage.Eフェーズ.起動7_完了:
+					case CStage.EPhase.起動7_完了:
 						this.str現在進行中 = "Setup done.";
 						break;
 				}

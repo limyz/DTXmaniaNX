@@ -132,12 +132,12 @@ namespace DTXMania
                     //座標などの定義は初回だけにする。
                     //2016.03.29 kairera0467 非セッション譜面で、譜面が無いパートでグラフを有効にしている場合、譜面があるパートに一時的にグラフを切り替える。
                     //                       時間がなくて雑なコードになったため、後日最適化を行う。
-                    if( CDTXMania.ConfigIni.bDrums有効 )
+                    if( CDTXMania.ConfigIni.bDrumsEnabled )
                     {
                         this.nPart = 0;
                         this.nGraphUsePart = 0;
                     }
-                    else if( CDTXMania.ConfigIni.bGuitar有効 )
+                    else if( CDTXMania.ConfigIni.bGuitarEnabled )
                     {
                         this.nGraphUsePart = ( CDTXMania.ConfigIni.bGraph有効.Guitar == true ) ? 1 : 2;
                         if( CDTXMania.DTX.bチップがある.Guitar )

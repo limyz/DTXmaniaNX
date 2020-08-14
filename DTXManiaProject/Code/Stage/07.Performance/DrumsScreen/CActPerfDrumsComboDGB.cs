@@ -41,7 +41,7 @@ namespace DTXMania
             {
                 if (this.st爆発[j].b使用中)
                 {
-                    this.st爆発[j].ct進行.t停止();
+                    this.st爆発[j].ct進行.tStop();
                     this.st爆発[j].b使用中 = false;
                     this.b爆発した[ this.n火薬カウント ] = true;
 
@@ -61,16 +61,16 @@ namespace DTXMania
             }
         }
 
-		protected override void tコンボ表示_ギター( int nCombo値, int nジャンプインデックス )
+		protected override void tDrawCombo_Guitar( int nCombo値, int nジャンプインデックス )
 		{
 		}
-		protected override void tコンボ表示_ドラム( int nCombo値, int nジャンプインデックス )
+		protected override void tDrawCombo_Drums( int nCombo値, int nジャンプインデックス )
 		{
             bool guitar = CDTXMania.DTX.bチップがある.Guitar;
             bool bass = CDTXMania.DTX.bチップがある.Bass;
 
             if( CDTXMania.ConfigIni.bドラムコンボ文字の表示 )
-                base.tコンボ表示_ドラム(nCombo値, nジャンプインデックス, 1245, 60);
+                base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1245, 60);
 
             this.n火薬カウント = (nCombo値 / 100);
 
@@ -90,10 +90,10 @@ namespace DTXMania
                     if (this.st爆発[i].b使用中)
                     {
                         int num1 = this.st爆発[i].ct進行.n現在の値;
-                        this.st爆発[i].ct進行.t進行();
+                        this.st爆発[i].ct進行.tUpdate();
                         if (this.st爆発[i].ct進行.bReachedEndValue)
                         {
-                            this.st爆発[i].ct進行.t停止();
+                            this.st爆発[i].ct進行.tStop();
                             this.st爆発[i].b使用中 = false;
                             this.bn00コンボに到達した[this.nコンボカウント.Drums].Drums = true;
                         }
@@ -107,7 +107,7 @@ namespace DTXMania
             }
 
 		}
-		protected override void tコンボ表示_ベース( int nCombo値, int nジャンプインデックス )
+		protected override void tDrawCombo_Base( int nCombo値, int nジャンプインデックス )
 		{
 		}
 	}

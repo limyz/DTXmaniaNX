@@ -41,7 +41,7 @@ namespace DTXMania
 			this.n総合ランク値 = -1;
             this.nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9 };
 			base.eステージID = CStage.EStage.Result;
-			base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			base.bNotActivated = true;
 			base.listChildActivities.Add( this.actResultImage = new CActResultImage() );
 			base.listChildActivities.Add( this.actParameterPanel = new CActResultParameterPanel() );
@@ -103,11 +103,11 @@ namespace DTXMania
                                 break;
                         }		
 
-						this.fPerfect率[i] = bIsAutoPlay ? 0f : ((100f * part.nPerfect数) / ((float)part.n全チップ数));
-                        this.fGreat率[i] = bIsAutoPlay ? 0f : ((100f * part.nGreat数) / ((float)part.n全チップ数));
-                        this.fGood率[i] = bIsAutoPlay ? 0f : ((100f * part.nGood数) / ((float)part.n全チップ数));
-                        this.fPoor率[i] = bIsAutoPlay ? 0f : ((100f * part.nPoor数) / ((float)part.n全チップ数));
-                        this.fMiss率[i] = bIsAutoPlay ? 0f : ((100f * part.nMiss数) / ((float)part.n全チップ数));
+						this.fPerfect率[i] = bIsAutoPlay ? 0f : ((100f * part.nPerfectCount) / ((float)part.nTotalChipsCount));
+                        this.fGreat率[i] = bIsAutoPlay ? 0f : ((100f * part.nGreatCount) / ((float)part.nTotalChipsCount));
+                        this.fGood率[i] = bIsAutoPlay ? 0f : ((100f * part.nGoodCount) / ((float)part.nTotalChipsCount));
+                        this.fPoor率[i] = bIsAutoPlay ? 0f : ((100f * part.nPoorCount) / ((float)part.nTotalChipsCount));
+                        this.fMiss率[i] = bIsAutoPlay ? 0f : ((100f * part.nMissCount) / ((float)part.nTotalChipsCount));
                         this.bAuto[i] = bIsAutoPlay; // #23596 10.11.16 add ikanick そのパートがオートなら1
 						//        10.11.17 change (int to bool) ikanick
 						//18072020: Change first condition check to 1, XG mode is 1, not 0. Fisyher
@@ -383,13 +383,13 @@ namespace DTXMania
                 //    {
                 //        sw.WriteLine( "Score=" + cScoreData.nスコア );
                 //        sw.WriteLine( "PlaySkill=" + cScoreData.dbPerformanceSkill );
-                //        sw.WriteLine( "Skill=" + cScoreData.dbゲーム型スキル値 );
-                //        sw.WriteLine( "Perfect=" + cScoreData.nPerfect数_Auto含まない );
-                //        sw.WriteLine( "Great=" + cScoreData.nGreat数_Auto含まない );
-                //        sw.WriteLine( "Good=" + cScoreData.nGood数_Auto含まない );
-                //        sw.WriteLine( "Poor=" + cScoreData.nPoor数_Auto含まない );
-                //        sw.WriteLine( "Miss=" + cScoreData.nMiss数_Auto含まない );
-                //        sw.WriteLine( "MaxCombo=" + cScoreData.n最大コンボ数 );
+                //        sw.WriteLine( "Skill=" + cScoreData.dbGameSkill );
+                //        sw.WriteLine( "Perfect=" + cScoreData.nPerfectCount_ExclAuto );
+                //        sw.WriteLine( "Great=" + cScoreData.nGreatCount_ExclAuto );
+                //        sw.WriteLine( "Good=" + cScoreData.nGoodCount_ExclAuto );
+                //        sw.WriteLine( "Poor=" + cScoreData.nPoorCount_ExclAuto );
+                //        sw.WriteLine( "Miss=" + cScoreData.nMissCount_ExclAuto );
+                //        sw.WriteLine( "MaxCombo=" + cScoreData.nMaxCombo );
                 //    }
                 //}
             }
@@ -538,7 +538,7 @@ namespace DTXMania
 					}
 						
                     this.actFI.tフェードイン開始(false);
-					base.eフェーズID = CStage.Eフェーズ.共通_フェードイン;
+					base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					base.bJustStartedUpdate = false;
 				}
                 if( this.ds背景動画 != null )
@@ -561,10 +561,10 @@ namespace DTXMania
 				this.bアニメが完了 = true;
 				if( this.ct登場用.b進行中 )
 				{
-					this.ct登場用.t進行();
+					this.ct登場用.tUpdate();
 					if( this.ct登場用.bReachedEndValue )
 					{
-						this.ct登場用.t停止();
+						this.ct登場用.tStop();
 					}
 					else
 					{
@@ -575,11 +575,11 @@ namespace DTXMania
 				//Play new record if available
 				if(this.ctPlayNewRecord != null && this.ctPlayNewRecord.b進行中)
                 {
-					this.ctPlayNewRecord.t進行();
+					this.ctPlayNewRecord.tUpdate();
 					if (this.ctPlayNewRecord.bReachedEndValue)
 					{
 						CDTXMania.Skin.sound新記録音.t再生する();
-						this.ctPlayNewRecord.t停止();
+						this.ctPlayNewRecord.tStop();
 					}
 				}
 
@@ -626,14 +626,14 @@ namespace DTXMania
                 {
                     this.bアニメが完了 = false;
                 }
-				if( base.eフェーズID == CStage.Eフェーズ.共通_フェードイン )
+				if( base.ePhaseID == CStage.EPhase.Common_FadeIn )
 				{
 					if( this.actFI.OnUpdateAndDraw() != 0 )
 					{
-						base.eフェーズID = CStage.Eフェーズ.共通_通常状態;
+						base.ePhaseID = CStage.EPhase.Common_DefaultState;
 					}
 				}
-				else if( ( base.eフェーズID == CStage.Eフェーズ.共通_フェードアウト ) )			//&& ( this.actFO.OnUpdateAndDraw() != 0 ) )
+				else if( ( base.ePhaseID == CStage.EPhase.Common_FadeOut ) )			//&& ( this.actFO.OnUpdateAndDraw() != 0 ) )
 				{
 					return (int) this.eフェードアウト完了時の戻り値;
 				}
@@ -651,7 +651,7 @@ namespace DTXMania
 
 				if( CDTXMania.act現在入力を占有中のプラグイン == null )
 				{
-					if( CDTXMania.ConfigIni.bドラム打音を発声する && CDTXMania.ConfigIni.bDrums有効 )
+					if( CDTXMania.ConfigIni.bドラム打音を発声する && CDTXMania.ConfigIni.bDrumsEnabled )
 					{
 						for( int i = 0; i < 11; i++ )
 						{
@@ -727,7 +727,7 @@ namespace DTXMania
 						this.actResultImage.tアニメを完了させる();
 						this.actParameterPanel.tアニメを完了させる();
 						this.actRank.tアニメを完了させる();
-						this.ct登場用.t停止();
+						this.ct登場用.tStop();
 					}
 					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
 //					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
@@ -737,19 +737,19 @@ namespace DTXMania
 //						this.bIsCheckedWhetherResultScreenShouldSaveOrNot = true;
 //					}
 					#endregion
-					if ( base.eフェーズID == CStage.Eフェーズ.共通_通常状態 )
+					if ( base.ePhaseID == CStage.EPhase.Common_DefaultState )
 					{
 						if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
 						{
 							CDTXMania.Skin.sound取消音.t再生する();
 							this.actFO.tフェードアウト開始();
-							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							base.ePhaseID = CStage.EPhase.Common_FadeOut;
 							this.eフェードアウト完了時の戻り値 = EReturnValue.Complete;
 						}
 						if ( ( ( CDTXMania.Pad.b押されたDGB( EPad.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
 						{
 							CDTXMania.Skin.sound取消音.t再生する();
-							base.eフェーズID = CStage.Eフェーズ.共通_フェードアウト;
+							base.ePhaseID = CStage.EPhase.Common_FadeOut;
 							this.eフェードアウト完了時の戻り値 = EReturnValue.Complete;
 						}
 					}

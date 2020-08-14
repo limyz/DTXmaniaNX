@@ -160,7 +160,7 @@ namespace DTXMania
 			}
 			return true;
 		}
-		public bool b押されている( EInstrumentPart part, EPad pad )
+		public bool bPressed( EInstrumentPart part, EPad pad )
 		{
 			if( part != EInstrumentPart.UNKNOWN )
 			{
@@ -205,9 +205,9 @@ namespace DTXMania
 		}
 		public bool b押されているGB( EPad pad )
 		{
-			if( !this.b押されている( EInstrumentPart.GUITAR, pad ) )
+			if( !this.bPressed( EInstrumentPart.GUITAR, pad ) )
 			{
-				return this.b押されている( EInstrumentPart.BASS, pad );
+				return this.bPressed( EInstrumentPart.BASS, pad );
 			}
 			return true;
 		}

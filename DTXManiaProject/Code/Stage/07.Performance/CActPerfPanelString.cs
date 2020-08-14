@@ -54,12 +54,12 @@ namespace DTXMania
         public override void OnActivate()
         {
 
-            if (CDTXMania.ConfigIni.bDrums有効)
+            if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
                 this.n曲名X = 950;
                 this.n曲名Y = 630;
             }
-            else if (CDTXMania.ConfigIni.bGuitar有効)
+            else if (CDTXMania.ConfigIni.bGuitarEnabled)
             {
                 this.n曲名X = 500;
                 this.n曲名Y = 630;
@@ -138,7 +138,7 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
                 /*
-                //this.ct進行用.t進行Loop();
+                //this.ct進行用.tUpdateLoop();
                 if ((string.IsNullOrEmpty(this.strパネル文字列) || (this.txPanel == null)) || (this.ct進行用 == null))
                 {
                     return 0;
@@ -159,7 +159,7 @@ namespace DTXMania
 
                 SlimDX.Matrix mat = SlimDX.Matrix.Identity;
 
-                if (CDTXMania.ConfigIni.bDrums有効)
+                if (CDTXMania.ConfigIni.bDrumsEnabled)
                 {
                     this.nジャケットX = 915;
                     this.nジャケットY = 287;
@@ -176,7 +176,7 @@ namespace DTXMania
                     mat *= SlimDX.Matrix.RotationZ(0.3f);
                 }
 
-                if (CDTXMania.ConfigIni.bGuitar有効)
+                if (CDTXMania.ConfigIni.bGuitarEnabled)
                 {
                     this.nジャケットX = 467;
                     this.nジャケットY = 287;

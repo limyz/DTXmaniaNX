@@ -207,8 +207,8 @@ namespace FDK
 
 		public static void t終了()
 		{
-			C共通.tDisposeする( SoundDevice ); SoundDevice = null;
-			C共通.tDisposeする( ref rc演奏用タイマ );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
+			CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
+			CCommon.tDisposeする( ref rc演奏用タイマ );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
 		}
 
 
@@ -225,8 +225,8 @@ namespace FDK
 
 				// サウンドデバイスと演奏タイマを解放する。
 
-				C共通.tDisposeする( SoundDevice ); SoundDevice = null;
-				C共通.tDisposeする( ref rc演奏用タイマ );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
+				CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
+				CCommon.tDisposeする( ref rc演奏用タイマ );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
 			}
 			//-----------------
 			#endregion
@@ -1199,7 +1199,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 						{
 							// 演奏終了後、長時間解放しないでいると、たまに AccessViolationException が発生することがある。
 						}
-						C共通.tDisposeする( ref this.Buffer );
+						CCommon.tDisposeする( ref this.Buffer );
 					}
 					//-----------------
 					#endregion

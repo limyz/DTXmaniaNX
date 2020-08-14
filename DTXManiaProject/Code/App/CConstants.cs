@@ -174,7 +174,7 @@ namespace DTXMania
 		マウス			= 3,
 		不明			= -1
 	}
-	public enum E判定
+	public enum EJudgement
 	{
 		Perfect	= 0,
 		Great	= 1,
@@ -219,7 +219,7 @@ namespace DTXMania
 		RIGHT,
 		OFF
 	}
-	internal enum Eレーン
+	internal enum ELane
 	{
 		LC = 0,
 		HH,
@@ -404,59 +404,59 @@ namespace DTXMania
 			{
 				switch ( index )
 				{
-					case (int) Eレーン.LC:
+					case (int) ELane.LC:
 						return this.LC;
-					case (int) Eレーン.HH:
+					case (int) ELane.HH:
 						return this.HH;
-					case (int) Eレーン.SD:
+					case (int) ELane.SD:
 						return this.SD;
-					case (int) Eレーン.BD:
+					case (int) ELane.BD:
 						return this.BD;
-					case (int) Eレーン.HT:
+					case (int) ELane.HT:
 						return this.HT;
-					case (int) Eレーン.LT:
+					case (int) ELane.LT:
 						return this.LT;
-					case (int) Eレーン.FT:
+					case (int) ELane.FT:
 						return this.FT;
-					case (int) Eレーン.CY:
+					case (int) ELane.CY:
 						return this.CY;
-                    case (int) Eレーン.LP:
+                    case (int) ELane.LP:
                         return this.LP;
-					case (int) Eレーン.RD:
+					case (int) ELane.RD:
 						return this.RD;
-                    case (int) Eレーン.LBD:
+                    case (int) ELane.LBD:
                         return this.LBD;
-					case (int) Eレーン.Guitar:
+					case (int) ELane.Guitar:
 						return this.Guitar;
-					case (int) Eレーン.Bass:
+					case (int) ELane.Bass:
 						return this.Bass;
-					case (int) Eレーン.GtR:
+					case (int) ELane.GtR:
 						return this.GtR;
-					case (int) Eレーン.GtG:
+					case (int) ELane.GtG:
 						return this.GtG;
-					case (int) Eレーン.GtB:
+					case (int) ELane.GtB:
 						return this.GtB;
-                    case (int) Eレーン.GtY:
+                    case (int) ELane.GtY:
                         return this.GtY;
-                    case (int) Eレーン.GtP:
+                    case (int) ELane.GtP:
                         return this.GtP;
-					case (int) Eレーン.GtPick:
+					case (int) ELane.GtPick:
 						return this.GtPick;
-					case (int) Eレーン.GtW:
+					case (int) ELane.GtW:
 						return this.GtW;
-					case (int) Eレーン.BsR:
+					case (int) ELane.BsR:
 						return this.BsR;
-					case (int) Eレーン.BsG:
+					case (int) ELane.BsG:
 						return this.BsG;
-					case (int) Eレーン.BsB:
+					case (int) ELane.BsB:
 						return this.BsB;
-                    case (int) Eレーン.BsY:
+                    case (int) ELane.BsY:
                         return this.BsY;
-                    case (int) Eレーン.BsP:
+                    case (int) ELane.BsP:
                         return this.BsP;
-					case (int) Eレーン.BsPick:
+					case (int) ELane.BsPick:
 						return this.BsPick;
-					case (int) Eレーン.BsW:
+					case (int) ELane.BsW:
 						return this.BsW;
 				}
 				throw new IndexOutOfRangeException();
@@ -465,85 +465,85 @@ namespace DTXMania
 			{
 				switch ( index )
 				{
-					case (int) Eレーン.LC:
+					case (int) ELane.LC:
 						this.LC = value;
 						return;
-					case (int) Eレーン.HH:
+					case (int) ELane.HH:
 						this.HH = value;
 						return;
-					case (int) Eレーン.SD:
+					case (int) ELane.SD:
 						this.SD = value;
 						return;
-					case (int) Eレーン.BD:
+					case (int) ELane.BD:
 						this.BD = value;
 						return;
-					case (int) Eレーン.HT:
+					case (int) ELane.HT:
 						this.HT = value;
 						return;
-					case (int) Eレーン.LT:
+					case (int) ELane.LT:
 						this.LT = value;
 						return;
-					case (int) Eレーン.FT:
+					case (int) ELane.FT:
 						this.FT = value;
 						return;
-					case (int) Eレーン.CY:
+					case (int) ELane.CY:
 						this.CY = value;
 						return;
-                    case (int) Eレーン.LP:
+                    case (int) ELane.LP:
                         this.LP = value;
                         return;
-					case (int) Eレーン.RD:
+					case (int) ELane.RD:
 						this.RD = value;
 						return;
-                    case (int) Eレーン.LBD:
+                    case (int) ELane.LBD:
                         this.LBD = value;
                         return;
-					case (int) Eレーン.Guitar:
+					case (int) ELane.Guitar:
 						this.Guitar = value;
 						return;
-					case (int) Eレーン.Bass:
+					case (int) ELane.Bass:
 						this.Bass = value;
 						return;
-					case (int) Eレーン.GtR:
+					case (int) ELane.GtR:
 						this.GtR = value;
 						return;
-					case (int) Eレーン.GtG:
+					case (int) ELane.GtG:
 						this.GtG = value;
 						return;
-					case (int) Eレーン.GtB:
+					case (int) ELane.GtB:
 						this.GtB = value;
 						return;
-                    case (int) Eレーン.GtY:
+                    case (int) ELane.GtY:
                         this.GtY = value;
                         return;
-                    case (int) Eレーン.GtP:
+                    case (int) ELane.GtP:
                         this.GtP = value;
                         return;
-					case (int) Eレーン.GtPick:
+					case (int) ELane.GtPick:
 						this.GtPick = value;
 						return;
-					case (int) Eレーン.GtW:
+					case (int) ELane.GtW:
 						this.GtW = value;
 						return;
-					case (int) Eレーン.BsR:
+					case (int) ELane.BsR:
 						this.BsR = value;
 						return;
-					case (int) Eレーン.BsG:
+					case (int) ELane.BsG:
 						this.BsG = value;
 						return;
-					case (int) Eレーン.BsB:
+					case (int) ELane.BsB:
 						this.BsB = value;
 						return;
-                    case (int) Eレーン.BsY:
+                    case (int) ELane.BsY:
                         this.BsY = value;
                         return;
-                    case (int) Eレーン.BsP:
+                    case (int) ELane.BsP:
                         this.BsP = value;
                         return;
-					case (int) Eレーン.BsPick:
+					case (int) ELane.BsPick:
 						this.BsPick = value;
 						return;
-					case (int) Eレーン.BsW:
+					case (int) ELane.BsW:
 						this.BsW = value;
 						return;
 				}
@@ -589,29 +589,29 @@ namespace DTXMania
 			{
 				switch ( index )
 				{
-					case (int) Eレーン.LC:
+					case (int) ELane.LC:
 						return this.LC;
-					case (int) Eレーン.HH:
+					case (int) ELane.HH:
 						return this.HH;
-					case (int) Eレーン.SD:
+					case (int) ELane.SD:
 						return this.SD;
-					case (int) Eレーン.BD:
+					case (int) ELane.BD:
 						return this.BD;
-					case (int) Eレーン.HT:
+					case (int) ELane.HT:
 						return this.HT;
-					case (int) Eレーン.LT:
+					case (int) ELane.LT:
 						return this.LT;
-					case (int) Eレーン.FT:
+					case (int) ELane.FT:
 						return this.FT;
-					case (int) Eレーン.CY:
+					case (int) ELane.CY:
 						return this.CY;
-                    case (int) Eレーン.LP:
+                    case (int) ELane.LP:
                         return this.LP;
-					case (int) Eレーン.RD:
+					case (int) ELane.RD:
 						return this.RD;
-                    case (int) Eレーン.LBD:
+                    case (int) ELane.LBD:
                         return this.LBD;
-                    case (int)Eレーン.Guitar:
+                    case (int)ELane.Guitar:
                         if (!this.GtR) return false;
                         if (!this.GtG) return false;
                         if (!this.GtB) return false;
@@ -620,7 +620,7 @@ namespace DTXMania
                         if (!this.GtPick) return false;
                         if (!this.GtW) return false;
                         return true;
-                    case (int)Eレーン.Bass:
+                    case (int)ELane.Bass:
                         if (!this.BsR) return false;
                         if (!this.BsG) return false;
                         if (!this.BsB) return false;
@@ -629,33 +629,33 @@ namespace DTXMania
                         if (!this.BsPick) return false;
                         if (!this.BsW) return false;
                         return true;
-					case (int) Eレーン.GtR:
+					case (int) ELane.GtR:
 						return this.GtR;
-					case (int) Eレーン.GtG:
+					case (int) ELane.GtG:
 						return this.GtG;
-					case (int) Eレーン.GtB:
+					case (int) ELane.GtB:
 						return this.GtB;
-                    case (int) Eレーン.GtY:
+                    case (int) ELane.GtY:
                         return this.GtY;
-                    case (int) Eレーン.GtP:
+                    case (int) ELane.GtP:
                         return this.GtP;
-					case (int) Eレーン.GtPick:
+					case (int) ELane.GtPick:
 						return this.GtPick;
-					case (int) Eレーン.GtW:
+					case (int) ELane.GtW:
 						return this.GtW;
-					case (int) Eレーン.BsR:
+					case (int) ELane.BsR:
 						return this.BsR;
-					case (int) Eレーン.BsG:
+					case (int) ELane.BsG:
 						return this.BsG;
-					case (int) Eレーン.BsB:
+					case (int) ELane.BsB:
 						return this.BsB;
-                    case (int) Eレーン.BsY:
+                    case (int) ELane.BsY:
                         return this.BsY;
-                    case (int) Eレーン.BsP:
+                    case (int) ELane.BsP:
                         return this.BsP;
-					case (int) Eレーン.BsPick:
+					case (int) ELane.BsPick:
 						return this.BsPick;
-					case (int) Eレーン.BsW:
+					case (int) ELane.BsW:
 						return this.BsW;
 				}
 				throw new IndexOutOfRangeException();
@@ -664,87 +664,87 @@ namespace DTXMania
 			{
 				switch ( index )
 				{
-					case (int) Eレーン.LC:
+					case (int) ELane.LC:
 						this.LC = value;
 						return;
-					case (int) Eレーン.HH:
+					case (int) ELane.HH:
 						this.HH = value;
 						return;
-					case (int) Eレーン.SD:
+					case (int) ELane.SD:
 						this.SD = value;
 						return;
-					case (int) Eレーン.BD:
+					case (int) ELane.BD:
 						this.BD = value;
 						return;
-					case (int) Eレーン.HT:
+					case (int) ELane.HT:
 						this.HT = value;
 						return;
-					case (int) Eレーン.LT:
+					case (int) ELane.LT:
 						this.LT = value;
 						return;
-					case (int) Eレーン.FT:
+					case (int) ELane.FT:
 						this.FT = value;
 						return;
-					case (int) Eレーン.CY:
+					case (int) ELane.CY:
 						this.CY = value;
 						return;
-                    case (int) Eレーン.LP:
+                    case (int) ELane.LP:
                         this.LP = value;
                         return;
-					case (int) Eレーン.RD:
+					case (int) ELane.RD:
 						this.RD = value;
 						return;
-                    case (int) Eレーン.LBD:
+                    case (int) ELane.LBD:
                         this.LBD = value;
                         return;
-                    case (int)Eレーン.Guitar:
+                    case (int)ELane.Guitar:
                         this.GtR = this.GtG = this.GtB = this.GtY = this.GtP = this.GtPick = this.GtW = value;
                         //this.GtR = this.GtG = this.GtB = this.GtPick = this.GtW = value;
                         return;
-                    case (int)Eレーン.Bass:
+                    case (int)ELane.Bass:
                         this.BsR = this.BsG = this.BsB = this.BsY = this.BsP = this.BsPick = this.BsW = value;
                         //this.BsR = this.BsG = this.BsB = this.BsPick = this.BsW = value;
                         return;
-					case (int) Eレーン.GtR:
+					case (int) ELane.GtR:
 						this.GtR = value;
 						return;
-					case (int) Eレーン.GtG:
+					case (int) ELane.GtG:
 						this.GtG = value;
 						return;
-					case (int) Eレーン.GtB:
+					case (int) ELane.GtB:
 						this.GtB = value;
 						return;
-                    case (int) Eレーン.GtY:
+                    case (int) ELane.GtY:
                         this.GtY = value;
                         return;
-                    case (int) Eレーン.GtP:
+                    case (int) ELane.GtP:
                         this.GtP = value;
                         return;
-					case (int) Eレーン.GtPick:
+					case (int) ELane.GtPick:
 						this.GtPick = value;
 						return;
-					case (int) Eレーン.GtW:
+					case (int) ELane.GtW:
 						this.GtW = value;
 						return;
-					case (int) Eレーン.BsR:
+					case (int) ELane.BsR:
 						this.BsR = value;
 						return;
-					case (int) Eレーン.BsG:
+					case (int) ELane.BsG:
 						this.BsG = value;
 						return;
-					case (int) Eレーン.BsB:
+					case (int) ELane.BsB:
 						this.BsB = value;
 						return;
-                    case (int) Eレーン.BsY:
+                    case (int) ELane.BsY:
                         this.BsY = value;
                         return;
-                    case (int) Eレーン.BsP:
+                    case (int) ELane.BsP:
                         this.BsP = value;
                         return;
-					case (int) Eレーン.BsPick:
+					case (int) ELane.BsPick:
 						this.BsPick = value;
 						return;
-					case (int) Eレーン.BsW:
+					case (int) ELane.BsW:
 						this.BsW = value;
 						return;
 				}

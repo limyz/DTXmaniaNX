@@ -33,7 +33,7 @@ namespace FDK
 					//return this.Device.n経過時間ms;		// #24820 2013.2.3 yyagi TESTCODE DirectSoundでスクロールが滑らかにならないため、
 					return ct.nシステム時刻ms;				// 仮にCSoundTimerをCTimer相当の動作にしてみた
 				}
-				return CTimerBase.n未使用;
+				return CTimerBase.nUnused;
 			}
 		}
 

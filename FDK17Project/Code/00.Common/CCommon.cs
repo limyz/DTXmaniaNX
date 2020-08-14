@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace FDK
 {
-	public class C共通
+	public class CCommon
 	{
 		// 解放
 

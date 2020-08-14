@@ -202,7 +202,7 @@ namespace FDK
 				#region [ 経緯時間計測用サウンドバッファを解放。]
 				//-----------------
 				this.sd経過時間計測用サウンドバッファ.tサウンドを停止する();
-				C共通.tDisposeする( ref this.sd経過時間計測用サウンドバッファ );
+				CCommon.tDisposeする( ref this.sd経過時間計測用サウンドバッファ );
 				//-----------------
 				#endregion
 				#region [ 単位繰り上げ用スレッド停止。]
@@ -216,8 +216,8 @@ namespace FDK
 				//-----------------
 				#endregion
 
-				C共通.tDisposeする( ref this.DirectSound );
-				C共通.tDisposeする( this.tmシステムタイマ );
+				CCommon.tDisposeする( ref this.DirectSound );
+				CCommon.tDisposeする( this.tmシステムタイマ );
 			}
 		}
 		~CSoundDeviceDirectSound()
@@ -235,7 +235,7 @@ namespace FDK
 		protected const uint n単位繰り上げ間隔ms = n単位繰り上げ間隔sec * 1000;	// [ミリ秒]
 		protected int nループ回数 = 0;
 
-		private long n前に経過時間を測定したシステム時刻ms = CTimer.n未使用;
+		private long n前に経過時間を測定したシステム時刻ms = CTimer.nUnused;
 		private int n前回の位置 = 0;
 	}
 }

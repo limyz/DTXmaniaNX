@@ -666,7 +666,7 @@ namespace DTXMania
 
 
 			// 本ステージは、(1)登場アニメフェーズ → (2)通常フェーズ　と二段階にわけて進む。
-			// ２つしかフェーズがないので CStage.eフェーズID を使ってないところがまた本末転倒。
+			// ２つしかフェーズがないので CStage.ePhaseID を使ってないところがまた本末転倒。
 
 			
 			// 進行。
@@ -677,10 +677,10 @@ namespace DTXMania
 				//-----------------
 				for( int i = 0; i < 13; i++ )	// パネルは全13枚。
 				{
-					this.ct登場アニメ用[ i ].t進行();
+					this.ct登場アニメ用[ i ].tUpdate();
 
 					if( this.ct登場アニメ用[ i ].bReachedEndValue )
-						this.ct登場アニメ用[ i ].t停止();
+						this.ct登場アニメ用[ i ].tStop();
 				}
 
 				// 全部の進行が終わったら、this.b登場アニメ全部完了 を true にする。

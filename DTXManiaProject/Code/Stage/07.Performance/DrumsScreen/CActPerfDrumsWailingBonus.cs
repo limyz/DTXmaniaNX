@@ -36,7 +36,7 @@ namespace DTXMania
 						{
 							if( r歓声Chip != null )
 							{
-								CDTXMania.DTX.tチップの再生( r歓声Chip, CDTXMania.Timer.nシステム時刻, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
+								CDTXMania.DTX.tチップの再生( r歓声Chip, CDTXMania.Timer.nシステム時刻, (int) ELane.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
 							CDTXMania.Skin.sound歓声音.t再生する();
@@ -87,11 +87,11 @@ namespace DTXMania
 						{
 							if( this.ct進行用[ (int) e楽器パート, j ].bReachedEndValue )
 							{
-								this.ct進行用[ (int) e楽器パート, j ].t停止();
+								this.ct進行用[ (int) e楽器パート, j ].tStop();
 							}
 							else
 							{
-								this.ct進行用[ (int) e楽器パート, j ].t進行();
+								this.ct進行用[ (int) e楽器パート, j ].tUpdate();
 								int x = ( ( e楽器パート == EInstrumentPart.GUITAR ) ? 0x1fb : 0x18e ) + 0x4e;
 								int num4 = 0;
 								int num5 = 0;

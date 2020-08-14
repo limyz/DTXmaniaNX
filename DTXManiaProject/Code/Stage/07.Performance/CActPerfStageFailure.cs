@@ -70,7 +70,7 @@ namespace DTXMania
             {
                 return 0;
             }
-            this.ct進行.t進行();
+            this.ct進行.tUpdate();
             if (this.ct進行.n現在の値 < 100)
             {
                 int x = (int)(640.0 * Math.Cos((Math.PI / 2 * this.ct進行.n現在の値) / 100.0));

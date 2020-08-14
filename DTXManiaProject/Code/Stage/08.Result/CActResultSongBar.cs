@@ -92,7 +92,7 @@ namespace DTXMania
 				this.ct登場用 = new CCounter( 0, 270, 4, CDTXMania.Timer );
 				base.bJustStartedUpdate = false;
 			}
-			this.ct登場用.t進行();
+			this.ct登場用.tUpdate();
 			int num = 0x1d4;
 			int num2 = num - 0x40;
 			if( this.ct登場用.b進行中 )
