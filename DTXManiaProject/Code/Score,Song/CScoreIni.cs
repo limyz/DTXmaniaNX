@@ -182,10 +182,10 @@ namespace DTXMania
 			public EFTGroup eFTGroup;
 			public EHHGroup eHHGroup;
             public EBDGroup eBDGroup;
-			public E打ち分け時の再生の優先順位 eHitSoundPriorityCY;
-			public E打ち分け時の再生の優先順位 eHitSoundPriorityFT;
-			public E打ち分け時の再生の優先順位 eHitSoundPriorityHH;
-			public STDGBVALUE<Eランダムモード> eRandom;
+			public EPlaybackPriority eHitSoundPriorityCY;
+			public EPlaybackPriority eHitSoundPriorityFT;
+			public EPlaybackPriority eHitSoundPriorityHH;
+			public STDGBVALUE<ERandomMode> eRandom;
 			public EDamageLevel eDamageLevel;
 			public STDGBVALUE<float> fScrollSpeed;
 			public string Hash;
@@ -255,10 +255,10 @@ namespace DTXMania
 				this.bReverse.Drums = false;
 				this.bReverse.Guitar = false;
 				this.bReverse.Bass = false;
-				this.eRandom = new STDGBVALUE<Eランダムモード>();
-				this.eRandom.Drums = Eランダムモード.OFF;
-				this.eRandom.Guitar = Eランダムモード.OFF;
-				this.eRandom.Bass = Eランダムモード.OFF;
+				this.eRandom = new STDGBVALUE<ERandomMode>();
+				this.eRandom.Drums = ERandomMode.OFF;
+				this.eRandom.Guitar = ERandomMode.OFF;
+				this.eRandom.Bass = ERandomMode.OFF;
 				this.bLight = new STDGBVALUE<bool>();
 				this.bLight.Drums = false;
 				this.bLight.Guitar = false;
@@ -586,7 +586,7 @@ namespace DTXMania
 						{
 							string item;
 							string para;
-							CPerformanceEntry c演奏記録;
+							CPerformanceEntry cPerformanceEntry;
 							#region [ section ]
 							if ( str[ 0 ] == '[' )
 							{
@@ -673,12 +673,12 @@ namespace DTXMania
                                         case ESectionType.LastPlayGuitar:
                                         case ESectionType.LastPlayBass:
 											{
-												c演奏記録 = this.stSection[ (int) section ];
+												cPerformanceEntry = this.stSection[ (int) section ];
 												if( !item.Equals( "Score" ) )
 												{
 													goto Label_03B9;
 												}
-												c演奏記録.nスコア = long.Parse( para );
+												cPerformanceEntry.nスコア = long.Parse( para );
 												continue;
 											}
 									}
@@ -768,39 +768,39 @@ namespace DTXMania
 						Label_03B9:
 							if( item.Equals( "PlaySkill" ) )
 							{
-								c演奏記録.dbPerformanceSkill = (double) decimal.Parse( para );
+								cPerformanceEntry.dbPerformanceSkill = (double) decimal.Parse( para );
 							}
 							else if( item.Equals( "Skill" ) )
 							{
-								c演奏記録.dbGameSkill = (double) decimal.Parse( para );
+								cPerformanceEntry.dbGameSkill = (double) decimal.Parse( para );
 							}
 							else if( item.Equals( "Perfect" ) )
 							{
-								c演奏記録.nPerfectCount = int.Parse( para );
+								cPerformanceEntry.nPerfectCount = int.Parse( para );
 							}
 							else if( item.Equals( "Great" ) )
 							{
-								c演奏記録.nGreatCount = int.Parse( para );
+								cPerformanceEntry.nGreatCount = int.Parse( para );
 							}
 							else if( item.Equals( "Good" ) )
 							{
-								c演奏記録.nGoodCount = int.Parse( para );
+								cPerformanceEntry.nGoodCount = int.Parse( para );
 							}
 							else if( item.Equals( "Poor" ) )
 							{
-								c演奏記録.nPoorCount = int.Parse( para );
+								cPerformanceEntry.nPoorCount = int.Parse( para );
 							}
 							else if( item.Equals( "Miss" ) )
 							{
-								c演奏記録.nMissCount = int.Parse( para );
+								cPerformanceEntry.nMissCount = int.Parse( para );
 							}
 							else if( item.Equals( "MaxCombo" ) )
 							{
-								c演奏記録.nMaxCombo = int.Parse( para );
+								cPerformanceEntry.nMaxCombo = int.Parse( para );
 							}
 							else if( item.Equals( "TotalChips" ) )
 							{
-								c演奏記録.nTotalChipsCount = int.Parse( para );
+								cPerformanceEntry.nTotalChipsCount = int.Parse( para );
 							}
 							else if( item.Equals( "AutoPlay" ) )
 							{
@@ -809,53 +809,53 @@ namespace DTXMania
 								{
 									for( int i = 0; i < para.Length; i++ )
 									{
-										c演奏記録.bAutoPlay[ i ] = this.ONorOFF( para[ i ] );
+										cPerformanceEntry.bAutoPlay[ i ] = this.ONorOFF( para[ i ] );
 									}
 								}
 							}
 							else if ( item.Equals( "Risky" ) )
 							{
-								c演奏記録.nRisky = int.Parse( para );
+								cPerformanceEntry.nRisky = int.Parse( para );
 							}
 							else if ( item.Equals( "TightDrums" ) )
 							{
-								c演奏記録.bTight = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bTight = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenDrums" ) )
 							{
-								c演奏記録.bSudden.Drums = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bSudden.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenGuitar" ) )
 							{
-								c演奏記録.bSudden.Guitar = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bSudden.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "SuddenBass" ) )
 							{
-								c演奏記録.bSudden.Bass = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bSudden.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenDrums" ) )
 							{
-								c演奏記録.bHidden.Drums = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bHidden.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenGuitar" ) )
 							{
-								c演奏記録.bHidden.Guitar = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bHidden.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "HiddenBass" ) )
 							{
-								c演奏記録.bHidden.Bass = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bHidden.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseDrums" ) )
 							{
-								c演奏記録.bReverse.Drums = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bReverse.Drums = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseGuitar" ) )
 							{
-								c演奏記録.bReverse.Guitar = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bReverse.Guitar = CConversion.bONorOFF( para[ 0 ] );
 							}
 							else if ( item.Equals( "ReverseBass" ) )
 							{
-								c演奏記録.bReverse.Bass = CConversion.bONorOFF( para[ 0 ] );
+								cPerformanceEntry.bReverse.Bass = CConversion.bONorOFF( para[ 0 ] );
 							}
 							#endregion
 							else
@@ -865,24 +865,24 @@ namespace DTXMania
 								{
 									switch ( int.Parse( para ) )
 									{
-										case (int) Eランダムモード.OFF:
+										case (int) ERandomMode.OFF:
 											{
-												c演奏記録.eRandom.Guitar = Eランダムモード.OFF;
+												cPerformanceEntry.eRandom.Guitar = ERandomMode.OFF;
 												continue;
 											}
-										case (int) Eランダムモード.RANDOM:
+										case (int) ERandomMode.RANDOM:
 											{
-												c演奏記録.eRandom.Guitar = Eランダムモード.RANDOM;
+												cPerformanceEntry.eRandom.Guitar = ERandomMode.RANDOM;
 												continue;
 											}
-										case (int) Eランダムモード.SUPERRANDOM:
+										case (int) ERandomMode.SUPERRANDOM:
 											{
-												c演奏記録.eRandom.Guitar = Eランダムモード.SUPERRANDOM;
+												cPerformanceEntry.eRandom.Guitar = ERandomMode.SUPERRANDOM;
 												continue;
 											}
-										case (int) Eランダムモード.HYPERRANDOM:		// #25452 2011.6.20 yyagi
+										case (int) ERandomMode.HYPERRANDOM:		// #25452 2011.6.20 yyagi
 											{
-												c演奏記録.eRandom.Guitar = Eランダムモード.SUPERRANDOM;
+												cPerformanceEntry.eRandom.Guitar = ERandomMode.SUPERRANDOM;
 												continue;
 											}
 									}
@@ -894,24 +894,24 @@ namespace DTXMania
 								{
 									switch ( int.Parse( para ) )
 									{
-										case (int) Eランダムモード.OFF:
+										case (int) ERandomMode.OFF:
 											{
-												c演奏記録.eRandom.Bass = Eランダムモード.OFF;
+												cPerformanceEntry.eRandom.Bass = ERandomMode.OFF;
 												continue;
 											}
-										case (int) Eランダムモード.RANDOM:
+										case (int) ERandomMode.RANDOM:
 											{
-												c演奏記録.eRandom.Bass = Eランダムモード.RANDOM;
+												cPerformanceEntry.eRandom.Bass = ERandomMode.RANDOM;
 												continue;
 											}
-										case (int) Eランダムモード.SUPERRANDOM:
+										case (int) ERandomMode.SUPERRANDOM:
 											{
-												c演奏記録.eRandom.Bass = Eランダムモード.SUPERRANDOM;
+												cPerformanceEntry.eRandom.Bass = ERandomMode.SUPERRANDOM;
 												continue;
 											}
-										case (int) Eランダムモード.HYPERRANDOM:		// #25452 2011.6.20 yyagi
+										case (int) ERandomMode.HYPERRANDOM:		// #25452 2011.6.20 yyagi
 											{
-												c演奏記録.eRandom.Bass = Eランダムモード.SUPERRANDOM;
+												cPerformanceEntry.eRandom.Bass = ERandomMode.SUPERRANDOM;
 												continue;
 											}
 									}
@@ -921,25 +921,25 @@ namespace DTXMania
 								#region [ LightGuitar ]
 								if ( item.Equals( "LightGuitar" ) )
 								{
-									c演奏記録.bLight.Guitar = CConversion.bONorOFF( para[ 0 ] );
+									cPerformanceEntry.bLight.Guitar = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LightBass ]
 								else if ( item.Equals( "LightBass" ) )
 								{
-									c演奏記録.bLight.Bass = CConversion.bONorOFF( para[ 0 ] );
+									cPerformanceEntry.bLight.Bass = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LeftGuitar ]
 								else if ( item.Equals( "LeftGuitar" ) )
 								{
-									c演奏記録.bLeft.Guitar = CConversion.bONorOFF( para[ 0 ] );
+									cPerformanceEntry.bLeft.Guitar = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								#region [ LeftBass ]
 								else if ( item.Equals( "LeftBass" ) )
 								{
-									c演奏記録.bLeft.Bass = CConversion.bONorOFF( para[ 0 ] );
+									cPerformanceEntry.bLeft.Bass = CConversion.bONorOFF( para[ 0 ] );
 								}
 								#endregion
 								else
@@ -951,17 +951,17 @@ namespace DTXMania
 										{
 											case 0:
 												{
-													c演奏記録.eDark = EDarkMode.OFF;
+													cPerformanceEntry.eDark = EDarkMode.OFF;
 													continue;
 												}
 											case 1:
 												{
-													c演奏記録.eDark = EDarkMode.HALF;
+													cPerformanceEntry.eDark = EDarkMode.HALF;
 													continue;
 												}
 											case 2:
 												{
-													c演奏記録.eDark = EDarkMode.FULL;
+													cPerformanceEntry.eDark = EDarkMode.FULL;
 													continue;
 												}
 										}
@@ -971,19 +971,19 @@ namespace DTXMania
 									#region [ ScrollSpeedDrums ]
 									if ( item.Equals( "ScrollSpeedDrums" ) )
 									{
-										c演奏記録.fScrollSpeed.Drums = (float) decimal.Parse( para );
+										cPerformanceEntry.fScrollSpeed.Drums = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ ScrollSpeedGuitar ]
 									else if ( item.Equals( "ScrollSpeedGuitar" ) )
 									{
-										c演奏記録.fScrollSpeed.Guitar = (float) decimal.Parse( para );
+										cPerformanceEntry.fScrollSpeed.Guitar = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ ScrollSpeedBass ]
 									else if ( item.Equals( "ScrollSpeedBass" ) )
 									{
-										c演奏記録.fScrollSpeed.Bass = (float) decimal.Parse( para );
+										cPerformanceEntry.fScrollSpeed.Bass = (float) decimal.Parse( para );
 									}
 									#endregion
 									#region [ PlaySpeed ]
@@ -992,8 +992,8 @@ namespace DTXMania
 										string[] strArray2 = para.Split( new char[] { '/' } );
 										if ( strArray2.Length == 2 )
 										{
-											c演奏記録.nPlaySpeedNumerator = int.Parse( strArray2[ 0 ] );
-											c演奏記録.nPlaySpeedDenominator = int.Parse( strArray2[ 1 ] );
+											cPerformanceEntry.nPlaySpeedNumerator = int.Parse( strArray2[ 0 ] );
+											cPerformanceEntry.nPlaySpeedDenominator = int.Parse( strArray2[ 1 ] );
 										}
 									}
 									#endregion
@@ -1006,22 +1006,22 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eHHGroup = EHHGroup.全部打ち分ける;
+														cPerformanceEntry.eHHGroup = EHHGroup.全部打ち分ける;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eHHGroup = EHHGroup.ハイハットのみ打ち分ける;
+														cPerformanceEntry.eHHGroup = EHHGroup.ハイハットのみ打ち分ける;
 														continue;
 													}
 												case 2:
 													{
-														c演奏記録.eHHGroup = EHHGroup.左シンバルのみ打ち分ける;
+														cPerformanceEntry.eHHGroup = EHHGroup.左シンバルのみ打ち分ける;
 														continue;
 													}
 												case 3:
 													{
-														c演奏記録.eHHGroup = EHHGroup.全部共通;
+														cPerformanceEntry.eHHGroup = EHHGroup.全部共通;
 														continue;
 													}
 											}
@@ -1035,12 +1035,12 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eFTGroup = EFTGroup.打ち分ける;
+														cPerformanceEntry.eFTGroup = EFTGroup.打ち分ける;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eFTGroup = EFTGroup.共通;
+														cPerformanceEntry.eFTGroup = EFTGroup.共通;
 														continue;
 													}
 											}
@@ -1054,12 +1054,12 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eCYGroup = ECYGroup.打ち分ける;
+														cPerformanceEntry.eCYGroup = ECYGroup.打ち分ける;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eCYGroup = ECYGroup.共通;
+														cPerformanceEntry.eCYGroup = ECYGroup.共通;
 														continue;
 													}
 											}
@@ -1073,17 +1073,17 @@ namespace DTXMania
                                             {
                                                 case 0:
                                                     {
-                                                        c演奏記録.eBDGroup = EBDGroup.打ち分ける;
+                                                        cPerformanceEntry.eBDGroup = EBDGroup.打ち分ける;
                                                         continue;
                                                     }
                                                 case 1:
                                                     {
-                                                        c演奏記録.eBDGroup = EBDGroup.左右ペダルのみ打ち分ける;
+                                                        cPerformanceEntry.eBDGroup = EBDGroup.左右ペダルのみ打ち分ける;
                                                         continue;
                                                     }
                                                 case 2:
                                                     {
-                                                        c演奏記録.eBDGroup = EBDGroup.どっちもBD;
+                                                        cPerformanceEntry.eBDGroup = EBDGroup.どっちもBD;
                                                         continue;
                                                     }
                                             }
@@ -1097,12 +1097,12 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eHitSoundPriorityHH = E打ち分け時の再生の優先順位.ChipがPadより優先;
+														cPerformanceEntry.eHitSoundPriorityHH = EPlaybackPriority.ChipOverPadPriority;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eHitSoundPriorityHH = E打ち分け時の再生の優先順位.PadがChipより優先;
+														cPerformanceEntry.eHitSoundPriorityHH = EPlaybackPriority.PadOverChipPriority;
 														continue;
 													}
 											}
@@ -1116,12 +1116,12 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eHitSoundPriorityFT = E打ち分け時の再生の優先順位.ChipがPadより優先;
+														cPerformanceEntry.eHitSoundPriorityFT = EPlaybackPriority.ChipOverPadPriority;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eHitSoundPriorityFT = E打ち分け時の再生の優先順位.PadがChipより優先;
+														cPerformanceEntry.eHitSoundPriorityFT = EPlaybackPriority.PadOverChipPriority;
 														continue;
 													}
 											}
@@ -1135,12 +1135,12 @@ namespace DTXMania
 											{
 												case 0:
 													{
-														c演奏記録.eHitSoundPriorityCY = E打ち分け時の再生の優先順位.ChipがPadより優先;
+														cPerformanceEntry.eHitSoundPriorityCY = EPlaybackPriority.ChipOverPadPriority;
 														continue;
 													}
 												case 1:
 													{
-														c演奏記録.eHitSoundPriorityCY = E打ち分け時の再生の優先順位.PadがChipより優先;
+														cPerformanceEntry.eHitSoundPriorityCY = EPlaybackPriority.PadOverChipPriority;
 														continue;
 													}
 											}
@@ -1150,19 +1150,19 @@ namespace DTXMania
 										#region [ Guitar ]
 										if ( item.Equals( "Guitar" ) )
 										{
-											c演奏記録.bGuitarEnabled = CConversion.bONorOFF( para[ 0 ] );
+											cPerformanceEntry.bGuitarEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										#region [ Drums ]
 										else if ( item.Equals( "Drums" ) )
 										{
-											c演奏記録.bDrumsEnabled = CConversion.bONorOFF( para[ 0 ] );
+											cPerformanceEntry.bDrumsEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										#region [ StageFailed ]
 										else if ( item.Equals( "StageFailed" ) )
 										{
-											c演奏記録.bSTAGEFAILEDEnabled = CConversion.bONorOFF( para[ 0 ] );
+											cPerformanceEntry.bSTAGEFAILEDEnabled = CConversion.bONorOFF( para[ 0 ] );
 										}
 										#endregion
 										else
@@ -1174,17 +1174,17 @@ namespace DTXMania
 												{
 													case 0:
 														{
-															c演奏記録.eDamageLevel = EDamageLevel.Small;
+															cPerformanceEntry.eDamageLevel = EDamageLevel.Small;
 															continue;
 														}
 													case 1:
 														{
-															c演奏記録.eDamageLevel = EDamageLevel.Normal;
+															cPerformanceEntry.eDamageLevel = EDamageLevel.Normal;
 															continue;
 														}
 													case 2:
 														{
-															c演奏記録.eDamageLevel = EDamageLevel.High;
+															cPerformanceEntry.eDamageLevel = EDamageLevel.High;
 															continue;
 														}
 												}
@@ -1193,51 +1193,51 @@ namespace DTXMania
 											#endregion
 											if ( item.Equals( "UseKeyboard" ) )
 											{
-												c演奏記録.bKeyboardUsed = CConversion.bONorOFF( para[ 0 ] );
+												cPerformanceEntry.bKeyboardUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseMIDIIN" ) )
 											{
-												c演奏記録.bMIDIUsed = CConversion.bONorOFF( para[ 0 ] );
+												cPerformanceEntry.bMIDIUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseJoypad" ) )
 											{
-												c演奏記録.bJoypadUsed = CConversion.bONorOFF( para[ 0 ] );
+												cPerformanceEntry.bJoypadUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "UseMouse" ) )
 											{
-												c演奏記録.bMouseUsed = CConversion.bONorOFF( para[ 0 ] );
+												cPerformanceEntry.bMouseUsed = CConversion.bONorOFF( para[ 0 ] );
 											}
 											else if ( item.Equals( "PerfectRange" ) )
 											{
-												c演奏記録.nPerfectRangeMs = int.Parse( para );
+												cPerformanceEntry.nPerfectRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "GreatRange" ) )
 											{
-												c演奏記録.nGreatRangeMs = int.Parse( para );
+												cPerformanceEntry.nGreatRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "GoodRange" ) )
 											{
-												c演奏記録.nGoodRangeMs = int.Parse( para );
+												cPerformanceEntry.nGoodRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "PoorRange" ) )
 											{
-												c演奏記録.nPoorRangeMs = int.Parse( para );
+												cPerformanceEntry.nPoorRangeMs = int.Parse( para );
 											}
 											else if ( item.Equals( "DTXManiaVersion" ) )
 											{
-												c演奏記録.strDTXManiaVersion = para;
+												cPerformanceEntry.strDTXManiaVersion = para;
 											}
 											else if ( item.Equals( "DateTime" ) )
 											{
-												c演奏記録.strDateTime = para;
+												cPerformanceEntry.strDateTime = para;
 											}
 											else if ( item.Equals( "Hash" ) )
 											{
-												c演奏記録.Hash = para;
+												cPerformanceEntry.Hash = para;
 											}
 											else if ( item.Equals( "9LaneMode" ) )
 											{
-												c演奏記録.レーン9モード = CConversion.bONorOFF( para[ 0 ] );
+												cPerformanceEntry.レーン9モード = CConversion.bONorOFF( para[ 0 ] );
 											}
 										}
 									}
@@ -1856,7 +1856,7 @@ namespace DTXMania
             return tCalculateRank(nTotal, nPerfect, nGreat, nGood, nPoor, nMiss, nCombo);
         }
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

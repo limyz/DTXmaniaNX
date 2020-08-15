@@ -94,7 +94,7 @@ namespace FDK
 										nKey = k,
 										b押された = true,
 										b離された = false,
-										nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+										nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 										nVelocity = CInputManager.n通常音量
 									};
 									this.list入力イベント.Add( item );
@@ -109,7 +109,7 @@ namespace FDK
 										nKey = k,
 										b押された = false,
 										b離された = true,
-										nTimeStamp = CSoundManager.rc演奏用タイマ.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
+										nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 										nVelocity = CInputManager.n通常音量
 									};
 									this.list入力イベント.Add( item );
@@ -139,7 +139,7 @@ namespace FDK
 									nKey = j,
 									b押された = true,
 									b離された = false,
-									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量,
 								};
 								this.list入力イベント.Add( ev );
@@ -153,7 +153,7 @@ namespace FDK
 									nKey = j,
 									b押された = false,
 									b離された = true,
-									nTimeStamp = CSoundManager.rc演奏用タイマ.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量,
 								};
 								this.list入力イベント.Add( ev );

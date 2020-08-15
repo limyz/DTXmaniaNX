@@ -305,56 +305,56 @@ namespace DTXMania
             switch( this.nIndex  )
             {
                 case 2:
-                    CDTXMania.Skin.soundNovice.t再生する();
+                    CDTXMania.Skin.soundNovice.tPlay();
                     string strnov = CSkin.Path( @"Sounds\Novice.ogg" );
                     if( !File.Exists( strnov ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 case 3:
-                    CDTXMania.Skin.soundRegular.t再生する();
+                    CDTXMania.Skin.soundRegular.tPlay();
                     string strreg = CSkin.Path( @"Sounds\Regular.ogg" );
                     if( !File.Exists( strreg ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 case 4:
-                    CDTXMania.Skin.soundExpert.t再生する();
+                    CDTXMania.Skin.soundExpert.tPlay();
                     string strexp = CSkin.Path( @"Sounds\Expert.ogg" );
                     if( !File.Exists( strexp ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 case 5:
-                    CDTXMania.Skin.soundMaster.t再生する();
+                    CDTXMania.Skin.soundMaster.tPlay();
                     string strmas = CSkin.Path( @"Sounds\Master.ogg" );
                     if( !File.Exists( strmas ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
                 
                 case 6:
-                    CDTXMania.Skin.soundBasic.t再生する();
+                    CDTXMania.Skin.soundBasic.tPlay();
                     string strbsc = CSkin.Path( @"Sounds\Basic.ogg" );
                     if( !File.Exists( strbsc ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 case 7:
-                    CDTXMania.Skin.soundAdvanced.t再生する();
+                    CDTXMania.Skin.soundAdvanced.tPlay();
                     string stradv = CSkin.Path( @"Sounds\Advanced.ogg" );
                     if( !File.Exists( stradv ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 case 8:
-                    CDTXMania.Skin.soundExtreme.t再生する();
+                    CDTXMania.Skin.soundExtreme.tPlay();
                     string strext = CSkin.Path( @"Sounds\Extreme.ogg" );
                     if( !File.Exists( strext ) )
-                        CDTXMania.Skin.sound変更音.t再生する();
+                        CDTXMania.Skin.sound変更音.tPlay();
                     break;
 
                 default:
-                    CDTXMania.Skin.sound変更音.t再生する();
+                    CDTXMania.Skin.sound変更音.tPlay();
                     break;
             }
 
@@ -421,7 +421,7 @@ namespace DTXMania
 			}
 			this.OnDeactivate();
 			this.r現在選択中の曲 = null;
-            if( CDTXMania.rCurrentStage.eステージID == CStage.EStage.SongSelection )
+            if( CDTXMania.rCurrentStage.eStageID == CStage.EStage.SongSelection )
 			    this.OnActivate();
 		}
 
@@ -563,7 +563,7 @@ namespace DTXMania
 
 					this.txSongNotFound = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
 
-					this.txSongNotFound.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );	// 半分のサイズで表示する。
+					this.txSongNotFound.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );	// 半分のサイズで表示する。
 				}
 			}
 			catch( CTextureCreateFailedException )
@@ -587,7 +587,7 @@ namespace DTXMania
 
 					this.txEnumeratingSongs = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
 
-					this.txEnumeratingSongs.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );	// 半分のサイズで表示する。
+					this.txEnumeratingSongs.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );	// 半分のサイズで表示する。
 				}
 			}
 			catch ( CTextureCreateFailedException )
@@ -650,7 +650,7 @@ namespace DTXMania
 				for( int i = 0; i < 13; i++ )
 					this.ct登場アニメ用[ i ] = new CCounter( -i * 10, 100, 3, CDTXMania.Timer );
 
-				this.nスクロールタイマ = CSoundManager.rc演奏用タイマ.n現在時刻;
+				this.nスクロールタイマ = CSoundManager.rcPerformanceTimer.n現在時刻;
 				CDTXMania.stageSongSelection.tSelectedSongChanged();
 				
 				base.bJustStartedUpdate = false;
@@ -927,9 +927,9 @@ namespace DTXMania
 				//-----------------
 				for( int i = 0; i < 13; i++ )	// パネルは全13枚。
 				{
-					if( this.ct登場アニメ用[ i ].n現在の値 >= 0 )
+					if( this.ct登場アニメ用[ i ].nCurrentValue >= 0 )
 					{
-						double db割合0to1 = ( (double) this.ct登場アニメ用[ i ].n現在の値 ) / 100.0;
+						double db割合0to1 = ( (double) this.ct登場アニメ用[ i ].nCurrentValue ) / 100.0;
 						double db回転率 = Math.Sin( Math.PI * 3 / 5 * db割合0to1 );
 						int nパネル番号 = ( ( ( this.n現在の選択行 - 5 ) + i ) + 13 ) % 13;
 						
@@ -985,9 +985,9 @@ namespace DTXMania
 							#endregion
 						}
                         if (this.tx上部パネル != null)
-                            this.tx上部パネル.tDraw2D(CDTXMania.app.Device, 0f, ((float)(this.tx上部パネル.szテクスチャサイズ.Height) * ((float)(this.ct登場アニメ用[0].n現在の値) / 100f)) - (float)(this.tx上部パネル.szテクスチャサイズ.Height));
+                            this.tx上部パネル.tDraw2D(CDTXMania.app.Device, 0f, ((float)(this.tx上部パネル.szTextureSize.Height) * ((float)(this.ct登場アニメ用[0].nCurrentValue) / 100f)) - (float)(this.tx上部パネル.szTextureSize.Height));
                         if (this.tx下部パネル != null)
-                            this.tx下部パネル.tDraw2D(CDTXMania.app.Device, 0f, 720 - ((float)(this.tx下部パネル.szテクスチャサイズ.Height) * ((float)(this.ct登場アニメ用[0].n現在の値) / 100f)));
+                            this.tx下部パネル.tDraw2D(CDTXMania.app.Device, 0f, 720 - ((float)(this.tx下部パネル.szTextureSize.Height) * ((float)(this.ct登場アニメ用[0].nCurrentValue) / 100f)));
                     }
 				}
 				//-----------------
@@ -1032,8 +1032,8 @@ namespace DTXMania
                                 this.tx選択中の曲名テクスチャ = this.t指定された文字テクスチャを生成する( CDTXMania.stageSongSelection.r現在選択中のスコア.SongInformation.Title );
                             if ( this.tx選択中の曲名テクスチャ != null )
                             {
-                                if ( this.tx選択中の曲名テクスチャ.sz画像サイズ.Width > 600 )
-                                    this.tx選択中の曲名テクスチャ.vc拡大縮小倍率.X = 600f / this.tx選択中の曲名テクスチャ.sz画像サイズ.Width;
+                                if ( this.tx選択中の曲名テクスチャ.szImageSize.Width > 600 )
+                                    this.tx選択中の曲名テクスチャ.vcScaleRatio.X = 600f / this.tx選択中の曲名テクスチャ.szImageSize.Width;
 
                                 this.tx選択中の曲名テクスチャ.tDraw2D( CDTXMania.app.Device, 60, 490 );
                             }
@@ -1042,8 +1042,8 @@ namespace DTXMania
                                 this.tx選択中のアーティスト名テクスチャ = this.t指定された文字テクスチャを生成する_小( CDTXMania.stageSongSelection.r現在選択中のスコア.SongInformation.ArtistName );
                             if ( this.tx選択中のアーティスト名テクスチャ != null )
                             {
-                                if ( this.tx選択中のアーティスト名テクスチャ.sz画像サイズ.Width > 600 )
-                                    this.tx選択中のアーティスト名テクスチャ.vc拡大縮小倍率.X = 600f / this.tx選択中のアーティスト名テクスチャ.sz画像サイズ.Width;
+                                if ( this.tx選択中のアーティスト名テクスチャ.szImageSize.Width > 600 )
+                                    this.tx選択中のアーティスト名テクスチャ.vcScaleRatio.X = 600f / this.tx選択中のアーティスト名テクスチャ.szImageSize.Width;
 
                                 this.tx選択中のアーティスト名テクスチャ.tDraw2D( CDTXMania.app.Device, 60, 545 );
                             }
@@ -1086,7 +1086,7 @@ namespace DTXMania
                 if( this.tx上部パネル != null )
                     this.tx上部パネル.tDraw2D( CDTXMania.app.Device, 0, 0 );
                 if( this.tx下部パネル != null )
-                    this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szテクスチャサイズ.Height );
+                    this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szTextureSize.Height );
 
 			}
 			#region [ スクロール地点の計算(描画はCActSelectShowCurrentPositionにて行う) #27648 ]
@@ -1116,7 +1116,7 @@ namespace DTXMania
 		}
 		
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -1480,7 +1480,7 @@ namespace DTXMania
 					CDTXMania.t安全にDisposeする( ref this.stバー情報[ nバー番号 ].txタイトル名 );
 
 					this.stバー情報[ nバー番号 ].txタイトル名 = new CTexture( CDTXMania.app.Device, bmp, CDTXMania.TextureFormat );
-					this.stバー情報[ nバー番号 ].txタイトル名.vc拡大縮小倍率 = new Vector3( f拡大率X, 0.5f, 1f );
+					this.stバー情報[ nバー番号 ].txタイトル名.vcScaleRatio = new Vector3( f拡大率X, 0.5f, 1f );
 
                     g.Dispose();
 				}

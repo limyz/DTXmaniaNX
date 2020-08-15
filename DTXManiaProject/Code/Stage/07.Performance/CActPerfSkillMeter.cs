@@ -184,7 +184,7 @@ namespace DTXMania
                 if( this.txグラフ != null )
                 {
                     //背景
-					this.txグラフ.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+					this.txグラフ.vcScaleRatio = new Vector3( 1f, 1f, 1f );
                     this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos, new Rectangle( 2, 2, 251, 584 ) );
                     
                     //自己ベスト数値表示
@@ -234,7 +234,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//----------------
@@ -347,7 +347,7 @@ namespace DTXMania
             CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
 
             if( tx文字テクスチャ != null )
-                tx文字テクスチャ.vc拡大縮小倍率 = new Vector3( 1.0f, 1.0f, 1f );
+                tx文字テクスチャ.vcScaleRatio = new Vector3( 1.0f, 1.0f, 1f );
 
             bmp.Dispose();
 

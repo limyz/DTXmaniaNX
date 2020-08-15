@@ -5,13 +5,13 @@ using System.Text;
 namespace DTXMania
 {
 	/// <summary>
-	/// 「整数」を表すアイテム。
+	/// 「Integer」を表すアイテム。
 	/// </summary>
 	internal class CItemInteger : CItemBase
 	{
 		// プロパティ
 
-		public int n現在の値;
+		public int nCurrentValue;
 		public bool b値がフォーカスされている;
 
 
@@ -19,10 +19,10 @@ namespace DTXMania
 
 		public CItemInteger()
 		{
-			base.e種別 = CItemBase.E種別.整数;
+			base.eType = CItemBase.EType.Integer;
 			this.n最小値 = 0;
 			this.n最大値 = 0;
-			this.n現在の値 = 0;
+			this.nCurrentValue = 0;
 			this.b値がフォーカスされている = false;
 		}
 		public CItemInteger( string str項目名, int n最小値, int n最大値, int n初期値 )
@@ -40,16 +40,16 @@ namespace DTXMania
 		}
 
 	
-		public CItemInteger( string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別 )
+		public CItemInteger( string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別 )
 			: this()
 		{
 			this.t初期化( str項目名, n最小値, n最大値, n初期値, eパネル種別 );
 		}
-		public CItemInteger(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別, string str説明文jp)
+		public CItemInteger(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別, string str説明文jp)
 			: this() {
 			this.t初期化(str項目名, n最小値, n最大値, n初期値, eパネル種別, str説明文jp);
 		}
-		public CItemInteger(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別, string str説明文jp, string str説明文en)
+		public CItemInteger(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別, string str説明文jp, string str説明文en)
 			: this() {
 			this.t初期化(str項目名, n最小値, n最大値, n初期値, eパネル種別, str説明文jp, str説明文en);
 		}
@@ -61,59 +61,59 @@ namespace DTXMania
 		{
 			this.b値がフォーカスされている = !this.b値がフォーカスされている;
 		}
-		public override void t項目値を次へ移動()
+		public override void tMoveItemValueToNext()
 		{
-			if( ++this.n現在の値 > this.n最大値 )
+			if( ++this.nCurrentValue > this.n最大値 )
 			{
-				this.n現在の値 = this.n最大値;
+				this.nCurrentValue = this.n最大値;
 			}
 		}
-		public override void t項目値を前へ移動()
+		public override void tMoveItemValueToPrevious()
 		{
-			if( --this.n現在の値 < this.n最小値 )
+			if( --this.nCurrentValue < this.n最小値 )
 			{
-				this.n現在の値 = this.n最小値;
+				this.nCurrentValue = this.n最小値;
 			}
 		}
 		public void t初期化( string str項目名, int n最小値, int n最大値, int n初期値 )
 		{
-			this.t初期化( str項目名, n最小値, n最大値, n初期値, CItemBase.Eパネル種別.通常, "", "" );
+			this.t初期化( str項目名, n最小値, n最大値, n初期値, CItemBase.EPanelType.Normal, "", "" );
 		}
 		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, string str説明文jp) {
-			this.t初期化(str項目名, n最小値, n最大値, n初期値, CItemBase.Eパネル種別.通常, str説明文jp, str説明文jp);
+			this.t初期化(str項目名, n最小値, n最大値, n初期値, CItemBase.EPanelType.Normal, str説明文jp, str説明文jp);
 		}
 		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, string str説明文jp, string str説明文en) {
-			this.t初期化(str項目名, n最小値, n最大値, n初期値, CItemBase.Eパネル種別.通常, str説明文jp, str説明文en);
+			this.t初期化(str項目名, n最小値, n最大値, n初期値, CItemBase.EPanelType.Normal, str説明文jp, str説明文en);
 		}
 
 	
-		public void t初期化( string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別 )
+		public void t初期化( string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別 )
 		{
 			this.t初期化( str項目名, n最小値, n最大値, n初期値, eパネル種別, "", "" );
 		}
-		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別, string str説明文jp) {
+		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別, string str説明文jp) {
 			this.t初期化(str項目名, n最小値, n最大値, n初期値, eパネル種別, str説明文jp, str説明文jp);
 		}
-		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.Eパネル種別 eパネル種別, string str説明文jp, string str説明文en) {
-			base.t初期化(str項目名, eパネル種別, str説明文jp, str説明文en);
+		public void t初期化(string str項目名, int n最小値, int n最大値, int n初期値, CItemBase.EPanelType eパネル種別, string str説明文jp, string str説明文en) {
+			base.tInitialize(str項目名, eパネル種別, str説明文jp, str説明文en);
 			this.n最小値 = n最小値;
 			this.n最大値 = n最大値;
-			this.n現在の値 = n初期値;
+			this.nCurrentValue = n初期値;
 			this.b値がフォーカスされている = false;
 		}
 		public override object obj現在値()
 		{
-			return this.n現在の値;
+			return this.nCurrentValue;
 		}
 		public override int GetIndex()
 		{
-			return this.n現在の値;
+			return this.nCurrentValue;
 		}
 		public override void SetIndex( int index )
 		{
-			this.n現在の値 = index;
+			this.nCurrentValue = index;
 		}
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

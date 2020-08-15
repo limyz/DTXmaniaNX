@@ -73,8 +73,8 @@
     <Compile Include="Code\00.Common\CPowerManagement.cs" />
     <Compile Include="Code\00.Common\CSendMessage.cs" />
     <Compile Include="Code\00.Common\CTimerBase.cs" />
-    <Compile Include="Code\00.Common\C一定間隔処理.cs" />
-    <Compile Include="Code\00.Common\C共通.cs" />
+    <Compile Include="Code\00.Common\CFixedIntervalProcessing.cs" />
+    <Compile Include="Code\00.Common\CCommon.cs" />
     <Compile Include="Code\01.Framework\Core\GameWindowSize.cs" />
     <Compile Include="Code\01.Framework\Core\Game.cs" />
     <Compile Include="Code\01.Framework\Core\GameClock.cs" />
@@ -139,7 +139,7 @@
     <Compile Include="Code\00.Common\CTimer.cs" />
     <Compile Include="Code\00.Common\CTraceLogListener.cs" />
     <Compile Include="Code\00.Common\CWin32.cs" />
-    <Compile Include="Code\00.Common\C変換.cs" />
+    <Compile Include="Code\00.Common\CConversion.cs" />
     <Compile Include="Code\05.DirectShow\CDirectShow.cs" />
     <Compile Include="Code\05.DirectShow\CDStoWAVFileImage.cs" />
     <Compile Include="Code\05.DirectShow\MemoryRenderer.cs" />

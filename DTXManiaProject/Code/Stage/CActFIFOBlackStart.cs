@@ -14,12 +14,12 @@ namespace DTXMania
 
 		public void tフェードアウト開始()
 		{
-			this.mode = EFIFOモード.フェードアウト;
+			this.mode = EFIFOMode.FadeOut;
 			this.counter = new CCounter( 0, 150, 5, CDTXMania.Timer );
 		}
 		public void tフェードイン開始()
 		{
-			this.mode = EFIFOモード.フェードイン;
+			this.mode = EFIFOMode.FadeIn;
 			this.counter = new CCounter( 0, 150, 5, CDTXMania.Timer );
 		}
 
@@ -55,7 +55,7 @@ namespace DTXMania
 			// Size clientSize = CDTXMania.app.Window.ClientSize;	// #23510 2010.10.31 yyagi: delete as of no one use this any longer.
 			if (this.tx黒幕 != null)
 			{
-                this.tx黒幕.nTransparency = (this.mode == EFIFOモード.フェードイン) ? (((100 - this.counter.n現在の値) * 0xff) / 100) : ((this.counter.n現在の値 * 0xff) / 100);
+                this.tx黒幕.nTransparency = (this.mode == EFIFOMode.FadeIn) ? (((100 - this.counter.nCurrentValue) * 0xff) / 100) : ((this.counter.nCurrentValue * 0xff) / 100);
                 this.tx黒幕.tDraw2D(CDTXMania.app.Device, 0, 0);
                 string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
                 if( this.txジャケット == null ) // 2019.04.26 kairera0467
@@ -73,16 +73,16 @@ namespace DTXMania
 
                 if( this.txジャケット != null )
                 {
-                    this.txジャケット.vc拡大縮小倍率.X = 0.96f;
-                    this.txジャケット.vc拡大縮小倍率.Y = 0.96f;
+                    this.txジャケット.vcScaleRatio.X = 0.96f;
+                    this.txジャケット.vcScaleRatio.Y = 0.96f;
                     this.txジャケット.fZAxisRotation = 0.28f;
-                    this.txジャケット.nTransparency = (this.mode == EFIFOモード.フェードイン) ? (((100 - this.counter.n現在の値) * 0xff) / 100) : ((this.counter.n現在の値 * 0xff) / 100);
+                    this.txジャケット.nTransparency = (this.mode == EFIFOMode.FadeIn) ? (((100 - this.counter.nCurrentValue) * 0xff) / 100) : ((this.counter.nCurrentValue * 0xff) / 100);
                     this.txジャケット.tDraw2D(CDTXMania.app.Device, 620, 40);
                 }
 			}
             else if (this.tx黒幕 == null)
             {
-                this.tx黒タイル64x64.nTransparency = (this.mode == EFIFOモード.フェードイン) ? (((100 - this.counter.n現在の値) * 0xff) / 100) : ((this.counter.n現在の値 * 0xff) / 100);
+                this.tx黒タイル64x64.nTransparency = (this.mode == EFIFOMode.FadeIn) ? (((100 - this.counter.nCurrentValue) * 0xff) / 100) : ((this.counter.nCurrentValue * 0xff) / 100);
                 for (int i = 0; i <= (SampleFramework.GameWindowSize.Width / 64); i++)		// #23510 2010.10.31 yyagi: change "clientSize.Width" to "640" to fix FIFO drawing size
                 {
                     for (int j = 0; j <= (SampleFramework.GameWindowSize.Height / 64); j++)	// #23510 2010.10.31 yyagi: change "clientSize.Height" to "480" to fix FIFO drawing size
@@ -91,7 +91,7 @@ namespace DTXMania
                     }
                 }
             }
-			if( this.counter.n現在の値 != 150 )
+			if( this.counter.nCurrentValue != 150 )
 			{
 				return 0;
 			}
@@ -99,12 +99,12 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
 		public CCounter counter;
-		private EFIFOモード mode;
+		private EFIFOMode mode;
 		private CTexture tx黒タイル64x64;
         private CTexture tx黒幕;
         private CTexture txジャケット;

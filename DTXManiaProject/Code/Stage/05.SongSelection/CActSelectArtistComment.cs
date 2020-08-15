@@ -42,7 +42,7 @@ namespace DTXMania
 						graphics.DrawString( this.strArtist, this.ft描画用フォント, Brushes.White, ( float ) 0f, ( float ) 0f );
 						graphics.Dispose();
 						this.txArtist = new CTexture( CDTXMania.app.Device, bitmap2, CDTXMania.TextureFormat );
-						this.txArtist.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );
+						this.txArtist.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );
 						bitmap2.Dispose();
 					}
 					catch( CTextureCreateFailedException )
@@ -99,7 +99,7 @@ namespace DTXMania
 					try
 					{
 						this.txComment = new CTexture( CDTXMania.app.Device, bitmap4, CDTXMania.TextureFormat );
-						this.txComment.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );
+						this.txComment.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );
 					}
 					catch( CTextureCreateFailedException )
 					{
@@ -112,7 +112,7 @@ namespace DTXMania
 				image.Dispose();
 				if( this.txComment != null )
 				{
-					this.ctComment = new CCounter( -740, (int) ( ( ( ( this.nComment行数 - 1 ) * this.nテクスチャの最大幅 ) + this.nComment最終行の幅 ) * this.txComment.vc拡大縮小倍率.X ), 10, CDTXMania.Timer );
+					this.ctComment = new CCounter( -740, (int) ( ( ( ( this.nComment行数 - 1 ) * this.nテクスチャの最大幅 ) + this.nComment最終行の幅 ) * this.txComment.vcScaleRatio.X ), 10, CDTXMania.Timer );
 				}
 			}
 		}
@@ -177,7 +177,7 @@ namespace DTXMania
 				}
 				if( this.txArtist != null )
 				{
-					int x = 1260 - 25 - ( (int) ( this.txArtist.szテクスチャサイズ.Width * this.txArtist.vc拡大縮小倍率.X ) );		// #27648 2012.3.14 yyagi: -12 for scrollbar
+					int x = 1260 - 25 - ( (int) ( this.txArtist.szTextureSize.Width * this.txArtist.vcScaleRatio.X ) );		// #27648 2012.3.14 yyagi: -12 for scrollbar
 					int y = 320;
 					this.txArtist.tDraw2D( CDTXMania.app.Device, x, y );
                     //this.txArtist.tDraw2D(CDTXMania.app.Device, 64, 570);
@@ -186,24 +186,24 @@ namespace DTXMania
                     int num3 = 683;
                     int num4 = 339;
 
-                if ((this.txComment != null) && ((this.txComment.szテクスチャサイズ.Width * this.txComment.vc拡大縮小倍率.X) < (1250 - num3)))
+                if ((this.txComment != null) && ((this.txComment.szTextureSize.Width * this.txComment.vcScaleRatio.X) < (1250 - num3)))
                 {
                     this.txComment.tDraw2D(CDTXMania.app.Device, num3, num4);
                 }
                 else if (this.txComment != null)
                 {
-                    Rectangle rectangle = new Rectangle(this.ctComment.n現在の値, 0, 750, (int)this.ft描画用フォント.Size);
+                    Rectangle rectangle = new Rectangle(this.ctComment.nCurrentValue, 0, 750, (int)this.ft描画用フォント.Size);
                     if (rectangle.X < 0)
                     {
                         num3 += -rectangle.X;
                         rectangle.Width -= -rectangle.X;
                         rectangle.X = 0;
                     }
-                    int num5 = ((int)(((float)rectangle.X) / this.txComment.vc拡大縮小倍率.X)) / this.nテクスチャの最大幅;
+                    int num5 = ((int)(((float)rectangle.X) / this.txComment.vcScaleRatio.X)) / this.nテクスチャの最大幅;
                     Rectangle rectangle2 = new Rectangle();
                     while (rectangle.Width > 0)
                     {
-                        rectangle2.X = ((int)(((float)rectangle.X) / this.txComment.vc拡大縮小倍率.X)) % this.nテクスチャの最大幅;
+                        rectangle2.X = ((int)(((float)rectangle.X) / this.txComment.vcScaleRatio.X)) % this.nテクスチャの最大幅;
                         rectangle2.Y = num5 * ((int)this.ft描画用フォント.Size);
                         int num6 = ((num5 + 1) == this.nComment行数) ? this.nComment最終行の幅 : this.nテクスチャの最大幅;
                         int num7 = num6 - rectangle2.X;
@@ -214,7 +214,7 @@ namespace DTXMania
                         {
                             break;
                         }
-                        int num8 = (int)(rectangle2.Width * this.txComment.vc拡大縮小倍率.X);
+                        int num8 = (int)(rectangle2.Width * this.txComment.vcScaleRatio.X);
                         rectangle.X += num8;
                         rectangle.Width -= num8;
                         num3 += num8;
@@ -225,7 +225,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

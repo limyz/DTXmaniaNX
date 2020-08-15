@@ -19,7 +19,7 @@ namespace DTXMania
 
 		public CStageChangeSkin()
 		{
-			base.eステージID = CStage.EStage.ChangeSkin;
+			base.eStageID = CStage.EStage.ChangeSkin;
 			base.bNotActivated = true;
 		}
 

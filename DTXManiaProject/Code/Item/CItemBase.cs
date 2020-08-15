@@ -13,25 +13,25 @@ namespace DTXMania
 	{
 		// プロパティ
 
-		public Eパネル種別 eパネル種別;
-		public enum Eパネル種別
+		public EPanelType ePanelType;
+		public enum EPanelType
 		{
-			通常,
-			その他
+			Normal,
+			Other
 		}
 
-		public E種別 e種別;
-		public enum E種別
+		public EType eType;
+		public enum EType
 		{
 			基本形,
-			ONorOFFトグル,
-			ONorOFFor不定スリーステート,
-			整数,
-			リスト,
+			ONorOFFToggle,
+			ONorOFForUndefined3State,
+			Integer,
+			List,
 			切替リスト
 		}
 
-		public string str項目名;
+		public string strItemName;
 		public string str説明文;
 
 
@@ -39,35 +39,35 @@ namespace DTXMania
 
 		public CItemBase()
 		{
-			this.str項目名 = "";
+			this.strItemName = "";
 			this.str説明文 = "";
 		}
 		public CItemBase( string str項目名 )
 			: this()
 		{
-			this.t初期化( str項目名 );
+			this.tInitialize( str項目名 );
 		}
 		public CItemBase(string str項目名, string str説明文jp)
 			: this() {
-			this.t初期化(str項目名, str説明文jp);
+			this.tInitialize(str項目名, str説明文jp);
 		}
 		public CItemBase(string str項目名,  string str説明文jp, string str説明文en)
 			: this() {
-			this.t初期化(str項目名, str説明文jp, str説明文en);
+			this.tInitialize(str項目名, str説明文jp, str説明文en);
 		}
 
-		public CItemBase(string str項目名, Eパネル種別 eパネル種別)
+		public CItemBase(string str項目名, EPanelType eパネル種別)
 			: this()
 		{
-			this.t初期化( str項目名, eパネル種別 );
+			this.tInitialize( str項目名, eパネル種別 );
 		}
-		public CItemBase(string str項目名, Eパネル種別 eパネル種別, string str説明文jp)
+		public CItemBase(string str項目名, EPanelType eパネル種別, string str説明文jp)
 			: this() {
-			this.t初期化(str項目名, eパネル種別, str説明文jp);
+			this.tInitialize(str項目名, eパネル種別, str説明文jp);
 		}
-		public CItemBase(string str項目名, Eパネル種別 eパネル種別, string str説明文jp, string str説明文en)
+		public CItemBase(string str項目名, EPanelType eパネル種別, string str説明文jp, string str説明文en)
 			: this() {
-			this.t初期化(str項目名, eパネル種別, str説明文jp, str説明文en);
+			this.tInitialize(str項目名, eパネル種別, str説明文jp, str説明文en);
 		}
 
 		
@@ -76,33 +76,33 @@ namespace DTXMania
 		public virtual void tEnter押下()
 		{
 		}
-		public virtual void t項目値を次へ移動()
+		public virtual void tMoveItemValueToNext()
 		{
 		}
-		public virtual void t項目値を前へ移動()
+		public virtual void tMoveItemValueToPrevious()
 		{
 		}
-		public virtual void t初期化( string str項目名 )
+		public virtual void tInitialize( string str項目名 )
 		{
-			this.t初期化( str項目名, Eパネル種別.通常 );
+			this.tInitialize( str項目名, EPanelType.Normal );
 		}
-		public virtual void t初期化(string str項目名, string str説明文jp) {
-			this.t初期化(str項目名, Eパネル種別.通常, str説明文jp, str説明文jp);
+		public virtual void tInitialize(string str項目名, string str説明文jp) {
+			this.tInitialize(str項目名, EPanelType.Normal, str説明文jp, str説明文jp);
 		}
-		public virtual void t初期化(string str項目名, string str説明文jp, string str説明文en) {
-			this.t初期化(str項目名, Eパネル種別.通常, str説明文jp, str説明文en);
+		public virtual void tInitialize(string str項目名, string str説明文jp, string str説明文en) {
+			this.tInitialize(str項目名, EPanelType.Normal, str説明文jp, str説明文en);
 		}
 
-		public virtual void t初期化( string str項目名, Eパネル種別 eパネル種別 )
+		public virtual void tInitialize( string str項目名, EPanelType eパネル種別 )
 		{
-			this.t初期化(str項目名, eパネル種別, "", "");
+			this.tInitialize(str項目名, eパネル種別, "", "");
 		}
-		public virtual void t初期化(string str項目名, Eパネル種別 eパネル種別, string str説明文jp) {
-			this.t初期化(str項目名, eパネル種別, str説明文jp, str説明文jp);
+		public virtual void tInitialize(string str項目名, EPanelType eパネル種別, string str説明文jp) {
+			this.tInitialize(str項目名, eパネル種別, str説明文jp, str説明文jp);
 		}
-		public virtual void t初期化(string str項目名, Eパネル種別 eパネル種別, string str説明文jp, string str説明文en) {
-			this.str項目名 = str項目名;
-			this.eパネル種別 = eパネル種別;
+		public virtual void tInitialize(string str項目名, EPanelType eパネル種別, string str説明文jp, string str説明文en) {
+			this.strItemName = str項目名;
+			this.ePanelType = eパネル種別;
 			this.str説明文 = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ? str説明文jp : str説明文en;
 		}
 		public virtual object obj現在値()

@@ -198,7 +198,7 @@ namespace DTXMania
 			return v.GetHashCode();
 		}
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

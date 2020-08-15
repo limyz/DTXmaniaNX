@@ -20,7 +20,7 @@ namespace DTXMania
 			AUTO
 		}
 
-		internal EStage eステージID;
+		internal EStage eStageID;
 		public enum EStage
 		{
 			DoNothing,

@@ -533,7 +533,7 @@ namespace DTXMania
 				CTexture texture = b強調 ? this.tx強調文字 : this.tx通常文字;
 				if( texture != null )
 				{
-					texture.vc拡大縮小倍率 = new Vector3( fScale, fScale, 1f );
+					texture.vcScaleRatio = new Vector3( fScale, fScale, 1f );
 					foreach( char ch in str )
 					{
 						foreach( ST文字領域 st文字領域 in this.st文字領域 )
@@ -581,7 +581,7 @@ namespace DTXMania
 		}
 		
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

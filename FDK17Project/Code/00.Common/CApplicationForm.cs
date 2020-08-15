@@ -343,12 +343,12 @@ namespace FDK
 
 			#region [ CTexture の持つ画面情報の更新 ]
 			//-----------------
-			CTexture.sz論理画面 = sz論理画面;
-			CTexture.sz物理画面 = this.Window.ClientSize;
+			CTexture.szLogicalScreen = sz論理画面;
+			CTexture.szPhysicalScreen = this.Window.ClientSize;
 
 			Vector2 vc論理画面を1とする場合の物理画面の倍率 = new Vector2() {
-				X = (float) CTexture.sz物理画面.Width / CTexture.sz論理画面.Width,
-				Y = (float) CTexture.sz物理画面.Height / CTexture.sz論理画面.Height,
+				X = (float) CTexture.szPhysicalScreen.Width / CTexture.szLogicalScreen.Width,
+				Y = (float) CTexture.szPhysicalScreen.Height / CTexture.szLogicalScreen.Height,
 			};
 
 			if( vc論理画面を1とする場合の物理画面の倍率.X < vc論理画面を1とする場合の物理画面の倍率.Y )
@@ -356,29 +356,29 @@ namespace FDK
 				// (A) 物理と論理の横幅を一致させる。
 
 				CTexture.fScreenRatio = vc論理画面を1とする場合の物理画面の倍率.X;		// X
-				CTexture.rc物理画面描画領域 = new Rectangle();
-				CTexture.rc物理画面描画領域.Width = CTexture.sz物理画面.Width;
-				CTexture.rc物理画面描画領域.Height = (int) ( CTexture.sz論理画面.Height * CTexture.fScreenRatio );
-				CTexture.rc物理画面描画領域.X = 0;
-				CTexture.rc物理画面描画領域.Y = ( CTexture.sz物理画面.Height - CTexture.rc物理画面描画領域.Height ) / 2;
+				CTexture.rcPhysicalScreenDrawingArea = new Rectangle();
+				CTexture.rcPhysicalScreenDrawingArea.Width = CTexture.szPhysicalScreen.Width;
+				CTexture.rcPhysicalScreenDrawingArea.Height = (int) ( CTexture.szLogicalScreen.Height * CTexture.fScreenRatio );
+				CTexture.rcPhysicalScreenDrawingArea.X = 0;
+				CTexture.rcPhysicalScreenDrawingArea.Y = ( CTexture.szPhysicalScreen.Height - CTexture.rcPhysicalScreenDrawingArea.Height ) / 2;
 			}
 			else
 			{
 				// (B) 物理と論理の縦幅を一致させる。
 
 				CTexture.fScreenRatio = vc論理画面を1とする場合の物理画面の倍率.Y;		// Y
-				CTexture.rc物理画面描画領域 = new Rectangle();
-				CTexture.rc物理画面描画領域.Width = (int) ( CTexture.sz論理画面.Width * CTexture.fScreenRatio );
-				CTexture.rc物理画面描画領域.Height = CTexture.sz物理画面.Height;
-				CTexture.rc物理画面描画領域.X = ( CTexture.sz物理画面.Width - CTexture.rc物理画面描画領域.Width ) / 2;
-				CTexture.rc物理画面描画領域.Y = 0;
+				CTexture.rcPhysicalScreenDrawingArea = new Rectangle();
+				CTexture.rcPhysicalScreenDrawingArea.Width = (int) ( CTexture.szLogicalScreen.Width * CTexture.fScreenRatio );
+				CTexture.rcPhysicalScreenDrawingArea.Height = CTexture.szPhysicalScreen.Height;
+				CTexture.rcPhysicalScreenDrawingArea.X = ( CTexture.szPhysicalScreen.Width - CTexture.rcPhysicalScreenDrawingArea.Width ) / 2;
+				CTexture.rcPhysicalScreenDrawingArea.Y = 0;
 			}
 
 			Trace.TraceInformation( "Direct3D9 デバイス：論理画面:{0}x{1}, 物理画面:{2}x{3}, 画面比率:{4}, 物理画面描画領域:({5},{6})-({7}x{8})",
-				CTexture.sz論理画面.Width, CTexture.sz論理画面.Height,
-				CTexture.sz物理画面.Width, CTexture.sz物理画面.Height,
+				CTexture.szLogicalScreen.Width, CTexture.szLogicalScreen.Height,
+				CTexture.szPhysicalScreen.Width, CTexture.szPhysicalScreen.Height,
 				CTexture.fScreenRatio,
-				CTexture.rc物理画面描画領域.Left, CTexture.rc物理画面描画領域.Top, CTexture.rc物理画面描画領域.Right, CTexture.rc物理画面描画領域.Bottom );
+				CTexture.rcPhysicalScreenDrawingArea.Left, CTexture.rcPhysicalScreenDrawingArea.Top, CTexture.rcPhysicalScreenDrawingArea.Right, CTexture.rcPhysicalScreenDrawingArea.Bottom );
 			//-----------------
 			#endregion
 
@@ -528,7 +528,7 @@ namespace FDK
 
 							try
 							{
-								if( this.tGenerateChangeResetDirect3DDevice( newSettings, CTexture.sz論理画面 ) )
+								if( this.tGenerateChangeResetDirect3DDevice( newSettings, CTexture.szLogicalScreen ) )
 								{
 									// 作成成功。
 
@@ -556,7 +556,7 @@ namespace FDK
 					#region [ 時間計測（デバッグ用）]
 					//-----------------
 					if( b時間計測 )
-						n開始 = timer.nシステム時刻ms;
+						n開始 = timer.nSystemTimeMs;
 					//-----------------
 					#endregion
 
@@ -593,7 +593,7 @@ namespace FDK
 					#region [ 時間計測（デバッグ用）]
 					//-----------------
 					if( b時間計測 )
-						nPresent開始 = timer.nシステム時刻ms;
+						nPresent開始 = timer.nSystemTimeMs;
 					//-----------------
 					#endregion
 
@@ -642,7 +642,7 @@ namespace FDK
 					//-----------------
 					if( b時間計測 )
 					{
-						n終了 = timer.nシステム時刻ms;
+						n終了 = timer.nSystemTimeMs;
 
 						if( ( n終了 - n開始 ) > 18 )
 						{

@@ -23,7 +23,7 @@ namespace FDK
 		}
 
 
-		public override long nシステム時刻ms
+		public override long nSystemTimeMs
 		{
 			get
 			{

@@ -250,7 +250,7 @@ namespace DTXMania
 
                 try
                 {
-                    CDTXMania.Skin.bgm起動画面.t再生する();
+                    CDTXMania.Skin.bgm起動画面.tPlay();
                     for (int i = 0; i < CDTXMania.Skin.nシステムサウンド数; i++)
                     {
                         if (!CDTXMania.Skin[i].b排他)	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
@@ -264,7 +264,7 @@ namespace DTXMania
                                     Trace.TraceInformation("システムサウンドを読み込みました。({0})", cシステムサウンド.strFilename);
                                     //if ( ( cシステムサウンド == CDTXMania.Skin.bgm起動画面 ) && cシステムサウンド.b読み込み成功 )
                                     //{
-                                    //	cシステムサウンド.t再生する();
+                                    //	cシステムサウンド.tPlay();
                                     //}
                                 }
                                 catch (FileNotFoundException)

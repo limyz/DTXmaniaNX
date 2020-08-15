@@ -108,7 +108,7 @@ namespace DTXMania
                     graphics.DrawString(strMessage[ci], ftMessage, Brushes.White, (float)0f, (float)0f);
                     graphics.Dispose();
                     this.txMessage = new CTexture(CDTXMania.app.Device, image, CDTXMania.TextureFormat);
-                    this.txMessage.vc拡大縮小倍率 = new Vector3(0.5f, 0.5f, 1f);
+                    this.txMessage.vcScaleRatio = new Vector3(0.5f, 0.5f, 1f);
                     image.Dispose();
                     CDTXMania.t安全にDisposeする(ref ftMessage);
                 }
@@ -145,7 +145,7 @@ namespace DTXMania
             this.ctNowEnumeratingSongs.tUpdateLoop();
             if (this.txNowEnumeratingSongs != null)
             {
-                this.txNowEnumeratingSongs.nTransparency = (int)(176.0 + 80.0 * Math.Sin((double)(2 * Math.PI * this.ctNowEnumeratingSongs.n現在の値 * 2 / 100.0)));
+                this.txNowEnumeratingSongs.nTransparency = (int)(176.0 + 80.0 * Math.Sin((double)(2 * Math.PI * this.ctNowEnumeratingSongs.nCurrentValue * 2 / 100.0)));
                 this.txNowEnumeratingSongs.tDraw2D(CDTXMania.app.Device, 18, 7);
             }
             if (bコマンドでの曲データ取得 && this.txDialogNowEnumeratingSongs != null)

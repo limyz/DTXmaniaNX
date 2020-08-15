@@ -54,7 +54,7 @@ namespace DTXMania
 		Normal	= 1,
 		High	= 2
 	}
-	public enum EPad			// 演奏用のenum。ここを修正するときは、次に出てくる EKeyConfigPad と EパッドFlag もセットで修正すること。
+	public enum EPad			// 演奏用のenum。ここを修正するときは、次に出てくる EKeyConfigPad と EPadFlag もセットで修正すること。
 	{
 		HH		= 0,
 		R		= 0,
@@ -109,7 +109,7 @@ namespace DTXMania
 		UNKNOWN = EPad.UNKNOWN
 	}
 	[Flags]
-	public enum EパッドFlag		// #24063 2011.1.16 yyagi コマンド入力用 パッド入力のフラグ化
+	public enum EPadFlag		// #24063 2011.1.16 yyagi コマンド入力用 パッド入力のフラグ化
 	{
 		None	= 0,
 		HH		= 1,
@@ -135,7 +135,7 @@ namespace DTXMania
         LBD     = 2048,
 		UNKNOWN = 4096
 	}
-	public enum Eランダムモード
+	public enum ERandomMode
 	{
 		OFF,
         MIRROR,
@@ -161,18 +161,18 @@ namespace DTXMania
 		UNKNOWN	= EInstrumentPart.UNKNOWN
 	}
 
-	public enum E打ち分け時の再生の優先順位
+	public enum EPlaybackPriority
 	{
-		ChipがPadより優先,
-		PadがChipより優先
+		ChipOverPadPriority,
+		PadOverChipPriority
 	}
-	internal enum E入力デバイス
+	internal enum EInputDevice
 	{
-		キーボード		= 0,
+		Keyboard	= 0,
 		MIDI入力		= 1,
-		ジョイパッド	= 2,
-		マウス			= 3,
-		不明			= -1
+		Joypad		= 2,
+		Mouse		= 3,
+		Unknown		= -1
 	}
 	public enum EJudgement
 	{
@@ -189,17 +189,17 @@ namespace DTXMania
 
 	internal enum E判定文字表示位置
 	{
-		レーン上,
+		OnTheLane,
 		判定ライン上または横,
 		表示OFF
 	}
-	internal enum EAVI種別
+	internal enum EAVIType
 	{
 		Unknown,
 		AVI,
 		AVIPAN
 	}
-	internal enum EBGA種別
+	internal enum EBGAType
 	{
 		Unknown,
 		BMP,
@@ -207,12 +207,12 @@ namespace DTXMania
 		BGA,
 		BGAPAN
 	}
-	internal enum EFIFOモード
+	internal enum EFIFOMode
 	{
-		フェードイン,
-		フェードアウト
+		FadeIn,
+		FadeOut
 	}
-	internal enum Eドラムコンボ文字の表示位置
+	internal enum EDrumComboTextDisplayPosition
 	{
 		LEFT,
 		CENTER,
@@ -251,24 +251,24 @@ namespace DTXMania
 		MAX,	// 要素数取得のための定義 ("BGM"は使わない前提で)
 		BGM
 	}
-	internal enum Eログ出力
+	internal enum EOutputLog
 	{
 		OFF,
-		ON通常,
-		ON詳細あり
+		ONNormal,
+		ONVerbose
 	}
-	internal enum E演奏画面の戻り値
+	internal enum EPerfScreenReturnValue
 	{
-		継続,
-		演奏中断,
-		ステージ失敗,
-		ステージクリア
+		Continue,
+		Interruption,
+		StageFailure,
+		StageClear
 	}
-    internal enum E曲読込画面の戻り値
+    internal enum ESongLoadingScreenReturnValue
     {
-        継続 = 0,
-        読込完了,
-        読込中止
+        Continue = 0,
+        LoadingComplete,
+        LoadingStopped
     }
 	/// <summary>
 	/// 入力ラグ表示タイプ

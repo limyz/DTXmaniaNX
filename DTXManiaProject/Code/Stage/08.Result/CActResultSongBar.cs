@@ -22,7 +22,7 @@ namespace DTXMania
 
 		public void tアニメを完了させる()
 		{
-			this.ct登場用.n現在の値 = this.ct登場用.n終了値;
+			this.ct登場用.nCurrentValue = this.ct登場用.n終了値;
 		}
 
 
@@ -60,7 +60,7 @@ namespace DTXMania
 					graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 					graphics.DrawString( CDTXMania.DTX.TITLE, this.ft曲名用フォント, Brushes.White, ( float ) 8f, ( float ) 0f );
 					this.tx曲名 = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
-					this.tx曲名.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );
+					this.tx曲名.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );
 					graphics.Dispose();
 					image.Dispose();
 				}
@@ -97,21 +97,21 @@ namespace DTXMania
 			int num2 = num - 0x40;
 			if( this.ct登場用.b進行中 )
 			{
-				if( this.ct登場用.n現在の値 <= 100 )
+				if( this.ct登場用.nCurrentValue <= 100 )
 				{
-					double num3 = 1.0 - ( ( (double) this.ct登場用.n現在の値 ) / 100.0 );
+					double num3 = 1.0 - ( ( (double) this.ct登場用.nCurrentValue ) / 100.0 );
 					this.n本体X = -( (int) ( num * Math.Sin( Math.PI / 2 * num3 ) ) );
 					this.n本体Y = 0x18b;
 				}
-				else if( this.ct登場用.n現在の値 <= 200 )
+				else if( this.ct登場用.nCurrentValue <= 200 )
 				{
-					double num4 = ( (double) ( this.ct登場用.n現在の値 - 100 ) ) / 100.0;
+					double num4 = ( (double) ( this.ct登場用.nCurrentValue - 100 ) ) / 100.0;
 					this.n本体X = -( (int) ( ( ( (double) num ) / 6.0 ) * Math.Sin( Math.PI * num4 ) ) );
 					this.n本体Y = 0x18b;
 				}
-				else if( this.ct登場用.n現在の値 <= 270 )
+				else if( this.ct登場用.nCurrentValue <= 270 )
 				{
-					double num5 = ( (double) ( this.ct登場用.n現在の値 - 200 ) ) / 70.0;
+					double num5 = ( (double) ( this.ct登場用.nCurrentValue - 200 ) ) / 70.0;
 					this.n本体X = -( (int) ( ( ( (double) num ) / 18.0 ) * Math.Sin( Math.PI * num5 ) ) );
 					this.n本体Y = 0x18b;
 				}
@@ -145,7 +145,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

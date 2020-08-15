@@ -38,7 +38,7 @@ namespace FDK
 			get
 			{
 				int n現在位置 = this.sd経過時間計測用サウンドバッファ.DirectSoundBuffer.CurrentPlayPosition;
-				long n現在のシステム時刻ms = this.tmシステムタイマ.nシステム時刻ms;
+				long n現在のシステム時刻ms = this.tmシステムタイマ.nSystemTimeMs;
 
 				
 				// ループ回数を調整。
@@ -147,7 +147,7 @@ namespace FDK
 			this.nループ回数 = 0;
 			this.n前回の位置 = 0;
 			this.sd経過時間計測用サウンドバッファ.DirectSoundBuffer.Play( 0, PlayFlags.Looping );
-			this.n前に経過時間を測定したシステム時刻ms = this.tmシステムタイマ.nシステム時刻ms;
+			this.n前に経過時間を測定したシステム時刻ms = this.tmシステムタイマ.nSystemTimeMs;
 			//-----------------
 			#endregion
 

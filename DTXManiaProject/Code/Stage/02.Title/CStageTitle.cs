@@ -16,7 +16,7 @@ namespace DTXMania
 
 		public CStageTitle()
 		{
-			base.eステージID = CStage.EStage.Title;
+			base.eStageID = CStage.EStage.Title;
 			base.bNotActivated = true;
 			base.listChildActivities.Add( this.actFIfromSetup = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
@@ -105,7 +105,7 @@ namespace DTXMania
 						base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					}
 					this.ctカーソルフラッシュ用.tStart( 0, 700, 5, CDTXMania.Timer );
-					this.ctカーソルフラッシュ用.n現在の値 = 100;
+					this.ctカーソルフラッシュ用.nCurrentValue = 100;
 					base.bJustStartedUpdate = false;
 				}
 				//---------------------
@@ -148,36 +148,36 @@ namespace DTXMania
 				if( base.ePhaseID == CStage.EPhase.Common_DefaultState		// 通常状態、かつ
 					&& CDTXMania.act現在入力を占有中のプラグイン == null )	// プラグインの入力占有がない
 				{
-					if( CDTXMania.Input管理.Keyboard.bキーが押された( (int) Key.Escape ) )
+					if( CDTXMania.InputManager.Keyboard.bキーが押された( (int) Key.Escape ) )
 						return (int) E戻り値.EXIT;
 
-					this.ctキー反復用.Up.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+					this.ctキー反復用.Up.tRepeatKey( CDTXMania.InputManager.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					this.ctキー反復用.R.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					//Change to HT
-					if( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.HT ) )
+					if( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.HT ) )
 						this.tカーソルを上へ移動する();
 
-					this.ctキー反復用.Down.tRepeatKey( CDTXMania.Input管理.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+					this.ctキー反復用.Down.tRepeatKey( CDTXMania.InputManager.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					this.ctキー反復用.B.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.SD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					//Change to LT
-					if ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LT ) )
+					if ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LT ) )
 						this.tカーソルを下へ移動する();
 
-					if( ( CDTXMania.Pad.b押されたDGB( EPad.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) 
+					if( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) 
 					{
 						if ( ( this.n現在のカーソル行 == (int) E戻り値.GAMESTART - 1 ) && CDTXMania.Skin.soundゲーム開始音.b読み込み成功 )
 						{
-							CDTXMania.Skin.soundゲーム開始音.t再生する();
+							CDTXMania.Skin.soundゲーム開始音.tPlay();
 						}
 						else
 						{
-							CDTXMania.Skin.sound決定音.t再生する();
+							CDTXMania.Skin.sound決定音.tPlay();
 						}
 						if( this.n現在のカーソル行 == (int)E戻り値.EXIT - 1 )
 						{
 							return (int)E戻り値.EXIT;
 						}
-						this.actFO.tフェードアウト開始();
+						this.actFO.tStartFadeOut();
 						base.ePhaseID = CStage.EPhase.Common_FadeOut;
 					}
 				}
@@ -195,24 +195,24 @@ namespace DTXMania
 					int y = MENU_Y + ( this.n現在のカーソル行 * MENU_H );
 					if( this.ct上移動用.b進行中 )
 					{
-						y += (int) ( (double)MENU_H / 2 * ( Math.Cos( Math.PI * ( ( (double) this.ct上移動用.n現在の値 ) / 100.0 ) ) + 1.0 ) );
+						y += (int) ( (double)MENU_H / 2 * ( Math.Cos( Math.PI * ( ( (double) this.ct上移動用.nCurrentValue ) / 100.0 ) ) + 1.0 ) );
 					}
 					else if( this.ct下移動用.b進行中 )
 					{
-						y -= (int) ( (double)MENU_H / 2 * ( Math.Cos( Math.PI * ( ( (double) this.ct下移動用.n現在の値 ) / 100.0 ) ) + 1.0 ) );
+						y -= (int) ( (double)MENU_H / 2 * ( Math.Cos( Math.PI * ( ( (double) this.ct下移動用.nCurrentValue ) / 100.0 ) ) + 1.0 ) );
 					}
-					if( this.ctカーソルフラッシュ用.n現在の値 <= 100 )
+					if( this.ctカーソルフラッシュ用.nCurrentValue <= 100 )
 					{
-						float nMag = (float) ( 1.0 + ( ( ( (double) this.ctカーソルフラッシュ用.n現在の値 ) / 100.0 ) * 0.5 ) );
-						this.txメニュー.vc拡大縮小倍率.X = nMag;
-						this.txメニュー.vc拡大縮小倍率.Y = nMag;
-						this.txメニュー.nTransparency = (int) ( 255.0 * ( 1.0 - ( ( (double) this.ctカーソルフラッシュ用.n現在の値 ) / 100.0 ) ) );
+						float nMag = (float) ( 1.0 + ( ( ( (double) this.ctカーソルフラッシュ用.nCurrentValue ) / 100.0 ) * 0.5 ) );
+						this.txメニュー.vcScaleRatio.X = nMag;
+						this.txメニュー.vcScaleRatio.Y = nMag;
+						this.txメニュー.nTransparency = (int) ( 255.0 * ( 1.0 - ( ( (double) this.ctカーソルフラッシュ用.nCurrentValue ) / 100.0 ) ) );
 						int x_magnified = x + ( (int) ( ( MENU_W * ( 1.0 - nMag ) ) / 2.0 ) );
 						int y_magnified = y + ( (int) ( ( MENU_H * ( 1.0 - nMag ) ) / 2.0 ) );
 						this.txメニュー.tDraw2D( CDTXMania.app.Device, x_magnified, y_magnified, new Rectangle( 0, MENU_H * 5, MENU_W, MENU_H ) );
 					}
-					this.txメニュー.vc拡大縮小倍率.X = 1f;
-					this.txメニュー.vc拡大縮小倍率.Y = 1f;
+					this.txメニュー.vcScaleRatio.X = 1f;
+					this.txメニュー.vcScaleRatio.Y = 1f;
 					this.txメニュー.nTransparency = 0xff;
 					this.txメニュー.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( 0, MENU_H * 4, MENU_W, MENU_H ) );
 				}
@@ -229,7 +229,7 @@ namespace DTXMania
 					case CStage.EPhase.Common_FadeIn:
 						if( this.actFI.OnUpdateAndDraw() != 0 )
 						{
-							CDTXMania.Skin.soundタイトル音.t再生する();
+							CDTXMania.Skin.soundタイトル音.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;
@@ -257,7 +257,7 @@ namespace DTXMania
 					case CStage.EPhase.タイトル_起動画面からのフェードイン:
 						if( this.actFIfromSetup.OnUpdateAndDraw() != 0 )
 						{
-							CDTXMania.Skin.soundタイトル音.t再生する();
+							CDTXMania.Skin.soundタイトル音.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;
@@ -275,7 +275,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -350,12 +350,12 @@ namespace DTXMania
 		{
 			if ( this.n現在のカーソル行 != (int) E戻り値.EXIT - 1 )
 			{
-				CDTXMania.Skin.soundカーソル移動音.t再生する();
+				CDTXMania.Skin.soundCursorMovement.tPlay();
 				this.n現在のカーソル行++;
 				this.ct下移動用.tStart( 0, 100, 1, CDTXMania.Timer );
 				if( this.ct上移動用.b進行中 )
 				{
-					this.ct下移動用.n現在の値 = 100 - this.ct上移動用.n現在の値;
+					this.ct下移動用.nCurrentValue = 100 - this.ct上移動用.nCurrentValue;
 					this.ct上移動用.tStop();
 				}
 			}
@@ -364,12 +364,12 @@ namespace DTXMania
 		{
 			if ( this.n現在のカーソル行 != (int) E戻り値.GAMESTART - 1 )
 			{
-				CDTXMania.Skin.soundカーソル移動音.t再生する();
+				CDTXMania.Skin.soundCursorMovement.tPlay();
 				this.n現在のカーソル行--;
 				this.ct上移動用.tStart( 0, 100, 1, CDTXMania.Timer );
 				if( this.ct下移動用.b進行中 )
 				{
-					this.ct上移動用.n現在の値 = 100 - this.ct下移動用.n現在の値;
+					this.ct上移動用.nCurrentValue = 100 - this.ct下移動用.nCurrentValue;
 					this.ct下移動用.tStop();
 				}
 			}

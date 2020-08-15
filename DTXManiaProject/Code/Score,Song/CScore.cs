@@ -234,7 +234,7 @@ namespace DTXMania
         }
 
         public bool bHadACacheInSongDB;
-        public bool bスコアが有効である
+        public bool bIsScoreValid
         {
             get
             {

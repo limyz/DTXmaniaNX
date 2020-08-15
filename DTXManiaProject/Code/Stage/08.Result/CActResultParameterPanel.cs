@@ -217,7 +217,7 @@ namespace DTXMania
 
 		public void tアニメを完了させる()
 		{
-			this.ct表示用.n現在の値 = this.ct表示用.n終了値;
+			this.ct表示用.nCurrentValue = this.ct表示用.n終了値;
 		}
 
 
@@ -552,7 +552,7 @@ namespace DTXMania
                             this.txNewRecord.tDraw2D( CDTXMania.app.Device, 118 + this.n本体X[j], 322 + this.n本体Y );
                         }
                     }
-                    if (this.ct表示用.n現在の値 >= 900)
+                    if (this.ct表示用.nCurrentValue >= 900)
                     {
                         if (CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount == CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount)
                         {
@@ -571,7 +571,7 @@ namespace DTXMania
             }
             return 1;
         }
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

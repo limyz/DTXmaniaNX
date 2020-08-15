@@ -238,7 +238,7 @@ namespace DTXMania
 				}
 				this.b読み込み成功 = true;
 			}
-			public void t再生する()
+			public void tPlay()
 			{
 				if ( this.bReadNotTried )
 				{
@@ -329,7 +329,7 @@ namespace DTXMania
 		public CSystemSound bgm選曲画面 = null;
         public CSystemSound bgm結果画面 = null;
 		public CSystemSound soundSTAGEFAILED音 = null;
-		public CSystemSound soundカーソル移動音 = null;
+		public CSystemSound soundCursorMovement = null;
 		public CSystemSound soundゲーム開始音 = null;
 		public CSystemSound soundGameEnd = null;
 		public CSystemSound soundステージクリア音 = null;
@@ -359,7 +359,7 @@ namespace DTXMania
 				switch( sound )
 				{
 					case ESystemSound.SOUNDカーソル移動音:
-						return this.soundカーソル移動音;
+						return this.soundCursorMovement;
 
 					case ESystemSound.SOUND決定音:
 						return this.sound決定音;
@@ -452,7 +452,7 @@ namespace DTXMania
 				switch( index )
 				{
 					case 0:
-						return this.soundカーソル移動音;
+						return this.soundCursorMovement;
 
 					case 1:
 						return this.sound決定音;
@@ -666,7 +666,7 @@ namespace DTXMania
 					this[ i ].Dispose();
 				}
 			}
-			this.soundカーソル移動音	= new CSystemSound( @"Sounds\Move.ogg",			false, false, false );
+			this.soundCursorMovement	= new CSystemSound( @"Sounds\Move.ogg",			false, false, false );
 			this.sound決定音			= new CSystemSound( @"Sounds\Decide.ogg",			false, false, false );
 			this.sound変更音			= new CSystemSound( @"Sounds\Change.ogg",			false, false, false );
 			this.sound取消音			= new CSystemSound( @"Sounds\Cancel.ogg",			false, false, true  );
@@ -894,7 +894,7 @@ namespace DTXMania
             if( File.Exists( CSkin.Path( @"SkinConfig.ini" ) ) )
             {
                 string str;
-				//this.tキーアサインを全部クリアする();
+				//this.tClearAllKeyAssignments();
 				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding( "unicode" ) ) )
                 {
 				    str = reader.ReadToEnd();
@@ -1142,7 +1142,7 @@ namespace DTXMania
 		#endregion
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

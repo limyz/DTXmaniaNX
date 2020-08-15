@@ -32,7 +32,7 @@ namespace FDK
 			get;
 			private set;
 		}
-		public int n現在の値
+		public int nCurrentValue
 		{
 			get;
 			set;
@@ -77,7 +77,7 @@ namespace FDK
 		}
 		public bool bReachedEndValue
 		{
-			get { return ( this.n現在の値 >= this.n終了値 ); }
+			get { return ( this.nCurrentValue >= this.n終了値 ); }
 		}
 		public bool b終了値に達してない
 		{
@@ -117,7 +117,7 @@ namespace FDK
 			this.n開始値 = 0;
 			this.n終了値 = 0;
 			this.n間隔ms = 0;
-			this.n現在の値 = 0;
+			this.nCurrentValue = 0;
 			this.nCurrentElapsedTimeMs = CTimer.nUnused;
 
             this.db開始値 = 0;
@@ -158,7 +158,7 @@ namespace FDK
 			this.n間隔ms = n間隔ms;
 			this.timer = timer;
 			this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
-			this.n現在の値 = n開始値;
+			this.nCurrentValue = n開始値;
 		}
 
         /// <summary>
@@ -192,8 +192,8 @@ namespace FDK
 
 				while ( ( num - this.nCurrentElapsedTimeMs ) >= this.n間隔ms )
 				{
-					if ( ++this.n現在の値 > this.n終了値 )
-						this.n現在の値 = this.n終了値;
+					if ( ++this.nCurrentValue > this.n終了値 )
+						this.nCurrentValue = this.n終了値;
 
 					this.nCurrentElapsedTimeMs += this.n間隔ms;
 				}
@@ -236,8 +236,8 @@ namespace FDK
 
 				while ( ( num - this.nCurrentElapsedTimeMs ) >= this.n間隔ms )
 				{
-					if ( ++this.n現在の値 > this.n終了値 )
-						this.n現在の値 = this.n開始値;
+					if ( ++this.nCurrentValue > this.n終了値 )
+						this.nCurrentValue = this.n開始値;
 
 					this.nCurrentElapsedTimeMs += this.n間隔ms;
 				}
@@ -297,12 +297,12 @@ namespace FDK
 
 			if ( bキー押下 )
 			{
-				switch ( this.n現在の値 )
+				switch ( this.nCurrentValue )
 				{
 					case n1回目:
 
 						tキー処理();
-						this.n現在の値 = n2回目;
+						this.nCurrentValue = n2回目;
 						this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
 						return;
 
@@ -312,7 +312,7 @@ namespace FDK
 						{
 							tキー処理();
 							this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
-							this.n現在の値 = n3回目以降;
+							this.nCurrentValue = n3回目以降;
 						}
 						return;
 
@@ -328,7 +328,7 @@ namespace FDK
 			}
 			else
 			{
-				this.n現在の値 = n1回目;
+				this.nCurrentValue = n1回目;
 			}
 		}
 		public delegate void DGキー処理();

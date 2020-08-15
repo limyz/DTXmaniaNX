@@ -23,7 +23,7 @@ namespace DTXMania
 
         public void tアニメを完了させる()
         {
-            this.ct登場用.n現在の値 = this.ct登場用.n終了値;
+            this.ct登場用.nCurrentValue = this.ct登場用.n終了値;
         }
 
 
@@ -178,18 +178,18 @@ namespace DTXMania
             if (this.txリザルト画像 != null)
             {
                 Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(245.0f / this.txリザルト画像.sz画像サイズ.Width, 245.0f / this.txリザルト画像.sz画像サイズ.Height, 1f);
+                mat *= Matrix.Scaling(245.0f / this.txリザルト画像.szImageSize.Width, 245.0f / this.txリザルト画像.szImageSize.Height, 1f);
                 mat *= Matrix.Translation(-28f, -94.5f, 0f);
                 mat *= Matrix.RotationZ(0.3f);
 
                 this.txリザルト画像.tDraw3D(CDTXMania.app.Device, mat);
             }
 
-            if (this.txSongName.sz画像サイズ.Width > 320)
-                this.txSongName.vc拡大縮小倍率.X = 320f / this.txSongName.sz画像サイズ.Width;
+            if (this.txSongName.szImageSize.Width > 320)
+                this.txSongName.vcScaleRatio.X = 320f / this.txSongName.szImageSize.Width;
 
-            if (this.txArtistName.sz画像サイズ.Width > 320)
-                this.txArtistName.vc拡大縮小倍率.X = 320f / this.txArtistName.sz画像サイズ.Width;
+            if (this.txArtistName.szImageSize.Width > 320)
+                this.txArtistName.vcScaleRatio.X = 320f / this.txArtistName.szImageSize.Width;
 
             this.txSongName.tDraw2D(CDTXMania.app.Device, 500, 630);
             this.txArtistName.tDraw2D(CDTXMania.app.Device, 500, 665);
@@ -202,7 +202,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

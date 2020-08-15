@@ -11,7 +11,7 @@ namespace DTXMania
 {
 	internal class CConfigIni
 	{
-		// クラス
+		// Class
 
 		public class CKeyAssign
 		{
@@ -390,14 +390,14 @@ namespace DTXMania
 			[StructLayout( LayoutKind.Sequential )]
 			public struct STKEYASSIGN
 			{
-				public E入力デバイス 入力デバイス;
+				public EInputDevice InputDevice;
 				public int ID;
-				public int コード;
-				public STKEYASSIGN( E入力デバイス DeviceType, int nID, int nCode )
+				public int Code;
+				public STKEYASSIGN( EInputDevice DeviceType, int nID, int nCode )
 				{
-					this.入力デバイス = DeviceType;
+					this.InputDevice = DeviceType;
 					this.ID = nID;
-					this.コード = nCode;
+					this.Code = nCode;
 				}
 			}
 
@@ -467,8 +467,8 @@ namespace DTXMania
 #endif
 		public int nBGAlpha;
         public int nMovieAlpha;
-		public bool bAVI有効;
-		public bool bBGA有効;
+		public bool bAVIEnabled;
+		public bool bBGAEnabled;
 		public bool bBGM音を発声する;
 		public STDGBVALUE<bool> bHidden;
 		public STDGBVALUE<bool> bLeft;
@@ -488,7 +488,7 @@ namespace DTXMania
 		public bool bドラム打音を発声する;
 		public bool bフィルイン有効;
 		public bool bランダムセレクトで子BOXを検索対象とする;
-		public bool bログ出力;
+		public bool bOutputLogs;
 		public STDGBVALUE<bool> b演奏音を強調する;
 		public bool b演奏情報を表示する;
         public bool bAutoAddGage; //2012.9.18
@@ -497,7 +497,7 @@ namespace DTXMania
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
         public bool bDirectShowMode;
-		public bool b全画面モード;
+		public bool bFullScreenMode;
         public int n初期ウィンドウ開始位置X; // #30675 2013.02.04 ikanick add
 	    public int n初期ウィンドウ開始位置Y;
 		public int nウインドウwidth;				// #23510 2010.10.31 yyagi add
@@ -524,12 +524,12 @@ namespace DTXMania
 		public EFTGroup eFTGroup;
 		public EHHGroup eHHGroup;
 		public EBDGroup eBDGroup;					// #27029 2012.1.4 from add
-		public E打ち分け時の再生の優先順位 eHitSoundPriorityCY;
-		public E打ち分け時の再生の優先順位 eHitSoundPriorityFT;
-		public E打ち分け時の再生の優先順位 eHitSoundPriorityHH;
-        public E打ち分け時の再生の優先順位 eHitSoundPriorityLP;
-        public STDGBVALUE<Eランダムモード> eRandom;
-        public STDGBVALUE<Eランダムモード> eRandomPedal;
+		public EPlaybackPriority eHitSoundPriorityCY;
+		public EPlaybackPriority eHitSoundPriorityFT;
+		public EPlaybackPriority eHitSoundPriorityHH;
+        public EPlaybackPriority eHitSoundPriorityLP;
+        public STDGBVALUE<ERandomMode> eRandom;
+        public STDGBVALUE<ERandomMode> eRandomPedal;
         public STDGBVALUE<bool> bAssignToLBD;
 		public EDamageLevel eDamageLevel;
         public CKeyAssign KeyAssign;
@@ -556,7 +556,7 @@ namespace DTXMania
 		public string str選曲リストフォント;
         public string[] strCardName; //2015.12.3 kaiera0467 DrumとGuitarとBassで名前を別々にするため、string[3]に変更。
         public string[] strGroupName;
-		public Eドラムコンボ文字の表示位置 ドラムコンボ文字の表示位置;
+		public EDrumComboTextDisplayPosition ドラムコンボ文字の表示位置;
         public bool bドラムコンボ文字の表示;
         public STDGBVALUE<EType> 判定文字表示位置;
         public int nMovieMode;
@@ -651,7 +651,7 @@ namespace DTXMania
 					{
 						for( int k = 0; k < 0x10; k++ )
 						{
-							if( ( this.KeyAssign[ i ][ j ][ k ].入力デバイス == E入力デバイス.キーボード ) && ( this.KeyAssign[ i ][ j ][ k ].コード == (int) SlimDX.DirectInput.Key.Return ) )
+							if( ( this.KeyAssign[ i ][ j ][ k ].InputDevice == EInputDevice.Keyboard ) && ( this.KeyAssign[ i ][ j ][ k ].Code == (int) SlimDX.DirectInput.Key.Return ) )
 							{
 								return false;
 							}
@@ -680,11 +680,11 @@ namespace DTXMania
 		{
 			get
 			{
-				return !this.b全画面モード;
+				return !this.bFullScreenMode;
 			}
 			set
 			{
-				this.b全画面モード = !value;
+				this.bFullScreenMode = !value;
 			}
 		}
 		public bool bギタレボモード
@@ -968,7 +968,7 @@ namespace DTXMania
 		public class CBackupOf1BD
 		{
 			public EHHGroup eHHGroup = EHHGroup.全部打ち分ける;
-			public E打ち分け時の再生の優先順位 eHitSoundPriorityHH = E打ち分け時の再生の優先順位.ChipがPadより優先;
+			public EPlaybackPriority eHitSoundPriorityHH = EPlaybackPriority.ChipOverPadPriority;
 		}
 		public CBackupOf1BD BackupOf1BD = null;
         */
@@ -1013,7 +1013,7 @@ namespace DTXMania
 #endif
 			this.strDTXManiaのバージョン = "Unknown";
 			this.str曲データ検索パス = @".\";
-			this.b全画面モード = false;
+			this.bFullScreenMode = false;
 			this.b垂直帰線待ちを行う = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
@@ -1036,8 +1036,8 @@ namespace DTXMania
 			this.nBGAlpha = 100;
 			this.eDamageLevel = EDamageLevel.Normal;
 			this.bSTAGEFAILEDEnabled = true;
-			this.bAVI有効 = true;
-			this.bBGA有効 = true;
+			this.bAVIEnabled = true;
+			this.bBGAEnabled = true;
 			this.bフィルイン有効 = true;
             this.ボーナス演出を表示する = true;
             this.eRDPosition = ERDPosition.RCRD;
@@ -1060,14 +1060,14 @@ namespace DTXMania
             this.eNumOfLanes.Bass = EType.A;
             this.bAssignToLBD = default(STDGBVALUE<bool>);
             this.bAssignToLBD.Drums = false;
-            this.eRandom = default(STDGBVALUE<Eランダムモード>);
-            this.eRandom.Drums = Eランダムモード.OFF;
-            this.eRandom.Guitar = Eランダムモード.OFF;
-            this.eRandom.Bass = Eランダムモード.OFF;
-            this.eRandomPedal = default(STDGBVALUE<Eランダムモード>);
-            this.eRandomPedal.Drums = Eランダムモード.OFF;
-            this.eRandomPedal.Guitar = Eランダムモード.OFF;
-            this.eRandomPedal.Bass = Eランダムモード.OFF;
+            this.eRandom = default(STDGBVALUE<ERandomMode>);
+            this.eRandom.Drums = ERandomMode.OFF;
+            this.eRandom.Guitar = ERandomMode.OFF;
+            this.eRandom.Bass = ERandomMode.OFF;
+            this.eRandomPedal = default(STDGBVALUE<ERandomMode>);
+            this.eRandomPedal.Drums = ERandomMode.OFF;
+            this.eRandomPedal.Guitar = ERandomMode.OFF;
+            this.eRandomPedal.Bass = ERandomMode.OFF;
             this.nLaneDisp = new STDGBVALUE<int>();
             this.nLaneDisp.Drums = 0;
             this.nLaneDisp.Guitar = 0;
@@ -1124,13 +1124,13 @@ namespace DTXMania
 			this.b選曲リストフォントを太字にする = true;
 			this.n自動再生音量 = 80;
 			this.n手動再生音量 = 100;
-			this.bログ出力 = true;
+			this.bOutputLogs = true;
             this.b曲名表示をdefのものにする = false;
 			this.b演奏音を強調する = new STDGBVALUE<bool>();
 			this.bSudden = new STDGBVALUE<bool>();
 			this.bHidden = new STDGBVALUE<bool>();
 			this.bReverse = new STDGBVALUE<bool>();
-			this.eRandom = new STDGBVALUE<Eランダムモード>();
+			this.eRandom = new STDGBVALUE<ERandomMode>();
 			this.bLight = new STDGBVALUE<bool>();
 			this.bLeft = new STDGBVALUE<bool>();
             this.判定文字表示位置 = new STDGBVALUE<EType>();
@@ -1144,7 +1144,7 @@ namespace DTXMania
 				this.bSudden[ i ] = false;
 				this.bHidden[ i ] = false;
 				this.bReverse[ i ] = false;
-				this.eRandom[ i ] = Eランダムモード.OFF;
+				this.eRandom[ i ] = ERandomMode.OFF;
 				this.bLight[ i ] = false;
 				this.bLeft[ i ] = false;
 				this.判定文字表示位置[ i ] = EType.A;
@@ -1153,7 +1153,7 @@ namespace DTXMania
                 this.nJudgeLinePosOffset[i] = 0;
 			}
 			this.nPlaySpeed = 20;
-            this.ドラムコンボ文字の表示位置 = Eドラムコンボ文字の表示位置.RIGHT;
+            this.ドラムコンボ文字の表示位置 = EDrumComboTextDisplayPosition.RIGHT;
             this.bドラムコンボ文字の表示 = true;
             this.bCLASSIC譜面判別を有効にする = false;
             this.bSkillModeを自動切換えする = false;
@@ -1195,7 +1195,7 @@ namespace DTXMania
 			this.nヒット範囲ms.Poor = 117;
 			this.ConfigIniファイル名 = "";
 			this.dicJoystick = new Dictionary<int, string>( 10 );
-			this.tデフォルトのキーアサインに設定する();
+			this.tSetDefaultKeyAssignments();
             #region [ velocityMin ]
             this.nVelocityMin.LC = 0;					// #23857 2011.1.31 yyagi VelocityMin
 			this.nVelocityMin.HH = 20;
@@ -1251,13 +1251,13 @@ namespace DTXMania
 		public CConfigIni( string iniファイル名 )
 			: this()
 		{
-			this.tファイルから読み込み( iniファイル名 );
+			this.tReadFromFile( iniファイル名 );
 		}
 
 
 		// メソッド
 
-		public void t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス DeviceType, int nID, int nCode )
+		public void tDeleteAlreadyAssignedInputs( EInputDevice DeviceType, int nID, int nCode )
 		{
 			for( int i = 0; i <= (int)EKeyConfigPart.SYSTEM; i++ )
 			{
@@ -1265,24 +1265,24 @@ namespace DTXMania
 				{
 					for( int k = 0; k < 0x10; k++ )
 					{
-						if( ( ( this.KeyAssign[ i ][ j ][ k ].入力デバイス == DeviceType ) && ( this.KeyAssign[ i ][ j ][ k ].ID == nID ) ) && ( this.KeyAssign[ i ][ j ][ k ].コード == nCode ) )
+						if( ( ( this.KeyAssign[ i ][ j ][ k ].InputDevice == DeviceType ) && ( this.KeyAssign[ i ][ j ][ k ].ID == nID ) ) && ( this.KeyAssign[ i ][ j ][ k ].Code == nCode ) )
 						{
 							for( int m = k; m < 15; m++ )
 							{
 								this.KeyAssign[ i ][ j ][ m ] = this.KeyAssign[ i ][ j ][ m + 1 ];
 							}
-							this.KeyAssign[ i ][ j ][ 15 ].入力デバイス = E入力デバイス.不明;
+							this.KeyAssign[ i ][ j ][ 15 ].InputDevice = EInputDevice.Unknown;
 							this.KeyAssign[ i ][ j ][ 15 ].ID = 0;
-							this.KeyAssign[ i ][ j ][ 15 ].コード = 0;
+							this.KeyAssign[ i ][ j ][ 15 ].Code = 0;
 							k--;
 						}
 					}
 				}
 			}
 		}
-		public void t書き出し( string iniファイル名 )
+		public void tWrite( string iniFilename )
 		{
-			StreamWriter sw = new StreamWriter( iniファイル名, false, Encoding.GetEncoding( "unicode" ) );
+			StreamWriter sw = new StreamWriter( iniFilename, false, Encoding.GetEncoding( "unicode" ) );
 			sw.WriteLine( ";-------------------" );
 			
 			#region [ System ]
@@ -1372,7 +1372,7 @@ namespace DTXMania
             #region [ Window関連 ]
             sw.WriteLine( "; 画面モード(0:ウィンドウ, 1:全画面)" );
 			sw.WriteLine( "; Screen mode. (0:Window, 1:Fullscreen)" );
-			sw.WriteLine( "FullScreen={0}", this.b全画面モード ? 1 : 0 );
+			sw.WriteLine( "FullScreen={0}", this.bFullScreenMode ? 1 : 0 );
             sw.WriteLine();
 			sw.WriteLine("; ウインドウモード時の画面幅");				// #23510 2010.10.31 yyagi add
 			sw.WriteLine("; A width size in the window mode.");			//
@@ -1513,10 +1513,10 @@ namespace DTXMania
             #endregion
             #region [ AVI/BGA ]
 			sw.WriteLine( "; AVIの表示(0:OFF, 1:ON)" );
-			sw.WriteLine( "AVI={0}", this.bAVI有効 ? 1 : 0 );
+			sw.WriteLine( "AVI={0}", this.bAVIEnabled ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; BGAの表示(0:OFF, 1:ON)" );
-			sw.WriteLine( "BGA={0}", this.bBGA有効 ? 1 : 0 );
+			sw.WriteLine( "BGA={0}", this.bBGAEnabled ? 1 : 0 );
 			sw.WriteLine();
             #endregion
             #region [ フィルイン ]
@@ -1705,7 +1705,7 @@ namespace DTXMania
 			sw.WriteLine( "[Log]" );
 			sw.WriteLine();
 			sw.WriteLine( "; Log出力(0:OFF, 1:ON)" );
-			sw.WriteLine( "OutputLog={0}", this.bログ出力 ? 1 : 0 );
+			sw.WriteLine( "OutputLog={0}", this.bOutputLogs ? 1 : 0 );
 			sw.WriteLine();
 			sw.WriteLine( "; 曲データ検索に関するLog出力(0:OFF, 1:ON)" );
 			sw.WriteLine( "TraceSongSearch={0}", this.bLogSongSearch ? 1 : 0 );
@@ -1757,10 +1757,10 @@ namespace DTXMania
             sw.WriteLine("GuitarHiddenSudden={0}", (int)this.nHidSud.Guitar);
             sw.WriteLine("BassHiddenSudden={0}", (int)this.nHidSud.Bass);
             sw.WriteLine();
-			sw.WriteLine( "; ドラム判定文字表示位置(0:レーン上,1:判定ライン上,2:表示OFF)" );
+			sw.WriteLine( "; ドラム判定文字表示位置(0:OnTheLane,1:判定ライン上,2:表示OFF)" );
 			sw.WriteLine( "DrumsPosition={0}", (int) this.判定文字表示位置.Drums );
 			sw.WriteLine();
-			sw.WriteLine( "; ギター/ベース判定文字表示位置(0:レーン上, 1:レーン横, 2:判定ライン上, 3:表示OFF)" );
+			sw.WriteLine( "; ギター/ベース判定文字表示位置(0:OnTheLane, 1:レーン横, 2:判定ライン上, 3:表示OFF)" );
 			sw.WriteLine( "GuitarPosition={0}", (int) this.判定文字表示位置.Guitar );
 			sw.WriteLine( "BassPosition={0}", (int) this.判定文字表示位置.Bass );
 			sw.WriteLine();
@@ -2043,40 +2043,40 @@ namespace DTXMania
 			sw.WriteLine( "[DrumsKeyAssign]" );
 			sw.WriteLine();
 			sw.Write( "HH=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.HH );
+			this.tWriteKey( sw, this.KeyAssign.Drums.HH );
 			sw.WriteLine();
 			sw.Write( "SD=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.SD );
+			this.tWriteKey( sw, this.KeyAssign.Drums.SD );
 			sw.WriteLine();
 			sw.Write( "BD=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.BD );
+			this.tWriteKey( sw, this.KeyAssign.Drums.BD );
 			sw.WriteLine();
 			sw.Write( "HT=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.HT );
+			this.tWriteKey( sw, this.KeyAssign.Drums.HT );
 			sw.WriteLine();
 			sw.Write( "LT=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.LT );
+			this.tWriteKey( sw, this.KeyAssign.Drums.LT );
 			sw.WriteLine();
 			sw.Write( "FT=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.FT );
+			this.tWriteKey( sw, this.KeyAssign.Drums.FT );
 			sw.WriteLine();
 			sw.Write( "CY=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.CY );
+			this.tWriteKey( sw, this.KeyAssign.Drums.CY );
 			sw.WriteLine();
 			sw.Write( "HO=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.HHO );
+			this.tWriteKey( sw, this.KeyAssign.Drums.HHO );
 			sw.WriteLine();
 			sw.Write( "RD=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.RD );
+			this.tWriteKey( sw, this.KeyAssign.Drums.RD );
 			sw.WriteLine();
 			sw.Write( "LC=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.LC );
+			this.tWriteKey( sw, this.KeyAssign.Drums.LC );
 			sw.WriteLine();
 			sw.Write( "LP=" );										// #27029 2012.1.4 from
-			this.tキーの書き出し( sw, this.KeyAssign.Drums.LP );	//
+			this.tWriteKey( sw, this.KeyAssign.Drums.LP );	//
 			sw.WriteLine();											//
             sw.Write( "LBD=" );
-            this.tキーの書き出し( sw, this.KeyAssign.Drums.LBD );
+            this.tWriteKey( sw, this.KeyAssign.Drums.LBD );
 			sw.WriteLine();
             sw.WriteLine();
             #endregion
@@ -2084,28 +2084,28 @@ namespace DTXMania
 			sw.WriteLine( "[GuitarKeyAssign]" );
 			sw.WriteLine();
 			sw.Write( "R=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.R );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.R );
 			sw.WriteLine();
 			sw.Write( "G=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.G );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.G );
 			sw.WriteLine();
 			sw.Write( "B=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.B );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.B );
             sw.WriteLine();
             sw.Write( "Y=" );
-            this.tキーの書き出し( sw, this.KeyAssign.Guitar.Y );
+            this.tWriteKey( sw, this.KeyAssign.Guitar.Y );
             sw.WriteLine();
             sw.Write( "P=" );
-            this.tキーの書き出し( sw, this.KeyAssign.Guitar.P );
+            this.tWriteKey( sw, this.KeyAssign.Guitar.P );
 			sw.WriteLine();
 			sw.Write( "Pick=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.Pick );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.Pick );
 			sw.WriteLine();
 			sw.Write( "Wail=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.Wail );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.Wail );
 			sw.WriteLine();
 			sw.Write( "Decide=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.Decide );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.Decide );
 			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
@@ -2113,28 +2113,28 @@ namespace DTXMania
 			sw.WriteLine( "[BassKeyAssign]" );
 			sw.WriteLine();
 			sw.Write( "R=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.R );
+			this.tWriteKey( sw, this.KeyAssign.Bass.R );
 			sw.WriteLine();
 			sw.Write( "G=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.G );
+			this.tWriteKey( sw, this.KeyAssign.Bass.G );
 			sw.WriteLine();
 			sw.Write( "B=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.B );
+			this.tWriteKey( sw, this.KeyAssign.Bass.B );
             sw.WriteLine();
             sw.Write( "Y=" );
-            this.tキーの書き出し( sw, this.KeyAssign.Bass.Y );
+            this.tWriteKey( sw, this.KeyAssign.Bass.Y );
             sw.WriteLine();
             sw.Write( "P=" );
-            this.tキーの書き出し( sw, this.KeyAssign.Bass.P );
+            this.tWriteKey( sw, this.KeyAssign.Bass.P );
 			sw.WriteLine();
 			sw.Write( "Pick=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.Pick );
+			this.tWriteKey( sw, this.KeyAssign.Bass.Pick );
 			sw.WriteLine();
 			sw.Write( "Wail=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.Wail );
+			this.tWriteKey( sw, this.KeyAssign.Bass.Wail );
 			sw.WriteLine();
 			sw.Write( "Decide=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.Decide );
+			this.tWriteKey( sw, this.KeyAssign.Bass.Decide );
 			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
@@ -2142,20 +2142,20 @@ namespace DTXMania
 			sw.WriteLine( "[SystemKeyAssign]" );
 			sw.WriteLine();
 			sw.Write( "Capture=" );
-			this.tキーの書き出し( sw, this.KeyAssign.System.Capture );
+			this.tWriteKey( sw, this.KeyAssign.System.Capture );
 			sw.WriteLine();
 			sw.Write( "Help=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Guitar.Help );
+			this.tWriteKey( sw, this.KeyAssign.Guitar.Help );
 			sw.WriteLine();
 			sw.Write( "Pause=" );
-			this.tキーの書き出し( sw, this.KeyAssign.Bass.Help );
+			this.tWriteKey( sw, this.KeyAssign.Bass.Help );
 			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			
 			sw.Close();
 		}
-		public void tファイルから読み込み( string iniファイル名 )
+		public void tReadFromFile( string iniファイル名 )
 		{
 			this.ConfigIniファイル名 = iniファイル名;
 			this.bConfigIniが存在している = File.Exists( this.ConfigIniファイル名 );
@@ -2164,14 +2164,14 @@ namespace DTXMania
 				string str;
 				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "Shift_JIS" ) );
 				str = reader.ReadToEnd();
-				t文字列から読み込み( str );
+				tReadFromString( str );
 				CDTXVersion version = new CDTXVersion( this.strDTXManiaのバージョン );
 			}
 		}
 
-		private void t文字列から読み込み( string strAllSettings )	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
+		private void tReadFromString( string strAllSettings )	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
 		{
-			Eセクション種別 unknown = Eセクション種別.Unknown;
+			ESectionType unknown = ESectionType.Unknown;
 			string[] delimiter = { "\n" };
 			string[] strSingleLine = strAllSettings.Split( delimiter, StringSplitOptions.RemoveEmptyEntries );
 			foreach ( string s in strSingleLine )
@@ -2196,47 +2196,47 @@ namespace DTXMania
 							string str2 = builder.ToString();
 							if ( str2.Equals( "System" ) )
 							{
-								unknown = Eセクション種別.System;
+								unknown = ESectionType.System;
 							}
 							else if ( str2.Equals( "Log" ) )
 							{
-								unknown = Eセクション種別.Log;
+								unknown = ESectionType.Log;
 							}
 							else if ( str2.Equals( "PlayOption" ) )
 							{
-								unknown = Eセクション種別.PlayOption;
+								unknown = ESectionType.PlayOption;
 							}
 							else if ( str2.Equals( "AutoPlay" ) )
 							{
-								unknown = Eセクション種別.AutoPlay;
+								unknown = ESectionType.AutoPlay;
 							}
 							else if ( str2.Equals( "HitRange" ) )
 							{
-								unknown = Eセクション種別.HitRange;
+								unknown = ESectionType.HitRange;
 							}
 							else if ( str2.Equals( "GUID" ) )
 							{
-								unknown = Eセクション種別.GUID;
+								unknown = ESectionType.GUID;
 							}
 							else if ( str2.Equals( "DrumsKeyAssign" ) )
 							{
-								unknown = Eセクション種別.DrumsKeyAssign;
+								unknown = ESectionType.DrumsKeyAssign;
 							}
 							else if ( str2.Equals( "GuitarKeyAssign" ) )
 							{
-								unknown = Eセクション種別.GuitarKeyAssign;
+								unknown = ESectionType.GuitarKeyAssign;
 							}
 							else if ( str2.Equals( "BassKeyAssign" ) )
 							{
-								unknown = Eセクション種別.BassKeyAssign;
+								unknown = ESectionType.BassKeyAssign;
 							}
 							else if ( str2.Equals( "SystemKeyAssign" ) )
 							{
-								unknown = Eセクション種別.SystemKeyAssign;
+								unknown = ESectionType.SystemKeyAssign;
 							}
 							else
 							{
-								unknown = Eセクション種別.Unknown;
+								unknown = ESectionType.Unknown;
 							}
 							//-----------------------------
 							#endregion
@@ -2252,7 +2252,7 @@ namespace DTXMania
 								{
 									#region [ [System] ]
 									//-----------------------------
-									case Eセクション種別.System:
+									case ESectionType.System:
 										{
 #if false		// #23625 2011.1.11 Config.iniからダメージ/回復値の定数変更を行う場合はここを有効にする 087リリースに合わせ機能無効化
 										//----------------------------------------
@@ -2354,7 +2354,7 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("FullScreen"))
                                             {
-                                                this.b全画面モード = CConversion.bONorOFF(str4[0]);
+                                                this.bFullScreenMode = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("WindowWidth"))		// #23510 2010.10.31 yyagi add
                                             {
@@ -2481,19 +2481,19 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("HitSoundPriorityHH"))
                                             {
-                                                this.eHitSoundPriorityHH = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityHH);
+                                                this.eHitSoundPriorityHH = (EPlaybackPriority)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityHH);
                                             }
                                             else if (str3.Equals("HitSoundPriorityFT"))
                                             {
-                                                this.eHitSoundPriorityFT = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityFT);
+                                                this.eHitSoundPriorityFT = (EPlaybackPriority)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityFT);
                                             }
                                             else if (str3.Equals("HitSoundPriorityCY"))
                                             {
-                                                this.eHitSoundPriorityCY = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityCY);
+                                                this.eHitSoundPriorityCY = (EPlaybackPriority)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityCY);
                                             }
                                             else if (str3.Equals("HitSoundPriorityLP"))
                                             {
-                                                this.eHitSoundPriorityLP = (E打ち分け時の再生の優先順位)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityLP);
+                                                this.eHitSoundPriorityLP = (EPlaybackPriority)CConversion.nGetNumberIfInRange(str4, 0, 1, (int)this.eHitSoundPriorityLP);
                                             }
                                             else if (str3.Equals("StageFailed"))
                                             {
@@ -2501,11 +2501,11 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("AVI"))
                                             {
-                                                this.bAVI有効 = CConversion.bONorOFF(str4[0]);
+                                                this.bAVIEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BGA"))
                                             {
-                                                this.bBGA有効 = CConversion.bONorOFF(str4[0]);
+                                                this.bBGAEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("FillInEffect"))
                                             {
@@ -2746,11 +2746,11 @@ namespace DTXMania
 
 									#region [ [Log] ]
 									//-----------------------------
-									case Eセクション種別.Log:
+									case ESectionType.Log:
 										{
 											if( str3.Equals( "OutputLog" ) )
 											{
-												this.bログ出力 = CConversion.bONorOFF( str4[ 0 ] );
+												this.bOutputLogs = CConversion.bONorOFF( str4[ 0 ] );
 											}
 											else if( str3.Equals( "TraceCreatedDisposed" ) )
 											{
@@ -2771,7 +2771,7 @@ namespace DTXMania
 
 									#region [ [PlayOption] ]
 									//-----------------------------
-									case Eセクション種別.PlayOption:
+									case ESectionType.PlayOption:
 										{
                                             if( str3.Equals( "DrumGraph" ) )  // #24074 2011.01.23 addikanick
 											{
@@ -2799,11 +2799,11 @@ namespace DTXMania
 											}
 											else if( str3.Equals( "GuitarRandom" ) )
 											{
-												this.eRandom.Guitar = (Eランダムモード) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Guitar );
+												this.eRandom.Guitar = (ERandomMode) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Guitar );
 											}
 											else if( str3.Equals( "BassRandom" ) )
 											{
-												this.eRandom.Bass = (Eランダムモード) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Bass );
+												this.eRandom.Bass = (ERandomMode) CConversion.nGetNumberIfInRange( str4, 0, 4, (int) this.eRandom.Bass );
 											}
 											else if( str3.Equals( "DrumsTight" ) )
 											{
@@ -2867,7 +2867,7 @@ namespace DTXMania
 											}
 											else if( str3.Equals( "ComboPosition" ) )
 											{
-												this.ドラムコンボ文字の表示位置 = (Eドラムコンボ文字の表示位置) CConversion.nGetNumberIfInRange( str4, 0, 3, (int) this.ドラムコンボ文字の表示位置 );
+												this.ドラムコンボ文字の表示位置 = (EDrumComboTextDisplayPosition) CConversion.nGetNumberIfInRange( str4, 0, 3, (int) this.ドラムコンボ文字の表示位置 );
 											}
 											else if( str3.Equals( "Risky" ) )					// #2359 2011.6.23  yyagi
 											{
@@ -2981,11 +2981,11 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("DrumsRandomPad"))
                                             {
-                                                this.eRandom.Drums = (Eランダムモード)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandom.Drums);
+                                                this.eRandom.Drums = (ERandomMode)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandom.Drums);
                                             }
                                             else if (str3.Equals("DrumsRandomPedal"))
                                             {
-                                                this.eRandomPedal.Drums = (Eランダムモード)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandomPedal.Drums);
+                                                this.eRandomPedal.Drums = (ERandomMode)CConversion.nGetNumberIfInRange(str4, 0, 6, (int)this.eRandomPedal.Drums);
                                             }
                                             else if (str3.Equals("DrumsAttackEffect"))
                                             {
@@ -3140,7 +3140,7 @@ namespace DTXMania
 
 									#region [ [AutoPlay] ]
 									//-----------------------------
-									case Eセクション種別.AutoPlay:
+									case ESectionType.AutoPlay:
 										if( str3.Equals( "LC" ) )
 										{
 											this.bAutoPlay.LC = CConversion.bONorOFF( str4[ 0 ] );
@@ -3255,7 +3255,7 @@ namespace DTXMania
 
                                     #region [ [HitRange] ]
                                     //-----------------------------
-									case Eセクション種別.HitRange:
+									case ESectionType.HitRange:
 										if( str3.Equals( "Perfect" ) )
 										{
 											this.nヒット範囲ms.Perfect = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Perfect );
@@ -3278,10 +3278,10 @@ namespace DTXMania
 
 									#region [ [GUID] ]
 									//-----------------------------
-									case Eセクション種別.GUID:
+									case ESectionType.GUID:
 										if( str3.Equals( "JoystickID" ) )
 										{
-											this.tJoystickIDの取得( str4 );
+											this.tAcquireJoystickID( str4 );
 										}
 										continue;
 									//-----------------------------
@@ -3289,55 +3289,55 @@ namespace DTXMania
 
 									#region [ [DrumsKeyAssign] ]
 									//-----------------------------
-									case Eセクション種別.DrumsKeyAssign:
+									case ESectionType.DrumsKeyAssign:
 										{
 											if( str3.Equals( "HH" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.HH );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.HH );
 											}
 											else if( str3.Equals( "SD" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.SD );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.SD );
 											}
 											else if( str3.Equals( "BD" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.BD );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.BD );
 											}
 											else if( str3.Equals( "HT" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.HT );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.HT );
 											}
 											else if( str3.Equals( "LT" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.LT );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.LT );
 											}
 											else if( str3.Equals( "FT" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.FT );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.FT );
 											}
 											else if( str3.Equals( "CY" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.CY );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.CY );
 											}
 											else if( str3.Equals( "HO" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.HHO );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.HHO );
 											}
 											else if( str3.Equals( "RD" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.RD );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.RD );
 											}
 											else if( str3.Equals( "LC" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.LC );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.LC );
 											}
 											else if( str3.Equals( "LP" ) )										// #27029 2012.1.4 from
 											{																	//
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.LP );	//
+												this.tReadAndSetSkey( str4, this.KeyAssign.Drums.LP );	//
 											}																	//
                                             else if (str3.Equals( "LBD" ))										
                                             {																	
-                                                this.tキーの読み出しと設定( str4, this.KeyAssign.Drums.LBD );	
+                                                this.tReadAndSetSkey( str4, this.KeyAssign.Drums.LBD );	
                                             }	
 											continue;
 										}
@@ -3346,39 +3346,39 @@ namespace DTXMania
 
 									#region [ [GuitarKeyAssign] ]
 									//-----------------------------
-									case Eセクション種別.GuitarKeyAssign:
+									case ESectionType.GuitarKeyAssign:
 										{
 											if( str3.Equals( "R" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.R );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.R );
 											}
 											else if( str3.Equals( "G" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.G );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.G );
 											}
 											else if( str3.Equals( "B" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.B );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.B );
 											}
                                             else if( str3.Equals( "Y" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.Y );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Y );
 											}
                                             else if( str3.Equals( "P" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.P );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.P );
 											}
 											else if( str3.Equals( "Pick" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.Pick );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Pick );
 											}
 											else if( str3.Equals( "Wail" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.Wail );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Wail );
 											}
 											else if( str3.Equals( "Decide" ) )
 											{
-												this.tキーの読み出しと設定( str4, this.KeyAssign.Guitar.Decide );
+												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Decide );
 											}
 											continue;
 										}
@@ -3387,38 +3387,38 @@ namespace DTXMania
 
 									#region [ [BassKeyAssign] ]
 									//-----------------------------
-									case Eセクション種別.BassKeyAssign:
+									case ESectionType.BassKeyAssign:
 										if( str3.Equals( "R" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.R );
+											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.R );
 										}
 										else if( str3.Equals( "G" ) )
 										{
-										    this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.G );
+										    this.tReadAndSetSkey( str4, this.KeyAssign.Bass.G );
 										}
 										else if( str3.Equals( "B" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.B );
+											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.B );
 										}
                                         else if( str3.Equals( "Y" ) )
                                         {
-                                            this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.Y );
+                                            this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Y );
                                         }
                                         else if( str3.Equals( "P" ) ) 
                                         {
-                                            this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.P );
+                                            this.tReadAndSetSkey( str4, this.KeyAssign.Bass.P );
                                         }
 										else if( str3.Equals( "Pick" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.Pick );
+											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Pick );
 										}
 										else if( str3.Equals( "Wail" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.Wail );
+											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Wail );
 										}
 										else if( str3.Equals( "Decide" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.Bass.Decide );
+											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Decide );
 										}
 										continue;
 									//-----------------------------
@@ -3426,18 +3426,18 @@ namespace DTXMania
 
 									#region [ [SystemKeyAssign] ]
 									//-----------------------------
-									case Eセクション種別.SystemKeyAssign:
+									case ESectionType.SystemKeyAssign:
 										if( str3.Equals( "Capture" ) )
 										{
-											this.tキーの読み出しと設定( str4, this.KeyAssign.System.Capture );
+											this.tReadAndSetSkey( str4, this.KeyAssign.System.Capture );
 										}
                                         else if (str3.Equals("Help"))
                                         {
-                                            this.tキーの読み出しと設定(str4, this.KeyAssign.Guitar.Help);
+                                            this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Help);
                                         }
                                         else if (str3.Equals("Pause"))
                                         {
-                                            this.tキーの読み出しと設定(str4, this.KeyAssign.Bass.Help);
+                                            this.tReadAndSetSkey(str4, this.KeyAssign.Bass.Help);
                                         }
                                         continue;
 									//-----------------------------
@@ -3478,11 +3478,11 @@ namespace DTXMania
         */
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
-		private enum Eセクション種別
+		private enum ESectionType
 		{
 			Unknown,
 			System,
@@ -3503,7 +3503,7 @@ namespace DTXMania
 		private bool bConfigIniが存在している;
 		private string ConfigIniファイル名;
 
-		private void tJoystickIDの取得( string strキー記述 )
+		private void tAcquireJoystickID( string strキー記述 )
 		{
 			string[] strArray = strキー記述.Split( new char[] { ',' } );
 			if( strArray.Length >= 2 )
@@ -3519,7 +3519,7 @@ namespace DTXMania
 				}
 			}
 		}
-		private void tキーアサインを全部クリアする()
+		private void tClearAllKeyAssignments()
 		{
 			this.KeyAssign = new CKeyAssign();
 			for( int i = 0; i <= (int)EKeyConfigPart.SYSTEM; i++ )
@@ -3529,17 +3529,17 @@ namespace DTXMania
 					this.KeyAssign[ i ][ j ] = new CKeyAssign.STKEYASSIGN[ 16 ];
 					for( int k = 0; k < 16; k++ )
 					{
-						this.KeyAssign[ i ][ j ][ k ] = new CKeyAssign.STKEYASSIGN( E入力デバイス.不明, 0, 0 );
+						this.KeyAssign[ i ][ j ][ k ] = new CKeyAssign.STKEYASSIGN( EInputDevice.Unknown, 0, 0 );
 					}
 				}
 			}
 		}
-		private void tキーの書き出し( StreamWriter sw, CKeyAssign.STKEYASSIGN[] assign )
+		private void tWriteKey( StreamWriter sw, CKeyAssign.STKEYASSIGN[] assign )
 		{
 			bool flag = true;
 			for( int i = 0; i < 0x10; i++ )
 			{
-				if( assign[ i ].入力デバイス == E入力デバイス.不明 )
+				if( assign[ i ].InputDevice == EInputDevice.Unknown )
 				{
 					continue;
 				}
@@ -3548,58 +3548,58 @@ namespace DTXMania
 					sw.Write( ',' );
 				}
 				flag = false;
-				switch( assign[ i ].入力デバイス )
+				switch( assign[ i ].InputDevice )
 				{
-					case E入力デバイス.キーボード:
+					case EInputDevice.Keyboard:
 						sw.Write( 'K' );
 						break;
 
-					case E入力デバイス.MIDI入力:
+					case EInputDevice.MIDI入力:
 						sw.Write( 'M' );
 						break;
 
-					case E入力デバイス.ジョイパッド:
+					case EInputDevice.Joypad:
 						sw.Write( 'J' );
 						break;
 
-					case E入力デバイス.マウス:
+					case EInputDevice.Mouse:
 						sw.Write( 'N' );
 						break;
 				}
-				sw.Write( "{0}{1}", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".Substring( assign[ i ].ID, 1 ), assign[ i ].コード );	// #24166 2011.1.15 yyagi: to support ID > 10, change 2nd character from Decimal to 36-numeral system. (e.g. J1023 -> JA23)
+				sw.Write( "{0}{1}", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".Substring( assign[ i ].ID, 1 ), assign[ i ].Code );	// #24166 2011.1.15 yyagi: to support ID > 10, change 2nd character from Decimal to 36-numeral system. (e.g. J1023 -> JA23)
 			}
 		}
-        private void tキーの読み出しと設定(string strキー記述, CKeyAssign.STKEYASSIGN[] assign)
+        private void tReadAndSetSkey(string strキー記述, CKeyAssign.STKEYASSIGN[] assign)
         {
             string[] strArray = strキー記述.Split(new char[] { ',' });
             for (int i = 0; (i < strArray.Length) && (i < 16); i++)
             {
-                E入力デバイス e入力デバイス;
+                EInputDevice eInputDevice;
                 int id;
                 int code;
                 string str = strArray[i].Trim().ToUpper();
                 if (str.Length >= 3)
                 {
-                    e入力デバイス = E入力デバイス.不明;
+                    eInputDevice = EInputDevice.Unknown;
                     switch (str[0])
                     {
                         case 'J':
-                            e入力デバイス = E入力デバイス.ジョイパッド;
+                            eInputDevice = EInputDevice.Joypad;
                             break;
 
                         case 'K':
-                            e入力デバイス = E入力デバイス.キーボード;
+                            eInputDevice = EInputDevice.Keyboard;
                             break;
 
                         case 'L':
                             continue;
 
                         case 'M':
-                            e入力デバイス = E入力デバイス.MIDI入力;
+                            eInputDevice = EInputDevice.MIDI入力;
                             break;
 
                         case 'N':
-                            e入力デバイス = E入力デバイス.マウス;
+                            eInputDevice = EInputDevice.Mouse;
                             break;
                     }
                 }
@@ -3610,16 +3610,16 @@ namespace DTXMania
                 id = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".IndexOf(str[1]);	// #24166 2011.1.15 yyagi: to support ID > 10, change 2nd character from Decimal to 36-numeral system. (e.g. J1023 -> JA23)
                 if (((id >= 0) && int.TryParse(str.Substring(2), out code)) && ((code >= 0) && (code <= 0xff)))
                 {
-                    this.t指定した入力が既にアサイン済みである場合はそれを全削除する(e入力デバイス, id, code);
-                    assign[i].入力デバイス = e入力デバイス;
+                    this.tDeleteAlreadyAssignedInputs(eInputDevice, id, code);
+                    assign[i].InputDevice = eInputDevice;
                     assign[i].ID = id;
-                    assign[i].コード = code;
+                    assign[i].Code = code;
                 }
             }
         }
-		private void tデフォルトのキーアサインに設定する()
+		private void tSetDefaultKeyAssignments()
 		{
-			this.tキーアサインを全部クリアする();
+			this.tClearAllKeyAssignments();
 
 			string strDefaultKeyAssign = @"
 [DrumsKeyAssign]
@@ -3664,7 +3664,7 @@ Capture=K065
 Help=K064
 Pause=K0110
 ";
-			t文字列から読み込み( strDefaultKeyAssign );
+			tReadFromString( strDefaultKeyAssign );
 		}
 		//-----------------
 		#endregion

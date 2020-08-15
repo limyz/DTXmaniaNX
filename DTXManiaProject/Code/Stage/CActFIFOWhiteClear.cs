@@ -17,17 +17,17 @@ namespace DTXMania
 
 		public void tフェードアウト開始()
 		{
-			this.mode = EFIFOモード.フェードアウト;
+			this.mode = EFIFOMode.FadeOut;
 			this.counter = new CCounter( 0, 400, 5, CDTXMania.Timer );
 		}
 		public void tフェードイン開始()
 		{
-			this.mode = EFIFOモード.フェードイン;
+			this.mode = EFIFOMode.FadeIn;
 			this.counter = new CCounter( 0, 400, 5, CDTXMania.Timer );
 		}
 		public void tフェードイン完了()		// #25406 2011.6.9 yyagi
 		{
-			this.counter.n現在の値 = this.counter.n終了値;
+			this.counter.nCurrentValue = this.counter.n終了値;
 		}
 
 		// CActivity 実装
@@ -56,7 +56,7 @@ namespace DTXMania
                 this.txボーナス花火 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip star.png"));
                 if (this.txボーナス花火 != null)
                 {
-                    this.txボーナス花火.b加算合成 = true;
+                    this.txボーナス花火.bAdditiveBlending = true;
                 }
 
                 for (int i = 0; i < 16; i++)
@@ -142,7 +142,7 @@ namespace DTXMania
                 return 0;
             }
             this.counter.tUpdate();
-            if (this.counter.n現在の値 != 400)
+            if (this.counter.nCurrentValue != 400)
             {
                 return 0;
             }
@@ -151,12 +151,12 @@ namespace DTXMania
         
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
 		public CCounter counter;
-		private EFIFOモード mode;
+		private EFIFOMode mode;
 		private CTexture tx白タイル64x64;
         private CTexture txFullCombo;
         private CTexture txExcellent;

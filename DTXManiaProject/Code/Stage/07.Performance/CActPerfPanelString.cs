@@ -35,7 +35,7 @@ namespace DTXMania
                         graphics.DrawString(this.strパネル文字列, this.ft表示用フォント, Brushes.White, (float)0f, (float)0f);
                         graphics.Dispose();
                         this.txPanel = new CTexture(CDTXMania.app.Device, bitmap2, CDTXMania.TextureFormat);
-                        this.txPanel.vc拡大縮小倍率 = new Vector3(0.5f, 0.5f, 1f);
+                        this.txPanel.vcScaleRatio = new Vector3(0.5f, 0.5f, 1f);
                         bitmap2.Dispose();
                     }
                     catch (CTextureCreateFailedException)
@@ -143,7 +143,7 @@ namespace DTXMania
                 {
                     return 0;
                 }
-                float num = this.txPanel.vc拡大縮小倍率.X;
+                float num = this.txPanel.vcScaleRatio.X;
                 Rectangle rectangle = new Rectangle((int)(num), 0, (int)(360f / num), (int)this.ft表示用フォント.Size);
                 if (rectangle.X < 0)
                 {
@@ -165,13 +165,13 @@ namespace DTXMania
                     this.nジャケットY = 287;
 
                     /*
-                    this.txジャケット画像.vc拡大縮小倍率.X = 245.0f / ((float)this.txジャケット画像.sz画像サイズ.Width);
-                    this.txジャケット画像.vc拡大縮小倍率.Y = 245.0f / ((float)this.txジャケット画像.sz画像サイズ.Height);
+                    this.txジャケット画像.vcScaleRatio.X = 245.0f / ((float)this.txジャケット画像.szImageSize.Width);
+                    this.txジャケット画像.vcScaleRatio.Y = 245.0f / ((float)this.txジャケット画像.szImageSize.Height);
                     this.txジャケット画像.fZAxisRotation = 0.3f;
-                    this.txジャケット画像.tDraw2D(CDTXMania.app.Device, 960, 350, new Rectangle(0, 0, this.txジャケット画像.sz画像サイズ.Width, this.txジャケット画像.sz画像サイズ.Height));
+                    this.txジャケット画像.tDraw2D(CDTXMania.app.Device, 960, 350, new Rectangle(0, 0, this.txジャケット画像.szImageSize.Width, this.txジャケット画像.szImageSize.Height));
                      */
 
-                    mat *= SlimDX.Matrix.Scaling(245.0f / this.txジャケット画像.sz画像サイズ.Width, 245.0f / this.txジャケット画像.sz画像サイズ.Height, 1f);
+                    mat *= SlimDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
                     mat *= SlimDX.Matrix.Translation(400f, -227f, 0f);
                     mat *= SlimDX.Matrix.RotationZ(0.3f);
                 }
@@ -181,7 +181,7 @@ namespace DTXMania
                     this.nジャケットX = 467;
                     this.nジャケットY = 287;
 
-                    mat *= SlimDX.Matrix.Scaling(245.0f / this.txジャケット画像.sz画像サイズ.Width, 245.0f / this.txジャケット画像.sz画像サイズ.Height, 1f);
+                    mat *= SlimDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
                     mat *= SlimDX.Matrix.Translation(-28f, -94.5f, 0f);
                     mat *= SlimDX.Matrix.RotationZ(0.3f);
                 }
@@ -192,11 +192,11 @@ namespace DTXMania
                 if (this.txジャケット画像 != null)
                     this.txジャケット画像.tDraw3D(CDTXMania.app.Device, mat);
 
-                if (this.txSongName.sz画像サイズ.Width > 320)
-                    this.txSongName.vc拡大縮小倍率.X = 320f / this.txSongName.sz画像サイズ.Width;
+                if (this.txSongName.szImageSize.Width > 320)
+                    this.txSongName.vcScaleRatio.X = 320f / this.txSongName.szImageSize.Width;
 
-                if (this.txArtistName.sz画像サイズ.Width > 320)
-                    this.txArtistName.vc拡大縮小倍率.X = 320f / this.txArtistName.sz画像サイズ.Width;
+                if (this.txArtistName.szImageSize.Width > 320)
+                    this.txArtistName.vcScaleRatio.X = 320f / this.txArtistName.szImageSize.Width;
 
                 this.txSongName.tDraw2D(CDTXMania.app.Device, this.n曲名X, this.n曲名Y);
                 this.txArtistName.tDraw2D(CDTXMania.app.Device, this.n曲名X, this.n曲名Y + 35);
@@ -205,7 +205,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

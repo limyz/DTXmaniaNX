@@ -17,7 +17,7 @@ namespace DTXMania
 
 		public CStagePerfGuitarScreen()
 		{
-			base.eステージID = CStage.EStage.Playing;
+			base.eStageID = CStage.EStage.Playing;
 			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			base.bNotActivated = true;
 			base.listChildActivities.Add( this.actStageFailed = new CActPerfStageFailure() );
@@ -129,7 +129,7 @@ namespace DTXMania
 
 				if( base.bJustStartedUpdate )
 				{
-                    CSoundManager.rc演奏用タイマ.tリセット();
+                    CSoundManager.rcPerformanceTimer.tリセット();
 					CDTXMania.Timer.tリセット();
 
                     this.UnitTime = ((60.0 / (CDTXMania.stagePerfGuitarScreen.actPlayInfo.dbBPM) / 14.0)); //2014.01.14.kairera0467 これも動かしたいのだが____
@@ -195,7 +195,7 @@ namespace DTXMania
                 flag2 = this.tUpdateAndDraw_FadeIn_Out();
                 if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
                 {
-                    this.eフェードアウト完了時の戻り値 = E演奏画面の戻り値.ステージクリア;
+                    this.eフェードアウト完了時の戻り値 = EPerfScreenReturnValue.StageClear;
                     base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
                     this.actFOStageClear.tフェードアウト開始();
                 }
@@ -221,7 +221,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -404,7 +404,7 @@ namespace DTXMania
             if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
             {
                 //pChip.bHit = true;
-                //this.tサウンド再生(pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
+                //this.tサウンド再生(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
             }
         }
         protected override void t進行描画_チップ_ドラムス(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
@@ -413,7 +413,7 @@ namespace DTXMania
 			if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
 			{
 				pChip.bHit = true;
-                this.tサウンド再生(pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
+                this.tサウンド再生(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
 			}
 		}
 		protected override void t進行描画_チップ_ギターベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, EInstrumentPart inst )
@@ -567,7 +567,7 @@ namespace DTXMania
 					const int numD = 709;				// ドラム画面かギター画面かで変わる値
 					if ( ( numB < ( numD + numA ) ) && ( numB > -numA ) )	// 以下のロジックは4種全て同じ
 					{
-						int c = this.ctWailingChipPatternAnimation.n現在の値;
+						int c = this.ctWailingChipPatternAnimation.nCurrentValue;
 						Rectangle rect = new Rectangle( baseTextureOffsetX, baseTextureOffsetY, WailingWidth, WailingHeight );
 						if ( numB < numA )
 						{
@@ -763,7 +763,7 @@ namespace DTXMania
 					const int numD = 709;				// ドラム画面かギター画面かで変わる値
 					if ( ( numB < ( numD + numA ) ) && ( numB > -numA ) )	// 以下のロジックは4種全て同じ
 					{
-						int c = this.ctWailingChipPatternAnimation.n現在の値;
+						int c = this.ctWailingChipPatternAnimation.nCurrentValue;
                         Rectangle rect = new Rectangle(baseTextureOffsetX, baseTextureOffsetY, WailingWidth, WailingHeight);
 						if ( numB < numA )
 						{

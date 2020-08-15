@@ -49,7 +49,7 @@ namespace DTXMania
 			return 0;
 		}
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

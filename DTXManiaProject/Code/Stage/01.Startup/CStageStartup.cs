@@ -16,7 +16,7 @@ namespace DTXMania
 
 		public CStageStartup()
 		{
-			base.eステージID = CStage.EStage.Startup;
+			base.eStageID = CStage.EStage.Startup;
 			base.bNotActivated = true;
 		}
 
@@ -168,7 +168,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

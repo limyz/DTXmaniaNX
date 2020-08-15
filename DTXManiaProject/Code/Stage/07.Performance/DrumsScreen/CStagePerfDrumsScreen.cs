@@ -19,7 +19,7 @@ namespace DTXMania
 
 		public CStagePerfDrumsScreen()
 		{
-			base.eステージID = CStage.EStage.Playing;
+			base.eStageID = CStage.EStage.Playing;
 			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			base.bNotActivated = true;
 			base.listChildActivities.Add( this.actPad = new CActPerfDrumsPad() );
@@ -159,16 +159,16 @@ namespace DTXMania
                 this.bフルコン = false;
                 if (base.bJustStartedUpdate)
                 {
-                    CSoundManager.rc演奏用タイマ.tリセット();
+                    CSoundManager.rcPerformanceTimer.tリセット();
                     CDTXMania.Timer.tリセット();
                     this.actChipFireD.Start(ELane.HH, false, false, false, 0, false); // #31554 2013.6.12 yyagi
 
                     this.ctChipPatternAnimation.Drums = new CCounter(0, 7, 70, CDTXMania.Timer);
                     double UnitTime;
                     UnitTime = ((60.0 / (CDTXMania.stagePerfDrumsScreen.actPlayInfo.dbBPM) / 14.0));
-                    this.ctBPMBar = new CCounter(1.0, 14.0, UnitTime, CSoundManager.rc演奏用タイマ);
+                    this.ctBPMBar = new CCounter(1.0, 14.0, UnitTime, CSoundManager.rcPerformanceTimer);
 
-                    this.ctComboTimer = new CCounter( 1.0, 16.0, ((60.0 / (CDTXMania.stagePerfDrumsScreen.actPlayInfo.dbBPM) / 16)), CSoundManager.rc演奏用タイマ);
+                    this.ctComboTimer = new CCounter( 1.0, 16.0, ((60.0 / (CDTXMania.stagePerfDrumsScreen.actPlayInfo.dbBPM) / 16)), CSoundManager.rcPerformanceTimer);
 
                     this.ctChipPatternAnimation.Guitar = new CCounter(0, 0x17, 20, CDTXMania.Timer);
                     this.ctChipPatternAnimation.Bass = new CCounter(0, 0x17, 20, CDTXMania.Timer);
@@ -387,7 +387,7 @@ namespace DTXMania
                     }
                     else
                     {
-                        this.eフェードアウト完了時の戻り値 = E演奏画面の戻り値.ステージクリア;
+                        this.eフェードアウト完了時の戻り値 = EPerfScreenReturnValue.StageClear;
                         base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
                         if (base.nHitCount_ExclAuto.Drums.Miss + base.nHitCount_ExclAuto.Drums.Poor == 0)
                         {
@@ -503,7 +503,7 @@ namespace DTXMania
 
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -557,7 +557,7 @@ namespace DTXMania
 
         private void tフェードアウト()
         {
-            this.eフェードアウト完了時の戻り値 = E演奏画面の戻り値.ステージクリア;
+            this.eフェードアウト完了時の戻り値 = EPerfScreenReturnValue.StageClear;
             base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
 
             this.actFOStageClear.tフェードアウト開始();
@@ -670,19 +670,19 @@ namespace DTXMania
 				bool bIsChipsoundPriorToPad = true;
 				if( ( ( type == EPad.HH ) || ( type == EPad.HHO ) ) || ( type == EPad.LC ) )
 				{
-					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityHH == E打ち分け時の再生の優先順位.ChipがPadより優先;
+					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityHH == EPlaybackPriority.ChipOverPadPriority;
 				}
 				else if( ( type == EPad.LT ) || ( type == EPad.FT ) )
 				{
-					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityFT == E打ち分け時の再生の優先順位.ChipがPadより優先;
+					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityFT == EPlaybackPriority.ChipOverPadPriority;
 				}
 				else if( ( type == EPad.CY ) || ( type == EPad.RD ) )
 				{
-					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityCY == E打ち分け時の再生の優先順位.ChipがPadより優先;
+					bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityCY == EPlaybackPriority.ChipOverPadPriority;
 				}
                 else if (((type == EPad.LP) || (type == EPad.LBD)) || (type == EPad.BD))
                 {
-                    bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityLP == E打ち分け時の再生の優先順位.ChipがPadより優先;
+                    bIsChipsoundPriorToPad = CDTXMania.ConfigIni.eHitSoundPriorityLP == EPlaybackPriority.ChipOverPadPriority;
                 }
 
 				if( bIsChipsoundPriorToPad )
@@ -710,7 +710,7 @@ namespace DTXMania
 						rChip = pChip;
 					}
 				}
-				this.tサウンド再生( rChip, CSoundManager.rc演奏用タイマ.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
+				this.tサウンド再生( rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
 			}
 			return true;
 		}
@@ -742,8 +742,8 @@ namespace DTXMania
 		protected override void t進行描画_Wailing枠()
 		{
 			base.t進行描画_Wailing枠( 587, 478,
-				CDTXMania.ConfigIni.bReverse.Guitar ? ( 400 - this.txWailing枠.sz画像サイズ.Height ) : 69,
-				CDTXMania.ConfigIni.bReverse.Bass ? ( 400 - this.txWailing枠.sz画像サイズ.Height ) : 69
+				CDTXMania.ConfigIni.bReverse.Guitar ? ( 400 - this.txWailing枠.szImageSize.Height ) : 69,
+				CDTXMania.ConfigIni.bReverse.Bass ? ( 400 - this.txWailing枠.szImageSize.Height ) : 69
 			);
 		}
 
@@ -895,7 +895,7 @@ namespace DTXMania
                     if (!inputEvent.b押された)
                         continue;
 
-                    long nTime = inputEvent.nTimeStamp - CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻;
+                    long nTime = inputEvent.nTimeStamp - CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻;
                     int nInputAdjustTime = this.bIsAutoPlay[base.nチャンネル0Atoレーン07[nPad]] ? 0 : this.nInputAdjustTimeMs.Drums;
                     int nPedalLagTime = CDTXMania.ConfigIni.nPedalLagTime;
 
@@ -2388,7 +2388,7 @@ namespace DTXMania
                         {
                             #region [ (B1) 空打ち音が譜面で指定されているのでそれを再生する。]
                             //-----------------
-                            this.tサウンド再生(rChip, CSoundManager.rc演奏用タイマ.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
+                            this.tサウンド再生(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
                             //-----------------
                             #endregion
                         }
@@ -2795,7 +2795,7 @@ namespace DTXMania
                             if (rChip != null)
                             {
                                 // 空打ち音が見つかったので再生する。
-                                this.tサウンド再生(rChip, CSoundManager.rc演奏用タイマ.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
+                                this.tサウンド再生(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
                             }
                             //-----------------
                             #endregion
@@ -2845,7 +2845,7 @@ namespace DTXMania
 		protected override void tGenerateBackgroundTexture()
 		{
             Rectangle bgrect = new Rectangle(980, 0, 0, 0);
-            if (CDTXMania.ConfigIni.bBGA有効)
+            if (CDTXMania.ConfigIni.bBGAEnabled)
             {
                 bgrect = new Rectangle(980, 0, 278, 355);
             }
@@ -2970,9 +2970,9 @@ namespace DTXMania
                     int y = configIni.bReverse.Drums ? (base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) : (base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums);
                     if (base.txチップ != null)
                     {
-                        base.txチップ.vc拡大縮小倍率 = new Vector3((float)pChip.dbチップサイズ倍率, (float)pChip.dbチップサイズ倍率, 1f);
+                        base.txチップ.vcScaleRatio = new Vector3((float)pChip.dbチップサイズ倍率, (float)pChip.dbチップサイズ倍率, 1f);
                     }
-                    int num9 = this.ctChipPatternAnimation.Drums.n現在の値;
+                    int num9 = this.ctChipPatternAnimation.Drums.nCurrentValue;
 
                     switch (pChip.nチャンネル番号)
                     {
@@ -3100,7 +3100,7 @@ namespace DTXMania
                     }
                     if (this.txチップ != null)
                     {
-                        this.txチップ.vc拡大縮小倍率 = new Vector3(1f, 1f, 1f);
+                        this.txチップ.vcScaleRatio = new Vector3(1f, 1f, 1f);
                         this.txチップ.nTransparency = 0xff;
                     }
                 }
@@ -3117,7 +3117,7 @@ namespace DTXMania
                     // #31602 2013.6.24 yyagi 判定ラインの表示位置をずらしたら、チップのヒットエフェクトの表示もずらすために、nJudgeLine..を追加
                     this.actChipFireD.Start( (ELane)indexSevenLanes, flag, flag2, flag2, nJudgeLinePosY_delta.Drums );
 					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nチャンネル番号 - 0x11 ] );
-					this.tサウンド再生( pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+					this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
 					this.tProcessChipHit( pChip.n発声時刻ms, pChip );
 				}
                 */
@@ -3125,7 +3125,7 @@ namespace DTXMania
             }	// end of "if configIni.bDrumsEnabled"
             if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
             {
-                //this.tサウンド再生(pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
+                //this.tサウンド再生(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
                 pChip.bHit = true;
             }
         }
@@ -3241,9 +3241,9 @@ namespace DTXMania
                     int y = configIni.bReverse.Drums ? ( base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums ) : ( base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums );
                     if( base.txチップ != null )
                     {
-                        base.txチップ.vc拡大縮小倍率 = new Vector3( ( float )pChip.dbチップサイズ倍率, ( float )pChip.dbチップサイズ倍率, 1f );
+                        base.txチップ.vcScaleRatio = new Vector3( ( float )pChip.dbチップサイズ倍率, ( float )pChip.dbチップサイズ倍率, 1f );
                     }
-                    int num9 = this.ctChipPatternAnimation.Drums.n現在の値;
+                    int num9 = this.ctChipPatternAnimation.Drums.nCurrentValue;
 
                     switch( pChip.nチャンネル番号 )
                     {
@@ -3408,7 +3408,7 @@ namespace DTXMania
                     }
                     if( this.txチップ != null )
                     {
-                        this.txチップ.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+                        this.txチップ.vcScaleRatio = new Vector3( 1f, 1f, 1f );
                         this.txチップ.nTransparency = 0xff;
                     }
                 }
@@ -3428,7 +3428,7 @@ namespace DTXMania
 					ghostLag = CDTXMania.listAutoGhostLag.Drums[pChip.n楽器パートでの出現順];
 					ghostLag = (ghostLag & 255) - 128;
 					ghostLag -= this.nInputAdjustTimeMs.Drums;
-					autoPlayCondition &= !pChip.bHit && (ghostLag + pChip.n発声時刻ms <= CSoundManager.rc演奏用タイマ.n現在時刻ms);
+					autoPlayCondition &= !pChip.bHit && (ghostLag + pChip.n発声時刻ms <= CSoundManager.rcPerformanceTimer.n現在時刻ms);
                     UsePerfectGhost = false;
                 }
                 if( UsePerfectGhost )
@@ -3447,7 +3447,7 @@ namespace DTXMania
 					// #31602 2013.6.24 yyagi 判定ラインの表示位置をずらしたら、チップのヒットエフェクトの表示もずらすために、nJudgeLine..を追加
 					this.actChipFireD.Start( (ELane)indexSevenLanes, flag, flag2, flag2, nJudgeLinePosY_delta.Drums );
 					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nチャンネル番号 - 0x11 ] );
-					this.tサウンド再生( pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms + ghostLag, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+					this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms + ghostLag, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
 					this.tProcessChipHit(pChip.n発声時刻ms + ghostLag, pChip);
 					//cInvisibleChip.StartSemiInvisible( EInstrumentPart.DRUMS );
 				}
@@ -3506,7 +3506,7 @@ namespace DTXMania
 			}	// end of "if configIni.bDrumsEnabled"
 			if( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
 			{
-                this.tサウンド再生( pChip, CSoundManager.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+                this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
 				pChip.bHit = true;
 			}
 		}
@@ -3551,7 +3551,7 @@ namespace DTXMania
 					const int numD = 355;				// ドラム画面かギター画面かで変わる値
 					if ( ( numB < ( numD + numA ) ) && ( numB > -numA ) )	// 以下のロジックは4種全て同じ
 					{
-						int c = this.ctWailingChipPatternAnimation.n現在の値;
+						int c = this.ctWailingChipPatternAnimation.nCurrentValue;
 						Rectangle rect = new Rectangle( baseTextureOffsetX + ( c * WailingWidth ), baseTextureOffsetY, WailingWidth, WailingHeight);
 						if ( numB < numA )
 						{
@@ -3614,11 +3614,11 @@ namespace DTXMania
                             this.actAVI.Start(bフィルイン中);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rc演奏用タイマ.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
-                                CDTXMania.Skin.sound歓声音.t再生する();
+                                CDTXMania.Skin.sound歓声音.tPlay();
                                 CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = 0;
                             }
                             //if (CDTXMania.ConfigIni.nSkillMode == 1)
@@ -3641,11 +3641,11 @@ namespace DTXMania
                             this.actAVI.Start(true);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rc演奏用タイマ.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
-                                CDTXMania.Skin.sound歓声音.t再生する();
+                                CDTXMania.Skin.sound歓声音.tPlay();
                                 CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = 0;
                             }
                         }
@@ -3660,11 +3660,11 @@ namespace DTXMania
                             this.actAVI.Start(true);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rc演奏用タイマ.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
-                                CDTXMania.Skin.sound歓声音.t再生する();
+                                CDTXMania.Skin.sound歓声音.tPlay();
                                 CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = 0;
                             }
                         }
@@ -3776,7 +3776,7 @@ namespace DTXMania
                 if( configIni.ボーナス演出を表示する )
                 {
                     this.actAVI.Start( true );
-                    CDTXMania.Skin.sound歓声音.t再生する();
+                    CDTXMania.Skin.sound歓声音.tPlay();
                     CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = 0;
                 }
                 if( CDTXMania.ConfigIni.nSkillMode == 1 && ( !CDTXMania.ConfigIni.bAllDrumsAreAutoPlay || CDTXMania.ConfigIni.bAutoAddGage ) )
@@ -3821,7 +3821,7 @@ namespace DTXMania
 					const int numD = 355;				// ドラム画面かギター画面かで変わる値
 					if ( ( numB < ( numD + numA ) ) && ( numB > -numA ) )	// 以下のロジックは4種全て同じ
 					{
-						int c = this.ctWailingChipPatternAnimation.n現在の値;
+						int c = this.ctWailingChipPatternAnimation.nCurrentValue;
 						Rectangle rect = new Rectangle( baseTextureOffsetX + ( c * WailingWidth ), baseTextureOffsetY, WailingWidth, WailingHeight );
 						if ( numB < numA )
 						{

@@ -55,7 +55,7 @@ namespace DTXMania
             #endregion
             #region [ Global.* を初期化する。--> コンストラクタへ移動 ]
             //-----------------
-            //Global.t初期化( this );	
+            //Global.tInitialize( this );	
             //-----------------
             #endregion
 
@@ -99,7 +99,7 @@ namespace DTXMania
         /// </summary>
         protected override void OnUpdate()
         {
-            switch ( CDTXMania.rCurrentStage.eステージID )
+            switch ( CDTXMania.rCurrentStage.eStageID )
             {
 
                 case CStage.EStage.Playing:

@@ -10,7 +10,7 @@ namespace FDK
 {
 	public class CSoundTimer : CTimerBase
 	{
-		public override long nシステム時刻ms
+		public override long nSystemTimeMs
 		{
 			get
 			{
@@ -26,12 +26,12 @@ namespace FDK
 					// この場合の対策は、ASIOのバッファ量を増やして、ASIOの音声合成処理の負荷を下げること。
 
 					return this.Device.n経過時間ms
-						+ ( this.Device.tmシステムタイマ.nシステム時刻ms - this.Device.n経過時間を更新したシステム時刻ms );
+						+ ( this.Device.tmシステムタイマ.nSystemTimeMs - this.Device.n経過時間を更新したシステム時刻ms );
 				}
 				else if( this.Device.e出力デバイス == ESoundDeviceType.DirectSound )
 				{
 					//return this.Device.n経過時間ms;		// #24820 2013.2.3 yyagi TESTCODE DirectSoundでスクロールが滑らかにならないため、
-					return ct.nシステム時刻ms;				// 仮にCSoundTimerをCTimer相当の動作にしてみた
+					return ct.nSystemTimeMs;				// 仮にCSoundTimerをCTimer相当の動作にしてみた
 				}
 				return CTimerBase.nUnused;
 			}
@@ -57,8 +57,8 @@ namespace FDK
 		{
 			if ( this.Device.e出力デバイス != ESoundDeviceType.DirectSound )
 			{
-				this.nDInputTimerCounter = this.ctDInputTimer.nシステム時刻ms;
-				this.nSoundTimerCounter = this.nシステム時刻ms;
+				this.nDInputTimerCounter = this.ctDInputTimer.nSystemTimeMs;
+				this.nSoundTimerCounter = this.nSystemTimeMs;
 				//Debug.WriteLine( "BaseCounter: " + nDInputTimerCounter + ", " + nSoundTimerCounter );
 			}
 		}
@@ -156,7 +156,7 @@ Debug.WriteLine( "B" );
 			}
 			if ( ct != null )
 			{
-				ct.t一時停止();
+				ct.tPause();
 				ct.Dispose();
 				ct = null;
 			}

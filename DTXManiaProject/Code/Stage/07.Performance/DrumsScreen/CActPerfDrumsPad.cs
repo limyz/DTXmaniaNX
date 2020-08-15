@@ -150,7 +150,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                int num1 = CDTXMania.stagePerfDrumsScreen.ctBPMBar.n現在の値;
+                int num1 = CDTXMania.stagePerfDrumsScreen.ctBPMBar.nCurrentValue;
 
 
                 if (base.bJustStartedUpdate)
@@ -371,7 +371,7 @@ namespace DTXMania
                     //アニメーションは仮のもの。後から強化する予定。
                     if (this.stボーナス[i].b使用中)
                     {
-                        int numf = this.stボーナス[i].ct進行.n現在の値;
+                        int numf = this.stボーナス[i].ct進行.nCurrentValue;
                         this.stボーナス[i].ct進行.tUpdate();
                         if (this.stボーナス[i].ct進行.bReachedEndValue)
                         {
@@ -381,9 +381,9 @@ namespace DTXMania
                         if (this.txボーナス文字 != null && CDTXMania.ConfigIni.bShowScore)
                         {
                             this.txボーナス文字.tDraw2D(CDTXMania.app.Device, 160, 80);
-                            //if (this.stボーナス[i].ct進行.n現在の値 >= 765)
+                            //if (this.stボーナス[i].ct進行.nCurrentValue >= 765)
                             //{
-                            //    int n = this.stボーナス[i].ct進行.n現在の値 - 765;
+                            //    int n = this.stボーナス[i].ct進行.nCurrentValue - 765;
                             //    this.txボーナス文字.nTransparency = 255 - n;
                             //}
                         }
@@ -443,7 +443,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

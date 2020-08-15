@@ -1732,7 +1732,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 		#endregion
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

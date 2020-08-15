@@ -230,7 +230,7 @@ namespace FDK
 			if( wMsg != CWin32.MIM_DATA || ( p != 0x80 && p != 0x90 ) )
 				return;
 
-            long time = CSoundManager.rc演奏用タイマ.nシステム時刻;	// lock前に取得。演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
+            long time = CSoundManager.rcPerformanceTimer.nシステム時刻;	// lock前に取得。演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 
 			lock( this.objMidiIn排他用 )
 			{

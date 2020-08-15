@@ -56,9 +56,9 @@ namespace DTXMania
                     {
                         return 0;
                     }
-                    int num = this.ct透明度用.n現在の値;
+                    int num = this.ct透明度用.nCurrentValue;
                     this.tx黒.nTransparency = num;　　//
-                    num = this.ct移動用.n現在の値;
+                    num = this.ct移動用.nCurrentValue;
                     int num2 = num;
                     for (int i = 0; i < 2; i++)
                     {
@@ -70,7 +70,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

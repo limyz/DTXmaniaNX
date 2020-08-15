@@ -18,7 +18,7 @@ namespace DTXMania
 
         public CStageSongLoading()
         {
-            base.eステージID = CStage.EStage.SongLoading;
+            base.eStageID = CStage.EStage.SongLoading;
             base.ePhaseID = CStage.EPhase.Common_DefaultState;
             base.bNotActivated = true;
             //			base.listChildActivities.Add( this.actFI = new CActFIFOBlack() );	// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
@@ -386,13 +386,13 @@ namespace DTXMania
                         CSkin.CSystemSound.rLastPlayedExclusiveSystemSound.t停止する();
                     }
                     this.sd読み込み音.tStartPlaying();
-                    this.nBGM再生開始時刻 = CSoundManager.rc演奏用タイマ.n現在時刻;
+                    this.nBGM再生開始時刻 = CSoundManager.rcPerformanceTimer.n現在時刻;
                     this.nBGMの総再生時間ms = this.sd読み込み音.n総演奏時間ms;
                 }
                 else
                 {
-                    CDTXMania.Skin.sound曲読込開始音.t再生する();
-                    this.nBGM再生開始時刻 = CSoundManager.rc演奏用タイマ.n現在時刻;
+                    CDTXMania.Skin.sound曲読込開始音.tPlay();
+                    this.nBGM再生開始時刻 = CSoundManager.rcPerformanceTimer.n現在時刻;
                     this.nBGMの総再生時間ms = CDTXMania.Skin.sound曲読込開始音.nLength_CurrentSound;
                 }
                 //				this.actFI.tフェードイン開始();							// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
@@ -413,7 +413,7 @@ namespace DTXMania
                     this.sd読み込み音.tサウンドを停止する();
                     this.sd読み込み音.t解放する();
                 }
-                return (int)E曲読込画面の戻り値.読込中止;
+                return (int)ESongLoadingScreenReturnValue.LoadingStopped;
             }
             #endregion
 
@@ -452,7 +452,7 @@ namespace DTXMania
             if( this.txジャケット != null )
             {
                 Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(384.0f / this.txジャケット.sz画像サイズ.Width, 384.0f / this.txジャケット.sz画像サイズ.Height, 1f);
+                mat *= Matrix.Scaling(384.0f / this.txジャケット.szImageSize.Width, 384.0f / this.txジャケット.szImageSize.Height, 1f);
                 mat *= Matrix.Translation(206f, 66f, 0f);
                 mat *= Matrix.RotationZ(0.28f);
 
@@ -461,16 +461,16 @@ namespace DTXMania
 
             if (this.txタイトル != null)
             {
-                if (this.txタイトル.sz画像サイズ.Width > 625)
-                    this.txタイトル.vc拡大縮小倍率.X = 625f / this.txタイトル.sz画像サイズ.Width;
+                if (this.txタイトル.szImageSize.Width > 625)
+                    this.txタイトル.vcScaleRatio.X = 625f / this.txタイトル.szImageSize.Width;
 
                 this.txタイトル.tDraw2D(CDTXMania.app.Device, 190, 285);
             }
 
             if (this.txアーティスト != null)
             {
-                if (this.txアーティスト.sz画像サイズ.Width > 625)
-                    this.txアーティスト.vc拡大縮小倍率.X = 625f / this.txアーティスト.sz画像サイズ.Width;
+                if (this.txアーティスト.szImageSize.Width > 625)
+                    this.txアーティスト.vcScaleRatio.X = 625f / this.txアーティスト.szImageSize.Width;
 
                 this.txアーティスト.tDraw2D(CDTXMania.app.Device, 190, 360);
             }
@@ -549,7 +549,7 @@ namespace DTXMania
                     // 必ず一度「CStaeg.EPhase.Common_FadeIn」フェーズを経由させること。
                     // さもないと、曲読み込みが完了するまで、曲読み込み画面が描画されない。
                     base.ePhaseID = CStage.EPhase.NOWLOADING_DTXファイルを読み込む;
-                    return (int)E曲読込画面の戻り値.継続;
+                    return (int)ESongLoadingScreenReturnValue.Continue;
 
                 case CStage.EPhase.NOWLOADING_DTXファイルを読み込む:
                     {
@@ -693,7 +693,7 @@ namespace DTXMania
 
                         base.ePhaseID = CStage.EPhase.NOWLOADING_WAVファイルを読み込む;
                         timeBeginLoadWAV = DateTime.Now;
-                        return (int)E曲読込画面の戻り値.継続;
+                        return (int)ESongLoadingScreenReturnValue.Continue;
                     }
 
                 case CStage.EPhase.NOWLOADING_WAVファイルを読み込む:
@@ -743,17 +743,17 @@ namespace DTXMania
 
                             base.ePhaseID = CStage.EPhase.NOWLOADING_BMPファイルを読み込む;
                         }
-                        return (int)E曲読込画面の戻り値.継続;
+                        return (int)ESongLoadingScreenReturnValue.Continue;
                     }
 
                 case CStage.EPhase.NOWLOADING_BMPファイルを読み込む:
                     {
                         TimeSpan span;
                         DateTime timeBeginLoadBMPAVI = DateTime.Now;
-                        if (CDTXMania.ConfigIni.bBGA有効)
+                        if (CDTXMania.ConfigIni.bBGAEnabled)
                             CDTXMania.DTX.tBMP_BMPTEXの読み込み();
 
-                        if (CDTXMania.ConfigIni.bAVI有効)
+                        if (CDTXMania.ConfigIni.bAVIEnabled)
                             CDTXMania.DTX.tAVIの読み込み();
                         span = (TimeSpan)(DateTime.Now - timeBeginLoadBMPAVI);
                         Trace.TraceInformation("BMP/AVI読込所要時間({0,4}): {1}", (CDTXMania.DTX.listBMP.Count + CDTXMania.DTX.listBMPTEX.Count + CDTXMania.DTX.listAVI.Count), span.ToString());
@@ -762,7 +762,7 @@ namespace DTXMania
                         Trace.TraceInformation("総読込時間:                {0}", span.ToString());
                         CDTXMania.Timer.t更新();
                         base.ePhaseID = CStage.EPhase.NOWLOADING_システムサウンドBGMの完了を待つ;
-                        return (int)E曲読込画面の戻り値.継続;
+                        return (int)ESongLoadingScreenReturnValue.Continue;
                     }
 
                 case CStage.EPhase.NOWLOADING_システムサウンドBGMの完了を待つ:
@@ -777,7 +777,7 @@ namespace DTXMania
                             this.actFO.tフェードアウト開始();
                             base.ePhaseID = CStage.EPhase.Common_FadeOut;
                         }
-                        return (int)E曲読込画面の戻り値.継続;
+                        return (int)ESongLoadingScreenReturnValue.Continue;
                     }
 
                 case CStage.EPhase.Common_FadeOut:
@@ -787,9 +787,9 @@ namespace DTXMania
                     {
                         this.sd読み込み音.t解放する();
                     }
-                    return (int)E曲読込画面の戻り値.読込完了;
+                    return (int)ESongLoadingScreenReturnValue.LoadingComplete;
             }
-            return (int)E曲読込画面の戻り値.継続;
+            return (int)ESongLoadingScreenReturnValue.Continue;
         }
 
 
@@ -799,7 +799,7 @@ namespace DTXMania
         /// <returns></returns>
         protected bool tキー入力()
         {
-            IInputDevice keyboard = CDTXMania.Input管理.Keyboard;
+            IInputDevice keyboard = CDTXMania.InputManager.Keyboard;
             if ( keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )		// escape (exit)
             {
                 if ( CDTXMania.ConfigIni.bギタレボモード )
@@ -818,7 +818,7 @@ namespace DTXMania
             return false;
         }
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

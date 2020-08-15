@@ -53,15 +53,15 @@ namespace DTXMania
             List<CItemBase> l = new List<CItemBase>();
 
             #region [ 共通 Target/AutoMode/AutoLane ]
-            l.Add(new CSwitchItemList("Target", CItemBase.Eパネル種別.通常, nInst, "", "", new string[] { "Drums", "Guitar", "Bass" }));
+            l.Add(new CSwitchItemList("Target", CItemBase.EPanelType.Normal, nInst, "", "", new string[] { "Drums", "Guitar", "Bass" }));
             List<int> automode = tConfigureAuto_DefaultSettings();
             if (nInst == (int)EInstrumentPart.DRUMS)
             {
-                l.Add(new CItemList("Auto Mode", CItemBase.Eパネル種別.通常, automode[nInst], "", "", new string[] { "All Auto", "Auto LP", "Auto BD", "2PedalAuto", "XGLaneAuto", "Custom", "OFF" }));
+                l.Add(new CItemList("Auto Mode", CItemBase.EPanelType.Normal, automode[nInst], "", "", new string[] { "All Auto", "Auto LP", "Auto BD", "2PedalAuto", "XGLaneAuto", "Custom", "OFF" }));
             }
             else
             {
-                l.Add(new CItemList("Auto Mode", CItemBase.Eパネル種別.通常, automode[nInst], "", "", new string[] { "All Auto", "Auto Neck", "Auto Pick", "Custom", "OFF" }));
+                l.Add(new CItemList("Auto Mode", CItemBase.EPanelType.Normal, automode[nInst], "", "", new string[] { "All Auto", "Auto Neck", "Auto Pick", "Custom", "OFF" }));
             }
             #endregion
             #region [ 個別 ScrollSpeed ]
@@ -75,7 +75,7 @@ namespace DTXMania
                 "(ScrollSpeed=x0.5 means half speed)"));
             #endregion
             #region [ 共通 Dark/Risky/PlaySpeed ]
-            l.Add(new CItemList("Dark", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eDark,
+            l.Add(new CItemList("Dark", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eDark,
                 "HALF: 背景、レーン、ゲージが表示\n" +
                 "されなくなります。\n" +
                 "FULL: さらに小節線、拍線、判定ラ\n" +
@@ -111,28 +111,28 @@ namespace DTXMania
                 "Note: It also changes the songs' pitch."));
             #endregion
             #region [ 個別 Sud/Hid ]
-            l.Add(new CItemList("HID/SUD", CItemBase.Eパネル種別.通常, CDTXMania.ConfigIni.nHidSud[nInst],
+            l.Add(new CItemList("HID/SUD", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.nHidSud[nInst],
                 "",
                 "",
                 new string[] { "OFF", "HIDDEN", "SUDDEN", "HID/SUD", "STEALTH" }));
             //ドラム、ギター、ベースでのHIDDEN/SUDDENの設定の分離を考えなければならない。
             #endregion
             #region [ 個別 Ghost ]
-            l.Add( new CItemList("AUTO Ghost", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eAutoGhost[ nInst ],
+            l.Add( new CItemList("AUTO Ghost", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eAutoGhost[ nInst ],
                 "AUTOプレーのゴーストを指定します。\n",
                 "Specify Play Ghost data.\n",
                 new string[] {"Perfect", "Last Play", "Hi Skill", "Hi Score", "Online" }
                 ));
-            l.Add(new CItemList("Target Ghost", CItemBase.Eパネル種別.通常, (int)CDTXMania.ConfigIni.eTargetGhost[ nInst ],
+            l.Add(new CItemList("Target Ghost", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eTargetGhost[ nInst ],
                 "ターゲットゴーストを指定します。\n",
                 "Specify Target Ghost data.\n",
                 new string[] {"None", "Perfect", "Last Play", "Hi Skill", "Hi Score", "Online" }
                 ));
             #endregion
             #region [ 共通 SET切り替え/More/Return ]
-            //l.Add(new CSwitchItemList("Config Set", CItemBase.Eパネル種別.通常, nCurrentConfigSet, "", "", new string[] { "SET-1", "SET-2", "SET-3" }));
-            l.Add(new CSwitchItemList("More...", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "" }));
-            l.Add(new CSwitchItemList("Return", CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "", "" }));
+            //l.Add(new CSwitchItemList("Config Set", CItemBase.EPanelType.Normal, nCurrentConfigSet, "", "", new string[] { "SET-1", "SET-2", "SET-3" }));
+            l.Add(new CSwitchItemList("More...", CItemBase.EPanelType.Normal, 0, "", "", new string[] { "" }));
+            l.Add(new CSwitchItemList("Return", CItemBase.EPanelType.Normal, 0, "", "", new string[] { "", "" }));
             #endregion
 
             return l;
@@ -334,7 +334,7 @@ namespace DTXMania
                     this.tx文字列パネル.Dispose();
                 }
                 this.tx文字列パネル = new CTexture(CDTXMania.app.Device, image, CDTXMania.TextureFormat);
-                this.tx文字列パネル.vc拡大縮小倍率 = new Vector3(1f, 1f, 1f);
+                this.tx文字列パネル.vcScaleRatio = new Vector3(1f, 1f, 1f);
                 image.Dispose();
             }
             catch (CTextureCreateFailedException)

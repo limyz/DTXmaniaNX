@@ -84,7 +84,7 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CInputManager Input管理
+        public static CInputManager InputManager
         {
             get;
             private set;
@@ -543,11 +543,11 @@ namespace DTXMania
 
             if (Timer != null)
                 Timer.t更新();
-            if (CSoundManager.rc演奏用タイマ != null)
-                CSoundManager.rc演奏用タイマ.t更新();
+            if (CSoundManager.rcPerformanceTimer != null)
+                CSoundManager.rcPerformanceTimer.t更新();
 
-            if (Input管理 != null)
-                Input管理.tDoPolling(this.bApplicationActive, CDTXMania.ConfigIni.bバッファ入力を行う);
+            if (InputManager != null)
+                InputManager.tDoPolling(this.bApplicationActive, CDTXMania.ConfigIni.bバッファ入力を行う);
 
             if (FPS != null)
                 FPS.tカウンタ更新();
@@ -583,7 +583,7 @@ namespace DTXMania
                     Directory.SetCurrentDirectory(sp.strプラグインフォルダ);
 
                     if (CDTXMania.act現在入力を占有中のプラグイン == null || CDTXMania.act現在入力を占有中のプラグイン == sp.plugin)
-                        sp.plugin.On進行描画(CDTXMania.Pad, CDTXMania.Input管理.Keyboard);
+                        sp.plugin.On進行描画(CDTXMania.Pad, CDTXMania.InputManager.Keyboard);
                     else
                         sp.plugin.On進行描画(null, null);
 
@@ -606,7 +606,7 @@ namespace DTXMania
                 {
                     actEnumSongs.OnUpdateAndDraw();							// "Enumerating Songs..."アイコンの描画
                 }							// "Enumerating Songs..."アイコンの描画
-                switch (rCurrentStage.eステージID)
+                switch (rCurrentStage.eStageID)
                 {
                     case CStage.EStage.Title:
                     case CStage.EStage.Config:
@@ -616,8 +616,8 @@ namespace DTXMania
                         if (EnumSongs != null)
                         {
                             #region [ (特定条件時) 曲検索スレッドの起動_開始 ]
-                            if (rCurrentStage.eステージID == CStage.EStage.Title &&
-                                 r直前のステージ.eステージID == CStage.EStage.Startup &&
+                            if (rCurrentStage.eStageID == CStage.EStage.Title &&
+                                 r直前のステージ.eStageID == CStage.EStage.Startup &&
                                  this.n進行描画の戻り値 == (int)CStageTitle.E戻り値.継続 &&
                                  !EnumSongs.IsSongListEnumStarted)
                             {
@@ -633,7 +633,7 @@ namespace DTXMania
                             #endregion
 
                             #region [ 曲検索の中断と再開 ]
-                            if (rCurrentStage.eステージID == CStage.EStage.SongSelection && !EnumSongs.IsSongListEnumCompletelyDone)
+                            if (rCurrentStage.eStageID == CStage.EStage.SongSelection && !EnumSongs.IsSongListEnumCompletelyDone)
                             {
                                 switch (this.n進行描画の戻り値)
                                 {
@@ -661,7 +661,7 @@ namespace DTXMania
                             #endregion
 
                             #region [ 曲探索中断待ち待機 ]
-                            if (rCurrentStage.eステージID == CStage.EStage.SongLoading && !EnumSongs.IsSongListEnumCompletelyDone &&
+                            if (rCurrentStage.eStageID == CStage.EStage.SongLoading && !EnumSongs.IsSongListEnumCompletelyDone &&
                                 EnumSongs.thDTXFileEnumerate != null)							// #28700 2012.6.12 yyagi; at Compact mode, enumerating thread does not exist.
                             {
                                 EnumSongs.WaitUntilSuspended();									// 念のため、曲検索が一時中断されるまで待機
@@ -675,7 +675,7 @@ namespace DTXMania
                                 actEnumSongs.OnDeactivate();
                                 CDTXMania.stageSongSelection.bIsEnumeratingSongs = false;
 
-                                bool bRemakeSongTitleBar = (rCurrentStage.eステージID == CStage.EStage.SongSelection) ? true : false;
+                                bool bRemakeSongTitleBar = (rCurrentStage.eStageID == CStage.EStage.SongSelection) ? true : false;
                                 CDTXMania.stageSongSelection.Refresh(EnumSongs.Songs管理, bRemakeSongTitleBar);
                                 EnumSongs.SongListEnumCompletelyDone();
                             }
@@ -685,7 +685,7 @@ namespace DTXMania
                 }
                 #endregion
 
-                switch (rCurrentStage.eステージID)
+                switch (rCurrentStage.eStageID)
                 {
                     case CStage.EStage.DoNothing:
                         break;
@@ -811,7 +811,7 @@ namespace DTXMania
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
-                            switch (r直前のステージ.eステージID)
+                            switch (r直前のステージ.eStageID)
                             {
                                 case CStage.EStage.Title:
                                     #region [ *** ]
@@ -868,7 +868,7 @@ namespace DTXMania
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
-                            switch (r直前のステージ.eステージID)
+                            switch (r直前のステージ.eStageID)
                             {
                                 case CStage.EStage.Title:
                                     #region [ *** ]
@@ -1042,7 +1042,7 @@ namespace DTXMania
                             rCurrentStage.OnDeactivate();
 
                             #region [ ESC押下時は、曲の読み込みを中止して選曲画面に戻る ]
-                            if (this.n進行描画の戻り値 == (int)E曲読込画面の戻り値.読込中止)
+                            if (this.n進行描画の戻り値 == (int)ESongLoadingScreenReturnValue.LoadingStopped)
                             {
                                 //DTX.t全チップの再生停止();
                                 DTX.OnDeactivate();
@@ -1121,10 +1121,10 @@ for (int i = 0; i < 3; i++) {
                         //-----------------------------
                         switch (this.n進行描画の戻り値)
                         {
-                            case (int)E演奏画面の戻り値.継続:
+                            case (int)EPerfScreenReturnValue.Continue:
                                 break;
 
-                            case (int)E演奏画面の戻り値.演奏中断:
+                            case (int)EPerfScreenReturnValue.Interruption:
                                 #region [ 演奏キャンセル ]
                                 //-----------------------------
                                 scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Play canceled");
@@ -1172,7 +1172,7 @@ for (int i = 0; i < 3; i++) {
                             //-----------------------------
                                 #endregion
 
-                            case (int)E演奏画面の戻り値.ステージ失敗:
+                            case (int)EPerfScreenReturnValue.StageFailure:
                                 #region [ 演奏失敗(StageFailed) ]
                                 //-----------------------------
                                 scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Stage failed");
@@ -1220,7 +1220,7 @@ for (int i = 0; i < 3; i++) {
                             //-----------------------------
                                 #endregion
 
-                            case (int)E演奏画面の戻り値.ステージクリア:
+                            case (int)EPerfScreenReturnValue.StageClear:
                                 #region [ 演奏クリア ]
                                 //-----------------------------
                                 CScoreIni.CPerformanceEntry c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass;
@@ -1352,7 +1352,7 @@ for (int i = 0; i < 3; i++) {
                                 CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // Auto入れ替え
                             }
 
-                            DTX.t全チップの再生一時停止();
+                            DTX.tPausePlaybackForAllChips();
                             DTX.OnDeactivate();
                             rCurrentStage.OnDeactivate();
                             if (!bCompactMode)
@@ -1418,7 +1418,7 @@ for (int i = 0; i < 3; i++) {
             #region [ 全画面_ウインドウ切り替え ]
             if (this.b次のタイミングで全画面_ウィンドウ切り替えを行う)
             {
-                ConfigIni.b全画面モード = !ConfigIni.b全画面モード;
+                ConfigIni.bFullScreenMode = !ConfigIni.bFullScreenMode;
                 app.tSwitchFullScreenMode();
                 this.b次のタイミングで全画面_ウィンドウ切り替えを行う = false;
             }
@@ -1442,7 +1442,7 @@ for (int i = 0; i < 3; i++) {
         }
 
 
-        // その他
+        // Other
 
 		#region [ 汎用ヘルパー ]
 		//-----------------
@@ -1475,7 +1475,7 @@ for (int i = 0; i < 3; i++) {
 		public static void tReleaseTexture( ref CTexture tx )
 		{
             if (tx != null) {
-                //Trace.WriteLine( "CTextureを解放 Size W:" + tx.sz画像サイズ.Width + " H:" + tx.sz画像サイズ.Height );
+                //Trace.WriteLine( "CTextureを解放 Size W:" + tx.szImageSize.Width + " H:" + tx.szImageSize.Height );
 			    CDTXMania.t安全にDisposeする( ref tx );
             }
 		}
@@ -1641,7 +1641,7 @@ for (int i = 0; i < 3; i++) {
             {
                 try
                 {
-                    ConfigIni.tファイルから読み込み(path);
+                    ConfigIni.tReadFromFile(path);
                 }
                 catch
                 {
@@ -1656,7 +1656,7 @@ for (int i = 0; i < 3; i++) {
             #region [ Start output log ]
             //---------------------
             Trace.AutoFlush = true;
-            if (ConfigIni.bログ出力)
+            if (ConfigIni.bOutputLogs)
             {
                 try
                 {
@@ -1849,8 +1849,8 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Input管理 = new CInputManager(base.Window.Handle);
-                foreach (IInputDevice device in Input管理.listInputDevices)
+                InputManager = new CInputManager(base.Window.Handle);
+                foreach (IInputDevice device in InputManager.listInputDevices)
                 {
                     if ((device.eInputDeviceType == EInputDeviceType.Joystick) && !ConfigIni.dicJoystick.ContainsValue(device.GUID))
                     {
@@ -1862,7 +1862,7 @@ for (int i = 0; i < 3; i++) {
                         ConfigIni.dicJoystick.Add(key, device.GUID);
                     }
                 }
-                foreach (IInputDevice device2 in Input管理.listInputDevices)
+                foreach (IInputDevice device2 in InputManager.listInputDevices)
                 {
                     if (device2.eInputDeviceType == EInputDeviceType.Joystick)
                     {
@@ -1897,7 +1897,7 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Pad = new CPad(ConfigIni, Input管理);
+                Pad = new CPad(ConfigIni, InputManager);
                 Trace.TraceInformation("パッドの初期化を完了しました。");
             }
             catch (Exception exception3)
@@ -2272,14 +2272,14 @@ for (int i = 0; i < 3; i++) {
                 #endregion
                 #region [ DirectInput, MIDI入力の終了処理 ]
                 //---------------------
-                if (Input管理 != null)
+                if (InputManager != null)
                 {
                     Trace.TraceInformation("DirectInput, MIDI入力の終了処理を行います。");
                     Trace.Indent();
                     try
                     {
-                        Input管理.Dispose();
-                        Input管理 = null;
+                        InputManager.Dispose();
+                        InputManager = null;
                         Trace.TraceInformation("DirectInput, MIDI入力の終了処理を完了しました。");
                     }
                     catch (Exception exception5)
@@ -2374,7 +2374,7 @@ for (int i = 0; i < 3; i++) {
                 Trace.Indent();
                 try
                 {
-                    ConfigIni.t書き出し(str);
+                    ConfigIni.tWrite(str);
                     Trace.TraceInformation("保存しました。({0})", new object[] { str });
                 }
                 catch (Exception e)
@@ -2548,8 +2548,8 @@ for (int i = 0; i < 3; i++) {
             {
                 for (int i = 0; i < 0x10; i++)
                 {
-                    if (ConfigIni.KeyAssign.System.Capture[i].コード > 0 &&
-                         e.KeyCode == DeviceConstantConverter.KeyToKeyCode((SlimDX.DirectInput.Key)ConfigIni.KeyAssign.System.Capture[i].コード))
+                    if (ConfigIni.KeyAssign.System.Capture[i].Code > 0 &&
+                         e.KeyCode == DeviceConstantConverter.KeyToKeyCode((SlimDX.DirectInput.Key)ConfigIni.KeyAssign.System.Capture[i].Code))
                     {
                         // Debug.WriteLine( "capture: " + string.Format( "{0:2x}", (int) e.KeyCode ) + " " + (int) e.KeyCode );
                         string strFullPath =

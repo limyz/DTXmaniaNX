@@ -104,7 +104,7 @@ namespace DTXMania
 					{
 						this.ct遅延表示.tStop();
 					}
-					else if( ( this.ct遅延表示.n現在の値 >= 0 ) && this.b新しいプレビューファイルをまだ読み込んでいない )
+					else if( ( this.ct遅延表示.nCurrentValue >= 0 ) && this.b新しいプレビューファイルをまだ読み込んでいない )
 					{
 						this.tプレビュー画像_動画の変更();
 						CDTXMania.Timer.t更新();
@@ -145,7 +145,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -270,7 +270,7 @@ namespace DTXMania
 		private bool tプレビュー動画の指定があれば構築する()
 		{
 			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
-			if( ( CDTXMania.ConfigIni.bAVI有効 && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.SongInformation.Premovie ) )
+			if( ( CDTXMania.ConfigIni.bAVIEnabled && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.SongInformation.Premovie ) )
 			{
 				string filename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Premovie;
 				if( filename.Equals( this.str現在のファイル名 ) )
@@ -459,10 +459,10 @@ namespace DTXMania
 			}
 			else
 			{
-				double num = ( (double) this.ct登場アニメ用.n現在の値 ) / 100.0;
+				double num = ( (double) this.ct登場アニメ用.nCurrentValue ) / 100.0;
 				double num2 = Math.Cos( ( 1.5 + ( 0.5 * num ) ) * Math.PI );
 				this.n本体X = n基X;
-				this.n本体Y = n基Y - ( (int) ( this.txパネル本体.sz画像サイズ.Height * ( 1.0 - ( num2 * num2 ) ) ) );
+				this.n本体Y = n基Y - ( (int) ( this.txパネル本体.szImageSize.Height * ( 1.0 - ( num2 * num2 ) ) ) );
 			}
 			if( this.txパネル本体 != null )
 			{
@@ -471,7 +471,7 @@ namespace DTXMania
 		}
 		private unsafe void t描画処理_プレビュー画像()
 		{
-			if( !CDTXMania.stageSongSelection.bScrolling && ( ( ( this.ct遅延表示 != null ) && ( this.ct遅延表示.n現在の値 > 0 ) ) && !this.b新しいプレビューファイルをまだ読み込んでいない ) )
+			if( !CDTXMania.stageSongSelection.bScrolling && ( ( ( this.ct遅延表示 != null ) && ( this.ct遅延表示.nCurrentValue > 0 ) ) && !this.b新しいプレビューファイルをまだ読み込んでいない ) )
 			{
                 int n差X = 0x25;
                 int n差Y = 0x18;
@@ -487,7 +487,7 @@ namespace DTXMania
                 int x = this.n本体X + n差X;
                 int y = this.n本体Y + n差Y;
                 int z = n表示ジャケットサイズ;
-				float num3 = ( (float) this.ct遅延表示.n現在の値 ) / 100f;
+				float num3 = ( (float) this.ct遅延表示.nCurrentValue ) / 100f;
 				float num4 = 0.9f + ( 0.1f * num3 );
 				if( ( this.nAVI再生開始時刻 != -1 ) && ( this.sfAVI画像 != null ) )
 				{
@@ -523,8 +523,8 @@ namespace DTXMania
 				}
                 if (this.r表示するプレビュー画像 != null)
                 {
-                    float width = this.r表示するプレビュー画像.sz画像サイズ.Width;
-                    float height = this.r表示するプレビュー画像.sz画像サイズ.Height;
+                    float width = this.r表示するプレビュー画像.szImageSize.Width;
+                    float height = this.r表示するプレビュー画像.szImageSize.Height;
                     float f倍率;
                     if (((float) z / width) > ((float) z / height))
                     {
@@ -537,8 +537,8 @@ namespace DTXMania
                     x += (z - ((int)(width * num4 * f倍率))) / 2;
                     y += (z - ((int)(height * num4 * f倍率))) / 2;
                     this.r表示するプレビュー画像.nTransparency = (int)(255f * num3);
-                    this.r表示するプレビュー画像.vc拡大縮小倍率.X = num4 * f倍率;
-                    this.r表示するプレビュー画像.vc拡大縮小倍率.Y = num4 * f倍率;
+                    this.r表示するプレビュー画像.vcScaleRatio.X = num4 * f倍率;
+                    this.r表示するプレビュー画像.vcScaleRatio.Y = num4 * f倍率;
                     this.r表示するプレビュー画像.tDraw2D(CDTXMania.app.Device, x, y);
                 }
 			}

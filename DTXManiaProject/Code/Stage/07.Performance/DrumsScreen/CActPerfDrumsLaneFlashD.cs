@@ -396,7 +396,7 @@ namespace DTXMania
                             {
                                 if (CDTXMania.ConfigIni.bReverse.Drums)
                                 {
-                                    int y = 32 + ((this.ct進行[j].n現在の値 * 740) / 100);
+                                    int y = 32 + ((this.ct進行[j].nCurrentValue * 740) / 100);
                                     for (int m = 0; m < w; m += 42)
                                     {
                                         if (this.txFlush[j + 11] != null)
@@ -407,7 +407,7 @@ namespace DTXMania
                                 }
                                 else
                                 {
-                                    int num8 = (200 + (500)) - ((this.ct進行[j].n現在の値 * 740) / 100);
+                                    int num8 = (200 + (500)) - ((this.ct進行[j].nCurrentValue * 740) / 100);
                                     if (num8 < 720)
                                     {
                                         for (int n = 0; n < w; n += 42)
@@ -430,7 +430,7 @@ namespace DTXMania
 		}
 
 		
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

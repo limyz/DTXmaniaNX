@@ -66,14 +66,14 @@ namespace DTXMania
 						EInstrumentPart e楽器パート = ( i < 5 ) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
 						CTexture texture = CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] ? base.txFlush[ ( i % 5 ) + 5 ] : base.txFlush[ i % 5 ];
 						int num2 = CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] ? 1 : 0;
-						//int x = ( ( ( i < 5 ) ? 88 : 480 ) + this.nRGBのX座標[ num2, i ] ) + ( ( 37 * base.ct進行[ i ].n現在の値 ) / 100 );
-                        int x = (((i < 5) ? 88 : 958) + this.nRGBのX座標[num2, i] + ( ( 19 * base.ct進行[ i ].n現在の値 ) / 70 ));
+						//int x = ( ( ( i < 5 ) ? 88 : 480 ) + this.nRGBのX座標[ num2, i ] ) + ( ( 37 * base.ct進行[ i ].nCurrentValue ) / 100 );
+                        int x = (((i < 5) ? 88 : 958) + this.nRGBのX座標[num2, i] + ( ( 19 * base.ct進行[ i ].nCurrentValue ) / 70 ));
                         int x2 = ((i < 5) ? 88 : 954);
 		                int y = CDTXMania.ConfigIni.bReverse[ (int) e楽器パート ] ? 414 : 100;
                         int y2 = CDTXMania.ConfigIni.bReverse[(int)e楽器パート] ? 414 : 104;
 						if( texture != null && CDTXMania.ConfigIni.bLaneFlush[ (int) e楽器パート ] )
 						{
-                            texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( 37, 0, ( 37 * ( 70 - base.ct進行[ i ].n現在の値)) / 70, 256 ) );
+                            texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( 37, 0, ( 37 * ( 70 - base.ct進行[ i ].nCurrentValue)) / 70, 256 ) );
                             //if( j == 4 )
                                 //this.txレーンフラッシュ.tDraw2D( CDTXMania.app.Device, x2 + ( ( i < 5 ? i : i - 5 ) * 39 ), y2, new Rectangle( i * 39, 0, 41, 566 ) );
 				        }
@@ -133,7 +133,7 @@ namespace DTXMania
 		}
 		
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

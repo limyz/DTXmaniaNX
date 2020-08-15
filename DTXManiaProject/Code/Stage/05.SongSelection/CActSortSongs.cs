@@ -13,17 +13,17 @@ namespace DTXMania
 		public CActSortSongs()
 		{
 			List<CItemBase> lci = new List<CItemBase>();
-			lci.Add( new CItemList( "Title",		CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "Z,Y,X,...",		"A,B,C,..." } ) );
-			lci.Add( new CItemList( "Level",		CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "99,98,97,...",	"1,2,3,..." } ) );
-			lci.Add( new CItemList( "Best Rank",	CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "E,D,C,...",		"SS,S,A,..." } ) );
-			lci.Add( new CItemList( "PlayCount",	CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "10,9,8,...",		"1,2,3,..." } ) );
-			lci.Add( new CItemList( "Author",		CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "Z,Y,X,...",		"A,B,C,..." } ) );
-			lci.Add( new CItemList( "SkillPoint",	CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "100,99,98,...",	"1,2,3,..." } ) );
+			lci.Add( new CItemList( "Title",		CItemBase.EPanelType.Normal, 0, "", "", new string[] { "Z,Y,X,...",		"A,B,C,..." } ) );
+			lci.Add( new CItemList( "Level",		CItemBase.EPanelType.Normal, 0, "", "", new string[] { "99,98,97,...",	"1,2,3,..." } ) );
+			lci.Add( new CItemList( "Best Rank",	CItemBase.EPanelType.Normal, 0, "", "", new string[] { "E,D,C,...",		"SS,S,A,..." } ) );
+			lci.Add( new CItemList( "PlayCount",	CItemBase.EPanelType.Normal, 0, "", "", new string[] { "10,9,8,...",		"1,2,3,..." } ) );
+			lci.Add( new CItemList( "Author",		CItemBase.EPanelType.Normal, 0, "", "", new string[] { "Z,Y,X,...",		"A,B,C,..." } ) );
+			lci.Add( new CItemList( "SkillPoint",	CItemBase.EPanelType.Normal, 0, "", "", new string[] { "100,99,98,...",	"1,2,3,..." } ) );
 #if TEST_SORTBGM
 			lci.Add( new CItemList( "BPM",			CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "300,200,...",	"70,80,90,..." } ) );
 #endif
-			lci.Add( new CItemList( "Date",			CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "Dec.31,30,...",	"Jan.1,2,..." } ) );
-			lci.Add( new CItemList( "Return",		CItemBase.Eパネル種別.通常, 0, "", "", new string[] { "", 				"" } ) );
+			lci.Add( new CItemList( "Date",			CItemBase.EPanelType.Normal, 0, "", "", new string[] { "Dec.31,30,...",	"Jan.1,2,..." } ) );
+			lci.Add( new CItemList( "Return",		CItemBase.EPanelType.Normal, 0, "", "", new string[] { "", 				"" } ) );
 			
 			base.Initialize( lci, false, "SORT MENU" );
 		}

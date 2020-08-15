@@ -12,7 +12,7 @@ namespace DTXMania
 
 		public CStageEnd()
 		{
-			base.eステージID = CStage.EStage.End;
+			base.eStageID = CStage.EStage.End;
 			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			base.bNotActivated = true;
 		}
@@ -71,7 +71,7 @@ namespace DTXMania
 			{
 				if( base.bJustStartedUpdate )
 				{
-					CDTXMania.Skin.soundGameEnd.t再生する();
+					CDTXMania.Skin.soundGameEnd.tPlay();
 					this.ct時間稼ぎ.tStart( 0, 1, 0x3e8, CDTXMania.Timer );
                     base.bJustStartedUpdate = false;
 				}
@@ -89,7 +89,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

@@ -331,7 +331,7 @@ namespace FDK
 
 			int n未再生バイト数 = BassWasapi.BASS_WASAPI_GetData( null, (int) BASSData.BASS_DATA_AVAILABLE );	// 誤差削減のため、必要となるギリギリ直前に取得する。
 			this.n経過時間ms = ( this.n累積転送バイト数 - n未再生バイト数 ) * 1000 / this.nミキサーの1秒あたりのバイト数;
-			this.n経過時間を更新したシステム時刻ms = this.tmシステムタイマ.nシステム時刻ms;
+			this.n経過時間を更新したシステム時刻ms = this.tmシステムタイマ.nSystemTimeMs;
 
 			// 実出力遅延を更新。
 			// 未再生バイト数の平均値。

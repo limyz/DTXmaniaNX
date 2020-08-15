@@ -313,7 +313,7 @@ namespace DTXMania
 			}
 			public override void PutLog( string strテクスチャファイル名 )
 			{
-				Trace.TraceInformation( "テクスチャを生成しました。({0})({1})(Gr:{2}x{3})(Tx:{4}x{5})", this.strコメント文, strテクスチャファイル名, this.tx画像.sz画像サイズ.Width, this.tx画像.sz画像サイズ.Height, this.tx画像.szテクスチャサイズ.Width, this.tx画像.szテクスチャサイズ.Height );
+				Trace.TraceInformation( "テクスチャを生成しました。({0})({1})(Gr:{2}x{3})(Tx:{4}x{5})", this.strコメント文, strテクスチャファイル名, this.tx画像.szImageSize.Width, this.tx画像.szImageSize.Height, this.tx画像.szTextureSize.Width, this.tx画像.szTextureSize.Height );
 			}
 			public override string ToString()
 			{
@@ -331,14 +331,14 @@ namespace DTXMania
 			{
 				get
 				{
-					return this.tx画像.sz画像サイズ.Height;
+					return this.tx画像.szImageSize.Height;
 				}
 			}
 			public int n幅
 			{
 				get
 				{
-					return this.tx画像.sz画像サイズ.Width;
+					return this.tx画像.szImageSize.Width;
 				}
 			}
 			public bool b黒を透過する;
@@ -490,8 +490,8 @@ namespace DTXMania
 			public bool b可視 = true;
 			public double dbチップサイズ倍率 = 1.0;
 			public double db実数値;
-			public EAVI種別 eAVI種別;
-			public EBGA種別 eBGA種別;
+			public EAVIType eAVI種別;
+			public EBGAType eBGA種別;
 			public EInstrumentPart e楽器パート = EInstrumentPart.UNKNOWN;
 			public int nチャンネル番号;
 			public STDGBVALUE<int> nバーからの距離dot;
@@ -869,7 +869,7 @@ namespace DTXMania
 			public List<int> listこのWAVを使用するチャンネル番号の集合 = new List<int>( 16 );
 			public int nチップサイズ = 100;
 			public int n位置;
-			public long[] n一時停止時刻 = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
+			public long[] nPauseTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
 			public int n音量 = 100;
 			public int n現在再生中のサウンド番号;
 			public long[] n再生開始時刻 = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
@@ -1563,7 +1563,7 @@ namespace DTXMania
 				{
 					if( chip.nチャンネル番号 == 0x54 || chip.nチャンネル番号 == 0x5A )
 					{
-						chip.eAVI種別 = EAVI種別.Unknown;
+						chip.eAVI種別 = EAVIType.Unknown;
 						chip.rAVI = null;
                         chip.rDShow = null;
 						chip.rAVIPan = null;
@@ -1572,7 +1572,7 @@ namespace DTXMania
 							CAVIPAN cavipan = this.listAVIPAN[ chip.n整数値 ];
 							if( this.listAVI.ContainsKey( cavipan.nAVI番号 ) && ( this.listAVI[ cavipan.nAVI番号 ].avi != null ) )
 							{
-								chip.eAVI種別 = EAVI種別.AVIPAN;
+								chip.eAVI種別 = EAVIType.AVIPAN;
 								chip.rAVI = this.listAVI[ cavipan.nAVI番号 ];
                                 if(CDTXMania.ConfigIni.bDirectShowMode == true)
                                     chip.rDShow = this.listDS[ cavipan.nAVI番号 ];
@@ -1582,7 +1582,7 @@ namespace DTXMania
 						}
 						if( this.listAVI.ContainsKey( chip.n整数値 ) && ( this.listAVI[ chip.n整数値 ].avi != null ) || ( this.listDS.ContainsKey( chip.n整数値 ) && ( this.listDS[ chip.n整数値 ].dshow != null ) ) )
 						{
-							chip.eAVI種別 = EAVI種別.AVI;
+							chip.eAVI種別 = EAVIType.AVI;
 							chip.rAVI = this.listAVI[ chip.n整数値 ];
                             if( CDTXMania.ConfigIni.bDirectShowMode == true )
                                 chip.rDShow = this.listDS[ chip.n整数値 ];
@@ -1752,7 +1752,7 @@ namespace DTXMania
 					#region [ BGAPAN/BGA/BMPTEX/BMP ]
 					if ( ( ( ( chip.nチャンネル番号 == 4 ) || ( chip.nチャンネル番号 == 7 ) ) || ( ( chip.nチャンネル番号 >= 0x55 ) && ( chip.nチャンネル番号 <= 0x59 ) ) ) || ( chip.nチャンネル番号 == 0x60 ) )
 					{
-						chip.eBGA種別 = EBGA種別.Unknown;
+						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
 						chip.rBMPTEX = null;
 						chip.rBGA = null;
@@ -1763,14 +1763,14 @@ namespace DTXMania
 							CBGAPAN cbgapan = this.listBGAPAN[ chip.n整数値 ];
 							if ( this.listBMPTEX.ContainsKey( cbgapan.nBMP番号 ) && this.listBMPTEX[ cbgapan.nBMP番号 ].bUse )
 							{
-								chip.eBGA種別 = EBGA種別.BGAPAN;
+								chip.eBGA種別 = EBGAType.BGAPAN;
 								chip.rBMPTEX = this.listBMPTEX[ cbgapan.nBMP番号 ];
 								chip.rBGAPan = cbgapan;
 								continue;
 							}
 							if ( this.listBMP.ContainsKey( cbgapan.nBMP番号 ) && this.listBMP[ cbgapan.nBMP番号 ].bUse )
 							{
-								chip.eBGA種別 = EBGA種別.BGAPAN;
+								chip.eBGA種別 = EBGAType.BGAPAN;
 								chip.rBMP = this.listBMP[ cbgapan.nBMP番号 ];
 								chip.rBGAPan = cbgapan;
 								continue;
@@ -1783,14 +1783,14 @@ namespace DTXMania
 							CBGA cbga = this.listBGA[ chip.n整数値 ];
 							if ( this.listBMPTEX.ContainsKey( cbga.nBMP番号 ) && this.listBMPTEX[ cbga.nBMP番号 ].bUse )
 							{
-								chip.eBGA種別 = EBGA種別.BGA;
+								chip.eBGA種別 = EBGAType.BGA;
 								chip.rBMPTEX = this.listBMPTEX[ cbga.nBMP番号 ];
 								chip.rBGA = cbga;
 								continue;
 							}
 							if ( this.listBMP.ContainsKey( cbga.nBMP番号 ) && this.listBMP[ cbga.nBMP番号 ].bUse )
 							{
-								chip.eBGA種別 = EBGA種別.BGA;
+								chip.eBGA種別 = EBGAType.BGA;
 								chip.rBMP = this.listBMP[ cbga.nBMP番号 ];
 								chip.rBGA = cbga;
 								continue;
@@ -1800,7 +1800,7 @@ namespace DTXMania
 						#region [ BMPTEX ]
 						if ( this.listBMPTEX.ContainsKey( chip.n整数値 ) && this.listBMPTEX[ chip.n整数値 ].bUse )
 						{
-							chip.eBGA種別 = EBGA種別.BMPTEX;
+							chip.eBGA種別 = EBGAType.BMPTEX;
 							chip.rBMPTEX = this.listBMPTEX[ chip.n整数値 ];
 							continue;
 						}
@@ -1808,7 +1808,7 @@ namespace DTXMania
 						#region [ BMP ]
 						if ( this.listBMP.ContainsKey( chip.n整数値 ) && this.listBMP[ chip.n整数値 ].bUse )
 						{
-							chip.eBGA種別 = EBGA種別.BMP;
+							chip.eBGA種別 = EBGAType.BMP;
 							chip.rBMP = this.listBMP[ chip.n整数値 ];
 							continue;
 						}
@@ -1818,19 +1818,19 @@ namespace DTXMania
 					#region [ BGA入れ替え ]
 					if ( ( ( ( chip.nチャンネル番号 == 0xc4 ) || ( chip.nチャンネル番号 == 0xc7 ) ) || ( ( chip.nチャンネル番号 >= 0xd5 ) && ( chip.nチャンネル番号 <= 0xd9 ) ) ) || ( chip.nチャンネル番号 == 0xe0 ) )
 					{
-						chip.eBGA種別 = EBGA種別.Unknown;
+						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
 						chip.rBMPTEX = null;
 						chip.rBGA = null;
 						chip.rBGAPan = null;
 						if ( this.listBMPTEX.ContainsKey( chip.n整数値 ) && this.listBMPTEX[ chip.n整数値 ].bUse )
 						{
-							chip.eBGA種別 = EBGA種別.BMPTEX;
+							chip.eBGA種別 = EBGAType.BMPTEX;
 							chip.rBMPTEX = this.listBMPTEX[ chip.n整数値 ];
 						}
 						else if ( this.listBMP.ContainsKey( chip.n整数値 ) && this.listBMP[ chip.n整数値 ].bUse )
 						{
-							chip.eBGA種別 = EBGA種別.BMP;
+							chip.eBGA種別 = EBGAType.BMP;
 							chip.rBMP = this.listBMP[ chip.n整数値 ];
 						}
 					}
@@ -2190,9 +2190,9 @@ namespace DTXMania
                     return;
             }
         }
-        public void tドラムのランダム化(EInstrumentPart part, Eランダムモード eRandom)
+        public void tドラムのランダム化(EInstrumentPart part, ERandomMode eRandom)
         {
-            if (part == EInstrumentPart.DRUMS && eRandom == Eランダムモード.MIRROR)
+            if (part == EInstrumentPart.DRUMS && eRandom == ERandomMode.MIRROR)
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
@@ -2203,7 +2203,7 @@ namespace DTXMania
                     }
                 }
             }
-            else if (part == EInstrumentPart.DRUMS && eRandom != Eランダムモード.OFF)
+            else if (part == EInstrumentPart.DRUMS && eRandom != ERandomMode.OFF)
             {
                 if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                 {
@@ -2224,10 +2224,10 @@ namespace DTXMania
                             {
                                 switch (eRandom)
                                 {
-                                    case Eランダムモード.RANDOM:
+                                    case ERandomMode.RANDOM:
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
-                                    case Eランダムモード.SUPERRANDOM:
+                                    case ERandomMode.SUPERRANDOM:
                                         if (current.n発声位置 / 384 != num4)
                                         {
                                             num4 = current.n発声位置 / 384;
@@ -2235,7 +2235,7 @@ namespace DTXMania
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
-                                    case Eランダムモード.HYPERRANDOM:
+                                    case ERandomMode.HYPERRANDOM:
                                         if (current.n発声位置 / 96 != num4)
                                         {
                                             num4 = current.n発声位置 / 96;
@@ -2243,7 +2243,7 @@ namespace DTXMania
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
-                                    case Eランダムモード.MASTERRANDOM:
+                                    case ERandomMode.MASTERRANDOM:
                                         if (nチャンネル番号 == 18 || nチャンネル番号 == 20 || nチャンネル番号 == 21 || nチャンネル番号 == 23)
                                         {
                                             if (num3 != current.n発声位置 || num2 != 2)
@@ -2289,7 +2289,7 @@ namespace DTXMania
                                         num3 = current.n発声位置;
                                         num = current.nチャンネル番号;
                                         break;
-                                    case Eランダムモード.ANOTHERRANDOM:
+                                    case ERandomMode.ANOTHERRANDOM:
                                         if (nチャンネル番号 == 17 || nチャンネル番号 == 24 || nチャンネル番号 == 26)
                                         {
                                             if (num2 != 1 || num3 != current.n発声位置)
@@ -2393,10 +2393,10 @@ namespace DTXMania
                     {
                         switch (eRandom)
                         {
-                            case Eランダムモード.RANDOM:
+                            case ERandomMode.RANDOM:
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
-                            case Eランダムモード.SUPERRANDOM:
+                            case ERandomMode.SUPERRANDOM:
                                 if (current2.n発声位置 / 384 != num9)
                                 {
                                     num9 = current2.n発声位置 / 384;
@@ -2404,7 +2404,7 @@ namespace DTXMania
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
-                            case Eランダムモード.HYPERRANDOM:
+                            case ERandomMode.HYPERRANDOM:
                                 if (current2.n発声位置 / 96 != num9)
                                 {
                                     num9 = current2.n発声位置 / 96;
@@ -2412,7 +2412,7 @@ namespace DTXMania
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
-                            case Eランダムモード.MASTERRANDOM:
+                            case ERandomMode.MASTERRANDOM:
                                 do
                                 {
                                     current2.nチャンネル番号 = ((CDTXMania.Random.Next(5) >= 2) ? (CDTXMania.Random.Next(3) + 20) : (CDTXMania.Random.Next(2) + 17));
@@ -2421,7 +2421,7 @@ namespace DTXMania
                                 num7 = current2.nチャンネル番号;
                                 num8 = current2.n発声位置;
                                 break;
-                            case Eランダムモード.ANOTHERRANDOM:
+                            case ERandomMode.ANOTHERRANDOM:
                                 switch (nチャンネル番号2)
                                 {
                                     case 17:
@@ -2541,9 +2541,9 @@ namespace DTXMania
                 }
             }
         }
-        public void tドラムの足ランダム化(EInstrumentPart part, Eランダムモード eRandomPedal)
+        public void tドラムの足ランダム化(EInstrumentPart part, ERandomMode eRandomPedal)
         {
-            if (part == EInstrumentPart.DRUMS && eRandomPedal == Eランダムモード.MIRROR)
+            if (part == EInstrumentPart.DRUMS && eRandomPedal == ERandomMode.MIRROR)
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
@@ -2554,7 +2554,7 @@ namespace DTXMania
                     }
                 }
             }
-            else if (part == EInstrumentPart.DRUMS && eRandomPedal != Eランダムモード.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
+            else if (part == EInstrumentPart.DRUMS && eRandomPedal != ERandomMode.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
             {
                 int num = CDTXMania.Random.Next(2);
                 int num2 = 0;
@@ -2571,7 +2571,7 @@ namespace DTXMania
                         }
                         switch (eRandomPedal)
                         {
-                            case Eランダムモード.RANDOM:
+                            case ERandomMode.RANDOM:
                                 if (num5 == 19)
                                 {
                                     current.nチャンネル番号 = ((num == 0) ? 19 : 0x1B);
@@ -2581,7 +2581,7 @@ namespace DTXMania
                                     current.nチャンネル番号 = ((num == 1) ? 19 : 0x1B);
                                 }
                                 break;
-                            case Eランダムモード.SUPERRANDOM:
+                            case ERandomMode.SUPERRANDOM:
                                 if (current.n発声位置 / 384 != num4)
                                 {
                                     num4 = current.n発声位置 / 384;
@@ -2596,7 +2596,7 @@ namespace DTXMania
                                     current.nチャンネル番号 = ((num == 1) ? 19 : 27);
                                 }
                                 break;
-                            case Eランダムモード.HYPERRANDOM:
+                            case ERandomMode.HYPERRANDOM:
                                 if (current.n発声位置 / 96 != num4)
                                 {
                                     num4 = current.n発声位置 / 96;
@@ -2611,7 +2611,7 @@ namespace DTXMania
                                     current.nチャンネル番号 = ((num == 1) ? 19 : 27);
                                 }
                                 break;
-                            case Eランダムモード.MASTERRANDOM:
+                            case ERandomMode.MASTERRANDOM:
                                 if (num3 != current.n発声位置)
                                 {
                                     num = CDTXMania.Random.Next(2);
@@ -2631,7 +2631,7 @@ namespace DTXMania
                                 num3 = current.n発声位置;
                                 num2 = current.nチャンネル番号;
                                 break;
-                            case Eランダムモード.ANOTHERRANDOM:
+                            case ERandomMode.ANOTHERRANDOM:
                                 if (num3 != current.n発声位置)
                                 {
                                     if (CDTXMania.Random.Next(4) == 0)
@@ -2848,7 +2848,7 @@ namespace DTXMania
 				{
 					if ( ( wc.rSound[ i ] != null ) && ( wc.rSound[ i ].b再生中 ) )
 					{
-						long nCurrentTime = CSoundManager.rc演奏用タイマ.nシステム時刻ms;
+						long nCurrentTime = CSoundManager.rcPerformanceTimer.nSystemTimeMs;
 						if ( nCurrentTime > wc.n再生開始時刻[ i ] )
 						{
 							long nAbsTimeFromStartPlaying = nCurrentTime - wc.n再生開始時刻[ i ];
@@ -3009,9 +3009,9 @@ namespace DTXMania
 			string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			return new string( new char[] { str[ n / 36 ], str[ n % 36 ] } );
 		}
-		public void tギターとベースのランダム化(EInstrumentPart part, Eランダムモード eRandom)
+		public void tギターとベースのランダム化(EInstrumentPart part, ERandomMode eRandom)
 		{
-			if( ( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) ) && ( eRandom != Eランダムモード.OFF ) )
+			if( ( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) ) && ( eRandom != ERandomMode.OFF ) )
 			{
 				int[,] nランダムレーン候補 = new int[ , ] { { 0, 1, 2, 3, 4, 5, 6, 7 }, { 0, 2, 1, 3, 4, 6, 5, 7 }, { 0, 1, 4, 5, 2, 3, 6, 7 }, { 0, 2, 4, 6, 1, 3, 5, 7 }, { 0, 4, 1, 5, 2, 6, 3, 7 }, { 0, 4, 2, 6, 1, 5, 3, 7 } };
 				int n小節番号 = -10000;
@@ -3036,15 +3036,15 @@ namespace DTXMania
 					}
 					switch( eRandom )
 					{
-						case Eランダムモード.RANDOM:		// 1小節単位でレーンのR/G/Bがランダムに入れ替わる
+						case ERandomMode.RANDOM:		// 1小節単位でレーンのR/G/Bがランダムに入れ替わる
 							chip.nチャンネル番号 = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ n小節内乱数6通り, nランダム化前チャンネル番号 & 0x07 ];
 							continue;	// goto Label_02C4;
 
-						case Eランダムモード.SUPERRANDOM:	// チップごとにR/G/Bがランダムで入れ替わる(レーンの本数までは変わらない)。
+						case ERandomMode.SUPERRANDOM:	// チップごとにR/G/Bがランダムで入れ替わる(レーンの本数までは変わらない)。
 							chip.nチャンネル番号 = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ CDTXMania.Random.Next( 6 ), nランダム化前チャンネル番号 & 0x07 ];
 							continue;	// goto Label_02C4;
 
-						case Eランダムモード.HYPERRANDOM:	// レーンの本数も変わる
+						case ERandomMode.HYPERRANDOM:	// レーンの本数も変わる
 							nRGBレーンビットパターン = nランダム化前チャンネル番号 & 7;
 							// n新RGBレーンビットパターン = (int)Eレーンビットパターン.OPEN;	// この値は結局未使用なので削除
 							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);	// #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
@@ -3245,7 +3245,7 @@ namespace DTXMania
 				}
 			}
 		}
-		public void t全チップの再生一時停止()
+		public void tPausePlaybackForAllChips()
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{
@@ -3253,8 +3253,8 @@ namespace DTXMania
 				{
 					if( ( cwav.rSound[ i ] != null ) && cwav.rSound[ i ].b再生中 )
 					{
-						cwav.rSound[ i ].t再生を一時停止する();
-						cwav.n一時停止時刻[ i ] = CSoundManager.rc演奏用タイマ.nシステム時刻ms;
+						cwav.rSound[ i ].tPausePlayback();
+						cwav.nPauseTime[ i ] = CSoundManager.rcPerformanceTimer.nSystemTimeMs;
 					}
 				}
 			}
@@ -3267,10 +3267,10 @@ namespace DTXMania
 				{
 					if( ( cwav.rSound[ i ] != null ) && cwav.rSound[ i ].b一時停止中 )
 					{
-						//long num1 = cwav.n一時停止時刻[ i ];
+						//long num1 = cwav.nPauseTime[ i ];
 						//long num2 = cwav.n再生開始時刻[ i ];
-						cwav.rSound[ i ].t再生を再開する( cwav.n一時停止時刻[ i ] - cwav.n再生開始時刻[ i ] );
-                        cwav.n再生開始時刻[i] += CSoundManager.rc演奏用タイマ.nシステム時刻ms - cwav.n一時停止時刻[i];
+						cwav.rSound[ i ].t再生を再開する( cwav.nPauseTime[ i ] - cwav.n再生開始時刻[ i ] );
+                        cwav.n再生開始時刻[i] += CSoundManager.rcPerformanceTimer.nSystemTimeMs - cwav.nPauseTime[i];
 					}
 				}
 			}
@@ -3290,7 +3290,7 @@ namespace DTXMania
 		public void t入力( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 		{
 			this.bヘッダのみ = bヘッダのみ;
-            this.b動画読み込み = (CDTXMania.rCurrentStage.eステージID == CStage.EStage.SongLoading ? true : false);
+            this.b動画読み込み = (CDTXMania.rCurrentStage.eStageID == CStage.EStage.SongLoading ? true : false);
 			this.strファイル名の絶対パス = Path.GetFullPath( strファイル名 );
 			this.strファイル名 = Path.GetFileName( this.strファイル名の絶対パス );
 			this.strフォルダ名 = Path.GetDirectoryName( this.strファイル名の絶対パス ) + @"\";
@@ -4358,7 +4358,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 		
 		#region [ private ]
 		//-----------------

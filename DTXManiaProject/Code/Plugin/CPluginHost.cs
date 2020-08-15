@@ -47,7 +47,7 @@ namespace DTXMania
 		}
 		public CStage.EStage e現在のステージ
 		{
-			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eステージID : CStage.EStage.DoNothing; }
+			get { return ( CDTXMania.rCurrentStage != null ) ? CDTXMania.rCurrentStage.eStageID : CStage.EStage.DoNothing; }
 		}
 		public CStage.EPhase e現在のフェーズ
 		{
@@ -72,11 +72,11 @@ namespace DTXMania
 		public void tシステムサウンドを再生する( ESystemSound sound )
 		{
 			if( CDTXMania.Skin != null )
-				CDTXMania.Skin[ sound ].t再生する();
+				CDTXMania.Skin[ sound ].tPlay();
 		}
 		
 		
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

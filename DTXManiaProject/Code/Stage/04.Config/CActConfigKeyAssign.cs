@@ -15,14 +15,14 @@ namespace DTXMania
 		{
 			get
 			{
-				return this.bキー入力待ち;
+				return this.bWaitingForKeyInput;
 			}
 		}
 
 
 		// メソッド
 
-		public void t開始( EKeyConfigPart part, EKeyConfigPad pad, string strパッド名 )
+		public void tStart( EKeyConfigPart part, EKeyConfigPad pad, string strパッド名 )
 		{
 			if( part != EKeyConfigPart.UNKNOWN )
 			{
@@ -31,50 +31,50 @@ namespace DTXMania
 				this.strパッド名 = strパッド名;
 				for( int i = 0; i < 16; i++ )
 				{
-					this.structReset用KeyAssign[ i ].入力デバイス = CDTXMania.ConfigIni.KeyAssign[ (int) part ][ (int) pad ][ i ].入力デバイス;
+					this.structReset用KeyAssign[ i ].InputDevice = CDTXMania.ConfigIni.KeyAssign[ (int) part ][ (int) pad ][ i ].InputDevice;
 					this.structReset用KeyAssign[ i ].ID = CDTXMania.ConfigIni.KeyAssign[ (int) part ][ (int) pad ][ i ].ID;
-					this.structReset用KeyAssign[ i ].コード = CDTXMania.ConfigIni.KeyAssign[ (int) part ][ (int) pad ][ i ].コード;
+					this.structReset用KeyAssign[ i ].Code = CDTXMania.ConfigIni.KeyAssign[ (int) part ][ (int) pad ][ i ].Code;
 				}
 			}
 		}
 		
-		public void tEnter押下()
+		public void tPressEnter()
 		{
-			if( !this.bキー入力待ち )
+			if( !this.bWaitingForKeyInput )
 			{
-				CDTXMania.Skin.sound決定音.t再生する();
-				switch( this.n現在の選択行 )
+				CDTXMania.Skin.sound決定音.tPlay();
+				switch( this.nSelectedRow )
 				{
 					case 16:
 						for( int i = 0; i < 16; i++ )
 						{
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ i ].入力デバイス = this.structReset用KeyAssign[ i ].入力デバイス;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ i ].InputDevice = this.structReset用KeyAssign[ i ].InputDevice;
 							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ i ].ID = this.structReset用KeyAssign[ i ].ID;
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ i ].コード = this.structReset用KeyAssign[ i ].コード;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ i ].Code = this.structReset用KeyAssign[ i ].Code;
 						}
 						return;
 
 					case 0x11:
-						CDTXMania.stageConfig.tアサイン完了通知();
+						CDTXMania.stageConfig.tNotifyAssignmentComplete();
 						return;
 				}
-				this.bキー入力待ち = true;
+				this.bWaitingForKeyInput = true;
 			}
 		}
-		public void t次に移動()
+		public void tMoveToNext()
 		{
-			if( !this.bキー入力待ち )
+			if( !this.bWaitingForKeyInput )
 			{
-				CDTXMania.Skin.soundカーソル移動音.t再生する();
-				this.n現在の選択行 = ( this.n現在の選択行 + 1 ) % 0x12;
+				CDTXMania.Skin.soundCursorMovement.tPlay();
+				this.nSelectedRow = ( this.nSelectedRow + 1 ) % 0x12;
 			}
 		}
-		public void t前に移動()
+		public void tMoveToPrevious()
 		{
-			if( !this.bキー入力待ち )
+			if( !this.bWaitingForKeyInput )
 			{
-				CDTXMania.Skin.soundカーソル移動音.t再生する();
-				this.n現在の選択行 = ( ( this.n現在の選択行 - 1 ) + 0x12 ) % 0x12;
+				CDTXMania.Skin.soundCursorMovement.tPlay();
+				this.nSelectedRow = ( ( this.nSelectedRow - 1 ) + 0x12 ) % 0x12;
 			}
 		}
 
@@ -86,8 +86,8 @@ namespace DTXMania
 			this.part = EKeyConfigPart.UNKNOWN;
 			this.pad = EKeyConfigPad.UNKNOWN;
 			this.strパッド名 = "";
-			this.n現在の選択行 = 0;
-			this.bキー入力待ち = false;
+			this.nSelectedRow = 0;
+			this.bWaitingForKeyInput = false;
 			this.structReset用KeyAssign = new CConfigIni.CKeyAssign.STKEYASSIGN[ 0x10 ];
 			base.OnActivate();
 		}
@@ -113,32 +113,32 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				if( this.bキー入力待ち )
+				if( this.bWaitingForKeyInput )
 				{
-					if( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+					if( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
 					{
-						CDTXMania.Skin.sound取消音.t再生する();
-						this.bキー入力待ち = false;
-						CDTXMania.Input管理.tDoPolling( CDTXMania.app.bApplicationActive, false );
+						CDTXMania.Skin.sound取消音.tPlay();
+						this.bWaitingForKeyInput = false;
+						CDTXMania.InputManager.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
 					else if( ( this.tキーチェックとアサイン_Keyboard() || this.tキーチェックとアサイン_MidiIn() ) || ( this.tキーチェックとアサイン_Joypad() || this.tキーチェックとアサイン_Mouse() ) )
 					{
-						this.bキー入力待ち = false;
-						CDTXMania.Input管理.tDoPolling( CDTXMania.app.bApplicationActive, false );
+						this.bWaitingForKeyInput = false;
+						CDTXMania.InputManager.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
 				}
-				else if( ( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Delete ) && ( this.n現在の選択行 >= 0 ) ) && ( this.n現在の選択行 <= 15 ) )
+				else if( ( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Delete ) && ( this.nSelectedRow >= 0 ) ) && ( this.nSelectedRow <= 15 ) )
 				{
-					CDTXMania.Skin.sound決定音.t再生する();
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.不明;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].ID = 0;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].コード = 0;
+					CDTXMania.Skin.sound決定音.tPlay();
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Unknown;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = 0;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = 0;
 				}
 				if( this.txカーソル != null )
 				{
 					int num = 20;
 					int num2 = 0x144;
-					int num3 = 0x3e + ( num * ( this.n現在の選択行 + 1 ) );
+					int num3 = 0x3e + ( num * ( this.nSelectedRow + 1 ) );
 					this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, new Rectangle( 0, 0, 0x10, 0x20 ) );
 					num2 += 0x10;
 					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
@@ -157,35 +157,35 @@ namespace DTXMania
 				CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ];
 				for( int i = 0; i < 0x10; i++ )
 				{
-					switch( stkeyassignArray[ i ].入力デバイス )
+					switch( stkeyassignArray[ i ].InputDevice )
 					{
-						case E入力デバイス.キーボード:
-							this.tアサインコードの描画_Keyboard( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].コード, this.n現在の選択行 == i );
+						case EInputDevice.Keyboard:
+							this.tアサインコードの描画_Keyboard( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].Code, this.nSelectedRow == i );
 							break;
 
-						case E入力デバイス.MIDI入力:
-							this.tアサインコードの描画_MidiIn( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].コード, this.n現在の選択行 == i );
+						case EInputDevice.MIDI入力:
+							this.tアサインコードの描画_MidiIn( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].Code, this.nSelectedRow == i );
 							break;
 
-						case E入力デバイス.ジョイパッド:
-							this.tアサインコードの描画_Joypad( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].コード, this.n現在の選択行 == i );
+						case EInputDevice.Joypad:
+							this.tアサインコードの描画_Joypad( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].Code, this.nSelectedRow == i );
 							break;
 
-						case E入力デバイス.マウス:
-							this.tアサインコードの描画_Mouse( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].コード, this.n現在の選択行 == i );
+						case EInputDevice.Mouse:
+							this.tアサインコードの描画_Mouse( i + 1, x + 20, y, stkeyassignArray[ i ].ID, stkeyassignArray[ i ].Code, this.nSelectedRow == i );
 							break;
 
 						default:
-							CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, string.Format( "{0,2}.", i + 1 ), this.n現在の選択行 == i, 0.75f );
+							CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, string.Format( "{0,2}.", i + 1 ), this.nSelectedRow == i, 0.75f );
 							break;
 					}
 					y += num5;
 				}
-				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "Reset", this.n現在の選択行 == 0x10, 0.75f );
+				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "Reset", this.nSelectedRow == 0x10, 0.75f );
 				y += num5;
-				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "<< Returnto List", this.n現在の選択行 == 0x11, 0.75f );
+				CDTXMania.stageConfig.actFont.t文字列描画( x + 20, y, "<< Returnto List", this.nSelectedRow == 0x11, 0.75f );
 				y += num5;
-				if( this.bキー入力待ち && ( this.txHitKeyダイアログ != null ) )
+				if( this.bWaitingForKeyInput && ( this.txHitKeyダイアログ != null ) )
 				{
 					this.txHitKeyダイアログ.tDraw2D( CDTXMania.app.Device, 0x185, 0xd7 );
 				}
@@ -194,7 +194,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------
@@ -210,7 +210,7 @@ namespace DTXMania
 			}
 		}
 
-		private bool bキー入力待ち;
+		private bool bWaitingForKeyInput;
 		private STKEYLABEL[] KeyLabel = new STKEYLABEL[] { 
 			new STKEYLABEL(0x35, "[ESC]"),
             new STKEYLABEL(1, "[ 1 ]"),
@@ -345,7 +345,7 @@ namespace DTXMania
             new STKEYLABEL(0x7d, "[Sleep]"),
             new STKEYLABEL(0x87, "[Wake]")
 		};
-		private int n現在の選択行;
+		private int nSelectedRow;
 		private EKeyConfigPad pad;
 		private EKeyConfigPart part;
 		private CConfigIni.CKeyAssign.STKEYASSIGN[] structReset用KeyAssign;
@@ -426,7 +426,7 @@ namespace DTXMania
 		}
 		private bool tキーチェックとアサイン_Joypad()
 		{
-			foreach( IInputDevice device in CDTXMania.Input管理.listInputDevices )
+			foreach( IInputDevice device in CDTXMania.InputManager.listInputDevices )
 			{
 				if( device.eInputDeviceType == EInputDeviceType.Joystick )
 				{
@@ -434,11 +434,11 @@ namespace DTXMania
 					{
 						if( device.bキーが押された( i ) )
 						{
-							CDTXMania.Skin.sound決定音.t再生する();
-							CDTXMania.ConfigIni.t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス.ジョイパッド, device.ID, i );
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.ジョイパッド;
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].ID = device.ID;
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].コード = i;
+							CDTXMania.Skin.sound決定音.tPlay();
+							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Joypad, device.ID, i );
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Joypad;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = device.ID;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = i;
 							return true;
 						}
 					}
@@ -456,13 +456,13 @@ namespace DTXMania
 					i != (int)SlimDX.DirectInput.Key.LeftArrow &&
 					i != (int)SlimDX.DirectInput.Key.RightArrow &&
 					i != (int)SlimDX.DirectInput.Key.Delete &&
-					 CDTXMania.Input管理.Keyboard.bキーが押された( i ) )
+					 CDTXMania.InputManager.Keyboard.bキーが押された( i ) )
 				{
-					CDTXMania.Skin.sound決定音.t再生する();
-					CDTXMania.ConfigIni.t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス.キーボード, 0, i );
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.キーボード;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].ID = 0;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].コード = i;
+					CDTXMania.Skin.sound決定音.tPlay();
+					CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Keyboard, 0, i );
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Keyboard;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = 0;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = i;
 					return true;
 				}
 			}
@@ -470,7 +470,7 @@ namespace DTXMania
 		}
 		private bool tキーチェックとアサイン_MidiIn()
 		{
-			foreach( IInputDevice device in CDTXMania.Input管理.listInputDevices )
+			foreach( IInputDevice device in CDTXMania.InputManager.listInputDevices )
 			{
 				if( device.eInputDeviceType == EInputDeviceType.MidiIn )
 				{
@@ -478,11 +478,11 @@ namespace DTXMania
 					{
 						if( device.bキーが押された( i ) )
 						{
-							CDTXMania.Skin.sound決定音.t再生する();
-							CDTXMania.ConfigIni.t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス.MIDI入力, device.ID, i );
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.MIDI入力;
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].ID = device.ID;
-							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].コード = i;
+							CDTXMania.Skin.sound決定音.tPlay();
+							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.MIDI入力, device.ID, i );
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.MIDI入力;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = device.ID;
+							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = i;
 							return true;
 						}
 					}
@@ -494,12 +494,12 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 8; i++ )
 			{
-				if( CDTXMania.Input管理.Mouse.bキーが押された( i ) )
+				if( CDTXMania.InputManager.Mouse.bキーが押された( i ) )
 				{
-					CDTXMania.ConfigIni.t指定した入力が既にアサイン済みである場合はそれを全削除する( E入力デバイス.マウス, 0, i );
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].入力デバイス = E入力デバイス.マウス;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].ID = 0;
-					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.n現在の選択行 ].コード = i;
+					CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Mouse, 0, i );
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Mouse;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = 0;
+					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = i;
 				}
 			}
 			return false;

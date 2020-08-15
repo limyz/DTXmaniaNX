@@ -13,7 +13,7 @@ namespace FDK
 		public const long nUnused = -1;
 
 		// この２つを override する。
-		public abstract long nシステム時刻ms
+		public abstract long nSystemTimeMs
 		{
 			get;
 		}
@@ -27,7 +27,7 @@ namespace FDK
 		#region [ DTXMania用に、語尾にmsのつかない宣言を追加 ]
 		public long nシステム時刻
 		{
-			get { return nシステム時刻ms; }
+			get { return nSystemTimeMs; }
 		}
 		public long n現在時刻
 		{
@@ -79,7 +79,7 @@ namespace FDK
 				if( this.n停止数 > 0 )
 					return ( this.n一時停止システム時刻ms - this.n前回リセットした時のシステム時刻ms );
 
-				return ( this.nシステム時刻ms - this.n前回リセットした時のシステム時刻ms );
+				return ( this.nSystemTimeMs - this.n前回リセットした時のシステム時刻ms );
 			}
 		}
 		public long n前回リセットした時のシステム時刻ms
@@ -130,7 +130,7 @@ namespace FDK
 			this.n一時停止システム時刻ms = this.n更新システム時刻ms;
 			this.n停止数 = 0;
 		}
-		public void t一時停止()
+		public void tPause()
 		{
 			if( this.n停止数 == 0 )
             {
@@ -142,7 +142,7 @@ namespace FDK
 		}
 		public void t更新()
 		{
-			this.n更新システム時刻ms = this.nシステム時刻ms;
+			this.n更新システム時刻ms = this.nSystemTimeMs;
             this.db更新システム時刻ms = this.dbシステム時刻ms;
 		}
 		public void t再開()

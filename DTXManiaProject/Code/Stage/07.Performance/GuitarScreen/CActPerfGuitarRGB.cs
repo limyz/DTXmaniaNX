@@ -84,7 +84,7 @@ namespace DTXMania
                         this.nシャッター下.Guitar = CDTXMania.ConfigIni.nShutterInSide.Guitar;
                     }
 
-                    this.dbシャッター上.Guitar = 108 - base.txシャッター.sz画像サイズ.Height + (this.nシャッター上.Guitar * this.db倍率);
+                    this.dbシャッター上.Guitar = 108 - base.txシャッター.szImageSize.Height + (this.nシャッター上.Guitar * this.db倍率);
                     this.dbシャッター下.Guitar = 720 - 50 - (this.nシャッター下.Guitar * this.db倍率);
 
                     this.nシャッター上.Bass = CDTXMania.ConfigIni.nShutterInSide.Bass;
@@ -96,7 +96,7 @@ namespace DTXMania
                         this.nシャッター下.Bass = CDTXMania.ConfigIni.nShutterInSide.Bass;
                     }
 
-                    this.dbシャッター上.Bass = 108 - base.txシャッター.sz画像サイズ.Height + (this.nシャッター上.Bass * this.db倍率);
+                    this.dbシャッター上.Bass = 108 - base.txシャッター.szImageSize.Height + (this.nシャッター上.Bass * this.db倍率);
                     this.dbシャッター下.Bass = 720 - 50 - (this.nシャッター下.Bass * this.db倍率);
                 }
                 #endregion
@@ -143,7 +143,7 @@ namespace DTXMania
                             base.txシャッター.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbシャッター上.Guitar);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(195, (int)this.dbシャッター上.Guitar - 25 + base.txシャッター.sz画像サイズ.Height, this.nシャッター上.Guitar.ToString());
+                                this.actLVFont.t文字列描画(195, (int)this.dbシャッター上.Guitar - 25 + base.txシャッター.szImageSize.Height, this.nシャッター上.Guitar.ToString());
                         }
                     }
                 }
@@ -190,7 +190,7 @@ namespace DTXMania
                             base.txシャッター.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbシャッター上.Bass);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(1065, (int)this.dbシャッター上.Bass - 25 + base.txシャッター.sz画像サイズ.Height, this.nシャッター上.Bass.ToString());
+                                this.actLVFont.t文字列描画(1065, (int)this.dbシャッター上.Bass - 25 + base.txシャッター.szImageSize.Height, this.nシャッター上.Bass.ToString());
                         }
                     }
                 }

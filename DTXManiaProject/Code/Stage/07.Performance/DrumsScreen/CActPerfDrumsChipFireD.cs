@@ -283,7 +283,7 @@ namespace DTXMania
 							this.st大波[ j ].f半径 = ( (float) ( ( 20 - CDTXMania.Random.Next( 40 ) ) + 100 ) ) / 100f;
 							this.st大波[ j ].n進行速度ms = 10;
 							this.st大波[ j ].ct進行 = new CCounter( 0, 100, this.st大波[ j ].n進行速度ms, CDTXMania.Timer );
-							this.st大波[ j ].ct進行.n現在の値 = i * 10;
+							this.st大波[ j ].ct進行.nCurrentValue = i * 10;
 							this.st大波[ j ].f角度X = CConversion.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
 							this.st大波[ j ].f角度Y = CConversion.DegreeToRadian( this.b大波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
 							this.st大波[ j ].f回転単位 = CConversion.DegreeToRadian( (float) 0f );
@@ -307,7 +307,7 @@ namespace DTXMania
 							this.st細波[ j ].f半径 = ( (float) ( ( 20 - CDTXMania.Random.Next( 40 ) ) + 100 ) ) / 100f;
 							this.st細波[ j ].n進行速度ms = 8;
 							this.st細波[ j ].ct進行 = new CCounter( 0, 100, this.st細波[ j ].n進行速度ms, CDTXMania.Timer );
-							this.st細波[ j ].ct進行.n現在の値 = 0;
+							this.st細波[ j ].ct進行.nCurrentValue = 0;
 							this.st細波[ j ].f角度X = CConversion.DegreeToRadian( (float) ( ( ( (double) ( CDTXMania.Random.Next( 100 ) * 50 ) ) / 100.0 ) + 30.0 ) );
 							this.st細波[ j ].f角度Y = CConversion.DegreeToRadian( this.b細波Balance ? ( this.fY波の最小仰角[ (int) lane ] + CDTXMania.Random.Next( 30 ) ) : ( this.fY波の最大仰角[ (int) lane ] - CDTXMania.Random.Next( 30 ) ) );
 							this.b細波Balance = !this.b細波Balance;
@@ -383,129 +383,129 @@ namespace DTXMania
                     this.tx火花2 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire.png"));
                     if (this.tx火花2 != null)
                     {
-                        this.tx火花2.b加算合成 = true;
+                        this.tx火花2.bAdditiveBlending = true;
                     }
                 }
                 this.tx火花[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LC.png"));
                 if (this.tx火花[0] != null)
                 {
-                    this.tx火花[0].b加算合成 = true;
+                    this.tx火花[0].bAdditiveBlending = true;
                 }
 				this.tx火花[1] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip fire_HH.png" ) );
 				if( this.tx火花[1] != null )
 				{
-					this.tx火花[1].b加算合成 = true;
+					this.tx火花[1].bAdditiveBlending = true;
 				}
                 this.tx火花[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_SD.png"));
                 if (this.tx火花[2] != null)
                 {
-                    this.tx火花[2].b加算合成 = true;
+                    this.tx火花[2].bAdditiveBlending = true;
                 }
                 this.tx火花[3] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_BD.png"));
                 if (this.tx火花[3] != null)
                 {
-                    this.tx火花[3].b加算合成 = true;
+                    this.tx火花[3].bAdditiveBlending = true;
                 }
                 this.tx火花[4] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_HT.png"));
                 if (this.tx火花[4] != null)
                 {
-                    this.tx火花[4].b加算合成 = true;
+                    this.tx火花[4].bAdditiveBlending = true;
                 }
                 this.tx火花[5] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LT.png"));
                 if (this.tx火花[5] != null)
                 {
-                    this.tx火花[5].b加算合成 = true;
+                    this.tx火花[5].bAdditiveBlending = true;
                 }
                 this.tx火花[6] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_FT.png"));
                 if (this.tx火花[6] != null)
                 {
-                    this.tx火花[6].b加算合成 = true;
+                    this.tx火花[6].bAdditiveBlending = true;
                 }
                 this.tx火花[7] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_CY.png"));
                 if (this.tx火花[7] != null)
                 {
-                    this.tx火花[7].b加算合成 = true;
+                    this.tx火花[7].bAdditiveBlending = true;
                 }
                 this.tx火花[8] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_LP.png"));
                 if (this.tx火花[8] != null)
                 {
-                    this.tx火花[8].b加算合成 = true;
+                    this.tx火花[8].bAdditiveBlending = true;
                 }
                 this.tx火花[9] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_RD.png"));
                 if (this.tx火花[9] != null)
                 {
-                    this.tx火花[9].b加算合成 = true;
+                    this.tx火花[9].bAdditiveBlending = true;
                 }
 				this.tx青い星[0] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LC.png" ) );
 				if( this.tx青い星[0] != null )
 				{
-					this.tx青い星[0].b加算合成 = true;
+					this.tx青い星[0].bAdditiveBlending = true;
 				}
                 this.tx青い星[1] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HH.png" ) );
 				if( this.tx青い星[1] != null )
 				{
-					this.tx青い星[1].b加算合成 = true;
+					this.tx青い星[1].bAdditiveBlending = true;
 				}
                 this.tx青い星[2] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_SD.png" ) );
 				if( this.tx青い星[2] != null )
 				{
-					this.tx青い星[2].b加算合成 = true;
+					this.tx青い星[2].bAdditiveBlending = true;
 				}
                 this.tx青い星[3] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_BD.png" ) );
 				if( this.tx青い星[3] != null )
 				{
-					this.tx青い星[3].b加算合成 = true;
+					this.tx青い星[3].bAdditiveBlending = true;
 				}
                 this.tx青い星[4] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_HT.png" ) );
 				if( this.tx青い星[4] != null )
 				{
-					this.tx青い星[4].b加算合成 = true;
+					this.tx青い星[4].bAdditiveBlending = true;
 				}
                 this.tx青い星[5] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LT.png" ) );
 				if( this.tx青い星[5] != null )
 				{
-					this.tx青い星[5].b加算合成 = true;
+					this.tx青い星[5].bAdditiveBlending = true;
 				}
                 this.tx青い星[6] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_FT.png" ) );
 				if( this.tx青い星[6] != null )
 				{
-					this.tx青い星[6].b加算合成 = true;
+					this.tx青い星[6].bAdditiveBlending = true;
 				}
                 this.tx青い星[7] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_CY.png" ) );
 				if( this.tx青い星[7] != null )
 				{
-					this.tx青い星[7].b加算合成 = true;
+					this.tx青い星[7].bAdditiveBlending = true;
 				}
                 this.tx青い星[8] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_LP.png" ) );
 				if( this.tx青い星[8] != null )
 				{
-					this.tx青い星[8].b加算合成 = true;
+					this.tx青い星[8].bAdditiveBlending = true;
 				}
                 this.tx青い星[9] = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip star_RD.png" ) );
 				if( this.tx青い星[9] != null )
 				{
-					this.tx青い星[9].b加算合成 = true;
+					this.tx青い星[9].bAdditiveBlending = true;
 				}
 				this.tx大波 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave.png" ) );
 				if( this.tx大波 != null )
 				{
-					this.tx大波.b加算合成 = true;
+					this.tx大波.bAdditiveBlending = true;
 				}
 				this.tx細波 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums chip wave2.png" ) );
 				if( this.tx細波 != null )
 				{
-					this.tx細波.b加算合成 = true;
+					this.tx細波.bAdditiveBlending = true;
 				}
                 this.txボーナス花火 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\ScreenPlayDrums chip fire_Bonus.png"));
                 if (this.txボーナス花火 != null)
                 {
-                    this.txボーナス花火.b加算合成 = true;
+                    this.txボーナス花火.bAdditiveBlending = true;
                 }
                 this.txNotes = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Chips_drums.png"));
                 if (this.txNotes != null)
                 {
                     this.txNotes.nTransparency = 120;
-                    this.txNotes.b加算合成 = true;
+                    this.txNotes.bAdditiveBlending = true;
                 }
 				base.OnManagedCreateResources();
 			}
@@ -536,14 +536,14 @@ namespace DTXMania
                 {
                     if (this.st青い星[i].b使用中)
                     {
-                        this.st青い星[i].n前回のValue = this.st青い星[i].ct進行.n現在の値;
+                        this.st青い星[i].n前回のValue = this.st青い星[i].ct進行.nCurrentValue;
                         this.st青い星[i].ct進行.tUpdate();
                         if (this.st青い星[i].ct進行.bReachedEndValue)
                         {
                             this.st青い星[i].ct進行.tStop();
                             this.st青い星[i].b使用中 = false;
                         }
-                        for (int n = this.st青い星[i].n前回のValue; n < this.st青い星[i].ct進行.n現在の値; n++)
+                        for (int n = this.st青い星[i].n前回のValue; n < this.st青い星[i].ct進行.nCurrentValue; n++)
                         {
                             this.st青い星[i].fX += this.st青い星[i].f加速度X;
                             this.st青い星[i].fY -= this.st青い星[i].f加速度Y;
@@ -553,7 +553,7 @@ namespace DTXMania
                         }
                         Matrix mat = Matrix.Identity;
 
-                        float x = (float)(this.st青い星[i].f半径 * Math.Cos((Math.PI / 2 * this.st青い星[i].ct進行.n現在の値) / 100.0));
+                        float x = (float)(this.st青い星[i].f半径 * Math.Cos((Math.PI / 2 * this.st青い星[i].ct進行.nCurrentValue) / 100.0));
                         mat *= Matrix.Scaling(x, x, 1f);
                         mat *= Matrix.Translation(this.st青い星[i].fX - SampleFramework.GameWindowSize.Width / 2, -(this.st青い星[i].fY - SampleFramework.GameWindowSize.Height / 2), 0f);
 
@@ -572,14 +572,14 @@ namespace DTXMania
                     {
                         if (this.st飛び散るチップ[i].b使用中)
                         {
-                            this.st飛び散るチップ[i].n前回のValue = this.st飛び散るチップ[i].ct進行.n現在の値;
+                            this.st飛び散るチップ[i].n前回のValue = this.st飛び散るチップ[i].ct進行.nCurrentValue;
                             this.st飛び散るチップ[i].ct進行.tUpdate();
                             if (this.st飛び散るチップ[i].ct進行.bReachedEndValue)
                             {
                                 this.st飛び散るチップ[i].ct進行.tStop();
                                 this.st飛び散るチップ[i].b使用中 = false;
                             }
-                            for (int n = this.st飛び散るチップ[i].n前回のValue; n < this.st飛び散るチップ[i].ct進行.n現在の値; n++)
+                            for (int n = this.st飛び散るチップ[i].n前回のValue; n < this.st飛び散るチップ[i].ct進行.nCurrentValue; n++)
                             {
                                 //これは物理放物線を利用する。
                                 //θ=角度　角度は大体60度ぐらいかな。
@@ -596,31 +596,31 @@ namespace DTXMania
                                 //this.st飛び散るチップ[i].fY *= this.st飛び散るチップ[i].f加速度Y;
                                 this.st飛び散るチップ[i].f加速度Y += this.st飛び散るチップ[i].f重力加速度;
                                 /*
-                                if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 0 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 2)
+                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 0 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 2)
                                 {
                                     this.st飛び散るチップ[i].fY -= 1f;
                                 }
-                                if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 2 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 4)
+                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 2 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 4)
                                 {
                                     this.st飛び散るチップ[i].fY -= 3f;
                                 }
-                                if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 4 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 8)
+                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 4 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 8)
                                 {
                                     this.st飛び散るチップ[i].fY -= 7f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 8 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 20)
+                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 8 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 20)
                                 {
                                     this.st飛び散るチップ[i].fY -= 9f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 20 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 24)
+                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 20 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 24)
                                 {
                                     this.st飛び散るチップ[i].fY -= 7f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 24 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 26)
+                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 24 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 26)
                                 {
                                     this.st飛び散るチップ[i].fY -= 3f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.n現在の値 >= 26 && this.st飛び散るチップ[i].ct進行.n現在の値 <= 28)
+                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 26 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 28)
                                 {
                                     this.st飛び散るチップ[i].fY -= 1f;
                                 }
@@ -632,8 +632,8 @@ namespace DTXMania
                             Matrix mat = Matrix.Identity;
                             Matrix mat2 = Matrix.Identity;
 
-                            mat *= Matrix.RotationZ(0.09f * this.st飛び散るチップ[i].ct進行.n現在の値);
-                            mat2 *= Matrix.RotationZ(-0.09f * this.st飛び散るチップ[i].ct進行.n現在の値);
+                            mat *= Matrix.RotationZ(0.09f * this.st飛び散るチップ[i].ct進行.nCurrentValue);
+                            mat2 *= Matrix.RotationZ(-0.09f * this.st飛び散るチップ[i].ct進行.nCurrentValue);
 
                             mat *= Matrix.Translation((this.st飛び散るチップ[i].fXL - 50f) - SampleFramework.GameWindowSize.Width / 2, -(this.st飛び散るチップ[i].fY + nJudgeLinePosY_delta_Drums - SampleFramework.GameWindowSize.Height / 2), 0f);
                             mat2 *= Matrix.Translation((this.st飛び散るチップ[i].fXR - 50f) - SampleFramework.GameWindowSize.Width / 2, -(this.st飛び散るチップ[i].fY + nJudgeLinePosY_delta_Drums - SampleFramework.GameWindowSize.Height / 2), 0f);
@@ -662,9 +662,9 @@ namespace DTXMania
                         if (CDTXMania.ConfigIni.nExplosionFrames <= 1)
                         {
                             Matrix identity = Matrix.Identity;
-                            float num2 = ((float)this.st火花[i].ct進行.n現在の値) / 70f;
+                            float num2 = ((float)this.st火花[i].ct進行.nCurrentValue) / 70f;
                             float num3 = this.st火花[i].f回転単位 + (this.st火花[i].f回転方向 * CConversion.DegreeToRadian((float)(60f * num2)));
-                            float num4 = ((float)(0.2 + (0.8 * Math.Cos((((double)this.st火花[i].ct進行.n現在の値) / 50.0) * 1.5707963267948966)))) * this.st火花[i].fサイズ;
+                            float num4 = ((float)(0.2 + (0.8 * Math.Cos((((double)this.st火花[i].ct進行.nCurrentValue) / 50.0) * 1.5707963267948966)))) * this.st火花[i].fサイズ;
                             identity *= Matrix.Scaling(0.2f + num4, 0.2f + num4, 1f);
                             //identity *= Matrix.RotationZ( num3 + ( (float) Math.PI / 2 ) );
                             float num5 = ((float)(0.8 * Math.Sin(num2 * 1.5707963267948966))) * this.st火花[i].fサイズ;
@@ -772,9 +772,9 @@ namespace DTXMania
                                 int n幅 = CDTXMania.ConfigIni.nExplosionWidgh;
                                 int n高さ = CDTXMania.ConfigIni.nExplosionHeight;
 
-                                this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.n現在の値, this.st火花[i].nLane * n高さ, n幅, n高さ));
+                                this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.nCurrentValue, this.st火花[i].nLane * n高さ, n幅, n高さ));
                                 if (CDTXMania.stagePerfDrumsScreen.bサビ区間 == true && this.txボーナス花火 != null)
-                                    this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.n現在の値 * n幅, 10 * n高さ, n幅, n高さ));
+                                    this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.nCurrentValue * n幅, 10 * n高さ, n幅, n高さ));
                             }
                         }
 					}
@@ -789,10 +789,10 @@ namespace DTXMania
 							this.st大波[ i ].ct進行.tStop();
 							this.st大波[ i ].b使用中 = false;
 						}
-						if( this.st大波[ i ].ct進行.n現在の値 >= 0 )
+						if( this.st大波[ i ].ct進行.nCurrentValue >= 0 )
 						{
 							Matrix matrix3 = Matrix.Identity;
-							float num10 = ( (float) this.st大波[ i ].ct進行.n現在の値 ) / 100f;
+							float num10 = ( (float) this.st大波[ i ].ct進行.nCurrentValue ) / 100f;
 							float angle = this.st大波[ i ].f回転単位 + ( this.st大波[ i ].f回転方向 * CConversion.DegreeToRadian( (float) ( 60f * num10 ) ) );
 							float num12 = 1f;
 							if( num10 < 0.4f )
@@ -882,10 +882,10 @@ namespace DTXMania
 							this.st細波[ i ].ct進行.tStop();
 							this.st細波[ i ].b使用中 = false;
 						}
-						if( this.st細波[ i ].ct進行.n現在の値 >= 0 )
+						if( this.st細波[ i ].ct進行.nCurrentValue >= 0 )
 						{
 							Matrix matrix4 = Matrix.Identity;
-							float num15 = ( (float) this.st細波[ i ].ct進行.n現在の値 ) / 100f;
+							float num15 = ( (float) this.st細波[ i ].ct進行.nCurrentValue ) / 100f;
 							float num16 = 14f * num15;
 							int num17 = ( num15 < 0.5f ) ? 155 : ( (int) ( ( 155f * ( 1f - num15 ) ) / 1f ) );
 							matrix4 *= Matrix.Scaling(
@@ -952,7 +952,7 @@ namespace DTXMania
 		}
 		
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

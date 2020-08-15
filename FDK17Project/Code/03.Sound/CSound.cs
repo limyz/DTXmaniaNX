@@ -29,7 +29,7 @@ namespace FDK
 		{
 			get; set;
 		}
-		public static CSoundTimer rc演奏用タイマ = null;
+		public static CSoundTimer rcPerformanceTimer = null;
 
 		public static IntPtr WindowHandle;
 
@@ -147,7 +147,7 @@ namespace FDK
 		public static void t初期化( ESoundDeviceType soundDeviceType, int _nSoundDelayExclusiveWASAPI, int _nSoundDelayASIO, int _nASIODevice )
 		{
 			//SoundDevice = null;						// 後で再初期化することがあるので、null初期化はコンストラクタに回す
-			rc演奏用タイマ = null;						// Global.Bass 依存（つまりユーザ依存）
+			rcPerformanceTimer = null;						// Global.Bass 依存（つまりユーザ依存）
 			nMixing = 0;
 
 			SoundDelayExclusiveWASAPI = _nSoundDelayExclusiveWASAPI;
@@ -208,7 +208,7 @@ namespace FDK
 		public static void t終了()
 		{
 			CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
-			CCommon.tDisposeする( ref rc演奏用タイマ );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
+			CCommon.tDisposeする( ref rcPerformanceTimer );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
 		}
 
 
@@ -226,7 +226,7 @@ namespace FDK
 				// サウンドデバイスと演奏タイマを解放する。
 
 				CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
-				CCommon.tDisposeする( ref rc演奏用タイマ );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
+				CCommon.tDisposeする( ref rcPerformanceTimer );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
 			}
 			//-----------------
 			#endregion
@@ -258,7 +258,7 @@ namespace FDK
 			#endregion
 			#region [ 新しい演奏タイマを構築する。]
 			//-----------------
-			rc演奏用タイマ = new CSoundTimer( SoundDevice );
+			rcPerformanceTimer = new CSoundTimer( SoundDevice );
 			//-----------------
 			#endregion
 
@@ -911,7 +911,7 @@ namespace FDK
 			tサウンドを停止する();
 			t再生位置を先頭に戻す();
 		}
-		public void t再生を一時停止する()
+		public void tPausePlayback()
 		{
 			tサウンドを停止する(true);
 			this.n一時停止回数++;

@@ -67,9 +67,9 @@ namespace DTXMania
 				{
 					this.n画像Index上 = this.n画像Index下;
 					this.n画像Index下 = ( this.n画像Index下 + 1 ) % stInfo.GetLength( 0 );		//8;
-					this.ctスクロール用.n現在の値 = 0;
+					this.ctスクロール用.nCurrentValue = 0;
 				}
-				int n現在の値 = this.ctスクロール用.n現在の値;
+				int n現在の値 = this.ctスクロール用.nCurrentValue;
 				if( n現在の値 <= 250 )
 				{
 					double n現在の割合 = ( (double) n現在の値 ) / 250.0;
@@ -106,7 +106,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

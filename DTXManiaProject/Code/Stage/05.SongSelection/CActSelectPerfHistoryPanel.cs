@@ -40,7 +40,7 @@ namespace DTXMania
 						this.tx文字列パネル.Dispose();
 					}
 					this.tx文字列パネル = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
-					this.tx文字列パネル.vc拡大縮小倍率 = new Vector3( 0.5f, 0.5f, 1f );
+					this.tx文字列パネル.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );
 					image.Dispose();
 				}
 				catch( CTextureCreateFailedException )
@@ -109,9 +109,9 @@ namespace DTXMania
 				}
 				else
 				{
-					double num = ( (double) this.ct登場アニメ用.n現在の値 ) / 100.0;
+					double num = ( (double) this.ct登場アニメ用.nCurrentValue ) / 100.0;
 					double num2 = Math.Cos( ( 1.5 + ( 0.5 * num ) ) * Math.PI );
-					this.n本体Y = 0x23a + ( (int) ( this.txパネル本体.sz画像サイズ.Height * ( 1.0 - ( num2 * num2 ) ) ) );
+					this.n本体Y = 0x23a + ( (int) ( this.txパネル本体.szImageSize.Height * ( 1.0 - ( num2 * num2 ) ) ) );
 				}
 
 				if( this.txパネル本体 != null )
@@ -126,7 +126,7 @@ namespace DTXMania
 		}
 		
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

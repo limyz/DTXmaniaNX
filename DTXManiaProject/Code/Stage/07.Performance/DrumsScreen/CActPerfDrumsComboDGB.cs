@@ -89,7 +89,7 @@ namespace DTXMania
                 {
                     if (this.st爆発[i].b使用中)
                     {
-                        int num1 = this.st爆発[i].ct進行.n現在の値;
+                        int num1 = this.st爆発[i].ct進行.nCurrentValue;
                         this.st爆発[i].ct進行.tUpdate();
                         if (this.st爆発[i].ct進行.bReachedEndValue)
                         {
@@ -100,7 +100,7 @@ namespace DTXMania
                         if ( this.txComboBom != null && CDTXMania.ConfigIni.bドラムコンボ文字の表示 != false )
                         {
                             this.txComboBom.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, (340 * num1), 360, 340));
-                            this.txComboBom.vc拡大縮小倍率 = new SlimDX.Vector3(1.5f, 1.5f, 1f);
+                            this.txComboBom.vcScaleRatio = new SlimDX.Vector3(1.5f, 1.5f, 1f);
                         }
                     }
                 }

@@ -40,7 +40,7 @@ namespace DTXMania
 			this.rEmptyDrumChip = new CDTX.CChip[ 10 ];
 			this.n総合ランク値 = -1;
             this.nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9 };
-			base.eステージID = CStage.EStage.Result;
+			base.eStageID = CStage.EStage.Result;
 			base.ePhaseID = CStage.EPhase.Common_DefaultState;
 			base.bNotActivated = true;
 			base.listChildActivities.Add( this.actResultImage = new CActResultImage() );
@@ -520,15 +520,15 @@ namespace DTXMania
 					//Play the corresponding sound
 					if(l_outputSoundEnum == 1)
                     {
-						CDTXMania.Skin.soundフルコンボ音.t再生する();
+						CDTXMania.Skin.soundフルコンボ音.tPlay();
 					}
 					else if(l_outputSoundEnum == 2)
                     {
-						CDTXMania.Skin.soundエクセレント音.t再生する();
+						CDTXMania.Skin.soundエクセレント音.tPlay();
 					}
 					else
                     {
-						CDTXMania.Skin.soundステージクリア音.t再生する();
+						CDTXMania.Skin.soundステージクリア音.tPlay();
 					}
 
 					//Create the delay timer of 150 x 10 = 1500 ms to play New Record
@@ -578,7 +578,7 @@ namespace DTXMania
 					this.ctPlayNewRecord.tUpdate();
 					if (this.ctPlayNewRecord.bReachedEndValue)
 					{
-						CDTXMania.Skin.sound新記録音.t再生する();
+						CDTXMania.Skin.sound新記録音.tPlay();
 						this.ctPlayNewRecord.tStop();
 					}
 				}
@@ -598,9 +598,9 @@ namespace DTXMania
 				}
 				if( this.ct登場用.b進行中 && ( this.tx上部パネル != null ) )
 				{
-					double num2 = ( (double) this.ct登場用.n現在の値 ) / 100.0;
+					double num2 = ( (double) this.ct登場用.nCurrentValue ) / 100.0;
 					double num3 = Math.Sin( Math.PI / 2 * num2 );
-					num = ( (int) ( this.tx上部パネル.sz画像サイズ.Height * num3 ) ) - this.tx上部パネル.sz画像サイズ.Height;
+					num = ( (int) ( this.tx上部パネル.szImageSize.Height * num3 ) ) - this.tx上部パネル.szImageSize.Height;
 				}
 				else
 				{
@@ -612,7 +612,7 @@ namespace DTXMania
 				}
 				if( this.tx下部パネル != null )
 				{
-					this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.sz画像サイズ.Height );
+					this.tx下部パネル.tDraw2D( CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szImageSize.Height );
 				}
                 if( this.actResultImage.OnUpdateAndDraw() == 0 )
 				{
@@ -721,7 +721,7 @@ namespace DTXMania
 							}
 						}
 					}
-					if( ( ( CDTXMania.Pad.b押されたDGB( EPad.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
+					if( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
 					{
 						this.actFI.tフェードイン完了();					// #25406 2011.6.9 yyagi
 						this.actResultImage.tアニメを完了させる();
@@ -730,7 +730,7 @@ namespace DTXMania
 						this.ct登場用.tStop();
 					}
 					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
-//					if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
+//					if ( CDTXMania.InputManager.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
 //						CDTXMania.ConfigIni.bScoreIniを出力する )
 //					{
 //						CheckAndSaveResultScreen(false);
@@ -739,16 +739,16 @@ namespace DTXMania
 					#endregion
 					if ( base.ePhaseID == CStage.EPhase.Common_DefaultState )
 					{
-						if ( CDTXMania.Input管理.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+						if ( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
 						{
-							CDTXMania.Skin.sound取消音.t再生する();
+							CDTXMania.Skin.sound取消音.tPlay();
 							this.actFO.tフェードアウト開始();
 							base.ePhaseID = CStage.EPhase.Common_FadeOut;
 							this.eフェードアウト完了時の戻り値 = EReturnValue.Complete;
 						}
-						if ( ( ( CDTXMania.Pad.b押されたDGB( EPad.CY ) || CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.b押された( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.Input管理.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
+						if ( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
 						{
-							CDTXMania.Skin.sound取消音.t再生する();
+							CDTXMania.Skin.sound取消音.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_FadeOut;
 							this.eフェードアウト完了時の戻り値 = EReturnValue.Complete;
 						}
@@ -765,7 +765,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

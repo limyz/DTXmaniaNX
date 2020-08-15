@@ -13,7 +13,7 @@ namespace FDK
 	public class CTexture : IDisposable
 	{
 		// プロパティ
-		public bool b加算合成
+		public bool bAdditiveBlending
 		{
 			get;
 			set; 
@@ -27,30 +27,30 @@ namespace FDK
 		{
 			get
 			{
-				return this._透明度;
+				return this._Transparency;
 			}
 			set
 			{
 				if( value < 0 )
 				{
-					this._透明度 = 0;
+					this._Transparency = 0;
 				}
 				else if( value > 0xff )
 				{
-					this._透明度 = 0xff;
+					this._Transparency = 0xff;
 				}
 				else
 				{
-					this._透明度 = value;
+					this._Transparency = value;
 				}
 			}
 		}
-		public Size szテクスチャサイズ
+		public Size szTextureSize
 		{
 			get; 
 			private set;
 		}
-		public Size sz画像サイズ
+		public Size szImageSize
 		{
 			get;
 			protected set;
@@ -65,14 +65,14 @@ namespace FDK
 			get;
 			protected set;
 		}
-		public Vector3 vc拡大縮小倍率;
+		public Vector3 vcScaleRatio;
         public string filename;
 
         	// 画面が変わるたび以下のプロパティを設定し治すこと。
 
-        	public static Size sz論理画面 = Size.Empty;
-        	public static Size sz物理画面 = Size.Empty;
-        	public static Rectangle rc物理画面描画領域 = Rectangle.Empty;
+        	public static Size szLogicalScreen = Size.Empty;
+        	public static Size szPhysicalScreen = Size.Empty;
+        	public static Rectangle rcPhysicalScreenDrawingArea = Rectangle.Empty;
         	/// <summary>
         	/// <para>論理画面を1とする場合の物理画面の倍率。</para>
         	/// <para>論理値×画面比率＝物理値。</para>
@@ -83,15 +83,15 @@ namespace FDK
 
 		public CTexture()
 		{
-			this.sz画像サイズ = new Size( 0, 0 );
-			this.szテクスチャサイズ = new Size( 0, 0 );
-			this._透明度 = 0xff;
+			this.szImageSize = new Size( 0, 0 );
+			this.szTextureSize = new Size( 0, 0 );
+			this._Transparency = 0xff;
 			this.texture = null;
             this.bSlimDXTextureDispose完了済み = true;
 			this.cvPositionColoredVertexies = null;
-			this.b加算合成 = false;
+			this.bAdditiveBlending = false;
 			this.fZAxisRotation = 0f;
-			this.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+			this.vcScaleRatio = new Vector3( 1f, 1f, 1f );
             this.filename = ""; // DTXMania rev:693bf14b0d83efc770235c788117190d08a4e531
 //			this._txData = null;
 		}
@@ -113,16 +113,16 @@ namespace FDK
 			try
 			{
 				this.Format = format;
-				this.sz画像サイズ = new Size( bitmap.Width, bitmap.Height );
-				this.szテクスチャサイズ = this.t指定されたサイズを超えない最適なテクスチャサイズを返す( device, this.sz画像サイズ );
-				this.rc全画像 = new Rectangle( 0, 0, this.sz画像サイズ.Width, this.sz画像サイズ.Height );
+				this.szImageSize = new Size( bitmap.Width, bitmap.Height );
+				this.szTextureSize = this.tGetOptimalTextureSizeNotExceedingSpecifiedSize( device, this.szImageSize );
+				this.rcFullImage = new Rectangle( 0, 0, this.szImageSize.Width, this.szImageSize.Height );
 
 				using( var stream = new MemoryStream() )
 				{
 					bitmap.Save( stream, ImageFormat.Bmp );
 					stream.Seek( 0L, SeekOrigin.Begin );
 					int colorKey = unchecked( (int) 0xFF000000 );
-					this.texture = Texture.FromStream( device, stream, this.szテクスチャサイズ.Width, this.szテクスチャサイズ.Height, 1, Usage.None, format, poolvar, Filter.Point, Filter.None, colorKey );
+					this.texture = Texture.FromStream( device, stream, this.szTextureSize.Width, this.szTextureSize.Height, 1, Usage.None, format, poolvar, Filter.Point, Filter.None, colorKey );
                     this.bSlimDXTextureDispose完了済み = false;
 				}
 			}
@@ -198,9 +198,9 @@ namespace FDK
 			try
 			{
 				this.Format = format;
-				this.sz画像サイズ = new Size( n幅, n高さ );
-				this.szテクスチャサイズ = this.t指定されたサイズを超えない最適なテクスチャサイズを返す( device, this.sz画像サイズ );
-				this.rc全画像 = new Rectangle( 0, 0, this.sz画像サイズ.Width, this.sz画像サイズ.Height );
+				this.szImageSize = new Size( n幅, n高さ );
+				this.szTextureSize = this.tGetOptimalTextureSizeNotExceedingSpecifiedSize( device, this.szImageSize );
+				this.rcFullImage = new Rectangle( 0, 0, this.szImageSize.Width, this.szImageSize.Height );
 		
 				using ( var bitmap = new Bitmap( 1, 1 ) )
 				{
@@ -267,17 +267,17 @@ namespace FDK
 			{
 				var information = ImageInformation.FromMemory( txData );
 				this.Format = format;
-				this.sz画像サイズ = new Size( information.Width, information.Height );
-				this.rc全画像 = new Rectangle( 0, 0, this.sz画像サイズ.Width, this.sz画像サイズ.Height );
+				this.szImageSize = new Size( information.Width, information.Height );
+				this.rcFullImage = new Rectangle( 0, 0, this.szImageSize.Width, this.szImageSize.Height );
 				int colorKey = ( b黒を透過する ) ? unchecked( (int) 0xFF000000 ) : 0;
-				this.szテクスチャサイズ = this.t指定されたサイズを超えない最適なテクスチャサイズを返す( device, this.sz画像サイズ );
+				this.szTextureSize = this.tGetOptimalTextureSizeNotExceedingSpecifiedSize( device, this.szImageSize );
 #if TEST_Direct3D9Ex
 				pool = poolvar;
 #endif
 				//				lock ( lockobj )
 				//				{
 				//Trace.TraceInformation( "CTexture() start: " );
-				this.texture = Texture.FromMemory( device, txData, this.sz画像サイズ.Width, this.sz画像サイズ.Height, 1, Usage.None, format, pool, Filter.Point, Filter.None, colorKey );
+				this.texture = Texture.FromMemory( device, txData, this.szImageSize.Width, this.szImageSize.Height, 1, Usage.None, format, pool, Filter.Point, Filter.None, colorKey );
                 this.bSlimDXTextureDispose完了済み = false;
 				//Trace.TraceInformation( "CTexture() end:   " );
 				//				}
@@ -300,10 +300,10 @@ namespace FDK
 			try
 			{
 				this.Format = format;
-				this.sz画像サイズ = new Size( bitmap.Width, bitmap.Height );
-				this.rc全画像 = new Rectangle( 0, 0, this.sz画像サイズ.Width, this.sz画像サイズ.Height );
+				this.szImageSize = new Size( bitmap.Width, bitmap.Height );
+				this.rcFullImage = new Rectangle( 0, 0, this.szImageSize.Width, this.szImageSize.Height );
 				int colorKey = ( b黒を透過する ) ? unchecked( (int) 0xFF000000 ) : 0;
-				this.szテクスチャサイズ = this.t指定されたサイズを超えない最適なテクスチャサイズを返す( device, this.sz画像サイズ );
+				this.szTextureSize = this.tGetOptimalTextureSizeNotExceedingSpecifiedSize( device, this.szImageSize );
 #if TEST_Direct3D9Ex
 				pool = poolvar;
 #endif
@@ -314,14 +314,14 @@ namespace FDK
 #if TEST_Direct3D9Ex
 					288;		// 32の倍数にする(グラフによっては2のべき乗にしないとダメかも)
 #else
-					this.sz画像サイズ.Width;
+					this.szImageSize.Width;
 #endif
 #if TEST_Direct3D9Ex
 					this.texture = new Texture( device, tw, this.sz画像サイズ.Height, 1, Usage.Dynamic, format, Pool.Default );
 #else
-					this.texture = new Texture( device, this.sz画像サイズ.Width, this.sz画像サイズ.Height, 1, Usage.None, format, pool );
+					this.texture = new Texture( device, this.szImageSize.Width, this.szImageSize.Height, 1, Usage.None, format, pool );
 #endif
-					BitmapData srcBufData = bitmap.LockBits( new Rectangle( 0, 0, this.sz画像サイズ.Width, this.sz画像サイズ.Height ), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb );
+					BitmapData srcBufData = bitmap.LockBits( new Rectangle( 0, 0, this.szImageSize.Width, this.szImageSize.Height ), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb );
 					DataRectangle destDataRectangle = texture.LockRectangle( 0, LockFlags.Discard );	// None
 #if TEST_Direct3D9Ex
 					byte[] filldata = null;
@@ -340,7 +340,7 @@ namespace FDK
 					}
 #else
 					IntPtr src_scan0 = (IntPtr) ( (Int64) srcBufData.Scan0 );
-					destDataRectangle.Data.WriteRange( src_scan0, this.sz画像サイズ.Width * 4 * this.sz画像サイズ.Height );
+					destDataRectangle.Data.WriteRange( src_scan0, this.szImageSize.Width * 4 * this.szImageSize.Height );
 #endif
 					texture.UnlockRectangle( 0 );
 					bitmap.UnlockBits( srcBufData );
@@ -365,7 +365,7 @@ namespace FDK
 		/// <param name="y">描画位置（テクスチャの左上位置の Y 座標[dot]）。</param>
 		public void tDraw2D( Device device, int x, int y )
 		{
-			this.tDraw2D( device, x, y, 1f, this.rc全画像 );
+			this.tDraw2D( device, x, y, 1f, this.rcFullImage );
 		}
 		public void tDraw2D( Device device, int x, int y, Rectangle rc画像内の描画領域 )
 		{
@@ -373,7 +373,7 @@ namespace FDK
 		}
         public void tDraw2D( Device device, float x, float y )
 		{
-			this.tDraw2D( device, (int)x, (int)y, 1f, this.rc全画像 );
+			this.tDraw2D( device, (int)x, (int)y, 1f, this.rcFullImage );
 		}
 		public void tDraw2D( Device device, float x, float y, Rectangle rc画像内の描画領域 )
 		{
@@ -394,11 +394,11 @@ namespace FDK
 				float f補正値Y = -0.5f;	//
 				float w = rc画像内の描画領域.Width;
 				float h = rc画像内の描画領域.Height;
-				float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
-				float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
-				float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
-				float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szテクスチャサイズ.Height );
-				this.color4.Alpha = ( (float) this._透明度 ) / 255f;
+				float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szTextureSize.Width );
+				float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szTextureSize.Width );
+				float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szTextureSize.Height );
+				float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szTextureSize.Height );
+				this.color4.Alpha = ( (float) this._Transparency ) / 255f;
 				int color = this.color4.ToArgb();
 
 				if( this.cvTransformedColoredVertexies == null )
@@ -414,7 +414,7 @@ namespace FDK
 				this.cvTransformedColoredVertexies[ 0 ].TextureCoordinates.X = f左U値;
 				this.cvTransformedColoredVertexies[ 0 ].TextureCoordinates.Y = f上V値;
 
-				this.cvTransformedColoredVertexies[ 1 ].Position.X = ( x + ( w * this.vc拡大縮小倍率.X ) ) + f補正値X;
+				this.cvTransformedColoredVertexies[ 1 ].Position.X = ( x + ( w * this.vcScaleRatio.X ) ) + f補正値X;
 				this.cvTransformedColoredVertexies[ 1 ].Position.Y = y + f補正値Y;
 				this.cvTransformedColoredVertexies[ 1 ].Position.Z = depth;
 				this.cvTransformedColoredVertexies[ 1 ].Position.W = 1.0f;
@@ -423,15 +423,15 @@ namespace FDK
 				this.cvTransformedColoredVertexies[ 1 ].TextureCoordinates.Y = f上V値;
 
 				this.cvTransformedColoredVertexies[ 2 ].Position.X = x + f補正値X;
-				this.cvTransformedColoredVertexies[ 2 ].Position.Y = ( y + ( h * this.vc拡大縮小倍率.Y ) ) + f補正値Y;
+				this.cvTransformedColoredVertexies[ 2 ].Position.Y = ( y + ( h * this.vcScaleRatio.Y ) ) + f補正値Y;
 				this.cvTransformedColoredVertexies[ 2 ].Position.Z = depth;
 				this.cvTransformedColoredVertexies[ 2 ].Position.W = 1.0f;
 				this.cvTransformedColoredVertexies[ 2 ].Color = color;
 				this.cvTransformedColoredVertexies[ 2 ].TextureCoordinates.X = f左U値;
 				this.cvTransformedColoredVertexies[ 2 ].TextureCoordinates.Y = f下V値;
 
-				this.cvTransformedColoredVertexies[ 3 ].Position.X = ( x + ( w * this.vc拡大縮小倍率.X ) ) + f補正値X;
-				this.cvTransformedColoredVertexies[ 3 ].Position.Y = ( y + ( h * this.vc拡大縮小倍率.Y ) ) + f補正値Y;
+				this.cvTransformedColoredVertexies[ 3 ].Position.X = ( x + ( w * this.vcScaleRatio.X ) ) + f補正値X;
+				this.cvTransformedColoredVertexies[ 3 ].Position.Y = ( y + ( h * this.vcScaleRatio.Y ) ) + f補正値Y;
 				this.cvTransformedColoredVertexies[ 3 ].Position.Z = depth;
 				this.cvTransformedColoredVertexies[ 3 ].Position.W = 1.0f;
 				this.cvTransformedColoredVertexies[ 3 ].Color = color;
@@ -452,11 +452,11 @@ namespace FDK
 				float f補正値Y = ( ( rc画像内の描画領域.Height % 2 ) == 0 ) ? -0.5f : 0f;	// 3D（回転する）なら補正はいらない。
 				float f中央X = ( (float) rc画像内の描画領域.Width ) / 2f;
 				float f中央Y = ( (float) rc画像内の描画領域.Height ) / 2f;
-				float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
-				float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
-				float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
-				float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szテクスチャサイズ.Height );
-				this.color4.Alpha = ( (float) this._透明度 ) / 255f;
+				float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szTextureSize.Width );
+				float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szTextureSize.Width );
+				float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szTextureSize.Height );
+				float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szTextureSize.Height );
+				this.color4.Alpha = ( (float) this._Transparency ) / 255f;
 				int color = this.color4.ToArgb();
 
 				if( this.cvPositionColoredVertexies == null )
@@ -496,7 +496,7 @@ namespace FDK
 				int n描画領域内Y = y + ( rc画像内の描画領域.Height / 2 );
 				var vc3移動量 = new Vector3( n描画領域内X - ( ( (float) device.Viewport.Width ) / 2f ), -( n描画領域内Y - ( ( (float) device.Viewport.Height ) / 2f ) ), 0f );
 				
-				var matrix = Matrix.Identity * Matrix.Scaling( this.vc拡大縮小倍率 );
+				var matrix = Matrix.Identity * Matrix.Scaling( this.vcScaleRatio );
 				matrix *= Matrix.RotationZ( this.fZAxisRotation );
 				matrix *= Matrix.Translation( vc3移動量 );
 				device.SetTransform( TransformState.World, matrix );
@@ -510,7 +510,7 @@ namespace FDK
 		}
 		public void tDraw2DUpsideDown( Device device, int x, int y )
 		{
-			this.tDraw2DUpsideDown( device, x, y, 1f, this.rc全画像 );
+			this.tDraw2DUpsideDown( device, x, y, 1f, this.rcFullImage );
 		}
 		public void tDraw2DUpsideDown( Device device, int x, int y, Rectangle rc画像内の描画領域 )
 		{
@@ -523,15 +523,15 @@ namespace FDK
 
 			this.tRenderStateSettings( device );
 
-			float fx = x * CTexture.fScreenRatio + CTexture.rc物理画面描画領域.X - 0.5f;	// -0.5 は座標とピクセルの誤差を吸収するための座標補正値。(MSDN参照)
-			float fy = y * CTexture.fScreenRatio + CTexture.rc物理画面描画領域.Y - 0.5f;	//
-			float w = rc画像内の描画領域.Width * this.vc拡大縮小倍率.X * CTexture.fScreenRatio;
-			float h = rc画像内の描画領域.Height * this.vc拡大縮小倍率.Y * CTexture.fScreenRatio;
-			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
-			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
-			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
-			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szテクスチャサイズ.Height );
-			this.color4.Alpha = ( (float) this._透明度 ) / 255f;
+			float fx = x * CTexture.fScreenRatio + CTexture.rcPhysicalScreenDrawingArea.X - 0.5f;	// -0.5 は座標とピクセルの誤差を吸収するための座標補正値。(MSDN参照)
+			float fy = y * CTexture.fScreenRatio + CTexture.rcPhysicalScreenDrawingArea.Y - 0.5f;	//
+			float w = rc画像内の描画領域.Width * this.vcScaleRatio.X * CTexture.fScreenRatio;
+			float h = rc画像内の描画領域.Height * this.vcScaleRatio.Y * CTexture.fScreenRatio;
+			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szTextureSize.Width );
+			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szTextureSize.Width );
+			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szTextureSize.Height );
+			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szTextureSize.Height );
+			this.color4.Alpha = ( (float) this._Transparency ) / 255f;
 			int color = this.color4.ToArgb();
 
             if( this.cvTransformedColoredVertexies == null )
@@ -577,7 +577,7 @@ namespace FDK
 		}
 		public void tDraw2DUpsideDown( Device device, Point pt )
 		{
-			this.tDraw2DUpsideDown( device, pt.X, pt.Y, 1f, this.rc全画像 );
+			this.tDraw2DUpsideDown( device, pt.X, pt.Y, 1f, this.rcFullImage );
 		}
 		public void tDraw2DUpsideDown( Device device, Point pt, Rectangle rc画像内の描画領域 )
 		{
@@ -607,8 +607,8 @@ namespace FDK
         public static Vector3 t論理画面座標をワールド座標へ変換する(Vector3 v3論理画面座標)
         {
             return new Vector3(
-                (v3論理画面座標.X - (CTexture.sz論理画面.Width / 2.0f)) * CTexture.fScreenRatio,
-                (-(v3論理画面座標.Y - (CTexture.sz論理画面.Height / 2.0f)) * CTexture.fScreenRatio),
+                (v3論理画面座標.X - (CTexture.szLogicalScreen.Width / 2.0f)) * CTexture.fScreenRatio,
+                (-(v3論理画面座標.Y - (CTexture.szLogicalScreen.Height / 2.0f)) * CTexture.fScreenRatio),
                 v3論理画面座標.Z);
         }
 
@@ -617,7 +617,7 @@ namespace FDK
 		/// </summary>
 		public void tDraw3D( Device device, Matrix mat )
 		{
-			this.tDraw3D( device, mat, this.rc全画像 );
+			this.tDraw3D( device, mat, this.rcFullImage );
 		}
 		public void tDraw3D( Device device, Matrix mat, Rectangle rc画像内の描画領域 )
 		{
@@ -627,11 +627,11 @@ namespace FDK
 			float x = ( (float) rc画像内の描画領域.Width ) / 2f;
 			float y = ( (float) rc画像内の描画領域.Height ) / 2f;
 			float z = 0.0f;
-			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
-			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
-			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
-			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szテクスチャサイズ.Height );
-			this.color4.Alpha = ( (float) this._透明度 ) / 255f;
+			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szTextureSize.Width );
+			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szTextureSize.Width );
+			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szTextureSize.Height );
+			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szTextureSize.Height );
+			this.color4.Alpha = ( (float) this._Transparency ) / 255f;
 			int color = this.color4.ToArgb();
 			
 			if( this.cvPositionColoredVertexies == null )
@@ -677,7 +677,7 @@ namespace FDK
 
         public void tDraw3DTopLeftReference( Device device, Matrix mat )
 		{
-			this.tDraw3DTopLeftReference( device, mat, this.rc全画像 );
+			this.tDraw3DTopLeftReference( device, mat, this.rcFullImage );
 		}
 		/// <summary>
 		/// ○覚書
@@ -694,11 +694,11 @@ namespace FDK
 			float x = 0.0f;
 			float y = 0.0f;
 			float z = 0.0f;
-			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szテクスチャサイズ.Width );
-			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szテクスチャサイズ.Width );
-			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szテクスチャサイズ.Height );
-			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szテクスチャサイズ.Height );
-			this.color4.Alpha = ( (float) this._透明度 ) / 255f;
+			float f左U値 = ( (float) rc画像内の描画領域.Left ) / ( (float) this.szTextureSize.Width );
+			float f右U値 = ( (float) rc画像内の描画領域.Right ) / ( (float) this.szTextureSize.Width );
+			float f上V値 = ( (float) rc画像内の描画領域.Top ) / ( (float) this.szTextureSize.Height );
+			float f下V値 = ( (float) rc画像内の描画領域.Bottom ) / ( (float) this.szTextureSize.Height );
+			this.color4.Alpha = ( (float) this._Transparency ) / 255f;
 			int color = this.color4.ToArgb();
 			
 			if( this.cvPositionColoredVertexies == null )
@@ -777,7 +777,7 @@ namespace FDK
 			// CTextureのDispose漏れと見做して警告をログ出力する
 			if (!this.bSlimDXTextureDispose完了済み)
 			{
-                Trace.TraceWarning("CTexture: Dispose漏れを検出しました。(Size=({0}, {1}), filename={2})", sz画像サイズ.Width, sz画像サイズ.Height, filename );
+                Trace.TraceWarning("CTexture: Dispose漏れを検出しました。(Size=({0}, {1}), filename={2})", szImageSize.Width, szImageSize.Height, filename );
 			}
 			this.Dispose(false);
 		}
@@ -789,7 +789,7 @@ namespace FDK
 
 		#region [ private ]
 		//-----------------
-		private int _透明度;
+		private int _Transparency;
         private bool bDispose完了済み, bSlimDXTextureDispose完了済み;
 		private PositionColoredTexturedVertex[] cvPositionColoredVertexies;
         protected TransformedColoredTexturedVertex[] cvTransformedColoredVertexies = new TransformedColoredTexturedVertex[]
@@ -810,7 +810,7 @@ namespace FDK
 
 		private void tRenderStateSettings( Device device )
 		{
-			if( this.b加算合成 )
+			if( this.bAdditiveBlending )
 			{
 				device.SetRenderState( RenderState.AlphaBlendEnable, true );
 				device.SetRenderState( RenderState.SourceBlend, SlimDX.Direct3D9.Blend.SourceAlpha );				// 5
@@ -823,14 +823,14 @@ namespace FDK
 				device.SetRenderState( RenderState.DestinationBlend, SlimDX.Direct3D9.Blend.InverseSourceAlpha );	// 6
 			}
 		}
-		private Size t指定されたサイズを超えない最適なテクスチャサイズを返す( Device device, Size sz指定サイズ )
+		private Size tGetOptimalTextureSizeNotExceedingSpecifiedSize( Device device, Size sz指定サイズ )
 		{
 			bool b条件付きでサイズは２の累乗でなくてもOK = ( device.Capabilities.TextureCaps & TextureCaps.NonPow2Conditional ) != 0;
 			bool bサイズは２の累乗でなければならない = ( device.Capabilities.TextureCaps & TextureCaps.Pow2 ) != 0;
 			bool b正方形でなければならない = ( device.Capabilities.TextureCaps & TextureCaps.SquareOnly ) != 0;
 			int n最大幅 = device.Capabilities.MaxTextureWidth;
 			int n最大高 = device.Capabilities.MaxTextureHeight;
-			var szサイズ = new Size( sz指定サイズ.Width, sz指定サイズ.Height );
+			var szSize = new Size( sz指定サイズ.Width, sz指定サイズ.Height );
 			
 			if( bサイズは２の累乗でなければならない && !b条件付きでサイズは２の累乗でなくてもOK )
 			{
@@ -861,23 +861,23 @@ namespace FDK
 
 			if( b正方形でなければならない )
 			{
-				if( szサイズ.Width > szサイズ.Height )
+				if( szSize.Width > szSize.Height )
 				{
-					szサイズ.Height = szサイズ.Width;
+					szSize.Height = szSize.Width;
 				}
-				else if( szサイズ.Width < szサイズ.Height )
+				else if( szSize.Width < szSize.Height )
 				{
-					szサイズ.Width = szサイズ.Height;
+					szSize.Width = szSize.Height;
 				}
 			}
 
-			return szサイズ;
+			return szSize;
 		}
 
 		
 		// 2012.3.21 さらなる new の省略作戦
 
-		protected Rectangle rc全画像;								// テクスチャ作ったらあとは不変
+		protected Rectangle rcFullImage;								// テクスチャ作ったらあとは不変
 		protected Color4 color4 = new Color4( 1f, 1f, 1f, 1f );	// アルファ以外は不変
 		//-----------------
 		#endregion

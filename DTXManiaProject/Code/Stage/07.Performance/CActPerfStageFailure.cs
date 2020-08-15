@@ -71,9 +71,9 @@ namespace DTXMania
                 return 0;
             }
             this.ct進行.tUpdate();
-            if (this.ct進行.n現在の値 < 100)
+            if (this.ct進行.nCurrentValue < 100)
             {
-                int x = (int)(640.0 * Math.Cos((Math.PI / 2 * this.ct進行.n現在の値) / 100.0));
+                int x = (int)(640.0 * Math.Cos((Math.PI / 2 * this.ct進行.nCurrentValue) / 100.0));
                 if ((x != 1280) && (this.txStageFailed != null))
                 {
                     this.txStageFailed.tDraw2D(CDTXMania.app.Device, 0, 0, new Rectangle(x, 0, 640 - x, 720));
@@ -106,7 +106,7 @@ namespace DTXMania
                     }
                     else
                     {
-                        CDTXMania.Skin.soundSTAGEFAILED音.t再生する();
+                        CDTXMania.Skin.soundSTAGEFAILED音.tPlay();
                     }
                     this.b効果音再生済み = true;
                 }
@@ -119,7 +119,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

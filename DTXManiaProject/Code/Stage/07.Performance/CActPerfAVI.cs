@@ -81,8 +81,8 @@ namespace DTXMania
                         this.rec = new Rectangle( 0, 0, this.i1, (int)this.frameheight );
                         this.rec2 = new Rectangle( this.i1, 0, this.i2, (int)this.frameheight );
                         this.rec3 = new Rectangle( this.i1 + this.i2, 0, ( ( (int)this.framewidth ) - this.i1 ) - this.i2, (int)this.frameheight );
-                        this.tx描画用.vc拡大縮小倍率.X = this.ratio1;
-                        this.tx描画用.vc拡大縮小倍率.Y = this.ratio1;
+                        this.tx描画用.vcScaleRatio.X = this.ratio1;
+                        this.tx描画用.vcScaleRatio.Y = this.ratio1;
 
                         if( this.framewidth > 420 )
                             f拡大率x = 420f / ( (float)this.framewidth );
@@ -131,7 +131,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rc演奏用タイマ.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.n現在時刻;
 
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -168,8 +168,8 @@ namespace DTXMania
                                 this.rec3 = new Rectangle( this.i1 + this.i2, 0, ( ( (int)this.framewidth ) - this.i1 ) - this.i2, (int)this.frameheight );
                                 this.rec2 = new Rectangle( this.i1, 0, this.i2, (int)this.frameheight );
                             }
-                            this.tx描画用.vc拡大縮小倍率.X = this.ratio1;
-                            this.tx描画用.vc拡大縮小倍率.Y = this.ratio1;
+                            this.tx描画用.vcScaleRatio.X = this.ratio1;
+                            this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
                         else
                         {
@@ -181,8 +181,8 @@ namespace DTXMania
                             this.rec = new Rectangle( 0, 0, this.i1, (int)this.frameheight );
                             this.rec2 = new Rectangle( this.i1, 0, this.i2, (int)this.frameheight );
                             this.rec3 = new Rectangle( this.i1 + this.i2, 0, ( ( (int)this.framewidth ) - this.i1 ) - this.i2, (int)this.frameheight );
-                            this.tx描画用.vc拡大縮小倍率.X = this.ratio1;
-                            this.tx描画用.vc拡大縮小倍率.Y = this.ratio1;
+                            this.tx描画用.vcScaleRatio.X = this.ratio1;
+                            this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
 
 
@@ -232,7 +232,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rc演奏用タイマ.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.n現在時刻;
                     this.n前回表示したフレーム番号 = -1;
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -268,8 +268,8 @@ namespace DTXMania
                                 this.rec3 = new Rectangle(this.i1 + this.i2, 0, (((int)this.framewidth) - this.i1) - this.i2, (int)this.frameheight);
                                 this.rec2 = new Rectangle(this.i1, 0, this.i2, (int)this.frameheight);
                             }
-                            this.tx描画用.vc拡大縮小倍率.X = this.ratio1;
-                            this.tx描画用.vc拡大縮小倍率.Y = this.ratio1;
+                            this.tx描画用.vcScaleRatio.X = this.ratio1;
+                            this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
                         else
                         {
@@ -281,8 +281,8 @@ namespace DTXMania
                             this.rec = new Rectangle(0, 0, this.i1, (int)this.frameheight);
                             this.rec2 = new Rectangle(this.i1, 0, this.i2, (int)this.frameheight);
                             this.rec3 = new Rectangle(this.i1 + this.i2, 0, (((int)this.framewidth) - this.i1) - this.i2, (int)this.frameheight);
-                            this.tx描画用.vc拡大縮小倍率.X = this.ratio1;
-                            this.tx描画用.vc拡大縮小倍率.Y = this.ratio1;
+                            this.tx描画用.vcScaleRatio.X = this.ratio1;
+                            this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
 
 
@@ -328,7 +328,7 @@ namespace DTXMania
                 }
                 switch (chip.eAVI種別)
                 {
-                    case EAVI種別.AVI:
+                    case EAVIType.AVI:
                         {
                             if (chip.rAVI != null)
                             {
@@ -336,7 +336,7 @@ namespace DTXMania
                             }
                             continue;
                         }
-                    case EAVI種別.AVIPAN:
+                    case EAVIType.AVIPAN:
                         {
                             if (chip.rAVIPan != null)
                             {
@@ -448,8 +448,8 @@ namespace DTXMania
                 //    if( this.txフィルインエフェクト[ fill ] == null )
                 //        continue;
 
-                //    this.txフィルインエフェクト[ fill ].b加算合成 = true;
-                //    this.txフィルインエフェクト[ fill ].vc拡大縮小倍率 = new Vector3( 2.0f, 2.0f, 1.0f );
+                //    this.txフィルインエフェクト[ fill ].bAdditiveBlending = true;
+                //    this.txフィルインエフェクト[ fill ].vcScaleRatio = new Vector3( 2.0f, 2.0f, 1.0f );
                 //}
 
                 base.OnManagedCreateResources();
@@ -501,7 +501,7 @@ namespace DTXMania
                 {
                     if (this.txDShow汎用 != null)
                     {
-                        this.txDShow汎用.vc拡大縮小倍率 = new Vector3(
+                        this.txDShow汎用.vcScaleRatio = new Vector3(
                             ((float)1280 / (float)this.ds汎用.n幅px),
                             ((float)720 / (float)this.ds汎用.n高さpx),
                             1.0f);
@@ -538,7 +538,7 @@ namespace DTXMania
                     Rectangle rectangle2;
 
                     #region[ frameNoFromTime ]
-                    int time = (int)( ( CSoundManager.rc演奏用タイマ.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
+                    int time = (int)( ( CSoundManager.rcPerformanceTimer.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
                     int frameNoFromTime = 0;
                     if( this.bUseMRenderer )
                     {
@@ -588,9 +588,9 @@ namespace DTXMania
                     Point point2 = new Point( this.n画像側終了位置X, this.n画像側終了位置Y );
                     Point point3 = new Point( this.n表示側開始位置X, this.n表示側開始位置Y );
                     Point point4 = new Point( this.n表示側終了位置X, this.n表示側終了位置Y );
-                    if( CSoundManager.rc演奏用タイマ.n現在時刻 < this.n移動開始時刻ms )
+                    if( CSoundManager.rcPerformanceTimer.n現在時刻 < this.n移動開始時刻ms )
                     {
-                        this.n移動開始時刻ms = CSoundManager.rc演奏用タイマ.n現在時刻;
+                        this.n移動開始時刻ms = CSoundManager.rcPerformanceTimer.n現在時刻;
                     }
                     if( this.n総移動時間ms == 0 )
                     {
@@ -698,13 +698,13 @@ namespace DTXMania
                                 {
                                     if( CDTXMania.ConfigIni.bDrumsEnabled )
                                     {
-                                        this.tx描画用.vc拡大縮小倍率 = this.vclip;
+                                        this.tx描画用.vcScaleRatio = this.vclip;
                                         //this.tx描画用.tDraw2D( CDTXMania.app.Device, 882, 0 );
                                         this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 882, 0 );
                                     }
                                     else if( CDTXMania.ConfigIni.bGuitarEnabled )
                                     {
-                                        this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+                                        this.tx描画用.vcScaleRatio = new Vector3( 1f, 1f, 1f );
                                         this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f);
                                         //this.tx描画用.tDraw2D( CDTXMania.app.Device, this.PositionG, 0 );
                                         this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, this.PositionG, 0);
@@ -722,18 +722,18 @@ namespace DTXMania
                             #region[ フレームの生成 ]
                             DataRectangle rectangle3 = this.tx描画用.texture.LockRectangle( 0, LockFlags.None );
                             DataStream data = rectangle3.Data;
-                            int num14 = rectangle3.Pitch / this.tx描画用.szテクスチャサイズ.Width;
+                            int num14 = rectangle3.Pitch / this.tx描画用.szTextureSize.Width;
                             BitmapUtil.BITMAPINFOHEADER* pBITMAPINFOHEADER = (BitmapUtil.BITMAPINFOHEADER*)this.pBmp.ToPointer();
                             if (pBITMAPINFOHEADER->biBitCount == 0x18)
                             {
                                 switch (num14)
                                 {
                                     case 2:
-                                        this.rAVI.avi.tBitmap24ToGraphicsStreamR5G6B5( pBITMAPINFOHEADER, data, this.tx描画用.szテクスチャサイズ.Width, this.tx描画用.szテクスチャサイズ.Height );
+                                        this.rAVI.avi.tBitmap24ToGraphicsStreamR5G6B5( pBITMAPINFOHEADER, data, this.tx描画用.szTextureSize.Width, this.tx描画用.szTextureSize.Height );
                                         break;
 
                                     case 4:
-                                        this.rAVI.avi.tBitmap24ToGraphicsStreamX8R8G8B8( pBITMAPINFOHEADER, data, this.tx描画用.szテクスチャサイズ.Width, this.tx描画用.szテクスチャサイズ.Height );
+                                        this.rAVI.avi.tBitmap24ToGraphicsStreamX8R8G8B8( pBITMAPINFOHEADER, data, this.tx描画用.szTextureSize.Width, this.tx描画用.szTextureSize.Height );
                                         break;
                                 }
                             }
@@ -753,12 +753,12 @@ namespace DTXMania
                             {
                                 if( CDTXMania.ConfigIni.bDrumsEnabled )
                                 {
-                                    this.tx描画用.vc拡大縮小倍率 = this.vclip;
+                                    this.tx描画用.vcScaleRatio = this.vclip;
                                     this.tx描画用.tDraw2D(CDTXMania.app.Device, 882, 0);
                                 }
                                 else if( CDTXMania.ConfigIni.bGuitarEnabled )
                                 {
-                                    this.tx描画用.vc拡大縮小倍率 = new Vector3( 1f, 1f, 1f );
+                                    this.tx描画用.vcScaleRatio = new Vector3( 1f, 1f, 1f );
                                     this.PositionG = (int)( ( 1280f - (float)( this.framewidth ) ) / 2f );
                                     this.tx描画用.tDraw2D( CDTXMania.app.Device, this.PositionG, 0 );
                                 }
@@ -772,7 +772,7 @@ namespace DTXMania
 
             #endregion
 
-                if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigIni.bBGA有効 == true)
+                if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigIni.bBGAEnabled == true)
                 {
                     if (CDTXMania.ConfigIni.bDrumsEnabled)
                         CDTXMania.stagePerfDrumsScreen.actBGA.t進行描画(980, 0);
@@ -786,7 +786,7 @@ namespace DTXMania
                     {
                         if (this.stフィルイン[ i ].b使用中)
                         {
-                            int numf = this.stフィルイン[ i ].ct進行.n現在の値;
+                            int numf = this.stフィルイン[ i ].ct進行.nCurrentValue;
                             this.stフィルイン[ i ].ct進行.tUpdate();
                             if( this.stフィルイン[ i ].ct進行.bReachedEndValue )
                             {
@@ -799,19 +799,19 @@ namespace DTXMania
 
                             //if( ( CDTXMania.ConfigIni.bDrumsEnabled ? stageDrum.txボーナスエフェクト : stageGuitar.txボーナスエフェクト ) != null )
                             {
-                                //this.txフィルインエフェクト.vc拡大縮小倍率.X = 2.0f;
-                                //this.txフィルインエフェクト.vc拡大縮小倍率.Y = 2.0f;
-                                //this.txフィルインエフェクト.b加算合成 = true;
+                                //this.txフィルインエフェクト.vcScaleRatio.X = 2.0f;
+                                //this.txフィルインエフェクト.vcScaleRatio.Y = 2.0f;
+                                //this.txフィルインエフェクト.bAdditiveBlending = true;
                                 //this.txフィルインエフェクト.tDraw2D(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
                                 if( CDTXMania.ConfigIni.bDrumsEnabled )
                                 {
-                                    stageDrum.txボーナスエフェクト.vc拡大縮小倍率 = new Vector3( 2.0f, 2.0f, 1.0f );
-                                    stageDrum.txボーナスエフェクト.b加算合成 = true;
+                                    stageDrum.txボーナスエフェクト.vcScaleRatio = new Vector3( 2.0f, 2.0f, 1.0f );
+                                    stageDrum.txボーナスエフェクト.bAdditiveBlending = true;
                                     stageDrum.txボーナスエフェクト.tDraw2D( CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + ( 360 * numf ), 640, 360 )) ;
                                     try
                                     {
-                                    //if( this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ] != null )
-                                    //    this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.n現在の値 ].tDraw2D( CDTXMania.app.Device, 0, 0 );
+                                    //if( this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.nCurrentValue ] != null )
+                                    //    this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.nCurrentValue ].tDraw2D( CDTXMania.app.Device, 0, 0 );
                                     }
                                     catch( Exception ex )
                                     {
@@ -826,10 +826,10 @@ namespace DTXMania
                 if (CDTXMania.ConfigIni.bShowMusicInfo)
                     this.actPanel.t進行描画();
 
-                if( ( ( this.bWindowMode ) && this.tx描画用 != null && ( CDTXMania.ConfigIni.bAVI有効 ) ) )
+                if( ( ( this.bWindowMode ) && this.tx描画用 != null && ( CDTXMania.ConfigIni.bAVIEnabled ) ) )
                 {
-                    this.vector = this.tx描画用.vc拡大縮小倍率;
-                    this.tx描画用.vc拡大縮小倍率 = this.smallvc;
+                    this.vector = this.tx描画用.vcScaleRatio;
+                    this.tx描画用.vcScaleRatio = this.smallvc;
                     this.tx描画用.nTransparency = 0xff;
 
                     if( CDTXMania.ConfigIni.bDrumsEnabled )
@@ -897,7 +897,7 @@ namespace DTXMania
                             if( this.txクリップパネル != null )
                                 this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y ); 
                             this.smallvc = new Vector3( this.ratio2, this.ratio2, 1f );
-                            this.tx描画用.vc拡大縮小倍率 = this.smallvc;
+                            this.tx描画用.vcScaleRatio = this.smallvc;
                             if( this.bUseMRenderer )
                             {
                                 if( this.dsBGV != null && this.bDShowクリップを再生している )
@@ -949,7 +949,7 @@ namespace DTXMania
                         if( this.txクリップパネル != null )
                             this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
                         this.smallvc = new Vector3( this.ratio2, this.ratio2, 1f );
-                        this.tx描画用.vc拡大縮小倍率 = this.smallvc;
+                        this.tx描画用.vcScaleRatio = this.smallvc;
                         if( this.bUseMRenderer )
                         {
                             if( this.dsBGV != null && this.bDShowクリップを再生している )
@@ -973,10 +973,10 @@ namespace DTXMania
                         }
                         #endregion
                     }
-                    this.tx描画用.vc拡大縮小倍率 = this.vector;
+                    this.tx描画用.vcScaleRatio = this.vector;
                 }
-                IInputDevice keyboard = CDTXMania.Input管理.Keyboard;
-                if( CDTXMania.Pad.b押された( EInstrumentPart.BASS, EPad.Help ) )
+                IInputDevice keyboard = CDTXMania.InputManager.Keyboard;
+                if( CDTXMania.Pad.bPressed( EInstrumentPart.BASS, EPad.Help ) )
                 {
                     if( this.b再生トグル == false )
                     {
@@ -1044,7 +1044,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------

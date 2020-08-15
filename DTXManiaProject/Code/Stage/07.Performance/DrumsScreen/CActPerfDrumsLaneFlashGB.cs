@@ -23,11 +23,11 @@ namespace DTXMania
 						int num2 = CDTXMania.ConfigIni.bLeft[ (int) e楽器パート ] ? 1 : 0;
 						for( int j = 0; j < 3; j++ )
 						{
-							int x = ( ( ( i < 3 ) ? 0x1fb : 0x18e ) + this.nRGBのX座標[ num2, i ] ) + ( ( 0x10 * base.ct進行[ i ].n現在の値 ) / 100 );
+							int x = ( ( ( i < 3 ) ? 0x1fb : 0x18e ) + this.nRGBのX座標[ num2, i ] ) + ( ( 0x10 * base.ct進行[ i ].nCurrentValue ) / 100 );
 							int y = ( ( i < 3 ) ? 0x39 : 0x39 ) + ( j * 0x76 );
 							if( texture != null )
 							{
-								texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( j * 0x20, 0, ( 0x18 * ( 100 - base.ct進行[ i ].n現在の値 ) ) / 100, 0x76 ) );
+								texture.tDraw2D( CDTXMania.app.Device, x, y, new Rectangle( j * 0x20, 0, ( 0x18 * ( 100 - base.ct進行[ i ].nCurrentValue ) ) / 100, 0x76 ) );
 							}
 						}
 						base.ct進行[ i ].tUpdate();
@@ -42,7 +42,7 @@ namespace DTXMania
 		}
 
 
-		// その他
+		// Other
 
 		#region [ private ]
 		//-----------------

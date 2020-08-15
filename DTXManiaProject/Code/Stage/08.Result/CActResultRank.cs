@@ -21,7 +21,7 @@ namespace DTXMania
 
         public void tアニメを完了させる()
         {
-            this.ctランク表示.n現在の値 = this.ctランク表示.n終了値;
+            this.ctランク表示.nCurrentValue = this.ctランク表示.n終了値;
         }
 
 
@@ -180,10 +180,10 @@ namespace DTXMania
                     #region [ ランク文字 ]
                     if (this.txランク文字[j] != null)
                     {
-                        double num2 = ((double)this.ctランク表示.n現在の値 - 200.0) / 300.0;
+                        double num2 = ((double)this.ctランク表示.nCurrentValue - 200.0) / 300.0;
 
-                        if (this.ctランク表示.n現在の値 >= 200.0)
-                            this.txランク文字[j].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y[j] + ((int)((double)this.txランク文字[j].sz画像サイズ.Height * (1.0 - num2))), new Rectangle(0, 0, txランク文字[j].sz画像サイズ.Width, (int)((double)this.txランク文字[j].sz画像サイズ.Height * num2)));
+                        if (this.ctランク表示.nCurrentValue >= 200.0)
+                            this.txランク文字[j].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y[j] + ((int)((double)this.txランク文字[j].szImageSize.Height * (1.0 - num2))), new Rectangle(0, 0, txランク文字[j].szImageSize.Width, (int)((double)this.txランク文字[j].szImageSize.Height * num2)));
                     }
                     #endregion
 
@@ -218,7 +218,7 @@ namespace DTXMania
         }
 
 
-        // その他
+        // Other
 
         #region [ private ]
         //-----------------
