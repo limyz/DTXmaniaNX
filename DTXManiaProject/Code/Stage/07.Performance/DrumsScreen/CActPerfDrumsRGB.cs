@@ -23,7 +23,7 @@ namespace DTXMania
 					{
 						int index = CDTXMania.ConfigIni.bLeft.Guitar ? ( 2 - j ) : j;
 						Rectangle rectangle = new Rectangle( index * 0x18, 0, 0x18, 0x20 );
-						if( base.b押下状態[ index ] )
+						if( base.bPressedState[ index ] )
 						{
 							rectangle.Y += 0x20;
 						}
@@ -39,7 +39,7 @@ namespace DTXMania
 					{
 						int num4 = CDTXMania.ConfigIni.bLeft.Bass ? ( 2 - k ) : k;
 						Rectangle rectangle2 = new Rectangle( num4 * 0x18, 0, 0x18, 0x20 );
-						if( base.b押下状態[ num4 + 3 ] )
+						if( base.bPressedState[ num4 + 3 ] )
 						{
 							rectangle2.Y += 0x20;
 						}
@@ -51,7 +51,7 @@ namespace DTXMania
 				}
 				for( int i = 0; i < 6; i++ )
 				{
-					base.b押下状態[ i ] = false;
+					base.bPressedState[ i ] = false;
 				}
 			}
 			return 0;

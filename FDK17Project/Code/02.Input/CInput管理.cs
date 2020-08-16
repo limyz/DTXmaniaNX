@@ -147,7 +147,7 @@ namespace FDK
 					IInputDevice device = this.listInputDevices[i];
 					try
 					{
-						device.tポーリング(bWindowがアクティブ中, bバッファ入力を使用する);
+						device.tPolling(bWindowがアクティブ中, bバッファ入力を使用する);
 					}
 					catch (DirectInputException)							// #24016 2011.1.6 yyagi: catch exception for unplugging USB joystick, and remove the device object from the polling items.
 					{

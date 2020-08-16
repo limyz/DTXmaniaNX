@@ -17,12 +17,12 @@ namespace DTXMania
         public struct STScoreIniInformation
         {
             public DateTime LastModified;
-            public long ファイルサイズ;
+            public long FileSize;
 
             public STScoreIniInformation(DateTime 最終更新日時, long ファイルサイズ)
             {
                 this.LastModified = 最終更新日時;
-                this.ファイルサイズ = ファイルサイズ;
+                this.FileSize = ファイルサイズ;
             }
         }
 

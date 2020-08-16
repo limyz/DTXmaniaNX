@@ -195,7 +195,7 @@ namespace DTXMania
 									if( File.Exists( str3 ) )
 									{
 										FileInfo info3 = new FileInfo( str3 );
-										item.arScore[ j ].ScoreIniInformation.ファイルサイズ = info3.Length;
+										item.arScore[ j ].ScoreIniInformation.FileSize = info3.Length;
 										item.arScore[ j ].ScoreIniInformation.LastModified = info3.LastWriteTime;
 									}
 									item.nスコア数++;
@@ -300,7 +300,7 @@ namespace DTXMania
 						if( File.Exists( strFileNameScoreIni ) )
 						{
 							FileInfo infoScoreIni = new FileInfo( strFileNameScoreIni );
-							c曲リストノード.arScore[ 0 ].ScoreIniInformation.ファイルサイズ = infoScoreIni.Length;
+							c曲リストノード.arScore[ 0 ].ScoreIniInformation.FileSize = infoScoreIni.Length;
 							c曲リストノード.arScore[ 0 ].ScoreIniInformation.LastModified = infoScoreIni.LastWriteTime;
 						}
 						this.nNbScoresFound++;
@@ -671,7 +671,7 @@ namespace DTXMania
 											( sc.FileInformation.AbsoluteFilePath.Equals( node.arScore[ lv ].FileInformation.AbsoluteFilePath )
 											&& sc.FileInformation.FileSize.Equals( node.arScore[ lv ].FileInformation.FileSize ) )
 											&& ( sc.FileInformation.LastModified.Equals( node.arScore[ lv ].FileInformation.LastModified )
-											&& sc.ScoreIniInformation.ファイルサイズ.Equals( node.arScore[ lv ].ScoreIniInformation.ファイルサイズ ) ) )
+											&& sc.ScoreIniInformation.FileSize.Equals( node.arScore[ lv ].ScoreIniInformation.FileSize ) ) )
 											&& sc.ScoreIniInformation.LastModified.Equals( node.arScore[ lv ].ScoreIniInformation.LastModified );
 									};
 								}
@@ -761,7 +761,7 @@ namespace DTXMania
 			cスコア.FileInformation.LastModified = new DateTime( br.ReadInt64() );
 			cスコア.FileInformation.FileSize = br.ReadInt64();
 			cスコア.ScoreIniInformation.LastModified = new DateTime( br.ReadInt64() );
-			cスコア.ScoreIniInformation.ファイルサイズ = br.ReadInt64();
+			cスコア.ScoreIniInformation.FileSize = br.ReadInt64();
 			cスコア.SongInformation.Title = br.ReadString();
 			cスコア.SongInformation.ArtistName = br.ReadString();
 			cスコア.SongInformation.Comment = br.ReadString();
@@ -911,7 +911,7 @@ namespace DTXMania
 
 							#region [ 対応する .score.ini が存在していれば読み込み、Cスコア.譜面情報 に追加設定する ]
 							//-----------------
-							this.tScoreIniを読み込んで譜面情報を設定する( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath + ".score.ini", ref c曲リストノード.arScore[ i ] );
+							this.tReadScoreIniAndSetScoreInformation( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath + ".score.ini", ref c曲リストノード.arScore[ i ] );
 							//-----------------
 							#endregion
 						}
@@ -1129,7 +1129,7 @@ namespace DTXMania
 					bw.Write( node.arScore[ i ].FileInformation.LastModified.Ticks );
 					bw.Write( node.arScore[ i ].FileInformation.FileSize );
 					bw.Write( node.arScore[ i ].ScoreIniInformation.LastModified.Ticks );
-					bw.Write( node.arScore[ i ].ScoreIniInformation.ファイルサイズ );
+					bw.Write( node.arScore[ i ].ScoreIniInformation.FileSize );
 					bw.Write( node.arScore[ i ].SongInformation.Title );
 					bw.Write( node.arScore[ i ].SongInformation.ArtistName );
 					bw.Write( node.arScore[ i ].SongInformation.Comment );
@@ -1658,7 +1658,7 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 		#endregion
 		#region [ .score.ini を読み込んで Cスコア.譜面情報に設定する ]
 		//-----------------
-		public void tScoreIniを読み込んで譜面情報を設定する( string strScoreIniファイルパス, ref CScore score )
+		public void tReadScoreIniAndSetScoreInformation( string strScoreIniファイルパス, ref CScore score )
 		{
 			if( !File.Exists( strScoreIniファイルパス ) )
 				return;

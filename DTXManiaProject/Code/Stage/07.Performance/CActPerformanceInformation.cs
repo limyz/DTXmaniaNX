@@ -45,7 +45,7 @@ namespace DTXMania
 		}
 		public override int OnUpdateAndDraw()
 		{
-			throw new InvalidOperationException( "t進行描画(int x, int y) のほうを使用してください。" );
+			throw new InvalidOperationException( "tUpdateAndDraw(int x, int y) のほうを使用してください。" );
 		}
 		public void t進行描画( int x, int y )
 		{

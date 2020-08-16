@@ -57,7 +57,7 @@ namespace FDK
 
 			//this.timer = new CTimer( CTimer.E種別.MultiMedia );
 
-			this.list入力イベント = new List<STInputEvent>( 32 );
+			this.listInputEvent = new List<STInputEvent>( 32 );
 		}
 		
 		
@@ -85,13 +85,13 @@ namespace FDK
 			get; 
 			private set;
 		}
-		public List<STInputEvent> list入力イベント 
+		public List<STInputEvent> listInputEvent 
 		{
 			get;
 			private set; 
 		}
 
-		public void tポーリング( bool bWindowがアクティブ中, bool bバッファ入力を使用する )
+		public void tPolling( bool bWindowがアクティブ中, bool bバッファ入力を使用する )
 		{
 			#region [ bButtonフラグ初期化 ]
 			for ( int i = 0; i < 256; i++ )
@@ -103,8 +103,8 @@ namespace FDK
 
 			if ( ( bWindowがアクティブ中 && !this.devJoystick.Acquire().IsFailure ) && !this.devJoystick.Poll().IsFailure )
 			{
-				// this.list入力イベント = new List<STInputEvent>( 32 );
-				this.list入力イベント.Clear();						// #xxxxx 2012.6.11 yyagi; To optimize, I removed new();
+				// this.listInputEvent = new List<STInputEvent>( 32 );
+				this.listInputEvent.Clear();						// #xxxxx 2012.6.11 yyagi; To optimize, I removed new();
 
 
 				if( bバッファ入力を使用する )
@@ -220,7 +220,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 										}
 										//e.nTimeStamp = data.TimeStamp;
 										e.nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp );
-										this.list入力イベント.Add( e );
+										this.listInputEvent.Add( e );
 									}
 									#endregion
 									break;
@@ -239,7 +239,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 												nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 												nVelocity = CInputManager.n通常音量
 											};
-											this.list入力イベント.Add( e );
+											this.listInputEvent.Add( e );
 
 											this.bButtonState[ 6 + i ] = true;
 											this.bButtonPushDown[ 6 + i ] = true;
@@ -254,7 +254,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 												nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 												nVelocity = CInputManager.n通常音量,
 											};
-											this.list入力イベント.Add( ev );
+											this.listInputEvent.Add( ev );
 
 											this.bButtonState[ 6 + i ] = false;
 											this.bButtonPullUp[ 6 + i ] = true;
@@ -289,7 +289,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 0 ] = true;
 								this.bButtonPushDown[ 0 ] = true;
@@ -306,7 +306,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 0 ] = false;
 								this.bButtonPullUp[ 0 ] = true;
@@ -327,7 +327,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 1 ] = true;
 								this.bButtonPushDown[ 1 ] = true;
@@ -344,7 +344,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( event7 );
+								this.listInputEvent.Add( event7 );
 
 								this.bButtonState[ 1 ] = false;
 								this.bButtonPullUp[ 1 ] = true;
@@ -365,7 +365,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 2 ] = true;
 								this.bButtonPushDown[ 2 ] = true;
@@ -382,7 +382,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 2 ] = false;
 								this.bButtonPullUp[ 2 ] = true;
@@ -403,7 +403,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 3 ] = true;
 								this.bButtonPushDown[ 3 ] = true;
@@ -420,7 +420,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 3 ] = false;
 								this.bButtonPullUp[ 3 ] = true;
@@ -441,7 +441,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 4 ] = true;
 								this.bButtonPushDown[ 4 ] = true;
@@ -458,7 +458,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 4 ] = false;
 								this.bButtonPullUp[ 4 ] = true;
@@ -479,7 +479,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( ev );
+								this.listInputEvent.Add( ev );
 
 								this.bButtonState[ 5 ] = true;
 								this.bButtonPushDown[ 5 ] = true;
@@ -496,7 +496,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( event15 );
+								this.listInputEvent.Add( event15 );
 
 								this.bButtonState[ 5 ] = false;
 								this.bButtonPullUp[ 5 ] = true;
@@ -519,7 +519,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( item );
+								this.listInputEvent.Add( item );
 
 								this.bButtonState[ 6 + j ] = true;
 								this.bButtonPushDown[ 6 + j ] = true;
@@ -534,7 +534,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 									nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 									nVelocity = CInputManager.n通常音量
 								};
-								this.list入力イベント.Add( item );
+								this.listInputEvent.Add( item );
 
 								this.bButtonState[ 6 + j ] = false;
 								this.bButtonPullUp[ 6 + j ] = true;
@@ -564,7 +564,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 										nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 										nVelocity = CInputManager.n通常音量
 									};
-									this.list入力イベント.Add( stevent );
+									this.listInputEvent.Add( stevent );
 
 									this.bButtonState[ stevent.nKey ] = true;
 									this.bButtonPushDown[ stevent.nKey ] = true;
@@ -590,7 +590,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 										nTimeStamp = CSoundManager.rcPerformanceTimer.nシステム時刻,	// 演奏用タイマと同じタイマを使うことで、BGMと譜面、入力ずれを防ぐ。
 										nVelocity = 0
 									};
-									this.list入力イベント.Add( stevent );
+									this.listInputEvent.Add( stevent );
 
 									this.bButtonState[ nWay ] = false;
 									this.bButtonPullUp[ nWay ] = true;
@@ -605,19 +605,19 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 			}
 		}
 
-		public bool bキーが押された( int nButton )
+		public bool bKeyPressed( int nButton )
 		{
 			return this.bButtonPushDown[ nButton ];
 		}
-		public bool bキーが押されている( int nButton )
+		public bool bKeyPressing( int nButton )
 		{
 			return this.bButtonState[ nButton ];
 		}
-		public bool bキーが離された( int nButton )
+		public bool bKeyReleased( int nButton )
 		{
 			return this.bButtonPullUp[ nButton ];
 		}
-		public bool bキーが離されている( int nButton )
+		public bool bKeyReleasing( int nButton )
 		{
 			return !this.bButtonState[ nButton ];
 		}
@@ -640,9 +640,9 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 				//    this.timer.Dispose();
 				//    this.timer = null;
 				//}
-				if ( this.list入力イベント != null )
+				if ( this.listInputEvent != null )
 				{
-					this.list入力イベント = null;
+					this.listInputEvent = null;
 				}
 				this.bDispose完了済み = true;
 			}
@@ -710,7 +710,7 @@ Trace.TraceInformation( "TS={0}: IsPressed={1}, IsReleased={2}", data.TimeStamp,
 					nTimeStamp = CSoundManager.rcPerformanceTimer.nサウンドタイマーのシステム時刻msへの変換( data.TimeStamp ),
 					nVelocity = ( lastMode ) ? 0 : CInputManager.n通常音量
 				};
-				this.list入力イベント.Add( e );
+				this.listInputEvent.Add( e );
 
 				this.bButtonState[ target ] = !lastMode;
 				if ( lastMode )

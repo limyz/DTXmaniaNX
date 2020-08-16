@@ -12,14 +12,14 @@ namespace DTXMania
 
 		// プロパティ
 
-		public bool[] b押下状態 = new bool[ 10 ];
+		public bool[] bPressedState = new bool[ 10 ];
         protected STDGBVALUE<int> nシャッター上;
         protected STDGBVALUE<int> nシャッター下;
-        protected STDGBVALUE<double> dbシャッター上;
-        protected STDGBVALUE<double> dbシャッター下;
+        protected STDGBVALUE<double> dbAboveShutter;
+        protected STDGBVALUE<double> dbUnderShutter;
         protected double db倍率 = 6.14;
         protected CTexture txRGB;
-        protected CTexture txシャッター;
+        protected CTexture txShutter;
         protected CActLVLNFont actLVFont;
 
 		// コンストラクタ
@@ -35,7 +35,7 @@ namespace DTXMania
 
 		public void Push( int nLane )
 		{
-			this.b押下状態[ nLane ] = true;
+			this.bPressedState[ nLane ] = true;
 		}
 
 
@@ -45,7 +45,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 10; i++ )
 			{
-				this.b押下状態[ i ] = false;
+				this.bPressedState[ i ] = false;
 			}
 			base.OnActivate();
 		}
@@ -54,7 +54,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 this.txRGB = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RGB buttons.png"));
-                this.txシャッター = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_shutter_GB.png"));
+                this.txShutter = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_shutter_GB.png"));
                 base.OnManagedCreateResources();
 			}
 		}
@@ -63,7 +63,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
 				CDTXMania.tReleaseTexture( ref this.txRGB );
-                CDTXMania.tReleaseTexture(ref this.txシャッター);
+                CDTXMania.tReleaseTexture(ref this.txShutter);
                 base.OnManagedReleaseResources();
 			}
 		}

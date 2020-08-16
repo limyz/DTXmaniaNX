@@ -145,7 +145,7 @@ namespace FDK
 			this.n更新システム時刻ms = this.nSystemTimeMs;
             this.db更新システム時刻ms = this.dbシステム時刻ms;
 		}
-		public void t再開()
+		public void tResume()
 		{
 			if( this.n停止数 > 0 )
 			{

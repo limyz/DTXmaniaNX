@@ -73,7 +73,7 @@ namespace DTXMania
                 }
 
                 #region[ シャッター 変数]
-                if (base.txシャッター != null)
+                if (base.txShutter != null)
                 {
                     this.nシャッター上.Guitar = CDTXMania.ConfigIni.nShutterInSide.Guitar;
                     this.nシャッター下.Guitar = CDTXMania.ConfigIni.nShutterOutSide.Guitar;
@@ -84,8 +84,8 @@ namespace DTXMania
                         this.nシャッター下.Guitar = CDTXMania.ConfigIni.nShutterInSide.Guitar;
                     }
 
-                    this.dbシャッター上.Guitar = 108 - base.txシャッター.szImageSize.Height + (this.nシャッター上.Guitar * this.db倍率);
-                    this.dbシャッター下.Guitar = 720 - 50 - (this.nシャッター下.Guitar * this.db倍率);
+                    this.dbAboveShutter.Guitar = 108 - base.txShutter.szImageSize.Height + (this.nシャッター上.Guitar * this.db倍率);
+                    this.dbUnderShutter.Guitar = 720 - 50 - (this.nシャッター下.Guitar * this.db倍率);
 
                     this.nシャッター上.Bass = CDTXMania.ConfigIni.nShutterInSide.Bass;
                     this.nシャッター下.Bass = CDTXMania.ConfigIni.nShutterOutSide.Bass;
@@ -96,12 +96,12 @@ namespace DTXMania
                         this.nシャッター下.Bass = CDTXMania.ConfigIni.nShutterInSide.Bass;
                     }
 
-                    this.dbシャッター上.Bass = 108 - base.txシャッター.szImageSize.Height + (this.nシャッター上.Bass * this.db倍率);
-                    this.dbシャッター下.Bass = 720 - 50 - (this.nシャッター下.Bass * this.db倍率);
+                    this.dbAboveShutter.Bass = 108 - base.txShutter.szImageSize.Height + (this.nシャッター上.Bass * this.db倍率);
+                    this.dbUnderShutter.Bass = 720 - 50 - (this.nシャッター下.Bass * this.db倍率);
                 }
                 #endregion
 
-                #region [ ギター ]
+                #region [ Guitar ]
                 if (CDTXMania.DTX.bチップがある.Guitar)
                 {
                     /*
@@ -109,7 +109,7 @@ namespace DTXMania
 					{
 						int index = CDTXMania.ConfigIni.bLeft.Guitar ? ( 2 - j ) : j;
 						Rectangle rectangle = new Rectangle( index * 24, 0, 0x18, 0x20 );
-						//if( base.b押下状態[ index ] )
+						//if( base.bPressedState[ index ] )
 						{
 							rectangle.Y += 0x20;
 						}
@@ -129,26 +129,26 @@ namespace DTXMania
                             base.txRGB.tDraw2D(CDTXMania.app.Device, 67, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Guitar ? 64 : 0), 277, 64));
                     }
 
-                    if (base.txシャッター != null)
+                    if (base.txShutter != null)
                     {
                         if (this.nシャッター下.Guitar != 0)
                         {
-                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbシャッター下.Guitar);
+                            base.txShutter.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbUnderShutter.Guitar);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(195, (int)this.dbシャッター下.Guitar + 5, this.nシャッター下.Guitar.ToString());
+                                this.actLVFont.tDrawString(195, (int)this.dbUnderShutter.Guitar + 5, this.nシャッター下.Guitar.ToString());
                         }
                         if (this.nシャッター上.Guitar != 0)
                         {
-                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbシャッター上.Guitar);
+                            base.txShutter.tDraw2D(CDTXMania.app.Device, 80, (int)this.dbAboveShutter.Guitar);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(195, (int)this.dbシャッター上.Guitar - 25 + base.txシャッター.szImageSize.Height, this.nシャッター上.Guitar.ToString());
+                                this.actLVFont.tDrawString(195, (int)this.dbAboveShutter.Guitar - 25 + base.txShutter.szImageSize.Height, this.nシャッター上.Guitar.ToString());
                         }
                     }
                 }
                 #endregion
-                #region [ ベース ]
+                #region [ Bass ]
                 if (CDTXMania.DTX.bチップがある.Bass)
                 {
                     /*
@@ -156,7 +156,7 @@ namespace DTXMania
 					{
 						int index = CDTXMania.ConfigIni.bLeft.Guitar ? ( 2 - j ) : j;
 						Rectangle rectangle = new Rectangle( index * 24, 0, 0x18, 0x20 );
-						//if( base.b押下状態[ index ] )
+						//if( base.bPressedState[ index ] )
 						{
 							rectangle.Y += 0x20;
 						}
@@ -176,28 +176,28 @@ namespace DTXMania
                             base.txRGB.tDraw2D(CDTXMania.app.Device, 937, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Bass ? 64 : 0), 277, 64));
                     }
 
-                    if (base.txシャッター != null)
+                    if (base.txShutter != null)
                     {
                         if (this.nシャッター下.Bass != 0)
                         {
-                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbシャッター下.Bass);
+                            base.txShutter.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbUnderShutter.Bass);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(1065, (int)this.dbシャッター下.Bass + 5, this.nシャッター下.Bass.ToString());
+                                this.actLVFont.tDrawString(1065, (int)this.dbUnderShutter.Bass + 5, this.nシャッター下.Bass.ToString());
                         }
                         if (this.nシャッター上.Bass != 0)
                         {
-                            base.txシャッター.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbシャッター上.Bass);
+                            base.txShutter.tDraw2D(CDTXMania.app.Device, 950, (int)this.dbAboveShutter.Bass);
 
                             if (CDTXMania.ConfigIni.b演奏情報を表示する)
-                                this.actLVFont.t文字列描画(1065, (int)this.dbシャッター上.Bass - 25 + base.txシャッター.szImageSize.Height, this.nシャッター上.Bass.ToString());
+                                this.actLVFont.tDrawString(1065, (int)this.dbAboveShutter.Bass - 25 + base.txShutter.szImageSize.Height, this.nシャッター上.Bass.ToString());
                         }
                     }
                 }
                 #endregion
                 for (int i = 0; i < 10; i++)
                 {
-                    base.b押下状態[i] = false;
+                    base.bPressedState[i] = false;
                 }
             }
 			return 0;

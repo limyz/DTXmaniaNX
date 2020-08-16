@@ -11,7 +11,7 @@ namespace DTXMania
 
 		public STDGBVALUE<long> nスコアの増分;
         public STDGBVALUE<int>[] x位置 = new STDGBVALUE<int>[10];
-		public STDGBVALUE<double> n現在の本当のスコア;
+		public STDGBVALUE<double> nCurrentTrueScore;
 		public STDGBVALUE<long> n現在表示中のスコア;
         public STDGBVALUE<int> n本体X;
         public int n本体Y;
@@ -31,15 +31,15 @@ namespace DTXMania
 
 		public double Get( EInstrumentPart part )
 		{
-			return this.n現在の本当のスコア[ (int) part ];
+			return this.nCurrentTrueScore[ (int) part ];
 		}
 		public void Set( EInstrumentPart part, double nScore )
 		{
 			int nPart = (int) part;
-			if( this.n現在の本当のスコア[ nPart ] != nScore )
+			if( this.nCurrentTrueScore[ nPart ] != nScore )
 			{
-				this.n現在の本当のスコア[ nPart ] = nScore;
-				this.nスコアの増分[ nPart ] = (long) ( ( (double) ( this.n現在の本当のスコア[ nPart ] - this.n現在表示中のスコア[ nPart ] ) ) / 20.0 );
+				this.nCurrentTrueScore[ nPart ] = nScore;
+				this.nスコアの増分[ nPart ] = (long) ( ( (double) ( this.nCurrentTrueScore[ nPart ] - this.n現在表示中のスコア[ nPart ] ) ) / 20.0 );
 				if( this.nスコアの増分[ nPart ] < 1L )
 				{
 					this.nスコアの増分[ nPart ] = 1L;
@@ -124,7 +124,7 @@ namespace DTXMania
 			for( int i = 0; i < 3; i++ )
 			{
 				this.n現在表示中のスコア[ i ] = 0L;
-				this.n現在の本当のスコア[ i ] = 0L;
+				this.nCurrentTrueScore[ i ] = 0L;
 				this.nスコアの増分[ i ] = 0L;
 			}
 			base.OnActivate();

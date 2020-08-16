@@ -66,8 +66,8 @@ namespace DTXMania
 					{
 						this.n現在表示中のスコア[ j ] += this.nスコアの増分[ j ];
 
-						if( this.n現在表示中のスコア[ j ] > (long) this.n現在の本当のスコア[ j ] )
-							this.n現在表示中のスコア[ j ] = (long) this.n現在の本当のスコア[ j ];
+						if( this.n現在表示中のスコア[ j ] > (long) this.nCurrentTrueScore[ j ] )
+							this.n現在表示中のスコア[ j ] = (long) this.nCurrentTrueScore[ j ];
 					}
 					base.n進行用タイマ += 10;
 				}

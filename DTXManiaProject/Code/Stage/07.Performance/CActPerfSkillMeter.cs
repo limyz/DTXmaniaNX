@@ -45,7 +45,7 @@ namespace DTXMania
                 this.dbグラフ値現在 = value;
             }
         }
-        public double dbグラフ値目標_渡
+        public double dbGraphValue_Goal
         {
             get
             {
@@ -188,7 +188,7 @@ namespace DTXMania
                     this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ], nGraphBG_YPos, new Rectangle( 2, 2, 251, 584 ) );
                     
                     //自己ベスト数値表示
-                    this.t達成率文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 501, string.Format( "{0,6:##0.00}" + "%", this.dbグラフ値自己ベスト ) );
+                    this.t達成率文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 501, string.Format( "{0,6:##0.00}" + "%", this.dbGraphValue_PersonalBest ) );
                 }
 
                 //ゲージ現在
@@ -242,7 +242,7 @@ namespace DTXMania
         private double dbグラフ値目標_表示;
         private double dbグラフ値現在;
         private double dbグラフ値現在_表示;
-        public double dbグラフ値自己ベスト;
+        public double dbGraphValue_PersonalBest;
         private int[] n現在のAutoを含まない判定数;
 
         private CTexture txPlayerName;
@@ -364,7 +364,7 @@ namespace DTXMania
 
                 Graphics g = Graphics.FromImage( canvas );
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-                int nMybestGaugeSize = (int)( 560.0f * (float)this.dbグラフ値自己ベスト / 100.0f );
+                int nMybestGaugeSize = (int)( 560.0f * (float)this.dbGraphValue_PersonalBest / 100.0f );
                 int nMybestGaugePosY = 600 - nMybestGaugeSize;
 
                 int nTargetGaugeSize = (int)( 560.0f * (float)this.dbグラフ値目標_表示 / 100.0f );

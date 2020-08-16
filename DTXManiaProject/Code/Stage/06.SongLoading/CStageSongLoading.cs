@@ -800,7 +800,7 @@ namespace DTXMania
         protected bool tキー入力()
         {
             IInputDevice keyboard = CDTXMania.InputManager.Keyboard;
-            if ( keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )		// escape (exit)
+            if ( keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Escape ) )		// escape (exit)
             {
                 if ( CDTXMania.ConfigIni.bギタレボモード )
                 {

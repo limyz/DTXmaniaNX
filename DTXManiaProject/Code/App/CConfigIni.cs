@@ -486,7 +486,7 @@ namespace DTXMania
 		public bool bシンバルフリー;
 		public bool bストイックモード;
 		public bool bドラム打音を発声する;
-		public bool bフィルイン有効;
+		public bool bFillInEnabled;
 		public bool bランダムセレクトで子BOXを検索対象とする;
 		public bool bOutputLogs;
 		public STDGBVALUE<bool> b演奏音を強調する;
@@ -1038,7 +1038,7 @@ namespace DTXMania
 			this.bSTAGEFAILEDEnabled = true;
 			this.bAVIEnabled = true;
 			this.bBGAEnabled = true;
-			this.bフィルイン有効 = true;
+			this.bFillInEnabled = true;
             this.ボーナス演出を表示する = true;
             this.eRDPosition = ERDPosition.RCRD;
             this.nInfoType = 0;
@@ -1521,7 +1521,7 @@ namespace DTXMania
             #endregion
             #region [ フィルイン ]
             sw.WriteLine( "; フィルイン効果(0:OFF, 1:ON)" );
-			sw.WriteLine( "FillInEffect={0}", this.bフィルイン有効 ? 1 : 0 );
+			sw.WriteLine( "FillInEffect={0}", this.bFillInEnabled ? 1 : 0 );
 			sw.WriteLine();
             sw.WriteLine("; フィルイン達成時の歓声の再生(0:OFF, 1:ON)");
             sw.WriteLine("AudienceSound={0}", this.b歓声を発声する ? 1 : 0);
@@ -2509,7 +2509,7 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("FillInEffect"))
                                             {
-                                                this.bフィルイン有効 = CConversion.bONorOFF(str4[0]);
+                                                this.bFillInEnabled = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("PreviewSoundWait"))
                                             {

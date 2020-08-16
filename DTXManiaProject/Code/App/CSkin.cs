@@ -332,16 +332,16 @@ namespace DTXMania
 		public CSystemSound soundCursorMovement = null;
 		public CSystemSound soundゲーム開始音 = null;
 		public CSystemSound soundGameEnd = null;
-		public CSystemSound soundステージクリア音 = null;
+		public CSystemSound soundStageClear = null;
 		public CSystemSound soundタイトル音 = null;
-		public CSystemSound soundフルコンボ音 = null;
+		public CSystemSound soundFullCombo = null;
 		public CSystemSound sound歓声音 = null;
 		public CSystemSound sound曲読込開始音 = null;
 		public CSystemSound sound決定音 = null;
 		public CSystemSound sound取消音 = null;
 		public CSystemSound sound変更音 = null;
         public CSystemSound sound曲決定 = null;
-        public CSystemSound soundエクセレント音 = null;
+        public CSystemSound soundExcellent = null;
         public CSystemSound sound新記録音 = null;
         public CSystemSound soundSelectMusic = null;
         public CSystemSound soundNovice = null;
@@ -383,13 +383,13 @@ namespace DTXMania
 						return this.soundGameEnd;
 
 					case ESystemSound.SOUNDステージクリア音:
-						return this.soundステージクリア音;
+						return this.soundStageClear;
 
 					case ESystemSound.SOUNDフルコンボ音:
-						return this.soundフルコンボ音;
+						return this.soundFullCombo;
 
                     case ESystemSound.SOUNDエクセレント音:
-                        return this.soundエクセレント音;
+                        return this.soundExcellent;
 
                     case ESystemSound.SOUND新記録音:
                         return this.sound新記録音;
@@ -476,10 +476,10 @@ namespace DTXMania
 						return this.soundGameEnd;
 
 					case 8:
-						return this.soundフルコンボ音;
+						return this.soundFullCombo;
 
                     case 9:
-                        return this.soundエクセレント音;
+                        return this.soundExcellent;
 
                     case 10:
                         return this.sound新記録音;
@@ -509,7 +509,7 @@ namespace DTXMania
                         return this.bgm結果画面;
 
                     case 19:
-                        return this.soundステージクリア音;
+                        return this.soundStageClear;
 
                     case 20:
                         return this.soundNovice;
@@ -674,10 +674,10 @@ namespace DTXMania
 			this.soundSTAGEFAILED音		= new CSystemSound( @"Sounds\Stage failed.ogg",	false, true,  true  );
 			this.soundゲーム開始音		= new CSystemSound( @"Sounds\Game start.ogg",		false, false, false );
 			this.soundGameEnd		= new CSystemSound( @"Sounds\Game end.ogg",		false, true,  false );
-			this.soundステージクリア音	= new CSystemSound( @"Sounds\Stage clear.ogg",		false, true,  false );
-			this.soundフルコンボ音		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
+			this.soundStageClear	= new CSystemSound( @"Sounds\Stage clear.ogg",		false, true,  false );
+			this.soundFullCombo		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
             this.sound新記録音          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
-            this.soundエクセレント音    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
+            this.soundExcellent    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
 			this.sound曲読込開始音		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
 			this.soundタイトル音		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
             this.sound曲決定            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );

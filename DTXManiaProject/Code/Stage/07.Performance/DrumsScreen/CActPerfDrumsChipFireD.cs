@@ -716,7 +716,7 @@ namespace DTXMania
                             if (this.tx火花[this.st火花[i].nLane] != null)
                             {
                                 this.tx火花[this.st火花[i].nLane].tDraw3D(CDTXMania.app.Device, identity);
-                                if (CDTXMania.stagePerfDrumsScreen.bサビ区間 == true && this.txボーナス花火 != null)
+                                if (CDTXMania.stagePerfDrumsScreen.bChorusSection == true && this.txボーナス花火 != null)
                                     this.txボーナス花火.tDraw3D(CDTXMania.app.Device, identity);
                             }
                         }
@@ -773,7 +773,7 @@ namespace DTXMania
                                 int n高さ = CDTXMania.ConfigIni.nExplosionHeight;
 
                                 this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle( n幅 * this.st火花[i].ct進行.nCurrentValue, this.st火花[i].nLane * n高さ, n幅, n高さ));
-                                if (CDTXMania.stagePerfDrumsScreen.bサビ区間 == true && this.txボーナス花火 != null)
+                                if (CDTXMania.stagePerfDrumsScreen.bChorusSection == true && this.txボーナス花火 != null)
                                     this.tx火花2.tDraw3D(CDTXMania.app.Device, identity, new Rectangle(this.st火花[i].ct進行.nCurrentValue * n幅, 10 * n高さ, n幅, n高さ));
                             }
                         }

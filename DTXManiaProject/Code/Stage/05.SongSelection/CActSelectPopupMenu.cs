@@ -231,7 +231,7 @@ namespace DTXMania
 
         public override int OnUpdateAndDraw()
         {
-            throw new InvalidOperationException("t進行描画(bool)のほうを使用してください。");
+            throw new InvalidOperationException("tUpdateAndDraw(bool)のほうを使用してください。");
         }
 
         public int t進行描画()
@@ -253,7 +253,7 @@ namespace DTXMania
                     }
                     #endregion
                     #region [ キー入力: キャンセル ]
-                    else if (CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape)
+                    else if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Escape)
                         || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)
                         || CDTXMania.Pad.bPressedGB(EPad.Pick))
                     {	// キャンセル
@@ -318,7 +318,7 @@ namespace DTXMania
                     else if (
                         CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.Decide)	// #24756 2011.4.1 yyagi: Add condition "Drum-Decide" to enable CY in Sort Menu.
                         || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.RD)
-                        || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
+                        || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Return)))
                     {
                         eInst = EInstrumentPart.DRUMS;
                         eAction = ESortAction.Decide;
@@ -329,7 +329,7 @@ namespace DTXMania
                     }
                     #endregion
                     #region [ キー入力: 前に移動 ]
-                    this.ctキー反復用.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.t前に移動));
+                    this.ctキー反復用.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.t前に移動));
                     this.ctキー反復用.R.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.R), new CCounter.DGキー処理(this.t前に移動));
                     //Change to HT
                     if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.HT))
@@ -338,7 +338,7 @@ namespace DTXMania
                     }
                     #endregion
                     #region [ キー入力: 次に移動 ]
-                    this.ctキー反復用.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.t次に移動));
+                    this.ctキー反復用.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.t次に移動));
                     this.ctキー反復用.B.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.G), new CCounter.DGキー処理(this.t次に移動));
                     //Change to LT
                     if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LT))

@@ -10,7 +10,7 @@ namespace DTXMania
 	{
 		// プロパティ
 
-		internal STHIT st検知したデバイス;
+		internal STHIT stDetectedDevice;
 		[StructLayout( LayoutKind.Sequential )]
 		internal struct STHIT
 		{
@@ -34,7 +34,7 @@ namespace DTXMania
 		{
 			this.rConfigIni = configIni;
 			this.rInput管理 = mgrInput;
-			this.st検知したデバイス.Clear();
+			this.stDetectedDevice.Clear();
 		}
 
 
@@ -48,9 +48,9 @@ namespace DTXMania
 			// すべての入力デバイスについて…
 			foreach( IInputDevice device in this.rInput管理.listInputDevices )
 			{
-				if( ( device.list入力イベント != null ) && ( device.list入力イベント.Count != 0 ) )
+				if( ( device.listInputEvent != null ) && ( device.listInputEvent.Count != 0 ) )
 				{
-					foreach( STInputEvent event2 in device.list入力イベント )
+					foreach( STInputEvent event2 in device.listInputEvent )
 					{
 						for( int i = 0; i < stkeyassignArray.Length; i++ )
 						{
@@ -60,7 +60,7 @@ namespace DTXMania
 									if( ( device.eInputDeviceType == EInputDeviceType.Keyboard ) && ( event2.nKey == stkeyassignArray[ i ].Code ) )
 									{
 										list.Add( event2 );
-										this.st検知したデバイス.Keyboard = true;
+										this.stDetectedDevice.Keyboard = true;
 									}
 									break;
 
@@ -68,7 +68,7 @@ namespace DTXMania
 									if( ( ( device.eInputDeviceType == EInputDeviceType.MidiIn ) && ( device.ID == stkeyassignArray[ i ].ID ) ) && ( event2.nKey == stkeyassignArray[ i ].Code ) )
 									{
 										list.Add( event2 );
-										this.st検知したデバイス.MIDIIN = true;
+										this.stDetectedDevice.MIDIIN = true;
 									}
 									break;
 
@@ -76,7 +76,7 @@ namespace DTXMania
 									if( ( ( device.eInputDeviceType == EInputDeviceType.Joystick ) && ( device.ID == stkeyassignArray[ i ].ID ) ) && ( event2.nKey == stkeyassignArray[ i ].Code ) )
 									{
 										list.Add( event2 );
-										this.st検知したデバイス.Joypad = true;
+										this.stDetectedDevice.Joypad = true;
 									}
 									break;
 
@@ -84,7 +84,7 @@ namespace DTXMania
 									if( ( device.eInputDeviceType == EInputDeviceType.Mouse ) && ( event2.nKey == stkeyassignArray[ i ].Code ) )
 									{
 										list.Add( event2 );
-										this.st検知したデバイス.Mouse = true;
+										this.stDetectedDevice.Mouse = true;
 									}
 									break;
 							}
@@ -106,19 +106,19 @@ namespace DTXMania
 					switch( stkeyassignArray[ i ].InputDevice )
 					{
 						case EInputDevice.Keyboard:
-							if( !this.rInput管理.Keyboard.bキーが押された( stkeyassignArray[ i ].Code ) )
+							if( !this.rInput管理.Keyboard.bKeyPressed( stkeyassignArray[ i ].Code ) )
 								break;
 
-							this.st検知したデバイス.Keyboard = true;
+							this.stDetectedDevice.Keyboard = true;
 							return true;
 
 						case EInputDevice.MIDI入力:
 							{
 								IInputDevice device2 = this.rInput管理.MidiIn( stkeyassignArray[ i ].ID );
-								if( ( device2 == null ) || !device2.bキーが押された( stkeyassignArray[ i ].Code ) )
+								if( ( device2 == null ) || !device2.bKeyPressed( stkeyassignArray[ i ].Code ) )
 									break;
 
-								this.st検知したデバイス.MIDIIN = true;
+								this.stDetectedDevice.MIDIIN = true;
 								return true;
 							}
 						case EInputDevice.Joypad:
@@ -127,17 +127,17 @@ namespace DTXMania
 									break;
 
 								IInputDevice device = this.rInput管理.Joystick( stkeyassignArray[ i ].ID );
-								if( ( device == null ) || !device.bキーが押された( stkeyassignArray[ i ].Code ) )
+								if( ( device == null ) || !device.bKeyPressed( stkeyassignArray[ i ].Code ) )
 									break;
 
-								this.st検知したデバイス.Joypad = true;
+								this.stDetectedDevice.Joypad = true;
 								return true;
 							}
 						case EInputDevice.Mouse:
-							if( !this.rInput管理.Mouse.bキーが押された( stkeyassignArray[ i ].Code ) )
+							if( !this.rInput管理.Mouse.bKeyPressed( stkeyassignArray[ i ].Code ) )
 								break;
 
-							this.st検知したデバイス.Mouse = true;
+							this.stDetectedDevice.Mouse = true;
 							return true;
 					}
 				}
@@ -170,11 +170,11 @@ namespace DTXMania
 					switch( stkeyassignArray[ i ].InputDevice )
 					{
 						case EInputDevice.Keyboard:
-							if( !this.rInput管理.Keyboard.bキーが押されている( stkeyassignArray[ i ].Code ) )
+							if( !this.rInput管理.Keyboard.bKeyPressing( stkeyassignArray[ i ].Code ) )
 							{
 								break;
 							}
-							this.st検知したデバイス.Keyboard = true;
+							this.stDetectedDevice.Keyboard = true;
 							return true;
 
 						case EInputDevice.Joypad:
@@ -184,19 +184,19 @@ namespace DTXMania
 									break;
 								}
 								IInputDevice device = this.rInput管理.Joystick( stkeyassignArray[ i ].ID );
-								if( ( device == null ) || !device.bキーが押されている( stkeyassignArray[ i ].Code ) )
+								if( ( device == null ) || !device.bKeyPressing( stkeyassignArray[ i ].Code ) )
 								{
 									break;
 								}
-								this.st検知したデバイス.Joypad = true;
+								this.stDetectedDevice.Joypad = true;
 								return true;
 							}
 						case EInputDevice.Mouse:
-							if( !this.rInput管理.Mouse.bキーが押されている( stkeyassignArray[ i ].Code ) )
+							if( !this.rInput管理.Mouse.bKeyPressing( stkeyassignArray[ i ].Code ) )
 							{
 								break;
 							}
-							this.st検知したデバイス.Mouse = true;
+							this.stDetectedDevice.Mouse = true;
 							return true;
 					}
 				}

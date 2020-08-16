@@ -37,11 +37,11 @@ namespace DTXMania
 
 
 		// メソッド
-		public void t文字列描画(int x, int y, string str)
+		public void tDrawString(int x, int y, string str)
 		{
-			this.t文字列描画(x, y, str, EFontColor.White, EFontAlign.Right);
+			this.tDrawString(x, y, str, EFontColor.White, EFontAlign.Right);
 		}
-		public void t文字列描画(int x, int y, string str, EFontColor efc, EFontAlign efa)
+		public void tDrawString(int x, int y, string str, EFontColor efc, EFontAlign efa)
 		{
 			if (!base.bNotActivated && !string.IsNullOrEmpty(str))
 			{

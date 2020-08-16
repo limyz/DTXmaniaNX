@@ -553,7 +553,7 @@ namespace DTXMania
                 FPS.tカウンタ更新();
 
             //if( Pad != null )					ポーリング時にクリアしたらダメ！曲の開始時に1回だけクリアする。(2010.9.11)
-            //	Pad.st検知したデバイス.Clear();
+            //	Pad.stDetectedDevice.Clear();
 
             if (this.Device == null)
                 return;
@@ -1037,7 +1037,7 @@ namespace DTXMania
                         //-----------------------------
                         if (this.n進行描画の戻り値 != 0)
                         {
-                            CDTXMania.Pad.st検知したデバイス.Clear();	// 入力デバイスフラグクリア(2010.9.11)
+                            CDTXMania.Pad.stDetectedDevice.Clear();	// 入力デバイスフラグクリア(2010.9.11)
 
                             rCurrentStage.OnDeactivate();
 
@@ -1231,7 +1231,7 @@ for (int i = 0; i < 3; i++) {
                                 }
                                 else
                                 {
-                                    stagePerfDrumsScreen.t演奏結果を格納する(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out chipArray);
+                                    stagePerfDrumsScreen.tStorePerfResults(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out chipArray);
                                 }
 
                                 if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える

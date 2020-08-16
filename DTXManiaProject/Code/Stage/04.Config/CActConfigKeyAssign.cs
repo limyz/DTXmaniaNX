@@ -115,7 +115,7 @@ namespace DTXMania
 			{
 				if( this.bWaitingForKeyInput )
 				{
-					if( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+					if( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Escape ) )
 					{
 						CDTXMania.Skin.sound取消音.tPlay();
 						this.bWaitingForKeyInput = false;
@@ -127,7 +127,7 @@ namespace DTXMania
 						CDTXMania.InputManager.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
 				}
-				else if( ( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Delete ) && ( this.nSelectedRow >= 0 ) ) && ( this.nSelectedRow <= 15 ) )
+				else if( ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Delete ) && ( this.nSelectedRow >= 0 ) ) && ( this.nSelectedRow <= 15 ) )
 				{
 					CDTXMania.Skin.sound決定音.tPlay();
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Unknown;
@@ -432,7 +432,7 @@ namespace DTXMania
 				{
 					for( int i = 0; i < 6 + 0x80 + 8; i++ )		// +6 for Axis, +8 for HAT
 					{
-						if( device.bキーが押された( i ) )
+						if( device.bKeyPressed( i ) )
 						{
 							CDTXMania.Skin.sound決定音.tPlay();
 							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Joypad, device.ID, i );
@@ -456,7 +456,7 @@ namespace DTXMania
 					i != (int)SlimDX.DirectInput.Key.LeftArrow &&
 					i != (int)SlimDX.DirectInput.Key.RightArrow &&
 					i != (int)SlimDX.DirectInput.Key.Delete &&
-					 CDTXMania.InputManager.Keyboard.bキーが押された( i ) )
+					 CDTXMania.InputManager.Keyboard.bKeyPressed( i ) )
 				{
 					CDTXMania.Skin.sound決定音.tPlay();
 					CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Keyboard, 0, i );
@@ -476,7 +476,7 @@ namespace DTXMania
 				{
 					for( int i = 0; i < 0x100; i++ )
 					{
-						if( device.bキーが押された( i ) )
+						if( device.bKeyPressed( i ) )
 						{
 							CDTXMania.Skin.sound決定音.tPlay();
 							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.MIDI入力, device.ID, i );
@@ -494,7 +494,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 8; i++ )
 			{
-				if( CDTXMania.InputManager.Mouse.bキーが押された( i ) )
+				if( CDTXMania.InputManager.Mouse.bKeyPressed( i ) )
 				{
 					CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Mouse, 0, i );
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Mouse;

@@ -311,7 +311,7 @@ namespace DTXMania
             // 曲データの一覧取得中は、キー入力を無効化する
             if (!CDTXMania.EnumSongs.IsEnumerating || CDTXMania.actEnumSongs.bコマンドでの曲データ取得 != true)
             {
-                if ((CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)) || CDTXMania.Pad.bPressedGB(EPad.Pick))
+                if ((CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Escape) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)) || CDTXMania.Pad.bPressedGB(EPad.Pick))
                 {
                     CDTXMania.Skin.sound取消音.tPlay();
                     if (!this.bFocusIsOnMenu)
@@ -334,7 +334,7 @@ namespace DTXMania
                         base.ePhaseID = CStage.EPhase.Common_FadeOut;
                     }
                 }
-                else if ((CDTXMania.Pad.bPressedDGB(EPad.CY) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.RD) || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return))))
+                else if ((CDTXMania.Pad.bPressedDGB(EPad.CY) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.RD) || (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Return))))
                 {
                     if (this.nCurrentMenuNumber == 4)
                     {
@@ -371,14 +371,14 @@ namespace DTXMania
                         }
                     }
                 }
-                this.ctKeyRepetition.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tMoveCursorUp));
+                this.ctKeyRepetition.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tMoveCursorUp));
                 this.ctKeyRepetition.R.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.HH), new CCounter.DGキー処理(this.tMoveCursorUp));
                 //Change to HT
                 if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.HT))
                 {
                     this.tMoveCursorUp();
                 }
-                this.ctKeyRepetition.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tMoveCursorDown));
+                this.ctKeyRepetition.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tMoveCursorDown));
                 this.ctKeyRepetition.B.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.SD), new CCounter.DGキー処理(this.tMoveCursorDown));
                 //Change to LT
                 if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LT))

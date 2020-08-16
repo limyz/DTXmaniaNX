@@ -37,8 +37,8 @@ namespace DTXMania
                 {
                         this.n現在表示中のスコア[0] += this.nスコアの増分[0];
 
-                        if (this.n現在表示中のスコア[0] > (long)this.n現在の本当のスコア[0])
-                            this.n現在表示中のスコア[0] = (long)this.n現在の本当のスコア[0];
+                        if (this.n現在表示中のスコア[0] > (long)this.nCurrentTrueScore[0])
+                            this.n現在表示中のスコア[0] = (long)this.nCurrentTrueScore[0];
                     base.n進行用タイマ += 10;
                 }
                 string str = string.Format("{0,7:######0}", this.n現在表示中のスコア[0]);

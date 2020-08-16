@@ -148,22 +148,22 @@ namespace DTXMania
 				if( base.ePhaseID == CStage.EPhase.Common_DefaultState		// 通常状態、かつ
 					&& CDTXMania.act現在入力を占有中のプラグイン == null )	// プラグインの入力占有がない
 				{
-					if( CDTXMania.InputManager.Keyboard.bキーが押された( (int) Key.Escape ) )
+					if( CDTXMania.InputManager.Keyboard.bKeyPressed( (int) Key.Escape ) )
 						return (int) E戻り値.EXIT;
 
-					this.ctキー反復用.Up.tRepeatKey( CDTXMania.InputManager.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
+					this.ctキー反復用.Up.tRepeatKey( CDTXMania.InputManager.Keyboard.bKeyPressing( (int)SlimDX.DirectInput.Key.UpArrow ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					this.ctキー反復用.R.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.HH ), new CCounter.DGキー処理( this.tカーソルを上へ移動する ) );
 					//Change to HT
 					if( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.HT ) )
 						this.tカーソルを上へ移動する();
 
-					this.ctキー反復用.Down.tRepeatKey( CDTXMania.InputManager.Keyboard.bキーが押されている( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
+					this.ctキー反復用.Down.tRepeatKey( CDTXMania.InputManager.Keyboard.bKeyPressing( (int)SlimDX.DirectInput.Key.DownArrow ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					this.ctキー反復用.B.tRepeatKey( CDTXMania.Pad.b押されているGB( EPad.SD ), new CCounter.DGキー処理( this.tカーソルを下へ移動する ) );
 					//Change to LT
 					if ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LT ) )
 						this.tカーソルを下へ移動する();
 
-					if( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) 
+					if( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Return ) ) ) 
 					{
 						if ( ( this.n現在のカーソル行 == (int) E戻り値.GAMESTART - 1 ) && CDTXMania.Skin.soundゲーム開始音.b読み込み成功 )
 						{

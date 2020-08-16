@@ -3259,7 +3259,7 @@ namespace DTXMania
 				}
 			}
         }
-		public void t全チップの再生再開()
+		public void tResumePlaybackForAllChips()
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{

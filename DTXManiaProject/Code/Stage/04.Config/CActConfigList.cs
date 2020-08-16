@@ -847,7 +847,7 @@ namespace DTXMania
                 new string[] { "C>P", "P>C" });
             this.listItems.Add(this.iSystemHitSoundPriorityCY);
 
-            this.iSystemFillIn = new CItemToggle("FillIn", CDTXMania.ConfigIni.bフィルイン有効,
+            this.iSystemFillIn = new CItemToggle("FillIn", CDTXMania.ConfigIni.bFillInEnabled,
                 "フィルインエフェクトの使用：\n" +
                 "フィルイン区間の爆発パターンに特別" +
                 "のエフェクトを使用します。\n" +
@@ -2257,7 +2257,7 @@ namespace DTXMania
 		}
         public override int OnUpdateAndDraw()
         {
-            throw new InvalidOperationException("t進行描画(bool)のほうを使用してください。");
+            throw new InvalidOperationException("tUpdateAndDraw(bool)のほうを使用してください。");
         }
         public int t進行描画(bool b項目リスト側にフォーカスがある)
         {
@@ -2433,7 +2433,7 @@ namespace DTXMania
 //					CDTXMania.tReleaseTexture( ref ctItem );
 					CDTXMania.t安全にDisposeする( ref bmpItem );
 				}
-				//CDTXMania.stageConfig.actFont.t文字列描画( x + 0x12, y + 12, this.listItems[ nItem ].strItemName );
+				//CDTXMania.stageConfig.actFont.tDrawString( x + 0x12, y + 12, this.listItems[ nItem ].strItemName );
                 //-----------------
                 #endregion
                 #region [ 現在の行の項目の要素を描画。]
@@ -2445,7 +2445,7 @@ namespace DTXMania
 					case CItemBase.EType.ONorOFFToggle:
 						#region [ *** ]
 						//-----------------
-						//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, ( (CItemToggle) this.listItems[ nItem ] ).bON ? "ON" : "OFF" );
+						//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, ( (CItemToggle) this.listItems[ nItem ] ).bON ? "ON" : "OFF" );
 						strParam = ( (CItemToggle) this.listItems[ nItem ] ).bON ? "ON" : "OFF";
 						break;
 						//-----------------
@@ -2468,7 +2468,7 @@ namespace DTXMania
 								strParam = "OFF";
 								break;
 						}
-						//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, "ON" );
+						//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, "ON" );
 						break;
 						//-----------------
 						#endregion
@@ -2479,18 +2479,18 @@ namespace DTXMania
 						if( this.listItems[ nItem ] == this.iCommonPlaySpeed )
 						{
 							double d = ( (double) ( (CItemInteger) this.listItems[ nItem ] ).nCurrentValue ) / 20.0;
-							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, d.ToString( "0.000" ), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
+							//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, d.ToString( "0.000" ), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
 							strParam = d.ToString( "0.000" );
 						}
 						else if( this.listItems[ nItem ] == this.iDrumsScrollSpeed || this.listItems[ nItem ] == this.iGuitarScrollSpeed || this.listItems[ nItem ] == this.iBassScrollSpeed )
 						{
 							float f = ( ( (CItemInteger) this.listItems[ nItem ] ).nCurrentValue + 1 ) * 0.5f;
-							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, f.ToString( "x0.0" ), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
+							//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, f.ToString( "x0.0" ), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
 							strParam = f.ToString( "x0.0" );
 						}
 						else
 						{
-							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, ( (CItemInteger) this.listItems[ nItem ] ).nCurrentValue.ToString(), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
+							//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, ( (CItemInteger) this.listItems[ nItem ] ).nCurrentValue.ToString(), ( n行番号 == 0 ) && this.bFocusIsOnElementValue );
 							strParam = ( (CItemInteger) this.listItems[ nItem ] ).nCurrentValue.ToString();
 						}
 						b強調 = ( n行番号 == 0 ) && this.bFocusIsOnElementValue;
@@ -2503,7 +2503,7 @@ namespace DTXMania
 						//-----------------
 						{
 							CItemList list = (CItemList) this.listItems[ nItem ];
-							//CDTXMania.stageConfig.actFont.t文字列描画( x + 210, y + 12, list.list項目値[ list.n現在選択されている項目番号 ] );
+							//CDTXMania.stageConfig.actFont.tDrawString( x + 210, y + 12, list.list項目値[ list.n現在選択されている項目番号 ] );
 							strParam = list.list項目値[ list.n現在選択されている項目番号 ];
 
 							#region [ 必要な場合に、Skinのサンプルを生成_描画する。#28195 2012.5.2 yyagi ]
@@ -3093,7 +3093,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.eHHOGraphics.Drums = (EType)this.iDrumsHHOGraphics.n現在選択されている項目番号;
             CDTXMania.ConfigIni.eLBDGraphics.Drums = (EType)this.iDrumsLBDGraphics.n現在選択されている項目番号;
             CDTXMania.ConfigIni.eRDPosition = (ERDPosition)this.iDrumsRDPosition.n現在選択されている項目番号;
-            CDTXMania.ConfigIni.bフィルイン有効 = this.iSystemFillIn.bON;
+            CDTXMania.ConfigIni.bFillInEnabled = this.iSystemFillIn.bON;
             CDTXMania.ConfigIni.b演奏音を強調する.Drums = this.iSystemSoundMonitorDrums.bON;
             CDTXMania.ConfigIni.bドラム打音を発声する = this.iSystemHitSound.bON;
             CDTXMania.ConfigIni.n表示可能な最小コンボ数.Drums = this.iSystemMinComboDrums.nCurrentValue;

@@ -344,7 +344,7 @@ namespace DTXMania
 						actQuickConfig.tDeativatePopupMenu();
 						this.actPresound.tサウンド停止();
 						this.eフェードアウト完了時の戻り値 = E戻り値.コンフィグ呼び出し;	// #24525 2011.3.16 yyagi: [SHIFT]-[F1]でCONFIG呼び出し
-						this.actFIFO.tフェードアウト開始();
+						this.actFIFO.tStartFadeOut();
 						base.ePhaseID = CStage.EPhase.Common_FadeOut;
 						CDTXMania.Skin.sound取消音.tPlay();
 						return 0;
@@ -353,11 +353,11 @@ namespace DTXMania
 					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu )
 					{
                         #region [ ESC ]
-                        if (CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)) && ((this.actSongList.r現在選択中の曲 != null) && (this.actSongList.r現在選択中の曲.r親ノード == null))))
+                        if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)) && ((this.actSongList.r現在選択中の曲 != null) && (this.actSongList.r現在選択中の曲.r親ノード == null))))
                         {	// [ESC]
                             CDTXMania.Skin.sound取消音.tPlay();
                             this.eフェードアウト完了時の戻り値 = E戻り値.タイトルに戻る;
-                            this.actFIFO.tフェードアウト開始();
+                            this.actFIFO.tStartFadeOut();
                             base.ePhaseID = CStage.EPhase.Common_FadeOut;
                             return 0;
                         }
@@ -367,7 +367,7 @@ namespace DTXMania
                         {	// [SHIFT] + [F1] CONFIG
                             this.actPresound.tサウンド停止();
                             this.eフェードアウト完了時の戻り値 = E戻り値.コンフィグ呼び出し;	// #24525 2011.3.16 yyagi: [SHIFT]-[F1]でCONFIG呼び出し
-                            this.actFIFO.tフェードアウト開始();
+                            this.actFIFO.tStartFadeOut();
                             base.ePhaseID = CStage.EPhase.Common_FadeOut;
                             CDTXMania.Skin.sound取消音.tPlay();
                             return 0;
@@ -376,8 +376,8 @@ namespace DTXMania
                         #region [ Shift-F2: 未使用 ]
                         // #24525 2011.3.16 yyagi: [SHIFT]+[F2]は廃止(将来発生するかもしれない別用途のためにキープ)
                         /*
-                        if ((CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.RightShift) || CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.LeftShift)) &&
-                            CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.F2))
+                        if ((CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.RightShift) || CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.LeftShift)) &&
+                            CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.F2))
                         {	// [SHIFT] + [F2] CONFIGURATION
                             this.actPresound.tサウンド停止();
                             this.eフェードアウト完了時の戻り値 = EReturnValue.オプション呼び出し;
@@ -392,7 +392,7 @@ namespace DTXMania
                         {
                             #region [ Decide ]
                             if ((CDTXMania.Pad.bPressedDGB(EPad.Decide) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.CY) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.RD)) ||
-                                (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.Return)))
+                                (CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Return)))
                             {
                                 if (this.actSongList.r現在選択中の曲 != null)
                                 {
@@ -441,7 +441,7 @@ namespace DTXMania
                             }
                             #endregion
                             #region [ Up ]
-                            this.ctキー反復用.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
+                            this.ctキー反復用.Up.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.UpArrow), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
                             this.ctキー反復用.R.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.R), new CCounter.DGキー処理(this.tカーソルを上へ移動する));
                             //SD changed to HT to follow Gitadora style
 							if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.HT))
@@ -450,7 +450,7 @@ namespace DTXMania
                             }
                             #endregion
                             #region [ Down ]
-                            this.ctキー反復用.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bキーが押されている((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
+                            this.ctキー反復用.Down.tRepeatKey(CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.DownArrow), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
                             this.ctキー反復用.B.tRepeatKey(CDTXMania.Pad.b押されているGB(EPad.G), new CCounter.DGキー処理(this.tカーソルを下へ移動する));
 							//FT changed to LT to follow Gitadora style
 							if (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LT))
@@ -608,7 +608,7 @@ namespace DTXMania
                             }
                             #endregion
                         }
-                        //if( CDTXMania.InputManager.Keyboard.bキーが押された((int)SlimDX.DirectInput.Key.F6) )
+                        //if( CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.F6) )
                         //{
                         //    if (CDTXMania.EnumSongs.IsEnumerating)
                         //    {

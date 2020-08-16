@@ -20,18 +20,18 @@ namespace FDK
 		{
 			get;
 		}
-		List<STInputEvent> list入力イベント
+		List<STInputEvent> listInputEvent
 		{
 			get;
 		}
 
 
-		// メソッドインターフェース
+		// Method interfaces
 
-		void tポーリング( bool bWindowがアクティブ中, bool bバッファ入力を使用する );
-		bool bキーが押された( int nKey );
-		bool bキーが押されている( int nKey );
-		bool bキーが離された( int nKey );
-		bool bキーが離されている( int nKey );
+		void tPolling( bool bWindowがアクティブ中, bool bバッファ入力を使用する );
+		bool bKeyPressed( int nKey );
+		bool bKeyPressing( int nKey );
+		bool bKeyReleased( int nKey );
+		bool bKeyReleasing( int nKey );
 	}
 }

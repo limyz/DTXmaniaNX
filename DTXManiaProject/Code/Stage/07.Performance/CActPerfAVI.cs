@@ -492,7 +492,7 @@ namespace DTXMania
                 base.OnManagedReleaseResources();
             }
         }
-        public unsafe int t進行描画(int x, int y)
+        public unsafe int tUpdateAndDraw(int x, int y)
         {
             if (this.txDShow汎用 != null && (CDTXMania.ConfigIni.bDrumsEnabled ? CDTXMania.stagePerfDrumsScreen.ct登場用.bReachedEndValue : CDTXMania.stagePerfGuitarScreen.ct登場用.bReachedEndValue))
             {
@@ -1040,7 +1040,7 @@ namespace DTXMania
         }
         public override int OnUpdateAndDraw()
         {
-            throw new InvalidOperationException("t進行描画(int,int)のほうを使用してください。");
+            throw new InvalidOperationException("tUpdateAndDraw(int,int)のほうを使用してください。");
         }
 
 

@@ -26,7 +26,7 @@ namespace DTXMania
 		}
 		public override int OnUpdateAndDraw()
 		{
-			throw new InvalidOperationException( "t進行描画(bool)のほうを使用してください。" );
+			throw new InvalidOperationException( "tUpdateAndDraw(bool)のほうを使用してください。" );
 		}
 		/// <summary>
 		/// ドラム画面のDANGER描画

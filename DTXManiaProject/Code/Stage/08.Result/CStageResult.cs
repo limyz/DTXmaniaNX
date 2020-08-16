@@ -520,15 +520,15 @@ namespace DTXMania
 					//Play the corresponding sound
 					if(l_outputSoundEnum == 1)
                     {
-						CDTXMania.Skin.soundフルコンボ音.tPlay();
+						CDTXMania.Skin.soundFullCombo.tPlay();
 					}
 					else if(l_outputSoundEnum == 2)
                     {
-						CDTXMania.Skin.soundエクセレント音.tPlay();
+						CDTXMania.Skin.soundExcellent.tPlay();
 					}
 					else
                     {
-						CDTXMania.Skin.soundステージクリア音.tPlay();
+						CDTXMania.Skin.soundStageClear.tPlay();
 					}
 
 					//Create the delay timer of 150 x 10 = 1500 ms to play New Record
@@ -721,7 +721,7 @@ namespace DTXMania
 							}
 						}
 					}
-					if( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
+					if( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Return ) ) ) && !this.bアニメが完了 )
 					{
 						this.actFI.tフェードイン完了();					// #25406 2011.6.9 yyagi
 						this.actResultImage.tアニメを完了させる();
@@ -730,7 +730,7 @@ namespace DTXMania
 						this.ct登場用.tStop();
 					}
 					#region [ #24609 2011.4.7 yyagi リザルト画面で[F12]を押下すると、リザルト画像をpngで保存する機能は、CDTXManiaに移管。 ]
-//					if ( CDTXMania.InputManager.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.F12 ) &&
+//					if ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int) SlimDX.DirectInput.Key.F12 ) &&
 //						CDTXMania.ConfigIni.bScoreIniを出力する )
 //					{
 //						CheckAndSaveResultScreen(false);
@@ -739,14 +739,14 @@ namespace DTXMania
 					#endregion
 					if ( base.ePhaseID == CStage.EPhase.Common_DefaultState )
 					{
-						if ( CDTXMania.InputManager.Keyboard.bキーが押された( (int)SlimDX.DirectInput.Key.Escape ) )
+						if ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Escape ) )
 						{
 							CDTXMania.Skin.sound取消音.tPlay();
-							this.actFO.tフェードアウト開始();
+							this.actFO.tStartFadeOut();
 							base.ePhaseID = CStage.EPhase.Common_FadeOut;
 							this.eフェードアウト完了時の戻り値 = EReturnValue.Complete;
 						}
-						if ( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bキーが押された( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
+						if ( ( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) || CDTXMania.InputManager.Keyboard.bKeyPressed( (int) SlimDX.DirectInput.Key.Return ) ) ) && this.bアニメが完了 )
 						{
 							CDTXMania.Skin.sound取消音.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_FadeOut;
