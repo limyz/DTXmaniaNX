@@ -288,7 +288,7 @@ namespace DTXMania
             this.tComplete(THREAD_進行);
             this.tComplete(THREAD_描画);
         }
-        //public int n進行描画の戻り値;
+        //public int nUpdateAndDrawReturnValue;
         //private void t現在のステージの進行()
         //{
         //

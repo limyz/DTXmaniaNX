@@ -155,11 +155,11 @@ namespace DTXMania
 
                 if (base.bJustStartedUpdate)
                 {
-                    this.nフラッシュ制御タイマ = CDTXMania.Timer.n現在時刻;
-                    this.nY座標制御タイマ = CDTXMania.Timer.n現在時刻;
+                    this.nフラッシュ制御タイマ = CDTXMania.Timer.nCurrentTime;
+                    this.nY座標制御タイマ = CDTXMania.Timer.nCurrentTime;
                     base.bJustStartedUpdate = false;
                 }
-                long num = CDTXMania.Timer.n現在時刻;
+                long num = CDTXMania.Timer.nCurrentTime;
                 if (num < this.nフラッシュ制御タイマ)
                 {
                     this.nフラッシュ制御タイマ = num;
@@ -175,7 +175,7 @@ namespace DTXMania
                     }
                     this.nフラッシュ制御タイマ += 18L;
                 }
-                long num3 = CDTXMania.Timer.n現在時刻;
+                long num3 = CDTXMania.Timer.nCurrentTime;
                 if (num3 < this.nY座標制御タイマ)
                 {
                     this.nY座標制御タイマ = num3;
@@ -381,9 +381,9 @@ namespace DTXMania
                         if (this.txボーナス文字 != null && CDTXMania.ConfigIni.bShowScore)
                         {
                             this.txボーナス文字.tDraw2D(CDTXMania.app.Device, 160, 80);
-                            //if (this.stボーナス[i].ct進行.nCurrentValue >= 765)
+                            //if (this.stボーナス[i].ctUpdate.nCurrentValue >= 765)
                             //{
-                            //    int n = this.stボーナス[i].ct進行.nCurrentValue - 765;
+                            //    int n = this.stボーナス[i].ctUpdate.nCurrentValue - 765;
                             //    this.txボーナス文字.nTransparency = 255 - n;
                             //}
                         }

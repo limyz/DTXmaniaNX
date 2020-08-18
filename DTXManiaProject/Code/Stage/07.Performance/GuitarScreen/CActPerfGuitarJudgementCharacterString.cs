@@ -133,7 +133,7 @@ namespace DTXMania
                             {
                                 base.st状態[i].ct進行.tStop();
                             }
-                            //int num2 = base.st状態[i].ct進行.nCurrentValue;
+                            //int num2 = base.st状態[i].ctUpdate.nCurrentValue;
                             int nNowFrame = base.st状態[ i ].ct進行.nCurrentValue;
 
                             //テンプレのようなもの。

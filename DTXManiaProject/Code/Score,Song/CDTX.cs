@@ -74,7 +74,7 @@ namespace DTXMania
 				if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 					strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 				else
-					strAVIファイル名 = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
+					strAVIファイル名 = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PATH + this.strファイル名;
 				//-----------------
 				#endregion
 
@@ -128,7 +128,7 @@ namespace DTXMania
 					if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 						strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 					else
-						strAVIファイル名 = CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+						strAVIファイル名 = CDTXMania.DTX.strFolderName + this.strファイル名;
 					//-----------------
 					#endregion
 
@@ -159,7 +159,7 @@ namespace DTXMania
 				if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 					str動画ファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 				else
-					str動画ファイル名 = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
+					str動画ファイル名 = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PATH + this.strファイル名;
 				//-----------------
 				#endregion
 
@@ -173,7 +173,7 @@ namespace DTXMania
 
 				try
 				{
-                    this.dshow = new FDK.CDirectShow( CDTXMania.stageSongSelection.r確定されたスコア.FileInformation.AbsoluteFolderPath + this.strファイル名, CDTXMania.app.WindowHandle, true);
+                    this.dshow = new FDK.CDirectShow( CDTXMania.stageSongSelection.rChosenScore.FileInformation.AbsoluteFolderPath + this.strファイル名, CDTXMania.app.WindowHandle, true);
 					Trace.TraceInformation( "DirectShowを生成しました。({0})({1})({2}byte)", this.strコメント文, str動画ファイル名, this.dshow.nデータサイズbyte );
                     CDTXMania.app.b汎用ムービーである = false;
 				}
@@ -204,7 +204,7 @@ namespace DTXMania
 					if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 						str動画ファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
 					else
-						str動画ファイル名 = CDTXMania.DTX.strフォルダ名 + this.strファイル名;
+						str動画ファイル名 = CDTXMania.DTX.strFolderName + this.strファイル名;
 					//-----------------
 					#endregion
 
@@ -353,7 +353,7 @@ namespace DTXMania
                         if ( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 						    return CDTXMania.DTX.PATH_WAV + this.strファイル名;
 					    else
-						    return CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PATH + this.strファイル名;
+						    return CDTXMania.DTX.strFolderName + CDTXMania.DTX.PATH + this.strファイル名;
                     }
                     return "";
 				}
@@ -442,7 +442,7 @@ namespace DTXMania
 					//if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
 					//    strテクスチャファイル名 = CDTXMania.DTX.PATH_WAV + this.strFilename;
 					//else
-					//    strテクスチャファイル名 = CDTXMania.DTX.strフォルダ名 + this.strFilename;
+					//    strテクスチャファイル名 = CDTXMania.DTX.strFolderName + this.strFilename;
 					//-----------------
 					#endregion
 
@@ -487,21 +487,21 @@ namespace DTXMania
 		public class CChip : IComparable<CDTX.CChip>, ICloneable
 		{
 			public bool bHit;
-			public bool b可視 = true;
-			public double dbチップサイズ倍率 = 1.0;
+			public bool bVisible = true;
+			public double dbChipSizeRatio = 1.0;
 			public double db実数値;
 			public EAVIType eAVI種別;
 			public EBGAType eBGA種別;
-			public EInstrumentPart e楽器パート = EInstrumentPart.UNKNOWN;
-			public int nチャンネル番号;
-			public STDGBVALUE<int> nバーからの距離dot;
-			public int n整数値;
-			public int n整数値_内部番号;
+			public EInstrumentPart eInstrumentPart = EInstrumentPart.UNKNOWN;
+			public int nChannelNumber;
+			public STDGBVALUE<int> nDistanceFromBar;
+			public int nIntegerValue;
+			public int nIntegerValue_InternalNumber;
 			public int n総移動時間;
-			public int n透明度 = 0xff;
-			public int n発声位置;
-			public int n発声時刻ms;
-            public bool bボーナスチップ;
+			public int nTransparency = 0xff;
+			public int nPlaybackPosition;
+			public int nPlaybackTimeMs;
+            public bool bBonusChip;
 			public int nLag;				// 2011.2.1 yyagi
             public int nCurrentComboForGhost; // 2015.9.29 chnmr0 fork
 			public CDTX.CAVI rAVI;
@@ -515,7 +515,7 @@ namespace DTXMania
 			{
 				get
 				{
-					if (this.nチャンネル番号 == 3 || this.nチャンネル番号 == 8) {
+					if (this.nChannelNumber == 3 || this.nChannelNumber == 8) {
 						return true;
 					} else {
 						return false;
@@ -526,7 +526,7 @@ namespace DTXMania
 			{
 				get
 				{
-					switch( this.nチャンネル番号 )
+					switch( this.nChannelNumber )
 					{
 						case 0x01:
 						case 0x11:
@@ -678,7 +678,7 @@ namespace DTXMania
 			{
 				get
 				{
-					int num = this.nチャンネル番号;
+					int num = this.nChannelNumber;
 					if( ( ( ( num != 1 ) && ( ( 0x61 > num ) || ( num > 0x69 ) ) ) && ( ( 0x70 > num ) || ( num > 0x79 ) ) ) && ( ( 0x80 > num ) || ( num > 0x89 ) ) )
 					{
 						return ( ( 0x90 <= num ) && ( num <= 0x92 ) );
@@ -687,7 +687,7 @@ namespace DTXMania
 				}
 			}
 			public bool bIsAutoPlayed;						// 2011.6.10 yyagi
-            public bool b演奏終了後も再生が続くチップである; // #32248 2013.10.14 yyagi
+            public bool bChipKeepsPlayingAfterPerfEnds; // #32248 2013.10.14 yyagi
 
             //fork
             public int n楽器パートでの出現順;                // #35411 2015.08.20 chnmr0
@@ -695,7 +695,7 @@ namespace DTXMania
 			
 			public CChip()
 			{
-				this.nバーからの距離dot = new STDGBVALUE<int>() {
+				this.nDistanceFromBar = new STDGBVALUE<int>() {
 					Drums = 0,
 					Guitar = 0,
 					Bass = 0,
@@ -703,26 +703,26 @@ namespace DTXMania
 			}
 			public void t初期化()
 			{
-				this.nチャンネル番号 = 0;
-				this.n整数値 = 0;
-				this.n整数値_内部番号 = 0;
+				this.nChannelNumber = 0;
+				this.nIntegerValue = 0;
+				this.nIntegerValue_InternalNumber = 0;
 				this.db実数値 = 0.0;
-				this.n発声位置 = 0;
-				this.n発声時刻ms = 0;
-                this.bボーナスチップ = false;
+				this.nPlaybackPosition = 0;
+				this.nPlaybackTimeMs = 0;
+                this.bBonusChip = false;
 				this.nLag = -999;
                 this.n楽器パートでの出現順 = -1;
                 this.bTargetGhost判定済み = false;
 				this.bIsAutoPlayed = false;
-                this.b演奏終了後も再生が続くチップである = false;
-				this.dbチップサイズ倍率 = 1.0;
+                this.bChipKeepsPlayingAfterPerfEnds = false;
+				this.dbChipSizeRatio = 1.0;
 				this.bHit = false;
-				this.b可視 = true;
-				this.e楽器パート = EInstrumentPart.UNKNOWN;
-				this.n透明度 = 0xff;
-				this.nバーからの距離dot.Drums = 0;
-				this.nバーからの距離dot.Guitar = 0;
-				this.nバーからの距離dot.Bass = 0;
+				this.bVisible = true;
+				this.eInstrumentPart = EInstrumentPart.UNKNOWN;
+				this.nTransparency = 0xff;
+				this.nDistanceFromBar.Drums = 0;
+				this.nDistanceFromBar.Guitar = 0;
+				this.nDistanceFromBar.Bass = 0;
 				this.n総移動時間 = 0;
 			}
 			public override string ToString()
@@ -760,15 +760,15 @@ namespace DTXMania
 					"BGAスコープ画像切替8"
 				};
 				return string.Format( "CChip: 位置:{0:D4}.{1:D3}, 時刻{2:D6}, Ch:{3:X2}({4}), Pn:{5}({11})(内部{6}), Pd:{7}, Sz:{8}, UseWav:{9}, Auto:{10}",
-					this.n発声位置 / 384, this.n発声位置 % 384,
-					this.n発声時刻ms,
-					this.nチャンネル番号, chToStr[ this.nチャンネル番号 ],
-					this.n整数値, this.n整数値_内部番号,
+					this.nPlaybackPosition / 384, this.nPlaybackPosition % 384,
+					this.nPlaybackTimeMs,
+					this.nChannelNumber, chToStr[ this.nChannelNumber ],
+					this.nIntegerValue, this.nIntegerValue_InternalNumber,
 					this.db実数値,
-					this.dbチップサイズ倍率,
+					this.dbChipSizeRatio,
 					this.bWAVを使うチャンネルである,
 					this.b自動再生音チャンネルである,
-					CDTX.tZZ( this.n整数値 ) );
+					CDTX.tZZ( this.nIntegerValue ) );
 			}
 			/// <summary>
 			/// チップの再生長を取得する。現状、WAVチップとBGAチップでのみ使用可能。
@@ -781,17 +781,17 @@ namespace DTXMania
 				if ( this.bWAVを使うチャンネルである )		// WAV
 				{
 					CDTX.CWAV wc;
-					CDTXMania.DTX.listWAV.TryGetValue( this.n整数値_内部番号, out wc );
+					CDTXMania.DTX.listWAV.TryGetValue( this.nIntegerValue_InternalNumber, out wc );
 					if ( wc == null )
 					{
 						nDuration = 0;
 					}
 					else
 					{
-						nDuration = ( wc.rSound[ 0 ] == null ) ? 0 : wc.rSound[ 0 ].n総演奏時間ms;
+						nDuration = ( wc.rSound[ 0 ] == null ) ? 0 : wc.rSound[ 0 ].nTotalPlayTimeMs;
 					}
 				}
-				else if ( this.nチャンネル番号 == 0x54 || this.nチャンネル番号 == 0x5A )	// AVI
+				else if ( this.nChannelNumber == 0x54 || this.nChannelNumber == 0x5A )	// AVI
 				{
 					if ( this.rAVI != null && this.rAVI.avi != null )
 					{
@@ -832,19 +832,19 @@ namespace DTXMania
 
 				// まずは位置で比較。
 
-				if( this.n発声位置 < other.n発声位置 )
+				if( this.nPlaybackPosition < other.nPlaybackPosition )
 					return -1;
 
-				if( this.n発声位置 > other.n発声位置 )
+				if( this.nPlaybackPosition > other.nPlaybackPosition )
 					return 1;
 
 
 				// 位置が同じなら優先度で比較。
 
-				if( n優先度[ this.nチャンネル番号 ] < n優先度[ other.nチャンネル番号 ] )
+				if( n優先度[ this.nChannelNumber ] < n優先度[ other.nChannelNumber ] )
 					return -1;
 
-				if( n優先度[ this.nチャンネル番号 ] > n優先度[ other.nチャンネル番号 ] )
+				if( n優先度[ this.nChannelNumber ] > n優先度[ other.nChannelNumber ] )
 					return 1;
 
 
@@ -872,7 +872,7 @@ namespace DTXMania
 			public long[] nPauseTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
 			public int n音量 = 100;
 			public int n現在再生中のサウンド番号;
-			public long[] n再生開始時刻 = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
+			public long[] nPlayStartTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
 			public int n内部番号;
 			public int n表記上の番号;
 			public CSound[] rSound = new CSound[ CDTXMania.ConfigIni.nPoliphonicSounds ];		// 4
@@ -930,7 +930,7 @@ namespace DTXMania
 					for ( int i = 0; i < CDTXMania.ConfigIni.nPoliphonicSounds; i++ )	// 4
 					{
 						if( this.rSound[ i ] != null )
-							CDTXMania.SoundManager.tサウンドを破棄する( this.rSound[ i ] );
+							CDTXMania.SoundManager.tDiscard( this.rSound[ i ] );
 						this.rSound[ i ] = null;
 
 						if( ( i == 0 ) && CDTXMania.ConfigIni.bLog作成解放ログ出力 )
@@ -1367,7 +1367,7 @@ namespace DTXMania
 		public string strハッシュofDTXファイル;
 		public string strファイル名;
 		public string strファイル名の絶対パス;
-		public string strフォルダ名;
+		public string strFolderName;
 		public string TITLE;
         public bool b強制的にXG譜面にする;
         public bool bVol137to100;
@@ -1431,7 +1431,7 @@ namespace DTXMania
             this.bチップがある.YPBass = false;
             this.bチップがある.AVI = false;
 			this.strファイル名 = "";
-			this.strフォルダ名 = "";
+			this.strFolderName = "";
 			this.strファイル名の絶対パス = "";
 			this.n無限管理WAV = new int[ 36 * 36 ];
 			this.n無限管理BPM = new int[ 36 * 36 ];
@@ -1485,25 +1485,25 @@ namespace DTXMania
 			: this()
 		{
 			this.OnActivate();
-			this.t入力_全入力文字列から( str全入力文字列 );
+			this.tRead_FromString( str全入力文字列 );
 		}
 		public CDTX( string strファイル名, bool bヘッダのみ )
 			: this()
 		{
 			this.OnActivate();
-			this.t入力( strファイル名, bヘッダのみ );
+			this.tRead( strファイル名, bヘッダのみ );
 		}
 		public CDTX( string str全入力文字列, double db再生速度, int nBGMAdjust )
 			: this()
 		{
 			this.OnActivate();
-			this.t入力_全入力文字列から( str全入力文字列, db再生速度, nBGMAdjust );
+			this.tRead_FromString( str全入力文字列, db再生速度, nBGMAdjust );
 		}
 		public CDTX( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 			: this()
 		{
 			this.OnActivate();
-			this.t入力( strファイル名, bヘッダのみ, db再生速度, nBGMAdjust );
+			this.tRead( strファイル名, bヘッダのみ, db再生速度, nBGMAdjust );
 		}
 
 
@@ -1541,7 +1541,7 @@ namespace DTXMania
 			}
 			return configIni.n自動再生音量;
 		}
-		public void tAVIの読み込み()
+		public void tLoadAVI()
 		{
 			if( this.listAVI != null )
 			{
@@ -1561,15 +1561,15 @@ namespace DTXMania
 			{
 				foreach( CChip chip in this.listChip )
 				{
-					if( chip.nチャンネル番号 == 0x54 || chip.nチャンネル番号 == 0x5A )
+					if( chip.nChannelNumber == 0x54 || chip.nChannelNumber == 0x5A )
 					{
 						chip.eAVI種別 = EAVIType.Unknown;
 						chip.rAVI = null;
                         chip.rDShow = null;
 						chip.rAVIPan = null;
-						if( this.listAVIPAN.ContainsKey( chip.n整数値 ) )
+						if( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 						{
-							CAVIPAN cavipan = this.listAVIPAN[ chip.n整数値 ];
+							CAVIPAN cavipan = this.listAVIPAN[ chip.nIntegerValue ];
 							if( this.listAVI.ContainsKey( cavipan.nAVI番号 ) && ( this.listAVI[ cavipan.nAVI番号 ].avi != null ) )
 							{
 								chip.eAVI種別 = EAVIType.AVIPAN;
@@ -1580,12 +1580,12 @@ namespace DTXMania
 								continue;
 							}
 						}
-						if( this.listAVI.ContainsKey( chip.n整数値 ) && ( this.listAVI[ chip.n整数値 ].avi != null ) || ( this.listDS.ContainsKey( chip.n整数値 ) && ( this.listDS[ chip.n整数値 ].dshow != null ) ) )
+						if( this.listAVI.ContainsKey( chip.nIntegerValue ) && ( this.listAVI[ chip.nIntegerValue ].avi != null ) || ( this.listDS.ContainsKey( chip.nIntegerValue ) && ( this.listDS[ chip.nIntegerValue ].dshow != null ) ) )
 						{
 							chip.eAVI種別 = EAVIType.AVI;
-							chip.rAVI = this.listAVI[ chip.n整数値 ];
+							chip.rAVI = this.listAVI[ chip.nIntegerValue ];
                             if( CDTXMania.ConfigIni.bDirectShowMode == true )
-                                chip.rDShow = this.listDS[ chip.n整数値 ];
+                                chip.rDShow = this.listDS[ chip.nIntegerValue ];
 						}
 					}
 				}
@@ -1647,7 +1647,7 @@ namespace DTXMania
 		private static int nLoadDone;
 		#endregion
 
-		public void tBMP_BMPTEXの読み込み()
+		public void tLoadBMP_BMPTEX()
 		{
 			#region [ CPUコア数の取得 ]
 			CWin32.SYSTEM_INFO sysInfo = new CWin32.SYSTEM_INFO();
@@ -1750,7 +1750,7 @@ namespace DTXMania
 				foreach ( CChip chip in this.listChip )
 				{
 					#region [ BGAPAN/BGA/BMPTEX/BMP ]
-					if ( ( ( ( chip.nチャンネル番号 == 4 ) || ( chip.nチャンネル番号 == 7 ) ) || ( ( chip.nチャンネル番号 >= 0x55 ) && ( chip.nチャンネル番号 <= 0x59 ) ) ) || ( chip.nチャンネル番号 == 0x60 ) )
+					if ( ( ( ( chip.nChannelNumber == 4 ) || ( chip.nChannelNumber == 7 ) ) || ( ( chip.nChannelNumber >= 0x55 ) && ( chip.nChannelNumber <= 0x59 ) ) ) || ( chip.nChannelNumber == 0x60 ) )
 					{
 						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
@@ -1758,9 +1758,9 @@ namespace DTXMania
 						chip.rBGA = null;
 						chip.rBGAPan = null;
 						#region [ BGAPAN ]
-						if ( this.listBGAPAN.ContainsKey( chip.n整数値 ) )
+						if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
 						{
-							CBGAPAN cbgapan = this.listBGAPAN[ chip.n整数値 ];
+							CBGAPAN cbgapan = this.listBGAPAN[ chip.nIntegerValue ];
 							if ( this.listBMPTEX.ContainsKey( cbgapan.nBMP番号 ) && this.listBMPTEX[ cbgapan.nBMP番号 ].bUse )
 							{
 								chip.eBGA種別 = EBGAType.BGAPAN;
@@ -1778,9 +1778,9 @@ namespace DTXMania
 						}
 						#endregion
 						#region [ BGA ]
-						if ( this.listBGA.ContainsKey( chip.n整数値 ) )
+						if ( this.listBGA.ContainsKey( chip.nIntegerValue ) )
 						{
-							CBGA cbga = this.listBGA[ chip.n整数値 ];
+							CBGA cbga = this.listBGA[ chip.nIntegerValue ];
 							if ( this.listBMPTEX.ContainsKey( cbga.nBMP番号 ) && this.listBMPTEX[ cbga.nBMP番号 ].bUse )
 							{
 								chip.eBGA種別 = EBGAType.BGA;
@@ -1798,40 +1798,40 @@ namespace DTXMania
 						}
 						#endregion
 						#region [ BMPTEX ]
-						if ( this.listBMPTEX.ContainsKey( chip.n整数値 ) && this.listBMPTEX[ chip.n整数値 ].bUse )
+						if ( this.listBMPTEX.ContainsKey( chip.nIntegerValue ) && this.listBMPTEX[ chip.nIntegerValue ].bUse )
 						{
 							chip.eBGA種別 = EBGAType.BMPTEX;
-							chip.rBMPTEX = this.listBMPTEX[ chip.n整数値 ];
+							chip.rBMPTEX = this.listBMPTEX[ chip.nIntegerValue ];
 							continue;
 						}
 						#endregion
 						#region [ BMP ]
-						if ( this.listBMP.ContainsKey( chip.n整数値 ) && this.listBMP[ chip.n整数値 ].bUse )
+						if ( this.listBMP.ContainsKey( chip.nIntegerValue ) && this.listBMP[ chip.nIntegerValue ].bUse )
 						{
 							chip.eBGA種別 = EBGAType.BMP;
-							chip.rBMP = this.listBMP[ chip.n整数値 ];
+							chip.rBMP = this.listBMP[ chip.nIntegerValue ];
 							continue;
 						}
 						#endregion
 					}
 					#endregion
 					#region [ BGA入れ替え ]
-					if ( ( ( ( chip.nチャンネル番号 == 0xc4 ) || ( chip.nチャンネル番号 == 0xc7 ) ) || ( ( chip.nチャンネル番号 >= 0xd5 ) && ( chip.nチャンネル番号 <= 0xd9 ) ) ) || ( chip.nチャンネル番号 == 0xe0 ) )
+					if ( ( ( ( chip.nChannelNumber == 0xc4 ) || ( chip.nChannelNumber == 0xc7 ) ) || ( ( chip.nChannelNumber >= 0xd5 ) && ( chip.nChannelNumber <= 0xd9 ) ) ) || ( chip.nChannelNumber == 0xe0 ) )
 					{
 						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
 						chip.rBMPTEX = null;
 						chip.rBGA = null;
 						chip.rBGAPan = null;
-						if ( this.listBMPTEX.ContainsKey( chip.n整数値 ) && this.listBMPTEX[ chip.n整数値 ].bUse )
+						if ( this.listBMPTEX.ContainsKey( chip.nIntegerValue ) && this.listBMPTEX[ chip.nIntegerValue ].bUse )
 						{
 							chip.eBGA種別 = EBGAType.BMPTEX;
-							chip.rBMPTEX = this.listBMPTEX[ chip.n整数値 ];
+							chip.rBMPTEX = this.listBMPTEX[ chip.nIntegerValue ];
 						}
-						else if ( this.listBMP.ContainsKey( chip.n整数値 ) && this.listBMP[ chip.n整数値 ].bUse )
+						else if ( this.listBMP.ContainsKey( chip.nIntegerValue ) && this.listBMP[ chip.nIntegerValue ].bUse )
 						{
 							chip.eBGA種別 = EBGAType.BMP;
-							chip.rBMP = this.listBMP[ chip.n整数値 ];
+							chip.rBMP = this.listBMP[ chip.nIntegerValue ];
 						}
 					}
 					#endregion
@@ -1845,7 +1845,7 @@ namespace DTXMania
                 bool flag = false;
                 foreach (CDTX.CChip current in this.listChip)
                 {
-                    if (part == EInstrumentPart.DRUMS && (current.nチャンネル番号 == 27 || current.nチャンネル番号 == 28))
+                    if (part == EInstrumentPart.DRUMS && (current.nChannelNumber == 27 || current.nChannelNumber == 28))
                     {
                         flag = true;
                         break;
@@ -1857,14 +1857,14 @@ namespace DTXMania
                     bool flag2 = false;
                     foreach (CDTX.CChip current2 in this.listChip)
                     {
-                        if (part == EInstrumentPart.DRUMS && current2.nチャンネル番号 == 19)
+                        if (part == EInstrumentPart.DRUMS && current2.nChannelNumber == 19)
                         {
-                            if (!flag2 && current2.n発声時刻ms - num < 150)
+                            if (!flag2 && current2.nPlaybackTimeMs - num < 150)
                             {
-                                current2.nチャンネル番号 = 28;
+                                current2.nChannelNumber = 28;
                             }
-                            num = current2.n発声時刻ms;
-                            flag2 = (current2.nチャンネル番号 == 28);
+                            num = current2.nPlaybackTimeMs;
+                            flag2 = (current2.nChannelNumber == 28);
                         }
                     }
                 }
@@ -1892,18 +1892,18 @@ namespace DTXMania
                     foreach (CChip chip in this.listChip)
                     {
                         bool flag2 = false;
-                        int num9 = chip.nチャンネル番号;
+                        int num9 = chip.nChannelNumber;
                         if ((part == EInstrumentPart.DRUMS) && ((num9 == 0x13) || (num9 == 0x1c)))
                         {
                             num++;
-                            if (((num6 == 0x13) && (chip.n発声位置 == num3)) || ((num6 == 0x1c) && (chip.n発声位置 == num4)))
+                            if (((num6 == 0x13) && (chip.nPlaybackPosition == num3)) || ((num6 == 0x1c) && (chip.nPlaybackPosition == num4)))
                             {
-                                chip.nチャンネル番号 = (num7 == 0x13) ? 0x1c : 0x13;
+                                chip.nChannelNumber = (num7 == 0x13) ? 0x1c : 0x13;
                                 flag2 = true;
                             }
                             else if (num9 == 0x1c)
                             {
-                                if ((num6 == 0x13) && ((chip.n発声位置 - num3) <= 0x60))
+                                if ((num6 == 0x13) && ((chip.nPlaybackPosition - num3) <= 0x60))
                                 {
                                     if (!flag)
                                     {
@@ -1912,13 +1912,13 @@ namespace DTXMania
                                             numArray[index++] = num - 1;
                                         }
                                         flag = true;
-                                        chip.nチャンネル番号 = 0x13;
+                                        chip.nChannelNumber = 0x13;
                                     }
                                     else
                                     {
-                                        chip.nチャンネル番号 = 0x13;
+                                        chip.nChannelNumber = 0x13;
                                     }
-                                    num5 = chip.n発声位置 - num3;
+                                    num5 = chip.nPlaybackPosition - num3;
                                 }
                                 else
                                 {
@@ -1929,30 +1929,30 @@ namespace DTXMania
                             }
                             else
                             {
-                                if ((num6 == 0x1c) && ((chip.n発声位置 - num4) <= 0x60))
+                                if ((num6 == 0x1c) && ((chip.nPlaybackPosition - num4) <= 0x60))
                                 {
                                     if (!flag)
                                     {
-                                        if ((((chip.n発声位置 - num3) - num5) < 0x10) || (num5 == -1))
+                                        if ((((chip.nPlaybackPosition - num3) - num5) < 0x10) || (num5 == -1))
                                         {
                                             numArray[index++] = num - 1;
                                             flag = true;
-                                            chip.nチャンネル番号 = 0x1c;
+                                            chip.nChannelNumber = 0x1c;
                                         }
                                         else
                                         {
                                             flag = false;
                                         }
                                     }
-                                    else if (((chip.n発声位置 - num4) - num5) >= 0x10)
+                                    else if (((chip.nPlaybackPosition - num4) - num5) >= 0x10)
                                     {
                                         flag = false;
                                     }
                                     else
                                     {
-                                        chip.nチャンネル番号 = 0x1c;
+                                        chip.nChannelNumber = 0x1c;
                                     }
-                                    num5 = chip.n発声位置 - num4;
+                                    num5 = chip.nPlaybackPosition - num4;
                                 }
                                 else
                                 {
@@ -1962,16 +1962,16 @@ namespace DTXMania
                                 flag2 = false;
                             }
                             num6 = num9;
-                            num7 = chip.nチャンネル番号;
+                            num7 = chip.nChannelNumber;
                             if (num9 == 0x13)
                             {
-                                num3 = chip.n発声位置;
-                                int num1 = chip.n発声時刻ms;
+                                num3 = chip.nPlaybackPosition;
+                                int num1 = chip.nPlaybackTimeMs;
                             }
                             else
                             {
-                                num4 = chip.n発声位置;
-                                int num13 = chip.n発声時刻ms;
+                                num4 = chip.nPlaybackPosition;
+                                int num13 = chip.nPlaybackTimeMs;
                             }
                         }
                     }
@@ -1979,13 +1979,13 @@ namespace DTXMania
                     index = 0;
                     foreach (CChip chip2 in this.listChip)
                     {
-                        int num10 = chip2.nチャンネル番号;
+                        int num10 = chip2.nChannelNumber;
                         if ((part == EInstrumentPart.DRUMS) && ((num10 == 0x13) || (num10 == 0x1c)))
                         {
                             num++;
                             if (num == numArray[index])
                             {
-                                chip2.nチャンネル番号 = (num10 == 0x13) ? 0x1c : 0x13;
+                                chip2.nChannelNumber = (num10 == 0x13) ? 0x1c : 0x13;
                                 index++;
                             }
                         }
@@ -1996,18 +1996,18 @@ namespace DTXMania
                     int num11 = 0;
                     foreach (CChip chip3 in this.listChip)
                     {
-                        int num12 = chip3.nチャンネル番号;
+                        int num12 = chip3.nChannelNumber;
                         if ((part == EInstrumentPart.DRUMS) && ((num12 == 0x13) || (num12 == 0x1c)))
                         {
-                            if (num11 == chip3.n発声位置)
+                            if (num11 == chip3.nPlaybackPosition)
                             {
-                                chip3.nチャンネル番号 = 0x76;
+                                chip3.nChannelNumber = 0x76;
                             }
                             else if (num12 == 0x1c)
                             {
-                                chip3.nチャンネル番号 = 0x13;
+                                chip3.nChannelNumber = 0x13;
                             }
-                            num11 = chip3.n発声位置;
+                            num11 = chip3.nPlaybackPosition;
                         }
                     }
                 }
@@ -2025,18 +2025,18 @@ namespace DTXMania
                 {
                     foreach (CChip chip in this.listChip)
                     {
-                        int nチャンネル番号 = chip.nチャンネル番号;
+                        int nチャンネル番号 = chip.nChannelNumber;
                         if ((part == EInstrumentPart.DRUMS) && ((nチャンネル番号 == 0x19) || (nチャンネル番号 == 0x16)))
                         {
-                            if (num == chip.n発声位置)
+                            if (num == chip.nPlaybackPosition)
                             {
-                                chip.nチャンネル番号 = 0x1a;
+                                chip.nChannelNumber = 0x1a;
                             }
                             else if (nチャンネル番号 == 0x19)
                             {
-                                chip.nチャンネル番号 = 0x16;
+                                chip.nChannelNumber = 0x16;
                             }
-                            num = chip.n発声位置;
+                            num = chip.nPlaybackPosition;
                         }
                     }
                 }
@@ -2050,7 +2050,7 @@ namespace DTXMania
                     int num6 = 0;
                     foreach (CChip chip in this.listChip)
                     {
-                        int num7 = chip.nチャンネル番号;
+                        int num7 = chip.nChannelNumber;
                         if ((part == EInstrumentPart.DRUMS) && ((num7 >= 0x11) || (num7 <= 0x1c)))
                         {
                             switch (num7)
@@ -2058,13 +2058,13 @@ namespace DTXMania
                                 case 0x11:
                                 case 0x16:
                                 case 0x18:
-                                    if (num6 == chip.n発声位置)
+                                    if (num6 == chip.nPlaybackPosition)
                                     {
-                                        chip.nチャンネル番号 = (num4 == 0x16) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = (num4 == 0x16) ? 0x11 : 0x16;
                                     }
                                     flag2 = num7 == 0x16;
-                                    num4 = chip.nチャンネル番号;
-                                    num6 = chip.n発声位置;
+                                    num4 = chip.nChannelNumber;
+                                    num6 = chip.nPlaybackPosition;
                                     continue;
 
 
@@ -2075,58 +2075,58 @@ namespace DTXMania
                                     }
                                 case 0x14:
                                     {
-                                        chip.nチャンネル番号 = ((num5 == chip.n発声位置) && (num3 == 20)) ? 0x15 : 20;
+                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == 20)) ? 0x15 : 20;
                                         flag = false;
-                                        num3 = chip.nチャンネル番号;
-                                        num5 = chip.n発声位置;
+                                        num3 = chip.nChannelNumber;
+                                        num5 = chip.nPlaybackPosition;
                                         continue;
                                     }
                                 case 0x15:
-                                    if (num5 != chip.n発声位置)
+                                    if (num5 != chip.nPlaybackPosition)
                                     {
                                         if (flag)
                                         {
-                                            chip.nチャンネル番号 = 20;
+                                            chip.nChannelNumber = 20;
                                         }
                                     }
                                     if (num3 == 0x15)
                                     {
-                                        chip.nチャンネル番号 = 20;
+                                        chip.nChannelNumber = 20;
                                     }
-                                    num3 = chip.nチャンネル番号;
-                                    num5 = chip.n発声位置;
+                                    num3 = chip.nChannelNumber;
+                                    num5 = chip.nPlaybackPosition;
                                     continue;
 
                                 case 0x17:
                                     {
-                                        chip.nチャンネル番号 = ((num5 == chip.n発声位置) && (num3 == 0x15)) ? 20 : 0x15;
+                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == 0x15)) ? 20 : 0x15;
                                         flag = true;
-                                        num3 = chip.nチャンネル番号;
-                                        num5 = chip.n発声位置;
+                                        num3 = chip.nChannelNumber;
+                                        num5 = chip.nPlaybackPosition;
                                         continue;
                                     }
                                 case 0x19:
                                     {
-                                        chip.nチャンネル番号 = ((num6 == chip.n発声位置) && (num4 == 0x16)) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = ((num6 == chip.nPlaybackPosition) && (num4 == 0x16)) ? 0x11 : 0x16;
                                         flag2 = true;
-                                        num4 = chip.nチャンネル番号;
-                                        num6 = chip.n発声位置;
+                                        num4 = chip.nChannelNumber;
+                                        num6 = chip.nPlaybackPosition;
                                         continue;
                                     }
                                 case 0x1a:
-                                    if (num6 != chip.n発声位置)
+                                    if (num6 != chip.nPlaybackPosition)
                                     {
-                                        chip.nチャンネル番号 = (flag2 && ((chip.n発声位置 - num6) <= 0xc0)) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = (flag2 && ((chip.nPlaybackPosition - num6) <= 0xc0)) ? 0x11 : 0x16;
                                     }
-                                    chip.nチャンネル番号 = (num4 == 0x16) ? 0x11 : 0x16;
-                                    num4 = chip.nチャンネル番号;
-                                    num6 = chip.n発声位置;
+                                    chip.nChannelNumber = (num4 == 0x16) ? 0x11 : 0x16;
+                                    num4 = chip.nChannelNumber;
+                                    num6 = chip.nPlaybackPosition;
                                     continue;
 
                                 case 0x1b:
                                 case 0x1c:
                                     {
-                                        chip.nチャンネル番号 = 0x76;
+                                        chip.nChannelNumber = 0x76;
                                         continue;
                                     }
                             }
@@ -2146,45 +2146,45 @@ namespace DTXMania
                 case 0x18:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.B )
                     {
-                        chip.nチャンネル番号 = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A ) ? 0x19 : 0x16 );
+                        chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A ) ? 0x19 : 0x16 );
                         return;
                     }
                     break;
                 case 0x12:
-                    chip.nチャンネル番号 = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 21 : 23 );
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 21 : 23 );
                     return;
                 case 0x13:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                     {
-                        chip.nチャンネル番号 = 0x1C;
+                        chip.nChannelNumber = 0x1C;
                         return;
                     }
                     break;
                 case 0x14:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                     {
-                        chip.nチャンネル番号 = 0x15;
+                        chip.nChannelNumber = 0x15;
                         return;
                     }
                     break;
                 case 0x15:
-                    chip.nチャンネル番号 = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x12 : 0x14);
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x12 : 0x14);
                     return;
                 case 0x16:
-                    chip.nチャンネル番号 = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x11 : 0x1A);
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x11 : 0x1A);
                     return;
                 case 0x17:
-                    chip.nチャンネル番号 = 0x12;
+                    chip.nChannelNumber = 0x12;
                     return;
                 case 0x19:
-                    chip.nチャンネル番号 = 0x11;
+                    chip.nChannelNumber = 0x11;
                     return;
                 case 0x1A:
-                    chip.nチャンネル番号 = 0x16;
+                    chip.nChannelNumber = 0x16;
                     return;
                 case 0x1B:
                 case 0x1C:
-                    chip.nチャンネル番号 = 0x13;
+                    chip.nChannelNumber = 0x13;
                     break;
                 default:
                     return;
@@ -2196,7 +2196,7 @@ namespace DTXMania
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
-                    int nチャンネル番号 = current.nチャンネル番号;
+                    int nチャンネル番号 = current.nChannelNumber;
                     if (part == EInstrumentPart.DRUMS && 0x11 <= nチャンネル番号 && nチャンネル番号 != 0x13 && nチャンネル番号 <= 0x1A)
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
@@ -2219,7 +2219,7 @@ namespace DTXMania
                         while (enumerator.MoveNext())
                         {
                             CDTX.CChip current = enumerator.Current;
-                            int nチャンネル番号 = current.nチャンネル番号;
+                            int nチャンネル番号 = current.nChannelNumber;
                             if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号 && nチャンネル番号 <= 26 && nチャンネル番号 != 19)
                             {
                                 switch (eRandom)
@@ -2228,17 +2228,17 @@ namespace DTXMania
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
                                     case ERandomMode.SUPERRANDOM:
-                                        if (current.n発声位置 / 384 != num4)
+                                        if (current.nPlaybackPosition / 384 != num4)
                                         {
-                                            num4 = current.n発声位置 / 384;
+                                            num4 = current.nPlaybackPosition / 384;
                                             CDTX.tグループランダム分配作業(out array, out array2);
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
                                     case ERandomMode.HYPERRANDOM:
-                                        if (current.n発声位置 / 96 != num4)
+                                        if (current.nPlaybackPosition / 96 != num4)
                                         {
-                                            num4 = current.n発声位置 / 96;
+                                            num4 = current.nPlaybackPosition / 96;
                                             CDTX.tグループランダム分配作業(out array, out array2);
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
@@ -2246,18 +2246,18 @@ namespace DTXMania
                                     case ERandomMode.MASTERRANDOM:
                                         if (nチャンネル番号 == 18 || nチャンネル番号 == 20 || nチャンネル番号 == 21 || nチャンネル番号 == 23)
                                         {
-                                            if (num3 != current.n発声位置 || num2 != 2)
+                                            if (num3 != current.nPlaybackPosition || num2 != 2)
                                             {
-                                                current.nチャンネル番号 = array2[CDTXMania.Random.Next(4)] + 17;
+                                                current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + 17;
                                             }
                                             else
                                             {
                                                 int num5 = 0;
                                                 while (num5 == 0)
                                                 {
-                                                    current.nチャンネル番号 = array2[CDTXMania.Random.Next(4)] + 17;
+                                                    current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + 17;
                                                     num5 = 1;
-                                                    if (current.nチャンネル番号 == num)
+                                                    if (current.nChannelNumber == num)
                                                     {
                                                         num5 = 0;
                                                     }
@@ -2267,18 +2267,18 @@ namespace DTXMania
                                         }
                                         else
                                         {
-                                            if (num3 != current.n発声位置 || num2 != 1)
+                                            if (num3 != current.nPlaybackPosition || num2 != 1)
                                             {
-                                                current.nチャンネル番号 = array[CDTXMania.Random.Next(4)] + 17;
+                                                current.nChannelNumber = array[CDTXMania.Random.Next(4)] + 17;
                                             }
                                             else
                                             {
                                                 int num6 = 0;
                                                 while (num6 == 0)
                                                 {
-                                                    current.nチャンネル番号 = array[CDTXMania.Random.Next(4)] + 17;
+                                                    current.nChannelNumber = array[CDTXMania.Random.Next(4)] + 17;
                                                     num6 = 1;
-                                                    if (current.nチャンネル番号 == num)
+                                                    if (current.nChannelNumber == num)
                                                     {
                                                         num6 = 0;
                                                     }
@@ -2286,90 +2286,90 @@ namespace DTXMania
                                             }
                                             num2 = 1;
                                         }
-                                        num3 = current.n発声位置;
-                                        num = current.nチャンネル番号;
+                                        num3 = current.nPlaybackPosition;
+                                        num = current.nChannelNumber;
                                         break;
                                     case ERandomMode.ANOTHERRANDOM:
                                         if (nチャンネル番号 == 17 || nチャンネル番号 == 24 || nチャンネル番号 == 26)
                                         {
-                                            if (num2 != 1 || num3 != current.n発声位置)
+                                            if (num2 != 1 || num3 != current.nPlaybackPosition)
                                             {
                                                 if (CDTXMania.Random.Next(4) == 0)
                                                 {
-                                                    current.nチャンネル番号 = ((nチャンネル番号 == 26) ? 17 : 26);
+                                                    current.nChannelNumber = ((nチャンネル番号 == 26) ? 17 : 26);
                                                 }
                                                 else
                                                 {
                                                     if (nチャンネル番号 == 24)
                                                     {
-                                                        current.nチャンネル番号 = 17;
+                                                        current.nChannelNumber = 17;
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                current.nチャンネル番号 = ((num == 17 || num == 24) ? 26 : 17);
+                                                current.nChannelNumber = ((num == 17 || num == 24) ? 26 : 17);
                                             }
-                                            num = current.nチャンネル番号;
+                                            num = current.nChannelNumber;
                                             num2 = 1;
-                                            num3 = current.n発声位置;
+                                            num3 = current.nPlaybackPosition;
                                         }
                                         else
                                         {
                                             if (nチャンネル番号 == 18 || nチャンネル番号 == 20)
                                             {
-                                                if (num2 != 2 || num3 != current.n発声位置)
+                                                if (num2 != 2 || num3 != current.nPlaybackPosition)
                                                 {
                                                     if (CDTXMania.Random.Next(4) == 0)
                                                     {
-                                                        current.nチャンネル番号 = ((nチャンネル番号 == 18) ? 20 : 18);
+                                                        current.nChannelNumber = ((nチャンネル番号 == 18) ? 20 : 18);
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    current.nチャンネル番号 = ((num == 18) ? 20 : 18);
+                                                    current.nChannelNumber = ((num == 18) ? 20 : 18);
                                                 }
-                                                num = current.nチャンネル番号;
+                                                num = current.nChannelNumber;
                                                 num2 = 2;
-                                                num3 = current.n発声位置;
+                                                num3 = current.nPlaybackPosition;
                                             }
                                             else
                                             {
                                                 if (nチャンネル番号 == 21 || nチャンネル番号 == 23)
                                                 {
-                                                    if (num2 != 5 || num3 != current.n発声位置)
+                                                    if (num2 != 5 || num3 != current.nPlaybackPosition)
                                                     {
                                                         if (CDTXMania.Random.Next(4) == 0)
                                                         {
-                                                            current.nチャンネル番号 = ((nチャンネル番号 == 21) ? 23 : 21);
+                                                            current.nChannelNumber = ((nチャンネル番号 == 21) ? 23 : 21);
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        current.nチャンネル番号 = ((num == 21) ? 23 : 21);
+                                                        current.nChannelNumber = ((num == 21) ? 23 : 21);
                                                     }
-                                                    num = current.nチャンネル番号;
+                                                    num = current.nChannelNumber;
                                                     num2 = 5;
-                                                    num3 = current.n発声位置;
+                                                    num3 = current.nPlaybackPosition;
                                                 }
                                                 else
                                                 {
                                                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A && (nチャンネル番号 == 22 || nチャンネル番号 == 25))
                                                     {
-                                                        if (num2 != 6 || num3 != current.n発声位置)
+                                                        if (num2 != 6 || num3 != current.nPlaybackPosition)
                                                         {
                                                             if (CDTXMania.Random.Next(4) == 0)
                                                             {
-                                                                current.nチャンネル番号 = ((nチャンネル番号 == 22) ? 25 : 22);
+                                                                current.nChannelNumber = ((nチャンネル番号 == 22) ? 25 : 22);
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            current.nチャンネル番号 = ((num == 22) ? 25 : 22);
+                                                            current.nChannelNumber = ((num == 22) ? 25 : 22);
                                                         }
-                                                        num = current.nチャンネル番号;
+                                                        num = current.nChannelNumber;
                                                         num2 = 6;
-                                                        num3 = current.n発声位置;
+                                                        num3 = current.nPlaybackPosition;
                                                     }
                                                 }
                                             }
@@ -2388,7 +2388,7 @@ namespace DTXMania
                 CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
                 foreach (CDTX.CChip current2 in this.listChip)
                 {
-                    int nチャンネル番号2 = current2.nチャンネル番号;
+                    int nチャンネル番号2 = current2.nChannelNumber;
                     if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号2 && nチャンネル番号2 <= 24 && nチャンネル番号2 != 19)
                     {
                         switch (eRandom)
@@ -2397,17 +2397,17 @@ namespace DTXMania
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
                             case ERandomMode.SUPERRANDOM:
-                                if (current2.n発声位置 / 384 != num9)
+                                if (current2.nPlaybackPosition / 384 != num9)
                                 {
-                                    num9 = current2.n発声位置 / 384;
+                                    num9 = current2.nPlaybackPosition / 384;
                                     CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
                             case ERandomMode.HYPERRANDOM:
-                                if (current2.n発声位置 / 96 != num9)
+                                if (current2.nPlaybackPosition / 96 != num9)
                                 {
-                                    num9 = current2.n発声位置 / 96;
+                                    num9 = current2.nPlaybackPosition / 96;
                                     CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
@@ -2415,11 +2415,11 @@ namespace DTXMania
                             case ERandomMode.MASTERRANDOM:
                                 do
                                 {
-                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(5) >= 2) ? (CDTXMania.Random.Next(3) + 20) : (CDTXMania.Random.Next(2) + 17));
+                                    current2.nChannelNumber = ((CDTXMania.Random.Next(5) >= 2) ? (CDTXMania.Random.Next(3) + 20) : (CDTXMania.Random.Next(2) + 17));
                                 }
-                                while (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7);
-                                num7 = current2.nチャンネル番号;
-                                num8 = current2.n発声位置;
+                                while (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7);
+                                num7 = current2.nChannelNumber;
+                                num8 = current2.nPlaybackPosition;
                                 break;
                             case ERandomMode.ANOTHERRANDOM:
                                 switch (nチャンネル番号2)
@@ -2428,111 +2428,111 @@ namespace DTXMania
                                     case 24:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nチャンネル番号 = 18;
+                                            current2.nChannelNumber = 18;
                                         }
                                         else
                                         {
                                             if (nチャンネル番号2 == 24)
                                             {
-                                                current2.nチャンネル番号 = 17;
+                                                current2.nChannelNumber = 17;
                                             }
                                         }
-                                        if (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7)
+                                        if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            current2.nチャンネル番号 = ((num7 == 17) ? 18 : 17);
+                                            current2.nChannelNumber = ((num7 == 17) ? 18 : 17);
                                         }
-                                        num7 = current2.nチャンネル番号;
-                                        num8 = current2.n発声位置;
+                                        num7 = current2.nChannelNumber;
+                                        num8 = current2.nPlaybackPosition;
                                         break;
                                     case 18:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
                                         }
-                                        if (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7)
+                                        if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
                                             if (num7 == 17)
                                             {
-                                                current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
                                             }
                                             else
                                             {
                                                 if (num7 == 18)
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
                                                 }
                                                 else
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 17 : 18);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 18);
                                                 }
                                             }
                                         }
-                                        num7 = current2.nチャンネル番号;
-                                        num8 = current2.n発声位置;
+                                        num7 = current2.nChannelNumber;
+                                        num8 = current2.nPlaybackPosition;
                                         break;
                                     case 20:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
                                         }
-                                        if (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7)
+                                        if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
                                             if (num7 == 18)
                                             {
-                                                current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
                                             }
                                             else
                                             {
                                                 if (num7 == 20)
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
                                                 }
                                                 else
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
                                                 }
                                             }
                                         }
-                                        num7 = current2.nチャンネル番号;
-                                        num8 = current2.n発声位置;
+                                        num7 = current2.nChannelNumber;
+                                        num8 = current2.nPlaybackPosition;
                                         break;
                                     case 21:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
                                         }
-                                        if (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7)
+                                        if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
                                             if (num7 == 20)
                                             {
-                                                current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 21 : 22);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 21 : 22);
                                             }
                                             else
                                             {
                                                 if (num7 == 21)
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
                                                 }
                                                 else
                                                 {
-                                                    current2.nチャンネル番号 = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
                                                 }
                                             }
                                         }
-                                        num7 = current2.nチャンネル番号;
-                                        num8 = current2.n発声位置;
+                                        num7 = current2.nChannelNumber;
+                                        num8 = current2.nPlaybackPosition;
                                         break;
                                     case 22:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nチャンネル番号 = 21;
+                                            current2.nChannelNumber = 21;
                                         }
-                                        if (num8 == current2.n発声位置 && current2.nチャンネル番号 == num7)
+                                        if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            current2.nチャンネル番号 = ((num7 == 22) ? 21 : 22);
+                                            current2.nChannelNumber = ((num7 == 22) ? 21 : 22);
                                         }
-                                        num7 = current2.nチャンネル番号;
-                                        num8 = current2.n発声位置;
+                                        num7 = current2.nChannelNumber;
+                                        num8 = current2.nPlaybackPosition;
                                         break;
                                 }
                                 break;
@@ -2541,13 +2541,13 @@ namespace DTXMania
                 }
             }
         }
-        public void tドラムの足ランダム化(EInstrumentPart part, ERandomMode eRandomPedal)
+        public void tRandomizeDrumPedal(EInstrumentPart part, ERandomMode eRandomPedal)
         {
             if (part == EInstrumentPart.DRUMS && eRandomPedal == ERandomMode.MIRROR)
             {
                 foreach (CDTX.CChip current in this.listChip)
                 {
-                    int nチャンネル番号 = current.nチャンネル番号;
+                    int nチャンネル番号 = current.nChannelNumber;
                     if (part == EInstrumentPart.DRUMS && (nチャンネル番号 == 0x13 || nチャンネル番号 == 0x1B || nチャンネル番号 == 0x1C))
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
@@ -2562,7 +2562,7 @@ namespace DTXMania
                 int num4 = -10000;
                 foreach (CDTX.CChip current in this.listChip)
                 {
-                    int num5 = current.nチャンネル番号;
+                    int num5 = current.nChannelNumber;
                     if (part == EInstrumentPart.DRUMS && (num5 == 19 || num5 == 27 || num5 == 28))
                     {
                         if (num5 == 28)
@@ -2574,84 +2574,84 @@ namespace DTXMania
                             case ERandomMode.RANDOM:
                                 if (num5 == 19)
                                 {
-                                    current.nチャンネル番号 = ((num == 0) ? 19 : 0x1B);
+                                    current.nChannelNumber = ((num == 0) ? 19 : 0x1B);
                                 }
                                 else
                                 {
-                                    current.nチャンネル番号 = ((num == 1) ? 19 : 0x1B);
+                                    current.nChannelNumber = ((num == 1) ? 19 : 0x1B);
                                 }
                                 break;
                             case ERandomMode.SUPERRANDOM:
-                                if (current.n発声位置 / 384 != num4)
+                                if (current.nPlaybackPosition / 384 != num4)
                                 {
-                                    num4 = current.n発声位置 / 384;
+                                    num4 = current.nPlaybackPosition / 384;
                                     num = CDTXMania.Random.Next(2);
                                 }
                                 if (num5 == 19)
                                 {
-                                    current.nチャンネル番号 = ((num == 0) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 0) ? 19 : 27);
                                 }
                                 else
                                 {
-                                    current.nチャンネル番号 = ((num == 1) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 1) ? 19 : 27);
                                 }
                                 break;
                             case ERandomMode.HYPERRANDOM:
-                                if (current.n発声位置 / 96 != num4)
+                                if (current.nPlaybackPosition / 96 != num4)
                                 {
-                                    num4 = current.n発声位置 / 96;
+                                    num4 = current.nPlaybackPosition / 96;
                                     num = CDTXMania.Random.Next(2);
                                 }
                                 if (num5 == 19)
                                 {
-                                    current.nチャンネル番号 = ((num == 0) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 0) ? 19 : 27);
                                 }
                                 else
                                 {
-                                    current.nチャンネル番号 = ((num == 1) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 1) ? 19 : 27);
                                 }
                                 break;
                             case ERandomMode.MASTERRANDOM:
-                                if (num3 != current.n発声位置)
+                                if (num3 != current.nPlaybackPosition)
                                 {
                                     num = CDTXMania.Random.Next(2);
                                     if (num5 == 19)
                                     {
-                                        current.nチャンネル番号 = ((num == 0) ? 19 : 27);
+                                        current.nChannelNumber = ((num == 0) ? 19 : 27);
                                     }
                                     else
                                     {
-                                        current.nチャンネル番号 = ((num == 1) ? 19 : 27);
+                                        current.nChannelNumber = ((num == 1) ? 19 : 27);
                                     }
                                 }
                                 else
                                 {
-                                    current.nチャンネル番号 = ((num2 == 19) ? 27 : 19);
+                                    current.nChannelNumber = ((num2 == 19) ? 27 : 19);
                                 }
-                                num3 = current.n発声位置;
-                                num2 = current.nチャンネル番号;
+                                num3 = current.nPlaybackPosition;
+                                num2 = current.nChannelNumber;
                                 break;
                             case ERandomMode.ANOTHERRANDOM:
-                                if (num3 != current.n発声位置)
+                                if (num3 != current.nPlaybackPosition)
                                 {
                                     if (CDTXMania.Random.Next(4) == 0)
                                     {
-                                        current.nチャンネル番号 = ((num5 == 19) ? 27 : 19);
+                                        current.nChannelNumber = ((num5 == 19) ? 27 : 19);
                                     }
                                     else
                                     {
-                                        if (current.nチャンネル番号 == 28)
+                                        if (current.nChannelNumber == 28)
                                         {
-                                            current.nチャンネル番号 = 27;
+                                            current.nChannelNumber = 27;
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    current.nチャンネル番号 = ((num2 == 19) ? 27 : 19);
+                                    current.nChannelNumber = ((num2 == 19) ? 27 : 19);
                                 }
-                                num2 = current.nチャンネル番号;
-                                num3 = current.n発声位置;
+                                num2 = current.nChannelNumber;
+                                num3 = current.nPlaybackPosition;
                                 break;
                         }
                     }
@@ -2664,30 +2664,30 @@ namespace DTXMania
             {
                 case 17:
                 case 24:
-                    chip.nチャンネル番号 = nシンバルグループ[0] + 17;
+                    chip.nChannelNumber = nシンバルグループ[0] + 17;
                     return;
                 case 18:
-                    chip.nチャンネル番号 = nタムグループ[0] + 17;
+                    chip.nChannelNumber = nタムグループ[0] + 17;
                     return;
                 case 19:
                     break;
                 case 20:
-                    chip.nチャンネル番号 = nタムグループ[1] + 17;
+                    chip.nChannelNumber = nタムグループ[1] + 17;
                     return;
                 case 21:
-                    chip.nチャンネル番号 = nタムグループ[2] + 17;
+                    chip.nChannelNumber = nタムグループ[2] + 17;
                     return;
                 case 22:
-                    chip.nチャンネル番号 = nシンバルグループ[1] + 17;
+                    chip.nChannelNumber = nシンバルグループ[1] + 17;
                     return;
                 case 23:
-                    chip.nチャンネル番号 = nタムグループ[3] + 17;
+                    chip.nChannelNumber = nタムグループ[3] + 17;
                     return;
                 case 25:
-                    chip.nチャンネル番号 = nシンバルグループ[2] + 17;
+                    chip.nChannelNumber = nシンバルグループ[2] + 17;
                     return;
                 case 26:
-                    chip.nチャンネル番号 = nシンバルグループ[3] + 17;
+                    chip.nChannelNumber = nシンバルグループ[3] + 17;
                     break;
                 default:
                     return;
@@ -2738,22 +2738,22 @@ namespace DTXMania
             {
                 case 0x11:
                 case 0x18:
-                    chip.nチャンネル番号 = n乱数排列数列[0] + 0x11;
+                    chip.nChannelNumber = n乱数排列数列[0] + 0x11;
                     return;
                 case 0x12:
-                    chip.nチャンネル番号 = n乱数排列数列[1] + 0x11;
+                    chip.nChannelNumber = n乱数排列数列[1] + 0x11;
                     return;
                 case 0x13:
                 case 0x17:
                     break;
                 case 0x14:
-                    chip.nチャンネル番号 = n乱数排列数列[2] + 0x11;
+                    chip.nChannelNumber = n乱数排列数列[2] + 0x11;
                     return;
                 case 0x15:
-                    chip.nチャンネル番号 = n乱数排列数列[3] + 0x11;
+                    chip.nChannelNumber = n乱数排列数列[3] + 0x11;
                     return;
                 case 0x16:
-                    chip.nチャンネル番号 = n乱数排列数列[4] + 0x11;
+                    chip.nChannelNumber = n乱数排列数列[4] + 0x11;
                     break;
                 default:
                     return;
@@ -2822,49 +2822,49 @@ namespace DTXMania
             //本当はfor文検索はよろしくないんだろうけど、僕の技術ではこれが限界なんだ...
             for( int i = 0; i < this.listChip.Count; i++ )
             {
-                if( this.listChip[ i ].n発声位置 == n発声位置 )
+                if( this.listChip[ i ].nPlaybackPosition == n発声位置 )
                 {
-                    if( this.listChip[ i ].nチャンネル番号 == n変換後のレーン番号 || this.listChip[ i ].nチャンネル番号 == n変換後のレーン番号2 )
+                    if( this.listChip[ i ].nChannelNumber == n変換後のレーン番号 || this.listChip[ i ].nChannelNumber == n変換後のレーン番号2 )
                     {
-                        this.listChip[ i ].bボーナスチップ = true;
+                        this.listChip[ i ].bBonusChip = true;
                     }
                 }
             }
             
         }
 
-		public void tWave再生位置自動補正()
+		public void tAutoCorrectWavPlaybackPosition()
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{
-				this.tWave再生位置自動補正( cwav );
+				this.tAutoCorrectWavPlaybackPosition( cwav );
 			}
 		}
-		public void tWave再生位置自動補正( CWAV wc )
+		public void tAutoCorrectWavPlaybackPosition( CWAV wc )
 		{
-			if ( wc.rSound[ 0 ] != null && wc.rSound[ 0 ].n総演奏時間ms >= 5000 )
+			if ( wc.rSound[ 0 ] != null && wc.rSound[ 0 ].nTotalPlayTimeMs >= 5000 )
 			{
 				for ( int i = 0; i < nPolyphonicSounds; i++ )
 				{
 					if ( ( wc.rSound[ i ] != null ) && ( wc.rSound[ i ].b再生中 ) )
 					{
 						long nCurrentTime = CSoundManager.rcPerformanceTimer.nSystemTimeMs;
-						if ( nCurrentTime > wc.n再生開始時刻[ i ] )
+						if ( nCurrentTime > wc.nPlayStartTime[ i ] )
 						{
-							long nAbsTimeFromStartPlaying = nCurrentTime - wc.n再生開始時刻[ i ];
+							long nAbsTimeFromStartPlaying = nCurrentTime - wc.nPlayStartTime[ i ];
 							//Trace.TraceInformation( "再生位置自動補正: {0}, seek先={1}ms, 全音長={2}ms",
 							//    Path.GetFileName( wc.rSound[ 0 ].strFilename ),
 							//    nAbsTimeFromStartPlaying,
-							//    wc.rSound[ 0 ].n総演奏時間ms
+							//    wc.rSound[ 0 ].nTotalPlayTimeMs
 							//);
-							// wc.rSound[ i ].t再生位置を変更する( wc.rSound[ i ].t時刻から位置を返す( nAbsTimeFromStartPlaying ) );
-							wc.rSound[ i ].t再生位置を変更する( nAbsTimeFromStartPlaying );	// WASAPI/ASIO用
+							// wc.rSound[ i ].tChangePlaybackPosition( wc.rSound[ i ].t時刻から位置を返す( nAbsTimeFromStartPlaying ) );
+							wc.rSound[ i ].tChangePlaybackPosition( nAbsTimeFromStartPlaying );	// WASAPI/ASIO用
 						}
 					}
 				}
 			}
 		}
-		public void tWavの再生停止( int nWaveの内部番号 )
+		public void tStopPlayingWav( int nWaveの内部番号 )
 		{
 			if( this.listWAV.ContainsKey( nWaveの内部番号 ) )
 			{
@@ -2873,12 +2873,12 @@ namespace DTXMania
 				{
 					if( cwav.rSound[ i ] != null && cwav.rSound[ i ].b再生中 )
 					{
-						cwav.rSound[ i ].t再生を停止する();
+						cwav.rSound[ i ].tStopPlayback();
 					}
 				}
 			}
 		}
-		public void tWAVの読み込み( CWAV cwav )
+		public void tLoadWAV( CWAV cwav )
 		{
 //			Trace.TraceInformation("WAV files={0}", this.listWAV.Count);
 //			int count = 0;
@@ -2889,7 +2889,7 @@ namespace DTXMania
 //				CDTXMania.act文字コンソール.tPrint(0, 0, CCharacterConsole.Eフォント種別.白, strCount);
 //				count++;
 
-				string str = string.IsNullOrEmpty(this.PATH_WAV) ? this.strフォルダ名 : this.PATH_WAV;
+				string str = string.IsNullOrEmpty(this.PATH_WAV) ? this.strFolderName : this.PATH_WAV;
 				str = str + this.PATH + cwav.strファイル名;
 				bool bIsDirectSound = ( CDTXMania.SoundManager.GetCurrentSoundDeviceType() == "DirectSound" );
 				try
@@ -2897,7 +2897,7 @@ namespace DTXMania
 					//try
 					//{
 					//    cwav.rSound[ 0 ] = CDTXMania.SoundManager.tGenerateSound( str );
-					//    cwav.rSound[ 0 ].n音量 = 100;
+					//    cwav.rSound[ 0 ].nVolume = 100;
 					//    if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 					//    {
 					//        Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -2928,7 +2928,7 @@ namespace DTXMania
 					try
 					{
 						cwav.rSound[ 0 ] = CDTXMania.SoundManager.tGenerateSound( str );
-						cwav.rSound[ 0 ].n音量 = 100;
+						cwav.rSound[ 0 ].nVolume = 100;
 						if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 						{
 							Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -2973,7 +2973,7 @@ namespace DTXMania
 							try
 							{
 								cwav.rSound[ i ] = CDTXMania.SoundManager.tGenerateSound( str );
-								cwav.rSound[ i ].n音量 = 100;
+								cwav.rSound[ i ].nVolume = 100;
 								if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 								{
 									Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -3009,7 +3009,7 @@ namespace DTXMania
 			string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			return new string( new char[] { str[ n / 36 ], str[ n % 36 ] } );
 		}
-		public void tギターとベースのランダム化(EInstrumentPart part, ERandomMode eRandom)
+		public void tRandomizeGuitarAndBass(EInstrumentPart part, ERandomMode eRandom)
 		{
 			if( ( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) ) && ( eRandom != ERandomMode.OFF ) )
 			{
@@ -3022,12 +3022,12 @@ namespace DTXMania
 					int nRGBレーンビットパターン;
 					int n新RGBレーンビットパターン = 0;				// 「未割り当てのローカル変数」ビルドエラー回避のために0を初期値に設定
 					bool flag;
-					if( ( chip.n発声位置 / 384 ) != n小節番号 )		// 小節が変化したら
+					if( ( chip.nPlaybackPosition / 384 ) != n小節番号 )		// 小節が変化したら
 					{
-						n小節番号 = chip.n発声位置 / 384;
+						n小節番号 = chip.nPlaybackPosition / 384;
 						n小節内乱数6通り = CDTXMania.Random.Next( 6 );
 					}
-					int nランダム化前チャンネル番号 = chip.nチャンネル番号;
+					int nランダム化前チャンネル番号 = chip.nChannelNumber;
 					if(		( ( ( part != EInstrumentPart.GUITAR ) || ( 0x20 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0x27 ) )
 						&&	( ( ( part != EInstrumentPart.BASS )   || ( 0xA0 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0xa7 ) )
 					)
@@ -3037,11 +3037,11 @@ namespace DTXMania
 					switch( eRandom )
 					{
 						case ERandomMode.RANDOM:		// 1小節単位でレーンのR/G/Bがランダムに入れ替わる
-							chip.nチャンネル番号 = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ n小節内乱数6通り, nランダム化前チャンネル番号 & 0x07 ];
+							chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ n小節内乱数6通り, nランダム化前チャンネル番号 & 0x07 ];
 							continue;	// goto Label_02C4;
 
 						case ERandomMode.SUPERRANDOM:	// チップごとにR/G/Bがランダムで入れ替わる(レーンの本数までは変わらない)。
-							chip.nチャンネル番号 = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ CDTXMania.Random.Next( 6 ), nランダム化前チャンネル番号 & 0x07 ];
+							chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ CDTXMania.Random.Next( 6 ), nランダム化前チャンネル番号 & 0x07 ];
 							continue;	// goto Label_02C4;
 
 						case ERandomMode.HYPERRANDOM:	// レーンの本数も変わる
@@ -3149,7 +3149,7 @@ namespace DTXMania
 							break;	// goto Label_02B2;
 					}
 				Label_02B2:
-					chip.nチャンネル番号 = ( nランダム化前チャンネル番号 & 0xF0 ) | n新RGBレーンビットパターン;
+					chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | n新RGBレーンビットパターン;
 //				Label_02C4:
 //					GOTO_END++;		// goto用のダミーコード
 				}
@@ -3157,29 +3157,29 @@ namespace DTXMania
         }
 
         #region [ チップの再生と停止 ]
-        public void tチップの再生( CChip rChip, long n再生開始システム時刻ms, int nLane )
+        public void tPlayChip( CChip rChip, long n再生開始システム時刻ms, int nLane )
 		{
-			this.tチップの再生( rChip, n再生開始システム時刻ms, nLane, CDTXMania.ConfigIni.n自動再生音量, false, false );
+			this.tPlayChip( rChip, n再生開始システム時刻ms, nLane, CDTXMania.ConfigIni.n自動再生音量, false, false );
 		}
-		public void tチップの再生( CChip rChip, long n再生開始システム時刻ms, int nLane, int nVol )
+		public void tPlayChip( CChip rChip, long n再生開始システム時刻ms, int nLane, int nVol )
 		{
-			this.tチップの再生( rChip, n再生開始システム時刻ms, nLane, nVol, false, false );
+			this.tPlayChip( rChip, n再生開始システム時刻ms, nLane, nVol, false, false );
 		}
-		public void tチップの再生( CChip rChip, long n再生開始システム時刻ms, int nLane, int nVol, bool bMIDIMonitor )
+		public void tPlayChip( CChip rChip, long n再生開始システム時刻ms, int nLane, int nVol, bool bMIDIMonitor )
 		{
-			this.tチップの再生( rChip, n再生開始システム時刻ms, nLane, nVol, bMIDIMonitor, false );
+			this.tPlayChip( rChip, n再生開始システム時刻ms, nLane, nVol, bMIDIMonitor, false );
 		}
-		public void tチップの再生( CChip pChip, long n再生開始システム時刻ms, int nLane, int nVol, bool bMIDIMonitor, bool bBad )
+		public void tPlayChip( CChip pChip, long n再生開始システム時刻ms, int nLane, int nVol, bool bMIDIMonitor, bool bBad )
 		{
-			if( pChip.n整数値_内部番号 >= 0 )
+			if( pChip.nIntegerValue_InternalNumber >= 0 )
 			{
 				if( ( nLane < (int) ELane.LC ) || ( (int) ELane.BGM < nLane ) )
 				{
 					throw new ArgumentOutOfRangeException();
 				}
-				if( this.listWAV.ContainsKey( pChip.n整数値_内部番号 ) )
+				if( this.listWAV.ContainsKey( pChip.nIntegerValue_InternalNumber ) )
 				{
-					CWAV wc = this.listWAV[ pChip.n整数値_内部番号 ];
+					CWAV wc = this.listWAV[ pChip.nIntegerValue_InternalNumber ];
 					int index = wc.n現在再生中のサウンド番号 = ( wc.n現在再生中のサウンド番号 + 1 ) % nPolyphonicSounds;
 					if( ( wc.rSound[ 0 ] != null ) && 
 						( wc.rSound[ 0 ].bストリーム再生する || wc.rSound[index] == null ) )
@@ -3197,14 +3197,14 @@ namespace DTXMania
 						{
 							sound.db周波数倍率 = 1.0;
 						}
-						sound.db再生速度 = ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0;
+						sound.dbPlaySpeed = ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0;
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
-						sound.n音量 = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
-						sound.n位置 = wc.n位置;
+						sound.nVolume = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
+						sound.nPosition = wc.n位置;
 						sound.tStartPlaying();
 					}
-					wc.n再生開始時刻[ wc.n現在再生中のサウンド番号 ] = n再生開始システム時刻ms;
-					this.tWave再生位置自動補正( wc );
+					wc.nPlayStartTime[ wc.n現在再生中のサウンド番号 ] = n再生開始システム時刻ms;
+					this.tAutoCorrectWavPlaybackPosition( wc );
 				}
 			}
 		}
@@ -3221,7 +3221,7 @@ namespace DTXMania
 
 			for( int i = 0; i < this.listChip.Count; i++ )
 			{
-				int nChannelNumber = this.listChip[ i ].nチャンネル番号;
+				int nChannelNumber = this.listChip[ i ].nChannelNumber;
 				if( ( (
 						( nChannelNumber == 1 ) ||
 						( ( 0x61 <= nChannelNumber ) && ( nChannelNumber <= 0x69 ) )
@@ -3231,7 +3231,7 @@ namespace DTXMania
 					( ( ( 0x80 <= nChannelNumber ) && ( nChannelNumber <= 0x89 ) ) || ( ( 0x90 <= nChannelNumber ) && ( nChannelNumber <= 0x92 ) ) )
 				  )
 				{
-					this.listChip[ i ].n発声時刻ms += nBGMAdjustの増減値;
+					this.listChip[ i ].nPlaybackTimeMs += nBGMAdjustの増減値;
 				}
 			}
 			foreach( CWAV cwav in this.listWAV.Values )
@@ -3240,7 +3240,7 @@ namespace DTXMania
 				{
 					if( ( cwav.rSound[ j ] != null ) && cwav.rSound[ j ].b再生中 )
 					{
-						cwav.n再生開始時刻[ j ] += nBGMAdjustの増減値;
+						cwav.nPlayStartTime[ j ] += nBGMAdjustの増減値;
 					}
 				}
 			}
@@ -3268,32 +3268,32 @@ namespace DTXMania
 					if( ( cwav.rSound[ i ] != null ) && cwav.rSound[ i ].b一時停止中 )
 					{
 						//long num1 = cwav.nPauseTime[ i ];
-						//long num2 = cwav.n再生開始時刻[ i ];
-						cwav.rSound[ i ].t再生を再開する( cwav.nPauseTime[ i ] - cwav.n再生開始時刻[ i ] );
-                        cwav.n再生開始時刻[i] += CSoundManager.rcPerformanceTimer.nSystemTimeMs - cwav.nPauseTime[i];
+						//long num2 = cwav.nPlayStartTime[ i ];
+						cwav.rSound[ i ].t再生を再開する( cwav.nPauseTime[ i ] - cwav.nPlayStartTime[ i ] );
+                        cwav.nPlayStartTime[i] += CSoundManager.rcPerformanceTimer.nSystemTimeMs - cwav.nPauseTime[i];
 					}
 				}
 			}
 		}
-		public void t全チップの再生停止()
+		public void tStopPlayingAllChips()
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{
-				this.tWavの再生停止( cwav.n内部番号 );
+				this.tStopPlayingWav( cwav.n内部番号 );
 			}
         }
         #endregion
-        public void t入力( string strファイル名, bool bヘッダのみ )
+        public void tRead( string strファイル名, bool bヘッダのみ )
 		{
-			this.t入力( strファイル名, bヘッダのみ, 1.0, 0 );
+			this.tRead( strファイル名, bヘッダのみ, 1.0, 0 );
 		}
-		public void t入力( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
+		public void tRead( string strファイル名, bool bヘッダのみ, double db再生速度, int nBGMAdjust )
 		{
 			this.bヘッダのみ = bヘッダのみ;
             this.b動画読み込み = (CDTXMania.rCurrentStage.eStageID == CStage.EStage.SongLoading ? true : false);
 			this.strファイル名の絶対パス = Path.GetFullPath( strファイル名 );
 			this.strファイル名 = Path.GetFileName( this.strファイル名の絶対パス );
-			this.strフォルダ名 = Path.GetDirectoryName( this.strファイル名の絶対パス ) + @"\";
+			this.strFolderName = Path.GetDirectoryName( this.strファイル名の絶対パス ) + @"\";
 			string ext = Path.GetExtension( this.strファイル名 ).ToLower();
 			if ( ext != null )
 			{
@@ -3338,7 +3338,7 @@ namespace DTXMania
 					//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 					//Trace.TraceInformation( "DTXfileload時間:          {0}", span.ToString() );
 
-					this.t入力_全入力文字列から( str2, db再生速度, nBGMAdjust );
+					this.tRead_FromString( str2, db再生速度, nBGMAdjust );
 				}
 				catch
 				{
@@ -3349,11 +3349,11 @@ namespace DTXMania
 				Trace.TraceWarning( "SMF の演奏は未対応です。（検討中）" );
 			}
 		}
-		public void t入力_全入力文字列から( string str全入力文字列 )
+		public void tRead_FromString( string str全入力文字列 )
 		{
-			this.t入力_全入力文字列から( str全入力文字列, 1.0, 0 );
+			this.tRead_FromString( str全入力文字列, 1.0, 0 );
 		}
-		public unsafe void t入力_全入力文字列から( string str全入力文字列, double db再生速度, int nBGMAdjust )
+		public unsafe void tRead_FromString( string str全入力文字列, double db再生速度, int nBGMAdjust )
 		{
 			//DateTime timeBeginLoad = DateTime.Now;
 			//TimeSpan span;
@@ -3455,28 +3455,28 @@ namespace DTXMania
 							cbpm.dbBPM値 = 120.0;
 							this.listBPM.Add( cbpm.n内部番号, cbpm );
 							CChip chip = new CChip();
-							chip.n発声位置 = 0;
-							chip.nチャンネル番号 = 8;		// 拡張BPM
-							chip.n整数値 = 0;
-							chip.n整数値_内部番号 = cbpm.n内部番号;
+							chip.nPlaybackPosition = 0;
+							chip.nChannelNumber = 8;		// 拡張BPM
+							chip.nIntegerValue = 0;
+							chip.nIntegerValue_InternalNumber = cbpm.n内部番号;
 							this.listChip.Insert( 0, chip );
 						}
 						else
 						{
 							CChip chip = new CChip();
-							chip.n発声位置 = 0;
-							chip.nチャンネル番号 = 8;		// 拡張BPM
-							chip.n整数値 = 0;
-							chip.n整数値_内部番号 = cbpm.n内部番号;
+							chip.nPlaybackPosition = 0;
+							chip.nChannelNumber = 8;		// 拡張BPM
+							chip.nIntegerValue = 0;
+							chip.nIntegerValue_InternalNumber = cbpm.n内部番号;
 							this.listChip.Insert( 0, chip );
 						}
 						if ( this.listBMP.ContainsKey( 0 ) )
 						{
 							CChip chip = new CChip();
-							chip.n発声位置 = 0;
-							chip.nチャンネル番号 = 4;		// BGA (レイヤBGA1)
-							chip.n整数値 = 0;
-							chip.n整数値_内部番号 = 0;
+							chip.nPlaybackPosition = 0;
+							chip.nChannelNumber = 4;		// BGA (レイヤBGA1)
+							chip.nIntegerValue = 0;
+							chip.nIntegerValue_InternalNumber = 0;
 							this.listChip.Insert( 0, chip );
 						}
 						#endregion
@@ -3506,10 +3506,10 @@ namespace DTXMania
 						#region [ チップ倍率設定 ]						// #28145 2012.4.22 yyagi 二重ループを1重ループに変更して高速化)
 						foreach ( CChip chip in this.listChip )
 						{
-							if ( this.listWAV.ContainsKey( chip.n整数値_内部番号 ) )
+							if ( this.listWAV.ContainsKey( chip.nIntegerValue_InternalNumber ) )
 							{
-								CWAV cwav = this.listWAV[ chip.n整数値_内部番号 ];
-								chip.dbチップサイズ倍率 = ( (double) cwav.nチップサイズ ) / 100.0;
+								CWAV cwav = this.listWAV[ chip.nIntegerValue_InternalNumber ];
+								chip.dbChipSizeRatio = ( (double) cwav.nチップサイズ ) / 100.0;
 							}
 						}
 						#endregion
@@ -3518,13 +3518,13 @@ namespace DTXMania
 						//{
 							//foreach ( CChip chip in this.listChip )
 							//{
-								//if ( chip.nチャンネル番号 == m )
+								//if ( chip.nChannelNumber == m )
 								//{
 									//CChip c = new CChip();
-									//c.n発声位置 = 0;
-									//c.nチャンネル番号 = chip.nチャンネル番号;
-									//c.n整数値 = chip.n整数値;
-									//c.n整数値_内部番号 = chip.n整数値_内部番号;
+									//c.nPlaybackPosition = 0;
+									//c.nChannelNumber = chip.nChannelNumber;
+									//c.nIntegerValue = chip.nIntegerValue;
+									//c.nIntegerValue_InternalNumber = chip.nIntegerValue_InternalNumber;
 									//this.listChip.Insert( 0, c );
 									//break;
 								//}
@@ -3543,13 +3543,13 @@ namespace DTXMania
 							// (ここまでの一部チップ登録を、listChip.Add(c)から同Insert(0,c)に変更してある)
 							// これにより、数ms程度ながらここでのソートも高速化されている。
 							double barlength = 1.0;
-							int nEndOfSong = ( this.listChip[ this.listChip.Count - 1 ].n発声位置 + 384 ) - ( this.listChip[ this.listChip.Count - 1 ].n発声位置 % 384 );
+							int nEndOfSong = ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition + 384 ) - ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition % 384 );
 							for ( int tick384 = 0; tick384 <= nEndOfSong; tick384 += 384 )	// 小節線の挿入　(後に出てくる拍子線とループをまとめようとするなら、forループの終了条件の微妙な違いに注意が必要)
 							{
 								CChip chip = new CChip();
-								chip.n発声位置 = tick384;
-								chip.nチャンネル番号 = 0x50;	// 小節線
-								chip.n整数値 = 36 * 36 - 1;
+								chip.nPlaybackPosition = tick384;
+								chip.nChannelNumber = 0x50;	// 小節線
+								chip.nIntegerValue = 36 * 36 - 1;
 								this.listChip.Add( chip );
 							}
 							//this.listChip.Sort();				// ここでのソートは不要。ただし最後にソートすること
@@ -3558,11 +3558,11 @@ namespace DTXMania
 							for ( int tick384 = 0; tick384 < nEndOfSong; tick384 += 384 )
 							{
 								int n発声位置_C1_同一小節内 = 0;
-								while ( ( nChipNo_C1 < this.listChip.Count ) && ( this.listChip[ nChipNo_C1 ].n発声位置 < ( tick384 + 384 ) ) )
+								while ( ( nChipNo_C1 < this.listChip.Count ) && ( this.listChip[ nChipNo_C1 ].nPlaybackPosition < ( tick384 + 384 ) ) )
 								{
-									if ( this.listChip[ nChipNo_C1 ].nチャンネル番号 == 0xc1 )				// 拍線シフトの検出
+									if ( this.listChip[ nChipNo_C1 ].nChannelNumber == 0xc1 )				// 拍線シフトの検出
 									{
-										n発声位置_C1_同一小節内 = this.listChip[ nChipNo_C1 ].n発声位置 - tick384;
+										n発声位置_C1_同一小節内 = this.listChip[ nChipNo_C1 ].nPlaybackPosition - tick384;
 									}
 									nChipNo_C1++;
 								}
@@ -3570,9 +3570,9 @@ namespace DTXMania
 								{
 									barlength = 1.0;
 								}
-								while ( ( nChipNo_BarLength < this.listChip.Count ) && ( this.listChip[ nChipNo_BarLength ].n発声位置 <= tick384 ) )
+								while ( ( nChipNo_BarLength < this.listChip.Count ) && ( this.listChip[ nChipNo_BarLength ].nPlaybackPosition <= tick384 ) )
 								{
-									if ( this.listChip[ nChipNo_BarLength ].nチャンネル番号 == 0x02 )		// bar lengthの検出
+									if ( this.listChip[ nChipNo_BarLength ].nChannelNumber == 0x02 )		// bar lengthの検出
 									{
 										barlength = this.listChip[ nChipNo_BarLength ].db実数値;
 									}
@@ -3588,9 +3588,9 @@ namespace DTXMania
 									if ( ( ( tickBeat + n発声位置_C1_同一小節内 ) % 384 ) != 0 )
 									{
 										CChip chip = new CChip();
-										chip.n発声位置 = tick384 + ( tickBeat + n発声位置_C1_同一小節内 );
-										chip.nチャンネル番号 = 0x51;						// beat line 拍線
-										chip.n整数値 = 36 * 36 - 1;
+										chip.nPlaybackPosition = tick384 + ( tickBeat + n発声位置_C1_同一小節内 );
+										chip.nChannelNumber = 0x51;						// beat line 拍線
+										chip.nIntegerValue = 36 * 36 - 1;
 										this.listChip.Add( chip );
 									}
 								}
@@ -3606,14 +3606,14 @@ namespace DTXMania
 						for ( int i = 0; i < this.listChip.Count; i++ )
 						{
 							bool bChangedBeatBarStatus = false;
-							if ( ( this.listChip[ i ].nチャンネル番号 == 0xc2 ) )
+							if ( ( this.listChip[ i ].nChannelNumber == 0xc2 ) )
 							{
-								if ( this.listChip[ i ].n整数値 == 1 )				// BAR/BEAT LINE = ON
+								if ( this.listChip[ i ].nIntegerValue == 1 )				// BAR/BEAT LINE = ON
 								{
 									bShowBeatBarLine = true;
 									bChangedBeatBarStatus = true;
 								}
-								else if ( this.listChip[ i ].n整数値 == 2 )			// BAR/BEAT LINE = OFF
+								else if ( this.listChip[ i ].nIntegerValue == 2 )			// BAR/BEAT LINE = OFF
 								{
 									bShowBeatBarLine = false;
 									bChangedBeatBarStatus = true;
@@ -3622,7 +3622,7 @@ namespace DTXMania
 							int startIndex = i;
 							if ( bChangedBeatBarStatus )							// C2チップの前に50/51チップが来ている可能性に配慮
 							{
-								while ( startIndex > 0 && this.listChip[ startIndex ].n発声位置 == this.listChip[ i ].n発声位置 )
+								while ( startIndex > 0 && this.listChip[ startIndex ].nPlaybackPosition == this.listChip[ i ].nPlaybackPosition )
 								{
 									startIndex--;
 								}
@@ -3630,10 +3630,10 @@ namespace DTXMania
 							}
 							for ( int j = startIndex; j <= i; j++ )
 							{
-								if ( ( ( this.listChip[ j ].nチャンネル番号 == 0x50 ) || ( this.listChip[ j ].nチャンネル番号 == 0x51 ) ) &&
-									( this.listChip[ j ].n整数値 == ( 36 * 36 - 1 ) ) )
+								if ( ( ( this.listChip[ j ].nChannelNumber == 0x50 ) || ( this.listChip[ j ].nChannelNumber == 0x51 ) ) &&
+									( this.listChip[ j ].nIntegerValue == ( 36 * 36 - 1 ) ) )
 								{
-									this.listChip[ j ].b可視 = bShowBeatBarLine;
+									this.listChip[ j ].bVisible = bShowBeatBarLine;
 								}
 							}
 						}
@@ -3649,29 +3649,29 @@ namespace DTXMania
 						int nBar = 0;
 						foreach ( CChip chip in this.listChip )
 						{
-							chip.n発声時刻ms = ms + ( (int) ( ( ( 0x271 * ( chip.n発声位置 - n発声位置 ) ) * dbBarLength ) / bpm ) );
-							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.n発声位置 / 384 ) != nBar ) ) )
+							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
 							{
-								n発声位置 = chip.n発声位置;
-								ms = chip.n発声時刻ms;
+								n発声位置 = chip.nPlaybackPosition;
+								ms = chip.nPlaybackTimeMs;
 								dbBarLength = 1.0;
 							}
-							nBar = chip.n発声位置 / 384;
-							ch = chip.nチャンネル番号;
+							nBar = chip.nPlaybackPosition / 384;
+							ch = chip.nChannelNumber;
 							switch ( ch )
 							{
 								case 0x02:	// BarLength
 									{
-										n発声位置 = chip.n発声位置;
-										ms = chip.n発声時刻ms;
+										n発声位置 = chip.nPlaybackPosition;
+										ms = chip.nPlaybackTimeMs;
 										dbBarLength = chip.db実数値;
 										continue;
 									}
 								case 0x03:	// BPM
 									{
-										n発声位置 = chip.n発声位置;
-										ms = chip.n発声時刻ms;
-										bpm = this.BASEBPM + chip.n整数値;
+										n発声位置 = chip.nPlaybackPosition;
+										ms = chip.nPlaybackTimeMs;
+										bpm = this.BASEBPM + chip.nIntegerValue;
 										continue;
 									}
 								case 0x04:	// BGA (レイヤBGA1)
@@ -3697,49 +3697,49 @@ namespace DTXMania
 									}
 								case 0x08:	// 拡張BPM
 									{
-										n発声位置 = chip.n発声位置;
-										ms = chip.n発声時刻ms;
-										if ( this.listBPM.ContainsKey( chip.n整数値_内部番号 ) )
+										n発声位置 = chip.nPlaybackPosition;
+										ms = chip.nPlaybackTimeMs;
+										if ( this.listBPM.ContainsKey( chip.nIntegerValue_InternalNumber ) )
 										{
-											bpm = ( ( this.listBPM[ chip.n整数値_内部番号 ].n表記上の番号 == 0 ) ? 0.0 : this.BASEBPM ) + this.listBPM[ chip.n整数値_内部番号 ].dbBPM値;
+											bpm = ( ( this.listBPM[ chip.nIntegerValue_InternalNumber ].n表記上の番号 == 0 ) ? 0.0 : this.BASEBPM ) + this.listBPM[ chip.nIntegerValue_InternalNumber ].dbBPM値;
 										}
 										continue;
 									}
 								case 0x54:	// 動画再生
 									{
-										if ( this.listAVIPAN.ContainsKey( chip.n整数値 ) )
+										if ( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 										{
-											int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.n発声位置 - n発声位置 ) ) * dbBarLength ) / bpm ) );
-											int num22 = ms + ( (int) ( ( ( 0x271 * ( ( chip.n発声位置 + this.listAVIPAN[ chip.n整数値 ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
+											int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+											int num22 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listAVIPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
 											chip.n総移動時間 = num22 - num21;
 										}
 										continue;
 									}
                                 case 0x5A:	// 動画再生
                                     {
-                                        if (this.listAVIPAN.ContainsKey(chip.n整数値))
+                                        if (this.listAVIPAN.ContainsKey(chip.nIntegerValue))
                                         {
-                                            int num21 = ms + ((int)(((0x271 * (chip.n発声位置 - n発声位置)) * dbBarLength) / bpm));
-                                            int num22 = ms + ((int)(((0x271 * ((chip.n発声位置 + this.listAVIPAN[chip.n整数値].n移動時間ct) - n発声位置)) * dbBarLength) / bpm));
+                                            int num21 = ms + ((int)(((0x271 * (chip.nPlaybackPosition - n発声位置)) * dbBarLength) / bpm));
+                                            int num22 = ms + ((int)(((0x271 * ((chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置)) * dbBarLength) / bpm));
                                             chip.n総移動時間 = num22 - num21;
                                         }
                                         continue;
                                     }
 								default:
 									{
-                                        if( chip.nチャンネル番号 >= 0x4C && chip.nチャンネル番号 <= 0x4F )
+                                        if( chip.nChannelNumber >= 0x4C && chip.nChannelNumber <= 0x4F )
                                         {
                                             #region [ TEST ]
-                                            this.t指定された発声位置と同じ位置の指定したチップにボーナスフラグを立てる( chip.n発声位置, chip.n整数値 );
+                                            this.t指定された発声位置と同じ位置の指定したチップにボーナスフラグを立てる( chip.nPlaybackPosition, chip.nIntegerValue );
                                             #endregion
                                         }
 										continue;
 									}
 							}
-							if ( this.listBGAPAN.ContainsKey( chip.n整数値 ) )
+							if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
 							{
-								int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.n発声位置 - n発声位置 ) ) * dbBarLength ) / bpm ) );
-								int num20 = ms + ( (int) ( ( ( 0x271 * ( ( chip.n発声位置 + this.listBGAPAN[ chip.n整数値 ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
+								int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+								int num20 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listBGAPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
 								chip.n総移動時間 = num20 - num19;
 							}
 						}
@@ -3747,7 +3747,7 @@ namespace DTXMania
 						{
 							foreach ( CChip chip in this.listChip )
 							{
-								chip.n発声時刻ms = (int) ( ( (double) chip.n発声時刻ms ) / this.db再生速度 );
+								chip.nPlaybackTimeMs = (int) ( ( (double) chip.nPlaybackTimeMs ) / this.db再生速度 );
 							}
 						}
 						#endregion
@@ -3768,7 +3768,7 @@ namespace DTXMania
 						}
 						foreach ( CChip chip in this.listChip )
 						{
-							int c = chip.nチャンネル番号;
+							int c = chip.nChannelNumber;
 							if ( ( 0x11 <= c ) && ( c <= 0x1c ) )
 							{
 								this.nVisibleChipsCount[ c - 0x11 ]++;
@@ -3793,28 +3793,28 @@ namespace DTXMania
                         #region [ チップの種類を分類し、対応するフラグを立てる ]
                         foreach (CChip chip in this.listChip)
                         {
-                            if ((chip.bWAVを使うチャンネルである && this.listWAV.ContainsKey(chip.n整数値_内部番号)) && !this.listWAV[chip.n整数値_内部番号].listこのWAVを使用するチャンネル番号の集合.Contains(chip.nチャンネル番号))
+                            if ((chip.bWAVを使うチャンネルである && this.listWAV.ContainsKey(chip.nIntegerValue_InternalNumber)) && !this.listWAV[chip.nIntegerValue_InternalNumber].listこのWAVを使用するチャンネル番号の集合.Contains(chip.nChannelNumber))
                             {
-                                this.listWAV[chip.n整数値_内部番号].listこのWAVを使用するチャンネル番号の集合.Add(chip.nチャンネル番号);
+                                this.listWAV[chip.nIntegerValue_InternalNumber].listこのWAVを使用するチャンネル番号の集合.Add(chip.nChannelNumber);
 
-                                int c = chip.nチャンネル番号 >> 4;
+                                int c = chip.nChannelNumber >> 4;
                                 switch (c)
                                 {
                                     case 0x01:
-                                        this.listWAV[chip.n整数値_内部番号].bIsDrumsSound = true; break;
+                                        this.listWAV[chip.nIntegerValue_InternalNumber].bIsDrumsSound = true; break;
                                     case 0x02:
-                                        this.listWAV[chip.n整数値_内部番号].bIsGuitarSound = true; break;
+                                        this.listWAV[chip.nIntegerValue_InternalNumber].bIsGuitarSound = true; break;
                                     case 0x0A:
-                                        this.listWAV[chip.n整数値_内部番号].bIsBassSound = true; break;
+                                        this.listWAV[chip.nIntegerValue_InternalNumber].bIsBassSound = true; break;
                                     case 0x06:
                                     case 0x07:
                                     case 0x08:
                                     case 0x09:
-                                        this.listWAV[chip.n整数値_内部番号].bIsSESound = true; break;
+                                        this.listWAV[chip.nIntegerValue_InternalNumber].bIsSESound = true; break;
                                     case 0x00:
-                                        if (chip.nチャンネル番号 == 0x01)
+                                        if (chip.nChannelNumber == 0x01)
                                         {
-                                            this.listWAV[chip.n整数値_内部番号].bIsBGMSound = true; break;
+                                            this.listWAV[chip.nIntegerValue_InternalNumber].bIsBGMSound = true; break;
                                         }
                                         break;
                                 }
@@ -3921,32 +3921,32 @@ namespace DTXMania
 
 			foreach ( CChip pChip in listChip )
 			{
-				switch ( pChip.nチャンネル番号 )
+				switch ( pChip.nChannelNumber )
 				{
 					// BGM, 演奏チャネル, 不可視サウンド, フィルインサウンド, 空打ち音はミキサー管理の対象
 					// BGM:
 					case 0x01:
-					// Dr演奏チャネル
+					// Dr playing channels
 					case 0x11:	case 0x12:	case 0x13:	case 0x14:	case 0x15:	case 0x16:	case 0x17:	case 0x18:	case 0x19:	case 0x1A:  case 0x1B:  case 0x1C:
-					// Gt演奏チャネル
+					// Gt playing channels
 					case 0x20:	case 0x21:	case 0x22:	case 0x23:	case 0x24:	case 0x25:	case 0x26:	case 0x27:	case 0x28:
                     case 0x93:　case 0x94:　case 0x95:　case 0x96:　case 0x97:　case 0x98:　case 0x99:　case 0x9A:　case 0x9B:  case 0x9C:　case 0x9D:　case 0x9E:　case 0x9F:
                     case 0xA9:  case 0xAA:　case 0xAB:　case 0xAC:　case 0xAD:　case 0xAE:　case 0xAF:
                     case 0xD0:  case 0xD1:  case 0xD2:  case 0xD3:
-					// Bs演奏チャネル
+					// Bs playing channels
 					case 0xA0:	case 0xA1:	case 0xA2:	case 0xA3:	case 0xA4:	case 0xA5:	case 0xA6:	case 0xA7:	case 0xA8:
                     case 0xC5:  case 0xC6:  case 0xC8:  case 0xC9:  case 0xCA:  case 0xCB:  case 0xCC:  case 0xCD:  case 0xCE:  case 0xCF:
                     case 0xDA:  case 0xDB:  case 0xDC:  case 0xDD:  case 0xDE:  case 0xDF:
                     case 0xE1:  case 0xE2:  case 0xE3:  case 0xE4:  case 0xE5:  case 0xE6:  case 0xE7:  case 0xE8:
-					// Dr不可視チップ
+					// Dr invisible chips
 					case 0x31:	case 0x32:	case 0x33:	case 0x34:	case 0x35:	case 0x36:	case 0x37:
 					case 0x38:	case 0x39:	case 0x3A:  case 0x3B:　case 0x3C:
-					// Dr/Gt/Bs空打ち
+					// Dr/Gt/Bs blank hits
 					case 0xB1:	case 0xB2:	case 0xB3:	case 0xB4:	case 0xB5:	case 0xB6:	case 0xB7:	case 0xB8:
 					case 0xB9:	case 0xBA:	case 0xBB:	case 0xBC:　case 0xBD:　case 0xBE:
-					// フィルインサウンド
+					// Fill-in sounds
 					case 0x1F:	case 0x2F:	//case 0xAF:
-					// 自動演奏チップ
+					// Auto-playing chips
 					case 0x61:	case 0x62:	case 0x63:	case 0x64:	case 0x65:	case 0x66:	case 0x67:	case 0x68:	case 0x69:
 					case 0x70:	case 0x71:	case 0x72:	case 0x73:	case 0x74:	case 0x75:	case 0x76:	case 0x77:	case 0x78:	case 0x79:
 					case 0x80:	case 0x81:	case 0x82:	case 0x83:	case 0x84:	case 0x85:	case 0x86:	case 0x87:	case 0x88:	case 0x89:
@@ -3955,7 +3955,7 @@ namespace DTXMania
 						#region [ 発音1秒前のタイミングを記録 ]
 						int n発音前余裕ms = 1000, n発音後余裕ms = 800;
 						{
-							int ch = pChip.nチャンネル番号 >> 4;
+							int ch = pChip.nChannelNumber >> 4;
 							if ( ch == 0x02 || ch == 0x0A )
 							{
 								n発音前余裕ms = 800;
@@ -3967,11 +3967,11 @@ namespace DTXMania
 								n発音前余裕ms = 500;
 							}
 						}
-						if ( pChip.nチャンネル番号 == 0x01 )	// BGMチップは即ミキサーに追加
+						if ( pChip.nChannelNumber == 0x01 )	// BGMチップは即ミキサーに追加
 						{
-							if ( listWAV.ContainsKey( pChip.n整数値_内部番号 ) )
+							if ( listWAV.ContainsKey( pChip.nIntegerValue_InternalNumber ) )
 							{
-								CDTX.CWAV wc = CDTXMania.DTX.listWAV[ pChip.n整数値_内部番号 ];
+								CDTX.CWAV wc = CDTXMania.DTX.listWAV[ pChip.nIntegerValue_InternalNumber ];
 								if ( wc.rSound[ 0 ] != null )
 								{
 									CDTXMania.SoundManager.AddMixer( wc.rSound[ 0 ] );	// BGMは多重再生しない仕様としているので、1個目だけミキサーに登録すればよい
@@ -3982,18 +3982,18 @@ namespace DTXMania
 
 						int nAddMixer時刻ms, nAddMixer位置 = 0;
 //Debug.WriteLine("==================================================================");
-//Debug.WriteLine( "Start: ch=" + pChip.nチャンネル番号.ToString("x2") + ", nWAV番号=" + pChip.n整数値 + ", time=" + pChip.n発声時刻ms + ", lasttime=" + listChip[ listChip.Count - 1 ].n発声時刻ms );
-						t発声時刻msと発声位置を取得する( pChip.n発声時刻ms - n発音前余裕ms, out nAddMixer時刻ms, out nAddMixer位置 );
+//Debug.WriteLine( "Start: ch=" + pChip.nChannelNumber.ToString("x2") + ", nWAV番号=" + pChip.nIntegerValue + ", time=" + pChip.nPlaybackTimeMs + ", lasttime=" + listChip[ listChip.Count - 1 ].nPlaybackTimeMs );
+						t発声時刻msと発声位置を取得する( pChip.nPlaybackTimeMs - n発音前余裕ms, out nAddMixer時刻ms, out nAddMixer位置 );
 //Debug.WriteLine( "nAddMixer時刻ms=" + nAddMixer時刻ms + ",nAddMixer位置=" + nAddMixer位置 );
 
 						CChip c_AddMixer = new CChip()
 						{
-							nチャンネル番号 = 0xEA,
-							n整数値 = pChip.n整数値,
-							n整数値_内部番号 = pChip.n整数値_内部番号,
-							n発声時刻ms = nAddMixer時刻ms,
-							n発声位置 = nAddMixer位置,
-                            b演奏終了後も再生が続くチップである = false
+							nChannelNumber = 0xEA,
+							nIntegerValue = pChip.nIntegerValue,
+							nIntegerValue_InternalNumber = pChip.nIntegerValue_InternalNumber,
+							nPlaybackTimeMs = nAddMixer時刻ms,
+							nPlaybackPosition = nAddMixer位置,
+                            bChipKeepsPlayingAfterPerfEnds = false
 						};
 						listAddMixerChannel.Add( c_AddMixer );
 //Debug.WriteLine("listAddMixerChannel:" );
@@ -4001,46 +4001,46 @@ namespace DTXMania
 						#endregion
 
 						int duration = 0;
-						if ( listWAV.ContainsKey( pChip.n整数値_内部番号 ) )
+						if ( listWAV.ContainsKey( pChip.nIntegerValue_InternalNumber ) )
 						{
-							CDTX.CWAV wc = CDTXMania.DTX.listWAV[ pChip.n整数値_内部番号 ];
-							duration = ( wc.rSound[ 0 ] == null ) ? 0 : (int) ( wc.rSound[ 0 ].n総演奏時間ms / this.db再生速度 );	// #23664 durationに再生速度が加味されておらず、低速再生でBGMが途切れる問題を修正 (発声時刻msは、DTX読み込み時に再生速度加味済)
+							CDTX.CWAV wc = CDTXMania.DTX.listWAV[ pChip.nIntegerValue_InternalNumber ];
+							duration = ( wc.rSound[ 0 ] == null ) ? 0 : (int) ( wc.rSound[ 0 ].nTotalPlayTimeMs / this.db再生速度 );	// #23664 durationに再生速度が加味されておらず、低速再生でBGMが途切れる問題を修正 (発声時刻msは、DTX読み込み時に再生速度加味済)
 						}
 //Debug.WriteLine("duration=" + duration );
 						int n新RemoveMixer時刻ms, n新RemoveMixer位置;
-						t発声時刻msと発声位置を取得する( pChip.n発声時刻ms + duration + n発音後余裕ms, out n新RemoveMixer時刻ms, out n新RemoveMixer位置 );
+						t発声時刻msと発声位置を取得する( pChip.nPlaybackTimeMs + duration + n発音後余裕ms, out n新RemoveMixer時刻ms, out n新RemoveMixer位置 );
 //Debug.WriteLine( "n新RemoveMixer時刻ms=" + n新RemoveMixer時刻ms + ",n新RemoveMixer位置=" + n新RemoveMixer位置 );
-						if ( n新RemoveMixer時刻ms < pChip.n発声時刻ms + duration )	// 曲の最後でサウンドが切れるような場合は
+						if ( n新RemoveMixer時刻ms < pChip.nPlaybackTimeMs + duration )	// 曲の最後でサウンドが切れるような場合は
 						{
                             CChip c_AddMixer_noremove = c_AddMixer;
-	                        c_AddMixer_noremove.b演奏終了後も再生が続くチップである = true;
+	                        c_AddMixer_noremove.bChipKeepsPlayingAfterPerfEnds = true;
 	                        listAddMixerChannel[ listAddMixerChannel.Count - 1 ] = c_AddMixer_noremove;
 	                        //continue;                 // 発声位置の計算ができないので、Mixer削除をあきらめる___のではなく
 	                                                    // #32248 2013.10.15 yyagi 演奏終了後も再生を続けるチップであるというフラグをpChip内に立てる
 	                        break;
 						}
 						#region [ 未使用コード ]
-						//if ( n新RemoveMixer時刻ms < pChip.n発声時刻ms + duration )	// 曲の最後でサウンドが切れるような場合
+						//if ( n新RemoveMixer時刻ms < pChip.nPlaybackTimeMs + duration )	// 曲の最後でサウンドが切れるような場合
 						//{
-						//    n新RemoveMixer時刻ms = pChip.n発声時刻ms + duration;
+						//    n新RemoveMixer時刻ms = pChip.nPlaybackTimeMs + duration;
 						//    // 「位置」は比例計算で求めてお茶を濁す...このやり方だと誤動作したため対応中止
-						//    n新RemoveMixer位置 = listChip[ listChip.Count - 1 ].n発声位置 * n新RemoveMixer時刻ms / listChip[ listChip.Count - 1 ].n発声時刻ms;
+						//    n新RemoveMixer位置 = listChip[ listChip.Count - 1 ].nPlaybackPosition * n新RemoveMixer時刻ms / listChip[ listChip.Count - 1 ].nPlaybackTimeMs;
 						//}
 						#endregion
 
 						#region [ 発音終了2秒後にmixerから削除するが、その前に再発音することになるのかを確認(再発音ならmixer削除タイミングを延期) ]
-						int n整数値 = pChip.n整数値;
+						int n整数値 = pChip.nIntegerValue;
 						int index = listRemoveTiming.FindIndex(
-							delegate( CChip cchip ) { return cchip.n整数値 == n整数値; }
+							delegate( CChip cchip ) { return cchip.nIntegerValue == n整数値; }
 						);
 //Debug.WriteLine( "index=" + index );
 						if ( index >= 0 )													// 過去に同じチップで発音中のものが見つかった場合
 						{																	// 過去の発音のmixer削除を確定させるか、延期するかの2択。
-							int n旧RemoveMixer時刻ms = listRemoveTiming[ index ].n発声時刻ms;
-							int n旧RemoveMixer位置 = listRemoveTiming[ index ].n発声位置;
+							int n旧RemoveMixer時刻ms = listRemoveTiming[ index ].nPlaybackTimeMs;
+							int n旧RemoveMixer位置 = listRemoveTiming[ index ].nPlaybackPosition;
 
 //Debug.WriteLine( "n旧RemoveMixer時刻ms=" + n旧RemoveMixer時刻ms + ",n旧RemoveMixer位置=" + n旧RemoveMixer位置 );
-							if ( pChip.n発声時刻ms - n発音前余裕ms <= n旧RemoveMixer時刻ms )	// mixer削除前に、同じ音の再発音がある場合は、
+							if ( pChip.nPlaybackTimeMs - n発音前余裕ms <= n旧RemoveMixer時刻ms )	// mixer削除前に、同じ音の再発音がある場合は、
 							{																	// mixer削除時刻を遅延させる(if-else後に行う)
 //Debug.WriteLine( "remove TAIL of listAddMixerChannel. TAIL INDEX=" + listAddMixerChannel.Count );
 //DebugOut_CChipList( listAddMixerChannel );
@@ -4058,15 +4058,15 @@ namespace DTXMania
 							}
 							CChip c = new CChip()											// mixer削除時刻を更新(遅延)する
 							{
-								nチャンネル番号 = 0xEB,
-								n整数値 = listRemoveTiming[ index ].n整数値,
-								n整数値_内部番号 = listRemoveTiming[ index ].n整数値_内部番号,
-								n発声時刻ms = n新RemoveMixer時刻ms,
-								n発声位置 = n新RemoveMixer位置
+								nChannelNumber = 0xEB,
+								nIntegerValue = listRemoveTiming[ index ].nIntegerValue,
+								nIntegerValue_InternalNumber = listRemoveTiming[ index ].nIntegerValue_InternalNumber,
+								nPlaybackTimeMs = n新RemoveMixer時刻ms,
+								nPlaybackPosition = n新RemoveMixer位置
 							};
 							listRemoveTiming[ index ] = c;
-							//listRemoveTiming[ index ].n発声時刻ms = n新RemoveMixer時刻ms;	// mixer削除時刻を更新(遅延)する
-							//listRemoveTiming[ index ].n発声位置 = n新RemoveMixer位置;
+							//listRemoveTiming[ index ].nPlaybackTimeMs = n新RemoveMixer時刻ms;	// mixer削除時刻を更新(遅延)する
+							//listRemoveTiming[ index ].nPlaybackPosition = n新RemoveMixer位置;
 //Debug.WriteLine( "listRemoveTiming: modified" );
 //DebugOut_CChipList( listRemoveTiming );
 						}
@@ -4074,14 +4074,14 @@ namespace DTXMania
 						{																	// 発音していたが既にmixer削除確定していたなら
 							CChip c = new CChip()											// 新しくmixer削除候補として追加する
 							{
-								nチャンネル番号 = 0xEB,
-								n整数値 = pChip.n整数値,
-								n整数値_内部番号 = pChip.n整数値_内部番号,
-								n発声時刻ms = n新RemoveMixer時刻ms,
-								n発声位置 = n新RemoveMixer位置
+								nChannelNumber = 0xEB,
+								nIntegerValue = pChip.nIntegerValue,
+								nIntegerValue_InternalNumber = pChip.nIntegerValue_InternalNumber,
+								nPlaybackTimeMs = n新RemoveMixer時刻ms,
+								nPlaybackPosition = n新RemoveMixer位置
 							};
 //Debug.WriteLine( "Add new chip to listRemoveMixerTiming: " );
-//Debug.WriteLine( "ch=" + c.nチャンネル番号.ToString( "x2" ) + ", nWAV番号=" + c.n整数値 + ", time=" + c.n発声時刻ms + ", lasttime=" + listChip[ listChip.Count - 1 ].n発声時刻ms );
+//Debug.WriteLine( "ch=" + c.nChannelNumber.ToString( "x2" ) + ", nWAV番号=" + c.nIntegerValue + ", time=" + c.nPlaybackTimeMs + ", lasttime=" + listChip[ listChip.Count - 1 ].nPlaybackTimeMs );
 							listRemoveTiming.Add( c );
 //Debug.WriteLine( "listRemoveTiming:" );
 //DebugOut_CChipList( listRemoveTiming );
@@ -4110,7 +4110,7 @@ namespace DTXMania
 //Debug.WriteLine( "Count=" + c.Count );
 			for ( int i = 0; i < c.Count; i++ )
 			{
-				Debug.WriteLine( i + ": ch=" + c[ i ].nチャンネル番号.ToString("x2") + ", WAV番号=" + c[ i ].n整数値 + ", time=" + c[ i ].n発声時刻ms );
+				Debug.WriteLine( i + ": ch=" + c[ i ].nChannelNumber.ToString("x2") + ", WAV番号=" + c[ i ].nIntegerValue + ", time=" + c[ i ].nPlaybackTimeMs );
 			}
 		}
 		private bool t発声時刻msと発声位置を取得する( int n希望発声時刻ms, out int n新発声時刻ms, out int n新発声位置 )
@@ -4122,15 +4122,15 @@ namespace DTXMania
 			{
 				n希望発声時刻ms = 0;
 			}
-			//else if ( n希望発声時刻ms > listChip[ listChip.Count - 1 ].n発声時刻ms )		// BGMの最後の余韻を殺してしまうので、この条件は外す
+			//else if ( n希望発声時刻ms > listChip[ listChip.Count - 1 ].nPlaybackTimeMs )		// BGMの最後の余韻を殺してしまうので、この条件は外す
 			//{
-			//    n希望発声時刻ms = listChip[ listChip.Count - 1 ].n発声時刻ms;
+			//    n希望発声時刻ms = listChip[ listChip.Count - 1 ].nPlaybackTimeMs;
 			//}
 
 			int index_min = -1, index_max = -1;
 			for ( int i = 0; i < listChip.Count; i++ )		// 希望発声位置前後の「前」の方のチップを検索
 			{
-				if ( listChip[ i ].n発声時刻ms >= n希望発声時刻ms )
+				if ( listChip[ i ].nPlaybackTimeMs >= n希望発声時刻ms )
 				{
 					index_min = i;
 					break;
@@ -4142,9 +4142,9 @@ namespace DTXMania
 								//___のではダメ。BGMが尻切れになる。
 								// そこで、listの最終項目の発声時刻msと発生位置から、希望発声時刻に相当する希望発声位置を比例計算して求める。
 				//n新発声時刻ms = n希望発声時刻ms;
-				//n新発声位置 = listChip[ listChip.Count - 1 ].n発声位置 * n希望発声時刻ms / listChip[ listChip.Count - 1 ].n発声時刻ms;
-				n新発声時刻ms = listChip[ listChip.Count - 1 ].n発声時刻ms;
-				n新発声位置   = listChip[ listChip.Count - 1 ].n発声位置;
+				//n新発声位置 = listChip[ listChip.Count - 1 ].nPlaybackPosition * n希望発声時刻ms / listChip[ listChip.Count - 1 ].nPlaybackTimeMs;
+				n新発声時刻ms = listChip[ listChip.Count - 1 ].nPlaybackTimeMs;
+				n新発声位置   = listChip[ listChip.Count - 1 ].nPlaybackPosition;
 				return false;
 			}
 			index_max = index_min + 1;
@@ -4152,8 +4152,8 @@ namespace DTXMania
 			{
 				index_max = index_min;
 			}
-			n新発声時刻ms = ( listChip[ index_max ].n発声時刻ms + listChip[ index_min ].n発声時刻ms ) / 2;
-			n新発声位置   = ( listChip[ index_max ].n発声位置   + listChip[ index_min ].n発声位置   ) / 2;
+			n新発声時刻ms = ( listChip[ index_max ].nPlaybackTimeMs + listChip[ index_min ].nPlaybackTimeMs ) / 2;
+			n新発声位置   = ( listChip[ index_max ].nPlaybackPosition   + listChip[ index_min ].nPlaybackPosition   ) / 2;
 
 			return true;
 		}
@@ -4165,48 +4165,48 @@ namespace DTXMania
 		{
 			for( int i = this.listChip.Count - 1; i >= 0; i-- )
             {
-				if( listChip[ i ].e楽器パート == EInstrumentPart.BASS )
+				if( listChip[ i ].eInstrumentPart == EInstrumentPart.BASS )
                 {
-					listChip[ i ].e楽器パート = EInstrumentPart.GUITAR;
-                    if( listChip[ i ].nチャンネル番号 >= 0xA0 && listChip[ i ].nチャンネル番号 <= 0xA8 )
-					    listChip[ i ].nチャンネル番号 -= ( 0xA0 - 0x20 );
-                    else if( listChip[ i ].nチャンネル番号 == 0xC5 || listChip[ i ].nチャンネル番号 == 0xC6 )
-                        listChip[ i ].nチャンネル番号 -= 0x32;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xC8 && listChip[ i ].nチャンネル番号 <= 0xCF )
-                        listChip[ i ].nチャンネル番号 -= 0x33;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xDA && listChip[ i ].nチャンネル番号 <= 0xDC )
-                        listChip[ i ].nチャンネル番号 -= 0x3D;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xDD && listChip[ i ].nチャンネル番号 <= 0xDF )
-                        listChip[ i ].nチャンネル番号 -= 0x34;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xE1 && listChip[ i ].nチャンネル番号 <= 0xE8 )
-                        listChip[ i ].nチャンネル番号 -= 0x35;
+					listChip[ i ].eInstrumentPart = EInstrumentPart.GUITAR;
+                    if( listChip[ i ].nChannelNumber >= 0xA0 && listChip[ i ].nChannelNumber <= 0xA8 )
+					    listChip[ i ].nChannelNumber -= ( 0xA0 - 0x20 );
+                    else if( listChip[ i ].nChannelNumber == 0xC5 || listChip[ i ].nChannelNumber == 0xC6 )
+                        listChip[ i ].nChannelNumber -= 0x32;
+                    else if( listChip[ i ].nChannelNumber >= 0xC8 && listChip[ i ].nChannelNumber <= 0xCF )
+                        listChip[ i ].nChannelNumber -= 0x33;
+                    else if( listChip[ i ].nChannelNumber >= 0xDA && listChip[ i ].nChannelNumber <= 0xDC )
+                        listChip[ i ].nChannelNumber -= 0x3D;
+                    else if( listChip[ i ].nChannelNumber >= 0xDD && listChip[ i ].nChannelNumber <= 0xDF )
+                        listChip[ i ].nChannelNumber -= 0x34;
+                    else if( listChip[ i ].nChannelNumber >= 0xE1 && listChip[ i ].nChannelNumber <= 0xE8 )
+                        listChip[ i ].nChannelNumber -= 0x35;
 				}
-				else if( listChip[i].e楽器パート == EInstrumentPart.GUITAR )
+				else if( listChip[i].eInstrumentPart == EInstrumentPart.GUITAR )
 				{
-					listChip[ i ].e楽器パート = EInstrumentPart.BASS;
+					listChip[ i ].eInstrumentPart = EInstrumentPart.BASS;
 
-                    if( listChip[ i ].nチャンネル番号 >= 0x20 && listChip[ i ].nチャンネル番号 <= 0x28 )
-					    listChip[ i ].nチャンネル番号 += ( 0xA0 - 0x20 );
-                    else if( listChip[ i ].nチャンネル番号 == 0x93 || listChip[ i ].nチャンネル番号 == 0x94 )
-                        listChip[ i ].nチャンネル番号 += 0x32;
-                    else if( listChip[ i ].nチャンネル番号 >= 0x95 && listChip[ i ].nチャンネル番号 <= 0x9C )
-                        listChip[ i ].nチャンネル番号 += 0x33;
-                    else if( listChip[ i ].nチャンネル番号 >= 0x9D && listChip[ i ].nチャンネル番号 <= 0x9F )
-                        listChip[ i ].nチャンネル番号 += 0x3D;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xA9 && listChip[ i ].nチャンネル番号 <= 0xAB )
-                        listChip[ i ].nチャンネル番号 += 0x34;
-                    else if( listChip[ i ].nチャンネル番号 >= 0xAC && listChip[ i ].nチャンネル番号 <= 0xD3 )
-                        listChip[ i ].nチャンネル番号 += 0x35;
+                    if( listChip[ i ].nChannelNumber >= 0x20 && listChip[ i ].nChannelNumber <= 0x28 )
+					    listChip[ i ].nChannelNumber += ( 0xA0 - 0x20 );
+                    else if( listChip[ i ].nChannelNumber == 0x93 || listChip[ i ].nChannelNumber == 0x94 )
+                        listChip[ i ].nChannelNumber += 0x32;
+                    else if( listChip[ i ].nChannelNumber >= 0x95 && listChip[ i ].nChannelNumber <= 0x9C )
+                        listChip[ i ].nChannelNumber += 0x33;
+                    else if( listChip[ i ].nChannelNumber >= 0x9D && listChip[ i ].nChannelNumber <= 0x9F )
+                        listChip[ i ].nChannelNumber += 0x3D;
+                    else if( listChip[ i ].nChannelNumber >= 0xA9 && listChip[ i ].nChannelNumber <= 0xAB )
+                        listChip[ i ].nChannelNumber += 0x34;
+                    else if( listChip[ i ].nChannelNumber >= 0xAC && listChip[ i ].nChannelNumber <= 0xD3 )
+                        listChip[ i ].nChannelNumber += 0x35;
 				}
 
                 //Wailing
-				else if ( listChip[ i ].nチャンネル番号 == 0x28 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				else if ( listChip[ i ].nChannelNumber == 0x28 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
 				{
-					listChip[ i ].nチャンネル番号 += ( 0xA0 - 0x20 );
+					listChip[ i ].nChannelNumber += ( 0xA0 - 0x20 );
 				}
-				else if ( listChip[ i ].nチャンネル番号 == 0xA8 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				else if ( listChip[ i ].nChannelNumber == 0xA8 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
 				{
-					listChip[ i ].nチャンネル番号 -= ( 0xA0 - 0x20 );
+					listChip[ i ].nChannelNumber -= ( 0xA0 - 0x20 );
 				}
 			}
 			int t = this.LEVEL.Bass;
@@ -4316,8 +4316,8 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-				this.tBMP_BMPTEXの読み込み();
-				this.tAVIの読み込み();
+				this.tLoadBMP_BMPTEX();
+				this.tLoadAVI();
 				base.OnManagedCreateResources();
 			}
 		}
@@ -4966,7 +4966,7 @@ namespace DTXMania
 						!this.t入力_行解析_RESULTSOUND( strコマンド, strパラメータ, strコメント ) &&
 						!this.t入力_行解析_SIZE( strコマンド, strパラメータ, strコメント ) )
 					{
-						this.t入力_行解析_チップ配置( strコマンド, strパラメータ, strコメント );
+						this.tInput_LineAnalysis_ChipLocation( strコマンド, strパラメータ, strコメント );
 					}
 				EOL:
 					Debug.Assert( true );		// #23885 2010.12.12 yyagi: dummy line to exit parsing the line
@@ -4974,7 +4974,7 @@ namespace DTXMania
 				}
 				//else
 				//{	// Duration測定のため、bヘッダのみ==trueでも、チップ配置は行う
-				//	this.t入力_行解析_チップ配置( strコマンド, strパラメータ, strコメント );
+				//	this.tInput_LineAnalysis_ChipLocation( strコマンド, strパラメータ, strコメント );
 				//}
 			}
 		}
@@ -5868,8 +5868,8 @@ namespace DTXMania
 				{
 					var chip = this.listChip[ i ];
 
-					if( chip.bBPMチップである && chip.n整数値_内部番号 == -zz )	// #BPMzz 行より前の行に出現した #BPMzz では、整数値_内部番号は -zz に初期化されている。
-						chip.n整数値_内部番号 = this.n内部番号BPM1to;
+					if( chip.bBPMチップである && chip.nIntegerValue_InternalNumber == -zz )	// #BPMzz 行より前の行に出現した #BPMzz では、整数値_内部番号は -zz に初期化されている。
+						chip.nIntegerValue_InternalNumber = this.n内部番号BPM1to;
 				}
 			}
 			this.n無限管理BPM[ zz ] = this.n内部番号BPM1to;			// 次にこの BPM番号 zz を使うBPMチップが現れたら、このBPM値が格納されることになる。
@@ -6257,8 +6257,8 @@ namespace DTXMania
 				{
 					var chip = this.listChip[ i ];
 
-					if( chip.bWAVを使うチャンネルである && ( chip.n整数値_内部番号 == -zz ) )	// この #WAVzz 行より前の行に出現した #WAVzz では、整数値_内部番号は -zz に初期化されている。
-						chip.n整数値_内部番号 = this.n内部番号WAV1to;
+					if( chip.bWAVを使うチャンネルである && ( chip.nIntegerValue_InternalNumber == -zz ) )	// この #WAVzz 行より前の行に出現した #WAVzz では、整数値_内部番号は -zz に初期化されている。
+						chip.nIntegerValue_InternalNumber = this.n内部番号WAV1to;
 				}
 			}
 			this.n無限管理WAV[ zz ] = this.n内部番号WAV1to;			// 次にこの WAV番号 zz を使うWAVチップが現れたら、この内部番号が格納されることになる。
@@ -6389,7 +6389,7 @@ namespace DTXMania
             return nMax100Vol;
         }
 
-		private bool t入力_行解析_チップ配置( string strコマンド, string strパラメータ, string strコメント )
+		private bool tInput_LineAnalysis_ChipLocation( string strコマンド, string strパラメータ, string strコメント )
 		{
 			// (1) コマンドを処理。
 
@@ -6576,9 +6576,9 @@ namespace DTXMania
 				this.listChip.Insert(
 					0,
 					new CChip() {
-						nチャンネル番号 = nチャンネル番号,
+						nChannelNumber = nチャンネル番号,
 						db実数値 = db小節長倍率,
-						n発声位置 = n小節番号 * 384,
+						nPlaybackPosition = n小節番号 * 384,
 					} );
 
 				return true;	// 配置終了。
@@ -6652,24 +6652,24 @@ namespace DTXMania
 
 				var chip = new CChip();
 
-				chip.nチャンネル番号 = nチャンネル番号;
-				chip.n発声位置 = ( n小節番号 * 384 ) + ( ( 384 * i ) / ( n文字数 / 2 ) );
-				chip.n整数値 = nオブジェクト数値;
-				chip.n整数値_内部番号 = nオブジェクト数値;
+				chip.nChannelNumber = nチャンネル番号;
+				chip.nPlaybackPosition = ( n小節番号 * 384 ) + ( ( 384 * i ) / ( n文字数 / 2 ) );
+				chip.nIntegerValue = nオブジェクト数値;
+				chip.nIntegerValue_InternalNumber = nオブジェクト数値;
 
 				#region [ chip.e楽器パート = ... ]
 				//-----------------
 				if( ( nチャンネル番号 >= 0x11 ) && ( nチャンネル番号 <= 0x1C ) )
 				{
-					chip.e楽器パート = EInstrumentPart.DRUMS;
+					chip.eInstrumentPart = EInstrumentPart.DRUMS;
 				}
                 if ( ( nチャンネル番号 >= 0x20 && nチャンネル番号 <= 0x27 ) || ( nチャンネル番号 >= 0x93 && nチャンネル番号 <= 0x9F ) || ( nチャンネル番号 >= 0xA9 && nチャンネル番号 <= 0xAF ) || ( nチャンネル番号 >= 0xD0 && nチャンネル番号 <= 0xD3 ) )
                 {
-                    chip.e楽器パート = EInstrumentPart.GUITAR;
+                    chip.eInstrumentPart = EInstrumentPart.GUITAR;
                 }
                 if ( ( nチャンネル番号 >= 0xA0 && nチャンネル番号 <= 0xA7 ) || ( nチャンネル番号 == 0xC5 ) || ( nチャンネル番号 == 0xC6 ) || ( nチャンネル番号 >= 0xC8 && nチャンネル番号 <= 0xCF ) || ( nチャンネル番号 >= 0xDA && nチャンネル番号 <= 0xDF ) || ( nチャンネル番号 >= 0xE1 && nチャンネル番号 <= 0xE8 ) )
                 {
-                    chip.e楽器パート = EInstrumentPart.BASS;
+                    chip.eInstrumentPart = EInstrumentPart.BASS;
                 }
 				//-----------------
 				#endregion
@@ -6682,11 +6682,11 @@ namespace DTXMania
 
 				if( chip.bWAVを使うチャンネルである )
 				{
-					chip.n整数値_内部番号 = this.n無限管理WAV[ nオブジェクト数値 ];	// これが本当に一意なWAV番号となる。（無限定義の場合、chip.n整数値 は一意である保証がない。）
+					chip.nIntegerValue_InternalNumber = this.n無限管理WAV[ nオブジェクト数値 ];	// これが本当に一意なWAV番号となる。（無限定義の場合、chip.nIntegerValue は一意である保証がない。）
 				}
 				else if( chip.bBPMチップである )
 				{
-					chip.n整数値_内部番号 = this.n無限管理BPM[ nオブジェクト数値 ];	// これが本当に一意なBPM番号となる。（同上。）
+					chip.nIntegerValue_InternalNumber = this.n無限管理BPM[ nオブジェクト数値 ];	// これが本当に一意なBPM番号となる。（同上。）
 				}
 				//-----------------
 				#endregion
@@ -6703,11 +6703,11 @@ namespace DTXMania
 
 					if( ( nオブジェクト数値 > 0 ) && ( nオブジェクト数値 < 2 ) )
 					{
-						chip.n発声位置 -= 32;	// 384÷32＝12 ということで、フィルインONチップは12分音符ほど前へ移動。
+						chip.nPlaybackPosition -= 32;	// 384÷32＝12 ということで、フィルインONチップは12分音符ほど前へ移動。
 					}
 					else if( nオブジェクト数値 == 2 )
 					{
-						chip.n発声位置 += 32;	// 同じく、フィルインOFFチップは12分音符ほど後ろへ移動。
+						chip.nPlaybackPosition += 32;	// 同じく、フィルインOFFチップは12分音符ほど後ろへ移動。
 					}
 				}
 				//-----------------

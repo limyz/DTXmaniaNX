@@ -596,31 +596,31 @@ namespace DTXMania
                                 //this.st飛び散るチップ[i].fY *= this.st飛び散るチップ[i].f加速度Y;
                                 this.st飛び散るチップ[i].f加速度Y += this.st飛び散るチップ[i].f重力加速度;
                                 /*
-                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 0 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 2)
+                                if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 0 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 2)
                                 {
                                     this.st飛び散るチップ[i].fY -= 1f;
                                 }
-                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 2 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 4)
+                                if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 2 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 4)
                                 {
                                     this.st飛び散るチップ[i].fY -= 3f;
                                 }
-                                if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 4 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 8)
+                                if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 4 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 8)
                                 {
                                     this.st飛び散るチップ[i].fY -= 7f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 8 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 20)
+                                else if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 8 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 20)
                                 {
                                     this.st飛び散るチップ[i].fY -= 9f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 20 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 24)
+                                else if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 20 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 24)
                                 {
                                     this.st飛び散るチップ[i].fY -= 7f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 24 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 26)
+                                else if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 24 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 26)
                                 {
                                     this.st飛び散るチップ[i].fY -= 3f;
                                 }
-                                else if (this.st飛び散るチップ[i].ct進行.nCurrentValue >= 26 && this.st飛び散るチップ[i].ct進行.nCurrentValue <= 28)
+                                else if (this.st飛び散るチップ[i].ctUpdate.nCurrentValue >= 26 && this.st飛び散るチップ[i].ctUpdate.nCurrentValue <= 28)
                                 {
                                     this.st飛び散るチップ[i].fY -= 1f;
                                 }

@@ -157,7 +157,7 @@ namespace FDK
 			this.n終了値 = n終了値;
 			this.n間隔ms = n間隔ms;
 			this.timer = timer;
-			this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
+			this.nCurrentElapsedTimeMs = this.timer.nCurrentTime;
 			this.nCurrentValue = n開始値;
 		}
 
@@ -186,7 +186,7 @@ namespace FDK
 		{
 			if ( ( this.timer != null ) && ( this.nCurrentElapsedTimeMs != CTimer.nUnused ) )
 			{
-				long num = this.timer.n現在時刻;
+				long num = this.timer.nCurrentTime;
 				if ( num < this.nCurrentElapsedTimeMs )
 					this.nCurrentElapsedTimeMs = num;
 
@@ -208,7 +208,7 @@ namespace FDK
 		{
 			if ( ( this.timerdb != null ) && ( this.dbCurrentElapsedTime != CSoundTimer.nUnused ) )
 			{
-				double num = this.timerdb.n現在時刻;
+				double num = this.timerdb.nCurrentTime;
 				if ( num < this.dbCurrentElapsedTime )
 					this.dbCurrentElapsedTime = num;
 
@@ -230,7 +230,7 @@ namespace FDK
 		{
 			if ( ( this.timer != null ) && ( this.nCurrentElapsedTimeMs != CTimer.nUnused ) )
 			{
-				long num = this.timer.n現在時刻;
+				long num = this.timer.nCurrentTime;
 				if ( num < this.nCurrentElapsedTimeMs )
 					this.nCurrentElapsedTimeMs = num;
 
@@ -252,7 +252,7 @@ namespace FDK
 		{
 			if ( ( this.timerdb != null ) && ( this.dbCurrentElapsedTime != CSoundTimer.nUnused ) )
 			{
-				double num = this.timerdb.n現在時刻;
+				double num = this.timerdb.nCurrentTime;
 				if ( num < this.nCurrentElapsedTimeMs )
 					this.dbCurrentElapsedTime = num;
 
@@ -303,25 +303,25 @@ namespace FDK
 
 						tキー処理();
 						this.nCurrentValue = n2回目;
-						this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
+						this.nCurrentElapsedTimeMs = this.timer.nCurrentTime;
 						return;
 
 					case n2回目:
 
-						if ( ( this.timer.n現在時刻 - this.nCurrentElapsedTimeMs ) > 200 )
+						if ( ( this.timer.nCurrentTime - this.nCurrentElapsedTimeMs ) > 200 )
 						{
 							tキー処理();
-							this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
+							this.nCurrentElapsedTimeMs = this.timer.nCurrentTime;
 							this.nCurrentValue = n3回目以降;
 						}
 						return;
 
 					case n3回目以降:
 
-						if ( ( this.timer.n現在時刻 - this.nCurrentElapsedTimeMs ) > 30 )
+						if ( ( this.timer.nCurrentTime - this.nCurrentElapsedTimeMs ) > 30 )
 						{
 							tキー処理();
-							this.nCurrentElapsedTimeMs = this.timer.n現在時刻;
+							this.nCurrentElapsedTimeMs = this.timer.nCurrentTime;
 						}
 						return;
 				}

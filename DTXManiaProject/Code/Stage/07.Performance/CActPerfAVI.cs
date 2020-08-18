@@ -131,7 +131,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.nCurrentTime;
 
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -232,7 +232,7 @@ namespace DTXMania
                     this.n表示側終了位置X = n表示側終了位置X;
                     this.n表示側終了位置Y = n表示側終了位置Y;
                     this.n総移動時間ms = n総移動時間ms;
-                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.n現在時刻;
+                    this.n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CSoundManager.rcPerformanceTimer.nCurrentTime;
                     this.n前回表示したフレーム番号 = -1;
                     if( ( this.rAVI != null ) && ( this.rAVI.avi != null ) )
                     {
@@ -322,7 +322,7 @@ namespace DTXMania
         {
             foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
             {
-                if (chip.n発声時刻ms > n移動開始時刻ms)
+                if (chip.nPlaybackTimeMs > n移動開始時刻ms)
                 {
                     break;
                 }
@@ -332,7 +332,7 @@ namespace DTXMania
                         {
                             if (chip.rAVI != null)
                             {
-                                this.Start(chip.nチャンネル番号, chip.rAVI, chip.rDShow, 1280, 720, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.n発声時刻ms);
+                                this.Start(chip.nChannelNumber, chip.rAVI, chip.rDShow, 1280, 720, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.nPlaybackTimeMs);
                             }
                             continue;
                         }
@@ -340,7 +340,7 @@ namespace DTXMania
                         {
                             if (chip.rAVIPan != null)
                             {
-                                this.Start(chip.nチャンネル番号, chip.rAVI, chip.rDShow, chip.rAVIPan.sz開始サイズ.Width, chip.rAVIPan.sz開始サイズ.Height, chip.rAVIPan.sz終了サイズ.Width, chip.rAVIPan.sz終了サイズ.Height, chip.rAVIPan.pt動画側開始位置.X, chip.rAVIPan.pt動画側開始位置.Y, chip.rAVIPan.pt動画側終了位置.X, chip.rAVIPan.pt動画側終了位置.Y, chip.rAVIPan.pt表示側開始位置.X, chip.rAVIPan.pt表示側開始位置.Y, chip.rAVIPan.pt表示側終了位置.X, chip.rAVIPan.pt表示側終了位置.Y, chip.n総移動時間, chip.n発声時刻ms);
+                                this.Start(chip.nChannelNumber, chip.rAVI, chip.rDShow, chip.rAVIPan.sz開始サイズ.Width, chip.rAVIPan.sz開始サイズ.Height, chip.rAVIPan.sz終了サイズ.Width, chip.rAVIPan.sz終了サイズ.Height, chip.rAVIPan.pt動画側開始位置.X, chip.rAVIPan.pt動画側開始位置.Y, chip.rAVIPan.pt動画側終了位置.X, chip.rAVIPan.pt動画側終了位置.Y, chip.rAVIPan.pt表示側開始位置.X, chip.rAVIPan.pt表示側開始位置.Y, chip.rAVIPan.pt表示側終了位置.X, chip.rAVIPan.pt表示側終了位置.Y, chip.n総移動時間, chip.nPlaybackTimeMs);
                             }
                             continue;
                         }
@@ -435,9 +435,9 @@ namespace DTXMania
 
                 for (int i = 0; i < 1; i++)
                 {
-                    this.stフィルイン[i] = new STフィルイン();
-                    this.stフィルイン[i].ct進行 = new CCounter(0, 30, 30, CDTXMania.Timer);
-                    this.stフィルイン[i].b使用中 = false;
+                    this.stFillIn[i] = new STフィルイン();
+                    this.stFillIn[i].ctUpdate = new CCounter(0, 30, 30, CDTXMania.Timer);
+                    this.stFillIn[i].bInUse = false;
                 }
                 this.txフィルインエフェクト = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_Fillin Effect.png" ) );
 
@@ -538,7 +538,7 @@ namespace DTXMania
                     Rectangle rectangle2;
 
                     #region[ frameNoFromTime ]
-                    int time = (int)( ( CSoundManager.rcPerformanceTimer.n現在時刻 - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
+                    int time = (int)( ( CSoundManager.rcPerformanceTimer.nCurrentTime - this.n移動開始時刻ms ) * ( ( (double)CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
                     int frameNoFromTime = 0;
                     if( this.bUseMRenderer )
                     {
@@ -588,9 +588,9 @@ namespace DTXMania
                     Point point2 = new Point( this.n画像側終了位置X, this.n画像側終了位置Y );
                     Point point3 = new Point( this.n表示側開始位置X, this.n表示側開始位置Y );
                     Point point4 = new Point( this.n表示側終了位置X, this.n表示側終了位置Y );
-                    if( CSoundManager.rcPerformanceTimer.n現在時刻 < this.n移動開始時刻ms )
+                    if( CSoundManager.rcPerformanceTimer.nCurrentTime < this.n移動開始時刻ms )
                     {
-                        this.n移動開始時刻ms = CSoundManager.rcPerformanceTimer.n現在時刻;
+                        this.n移動開始時刻ms = CSoundManager.rcPerformanceTimer.nCurrentTime;
                     }
                     if( this.n総移動時間ms == 0 )
                     {
@@ -775,29 +775,29 @@ namespace DTXMania
                 if (CDTXMania.DTX.listBMP.Count >= 1 && CDTXMania.ConfigIni.bBGAEnabled == true)
                 {
                     if (CDTXMania.ConfigIni.bDrumsEnabled)
-                        CDTXMania.stagePerfDrumsScreen.actBGA.t進行描画(980, 0);
+                        CDTXMania.stagePerfDrumsScreen.actBGA.tUpdateAndDraw(980, 0);
                     else
-                        CDTXMania.stagePerfGuitarScreen.actBGA.t進行描画(501, 0);
+                        CDTXMania.stagePerfGuitarScreen.actBGA.tUpdateAndDraw(501, 0);
                 }
 
-                if( CDTXMania.ConfigIni.ボーナス演出を表示する == true )
+                if( CDTXMania.ConfigIni.DisplayBonusEffects == true )
                 {
                     for( int i = 0; i < 1; i++ )
                     {
-                        if (this.stフィルイン[ i ].b使用中)
+                        if (this.stFillIn[ i ].bInUse)
                         {
-                            int numf = this.stフィルイン[ i ].ct進行.nCurrentValue;
-                            this.stフィルイン[ i ].ct進行.tUpdate();
-                            if( this.stフィルイン[ i ].ct進行.bReachedEndValue )
+                            int numf = this.stFillIn[ i ].ctUpdate.nCurrentValue;
+                            this.stFillIn[ i ].ctUpdate.tUpdate();
+                            if( this.stFillIn[ i ].ctUpdate.bReachedEndValue )
                             {
-                                this.stフィルイン[ i ].ct進行.tStop();
-                                this.stフィルイン[ i ].b使用中 = false;
+                                this.stFillIn[ i ].ctUpdate.tStop();
+                                this.stFillIn[ i ].bInUse = false;
                             }
                             //if ( this.txフィルインエフェクト != null )
                             CStagePerfDrumsScreen stageDrum = CDTXMania.stagePerfDrumsScreen;
                             //CStagePerfGuitarScreen stageGuitar = CDTXMania.stagePerfGuitarScreen;
 
-                            //if( ( CDTXMania.ConfigIni.bDrumsEnabled ? stageDrum.txボーナスエフェクト : stageGuitar.txボーナスエフェクト ) != null )
+                            //if( ( CDTXMania.ConfigIni.bDrumsEnabled ? stageDrum.txBonusEffect : stageGuitar.txBonusEffect ) != null )
                             {
                                 //this.txフィルインエフェクト.vcScaleRatio.X = 2.0f;
                                 //this.txフィルインエフェクト.vcScaleRatio.Y = 2.0f;
@@ -805,13 +805,13 @@ namespace DTXMania
                                 //this.txフィルインエフェクト.tDraw2D(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
                                 if( CDTXMania.ConfigIni.bDrumsEnabled )
                                 {
-                                    stageDrum.txボーナスエフェクト.vcScaleRatio = new Vector3( 2.0f, 2.0f, 1.0f );
-                                    stageDrum.txボーナスエフェクト.bAdditiveBlending = true;
-                                    stageDrum.txボーナスエフェクト.tDraw2D( CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + ( 360 * numf ), 640, 360 )) ;
+                                    stageDrum.txBonusEffect.vcScaleRatio = new Vector3( 2.0f, 2.0f, 1.0f );
+                                    stageDrum.txBonusEffect.bAdditiveBlending = true;
+                                    stageDrum.txBonusEffect.tDraw2D( CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + ( 360 * numf ), 640, 360 )) ;
                                     try
                                     {
-                                    //if( this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.nCurrentValue ] != null )
-                                    //    this.txフィルインエフェクト[ this.stフィルイン[ i ].ct進行.nCurrentValue ].tDraw2D( CDTXMania.app.Device, 0, 0 );
+                                    //if( this.txフィルインエフェクト[ this.stFillIn[ i ].ctUpdate.nCurrentValue ] != null )
+                                    //    this.txフィルインエフェクト[ this.stFillIn[ i ].ctUpdate.nCurrentValue ].tDraw2D( CDTXMania.app.Device, 0, 0 );
                                     }
                                     catch( Exception ex )
                                     {
@@ -1019,20 +1019,20 @@ namespace DTXMania
         {
             for (int j = 0; j < 1; j++)
             {
-                if (this.stフィルイン[j].b使用中)
+                if (this.stFillIn[j].bInUse)
                 {
-                    this.stフィルイン[j].ct進行.tStop();
-                    this.stフィルイン[j].b使用中 = false;
+                    this.stFillIn[j].ctUpdate.tStop();
+                    this.stFillIn[j].bInUse = false;
                 }
             }
             for (int i = 0; i < 1; i++)
             {
                 for (int j = 0; j < 1; j++)
                 {
-                    if (!this.stフィルイン[j].b使用中)
+                    if (!this.stFillIn[j].bInUse)
                     {
-                        this.stフィルイン[j].b使用中 = true;
-                        this.stフィルイン[j].ct進行 = new CCounter(0, 30, 30, CDTXMania.Timer);
+                        this.stFillIn[j].bInUse = true;
+                        this.stFillIn[j].ctUpdate = new CCounter(0, 30, 30, CDTXMania.Timer);
                         break;
                     }
                 }
@@ -1123,11 +1123,11 @@ namespace DTXMania
         [StructLayout(LayoutKind.Sequential)]
         public struct STフィルイン
         {
-            public bool b使用中;
-            public CCounter ct進行;
+            public bool bInUse;
+            public CCounter ctUpdate;
         }
         private STパッド状態[] stパッド状態 = new STパッド状態[19];
-        public STフィルイン[] stフィルイン = new STフィルイン[2];
+        public STフィルイン[] stFillIn = new STフィルイン[2];
         //-----------------
         #endregion
     }

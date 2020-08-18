@@ -207,8 +207,8 @@ namespace FDK
 
 		public static void t終了()
 		{
-			CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
-			CCommon.tDisposeする( ref rcPerformanceTimer );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
+			CCommon.tDispose( SoundDevice ); SoundDevice = null;
+			CCommon.tDispose( ref rcPerformanceTimer );	// Global.Bass を解放した後に解放すること。（Global.Bass で参照されているため）
 		}
 
 
@@ -225,8 +225,8 @@ namespace FDK
 
 				// サウンドデバイスと演奏タイマを解放する。
 
-				CCommon.tDisposeする( SoundDevice ); SoundDevice = null;
-				CCommon.tDisposeする( ref rcPerformanceTimer );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
+				CCommon.tDispose( SoundDevice ); SoundDevice = null;
+				CCommon.tDispose( ref rcPerformanceTimer );	// Global.SoundDevice を解放した後に解放すること。（Global.SoundDevice で参照されているため）
 			}
 			//-----------------
 			#endregion
@@ -295,9 +295,9 @@ namespace FDK
             //}
 		}
 
-		public void tサウンドを破棄する( CSound csound )
+		public void tDiscard( CSound csound )
 		{
-			csound.t解放する( true );			// インスタンスは存続→破棄にする。
+			csound.tRelease( true );			// インスタンスは存続→破棄にする。
 			csound = null;
 		}
 
@@ -342,17 +342,17 @@ namespace FDK
 		public void AddMixer( CSound cs, double db再生速度, bool _b演奏終了後も再生が続くチップである )
 		{
 			cs.b演奏終了後も再生が続くチップである = _b演奏終了後も再生が続くチップである;
-			cs.db再生速度 = db再生速度;
-			cs.tBASSサウンドをミキサーに追加する();
+			cs.dbPlaySpeed = db再生速度;
+			cs.tBASSAddSoundToMixer();
 		}
 		public void AddMixer( CSound cs, double db再生速度 )
 		{
-			cs.db再生速度 = db再生速度;
-			cs.tBASSサウンドをミキサーに追加する();
+			cs.dbPlaySpeed = db再生速度;
+			cs.tBASSAddSoundToMixer();
 		}
 		public void AddMixer( CSound cs )
 		{
-			cs.tBASSサウンドをミキサーに追加する();
+			cs.tBASSAddSoundToMixer();
 		}
 		public void RemoveMixer( CSound cs )
 		{
@@ -367,7 +367,7 @@ namespace FDK
 	public class CSound : IDisposable, ICloneable
 	{
 		#region [ DTXMania用拡張 ]
-		public int n総演奏時間ms
+		public int nTotalPlayTimeMs
 		{
 			get;
 			private set;
@@ -392,7 +392,7 @@ namespace FDK
 				if ( _db周波数倍率 != value )
 				{
 					_db周波数倍率 = value;
-					if ( bBASSサウンドである )
+					if ( bIsBASS )
 					{
 						Bass.BASS_ChannelSetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_FREQ, ( float ) ( _db周波数倍率 * _db再生速度 * nオリジナルの周波数 ) );
 					}
@@ -406,7 +406,7 @@ namespace FDK
 				}
 			}
 		}
-		public double db再生速度
+		public double dbPlaySpeed
 		{
 			get
 			{
@@ -418,7 +418,7 @@ namespace FDK
 				{
 					_db再生速度 = value;
 					bIs1倍速再生 = ( _db再生速度 == 1.000f );
-					if ( bBASSサウンドである )
+					if ( bIsBASS )
 					{
 						if ( _hTempoStream != 0 && !this.bIs1倍速再生 )	// 再生速度がx1.000のときは、TempoStreamを用いないようにして高速化する
 				        {
@@ -431,9 +431,9 @@ namespace FDK
 
 						if ( CSoundManager.bIsTimeStretch )
 						{
-							Bass.BASS_ChannelSetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_TEMPO, (float) ( db再生速度 * 100 - 100 ) );
+							Bass.BASS_ChannelSetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_TEMPO, (float) ( dbPlaySpeed * 100 - 100 ) );
 							//double seconds = Bass.BASS_ChannelBytes2Seconds( this.hTempoStream, nBytes );
-							//this.n総演奏時間ms = (int) ( seconds * 1000 );
+							//this.nTotalPlayTimeMs = (int) ( seconds * 1000 );
 						}
 						else
 						{
@@ -461,11 +461,11 @@ namespace FDK
 		/// <summary>
 		/// <para>0:最小～100:原音</para>
 		/// </summary>
-		public int n音量
+		public int nVolume
 		{
 			get
 			{
-				if( this.bBASSサウンドである )
+				if( this.bIsBASS )
 				{
 					float f音量 = 0.0f;
 					if ( !Bass.BASS_ChannelGetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_VOL, ref f音量 ) )
@@ -473,7 +473,7 @@ namespace FDK
 					    return 100;
 					return (int) ( f音量 * 100 );
 				}
-				else if( this.bDirectSoundである )
+				else if( this.bIsDirectSound )
 				{
 					return this._n音量;
 				}
@@ -481,7 +481,7 @@ namespace FDK
 			}
 			set
 			{
-				if( this.bBASSサウンドである )
+				if( this.bIsBASS )
 				{
 					float f音量 = Math.Min( Math.Max( value, 0 ), 100 ) / 100.0f;	// 0～100 → 0.0～1.0
 					//var nodes = new BASS_MIXER_NODE[ 1 ] { new BASS_MIXER_NODE( 0, f音量 ) };
@@ -489,7 +489,7 @@ namespace FDK
 					Bass.BASS_ChannelSetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_VOL, f音量 );
 
 				}
-				else if( this.bDirectSoundである )
+				else if( this.bIsDirectSound )
 				{
 					this._n音量 = value;
 
@@ -510,11 +510,11 @@ namespace FDK
 		/// <summary>
 		/// <para>左:-100～中央:0～100:右。set のみ。</para>
 		/// </summary>
-		public int n位置
+		public int nPosition
 		{
 			get
 			{
-				if( this.bBASSサウンドである )
+				if( this.bIsBASS )
 				{
 					float f位置 = 0.0f;
 					if ( !Bass.BASS_ChannelGetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, ref f位置 ) )
@@ -522,7 +522,7 @@ namespace FDK
 						return 0;
 					return (int) ( f位置 * 100 );
 				}
-				else if( this.bDirectSoundである )
+				else if( this.bIsDirectSound )
 				{
 					return this._n位置;
 				}
@@ -530,14 +530,14 @@ namespace FDK
 			}
 			set
 			{
-				if( this.bBASSサウンドである )
+				if( this.bIsBASS )
 				{
 					float f位置 = Math.Min( Math.Max( value, -100 ), 100 ) / 100.0f;	// -100～100 → -1.0～1.0
 					//var nodes = new BASS_MIXER_NODE[ 1 ] { new BASS_MIXER_NODE( 0, f位置 ) };
 					//BassMix.BASS_Mixer_ChannelSetEnvelope( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_PAN, nodes );
 					Bass.BASS_ChannelSetAttribute( this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, f位置 );
 				}
-				else if( this.bDirectSoundである )
+				else if( this.bIsDirectSound )
 				{
 					this._n位置 = Math.Min( Math.Max( -100, value ), 100 );		// -100～100
 
@@ -587,7 +587,7 @@ namespace FDK
 
 		/// <summary>
 		/// <para>全インスタンスリスト。</para>
-		/// <para>～を作成する() で追加され、t解放する() or Dispose() で解放される。</para>
+		/// <para>～を作成する() で追加され、tRelease() or Dispose() で解放される。</para>
 		/// </summary>
 		public static List<CSound> listインスタンス = new List<CSound>();
 
@@ -602,8 +602,8 @@ namespace FDK
 
 		public CSound()
 		{
-			this.n音量 = 100;
-			this.n位置 = 0;
+			this.nVolume = 100;
+			this.nPosition = 0;
 			this._db周波数倍率 = 1.0;
 			this._db再生速度 = 1.0;
 			this.DirectSoundBufferFlags = CSoundDeviceDirectSound.DefaultFlags;
@@ -614,7 +614,7 @@ namespace FDK
 
 		public object Clone()
 		{
-			if ( !bDirectSoundである )
+			if ( !bIsDirectSound )
 			{
 				throw new NotImplementedException();
 			}
@@ -871,7 +871,7 @@ namespace FDK
 
 			// DTXMania用に追加
 			this.nオリジナルの周波数 = wfx.SamplesPerSecond;
-			n総演奏時間ms = (int) ( ( (double) nPCMサイズbyte ) / ( this.Buffer.Format.AverageBytesPerSecond * 0.001 ) );
+			nTotalPlayTimeMs = (int) ( ( (double) nPCMサイズbyte ) / ( this.Buffer.Format.AverageBytesPerSecond * 0.001 ) );
 
 
 			// インスタンスリストに登録。
@@ -883,16 +883,16 @@ namespace FDK
 
 		public void tサウンドを破棄する( CSound cs )
 		{
-			cs.t解放する();
+			cs.tRelease();
 		}
 		public void tStartPlaying()
 		{
-			t再生位置を先頭に戻す();
+			tSetPlaybackPositionToBeginning();
 			tサウンドを再生する();
 		}
 		public void tStartPlaying( bool bループする )
 		{
-			if ( bBASSサウンドである )
+			if ( bIsBASS )
 			{
 				if ( bループする )
 				{
@@ -903,23 +903,23 @@ namespace FDK
 					Bass.BASS_ChannelFlags( this.hBassStream, BASSFlag.BASS_DEFAULT, BASSFlag.BASS_DEFAULT );
 				}
 			}
-			t再生位置を先頭に戻す();
+			tSetPlaybackPositionToBeginning();
 			tサウンドを再生する( bループする );
 		}
-		public void t再生を停止する()
+		public void tStopPlayback()
 		{
-			tサウンドを停止する();
-			t再生位置を先頭に戻す();
+			tStopSound();
+			tSetPlaybackPositionToBeginning();
 		}
 		public void tPausePlayback()
 		{
-			tサウンドを停止する(true);
+			tStopSound(true);
 			this.n一時停止回数++;
 		}
 		public void t再生を再開する( long t )	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 		{
 			Debug.WriteLine( "t再生を再開する(long " + t + ")" );
-			t再生位置を変更する( t );
+			tChangePlaybackPosition( t );
 			tサウンドを再生する();
 			this.n一時停止回数--;
 		}
@@ -927,7 +927,7 @@ namespace FDK
 		{
 			get
 			{
-				if ( this.bBASSサウンドである )
+				if ( this.bIsBASS )
 				{
 					bool ret = ( BassMix.BASS_Mixer_ChannelIsActive( this.hBassStream ) == BASSActive.BASS_ACTIVE_PAUSED ) &
 								( BassMix.BASS_Mixer_ChannelGetPosition( this.hBassStream ) > 0 );
@@ -962,20 +962,20 @@ namespace FDK
 		}
 		//public lint t時刻から位置を返す( long t )
 		//{
-		//    double num = ( n時刻 * this.db再生速度 ) * this.db周波数倍率;
+		//    double num = ( n時刻 * this.dbPlaySpeed ) * this.db周波数倍率;
 		//    return (int) ( ( num * 0.01 ) * this.nSamplesPerSecond );
 		//}
 		#endregion
 
 
-		public void t解放する()
+		public void tRelease()
 		{
-			t解放する( false );
+			tRelease( false );
 		}
 
-		public void t解放する( bool _bインスタンス削除 )
+		public void tRelease( bool _bインスタンス削除 )
 		{
-			if ( this.bBASSサウンドである )		// stream数の削減用
+			if ( this.bIsBASS )		// stream数の削減用
 			{
 				tBASSサウンドをミキサーから削除する();
 				_cbEndofStream = null;
@@ -993,7 +993,7 @@ namespace FDK
 		}
 		public void tサウンドを再生する( bool bループする )
 		{
-			if ( this.bBASSサウンドである )			// BASSサウンド時のループ処理は、tStartPlaying()側に実装。ここでは「bループする」は未使用。
+			if ( this.bIsBASS )			// BASSサウンド時のループ処理は、tStartPlaying()側に実装。ここでは「bループする」は未使用。
 			{
 //Debug.WriteLine( "再生中?: " +  System.IO.Path.GetFileName(this.strファイル名) + " status=" + BassMix.BASS_Mixer_ChannelIsActive( this.hBassStream ) + " current=" + BassMix.BASS_Mixer_ChannelGetPosition( this.hBassStream ) + " nBytes=" + nBytes );
 				bool b = BassMix.BASS_Mixer_ChannelPlay( this.hBassStream );
@@ -1001,7 +1001,7 @@ namespace FDK
 				{
 //Debug.WriteLine( "再生しようとしたが、Mixerに登録されていなかった: " + Path.GetFileName( this.strファイル名 ) + ", stream#=" + this.hBassStream + ", ErrCode=" + Bass.BASS_ErrorGetCode() );
 
-					bool bb = tBASSサウンドをミキサーに追加する();
+					bool bb = tBASSAddSoundToMixer();
 					if ( !bb )
 					{
 Debug.WriteLine( "Mixerへの登録に失敗: " + Path.GetFileName( this.strファイル名 ) + ", ErrCode=" + Bass.BASS_ErrorGetCode() );
@@ -1010,7 +1010,7 @@ Debug.WriteLine( "Mixerへの登録に失敗: " + Path.GetFileName( this.strフ�
 					{
 //Debug.WriteLine( "Mixerへの登録に成功: " + Path.GetFileName( this.strファイル名 ) + ": " + Bass.BASS_ErrorGetCode() );
 					}
-					//this.t再生位置を先頭に戻す();
+					//this.tSetPlaybackPositionToBeginning();
 
 					bool bbb = BassMix.BASS_Mixer_ChannelPlay( this.hBassStream );
 					if (!bbb)
@@ -1027,7 +1027,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 //Debug.WriteLine( "再生成功: " + Path.GetFileName( this.strファイル名 ) + " (" + hBassStream + ")" );
 				}
 			}
-			else if( this.bDirectSoundである )
+			else if( this.bIsDirectSound )
 			{
 				PlayFlags pf = ( bループする ) ? PlayFlags.Looping : PlayFlags.None;
 				this.Buffer.Play( 0, pf );
@@ -1035,16 +1035,16 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		}
 		public void tサウンドを先頭から再生する()
 		{
-			this.t再生位置を先頭に戻す();
+			this.tSetPlaybackPositionToBeginning();
 			this.tサウンドを再生する();
 		}
-		public void tサウンドを停止する()
+		public void tStopSound()
 		{
-			tサウンドを停止する( false );
+			tStopSound( false );
 		}
-		public void tサウンドを停止する( bool pause )
+		public void tStopSound( bool pause )
 		{
-			if( this.bBASSサウンドである )
+			if( this.bIsBASS )
 			{
 //Debug.WriteLine( "停止: " + System.IO.Path.GetFileName( this.strファイル名 ) + " status=" + BassMix.BASS_Mixer_ChannelIsActive( this.hBassStream ) + " current=" + BassMix.BASS_Mixer_ChannelGetPosition( this.hBassStream ) + " nBytes=" + nBytes );
 				BassMix.BASS_Mixer_ChannelPause( this.hBassStream );
@@ -1053,7 +1053,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			//		tBASSサウンドをミキサーから削除する();		// PAUSEと再生停止を区別できるようにすること!!
 				}
 			}
-			else if( this.bDirectSoundである )
+			else if( this.bIsDirectSound )
 			{
                 try
                 {
@@ -1067,25 +1067,25 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 			}
 		}
 		
-		public void t再生位置を先頭に戻す()
+		public void tSetPlaybackPositionToBeginning()
 		{
-			if( this.bBASSサウンドである )
+			if( this.bIsBASS )
 			{
 				BassMix.BASS_Mixer_ChannelSetPosition( this.hBassStream, 0 );
 				pos = 0;
 			}
-			else if( this.bDirectSoundである )
+			else if( this.bIsDirectSound )
 			{
 				this.Buffer.CurrentPlayPosition = 0;
 			}
 		}
-		public void t再生位置を変更する( long n位置ms )
+		public void tChangePlaybackPosition( long n位置ms )
 		{
-			if( this.bBASSサウンドである )
+			if( this.bIsBASS )
 			{
-				BassMix.BASS_Mixer_ChannelSetPosition( this.hBassStream, Bass.BASS_ChannelSeconds2Bytes( this.hBassStream, n位置ms * this.db周波数倍率 * this.db再生速度 / 1000.0 ), BASSMode.BASS_POS_BYTES );
+				BassMix.BASS_Mixer_ChannelSetPosition( this.hBassStream, Bass.BASS_ChannelSeconds2Bytes( this.hBassStream, n位置ms * this.db周波数倍率 * this.dbPlaySpeed / 1000.0 ), BASSMode.BASS_POS_BYTES );
 			}
-			else if( this.bDirectSoundである )
+			else if( this.bIsDirectSound )
 			{
 				int n位置sample = (int) ( this.Buffer.Format.SamplesPerSecond * n位置ms * 0.001 * _db周波数倍率 * _db再生速度 );	// #30839 2013.2.24 yyagi; add _db周波数倍率 and _db再生速度
 				this.Buffer.CurrentPlayPosition = n位置sample * this.Buffer.Format.BlockAlignment;
@@ -1096,7 +1096,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		{
 			foreach ( var sound in CSound.listインスタンス )
 			{
-				sound.t解放する( false );
+				sound.tRelease( false );
 			}
 		}
 		public static void tすべてのサウンドを再構築する( ISoundDevice device )
@@ -1126,13 +1126,13 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 					#endregion
 					#region [ WAVファイルイメージから ]
 					case E作成方法.WAVファイルイメージから:
-						if( sounds[ i ].bBASSサウンドである )
+						if( sounds[ i ].bIsBASS )
 						{
 							byte[] byArrWaveファイルイメージ = sounds[ i ].byArrWAVファイルイメージ;
 							sounds[ i ].Dispose( true, false );
 							device.tサウンドを作成する( byArrWaveファイルイメージ, ref sounds[ i ] );
 						}
-						else if( sounds[ i ].bDirectSoundである )
+						else if( sounds[ i ].bIsDirectSound )
 						{
 							byte[] byArrWaveファイルイメージ = sounds[ i ].byArrWAVファイルイメージ;
 							var flags = sounds[ i ].DirectSoundBufferFlags;
@@ -1154,7 +1154,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		}
 		protected void Dispose( bool bManagedも解放する, bool bインスタンス削除 )
 		{
-			if( this.bBASSサウンドである )
+			if( this.bIsBASS )
 			{
 				#region [ ASIO, WASAPI の解放 ]
 				//-----------------
@@ -1199,7 +1199,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 						{
 							// 演奏終了後、長時間解放しないでいると、たまに AccessViolationException が発生することがある。
 						}
-						CCommon.tDisposeする( ref this.Buffer );
+						CCommon.tDispose( ref this.Buffer );
 					}
 					//-----------------
 					#endregion
@@ -1284,11 +1284,11 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 
 		#region [ private ]
 		//-----------------
-		private bool bDirectSoundである
+		private bool bIsDirectSound
 		{
 			get { return ( this.eデバイス種別 == ESoundDeviceType.DirectSound ); }
 		}
-		private bool bBASSサウンドである
+		private bool bIsBASS
 		{
 			get
 			{
@@ -1419,7 +1419,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 
 			// n総演奏時間の取得; DTXMania用に追加。
 			double seconds = Bass.BASS_ChannelBytes2Seconds( this._hBassStream, nBytes );
-			this.n総演奏時間ms = (int) ( seconds * 1000 );
+			this.nTotalPlayTimeMs = (int) ( seconds * 1000 );
 			this.pos = 0;
 			this.hMixer = hMixer;
 			float freq = 0.0f;
@@ -1483,7 +1483,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 
 // mixer への追加
 		
-		public bool tBASSサウンドをミキサーに追加する()
+		public bool tBASSAddSoundToMixer()
 		{
 			if ( BassMix.BASS_Mixer_ChannelGetMixer( hBassStream ) == 0 )
 			{
@@ -1495,7 +1495,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 
 				bool b1 = BassMix.BASS_Mixer_StreamAddChannel( this.hMixer, this.hBassStream, bf );
 				//bool b2 = BassMix.BASS_Mixer_ChannelPause( this.hBassStream );
-				t再生位置を先頭に戻す();	// StreamAddChannelの後で再生位置を戻さないとダメ。逆だと再生位置が変わらない。
+				tSetPlaybackPositionToBeginning();	// StreamAddChannelの後で再生位置を戻さないとダメ。逆だと再生位置が変わらない。
 //				Debug.WriteLine( "Add Mixer: " + Path.GetFileName( this.strファイル名 ) + " (" + hBassStream + ")" + " MixedStreams=" + CSoundManager.nMixing );
 				Bass.BASS_ChannelUpdate( this.hBassStream, 0 );	// pre-buffer
 				return b1;	// &b2;

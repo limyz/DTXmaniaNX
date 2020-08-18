@@ -22,7 +22,7 @@ namespace DTXMania
             CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
             if ((c曲リストノード != null) && (cスコア != null))
             {
-                this.n現在選択中の曲の難易度 = CDTXMania.stageSongSelection.n現在選択中の曲の難易度;
+                this.n現在選択中の曲の難易度 = CDTXMania.stageSongSelection.nSelectedSongDifficultyLevel;
                 for (int i = 0; i < 3; i++)
                 {
                     if (CDTXMania.ConfigIni.nSkillMode == 0)
@@ -226,9 +226,9 @@ namespace DTXMania
                     }
 
                     string strBPM;
-                    switch (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別)
+                    switch (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType)
                     {
-                        case CSongListNode.Eノード種別.SCORE:
+                        case CSongListNode.ENodeType.SCORE:
                             {
                                 strBPM = cスコア.SongInformation.Bpm.ToString();
                                 break;
@@ -296,7 +296,7 @@ namespace DTXMania
                         int[] n難易度小数 = new int[5];
                         for (int i = 0; i < 5; i++)
                         {
-                            if (this.str難易度ラベル[i] != null || CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
+                            if (this.str難易度ラベル[i] != null || CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.RANDOM)
                             {
 
                                 int nBoxX = nPanelX;
@@ -328,7 +328,7 @@ namespace DTXMania
                                     {
                                         this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, string.Format("{0,4:0.00}", ((double)n難易度整数[i]) + (((double)n難易度小数[i]) / 100)));
                                     }
-                                    else if ((this.str難易度ラベル[i] != null && !this.b現在選択中の曲に譜面がある[i][j]) || CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.RANDOM)
+                                    else if ((this.str難易度ラベル[i] != null && !this.b現在選択中の曲に譜面がある[i][j]) || CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.RANDOM)
                                     {
                                         this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, ("-.--"));
                                     }
@@ -378,7 +378,7 @@ namespace DTXMania
                                 }
 
                             }
-                            else if (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                            else if (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.SCORE)
                             {
                                 flag = flag + 1;
                             }
@@ -401,11 +401,11 @@ namespace DTXMania
                                 n難易度小数[0] = (this.n現在選択中の曲のレベル[ j ] - ( n難易度整数[ 0 ] * 10 ) ) * 10;
                                 n難易度小数[0] += this.n現在選択中の曲のレベル小数点[ j ];
 
-                                if (this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                                if (this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.SCORE)
                                 {
                                     this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, string.Format("{0,4:0.00}", ((double)n難易度整数[ 0 ]) + (((double)n難易度小数[ 0 ]) / 100)));
                                 }
-                                else if (!this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE)
+                                else if (!this.b現在選択中の曲の譜面[j] && CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.SCORE)
                                 {
                                     this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, ("-.--"));
                                 }

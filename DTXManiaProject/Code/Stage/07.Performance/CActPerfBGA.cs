@@ -57,7 +57,7 @@ namespace DTXMania
 					this.stLayer[ i ].pt表示側終了位置.X = n表示側終了位置X;
 					this.stLayer[ i ].pt表示側終了位置.Y = n表示側終了位置Y;
 					this.stLayer[ i ].n総移動時間ms = n総移動時間ms;
-					this.stLayer[ i ].n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CDTXMania.Timer.n現在時刻;
+					this.stLayer[ i ].n移動開始時刻ms = ( n移動開始時刻ms != -1 ) ? n移動開始時刻ms : CDTXMania.Timer.nCurrentTime;
 				}
 			}
 		}
@@ -66,7 +66,7 @@ namespace DTXMania
 			for( int i = 0; i < CDTXMania.DTX.listChip.Count; i++ )
 			{
 				CDTX.CChip chip = CDTXMania.DTX.listChip[ i ];
-				if( chip.n発声時刻ms > n移動開始時刻ms )
+				if( chip.nPlaybackTimeMs > n移動開始時刻ms )
 				{
 					return;
 				}
@@ -75,28 +75,28 @@ namespace DTXMania
 					case EBGAType.BMP:
 						if( ( chip.rBMP != null ) && ( chip.rBMP.tx画像 != null ) )
 						{
-							this.Start( chip.nチャンネル番号, chip.rBMP, null, chip.rBMP.n幅, chip.rBMP.n高さ, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.n発声時刻ms );
+							this.Start( chip.nChannelNumber, chip.rBMP, null, chip.rBMP.n幅, chip.rBMP.n高さ, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.nPlaybackTimeMs );
 						}
 						break;
 
 					case EBGAType.BMPTEX:
 						if( ( chip.rBMPTEX != null ) && ( chip.rBMPTEX.tx画像 != null ) )
 						{
-							this.Start( chip.nチャンネル番号, null, chip.rBMPTEX, chip.rBMPTEX.tx画像.szImageSize.Width, chip.rBMPTEX.tx画像.szImageSize.Height, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.n発声時刻ms );
+							this.Start( chip.nChannelNumber, null, chip.rBMPTEX, chip.rBMPTEX.tx画像.szImageSize.Width, chip.rBMPTEX.tx画像.szImageSize.Height, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.nPlaybackTimeMs );
 						}
 						break;
 
 					case EBGAType.BGA:
 						if( chip.rBGA != null )
 						{
-							this.Start( chip.nチャンネル番号, chip.rBMP, chip.rBMPTEX, chip.rBGA.pt画像側右下座標.X - chip.rBGA.pt画像側左上座標.X, chip.rBGA.pt画像側右下座標.Y - chip.rBGA.pt画像側左上座標.Y, 0, 0, chip.rBGA.pt画像側左上座標.X, chip.rBGA.pt画像側左上座標.Y, 0, 0, chip.rBGA.pt表示座標.X, chip.rBGA.pt表示座標.Y, 0, 0, 0, chip.n発声時刻ms );
+							this.Start( chip.nChannelNumber, chip.rBMP, chip.rBMPTEX, chip.rBGA.pt画像側右下座標.X - chip.rBGA.pt画像側左上座標.X, chip.rBGA.pt画像側右下座標.Y - chip.rBGA.pt画像側左上座標.Y, 0, 0, chip.rBGA.pt画像側左上座標.X, chip.rBGA.pt画像側左上座標.Y, 0, 0, chip.rBGA.pt表示座標.X, chip.rBGA.pt表示座標.Y, 0, 0, 0, chip.nPlaybackTimeMs );
 						}
 						break;
 
 					case EBGAType.BGAPAN:
 						if( chip.rBGAPan != null )
 						{
-							this.Start( chip.nチャンネル番号, chip.rBMP, chip.rBMPTEX, chip.rBGAPan.sz開始サイズ.Width, chip.rBGAPan.sz開始サイズ.Height, chip.rBGAPan.sz終了サイズ.Width, chip.rBGAPan.sz終了サイズ.Height, chip.rBGAPan.pt画像側開始位置.X, chip.rBGAPan.pt画像側開始位置.Y, chip.rBGAPan.pt画像側終了位置.X, chip.rBGAPan.pt画像側終了位置.Y, chip.rBGAPan.pt表示側開始位置.X, chip.rBGAPan.pt表示側開始位置.Y, chip.rBGAPan.pt表示側終了位置.X, chip.rBGAPan.pt表示側終了位置.Y, chip.n総移動時間, chip.n発声時刻ms );
+							this.Start( chip.nChannelNumber, chip.rBMP, chip.rBMPTEX, chip.rBGAPan.sz開始サイズ.Width, chip.rBGAPan.sz開始サイズ.Height, chip.rBGAPan.sz終了サイズ.Width, chip.rBGAPan.sz終了サイズ.Height, chip.rBGAPan.pt画像側開始位置.X, chip.rBGAPan.pt画像側開始位置.Y, chip.rBGAPan.pt画像側終了位置.X, chip.rBGAPan.pt画像側終了位置.Y, chip.rBGAPan.pt表示側開始位置.X, chip.rBGAPan.pt表示側開始位置.Y, chip.rBGAPan.pt表示側終了位置.X, chip.rBGAPan.pt表示側終了位置.Y, chip.n総移動時間, chip.nPlaybackTimeMs );
 						}
 						break;
 				}
@@ -155,7 +155,7 @@ namespace DTXMania
 		{
 			throw new InvalidOperationException( "tUpdateAndDraw(x,y)のほうを使用してください。" );
 		}
-		public int t進行描画( int x, int y )
+		public int tUpdateAndDraw( int x, int y )
 		{
 			if( !base.bNotActivated )
 			{
@@ -172,13 +172,13 @@ namespace DTXMania
 						Point point4 = this.stLayer[ i ].pt表示側終了位置;
 						long num2 = this.stLayer[ i ].n総移動時間ms;
 						long num3 = this.stLayer[ i ].n移動開始時刻ms;
-						if( CDTXMania.Timer.n現在時刻 < num3 )
+						if( CDTXMania.Timer.nCurrentTime < num3 )
 						{
-							num3 = CDTXMania.Timer.n現在時刻;
+							num3 = CDTXMania.Timer.nCurrentTime;
 						}
 						Size size3 = new Size( 0x116, 0x163 );
 						Size size4 = new Size( ( this.stLayer[ i ].rBMP != null ) ? this.stLayer[ i ].rBMP.n幅 : this.stLayer[ i ].rBMPTEX.tx画像.szImageSize.Width, ( this.stLayer[ i ].rBMP != null ) ? this.stLayer[ i ].rBMP.n高さ : this.stLayer[ i ].rBMPTEX.tx画像.szImageSize.Height );
-						int num4 = (int) ( ( CDTXMania.Timer.n現在時刻 - num3 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
+						int num4 = (int) ( ( CDTXMania.Timer.nCurrentTime - num3 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
 						if( ( num2 != 0 ) && ( num2 < num4 ) )
 						{
 							this.stLayer[ i ].pt画像側開始位置 = point = point2;

@@ -437,8 +437,8 @@ namespace DTXMania
             //CDTXMania.act文字コンソール.tPrint(1200, 48, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.n終了値.ToString());
             if( this.nY1の位座標差分値 > 0 )
             {
-                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? 16 : 4);
-                this.nY1の位座標差分値 = this.nY1の位座標差分値 - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctコンボアニメ.db現在の値 : this.ctコンボアニメ.nCurrentValue);
+                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.bVerticalSyncWait ? 16 : 4);
+                this.nY1の位座標差分値 = this.nY1の位座標差分値 - ( CDTXMania.ConfigIni.bVerticalSyncWait ? (int)this.ctコンボアニメ.db現在の値 : this.ctコンボアニメ.nCurrentValue);
             }
             else
             {
@@ -540,8 +540,8 @@ namespace DTXMania
             //CDTXMania.act文字コンソール.tPrint(1200, 48, CCharacterConsole.Eフォント種別.白, this.ctコンボアニメ.n終了値.ToString());
             if( this.nY1の位座標差分値_2P > 0 )
             {
-                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? 16 : 4);
-                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigIni.b垂直帰線待ちを行う ? (int)this.ctComboAnimation_2P.db現在の値 : this.ctComboAnimation_2P.nCurrentValue);
+                //this.nY1の位座標差分値 -= ( CDTXMania.ConfigIni.bVerticalSyncWait ? 16 : 4);
+                this.nY1の位座標差分値_2P = this.nY1の位座標差分値_2P - ( CDTXMania.ConfigIni.bVerticalSyncWait ? (int)this.ctComboAnimation_2P.db現在の値 : this.ctComboAnimation_2P.nCurrentValue);
             }
             else
             {
@@ -630,7 +630,7 @@ namespace DTXMania
 
             this.ctコンボアニメ = new CCounter( 0, 130, 4, CDTXMania.Timer );
             this.ctComboAnimation_2P = new CCounter( 0, 130, 4, CDTXMania.Timer );
-            if(CDTXMania.ConfigIni.b垂直帰線待ちを行う)
+            if(CDTXMania.ConfigIni.bVerticalSyncWait)
             {
                 this.ctコンボアニメ = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rcPerformanceTimer );
                 this.ctComboAnimation_2P = new CCounter( 0.0, 130.0, 0.003, CSoundManager.rcPerformanceTimer );
@@ -704,11 +704,11 @@ namespace DTXMania
                 //-----------------
                 if (this.status[i].nジャンプインデックス値 < 360)
                 {
-                    if ((this.status[i].n前回の時刻_ジャンプ用 == -1) || (CDTXMania.Timer.n現在時刻 < this.status[i].n前回の時刻_ジャンプ用))
-                        this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                    if ((this.status[i].n前回の時刻_ジャンプ用 == -1) || (CDTXMania.Timer.nCurrentTime < this.status[i].n前回の時刻_ジャンプ用))
+                        this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.nCurrentTime;
 
                     const long INTERVAL = 2;
-                    while ((CDTXMania.Timer.n現在時刻 - this.status[i].n前回の時刻_ジャンプ用) >= INTERVAL)
+                    while ((CDTXMania.Timer.nCurrentTime - this.status[i].n前回の時刻_ジャンプ用) >= INTERVAL)
                     {
                         if (this.status[i].nジャンプインデックス値 < 2000)
                             this.status[i].nジャンプインデックス値 += 3;
@@ -733,7 +733,7 @@ namespace DTXMania
                             // モード変更
                             this.status[i].e現在のモード = EMode.進行表示中;
                             this.status[i].nジャンプインデックス値 = 0;
-                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.nCurrentTime;
                             goto Retry;
                         }
 
@@ -751,14 +751,14 @@ namespace DTXMania
                             // モード変更
                             this.status[i].e現在のモード = EMode.残像表示中;
                             this.status[i].n残像表示中のCOMBO値 = this.status[i].n現在表示中のCOMBO値;
-                            this.status[i].nコンボが切れた時刻 = CDTXMania.Timer.n現在時刻;
+                            this.status[i].nコンボが切れた時刻 = CDTXMania.Timer.nCurrentTime;
                             goto Retry;
                         }
 
                         if (e今回の状態遷移イベント == EEvent.数値更新)
                         {
                             this.status[i].nジャンプインデックス値 = 0;
-                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.n現在時刻;
+                            this.status[i].n前回の時刻_ジャンプ用 = CDTXMania.Timer.nCurrentTime;
                         }
 
                         this.status[i].n現在表示中のCOMBO値 = this.status[i].nCOMBO値;
@@ -789,7 +789,7 @@ namespace DTXMania
                             this.status[i].e現在のモード = EMode.進行表示中;
                             goto Retry;
                         }
-                        if ((CDTXMania.Timer.n現在時刻 - this.status[i].nコンボが切れた時刻) > 1000)
+                        if ((CDTXMania.Timer.nCurrentTime - this.status[i].nコンボが切れた時刻) > 1000)
                         {
                             // モード変更２
                             this.status[i].e現在のモード = EMode.非表示中;

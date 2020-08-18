@@ -29,11 +29,11 @@ namespace DTXMania
 
             if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
             {
-                if (!CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                if (!CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay && CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                 {
                     this.n本体X[2] = 0;
                 }
-                else if (CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                else if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay && !CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                 {
                     this.n本体X[1] = 0;
                 }
@@ -52,10 +52,10 @@ namespace DTXMania
 			{
 				if( base.bJustStartedUpdate )
 				{
-					base.n進行用タイマ = CDTXMania.Timer.n現在時刻;
+					base.n進行用タイマ = CDTXMania.Timer.nCurrentTime;
 					base.bJustStartedUpdate = false;
 				}
-				long num = CDTXMania.Timer.n現在時刻;
+				long num = CDTXMania.Timer.nCurrentTime;
 				if( num < base.n進行用タイマ )
 				{
 					base.n進行用タイマ = num;

@@ -29,7 +29,7 @@ namespace FDK
 		{
 			get { return nSystemTimeMs; }
 		}
-		public long n現在時刻
+		public long nCurrentTime
 		{
 			get { return n現在時刻ms; }
 			set { n現在時刻ms = value; }
@@ -125,7 +125,7 @@ namespace FDK
 
 		public void tリセット()
 		{
-			this.t更新();
+			this.tUpdate();
 			this.n前回リセットした時のシステム時刻ms = this.n更新システム時刻ms;
 			this.n一時停止システム時刻ms = this.n更新システム時刻ms;
 			this.n停止数 = 0;
@@ -140,7 +140,7 @@ namespace FDK
 
 			this.n停止数++;
 		}
-		public void t更新()
+		public void tUpdate()
 		{
 			this.n更新システム時刻ms = this.nSystemTimeMs;
             this.db更新システム時刻ms = this.dbシステム時刻ms;
@@ -152,7 +152,7 @@ namespace FDK
 				this.n停止数--;
 				if( this.n停止数 == 0 )
 				{
-					this.t更新();
+					this.tUpdate();
 					this.n前回リセットした時のシステム時刻ms += this.n更新システム時刻ms - this.n一時停止システム時刻ms;
                     this.db前回リセットした時のシステム時刻ms += this.db更新システム時刻ms - this.db一時停止システム時刻ms;
 				}

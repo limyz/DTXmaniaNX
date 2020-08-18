@@ -12,7 +12,7 @@ namespace DTXMania
 	{
 		// メソッド
 
-		public void tフェードアウト開始()
+		public void tStartFadeOut()
 		{
 			this.mode = EFIFOMode.FadeOut;
 			this.counter = new CCounter( 0, 150, 5, CDTXMania.Timer );
@@ -57,7 +57,7 @@ namespace DTXMania
 			{
                 this.tx黒幕.nTransparency = (this.mode == EFIFOMode.FadeIn) ? (((100 - this.counter.nCurrentValue) * 0xff) / 100) : ((this.counter.nCurrentValue * 0xff) / 100);
                 this.tx黒幕.tDraw2D(CDTXMania.app.Device, 0, 0);
-                string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
+                string path = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PREIMAGE;
                 if( this.txジャケット == null ) // 2019.04.26 kairera0467
                 {
                     if (!File.Exists(path))

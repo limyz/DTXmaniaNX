@@ -101,17 +101,17 @@ namespace DTXMania
                     (CDTXMania.DTX.bチップがある.FT == false) && 
                     (CDTXMania.DTX.bチップがある.Ride == false)))
                 {
-                    num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums);
+                    num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
                 }
                 else
                 {
-                    if (CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums > 100)
+                    if (CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums > 100)
                     {
-                        num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums);
+                        num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
                     }
                     else
                     {
-                        num = ((float)CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.Level.Drums) / 10f;
+                        num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums) / 10f;
                     }
                 }
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
@@ -240,7 +240,7 @@ namespace DTXMania
             }
             CDTXMania.tReleaseTexture(ref this.txリザルト画像);
             this.r表示するリザルト画像 = null;
-            string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
+            string path = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PREIMAGE;
             if (!File.Exists(path))
             {
                 Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });
@@ -263,7 +263,7 @@ namespace DTXMania
             }
             CDTXMania.tReleaseTexture(ref this.txリザルト画像);
             this.r表示するリザルト画像 = null;
-            string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.RESULTIMAGE[rank];
+            string path = CDTXMania.DTX.strFolderName + CDTXMania.DTX.RESULTIMAGE[rank];
             if (!File.Exists(path))
             {
                 Trace.TraceWarning("ファイルが存在しません。({0})", new object[] { path });

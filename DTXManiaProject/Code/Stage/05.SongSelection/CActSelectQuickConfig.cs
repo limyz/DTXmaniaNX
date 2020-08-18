@@ -202,7 +202,7 @@ namespace DTXMania
             // "OFF", "ON" 
             //			l.Add( ( CDTXMania.ConfigIni.bAutoPlay.Guitar == true ) ? 1 : 0 );
             //			l.Add( ( CDTXMania.ConfigIni.bAutoPlay.Bass   == true ) ? 1 : 0 );
-            if (CDTXMania.ConfigIni.bギターが全部オートプレイである)
+            if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay)
             {
                 automode = 0;	// All Auto
             }
@@ -231,7 +231,7 @@ namespace DTXMania
             l.Add(automode);
             #endregion
             #region [ Bass ]
-            if (CDTXMania.ConfigIni.bベースが全部オートプレイである)
+            if (CDTXMania.ConfigIni.bAllBassAreAutoPlay)
             {
                 automode = 0;	// All Auto
             }

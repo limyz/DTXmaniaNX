@@ -177,7 +177,7 @@ namespace DTXMania
                 " only when DirectSound is used.");
             this.listItems.Add(this.iSystemAdjustWaves);
 
-            this.iSystemVSyncWait = new CItemToggle("VSyncWait", CDTXMania.ConfigIni.b垂直帰線待ちを行う,
+            this.iSystemVSyncWait = new CItemToggle("VSyncWait", CDTXMania.ConfigIni.bVerticalSyncWait,
                 "垂直帰線同期：\n" +
                 "画面の描画をディスプレイの\n" +
                 "垂直帰線中に行なう場合には\n" +
@@ -291,7 +291,7 @@ namespace DTXMania
             this.listItems.Add(this.iSystemStoicMode);
             */
 
-            this.iSystemStageEffect = new CItemToggle("StageEffect", CDTXMania.ConfigIni.ボーナス演出を表示する,
+            this.iSystemStageEffect = new CItemToggle("StageEffect", CDTXMania.ConfigIni.DisplayBonusEffects,
                 "OFFにすると、\n" +
                 "ゲーム中の背景演出が\n" +
                 "非表示になります。",
@@ -1643,7 +1643,7 @@ namespace DTXMania
                 }
                 else if (this.listItems[this.nCurrentSelection] == this.iSystemVSyncWait)
                 {
-                    CDTXMania.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
+                    CDTXMania.ConfigIni.bVerticalSyncWait = this.iSystemVSyncWait.bON;
                     CDTXMania.app.b次のタイミングで垂直帰線同期切り替えを行う = true;
                 }
                 #region [ AutoPlay #23886 2012.5.8 yyagi ]
@@ -2270,7 +2270,7 @@ namespace DTXMania
             //-----------------
             if (base.bJustStartedUpdate)
             {
-                this.nスクロール用タイマ値 = CSoundManager.rcPerformanceTimer.n現在時刻;
+                this.nスクロール用タイマ値 = CSoundManager.rcPerformanceTimer.nCurrentTime;
                 this.ctTriangleArrowAnimation.tStart(0, 9, 50, CDTXMania.Timer);
 
                 base.bJustStartedUpdate = false;
@@ -2282,7 +2282,7 @@ namespace DTXMania
 
             #region [ 項目スクロールの進行 ]
             //-----------------
-            long n現在時刻 = CDTXMania.Timer.n現在時刻;
+            long n現在時刻 = CDTXMania.Timer.nCurrentTime;
             if (n現在時刻 < this.nスクロール用タイマ値) this.nスクロール用タイマ値 = n現在時刻;
 
             const int INTERVAL = 2;	// [ms]
@@ -2975,7 +2975,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする = this.iSystemRandomFromSubBox.bON;
 
             CDTXMania.ConfigIni.bWave再生位置自動調整機能有効 = this.iSystemAdjustWaves.bON;
-            CDTXMania.ConfigIni.b垂直帰線待ちを行う = this.iSystemVSyncWait.bON;
+            CDTXMania.ConfigIni.bVerticalSyncWait = this.iSystemVSyncWait.bON;
             CDTXMania.ConfigIni.bバッファ入力を行う = this.iSystemBufferedInput.bON;
             CDTXMania.ConfigIni.bAVIEnabled = this.iSystemAVI.bON;
             CDTXMania.ConfigIni.bBGAEnabled = this.iSystemBGA.bON;
@@ -2995,7 +2995,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.n手動再生音量 = this.iSystemChipVolume.nCurrentValue;
             CDTXMania.ConfigIni.n自動再生音量 = this.iSystemAutoChipVolume.nCurrentValue;
             //CDTXMania.ConfigIni.bストイックモード = this.iSystemStoicMode.bON;
-            CDTXMania.ConfigIni.ボーナス演出を表示する = this.iSystemStageEffect.bON;
+            CDTXMania.ConfigIni.DisplayBonusEffects = this.iSystemStageEffect.bON;
 
             CDTXMania.ConfigIni.nShowLagType = this.iSystemShowLag.n現在選択されている項目番号;				// #25370 2011.6.3 yyagi
             CDTXMania.ConfigIni.nShowLagTypeColor = this.iSystemShowLagColor.n現在選択されている項目番号;

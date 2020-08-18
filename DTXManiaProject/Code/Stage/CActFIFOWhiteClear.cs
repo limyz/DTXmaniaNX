@@ -15,7 +15,7 @@ namespace DTXMania
 	{
 		// メソッド
 
-		public void tフェードアウト開始()
+		public void tStartFadeOut()
 		{
 			this.mode = EFIFOMode.FadeOut;
 			this.counter = new CCounter( 0, 400, 5, CDTXMania.Timer );

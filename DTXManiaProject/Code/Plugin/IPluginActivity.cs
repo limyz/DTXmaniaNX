@@ -62,7 +62,7 @@ namespace DTXMania
 		/// <para>ステージが変わる度に呼び出されます。</para>
 		/// <para>呼び出しタイミングは、新しいステージの活性化直後かつ描画開始前です。</para>
 		/// </summary>
-		void Onステージ変更();
+		void OnChangeStage();
 
 		/// <summary>
 		/// <para>選曲画面で選択曲が変更された場合に呼び出されます。</para>

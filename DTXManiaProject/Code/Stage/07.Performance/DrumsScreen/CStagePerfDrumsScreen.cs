@@ -66,7 +66,7 @@ namespace DTXMania
 				r空打ちドラムチップ[ i ] = this.r空うちChip( EInstrumentPart.DRUMS, (EPad) i );
 				if( r空打ちドラムチップ[ i ] == null )
 				{
-					r空打ちドラムチップ[ i ] = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮( CDTXMania.Timer.n現在時刻, this.nパッド0Atoチャンネル0A[ i ], this.nInputAdjustTimeMs.Drums );
+					r空打ちドラムチップ[ i ] = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮( CDTXMania.Timer.nCurrentTime, this.nパッド0Atoチャンネル0A[ i ], this.nInputAdjustTimeMs.Drums );
 				}
 			}
 		}
@@ -78,7 +78,7 @@ namespace DTXMania
 		{
 			this.bInFillIn = false;
 			base.OnActivate();
-            CScore cスコア = CDTXMania.stageSongSelection.r確定されたスコア;
+            CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
             this.ct登場用 = new CCounter(0, 12, 16, CDTXMania.Timer);
 
             this.actChipFireD.iPosY = (CDTXMania.ConfigIni.bReverse.Drums ? base.nJudgeLinePosY.Drums - 183 : base.nJudgeLinePosY.Drums - 186);
@@ -92,8 +92,8 @@ namespace DTXMania
 			}
 			else
 			{
-				this.actGraph.dbGraphValue_Goal = CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.HighSkill[ 0 ];	// #24074 2011.01.23 add ikanick
-                this.actGraph.dbGraphValue_PersonalBest = CDTXMania.stageSongSelection.r確定されたスコア.SongInformation.HighSkill[ 0 ];
+				this.actGraph.dbGraphValue_Goal = CDTXMania.stageSongSelection.rChosenScore.SongInformation.HighSkill[ 0 ];	// #24074 2011.01.23 add ikanick
+                this.actGraph.dbGraphValue_PersonalBest = CDTXMania.stageSongSelection.rChosenScore.SongInformation.HighSkill[ 0 ];
 
                 // #35411 2015.08.21 chnmr0 add
                 // ゴースト利用可のなとき、0で初期化
@@ -175,10 +175,10 @@ namespace DTXMania
                     this.ctWailingChipPatternAnimation = new CCounter(0, 4, 50, CDTXMania.Timer);
                     base.ePhaseID = CStage.EPhase.Common_FadeIn;
                     
-                    if( this.tx判定画像anime != null && this.txボーナスエフェクト != null )
+                    if( this.tx判定画像anime != null && this.txBonusEffect != null )
                     {
                         this.tx判定画像anime.tDraw2D( CDTXMania.app.Device, 1280, 720 );
-                        this.txボーナスエフェクト.tDraw2D( CDTXMania.app.Device, 1280, 720 );
+                        this.txBonusEffect.tDraw2D( CDTXMania.app.Device, 1280, 720 );
                     }
                     this.actFI.tフェードイン開始();
                     this.ct登場用.tUpdate();
@@ -276,14 +276,14 @@ namespace DTXMania
                 if ((CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
                 {
                     this.actStageFailed.Start();
-                    CDTXMania.DTX.t全チップの再生停止();
+                    CDTXMania.DTX.tStopPlayingAllChips();
                     base.ePhaseID = CStage.EPhase.演奏_STAGE_FAILED;
                 }
                 this.tUpdateAndDraw_Background();
                 this.tUpdateAndDraw_MIDIBGM();
                 this.tUpdateAndDraw_AVI();
-                this.t進行描画_レーンフラッシュD();
-                this.t進行描画_譜面スクロール速度();
+                this.tUpdateAndDraw_LaneFlushD();
+                this.tUpdateAndDraw_ScrollSpeed();
                 this.tUpdateAndDraw_ChipAnimation();
                 this.tUpdateAndDraw_BarLine( EInstrumentPart.DRUMS );
                 this.tUpdateAndDraw_Chip_PatternOnly( EInstrumentPart.DRUMS );
@@ -382,12 +382,12 @@ namespace DTXMania
                     if ((this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
                     {
                         this.actStageFailed.Start();
-                        CDTXMania.DTX.t全チップの再生停止();
+                        CDTXMania.DTX.tStopPlayingAllChips();
                         base.ePhaseID = CStage.EPhase.演奏_STAGE_FAILED;
                     }
                     else
                     {
-                        this.eフェードアウト完了時の戻り値 = EPerfScreenReturnValue.StageClear;
+                        this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
                         base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
                         if (base.nHitCount_ExclAuto.Drums.Miss + base.nHitCount_ExclAuto.Drums.Poor == 0)
                         {
@@ -407,7 +407,7 @@ namespace DTXMania
                         {
 
                         }
-                        this.actFOStageClear.tフェードアウト開始();
+                        this.actFOStageClear.tStartFadeOut();
                     }
                 }
                 if( CDTXMania.ConfigIni.bShowScore )
@@ -464,7 +464,7 @@ namespace DTXMania
                                     break;
                                 }
                         }
-                        return (int)this.eフェードアウト完了時の戻り値;
+                        return (int)this.eReturnValueAfterFadeOut;
                     }
                 }
 
@@ -555,12 +555,12 @@ namespace DTXMania
         private CTexture txLaneCover;
 		//-----------------
 
-        private void tフェードアウト()
+        private void tFadeOut()
         {
-            this.eフェードアウト完了時の戻り値 = EPerfScreenReturnValue.StageClear;
+            this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
             base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
 
-            this.actFOStageClear.tフェードアウト開始();
+            this.actFOStageClear.tStartFadeOut();
         }
 
 		private bool bフィルイン区間の最後のChipである( CDTX.CChip pChip )
@@ -569,15 +569,15 @@ namespace DTXMania
 			{
 				return false;
 			}
-			int num = pChip.n発声位置;
+			int num = pChip.nPlaybackPosition;
             for (int i = listChip.IndexOf(pChip) + 1; i < listChip.Count; i++)
 			{
                 pChip = listChip[i];
-				if( ( pChip.nチャンネル番号 == 0x53 ) && ( pChip.n整数値 == 2 ) )
+				if( ( pChip.nChannelNumber == 0x53 ) && ( pChip.nIntegerValue == 2 ) )
 				{
 					return true;
 				}
-				if( ( ( pChip.nチャンネル番号 >= 0x11 ) && ( pChip.nチャンネル番号 <= 0x1c ) ) && ( ( pChip.n発声位置 - num ) > 0x18 ) )
+				if( ( ( pChip.nChannelNumber >= 0x11 ) && ( pChip.nChannelNumber <= 0x1c ) ) && ( ( pChip.nPlaybackPosition - num ) > 0x18 ) )
 				{
 					return false;
 				}
@@ -636,7 +636,7 @@ namespace DTXMania
 			{
 				return false;
 			}
-			int index = pChip.nチャンネル番号;
+			int index = pChip.nChannelNumber;
 			if ( ( index >= 0x11 ) && ( index <= 0x1c ) )
 			{
 				index -= 0x11;
@@ -710,7 +710,7 @@ namespace DTXMania
 						rChip = pChip;
 					}
 				}
-				this.tサウンド再生( rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
+				this.tPlaySound( rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
 			}
 			return true;
 		}
@@ -925,11 +925,11 @@ namespace DTXMania
                                         //-----------------------------
                                         if ((e判定HC != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipLC.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipLC, inputEvent.nVelocity);
                                             }
@@ -961,11 +961,11 @@ namespace DTXMania
                                         //-----------------------------
                                         if ((e判定HC != EJudgement.Miss) && (e判定HO != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipHO.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipHO.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHO, inputEvent.nVelocity);
                                             }
@@ -1000,30 +1000,30 @@ namespace DTXMania
                                             CDTX.CChip chip;
                                             CDTX.CChip[] chipArray = new CDTX.CChip[] { chipHC, chipHO, chipLC };
                                             // ここから、chipArrayをn発生位置の小さい順に並び替える
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
-                                            if (chipArray[0].n発声位置 > chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition > chipArray[1].nPlaybackPosition)
                                             {
                                                 chip = chipArray[0];
                                                 chipArray[0] = chipArray[1];
                                                 chipArray[1] = chip;
                                             }
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
                                             this.tドラムヒット処理(nTime, EPad.HH, chipArray[0], inputEvent.nVelocity);
-                                            if (chipArray[0].n発声位置 == chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[1].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipArray[1], inputEvent.nVelocity);
                                             }
-                                            if (chipArray[0].n発声位置 == chipArray[2].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[2].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipArray[2], inputEvent.nVelocity);
                                             }
@@ -1031,11 +1031,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HC != EJudgement.Miss) && (e判定HO != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipHO.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipHO.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHO, inputEvent.nVelocity);
                                             }
@@ -1048,11 +1048,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HC != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipLC.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipLC, inputEvent.nVelocity);
                                             }
@@ -1065,11 +1065,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HO != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHO.n発声位置 < chipLC.n発声位置)
+                                            if (chipHO.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipHO, inputEvent.nVelocity);
                                             }
-                                            else if (chipHO.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHO.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HH, chipLC, inputEvent.nVelocity);
                                             }
@@ -1152,11 +1152,11 @@ namespace DTXMania
                                         #region[ BD & LBD | LP ]
                                         if( e判定BD != EJudgement.Miss && e判定LBD != EJudgement.Miss )
                                         {
-                                            if( chipBD.n発声位置 < chipLBD.n発声位置 )
+                                            if( chipBD.nPlaybackPosition < chipLBD.nPlaybackPosition )
                                             {
                                                 this.tドラムヒット処理( nTime, EPad.BD, chipBD, inputEvent.nVelocity );
                                             }
-                                            else if( chipBD.n発声位置 > chipLBD.n発声位置 )
+                                            else if( chipBD.nPlaybackPosition > chipLBD.nPlaybackPosition )
                                             {
                                                 this.tドラムヒット処理( nTime, EPad.BD, chipLBD, inputEvent.nVelocity );
                                             }
@@ -1203,30 +1203,30 @@ namespace DTXMania
                                         {
                                             CDTX.CChip chip8;
                                             CDTX.CChip[] chipArray2 = new CDTX.CChip[] { chipLP, chipLBD, chipBD };
-                                            if (chipArray2[1].n発声位置 > chipArray2[2].n発声位置)
+                                            if (chipArray2[1].nPlaybackPosition > chipArray2[2].nPlaybackPosition)
                                             {
                                                 chip8 = chipArray2[1];
                                                 chipArray2[1] = chipArray2[2];
                                                 chipArray2[2] = chip8;
                                             }
-                                            if (chipArray2[0].n発声位置 > chipArray2[1].n発声位置)
+                                            if (chipArray2[0].nPlaybackPosition > chipArray2[1].nPlaybackPosition)
                                             {
                                                 chip8 = chipArray2[0];
                                                 chipArray2[0] = chipArray2[1];
                                                 chipArray2[1] = chip8;
                                             }
-                                            if (chipArray2[1].n発声位置 > chipArray2[2].n発声位置)
+                                            if (chipArray2[1].nPlaybackPosition > chipArray2[2].nPlaybackPosition)
                                             {
                                                 chip8 = chipArray2[1];
                                                 chipArray2[1] = chipArray2[2];
                                                 chipArray2[2] = chip8;
                                             }
                                             this.tドラムヒット処理(nTime, EPad.BD, chipArray2[0], inputEvent.nVelocity);
-                                            if (chipArray2[0].n発声位置 == chipArray2[1].n発声位置)
+                                            if (chipArray2[0].nPlaybackPosition == chipArray2[1].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipArray2[1], inputEvent.nVelocity);
                                             }
-                                            if (chipArray2[0].n発声位置 == chipArray2[2].n発声位置)
+                                            if (chipArray2[0].nPlaybackPosition == chipArray2[2].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipArray2[2], inputEvent.nVelocity);
                                             }
@@ -1236,11 +1236,11 @@ namespace DTXMania
                                         //判定6 BD  判定5　　 判定4
                                         else if ((e判定LP != EJudgement.Miss) && (e判定LBD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipLBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipLBD, inputEvent.nVelocity);
                                             }
@@ -1253,11 +1253,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LP != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipBD, inputEvent.nVelocity);
                                             }
@@ -1272,11 +1272,11 @@ namespace DTXMania
                                         //判定6 BD  判定5　　 判定4
                                         else if ((e判定LBD != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLBD.n発声位置 < chipBD.n発声位置)
+                                            if (chipLBD.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipLBD, inputEvent.nVelocity);
                                             }
-                                            else if (chipLBD.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLBD.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.BD, chipBD, inputEvent.nVelocity);
                                             }
@@ -1370,11 +1370,11 @@ namespace DTXMania
                                         //-----------------------------
                                         if ((e判定LT != EJudgement.Miss) && (e判定FT != EJudgement.Miss))
                                         {
-                                            if (chipLT.n発声位置 < chipFT.n発声位置)
+                                            if (chipLT.nPlaybackPosition < chipFT.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LT, chipLT, inputEvent.nVelocity);
                                             }
-                                            else if (chipLT.n発声位置 > chipFT.n発声位置)
+                                            else if (chipLT.nPlaybackPosition > chipFT.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LT, chipFT, inputEvent.nVelocity);
                                             }
@@ -1435,11 +1435,11 @@ namespace DTXMania
                                         //-----------------------------
                                         if ((e判定LT != EJudgement.Miss) && (e判定FT != EJudgement.Miss))
                                         {
-                                            if (chipLT.n発声位置 < chipFT.n発声位置)
+                                            if (chipLT.nPlaybackPosition < chipFT.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.FT, chipLT, inputEvent.nVelocity);
                                             }
-                                            else if (chipLT.n発声位置 > chipFT.n発声位置)
+                                            else if (chipLT.nPlaybackPosition > chipFT.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.FT, chipFT, inputEvent.nVelocity);
                                             }
@@ -1498,7 +1498,7 @@ namespace DTXMania
                                 //    //while( num9 > num8 )
                                 //    for ( int j = NumOfChips - 1; j > i; j-- )
                                 //    {
-                                //        if ( ( chipArray[ j - 1 ] == null ) || ( ( chipArray[ j ] != null ) && ( chipArray[ j - 1 ].n発声位置 > chipArray[ j ].n発声位置 ) ) )
+                                //        if ( ( chipArray[ j - 1 ] == null ) || ( ( chipArray[ j ] != null ) && ( chipArray[ j - 1 ].nPlaybackPosition > chipArray[ j ].nPlaybackPosition ) ) )
                                 //        {
                                 //            // swap
                                 //            CDTX.CChip chipTemp = chipArray[ j - 1 ];
@@ -1621,11 +1621,11 @@ namespace DTXMania
                                     case EHHGroup.ハイハットのみ打ち分ける:
                                         if ((e判定HO != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHO.n発声位置 < chipLC.n発声位置)
+                                            if (chipHO.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHO, inputEvent.nVelocity);
                                             }
-                                            else if (chipHO.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHO.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipLC, inputEvent.nVelocity);
                                             }
@@ -1653,11 +1653,11 @@ namespace DTXMania
                                     case EHHGroup.左シンバルのみ打ち分ける:
                                         if ((e判定HC != EJudgement.Miss) && (e判定HO != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipHO.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipHO.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHO, inputEvent.nVelocity);
                                             }
@@ -1688,30 +1688,30 @@ namespace DTXMania
                                             CDTX.CChip chip;
                                             CDTX.CChip[] chipArray = new CDTX.CChip[] { chipHC, chipHO, chipLC };
                                             // ここから、chipArrayをn発生位置の小さい順に並び替える
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
-                                            if (chipArray[0].n発声位置 > chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition > chipArray[1].nPlaybackPosition)
                                             {
                                                 chip = chipArray[0];
                                                 chipArray[0] = chipArray[1];
                                                 chipArray[1] = chip;
                                             }
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
                                             this.tドラムヒット処理(nTime, EPad.HHO, chipArray[0], inputEvent.nVelocity);
-                                            if (chipArray[0].n発声位置 == chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[1].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipArray[1], inputEvent.nVelocity);
                                             }
-                                            if (chipArray[0].n発声位置 == chipArray[2].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[2].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipArray[2], inputEvent.nVelocity);
                                             }
@@ -1719,11 +1719,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HC != EJudgement.Miss) && (e判定HO != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipHO.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipHO.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipHO.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHO, inputEvent.nVelocity);
                                             }
@@ -1736,11 +1736,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HC != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHC.n発声位置 < chipLC.n発声位置)
+                                            if (chipHC.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHC, inputEvent.nVelocity);
                                             }
-                                            else if (chipHC.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHC.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipLC, inputEvent.nVelocity);
                                             }
@@ -1753,11 +1753,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定HO != EJudgement.Miss) && (e判定LC != EJudgement.Miss))
                                         {
-                                            if (chipHO.n発声位置 < chipLC.n発声位置)
+                                            if (chipHO.nPlaybackPosition < chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipHO, inputEvent.nVelocity);
                                             }
-                                            else if (chipHO.n発声位置 > chipLC.n発声位置)
+                                            else if (chipHO.nPlaybackPosition > chipLC.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.HHO, chipLC, inputEvent.nVelocity);
                                             }
@@ -1978,13 +1978,13 @@ namespace DTXMania
                                         #region[ LPのヒット処理]
                                         if (e判定LP != EJudgement.Miss && e判定LBD != EJudgement.Miss)
                                         {
-                                            if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipLP, inputEvent.nVelocity);
                                             }
                                             else
                                             {
-                                                if (chipLP.n発声位置 > chipLBD.n発声位置)
+                                                if (chipLP.nPlaybackPosition > chipLBD.nPlaybackPosition)
                                                 {
                                                     this.tドラムヒット処理(nTime, EPad.LP, chipLBD, inputEvent.nVelocity);
                                                 }
@@ -2025,30 +2025,30 @@ namespace DTXMania
                                         {
                                             CDTX.CChip chip;
                                             CDTX.CChip[] chipArray = new CDTX.CChip[] { chipLP, chipLBD, chipBD };
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
-                                            if (chipArray[0].n発声位置 > chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition > chipArray[1].nPlaybackPosition)
                                             {
                                                 chip = chipArray[0];
                                                 chipArray[0] = chipArray[1];
                                                 chipArray[1] = chip;
                                             }
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
                                             this.tドラムヒット処理(nTime, EPad.LP, chipArray[0], inputEvent.nVelocity);
-                                            if (chipArray[0].n発声位置 == chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[1].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipArray[1], inputEvent.nVelocity);
                                             }
-                                            if (chipArray[0].n発声位置 == chipArray[2].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[2].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipArray[2], inputEvent.nVelocity);
                                             }
@@ -2056,11 +2056,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LP != EJudgement.Miss) && (e判定LBD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipLBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipLBD, inputEvent.nVelocity);
                                             }
@@ -2073,11 +2073,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LP != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipBD, inputEvent.nVelocity);
                                             }
@@ -2090,11 +2090,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LBD != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLBD.n発声位置 < chipBD.n発声位置)
+                                            if (chipLBD.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipLBD, inputEvent.nVelocity);
                                             }
-                                            else if (chipLBD.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLBD.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LP, chipBD, inputEvent.nVelocity);
                                             }
@@ -2167,11 +2167,11 @@ namespace DTXMania
                                         #region[ BD & LBD | LP ]
                                         if( e判定BD != EJudgement.Miss && e判定LBD != EJudgement.Miss )
                                         {
-                                            if( chipBD.n発声位置 < chipLBD.n発声位置 )
+                                            if( chipBD.nPlaybackPosition < chipLBD.nPlaybackPosition )
                                             {
                                                 this.tドラムヒット処理( nTime, EPad.LBD, chipBD, inputEvent.nVelocity );
                                             }
-                                            else if( chipBD.n発声位置 > chipLBD.n発声位置 )
+                                            else if( chipBD.nPlaybackPosition > chipLBD.nPlaybackPosition )
                                             {
                                                 this.tドラムヒット処理( nTime, EPad.LBD, chipLBD, inputEvent.nVelocity );
                                             }
@@ -2202,13 +2202,13 @@ namespace DTXMania
                                         #region[ LPのヒット処理]
                                         if (e判定LP != EJudgement.Miss && e判定LBD != EJudgement.Miss)
                                         {
-                                            if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipLP, inputEvent.nVelocity);
                                             }
                                             else
                                             {
-                                                if (chipLP.n発声位置 > chipLBD.n発声位置)
+                                                if (chipLP.nPlaybackPosition > chipLBD.nPlaybackPosition)
                                                 {
                                                     this.tドラムヒット処理(nTime, EPad.LBD, chipLBD, inputEvent.nVelocity);
                                                 }
@@ -2249,30 +2249,30 @@ namespace DTXMania
                                         {
                                             CDTX.CChip chip;
                                             CDTX.CChip[] chipArray = new CDTX.CChip[] { chipLP, chipLBD, chipBD };
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
-                                            if (chipArray[0].n発声位置 > chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition > chipArray[1].nPlaybackPosition)
                                             {
                                                 chip = chipArray[0];
                                                 chipArray[0] = chipArray[1];
                                                 chipArray[1] = chip;
                                             }
-                                            if (chipArray[1].n発声位置 > chipArray[2].n発声位置)
+                                            if (chipArray[1].nPlaybackPosition > chipArray[2].nPlaybackPosition)
                                             {
                                                 chip = chipArray[1];
                                                 chipArray[1] = chipArray[2];
                                                 chipArray[2] = chip;
                                             }
                                             this.tドラムヒット処理(nTime, EPad.LBD, chipArray[0], inputEvent.nVelocity);
-                                            if (chipArray[0].n発声位置 == chipArray[1].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[1].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipArray[1], inputEvent.nVelocity);
                                             }
-                                            if (chipArray[0].n発声位置 == chipArray[2].n発声位置)
+                                            if (chipArray[0].nPlaybackPosition == chipArray[2].nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipArray[2], inputEvent.nVelocity);
                                             }
@@ -2280,11 +2280,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LP != EJudgement.Miss) && (e判定LBD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipLBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipLBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipLBD, inputEvent.nVelocity);
                                             }
@@ -2297,11 +2297,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LP != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLP.n発声位置 < chipBD.n発声位置)
+                                            if (chipLP.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipLP, inputEvent.nVelocity);
                                             }
-                                            else if (chipLP.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLP.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipBD, inputEvent.nVelocity);
                                             }
@@ -2314,11 +2314,11 @@ namespace DTXMania
                                         }
                                         else if ((e判定LBD != EJudgement.Miss) && (e判定BD != EJudgement.Miss))
                                         {
-                                            if (chipLBD.n発声位置 < chipBD.n発声位置)
+                                            if (chipLBD.nPlaybackPosition < chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipLBD, inputEvent.nVelocity);
                                             }
-                                            else if (chipLBD.n発声位置 > chipBD.n発声位置)
+                                            else if (chipLBD.nPlaybackPosition > chipBD.nPlaybackPosition)
                                             {
                                                 this.tドラムヒット処理(nTime, EPad.LBD, chipBD, inputEvent.nVelocity);
                                             }
@@ -2388,7 +2388,7 @@ namespace DTXMania
                         {
                             #region [ (B1) 空打ち音が譜面で指定されているのでそれを再生する。]
                             //-----------------
-                            this.tサウンド再生(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
+                            this.tPlaySound(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
                             //-----------------
                             #endregion
                         }
@@ -2428,7 +2428,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipHO;
                                                 }
-                                                else if (chipHO.n発声位置 < chipLC.n発声位置)
+                                                else if (chipHO.nPlaybackPosition < chipLC.nPlaybackPosition)
                                                 {
                                                     rChip = chipHO;
                                                 }
@@ -2527,7 +2527,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipHC;
                                                 }
-                                                else if (chipHC.n発声位置 < chipLC.n発声位置)
+                                                else if (chipHC.nPlaybackPosition < chipLC.nPlaybackPosition)
                                                 {
                                                     rChip = chipHC;
                                                 }
@@ -2585,7 +2585,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipHC;
                                                 }
-                                                else if (chipHC.n発声位置 < chipHO.n発声位置)
+                                                else if (chipHC.nPlaybackPosition < chipHO.nPlaybackPosition)
                                                 {
                                                     rChip = chipHC;
                                                 }
@@ -2620,9 +2620,9 @@ namespace DTXMania
                                             case EBDGroup.BDとLPで打ち分ける:
                                                 if( chipBD != null && chipLBD != null )
                                                 {
-                                                    if( chipBD.n発声時刻ms >= chipLBD.n発声時刻ms )
+                                                    if( chipBD.nPlaybackTimeMs >= chipLBD.nPlaybackTimeMs )
                                                         rChip = chipBD;
-                                                    else if( chipBD.n発声時刻ms < chipLBD.n発声時刻ms )
+                                                    else if( chipBD.nPlaybackTimeMs < chipLBD.nPlaybackTimeMs )
                                                         rChip = chipLBD;
                                                 }
                                                 else if( chipLBD != null )
@@ -2649,7 +2649,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipLP;
                                                 }
-                                                else if (chipLP.n発声位置 < chipLBD.n発声位置)
+                                                else if (chipLP.nPlaybackPosition < chipLBD.nPlaybackPosition)
                                                 {
                                                     rChip = chipLP;
                                                 }
@@ -2701,7 +2701,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipLBD;
                                                 }
-                                                else if (chipLBD.n発声位置 < chipBD.n発声位置)
+                                                else if (chipLBD.nPlaybackPosition < chipBD.nPlaybackPosition)
                                                 {
                                                     rChip = chipLBD;
                                                 }
@@ -2738,9 +2738,9 @@ namespace DTXMania
                                                 #region[ BDとLBD ]
                                                 if( chipBD != null && chipLBD != null )
                                                 {
-                                                    if( chipBD.n発声時刻ms <= chipLBD.n発声時刻ms )
+                                                    if( chipBD.nPlaybackTimeMs <= chipLBD.nPlaybackTimeMs )
                                                         rChip = chipLBD;
-                                                    else if( chipBD.n発声時刻ms > chipLBD.n発声時刻ms )
+                                                    else if( chipBD.nPlaybackTimeMs > chipLBD.nPlaybackTimeMs )
                                                         rChip = chipBD;
                                                 }
                                                 else if( chipLBD != null )
@@ -2767,7 +2767,7 @@ namespace DTXMania
                                                 {
                                                     rChip = chipLP;
                                                 }
-                                                else if (chipLP.n発声位置 < chipBD.n発声位置)
+                                                else if (chipLP.nPlaybackPosition < chipBD.nPlaybackPosition)
                                                 {
                                                     rChip = chipLP;
                                                 }
@@ -2795,7 +2795,7 @@ namespace DTXMania
                             if (rChip != null)
                             {
                                 // 空打ち音が見つかったので再生する。
-                                this.tサウンド再生(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
+                                this.tPlaySound(rChip, CSoundManager.rcPerformanceTimer.nシステム時刻, EInstrumentPart.DRUMS, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums);
                             }
                             //-----------------
                             #endregion
@@ -2826,7 +2826,7 @@ namespace DTXMania
 				//while( num9 > num8 )
 				for ( int j = NumOfChips - 1; j > i; j-- )
 				{
-					if ( ( chipArray[ j - 1 ] == null ) || ( ( chipArray[ j ] != null ) && ( chipArray[ j - 1 ].n発声位置 > chipArray[ j ].n発声位置 ) ) )
+					if ( ( chipArray[ j - 1 ] == null ) || ( ( chipArray[ j ] != null ) && ( chipArray[ j - 1 ].nPlaybackPosition > chipArray[ j ].nPlaybackPosition ) ) )
 					{
 						// swap
 						CDTX.CChip chipTemp = chipArray[ j - 1 ];
@@ -2853,7 +2853,7 @@ namespace DTXMania
 			string BgFilename = "";
 			if ( ( ( CDTXMania.DTX.BACKGROUND != null ) && ( CDTXMania.DTX.BACKGROUND.Length > 0 ) ) && !CDTXMania.ConfigIni.bストイックモード )
 			{
-				BgFilename = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.BACKGROUND;
+				BgFilename = CDTXMania.DTX.strFolderName + CDTXMania.DTX.BACKGROUND;
 			}
 			base.tGenerateBackgroundTexture( DefaultBgFilename, bgrect, BgFilename );
 		}
@@ -2865,93 +2865,93 @@ namespace DTXMania
                 #region [ Sudden処理 ]
                 if ((CDTXMania.ConfigIni.nHidSud.Drums == 2) || (CDTXMania.ConfigIni.nHidSud.Drums == 3))
                 {
-                    if (pChip.nバーからの距離dot.Drums < 200)
+                    if (pChip.nDistanceFromBar.Drums < 200)
                     {
-                        pChip.b可視 = true;
-                        pChip.n透明度 = 0xff;
+                        pChip.bVisible = true;
+                        pChip.nTransparency = 0xff;
                     }
-                    else if (pChip.nバーからの距離dot.Drums < 250)
+                    else if (pChip.nDistanceFromBar.Drums < 250)
                     {
-                        pChip.b可視 = true;
-                        pChip.n透明度 = 0xff - ((int)((((double)(pChip.nバーからの距離dot.Drums - 200)) * 255.0) / 50.0));
+                        pChip.bVisible = true;
+                        pChip.nTransparency = 0xff - ((int)((((double)(pChip.nDistanceFromBar.Drums - 200)) * 255.0) / 50.0));
                     }
                     else
                     {
-                        pChip.b可視 = false;
-                        pChip.n透明度 = 0;
+                        pChip.bVisible = false;
+                        pChip.nTransparency = 0;
                     }
                 }
                 #endregion
                 #region [ Hidden処理 ]
                 if ((CDTXMania.ConfigIni.nHidSud.Drums == 1) || (CDTXMania.ConfigIni.nHidSud.Drums == 3))
                 {
-                    if (pChip.nバーからの距離dot.Drums < 100)
+                    if (pChip.nDistanceFromBar.Drums < 100)
                     {
-                        pChip.b可視 = false;
+                        pChip.bVisible = false;
                     }
-                    else if (pChip.nバーからの距離dot.Drums < 150)
+                    else if (pChip.nDistanceFromBar.Drums < 150)
                     {
-                        pChip.b可視 = true;
-                        pChip.n透明度 = (int)((((double)(pChip.nバーからの距離dot.Drums - 100)) * 255.0) / 50.0);
+                        pChip.bVisible = true;
+                        pChip.nTransparency = (int)((((double)(pChip.nDistanceFromBar.Drums - 100)) * 255.0) / 50.0);
                     }
                 }
                 #endregion
                 #region [ ステルス処理 ]
                 if (CDTXMania.ConfigIni.nHidSud.Drums == 4)
                 {
-                    pChip.b可視 = false;
+                    pChip.bVisible = false;
                 }
                 #endregion
-                if (!pChip.bHit && pChip.b可視)
+                if (!pChip.bHit && pChip.bVisible)
                 {
                     if (this.txチップ != null)
                     {
-                        this.txチップ.nTransparency = pChip.n透明度;
+                        this.txチップ.nTransparency = pChip.nTransparency;
                     }
-                    int x = this.nチャンネルtoX座標[pChip.nチャンネル番号 - 0x11];
+                    int x = this.nチャンネルtoX座標[pChip.nChannelNumber - 0x11];
 
                     if (configIni.eLaneType.Drums == EType.A)
                     {
                         if (configIni.eRDPosition == ERDPosition.RCRD)
                         {
-                            x = this.nチャンネルtoX座標[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標[pChip.nChannelNumber - 0x11];
                         }
                         else if (configIni.eRDPosition == ERDPosition.RDRC)
                         {
-                            x = this.nチャンネルtoX座標改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標改[pChip.nChannelNumber - 0x11];
                         }
                     }
                     else if (configIni.eLaneType.Drums == EType.B)
                     {
                         if (configIni.eRDPosition == ERDPosition.RCRD)
                         {
-                            x = this.nチャンネルtoX座標B[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標B[pChip.nChannelNumber - 0x11];
                         }
                         else if (configIni.eRDPosition == ERDPosition.RDRC)
                         {
-                            x = this.nチャンネルtoX座標B改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標B改[pChip.nChannelNumber - 0x11];
                         }
                     }
                     else if (configIni.eLaneType.Drums == EType.C)
                     {
                         if (configIni.eRDPosition == ERDPosition.RCRD)
                         {
-                            x = this.nチャンネルtoX座標C[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標C[pChip.nChannelNumber - 0x11];
                         }
                         else if (configIni.eRDPosition == ERDPosition.RDRC)
                         {
-                            x = this.nチャンネルtoX座標C改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標C改[pChip.nChannelNumber - 0x11];
                         }
                     }
                     else if (configIni.eLaneType.Drums == EType.D)
                     {
                         if (configIni.eRDPosition == ERDPosition.RCRD)
                         {
-                            x = this.nチャンネルtoX座標D[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標D[pChip.nChannelNumber - 0x11];
                         }
                         else if (configIni.eRDPosition == ERDPosition.RDRC)
                         {
-                            x = this.nチャンネルtoX座標D改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標D改[pChip.nChannelNumber - 0x11];
                         }
                     }
 
@@ -2959,25 +2959,25 @@ namespace DTXMania
                     {
                         if (configIni.eLaneType.Drums == EType.A)
                         {
-                            x = this.nチャンネルtoX座標改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標改[pChip.nChannelNumber - 0x11];
                         }
                         else if (configIni.eLaneType.Drums == EType.B)
                         {
-                            x = this.nチャンネルtoX座標B改[pChip.nチャンネル番号 - 0x11];
+                            x = this.nチャンネルtoX座標B改[pChip.nChannelNumber - 0x11];
                         }
                     }
 
-                    int y = configIni.bReverse.Drums ? (base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) : (base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums);
+                    int y = configIni.bReverse.Drums ? (base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) : (base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums);
                     if (base.txチップ != null)
                     {
-                        base.txチップ.vcScaleRatio = new Vector3((float)pChip.dbチップサイズ倍率, (float)pChip.dbチップサイズ倍率, 1f);
+                        base.txチップ.vcScaleRatio = new Vector3((float)pChip.dbChipSizeRatio, (float)pChip.dbChipSizeRatio, 1f);
                     }
                     int num9 = this.ctChipPatternAnimation.Drums.nCurrentValue;
 
-                    switch (pChip.nチャンネル番号)
+                    switch (pChip.nChannelNumber)
                     {
                         case 0x11:
-                            x = (x + 0x10) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x10) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(60 + 10, 128 + (num9 * 64), 0x2e + 10, 64));
@@ -2985,7 +2985,7 @@ namespace DTXMania
                             break;
 
                         case 0x12:
-                            x = (x + 0x10) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x10) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 32, new Rectangle(0x6a + 20, 128 + (num9 * 64), 0x36 + 10, 64));
@@ -2993,7 +2993,7 @@ namespace DTXMania
                             break;
 
                         case 0x13:
-                            x = (x + 0x16) - ((int)((44.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x16) - ((int)((44.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(0, 128 + (num9 * 0x40), 60 + 10, 0x40));
@@ -3001,7 +3001,7 @@ namespace DTXMania
                             break;
 
                         case 0x14:
-                            x = (x + 0x10) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x10) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 32, new Rectangle(160 + 30, 128 + (num9 * 0x40), 0x2e + 10, 64));
@@ -3009,7 +3009,7 @@ namespace DTXMania
                             break;
 
                         case 0x15:
-                            x = (x + 0x10) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x10) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 32, new Rectangle(0xce + 40, 128 + (num9 * 0x40), 0x2e + 10, 64));
@@ -3017,7 +3017,7 @@ namespace DTXMania
                             break;
 
                         case 0x16:
-                            x = (x + 19) - ((int)((38.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 19) - ((int)((38.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(298 + 60, 128 + (num9 * 64), 64 + 10, 64));
@@ -3025,7 +3025,7 @@ namespace DTXMania
                             break;
 
                         case 0x17:
-                            x = (x + 0x10) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x10) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(0xfc + 50, 128 + (num9 * 64), 0x2e + 10, 0x40));
@@ -3033,25 +3033,25 @@ namespace DTXMania
                             break;
 
                         case 0x18:
-                            x = (x + 13) - ((int)((26.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 13) - ((int)((26.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 switch (configIni.eHHOGraphics.Drums)
                                 {
                                     case EType.A:
-                                        x = (x + 14) - ((int)((26.0 * pChip.dbチップサイズ倍率) / 2.0));
+                                        x = (x + 14) - ((int)((26.0 * pChip.dbChipSizeRatio) / 2.0));
                                         this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(0x200 + 100, 128 + (num9 * 64), 0x26 + 10, 64));
                                         break;
 
                                     /*
                                 case EType.B:
-                                    x = (x + 14) - ((int)((26.0 * pChip.dbチップサイズ倍率) / 2.0));
+                                    x = (x + 14) - ((int)((26.0 * pChip.dbChipSizeRatio) / 2.0));
                                     this.txチップ.tDraw2D(CDTXMania.app.Device, x, y - 32, new Rectangle(0x200, 128 + (num9 * 64), 0x26, 64));
                                     break;
                                      */
 
                                     case EType.C:
-                                        x = (x + 13) - ((int)((32.0 * pChip.dbチップサイズ倍率) / 2.0));
+                                        x = (x + 13) - ((int)((32.0 * pChip.dbChipSizeRatio) / 2.0));
                                         this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(60 + 10, 128 + (num9 * 64), 0x2e + 10, 64));
                                         break;
                                 }
@@ -3059,7 +3059,7 @@ namespace DTXMania
                             break;
 
                         case 0x19:
-                            x = (x + 13) - ((int)((26.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 13) - ((int)((26.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(0x16a + 70, 128 + (num9 * 64), 0x26 + 10, 0x40));
@@ -3067,7 +3067,7 @@ namespace DTXMania
                             break;
 
                         case 0x1a:
-                            x = (x + 0x13) - ((int)((38.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x13) - ((int)((38.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(448 + 90, 128 + (num9 * 64), 64 + 10, 64));
@@ -3075,7 +3075,7 @@ namespace DTXMania
                             break;
 
                         case 0x1b:
-                            x = (x + 0x13) - ((int)((38.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x13) - ((int)((38.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle(550 + 110, 128 + (num9 * 64), 0x30 + 10, 64));
@@ -3083,7 +3083,7 @@ namespace DTXMania
                             break;
 
                         case 0x1c:
-                            x = (x + 0x13) - ((int)((38.0 * pChip.dbチップサイズ倍率) / 2.0));
+                            x = (x + 0x13) - ((int)((38.0 * pChip.dbChipSizeRatio) / 2.0));
                             if (this.txチップ != null)
                             {
 
@@ -3106,8 +3106,8 @@ namespace DTXMania
                 }
 
                 /*
-				int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nチャンネル番号 - 0x11 ];
-				if ( ( configIni.bAutoPlay[ indexSevenLanes ] && !pChip.bHit ) && ( pChip.nバーからの距離dot.Drums < 0 ) )
+				int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nChannelNumber - 0x11 ];
+				if ( ( configIni.bAutoPlay[ indexSevenLanes ] && !pChip.bHit ) && ( pChip.nDistanceFromBar.Drums < 0 ) )
 				{
 					pChip.bHit = true;
 					this.actLaneFlushD.Start( (ELane) indexSevenLanes, ( (float) CInputManager.n通常音量 ) / 127f );
@@ -3116,113 +3116,113 @@ namespace DTXMania
 					//bool flag3 = flag2;
                     // #31602 2013.6.24 yyagi 判定ラインの表示位置をずらしたら、チップのヒットエフェクトの表示もずらすために、nJudgeLine..を追加
                     this.actChipFireD.Start( (ELane)indexSevenLanes, flag, flag2, flag2, nJudgeLinePosY_delta.Drums );
-					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nチャンネル番号 - 0x11 ] );
-					this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
-					this.tProcessChipHit( pChip.n発声時刻ms, pChip );
+					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nChannelNumber - 0x11 ] );
+					this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+					this.tProcessChipHit( pChip.nPlaybackTimeMs, pChip );
 				}
                 */
                 return;
             }	// end of "if configIni.bDrumsEnabled"
-            if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
+            if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
             {
-                //this.tサウンド再生(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
+                //this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
                 pChip.bHit = true;
             }
         }
-		protected override void t進行描画_チップ_ドラムス( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_Drums( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
 		{
 			if( configIni.bDrumsEnabled )
 			{
 				#region [ Sudden処理 ]
                 if( ( CDTXMania.ConfigIni.nHidSud.Drums == 2 ) || ( CDTXMania.ConfigIni.nHidSud.Drums == 3 ) )
 				{
-					if( pChip.nバーからの距離dot.Drums < 200 )
+					if( pChip.nDistanceFromBar.Drums < 200 )
 					{
-						pChip.b可視 = true;
-						pChip.n透明度 = 0xff;
+						pChip.bVisible = true;
+						pChip.nTransparency = 0xff;
 					}
-					else if( pChip.nバーからの距離dot.Drums < 250 )
+					else if( pChip.nDistanceFromBar.Drums < 250 )
 					{
-						pChip.b可視 = true;
-						pChip.n透明度 = 0xff - ( (int) ( ( ( (double) ( pChip.nバーからの距離dot.Drums - 200 ) ) * 255.0 ) / 50.0 ) );
+						pChip.bVisible = true;
+						pChip.nTransparency = 0xff - ( (int) ( ( ( (double) ( pChip.nDistanceFromBar.Drums - 200 ) ) * 255.0 ) / 50.0 ) );
 					}
 					else
 					{
-						pChip.b可視 = false;
-						pChip.n透明度 = 0;
+						pChip.bVisible = false;
+						pChip.nTransparency = 0;
 					}
 				}
 				#endregion
 				#region [ Hidden処理 ]
                 if( ( CDTXMania.ConfigIni.nHidSud.Drums == 1 ) || ( CDTXMania.ConfigIni.nHidSud.Drums == 3 ) )
 				{
-					if( pChip.nバーからの距離dot.Drums < 100 )
+					if( pChip.nDistanceFromBar.Drums < 100 )
 					{
-						pChip.b可視 = false;
+						pChip.bVisible = false;
 					}
-					else if( pChip.nバーからの距離dot.Drums < 150 )
+					else if( pChip.nDistanceFromBar.Drums < 150 )
 					{
-						pChip.b可視 = true;
-						pChip.n透明度 = (int) ( ( ( (double) ( pChip.nバーからの距離dot.Drums - 100 ) ) * 255.0 ) / 50.0 );
+						pChip.bVisible = true;
+						pChip.nTransparency = (int) ( ( ( (double) ( pChip.nDistanceFromBar.Drums - 100 ) ) * 255.0 ) / 50.0 );
 					}
 				}
 				#endregion
                 #region [ ステルス処理 ]
                 if( CDTXMania.ConfigIni.nHidSud.Drums == 4 )
                 {
-                        pChip.b可視 = false;
+                        pChip.bVisible = false;
                 }
                 #endregion
-				if( !pChip.bHit && pChip.b可視 )
+				if( !pChip.bHit && pChip.bVisible )
                 {
                     if( this.txチップ != null )
                     {
-                        this.txチップ.nTransparency = pChip.n透明度;
+                        this.txチップ.nTransparency = pChip.nTransparency;
                     }
-                    int x = this.nチャンネルtoX座標[ pChip.nチャンネル番号 - 0x11 ];
+                    int x = this.nチャンネルtoX座標[ pChip.nChannelNumber - 0x11 ];
 
                     if( configIni.eLaneType.Drums == EType.A )
                     {
                         if (configIni.eRDPosition == ERDPosition.RCRD)
                         {
-                            x = this.nチャンネルtoX座標[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標[ pChip.nChannelNumber - 0x11 ];
                         }
                         else if( configIni.eRDPosition == ERDPosition.RDRC )
                         {
-                            x = this.nチャンネルtoX座標改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標改[ pChip.nChannelNumber - 0x11 ];
                         }
                     }
                     else if( configIni.eLaneType.Drums == EType.B )
                     {
                         if( configIni.eRDPosition == ERDPosition.RCRD )
                         {
-                            x = this.nチャンネルtoX座標B[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標B[ pChip.nChannelNumber - 0x11 ];
                         }
                         else if( configIni.eRDPosition == ERDPosition.RDRC )
                         {
-                            x = this.nチャンネルtoX座標B改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標B改[ pChip.nChannelNumber - 0x11 ];
                         }
                     }
                     else if( configIni.eLaneType.Drums == EType.C )
                     {
                         if( configIni.eRDPosition == ERDPosition.RCRD )
                         {
-                            x = this.nチャンネルtoX座標C[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標C[ pChip.nChannelNumber - 0x11 ];
                         }
                         else if( configIni.eRDPosition == ERDPosition.RDRC )
                         {
-                            x = this.nチャンネルtoX座標C改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標C改[ pChip.nChannelNumber - 0x11 ];
                         }
                     }
                     else if( configIni.eLaneType.Drums == EType.D )
                     {
                         if( configIni.eRDPosition == ERDPosition.RCRD )
                         {
-                            x = this.nチャンネルtoX座標D[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標D[ pChip.nChannelNumber - 0x11 ];
                         }
                         else if( configIni.eRDPosition == ERDPosition.RDRC )
                         {
-                            x = this.nチャンネルtoX座標D改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標D改[ pChip.nChannelNumber - 0x11 ];
                         }
                     }
 
@@ -3230,124 +3230,124 @@ namespace DTXMania
                     {
                         if( configIni.eLaneType.Drums == EType.A )
                         {
-                            x = this.nチャンネルtoX座標改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標改[ pChip.nChannelNumber - 0x11 ];
                         }
                         else if( configIni.eLaneType.Drums == EType.B )
                         {
-                            x = this.nチャンネルtoX座標B改[ pChip.nチャンネル番号 - 0x11 ];
+                            x = this.nチャンネルtoX座標B改[ pChip.nChannelNumber - 0x11 ];
                         }
                     }
 
-                    int y = configIni.bReverse.Drums ? ( base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums ) : ( base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums );
+                    int y = configIni.bReverse.Drums ? ( base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums ) : ( base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums );
                     if( base.txチップ != null )
                     {
-                        base.txチップ.vcScaleRatio = new Vector3( ( float )pChip.dbチップサイズ倍率, ( float )pChip.dbチップサイズ倍率, 1f );
+                        base.txチップ.vcScaleRatio = new Vector3( ( float )pChip.dbChipSizeRatio, ( float )pChip.dbChipSizeRatio, 1f );
                     }
                     int num9 = this.ctChipPatternAnimation.Drums.nCurrentValue;
 
-                    switch( pChip.nチャンネル番号 )
+                    switch( pChip.nChannelNumber )
                     {
                         case 0x11:
-                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 60 + 10, 0, 0x2e + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 60 + 10, 64, 0x2e + 10, 64 ) );
                             }
                             break;
 
                         case 0x12:
-                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D(CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x6a + 20, 0, 0x36 +10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x6a + 20, 64, 0x36 + 10, 64 ) );
                             }
                             break;
 
                         case 0x13:
-                            x = ( x + 0x16 ) - ( ( int )( ( 44.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x16 ) - ( ( int )( ( 44.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0, 0, 60 + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0, 64, 60 + 10, 64 ) );
                             }
                             break;
 
                         case 0x14:
-                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 160 + 30, 0, 0x2e + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 160 + 30, 64, 0x2e + 10, 64 ) );
                             }
                             break;
 
                         case 0x15:
-                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0xce + 40, 0, 0x2e + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0xce + 40, 64, 0x2e + 10, 64 ) );
                             }
                             break;
 
                         case 0x16:
-                            x = ( x + 19 ) - ( ( int )( ( 38.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 19 ) - ( ( int )( ( 38.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 298 + 60, 0, 0x40 + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 298 + 60, 64, 0x40 + 10, 64 ) );
                             }
                             break;
 
                         case 0x17:
-                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x10 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0xfc + 50, 0, 0x2e + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0xfc + 50, 64, 0x2e + 10, 64 ) );
                             }
                             break;
 
                         case 0x18:
-                            x = ( x + 13 ) - ( ( int )( ( 26.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 13 ) - ( ( int )( ( 26.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 switch( configIni.eHHOGraphics.Drums )
                                 {
                                     case EType.A:
-                                        x = ( x + 14 ) - ( ( int )( ( 26.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                                        x = ( x + 14 ) - ( ( int )( ( 26.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                                         this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x200 + 100, 0, 0x26 + 10, 64 ) );
-                                        if( pChip.bボーナスチップ )
+                                        if( pChip.bBonusChip )
                                             this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x200 + 100, 64, 0x26 + 10, 64 ) );
                                         break;
 
                                     case EType.B:
-                                        x = ( x + 14 ) - ( ( int )( ( 26.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                                        x = ( x + 14 ) - ( ( int )( ( 26.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                                         this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x200 + 100, 0, 0x26 + 10, 64 ) );
-                                        if( pChip.bボーナスチップ )
+                                        if( pChip.bBonusChip )
                                             this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x200 + 100, 64, 0x26 + 10, 64 ) );
                                         break;
 
                                     case EType.C:
-                                        x = ( x + 13 ) - ( ( int )( ( 32.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                                        x = ( x + 13 ) - ( ( int )( ( 32.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                                         this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 60 + 10, 0, 0x2e + 10, 64 ) );
-                                        if( pChip.bボーナスチップ )
+                                        if( pChip.bBonusChip )
                                             this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 60 + 100, 64, 0x2e + 10, 64 ) );
                                         break;
                                 }
@@ -3355,52 +3355,52 @@ namespace DTXMania
                                 break;
 
                         case 0x19:
-                            x = ( x + 13 ) - ( ( int )( ( 26.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 13 ) - ( ( int )( ( 26.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 0x16a + 70, 0, 0x26 + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle( 0x16a + 70, 64, 0x26 + 10, 0x40 ) );
                             }
                             break;
 
                         case 0x1a:
-                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 448 + 90, 0, 64 + 10, 64 ) );
 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 0x20, new Rectangle( 448 + 90, 64, 64 + 10, 64 ) );
                             }
                             break;
 
                         case 0x1b:
-                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if (this.txチップ != null)
                             {
                                 this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 550 + 110, 0, 0x30 + 10, 64 ) );
                                 
-                                if( pChip.bボーナスチップ )
+                                if( pChip.bBonusChip )
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 550 + 110, 64, 0x30 + 10, 64 ) );
                             }
                             break;
 
                         case 0x1c:
-                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbチップサイズ倍率 ) / 2.0 ) );
+                            x = ( x + 0x13 ) - ( ( int )( ( 38.0 * pChip.dbChipSizeRatio ) / 2.0 ) );
                             if( this.txチップ != null )
                             {
                                 if( configIni.eLBDGraphics.Drums == EType.A )
                                 {
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 550 + 110, 0, 0x30 + 10, 64 ) );
-                                    if( pChip.bボーナスチップ )
+                                    if( pChip.bBonusChip )
                                         this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 550 + 110, 64, 0x30 + 10, 64 ) );
                                 }
                                 else if( configIni.eLBDGraphics.Drums == EType.B )
                                 {
                                     this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 400 + 80, 0, 0x30 + 10, 64 ) );
-                                    if( pChip.bボーナスチップ )
+                                    if( pChip.bBonusChip )
                                         this.txチップ.tDraw2D( CDTXMania.app.Device, x - 5, y - 32, new Rectangle( 400 + 80, 64, 0x30 + 10, 64 ) );
                                 }
                             }
@@ -3413,7 +3413,7 @@ namespace DTXMania
                     }
                 }
 
-				int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nチャンネル番号 - 0x11 ];
+				int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nChannelNumber - 0x11 ];
 				// #35411 chnmr0 modified
 				bool autoPlayCondition = ( configIni.bAutoPlay[ indexSevenLanes ] && !pChip.bHit );
                 bool UsePerfectGhost = true;
@@ -3428,13 +3428,13 @@ namespace DTXMania
 					ghostLag = CDTXMania.listAutoGhostLag.Drums[pChip.n楽器パートでの出現順];
 					ghostLag = (ghostLag & 255) - 128;
 					ghostLag -= this.nInputAdjustTimeMs.Drums;
-					autoPlayCondition &= !pChip.bHit && (ghostLag + pChip.n発声時刻ms <= CSoundManager.rcPerformanceTimer.n現在時刻ms);
+					autoPlayCondition &= !pChip.bHit && (ghostLag + pChip.nPlaybackTimeMs <= CSoundManager.rcPerformanceTimer.n現在時刻ms);
                     UsePerfectGhost = false;
                 }
                 if( UsePerfectGhost )
                 {
                     // 従来の AUTO : バー下で判定
-                    autoPlayCondition &= ( pChip.nバーからの距離dot.Drums < 0 );
+                    autoPlayCondition &= ( pChip.nDistanceFromBar.Drums < 0 );
                 }
 
 				if ( autoPlayCondition )
@@ -3446,9 +3446,9 @@ namespace DTXMania
 					//bool flag3 = flag2;
 					// #31602 2013.6.24 yyagi 判定ラインの表示位置をずらしたら、チップのヒットエフェクトの表示もずらすために、nJudgeLine..を追加
 					this.actChipFireD.Start( (ELane)indexSevenLanes, flag, flag2, flag2, nJudgeLinePosY_delta.Drums );
-					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nチャンネル番号 - 0x11 ] );
-					this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms + ghostLag, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
-					this.tProcessChipHit(pChip.n発声時刻ms + ghostLag, pChip);
+					this.actPad.Hit( this.nチャンネル0Atoパッド08[ pChip.nChannelNumber - 0x11 ] );
+					this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs + ghostLag, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+					this.tProcessChipHit(pChip.nPlaybackTimeMs + ghostLag, pChip);
 					//cInvisibleChip.StartSemiInvisible( EInstrumentPart.DRUMS );
 				}
                 // #35411 modify end
@@ -3504,9 +3504,9 @@ namespace DTXMania
                 }
 				return;
 			}	// end of "if configIni.bDrumsEnabled"
-			if( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
+			if( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
-                this.tサウンド再生( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
+                this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量( EInstrumentPart.DRUMS ) );
 				pChip.bHit = true;
 			}
 		}
@@ -3525,15 +3525,15 @@ namespace DTXMania
 			{
 				//if ( configIni.bSudden.Guitar )
 				//{
-				//    pChip.b可視 = pChip.nバーからの距離dot.Guitar < 200;
+				//    pChip.bVisible = pChip.nDistanceFromBar.Guitar < 200;
 				//}
-				//if ( configIni.bHidden.Guitar && ( pChip.nバーからの距離dot.Guitar < 100 ) )
+				//if ( configIni.bHidden.Guitar && ( pChip.nDistanceFromBar.Guitar < 100 ) )
 				//{
-				//    pChip.b可視 = false;
+				//    pChip.bVisible = false;
 				//}
 
 				// 後日、以下の部分を何とかCStage演奏画面共通.csに移したい。
-				if ( !pChip.bHit && pChip.b可視 )
+				if ( !pChip.bHit && pChip.bVisible )
 				{
 					int[] y_base = { 0x5f, 0x176 };		// 判定バーのY座標: ドラム画面かギター画面かで変わる値
 					int offset = 0x39;					// ドラム画面かギター画面かで変わる値
@@ -3545,7 +3545,7 @@ namespace DTXMania
 					const int drawX = 588;				// ウェイリングチップ描画位置X座標: 4種全て異なる値
 
 					const int numA = 25;				// 4種全て同じ値
-					int y = configIni.bReverse.Guitar ? ( y_base[1] - pChip.nバーからの距離dot.Guitar ) : ( y_base[0] + pChip.nバーからの距離dot.Guitar );
+					int y = configIni.bReverse.Guitar ? ( y_base[1] - pChip.nDistanceFromBar.Guitar ) : ( y_base[0] + pChip.nDistanceFromBar.Guitar );
 					int numB = y - offset;				// 4種全て同じ定義
 					int numC = 0;						// 4種全て同じ初期値
 					const int numD = 355;				// ドラム画面かギター画面かで変わる値
@@ -3569,9 +3569,9 @@ namespace DTXMania
 						}
 					}
 				}
-				//    if ( !pChip.bHit && ( pChip.nバーからの距離dot.Guitar < 0 ) )
+				//    if ( !pChip.bHit && ( pChip.nDistanceFromBar.Guitar < 0 ) )
 				//    {
-				//        if ( pChip.nバーからの距離dot.Guitar < -234 )	// #25253 2011.5.29 yyagi: Don't set pChip.bHit=true for wailing at once. It need to 1sec-delay (234pix per 1sec). 
+				//        if ( pChip.nDistanceFromBar.Guitar < -234 )	// #25253 2011.5.29 yyagi: Don't set pChip.bHit=true for wailing at once. It need to 1sec-delay (234pix per 1sec). 
 				//        {
 				//            pChip.bHit = true;
 				//        }
@@ -3590,10 +3590,10 @@ namespace DTXMania
          */
 		protected override void t進行描画_チップ_フィルイン( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
 		{
-			if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
+			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
 				pChip.bHit = true;
-				switch ( pChip.n整数値 )
+				switch ( pChip.nIntegerValue )
 				{
 					case 0x01:	// フィルイン開始
                         this.bEndFillIn = true;
@@ -3614,7 +3614,7 @@ namespace DTXMania
                             this.actAVI.Start(bInFillIn);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tPlayChip(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
@@ -3636,12 +3636,12 @@ namespace DTXMania
                         {
                             this.bChorusSection = true;
                         }
-                        if (((this.actCombo.nCurrentCombo.Drums > 0) || configIni.bAllDrumsAreAutoPlay) && configIni.b歓声を発声する && configIni.ボーナス演出を表示する)
+                        if (((this.actCombo.nCurrentCombo.Drums > 0) || configIni.bAllDrumsAreAutoPlay) && configIni.b歓声を発声する && configIni.DisplayBonusEffects)
                         {
                             this.actAVI.Start(true);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tPlayChip(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
@@ -3655,12 +3655,12 @@ namespace DTXMania
                         {
                             this.bChorusSection = false;
                         }
-                        if (((this.actCombo.nCurrentCombo.Drums > 0) || configIni.bAllDrumsAreAutoPlay) && configIni.b歓声を発声する && configIni.ボーナス演出を表示する)
+                        if (((this.actCombo.nCurrentCombo.Drums > 0) || configIni.bAllDrumsAreAutoPlay) && configIni.b歓声を発声する && configIni.DisplayBonusEffects)
                         {
                             this.actAVI.Start(true);
                             if (this.r現在の歓声Chip.Drums != null)
                             {
-                                dTX.tチップの再生(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                dTX.tPlayChip(this.r現在の歓声Chip.Drums, CSoundManager.rcPerformanceTimer.nシステム時刻, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                             }
                             else
                             {
@@ -3684,96 +3684,96 @@ namespace DTXMania
             pChip.bHit = true;
 
             //if ((this.actCombo.nCurrentCombo.Drums > 0) && configIni.b歓声を発声する )
-            if( pChip.bボーナスチップ )
+            if( pChip.bBonusChip )
             {
                 bBonus = true;
-                switch( pChip.nチャンネル番号 )
+                switch( pChip.nChannelNumber )
                 {
                     //case 0x01: //LC
-                    //    this.actPad.Start(0, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(0, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x02: //HH
-                    //    this.actPad.Start(1, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(1, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x03: //LP
-                    //    this.actPad.Start(2, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(2, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x04: //SD
-                    //    this.actPad.Start(3, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(3, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x05: //HT
-                    //    this.actPad.Start(4, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(4, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x06: //BD
-                    //    this.actPad.Start(5, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(5, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x07: //LT
-                    //    this.actPad.Start(6, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(6, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x08: //FT
-                    //    this.actPad.Start(7, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(7, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x09: //CY
-                    //    this.actPad.Start(8, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(8, true, pChip.nChannelNumber);
                     //    break;
 
                     //case 0x0A: //RD
-                    //    this.actPad.Start(9, true, pChip.nチャンネル番号);
+                    //    this.actPad.Start(9, true, pChip.nChannelNumber);
                     //    break;
 
                     case 0x1A: //LC
-                        this.actPad.Start( 0, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 0, true, pChip.nChannelNumber );
                         break;
 
                     case 0x11: //HH
                     case 0x18:
-                        this.actPad.Start( 1, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 1, true, pChip.nChannelNumber );
                         break;
 
                     case 0x1B: //LP
                     case 0x1C:
-                        this.actPad.Start( 2, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 2, true, pChip.nChannelNumber );
                         break;
 
                     case 0x12: //SD
-                        this.actPad.Start( 3, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 3, true, pChip.nChannelNumber );
                         break;
 
                     case 0x14: //HT
-                        this.actPad.Start( 4, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 4, true, pChip.nChannelNumber );
                         break;
 
                     case 0x13: //BD
-                        this.actPad.Start( 5, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 5, true, pChip.nChannelNumber );
                         break;
 
                     case 0x15: //LT
-                        this.actPad.Start( 6, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 6, true, pChip.nChannelNumber );
                         break;
 
                     case 0x17: //FT
-                        this.actPad.Start( 7, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 7, true, pChip.nChannelNumber );
                         break;
 
                     case 0x16: //CY
-                        this.actPad.Start( 8, true, pChip.nチャンネル番号 );
+                        this.actPad.Start( 8, true, pChip.nChannelNumber );
                         break;
 
                     case 0x19: //RD
-                        this.actPad.Start(9, true, pChip.nチャンネル番号);
+                        this.actPad.Start(9, true, pChip.nChannelNumber);
                         break;
                     default:
                         break;
                 }
-                if( configIni.ボーナス演出を表示する )
+                if( configIni.DisplayBonusEffects )
                 {
                     this.actAVI.Start( true );
                     CDTXMania.Skin.sound歓声音.tPlay();
@@ -3793,17 +3793,17 @@ namespace DTXMania
 			{
 				//if ( configIni.bSudden.Bass )
 				//{
-				//    pChip.b可視 = pChip.nバーからの距離dot.Bass < 200;
+				//    pChip.bVisible = pChip.nDistanceFromBar.Bass < 200;
 				//}
-				//if ( configIni.bHidden.Bass && ( pChip.nバーからの距離dot.Bass < 100 ) )
+				//if ( configIni.bHidden.Bass && ( pChip.nDistanceFromBar.Bass < 100 ) )
 				//{
-				//    pChip.b可視 = false;
+				//    pChip.bVisible = false;
 				//}
 
 				//
 				// 後日、以下の部分を何とかCStage演奏画面共通.csに移したい。
 				//
-				if ( !pChip.bHit && pChip.b可視 )
+				if ( !pChip.bHit && pChip.bVisible )
 				{
 					int[] y_base = { 0x5f, 0x176 };		// 判定バーのY座標: ドラム画面かギター画面かで変わる値
 					int offset = 0x39;					// ドラム画面かギター画面かで変わる値
@@ -3815,7 +3815,7 @@ namespace DTXMania
 					const int drawX = 479;				// ウェイリングチップ描画位置X座標: 4種全て異なる値
 
 					const int numA = 25;				// 4種全て同じ値
-					int y = configIni.bReverse.Bass ? ( y_base[ 1 ] - pChip.nバーからの距離dot.Bass ) : ( y_base[ 0 ] + pChip.nバーからの距離dot.Bass );
+					int y = configIni.bReverse.Bass ? ( y_base[ 1 ] - pChip.nDistanceFromBar.Bass ) : ( y_base[ 0 ] + pChip.nDistanceFromBar.Bass );
 					int numB = y - offset;				// 4種全て同じ定義
 					int numC = 0;						// 4種全て同じ初期値
 					const int numD = 355;				// ドラム画面かギター画面かで変わる値
@@ -3839,9 +3839,9 @@ namespace DTXMania
 						}
 					}
 				}
-				//    if ( !pChip.bHit && ( pChip.nバーからの距離dot.Bass < 0 ) )
+				//    if ( !pChip.bHit && ( pChip.nDistanceFromBar.Bass < 0 ) )
 				//    {
-				//        if ( pChip.nバーからの距離dot.Bass < -234 )	// #25253 2011.5.29 yyagi: Don't set pChip.bHit=true for wailing at once. It need to 1sec-delay (234pix per 1sec).
+				//        if ( pChip.nDistanceFromBar.Bass < -234 )	// #25253 2011.5.29 yyagi: Don't set pChip.bHit=true for wailing at once. It need to 1sec-delay (234pix per 1sec).
 				//        {
 				//            pChip.bHit = true;
 				//        }
@@ -3861,13 +3861,13 @@ namespace DTXMania
 
         protected override void t進行描画_チップ_空打ち音設定_ドラム(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
         {
-            if (!pChip.bHit && (pChip.nバーからの距離dot.Drums < 0))
+            if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
             {
                 try
                 {
                     pChip.bHit = true;
-                    this.r現在の空うちドラムChip[(int)this.eChannelToPad[pChip.nチャンネル番号 - 0xb1]] = pChip;
-                    pChip.nチャンネル番号 = ((pChip.nチャンネル番号 < 0xbc) || (pChip.nチャンネル番号 > 190)) ? ((pChip.nチャンネル番号 - 0xb1) + 0x11) : ((pChip.nチャンネル番号 - 0xb3) + 0x11);
+                    this.r現在の空うちドラムChip[(int)this.eChannelToPad[pChip.nChannelNumber - 0xb1]] = pChip;
+                    pChip.nChannelNumber = ((pChip.nChannelNumber < 0xbc) || (pChip.nChannelNumber > 190)) ? ((pChip.nChannelNumber - 0xb1) + 0x11) : ((pChip.nChannelNumber - 0xb3) + 0x11);
                 }
                 catch
                 {
@@ -3876,24 +3876,24 @@ namespace DTXMania
             }
 
         }
-		protected override void t進行描画_チップ_小節線( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_BarLine( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
 		{
-			int n小節番号plus1 = pChip.n発声位置 / 384;
-			if ( !pChip.bHit && ( pChip.nバーからの距離dot.Drums < 0 ) )
+			int n小節番号plus1 = pChip.nPlaybackPosition / 384;
+			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
 				pChip.bHit = true;
 				this.actPlayInfo.n小節番号 = n小節番号plus1 - 1;
                 if ( configIni.bWave再生位置自動調整機能有効 && bIsDirectSound )
 				{
-					dTX.tWave再生位置自動補正();
+					dTX.tAutoCorrectWavPlaybackPosition();
 				}
 			}
 				if ( configIni.b演奏情報を表示する && ( configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1 ) )
                 {
                         int n小節番号 = n小節番号plus1 - 1;
-                        CDTXMania.act文字コンソール.tPrint(858, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 0x11) : ((base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 0x11), CCharacterConsole.Eフォント種別.白, n小節番号.ToString());
+                        CDTXMania.act文字コンソール.tPrint(858, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 0x11) : ((base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 0x11), CCharacterConsole.Eフォント種別.白, n小節番号.ToString());
 				}
-                if (((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.b可視) && (this.txチップ != null))
+                if (((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.bVisible) && (this.txチップ != null))
 				{
                     int l_drumPanelWidth = 0x22f;
                     int l_xOffset = 0;
@@ -3907,18 +3907,18 @@ namespace DTXMania
                         l_xOffset = 72;
                     }
 
-                this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nバーからの距離dot.Drums) - 1) : ((base.nJudgeLinePosY.Drums - pChip.nバーからの距離dot.Drums) - 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 1) : ((base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
 				}
               
             /*
-			if ( ( pChip.b可視 && configIni.bGuitarEnabled ) && ( configIni.eDark != EDarkMode.FULL ) )
+			if ( ( pChip.bVisible && configIni.bGuitarEnabled ) && ( configIni.eDark != EDarkMode.FULL ) )
 			{
-				int y = configIni.bReverse.Guitar ? ( ( 0x176 - pChip.nバーからの距離dot.Guitar ) - 1 ) : ( ( 0x5f + pChip.nバーからの距離dot.Guitar ) - 1 );
+				int y = configIni.bReverse.Guitar ? ( ( 0x176 - pChip.nDistanceFromBar.Guitar ) - 1 ) : ( ( 0x5f + pChip.nDistanceFromBar.Guitar ) - 1 );
 				if ( ( dTX.bチップがある.Guitar && ( y > 0x39 ) ) && ( ( y < 0x19c ) && ( this.txチップ != null ) ) )
 				{
 					this.txチップ.tDraw2D( CDTXMania.app.Device, 374, y, new Rectangle( 0, 450, 0x4e, 1 ) );
 				}
-				y = configIni.bReverse.Bass ? ( ( 0x176 - pChip.nバーからの距離dot.Bass ) - 1 ) : ( ( 0x5f + pChip.nバーからの距離dot.Bass ) - 1 );
+				y = configIni.bReverse.Bass ? ( ( 0x176 - pChip.nDistanceFromBar.Bass ) - 1 ) : ( ( 0x5f + pChip.nDistanceFromBar.Bass ) - 1 );
 				if ( ( dTX.bチップがある.Bass && ( y > 0x39 ) ) && ( ( y < 0x19c ) && ( this.txチップ != null ) ) )
 				{
 					this.txチップ.tDraw2D( CDTXMania.app.Device, 398, y, new Rectangle( 0, 450, 0x4e, 1 ) );

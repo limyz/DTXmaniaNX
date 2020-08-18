@@ -493,7 +493,7 @@ namespace DTXMania
 		public bool b演奏情報を表示する;
         public bool bAutoAddGage; //2012.9.18
 		public bool b歓声を発声する;
-		public bool b垂直帰線待ちを行う;
+		public bool bVerticalSyncWait;
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
         public bool bDirectShowMode;
@@ -502,7 +502,7 @@ namespace DTXMania
 	    public int n初期ウィンドウ開始位置Y;
 		public int nウインドウwidth;				// #23510 2010.10.31 yyagi add
 		public int nウインドウheight;				// #23510 2010.10.31 yyagi add
-        public bool ボーナス演出を表示する;
+        public bool DisplayBonusEffects;
         public bool bHAZARD;
         public int nSoundDeviceType; // #24820 2012.12.23 yyagi 出力サウンドデバイス(0=ACM(にしたいが設計がきつそうならDirectShow), 1=ASIO, 2=WASAPI)
         public int nWASAPIBufferSizeMs; // #24820 2013.1.15 yyagi WASAPIのバッファサイズ
@@ -687,7 +687,7 @@ namespace DTXMania
 				this.bFullScreenMode = !value;
 			}
 		}
-		public bool bギタレボモード
+		public bool bGuitarRevolutionMode
 		{
 			get
 			{
@@ -708,7 +708,7 @@ namespace DTXMania
 				return true;
 			}
 		}
-		public bool bギターが全部オートプレイである
+		public bool bAllGuitarsAreAutoPlay
 		{
 			get
 			{
@@ -722,7 +722,7 @@ namespace DTXMania
 				return true;
 			}
 		}
-		public bool bベースが全部オートプレイである
+		public bool bAllBassAreAutoPlay
 		{
 			get
 			{
@@ -1014,7 +1014,7 @@ namespace DTXMania
 			this.strDTXManiaのバージョン = "Unknown";
 			this.str曲データ検索パス = @".\";
 			this.bFullScreenMode = false;
-			this.b垂直帰線待ちを行う = true;
+			this.bVerticalSyncWait = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
             this.bDirectShowMode = false;
@@ -1039,7 +1039,7 @@ namespace DTXMania
 			this.bAVIEnabled = true;
 			this.bBGAEnabled = true;
 			this.bFillInEnabled = true;
-            this.ボーナス演出を表示する = true;
+            this.DisplayBonusEffects = true;
             this.eRDPosition = ERDPosition.RCRD;
             this.nInfoType = 0;
             this.nSkillMode = 0;
@@ -1406,7 +1406,7 @@ namespace DTXMania
             #endregion
             #region [ フレーム処理関連(VSync, フレーム毎のsleep) ]
             sw.WriteLine("; 垂直帰線同期(0:OFF,1:ON)");
-			sw.WriteLine( "VSyncWait={0}", this.b垂直帰線待ちを行う ? 1 : 0 );
+			sw.WriteLine( "VSyncWait={0}", this.bVerticalSyncWait ? 1 : 0 );
             sw.WriteLine();
             sw.WriteLine("; フレーム毎のsleep値[ms] (-1でスリープ無し, 0以上で毎フレームスリープ。動画キャプチャ等で活用下さい)");	// #xxxxx 2011.11.27 yyagi add
             sw.WriteLine("; A sleep time[ms] per frame.");							//
@@ -1856,7 +1856,7 @@ namespace DTXMania
             sw.WriteLine("BassShutterOut={0}", (int)this.nShutterOutSide.Bass);
             sw.WriteLine();
             sw.WriteLine( "; ボーナス演出の表示(0:表示しない, 1:表示する)");
-            sw.WriteLine("DrumsStageEffect={0}", this.ボーナス演出を表示する ? 1 : 0);
+            sw.WriteLine("DrumsStageEffect={0}", this.DisplayBonusEffects ? 1 : 0);
             sw.WriteLine();
             sw.WriteLine("; ドラムレーンタイプ(0:A, 1:B, 2:C 3:D )");
             sw.WriteLine("DrumsLaneType={0}", (int)this.eLaneType.Drums);
@@ -2433,7 +2433,7 @@ namespace DTXMania
                                             //}
                                             else if (str3.Equals("VSyncWait"))
                                             {
-                                                this.b垂直帰線待ちを行う = CConversion.bONorOFF(str4[0]);
+                                                this.bVerticalSyncWait = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("BackSleep"))				// #23568 2010.11.04 ikanick add
                                             {
@@ -2953,7 +2953,7 @@ namespace DTXMania
                                             #endregion
                                             else if (str3.Equals("DrumsStageEffect"))
                                             {
-                                                this.ボーナス演出を表示する = CConversion.bONorOFF(str4[0]);
+                                                this.DisplayBonusEffects = CConversion.bONorOFF(str4[0]);
                                             }
                                             else if (str3.Equals("CLASSIC"))
                                             {

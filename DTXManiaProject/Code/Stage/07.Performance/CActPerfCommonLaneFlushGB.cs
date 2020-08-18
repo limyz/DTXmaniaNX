@@ -5,17 +5,17 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfCommonLaneFlashGB : CActivity
+	internal class CActPerfCommonLaneFlushGB : CActivity
 	{
 		// プロパティ
 
-		protected CCounter[] ct進行 = new CCounter[ 10 ];
+		protected CCounter[] ctUpdate = new CCounter[ 10 ];
 		protected CTexture[] txFlush = new CTexture[ 10 ];
 
 
 		// コンストラクタ
 
-		public CActPerfCommonLaneFlashGB()
+		public CActPerfCommonLaneFlushGB()
 		{
 			base.bNotActivated = true;
 		}
@@ -29,7 +29,7 @@ namespace DTXMania
 			{
 				throw new IndexOutOfRangeException( "有効範囲は 0～10 です。" );
 			}
-			this.ct進行[ nLane ] = new CCounter( 0, 70, 1, CDTXMania.Timer );
+			this.ctUpdate[ nLane ] = new CCounter( 0, 70, 1, CDTXMania.Timer );
 		}
 
 
@@ -39,7 +39,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 10; i++ )
 			{
-				this.ct進行[ i ] = new CCounter();
+				this.ctUpdate[ i ] = new CCounter();
 			}
 			base.OnActivate();
 		}
@@ -47,7 +47,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 10; i++ )
 			{
-				this.ct進行[ i ] = null;
+				this.ctUpdate[ i ] = null;
 			}
 			base.OnDeactivate();
 		}

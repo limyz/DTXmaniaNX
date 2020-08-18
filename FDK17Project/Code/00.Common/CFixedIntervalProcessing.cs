@@ -17,7 +17,7 @@ namespace FDK
 
 			if( this.timer == null )
 				return;
-			this.timer.t更新();
+			this.timer.tUpdate();
 
 
 			// 初めての進行処理
@@ -46,7 +46,7 @@ namespace FDK
 		//-----------------
 		public void Dispose()
 		{
-			CCommon.tDisposeする( ref this.timer );
+			CCommon.tDispose( ref this.timer );
 		}
 		//-----------------
 		#endregion

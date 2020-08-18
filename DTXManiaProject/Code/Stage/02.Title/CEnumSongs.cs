@@ -253,7 +253,7 @@ namespace DTXMania
                     CDTXMania.Skin.bgm起動画面.tPlay();
                     for (int i = 0; i < CDTXMania.Skin.nシステムサウンド数; i++)
                     {
-                        if (!CDTXMania.Skin[i].b排他)	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
+                        if (!CDTXMania.Skin[i].bExclusive)	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
                         {
                             CSkin.CSystemSound cシステムサウンド = CDTXMania.Skin[i];
                             if (!CDTXMania.bCompactMode || cシステムサウンド.bCompact対象)

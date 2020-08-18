@@ -38,7 +38,7 @@ namespace DTXMania
             for (int i = 0; i < 12; i++)
             {
                 this.stパネルマップ[i] = default(CActPerfCommonStatusPanel.STATUSPANEL);
-                //this.stパネルマップ[i] = new STATUSPANEL();
+                //this.stPanelMap[i] = new STATUSPANEL();
                 this.stパネルマップ[i].status = status[i];
                 this.stパネルマップ[i].label = labels[i];
             }

@@ -107,18 +107,18 @@ namespace DTXMania
 					else if( ( this.ct遅延表示.nCurrentValue >= 0 ) && this.b新しいプレビューファイルをまだ読み込んでいない )
 					{
 						this.tプレビュー画像_動画の変更();
-						CDTXMania.Timer.t更新();
-						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.n現在時刻;
+						CDTXMania.Timer.tUpdate();
+						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.nCurrentTime;
 						this.b新しいプレビューファイルを読み込んだ = true;
 					}
 				}
 				else if( ( ( this.avi != null ) && ( this.sfAVI画像 != null ) ) && ( this.nAVI再生開始時刻 != -1 ) )
 				{
-					int time = (int) ( ( CDTXMania.Timer.n現在時刻 - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
+					int time = (int) ( ( CDTXMania.Timer.nCurrentTime - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
 					int frameNoFromTime = this.avi.GetFrameNoFromTime( time );
 					if( frameNoFromTime >= this.avi.GetMaxFrameCount() )
 					{
-						this.nAVI再生開始時刻 = CDTXMania.Timer.n現在時刻;
+						this.nAVI再生開始時刻 = CDTXMania.Timer.nCurrentTime;
 					}
 					else if( ( this.n前回描画したフレーム番号 != frameNoFromTime ) && !this.b動画フレームを作成した )
 					{
@@ -132,8 +132,8 @@ namespace DTXMania
                     if( this.b新しいプレビューファイルをまだ読み込んでいない )
                     {
 						this.tプレビュー画像_動画の変更();
-						CDTXMania.Timer.t更新();
-						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.n現在時刻;
+						CDTXMania.Timer.tUpdate();
+						this.ct遅延表示.nCurrentElapsedTimeMs = CDTXMania.Timer.nCurrentTime;
 						this.b新しいプレビューファイルを読み込んだ = true;
                     }
                 }
@@ -291,7 +291,7 @@ namespace DTXMania
 				try
 				{
 					this.avi = new CAvi( filename );
-					this.nAVI再生開始時刻 = CDTXMania.Timer.n現在時刻;
+					this.nAVI再生開始時刻 = CDTXMania.Timer.nCurrentTime;
 					this.n前回描画したフレーム番号 = -1;
 					this.b動画フレームを作成した = false;
 					this.tサーフェイスをクリアする( this.sfAVI画像 );
@@ -378,9 +378,9 @@ namespace DTXMania
 			if( ( c曲リストノード != null ) && ( cスコア != null ) )
 			{
 				string str = "";
-				switch( c曲リストノード.eノード種別 )
+				switch( c曲リストノード.eNodeType )
 				{
-					case CSongListNode.Eノード種別.SCORE:
+					case CSongListNode.ENodeType.SCORE:
 						if( ( c曲リストノード.strジャンル == null ) || ( c曲リストノード.strジャンル.Length <= 0 ) )
 						{
 							if( ( cスコア.SongInformation.Genre != null ) && ( cスコア.SongInformation.Genre.Length > 0 ) )
@@ -418,19 +418,19 @@ namespace DTXMania
 						str = c曲リストノード.strジャンル;
 						break;
 
-					case CSongListNode.Eノード種別.SCORE_MIDI:
+					case CSongListNode.ENodeType.SCORE_MIDI:
 						str = "MIDI";
 						break;
 
-					case CSongListNode.Eノード種別.BOX:
+					case CSongListNode.ENodeType.BOX:
 						str = "MusicBox";
 						break;
 
-					case CSongListNode.Eノード種別.BACKBOX:
+					case CSongListNode.ENodeType.BACKBOX:
 						str = "BackBox";
 						break;
 
-					case CSongListNode.Eノード種別.RANDOM:
+					case CSongListNode.ENodeType.RANDOM:
 						str = "Random";
 						break;
 

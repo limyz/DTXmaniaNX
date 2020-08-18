@@ -15,7 +15,7 @@ namespace DTXMania
 
         public CActResultParameterPanel()
         {
-            this.tx文字 = new CTexture[3];
+            this.txCharacter = new CTexture[3];
             ST文字位置[] st文字位置Array = new ST文字位置[11];
             ST文字位置 st文字位置 = new ST文字位置();
             st文字位置.ch = '0';
@@ -61,7 +61,7 @@ namespace DTXMania
             st文字位置11.ch = '.';
             st文字位置11.pt = new Point(280, 0);
             st文字位置Array[10] = st文字位置11;
-            this.st大文字位置 = st文字位置Array;
+            this.stLargeStringPosition = st文字位置Array;
 
             ST文字位置[] st文字位置Array2 = new ST文字位置[11];
             ST文字位置 st文字位置12 = new ST文字位置();
@@ -108,7 +108,7 @@ namespace DTXMania
             st文字位置22.ch = '%';
             st文字位置22.pt = new Point(200, 0);
             st文字位置Array2[10] = st文字位置22;
-            this.st小文字位置 = st文字位置Array2;
+            this.stSmallStringPosition = st文字位置Array2;
             ST文字位置[] st文字位置Array3 = new ST文字位置[12];
             ST文字位置 st文字位置23 = new ST文字位置();
             st文字位置23.ch = '0';
@@ -293,7 +293,7 @@ namespace DTXMania
 			}
             if (this.sdDTXで指定されたフルコンボ音 != null)
 			{
-				CDTXMania.SoundManager.tサウンドを破棄する( this.sdDTXで指定されたフルコンボ音 );
+				CDTXMania.SoundManager.tDiscard( this.sdDTXで指定されたフルコンボ音 );
 				this.sdDTXで指定されたフルコンボ音 = null;
 			}
 			base.OnDeactivate();
@@ -302,17 +302,17 @@ namespace DTXMania
 		{
             if (!base.bNotActivated)
             {
-                this.tx文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
-                this.tx文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
-                this.tx文字[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_numbers_large.png"));
+                this.txCharacter[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
+                this.txCharacter[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
+                this.txCharacter[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_numbers_large.png"));
                 this.txNewRecord = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_New Record.png"));
-                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
-                this.txエキサイトゲージ = new CTexture[3];
-                this.txエキサイトゲージ[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge.png"));
-                this.txエキサイトゲージ[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
-                this.txエキサイトゲージ[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
-                this.txスコア = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_score numbersGD.png"));
-                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.txSkillPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.txExciteGauge = new CTexture[3];
+                this.txExciteGauge[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge.png"));
+                this.txExciteGauge[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
+                this.txExciteGauge[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.jpg"));
+                this.txScore = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_score numbersGD.png"));
+                this.txSkillPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
                 this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
                 this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
                 //Load new textures
@@ -435,8 +435,8 @@ namespace DTXMania
             {
                 CDTXMania.tReleaseTexture( ref this.txパネル本体 );
                 CDTXMania.tReleaseTexture( ref this.txNewRecord );
-                CDTXMania.tReleaseTexture( ref this.txスキルパネル );
-                CDTXMania.tReleaseTexture( ref this.txスコア );
+                CDTXMania.tReleaseTexture( ref this.txSkillPanel );
+                CDTXMania.tReleaseTexture( ref this.txScore );
                 CDTXMania.tReleaseTexture( ref this.tx難易度パネル );
                 CDTXMania.tReleaseTexture( ref this.tx難易度用数字 );
                 //Free new texture
@@ -445,8 +445,8 @@ namespace DTXMania
                 for ( int i = 0; i < 3; i++ )
                 {
                     CDTXMania.tReleaseTexture( ref this.txネームプレート用文字[ i ] );
-                    CDTXMania.tReleaseTexture( ref this.txエキサイトゲージ[ i ] );
-                    CDTXMania.tReleaseTexture( ref this.tx文字[ i ] );
+                    CDTXMania.tReleaseTexture( ref this.txExciteGauge[ i ] );
+                    CDTXMania.tReleaseTexture( ref this.txCharacter[ i ] );
                 }
                 base.OnManagedReleaseResources();
             }
@@ -484,25 +484,25 @@ namespace DTXMania
                         bCLASSIC = true;
                     }
                     
-                    this.txスキルパネル.tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
+                    this.txSkillPanel.tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
                     this.txネームプレート用文字[ j ].tDraw2D(CDTXMania.app.Device, this.n本体X[j], this.n本体Y);
 
-                    this.t小文字表示(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount_ExclAuto));
-                    this.t小文字表示(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGreatCount_ExclAuto));
-                    this.t小文字表示(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGoodCount_ExclAuto));
-                    this.t小文字表示(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPoorCount_ExclAuto));
-                    this.t小文字表示(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMissCount_ExclAuto));
-                    this.t小文字表示(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPerfectCount_ExclAuto));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGreatCount_ExclAuto));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nGoodCount_ExclAuto));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPoorCount_ExclAuto));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMissCount_ExclAuto));
+                    this.tDrawStringSmall(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo));
 
 
-                    this.t小文字表示(167 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPerfect率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGreat率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGood率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPoor率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fMiss率[j])));
-                    this.t小文字表示(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo / CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount))));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPerfect率[j])));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGreat率[j])));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 132 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGood率[j])));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPoor率[j])));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fMiss率[j])));
+                    this.tDrawStringSmall(167 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round((100.0 * CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo / CDTXMania.stageResult.stPerformanceEntry[j].nTotalChipsCount))));
 
-                    //this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill));
+                    //this.tDrawStringLarge(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill));
                     //Conditional checks for MAX
                     if(this.txSkillMax != null && CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill >= 100.0)
                     {
@@ -510,12 +510,12 @@ namespace DTXMania
                     }
                     else
                     {
-                        this.t大文字表示(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill));
+                        this.tDrawStringLarge(58 + this.n本体X[j], 277 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbPerformanceSkill));
                         if(this.txPercent != null)
                             this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[j], 287 + this.n本体Y);
                     }
 
-                    this.t大文字表示(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbGameSkill));
+                    this.tDrawStringLarge(88 + this.n本体X[j], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stageResult.stPerformanceEntry[j].dbGameSkill));
                     
                     if(this.tx難易度パネル != null)
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
@@ -535,14 +535,14 @@ namespace DTXMania
                             int num4 = int.Parse(strScore.Substring(i, 1));
                             rectangle = new Rectangle(num4 * 36, 0, 36, 50);
                         }
-                        if (this.txスコア != null)
+                        if (this.txScore != null)
                         {
-                            this.txスコア.tDraw2D(CDTXMania.app.Device, this.nスコアX[j] + (i * 34), 58, rectangle);
+                            this.txScore.tDraw2D(CDTXMania.app.Device, this.nスコアX[j] + (i * 34), 58, rectangle);
                         }
                     }
-                    if (this.txスコア != null)
+                    if (this.txScore != null)
                     {
-                        this.txスコア.tDraw2D(CDTXMania.app.Device, this.nスコアX[j], 30, new Rectangle(0, 50, 86, 28));
+                        this.txScore.tDraw2D(CDTXMania.app.Device, this.nスコアX[j], 30, new Rectangle(0, 50, 86, 28));
                     }
 
                     for (int i = 0; i < 1; i++)
@@ -588,16 +588,16 @@ namespace DTXMania
         private STDGBVALUE<int> nスコアX;
         private readonly Point[] ptFullCombo位置;
         private CSound sdDTXで指定されたフルコンボ音;
-        private readonly ST文字位置[] st小文字位置;
-        private readonly ST文字位置[] st大文字位置;
+        private readonly ST文字位置[] stSmallStringPosition;
+        private readonly ST文字位置[] stLargeStringPosition;
         private readonly ST文字位置[] st特大文字位置;
         private readonly ST文字位置[] st難易度数字位置;
         private CTexture txNewRecord;
         private CTexture txパネル本体;
-        private CTexture[] tx文字;
-        private CTexture[] txエキサイトゲージ;
-        private CTexture txスキルパネル;
-        private CTexture txスコア;
+        private CTexture[] txCharacter;
+        private CTexture[] txExciteGauge;
+        private CTexture txSkillPanel;
+        private CTexture txScore;
         private CTexture[] txネームプレート用文字 = new CTexture[ 3 ];
         private string strPlayerName;
         private string strTitleName;
@@ -611,18 +611,18 @@ namespace DTXMania
         private CTexture txPercent;
         private CTexture txSkillMax;
 
-        private void t小文字表示(int x, int y, string str)
+        private void tDrawStringSmall(int x, int y, string str)
         {
             foreach (char ch in str)
             {
-                for (int i = 0; i < this.st小文字位置.Length; i++)
+                for (int i = 0; i < this.stSmallStringPosition.Length; i++)
                 {
-                    if (this.st小文字位置[i].ch == ch)
+                    if (this.stSmallStringPosition[i].ch == ch)
                     {
-                        Rectangle rectangle = new Rectangle(this.st小文字位置[i].pt.X, this.st小文字位置[i].pt.Y, 20, 26);
-                        if (this.tx文字[0] != null)
+                        Rectangle rectangle = new Rectangle(this.stSmallStringPosition[i].pt.X, this.stSmallStringPosition[i].pt.Y, 20, 26);
+                        if (this.txCharacter[0] != null)
                         {
-                            this.tx文字[0].tDraw2D(CDTXMania.app.Device, x, y, rectangle);
+                            this.txCharacter[0].tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
                         break;
                     }
@@ -630,23 +630,23 @@ namespace DTXMania
                 x += 20;
             }
         }
-		private void t小文字表示( int x, int y, string str, bool b強調 )
+		private void tDrawStringSmall( int x, int y, string str, bool b強調 )
 		{
 			foreach( char ch in str )
 			{
-				for( int i = 0; i < this.st小文字位置.Length; i++ )
+				for( int i = 0; i < this.stSmallStringPosition.Length; i++ )
 				{
-					if( this.st小文字位置[ i ].ch == ch )
+					if( this.stSmallStringPosition[ i ].ch == ch )
 					{
-						Rectangle rectangle = new Rectangle( this.st小文字位置[ i ].pt.X, this.st小文字位置[ i ].pt.Y, 14, 0x12 );
+						Rectangle rectangle = new Rectangle( this.stSmallStringPosition[ i ].pt.X, this.stSmallStringPosition[ i ].pt.Y, 14, 0x12 );
 						if( ch == '%' )
 						{
 							rectangle.Width -= 2;
 							rectangle.Height -= 2;
 						}
-						if( this.tx文字[ 0 ] != null )
+						if( this.txCharacter[ 0 ] != null )
 						{
-							this.tx文字[ 0 ].tDraw2D( CDTXMania.app.Device, x, y, rectangle );
+							this.txCharacter[ 0 ].tDraw2D( CDTXMania.app.Device, x, y, rectangle );
 						}
 						break;
 					}
@@ -654,26 +654,26 @@ namespace DTXMania
 				x += 11;
 			}
 		}
-		private void t大文字表示( int x, int y, string str )
+		private void tDrawStringLarge( int x, int y, string str )
 		{
-			this.t大文字表示( x, y, str, false );
+			this.tDrawStringLarge( x, y, str, false );
 		}
-		private void t大文字表示( int x, int y, string str, bool b強調 )
+		private void tDrawStringLarge( int x, int y, string str, bool b強調 )
 		{
 			foreach( char ch in str )
 			{
-				for( int i = 0; i < this.st大文字位置.Length; i++ )
+				for( int i = 0; i < this.stLargeStringPosition.Length; i++ )
 				{
-					if( this.st大文字位置[ i ].ch == ch )
+					if( this.stLargeStringPosition[ i ].ch == ch )
 					{
-						Rectangle rectangle = new Rectangle( this.st大文字位置[ i ].pt.X, this.st大文字位置[ i ].pt.Y, 28, 42 );
+						Rectangle rectangle = new Rectangle( this.stLargeStringPosition[ i ].pt.X, this.stLargeStringPosition[ i ].pt.Y, 28, 42 );
 						if( ch == '.' )
 						{
 							rectangle.Width -= 18;
 						}
-						if( this.tx文字[ 1 ] != null )
+						if( this.txCharacter[ 1 ] != null )
 						{
-							this.tx文字[ 1 ].tDraw2D( CDTXMania.app.Device, x, y, rectangle );
+							this.txCharacter[ 1 ].tDraw2D( CDTXMania.app.Device, x, y, rectangle );
 						}
 						break;
 					}
@@ -740,9 +740,9 @@ namespace DTXMania
                             rc画像内の描画領域.Width -= 2;
                             rc画像内の描画領域.Height -= 2;
                         }
-                        if (this.tx文字[2] != null)
+                        if (this.txCharacter[2] != null)
                         {
-                            this.tx文字[2].tDraw2D(CDTXMania.app.Device, x, y, rc画像内の描画領域);
+                            this.txCharacter[2].tDraw2D(CDTXMania.app.Device, x, y, rc画像内の描画領域);
                         }
                         break;
                     }

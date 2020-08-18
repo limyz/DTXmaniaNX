@@ -145,7 +145,7 @@
     <Compile Include="Code\Stage\07.Performance\CActPerfCommonStatusPanel.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfChipFireGB.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfPanelString.cs" />
-    <Compile Include="Code\Stage\07.Performance\CActPerfCommonLaneFlashGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonLaneFlushGB.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfCommonJudgementCharacterString.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerformanceInformation.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfSkillMeter.cs" />

@@ -195,11 +195,11 @@ namespace DTXMania
             }
             else if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
             {
-                if (!CDTXMania.ConfigIni.bギターが全部オートプレイである && CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                if (!CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay && CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                 {
                     this.n本体X[2] = 0;
                 }
-                else if (CDTXMania.ConfigIni.bギターが全部オートプレイである && !CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                else if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay && !CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                 {
                     this.n本体X[1] = 0;
                 }
@@ -435,7 +435,7 @@ namespace DTXMania
                         this.t小文字表示( 167 + this.n本体X[ i ], 192 + this.n本体Y, string.Format( "{0,3:##0}%", dbMISS率 ) );
                         this.t小文字表示( 167 + this.n本体X[ i ], 222 + this.n本体Y, string.Format( "{0,3:##0}%", dbMAXCOMBO率 ) );
 
-                        //this.t大文字表示(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stagePerfGuitarScreen.actStatusPanel.db現在の達成率.Guitar ) );
+                        //this.tDrawStringLarge(58 + this.n本体X[ i ], 277 + this.n本体Y, string.Format( "{0,6:##0.00}", CDTXMania.stagePerfGuitarScreen.actStatusPanel.db現在の達成率.Guitar ) );
                         if (this.txSkillMax != null && CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Guitar >= 100.0)
                         {
                             this.txSkillMax.tDraw2D(CDTXMania.app.Device, 127 + this.n本体X[i], 277 + this.n本体Y);

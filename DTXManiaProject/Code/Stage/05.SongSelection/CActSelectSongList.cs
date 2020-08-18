@@ -123,7 +123,7 @@ namespace DTXMania
 			if( song.arScore[ this.n現在のアンカ難易度レベル ] != null )
 				return this.n現在のアンカ難易度レベル;	// 難易度ぴったりの曲があったよ
 
-			if( ( song.eノード種別 == CSongListNode.Eノード種別.BOX ) || ( song.eノード種別 == CSongListNode.Eノード種別.BACKBOX ) )
+			if( ( song.eNodeType == CSongListNode.ENodeType.BOX ) || ( song.eNodeType == CSongListNode.ENodeType.BACKBOX ) )
 				return 0;								// BOX と BACKBOX は関係無いよ
 
 
@@ -650,7 +650,7 @@ namespace DTXMania
 				for( int i = 0; i < 13; i++ )
 					this.ct登場アニメ用[ i ] = new CCounter( -i * 10, 100, 3, CDTXMania.Timer );
 
-				this.nスクロールタイマ = CSoundManager.rcPerformanceTimer.n現在時刻;
+				this.nスクロールタイマ = CSoundManager.rcPerformanceTimer.nCurrentTime;
 				CDTXMania.stageSongSelection.tSelectedSongChanged();
 				
 				base.bJustStartedUpdate = false;
@@ -703,7 +703,7 @@ namespace DTXMania
 			{
 				#region [ (2) 通常フェーズの進行。]
 				//-----------------
-				long n現在時刻 = CDTXMania.Timer.n現在時刻;
+				long n現在時刻 = CDTXMania.Timer.nCurrentTime;
 				
 				if( n現在時刻 < this.nスクロールタイマ )	// 念のため
 					this.nスクロールタイマ = n現在時刻;
@@ -1026,7 +1026,7 @@ namespace DTXMania
 						if( this.stバー情報[ nパネル番号 ].txタイトル名 != null )
                             this.stバー情報[ nパネル番号 ].txタイトル名.tDraw2D( CDTXMania.app.Device, i選択曲バーX座標 + 65, y選曲 );
 
-                        if (CDTXMania.stageSongSelection.r現在選択中の曲.eノード種別 == CSongListNode.Eノード種別.SCORE && this.actステータスパネル.txパネル本体 == null)
+                        if (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.SCORE && this.actステータスパネル.txパネル本体 == null)
                         {
                             if( this.tx選択中の曲名テクスチャ == null )
                                 this.tx選択中の曲名テクスチャ = this.t指定された文字テクスチャを生成する( CDTXMania.stageSongSelection.r現在選択中のスコア.SongInformation.Title );
@@ -1262,14 +1262,14 @@ namespace DTXMania
 		{
 			if( song != null )
 			{
-				switch( song.eノード種別 )
+				switch( song.eNodeType )
 				{
-					case CSongListNode.Eノード種別.SCORE:
-					case CSongListNode.Eノード種別.SCORE_MIDI:
+					case CSongListNode.ENodeType.SCORE:
+					case CSongListNode.ENodeType.SCORE_MIDI:
 						return Eバー種別.Score;
 
-					case CSongListNode.Eノード種別.BOX:
-					case CSongListNode.Eノード種別.BACKBOX:
+					case CSongListNode.ENodeType.BOX:
+					case CSongListNode.ENodeType.BACKBOX:
 						return Eバー種別.Box;
 				}
 			}

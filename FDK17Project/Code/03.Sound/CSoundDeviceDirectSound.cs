@@ -201,8 +201,8 @@ namespace FDK
 			{
 				#region [ 経緯時間計測用サウンドバッファを解放。]
 				//-----------------
-				this.sd経過時間計測用サウンドバッファ.tサウンドを停止する();
-				CCommon.tDisposeする( ref this.sd経過時間計測用サウンドバッファ );
+				this.sd経過時間計測用サウンドバッファ.tStopSound();
+				CCommon.tDispose( ref this.sd経過時間計測用サウンドバッファ );
 				//-----------------
 				#endregion
 				#region [ 単位繰り上げ用スレッド停止。]
@@ -216,8 +216,8 @@ namespace FDK
 				//-----------------
 				#endregion
 
-				CCommon.tDisposeする( ref this.DirectSound );
-				CCommon.tDisposeする( this.tmシステムタイマ );
+				CCommon.tDispose( ref this.DirectSound );
+				CCommon.tDispose( this.tmシステムタイマ );
 			}
 		}
 		~CSoundDeviceDirectSound()

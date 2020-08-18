@@ -304,7 +304,7 @@ namespace FDK
 			}
 			if( bManagedDispose )
 			{
-				CCommon.tDisposeする( this.tmシステムタイマ );
+				CCommon.tDispose( this.tmシステムタイマ );
 				this.tmシステムタイマ = null;
 			}
 		}

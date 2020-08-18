@@ -82,9 +82,9 @@ namespace DTXMania
                 {
                     this.nRankValue[i] = -1;
                     this.fPerfect率[i] = this.fGreat率[i] = this.fGood率[i] = this.fPoor率[i] = this.fMiss率[i] = 0.0f;	// #28500 2011.5.24 yyagi
-                    if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
-                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
+                    if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bGuitarRevolutionMode)) &&
+                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bGuitarRevolutionMode))) &&
+                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bGuitarRevolutionMode)))
                     {
                         CScoreIni.CPerformanceEntry part = this.stPerformanceEntry[i];
                         bool bIsAutoPlay = true;
@@ -95,11 +95,11 @@ namespace DTXMania
                                 break;
 
                             case 1:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bギターが全部オートプレイである;
+                                bIsAutoPlay = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay;
                                 break;
 
                             case 2:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bベースが全部オートプレイである;
+                                bIsAutoPlay = CDTXMania.ConfigIni.bAllBassAreAutoPlay;
                                 break;
                         }		
 
@@ -131,7 +131,7 @@ namespace DTXMania
 				CScoreIni ini = new CScoreIni( str );
 
 				bool[] b今までにフルコンボしたことがある = new bool[] { false, false, false };
-                if (!CDTXMania.ConfigIni.bAllDrumsAreAutoPlay || !CDTXMania.ConfigIni.bギターが全部オートプレイである || !CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                if (!CDTXMania.ConfigIni.bAllDrumsAreAutoPlay || !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay || !CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                 {
                     for (int i = 0; i < 3; i++)
                     {
@@ -218,7 +218,7 @@ namespace DTXMania
 				//---------------------
 				if( !CDTXMania.bCompactMode )
 				{
-					CScore cScore = CDTXMania.stageSongSelection.r確定されたスコア;
+					CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
 					bool[] b更新が必要か否か = new bool[ 3 ];
 					CScoreIni.tGetIsUpdateNeeded( out b更新が必要か否か[ 0 ], out b更新が必要か否か[ 1 ], out b更新が必要か否か[ 2 ] );
 					for( int m = 0; m < 3; m++ )
@@ -267,9 +267,9 @@ namespace DTXMania
             {
                 if( chip.bIsAutoPlayed )
                 {
-					if (chip.nチャンネル番号 != 0x28 && chip.nチャンネル番号 != 0xA8) // Guitar/Bass Wailing は OK
+					if (chip.nChannelNumber != 0x28 && chip.nChannelNumber != 0xA8) // Guitar/Bass Wailing は OK
 					{
-						saveCond[(int)(chip.e楽器パート)] = false;
+						saveCond[(int)(chip.eInstrumentPart)] = false;
 					}
                 }
             }
@@ -278,7 +278,7 @@ namespace DTXMania
                 saveCond[instIndex] &= CDTXMania.listAutoGhostLag.Drums == null;
             }
 
-            string directory = CDTXMania.DTX.strフォルダ名;
+            string directory = CDTXMania.DTX.strFolderName;
             string filename = CDTXMania.DTX.strファイル名 + ".";
             EInstrumentPart inst = EInstrumentPart.UNKNOWN;
 
@@ -336,7 +336,7 @@ namespace DTXMania
             int cnt = 0;
             foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
             {
-                if (chip.e楽器パート == inst)
+                if (chip.eInstrumentPart == inst)
                 {
                     ++cnt;
                 }
@@ -352,7 +352,7 @@ namespace DTXMania
                         bw.Write((Int32)cnt);
                         foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
                         {
-                            if (chip.e楽器パート == inst)
+                            if (chip.eInstrumentPart == inst)
                             {
                             	// -128 ms から 127 ms までのラグしか保存しない
                             	// その範囲を超えているラグはクランプ
@@ -398,7 +398,7 @@ namespace DTXMania
 		{
 			if( this.rResultSound != null )
 			{
-				CDTXMania.SoundManager.tサウンドを破棄する( this.rResultSound );
+				CDTXMania.SoundManager.tDiscard( this.rResultSound );
 				this.rResultSound = null;
 			}
 			base.OnDeactivate();
@@ -494,9 +494,9 @@ namespace DTXMania
 					bool l_newRecord = false;
 					for (int i = 0; i < 3; i++)
 					{
-						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bギタレボモード)) &&
-							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bギタレボモード))) &&
-							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bギタレボモード)))
+						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bGuitarRevolutionMode)) &&
+							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bGuitarRevolutionMode))) &&
+							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bGuitarRevolutionMode)))
 						{ 
 							if(bAuto[i] == false)
                             {
@@ -706,16 +706,16 @@ namespace DTXMania
 												break;
 										}
 									}
-									if( ( ( rChip != null ) && ( rChip.nチャンネル番号 >= 0x11 ) ) && ( rChip.nチャンネル番号 <= 0x1b ) )
+									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= 0x11 ) ) && ( rChip.nChannelNumber <= 0x1b ) )
 									{
-										int nLane = this.nチャンネル0Atoレーン07[ rChip.nチャンネル番号 - 0x11 ];
-										if( ( nLane == 1 ) && ( ( rChip.nチャンネル番号 == 0x11 ) || ( ( rChip.nチャンネル番号 == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
+										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - 0x11 ];
+										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == 0x11 ) || ( ( rChip.nChannelNumber == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
 										{
-											CDTXMania.DTX.tWavの再生停止( this.n最後に再生したHHのWAV番号 );
-											this.n最後に再生したHHのWAV番号 = rChip.n整数値_内部番号;
-											this.n最後に再生したHHのチャンネル番号 = rChip.nチャンネル番号;
+											CDTXMania.DTX.tStopPlayingWav( this.n最後に再生したHHのWAV番号 );
+											this.n最後に再生したHHのWAV番号 = rChip.nIntegerValue_InternalNumber;
+											this.n最後に再生したHHのチャンネル番号 = rChip.nChannelNumber;
 										}
-										CDTXMania.DTX.tチップの再生( rChip, CDTXMania.Timer.nシステム時刻, nLane, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
+										CDTXMania.DTX.tPlayChip( rChip, CDTXMania.Timer.nシステム時刻, nLane, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する.Drums );
 									}
 								}
 							}

@@ -58,7 +58,7 @@ namespace DTXMania
 			public bool bループ;
 			public bool bReadNotTried;
 			public bool b読み込み成功;
-			public bool b排他;
+			public bool bExclusive;
 			public string strFilename = "";
 			public bool b再生中
 			{
@@ -78,13 +78,13 @@ namespace DTXMania
 					if( sound == null )
 						return 0;
 
-					return sound.n位置;
+					return sound.nPosition;
 				}
 				set
 				{
 					CSound sound = this.rSound[ 1 - this.n次に鳴るサウンド番号 ];
 					if( sound != null )
-						sound.n位置 = value;
+						sound.nPosition = value;
 				}
 			}
 			public int n位置_次に鳴るサウンド
@@ -95,13 +95,13 @@ namespace DTXMania
 					if( sound == null )
 						return 0;
 
-					return sound.n位置;
+					return sound.nPosition;
 				}
 				set
 				{
 					CSound sound = this.rSound[ this.n次に鳴るサウンド番号 ];
 					if( sound != null )
-						sound.n位置 = value;
+						sound.nPosition = value;
 				}
 			}
 			public int n音量_現在のサウンド
@@ -112,13 +112,13 @@ namespace DTXMania
 					if( sound == null )
 						return 0;
 
-					return sound.n音量;
+					return sound.nVolume;
 				}
 				set
 				{
 					CSound sound = this.rSound[ 1 - this.n次に鳴るサウンド番号 ];
 					if( sound != null )
-						sound.n音量 = value;
+						sound.nVolume = value;
 				}
 			}
 			public int n音量_次に鳴るサウンド
@@ -130,14 +130,14 @@ namespace DTXMania
 					{
 						return 0;
 					}
-					return sound.n音量;
+					return sound.nVolume;
 				}
 				set
 				{
 					CSound sound = this.rSound[ this.n次に鳴るサウンド番号 ];
 					if( sound != null )
 					{
-						sound.n音量 = value;
+						sound.nVolume = value;
 					}
 				}
 			}
@@ -150,7 +150,7 @@ namespace DTXMania
 					{
 						return 0;
 					}
-					return sound.n総演奏時間ms;
+					return sound.nTotalPlayTimeMs;
 				}
 			}
 			public int nLength_NextSound
@@ -162,7 +162,7 @@ namespace DTXMania
 					{
 						return 0;
 					}
-					return sound.n総演奏時間ms;
+					return sound.nTotalPlayTimeMs;
 				}
 			}
 
@@ -178,7 +178,7 @@ namespace DTXMania
 			{
 				this.strFilename = strファイル名;
 				this.bループ = bループ;
-				this.b排他 = b排他;
+				this.bExclusive = b排他;
 				this.bCompact対象 = bCompact対象;
 				this.bReadNotTried = true;
 			}
@@ -251,7 +251,7 @@ namespace DTXMania
 						this.bReadNotTried = false;
 					}
 				}
-				if( this.b排他 )
+				if( this.bExclusive )
 				{
 					if( rLastPlayedExclusiveSystemSound != null )
 						rLastPlayedExclusiveSystemSound.t停止する();
@@ -267,10 +267,10 @@ namespace DTXMania
 			public void t停止する()
 			{
 				if( this.rSound[ 0 ] != null )
-					this.rSound[ 0 ].t再生を停止する();
+					this.rSound[ 0 ].tStopPlayback();
 
 				if( this.rSound[ 1 ] != null )
-					this.rSound[ 1 ].t再生を停止する();
+					this.rSound[ 1 ].tStopPlayback();
 
 				if( rLastPlayedExclusiveSystemSound == this )
 					rLastPlayedExclusiveSystemSound = null;
@@ -300,7 +300,7 @@ namespace DTXMania
 					{
 						if( this.rSound[ i ] != null )
 						{
-							CDTXMania.SoundManager.tサウンドを破棄する( this.rSound[ i ] );
+							CDTXMania.SoundManager.tDiscard( this.rSound[ i ] );
 							this.rSound[ i ] = null;
 						}
 					}
@@ -336,7 +336,7 @@ namespace DTXMania
 		public CSystemSound soundタイトル音 = null;
 		public CSystemSound soundFullCombo = null;
 		public CSystemSound sound歓声音 = null;
-		public CSystemSound sound曲読込開始音 = null;
+		public CSystemSound soundNowLoading = null;
 		public CSystemSound sound決定音 = null;
 		public CSystemSound sound取消音 = null;
 		public CSystemSound sound変更音 = null;
@@ -395,7 +395,7 @@ namespace DTXMania
                         return this.sound新記録音;
 
 					case ESystemSound.SOUND曲読込開始音:
-						return this.sound曲読込開始音;
+						return this.soundNowLoading;
 
 					case ESystemSound.SOUNDタイトル音:
 						return this.soundタイトル音;
@@ -485,7 +485,7 @@ namespace DTXMania
                         return this.sound新記録音;
 
 					case 11:
-						return this.sound曲読込開始音;
+						return this.soundNowLoading;
 
 					case 12:
 						return this.soundタイトル音;
@@ -678,7 +678,7 @@ namespace DTXMania
 			this.soundFullCombo		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
             this.sound新記録音          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
             this.soundExcellent    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
-			this.sound曲読込開始音		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
+			this.soundNowLoading		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
 			this.soundタイトル音		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
             this.sound曲決定            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );
             this.soundNovice            = new CSystemSound( @"Sounds\Novice.ogg",          false, false, false );
@@ -700,7 +700,7 @@ namespace DTXMania
 		{
 			for ( int i = 0; i < nシステムサウンド数; i++ )
 			{
-				if ( !this[ i ].b排他 )	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
+				if ( !this[ i ].bExclusive )	// BGM系以外のみ読み込む。(BGM系は必要になったときに読み込む)
 				{
 					CSystemSound cシステムサウンド = this[ i ];
 					if ( !CDTXMania.bCompactMode || cシステムサウンド.bCompact対象 )

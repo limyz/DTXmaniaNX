@@ -163,12 +163,12 @@ namespace FDK
 			//-----------------
 			this.OnManageリソースを解放する();
 			this.OnUnmanageリソースを解放する();
-			CCommon.tDisposeする( this.D3D9Device );
+			CCommon.tDispose( this.D3D9Device );
 			//-----------------
 			#endregion
 			#region [ Direct3D9 を解放。]
 			//-----------------
-			CCommon.tDisposeする( this.Direct3D );
+			CCommon.tDispose( this.Direct3D );
 			//-----------------
 			#endregion
 		}
@@ -275,7 +275,7 @@ namespace FDK
 				this.OnManageリソースを解放する();
 				this.OnUnmanageリソースを解放する();
 				
-				CCommon.tDisposeする( this.D3D9Device );
+				CCommon.tDispose( this.D3D9Device );
 				this.D3D9Device = new Device(		// 失敗したら異常系とみなし、そのまま例外をthrow。
 					this.Direct3D,
 					newD3DSettings.nAdaptor,
@@ -744,8 +744,8 @@ namespace FDK
 		//-----------------
 		public void Dispose()
 		{
-			CCommon.tDisposeする( this.D3D9Device ); this.D3D9Device = null;
-			CCommon.tDisposeする( this.Direct3D ); this.Direct3D = null;
+			CCommon.tDispose( this.D3D9Device ); this.D3D9Device = null;
+			CCommon.tDispose( this.Direct3D ); this.Direct3D = null;
 		}
 		//-----------------
 		#endregion

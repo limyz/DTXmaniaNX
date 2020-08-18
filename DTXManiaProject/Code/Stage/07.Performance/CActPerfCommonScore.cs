@@ -63,7 +63,7 @@ namespace DTXMania
 				#endregion
 				#region [ Gutiar ]
 				case EInstrumentPart.GUITAR:
-					if ( !CDTXMania.ConfigIni.bギターが全部オートプレイである )
+					if ( !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay )
 					{
 						#region [ Auto Wailing ]
 						if ( bAutoPlay.GtW )
@@ -88,7 +88,7 @@ namespace DTXMania
 				#endregion
 				#region [ Bass ]
 				case EInstrumentPart.BASS:
-					if ( !CDTXMania.ConfigIni.bベースが全部オートプレイである )
+					if ( !CDTXMania.ConfigIni.bAllBassAreAutoPlay )
 					{
 						#region [ Auto Wailing ]
 						if ( bAutoPlay.BsW )

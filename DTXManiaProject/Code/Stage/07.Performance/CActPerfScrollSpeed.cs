@@ -40,7 +40,7 @@ namespace DTXMania
 					this.n速度変更制御タイマ.Drums = this.n速度変更制御タイマ.Guitar = this.n速度変更制御タイマ.Bass = CSoundManager.rcPerformanceTimer.nシステム時刻;
 					base.bJustStartedUpdate = false;
 				}
-				long num = CSoundManager.rcPerformanceTimer.n現在時刻;
+				long num = CSoundManager.rcPerformanceTimer.nCurrentTime;
 				for( int i = 0; i < 3; i++ )
 				{
 					double num3 = (double) CDTXMania.ConfigIni.nScrollSpeed[ i ];

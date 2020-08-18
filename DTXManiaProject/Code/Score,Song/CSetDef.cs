@@ -162,52 +162,52 @@ namespace DTXMania
 							else if( str.StartsWith( "#L1FILE", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.File[ 0 ] = str.Substring( 7 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L2FILE", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.File[ 1 ] = str.Substring( 7 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L3FILE", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.File[ 2 ] = str.Substring( 7 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L4FILE", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.File[ 3 ] = str.Substring( 7 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L5FILE", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.File[ 4 ] = str.Substring( 7 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L1LABEL", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.Label[ 0 ] = str.Substring( 8 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L2LABEL", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.Label[ 1 ] = str.Substring( 8 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L3LABEL", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.Label[ 2 ] = str.Substring( 8 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L4LABEL", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.Label[ 3 ] = str.Substring( 8 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 							else if( str.StartsWith( "#L5LABEL", StringComparison.OrdinalIgnoreCase ) )
 							{
 								block.Label[ 4 ] = str.Substring( 8 ).Trim( new char[] { ':', ' ', '\t' } );
-								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So b使用中 is not modified to set the property. I need to update it myself.
+								block.b使用中 = true;		// #28937 2012.7.7 yyagi; "get" accessor is called for T[] property. So bInUse is not modified to set the property. I need to update it myself.
 							}
 						}
 						continue;

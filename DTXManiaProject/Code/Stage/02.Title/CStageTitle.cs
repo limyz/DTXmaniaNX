@@ -94,7 +94,7 @@ namespace DTXMania
 				//---------------------
 				if( base.bJustStartedUpdate )
 				{
-					if( CDTXMania.r直前のステージ == CDTXMania.stageStartup )
+					if( CDTXMania.rPreviousStage == CDTXMania.stageStartup )
 					{
 						this.actFIfromSetup.tフェードイン開始();
 						base.ePhaseID = CStage.EPhase.タイトル_起動画面からのフェードイン;

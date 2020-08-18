@@ -70,7 +70,7 @@ namespace FDK
 				}
 				finally
 				{
-					CCommon.tCOMオブジェクトを解放する( ref sampleGrabber );
+					CCommon.tReleaseComObject( ref sampleGrabber );
 				}
 				//-----------------
 				#endregion
@@ -164,7 +164,7 @@ namespace FDK
 			}
 			finally
 			{
-				CCommon.tCOMオブジェクトを解放する( ref graphBuilder );
+				CCommon.tReleaseComObject( ref graphBuilder );
 			}
 		}
 

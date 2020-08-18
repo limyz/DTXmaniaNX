@@ -165,7 +165,7 @@ namespace DTXMania
 					{
 						CSetDef.CBlock block = def.blocks[ i ];
 						CSongListNode item = new CSongListNode();
-						item.eノード種別 = CSongListNode.Eノード種別.SCORE;
+						item.eNodeType = CSongListNode.ENodeType.SCORE;
 						item.strタイトル = block.Title;
 						item.strジャンル = block.Genre;
 						item.nスコア数 = 0;
@@ -284,7 +284,7 @@ namespace DTXMania
 					if( ( strExt.Equals( ".dtx" ) || strExt.Equals( ".gda" ) ) || ( ( strExt.Equals( ".g2d" ) || strExt.Equals( ".bms" ) ) || strExt.Equals( ".bme" ) ) )
 					{
 						CSongListNode c曲リストノード = new CSongListNode();
-						c曲リストノード.eノード種別 = CSongListNode.Eノード種別.SCORE;
+						c曲リストノード.eNodeType = CSongListNode.ENodeType.SCORE;
 						c曲リストノード.nスコア数 = 1;
 						c曲リストノード.r親ノード = node親;
 
@@ -350,7 +350,7 @@ namespace DTXMania
 				if( infoDir.Name.ToLower().StartsWith( "dtxfiles." ) )
 				{
 					CSongListNode c曲リストノード = new CSongListNode();
-					c曲リストノード.eノード種別 = CSongListNode.Eノード種別.BOX;
+					c曲リストノード.eNodeType = CSongListNode.ENodeType.BOX;
 					c曲リストノード.bDTXFilesで始まるフォルダ名のBOXである = true;
 					c曲リストノード.strタイトル = infoDir.Name.Substring( 9 );
 					c曲リストノード.nスコア数 = 1;
@@ -492,7 +492,7 @@ namespace DTXMania
 				{
 					CBoxDef boxdef = new CBoxDef( infoDir.FullName + @"\box.def" );
 					CSongListNode c曲リストノード = new CSongListNode();
-					c曲リストノード.eノード種別 = CSongListNode.Eノード種別.BOX;
+					c曲リストノード.eNodeType = CSongListNode.ENodeType.BOX;
 					c曲リストノード.bDTXFilesで始まるフォルダ名のBOXである = false;
 					c曲リストノード.strタイトル = boxdef.Title;
 					c曲リストノード.strジャンル = boxdef.Genre;
@@ -651,11 +651,11 @@ namespace DTXMania
 					SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 
 					CSongListNode node = enumerator.Current;
-					if( node.eノード種別 == CSongListNode.Eノード種別.BOX )
+					if( node.eNodeType == CSongListNode.ENodeType.BOX )
 					{
 						this.tReflectScoreCacheInSongList( node.list子リスト );
 					}
-					else if( ( node.eノード種別 == CSongListNode.Eノード種別.SCORE ) || ( node.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI ) )
+					else if( ( node.eNodeType == CSongListNode.ENodeType.SCORE ) || ( node.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 					{
 						Predicate<CScore> match = null;
 						for( int lv = 0; lv < 5; lv++ )
@@ -823,12 +823,12 @@ namespace DTXMania
 			{
 				SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 
-				if( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.BOX )
+				if( c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX )
 				{
 					this.tSongsDBになかった曲をファイルから読み込んで反映する( c曲リストノード.list子リスト );
 				}
-				else if( ( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.SCORE )
-					  || ( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI ) )
+				else if( ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE )
+					  || ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 				{
 					for( int i = 0; i < 5; i++ )
 					{
@@ -866,7 +866,7 @@ namespace DTXMania
                                     c曲リストノード.arScore[ i ].SongInformation.bScoreExists.Bass = cdtx.bチップがある.Bass;
 									c曲リストノード.arScore[ i ].SongInformation.SongType = cdtx.e種別;
 									c曲リストノード.arScore[ i ].SongInformation.Bpm = cdtx.BPM;
-									c曲リストノード.arScore[ i ].SongInformation.Duration = 0;	//  (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].n発声時刻ms;
+									c曲リストノード.arScore[ i ].SongInformation.Duration = 0;	//  (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].nPlaybackTimeMs;
 									this.nNbScoresFromFile++;
 									cdtx.OnDeactivate();
 //Debug.WriteLine( "★" + this.nNbScoresFromFile + " " + c曲リストノード.arScore[ i ].SongInformation.Title );
@@ -960,7 +960,7 @@ namespace DTXMania
 			if( ノードリスト.Count > 0 )
 			{
 				CSongListNode itemRandom = new CSongListNode();
-				itemRandom.eノード種別 = CSongListNode.Eノード種別.RANDOM;
+				itemRandom.eNodeType = CSongListNode.ENodeType.RANDOM;
 				itemRandom.strタイトル = "< RANDOM SELECT >";
 				itemRandom.nスコア数 = 5;
 				itemRandom.r親ノード = ノードリスト[ 0 ].r親ノード;
@@ -1011,10 +1011,10 @@ namespace DTXMania
 
 				#region [ BOXノードなら子リストに <<BACK を入れ、子リストに後処理を適用する ]
 				//-----------------------------
-				if( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.BOX )
+				if( c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX )
 				{
 					CSongListNode itemBack = new CSongListNode();
-					itemBack.eノード種別 = CSongListNode.Eノード種別.BACKBOX;
+					itemBack.eNodeType = CSongListNode.ENodeType.BACKBOX;
 					itemBack.strタイトル = "<< BACK";
 					itemBack.nスコア数 = 1;
 					itemBack.r親ノード = c曲リストノード;
@@ -1179,8 +1179,8 @@ namespace DTXMania
 		{
 			foreach( CSongListNode c曲リストノード in list )
 			{
-				if(    ( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.SCORE )
-					|| ( c曲リストノード.eノード種別 == CSongListNode.Eノード種別.SCORE_MIDI ) )
+				if(    ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE )
+					|| ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 				{
 					this.tSongsDBにノードを１つ出力する( bw, c曲リストノード );
 				}
@@ -1209,7 +1209,7 @@ namespace DTXMania
 				{
 					return num;
 				}
-				if( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+				if( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 				{
 					return n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 				}
@@ -1311,7 +1311,7 @@ namespace DTXMania
 					{
 						return order * num;
 					}
-					if( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+					if( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 					{
 						return order * n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 					}
@@ -1376,7 +1376,7 @@ namespace DTXMania
 					{
 						return (int)(order * num);
 					}
-					if ( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+					if ( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 					{
 						return order * n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 					}
@@ -1426,7 +1426,7 @@ namespace DTXMania
 					{
 						return order * num;
 					}
-					if ( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+					if ( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 					{
 						return order * n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 					}
@@ -1483,7 +1483,7 @@ namespace DTXMania
 					{
 						return order * num;
 					}
-					if ( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+					if ( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 					{
 						return order * n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 					}
@@ -1532,7 +1532,7 @@ namespace DTXMania
 					{
 						return order * num;
 					}
-					if ( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+					if ( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 					{
 						return order * n1.arScore[ 0 ].FileInformation.AbsoluteFolderPath.CompareTo( n2.arScore[ 0 ].FileInformation.AbsoluteFolderPath );
 					}
@@ -1741,27 +1741,27 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 
 		private int t比較0_共通( CSongListNode n1, CSongListNode n2 )
 		{
-			if( n1.eノード種別 == CSongListNode.Eノード種別.BACKBOX )
+			if( n1.eNodeType == CSongListNode.ENodeType.BACKBOX )
 			{
 				return -1;
 			}
-			if( n2.eノード種別 == CSongListNode.Eノード種別.BACKBOX )
+			if( n2.eNodeType == CSongListNode.ENodeType.BACKBOX )
 			{
 				return 1;
 			}
-			if( n1.eノード種別 == CSongListNode.Eノード種別.RANDOM )
+			if( n1.eNodeType == CSongListNode.ENodeType.RANDOM )
 			{
 				return 1;
 			}
-			if( n2.eノード種別 == CSongListNode.Eノード種別.RANDOM )
+			if( n2.eNodeType == CSongListNode.ENodeType.RANDOM )
 			{
 				return -1;
 			}
-			if( ( n1.eノード種別 == CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 != CSongListNode.Eノード種別.BOX ) )
+			if( ( n1.eNodeType == CSongListNode.ENodeType.BOX ) && ( n2.eNodeType != CSongListNode.ENodeType.BOX ) )
 			{
 				return -1;
 			}
-			if( ( n1.eノード種別 != CSongListNode.Eノード種別.BOX ) && ( n2.eノード種別 == CSongListNode.Eノード種別.BOX ) )
+			if( ( n1.eNodeType != CSongListNode.ENodeType.BOX ) && ( n2.eNodeType == CSongListNode.ENodeType.BOX ) )
 			{
 				return 1;
 			}

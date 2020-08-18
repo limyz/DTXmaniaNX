@@ -39,7 +39,7 @@ namespace DTXMania
             this.ct進行 = null;
             if (this.sd効果音 != null)
             {
-                CDTXMania.SoundManager.tサウンドを破棄する(this.sd効果音);
+                CDTXMania.SoundManager.tDiscard(this.sd効果音);
                 this.sd効果音 = null;
             }
             base.OnDeactivate();
@@ -88,16 +88,16 @@ namespace DTXMania
                 }
                 if (!this.b効果音再生済み)
                 {
-                    if (((CDTXMania.DTX.SOUND_STAGEFAILED != null) && (CDTXMania.DTX.SOUND_STAGEFAILED.Length > 0)) && File.Exists(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED))
+                    if (((CDTXMania.DTX.SOUND_STAGEFAILED != null) && (CDTXMania.DTX.SOUND_STAGEFAILED.Length > 0)) && File.Exists(CDTXMania.DTX.strFolderName + CDTXMania.DTX.SOUND_STAGEFAILED))
                     {
                         try
                         {
                             if (this.sd効果音 != null)
                             {
-                                CDTXMania.SoundManager.tサウンドを破棄する(this.sd効果音);
+                                CDTXMania.SoundManager.tDiscard(this.sd効果音);
                                 this.sd効果音 = null;
                             }
-                            this.sd効果音 = CDTXMania.SoundManager.tGenerateSound(CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.SOUND_STAGEFAILED);
+                            this.sd効果音 = CDTXMania.SoundManager.tGenerateSound(CDTXMania.DTX.strFolderName + CDTXMania.DTX.SOUND_STAGEFAILED);
                             this.sd効果音.tStartPlaying();
                         }
                         catch

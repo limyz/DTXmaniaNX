@@ -1707,7 +1707,7 @@ namespace DTXMania
                 #endregion
                 #region [ Guitar ]
                 case EInstrumentPart.GUITAR:
-                    if (!CDTXMania.ConfigIni.bギターが全部オートプレイである)
+                    if (!CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay)
                     {
                         #region [ Auto Pick ]
                         if (bAutoPlay.GtPick)
@@ -1736,7 +1736,7 @@ namespace DTXMania
                 #endregion
                 #region [ Bass ]
                 case EInstrumentPart.BASS:
-                    if (!CDTXMania.ConfigIni.bベースが全部オートプレイである)
+                    if (!CDTXMania.ConfigIni.bAllBassAreAutoPlay)
                     {
                         #region [ Auto Pick ]
                         if (bAutoPlay.BsPick)
@@ -1837,8 +1837,8 @@ namespace DTXMania
 		internal static void tGetIsUpdateNeeded( out bool bDrumsを更新する, out bool bGuitarを更新する, out bool bBassを更新する )
 		{
 			bDrumsを更新する =  CDTXMania.ConfigIni.bDrumsEnabled  && CDTXMania.DTX.bチップがある.Drums  && !CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
-			bGuitarを更新する = CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigIni.bギターが全部オートプレイである;
-			bBassを更新する =   CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigIni.bベースが全部オートプレイである;
+			bGuitarを更新する = CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Guitar && !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay;
+			bBassを更新する =   CDTXMania.ConfigIni.bGuitarEnabled && CDTXMania.DTX.bチップがある.Bass   && !CDTXMania.ConfigIni.bAllBassAreAutoPlay;
 		}
         internal static int tCalculateOverallRankValue(CPerformanceEntry Drums, CPerformanceEntry Guitar, CPerformanceEntry Bass)
         {

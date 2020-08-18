@@ -84,8 +84,8 @@ namespace DTXMania
             #endregion
 
             this.b全オート.Drums = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
-            this.b全オート.Guitar = CDTXMania.ConfigIni.bギターが全部オートプレイである;
-            this.b全オート.Bass = CDTXMania.ConfigIni.bベースが全部オートプレイである;
+            this.b全オート.Guitar = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay;
+            this.b全オート.Bass = CDTXMania.ConfigIni.bAllBassAreAutoPlay;
 
             base.OnActivate();
         }

@@ -81,7 +81,7 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
                 this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
-                string path = CDTXMania.DTX.strフォルダ名 + CDTXMania.DTX.PREIMAGE;
+                string path = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PREIMAGE;
                 if (!File.Exists(path))
                 {
                     this.txジャケット画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_preimage default.png"));

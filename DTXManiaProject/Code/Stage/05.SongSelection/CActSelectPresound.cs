@@ -18,8 +18,8 @@ namespace DTXMania
 		{
 			if( this.sound != null )
 			{
-				this.sound.t再生を停止する();
-				CDTXMania.SoundManager.tサウンドを破棄する( this.sound );
+				this.sound.tStopPlayback();
+				CDTXMania.SoundManager.tDiscard( this.sound );
 				this.sound = null;
 			}
 		}
@@ -122,7 +122,7 @@ namespace DTXMania
 				try
 				{
 					this.sound = CDTXMania.SoundManager.tGenerateSound( strPreviewFilename );
-					this.sound.n音量 = 80;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
+					this.sound.nVolume = 80;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
 					this.sound.tStartPlaying( true );
 					this.str現在のファイル名 = strPreviewFilename;
 					this.tBGMフェードアウト開始();

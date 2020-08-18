@@ -25,10 +25,10 @@ namespace DTXMania
             {
                 if (base.bJustStartedUpdate)
                 {
-                    base.n進行用タイマ = CDTXMania.Timer.n現在時刻;
+                    base.n進行用タイマ = CDTXMania.Timer.nCurrentTime;
                     base.bJustStartedUpdate = false;
                 }
-                long num = CDTXMania.Timer.n現在時刻;
+                long num = CDTXMania.Timer.nCurrentTime;
                 if (num < base.n進行用タイマ)
                 {
                     base.n進行用タイマ = num;
