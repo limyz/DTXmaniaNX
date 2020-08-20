@@ -401,7 +401,8 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 			bool bGradation = ( ( drawmode & DrawMode.Gradation ) == DrawMode.Gradation );
 
 			// 縁取りの縁のサイズは、とりあえずフォントの大きさの1/4とする
-			int nEdgePt = (bEdge)? _pt / 4 : 0;
+			// Changed to 1/6 as 1/4 is too thick for new Black-White Style
+			int nEdgePt = (bEdge)? _pt / 6 : 0;
 
 			// 描画サイズを測定する
 			Size stringSize = System.Windows.Forms.TextRenderer.MeasureText( drawstr, this._font, new Size( int.MaxValue, int.MaxValue ),

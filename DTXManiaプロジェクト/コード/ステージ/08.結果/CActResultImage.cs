@@ -229,8 +229,10 @@ namespace DTXMania
 
         //2014.04.05.kairera0467 GITADORAグラデーションの色。
         //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
-        private Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
-        private Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
+        //private Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
+        //private Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
+        private Color clGITADORAgradationTopColor = Color.FromArgb(255, 255, 255);
+        private Color clGITADORAgradationBottomColor = Color.FromArgb(255, 255, 255);
 
         private bool tプレビュー画像の指定があれば構築する()
         {
