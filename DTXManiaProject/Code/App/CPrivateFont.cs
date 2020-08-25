@@ -401,7 +401,8 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 			bool bGradation = ( ( drawmode & DrawMode.Gradation ) == DrawMode.Gradation );
 
 			// 縁取りの縁のサイズは、とりあえずフォントの大きさの1/4とする
-			int nEdgePt = (bEdge)? _pt / 4 : 0;
+			// Changed to 1/6 as 1/4 is too thick for new Black-White Style
+			int nEdgePt = (bEdge)? _pt / 6 : 0;
 
 			// 描画サイズを測定する
 			Size stringSize = System.Windows.Forms.TextRenderer.MeasureText( drawstr, this._font, new Size( int.MaxValue, int.MaxValue ),
@@ -410,18 +411,19 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
                 );
 
 			//取得した描画サイズを基に、描画先のbitmapを作成する
-			Bitmap bmp = new Bitmap( stringSize.Width + nEdgePt * 2, stringSize.Height + nEdgePt * 2 );
+			int l_width = stringSize.Width + nEdgePt * 6;
+			Bitmap bmp = new Bitmap(l_width, stringSize.Height + nEdgePt * 2 );
 			bmp.MakeTransparent();
 			Graphics g = Graphics.FromImage( bmp );
 			g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
 
 			StringFormat sf = new StringFormat();
 			sf.LineAlignment = StringAlignment.Far;	// 画面下部（垂直方向位置）
-			sf.Alignment = StringAlignment.Center;	// 画面中央（水平方向位置）
+			sf.Alignment = StringAlignment.Near;	// 画面中央（水平方向位置）//Changed to Left (Near) of Texture rect
 
 			// レイアウト枠
-			Rectangle r = new Rectangle( 0, 0, stringSize.Width + nEdgePt * 2, stringSize.Height + nEdgePt * 2 );
-            r = new Rectangle( 0, 0, stringSize.Width + nEdgePt * 3, stringSize.Height + nEdgePt * 2 ); // 2016.06.12 kairera0467 改行防止
+			Rectangle r = new Rectangle( 0, 0, l_width, stringSize.Height + nEdgePt * 2 );
+            //r = new Rectangle( 0, 0, l_width + nEdgePt*2, stringSize.Height + nEdgePt * 2 ); // 2016.06.12 kairera0467 改行防止
 
 			if( bEdge && bEdgeGradation )	// 縁取り有りの描画
 			{
