@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FDK
 {
-	public class CConversion
+	public class CConversion  // C変換
 	{
 		// プロパティ
 
@@ -80,7 +80,7 @@ namespace FDK
 			return num;
 		}
 		
-		public static int nGetNumberFrom2DigitHexadecimalString( string strNum )
+		public static int nConvert2DigitHexadecimalStringToNumber( string strNum)  // n16進数2桁の文字列を数値に変換して返す
 		{
 			if( strNum.Length < 2 )
 				return -1;
@@ -101,7 +101,7 @@ namespace FDK
 
 			return digit2 * 16 + digit1;
 		}
-		public static int nGetNumberFrom2DigitBase36String( string strNum )
+		public static int nConvert2DigitBase36StringToNumber( string strNum)  // n36進数2桁の文字列を数値に変換して返す
 		{
 			if( strNum.Length < 2 )
 				return -1;
@@ -122,7 +122,7 @@ namespace FDK
 
 			return digit2 * 36 + digit1;
 		}
-		public static int n小節番号の文字列3桁を数値に変換して返す( string strNum )
+		public static int nConvert3DigitMeasureNumberToNumber( string strNum)  // n小節番号の文字列3桁を数値に変換して返す
 		{
 			if( strNum.Length >= 3 )
 			{
@@ -144,7 +144,7 @@ namespace FDK
 			return -1;
 		}
 		
-		public static string str小節番号を文字列3桁に変換して返す( int num )
+		public static string strConvertNumberTo3DigitMeasureNumber( int num)  // str小節番号を文字列3桁に変換して返す
 		{
 			if( ( num < 0 ) || ( num >= 3600 ) )	// 3600 == Z99 + 1
 				return "000";
@@ -157,7 +157,7 @@ namespace FDK
 			char ch1 = strBase16Characters[ digit1 ];
 			return ( ch3.ToString() + ch2.ToString() + ch1.ToString() );
 		}
-		public static string str数値を16進数2桁に変換して返す( int num )
+		public static string strConvertNumberTo2DigitHexadecimalString( int num)  // str数値を16進数2桁に変換して返す
 		{
 			if( ( num < 0 ) || ( num >= 0x100 ) )
 				return "00";
@@ -166,7 +166,7 @@ namespace FDK
 			char ch1 = strBase16Characters[ num % 0x10 ];
 			return ( ch2.ToString() + ch1.ToString() );
 		}
-		public static string str数値を36進数2桁に変換して返す( int num )
+		public static string strConvertNumberTo2DigitBase36String( int num)  // str数値を36進数2桁に変換して返す
 		{
 			if( ( num < 0 ) || ( num >= 36 * 36 ) )
 				return "00";

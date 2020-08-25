@@ -264,7 +264,7 @@ namespace FDK
 
 			CSound.tすべてのサウンドを再構築する( SoundDevice );		// すでに生成済みのサウンドがあれば作り直す。
 		}
-		public CSound tGenerateSound( string filename )
+		public CSound tGenerateSound( string filename )  // tサウンドを生成する
 		{
 			if ( SoundDeviceType == ESoundDeviceType.Unknown )
 			{
@@ -461,7 +461,7 @@ namespace FDK
 		/// <summary>
 		/// <para>0:最小～100:原音</para>
 		/// </summary>
-		public int nVolume
+		public int nVolume  // n音量
 		{
 			get
 			{
@@ -510,7 +510,7 @@ namespace FDK
 		/// <summary>
 		/// <para>左:-100～中央:0～100:右。set のみ。</para>
 		/// </summary>
-		public int nPosition
+		public int nPosition  // n位置
 		{
 			get
 			{
@@ -885,7 +885,7 @@ namespace FDK
 		{
 			cs.tRelease();
 		}
-		public void tStartPlaying()
+		public void tStartPlaying()  // t再生を開始する
 		{
 			tSetPlaybackPositionToBeginning();
 			tサウンドを再生する();
@@ -906,7 +906,7 @@ namespace FDK
 			tSetPlaybackPositionToBeginning();
 			tサウンドを再生する( bループする );
 		}
-		public void tStopPlayback()
+		public void tStopPlayback()  // t再生を停止する
 		{
 			tStopSound();
 			tSetPlaybackPositionToBeginning();

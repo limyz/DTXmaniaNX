@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BAC81BCC-5689-4600-91A0-7427667500D6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTXCreator</RootNamespace>
+    <AssemblyName>DTXCreator</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Code\99.Resources\DTXC.ico</ApplicationIcon>
+    <ApplicationManifest>DTXCreator.exe.x86.manifest</ApplicationManifest>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;USE_ENGLISHRESOURCE_ USE_GERMANRESOURCE_</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <NoWarn>0219</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <NoWarn>0219</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\00.App\AppSetting.cs" />
+    <Compile Include="Code\00.App\CDTXInputOutput.cs" />
+    <Compile Include="Code\00.App\CVersionInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\00.App\CVersionInfo.Designer.cs">
+      <DependentUpon>CVersionInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\00.App\CMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\00.App\CMainForm.Designer.cs">
+      <DependentUpon>CMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\00.App\MakeTempDTX.cs" />
+    <Compile Include="Code\00.App\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\00.App\CVersionInfo.resx">
+      <DependentUpon>CVersionInfo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\00.App\CMainForm.ja-JP.resx">
+      <DependentUpon>CMainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\00.App\CMainForm.resx">
+      <DependentUpon>CMainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CSoundPropertiesDialog.ja-JP.resx">
+      <DependentUpon>CSoundPropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CSoundPropertiesDialog.resx">
+      <DependentUpon>CSoundPropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CVideoPropertiesDialog.ja-JP.resx">
+      <DependentUpon>CVideoPropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CVideoPropertiesDialog.resx">
+      <DependentUpon>CVideoPropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CImagePropertiesDialog.ja-JP.resx">
+      <DependentUpon>CImagePropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\02.WAV_BMP_AVI\CImagePropertiesDialog.resx">
+      <DependentUpon>CImagePropertiesDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\03.Options\COptionsDialog.ja-JP.resx">
+      <DependentUpon>COptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\03.Options\COptionsDialog.resx">
+      <DependentUpon>COptionsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\04.ChipPalette\CChipPalette.ja-JP.resx">
+      <DependentUpon>CChipPalette.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\04.ChipPalette\CChipPalette.resx">
+      <DependentUpon>CChipPalette.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CChangeMeasureLengthDialog.ja-JP.resx">
+      <DependentUpon>CChangeMeasureLengthDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CChangeMeasureLengthDialog.resx">
+      <DependentUpon>CChangeMeasureLengthDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CNumericInputDialog.ja-JP.resx">
+      <DependentUpon>CNumericInputDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CNumericInputDialog.resx">
+      <DependentUpon>CNumericInputDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CSearchDialog.ja-JP.resx">
+      <DependentUpon>CSearchDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CSearchDialog.resx">
+      <DependentUpon>CSearchDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CReplaceDialog.ja-JP.resx">
+      <DependentUpon>CReplaceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\05.Score\CReplaceDialog.resx">
+      <DependentUpon>CReplaceDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\06.Common\CMessagePopup.ja-JP.resx">
+      <DependentUpon>CMessagePopup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\06.Common\CMessagePopup.resx">
+      <DependentUpon>CMessagePopup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="DTXCreator.exe.x86.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Code\01.UndoRedo\CUndoRedoCell.cs" />
+    <Compile Include="Code\01.UndoRedo\CUndoRedoCellAbstract.cs" />
+    <Compile Include="Code\01.UndoRedo\CUndoRedoDirectory.cs" />
+    <Compile Include="Code\01.UndoRedo\CUndoRedoManager.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CAVI.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CAVICache.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CAVIListManager.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CBMP.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CBMPCache.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CBMPListManager.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CWAV.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CWAVCache.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CWAVListManager.cs" />
+    <Compile Include="Code\02.WAV_BMP_AVI\CSoundPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\02.WAV_BMP_AVI\CSoundPropertiesDialog.Designer.cs">
+      <DependentUpon>CSoundPropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\02.WAV_BMP_AVI\CVideoPropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\02.WAV_BMP_AVI\CVideoPropertiesDialog.Designer.cs">
+      <DependentUpon>CVideoPropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\02.WAV_BMP_AVI\CImagePropertiesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\02.WAV_BMP_AVI\CImagePropertiesDialog.Designer.cs">
+      <DependentUpon>CImagePropertiesDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\03.Options\COptionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\03.Options\COptionsDialog.Designer.cs">
+      <DependentUpon>COptionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\03.Options\COptionsManager.cs" />
+    <Compile Include="Code\04.ChipPalette\CChipPalette.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\04.ChipPalette\CChipPalette.Designer.cs">
+      <DependentUpon>CChipPalette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\04.ChipPalette\CDataForChipPaletteDragDrop.cs" />
+    <Compile Include="Code\05.Score\CClipCell.cs" />
+    <Compile Include="Code\05.Score\CClipBoard.cs" />
+    <Compile Include="Code\05.Score\CChip.cs" />
+    <Compile Include="Code\05.Score\CChipPositionUndoRedo.cs" />
+    <Compile Include="Code\05.Score\CChipLocationUndoRedo.cs" />
+    <Compile Include="Code\05.Score\CLane.cs" />
+    <Compile Include="Code\05.Score\CLaneAllocationUndoRedo.cs" />
+    <Compile Include="Code\05.Score\CMeasure.cs" />
+    <Compile Include="Code\05.Score\CMeasureUndoRedo.cs" />
+    <Compile Include="Code\05.Score\CChangeMeasureLengthDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\05.Score\CChangeMeasureLengthDialog.Designer.cs">
+      <DependentUpon>CChangeMeasureLengthDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\05.Score\CNumericInputDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\05.Score\CNumericInputDialog.Designer.cs">
+      <DependentUpon>CNumericInputDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\05.Score\CSearchDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\05.Score\CSearchDialog.Designer.cs">
+      <DependentUpon>CSearchDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\05.Score\CEditModeManager.cs" />
+    <Compile Include="Code\05.Score\CReplaceDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\05.Score\CReplaceDialog.Designer.cs">
+      <DependentUpon>CReplaceDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Code\05.Score\ScoreManager.cs" />
+    <Compile Include="Code\05.Score\CSelectionModeManager.cs" />
+    <Compile Include="Code\06.Common\CFileSelector_PathConversion.cs" />
+    <Compile Include="Code\06.Common\CMessagePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\06.Common\CMessagePopup.Designer.cs">
+      <DependentUpon>CMessagePopup.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Code\99.Resources\AudioHS.png" />
+    <Content Include="Code\99.Resources\CopyHS.png" />
+    <Content Include="Code\99.Resources\CutHS.png" />
+    <Content Include="Code\99.Resources\DataContainer_MoveNextHS.png" />
+    <Content Include="Code\99.Resources\DataContainer_NewRecordHS.png" />
+    <Content Include="Code\99.Resources\deleteHS.png" />
+    <Content Include="Code\99.Resources\DocumentHS.png" />
+    <Content Include="Code\99.Resources\DTXC.ico" />
+    <Content Include="Code\99.Resources\EditInformationHS.png" />
+    <Content Include="Code\99.Resources\Edit_RedoHS.png" />
+    <Content Include="Code\99.Resources\Edit_UndoHS.png" />
+    <Content Include="Code\99.Resources\Help.png" />
+    <Content Include="Code\99.Resources\MoveDown.png" />
+    <Content Include="Code\99.Resources\MoveUp.png" />
+    <Content Include="Code\99.Resources\MusicDoc.PNG" />
+    <Content Include="Code\99.Resources\openHS.png" />
+    <Content Include="Code\99.Resources\PasteHS.png" />
+    <Content Include="Code\99.Resources\PauseHS.png" />
+    <Content Include="Code\99.Resources\pencil.gif" />
+    <Content Include="Code\99.Resources\PicDoc.PNG" />
+    <Content Include="Code\99.Resources\PointerHS.png" />
+    <Content Include="Code\99.Resources\saveHS.png" />
+    <Content Include="Code\99.Resources\StopHS.png" />
+    <Content Include="Code\99.Resources\VideoDoc.PNG" />
+    <Content Include="Code\99.Resources\りらちょー.png" />
+    <Content Include="Code\99.Resources\バージョン情報.png" />
+    <Content Include="Code\99.Resources\最初から再生.png" />
+    <Content Include="Code\99.Resources\表示形式.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FDK17Project\FDK19.csproj">
+      <Project>{bcd40908-f3e2-4707-bfaa-1dd99df6357d}</Project>
+      <Name>FDK19</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)..\実行時フォルダ(DTXCreator)"
+	
+mkdir "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"
+
+copy /Y "$(TargetDir)ja-JP" "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

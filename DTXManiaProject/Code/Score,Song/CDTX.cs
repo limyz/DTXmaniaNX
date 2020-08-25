@@ -5002,7 +5002,7 @@ namespace DTXMania
 
 			#region [ AVI番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "AVI(VIDEO)番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5060,7 +5060,7 @@ namespace DTXMania
 
 			#region [ AVIPAN番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "AVIPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5097,7 +5097,7 @@ namespace DTXMania
 				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			avipan.nAVI番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
+			avipan.nAVI番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
 			if( avipan.nAVI番号 < 1 || avipan.nAVI番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5298,7 +5298,7 @@ namespace DTXMania
 
 			#region [ BGA番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BGA番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5335,7 +5335,7 @@ namespace DTXMania
 				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bga.nBMP番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
+			bga.nBMP番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
 			if( bga.nBMP番号 < 1 || bga.nBMP番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5464,7 +5464,7 @@ namespace DTXMania
 
 			#region [ BGAPAN番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BGAPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5501,7 +5501,7 @@ namespace DTXMania
 				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bgapan.nBMP番号 = CConversion.nGetNumberFrom2DigitBase36String( strParams[ i ] );
+			bgapan.nBMP番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
 			if( bgapan.nBMP番号 < 1 || bgapan.nBMP番号 >= 36 * 36 )
 			{
 				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
@@ -5713,7 +5713,7 @@ namespace DTXMania
 			{
 				#region [ (B) "#BMPzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+				zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 				if( zz < 0 || zz >= 36 * 36 )
 				{
 					Trace.TraceError( "BMP番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5763,7 +5763,7 @@ namespace DTXMania
 
 			#region [ BMPTEX番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "BMPTEX番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -5820,7 +5820,7 @@ namespace DTXMania
 			{
 				#region [ (B) "#BPMzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+				zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 				if( zz < 0 || zz >= 36 * 36 )
 				{
 					Trace.TraceError( "BPM番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6164,7 +6164,7 @@ namespace DTXMania
 
 			#region [ nWAV番号（36進数2桁）を取得。]
 			//-----------------
-			int nWAV番号 = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int nWAV番号 = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 
 			if( nWAV番号 < 0 || nWAV番号 >= 36 * 36 )
 			{
@@ -6224,7 +6224,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6292,7 +6292,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAVPAN(PAN)のWAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6347,7 +6347,7 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nGetNumberFrom2DigitBase36String( strコマンド.Substring( 0, 2 ) );
+			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( zz < 0 || zz >= 36 * 36 )
 			{
 				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
@@ -6398,7 +6398,7 @@ namespace DTXMania
 
 			#region [ n小節番号 を取得する。]
 			//-----------------
-			int n小節番号 = CConversion.n小節番号の文字列3桁を数値に変換して返す( strコマンド.Substring( 0, 3 ) );
+			int n小節番号 = CConversion.nConvert3DigitMeasureNumberToNumber( strコマンド.Substring( 0, 3 ) );
 			if( n小節番号 < 0 )
 				return false;
 
@@ -6435,7 +6435,7 @@ namespace DTXMania
 			{
 				#region [ (B) その他の場合：チャンネル番号は16進数2桁。]
 				//-----------------
-				nチャンネル番号 = CConversion.nGetNumberFrom2DigitHexadecimalString( strコマンド.Substring( 3, 2 ) );
+				nチャンネル番号 = CConversion.nConvert2DigitHexadecimalStringToNumber( strコマンド.Substring( 3, 2 ) );
 
 				if( nチャンネル番号 < 0 )
 					return false;
@@ -6635,12 +6635,12 @@ namespace DTXMania
 				if( nチャンネル番号 == 0x03 )
 				{
 					// Ch.03 のみ 16進数2桁。
-					nオブジェクト数値 = CConversion.nGetNumberFrom2DigitHexadecimalString( strパラメータ.Substring( i * 2, 2 ) );
+					nオブジェクト数値 = CConversion.nConvert2DigitHexadecimalStringToNumber( strパラメータ.Substring( i * 2, 2 ) );
 				}
 				else
 				{
 					// その他のチャンネルは36進数2桁。
-					nオブジェクト数値 = CConversion.nGetNumberFrom2DigitBase36String( strパラメータ.Substring( i * 2, 2 ) );
+					nオブジェクト数値 = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
 				}
 
 				if( nオブジェクト数値 == 0x00 )
