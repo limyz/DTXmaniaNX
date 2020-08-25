@@ -187,7 +187,7 @@ namespace DTXMania
 				if( this.tx背景 != null )
 					this.tx背景.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
-                CDTXMania.act文字コンソール.tPrint( 2, 2, CCharacterConsole.Eフォント種別.白, VERSION_DISPLAY);
+                CDTXMania.actDisplayString.tPrint( 2, 2, CCharacterConsole.EFontType.White, VERSION_DISPLAY);
 
 				if( this.txメニュー != null )
 				{

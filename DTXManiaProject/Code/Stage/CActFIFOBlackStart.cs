@@ -14,10 +14,10 @@ namespace DTXMania
 
 		public void tStartFadeOut()
 		{
-			this.mode = EFIFOMode.FadeOut;
+			this.mode = EFIFOMode.FadeOut;  // tフェードアウト開始
 			this.counter = new CCounter( 0, 150, 5, CDTXMania.Timer );
 		}
-		public void tフェードイン開始()
+		public void tStartFadeIn()  // tフェードイン開始
 		{
 			this.mode = EFIFOMode.FadeIn;
 			this.counter = new CCounter( 0, 150, 5, CDTXMania.Timer );

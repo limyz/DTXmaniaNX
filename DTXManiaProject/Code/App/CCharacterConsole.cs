@@ -10,14 +10,14 @@ namespace DTXMania
 	{
 		// 定数
 
-		public enum Eフォント種別
+		public enum EFontType  // Eフォント種別
 		{
-			白,
-			赤,
-			灰,
-			白細,
-			赤細,
-			灰細
+			White,     // 白
+			Red,       // 赤
+			Ash,	   // 灰
+			WhiteThin, // 白細
+			RedThin,   // 赤細
+			AshThin    // 灰細
 		}
 		public enum E配置
 		{
@@ -29,7 +29,7 @@ namespace DTXMania
 
 		// メソッド
 
-		public void tPrint( int x, int y, Eフォント種別 font, string str英数字文字列 )
+		public void tPrint( int x, int y, EFontType font, string str英数字文字列 )
 		{
 			if( !base.bNotActivated && !string.IsNullOrEmpty( str英数字文字列 ) )
 			{
@@ -51,9 +51,9 @@ namespace DTXMania
 						}
 						else
 						{
-							if( this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ] != null )
+							if( this.txフォント8x16[ (int) ( (int) font / (int) EFontType.WhiteThin ) ] != null )
 							{
-								this.txフォント8x16[ (int) ( (int) font / (int) Eフォント種別.白細 ) ].tDraw2D( CDTXMania.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) Eフォント種別.白細 ), index ] );
+								this.txフォント8x16[ (int) ( (int) font / (int) EFontType.WhiteThin ) ].tDraw2D( CDTXMania.app.Device, x, y, this.rc文字の矩形領域[ (int) ( (int) font % (int) EFontType.WhiteThin ), index ] );
 							}
 							x += nFontWidth;
 						}

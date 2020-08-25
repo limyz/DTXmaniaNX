@@ -44,7 +44,7 @@ namespace DTXMania
             get;
             private set;
         }
-        public static CCharacterConsole act文字コンソール
+        public static CCharacterConsole actDisplayString  // act文字コンソール
         {
             get;
             private set;
@@ -531,7 +531,7 @@ namespace DTXMania
         protected override void OnExiting(EventArgs e)
         {
             CPowerManagement.tEnableMonitorSuspend();		// スリープ抑止状態を解除
-            this.t終了処理();
+            this.tTerminate();
             base.OnExiting(e);
         }
         protected override void Update(GameTime gameTime)
@@ -1796,7 +1796,7 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                Timer = new CTimer(CTimer.E種別.MultiMedia);
+                Timer = new CTimer(CTimer.EType.MultiMedia);
                 Trace.TraceInformation("タイマの初期化を完了しました。");
             }
             finally
@@ -1826,9 +1826,9 @@ for (int i = 0; i < 3; i++) {
             Trace.Indent();
             try
             {
-                act文字コンソール = new CCharacterConsole();
+                actDisplayString = new CCharacterConsole();
                 Trace.TraceInformation("文字コンソールを生成しました。");
-                act文字コンソール.OnActivate();
+                actDisplayString.OnActivate();
                 Trace.TraceInformation("文字コンソールを活性化しました。");
                 Trace.TraceInformation("文字コンソールの初期化を完了しました。");
             }
@@ -2006,7 +2006,7 @@ for (int i = 0; i < 3; i++) {
             stageEnd = new CStageEnd();
             this.listTopLevelActivities = new List<CActivity>();
             this.listTopLevelActivities.Add(actEnumSongs);
-            this.listTopLevelActivities.Add(act文字コンソール);
+            this.listTopLevelActivities.Add(actDisplayString);
             this.listTopLevelActivities.Add(stageStartup);
             this.listTopLevelActivities.Add(stageTitle);
             this.listTopLevelActivities.Add(stageOption);
@@ -2100,7 +2100,7 @@ for (int i = 0; i < 3; i++) {
             base.Window.Text = strWindowTitle + " (" + SoundManager.GetCurrentSoundDeviceType() + delay + ")";
         }
 
-        private void t終了処理()
+        private void tTerminate()  // t終了処理
         {
             if (!this.b終了処理完了済み)
             {
@@ -2296,14 +2296,14 @@ for (int i = 0; i < 3; i++) {
                 #endregion
                 #region [ 文字コンソールの終了処理 ]
                 //---------------------
-                if (act文字コンソール != null)
+                if (actDisplayString != null)
                 {
                     Trace.TraceInformation("文字コンソールの終了処理を行います。");
                     Trace.Indent();
                     try
                     {
-                        act文字コンソール.OnDeactivate();
-                        act文字コンソール = null;
+                        actDisplayString.OnDeactivate();
+                        actDisplayString = null;
                         Trace.TraceInformation("文字コンソールの終了処理を完了しました。");
                     }
                     catch (Exception exception6)

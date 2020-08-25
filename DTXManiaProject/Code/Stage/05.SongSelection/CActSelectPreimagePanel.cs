@@ -438,7 +438,7 @@ namespace DTXMania
 						str = "Unknown";
 						break;
 				}
-				CDTXMania.act文字コンソール.tPrint( this.n本体X + 0x12, this.n本体Y - 30, CCharacterConsole.Eフォント種別.赤細, str );
+				CDTXMania.actDisplayString.tPrint( this.n本体X + 0x12, this.n本体Y - 30, CCharacterConsole.EFontType.RedThin, str );
 			}
 		}
 		private void t描画処理_パネル本体()

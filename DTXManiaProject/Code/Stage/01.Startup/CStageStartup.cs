@@ -150,10 +150,10 @@ namespace DTXMania
 					int y = 0;
 					foreach( string str in this.list進行文字列 )
 					{
-						CDTXMania.act文字コンソール.tPrint( x, y, CCharacterConsole.Eフォント種別.灰細, str );
+						CDTXMania.actDisplayString.tPrint( x, y, CCharacterConsole.EFontType.AshThin, str );
 						y += 14;
 					}
-					CDTXMania.act文字コンソール.tPrint( x, y, CCharacterConsole.Eフォント種別.灰細, this.str現在進行中 );
+					CDTXMania.actDisplayString.tPrint( x, y, CCharacterConsole.EFontType.AshThin, this.str現在進行中 );
 				}
 				//-----------------
 				#endregion

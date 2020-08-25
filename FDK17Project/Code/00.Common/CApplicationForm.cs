@@ -452,7 +452,7 @@ namespace FDK
 			//-----------------
 			CTimer timer = null;
 			if( b時間計測 )
-				timer = new CTimer( CTimer.E種別.MultiMedia );
+				timer = new CTimer( CTimer.EType.MultiMedia );
 			long n開始 = CTimer.nUnused;
 			long nPresent開始 = CTimer.nUnused;
 			long n終了 = CTimer.nUnused;

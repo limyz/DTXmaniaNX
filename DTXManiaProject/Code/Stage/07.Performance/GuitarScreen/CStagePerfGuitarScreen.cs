@@ -129,8 +129,8 @@ namespace DTXMania
 
 				if( base.bJustStartedUpdate )
 				{
-                    CSoundManager.rcPerformanceTimer.tリセット();
-					CDTXMania.Timer.tリセット();
+                    CSoundManager.rcPerformanceTimer.tReset();
+					CDTXMania.Timer.tReset();
 
                     this.UnitTime = ((60.0 / (CDTXMania.stagePerfGuitarScreen.actPlayInfo.dbBPM) / 14.0)); //2014.01.14.kairera0467 これも動かしたいのだが____
 
@@ -146,7 +146,7 @@ namespace DTXMania
                         this.txBonusEffect.tDraw2D( CDTXMania.app.Device, 1280, 720 );
                     }
 					base.ePhaseID = CStage.EPhase.Common_FadeIn;
-					this.actFI.tフェードイン開始();
+					this.actFI.tStartFadeIn();
 					base.bJustStartedUpdate = false;
 				}
 				if( CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && ( base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
@@ -825,7 +825,7 @@ namespace DTXMania
                     if ( configIni.b演奏情報を表示する )
                     {
                         int n小節番号 = n小節番号plus1 - 1;
-                        CDTXMania.act文字コンソール.tPrint(60, y - 16, CCharacterConsole.Eフォント種別.白, n小節番号.ToString());
+                        CDTXMania.actDisplayString.tPrint(60, y - 16, CCharacterConsole.EFontType.White, n小節番号.ToString());
                     }
 				}
                 y = CDTXMania.ConfigIni.bReverse.Bass ? ((this.nJudgeLinePosY.Bass - pChip.nDistanceFromBar.Bass) + 0) : ((this.nJudgeLinePosY.Bass + pChip.nDistanceFromBar.Bass) + 9);
@@ -837,7 +837,7 @@ namespace DTXMania
                     if ( configIni.b演奏情報を表示する )
                     {
                         int n小節番号 = n小節番号plus1 - 1;
-                        CDTXMania.act文字コンソール.tPrint(930, y - 16, CCharacterConsole.Eフォント種別.白, n小節番号.ToString());
+                        CDTXMania.actDisplayString.tPrint(930, y - 16, CCharacterConsole.EFontType.White, n小節番号.ToString());
                     }
 				}
 			}

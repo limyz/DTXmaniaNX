@@ -9,14 +9,14 @@ namespace FDK
 {
 	public class CTimer : CTimerBase
 	{
-		public enum E種別
+		public enum EType  // E種別
 		{
 			Unknown = -1,
 			PerformanceCounter = 0,
 			MultiMedia = 1,
 			GetTickCount = 2,
 		}
-		public E種別 eタイマ種別
+		public EType eタイマ種別
 		{
 			get;
 			protected set;
@@ -29,7 +29,7 @@ namespace FDK
 			{
 				switch( this.eタイマ種別 )
 				{
-					case E種別.PerformanceCounter:
+					case EType.PerformanceCounter:
 						{
 							double num = 0.0;
 							if( this.n現在の周波数 != 0L )
@@ -40,17 +40,17 @@ namespace FDK
 							}
 							return (long) num;
 						}
-					case E種別.MultiMedia:
+					case EType.MultiMedia:
 						return (long) timeGetTime();
 
-					case E種別.GetTickCount:
+					case EType.GetTickCount:
 						return (long) Environment.TickCount;
 				}
 				return 0;
 			}
 		}
 
-		public CTimer( E種別 eタイマ種別 )
+		public CTimer( EType eタイマ種別 )
 			:base()
 		{
 			this.eタイマ種別 = eタイマ種別;
@@ -59,17 +59,17 @@ namespace FDK
 			{
 				switch( this.eタイマ種別 )
 				{
-					case E種別.PerformanceCounter:
+					case EType.PerformanceCounter:
 						if( !this.b確認と設定_PerformanceCounter() && !this.b確認と設定_MultiMedia() )
 							this.b確認と設定_GetTickCount();
 						break;
 
-					case E種別.MultiMedia:
+					case EType.MultiMedia:
 						if( !this.b確認と設定_MultiMedia() && !this.b確認と設定_PerformanceCounter() )
 							this.b確認と設定_GetTickCount();
 						break;
 
-					case E種別.GetTickCount:
+					case EType.GetTickCount:
 						this.b確認と設定_GetTickCount();
 						break;
 
@@ -78,14 +78,14 @@ namespace FDK
 				}
 			}
 	
-			base.tリセット();
+			base.tReset();
 
 			n参照カウント[ (int) this.eタイマ種別 ]++;
 		}
 		
 		public override void Dispose()
 		{
-			if( this.eタイマ種別 == E種別.Unknown )
+			if( this.eタイマ種別 == EType.Unknown )
 				return;
 
 			int type = (int) this.eタイマ種別;
@@ -94,11 +94,11 @@ namespace FDK
 
 			if( n参照カウント[ type ] == 0 )
 			{
-				if( this.eタイマ種別 == E種別.MultiMedia )
+				if( this.eタイマ種別 == EType.MultiMedia )
 					timeEndPeriod( this.timeCaps.wPeriodMin );
 			}
 
-			this.eタイマ種別 = E種別.Unknown;
+			this.eタイマ種別 = EType.Unknown;
 		}
 
 		#region [ protected ]
@@ -109,7 +109,7 @@ namespace FDK
 
 		protected bool b確認と設定_GetTickCount()
 		{
-			this.eタイマ種別 = E種別.GetTickCount;
+			this.eタイマ種別 = EType.GetTickCount;
 			return true;
 		}
 		protected bool b確認と設定_MultiMedia()
@@ -117,7 +117,7 @@ namespace FDK
 			this.timeCaps = new TimeCaps();
 			if( ( timeGetDevCaps( out this.timeCaps, (uint) Marshal.SizeOf( typeof( TimeCaps ) ) ) == 0 ) && ( this.timeCaps.wPeriodMin < 10 ) )
 			{
-				this.eタイマ種別 = E種別.MultiMedia;
+				this.eタイマ種別 = EType.MultiMedia;
 				timeBeginPeriod( this.timeCaps.wPeriodMin );
 				return true;
 			}
@@ -127,7 +127,7 @@ namespace FDK
 		{
 			if( QueryPerformanceFrequency( ref this.n現在の周波数 ) != 0 )
 			{
-				this.eタイマ種別 = E種別.PerformanceCounter;
+				this.eタイマ種別 = EType.PerformanceCounter;
 				return true;
 			}
 			return false;

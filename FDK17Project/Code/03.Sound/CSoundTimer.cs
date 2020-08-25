@@ -45,11 +45,11 @@ namespace FDK
 			{
 				TimerCallback timerDelegate = new TimerCallback( SnapTimers );	// CSoundTimerをシステム時刻に変換するために、
 				timer = new Timer( timerDelegate, null, 0, 1000 );				// CSoundTimerとCTimerを両方とも走らせておき、
-				ctDInputTimer = new CTimer( CTimer.E種別.MultiMedia );			// 1秒に1回時差を測定するようにしておく
+				ctDInputTimer = new CTimer( CTimer.EType.MultiMedia );			// 1秒に1回時差を測定するようにしておく
 			}
 			else																// TESTCODE DirectSound時のみ、CSoundTimerでなくCTimerを使う
 			{
-			    ct = new CTimer( CTimer.E種別.MultiMedia );
+			    ct = new CTimer( CTimer.EType.MultiMedia );
 			}
 		}
 	

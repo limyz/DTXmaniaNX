@@ -8,13 +8,13 @@ using SlimDX.DirectInput;
 
 namespace FDK
 {
-	public class CInputManager : IDisposable
+	public class CInputManager : IDisposable  // CInput管理
 	{
 		// 定数
 
 		public static int n通常音量 = 110;
 
-
+		
 		// プロパティ
 
 		public List<IInputDevice> listInputDevices

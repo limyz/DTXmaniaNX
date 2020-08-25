@@ -87,7 +87,7 @@ namespace FDK
 
 			this.e出力デバイス = ESoundDeviceType.Unknown;
 			this.n実バッファサイズms = this.n実出力遅延ms = n遅延時間ms;
-			this.tmシステムタイマ = new CTimer( CTimer.E種別.MultiMedia );
+			this.tmシステムタイマ = new CTimer( CTimer.EType.MultiMedia );
 
 			#region [ DirectSound デバイスを作成する。]
 			//-----------------

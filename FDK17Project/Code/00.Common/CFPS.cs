@@ -25,7 +25,7 @@ namespace FDK
 		public CFPS()
 		{
 			this.n現在のFPS = 0;
-			this.timer = new CTimer( CTimer.E種別.MultiMedia );
+			this.timer = new CTimer( CTimer.EType.MultiMedia );
 			this.基点時刻ms = this.timer.nCurrentTime;
 			this.内部FPS = 0;
 			this.bFPSの値が変化した = false;

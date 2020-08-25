@@ -123,7 +123,7 @@ namespace FDK
 		}
 
 
-		public void tリセット()
+		public void tReset()  // tリセット
 		{
 			this.tUpdate();
 			this.n前回リセットした時のシステム時刻ms = this.n更新システム時刻ms;

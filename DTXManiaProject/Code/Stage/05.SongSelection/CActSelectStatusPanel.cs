@@ -462,7 +462,7 @@ namespace DTXMania
                 //-----------------
                 for (int i = 0; i < 5; i++)
                 {
-                    CDTXMania.act文字コンソール.tPrint(n難易度文字X + (i * 110), n難易度文字Y, (this.n現在選択中の曲の難易度 == i) ? CCharacterConsole.Eフォント種別.赤 : CCharacterConsole.Eフォント種別.白, this.str難易度ラベル[i]);
+                    CDTXMania.actDisplayString.tPrint(n難易度文字X + (i * 110), n難易度文字Y, (this.n現在選択中の曲の難易度 == i) ? CCharacterConsole.EFontType.Red : CCharacterConsole.EFontType.White, this.str難易度ラベル[i]);
                 }
                 #endregion
             }

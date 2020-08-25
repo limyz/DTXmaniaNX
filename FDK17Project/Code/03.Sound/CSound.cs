@@ -888,7 +888,7 @@ namespace FDK
 		public void tStartPlaying()  // t再生を開始する
 		{
 			tSetPlaybackPositionToBeginning();
-			tサウンドを再生する();
+			tPlaySound();
 		}
 		public void tStartPlaying( bool bループする )
 		{
@@ -904,7 +904,7 @@ namespace FDK
 				}
 			}
 			tSetPlaybackPositionToBeginning();
-			tサウンドを再生する( bループする );
+			tPlaySound( bループする );
 		}
 		public void tStopPlayback()  // t再生を停止する
 		{
@@ -916,11 +916,11 @@ namespace FDK
 			tStopSound(true);
 			this.n一時停止回数++;
 		}
-		public void t再生を再開する( long t )	// ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		public void tResumePlayback( long t)   // t再生を再開する ★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 		{
 			Debug.WriteLine( "t再生を再開する(long " + t + ")" );
 			tChangePlaybackPosition( t );
-			tサウンドを再生する();
+			tPlaySound();
 			this.n一時停止回数--;
 		}
 		public bool b一時停止中
@@ -987,11 +987,11 @@ namespace FDK
 			this.Dispose( bManagedも解放する, bインスタンス削除 );
 //Debug.WriteLine( "Disposed: " + _bインスタンス削除 + " : " + Path.GetFileName( this.strファイル名 ) );
 		}
-		public void tサウンドを再生する()
+		public void tPlaySound()  // tサウンドを再生する
 		{
-			tサウンドを再生する( false );
+			tPlaySound( false );
 		}
-		public void tサウンドを再生する( bool bループする )
+		public void tPlaySound( bool bループする)  // tサウンドを再生する
 		{
 			if ( this.bIsBASS )			// BASSサウンド時のループ処理は、tStartPlaying()側に実装。ここでは「bループする」は未使用。
 			{
@@ -1036,7 +1036,7 @@ Debug.WriteLine("更に再生に失敗: " + Path.GetFileName(this.strファイ�
 		public void tサウンドを先頭から再生する()
 		{
 			this.tSetPlaybackPositionToBeginning();
-			this.tサウンドを再生する();
+			this.tPlaySound();
 		}
 		public void tStopSound()
 		{

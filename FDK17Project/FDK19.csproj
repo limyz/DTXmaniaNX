@@ -103,7 +103,7 @@
     <Compile Include="Code\02.Input\CInputKeyboard.cs" />
     <Compile Include="Code\02.Input\CInputMIDI.cs" />
     <Compile Include="Code\02.Input\CInputMouse.cs" />
-    <Compile Include="Code\02.Input\CInput管理.cs" />
+    <Compile Include="Code\02.Input\CInputManager.cs" />
     <Compile Include="Code\02.Input\DeviceConstantConverter.cs" />
     <Compile Include="Code\02.Input\EInputDeviceType.cs" />
     <Compile Include="Code\02.Input\IInputDevice.cs" />

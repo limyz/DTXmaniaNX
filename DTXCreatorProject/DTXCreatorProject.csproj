@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DTXCreator</RootNamespace>
     <AssemblyName>DTXCreator</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Code\99.Resources\DTXC.ico</ApplicationIcon>
     <ApplicationManifest>DTXCreator.exe.x86.manifest</ApplicationManifest>
@@ -19,6 +19,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -314,7 +315,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)..\実行時フォルダ(DTXCreator)"
-	
+
 mkdir "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"
 
 copy /Y "$(TargetDir)ja-JP" "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"</PostBuildEvent>

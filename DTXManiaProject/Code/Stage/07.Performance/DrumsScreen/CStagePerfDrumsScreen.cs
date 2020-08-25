@@ -159,8 +159,8 @@ namespace DTXMania
                 this.bFullCom = false;
                 if (base.bJustStartedUpdate)
                 {
-                    CSoundManager.rcPerformanceTimer.tリセット();
-                    CDTXMania.Timer.tリセット();
+                    CSoundManager.rcPerformanceTimer.tReset();
+                    CDTXMania.Timer.tReset();
                     this.actChipFireD.Start(ELane.HH, false, false, false, 0, false); // #31554 2013.6.12 yyagi
 
                     this.ctChipPatternAnimation.Drums = new CCounter(0, 7, 70, CDTXMania.Timer);
@@ -180,7 +180,7 @@ namespace DTXMania
                         this.tx判定画像anime.tDraw2D( CDTXMania.app.Device, 1280, 720 );
                         this.txBonusEffect.tDraw2D( CDTXMania.app.Device, 1280, 720 );
                     }
-                    this.actFI.tフェードイン開始();
+                    this.actFI.tStartFadeIn();
                     this.ct登場用.tUpdate();
 //					if ( this.bDTXVmode )
                     {
@@ -3891,7 +3891,7 @@ namespace DTXMania
 				if ( configIni.b演奏情報を表示する && ( configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1 ) )
                 {
                         int n小節番号 = n小節番号plus1 - 1;
-                        CDTXMania.act文字コンソール.tPrint(858, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 0x11) : ((base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 0x11), CCharacterConsole.Eフォント種別.白, n小節番号.ToString());
+                        CDTXMania.actDisplayString.tPrint(858, configIni.bReverse.Drums ? ((base.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 0x11) : ((base.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 0x11), CCharacterConsole.EFontType.White, n小節番号.ToString());
 				}
                 if (((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.bVisible) && (this.txチップ != null))
 				{

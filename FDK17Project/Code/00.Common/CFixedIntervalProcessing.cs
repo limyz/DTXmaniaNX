@@ -53,7 +53,7 @@ namespace FDK
 
 		#region [ protected ]
 		//-----------------
-		protected CTimer timer = new CTimer( CTimer.E種別.MultiMedia );
+		protected CTimer timer = new CTimer( CTimer.EType.MultiMedia );
 		protected long n前回の時刻 = CTimer.nUnused;
 		//-----------------
 		#endregion

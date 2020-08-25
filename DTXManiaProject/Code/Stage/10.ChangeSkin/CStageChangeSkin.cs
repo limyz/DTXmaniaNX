@@ -88,12 +88,12 @@ namespace DTXMania
 		{
 			Trace.TraceInformation( "スキン変更:" + CDTXMania.Skin.GetCurrentSkinSubfolderFullName( false ) );
 
-			CDTXMania.act文字コンソール.OnDeactivate();
+			CDTXMania.actDisplayString.OnDeactivate();
 
 			CDTXMania.Skin.PrepareReloadSkin();
 			CDTXMania.Skin.ReloadSkin();
 
-			CDTXMania.act文字コンソール.OnActivate();
+			CDTXMania.actDisplayString.OnActivate();
 		}
 	}
 }

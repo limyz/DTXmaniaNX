@@ -3269,7 +3269,7 @@ namespace DTXMania
 					{
 						//long num1 = cwav.nPauseTime[ i ];
 						//long num2 = cwav.nPlayStartTime[ i ];
-						cwav.rSound[ i ].t再生を再開する( cwav.nPauseTime[ i ] - cwav.nPlayStartTime[ i ] );
+						cwav.rSound[ i ].tResumePlayback( cwav.nPauseTime[ i ] - cwav.nPlayStartTime[ i ] );
                         cwav.nPlayStartTime[i] += CSoundManager.rcPerformanceTimer.nSystemTimeMs - cwav.nPauseTime[i];
 					}
 				}
