@@ -315,9 +315,7 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)..\実行時フォルダ(DTXCreator)"
-
 mkdir "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"
-
 copy /Y "$(TargetDir)ja-JP" "$(SolutionDir)..\実行時フォルダ(DTXCreator)\ja-JP"</PostBuildEvent>
   </PropertyGroup>
 </Project>

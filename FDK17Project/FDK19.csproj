@@ -163,7 +163,6 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)..\実行時フォルダ"
-
 copy /Y "$(TargetPath)" "$(SolutionDir)..\実行時フォルダ(DTXCreator)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
