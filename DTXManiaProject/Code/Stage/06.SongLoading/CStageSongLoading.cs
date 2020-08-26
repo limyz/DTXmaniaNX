@@ -512,11 +512,11 @@ namespace DTXMania
                             {
                                 DTXLevel = cdtx.LEVEL[j] / 10;
                                 DTXLevelDeci = ((cdtx.LEVEL[j] - DTXLevel * 10) * 10) + cdtx.LEVELDEC[j];
-                            }
-
-                            this.txLevel.tDraw2D(CDTXMania.app.Device, 307 + k, 243, new Rectangle(1000, 92, 30, 38));
+                            }                            
+                            
+                            this.txLevel.tDraw2D(CDTXMania.app.Device, 282 + k, 243, new Rectangle(1000, 92, 30, 38));
                             this.tDrawStringLarge(187 + k, 152, string.Format("{0:0}", DTXLevel));
-                            this.tDrawStringLarge(357 + k, 152, string.Format("{0:00}", DTXLevelDeci));
+                            this.tDrawStringLarge(307 + k, 152, string.Format("{0:00}", DTXLevelDeci));
 
                         }
 
