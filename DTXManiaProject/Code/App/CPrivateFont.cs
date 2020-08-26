@@ -411,7 +411,7 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
                 );
 
 			//取得した描画サイズを基に、描画先のbitmapを作成する
-			int l_width = stringSize.Width + nEdgePt * 6;
+			int l_width = (int)(stringSize.Width * 1.05f); //A constant proportion of 5% buffer should avoid the issue of text truncation
 			Bitmap bmp = new Bitmap(l_width, stringSize.Height + nEdgePt * 2 );
 			bmp.MakeTransparent();
 			Graphics g = Graphics.FromImage( bmp );
