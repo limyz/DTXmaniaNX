@@ -230,7 +230,8 @@ namespace DTXMania
                     {
                         case CSongListNode.ENodeType.SCORE:
                             {
-                                strBPM = cスコア.SongInformation.Bpm.ToString();
+                                int bpm_int = (int)Math.Round(cスコア.SongInformation.Bpm);
+                                strBPM = bpm_int.ToString();
                                 break;
                             }
                         default:
@@ -251,7 +252,7 @@ namespace DTXMania
                 int[] nPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
 
                 int nBaseX = 30;
-                int nBaseY = 350;
+                int nBaseY = 350;//350
 
                 int n難易度文字X = 70;
                 int n難易度文字Y = 75;
@@ -281,7 +282,7 @@ namespace DTXMania
                         }
 
                         int nPanelX = nBaseX + this.txパネル本体.szImageSize.Width + (nPanelW * (nPart[j] - 3));
-                        int nPanelY = nBaseY + this.txパネル本体.szImageSize.Height - (nPanelH * 11 / 2) - 5;
+                        int nPanelY = nBaseY + this.txパネル本体.szImageSize.Height - (nPanelH * 11 / 2) - 5; // Note: Effectively not in use
 
                         int nRankW;
 
@@ -300,7 +301,7 @@ namespace DTXMania
                             {
 
                                 int nBoxX = nPanelX;
-                                int nBoxY = ( 391 + ( ( 4 - i ) * 60 ) ) - 2;
+                                int nBoxY = ( 391 + ( ( 4 - i ) * 60 ) ) - 2;// Note: does not use nPanelY
 
                                 if (this.n現在選択中の曲の難易度 == i && this.tx難易度枠 != null)
                                 {
@@ -386,7 +387,7 @@ namespace DTXMania
                         if (flag == 5)
                         {
                             int nBoxX = nPanelX;
-                            int nBoxY = nPanelY + (nPanelH / 2);
+                            int nBoxY = 389;//Equal to ( 391 + ( ( 4 - i ) * 60 ) ) - 2 where i is 4
 
                             if (this.tx難易度枠 != null)
                             {
