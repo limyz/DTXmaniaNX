@@ -30,19 +30,27 @@ namespace DTXMania
 					graphics.PageUnit = GraphicsUnit.Pixel;
 					SizeF ef = graphics.MeasureString( this.strArtist, this.ft描画用フォント );
 					graphics.Dispose();
-					if (ef.Width > SampleFramework.GameWindowSize.Width)
-					{
-						ef.Width = SampleFramework.GameWindowSize.Width;
-					}
+					//if (ef.Width > SampleFramework.GameWindowSize.Width)
+					//{
+					//	ef.Width = SampleFramework.GameWindowSize.Width;
+					//}
 					try
 					{
-						Bitmap bitmap2 = new Bitmap( (int) Math.Ceiling( (double) ef.Width ), (int) Math.Ceiling( (double) this.ft描画用フォント.Size ) );
+						//Fix length issue of Artist using the same method used for Song Title
+						int nLargestLengthPx = 510;//510px is the available space for artist in the bar
+						int widthAfterScaling = (int)((ef.Width + 2) * 0.5f);//+2 buffer
+						if (widthAfterScaling > (CDTXMania.app.Device.Capabilities.MaxTextureWidth / 2))
+							widthAfterScaling = CDTXMania.app.Device.Capabilities.MaxTextureWidth / 2;  // 右端断ち切れ仕方ないよね
+						//Compute horizontal scaling factor
+						float f拡大率X = (widthAfterScaling <= nLargestLengthPx) ? 0.5f : (((float)nLargestLengthPx / (float)widthAfterScaling) * 0.5f);   // 長い文字列は横方向に圧縮。
+																																						//ef.Width
+						Bitmap bitmap2 = new Bitmap( (int) Math.Ceiling( (double)widthAfterScaling * 2), (int) Math.Ceiling( (double) this.ft描画用フォント.Size ) );
 						graphics = Graphics.FromImage( bitmap2 );
 						graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 						graphics.DrawString( this.strArtist, this.ft描画用フォント, Brushes.White, ( float ) 0f, ( float ) 0f );
 						graphics.Dispose();
 						this.txArtist = new CTexture( CDTXMania.app.Device, bitmap2, CDTXMania.TextureFormat );
-						this.txArtist.vcScaleRatio = new Vector3( 0.5f, 0.5f, 1f );
+						this.txArtist.vcScaleRatio = new Vector3(f拡大率X, 0.5f, 1f );
 						bitmap2.Dispose();
 					}
 					catch( CTextureCreateFailedException )
