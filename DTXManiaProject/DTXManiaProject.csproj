@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81BEC512-8074-4BD1-8A3C-AC73BC7BF846}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTXMania</RootNamespace>
+    <AssemblyName>DTXManiaGR</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>dtx.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <ApplicationManifest>DTXManiaGR.exe.x86.manifest</ApplicationManifest>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\実行時フォルダ\</OutputPath>
+    <DefineConstants>TRACE;TEST_ENGLISH_ TEST_Direct3D9Ex_</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>0219</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>..\実行時フォルダ\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>0219</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\実行時フォルダ\DirectShowLib-2005.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="SlimDXc_net20x86_Jun2010, Version=1002.0.10.43, Culture=neutral, PublicKeyToken=53d0e4ef1f1579f5, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\実行時フォルダ\SlimDXc_net20x86_Jun2010.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="DTXManiaGR.exe.x86.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Code\Item\CItemBase.cs" />
+    <Compile Include="Code\Item\CItemInteger.cs" />
+    <Compile Include="Code\Item\CItemList.cs" />
+    <Compile Include="Code\Item\CItemThreeState.cs" />
+    <Compile Include="Code\Item\CItemToggle.cs" />
+    <Compile Include="Code\Score,Song\CBoxDef.cs" />
+    <Compile Include="Code\Score,Song\CDTX.cs" />
+    <Compile Include="Code\Score,Song\CScoreIni.cs" />
+    <Compile Include="Code\Score,Song\CSetDef.cs" />
+    <Compile Include="Code\Stage\02.Title\CEnumSongs.cs" />
+    <Compile Include="Code\Score,Song\CSongManager.cs" />
+    <Compile Include="Code\Score,Song\CScore.cs" />
+    <Compile Include="Code\Score,Song\CSongListNode.cs" />
+    <Compile Include="Code\Stage\01.Startup\CStageStartup.cs" />
+    <Compile Include="Code\Stage\02.Title\CActEnumSongs.cs" />
+    <Compile Include="Code\Stage\02.Title\CStageTitle.cs" />
+    <Compile Include="Code\Stage\03.Option\CStageOption.cs" />
+    <Compile Include="Code\Stage\04.Config\CActConfigKeyAssign.cs" />
+    <Compile Include="Code\Stage\04.Config\CActConfigList.cs" />
+    <Compile Include="Code\Stage\04.Config\CStageConfig.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectArtistComment.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectInformation.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectPopupMenu.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectPreimagePanel.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectPresound.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectQuickConfig.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectShowCurrentPosition.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectStatusPanel.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectSongList.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectPerfHistoryPanel.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSortSongs.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CStageSongSelection.cs" />
+    <Compile Include="Code\Stage\06.SongLoading\CStageSongLoading.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfBGA.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonCombo.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonDanger.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonRGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonWailingBonus.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonGauge.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfScrollSpeed.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonScore.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfStageClear.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonStatusPanel.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfChipFireGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfPanelString.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonLaneFlushGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerformanceInformation.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfSkillMeter.cs" />
+    <Compile Include="Code\Stage\07.Performance\CStagePerfCommonScreen.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarDanger.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarRGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarWailingBonus.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarGauge.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarCombo.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarScore.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarStatusPanel.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarChipFire.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarLaneFlashGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CStagePerfGuitarScreen.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfStageFailure.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfAVI.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsDanger.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsRGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsWailingBonus.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsGauge.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsComboDGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsScore.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsStatusPanel.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsChipFireD.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsChipFireGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsPad.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsFillingEffect.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlashD.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlashGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CStagePerfDrumsScreen.cs" />
+    <Compile Include="Code\Stage\08.Result\CActResultImage.cs" />
+    <Compile Include="Code\Stage\08.Result\CActResultParameterPanel.cs" />
+    <Compile Include="Code\Stage\08.Result\CActResultRank.cs" />
+    <Compile Include="Code\Stage\08.Result\CActResultSongBar.cs" />
+    <Compile Include="Code\Stage\08.Result\CStageResult.cs" />
+    <Compile Include="Code\Stage\09.End\CStageEnd.cs" />
+    <Compile Include="Code\Stage\10.ChangeSkin\CStageChangeSkin.cs" />
+    <Compile Include="Code\Stage\CActDFPFont.cs" />
+    <Compile Include="Code\Stage\CActFIFOBlack.cs" />
+    <Compile Include="Code\Stage\CActFIFOWhite.cs" />
+    <Compile Include="Code\Stage\CActLVLNFont.cs" />
+    <Compile Include="Code\Stage\CActOptionPanel.cs" />
+    <Compile Include="Code\Stage\CStage.cs" />
+    <Compile Include="Code\Stage\CActFIFOWhiteClear.cs" />
+    <Compile Include="Code\Stage\CActFIFOBlackStart.cs" />
+    <Compile Include="Code\Plugin\CPluginHost.cs" />
+    <Compile Include="Code\Plugin\IPluginActivity.cs" />
+    <Compile Include="Code\Plugin\IPluginHost.cs" />
+    <Compile Include="Code\App\App.cs" />
+    <Compile Include="Code\App\CActFlushGPU.cs" />
+    <Compile Include="Code\App\CConfigIni.cs" />
+    <Compile Include="Code\App\CDTXMania.cs" />
+    <Compile Include="Code\App\CDTXVersion.cs" />
+    <Compile Include="Code\App\CPad.cs" />
+    <Compile Include="Code\App\CPrivateFastFont.cs" />
+    <Compile Include="Code\App\CPrivateFont.cs" />
+    <Compile Include="Code\App\CSkin.cs" />
+    <Compile Include="Code\App\CMainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code\App\CConstants.cs" />
+    <Compile Include="Code\App\CCharacterConsole.cs" />
+    <Compile Include="Code\App\Folder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\App\Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dtx.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FDK17Project\FDK19.csproj">
+      <Project>{BCD40908-F3E2-4707-BFAA-1DD99DF6357D}</Project>
+      <Name>FDK19</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
