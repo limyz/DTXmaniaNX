@@ -114,6 +114,9 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actShowCurrentPosition = new CActSelectShowCurrentPosition() );
 			base.listChildActivities.Add( this.actQuickConfig = new CActSelectQuickConfig() );
 
+			//
+			base.listChildActivities.Add(this.actTextBox = new CActTextBox());
+
 			this.CommandHistory = new CCommandHistory();		// #24063 2011.1.16 yyagi
 		}
 		
@@ -186,7 +189,8 @@ namespace DTXMania
 
 				base.OnActivate();
 
-				this.actステータスパネル.tSelectedSongChanged();	// 最大ランクを更新
+				this.actステータスパネル.tSelectedSongChanged();    // 最大ランクを更新
+				this.actTextBox.t検索説明文を表示する設定にする();
 			}
 			finally
 			{
@@ -350,7 +354,7 @@ namespace DTXMania
 						return 0;
 					}
 					#endregion
-					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu )
+					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu && !CDTXMania.app.bテキスト入力中)
 					{
                         #region [ ESC ]
                         if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)) && ((this.actSongList.r現在選択中の曲 != null) && (this.actSongList.r現在選択中の曲.r親ノード == null))))
@@ -623,8 +627,29 @@ namespace DTXMania
                         //    CDTXMania.actEnumSongs.OnActivate();
                         //}
 					}
+
+					#region [Test text field]
+					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Backspace))
+					{
+						CDTXMania.Skin.sound決定音.tPlay();
+						this.actTextBox.t表示();
+						this.actTextBox.t入力を開始();
+					}
+					#endregion
+
 					this.actSortSongs.t進行描画();
 					this.actQuickConfig.t進行描画();
+					this.actTextBox.OnUpdateAndDraw();
+					if (actTextBox.b入力が終了した)
+					{
+						strSearchString = actTextBox.str確定文字列を返す();
+						if(strSearchString != "")
+                        {
+							Trace.TraceInformation("Input Search String : " + strSearchString);
+						}
+						CDTXMania.Skin.sound決定音.tPlay();
+						actTextBox.t非表示();
+					}
 				}
 			}
 			return 0;
@@ -710,6 +735,10 @@ namespace DTXMania
 
 		private CActSortSongs actSortSongs;
 		private CActSelectQuickConfig actQuickConfig;
+
+		//
+		private CActTextBox actTextBox;
+		private string strSearchString;
 
 		private bool bBGM再生済み;
 		private STキー反復用カウンタ ctキー反復用;
