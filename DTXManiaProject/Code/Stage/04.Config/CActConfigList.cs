@@ -1631,6 +1631,26 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemLoopCreate)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopCreate);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemLoopDelete)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopDelete);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemSkipForward)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipForward);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemSkipBackward)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipBackward);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemRestart)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Restart);
+            }
             #endregion
             else
             {
@@ -1863,6 +1883,31 @@ namespace DTXMania
                 "一時停止キー設定：\n 一時停止キーの割り当てを設定します。",
                 "Pause key assign:\n To assign key/pads for Pause button.");
             this.listItems.Add(this.iKeyAssignBassHelp);
+
+            this.iKeyAssignSystemLoopCreate = new CItemBase("Loop Create",
+                "",
+                "Loop Create assign:\n To assign key/pads for loop creation.");
+            this.listItems.Add(this.iKeyAssignSystemLoopCreate);
+
+            this.iKeyAssignSystemLoopDelete = new CItemBase("Loop Delete",
+                "",
+                "Pause key assign:\n To assign key/pads for loop deletion.");
+            this.listItems.Add(this.iKeyAssignSystemLoopDelete);
+
+            this.iKeyAssignSystemSkipForward = new CItemBase("Skip forward",
+                "",
+                "Skip forward assign:\n To assign key/pads for Skip forward.");
+            this.listItems.Add(this.iKeyAssignSystemSkipForward);
+
+            this.iKeyAssignSystemSkipBackward = new CItemBase("Skip backward",
+                "",
+                "Skip backward assign:\n To assign key/pads for Skip backward (rewind).");
+            this.listItems.Add(this.iKeyAssignSystemSkipBackward);
+
+            this.iKeyAssignSystemRestart = new CItemBase("Restart",
+                "",
+                "Restart assign:\n To assign key/pads for Restart button.");
+            this.listItems.Add(this.iKeyAssignSystemRestart);
 
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
@@ -2635,6 +2680,11 @@ namespace DTXMania
         private CCounter ctTriangleArrowAnimation;
         private EMenuType eMenuType;
         private CItemBase iKeyAssignSystemCapture;			// #24609
+        private CItemBase iKeyAssignSystemLoopCreate;
+        private CItemBase iKeyAssignSystemLoopDelete;
+        private CItemBase iKeyAssignSystemSkipForward;
+        private CItemBase iKeyAssignSystemSkipBackward;
+        private CItemBase iKeyAssignSystemRestart;
         private CItemBase iKeyAssignSystemReturnToMenu;		// #24609
 
         private CItemBase iKeyAssignGuitarHelp;

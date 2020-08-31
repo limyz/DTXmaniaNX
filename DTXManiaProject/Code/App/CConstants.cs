@@ -106,6 +106,12 @@ namespace DTXMania
         LP      = EPad.LP,
         LBD     = EPad.LBD,
 		Capture,
+		LoopCreate,
+		LoopDelete,
+		SkipForward,
+		SkipBackward, // = Rewind
+		Restart,
+		MAX,          // Gatekeeper
 		UNKNOWN = EPad.UNKNOWN
 	}
 	[Flags]
@@ -261,6 +267,7 @@ namespace DTXMania
 	{
 		Continue,
 		Interruption,
+		Restart,
 		StageFailure,
 		StageClear
 	}

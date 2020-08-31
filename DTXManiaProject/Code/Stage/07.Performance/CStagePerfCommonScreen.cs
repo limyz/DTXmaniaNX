@@ -338,6 +338,11 @@ namespace DTXMania
             bValidScore = true;
             bDTXVmode = false; // とりあえずfalse固定
 
+            this.LoopBeginMs = -1;
+            this.LoopEndMs = -1;
+            this.bIsTrainingMode = false;
+            this.bPAUSE = false;
+
             #region [ Sounds that should be registered in the mixer before starting playing (chip sounds that will be played immediately after the start of the performance) ]
             foreach (CDTX.CChip pChip in listChip)
             {
@@ -745,6 +750,10 @@ namespace DTXMania
         protected Stopwatch sw;		// 2011.6.13 最適化検討用のストップウォッチ
         protected Stopwatch sw2;
         //		protected GCLatencyMode gclatencymode;
+
+        protected long LoopBeginMs;
+        protected long LoopEndMs;
+        public bool bIsTrainingMode;
 
         public void AddMixer(CSound cs, bool _b演奏終了後も再生が続くチップである)
         {
@@ -1972,6 +1981,61 @@ namespace DTXMania
                     base.ePhaseID = CStage.EPhase.Common_FadeOut;
                     this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.Interruption;
                 }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.Restart))
+                {
+                    if (this.bPAUSE)
+                    {
+                        CSoundManager.rcPerformanceTimer.tResume();
+                        CDTXMania.Timer.tResume();
+                    }
+                    base.ePhaseID = CStage.EPhase.演奏_STAGE_RESTART;
+                    this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.Restart;
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipForward))
+                {
+                    this.bIsTrainingMode = true;
+                    Trace.TraceInformation("HOME CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                    this.tJumpInSong(CSoundManager.rcPerformanceTimer.nCurrentTime + CDTXMania.ConfigIni.nSkipTimeMs);
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipBackward))
+                {
+                    this.bIsTrainingMode = true;
+                    Trace.TraceInformation("END CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                    this.tJumpInSong(Math.Max(0, CSoundManager.rcPerformanceTimer.nCurrentTime - CDTXMania.ConfigIni.nSkipTimeMs));
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopCreate))
+                {
+                    this.bIsTrainingMode = true;
+                    if (this.LoopBeginMs == -1)
+                    {
+                        Trace.TraceInformation("INSERT LOOP BEGIN CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                        this.LoopBeginMs = CSoundManager.rcPerformanceTimer.nCurrentTime;
+                    }
+                    else
+                    {
+                        if (this.LoopEndMs == -1)
+                        {
+                            if (this.LoopBeginMs < CSoundManager.rcPerformanceTimer.nCurrentTime)
+                            {
+                                Trace.TraceInformation("INSERT LOOP END CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                                this.LoopEndMs = CSoundManager.rcPerformanceTimer.nCurrentTime;
+                            }
+                            else
+                            {
+                                Trace.TraceInformation("INSERT LOOP BEGIN AND SWAP CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                                this.LoopEndMs = this.LoopBeginMs;
+                                this.LoopBeginMs = CSoundManager.rcPerformanceTimer.nCurrentTime;
+                            }
+                        }
+                        //Else loop already set, do nothing
+                    }
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopDelete))
+                {
+                    Trace.TraceInformation("REMOVE LOOP CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                    this.LoopBeginMs = -1;
+                    this.LoopEndMs = -1;
+                }
 
                 if (!CDTXMania.ConfigIni.bReverse.Drums && keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.PageUp))
                 {
@@ -2212,8 +2276,7 @@ namespace DTXMania
             }
         }
 
-
-//      protected abstract void tUpdateAndDraw_AVI();
+        //      protected abstract void tUpdateAndDraw_AVI();
         protected void tUpdateAndDraw_AVI()
         {
             if (((base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED) && (base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED_フェードアウト)) && (!CDTXMania.ConfigIni.bストイックモード))
@@ -2313,7 +2376,7 @@ namespace DTXMania
         {
             this.actStatusPanel.OnUpdateAndDraw();
         }
-        protected bool tUpdateAndDraw_Chip(EInstrumentPart ePlayMode)
+        protected bool tUpdateAndDraw_Chips(EInstrumentPart ePlayMode)
         {
             if ((base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED) || (base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED_フェードアウト))
             {
@@ -2917,7 +2980,7 @@ namespace DTXMania
             }
             return false;
         }
-        protected bool tUpdateAndDraw_BarLine(EInstrumentPart ePlayMode)
+        protected bool tUpdateAndDraw_BarLines(EInstrumentPart ePlayMode)
         {
             if ((base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED) || (base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED_フェードアウト))
             {
@@ -3001,6 +3064,20 @@ namespace DTXMania
             }
             return false;
         }
+
+        protected bool tDraw_LoopLines()
+        {
+            if (this.LoopBeginMs != -1)
+            {
+                this.tDraw_LoopLine(CDTXMania.ConfigIni, false);
+                if (this.LoopEndMs != -1)
+                {
+                    this.tDraw_LoopLine(CDTXMania.ConfigIni, true);
+                }
+            }
+            return false;
+        }
+
         protected bool tUpdateAndDraw_Chip_PatternOnly(EInstrumentPart ePlayMode)
         {
             if ((base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED) || (base.ePhaseID == CStage.EPhase.演奏_STAGE_FAILED_フェードアウト))
@@ -4240,6 +4317,7 @@ namespace DTXMania
             this.actFillin.OnUpdateAndDraw();
         }
         protected abstract void tUpdateAndDraw_Chip_BarLine(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void tDraw_LoopLine(CConfigIni configIni, bool bIsEnd);
         //protected abstract void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip );
         protected virtual void t進行描画_チップ_ベース_ウェイリング(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
         {
@@ -5406,5 +5484,41 @@ namespace DTXMania
         }
 
         #endregion
+        protected void tJumpInSong(long newPosition)
+        {
+            long nNewPosition = Math.Max(0, newPosition);
+            Trace.TraceInformation("JUMP IN SONG currentPosition={0}, newPosition={1}", CSoundManager.rcPerformanceTimer.nCurrentTime, newPosition);
+
+            long oldPosition = CSoundManager.rcPerformanceTimer.nCurrentTime;
+            CSoundManager.rcPerformanceTimer.nCurrentTime = newPosition;
+            CDTXMania.Timer.nCurrentTime = newPosition;
+
+            //Stop any AVI
+            this.actAVI.Stop();
+
+            //Adjust BGM to new position
+            CDTX.CChip BGMChip = this.listChip.Find(x => x.nChannelNumber == 0x01);
+            if (BGMChip != null)
+            {
+                CDTXMania.DTX.tChangePlaybackPositionChip(BGMChip);
+            }
+
+            if (newPosition < oldPosition)
+            {
+                for (int nCurrentChip = 0; nCurrentChip < CDTXMania.DTX.listChip.Count; nCurrentChip++)
+                {
+                    CDTX.CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
+
+                    // Unhit the past chips so they display again (and are hittable again)
+                    if (pChip.nPlaybackTimeMs > newPosition && pChip.bHit)
+                    {
+                        pChip.bHit = false;
+                    }
+                }
+
+                // Current top chip will catch up at next frame
+                this.nCurrentTopChip = 0;
+            }
+        }
     }
 }

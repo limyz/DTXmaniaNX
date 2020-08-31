@@ -144,6 +144,55 @@ namespace DTXMania
 			}
 			return false;
 		}
+		public bool bPressed(EKeyConfigPart part, EKeyConfigPad pad)
+		{
+			if (part != EKeyConfigPart.UNKNOWN)
+			{
+
+				CConfigIni.CKeyAssign.STKEYASSIGN[] stkeyassignArray = this.rConfigIni.KeyAssign[(int)part][(int)pad];
+				for (int i = 0; i < stkeyassignArray.Length; i++)
+				{
+					switch (stkeyassignArray[i].InputDevice)
+					{
+						case EInputDevice.Keyboard:
+							if (!this.rInput管理.Keyboard.bKeyPressed(stkeyassignArray[i].Code))
+								break;
+
+							this.stDetectedDevice.Keyboard = true;
+							return true;
+
+						case EInputDevice.MIDI入力:
+							{
+								IInputDevice device2 = this.rInput管理.MidiIn(stkeyassignArray[i].ID);
+								if ((device2 == null) || !device2.bKeyPressed(stkeyassignArray[i].Code))
+									break;
+
+								this.stDetectedDevice.MIDIIN = true;
+								return true;
+							}
+						case EInputDevice.Joypad:
+							{
+								if (!this.rConfigIni.dicJoystick.ContainsKey(stkeyassignArray[i].ID))
+									break;
+
+								IInputDevice device = this.rInput管理.Joystick(stkeyassignArray[i].ID);
+								if ((device == null) || !device.bKeyPressed(stkeyassignArray[i].Code))
+									break;
+
+								this.stDetectedDevice.Joypad = true;
+								return true;
+							}
+						case EInputDevice.Mouse:
+							if (!this.rInput管理.Mouse.bKeyPressed(stkeyassignArray[i].Code))
+								break;
+
+							this.stDetectedDevice.Mouse = true;
+							return true;
+					}
+				}
+			}
+			return false;
+		}
 		public bool bPressedDGB( EPad pad )
 		{
 			if( !this.bPressed( EInstrumentPart.DRUMS, pad ) && !this.bPressed( EInstrumentPart.GUITAR, pad ) )
