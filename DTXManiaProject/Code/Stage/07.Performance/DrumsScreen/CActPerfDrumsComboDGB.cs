@@ -70,7 +70,12 @@ namespace DTXMania
             bool bass = CDTXMania.DTX.bチップがある.Bass;
 
             if( CDTXMania.ConfigIni.bドラムコンボ文字の表示 )
-                base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1245, 60);
+            {
+                if (CDTXMania.ConfigIni.bGraph有効.Drums && CDTXMania.ConfigIni.bSmallGraph)
+                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1275, 60);
+                else
+                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1245, 60);
+            }
 
             this.n火薬カウント = (nCombo値 / 100);
 
