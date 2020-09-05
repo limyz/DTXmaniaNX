@@ -261,6 +261,61 @@ namespace DTXMania
 						this.padCapture = value;
 					}
 				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] LoopCreate
+				{
+					get
+					{
+						return this.padLoopCreate;
+					}
+					set
+					{
+						this.padLoopCreate = value;
+					}
+				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] LoopDelete
+				{
+					get
+					{
+						return this.padLoopDelete;
+					}
+					set
+					{
+						this.padLoopDelete = value;
+					}
+				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] SkipForward
+				{
+					get
+					{
+						return this.padSkipForward;
+					}
+					set
+					{
+						this.padSkipForward = value;
+					}
+				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] SkipBackward
+				{
+					get
+					{
+						return this.padSkipBackward;
+					}
+					set
+					{
+						this.padSkipBackward = value;
+					}
+				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Restart
+				{
+					get
+					{
+						return this.padRestart;
+					}
+					set
+					{
+						this.padRestart = value;
+					}
+				}
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] this[ int index ]
 				{
 					get
@@ -305,6 +360,21 @@ namespace DTXMania
 
 							case (int) EKeyConfigPad.Capture:
 								return this.padCapture;
+
+							case (int)EKeyConfigPad.LoopCreate:
+								return this.padLoopCreate;
+
+							case (int)EKeyConfigPad.LoopDelete:
+								return this.padLoopDelete;
+
+							case (int)EKeyConfigPad.SkipForward:
+								return this.padSkipForward;
+
+							case (int)EKeyConfigPad.SkipBackward:
+								return this.padSkipBackward;
+
+							case (int)EKeyConfigPad.Restart:
+								return this.padRestart;
 						}
 						throw new IndexOutOfRangeException();
 					}
@@ -363,6 +433,26 @@ namespace DTXMania
 							case (int) EKeyConfigPad.Capture:
 								this.padCapture = value;
 								return;
+
+							case (int)EKeyConfigPad.LoopCreate:
+								this.padLoopCreate = value;
+								return;
+
+							case (int)EKeyConfigPad.LoopDelete:
+								this.padLoopDelete = value;
+								return;
+
+							case (int)EKeyConfigPad.SkipForward:
+								this.padSkipForward = value;
+								return;
+
+							case (int)EKeyConfigPad.SkipBackward:
+								this.padSkipBackward = value;
+								return;
+
+							case (int)EKeyConfigPad.Restart:
+								this.padRestart = value;
+								return;
 						}
 						throw new IndexOutOfRangeException();
 					}
@@ -383,6 +473,11 @@ namespace DTXMania
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLP;
                 private CConfigIni.CKeyAssign.STKEYASSIGN[] padLBD;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCapture;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopCreate;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopDelete;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipForward;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipBackward;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padRestart;
 				//-----------------
 				#endregion
 			}
@@ -613,7 +708,8 @@ namespace DTXMania
 		public bool bバッファ入力を行う;
 		public bool bIsEnabledSystemMenu;			// #28200 2012.5.1 yyagi System Menuの使用可否切替
 		public string strSystemSkinSubfolderFullName;	// #28195 2012.5.2 yyagi Skin切替用 System/以下のサブフォルダ名
-		public bool bUseBoxDefSkin;						// #28195 2012.5.6 yyagi Skin切替用 box.defによるスキン変更機能を使用するか否か
+		public bool bUseBoxDefSkin;                     // #28195 2012.5.6 yyagi Skin切替用 box.defによるスキン変更機能を使用するか否か
+		public int nSkipTimeMs;
 
         //つまみ食い
         public STDGBVALUE<EAutoGhostData> eAutoGhost;               // #35411 2015.8.18 chnmr0 プレー時使用ゴーストデータ種別
@@ -647,7 +743,7 @@ namespace DTXMania
 			{
 				for( int i = 0; i <= (int)EKeyConfigPart.SYSTEM; i++ )
 				{
-					for( int j = 0; j <= (int)EKeyConfigPad.Capture; j++ )
+					for( int j = 0; j < (int)EKeyConfigPad.MAX; j++ )
 					{
 						for( int k = 0; k < 0x10; k++ )
 						{
@@ -1245,7 +1341,8 @@ namespace DTXMania
             this.nASIODevice = 0;                       // #24820 2013.1.17 yyagi
 //          this.nASIOBufferSizeMs = 0;                 // #24820 2012.12.25 yyagi 初期値は0(自動設定)
             this.bDynamicBassMixerManagement = true;    //
-            this.bTimeStretch = false;					// #23664 2013.2.24 yyagi 初期値はfalse (再生速度変更を、ピッチ変更にて行う)
+            this.bTimeStretch = false;                  // #23664 2013.2.24 yyagi 初期値はfalse (再生速度変更を、ピッチ変更にて行う)
+			this.nSkipTimeMs = 5000;
 
 		}
 		public CConfigIni( string iniファイル名 )
@@ -1261,7 +1358,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i <= (int)EKeyConfigPart.SYSTEM; i++ )
 			{
-				for( int j = 0; j <= (int)EKeyConfigPad.Capture; j++ )
+				for( int j = 0; j < (int)EKeyConfigPad.MAX; j++ )
 				{
 					for( int k = 0; k < 0x10; k++ )
 					{
@@ -1697,6 +1794,9 @@ namespace DTXMania
             sw.WriteLine( "; オート時のゲージ加算(0:OFF, 1:ON )");
             sw.WriteLine( "AutoAddGage={0}", this.bAutoAddGage ? 1 : 0);
             sw.WriteLine();
+			sw.WriteLine("; Number of milliseconds to skip forward/backward (100-10000)");
+			sw.WriteLine("SkipTimeMs={0}", this.nSkipTimeMs);
+			sw.WriteLine();
 
 			sw.WriteLine( ";-------------------" );
 			#endregion
@@ -2149,6 +2249,21 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.Write( "Pause=" );
 			this.tWriteKey( sw, this.KeyAssign.Bass.Help );
+			sw.WriteLine();
+			sw.Write("LoopCreate=");
+			this.tWriteKey(sw, this.KeyAssign.System.LoopCreate);
+			sw.WriteLine();
+			sw.Write("LoopDelete=");
+			this.tWriteKey(sw, this.KeyAssign.System.LoopDelete);
+			sw.WriteLine();
+			sw.Write("SkipForward=");
+			this.tWriteKey(sw, this.KeyAssign.System.SkipForward);
+			sw.WriteLine();
+			sw.Write("SkipBackward=");
+			this.tWriteKey(sw, this.KeyAssign.System.SkipBackward);
+			sw.WriteLine();
+			sw.Write("Restart=");
+			this.tWriteKey(sw, this.KeyAssign.System.Restart);
 			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
@@ -2739,6 +2854,10 @@ namespace DTXMania
                                             {
                                                 this.bAutoAddGage = CConversion.bONorOFF(str4[0]);
                                             }
+											else if (str3.Equals("SkipTimeMs"))
+											{
+												this.nSkipTimeMs = CConversion.nGetNumberIfInRange(str4, 100, 20000, this.nSkipTimeMs);
+											}
 											continue;
 										}
 									//-----------------------------
@@ -3439,7 +3558,27 @@ namespace DTXMania
                                         {
                                             this.tReadAndSetSkey(str4, this.KeyAssign.Bass.Help);
                                         }
-                                        continue;
+										else if (str3.Equals("LoopCreate"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.LoopCreate);
+										}
+										else if (str3.Equals("LoopDelete"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.LoopDelete);
+										}
+										else if (str3.Equals("SkipForward"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.SkipForward);
+										}
+										else if (str3.Equals("SkipBackward"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.SkipBackward);
+										}
+										else if (str3.Equals("Restart"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.Restart);
+										}
+										continue;
 									//-----------------------------
 									#endregion
 
@@ -3524,7 +3663,7 @@ namespace DTXMania
 			this.KeyAssign = new CKeyAssign();
 			for( int i = 0; i <= (int)EKeyConfigPart.SYSTEM; i++ )
 			{
-				for( int j = 0; j <= (int)EKeyConfigPad.Capture; j++ )
+				for( int j = 0; j < (int)EKeyConfigPad.MAX; j++ )
 				{
 					this.KeyAssign[ i ][ j ] = new CKeyAssign.STKEYASSIGN[ 16 ];
 					for( int k = 0; k < 16; k++ )
@@ -3663,6 +3802,7 @@ Decide=K096
 Capture=K065
 Help=K064
 Pause=K0110
+Restart=K042
 ";
 			tReadFromString( strDefaultKeyAssign );
 		}

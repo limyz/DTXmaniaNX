@@ -54,7 +54,7 @@ namespace DTXMania
 
 		// Methods
 
-		public void tStorePerfResults( out CScoreIni.CPerformanceEntry Drums, out CScoreIni.CPerformanceEntry Guitar, out CScoreIni.CPerformanceEntry Bass, out CDTX.CChip[] r空打ちドラムチップ )
+		public void tStorePerfResults( out CScoreIni.CPerformanceEntry Drums, out CScoreIni.CPerformanceEntry Guitar, out CScoreIni.CPerformanceEntry Bass, out CDTX.CChip[] r空打ちドラムチップ, out bool bIsTrainingMode)
 		{
 			base.tStorePerfResults_Drums( out Drums );
 			base.tStorePerfResults_Guitar( out Guitar );
@@ -69,6 +69,7 @@ namespace DTXMania
 					r空打ちドラムチップ[ i ] = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮( CDTXMania.Timer.nCurrentTime, this.nパッド0Atoチャンネル0A[ i ], this.nInputAdjustTimeMs.Drums );
 				}
 			}
+            bIsTrainingMode = base.bIsTrainingMode;
 		}
 
 
@@ -273,7 +274,7 @@ namespace DTXMania
                     base.bJustStartedUpdate = false;
                 }
 
-                if ((CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
+                if ((CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && !this.bIsTrainingMode && this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
                 {
                     this.actStageFailed.Start();
                     CDTXMania.DTX.tStopPlayingAllChips();
@@ -285,9 +286,10 @@ namespace DTXMania
                 this.tUpdateAndDraw_LaneFlushD();
                 this.tUpdateAndDraw_ScrollSpeed();
                 this.tUpdateAndDraw_ChipAnimation();
-                this.tUpdateAndDraw_BarLine( EInstrumentPart.DRUMS );
+                this.tUpdateAndDraw_BarLines( EInstrumentPart.DRUMS );
+                this.tDraw_LoopLines();
                 this.tUpdateAndDraw_Chip_PatternOnly( EInstrumentPart.DRUMS );
-                bIsFinishedPlaying = this.tUpdateAndDraw_Chip( EInstrumentPart.DRUMS );
+                bIsFinishedPlaying = this.tUpdateAndDraw_Chips( EInstrumentPart.DRUMS );
                 #region[ シャッター ]
                 //シャッターを使うのはLC、LP、FT、RDレーンのみ。その他のレーンでは一切使用しない。
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
@@ -467,6 +469,11 @@ namespace DTXMania
                         return (int)this.eReturnValueAfterFadeOut;
                     }
                 }
+                if (base.ePhaseID == CStage.EPhase.演奏_STAGE_RESTART)
+                {
+                    Debug.WriteLine("Restarting");
+                    return (int)this.eReturnValueAfterFadeOut;
+                }
 
                 // もしサウンドの登録/削除が必要なら、実行する
                 if (queueMixerSound.Count > 0)
@@ -491,6 +498,21 @@ namespace DTXMania
                         }
                     }
                 }
+
+                if (this.LoopEndMs != -1 && CSoundManager.rcPerformanceTimer.nCurrentTime > this.LoopEndMs)
+                {
+                    Trace.TraceInformation("Reached end of loop");
+                    this.tJumpInSong(this.LoopBeginMs == -1 ? 0 : this.LoopBeginMs);
+                    //Reset hit counts and scores, so that the displayed score reflects the looped part only
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Perfect = 0;
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Great = 0;
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Good = 0;
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Poor = 0;
+                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Miss = 0;
+                    CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[0] = 0;
+                    base.actScore.nCurrentTrueScore.Drums = 0;
+                }
+
                 // キー入力
 
                 if (CDTXMania.act現在入力を占有中のプラグイン == null)
@@ -3925,8 +3947,56 @@ namespace DTXMania
 				}
 			}
              */
-		}              //移植完了。
-    #endregion
-	}
+		}
+        //移植完了。
+
+        protected override void tDraw_LoopLine(CConfigIni configIni, bool bIsEnd)
+        {
+            const double speed = 286;	// BPM150の時の1小節の長さ[dot]
+            double ScrollSpeedDrums = (this.actScrollSpeed.db現在の譜面スクロール速度.Drums + 1.0) * 0.5 * 37.5 * speed / 60000.0;
+
+            int nDistanceFromBar = (int)(((bIsEnd ? this.LoopEndMs : this.LoopBeginMs) - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedDrums);
+
+            //Display Loop Begin/Loop End text
+            CDTXMania.actDisplayString.tPrint(830, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 0x11) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 0x11), CCharacterConsole.EFontType.White, (bIsEnd ? "End loop" : "Begin loop"));
+            if ((configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1))
+            {
+                int l_drumPanelWidth = 0x22f;
+                int l_xOffset = 0;
+                if (configIni.eNumOfLanes.Drums == EType.B)
+                {
+                    l_drumPanelWidth = 0x207;
+                }
+                else if (CDTXMania.ConfigIni.eNumOfLanes.Drums == EType.C)
+                {
+                    l_drumPanelWidth = 447;
+                    l_xOffset = 72;
+                }
+
+                if (bIsEnd)
+                {
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 1) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 1) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 3), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 3) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 5), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 9) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 11), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 11) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 13), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 17) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 19), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) + 23) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 25), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                }
+                else
+                {
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 1) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) - 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 3) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 1), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 5) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 3), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 11) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 9), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 13) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 11), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 19) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 17), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                    this.txチップ.tDraw2D(CDTXMania.app.Device, 295 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + nDistanceFromBar) - 25) : ((this.nJudgeLinePosY.Drums - nDistanceFromBar) + 23), new Rectangle(0, 769, l_drumPanelWidth, 2));
+                }
+            }
+        }
+
+        #endregion
+    }
 
 }

@@ -28,6 +28,7 @@ namespace DTXMania
 		public int n総合ランク値;
 		public CDTX.CChip[] rEmptyDrumChip;
 		public STDGBVALUE<CScoreIni.CPerformanceEntry> stPerformanceEntry;
+		public bool bIsTrainingMode;
 
 
 		// コンストラクタ
@@ -76,173 +77,177 @@ namespace DTXMania
 				//---------------------
 				#endregion
 
-                #region [ Calculate results ]
-                //---------------------
-                for (int i = 0; i < 3; i++)
-                {
-                    this.nRankValue[i] = -1;
-                    this.fPerfect率[i] = this.fGreat率[i] = this.fGood率[i] = this.fPoor率[i] = this.fMiss率[i] = 0.0f;	// #28500 2011.5.24 yyagi
-                    if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bGuitarRevolutionMode)) &&
-                        ((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bGuitarRevolutionMode))) &&
-                        ((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bGuitarRevolutionMode)))
-                    {
-                        CScoreIni.CPerformanceEntry part = this.stPerformanceEntry[i];
-                        bool bIsAutoPlay = true;
-                        switch (i)
-                        {
-                            case 0:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
-                                break;
-
-                            case 1:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay;
-                                break;
-
-                            case 2:
-                                bIsAutoPlay = CDTXMania.ConfigIni.bAllBassAreAutoPlay;
-                                break;
-                        }		
-
-						this.fPerfect率[i] = bIsAutoPlay ? 0f : ((100f * part.nPerfectCount) / ((float)part.nTotalChipsCount));
-                        this.fGreat率[i] = bIsAutoPlay ? 0f : ((100f * part.nGreatCount) / ((float)part.nTotalChipsCount));
-                        this.fGood率[i] = bIsAutoPlay ? 0f : ((100f * part.nGoodCount) / ((float)part.nTotalChipsCount));
-                        this.fPoor率[i] = bIsAutoPlay ? 0f : ((100f * part.nPoorCount) / ((float)part.nTotalChipsCount));
-                        this.fMiss率[i] = bIsAutoPlay ? 0f : ((100f * part.nMissCount) / ((float)part.nTotalChipsCount));
-                        this.bAuto[i] = bIsAutoPlay; // #23596 10.11.16 add ikanick そのパートがオートなら1
-						//        10.11.17 change (int to bool) ikanick
-						//18072020: Change first condition check to 1, XG mode is 1, not 0. Fisyher
-						if (CDTXMania.ConfigIni.nSkillMode == 1)
-                        {
-                            this.nRankValue[i] = CScoreIni.tCalculateRank(part);
-                        }
-                        else if (CDTXMania.ConfigIni.nSkillMode == 0)
-                        {
-                            this.nRankValue[i] = CScoreIni.tCalculateRankOld(part);
-                        }
-                    }
-                }
-                this.n総合ランク値 = CScoreIni.tCalculateOverallRankValue(this.stPerformanceEntry.Drums, this.stPerformanceEntry.Guitar, this.stPerformanceEntry.Bass);
-				//---------------------
-				#endregion
-
-				#region [ Write .score.ini ]
-				//---------------------
-				string str = CDTXMania.DTX.strファイル名の絶対パス + ".score.ini";
-				CScoreIni ini = new CScoreIni( str );
-
-				bool[] b今までにフルコンボしたことがある = new bool[] { false, false, false };
-                if (!CDTXMania.ConfigIni.bAllDrumsAreAutoPlay || !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay || !CDTXMania.ConfigIni.bAllBassAreAutoPlay)
-                {
-                    for (int i = 0; i < 3; i++)
-                    {
-
-                        // フルコンボチェックならびに新記録ランクチェックは、ini.Record[] が、スコアチェックや演奏型スキルチェックの IF 内で書き直されてしまうよりも前に行う。(2010.9.10)
-
-                        b今までにフルコンボしたことがある[i] = ini.stSection[i * 2].bIsFullCombo | ini.stSection[i * 2 + 1].bIsFullCombo;
-
-                        #region [deleted by #24459]
-                        //		if( this.nRankValue[ i ] <= CScoreIni.tCalculateRank( ini.stSection[ ( i * 2 ) + 1 ] ) )
-                        //		{
-                        //			this.bNewRecordRank[ i ] = true;
-                        //		}
-                        #endregion
-                        // #24459 上記の条件だと[HiSkill.***]でのランクしかチェックしていないので、BestRankと比較するよう変更。
-                        if (this.nRankValue[i] >= 0 && ini.stFile.BestRank[i] > this.nRankValue[i])		// #24459 2011.3.1 yyagi update BestRank
-                        {
-                            this.bNewRecordRank[i] = true;
-                            ini.stFile.BestRank[i] = this.nRankValue[i];
-                        }
-
-			    		// 新記録スコアチェック
-				    	if( this.stPerformanceEntry[ i ].nスコア > ini.stSection[ i * 2 ].nスコア )
-					    {
-					        this.bNewRecordScore[ i ] = true;
-					        ini.stSection[ i * 2 ] = this.stPerformanceEntry[ i ];
-                            this.SaveGhost( i * 2 ); // #35411 chnmr0 add
-					    }
-
-                        // 新記録スキルチェック
-                        if ( ( this.stPerformanceEntry[ i ].dbPerformanceSkill > ini.stSection[ ( i * 2 ) + 1 ].dbPerformanceSkill ) && !this.bAuto[ i ] )
-                        {
-                            this.bNewRecordSkill[ i ] = true;
-                            ini.stSection[ ( i * 2 ) + 1 ] = this.stPerformanceEntry[ i ];
-                            this.SaveGhost( ( i * 2 ) + 1 ); // #35411 chnmr0 add
-                        }
-
-			    		// ラストプレイ #23595 2011.1.9 ikanick
-                        // オートじゃなければプレイ結果を書き込む
-                        if( this.bAuto[ i ] == false ) {
-                            ini.stSection[ i + 6 ] = this.stPerformanceEntry[ i ];
-                            this.SaveGhost(i + 6); // #35411 chnmr0 add
-                        }
-
-                        // #23596 10.11.16 add ikanick オートじゃないならクリア回数を1増やす
-                        //        11.02.05 bAuto to tGetIsUpdateNeeded use      ikanick
-                        bool[] b更新が必要か否か = new bool[3];
-                        CScoreIni.tGetIsUpdateNeeded(out b更新が必要か否か[0], out b更新が必要か否か[1], out b更新が必要か否か[2]);
-
-                        if (b更新が必要か否か[i])
-                        {
-                            switch (i)
-                            {
-                                case 0:
-                                    ini.stFile.ClearCountDrums++;
-                                    break;
-                                case 1:
-                                    ini.stFile.ClearCountGuitar++;
-                                    break;
-                                case 2:
-                                    ini.stFile.ClearCountBass++;
-                                    break;
-                                default:
-                                    throw new Exception("クリア回数増加のk(0-2)が範囲外です。");
-                            }
-                        }
-
-                        //---------------------------------------------------------------------/
-                    }
-                    if( CDTXMania.ConfigIni.bScoreIniを出力する )
-                    {
-                        ini.tExport(str);
-                    }
-                }
-				//---------------------
-				#endregion
-
-				#region [ Update nb of performance #24281 2011.1.30 yyagi]
-				this.nNbPerformances.Drums = ini.stFile.PlayCountDrums;
-				this.nNbPerformances.Guitar = ini.stFile.PlayCountGuitar;
-				this.nNbPerformances.Bass = ini.stFile.PlayCountBass;
-				#endregion
-				#region [ Update score information on Song Selection screen ]
-				//---------------------
-				if( !CDTXMania.bCompactMode )
+				if (!bIsTrainingMode)
 				{
-					CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
-					bool[] b更新が必要か否か = new bool[ 3 ];
-					CScoreIni.tGetIsUpdateNeeded( out b更新が必要か否か[ 0 ], out b更新が必要か否か[ 1 ], out b更新が必要か否か[ 2 ] );
-					for( int m = 0; m < 3; m++ )
+					#region [ Calculate results ]
+					//---------------------
+					for (int i = 0; i < 3; i++)
 					{
-						if( b更新が必要か否か[ m ] )
+						this.nRankValue[i] = -1;
+						this.fPerfect率[i] = this.fGreat率[i] = this.fGood率[i] = this.fPoor率[i] = this.fMiss率[i] = 0.0f;  // #28500 2011.5.24 yyagi
+						if ((((i != 0) || (CDTXMania.DTX.bチップがある.Drums && !CDTXMania.ConfigIni.bGuitarRevolutionMode)) &&
+							((i != 1) || (CDTXMania.DTX.bチップがある.Guitar && CDTXMania.ConfigIni.bGuitarRevolutionMode))) &&
+							((i != 2) || (CDTXMania.DTX.bチップがある.Bass && CDTXMania.ConfigIni.bGuitarRevolutionMode)))
 						{
-							// FullCombo した記録を FullCombo なしで超えた場合、FullCombo マークが消えてしまう。
-							// → FullCombo は、最新記録と関係なく、一度達成したらずっとつくようにする。(2010.9.11)
-							cScore.SongInformation.FullCombo[ m ] = this.stPerformanceEntry[ m ].bIsFullCombo | b今までにフルコンボしたことがある[ m ];
-
-							if( this.bNewRecordSkill[ m ] )
+							CScoreIni.CPerformanceEntry part = this.stPerformanceEntry[i];
+							bool bIsAutoPlay = true;
+							switch (i)
 							{
-								cScore.SongInformation.HighSkill[ m ] = this.stPerformanceEntry[ m ].dbPerformanceSkill;
-                            }
+								case 0:
+									bIsAutoPlay = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay;
+									break;
 
-                            if (this.bNewRecordRank[ m ])
-                            {
-                                cScore.SongInformation.BestRank[ m ] = this.nRankValue[ m ];
-                            }
+								case 1:
+									bIsAutoPlay = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay;
+									break;
+
+								case 2:
+									bIsAutoPlay = CDTXMania.ConfigIni.bAllBassAreAutoPlay;
+									break;
+							}
+
+							this.fPerfect率[i] = bIsAutoPlay ? 0f : ((100f * part.nPerfectCount) / ((float)part.nTotalChipsCount));
+							this.fGreat率[i] = bIsAutoPlay ? 0f : ((100f * part.nGreatCount) / ((float)part.nTotalChipsCount));
+							this.fGood率[i] = bIsAutoPlay ? 0f : ((100f * part.nGoodCount) / ((float)part.nTotalChipsCount));
+							this.fPoor率[i] = bIsAutoPlay ? 0f : ((100f * part.nPoorCount) / ((float)part.nTotalChipsCount));
+							this.fMiss率[i] = bIsAutoPlay ? 0f : ((100f * part.nMissCount) / ((float)part.nTotalChipsCount));
+							this.bAuto[i] = bIsAutoPlay; // #23596 10.11.16 add ikanick そのパートがオートなら1
+														 //        10.11.17 change (int to bool) ikanick
+														 //18072020: Change first condition check to 1, XG mode is 1, not 0. Fisyher
+							if (CDTXMania.ConfigIni.nSkillMode == 1)
+							{
+								this.nRankValue[i] = CScoreIni.tCalculateRank(part);
+							}
+							else if (CDTXMania.ConfigIni.nSkillMode == 0)
+							{
+								this.nRankValue[i] = CScoreIni.tCalculateRankOld(part);
+							}
 						}
 					}
+					this.n総合ランク値 = CScoreIni.tCalculateOverallRankValue(this.stPerformanceEntry.Drums, this.stPerformanceEntry.Guitar, this.stPerformanceEntry.Bass);
+					//---------------------
+					#endregion
+
+					#region [ Write .score.ini ]
+					//---------------------
+					string str = CDTXMania.DTX.strファイル名の絶対パス + ".score.ini";
+					CScoreIni ini = new CScoreIni(str);
+
+					bool[] b今までにフルコンボしたことがある = new bool[] { false, false, false };
+					if (!CDTXMania.ConfigIni.bAllDrumsAreAutoPlay || !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay || !CDTXMania.ConfigIni.bAllBassAreAutoPlay)
+					{
+						for (int i = 0; i < 3; i++)
+						{
+
+							// フルコンボチェックならびに新記録ランクチェックは、ini.Record[] が、スコアチェックや演奏型スキルチェックの IF 内で書き直されてしまうよりも前に行う。(2010.9.10)
+
+							b今までにフルコンボしたことがある[i] = ini.stSection[i * 2].bIsFullCombo | ini.stSection[i * 2 + 1].bIsFullCombo;
+
+							#region [deleted by #24459]
+							//		if( this.nRankValue[ i ] <= CScoreIni.tCalculateRank( ini.stSection[ ( i * 2 ) + 1 ] ) )
+							//		{
+							//			this.bNewRecordRank[ i ] = true;
+							//		}
+							#endregion
+							// #24459 上記の条件だと[HiSkill.***]でのランクしかチェックしていないので、BestRankと比較するよう変更。
+							if (this.nRankValue[i] >= 0 && ini.stFile.BestRank[i] > this.nRankValue[i])     // #24459 2011.3.1 yyagi update BestRank
+							{
+								this.bNewRecordRank[i] = true;
+								ini.stFile.BestRank[i] = this.nRankValue[i];
+							}
+
+							// 新記録スコアチェック
+							if (this.stPerformanceEntry[i].nスコア > ini.stSection[i * 2].nスコア)
+							{
+								this.bNewRecordScore[i] = true;
+								ini.stSection[i * 2] = this.stPerformanceEntry[i];
+								this.SaveGhost(i * 2); // #35411 chnmr0 add
+							}
+
+							// 新記録スキルチェック
+							if ((this.stPerformanceEntry[i].dbPerformanceSkill > ini.stSection[(i * 2) + 1].dbPerformanceSkill) && !this.bAuto[i])
+							{
+								this.bNewRecordSkill[i] = true;
+								ini.stSection[(i * 2) + 1] = this.stPerformanceEntry[i];
+								this.SaveGhost((i * 2) + 1); // #35411 chnmr0 add
+							}
+
+							// ラストプレイ #23595 2011.1.9 ikanick
+							// オートじゃなければプレイ結果を書き込む
+							if (this.bAuto[i] == false)
+							{
+								ini.stSection[i + 6] = this.stPerformanceEntry[i];
+								this.SaveGhost(i + 6); // #35411 chnmr0 add
+							}
+
+							// #23596 10.11.16 add ikanick オートじゃないならクリア回数を1増やす
+							//        11.02.05 bAuto to tGetIsUpdateNeeded use      ikanick
+							bool[] b更新が必要か否か = new bool[3];
+							CScoreIni.tGetIsUpdateNeeded(out b更新が必要か否か[0], out b更新が必要か否か[1], out b更新が必要か否か[2]);
+
+							if (b更新が必要か否か[i])
+							{
+								switch (i)
+								{
+									case 0:
+										ini.stFile.ClearCountDrums++;
+										break;
+									case 1:
+										ini.stFile.ClearCountGuitar++;
+										break;
+									case 2:
+										ini.stFile.ClearCountBass++;
+										break;
+									default:
+										throw new Exception("クリア回数増加のk(0-2)が範囲外です。");
+								}
+							}
+
+							//---------------------------------------------------------------------/
+						}
+						if (CDTXMania.ConfigIni.bScoreIniを出力する)
+						{
+							ini.tExport(str);
+						}
+					}
+					//---------------------
+					#endregion
+
+					#region [ Update nb of performance #24281 2011.1.30 yyagi]
+					this.nNbPerformances.Drums = ini.stFile.PlayCountDrums;
+					this.nNbPerformances.Guitar = ini.stFile.PlayCountGuitar;
+					this.nNbPerformances.Bass = ini.stFile.PlayCountBass;
+					#endregion
+					#region [ Update score information on Song Selection screen ]
+					//---------------------
+					if (!CDTXMania.bCompactMode)
+					{
+						CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
+						bool[] b更新が必要か否か = new bool[3];
+						CScoreIni.tGetIsUpdateNeeded(out b更新が必要か否か[0], out b更新が必要か否か[1], out b更新が必要か否か[2]);
+						for (int m = 0; m < 3; m++)
+						{
+							if (b更新が必要か否か[m])
+							{
+								// FullCombo した記録を FullCombo なしで超えた場合、FullCombo マークが消えてしまう。
+								// → FullCombo は、最新記録と関係なく、一度達成したらずっとつくようにする。(2010.9.11)
+								cScore.SongInformation.FullCombo[m] = this.stPerformanceEntry[m].bIsFullCombo | b今までにフルコンボしたことがある[m];
+
+								if (this.bNewRecordSkill[m])
+								{
+									cScore.SongInformation.HighSkill[m] = this.stPerformanceEntry[m].dbPerformanceSkill;
+								}
+
+								if (this.bNewRecordRank[m])
+								{
+									cScore.SongInformation.BestRank[m] = this.nRankValue[m];
+								}
+							}
+						}
+					}
+					//---------------------
+					#endregion
 				}
-				//---------------------
-				#endregion
 
 				base.OnActivate();
 			}

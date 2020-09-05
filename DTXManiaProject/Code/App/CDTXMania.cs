@@ -1125,6 +1125,7 @@ for (int i = 0; i < 3; i++) {
                                 break;
 
                             case (int)EPerfScreenReturnValue.Interruption:
+                            case (int)EPerfScreenReturnValue.Restart:
                                 #region [ Cancel performance ]
                                 //-----------------------------
                                 scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Play canceled");
@@ -1146,6 +1147,23 @@ for (int i = 0; i < 3; i++) {
                                 if (bCompactMode)
                                 {
                                     base.Window.Close();
+                                }
+                                else if (this.nUpdateAndDrawReturnValue == (int)EPerfScreenReturnValue.Restart)
+                                {
+                                    Trace.TraceInformation("----------------------");
+                                    Trace.TraceInformation("■ SongLoading");
+                                    stageSongLoading.OnActivate();
+                                    rPreviousStage = rCurrentStage;
+                                    rCurrentStage = stageSongLoading;
+
+                                    foreach (STPlugin pg in this.listPlugins)
+                                    {
+                                        Directory.SetCurrentDirectory(pg.strプラグインフォルダ);
+                                        pg.plugin.OnChangeStage();
+                                        Directory.SetCurrentDirectory(CDTXMania.strEXEのあるフォルダ);
+                                    }
+
+                                    this.tRunGarbageCollector();
                                 }
                                 else
                                 {
@@ -1224,82 +1242,86 @@ for (int i = 0; i < 3; i++) {
                                 #region [ 演奏クリア ]
                                 //-----------------------------
                                 CScoreIni.CPerformanceEntry c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass;
+                                bool bIsTrainingMode = false;
                                 CDTX.CChip[] chipArray = new CDTX.CChip[10];
                                 if (ConfigIni.bGuitarRevolutionMode)
                                 {
-                                    stagePerfGuitarScreen.t演奏結果を格納する(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass);
+                                    stagePerfGuitarScreen.tStorePerfResults(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out bIsTrainingMode);
                                 }
                                 else
                                 {
-                                    stagePerfDrumsScreen.tStorePerfResults(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out chipArray);
+                                    stagePerfDrumsScreen.tStorePerfResults(out c演奏記録_Drums, out c演奏記録_Guitar, out c演奏記録_Bass, out chipArray, out bIsTrainingMode);
                                 }
 
-                                if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
+                                if (!bIsTrainingMode)
                                 {
-                                    CScoreIni.CPerformanceEntry t;
-                                    t = c演奏記録_Guitar;
-                                    c演奏記録_Guitar = c演奏記録_Bass;
-                                    c演奏記録_Bass = t;
+                                    if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)		// #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
+                                    {
+                                        CScoreIni.CPerformanceEntry t;
+                                        t = c演奏記録_Guitar;
+                                        c演奏記録_Guitar = c演奏記録_Bass;
+                                        c演奏記録_Bass = t;
 
-                                    CDTXMania.DTX.SwapGuitarBassInfos();			// 譜面情報も元に戻す
-                                    CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // #24415 2011.2.27 yyagi
-                                    // リザルト集計時のみ、Auto系のフラグも元に戻す。
-                                    // これを戻すのは、リザルト集計後。
-                                }													// "case CStage.EStage.Result:"のところ。
+                                        CDTXMania.DTX.SwapGuitarBassInfos();			// 譜面情報も元に戻す
+                                        CDTXMania.ConfigIni.SwapGuitarBassInfos_AutoFlags(); // #24415 2011.2.27 yyagi
+                                        // リザルト集計時のみ、Auto系のフラグも元に戻す。
+                                        // これを戻すのは、リザルト集計後。
+                                    }													// "case CStage.EStage.Result:"のところ。
 
-                                double ps = 0.0, gs = 0.0;
-                                if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.nTotalChipsCount > 0)
-                                {
-                                    ps = c演奏記録_Drums.dbPerformanceSkill;
-                                    gs = c演奏記録_Drums.dbGameSkill;
+                                    double ps = 0.0, gs = 0.0;
+                                    if (!c演奏記録_Drums.b全AUTOである && c演奏記録_Drums.nTotalChipsCount > 0)
+                                    {
+                                        ps = c演奏記録_Drums.dbPerformanceSkill;
+                                        gs = c演奏記録_Drums.dbGameSkill;
+                                    }
+                                    else if (!c演奏記録_Guitar.b全AUTOである && c演奏記録_Guitar.nTotalChipsCount > 0)
+                                    {
+                                        ps = c演奏記録_Guitar.dbPerformanceSkill;
+                                        gs = c演奏記録_Guitar.dbGameSkill;
+                                    }
+                                    else
+                                    {
+                                        ps = c演奏記録_Bass.dbPerformanceSkill;
+                                        gs = c演奏記録_Bass.dbGameSkill;
+                                    }
+                                    string str = "Cleared";
+                                    switch (CScoreIni.tCalculateOverallRankValue(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
+                                    {
+                                        case (int)CScoreIni.ERANK.SS:
+                                            str = string.Format("Cleared (SS: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.S:
+                                            str = string.Format("Cleared (S: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.A:
+                                            str = string.Format("Cleared (A: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.B:
+                                            str = string.Format("Cleared (B: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.C:
+                                            str = string.Format("Cleared (C: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.D:
+                                            str = string.Format("Cleared (D: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.E:
+                                            str = string.Format("Cleared (E: {0:F2})", ps);
+                                            break;
+
+                                        case (int)CScoreIni.ERANK.UNKNOWN:	// #23534 2010.10.28 yyagi add: 演奏チップが0個のとき
+                                            str = "Cleared (No chips)";
+                                            break;
+                                    }
+                                    
+                                    scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
                                 }
-                                else if (!c演奏記録_Guitar.b全AUTOである && c演奏記録_Guitar.nTotalChipsCount > 0)
-                                {
-                                    ps = c演奏記録_Guitar.dbPerformanceSkill;
-                                    gs = c演奏記録_Guitar.dbGameSkill;
-                                }
-                                else
-                                {
-                                    ps = c演奏記録_Bass.dbPerformanceSkill;
-                                    gs = c演奏記録_Bass.dbGameSkill;
-                                }
-                                string str = "Cleared";
-                                switch (CScoreIni.tCalculateOverallRankValue(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
-                                {
-                                    case (int)CScoreIni.ERANK.SS:
-                                        str = string.Format("Cleared (SS: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.S:
-                                        str = string.Format("Cleared (S: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.A:
-                                        str = string.Format("Cleared (A: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.B:
-                                        str = string.Format("Cleared (B: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.C:
-                                        str = string.Format("Cleared (C: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.D:
-                                        str = string.Format("Cleared (D: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.E:
-                                        str = string.Format("Cleared (E: {0:F2})", ps);
-                                        break;
-
-                                    case (int)CScoreIni.ERANK.UNKNOWN:	// #23534 2010.10.28 yyagi add: 演奏チップが0個のとき
-                                        str = "Cleared (No chips)";
-                                        break;
-                                }
-
-                                scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
 
                                 #region [ プラグイン On演奏クリア() の呼び出し ]
                                 //---------------------
@@ -1319,6 +1341,7 @@ for (int i = 0; i < 3; i++) {
                                 stageResult.stPerformanceEntry.Guitar = c演奏記録_Guitar;
                                 stageResult.stPerformanceEntry.Bass = c演奏記録_Bass;
                                 stageResult.rEmptyDrumChip = chipArray;
+                                stageResult.bIsTrainingMode = bIsTrainingMode;
                                 stageResult.OnActivate();
                                 rPreviousStage = rCurrentStage;
                                 rCurrentStage = stageResult;
