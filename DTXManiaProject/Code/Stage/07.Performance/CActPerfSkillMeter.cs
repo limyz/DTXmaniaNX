@@ -152,12 +152,12 @@ namespace DTXMania
                             this.nPart = 0;
                     }
 
-                    this.nGraphBG_XPos.Drums = (CDTXMania.ConfigIni.bSmallGraph ? 858 : 870);
+                    this.nGraphBG_XPos.Drums = (CDTXMania.ConfigIni.bSmallGraph ? 850 : 870);
                     this.nGraphBG_XPos.Guitar = 356;
                     this.nGraphBG_XPos.Bass = 647;
                     this.nGraphBG_YPos = this.nGraphUsePart == 0 ? 50 : 110;
                     //2016.06.24 kairera0467 StatusPanelとSkillMaterの場合はX座標を調整する。
-                    if( CDTXMania.ConfigIni.nInfoType == 1 )
+                    if ( CDTXMania.ConfigIni.nInfoType == 1 )
                     {
                         this.nGraphBG_XPos.Guitar = 629 + 9;
                         this.nGraphBG_XPos.Bass = 403;
@@ -178,10 +178,10 @@ namespace DTXMania
                 }
 
 				int stYposInImg = 0;
+                int nGraphSizeOffset = (CDTXMania.ConfigIni.bSmallGraph ? -19 : 0);
 
 
-
-                if( this.txグラフ != null )
+                if ( this.txグラフ != null )
                 {
                     //背景
 					this.txグラフ.vcScaleRatio = new Vector3( 1f, 1f, 1f );
@@ -205,22 +205,22 @@ namespace DTXMania
                     int nGaugeSize = (int)(434.0f * (float)this.dbグラフ値現在 / 100.0f);
                     int nPosY = this.nGraphUsePart == 0 ? 527 - nGaugeSize : 587 - nGaugeSize;
                     this.txグラフ_ゲージ.nTransparency = 255;
-                    this.txグラフ_ゲージ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart] + (CDTXMania.ConfigIni.bSmallGraph ? 26 : 45), nPosY, new Rectangle(2, 2, 30, nGaugeSize));
+                    this.txグラフ_ゲージ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart] + 45 + nGraphSizeOffset, nPosY, new Rectangle(2, 2, 30, nGaugeSize));
                     //ゲージ比較
                     int nTargetGaugeSize = (int)( 434.0f * ( (float)this.dbグラフ値目標 / 100.0f ) );
                     int nTargetGaugePosY = this.nGraphUsePart == 0 ? 527 - nTargetGaugeSize : 587 - nTargetGaugeSize;
                     int nTargetGaugeRectX = this.dbグラフ値現在 > this.dbグラフ値目標 ? 38 : 74;
                     this.txグラフ_ゲージ.nTransparency = 255;
-                    this.txグラフ_ゲージ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + (CDTXMania.ConfigIni.bSmallGraph ? 56 : 75), nTargetGaugePosY, new Rectangle( nTargetGaugeRectX, 2, 30, nTargetGaugeSize ) );
+                    this.txグラフ_ゲージ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75 + nGraphSizeOffset, nTargetGaugePosY, new Rectangle( nTargetGaugeRectX, 2, 30, nTargetGaugeSize ) );
                     if( this.txグラフ != null )
                     {
                         //ターゲット達成率数値
 
                         //ターゲット名
                         //現在
-                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + (CDTXMania.ConfigIni.bSmallGraph ? 26 : 45), nGraphBG_YPos + 357, new Rectangle( 260, 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 45 + nGraphSizeOffset, nGraphBG_YPos + 357, new Rectangle( 260, 2, 30, 120 ) );
                         //比較対象
-                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + (CDTXMania.ConfigIni.bSmallGraph ? 56 : 75), nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
+                        this.txグラフ.tDraw2D( CDTXMania.app.Device, nGraphBG_XPos[ this.nGraphUsePart ] + 75 + nGraphSizeOffset, nGraphBG_YPos + 357, new Rectangle( 260 + ( 30 * ( (int)CDTXMania.ConfigIni.eTargetGhost[ this.nGraphUsePart ] ) ), 2, 30, 120 ) );
 
                         //以下使用予定
                         if (!CDTXMania.ConfigIni.bSmallGraph)
@@ -233,8 +233,8 @@ namespace DTXMania
                             this.txグラフ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart] + 164, nGraphBG_YPos + 357, new Rectangle(260 + 120, 2, 30, 120));
                         }
                     }
-                    this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + (CDTXMania.ConfigIni.bSmallGraph ? 25 : 44), nPosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値現在 ) ) );
-                    this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + (CDTXMania.ConfigIni.bSmallGraph ? 55 : 74), nTargetGaugePosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値目標 ) ) );
+                    this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 44 + nGraphSizeOffset, nPosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値現在 ) ) );
+                    this.t比較文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 74 + nGraphSizeOffset, nTargetGaugePosY - 10, string.Format( "{0,5:##0.00}", Math.Abs( this.dbグラフ値目標 ) ) );
                 }
 
 
