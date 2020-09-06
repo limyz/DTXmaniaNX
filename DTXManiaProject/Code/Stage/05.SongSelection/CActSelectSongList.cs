@@ -385,6 +385,14 @@ namespace DTXMania
             }
         }
 
+		//
+		public void SearchUpdate()
+        {
+			this.r現在選択中の曲 = CDTXMania.SongManager.listSongRoot[0];
+			this.t現在選択中の曲を元に曲バーを再構成する();
+			this.t選択曲が変更された(true);
+			CDTXMania.stageSongSelection.tSelectedSongChanged();
+		}
 
 		/// <summary>
 		/// 曲リストをリセットする
@@ -1275,12 +1283,12 @@ namespace DTXMania
 			}
 			return Eバー種別.Other;
 		}
-		private CSongListNode r次の曲( CSongListNode song )
+		private CSongListNode r次の曲( CSongListNode song)
 		{
 			if( song == null )
 				return null;
 
-			List<CSongListNode> list = ( song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
+			List<CSongListNode> list = (song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
 	
 			int index = list.IndexOf( song );
 
@@ -1292,12 +1300,12 @@ namespace DTXMania
 
 			return list[ index + 1 ];
 		}
-		private CSongListNode r前の曲( CSongListNode song )
+		private CSongListNode r前の曲( CSongListNode song)
 		{
 			if( song == null )
 				return null;
 
-			List<CSongListNode> list = ( song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
+			List<CSongListNode> list = (song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
 
 			int index = list.IndexOf( song );
 	
@@ -1373,7 +1381,7 @@ namespace DTXMania
 				return;
 
 			for( int i = 0; i < 5; i++ )
-				song = this.r前の曲( song );
+				song = this.r前の曲( song);
 
 			for( int i = 0; i < 13; i++ )
 			{
@@ -1384,7 +1392,7 @@ namespace DTXMania
 				for( int j = 0; j < 3; j++ )
 					this.stバー情報[ i ].nスキル値[ j ] = (int) song.arScore[ this.n現在のアンカ難易度レベルに最も近い難易度レベルを返す( song ) ].SongInformation.HighSkill[ j ];
 
-				song = this.r次の曲( song );
+				song = this.r次の曲( song);
 			}
 
 			this.n現在の選択行 = 5;

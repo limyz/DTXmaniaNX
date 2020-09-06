@@ -61,6 +61,36 @@ namespace DTXMania
 			this.nID = id++;
 		}
 
+		//
+		public CSongListNode ShallowCopyOfSelf()
+        {
+			CSongListNode newNode = new CSongListNode();
+			newNode.eNodeType = this.eNodeType;
+			newNode.nID = this.nID;
+			newNode.arDifficultyLabel = this.arDifficultyLabel;
+			newNode.arScore = this.arScore;
+			newNode.bDTXFilesで始まるフォルダ名のBOXである = this.bDTXFilesで始まるフォルダ名のBOXである;
+			newNode.bBoxDefで作成されたBOXである = this.bBoxDefで作成されたBOXである;
+			newNode.col文字色 = this.col文字色;
+			newNode.listランダム用ノードリスト = this.listランダム用ノードリスト;
+			newNode.list子リスト = this.list子リスト;
+			newNode.nGood範囲ms = this.nGood範囲ms;
+			newNode.nGreat範囲ms = this.nGreat範囲ms;
+			newNode.nPerfect範囲ms = this.nPerfect範囲ms;
+			newNode.nPoor範囲ms = this.nPoor範囲ms;
+			newNode.nスコア数 = this.nスコア数;
+			newNode.pathSetDefの絶対パス = this.pathSetDefの絶対パス;
+			newNode.r親ノード = this.r親ノード;
+			newNode.SetDefのブロック番号 = this.SetDefのブロック番号;
+			newNode.stackRandomPerformanceNumber = this.stackRandomPerformanceNumber;
+			newNode.strジャンル = this.strジャンル;
+			newNode.strタイトル = this.strタイトル;
+			newNode.strバージョン = this.strバージョン;
+			newNode.strBreadcrumbs = this.strBreadcrumbs;
+			newNode.strSkinPath = this.strSkinPath;
+
+			return newNode;
+		}
 
 		// Other
 

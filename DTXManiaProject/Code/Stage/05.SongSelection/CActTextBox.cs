@@ -83,7 +83,7 @@ namespace DTXMania
 
 		public override void OnActivate()
 		{
-			rectパネル基本位置 = new Rectangle(440, 200, 400, 40);
+			rectパネル基本位置 = new Rectangle(400, 200, 480, 40);
 			b表示中 = false;
 			b入力中 = false;
 			b入力終了直後 = false;
@@ -131,8 +131,9 @@ namespace DTXMania
 					graphics.FillRectangle(new SolidBrush(Color.FromArgb(160, Color.Black)), 0, 0, bitmap.Width, bitmap.Height);
 					StringBuilder stringBuilder = new StringBuilder(256);
 					stringBuilder.AppendLine("*Song Search*");
-					stringBuilder.AppendLine("Type Title or Artist");
-					stringBuilder.AppendLine("Press Enter to start search");
+					stringBuilder.AppendLine("Usage:");
+					stringBuilder.AppendLine("Type in Text and press Enter to search by Title");
+					stringBuilder.AppendLine("Type /q followed by Enter to exit search");
 
 					using (Bitmap bitmap2 = prvf説明.DrawPrivateFont(stringBuilder.ToString(), Color.White, Color.Black))
 					{
