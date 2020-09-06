@@ -1023,11 +1023,11 @@ namespace DTXMania
                 CDTXMania.listTargetGhostScoreData[ (int)this.nCurrentInst ] = null;
             }
         }
-        private void tSrawStringSmall(int x, int y, string str)
+        private void tDrawStringSmall(int x, int y, string str)
         {
-            this.tSrawStringSmall(x, y, str, false);
+            this.tDrawStringSmall(x, y, str, false);
         }
-        private void tSrawStringSmall(int x, int y, string str, bool b強調)
+        private void tDrawStringSmall(int x, int y, string str, bool b強調)
         {
             foreach (char ch in str)
             {

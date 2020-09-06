@@ -240,7 +240,7 @@ namespace DTXMania
 		}
 		private bool tプレビュー画像の指定があれば構築する()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Preimage ) )
 			{
 				return false;
@@ -269,7 +269,7 @@ namespace DTXMania
 		}
 		private bool tプレビュー動画の指定があれば構築する()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( CDTXMania.ConfigIni.bAVIEnabled && ( cスコア != null ) ) && !string.IsNullOrEmpty( cスコア.SongInformation.Premovie ) )
 			{
 				string filename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Premovie;
@@ -308,7 +308,7 @@ namespace DTXMania
 		}
 		private bool t背景画像があればその一部からプレビュー画像を構築する()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( cスコア == null ) || string.IsNullOrEmpty( cスコア.SongInformation.Backgound ) )
 			{
 				return false;
@@ -374,7 +374,7 @@ namespace DTXMania
 		private void t描画処理_ジャンル文字列()
 		{
 			CSongListNode c曲リストノード = CDTXMania.stageSongSelection.r現在選択中の曲;
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( c曲リストノード != null ) && ( cスコア != null ) )
 			{
 				string str = "";

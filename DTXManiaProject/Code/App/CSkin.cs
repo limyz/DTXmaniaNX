@@ -330,20 +330,20 @@ namespace DTXMania
         public CSystemSound bgm結果画面 = null;
 		public CSystemSound soundSTAGEFAILED音 = null;
 		public CSystemSound soundCursorMovement = null;
-		public CSystemSound soundゲーム開始音 = null;
+		public CSystemSound soundGameStart = null;  // soundゲーム開始音
 		public CSystemSound soundGameEnd = null;
 		public CSystemSound soundStageClear = null;
-		public CSystemSound soundタイトル音 = null;
+		public CSystemSound soundTitle = null;  // soundタイトル音
 		public CSystemSound soundFullCombo = null;
-		public CSystemSound sound歓声音 = null;
+		public CSystemSound soundAudience = null;  // sound歓声音
 		public CSystemSound soundNowLoading = null;
-		public CSystemSound sound決定音 = null;
-		public CSystemSound sound取消音 = null;
-		public CSystemSound sound変更音 = null;
-        public CSystemSound sound曲決定 = null;
-        public CSystemSound soundExcellent = null;
-        public CSystemSound sound新記録音 = null;
-        public CSystemSound soundSelectMusic = null;
+		public CSystemSound soundDecide = null;  // sound決定音
+		public CSystemSound soundCancel = null;  // sound取消音
+		public CSystemSound soundChange = null;  // sound変更音
+		public CSystemSound soundDecideSong = null;  // sound曲決定
+		public CSystemSound soundExcellent = null;
+        public CSystemSound soundNewRecord = null;  // sound新記録音
+		public CSystemSound soundSelectMusic = null;
         public CSystemSound soundNovice = null;
         public CSystemSound soundRegular = null;
         public CSystemSound soundExpert = null;
@@ -362,22 +362,22 @@ namespace DTXMania
 						return this.soundCursorMovement;
 
 					case ESystemSound.SOUND決定音:
-						return this.sound決定音;
+						return this.soundDecide;
 
 					case ESystemSound.SOUND変更音:
-						return this.sound変更音;
+						return this.soundChange;
 
 					case ESystemSound.SOUND取消音:
-						return this.sound取消音;
+						return this.soundCancel;
 
 					case ESystemSound.SOUND歓声音:
-						return this.sound歓声音;
+						return this.soundAudience;
 
 					case ESystemSound.SOUNDステージ失敗音:
 						return this.soundSTAGEFAILED音;
 
 					case ESystemSound.SOUNDゲーム開始音:
-						return this.soundゲーム開始音;
+						return this.soundGameStart;
 
 					case ESystemSound.SOUNDゲーム終了音:
 						return this.soundGameEnd;
@@ -392,16 +392,16 @@ namespace DTXMania
                         return this.soundExcellent;
 
                     case ESystemSound.SOUND新記録音:
-                        return this.sound新記録音;
+                        return this.soundNewRecord;
 
 					case ESystemSound.SOUND曲読込開始音:
 						return this.soundNowLoading;
 
 					case ESystemSound.SOUNDタイトル音:
-						return this.soundタイトル音;
+						return this.soundTitle;
 
                     case ESystemSound.SOUND曲決定:
-                        return this.sound曲決定;
+                        return this.soundDecideSong;
 
                     case ESystemSound.SOUNDNOVICE:
                         return this.soundNovice;
@@ -455,22 +455,22 @@ namespace DTXMania
 						return this.soundCursorMovement;
 
 					case 1:
-						return this.sound決定音;
+						return this.soundDecide;
 
 					case 2:
-						return this.sound変更音;
+						return this.soundChange;
 
 					case 3:
-						return this.sound取消音;
+						return this.soundCancel;
 
 					case 4:
-						return this.sound歓声音;
+						return this.soundAudience;
 
 					case 5:
 						return this.soundSTAGEFAILED音;
 
 					case 6:
-						return this.soundゲーム開始音;
+						return this.soundGameStart;
 
 					case 7:
 						return this.soundGameEnd;
@@ -482,16 +482,16 @@ namespace DTXMania
                         return this.soundExcellent;
 
                     case 10:
-                        return this.sound新記録音;
+                        return this.soundNewRecord;
 
 					case 11:
 						return this.soundNowLoading;
 
 					case 12:
-						return this.soundタイトル音;
+						return this.soundTitle;
 
                     case 13:
-                        return this.sound曲決定;
+                        return this.soundDecideSong;
 
 					case 14:
 						return this.bgm起動画面;
@@ -667,20 +667,20 @@ namespace DTXMania
 				}
 			}
 			this.soundCursorMovement	= new CSystemSound( @"Sounds\Move.ogg",			false, false, false );
-			this.sound決定音			= new CSystemSound( @"Sounds\Decide.ogg",			false, false, false );
-			this.sound変更音			= new CSystemSound( @"Sounds\Change.ogg",			false, false, false );
-			this.sound取消音			= new CSystemSound( @"Sounds\Cancel.ogg",			false, false, true  );
-			this.sound歓声音			= new CSystemSound( @"Sounds\Audience.ogg",		false, false,  true  );
+			this.soundDecide			= new CSystemSound( @"Sounds\Decide.ogg",			false, false, false );
+			this.soundChange			= new CSystemSound( @"Sounds\Change.ogg",			false, false, false );
+			this.soundCancel			= new CSystemSound( @"Sounds\Cancel.ogg",			false, false, true  );
+			this.soundAudience			= new CSystemSound( @"Sounds\Audience.ogg",		false, false,  true  );
 			this.soundSTAGEFAILED音		= new CSystemSound( @"Sounds\Stage failed.ogg",	false, true,  true  );
-			this.soundゲーム開始音		= new CSystemSound( @"Sounds\Game start.ogg",		false, false, false );
+			this.soundGameStart		= new CSystemSound( @"Sounds\Game start.ogg",		false, false, false );
 			this.soundGameEnd		= new CSystemSound( @"Sounds\Game end.ogg",		false, true,  false );
 			this.soundStageClear	= new CSystemSound( @"Sounds\Stage clear.ogg",		false, true,  false );
 			this.soundFullCombo		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
-            this.sound新記録音          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
+            this.soundNewRecord          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
             this.soundExcellent    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
 			this.soundNowLoading		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
-			this.soundタイトル音		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
-            this.sound曲決定            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );
+			this.soundTitle		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
+            this.soundDecideSong            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );
             this.soundNovice            = new CSystemSound( @"Sounds\Novice.ogg",          false, false, false );
             this.soundRegular           = new CSystemSound( @"Sounds\Regular.ogg",         false, false, false );
 			this.soundExpert		    = new CSystemSound( @"Sounds\Expert.ogg",		    false, false, false );

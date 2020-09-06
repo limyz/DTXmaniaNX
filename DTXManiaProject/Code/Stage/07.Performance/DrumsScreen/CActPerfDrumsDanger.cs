@@ -35,7 +35,7 @@ namespace DTXMania
 		/// <param name="bIsDangerGuitar">Guitarのゲージ(未使用)</param>
 		/// <param name="bIsDangerBass">Bassのゲージ(未使用)</param>
 		/// <returns></returns>
-		public override int t進行描画( bool bIsDangerDrums, bool bIsDangerGuitar, bool bIsDangerBass )
+		public override int tUpdateAndDraw( bool bIsDangerDrums, bool bIsDangerGuitar, bool bIsDangerBass )
 		{
 			if( !base.bNotActivated )
 			{

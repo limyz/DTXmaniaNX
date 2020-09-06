@@ -45,7 +45,7 @@ namespace DTXMania
 		/// <param name="bIsDamgerGuitar">GuitarがDangerならtrue</param>
 		/// <param name="bIsDangerBass">BassがDangerならtrue</param>
 		/// <returns></returns>
-		public abstract int t進行描画( bool bIsDangerDrums, bool bIsDamgerGuitar, bool bIsDangerBass );
+		public abstract int tUpdateAndDraw( bool bIsDangerDrums, bool bIsDamgerGuitar, bool bIsDangerBass );  // t進行描画
 
 
 

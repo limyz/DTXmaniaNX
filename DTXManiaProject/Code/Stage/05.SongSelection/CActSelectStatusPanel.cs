@@ -19,7 +19,7 @@ namespace DTXMania
         public void tSelectedSongChanged()
         {
             CSongListNode c曲リストノード = CDTXMania.stageSongSelection.r現在選択中の曲;
-            CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+            CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
             if ((c曲リストノード != null) && (cスコア != null))
             {
                 this.n現在選択中の曲の難易度 = CDTXMania.stageSongSelection.nSelectedSongDifficultyLevel;
@@ -210,7 +210,7 @@ namespace DTXMania
 
                 // 描画
 
-                CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+                CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 
                 #region [ 選択曲の BPM の描画 ]
                 if (CDTXMania.stageSongSelection.r現在選択中の曲 != null && this.txBPM画像 != null)

@@ -7,11 +7,11 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfDrumsLaneFlashD : CActivity
+	internal class CActPerfDrumsLaneFlushD : CActivity
 	{
 		// コンストラクタ
 
-		public CActPerfDrumsLaneFlashD()
+		public CActPerfDrumsLaneFlushD()
 		{
             STレーンサイズ[] stレーンサイズArray = new STレーンサイズ[11];
             STレーンサイズ stレーンサイズ = new STレーンサイズ();
