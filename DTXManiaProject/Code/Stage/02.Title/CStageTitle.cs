@@ -146,7 +146,7 @@ namespace DTXMania
 				// キー入力
 
 				if( base.ePhaseID == CStage.EPhase.Common_DefaultState		// 通常状態、かつ
-					&& CDTXMania.act現在入力を占有中のプラグイン == null )	// プラグインの入力占有がない
+					&& CDTXMania.actPluginOccupyingInput == null )	// プラグインの入力占有がない
 				{
 					if( CDTXMania.InputManager.Keyboard.bKeyPressed( (int) Key.Escape ) )
 						return (int) E戻り値.EXIT;
@@ -165,13 +165,13 @@ namespace DTXMania
 
 					if( ( CDTXMania.Pad.bPressedDGB( EPad.CY ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.RD ) ) || ( CDTXMania.ConfigIni.bEnterがキー割り当てのどこにも使用されていない && CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Return ) ) ) 
 					{
-						if ( ( this.n現在のカーソル行 == (int) E戻り値.GAMESTART - 1 ) && CDTXMania.Skin.soundゲーム開始音.b読み込み成功 )
+						if ( ( this.n現在のカーソル行 == (int) E戻り値.GAMESTART - 1 ) && CDTXMania.Skin.soundGameStart.b読み込み成功 )
 						{
-							CDTXMania.Skin.soundゲーム開始音.tPlay();
+							CDTXMania.Skin.soundGameStart.tPlay();
 						}
 						else
 						{
-							CDTXMania.Skin.sound決定音.tPlay();
+							CDTXMania.Skin.soundDecide.tPlay();
 						}
 						if( this.n現在のカーソル行 == (int)E戻り値.EXIT - 1 )
 						{
@@ -229,7 +229,7 @@ namespace DTXMania
 					case CStage.EPhase.Common_FadeIn:
 						if( this.actFI.OnUpdateAndDraw() != 0 )
 						{
-							CDTXMania.Skin.soundタイトル音.tPlay();
+							CDTXMania.Skin.soundTitle.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;
@@ -257,7 +257,7 @@ namespace DTXMania
 					case CStage.EPhase.タイトル_起動画面からのフェードイン:
 						if( this.actFIfromSetup.OnUpdateAndDraw() != 0 )
 						{
-							CDTXMania.Skin.soundタイトル音.tPlay();
+							CDTXMania.Skin.soundTitle.tPlay();
 							base.ePhaseID = CStage.EPhase.Common_DefaultState;
 						}
 						break;

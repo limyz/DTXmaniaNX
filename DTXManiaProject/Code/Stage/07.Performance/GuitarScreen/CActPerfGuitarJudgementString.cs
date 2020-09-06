@@ -10,11 +10,11 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfGuitarJudgementCharacterString : CActPerfCommonJudgementCharacterString
+	internal class CActPerfGuitarJudgementString : CActPerfCommonJudgementString
 	{
 		// コンストラクタ
 
-		public CActPerfGuitarJudgementCharacterString()
+		public CActPerfGuitarJudgementString()
 		{
 			this.stレーンサイズ = new STレーンサイズ[ 15 ];
 			STレーンサイズ stレーンサイズ = new STレーンサイズ();
@@ -1336,26 +1336,26 @@ namespace DTXMania
                             int num6 = 0;
 							if( j == 14 )
 							{
-								if( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.D )
+								if( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.D )
 								{
 									// goto Label_06B7;
 									continue;
 								}
-								num5 = ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.B ) ? 770 : 1060;
-                                if ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.C )
+								num5 = ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.B ) ? 770 : 1060;
+                                if ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.C )
                                     num6 = CDTXMania.ConfigIni.bReverse.Bass ? 650 : 80;
                                 else
                                     num6 = CDTXMania.ConfigIni.bReverse.Bass ? 450 : 300;
 							}
 							else if( j == 13 )
 							{
-								if( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.D )
+								if( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.D )
 								{
 									// goto Label_06B7;
 									continue;
 								}
-								num5 = ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.B ) ? 420 : 180;
-                                if ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.C )
+								num5 = ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.B ) ? 420 : 180;
+                                if ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.C )
                                     num6 = CDTXMania.ConfigIni.bReverse.Guitar ? 650 : 80;
                                 else
                                     num6 = CDTXMania.ConfigIni.bReverse.Guitar ? 450 : 300;
@@ -1448,26 +1448,26 @@ namespace DTXMania
                             int num6 = 0;
 							if( j == 14 )
 							{
-								if( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.D )
+								if( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.D )
 								{
 									// goto Label_06B7;
 									continue;
 								}
-								num5 = ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.B ) ? 770 : 1020;
-                                if ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) == EType.C )
+								num5 = ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.B ) ? 770 : 1020;
+                                if ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) == EType.C )
                                     num6 = CDTXMania.ConfigIni.bReverse.Bass ? 650 : 80;
                                 else
                                     num6 = CDTXMania.ConfigIni.bReverse.Bass ? 450 : 300;
 							}
 							else if( j == 13 )
 							{
-								if( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.D )
+								if( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.D )
 								{
 									// goto Label_06B7;
 									continue;
 								}
-								num5 = ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.B ) ? 420 : 160;
-                                if ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) == EType.C )
+								num5 = ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.B ) ? 420 : 160;
+                                if ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) == EType.C )
                                     num6 = CDTXMania.ConfigIni.bReverse.Guitar ? 650 : 80;
                                 else
                                     num6 = CDTXMania.ConfigIni.bReverse.Guitar ? 450 : 300;

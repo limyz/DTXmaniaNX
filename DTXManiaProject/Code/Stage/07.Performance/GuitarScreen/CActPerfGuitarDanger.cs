@@ -37,7 +37,7 @@ namespace DTXMania
 		/// <param name="bIsDangerGuitar">GuitarがDangerか否か</param>
 		/// <param name="bIsDangerBass">BassがDangerか否か</param>
 		/// <returns></returns>
-		public override int t進行描画( bool bIsDangerDrums, bool bIsDangerGuitar, bool bIsDangerBass )
+		public override int tUpdateAndDraw( bool bIsDangerDrums, bool bIsDangerGuitar, bool bIsDangerBass )
 		{
 			bool[] bIsDanger = { bIsDangerDrums, bIsDangerGuitar, bIsDangerBass };
 

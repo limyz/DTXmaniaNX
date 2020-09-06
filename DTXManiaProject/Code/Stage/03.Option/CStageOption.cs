@@ -210,7 +210,7 @@ namespace DTXMania
 			switch( this.eItemPanelMove )
 			{
 				case EItemPanelMode.PadList:
-					this.actList.t進行描画( !this.bFocusIsOnMenu );
+					this.actList.tUpdateAndDraw( !this.bFocusIsOnMenu );
 					break;
 
 				case EItemPanelMode.KeyCodeList:
@@ -262,12 +262,12 @@ namespace DTXMania
 
 			if( ( base.ePhaseID != CStage.EPhase.Common_DefaultState )
 				|| this.actKeyAssign.bキー入力待ちの最中である
-				|| CDTXMania.act現在入力を占有中のプラグイン != null )
+				|| CDTXMania.actPluginOccupyingInput != null )
 				return 0;
 
 			if( ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Escape ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) ) || CDTXMania.Pad.bPressedGB( EPad.Pick ) )
 			{
-				CDTXMania.Skin.sound取消音.tPlay();
+				CDTXMania.Skin.soundCancel.tPlay();
 				if( !this.bFocusIsOnMenu )
 				{
 					if( this.eItemPanelMove == EItemPanelMode.KeyCodeList )
@@ -292,13 +292,13 @@ namespace DTXMania
 			{
 				if( this.nCurrentMenuNumber == 4 )
 				{
-					CDTXMania.Skin.sound曲決定.tPlay();
+					CDTXMania.Skin.soundDecideSong.tPlay();
 					this.actFIFO.tStartFadeOut();
 					base.ePhaseID = CStage.EPhase.Common_FadeOut;
 				}
 				else if( this.bFocusIsOnMenu )
 				{
-					CDTXMania.Skin.sound決定音.tPlay();
+					CDTXMania.Skin.soundDecide.tPlay();
 					this.bFocusIsOnMenu = false;
 					this.tDrawSelectedItemDescriptionInDescriptionPanel();
 				}

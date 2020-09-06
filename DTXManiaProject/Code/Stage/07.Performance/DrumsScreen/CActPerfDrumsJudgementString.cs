@@ -11,11 +11,11 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfDrumsJudgementCharacterString : CActPerfCommonJudgementCharacterString
+	internal class CActPerfDrumsJudgementString : CActPerfCommonJudgementString
 	{
 		// コンストラクタ
 
-        public CActPerfDrumsJudgementCharacterString()
+        public CActPerfDrumsJudgementString()
         {
             base.bNotActivated = true;
         }
@@ -1263,7 +1263,7 @@ namespace DTXMania
                             if (j < 10)
                             {
                                 num5 = base.stレーンサイズ[j].x;
-                                if( CDTXMania.ConfigIni.判定文字表示位置.Drums == EType.A )
+                                if( CDTXMania.ConfigIni.JudgementStringPosition.Drums == EType.A )
                                 {
                                     num6 = CDTXMania.ConfigIni.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
                                 }
@@ -1361,7 +1361,7 @@ namespace DTXMania
                             if (j < 10)
                             {
                                 num5 = base.stレーンサイズ[j].x;
-                                if( CDTXMania.ConfigIni.判定文字表示位置.Drums == EType.A )
+                                if( CDTXMania.ConfigIni.JudgementStringPosition.Drums == EType.A )
                                 {
                                     num6 = CDTXMania.ConfigIni.bReverse.Drums ? 348 + -(this.n文字の縦表示位置[j] * 0x20) : (348 + this.n文字の縦表示位置[j] * 0x20);
                                 }

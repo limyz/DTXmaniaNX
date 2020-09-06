@@ -279,7 +279,7 @@ namespace DTXMania
             private set;
         }
         public static Format TextureFormat = Format.A8R8G8B8;
-        internal static IPluginActivity act現在入力を占有中のプラグイン = null;
+        internal static IPluginActivity actPluginOccupyingInput = null;  // act現在入力を占有中のプラグイン
         public bool bApplicationActive
         {
             get;
@@ -582,7 +582,7 @@ namespace DTXMania
                 {
                     Directory.SetCurrentDirectory(sp.strプラグインフォルダ);
 
-                    if (CDTXMania.act現在入力を占有中のプラグイン == null || CDTXMania.act現在入力を占有中のプラグイン == sp.plugin)
+                    if (CDTXMania.actPluginOccupyingInput == null || CDTXMania.actPluginOccupyingInput == sp.plugin)
                         sp.plugin.On進行描画(CDTXMania.Pad, CDTXMania.InputManager.Keyboard);
                     else
                         sp.plugin.On進行描画(null, null);
@@ -924,7 +924,7 @@ namespace DTXMania
                         //-----------------------------
                         switch (this.nUpdateAndDrawReturnValue)
                         {
-                            case (int)CStageSongSelection.E戻り値.タイトルに戻る:
+                            case (int)CStageSongSelection.EReturnValue.ReturnToTitle:
                                 #region [ *** ]
                                 //-----------------------------
                                 rCurrentStage.OnDeactivate();
@@ -946,7 +946,7 @@ namespace DTXMania
                             //-----------------------------
                                 #endregion
 
-                            case (int)CStageSongSelection.E戻り値.選曲した:
+                            case (int)CStageSongSelection.EReturnValue.Selected:
                                 #region [ *** ]
                                 //-----------------------------
                                 rCurrentStage.OnDeactivate();
@@ -969,7 +969,7 @@ namespace DTXMania
                                 #endregion
 
 
-                            case (int)CStageSongSelection.E戻り値.オプション呼び出し:
+                            case (int)CStageSongSelection.EReturnValue.CallOptions:
                                 #region [ *** ]
                                 //-----------------------------
 
@@ -992,7 +992,7 @@ namespace DTXMania
                             //-----------------------------
                                 #endregion
 
-                            case (int)CStageSongSelection.E戻り値.コンフィグ呼び出し:
+                            case (int)CStageSongSelection.EReturnValue.CallConfig:
                                 #region [ *** ]
                                 //-----------------------------
                                 rCurrentStage.OnDeactivate();
@@ -1014,7 +1014,7 @@ namespace DTXMania
                             //-----------------------------
                                 #endregion
 
-                            case (int)CStageSongSelection.E戻り値.スキン変更:
+                            case (int)CStageSongSelection.EReturnValue.ChangeSking:
 
                                 #region [ *** ]
                                 //-----------------------------
@@ -2455,12 +2455,12 @@ for (int i = 0; i < 3; i++) {
                 ini.tAddHistory(str新ヒストリ行);
                 if (!bCompactMode)
                 {
-                    stageSongSelection.r現在選択中のスコア.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;
-                    stageSongSelection.r現在選択中のスコア.SongInformation.NbPerformances.Guitar = ini.stFile.PlayCountGuitar;
-                    stageSongSelection.r現在選択中のスコア.SongInformation.NbPerformances.Bass = ini.stFile.PlayCountBass;
+                    stageSongSelection.rSelectedScore.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;
+                    stageSongSelection.rSelectedScore.SongInformation.NbPerformances.Guitar = ini.stFile.PlayCountGuitar;
+                    stageSongSelection.rSelectedScore.SongInformation.NbPerformances.Bass = ini.stFile.PlayCountBass;
                     for (int j = 0; j < ini.stFile.History.Length; j++)
                     {
-                        stageSongSelection.r現在選択中のスコア.SongInformation.PerformanceHistory[j] = ini.stFile.History[j];
+                        stageSongSelection.rSelectedScore.SongInformation.PerformanceHistory[j] = ini.stFile.History[j];
                     }
                 }
             }

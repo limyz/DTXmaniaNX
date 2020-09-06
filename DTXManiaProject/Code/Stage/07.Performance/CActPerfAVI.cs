@@ -824,7 +824,7 @@ namespace DTXMania
                 }
 
                 if (CDTXMania.ConfigIni.bShowMusicInfo)
-                    this.actPanel.t進行描画();
+                    this.actPanel.tUpdateAndDraw();
 
                 if( ( ( this.bWindowMode ) && this.tx描画用 != null && ( CDTXMania.ConfigIni.bAVIEnabled ) ) )
                 {

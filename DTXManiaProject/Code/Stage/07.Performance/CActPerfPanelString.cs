@@ -133,7 +133,7 @@ namespace DTXMania
         {
             throw new InvalidOperationException("tUpdateAndDraw(x,y)のほうを使用してください。");
         }
-        public int t進行描画()
+        public int tUpdateAndDraw()  // t進行描画
         {
             if (!base.bNotActivated)
             {

@@ -6,7 +6,7 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfDrumsLaneFlashGB : CActPerfCommonLaneFlushGB
+	internal class CActPerfDrumsLaneFlushGB : CActPerfCommonLaneFlushGB
 	{
 		// CActivity 実装（共通クラスからの差分のみ）
 

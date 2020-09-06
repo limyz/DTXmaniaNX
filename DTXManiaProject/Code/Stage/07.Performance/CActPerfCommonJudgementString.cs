@@ -8,7 +8,7 @@ using FDK;
 
 namespace DTXMania
 {
-	internal class CActPerfCommonJudgementCharacterString : CActivity
+	internal class CActPerfCommonJudgementString : CActivity
 	{
 		// プロパティ
         public int iP_A;
@@ -77,7 +77,7 @@ namespace DTXMania
         protected STレーンサイズ[] stレーンサイズ;
 		// コンストラクタ
 
-		public CActPerfCommonJudgementCharacterString()
+		public CActPerfCommonJudgementString()
 		{
             int iP_A = 390;
             int iP_B = 0x248;
@@ -112,7 +112,7 @@ namespace DTXMania
 			{
 				throw new IndexOutOfRangeException( "有効範囲は 0～14 です。" );
 			}
-			if( ( ( nLane >= 10 ) || ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Drums ) != EType.C ) ) && ( ( ( nLane != 13 ) || ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Guitar ) != EType.D ) ) && ( ( nLane != 14 ) || ( ( (EType) CDTXMania.ConfigIni.判定文字表示位置.Bass ) != EType.D ) ) ) )
+			if( ( ( nLane >= 10 ) || ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Drums ) != EType.C ) ) && ( ( ( nLane != 13 ) || ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Guitar ) != EType.D ) ) && ( ( nLane != 14 ) || ( ( (EType) CDTXMania.ConfigIni.JudgementStringPosition.Bass ) != EType.D ) ) ) )
 			{
                 if (CDTXMania.ConfigIni.nJudgeAnimeType != 0)
                 {
@@ -183,7 +183,7 @@ namespace DTXMania
                     this.stレーンサイズ[i] = new STレーンサイズ();
                     if( CDTXMania.ConfigIni.bDrumsEnabled )
                     {
-                        this.stレーンサイズ[i] = default(CActPerfDrumsJudgementCharacterString.STレーンサイズ);
+                        this.stレーンサイズ[i] = default(CActPerfDrumsJudgementString.STレーンサイズ);
                         switch ( CDTXMania.ConfigIni.eLaneType.Drums )
                         {
                             case EType.A:
