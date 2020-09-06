@@ -577,6 +577,7 @@ namespace DTXMania
 		public STDGBVALUE<bool> bSudden;
 		public bool bTight;
 		public STDGBVALUE<bool> bGraph有効;     // #24074 2011.01.23 add ikanick
+		public bool bSmallGraph;
 		public bool bWave再生位置自動調整機能有効;
 		public bool bシンバルフリー;
 		public bool bストイックモード;
@@ -1880,7 +1881,11 @@ namespace DTXMania
 			sw.WriteLine( "BassGraph={0}", this.bGraph有効.Bass ? 1 : 0 );
 			sw.WriteLine();
 
-            sw.WriteLine( "; ドラムコンボの表示(0:OFF, 1:ON)" );									// #29500 2012.9.11 kairera0467
+			sw.WriteLine("; Small Graph (0:OFF, 1:ON)");
+			sw.WriteLine("SmallGraph={0}", this.bSmallGraph ? 1 : 0);
+			sw.WriteLine();
+
+			sw.WriteLine( "; ドラムコンボの表示(0:OFF, 1:ON)" );									// #29500 2012.9.11 kairera0467
             sw.WriteLine( ": DrumPart Display Combo. 0=OFF, 1=ON " );
             sw.WriteLine( "DrumComboDisp={0}", this.bドラムコンボ文字の表示 ? 1 : 0 );				//
             sw.WriteLine();
@@ -2904,7 +2909,11 @@ namespace DTXMania
 											{
 												this.bGraph有効.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
-											else if( str3.Equals( "DrumsReverse" ) )
+											else if (str3.Equals("SmallGraph"))
+											{
+												this.bSmallGraph = CConversion.bONorOFF(str4[0]);
+											}
+											else if ( str3.Equals( "DrumsReverse" ) )
 											{
 												this.bReverse.Drums = CConversion.bONorOFF( str4[ 0 ] );
 											}
