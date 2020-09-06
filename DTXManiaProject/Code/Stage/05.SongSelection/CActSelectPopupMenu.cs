@@ -71,7 +71,7 @@ namespace DTXMania
         {
             if (this.bキー入力待ち)
             {
-                CDTXMania.Skin.sound決定音.tPlay();
+                CDTXMania.Skin.soundDecide.tPlay();
 
                 if (this.n現在の選択行 != lciMenuItems.Count - 1)
                 {
@@ -95,7 +95,7 @@ namespace DTXMania
                     }
                     nItemSelecting = n現在の選択行;
                 }
-                tEnter押下Main((int)lciMenuItems[n現在の選択行].GetIndex());
+                tPressEnterMain((int)lciMenuItems[n現在の選択行].GetIndex());
 
                 this.bキー入力待ち = true;
             }
@@ -105,7 +105,7 @@ namespace DTXMania
         /// Decide押下時の処理を、継承先で記述する。
         /// </summary>
         /// <param name="val">CItemBaseの現在の設定値のindex</param>
-        public virtual void tEnter押下Main(int val)
+        public virtual void tPressEnterMain(int val)
         {
         }
         /// <summary>
@@ -234,7 +234,7 @@ namespace DTXMania
             throw new InvalidOperationException("tUpdateAndDraw(bool)のほうを使用してください。");
         }
 
-        public int t進行描画()
+        public int tUpdateAndDraw()  // t進行描画
         {
             if (!base.bNotActivated && this.bIsActivePopupMenu)
             {
@@ -247,7 +247,7 @@ namespace DTXMania
                     #region [ CONFIG画面 ]
                     if (CDTXMania.Pad.bPressed(EInstrumentPart.GUITAR, EPad.Help))
                     {	// [SHIFT] + [F1] CONFIG
-                        CDTXMania.Skin.sound取消音.tPlay();
+                        CDTXMania.Skin.soundCancel.tPlay();
                         tCancel();
                         this.bGotoDetailConfig = true;
                     }
@@ -257,7 +257,7 @@ namespace DTXMania
                         || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)
                         || CDTXMania.Pad.bPressedGB(EPad.Pick))
                     {	// キャンセル
-                        CDTXMania.Skin.sound取消音.tPlay();
+                        CDTXMania.Skin.soundCancel.tPlay();
                         tCancel();
                         this.bIsActivePopupMenu = false;
                     }
@@ -269,7 +269,7 @@ namespace DTXMania
                         EPadFlag[] comChangeScrollSpeed = new EPadFlag[] { EPadFlag.BD, EPadFlag.BD };
                         if (this.CommandHistory.CheckCommand(comChangeScrollSpeed, EInstrumentPart.DRUMS))
                         {
-                            CDTXMania.Skin.sound変更音.tPlay();
+                            CDTXMania.Skin.soundChange.tPlay();
                             tBDContinuity();
                             this.bIsActivePopupMenu = false;
                         }
@@ -282,7 +282,7 @@ namespace DTXMania
                         EPadFlag[] comChangeScrollSpeed = new EPadFlag[] { EPadFlag.P, EPadFlag.P };
                         if (CommandHistory.CheckCommand(comChangeScrollSpeed, EInstrumentPart.GUITAR))
                         {
-                            CDTXMania.Skin.sound変更音.tPlay();
+                            CDTXMania.Skin.soundChange.tPlay();
                             tBDContinuity();
                             this.bIsActivePopupMenu = false;
                         }
@@ -295,7 +295,7 @@ namespace DTXMania
                         EPadFlag[] comChangeScrollSpeed = new EPadFlag[] { EPadFlag.P, EPadFlag.P };
                         if (CommandHistory.CheckCommand(comChangeScrollSpeed, EInstrumentPart.BASS))
                         {
-                            CDTXMania.Skin.sound変更音.tPlay();
+                            CDTXMania.Skin.soundChange.tPlay();
                             tBDContinuity();
                             this.bIsActivePopupMenu = false;
                         }

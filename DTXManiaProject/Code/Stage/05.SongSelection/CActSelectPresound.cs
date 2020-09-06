@@ -25,7 +25,7 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( cスコア != null ) && ( ( !( cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound ).Equals( this.str現在のファイル名 ) || ( this.sound == null ) ) || !this.sound.b再生中 ) )
 			{
 				this.tサウンド停止();
@@ -115,7 +115,7 @@ namespace DTXMania
 		}
 		private void tプレビューサウンドの作成()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( cスコア != null ) && !string.IsNullOrEmpty( cスコア.SongInformation.Presound ) )
 			{
 				string strPreviewFilename = cスコア.FileInformation.AbsoluteFolderPath + cスコア.SongInformation.Presound;

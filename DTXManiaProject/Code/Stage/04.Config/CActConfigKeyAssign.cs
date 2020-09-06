@@ -42,7 +42,7 @@ namespace DTXMania
 		{
 			if( !this.bWaitingForKeyInput )
 			{
-				CDTXMania.Skin.sound決定音.tPlay();
+				CDTXMania.Skin.soundDecide.tPlay();
 				switch( this.nSelectedRow )
 				{
 					case 16:
@@ -117,7 +117,7 @@ namespace DTXMania
 				{
 					if( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Escape ) )
 					{
-						CDTXMania.Skin.sound取消音.tPlay();
+						CDTXMania.Skin.soundCancel.tPlay();
 						this.bWaitingForKeyInput = false;
 						CDTXMania.InputManager.tDoPolling( CDTXMania.app.bApplicationActive, false );
 					}
@@ -129,7 +129,7 @@ namespace DTXMania
 				}
 				else if( ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDX.DirectInput.Key.Delete ) && ( this.nSelectedRow >= 0 ) ) && ( this.nSelectedRow <= 15 ) )
 				{
-					CDTXMania.Skin.sound決定音.tPlay();
+					CDTXMania.Skin.soundDecide.tPlay();
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Unknown;
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = 0;
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].Code = 0;
@@ -434,7 +434,7 @@ namespace DTXMania
 					{
 						if( device.bKeyPressed( i ) )
 						{
-							CDTXMania.Skin.sound決定音.tPlay();
+							CDTXMania.Skin.soundDecide.tPlay();
 							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Joypad, device.ID, i );
 							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Joypad;
 							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = device.ID;
@@ -458,7 +458,7 @@ namespace DTXMania
 					i != (int)SlimDX.DirectInput.Key.Delete &&
 					 CDTXMania.InputManager.Keyboard.bKeyPressed( i ) )
 				{
-					CDTXMania.Skin.sound決定音.tPlay();
+					CDTXMania.Skin.soundDecide.tPlay();
 					CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.Keyboard, 0, i );
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.Keyboard;
 					CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = 0;
@@ -478,7 +478,7 @@ namespace DTXMania
 					{
 						if( device.bKeyPressed( i ) )
 						{
-							CDTXMania.Skin.sound決定音.tPlay();
+							CDTXMania.Skin.soundDecide.tPlay();
 							CDTXMania.ConfigIni.tDeleteAlreadyAssignedInputs( EInputDevice.MIDI入力, device.ID, i );
 							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].InputDevice = EInputDevice.MIDI入力;
 							CDTXMania.ConfigIni.KeyAssign[ (int) this.part ][ (int) this.pad ][ this.nSelectedRow ].ID = device.ID;

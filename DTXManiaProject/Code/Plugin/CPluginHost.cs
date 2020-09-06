@@ -55,18 +55,18 @@ namespace DTXMania
 		}
 		public bool t入力を占有する(IPluginActivity act)
 		{
-			if (CDTXMania.act現在入力を占有中のプラグイン != null)
+			if (CDTXMania.actPluginOccupyingInput != null)
 				return false;
 
-			CDTXMania.act現在入力を占有中のプラグイン = act;
+			CDTXMania.actPluginOccupyingInput = act;
 			return true;
 		}
 		public bool t入力の占有を解除する(IPluginActivity act)
 		{
-			if (CDTXMania.act現在入力を占有中のプラグイン == null || CDTXMania.act現在入力を占有中のプラグイン != act)
+			if (CDTXMania.actPluginOccupyingInput == null || CDTXMania.actPluginOccupyingInput != act)
 				return false;
 
-			CDTXMania.act現在入力を占有中のプラグイン = null;
+			CDTXMania.actPluginOccupyingInput = null;
 			return true;
 		}
 		public void tシステムサウンドを再生する( ESystemSound sound )
