@@ -34,7 +34,7 @@ namespace DTXMania
 
 		private CPrivateFastFont prvf入力文字列;
 
-		private CPrivateFastFont prvf説明;
+		private CPrivateFont prvf説明;
 
 		private Rectangle rectパネル基本位置;
 
@@ -83,7 +83,7 @@ namespace DTXMania
 
 		public override void OnActivate()
 		{
-			rectパネル基本位置 = new Rectangle(400, 200, 480, 40);
+			rectパネル基本位置 = new Rectangle(390, 200, 500, 40);
 			b表示中 = false;
 			b入力中 = false;
 			b入力終了直後 = false;
@@ -121,21 +121,29 @@ namespace DTXMania
 			//prvf説明 = new CPrivateFastFont(CSkin.Path(strファイルの相対パス), 16);
 
 			prvf入力文字列 = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
-			prvf説明 = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 16, FontStyle.Regular);
+			prvf説明 = new CPrivateFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 14, FontStyle.Regular);
 			t基本位置に応じて文字の描画範囲を設定する();
 			t背景テクスチャを生成();
-			using (Bitmap bitmap = new Bitmap(rectパネル基本位置.Width, 500))
+			using (Bitmap bitmap = new Bitmap(rectパネル基本位置.Width, 350))
 			{
 				using (Graphics graphics = Graphics.FromImage(bitmap))
 				{
 					graphics.FillRectangle(new SolidBrush(Color.FromArgb(160, Color.Black)), 0, 0, bitmap.Width, bitmap.Height);
 					StringBuilder stringBuilder = new StringBuilder(256);
 					stringBuilder.AppendLine("*Song Search*");
-					stringBuilder.AppendLine("Usage:");
-					stringBuilder.AppendLine("Type in Text and press Enter to search by Title");
-					stringBuilder.AppendLine("Type /q followed by Enter to exit search");
+					stringBuilder.AppendLine("Type in Text and press Enter to search by Title, Artist");
+					stringBuilder.AppendLine("and Comment");
+					stringBuilder.AppendLine("");
+					stringBuilder.AppendLine("Examples:");
+					stringBuilder.AppendLine("/t title - Search by Title only");
+					stringBuilder.AppendLine("/a artist - Search by Artist only");
+					stringBuilder.AppendLine("/c Comment - Search by Comment only");
+					stringBuilder.AppendLine("/s search text - Case-sensitive Search");
+					stringBuilder.AppendLine("/t /a /s Text - Case-sensitive Search of Title and Artist");
+					stringBuilder.AppendLine("/all - Returns all songs in a single list");
+					stringBuilder.AppendLine("Type /q followed by Enter to exit search mode");
 
-					using (Bitmap bitmap2 = prvf説明.DrawPrivateFont(stringBuilder.ToString(), Color.White, Color.Black))
+					using (Bitmap bitmap2 = prvf説明.DrawPrivateFont(stringBuilder.ToString(), CPrivateFont.DrawMode.Edge, Color.PeachPuff, Color.Black, Color.DarkRed, Color.DarkRed, true))
 					{
 						graphics.DrawImage(bitmap2, 20, 20, bitmap2.Width, bitmap2.Height);
 					}

@@ -656,7 +656,7 @@ namespace DTXMania
 					{
 						strSearchString = actTextBox.str確定文字列を返す();
 						string searchOutcome = "";
-						if(strSearchString != "" && strSearchString != "/q")
+						if(strSearchString != "" && strSearchString != CSongSearch.ExitSwitch)
                         {
 							searchOutcome = "Search Input: " + strSearchString;
 							Trace.TraceInformation("Search Input: " + strSearchString);
@@ -665,7 +665,7 @@ namespace DTXMania
 								CDTXMania.SongManager.listSongBeforeSearch = CDTXMania.SongManager.listSongRoot;
 							}
 
-							List<CSongListNode> searchOutputList = this.searchForSongs(CDTXMania.SongManager.listSongBeforeSearch, strSearchString);
+							List<CSongListNode> searchOutputList = CSongSearch.tSearchForSongs(CDTXMania.SongManager.listSongBeforeSearch, strSearchString);
 							if(searchOutputList.Count == 0)
                             {
 								Trace.TraceInformation("No songs found!");
@@ -684,7 +684,7 @@ namespace DTXMania
 							this.tUpdateSearchNotification(searchOutcome);
 							CDTXMania.Skin.sound決定音.tPlay();
 						}
-						else if(strSearchString == "/q")
+						else if(strSearchString == CSongSearch.ExitSwitch)
                         {
 							if(CDTXMania.SongManager.listSongBeforeSearch != null)
                             {
@@ -717,39 +717,7 @@ namespace DTXMania
 			}
 			return 0;
 		}
-
-		//Simple search function. To refactor as a separate class later
-		public List<CSongListNode> searchForSongs(in List<CSongListNode> listInputList,  string strSearchInput)
-        {
-			List<CSongListNode> searchOutputList = new List<CSongListNode>();
-
-
-			for (int i = 0; i < listInputList.Count; i++)
-			{
-				//Recursive search through all directories
-				if(listInputList[i].eNodeType == CSongListNode.ENodeType.BOX)
-                {
-					List<CSongListNode> tempSearchOutputList = searchForSongs(listInputList[i].list子リスト, strSearchInput);
-					searchOutputList.AddRange(tempSearchOutputList);
-				}
-				//Match search string only if node is a score or score_midi type
-				else if ((listInputList[i].eNodeType == CSongListNode.ENodeType.SCORE) || (listInputList[i].eNodeType == CSongListNode.ENodeType.SCORE_MIDI))
-				{
-					if (listInputList[i].strタイトル.Contains(strSearchString))
-					{
-						CSongListNode foundNode = listInputList[i].ShallowCopyOfSelf();
-						//Remove any children and parent nodes from shallow copy. Search return list is flat.
-						foundNode.list子リスト = null;
-						foundNode.r親ノード = null;
-
-						searchOutputList.Add(foundNode);
-					}
-				}
-			}
-
-			return searchOutputList;
-		}
-
+		
 		public enum E戻り値 : int
 		{
 			継続,
