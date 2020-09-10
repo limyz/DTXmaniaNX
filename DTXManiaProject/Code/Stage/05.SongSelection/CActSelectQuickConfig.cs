@@ -344,7 +344,7 @@ namespace DTXMania
             }
         }
 
-        public override void tEnter押下Main(int nSortOrder)
+        public override void tPressEnterMain(int nSortOrder)
         {
             switch (n現在の選択行)
             {

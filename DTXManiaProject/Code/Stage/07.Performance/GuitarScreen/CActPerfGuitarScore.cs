@@ -55,22 +55,29 @@ namespace DTXMania
 					base.n進行用タイマ = CDTXMania.Timer.nCurrentTime;
 					base.bJustStartedUpdate = false;
 				}
-				long num = CDTXMania.Timer.nCurrentTime;
-				if( num < base.n進行用タイマ )
-				{
-					base.n進行用タイマ = num;
-				}
-				while( ( num - base.n進行用タイマ ) >= 10 )
-				{
-					for( int j = 1; j < 3; j++ )
-					{
-						this.n現在表示中のスコア[ j ] += this.nスコアの増分[ j ];
+                if (CDTXMania.stagePerfGuitarScreen.bIsTrainingMode)
+                {
+                    this.n現在表示中のスコア[0] = 0;
+                }
+                else
+                {
+                    long num = CDTXMania.Timer.nCurrentTime;
+                    if (num < base.n進行用タイマ)
+                    {
+                        base.n進行用タイマ = num;
+                    }
+                    while ((num - base.n進行用タイマ) >= 10)
+                    {
+                        for (int j = 1; j < 3; j++)
+                        {
+                            this.n現在表示中のスコア[j] += this.nスコアの増分[j];
 
-						if( this.n現在表示中のスコア[ j ] > (long) this.nCurrentTrueScore[ j ] )
-							this.n現在表示中のスコア[ j ] = (long) this.nCurrentTrueScore[ j ];
-					}
-					base.n進行用タイマ += 10;
-				}
+                            if (this.n現在表示中のスコア[j] > (long)this.nCurrentTrueScore[j])
+                                this.n現在表示中のスコア[j] = (long)this.nCurrentTrueScore[j];
+                        }
+                        base.n進行用タイマ += 10;
+                    }
+                }
 				for( int j = 1; j < 3; j++ )
                 {
                     if ( CDTXMania.DTX.bチップがある[j] && n本体X[j] != 0 )

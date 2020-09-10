@@ -19,7 +19,7 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( ( cスコア != null ) && !CDTXMania.stageSongSelection.bScrolling )
 			{
 				try

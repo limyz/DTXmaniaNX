@@ -366,12 +366,19 @@ namespace DTXMania
                     CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Poor +
                     CDTXMania.stagePerfDrumsScreen.nHitCount_IncAuto[i].Miss;
 
-                dbPERFECT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Perfect) / n現在のノーツ数);
-                dbGREAT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Great / n現在のノーツ数));
-                dbGOOD率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Good / n現在のノーツ数));
-                dbPOOR率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Poor / n現在のノーツ数));
-                dbMISS率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Miss / n現在のノーツ数));
-                dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[i] / n現在のノーツ数));
+                if (CDTXMania.stagePerfDrumsScreen.bIsTrainingMode)
+                {
+                    CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums = 0;
+                }
+                else
+                {
+                    dbPERFECT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Perfect) / n現在のノーツ数);
+                    dbGREAT率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Great / n現在のノーツ数));
+                    dbGOOD率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Good / n現在のノーツ数));
+                    dbPOOR率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Poor / n現在のノーツ数));
+                    dbMISS率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[i].Miss / n現在のノーツ数));
+                    dbMAXCOMBO率 = Math.Round((100.0 * CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[i] / n現在のノーツ数));
+                }
 
                 if (double.IsNaN(dbPERFECT率))
                     dbPERFECT率 = 0;

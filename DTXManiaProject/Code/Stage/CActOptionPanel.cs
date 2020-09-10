@@ -62,9 +62,9 @@ namespace DTXMania
                     this.txOptionPanel.tDraw2D(device, 0x372, 14, this.rcReverse[configIni.bReverse.Drums ? 1 : 0]);
                     this.txOptionPanel.tDraw2D(device, 0x372, 0x20, this.rcReverse[configIni.bReverse.Guitar ? 1 : 0]);
                     this.txOptionPanel.tDraw2D(device, 0x372, 50, this.rcReverse[configIni.bReverse.Bass ? 1 : 0]);
-                    this.txOptionPanel.tDraw2D(device, 930, 14, this.rcPosition[(int)configIni.判定文字表示位置.Drums]);
-                    this.txOptionPanel.tDraw2D(device, 930, 0x20, this.rcPosition[(int)configIni.判定文字表示位置.Guitar]);
-                    this.txOptionPanel.tDraw2D(device, 930, 50, this.rcPosition[(int)configIni.判定文字表示位置.Bass]);
+                    this.txOptionPanel.tDraw2D(device, 930, 14, this.rcPosition[(int)configIni.JudgementStringPosition.Drums]);
+                    this.txOptionPanel.tDraw2D(device, 930, 0x20, this.rcPosition[(int)configIni.JudgementStringPosition.Guitar]);
+                    this.txOptionPanel.tDraw2D(device, 930, 50, this.rcPosition[(int)configIni.JudgementStringPosition.Bass]);
                     this.txOptionPanel.tDraw2D(device, 0x3d2, 14, this.rcTight[configIni.bTight ? 1 : 0]);
                     this.txOptionPanel.tDraw2D(device, 0x3d2, 0x20, this.rcRandom[(int)configIni.eRandom.Guitar]);
                     this.txOptionPanel.tDraw2D(device, 0x3d2, 50, this.rcRandom[(int)configIni.eRandom.Bass]);

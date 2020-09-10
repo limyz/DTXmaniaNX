@@ -18,7 +18,7 @@ namespace DTXMania
 		}
 		public void t選択曲が変更された()
 		{
-			CScore cスコア = CDTXMania.stageSongSelection.r現在選択中のスコア;
+			CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 			if( cスコア != null )
 			{
 				Bitmap image = new Bitmap( 1, 1 );

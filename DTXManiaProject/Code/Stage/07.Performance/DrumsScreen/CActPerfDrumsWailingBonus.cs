@@ -39,7 +39,7 @@ namespace DTXMania
 								CDTXMania.DTX.tPlayChip( r歓声Chip, CDTXMania.Timer.nシステム時刻, (int) ELane.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
-							CDTXMania.Skin.sound歓声音.tPlay();
+							CDTXMania.Skin.soundAudience.tPlay();
 							return;
 						}
 						break;

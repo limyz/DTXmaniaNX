@@ -43,8 +43,8 @@ namespace DTXMania
 								CDTXMania.DTX.tPlayChip( r歓声Chip, CSoundManager.rcPerformanceTimer.nシステム時刻, (int) ELane.BGM, CDTXMania.DTX.nモニタを考慮した音量( EInstrumentPart.UNKNOWN ) );
 								return;
 							}
-							CDTXMania.Skin.sound歓声音.n位置_次に鳴るサウンド = ( part == EInstrumentPart.GUITAR ) ? -50 : 50;
-							CDTXMania.Skin.sound歓声音.tPlay();
+							CDTXMania.Skin.soundAudience.n位置_次に鳴るサウンド = ( part == EInstrumentPart.GUITAR ) ? -50 : 50;
+							CDTXMania.Skin.soundAudience.tPlay();
 							return;
 						}
 						break;

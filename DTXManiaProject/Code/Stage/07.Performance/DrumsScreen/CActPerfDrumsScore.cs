@@ -28,18 +28,25 @@ namespace DTXMania
                     base.n進行用タイマ = CDTXMania.Timer.nCurrentTime;
                     base.bJustStartedUpdate = false;
                 }
-                long num = CDTXMania.Timer.nCurrentTime;
-                if (num < base.n進行用タイマ)
+                if (CDTXMania.stagePerfDrumsScreen.bIsTrainingMode)
                 {
-                    base.n進行用タイマ = num;
+                    this.n現在表示中のスコア[0] = 0;
                 }
-                while ((num - base.n進行用タイマ) >= 10)
+                else
                 {
+                    long num = CDTXMania.Timer.nCurrentTime;
+                    if (num < base.n進行用タイマ)
+                    {
+                        base.n進行用タイマ = num;
+                    }
+                    while ((num - base.n進行用タイマ) >= 10)
+                    {
                         this.n現在表示中のスコア[0] += this.nスコアの増分[0];
 
                         if (this.n現在表示中のスコア[0] > (long)this.nCurrentTrueScore[0])
                             this.n現在表示中のスコア[0] = (long)this.nCurrentTrueScore[0];
-                    base.n進行用タイマ += 10;
+                        base.n進行用タイマ += 10;
+                    }
                 }
                 string str = string.Format("{0,7:######0}", this.n現在表示中のスコア[0]);
                 for (int i = 0; i < 7; i++)

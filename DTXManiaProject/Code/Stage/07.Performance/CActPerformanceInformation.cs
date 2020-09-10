@@ -47,8 +47,8 @@ namespace DTXMania
 		{
 			throw new InvalidOperationException( "tUpdateAndDraw(int x, int y) のほうを使用してください。" );
 		}
-		public void t進行描画( int x, int y )
-		{
+		public void tUpdateAndDraw( int x, int y)  // t進行描画
+        {
 			if( !base.bNotActivated )
 			{
                     y += 0x143;

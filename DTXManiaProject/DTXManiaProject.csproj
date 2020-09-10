@@ -151,7 +151,7 @@
     <Compile Include="Code\Stage\07.Performance\CActPerfChipFireGB.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfPanelString.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfCommonLaneFlushGB.cs" />
-    <Compile Include="Code\Stage\07.Performance\CActPerfCommonJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfCommonJudgementString.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerformanceInformation.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfSkillMeter.cs" />
     <Compile Include="Code\Stage\07.Performance\CStagePerfCommonScreen.cs" />
@@ -163,8 +163,8 @@
     <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarScore.cs" />
     <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarStatusPanel.cs" />
     <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarChipFire.cs" />
-    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarLaneFlashGB.cs" />
-    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarLaneFlushGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarJudgementString.cs" />
     <Compile Include="Code\Stage\07.Performance\GuitarScreen\CStagePerfGuitarScreen.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfStageFailure.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfAVI.cs" />
@@ -179,9 +179,9 @@
     <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsChipFireGB.cs" />
     <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsPad.cs" />
     <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsFillingEffect.cs" />
-    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlashD.cs" />
-    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlashGB.cs" />
-    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsJudgementCharacterString.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlushD.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsLaneFlushGB.cs" />
+    <Compile Include="Code\Stage\07.Performance\DrumsScreen\CActPerfDrumsJudgementString.cs" />
     <Compile Include="Code\Stage\07.Performance\DrumsScreen\CStagePerfDrumsScreen.cs" />
     <Compile Include="Code\Stage\08.Result\CActResultImage.cs" />
     <Compile Include="Code\Stage\08.Result\CActResultParameterPanel.cs" />

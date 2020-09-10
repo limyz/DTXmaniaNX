@@ -2864,6 +2864,33 @@ namespace DTXMania
 				}
 			}
 		}
+		public void tChangePlaybackPositionChip(CChip pChip)
+		{
+			if (this.listWAV.ContainsKey(pChip.nIntegerValue_InternalNumber))
+			{
+				CWAV wc = this.listWAV[pChip.nIntegerValue_InternalNumber];
+				if (wc.rSound[0] != null && wc.rSound[0].nTotalPlayTimeMs >= 1000)
+				{
+					for (int i = 0; i < nPolyphonicSounds; i++)
+					{
+						if ((wc.rSound[i] != null) && (wc.rSound[i].b再生中))
+						{
+							if (CSoundManager.rcPerformanceTimer.nCurrentTime > pChip.nPlaybackTimeMs
+								&& CSoundManager.rcPerformanceTimer.nCurrentTime < pChip.nPlaybackTimeMs + wc.rSound[i].nTotalPlayTimeMs)
+							{
+								Trace.TraceInformation("tChangePlaybackPositionChip: {0}, nPlaybackTimeMs={1}ms, nTotalPlayTimeMs={2}ms, nPlayStartTime={3}ms",
+									Path.GetFileName(wc.rSound[i].strファイル名),
+									pChip.nPlaybackTimeMs,            //relative time chip is scheduled
+									wc.rSound[i].nTotalPlayTimeMs,    //wav duration
+									wc.nPlayStartTime[i]              //absolute time
+								);
+								wc.rSound[i].tChangePlaybackPosition(CSoundManager.rcPerformanceTimer.nCurrentTime - pChip.nPlaybackTimeMs); // WASAPI/ASIO用
+							}
+						}
+					}
+				}
+			}
+		}
 		public void tStopPlayingWav( int nWaveの内部番号 )
 		{
 			if( this.listWAV.ContainsKey( nWaveの内部番号 ) )
