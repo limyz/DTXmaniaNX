@@ -316,7 +316,7 @@ Trace.TraceError( "DrawPrivateFont()の入力不正。最小値のbitmapを返�
 
 			StringFormat sf = new StringFormat();
 			sf.LineAlignment = StringAlignment.Far;	// 画面下部（垂直方向位置）
-			sf.Alignment = StringAlignment.Center;	// 画面中央（水平方向位置）
+			sf.Alignment = StringAlignment.Center;	// 画面中央（水平方向位置) //To fix
 
 			// レイアウト枠
             //Rectangle r = new Rectangle( 0, 0, stringSize.Width + nEdgePt * 2, stringSize.Height + nEdgePt * 2 );
