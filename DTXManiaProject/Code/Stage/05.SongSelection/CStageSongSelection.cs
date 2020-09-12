@@ -114,6 +114,9 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actShowCurrentPosition = new CActSelectShowCurrentPosition() );
 			base.listChildActivities.Add( this.actQuickConfig = new CActSelectQuickConfig() );
 
+			//
+			base.listChildActivities.Add(this.actTextBox = new CActTextBox());
+
 			this.CommandHistory = new CCommandHistory();		// #24063 2011.1.16 yyagi
 		}
 		
@@ -181,12 +184,15 @@ namespace DTXMania
 				this.eReturnValueWhenFadeOutCompleted = EReturnValue.Continue;
 				this.bBGMPlayed = false;
 				this.ftFont = new Font( "MS PGothic", 26f, GraphicsUnit.Pixel );
+				this.ftSearchInputNotificationFont = new Font("MS PGothic", 14f, GraphicsUnit.Pixel);
 				for( int i = 0; i < 4; i++ )
 					this.ctKeyRepeat[ i ] = new CCounter( 0, 0, 0, CDTXMania.Timer );
 
 				base.OnActivate();
 
+				this.actTextBox.t検索説明文を表示する設定にする();
 				this.actStatusPanel.tSelectedSongChanged();	// 最大ランクを更新
+
 			}
 			finally
 			{
@@ -205,6 +211,13 @@ namespace DTXMania
 					this.ftFont.Dispose();
 					this.ftFont = null;
 				}
+
+				if(this.ftSearchInputNotificationFont != null)
+                {
+					this.ftSearchInputNotificationFont.Dispose();
+					this.ftSearchInputNotificationFont = null;
+                }
+
 				for( int i = 0; i < 4; i++ )
 				{
 					this.ctKeyRepeat[ i ] = null;
@@ -224,6 +237,8 @@ namespace DTXMania
 				this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_background.jpg" ), false );
 				this.txTopPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_header panel.png" ), false );
 				this.txBottomPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_footer panel.png" ), false );
+				this.prvFontSearchInputNotification = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 14, FontStyle.Regular);
+
 				base.OnManagedCreateResources();
 			}
 		}
@@ -232,9 +247,14 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 CDTXMania.t安全にDisposeする( ref this.r現在演奏中のスコアの背景動画 );
-				CDTXMania.tReleaseTexture( ref this.txBackground );
-				CDTXMania.tReleaseTexture( ref this.txTopPanel );
-				CDTXMania.tReleaseTexture( ref this.txBottomPanel );
+
+				CDTXMania.tReleaseTexture( ref this.txBackground);
+				CDTXMania.tReleaseTexture( ref this.txTopPanel);
+				CDTXMania.tReleaseTexture( ref this.txBottomPanel);
+				//
+				CDTXMania.t安全にDisposeする(ref this.txSearchInputNotification);
+				CDTXMania.t安全にDisposeする(ref this.prvFontSearchInputNotification);
+
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -350,7 +370,7 @@ namespace DTXMania
 						return 0;
 					}
 					#endregion
-					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu )
+					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu && !CDTXMania.app.bテキスト入力中)
 					{
                         #region [ ESC ]
                         if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)) && ((this.actSongList.rSelectedSong != null) && (this.actSongList.rSelectedSong.r親ノード == null))))
@@ -372,10 +392,10 @@ namespace DTXMania
                             CDTXMania.Skin.soundCancel.tPlay();
                             return 0;
                         }
-                        #endregion
-                        #region [ Shift-F2: 未使用 ]
-                        // #24525 2011.3.16 yyagi: [SHIFT]+[F2]は廃止(将来発生するかもしれない別用途のためにキープ)
-                        /*
+						#endregion
+						#region [ Shift-F2: 未使用 ]
+						// #24525 2011.3.16 yyagi: [SHIFT]+[F2]は廃止(将来発生するかもしれない別用途のためにキープ)
+						/*
                         if ((CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.RightShift) || CDTXMania.InputManager.Keyboard.bKeyPressing((int)SlimDX.DirectInput.Key.LeftShift)) &&
                             CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.F2))
                         {	// [SHIFT] + [F2] CONFIGURATION
@@ -383,12 +403,12 @@ namespace DTXMania
                             this.eReturnValueAfterFadeOut = EReturnValue.オプション呼び出し;
                             this.actFIFO.tStartFadeOut();
                             base.ePhaseID = CStage.EPhase.Common_FadeOut;
-                            CDTXMania.Skin.sound取消音.tPlay();
+                            CDTXMania.Skin.soundCancel.tPlay();
                             return 0;
                         }
 						*/
-                        #endregion
-                        if (this.actSongList.rSelectedSong != null)
+						#endregion
+						if (this.actSongList.rSelectedSong != null)
                         {
                             #region [ Decide ]
                             if ((CDTXMania.Pad.bPressedDGB(EPad.Decide) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.CY) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.RD)) ||
@@ -623,12 +643,86 @@ namespace DTXMania
                         //    CDTXMania.actEnumSongs.OnActivate();
                         //}
 					}
+
+					#region [Test text field]
+					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDX.DirectInput.Key.Backspace))
+					{
+						CDTXMania.Skin.soundDecide.tPlay();
+						this.actTextBox.t表示();
+						this.actTextBox.t入力を開始();
+					}
+					#endregion
+
 					this.actSortSongs.tUpdateAndDraw();
 					this.actQuickConfig.tUpdateAndDraw();
+					this.actTextBox.OnUpdateAndDraw();
+					if (actTextBox.b入力が終了した)
+					{
+						strSearchString = actTextBox.str確定文字列を返す();
+						string searchOutcome = "";
+						if(strSearchString != "" && strSearchString != CSongSearch.ExitSwitch)
+                        {
+							searchOutcome = "Search Input: " + strSearchString;
+							Trace.TraceInformation("Search Input: " + strSearchString);
+							if(CDTXMania.SongManager.listSongBeforeSearch == null)
+                            {
+								CDTXMania.SongManager.listSongBeforeSearch = CDTXMania.SongManager.listSongRoot;
+							}
+
+							List<CSongListNode> searchOutputList = CSongSearch.tSearchForSongs(CDTXMania.SongManager.listSongBeforeSearch, strSearchString);
+							if(searchOutputList.Count == 0)
+                            {
+								Trace.TraceInformation("No songs found!");
+								//To print a outcome message
+								searchOutcome += "\r\nNo songs found";
+							}
+                            else
+                            {
+								CDTXMania.SongManager.listSongRoot = searchOutputList;
+
+								//
+								this.actSongList.SearchUpdate();
+								//this.actSongList.Refresh(CDTXMania.SongManager, true);
+							}
+
+							this.tUpdateSearchNotification(searchOutcome);
+							CDTXMania.Skin.soundDecide.tPlay();
+						}
+						else if(strSearchString == CSongSearch.ExitSwitch)
+                        {
+							if(CDTXMania.SongManager.listSongBeforeSearch != null)
+                            {
+								CDTXMania.SongManager.listSongRoot = CDTXMania.SongManager.listSongBeforeSearch;
+								CDTXMania.SongManager.listSongBeforeSearch = null;
+								this.actSongList.SearchUpdate();
+								this.tUpdateSearchNotification("Exit Search Mode");
+								CDTXMania.Skin.soundDecide.tPlay();
+							}
+                            else
+                            {
+								//Play cancel sound if input has no effect
+								CDTXMania.Skin.soundCancel.tPlay(); 
+							}
+						}
+                        else
+                        {
+							//Play cancel sound if input has no effect
+							CDTXMania.Skin.soundCancel.tPlay();
+						}						
+						
+						actTextBox.t非表示();
+					}
+
+					if(this.txSearchInputNotification != null)
+                    {
+						this.txSearchInputNotification.tDraw2D(CDTXMania.app.Device, 10, 160);
+                    }
+
 				}
 			}
 			return 0;
 		}
+
 		public enum EReturnValue : int  // E戻り値
 		{
 			Continue,      // 継続
@@ -711,6 +805,9 @@ namespace DTXMania
 		private CActSortSongs actSortSongs;
 		private CActSelectQuickConfig actQuickConfig;
 
+		//
+		private CActTextBox actTextBox;
+		private string strSearchString;
 		private bool bBGMPlayed;  // bBGM再生済み
 		private STKeyRepeatCounter ctKeyRepeat;  // ctキー反復用
 		public CCounter ct登場時アニメ用共通;
@@ -719,6 +816,11 @@ namespace DTXMania
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
+
+		//
+		private Font ftSearchInputNotificationFont;
+		private CPrivateFastFont prvFontSearchInputNotification;
+		private CTexture txSearchInputNotification = null;
 
 		private struct STCommandTime		// #24063 2011.1.16 yyagi コマンド入力時刻の記録用
 		{
@@ -940,6 +1042,28 @@ namespace DTXMania
 				}
 			}
 		}
+
+		public void tUpdateSearchNotification(string strNotification)
+        {
+			CDTXMania.t安全にDisposeする(ref this.txSearchInputNotification);
+
+			//
+			if(strNotification != "")
+            {
+				//using (Bitmap bmp = prvFontSearchInputNotification.DrawPrivateFont(strNotification,
+				//CPrivateFont.DrawMode.Edge, Color.White, Color.White, Color.White, Color.White, true))
+				using (Bitmap bmp = prvFontSearchInputNotification.DrawPrivateFont(strNotification, Color.White, Color.Black))
+				{
+					this.txSearchInputNotification = CDTXMania.tGenerateTexture(bmp);
+				}
+			}
+            else
+            {
+				this.txSearchInputNotification = null;
+            }			
+
+		}
+
 		//-----------------
 		#endregion
 	}

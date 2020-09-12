@@ -46,7 +46,8 @@ namespace DTXMania
 		}
 		[NonSerialized]
 		public List<CScore> listSongsDB;					// songs.dbから構築されるlist
-		public List<CSongListNode> listSongRoot;			// 起動時にフォルダ検索して構築されるlist
+		public List<CSongListNode> listSongRoot;            // 起動時にフォルダ検索して構築されるlist
+		public List<CSongListNode> listSongBeforeSearch = null;    // The SongListNode before a search is performed
 		public bool bIsSuspending							// 外部スレッドから、内部スレッドのsuspendを指示する時にtrueにする
 		{													// 再開時は、これをfalseにしてから、次のautoReset.Set()を実行する
 			get;

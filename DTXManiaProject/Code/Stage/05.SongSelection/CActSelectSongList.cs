@@ -385,6 +385,14 @@ namespace DTXMania
             }
         }
 
+		//
+		public void SearchUpdate()
+        {
+			this.rSelectedSong = CDTXMania.SongManager.listSongRoot[0];
+			this.t現在選択中の曲を元に曲バーを再構成する();
+			this.t選択曲が変更された(true);
+			CDTXMania.stageSongSelection.tSelectedSongChanged();
+		}
 
 		/// <summary>
 		/// 曲リストをリセットする
@@ -405,15 +413,15 @@ namespace DTXMania
 					{
 						this.t現在選択中の曲を元に曲バーを再構成する();
 					}
-#if false			// list子リストの中まではmatchしてくれないので、検索ロジックは手書きで実装 (searchCurrentBreadcrumbs())
-					string bc = this.r現在選択中の曲.strBreadcrumbs;
+#if false          // list子リストの中まではmatchしてくれないので、検索ロジックは手書きで実装 (searchCurrentBreadcrumbs())
+					string bc = this.rSelectedSong.strBreadcrumbs;
 					Predicate<C曲リストノード> match = delegate( C曲リストノード c )
 					{
 						return ( c.strBreadcrumbs.Equals( bc ) );
 					};
 					int nMatched = CDTXMania.Songs管理.list曲ルート.FindIndex( match );
 
-					this.r現在選択中の曲 = ( nMatched == -1 ) ? null : CDTXMania.Songs管理.list曲ルート[ nMatched ];
+					this.rSelectedSong = ( nMatched == -1 ) ? null : CDTXMania.Songs管理.list曲ルート[ nMatched ];
 					this.t現在選択中の曲を元に曲バーを再構成する();
 #endif
 					return;
@@ -1280,7 +1288,7 @@ namespace DTXMania
 			if( song == null )
 				return null;
 
-			List<CSongListNode> list = ( song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
+			List<CSongListNode> list = (song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
 	
 			int index = list.IndexOf( song );
 
@@ -1297,7 +1305,7 @@ namespace DTXMania
 			if( song == null )
 				return null;
 
-			List<CSongListNode> list = ( song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
+			List<CSongListNode> list = (song.r親ノード != null ) ? song.r親ノード.list子リスト : CDTXMania.SongManager.listSongRoot;
 
 			int index = list.IndexOf( song );
 	

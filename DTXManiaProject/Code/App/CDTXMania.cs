@@ -23,7 +23,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "Ver3.62cGD(200803)";
+        public static readonly string VERSION = "Ver3.70 GD (NX 1.00 200911)";
         public static readonly string SLIMDXDLL = "c_net20x86_Jun2010";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
@@ -1642,6 +1642,11 @@ for (int i = 0; i < 3; i++) {
         private MouseButtons mb = System.Windows.Forms.MouseButtons.Left;
         private string strWindowTitle = "";
 
+        //
+        public CIMEHook cIMEHook;
+        public CActTextBox textboxテキスト入力中;
+        public bool bテキスト入力中 => textboxテキスト入力中 != null;
+
         private void tStartProcess()
         {
             #region [ Determine strEXE folder ]
@@ -1747,6 +1752,8 @@ for (int i = 0; i < 3; i++) {
             base.Window.ResizeEnd += new EventHandler(this.Window_ResizeEnd);						// #23510 2010.11.20 yyagi: to set resized window size in Config.ini
             base.Window.ApplicationActivated += new EventHandler(this.Window_ApplicationActivated);
             base.Window.ApplicationDeactivated += new EventHandler(this.Window_ApplicationDeactivated);
+            //Add CIMEHook
+            base.Window.Controls.Add(cIMEHook = new CIMEHook());
             //---------------------
             #endregion
             #region [ Generate Direct3D9 device ]
