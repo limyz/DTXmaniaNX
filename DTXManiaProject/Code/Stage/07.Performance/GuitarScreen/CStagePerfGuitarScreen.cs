@@ -221,14 +221,19 @@ namespace DTXMania
 				{
 					Trace.TraceInformation("Reached end of loop");
 					this.tJumpInSong(this.LoopBeginMs == -1 ? 0 : this.LoopBeginMs);
+
 					//Reset hit counts and scores, so that the displayed score reflects the looped part only
-					CDTXMania.stagePerfGuitarScreen.nHitCount_ExclAuto[0].Perfect = 0;
-					CDTXMania.stagePerfGuitarScreen.nHitCount_ExclAuto[0].Great = 0;
-					CDTXMania.stagePerfGuitarScreen.nHitCount_ExclAuto[0].Good = 0;
-					CDTXMania.stagePerfGuitarScreen.nHitCount_ExclAuto[0].Poor = 0;
-					CDTXMania.stagePerfGuitarScreen.nHitCount_ExclAuto[0].Miss = 0;
-					CDTXMania.stagePerfGuitarScreen.actCombo.nCurrentCombo.HighestValue[0] = 0;
-					base.actScore.nCurrentTrueScore.Drums = 0;
+					for (int inst = 1; inst < 3; ++inst)
+					{
+						this.nHitCount_ExclAuto[inst].Perfect = 0;
+						this.nHitCount_ExclAuto[inst].Great = 0;
+						this.nHitCount_ExclAuto[inst].Good = 0;
+						this.nHitCount_ExclAuto[inst].Poor = 0;
+						this.nHitCount_ExclAuto[inst].Miss = 0;
+						this.actCombo.nCurrentCombo[inst] = 0;
+						this.actCombo.nCurrentCombo.HighestValue[inst] = 0;
+						base.actScore.nCurrentTrueScore[inst] = 0;
+					}
 				}
 
 				// キー入力
