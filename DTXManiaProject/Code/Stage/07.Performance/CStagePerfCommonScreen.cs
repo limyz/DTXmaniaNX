@@ -1994,13 +1994,13 @@ namespace DTXMania
                 else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipForward))
                 {
                     this.bIsTrainingMode = true;
-                    Trace.TraceInformation("HOME CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                    Trace.TraceInformation("SKIP FORWARD CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
                     this.tJumpInSong(CSoundManager.rcPerformanceTimer.nCurrentTime + CDTXMania.ConfigIni.nSkipTimeMs);
                 }
                 else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipBackward))
                 {
                     this.bIsTrainingMode = true;
-                    Trace.TraceInformation("END CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
+                    Trace.TraceInformation("SKIP BACKWARD CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
                     this.tJumpInSong(Math.Max(0, CSoundManager.rcPerformanceTimer.nCurrentTime - CDTXMania.ConfigIni.nSkipTimeMs));
                 }
                 else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopCreate))
