@@ -394,7 +394,7 @@ namespace DTXMania
         protected virtual void tDrawCombo_Guitar(int nCombo値, int nジャンプインデックス)
         {
         }
-        protected virtual void tDrawCombo_Base(int nCombo値, int nジャンプインデックス)
+        protected virtual void tDrawCombo_Bass(int nCombo値, int nジャンプインデックス)
         {
         }
         protected void tDrawCombo_Guitar(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
@@ -500,7 +500,7 @@ namespace DTXMania
                 #endregion
             }
         }
-        protected void tDrawCombo_Base(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
+        protected void tDrawCombo_Bass(int nCombo値, int nジャンプインデックス, int nコンボx, int nコンボy)
         {
             #region [ 事前チェック。]
             //-----------------
@@ -773,7 +773,7 @@ namespace DTXMania
                                 break;
 
                             case 2:
-                                this.tDrawCombo_Base(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
+                                this.tDrawCombo_Bass(this.status[i].nCOMBO値, this.status[i].nジャンプインデックス値);
                                 break;
                         }
                         break;

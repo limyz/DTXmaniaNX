@@ -18,12 +18,12 @@ namespace DTXMania
 		protected override void tDrawCombo_Drums( int nCombo値, int nジャンプインデックス )
 		{
 		}
-		protected override void tDrawCombo_Base( int nCombo値, int nジャンプインデックス )
+		protected override void tDrawCombo_Bass( int nCombo値, int nジャンプインデックス )
 		{
             int x = 845;
             int y = 220;
 
-            base.tDrawCombo_Base(nCombo値, nジャンプインデックス, x, y);
+            base.tDrawCombo_Bass(nCombo値, nジャンプインデックス, x, y);
         }
 	}
 }

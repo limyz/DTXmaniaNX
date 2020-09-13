@@ -112,7 +112,7 @@ namespace DTXMania
             }
 
 		}
-		protected override void tDrawCombo_Base( int nCombo値, int nジャンプインデックス )
+		protected override void tDrawCombo_Bass( int nCombo値, int nジャンプインデックス )
 		{
 		}
 	}

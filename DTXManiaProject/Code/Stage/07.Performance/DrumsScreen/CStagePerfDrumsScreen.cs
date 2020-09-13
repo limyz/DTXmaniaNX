@@ -503,13 +503,15 @@ namespace DTXMania
                 {
                     Trace.TraceInformation("Reached end of loop");
                     this.tJumpInSong(this.LoopBeginMs == -1 ? 0 : this.LoopBeginMs);
+
                     //Reset hit counts and scores, so that the displayed score reflects the looped part only
-                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Perfect = 0;
-                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Great = 0;
-                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Good = 0;
-                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Poor = 0;
-                    CDTXMania.stagePerfDrumsScreen.nHitCount_ExclAuto[0].Miss = 0;
-                    CDTXMania.stagePerfDrumsScreen.actCombo.nCurrentCombo.HighestValue[0] = 0;
+                    this.nHitCount_ExclAuto.Drums.Perfect = 0;
+                    this.nHitCount_ExclAuto.Drums.Great = 0;
+                    this.nHitCount_ExclAuto.Drums.Good = 0;
+                    this.nHitCount_ExclAuto.Drums.Poor = 0;
+                    this.nHitCount_ExclAuto.Drums.Miss = 0;
+                    this.actCombo.nCurrentCombo.Drums = 0;
+                    this.actCombo.nCurrentCombo.HighestValue.Drums = 0;
                     base.actScore.nCurrentTrueScore.Drums = 0;
                 }
 
