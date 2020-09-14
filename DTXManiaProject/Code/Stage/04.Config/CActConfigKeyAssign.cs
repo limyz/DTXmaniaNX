@@ -137,20 +137,22 @@ namespace DTXMania
 				if( this.txカーソル != null )
 				{
 					int num = 20;
-					int num2 = 0x144;
-					int num3 = 0x3e + ( num * ( this.nSelectedRow + 1 ) );
-					this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, new Rectangle( 0, 0, 0x10, 0x20 ) );
-					num2 += 0x10;
+					// 15SEP20 Increasing x position by 120 pixels (was 0x144)
+					int cursPosX = 0x1bc;
+					int cursPosY = 0x3e + ( num * ( this.nSelectedRow + 1 ) );
+					this.txカーソル.tDraw2D( CDTXMania.app.Device, cursPosX, cursPosY, new Rectangle( 0, 0, 0x10, 0x20 ) );
+					cursPosX += 0x10;
 					Rectangle rectangle = new Rectangle( 8, 0, 0x10, 0x20 );
 					for( int j = 0; j < 14; j++ )
 					{
-						this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, rectangle );
-						num2 += 0x10;
+						this.txカーソル.tDraw2D( CDTXMania.app.Device, cursPosX, cursPosY, rectangle );
+						cursPosX += 0x10;
 					}
-					this.txカーソル.tDraw2D( CDTXMania.app.Device, num2, num3, new Rectangle( 0x10, 0, 0x10, 0x20 ) );
+					this.txカーソル.tDraw2D( CDTXMania.app.Device, cursPosX, cursPosY, new Rectangle( 0x10, 0, 0x10, 0x20 ) );
 				}
 				int num5 = 20;
-				int x = 0x134;
+				// 15SEP20 Increasing x position by 120 pixels (was 0x134)
+				int x = 0x1ac;
 				int y = 0x40;
 				CDTXMania.stageConfig.actFont.t文字列描画( x, y, this.strパッド名, false, 0.75f );
 				y += num5;
@@ -187,7 +189,8 @@ namespace DTXMania
 				y += num5;
 				if( this.bWaitingForKeyInput && ( this.txHitKeyダイアログ != null ) )
 				{
-					this.txHitKeyダイアログ.tDraw2D( CDTXMania.app.Device, 0x185, 0xd7 );
+					// 15SEP20 Increasing x position by 120 pixels (was 0x185)
+					this.txHitKeyダイアログ.tDraw2D( CDTXMania.app.Device, 0x1fd, 0xd7 );
 				}
 			}
 			return 0;

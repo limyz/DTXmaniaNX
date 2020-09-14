@@ -2610,10 +2610,12 @@ namespace DTXMania
             #region[ 説明文パネル ]
             if( this.bFocusIsOnItemList && this.nTargetScrollCounter == 0 && CDTXMania.stageConfig.ctDisplayWait.bReachedEndValue )
             {
-                this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 601, 252 );
+                // 15SEP20 Increasing x position by 180 pixels (was 601)
+                this.tx説明文パネル.tDraw2D( CDTXMania.app.Device, 781, 252 );
                 if ( txSkinSample1 != null && this.nTargetScrollCounter == 0 && this.listItems[ this.nCurrentSelection ] == this.iSystemSkinSubfolder )
 				{
-					txSkinSample1.tDraw2D( CDTXMania.app.Device, 615 - 60, 442 - 106 );
+                    // 15SEP20 Increasing x position by 180 pixels (was 615 - 60)
+                    txSkinSample1.tDraw2D( CDTXMania.app.Device, 735, 442 - 106 );
 				}
             }
             #endregion
