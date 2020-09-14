@@ -50,8 +50,8 @@ namespace DTXMania
                 }
                 else if (CDTXMania.ConfigIni.nSkillMode == 1)
                 {
-                    Drums.dbGameSkill = CScoreIni.tCalculateGameSkill(CDTXMania.DTX.LEVEL.Drums, CDTXMania.DTX.LEVELDEC.Drums, CDTXMania.DTX.nVisibleChipsCount.Drums, this.nHitCount_ExclAuto.Drums.Perfect, this.nHitCount_ExclAuto.Drums.Great, this.actCombo.nCurrentCombo.HighestValue.Drums, EInstrumentPart.DRUMS, bIsAutoPlay);
                     Drums.dbPerformanceSkill = CScoreIni.tCalculatePlayingSkill(CDTXMania.DTX.nVisibleChipsCount.Drums, this.nHitCount_ExclAuto.Drums.Perfect, this.nHitCount_ExclAuto.Drums.Great, this.nHitCount_ExclAuto.Drums.Good, this.nHitCount_ExclAuto.Drums.Poor, this.nHitCount_ExclAuto.Drums.Miss, this.actCombo.nCurrentCombo.HighestValue.Drums, EInstrumentPart.DRUMS, bIsAutoPlay);
+                    Drums.dbGameSkill = CScoreIni.tCalculateGameSkillFromPlayingSkill(CDTXMania.DTX.LEVEL.Drums, CDTXMania.DTX.LEVELDEC.Drums, Drums.dbPerformanceSkill);
                 }
                 Drums.nPerfectCount = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay ? this.nHitCount_IncAuto.Drums.Perfect : this.nHitCount_ExclAuto.Drums.Perfect;
                 Drums.nGreatCount = CDTXMania.ConfigIni.bAllDrumsAreAutoPlay ? this.nHitCount_IncAuto.Drums.Great : this.nHitCount_ExclAuto.Drums.Great;
@@ -122,8 +122,8 @@ namespace DTXMania
                 }
                 else if (CDTXMania.ConfigIni.nSkillMode == 1)
                 {
-                    Guitar.dbGameSkill = CScoreIni.tCalculateGameSkill(CDTXMania.DTX.LEVEL.Guitar, CDTXMania.DTX.LEVELDEC.Guitar, CDTXMania.DTX.nVisibleChipsCount.Guitar, this.nHitCount_ExclAuto.Guitar.Perfect, this.nHitCount_ExclAuto.Guitar.Great, this.actCombo.nCurrentCombo.HighestValue.Guitar, EInstrumentPart.GUITAR, bIsAutoPlay);
                     Guitar.dbPerformanceSkill = CScoreIni.tCalculatePlayingSkill(CDTXMania.DTX.nVisibleChipsCount.Guitar, this.nHitCount_ExclAuto.Guitar.Perfect, this.nHitCount_ExclAuto.Guitar.Great, this.nHitCount_ExclAuto.Guitar.Good, this.nHitCount_ExclAuto.Guitar.Poor, this.nHitCount_ExclAuto.Guitar.Miss, this.actCombo.nCurrentCombo.HighestValue.Guitar, EInstrumentPart.GUITAR, bIsAutoPlay);
+                    Guitar.dbGameSkill = CScoreIni.tCalculateGameSkillFromPlayingSkill(CDTXMania.DTX.LEVEL.Guitar, CDTXMania.DTX.LEVELDEC.Guitar, Guitar.dbPerformanceSkill);
                 }
                 Guitar.nPerfectCount = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay ? this.nHitCount_IncAuto.Guitar.Perfect : this.nHitCount_ExclAuto.Guitar.Perfect;
                 Guitar.nGreatCount = CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay ? this.nHitCount_IncAuto.Guitar.Great : this.nHitCount_ExclAuto.Guitar.Great;
@@ -194,8 +194,8 @@ namespace DTXMania
                 }
                 else if (CDTXMania.ConfigIni.nSkillMode == 1)
                 {
-                    Bass.dbGameSkill = CScoreIni.tCalculateGameSkill(CDTXMania.DTX.LEVEL.Bass, CDTXMania.DTX.LEVELDEC.Bass, CDTXMania.DTX.nVisibleChipsCount.Bass, this.nHitCount_ExclAuto.Bass.Perfect, this.nHitCount_ExclAuto.Bass.Great, this.actCombo.nCurrentCombo.HighestValue.Bass, EInstrumentPart.BASS, bIsAutoPlay);
                     Bass.dbPerformanceSkill = CScoreIni.tCalculatePlayingSkill(CDTXMania.DTX.nVisibleChipsCount.Bass, this.nHitCount_ExclAuto.Bass.Perfect, this.nHitCount_ExclAuto.Bass.Great, this.nHitCount_ExclAuto.Bass.Good, this.nHitCount_ExclAuto.Bass.Poor, this.nHitCount_ExclAuto.Bass.Miss, this.actCombo.nCurrentCombo.HighestValue.Bass, EInstrumentPart.BASS, bIsAutoPlay);
+                    Bass.dbGameSkill = CScoreIni.tCalculateGameSkillFromPlayingSkill(CDTXMania.DTX.LEVEL.Bass, CDTXMania.DTX.LEVELDEC.Bass, Bass.dbPerformanceSkill);
                 }
                 Bass.nPerfectCount = CDTXMania.ConfigIni.bAllBassAreAutoPlay ? this.nHitCount_IncAuto.Bass.Perfect : this.nHitCount_ExclAuto.Bass.Perfect;
                 Bass.nGreatCount = CDTXMania.ConfigIni.bAllBassAreAutoPlay ? this.nHitCount_IncAuto.Bass.Great : this.nHitCount_ExclAuto.Bass.Great;

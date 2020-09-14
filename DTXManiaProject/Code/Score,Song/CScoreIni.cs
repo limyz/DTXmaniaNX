@@ -1422,7 +1422,12 @@ namespace DTXMania
             {
                 return (int)ERANK.SS;
             }
+
+			// Remark: this rate uses the percentage of perfect, great and combo compared to the number of non-auto chips only
+			// while the official rate from tCalculatePlayingSkill uses the percentage compared to the full total number of chips
+			// So this is probably wrong, but I'm not touching it for now.
             double dRate = ((((100.0 * nPerfect / (nTotal - nAuto))) * 0.85) + (((100.0 * nGreat / (nTotal - nAuto))) * 0.35) + ((100.0 * nCombo / (nTotal - nAuto))) * 0.15);
+
             //System.IO.StreamWriter sw = new System.IO.StreamWriter(@"debug.txt", true, System.Text.Encoding.GetEncoding("shift_jis"));
             //sw.WriteLine("-------------------------------");
             //sw.WriteLine("dRateの値は{0}です。", dRate);
@@ -1454,36 +1459,34 @@ namespace DTXMania
             }
             return (int)ERANK.E;
         }
-        internal static double tCalculateGameSkill(double dbLevel, int nLevelDec, int nTotal, int nPerfect, int nGreat, int nCombo, EInstrumentPart inst, STAUTOPLAY bAutoPlay)
+        internal static double tCalculateGameSkill(double dbLevel, int nLevelDec, int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, EInstrumentPart inst, STAUTOPLAY bAutoPlay)
         {
             //こちらはプレイヤースキル_全曲スキルに加算される得点。いわゆる曲別スキル。
-            double dbPERFECT率 = (100.0 * nPerfect / nTotal);
-            double dbGREAT率 = (100.0 * nGreat / nTotal);
-            double dbCOMBO率 = (100.0 * nCombo / nTotal);
 
-            double ret;
-            double dbRate = (dbPERFECT率 * 0.85 + dbGREAT率 * 0.35 + dbCOMBO率 * 0.15);
-            if ((nTotal == 0) || ((nPerfect == 0) && (nCombo == 0)))
-                ret = 0.0;
+			double dbRate = tCalculatePlayingSkill(nTotal, nPerfect, nGreat, nCombo, nPoor, nMiss, nCombo, inst, bAutoPlay);
 
-            if (dbLevel >= 100)
-            {
-                dbLevel = dbLevel / 100.0;
-            }
-            else if (dbLevel < 100)
-            {
-                dbLevel = dbLevel / 10.0 + ( nLevelDec != 0 ? 0 : nLevelDec / 100.0 );
-            }
+			double ret = tCalculateGameSkillFromPlayingSkill(dbLevel, nLevelDec, dbRate);
 
-            ret = ((dbRate * dbLevel * 0.2));
-            ret *= dbCalcReviseValForDrGtBsAutoLanes(inst, bAutoPlay);
-            if (CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
-            {
-                return 0;
-            }
             return ret;
         }
-        internal static double tCalculatePlayingSkill(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, EInstrumentPart inst, STAUTOPLAY bAutoPlay)
+		internal static double tCalculateGameSkillFromPlayingSkill(double dbLevel, int nLevelDec, double dbPlayingSkill)
+		{
+			if (dbLevel >= 100)
+			{
+				dbLevel = dbLevel / 100.0;
+			}
+			else if (dbLevel < 100)
+			{
+				dbLevel = dbLevel / 10.0 + nLevelDec / 100.0;
+			}
+
+			if (CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
+			{
+				return 0;
+			}
+			return dbPlayingSkill * dbLevel * 0.2;
+		}
+		internal static double tCalculatePlayingSkill(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, EInstrumentPart inst, STAUTOPLAY bAutoPlay)
         {
             if (nTotal == 0)
                 return 0.0;
@@ -1491,7 +1494,7 @@ namespace DTXMania
             int nAuto = nTotal - (nPerfect + nGreat + nGood + nPoor + nMiss);
             double dbPERFECT率 = (100.0 * nPerfect / nTotal);
             double dbGREAT率 = (100.0 * nGreat / nTotal);
-            double dbCOMBO率 = (100.0 * nCombo / (nTotal));
+            double dbCOMBO率 = (100.0 * nCombo / nTotal);
 
             if (nTotal == nAuto)
             {

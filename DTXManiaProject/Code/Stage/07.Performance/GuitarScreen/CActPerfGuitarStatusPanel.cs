@@ -460,7 +460,7 @@ namespace DTXMania
                         }
                         else
                         {
-                            this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfGuitarScreen.actStatusPanel.db現在の達成率.Guitar * (CDTXMania.DTX.LEVEL[i] / 10.0) * 0.2));
+                            this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CScoreIni.tCalculateGameSkillFromPlayingSkill(CDTXMania.DTX.LEVEL[i], CDTXMania.DTX.LEVELDEC[i], CDTXMania.stagePerfGuitarScreen.actStatusPanel.db現在の達成率.Guitar)));
                         }
                             
 
