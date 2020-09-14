@@ -182,7 +182,7 @@ namespace DTXMania
 
             // 描画
 
-            #region [ 背景 ]
+            #region [ Background ]
             //---------------------
             if (this.tx背景 != null)
                 this.tx背景.tDraw2D(CDTXMania.app.Device, 0, 0);
@@ -190,7 +190,7 @@ namespace DTXMania
                 this.txItemBar.tDraw2D( CDTXMania.app.Device, 400, 0 );
             //---------------------
             #endregion
-            #region [ メニューカーソル ]
+            #region [ Menu cursor ]
             //---------------------
             if( this.txMenuパネル != null )
             {
@@ -220,7 +220,7 @@ namespace DTXMania
             }
             //---------------------
             #endregion
-			#region [ メニュー ]
+			#region [ Menu ]
 			//---------------------
 			int menuY = 144;
 			int stepY = 32;
@@ -253,19 +253,20 @@ namespace DTXMania
             }
             //---------------------
             #endregion
-            #region [ 説明文パネル ]
+            #region [ Description panel ]
             //---------------------
             if( this.txDescriptionPanel != null && !this.bFocusIsOnMenu && this.actList.nTargetScrollCounter == 0 && this.ctDisplayWait.bReachedEndValue )
-                this.txDescriptionPanel.tDraw2D(CDTXMania.app.Device, 620, 270);
+                // 15SEP20 Increasing x position by 180 pixels (was 620)
+                this.txDescriptionPanel.tDraw2D(CDTXMania.app.Device, 800, 270);
             //---------------------
             #endregion
-            #region [ 上部パネル ]
+            #region [ Top panel ]
             //---------------------
             if (this.tx上部パネル != null)
                 this.tx上部パネル.tDraw2D(CDTXMania.app.Device, 0, 0);
             //---------------------
             #endregion
-            #region [ 下部パネル ]
+            #region [ Bottom panel ]
             //---------------------
             if (this.tx下部パネル != null)
                 this.tx下部パネル.tDraw2D(CDTXMania.app.Device, 0, 720 - this.tx下部パネル.szTextureSize.Height);
