@@ -10,3 +10,7 @@ For more information regarding creation of DTX files and its data formats, do vi
 ![.NET Framework 3.5](https://docs.microsoft.com/en-us/dotnet/framework/install/media/application-not-started/install-3-5.png)
 
 3. [Download and install the DirectX End-User Runtime (DirectX v9.0c)](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=35)
+
+## Community Support
+
+For additional help or support, ask away in DTXMania on Discord! [https://discord.gg/Q8xeugf](https://discord.gg/Q8xeugf)
