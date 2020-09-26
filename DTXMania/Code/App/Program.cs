@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using FDK;
 
+using System.IO;
+
 namespace DTXMania
 {
 	internal class Program
@@ -16,17 +18,29 @@ namespace DTXMania
 		//-----------------------------
 		private static Mutex mutex二重起動防止用;
 
-		private static bool tDLLの存在チェック( string strDll名, string str存在しないときに表示するエラー文字列jp, string str存在しないときに表示するエラー文字列en )
+		private static bool tDLLの存在チェック(string strDll名, string str存在しないときに表示するエラー文字列jp, string str存在しないときに表示するエラー文字列en, bool bLoadDllCheck = false)
 		{
 			string str存在しないときに表示するエラー文字列 = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ?
 				str存在しないときに表示するエラー文字列jp : str存在しないときに表示するエラー文字列en;
-			IntPtr hModule = LoadLibrary( strDll名 );
-			if( hModule == IntPtr.Zero )
+			if (bLoadDllCheck)
 			{
-				MessageBox.Show( str存在しないときに表示するエラー文字列, "DTXMania runtime error", MessageBoxButtons.OK, MessageBoxIcon.Hand );
-				return false;
+				IntPtr hModule = LoadLibrary(strDll名);    // 実際にLoadDll()してチェックする
+				if (hModule == IntPtr.Zero)
+				{
+					MessageBox.Show(str存在しないときに表示するエラー文字列, "DTXMania runtime error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+					return false;
+				}
+				FreeLibrary(hModule);
 			}
-			FreeLibrary( hModule );
+			else
+			{                         // 単純にファイルの存在有無をチェックするだけ (プロジェクトで「参照」していたり、アンマネージドなDLLが暗黙リンクされるものはこちら)
+				string path = Path.Combine(System.IO.Directory.GetCurrentDirectory(), strDll名);
+				if (!File.Exists(path))
+				{
+					MessageBox.Show(str存在しないときに表示するエラー文字列, "DTXMania runtime error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+					return false;
+				}
+			}
 			return true;
 		}
 
@@ -36,6 +50,9 @@ namespace DTXMania
 
 		[DllImport( "kernel32", CharSet = CharSet.Unicode, SetLastError = true )]
 		internal static extern IntPtr LoadLibrary( string lpFileName );
+
+		[DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+		internal static extern bool SetDllDirectory(string lpPathName);
 		#endregion
 		//-----------------------------
 		#endregion
@@ -48,56 +65,66 @@ namespace DTXMania
 			if( mutex二重起動防止用.WaitOne( 0, false ) )
 			{
 				string newLine = Environment.NewLine;
-				bool flag = false;
+				bool bDllNotFound = false;
 
 				#region [DLL Existence check]
-				if (!tDLLの存在チェック("FDK.dll",
+				if (!tDLLの存在チェック("dll\\FDK.dll",
 					"FDK.dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"FDK.dll, or its depended DLL, is not found." + newLine + "Please download DTXMania again."
-					) ) flag = true;
+					) ) bDllNotFound = true;
 				if (!tDLLの存在チェック(CDTXMania.D3DXDLL,
 					CDTXMania.D3DXDLL + " が存在しません。" + newLine + "DirectX Redist フォルダの DXSETUP.exe を実行し、" + newLine + "必要な DirectX ランタイムをインストールしてください。",
-					CDTXMania.D3DXDLL + " is not found." + newLine + "Please execute DXSETUP.exe in \"DirectX Redist\" folder, to install DirectX runtimes required for DTXMania."
-					)) flag = true;
-				if ( !tDLLの存在チェック( "bass.dll",
+					CDTXMania.D3DXDLL + " is not found." + newLine + "Please execute DXSETUP.exe in \"DirectX Redist\" folder, to install DirectX runtimes required for DTXMania.",
+					true
+					)) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\bass.dll",
 					"bass.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"baas.dll is not found." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "Bass.Net.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\Bass.Net.dll",
 					"Bass.Net.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"Bass.Net.dll is not found." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "bassmix.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\bassmix.dll",
 					"bassmix.dll を読み込めません。bassmix.dll か bass.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"bassmix.dll is not loaded. bassmix.dll or bass.dll must not exist." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "bassasio.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\bassasio.dll",
 					"bassasio.dll を読み込めません。bassasio.dll か bass.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"bassasio.dll is not loaded. bassasio.dll or bass.dll must not exist." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "basswasapi.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\basswasapi.dll",
 					"basswasapi.dll を読み込めません。basswasapi.dll か bass.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"basswasapi.dll is not loaded. basswasapi.dll or bass.dll must not exist." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "bass_fx.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\bass_fx.dll",
 					"bass_fx.dll を読み込めません。bass_fx.dll か bass.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"bass_fx.dll is not loaded. bass_fx.dll or bass.dll must not exist." + newLine + "Please download DTXMania again."
-					) ) flag = true;
-				if ( !tDLLの存在チェック( "DirectShowLib-2005.dll",
+					) ) bDllNotFound = true;
+				if ( !tDLLの存在チェック("dll\\DirectShowLib-2005.dll",
 					"DirectShowLib-2005.dll が存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
 					"DirectShowLib-2005.dll is not found." + newLine + "Please download DTXMania again."
-					) ) flag = true;
+					) ) bDllNotFound = true;
 				#endregion
-				if (!flag)
+				if (!bDllNotFound)
 				{
 #if DEBUG && TEST_ENGLISH
 					Thread.CurrentThread.CurrentCulture = new CultureInfo( "en-US" );
 #endif
 
-					DWM.EnableComposition(false);	// Disable AeroGrass temporally
+					DWM.EnableComposition(false);   // Disable AeroGrass temporally
 
-					// BEGIN #23670 2010.11.13 from: キャッチされない例外は放出せずに、ログに詳細を出力する。
-					// BEGIM #24606 2011.03.08 from: DEBUG 時は例外発生箇所を直接デバッグできるようにするため、例外をキャッチしないようにする。
+					string path = Path.GetDirectoryName(Application.ExecutablePath);
+					/* For future 64bit migration
+					SetDllDirectory(null);
+					if (Environment.Is64BitProcess)
+					{
+						SetDllDirectory(Path.Combine(path, @"dll\x64"));
+					}
+					else */
+					{
+						SetDllDirectory(Path.Combine(path, @"dll"));
+					}
 #if !DEBUG
 					try
 #endif

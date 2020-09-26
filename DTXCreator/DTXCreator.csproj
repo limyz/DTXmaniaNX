@@ -23,13 +23,14 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>..\Runtime\</OutputPath>
     <DefineConstants>TRACE;DEBUG;USE_ENGLISHRESOURCE_ USE_GERMANRESOURCE_</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <NoWarn>0219</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -305,20 +306,12 @@
     <ProjectReference Include="..\FDK\FDK.csproj">
       <Project>{bcd40908-f3e2-4707-bfaa-1dd99df6357d}</Project>
       <Name>FDK</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <!--ItemGroup>
-    <FilesToMove Include="$(TargetDir)*.dll" />
-  </ItemGroup-->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <!--Move SourceFiles="@(FilesToMove)" DestinationFolder="$(TargetDir)dll\" /-->
-    <!--Copy SourceFiles="$(TargetDir)*.dll" DestinationFolder="$(SolutionDir)RuntimeResources\dll" /-->
-    <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)Runtime" />
-    <Copy SourceFiles="$(TargetDir)$(TargetFileName).config" DestinationFolder="$(SolutionDir)Runtime" />
-    <Copy SourceFiles="$(TargetDir)ja-JP\DTXCreator.resources.dll" DestinationFolder="$(SolutionDir)Runtime\ja-JP\" />
-  </Target>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

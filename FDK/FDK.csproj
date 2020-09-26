@@ -53,33 +53,43 @@
   <ItemGroup>
     <Reference Include="Bass.Net">
       <HintPath>..\実行時フォルダ\dll\Bass.Net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="DirectShowLib-2005">
       <HintPath>..\実行時フォルダ\dll\DirectShowLib-2005.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="libbjxa">
       <HintPath>..\Libraries\libbjxa\obj\Debug\libbjxa.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX">
       <HintPath>..\実行時フォルダ\dll\SharpDX.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.Animation">
       <HintPath>..\実行時フォルダ\dll\SharpDX.Animation.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
       <HintPath>..\実行時フォルダ\dll\SharpDX.Direct3D9.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.DirectInput">
       <HintPath>..\実行時フォルダ\dll\SharpDX.DirectInput.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.DirectSound">
       <HintPath>..\実行時フォルダ\dll\SharpDX.DirectSound.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.DXGI">
       <HintPath>..\実行時フォルダ\dll\SharpDX.DXGI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="SharpDX.Mathematics">
       <HintPath>..\実行時フォルダ\dll\SharpDX.Mathematics.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -178,6 +188,7 @@
     <Copy SourceFiles="$(TargetDir)$(TargetFileName)" DestinationFolder="$(SolutionDir)Runtime\dll" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent></PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
