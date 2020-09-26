@@ -1435,7 +1435,7 @@ namespace DTXMania
             //    prvFont.Dispose();
             
             Bitmap bmp;
-            bmp = prvFont.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor);
+            bmp = prvFont.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
             CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
             bmp.Dispose();
 
@@ -1444,7 +1444,7 @@ namespace DTXMania
         private CTexture tGenerateTextTexture_Small( string str文字)  // t指定された文字テクスチャを生成する_小
 		{
             Bitmap bmp;
-            bmp = prvFontSmall.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor);
+            bmp = prvFontSmall.DrawPrivateFont( str文字, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
             CTexture tx文字テクスチャ = CDTXMania.tGenerateTexture( bmp, false );
             bmp.Dispose();
 

@@ -143,7 +143,7 @@ namespace DTXMania
 					stringBuilder.AppendLine("/all - Returns all songs in a single list");
 					stringBuilder.AppendLine("Type /q followed by Enter to exit search mode");
 
-					using (Bitmap bitmap2 = prvf説明.DrawPrivateFont(stringBuilder.ToString(), CPrivateFont.DrawMode.Edge, Color.PeachPuff, Color.Black, Color.DarkRed, Color.DarkRed))
+					using (Bitmap bitmap2 = prvf説明.DrawPrivateFont(stringBuilder.ToString(), CPrivateFont.DrawMode.Edge, Color.PeachPuff, Color.Black, Color.DarkRed, Color.DarkRed, true))
 					{
 						graphics.DrawImage(bitmap2, 20, 20, bitmap2.Width, bitmap2.Height);
 					}
