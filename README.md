@@ -24,8 +24,8 @@ https://osdn.net/projects/dtxmaniaxg-verk
 ## Installation
 1. Download the [latest release](https://github.com/limyz/DTXmaniaXG/releases) of DTXMania and extract it to a location of your choice
 
-2. Download and install the .NET Framework 3.5 (if prompted)
-![.NET Framework 3.5](https://docs.microsoft.com/en-us/dotnet/framework/install/media/application-not-started/install-3-5.png)
+2. Download and install the .NET Framework 4.7.1 (if prompted)
+![.NET Framework 4.7.1](https://dotnet.microsoft.com/download/dotnet-framework/net471)
 
 3. [Download and install the DirectX End-User Runtime (DirectX v9.0c)](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=35)
 
