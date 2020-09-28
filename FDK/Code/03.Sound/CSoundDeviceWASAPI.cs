@@ -294,13 +294,13 @@ namespace FDK
 		#endregion
 
 		Retry:
-			var flags = (mode == Eデバイスモード.排他) ? BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT | BASSWASAPIInit.BASS_WASAPI_EXCLUSIVE : BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT;
-			//var flags = ( mode == Eデバイスモード.排他 ) ? BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT | BASSWASAPIInit.BASS_WASAPI_EVENT | BASSWASAPIInit.BASS_WASAPI_EXCLUSIVE : BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT | BASSWASAPIInit.BASS_WASAPI_EVENT;
-			//if ( COS.bIsWin7OrLater() && CSound管理.bSoundUpdateByEventWASAPI )
-			//         if ( CSound管理.bSoundUpdateByEventWASAPI )
-			//{
-			//	flags |= BASSWASAPIInit.BASS_WASAPI_EVENT;	// Win7以降の場合は、WASAPIをevent drivenで動作させてCPU負荷減、レイテインシ改善
-			//}
+			var flags = (mode == Eデバイスモード.排他) ?
+				BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT | BASSWASAPIInit.BASS_WASAPI_EXCLUSIVE :
+				BASSWASAPIInit.BASS_WASAPI_AUTOFORMAT | BASSWASAPIInit.BASS_WASAPI_SHARED;  // 注: BASS_WASAPI_SHARED==0 なので、SHAREDの指定は意味なし
+			if (COS.bIsWin7OrLater() && CSoundManager.bSoundUpdateByEventWASAPI)
+			{
+				flags |= BASSWASAPIInit.BASS_WASAPI_EVENT;  // Win7以降の場合は、WASAPIをevent drivenで動作させてCPU負荷減、レイテインシ改善
+			}
 			n周波数 = deviceInfo.mixfreq;
 			nチャンネル数 = deviceInfo.mixchans;
 
