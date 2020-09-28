@@ -536,6 +536,13 @@ namespace DTXMania
         }
         protected override void Draw(GameTime gameTime)
         {
+            //Do not draw until SoundManager is initialized
+            //Fixed issue where exception is raised upon loading when Japanese IME is enabled
+            if (SoundManager == null)
+            {
+                return;
+            }
+
             SoundManager.t再生中の処理をする();
 
             if (Timer != null)

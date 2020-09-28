@@ -1257,6 +1257,7 @@ namespace DTXMania
                 this.nJudgeLinePosOffset[i] = 0;
 			}
 			this.nPlaySpeed = 20;
+			this.bSmallGraph = true;
             this.ドラムコンボ文字の表示位置 = EDrumComboTextDisplayPosition.RIGHT;
             this.bドラムコンボ文字の表示 = true;
             this.bCLASSIC譜面判別を有効にする = false;
@@ -1522,10 +1523,10 @@ namespace DTXMania
             sw.WriteLine();											        			//
             #endregion
             #region [ WASAPI/ASIO関連 ]
-            sw.WriteLine("; サウンド出力方式(0=ACM(って今はまだDirectShowですが), 1=ASIO, 2=WASAPI");
+            sw.WriteLine("; サウンド出力方式(0=ACM(って今はまだDirectShowですが), 1=ASIO, 2=WASAPI排他, 3=WASAPI共有");
             sw.WriteLine("; WASAPIはVista以降のOSで使用可能。推奨方式はWASAPI。");
             sw.WriteLine("; なお、WASAPIが使用不可ならASIOを、ASIOが使用不可ならACMを使用します。");
-            sw.WriteLine("; Sound device type(0=ACM, 1=ASIO, 2=WASAPI)");
+            sw.WriteLine("; Sound device type(0=ACM, 1=ASIO, 2=WASAPI Exclusive, 3=WASAPI Shared)");
             sw.WriteLine("; WASAPI can use on Vista or later OSs.");
             sw.WriteLine("; If WASAPI is not available, DTXMania try to use ASIO. If ASIO can't be used, ACM is used.");
             sw.WriteLine("SoundDeviceType={0}", (int)this.nSoundDeviceType);
@@ -1571,6 +1572,7 @@ namespace DTXMania
 
 			sw.WriteLine("; WASAPI使用時にEventDrivenモードを使う");
 			sw.WriteLine("EventDrivenWASAPI={0}", this.bEventDrivenWASAPI ? 1 : 0);
+			sw.WriteLine();
 
 			sw.WriteLine("; 全体ボリュームの設定");
 			sw.WriteLine("; (0=無音 ～ 100=最大。WASAPI/ASIO時のみ有効)");
