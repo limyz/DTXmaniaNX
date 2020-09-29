@@ -1289,34 +1289,40 @@ for (int i = 0; i < 3; i++) {
                                         gs = c演奏記録_Bass.dbGameSkill;
                                     }
                                     string str = "Cleared";
+                                    string strSpeed = "";
+                                    if (CDTXMania.ConfigIni.nPlaySpeed != 20)
+                                    {
+                                        double d = (double)(CDTXMania.ConfigIni.nPlaySpeed / 20.0);
+                                        strSpeed = " Speed x" + d.ToString("0.000");
+                                    }
                                     switch (CScoreIni.tCalculateOverallRankValue(c演奏記録_Drums, c演奏記録_Guitar, c演奏記録_Bass))
                                     {
                                         case (int)CScoreIni.ERANK.SS:
-                                            str = string.Format("Cleared (SS: {0:F2})", ps);
+                                            str = string.Format("Cleared (SS: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.S:
-                                            str = string.Format("Cleared (S: {0:F2})", ps);
+                                            str = string.Format("Cleared (S: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.A:
-                                            str = string.Format("Cleared (A: {0:F2})", ps);
+                                            str = string.Format("Cleared (A: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.B:
-                                            str = string.Format("Cleared (B: {0:F2})", ps);
+                                            str = string.Format("Cleared (B: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.C:
-                                            str = string.Format("Cleared (C: {0:F2})", ps);
+                                            str = string.Format("Cleared (C: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.D:
-                                            str = string.Format("Cleared (D: {0:F2})", ps);
+                                            str = string.Format("Cleared (D: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.E:
-                                            str = string.Format("Cleared (E: {0:F2})", ps);
+                                            str = string.Format("Cleared (E: {0:F2}{1})", ps);
                                             break;
 
                                         case (int)CScoreIni.ERANK.UNKNOWN:	// #23534 2010.10.28 yyagi add: 演奏チップが0個のとき

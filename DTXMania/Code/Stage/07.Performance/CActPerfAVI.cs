@@ -806,7 +806,7 @@ namespace DTXMania
                                 //this.txフィルインエフェクト.vcScaleRatio.Y = 2.0f;
                                 //this.txフィルインエフェクト.bAdditiveBlending = true;
                                 //this.txフィルインエフェクト.tDraw2D(CDTXMania.app.Device, 0, -2, new Rectangle(0, 0 + (360 * numf), 640, 360));
-                                if( CDTXMania.ConfigIni.bDrumsEnabled )
+                                if( CDTXMania.ConfigIni.bDrumsEnabled && stageDrum.txBonusEffect != null)
                                 {
                                     stageDrum.txBonusEffect.vcScaleRatio = new Vector3( 2.0f, 2.0f, 1.0f );
                                     stageDrum.txBonusEffect.bAdditiveBlending = true;
