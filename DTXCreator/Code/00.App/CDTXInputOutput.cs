@@ -45,6 +45,15 @@ namespace DTXCreator
 		}
 		public void tDTX入力( E種別 e種別, ref string str全入力文字列 )
 		{
+			this._Form.hScrollBarDLEVEL.Value = 0;
+			this._Form.textBoxDLEVEL.Text = "0";
+
+			this._Form.hScrollBarGLEVEL.Value = 0;
+			this._Form.textBoxGLEVEL.Text = "0";
+
+			this._Form.hScrollBarBLEVEL.Value = 0;
+			this._Form.textBoxBLEVEL.Text = "0";
+
 			this.e種別 = e種別;
 			if( str全入力文字列.Length != 0 )
 			{
