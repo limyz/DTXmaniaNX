@@ -423,7 +423,7 @@
 			// hScrollBarBLEVEL
 			// 
 			resources.ApplyResources( this.hScrollBarBLEVEL, "hScrollBarBLEVEL" );
-			this.hScrollBarBLEVEL.Maximum = 109;
+			this.hScrollBarBLEVEL.Maximum = 999 + 9;
 			this.hScrollBarBLEVEL.Name = "hScrollBarBLEVEL";
 			this.toolTipツールチップ.SetToolTip( this.hScrollBarBLEVEL, resources.GetString( "hScrollBarBLEVEL.ToolTip" ) );
 			this.hScrollBarBLEVEL.ValueChanged += new System.EventHandler( this.hScrollBarBLEVEL_ValueChanged );
@@ -445,7 +445,7 @@
 			// hScrollBarGLEVEL
 			// 
 			resources.ApplyResources( this.hScrollBarGLEVEL, "hScrollBarGLEVEL" );
-			this.hScrollBarGLEVEL.Maximum = 109;
+			this.hScrollBarGLEVEL.Maximum = 999 + 9;
 			this.hScrollBarGLEVEL.Name = "hScrollBarGLEVEL";
 			this.toolTipツールチップ.SetToolTip( this.hScrollBarGLEVEL, resources.GetString( "hScrollBarGLEVEL.ToolTip" ) );
 			this.hScrollBarGLEVEL.ValueChanged += new System.EventHandler( this.hScrollBarGLEVEL_ValueChanged );
@@ -467,7 +467,7 @@
 			// hScrollBarDLEVEL
 			// 
 			resources.ApplyResources( this.hScrollBarDLEVEL, "hScrollBarDLEVEL" );
-			this.hScrollBarDLEVEL.Maximum = 109;
+			this.hScrollBarDLEVEL.Maximum = 999 + 9;
 			this.hScrollBarDLEVEL.Name = "hScrollBarDLEVEL";
 			this.toolTipツールチップ.SetToolTip( this.hScrollBarDLEVEL, resources.GetString( "hScrollBarDLEVEL.ToolTip" ) );
 			this.hScrollBarDLEVEL.ValueChanged += new System.EventHandler( this.hScrollBarDLEVEL_ValueChanged );
