@@ -68,23 +68,51 @@ namespace DTXMania
                     this.txリザルト画像 = this.txリザルト画像がないときの画像;
                 }
 
-                #region[ 曲名、アーティスト名テクスチャの生成 ]
+                #region[ Generation of song title, artist name and disclaimer textures ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
                     this.strSongName = CDTXMania.stageSongSelection.r現在選択中の曲.strタイトル;
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
-                Bitmap bmpSongName = new Bitmap(1, 1);
-                bmpSongName = pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                CPrivateFastFont pfTitle = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                Bitmap bmpSongName = pfTitle.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tGenerateTexture(bmpSongName, false);
                 bmpSongName.Dispose();
+                pfTitle.Dispose();
 
-                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
-                Bitmap bmpArtistName = new Bitmap(1, 1);
-                bmpArtistName = pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
+                CPrivateFastFont pfArtist = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                Bitmap bmpArtistName = pfArtist.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tGenerateTexture(bmpArtistName, false);
                 bmpArtistName.Dispose();
+                pfArtist.Dispose();
+
+                if (CDTXMania.ConfigIni.nPlaySpeed != 20)
+                {
+                    double d = (double)(CDTXMania.ConfigIni.nPlaySpeed / 20.0);
+                    String strModifiedPlaySpeed = "Play Speed: x" + d.ToString("0.000");
+                    CPrivateFastFont pfModifiedPlaySpeed = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 18, FontStyle.Regular);
+                    Bitmap bmpModifiedPlaySpeed = pfModifiedPlaySpeed.DrawPrivateFont(strModifiedPlaySpeed, CPrivateFont.DrawMode.Edge, Color.White, Color.White, Color.Black, Color.Red, true);
+                    this.txModifiedPlaySpeed = CDTXMania.tGenerateTexture(bmpModifiedPlaySpeed, false);
+                    bmpModifiedPlaySpeed.Dispose();
+                    pfModifiedPlaySpeed.Dispose();
+                }
+
+                if (CDTXMania.stageResult.bIsTrainingMode)
+                {
+                    String strResultsNotSavedTraining = "Training feature used";
+                    CPrivateFastFont pfResultsNotSavedTraining = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 18, FontStyle.Regular);
+                    Bitmap bmpResultsNotSavedTraining = pfResultsNotSavedTraining.DrawPrivateFont(strResultsNotSavedTraining, CPrivateFont.DrawMode.Edge, Color.White, Color.White, Color.Black, Color.Red, true);
+                    this.txTrainingMode = CDTXMania.tGenerateTexture(bmpResultsNotSavedTraining, false);
+                    bmpResultsNotSavedTraining.Dispose();
+                    pfResultsNotSavedTraining.Dispose();
+                }
+
+                String strResultsNotSaved = "Score will not be saved";
+                CPrivateFastFont pfResultsNotSaved = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 18, FontStyle.Regular);
+                Bitmap bmpResultsNotSaved = pfResultsNotSaved.DrawPrivateFont(strResultsNotSaved, CPrivateFont.DrawMode.Edge, Color.White, Color.White, Color.Black, Color.Red, true);
+                this.txResultsNotSaved = CDTXMania.tGenerateTexture(bmpResultsNotSaved, false);
+                bmpResultsNotSaved.Dispose();
+                pfResultsNotSaved.Dispose();
                 #endregion
 
                 Bitmap bitmap2 = new Bitmap(0x3a, 0x12);
@@ -153,13 +181,14 @@ namespace DTXMania
                 CDTXMania.tReleaseTexture(ref this.txリザルト画像がないときの画像);
                 CDTXMania.tReleaseTexture(ref this.txSongName);
                 CDTXMania.tReleaseTexture(ref this.txArtistName);
+                CDTXMania.tReleaseTexture(ref this.txModifiedPlaySpeed);
+                CDTXMania.tReleaseTexture(ref this.txTrainingMode);
+                CDTXMania.tReleaseTexture(ref this.txResultsNotSaved);
                 CDTXMania.tReleaseTexture(ref this.r表示するリザルト画像);
                 CDTXMania.tReleaseTexture(ref this.txSongLevel);
                 CDTXMania.tReleaseTexture(ref this.txSongDifficulty);
                 CDTXMania.tReleaseTexture(ref this.txDrumSpeed);
 
-                CDTXMania.t安全にDisposeする( ref this.pfタイトル );
-                CDTXMania.t安全にDisposeする( ref this.pfアーティスト );
                 base.OnManagedReleaseResources();
             }
         }
@@ -197,6 +226,22 @@ namespace DTXMania
             this.txSongName.tDraw2D(CDTXMania.app.Device, 500, 630);
             this.txArtistName.tDraw2D(CDTXMania.app.Device, 500, 665);
 
+            int nDisclaimerY = 360;
+            if (CDTXMania.ConfigIni.nPlaySpeed != 20)
+            {
+                this.txModifiedPlaySpeed.tDraw2D(CDTXMania.app.Device, 840, nDisclaimerY);
+                nDisclaimerY += 25;
+            }
+            if (CDTXMania.stageResult.bIsTrainingMode)
+            {
+                this.txTrainingMode.tDraw2D(CDTXMania.app.Device, 840, nDisclaimerY);
+                nDisclaimerY += 25;
+            }
+            if (CDTXMania.stageResult.bIsTrainingMode || ((CDTXMania.ConfigIni.nPlaySpeed != 20) && !CDTXMania.ConfigIni.bSaveScoreIfModifiedPlaySpeed))
+            {
+                this.txResultsNotSaved.tDraw2D(CDTXMania.app.Device, 840, nDisclaimerY);
+            }
+
             if (!this.ct登場用.bReachedEndValue)
             {
                 return 0;
@@ -226,9 +271,9 @@ namespace DTXMania
 
         private CTexture txSongName;
         private CTexture txArtistName;
-
-        private CPrivateFastFont pfタイトル;
-        private CPrivateFastFont pfアーティスト;
+        private CTexture txModifiedPlaySpeed;
+        private CTexture txTrainingMode;
+        private CTexture txResultsNotSaved;
 
         //2014.04.05.kairera0467 GITADORAグラデーションの色。
         //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。

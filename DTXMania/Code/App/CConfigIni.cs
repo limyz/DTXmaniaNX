@@ -646,6 +646,7 @@ namespace DTXMania
 		public int n非フォーカス時スリープms;       // #23568 2010.11.04 ikanick add
 		public int nフレーム毎スリープms;			// #xxxxx 2011.11.27 yyagi add
 		public int nPlaySpeed;
+		public bool bSaveScoreIfModifiedPlaySpeed;
 		public int n曲が選択されてからプレビュー音が鳴るまでのウェイトms;
 		public int n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms;
 		public int n自動再生音量;
@@ -1257,6 +1258,7 @@ namespace DTXMania
                 this.nJudgeLinePosOffset[i] = 0;
 			}
 			this.nPlaySpeed = 20;
+			this.bSaveScoreIfModifiedPlaySpeed = false;
 			this.bSmallGraph = true;
             this.ドラムコンボ文字の表示位置 = EDrumComboTextDisplayPosition.RIGHT;
             this.bドラムコンボ文字の表示 = true;
@@ -1902,8 +1904,11 @@ namespace DTXMania
 			sw.WriteLine( "; 演奏速度(5～40)(→x5/20～x40/20)" );
 			sw.WriteLine( "PlaySpeed={0}", this.nPlaySpeed );
 			sw.WriteLine();
+			sw.WriteLine("; Save score when PlaySpeed is not 100% (0:OFF, 1:ON)");
+			sw.WriteLine("SaveScoreIfModifiedPlaySpeed={0}", this.bSaveScoreIfModifiedPlaySpeed ? 1 : 0);
+			sw.WriteLine();
 
-            // #24074 2011.01.23 add ikanick
+			// #24074 2011.01.23 add ikanick
 			sw.WriteLine( "; グラフ表示(0:OFF, 1:ON)" );
 			sw.WriteLine( "DrumGraph={0}", this.bGraph有効.Drums ? 1 : 0 );
 			sw.WriteLine( "GuitarGraph={0}", this.bGraph有効.Guitar ? 1 : 0 );
@@ -3034,7 +3039,11 @@ namespace DTXMania
 											{
 												this.nPlaySpeed = CConversion.nGetNumberIfInRange( str4, 5, 40, this.nPlaySpeed );
 											}
-											else if( str3.Equals( "ComboPosition" ) )
+											else if (str3.Equals("SaveScoreIfModifiedPlaySpeed"))
+											{
+												this.bSaveScoreIfModifiedPlaySpeed = CConversion.bONorOFF(str4[0]);
+											}
+											else if ( str3.Equals( "ComboPosition" ) )
 											{
 												this.ドラムコンボ文字の表示位置 = (EDrumComboTextDisplayPosition) CConversion.nGetNumberIfInRange( str4, 0, 3, (int) this.ドラムコンボ文字の表示位置 );
 											}

@@ -79,7 +79,7 @@ namespace DTXMania
 				//---------------------
 				#endregion
 
-				if (!bIsTrainingMode)
+				if (!bIsTrainingMode && (CDTXMania.ConfigIni.bSaveScoreIfModifiedPlaySpeed || CDTXMania.ConfigIni.nPlaySpeed == 20))
 				{
 					#region [ Calculate results ]
 					//---------------------
