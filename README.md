@@ -13,7 +13,7 @@ https://osdn.net/projects/dtxmania
 
 https://dtxmania.net
 
-* [DTXMania AL](http://senamih.com/dtxal) (Sema)
+* [DTXMania AL](http://senamih.com/dtxal) (Sena)
 
 http://senamih.com/dtxal
 
