@@ -26,7 +26,7 @@ https://osdn.net/projects/dtxmaniaxg-verk
 
 2. Download and install the [.NET Framework 4.7.1](https://dotnet.microsoft.com/download/dotnet-framework/net471) (if prompted)
 
-3. [Download and install the DirectX End-User Runtime (DirectX v9.0c)](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=35)
+3. Download and install the [DirectX End-User Runtime (DirectX v9.0c)](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=35)
 
 ## Community Support
 For additional help or support, ask away in DTXMania on Discord! 
