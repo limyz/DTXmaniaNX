@@ -312,8 +312,8 @@ namespace DTXMania
             this.listItems.Add(this.iSystemShowLag);
 
             this.iSystemShowLagColor = new CItemList("ShowLagTimeColor", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.nShowLagTypeColor,
-				"ズレ時間表示の表示色変更：\n  TYPE-A: 早ズレを赤、遅ズレを青で表示します。\n  TYPE-B: 早ズレを青、遅ズレを赤で表示します。",
-				"Change color of lag time display：\nTYPE-A: early notes in red and late notes in blue.\nTYPE-B: early notes in blue and late notes in red.",
+                "ズレ時間表示の表示色変更：\n  TYPE-A: 早ズレを青、遅ズレを赤で表示します。\n  TYPE-B: 早ズレを赤、遅ズレを青で表示します。",
+                "Change color of lag time display：\nTYPE-A: early notes in blue and late notes in red.\nTYPE-B: early notes in red and late notes in blue.",
 				new string[] { "TYPE-A", "TYPE-B" } );
 			this.listItems.Add( this.iSystemShowLagColor );
 
