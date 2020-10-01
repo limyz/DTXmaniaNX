@@ -73,6 +73,8 @@ namespace DTXCreator.Options  // オプション関連
 			this.radioButton_ASIO.Enabled = false;
 			this.comboBox_ASIOdevices.Enabled = false;
 			this.groupBox_SoundDeviceSettings.Enabled = false;
+			this.textBox_DTXViewerPath.Enabled = true;
+			this.button_DTXViewerPath.Enabled = true;
 		}
 
 		private void radioButton_UseDTXManiaGR_CheckedChanged(object sender, EventArgs e)
@@ -83,6 +85,8 @@ namespace DTXCreator.Options  // オプション関連
 			this.radioButton_ASIO.Enabled = true;
 			this.comboBox_ASIOdevices.Enabled = true;
 			this.groupBox_SoundDeviceSettings.Enabled = true;
+			this.textBox_DTXViewerPath.Enabled = false;
+			this.button_DTXViewerPath.Enabled = false;
 		}
 
 		private void radioButton_DirectSound_CheckedChanged(object sender, EventArgs e)
@@ -115,5 +119,12 @@ namespace DTXCreator.Options  // オプション関連
 
 		}
 
+        private void button_DTXViewerPath_Click(object sender, EventArgs e)
+        {
+			if (openFileDialog_DTXViewerPath.ShowDialog() == DialogResult.OK)
+			{
+				textBox_DTXViewerPath.Text = openFileDialog_DTXViewerPath.FileName;
+			}
+        }
 	}
 }

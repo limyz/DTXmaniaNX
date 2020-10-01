@@ -32,6 +32,7 @@ namespace DTXCreator.Options  // オプション関連
 			#region [ Viewerタブ ]
 			cオプションダイアログ.radioButton_UseDTXViewer.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.bViewerIsDTXV;
 			cオプションダイアログ.radioButton_UseDTXManiaGR.Checked = !this.formメインフォーム.appアプリ設定.ViewerInfo.bViewerIsDTXV;
+			cオプションダイアログ.textBox_DTXViewerPath.Text = this.formメインフォーム.appアプリ設定.ViewerInfo.PathDTXV;
 
 			cオプションダイアログ.groupBox_SoundDeviceSettings.Enabled = !this.formメインフォーム.appアプリ設定.ViewerInfo.bViewerIsDTXV;
 			cオプションダイアログ.radioButton_DirectSound.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.SoundType == FDK.ESoundDeviceType.DirectSound;
@@ -79,6 +80,7 @@ namespace DTXCreator.Options  // オプション関連
 
 				#region [ Viewer設定 ]
 				this.formメインフォーム.appアプリ設定.ViewerInfo.bViewerIsDTXV = cオプションダイアログ.radioButton_UseDTXViewer.Checked;
+				this.formメインフォーム.appアプリ設定.ViewerInfo.PathDTXV = cオプションダイアログ.textBox_DTXViewerPath.Text;
 
 				//AppSetting.ViewerSoundType vst = ( FDK.COS.bIsVistaOrLater ) ? AppSetting.ViewerSoundType.WASAPI : AppSetting.ViewerSoundType.DirectSound;
 				FDK.ESoundDeviceType vst = (FDK.COS.bIsVistaOrLater()) ? FDK.ESoundDeviceType.ExclusiveWASAPI : FDK.ESoundDeviceType.DirectSound;

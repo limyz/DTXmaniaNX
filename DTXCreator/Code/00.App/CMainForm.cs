@@ -1551,7 +1551,7 @@ namespace DTXCreator
 			//-----------------
 			try
 			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
@@ -1594,7 +1594,7 @@ namespace DTXCreator
 
 			try
 			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
@@ -1641,7 +1641,7 @@ namespace DTXCreator
 
 			try
 			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
@@ -1676,7 +1676,7 @@ namespace DTXCreator
 		{
 			try
 			{
-				string strViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ 実行中の DTXViewer に再生停止オプションを渡す。 ]
 				//-----------------
@@ -2093,7 +2093,7 @@ namespace DTXCreator
 
 		public void tDTXV演奏関連のボタンとメニューのEnabledの設定()
 		{
-			if( File.Exists( this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path ) )
+			if( File.Exists(this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM)) )
 			{
 				// DTXViewer が存在するなら Enable
 

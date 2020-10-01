@@ -379,10 +379,10 @@ namespace DTXCreator
 
 		public class Viewer
 		{
-			private const string PathDTXV = "DTXV.exe";
-			private const string PathDTXM = "DTXManiaGR.exe";
+			public const string FileNameDTXM = "DTXManiaGR.exe";
+			public string PathDTXV = "";
+			public bool bViewerIsDTXV = false;
 
-			public string Path = PathDTXM;
 			public string PlayStartFromOption = "-N";
 			public string PlayStartOption = "-N-1";
 			public string PlayStopOption = "-S";
@@ -396,7 +396,6 @@ namespace DTXCreator
 			// 引数無しのコンストラクタがないとSerializeできないのでダミー定義する
 			public Viewer()
 			{
-				Path = PathDTXM;
 				PlayStartFromOption = "-N";
 				PlayStartOption = "-N-1";
 				PlayStopOption = "-S";
@@ -408,17 +407,6 @@ namespace DTXCreator
 				GRmode = false;
 				TimeStretch = false;
 				VSyncWait = true;
-			}
-			public bool bViewerIsDTXV
-			{
-				get
-				{
-					return (this.Path == PathDTXV);
-				}
-				set
-				{
-					this.Path = value ? PathDTXV : PathDTXM;
-				}
 			}
 
 			public string PlaySoundOption
