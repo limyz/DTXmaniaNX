@@ -47,6 +47,7 @@ namespace DTXCreator
 			this._MovieListColumnWidth[ 2 ] = 120;
 			this._LastWorkFolder = Directory.GetCurrentDirectory();
 			this._ViewerInfo = new Viewer();
+			this._InitialOperationMode = false;
 		}
 		//-----------------
 		#endregion
@@ -352,12 +353,111 @@ namespace DTXCreator
 			}
 		}
 
+		/// <summary>
+		/// 操作モードの初期値
+		/// false: 編集モード
+		/// true:  選択モード
+		/// </summary>
+		public bool InitialOperationMode
+		{
+			get
+			{
+				return this._InitialOperationMode;
+			}
+			set
+			{
+				this._InitialOperationMode = value;
+			}
+		}
+
+		//public enum ViewerSoundType
+		//{
+		//    DirectSound,
+		//    WASAPI,
+		//    ASIO
+		//}
+
 		public class Viewer
 		{
-			public string Path = "DTXV.exe";
+			private const string PathDTXV = "DTXV.exe";
+			private const string PathDTXM = "DTXManiaGR.exe";
+
+			public string Path = PathDTXM;
 			public string PlayStartFromOption = "-N";
 			public string PlayStartOption = "-N-1";
 			public string PlayStopOption = "-S";
+			// public ViewerSoundType SoundType = ( FDK.COS.bIsVistaOrLater ) ? ViewerSoundType.WASAPI : ViewerSoundType.DirectSound;
+			public FDK.ESoundDeviceType SoundType = (FDK.COS.bIsVistaOrLater()) ? FDK.ESoundDeviceType.ExclusiveWASAPI : FDK.ESoundDeviceType.DirectSound;
+			public int ASIODeviceNo = 0;
+			public bool GRmode;
+			public bool TimeStretch;
+			public bool VSyncWait = true;
+
+			// 引数無しのコンストラクタがないとSerializeできないのでダミー定義する
+			public Viewer()
+			{
+				Path = PathDTXM;
+				PlayStartFromOption = "-N";
+				PlayStartOption = "-N-1";
+				PlayStopOption = "-S";
+				//SoundType =  (FDK.COS.bIsVistaOrLater)? ViewerSoundType.WASAPI : ViewerSoundType.DirectSound;
+				SoundType = (FDK.COS.bIsVistaOrLater()) ?
+								((FDK.COS.bIsWin10OrLater()) ? FDK.ESoundDeviceType.SharedWASAPI : FDK.ESoundDeviceType.ExclusiveWASAPI)
+							: FDK.ESoundDeviceType.DirectSound;
+				ASIODeviceNo = 0;
+				GRmode = false;
+				TimeStretch = false;
+				VSyncWait = true;
+			}
+			public bool bViewerIsDTXV
+			{
+				get
+				{
+					return (this.Path == PathDTXV);
+				}
+				set
+				{
+					this.Path = value ? PathDTXV : PathDTXM;
+				}
+			}
+
+			public string PlaySoundOption
+			{
+				get
+				{
+					string opt = "";
+					if (bViewerIsDTXV)
+					{
+						opt = "";
+					}
+					else
+					{
+						string soundtypeopt = "";
+						switch (SoundType)
+						{
+							case FDK.ESoundDeviceType.DirectSound:
+								soundtypeopt = "D";
+								break;
+							case FDK.ESoundDeviceType.ExclusiveWASAPI:
+								soundtypeopt = "WE";
+								break;
+							case FDK.ESoundDeviceType.SharedWASAPI:
+								soundtypeopt = "WS";
+								break;
+							case FDK.ESoundDeviceType.ASIO:
+								soundtypeopt = "A";
+								soundtypeopt += ASIODeviceNo.ToString();
+								break;
+						}
+
+						opt = "-D" + soundtypeopt;
+						opt += GRmode ? "Y" : "N";  // この辺は手抜き
+						opt += TimeStretch ? "Y" : "N"; //
+						opt += VSyncWait ? "Y" : "N";   //
+					}
+					return opt;
+				}
+			}
 		}
 
 		/// <summary>
@@ -403,6 +503,7 @@ namespace DTXCreator
 		private int _Width = 600;
 		private int _X;
 		private int _Y;
+		private bool _InitialOperationMode;
 		//-----------------
 		#endregion
 	}

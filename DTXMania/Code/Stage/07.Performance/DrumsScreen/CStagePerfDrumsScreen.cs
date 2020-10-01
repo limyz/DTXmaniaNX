@@ -11,6 +11,7 @@ using SharpDX;
 using FDK;
 
 using Rectangle = System.Drawing.Rectangle;
+using System.Windows.Forms;
 
 namespace DTXMania
 {
@@ -184,92 +185,11 @@ namespace DTXMania
                     }
                     this.actFI.tStartFadeIn();
                     this.ct登場用.tUpdate();
-//					if ( this.bDTXVmode )
+
+                    if (CDTXMania.DTXVmode.Enabled)
                     {
-                        #region [テストコード: 再生開始小節の変更]
-#if false
-						int nStartBar = 30;
-                        #region [ 処理を開始するチップの特定 ]
-						bool bSuccessSeek = false;
-						for ( int i = this.n現在のトップChip; i < CDTXMania.DTX.listChip.Count; i++ )
-						{
-							CDTX.CChip pChip = CDTXMania.DTX.listChip[ i ];
-							if ( pChip.n発声位置 < 384 * nStartBar )
-							{
-								continue;
-							}
-							else
-							{
-								bSuccessSeek = true;
-								this.n現在のトップChip = i;
-								break;
-							}
-						}
-						if ( !bSuccessSeek )
-						{
-							this.n現在のトップChip = CDTXMania.DTX.listChip.Count - 1;
-						}
-                        #endregion
-                        #region [ 演奏開始の発声時刻msを取得し、タイマに設定 ]
-						int nStartTime = CDTXMania.DTX.listChip[ this.n現在のトップChip ].n発声時刻ms;
-						CSound管理.rc演奏用タイマ.n現在時刻 = nStartTime;
-						CSound管理.rc演奏用タイマ.t一時停止();
-                        #endregion
-
-						List<CSound> pausedCSound = new List<CSound>();
-
-                        #region [ BGMの途中再生開始 (CDTXのt入力_行解析_チップ配置()で小節番号が+1されているのを削っておくこと) ]
-						foreach ( CDTX.CChip pChip in this.listChip )
-						{
-							if ( pChip.nチャンネル番号 == 0x01 )
-							{
-								CDTX.CWAV wc = CDTXMania.DTX.listWAV[ pChip.n整数値_内部番号 ];
-								int nDuration = ( wc.rSound[ 0 ] == null ) ? 0 : (int) ( wc.rSound[ 0 ].n総演奏時間ms / CDTXMania.DTX.db再生速度 );
-//								if (wc.bIsBGMSound || wc.bIsGuitarSound || wc.bIsBassSound || wc.bIsBGMSound || wc.bIsSESound )
-								{
-									if ( ( pChip.n発声時刻ms + nDuration > 0 ) && ( pChip.n発声時刻ms <= nStartTime ) && ( nStartTime <= pChip.n発声時刻ms + nDuration ) )
-									{
-										if ( CDTXMania.ConfigIni.bBGM音を発声する )
-										{
-											CDTXMania.DTX.tチップの再生( pChip, CSound管理.rc演奏用タイマ.n前回リセットした時のシステム時刻 + pChip.n発声時刻ms, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( E楽器パート.UNKNOWN ) );
-											//CDTXMania.DTX.tチップの再生( pChip, CSound管理.rc演奏用タイマ.n現在時刻ms + pChip.n発声時刻ms, (int) Eレーン.BGM, CDTXMania.DTX.nモニタを考慮した音量( E楽器パート.UNKNOWN ) );
-											for ( int i = 0; i < wc.rSound.Length; i++ )
-											{
-												if ( wc.rSound[ i ] != null )
-												{
-													wc.rSound[ i ].t再生を一時停止する();
-													wc.rSound[ i ].t再生位置を変更する( nStartTime - pChip.n発声時刻ms );
-													pausedCSound.Add( wc.rSound[ i ] );
-												}
-											}
-										}
-										break;
-									}
-								}
-							}
-						}
-                        #endregion
-// 以下未実装 ここから
-                        #region [ 演奏開始時点で既に演奏中になっているチップの再生とシーク (一つ手前のBGM処理のところに混ぜてもいいかも  ]
-                        #endregion
-                        #region [ 演奏開始時点で既に表示されているBGAの再生とシーク (BGAの動きの途中状況を反映すること) ]
-                        #endregion
-                        #region [ 演奏開始時点で既に表示されているAVIの再生とシーク (AVIの動きの途中状況を反映すること) ]
-                        #endregion
-
-// 未実装 ここまで
-                        #region [ PAUSEしていたサウンドを一斉に再生再開する ]
-						foreach ( CSound cs in pausedCSound )
-						{
-							cs.tサウンドを再生する();
-						}
-						pausedCSound.Clear();
-						pausedCSound = null;
-                        #endregion
-						CSound管理.rc演奏用タイマ.n現在時刻 = nStartTime;
-						CSound管理.rc演奏用タイマ.t再開();
-#endif
-                        #endregion
+                        tSetSettingsForDTXV();
+                        tJumpInSongToBar(CDTXMania.DTXVmode.nStartBar + 1);
                     }
 
                     base.bJustStartedUpdate = false;

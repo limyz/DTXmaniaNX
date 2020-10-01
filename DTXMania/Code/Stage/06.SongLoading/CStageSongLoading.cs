@@ -210,7 +210,9 @@ namespace DTXMania
                     this.strSongTitle = cdtx.TITLE;
 
                 this.strArtistName = cdtx.ARTIST;
-                if( ( ( cdtx.SOUND_NOWLOADING != null ) && ( cdtx.SOUND_NOWLOADING.Length > 0 ) ) && File.Exists( cdtx.strFolderName + cdtx.SOUND_NOWLOADING ) )
+                if( ( ( cdtx.SOUND_NOWLOADING != null ) && ( cdtx.SOUND_NOWLOADING.Length > 0 ) ) && File.Exists( cdtx.strFolderName + cdtx.SOUND_NOWLOADING )
+                    && (!CDTXMania.DTXVmode.Enabled)
+                    && (!CDTXMania.DTX2WAVmode.Enabled))
                 {
                     string strNowLoadingサウンドファイルパス = cdtx.strFolderName + cdtx.SOUND_NOWLOADING;
                     try
@@ -281,7 +283,7 @@ namespace DTXMania
 
                 cdtx.OnDeactivate();
                 base.OnActivate();
-                if( !CDTXMania.bCompactMode )
+                if( !CDTXMania.bCompactMode && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
                     this.tDetermineStatusLabelFromLabelName( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
             }
             finally
@@ -394,8 +396,9 @@ namespace DTXMania
                     this.nBGMPlayStartTime = CSoundManager.rcPerformanceTimer.nCurrentTime;
                     this.nBGMTotalPlayTimeMs = this.sdLoadingSound.nTotalPlayTimeMs;
                 }
-                else
+                else if (!CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
                 {
+                    
                     CDTXMania.Skin.soundNowLoading.tPlay();
                     this.nBGMPlayStartTime = CSoundManager.rcPerformanceTimer.nCurrentTime;
                     this.nBGMTotalPlayTimeMs = CDTXMania.Skin.soundNowLoading.nLength_CurrentSound;
@@ -403,7 +406,8 @@ namespace DTXMania
                 //				this.actFI.tフェードイン開始();							// #27787 2012.3.10 yyagi 曲読み込み画面のフェードインの省略
                 base.ePhaseID = CStage.EPhase.Common_FadeIn;
                 base.bJustStartedUpdate = false;
-                this.tDetermineStatusLabelFromLabelName( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
+                // Already done in OnActivate
+                //this.tDetermineStatusLabelFromLabelName( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
 
                 nWAVcount = 1;
             }
@@ -529,7 +533,8 @@ namespace DTXMania
                             this.txPartPanel.tDraw2D(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
 
                         //this.txJacket.Dispose();
-                        this.tDrawDifficultyPanel( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ], 191 + k, 102 );
+                        if (!CDTXMania.bCompactMode && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
+                            this.tDrawDifficultyPanel( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ], 191 + k, 102 );
 
                         k = 700;
                     }

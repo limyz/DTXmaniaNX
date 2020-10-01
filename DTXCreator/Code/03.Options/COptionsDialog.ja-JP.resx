@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,117 +59,271 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="checkBoxPlaySoundOnChip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 16</value>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	<data name="pictureBox_EditMode.ErrorImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+		<value />
+	</data>
+	<data name="pictureBox_EditMode.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+		<value />
+	</data>
+	<data name="pictureBox_SelectMode.InitialImage" type="System.Resources.ResXNullRef, System.Windows.Forms">
+		<value />
+	</data>
+	<assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	<data name="radioButton_EditMode.AutoSize" type="System.Boolean, mscorlib">
+		<value>True</value>
+	</data>
+	<assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+	<data name="radioButton_EditMode.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+		<value>TopLeft</value>
+	</data>
+	<data name="radioButton_EditMode.Size" type="System.Drawing.Size, System.Drawing">
+		<value>75, 16</value>
+	</data>
+	<data name="radioButton_EditMode.Text" xml:space="preserve">
+    <value>編集モード</value>
   </data>
-  <data name="checkBoxPlaySoundOnChip.Text" xml:space="preserve">
+	<data name="radioButton_EditMode.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+		<value>ImageBeforeText</value>
+	</data>
+	<data name="radioButton_SelectMode.AutoSize" type="System.Boolean, mscorlib">
+		<value>True</value>
+	</data>
+	<data name="radioButton_SelectMode.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+		<value>TopLeft</value>
+	</data>
+	<data name="radioButton_SelectMode.Size" type="System.Drawing.Size, System.Drawing">
+		<value>75, 16</value>
+	</data>
+	<data name="radioButton_SelectMode.Text" xml:space="preserve">
+    <value>選択モード</value>
+  </data>
+	<data name="radioButton_SelectMode.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+		<value>ImageBeforeText</value>
+	</data>
+	<data name="groupBoxDefaultOperationMode.Text" xml:space="preserve">
+    <value>初期モード</value>
+  </data>
+	<data name="checkBoxPlaySoundOnChip.Size" type="System.Drawing.Size, System.Drawing">
+		<value>283, 16</value>
+	</data>
+	<data name="checkBoxPlaySoundOnChip.Text" xml:space="preserve">
     <value>WAVチップを譜面に配置したときにチップの音を再生する</value>
   </data>
-  <data name="checkBoxPreviewBGM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>227, 16</value>
-  </data>
-  <data name="checkBoxPreviewBGM.Text" xml:space="preserve">
+	<data name="checkBoxPreviewBGM.Size" type="System.Drawing.Size, System.Drawing">
+		<value>227, 16</value>
+	</data>
+	<data name="checkBoxPreviewBGM.Text" xml:space="preserve">
     <value>BGMサウンドのプレビューは自動再生しない</value>
   </data>
-  <data name="checkBoxオートフォーカス.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 16</value>
-  </data>
-  <data name="checkBoxオートフォーカス.Text" xml:space="preserve">
+	<data name="checkBoxオートフォーカス.Size" type="System.Drawing.Size, System.Drawing">
+		<value>110, 16</value>
+	</data>
+	<data name="checkBoxオートフォーカス.Text" xml:space="preserve">
     <value>オートフォーカス(&amp;F)</value>
   </data>
-  <data name="label個まで表示する.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 29</value>
-  </data>
-  <data name="label個まで表示する.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 12</value>
-  </data>
-  <data name="label個まで表示する.Text" xml:space="preserve">
+	<data name="label個まで表示する.Location" type="System.Drawing.Point, System.Drawing">
+		<value>257, 29</value>
+	</data>
+	<data name="label個まで表示する.Size" type="System.Drawing.Size, System.Drawing">
+		<value>94, 12</value>
+	</data>
+	<data name="label個まで表示する.Text" xml:space="preserve">
     <value>個まで表示する(&amp;T)</value>
   </data>
-  <data name="checkBox最近使用したファイル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 16</value>
-  </data>
-  <data name="checkBox最近使用したファイル.Text" xml:space="preserve">
+	<data name="checkBox最近使用したファイル.Size" type="System.Drawing.Size, System.Drawing">
+		<value>180, 16</value>
+	</data>
+	<data name="checkBox最近使用したファイル.Text" xml:space="preserve">
     <value>最近使用したファイルの一覧(&amp;R)：</value>
   </data>
-  <data name="numericUpDown最近使用したファイルの最大表示個数.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 25</value>
-  </data>
-  <data name="tabPage全般.Text" xml:space="preserve">
+	<data name="numericUpDown最近使用したファイルの最大表示個数.Location" type="System.Drawing.Point, System.Drawing">
+		<value>195, 25</value>
+	</data>
+	<data name="tabPage全般.Size" type="System.Drawing.Size, System.Drawing">
+		<value>359, 328</value>
+	</data>
+	<data name="tabPage全般.Text" xml:space="preserve">
     <value>全般</value>
   </data>
-  <data name="labelSelectLanes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 12</value>
-  </data>
-  <data name="labelSelectLanes.Text" xml:space="preserve">
+	<data name="labelSelectLanes.Size" type="System.Drawing.Size, System.Drawing">
+		<value>165, 12</value>
+	</data>
+	<data name="labelSelectLanes.Text" xml:space="preserve">
     <value>使用するレーンを選択して下さい。</value>
   </data>
-  <data name="tabPageLanes.Text" xml:space="preserve">
+	<data name="tabPageLanes.Size" type="System.Drawing.Size, System.Drawing">
+		<value>359, 328</value>
+	</data>
+	<data name="tabPageLanes.Text" xml:space="preserve">
     <value>使用レーン</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
+	<data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+		<value>165, 35</value>
+	</data>
+	<data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+		<value>148, 36</value>
+	</data>
+	<data name="label1.Text" xml:space="preserve">
+    <value>(WASAPI/ASIO使用時のみ、
+ 再生速度 x0.8 - x1.2
+ の範囲で使用可能です)</value>
+  </data>
+	<data name="checkBox_TimeStretch.Location" type="System.Drawing.Point, System.Drawing">
+		<value>154, 18</value>
+	</data>
+	<data name="checkBox_TimeStretch.Size" type="System.Drawing.Size, System.Drawing">
+		<value>125, 16</value>
+	</data>
+	<data name="checkBox_TimeStretch.Text" xml:space="preserve">
+    <value>TimeStretch使用(&amp;T)</value>
+  </data>
+	<data name="checkBox_VSyncWait.Size" type="System.Drawing.Size, System.Drawing">
+		<value>137, 16</value>
+	</data>
+	<data name="checkBox_VSyncWait.Text" xml:space="preserve">
+    <value>垂直同期待ちをする(&amp;V)</value>
+  </data>
+	<data name="checkBox_GRmode.Size" type="System.Drawing.Size, System.Drawing">
+		<value>116, 16</value>
+	</data>
+	<data name="checkBox_GRmode.Text" xml:space="preserve">
+    <value>ギター専用画面(&amp;G)</value>
+  </data>
+	<data name="groupBox_DTXManiaSettings.Text" xml:space="preserve">
+    <value>他のDTXManiaGRの設定</value>
+  </data>
+	<data name="radioButton_WASAPI_Shared.Size" type="System.Drawing.Size, System.Drawing">
+		<value>105, 16</value>
+	</data>
+	<data name="radioButton_WASAPI_Shared.Text" xml:space="preserve">
+    <value>WASAPI共有(&amp;H)</value>
+  </data>
+	<data name="label_Notice.Location" type="System.Drawing.Point, System.Drawing">
+		<value>211, 15</value>
+	</data>
+	<data name="label_Notice.Size" type="System.Drawing.Size, System.Drawing">
+		<value>96, 48</value>
+	</data>
+	<data name="label_Notice.Text" xml:space="preserve">
+    <value>(*)
+設定変更時、
+Viewerの再起動が
+必要です。</value>
+  </data>
+	<data name="radioButton_DirectSound.Size" type="System.Drawing.Size, System.Drawing">
+		<value>101, 16</value>
+	</data>
+	<data name="radioButton_DirectSound.Text" xml:space="preserve">
+    <value>DirectSound(&amp;D)</value>
+  </data>
+	<data name="radioButton_WASAPI_Exclusive.Size" type="System.Drawing.Size, System.Drawing">
+		<value>106, 16</value>
+	</data>
+	<data name="radioButton_WASAPI_Exclusive.Text" xml:space="preserve">
+    <value>WASAPI排他(&amp;W)</value>
+  </data>
+	<data name="radioButton_ASIO.Size" type="System.Drawing.Size, System.Drawing">
+		<value>211, 16</value>
+	</data>
+	<data name="radioButton_ASIO.Text" xml:space="preserve">
+    <value>ASIO (ASIO対応デバイスで使用可)(&amp;A)</value>
+  </data>
+	<data name="groupBox_SoundDeviceSettings.Text" xml:space="preserve">
+    <value>サウンド再生方式の設定 (*)</value>
+  </data>
+	<data name="radioButton_UseDTXViewer.Text" xml:space="preserve">
+    <value>DTXViewerを使う(&amp;V)</value>
+  </data>
+	<data name="radioButton_UseDTXManiaGR.Size" type="System.Drawing.Size, System.Drawing">
+		<value>136, 16</value>
+	</data>
+	<data name="radioButton_UseDTXManiaGR.Text" xml:space="preserve">
+    <value>DTXManiaGRを使う(&amp;M)</value>
+  </data>
+	<data name="groupBox_SelectViewer.Size" type="System.Drawing.Size, System.Drawing">
+		<value>347, 288</value>
+	</data>
+	<data name="groupBox_SelectViewer.Text" xml:space="preserve">
+    <value>Viewerの設定</value>
+  </data>
+	<data name="tabPageViewer.Size" type="System.Drawing.Size, System.Drawing">
+		<value>359, 299</value>
+	</data>
+	<data name="tabControlオプション.Size" type="System.Drawing.Size, System.Drawing">
+		<value>367, 325</value>
+	</data>
+	<data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+		<value>300, 347</value>
+	</data>
+	<data name="button1.Text" xml:space="preserve">
     <value>キャンセル</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
+	<data name="buttonOK.Location" type="System.Drawing.Point, System.Drawing">
+		<value>219, 347</value>
+	</data>
+	<data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+		<value>391, 382</value>
+	</data>
+	<data name="$this.Text" xml:space="preserve">
     <value>オプション</value>
   </data>
 </root>

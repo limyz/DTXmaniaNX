@@ -32,6 +32,7 @@ namespace DTXMania
         public void Start(int nチャンネル番号, CDTX.CAVI rAVI, CDTX.CDirectShow dsBGV, int n開始サイズW, int n開始サイズH, int n終了サイズW, int n終了サイズH, int n画像側開始位置X, int n画像側開始位置Y, int n画像側終了位置X, int n画像側終了位置Y, int n表示側開始位置X, int n表示側開始位置Y, int n表示側終了位置X, int n表示側終了位置Y, int n総移動時間ms, int n移動開始時刻ms)
         {
             //2016.01.21 kairera0467 VfW時代のコードを除去+大改造
+            Trace.TraceInformation("CActPerfAVI: Start(): " + rAVI.strファイル名);
 
             this.rAVI = rAVI;
             #region[ アスペクト比からどっちを使うか判別 ]
@@ -352,6 +353,7 @@ namespace DTXMania
         }
         public void Stop()
         {
+            Trace.TraceInformation("CActPerfAVI: Stop()");
             if ((this.rAVI != null) && (this.rAVI.avi != null))
             {
                 this.n移動開始時刻ms = -1;

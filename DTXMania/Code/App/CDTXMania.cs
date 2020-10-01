@@ -320,6 +320,9 @@ namespace DTXMania
         {
             get { return base.Window.Handle; }
         }
+        public static CDTXVmode DTXVmode;                       // #28821 2014.1.23 yyagi
+        public static CDTX2WAVmode DTX2WAVmode;
+        public static CCommandParse CommandParse;
         //fork
         public static STDGBVALUE< List<int> > listAutoGhostLag = new STDGBVALUE<List<int>>();
         public static STDGBVALUE< List<int> > listTargetGhsotLag = new STDGBVALUE<List<int>>();
@@ -570,6 +573,75 @@ namespace DTXMania
             if (ConfigIni.nフレーム毎スリープms >= 0)			// #xxxxx 2011.11.27 yyagi
             {
                 Thread.Sleep(ConfigIni.nフレーム毎スリープms);
+            }
+            #endregion
+
+            #region [ DTXCreator/DTX2WAVからの指示 ]
+            if (this.Window.IsReceivedMessage)  // ウインドウメッセージで、
+            {
+                string strMes = this.Window.strMessage;
+                this.Window.IsReceivedMessage = false;
+                if (strMes != null)
+                {
+                    Trace.TraceInformation("Received Message. ParseArguments {0}。", strMes);
+                    CommandParse.ParseArguments(strMes, ref DTXVmode, ref DTX2WAVmode);
+
+                    if (DTXVmode.Enabled)
+                    {
+                        bCompactMode = true;
+                        strCompactModeFile = DTXVmode.filename;
+                        /*if (DTXVmode.Command == CDTXVmode.ECommand.Preview)
+                        {
+                            // preview soundの再生
+                            string strPreviewFilename = DTXVmode.previewFilename;
+                            //Trace.TraceInformation( "Preview Filename=" + DTXVmode.previewFilename );
+                            try
+                            {
+                                if (this.previewSound != null)
+                                {
+                                    this.previewSound.tサウンドを停止する();
+                                    this.previewSound.Dispose();
+                                    this.previewSound = null;
+                                }
+                                this.previewSound = CDTXMania.Instance.Sound管理.tサウンドを生成する(strPreviewFilename);
+                                this.previewSound.n音量 = DTXVmode.previewVolume;
+                                this.previewSound.n位置 = DTXVmode.previewPan;
+                                this.previewSound.t再生を開始する();
+                                Trace.TraceInformation("DTXCからの指示で、サウンドを生成しました。({0})", strPreviewFilename);
+                            }
+                            catch
+                            {
+                                Trace.TraceError("DTXCからの指示での、サウンドの生成に失敗しました。({0})", strPreviewFilename);
+                                if (this.previewSound != null)
+                                {
+                                    this.previewSound.Dispose();
+                                }
+                                this.previewSound = null;
+                            }
+                        }*/
+                    }
+                    if (DTX2WAVmode.Enabled)
+                    {
+                        if (DTX2WAVmode.Command == CDTX2WAVmode.ECommand.Cancel)
+                        {
+                            Trace.TraceInformation("録音のCancelコマンドをDTXMania本体が受信しました。");
+                            //Microsoft.VisualBasic.Interaction.AppActivate("メモ帳");
+                            //SendKeys.Send("{ESC}");
+                            //SendKeys.SendWait("%{F4}");
+                            //Application.Exit();
+                            if (DTX != null)    // 曲読み込みの前に録音Cancelされると、DTXがnullのままここにきてでGPFとなる→nullチェック追加
+                            {
+                                DTX.tStopPlayingAllChips();
+                                DTX.OnDeactivate();
+                            }
+                            rCurrentStage.OnDeactivate();
+
+                            //Environment.ExitCode = 10010;		// この組み合わせではダメ、返り値が反映されない
+                            //base.Window.Close();
+                            Environment.Exit(10010);            // このやり方ならばOK
+                        }
+                    }
+                }
             }
             #endregion
 
@@ -1123,6 +1195,54 @@ for (int i = 0; i < 3; i++) {
                     case CStage.EStage.Playing:
                         #region [ *** ]
                         //-----------------------------
+                        #region [ DTXVモード中にDTXCreatorから指示を受けた場合の処理 ]
+                        if (DTXVmode.Enabled && DTXVmode.Refreshed)
+                        {
+                            DTXVmode.Refreshed = false;
+
+                            if (DTXVmode.Command == CDTXVmode.ECommand.Stop)
+                            {
+                                ((CStagePerfCommonScreen)rCurrentStage).t停止();
+
+                                //if (previewSound != null)
+                                //{
+                                //    this.previewSound.tサウンドを停止する();
+                                //    this.previewSound.Dispose();
+                                //    this.previewSound = null;
+                                //}
+                            }
+                            else if (DTXVmode.Command == CDTXVmode.ECommand.Play)
+                            {
+                                if (DTXVmode.NeedReload)
+                                {
+                                    ((CStagePerfCommonScreen)rCurrentStage).t再読込();
+                                    if (DTXVmode.GRmode)
+                                    {
+                                        CDTXMania.ConfigIni.bDrumsEnabled = false;
+                                        CDTXMania.ConfigIni.bGuitarEnabled = true;
+                                    }
+                                    else
+                                    {
+                                        //Both in Original DTXMania, but we don't support that
+                                        CDTXMania.ConfigIni.bDrumsEnabled = true;
+                                        CDTXMania.ConfigIni.bGuitarEnabled = false;
+                                    }
+                                    CDTXMania.ConfigIni.bTimeStretch = DTXVmode.TimeStretch;
+                                    CSoundManager.bIsTimeStretch = DTXVmode.TimeStretch;
+                                    if (CDTXMania.ConfigIni.bVerticalSyncWait != DTXVmode.VSyncWait)
+                                    {
+                                        CDTXMania.ConfigIni.bVerticalSyncWait = DTXVmode.VSyncWait;
+                                        //CDTXMania.b次のタイミングで垂直帰線同期切り替えを行う = true;
+                                    }
+                                }
+                                else
+                                {
+                                    ((CStagePerfCommonScreen)rCurrentStage).tJumpInSongToBar(CDTXMania.DTXVmode.nStartBar);
+                                }
+                            }
+                        }
+                        #endregion
+
                         switch (this.nUpdateAndDrawReturnValue)
                         {
                             case (int)EPerfScreenReturnValue.Continue:
@@ -1132,7 +1252,10 @@ for (int i = 0; i < 3; i++) {
                             case (int)EPerfScreenReturnValue.Restart:
                                 #region [ Cancel performance ]
                                 //-----------------------------
-                                scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Play canceled");
+                                if (!DTXVmode.Enabled && !DTX2WAVmode.Enabled)
+                                {
+                                    scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Play cancelled");
+                                }
 
                                 #region [ プラグイン On演奏キャンセル() の呼び出し ]
                                 //---------------------
@@ -1148,7 +1271,7 @@ for (int i = 0; i < 3; i++) {
                                 DTX.tStopPlayingAllChips();
                                 DTX.OnDeactivate();
                                 rCurrentStage.OnDeactivate();
-                                if (bCompactMode)
+                                if (bCompactMode && !DTXVmode.Enabled && !DTX2WAVmode.Enabled)
                                 {
                                     base.Window.Close();
                                 }
@@ -1712,7 +1835,7 @@ for (int i = 0; i < 3; i++) {
             #endregion
             #region [ Detect compact mode ]
             //---------------------
-            bCompactMode = false;
+            /*bCompactMode = false;
             strCompactModeFile = "";
             string[] commandLineArgs = Environment.GetCommandLineArgs();
             if ((commandLineArgs != null) && (commandLineArgs.Length > 1))
@@ -1720,8 +1843,254 @@ for (int i = 0; i < 3; i++) {
                 bCompactMode = true;
                 strCompactModeFile = commandLineArgs[1];
                 Trace.TraceInformation("Start in compact mode. [{0}]", strCompactModeFile);
-            }
+            }*/
             //---------------------
+            #endregion
+
+            #region [ Initialize DTXVmode, DTX2WAVmode, CommandParse classes ]
+            //Trace.TraceInformation( "DTXVモードの初期化を行います。" );
+            //Trace.Indent();
+            try
+            {
+                DTXVmode = new CDTXVmode();
+                DTXVmode.Enabled = false;
+                //Trace.TraceInformation( "DTXVモードの初期化を完了しました。" );
+
+                DTX2WAVmode = new CDTX2WAVmode();
+                //Trace.TraceInformation( "DTX2WAVモードの初期化を完了しました。" );
+
+                CommandParse = new CCommandParse();
+                //Trace.TraceInformation( "CommandParseの初期化を完了しました。" );
+            }
+            finally
+            {
+                //Trace.Unindent();
+            }
+            #endregion
+            #region [ Detect compact mode、or start as DTXViewer/DTX2WAV ]
+            bCompactMode = false;
+            strCompactModeFile = "";
+            string[] commandLineArgs = Environment.GetCommandLineArgs();
+            if ((commandLineArgs != null) && (commandLineArgs.Length > 1))
+            {
+                bCompactMode = true;
+                string arg = "";
+
+                for (int i = 1; i < commandLineArgs.Length; i++)
+                {
+                    if (i != 1)
+                    {
+                        arg += " " + "\"" + commandLineArgs[i] + "\"";
+                    }
+                    else
+                    {
+                        arg += commandLineArgs[i];
+                    }
+                }
+                Trace.TraceInformation("Parsing arguments: {0}。", arg);
+                CommandParse.ParseArguments(arg, ref DTXVmode, ref DTX2WAVmode);
+                if (DTXVmode.Enabled)
+                {
+                    DTXVmode.Refreshed = false;                             // 初回起動時は再読み込みに走らせない
+                    strCompactModeFile = DTXVmode.filename;
+                    switch (DTXVmode.soundDeviceType)                       // サウンド再生方式の設定
+                    {
+                        case ESoundDeviceType.DirectSound:
+                            ConfigIni.nSoundDeviceType = (int)CConfigIni.ESoundDeviceTypeForConfig.ACM;
+                            break;
+                        case ESoundDeviceType.ExclusiveWASAPI:
+                            ConfigIni.nSoundDeviceType = (int)CConfigIni.ESoundDeviceTypeForConfig.WASAPI;
+                            break;
+                        case ESoundDeviceType.SharedWASAPI:
+                            ConfigIni.nSoundDeviceType = (int)CConfigIni.ESoundDeviceTypeForConfig.WASAPI_Share;
+                            break;
+                        case ESoundDeviceType.ASIO:
+                            ConfigIni.nSoundDeviceType = (int)CConfigIni.ESoundDeviceTypeForConfig.ASIO;
+                            ConfigIni.nASIODevice = DTXVmode.nASIOdevice;
+                            break;
+                    }
+
+                    CDTXMania.ConfigIni.bVerticalSyncWait = DTXVmode.VSyncWait;
+                    CDTXMania.ConfigIni.bTimeStretch = DTXVmode.TimeStretch;
+                    if (DTXVmode.GRmode)
+                    {
+                        CDTXMania.ConfigIni.bDrumsEnabled = false;
+                        CDTXMania.ConfigIni.bGuitarEnabled = true;
+                    }
+                    else
+                    {
+                        //Both in Original DTXMania, but we don't support that
+                        CDTXMania.ConfigIni.bDrumsEnabled = true;
+                        CDTXMania.ConfigIni.bGuitarEnabled = false;
+                    }
+
+                    CDTXMania.ConfigIni.bFullScreenMode = false;
+                    CDTXMania.ConfigIni.nMovieMode = 2;
+                    /*CDTXMania.ConfigIni.rcWindow_backup = CDTXMania.ConfigIni.rcWindow;       // #36612 2016.9.12 yyagi
+                    CDTXMania.ConfigIni.rcWindow.W = CDTXMania.ConfigIni.rcViewerWindow.W;
+                    CDTXMania.ConfigIni.rcWindow.H = CDTXMania.ConfigIni.rcViewerWindow.H;
+                    CDTXMania.ConfigIni.rcWindow.X = CDTXMania.ConfigIni.rcViewerWindow.X;
+                    CDTXMania.ConfigIni.rcWindow.Y = CDTXMania.ConfigIni.rcViewerWindow.Y;*/
+                }
+                else if (DTX2WAVmode.Enabled)
+                {
+                    strCompactModeFile = DTX2WAVmode.dtxfilename;
+                    #region [ FDKへの録音設定 ]
+                    FDK.CSoundManager.strRecordInputDTXfilename = DTX2WAVmode.dtxfilename;
+                    FDK.CSoundManager.strRecordOutFilename = DTX2WAVmode.outfilename;
+                    FDK.CSoundManager.strRecordFileType = DTX2WAVmode.Format.ToString();
+                    FDK.CSoundManager.nBitrate = DTX2WAVmode.bitrate;
+                    for (int i = 0; i < (int)FDK.CSound.EInstType.Unknown; i++)
+                    {
+                        FDK.CSoundManager.nMixerVolume[i] = DTX2WAVmode.nMixerVolume[i];
+                    }
+                    ConfigIni.nMasterVolume = DTX2WAVmode.nMixerVolume[(int)FDK.CSound.EInstType.Unknown];    // [5](Unknown)のところにMasterVolumeが入ってくるので注意
+                                                                                                                    // CSound管理.nMixerVolume[5]は、結局ここからは変更しないため、
+                                                                                                                    // 事実上初期値=100で固定。
+                    #endregion
+                    #region [ 録音用の本体設定 ]
+
+                    // 本体プロセスの優先度を少し上げる (最小化状態で動作させると、処理性能が落ちるようなので
+                    // → ほとんど効果がなかったので止めます
+                    //Process thisProcess = System.Diagnostics.Process.GetCurrentProcess();
+                    //thisProcess.PriorityClass = ProcessPriorityClass.AboveNormal;
+
+                    // エンコーダーのパス設定 (=DLLフォルダ)
+                    FDK.CSoundManager.strEncoderPath = Path.Combine(strEXEのあるフォルダ, "DLL");
+
+                    CDTXMania.ConfigIni.nSoundDeviceType = (int)CConfigIni.ESoundDeviceTypeForConfig.WASAPI;
+                    CDTXMania.ConfigIni.bEventDrivenWASAPI = false;
+
+                    CDTXMania.ConfigIni.bVerticalSyncWait = false;
+                    CDTXMania.ConfigIni.bTimeStretch = false;
+
+                    //Both in Original DTXMania, but we don't support that
+                    CDTXMania.ConfigIni.bDrumsEnabled = true;
+                    CDTXMania.ConfigIni.bGuitarEnabled = false;
+
+                    CDTXMania.ConfigIni.bFullScreenMode = false;
+                    /*CDTXMania.ConfigIni.rcWindow_backup = CDTXMania.ConfigIni.rcWindow;
+                    CDTXMania.ConfigIni.rcWindow.W = CDTXMania.ConfigIni.rcViewerWindow.W;
+                    CDTXMania.ConfigIni.rcWindow.H = CDTXMania.ConfigIni.rcViewerWindow.H;
+                    CDTXMania.ConfigIni.rcWindow.X = CDTXMania.ConfigIni.rcViewerWindow.X;
+                    CDTXMania.ConfigIni.rcWindow.Y = CDTXMania.ConfigIni.rcViewerWindow.Y;*/
+
+                    //全オート
+                    for (int i = 0; i < (int)ELane.MAX; i++)
+                    {
+                        CDTXMania.ConfigIni.bAutoPlay[i] = true;
+                    }
+
+                    //FillInオフ, 歓声オフ
+                    CDTXMania.ConfigIni.bFillInEnabled = false;
+                    CDTXMania.ConfigIni.b歓声を発声する = false;  // bAudience
+                    //ストイックモード
+                    CDTXMania.ConfigIni.bストイックモード = false;  // bStoicMode
+                    //チップ非表示
+                    CDTXMania.ConfigIni.nHidSud.Drums = 4;   // ESudHidInv.FullInv;
+                    CDTXMania.ConfigIni.nHidSud.Guitar = 4;  // ESudHidInv.FullInv;
+                    CDTXMania.ConfigIni.nHidSud.Bass = 4;    // ESudHidInv.FullInv;
+
+                    // Dark=Full
+                    CDTXMania.ConfigIni.eDark = EDarkMode.FULL;
+
+                    //多重再生数=4
+                    CDTXMania.ConfigIni.nPoliphonicSounds = 4;
+
+                    //再生速度x1
+                    CDTXMania.ConfigIni.nPlaySpeed = 20;
+
+                    //メトロノーム音量0
+                    //CDTXMania.ConfigIni.eClickType.Value = EClickType.Off;
+                    //CDTXMania.ConfigIni.nClickHighVolume.Value = 0;
+                    //CDTXMania.ConfigIni.nClickLowVolume.Value = 0;
+
+                    //自動再生音量=100
+                    CDTXMania.ConfigIni.n自動再生音量 = 100;  // nAutoVolume
+                    CDTXMania.ConfigIni.n手動再生音量 = 100;  // nChipVolume
+
+                    //マスターボリューム100
+                    //CDTXMania.ConfigIni.nMasterVolume.Value = 100;	// DTX2WAV側から設定するので、ここでは触らない
+
+                    //StageFailedオフ
+                    CDTXMania.ConfigIni.bSTAGEFAILEDEnabled = false;
+
+                    //グラフ無効
+                    CDTXMania.ConfigIni.bGraph有効.Drums = false;
+                    CDTXMania.ConfigIni.bGraph有効.Guitar = false;
+                    CDTXMania.ConfigIni.bGraph有効.Bass = false;
+
+                    //コンボ非表示,判定非表示
+                    CDTXMania.ConfigIni.bドラムコンボ文字の表示 = false;  // bドラムコンボ文字の表示
+                    CDTXMania.ConfigIni.n表示可能な最小コンボ数.Drums = 0;
+                    CDTXMania.ConfigIni.n表示可能な最小コンボ数.Guitar = 0;  // CDTXMania.ConfigIni.bDisplayCombo.Guitar.Value = false;
+                    CDTXMania.ConfigIni.n表示可能な最小コンボ数.Bass = 0;    // CDTXMania.ConfigIni.bDisplayCombo.Bass.Value = false;
+                    CDTXMania.ConfigIni.bDisplayJudge.Drums = false;
+                    CDTXMania.ConfigIni.bDisplayJudge.Guitar = false;
+                    CDTXMania.ConfigIni.bDisplayJudge.Bass = false;
+
+
+                    //デバッグ表示オフ
+                    //CDTXMania.ConfigIni.b演奏情報を表示する = false;
+                    CDTXMania.ConfigIni.b演奏情報を表示しない = true;  // bDebugInfo = false
+
+                    //BGAオフ, AVIオフ
+                    CDTXMania.ConfigIni.bBGAEnabled = false;
+                    CDTXMania.ConfigIni.bAVIEnabled = false;
+
+                    //BGMオン、チップ音オン
+                    CDTXMania.ConfigIni.bBGM音を発声する = true;  // bBGMPlay
+                    CDTXMania.ConfigIni.bドラム打音を発声する = true;  // bDrumsHitSound
+
+                    //パート強調オフ
+                    //CDTXMania.ConfigIni.bEmphasizePlaySound.Drums.Value = false;
+                    //CDTXMania.ConfigIni.bEmphasizePlaySound.Guitar.Value = false;
+                    //CDTXMania.ConfigIni.bEmphasizePlaySound.Bass.Value = false;
+
+                    // パッド入力等、基本操作の無効化 (ESCを除く)
+                    //CDTXMania.ConfigIni.KeyAssign[][];
+
+                    #endregion
+                }
+                else                                                        // 通常のコンパクトモード
+                {
+                    strCompactModeFile = commandLineArgs[1];
+                }
+
+                if (!File.Exists(strCompactModeFile))      // #32985 2014.1.23 yyagi 
+                {
+                    Trace.TraceError("The file specified in compact mode cannot be found. Terminating DTXMania. [{0}]", strCompactModeFile);
+#if DEBUG
+					Environment.Exit(-1);
+#else
+                    if (strCompactModeFile == "")  // DTXMania未起動状態で、DTXCで再生停止ボタンを押した場合は、何もせず終了
+                    {
+                        Environment.Exit(-1);
+                    }
+                    else
+                    {
+                        throw new FileNotFoundException("The file specified in compact mode cannot be found. Terminating DTXMania.", strCompactModeFile);
+                    }
+#endif
+                }
+                if (DTXVmode.Enabled)
+                {
+                    Trace.TraceInformation("Start in DTXV mode. [{0}]", strCompactModeFile);
+                }
+                else if (DTX2WAVmode.Enabled)
+                {
+                    Trace.TraceInformation("Start in DTX2WAV mode. [{0}]", strCompactModeFile);
+                    DTX2WAVmode.SendMessage2DTX2WAV("BOOT");
+                }
+                else
+                {
+                    Trace.TraceInformation("Start in compact mode. [{0}]", strCompactModeFile);
+                }
+            }
+            else
+            {
+                Trace.TraceInformation("Start in normal mode。");
+            }
             #endregion
 
             #region [ Initialize window ]
@@ -2414,8 +2783,24 @@ for (int i = 0; i < 3; i++) {
                 Trace.Indent();
                 try
                 {
-                    ConfigIni.tWrite(str);
-                    Trace.TraceInformation("保存しました。({0})", new object[] { str });
+                    if (DTXVmode.Enabled)
+                    {
+                        //TODO
+                        //DTXVmode.tUpdateConfigIni();
+                        //Trace.TraceInformation("DTXVモードの設定情報を、Config.xmlに保存しました。");
+                    }
+                    else if (DTX2WAVmode.Enabled)
+                    {
+                        //TODO
+                        //DTX2WAVmode.tUpdateConfigIni();
+                        //Trace.TraceInformation("DTX2WAVモードの設定情報を、Config.xmlに保存しました。");
+                        DTX2WAVmode.SendMessage2DTX2WAV("TERM");
+                    }
+                    else
+                    {
+                        ConfigIni.tWrite(str);
+                        Trace.TraceInformation("保存しました。({0})", new object[] { str });
+                    }
                 }
                 catch (Exception e)
                 {

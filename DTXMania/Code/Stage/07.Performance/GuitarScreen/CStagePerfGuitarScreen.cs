@@ -149,6 +149,13 @@ namespace DTXMania
                     }
 					base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					this.actFI.tStartFadeIn();
+
+					if (CDTXMania.DTXVmode.Enabled)
+					{
+						tSetSettingsForDTXV();
+						tJumpInSongToBar(CDTXMania.DTXVmode.nStartBar + 1);
+					}
+
 					base.bJustStartedUpdate = false;
 				}
 				if( CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && !this.bIsTrainingMode && ( base.ePhaseID == CStage.EPhase.Common_DefaultState ) )

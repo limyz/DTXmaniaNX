@@ -173,7 +173,7 @@ namespace DTXMania
 
 				try
 				{
-                    this.dshow = new FDK.CDirectShow( CDTXMania.stageSongSelection.rChosenScore.FileInformation.AbsoluteFolderPath + this.strファイル名, CDTXMania.app.WindowHandle, true);
+                    this.dshow = new FDK.CDirectShow(str動画ファイル名, CDTXMania.app.WindowHandle, true);
 					Trace.TraceInformation( "DirectShowを生成しました。({0})({1})({2}byte)", this.strコメント文, str動画ファイル名, this.dshow.nデータサイズbyte );
                     CDTXMania.app.b汎用ムービーである = false;
 				}
@@ -487,7 +487,7 @@ namespace DTXMania
 		public class CChip : IComparable<CDTX.CChip>, ICloneable
 		{
 			public bool bHit;
-			public bool bVisible = true;
+			public bool bVisible = true;    // b可視
 			public double dbChipSizeRatio = 1.0;
 			public double db実数値;
 			public EAVIType eAVI種別;
@@ -495,13 +495,13 @@ namespace DTXMania
 			public EInstrumentPart eInstrumentPart = EInstrumentPart.UNKNOWN;
 			public int nChannelNumber;
 			public STDGBVALUE<int> nDistanceFromBar;
-			public int nIntegerValue;
-			public int nIntegerValue_InternalNumber;
+			public int nIntegerValue;       // n整数値
+			public int nIntegerValue_InternalNumber; // n整数値_内部番号
 			public int n総移動時間;
 			public int nTransparency = 0xff;
-			public int nPlaybackPosition;
-			public int nPlaybackTimeMs;
-            public bool bBonusChip;
+			public int nPlaybackPosition;   // n発声位置
+			public int nPlaybackTimeMs;     // n発声時刻ms
+			public bool bBonusChip;
 			public int nLag;				// 2011.2.1 yyagi
             public int nCurrentComboForGhost; // 2015.9.29 chnmr0 fork
 			public CDTX.CAVI rAVI;
@@ -2833,14 +2833,62 @@ namespace DTXMania
             
         }
 
-		public void tAutoCorrectWavPlaybackPosition()
+		public void tチップの再生(CChip rChip, long n再生開始システム時刻ms)
+		{
+			this.tチップの再生(rChip, n再生開始システム時刻ms, CDTXMania.ConfigIni.n自動再生音量, false, false);
+		}
+		public void tチップの再生(CChip rChip, long n再生開始システム時刻ms, int nVol)
+		{
+			this.tチップの再生(rChip, n再生開始システム時刻ms, nVol, false, false);
+		}
+		public void tチップの再生(CChip rChip, long n再生開始システム時刻ms, int nVol, bool bMIDIMonitor)
+		{
+			this.tチップの再生(rChip, n再生開始システム時刻ms, nVol, bMIDIMonitor, false);
+		}
+		public void tチップの再生(CChip pChip, long n再生開始システム時刻ms, int nVol, bool bMIDIMonitor, bool bBad)
+		{
+			if (pChip.nIntegerValue_InternalNumber >= 0)
+			{
+				if (this.listWAV.ContainsKey(pChip.nIntegerValue_InternalNumber))
+				{
+					CWAV wc = this.listWAV[pChip.nIntegerValue_InternalNumber];
+					int index = wc.n現在再生中のサウンド番号 = (wc.n現在再生中のサウンド番号 + 1) % nPolyphonicSounds;
+					if ((wc.rSound[0] != null) &&
+						(wc.rSound[0].bストリーム再生する || wc.rSound[index] == null))
+					{
+						index = wc.n現在再生中のサウンド番号 = 0;
+					}
+					CSound sound = wc.rSound[index];
+					if (sound != null)
+					{
+						if (bBad)
+						{
+							sound.db周波数倍率 = ((float)(100 + (((CDTXMania.Random.Next(3) + 1) * 7) * (1 - (CDTXMania.Random.Next(2) * 2))))) / 100f;
+						}
+						else
+						{
+							sound.db周波数倍率 = 1.0;
+						}
+						sound.dbPlaySpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20.0;
+						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
+						sound.nVolume = (int)(((double)(nVol * wc.n音量)) / 100.0);
+						sound.nPosition = wc.n位置;
+						sound.tStartPlaying();
+					}
+					wc.nPlayStartTime[wc.n現在再生中のサウンド番号] = n再生開始システム時刻ms;
+					this.tAutoCorrectWavPlaybackPosition(wc);
+				}
+			}
+		}
+
+		public void tAutoCorrectWavPlaybackPosition()  // tWave再生位置自動補正
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{
 				this.tAutoCorrectWavPlaybackPosition( cwav );
 			}
 		}
-		public void tAutoCorrectWavPlaybackPosition( CWAV wc )
+		public void tAutoCorrectWavPlaybackPosition( CWAV wc)  // tWave再生位置自動補正
 		{
 			if ( wc.rSound[ 0 ] != null && wc.rSound[ 0 ].nTotalPlayTimeMs >= 5000 )
 			{
@@ -3302,7 +3350,7 @@ namespace DTXMania
 				}
 			}
 		}
-		public void tStopPlayingAllChips()
+		public void tStopPlayingAllChips()  // t全チップの再生停止
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
 			{
