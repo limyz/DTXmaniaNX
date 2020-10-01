@@ -23,7 +23,7 @@ namespace DTXMania
 
         public override unsafe int OnUpdateAndDraw()
         {
-            if (!base.bNotActivated)
+            if (!base.bNotActivated && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
             {
                 if (base.bJustStartedUpdate)
                 {

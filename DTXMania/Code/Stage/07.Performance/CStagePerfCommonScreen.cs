@@ -339,7 +339,6 @@ namespace DTXMania
             bIsDirectSound = (CDTXMania.SoundManager.GetCurrentSoundDeviceType() == "DirectSound");
             dbPlaySpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20.0;
             bValidScore = true;
-            bDTXVmode = false; // とりあえずfalse固定
 
             this.LoopBeginMs = -1;
             this.LoopEndMs = -1;
@@ -715,7 +714,6 @@ namespace DTXMania
         protected bool bIsDirectSound; //
         protected double dbPlaySpeed;
         protected bool bValidScore;
-        protected bool bDTXVmode;
         protected STDGBVALUE<int> nJudgeLinePosY_delta; // #31602 2013.6.23 yyagi 表示遅延対策として、判定ラインの表示位置をずらす機能を追加する
 
         private CCounter[] ctTimer = new CCounter[3];
@@ -1212,9 +1210,9 @@ namespace DTXMania
         }
         protected void tSetStatusPanel()  // tステータスパネルの選択
         {
-            if( CDTXMania.bCompactMode )
+            if( CDTXMania.bCompactMode || CDTXMania.DTXVmode.Enabled || CDTXMania.DTX2WAVmode.Enabled)
             {
-                this.actStatusPanel.tSetDifficultyLabelFromScript( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
+                //this.actStatusPanel.tSetDifficultyLabelFromScript( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
             }
             else if( CDTXMania.stageSongSelection.rConfirmedSong != null )
             {
@@ -5487,41 +5485,185 @@ namespace DTXMania
         }
 
         #endregion
+        public void tJumpInSongToBar(int nStartBar)
+        {
+            int nTopChip = 0;
+            for (int i = 0; i < CDTXMania.DTX.listChip.Count; i++)
+            {
+                CDTX.CChip pChip = CDTXMania.DTX.listChip[i];
+                if (pChip.nPlaybackPosition >= 384 * nStartBar)
+                {
+                    nTopChip = i;
+                    break;
+                }
+            }
+            int nStartTime = CDTXMania.DTX.listChip[nTopChip].nPlaybackTimeMs;
+
+            tJumpInSong(nStartTime);
+        }
         protected void tJumpInSong(long newPosition)
         {
             long nNewPosition = Math.Max(0, newPosition);
-            Trace.TraceInformation("JUMP IN SONG currentPosition={0}, newPosition={1}", CSoundManager.rcPerformanceTimer.nCurrentTime, newPosition);
+            Trace.TraceInformation("JUMP IN SONG currentPosition={0}, newPosition={1}", CSoundManager.rcPerformanceTimer.nCurrentTime, nNewPosition);
 
             long oldPosition = CSoundManager.rcPerformanceTimer.nCurrentTime;
-            CSoundManager.rcPerformanceTimer.nCurrentTime = newPosition;
-            CDTXMania.Timer.nCurrentTime = newPosition;
+            CSoundManager.rcPerformanceTimer.tReset();
+            CSoundManager.rcPerformanceTimer.tPause();
+            CSoundManager.rcPerformanceTimer.nCurrentTime = nNewPosition;
+            CDTXMania.Timer.tReset();
+            CDTXMania.Timer.nCurrentTime = nNewPosition;
 
-            //Stop any AVI
+            //Stop any AVI and BGA
             this.actAVI.Stop();
+            this.actBGA.Stop();
 
-            //Adjust BGM to new position
-            CDTX.CChip BGMChip = this.listChip.Find(x => x.nChannelNumber == 0x01);
-            if (BGMChip != null)
-            {
-                CDTXMania.DTX.tChangePlaybackPositionChip(BGMChip);
-            }
-
-            if (newPosition < oldPosition)
+            // If we are going backward, we need to unhit some chips, and reset TopChip
+            // If we are going forward, this is not needed, TopChip will automaticaly catch up at next frame
+            this.nCurrentTopChip = 0;
+            bool bIsTopChipSet = false;
+            if (nNewPosition < oldPosition)
             {
                 for (int nCurrentChip = 0; nCurrentChip < CDTXMania.DTX.listChip.Count; nCurrentChip++)
                 {
                     CDTX.CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
 
-                    // Unhit the past chips so they display again (and are hittable again)
-                    if (pChip.nPlaybackTimeMs > newPosition && pChip.bHit)
+                    if (pChip.nPlaybackTimeMs > oldPosition)
                     {
-                        pChip.bHit = false;
+                        break;
+                    }
+
+                    if (pChip.nPlaybackTimeMs >= nNewPosition)
+                    {
+                        if (!bIsTopChipSet)
+                        {
+                            this.nCurrentTopChip = nCurrentChip;
+                            bIsTopChipSet = true;
+                        }
+                        // Unhit the chip so it displays again (and is hittable again)
+                        if (pChip.bHit)
+                        {
+                            pChip.bHit = false;
+                        }
                     }
                 }
-
-                // Current top chip will catch up at next frame
-                this.nCurrentTopChip = 0;
             }
+
+            //Adjust BGM to new position
+            List<CSound> pausedCSound = new List<CSound>();
+
+            #region [ BGMやギターなど、演奏開始のタイミングで再生がかかっているサウンドのの途中再生開始 ] // (CDTXのt入力・行解析・チップ配置()で小節番号が+1されているのを削っておくこと)
+            for (int i = this.nCurrentTopChip; i >= 0; i--)
+            {
+                CDTX.CChip pChip = CDTXMania.DTX.listChip[i];
+                int nDuration = pChip.GetDuration();
+
+                if ((pChip.nPlaybackTimeMs + nDuration > 0) && (pChip.nPlaybackTimeMs <= nNewPosition) && (nNewPosition <= pChip.nPlaybackTimeMs + nDuration))
+                {
+                    if (pChip.bWAVを使うチャンネルである /*&& !pChip.b空打ちチップである*/) // wav系チャンネル、且つ、空打ちチップではない
+                    {
+                        CDTX.CWAV wc;
+                        bool b = CDTXMania.DTX.listWAV.TryGetValue(pChip.nIntegerValue_InternalNumber, out wc);
+                        if (!b) continue;
+
+                        if ((wc.bIsBGMSound && CDTXMania.ConfigIni.bBGM音を発声する) || (!wc.bIsBGMSound))
+                        {
+                            CDTXMania.DTX.tチップの再生(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, CDTXMania.DTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                            #region [ PAUSEする ]
+                            int j = wc.n現在再生中のサウンド番号;
+                            if (wc.rSound[j] != null)
+                            {
+                                wc.rSound[j].tPausePlayback();
+                                wc.rSound[j].tChangePlaybackPosition(nNewPosition - pChip.nPlaybackTimeMs);
+                                pausedCSound.Add(wc.rSound[j]);
+                            }
+                            #endregion
+                        }
+                    }
+                }
+            }
+            #endregion
+            #region [ 演奏開始時点で既に表示されているBGAとAVIの、シークと再生 ]
+            // Currently the SkipStart functions don't do what they are supposed to do, they don't adjust the specified playback position
+            // SkipStart work as expected in the new DirectShow implementation from core DTXMania, so once we migrate, we can uncomment.
+            //this.actBGA.SkipStart((int)nNewPosition);
+            //this.actAVI.SkipStart((int)nNewPosition);
+            #endregion
+            #region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
+            foreach (CSound cs in pausedCSound)
+            {
+                cs.tPlaySound();
+            }
+            pausedCSound.Clear();
+            #endregion
+
+            this.bPAUSE = false;
+            CSoundManager.rcPerformanceTimer.tResume();
+        }
+
+        protected void tSetSettingsForDTXV()
+        {
+            for (int i = 0; i < (int)ELane.MAX; i++)
+            {
+                CDTXMania.ConfigIni.bAutoPlay[i] = true;
+            }
+            CDTXMania.ConfigIni.bAVIEnabled = true;
+            CDTXMania.ConfigIni.nMovieMode = 2;
+            CDTXMania.ConfigIni.bBGAEnabled = true;
+            for (int i = 0; i < 3; i++)
+            {
+                CDTXMania.ConfigIni.bGraph有効[i] = false;
+                CDTXMania.ConfigIni.nHidSud[i] = 0; // ESudHidInv.Off;
+                CDTXMania.ConfigIni.bLight[i] = false;
+                CDTXMania.ConfigIni.bReverse[i] = false;
+                CDTXMania.ConfigIni.eRandom[i] = ERandomMode.OFF;
+                CDTXMania.ConfigIni.n表示可能な最小コンボ数[i] = 65535;
+                CDTXMania.ConfigIni.bDisplayJudge[i] = false;
+            }
+            CDTXMania.ConfigIni.bドラムコンボ文字の表示 = false;
+            CDTXMania.ConfigIni.eDark = EDarkMode.OFF;
+            //TODO add this option: CDTXMania.ConfigIni.bDebugInfo = CDTXMania.ConfigIni.bViewerShowDebugStatus;
+            CDTXMania.ConfigIni.b演奏情報を表示しない = false;
+            CDTXMania.ConfigIni.bFillInEnabled = true;
+            CDTXMania.ConfigIni.bScoreIniを出力する = false;
+            CDTXMania.ConfigIni.bSTAGEFAILEDEnabled = false;
+            CDTXMania.ConfigIni.bTight = false;
+            CDTXMania.ConfigIni.bストイックモード = false;
+            CDTXMania.ConfigIni.bドラム打音を発声する = true;
+            CDTXMania.ConfigIni.bBGM音を発声する = true;
+            CDTXMania.ConfigIni.nRisky = 0;
+            CDTXMania.ConfigIni.nShowLagType = (int)EShowLagType.OFF;
+            //CDTXMania.ConfigIni.bForceScalingAVI = false;		// DTXVモード時の各種表示要素の表示座標を「譜面制作者のカスタマイズ状態」にするか「DTXMania初期状態」にするかで
+            // 悩みました。
+        }
+
+        public void t再読込()
+        {
+            CDTXMania.DTX.tStopPlayingAllChips();
+            this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.Restart;
+            base.ePhaseID = CStage.EPhase.演奏_STAGE_RESTART;
+            this.bPAUSE = false;
+
+            // #34048 2014.7.16 yyagi
+            #region [ 読み込み画面に遷移する前に、設定変更した可能性があるパラメータをConfigIniクラスに書き戻す ]
+            //for (i = 0; i < 3; i++)
+            //{
+            //    CDTXMania.ConfigIni.nViewerScrollSpeed[i] = CDTXMania.Instance.ConfigIni.nScrollSpeed[i];
+            //}
+            //TODO CDTXMania.ConfigIni.bDebugInfo = CDTXMania.ConfigIni.bViewerShowDebugStatus;
+            #endregion
+        }
+
+        public void t停止()
+        {
+            CDTXMania.DTX.tStopPlayingAllChips();
+            this.actAVI.Stop();
+            this.actBGA.Stop();
+            //this.perfpanel.Stop();               // PANEL表示停止
+            CDTXMania.Timer.tPause();       // 再生時刻カウンタ停止
+
+            this.nCurrentTopChip = CDTXMania.DTX.listChip.Count - 1;   // 終端にシーク
+
+            // 自分自身のOn活性化()相当の処理もすべき。
         }
     }
 }

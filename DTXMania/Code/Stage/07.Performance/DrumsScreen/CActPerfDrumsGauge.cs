@@ -35,7 +35,7 @@ namespace DTXMania
         }
         public override void OnManagedCreateResources()
         {
-            if (!base.bNotActivated)
+            if (!base.bNotActivated && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
             {
                 this.txフレーム.Drums = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge.png"));
                 this.txゲージ = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
@@ -50,7 +50,7 @@ namespace DTXMania
         }
         public override void OnManagedReleaseResources()
         {
-            if (!base.bNotActivated)
+            if (!base.bNotActivated && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
             {
                 CDTXMania.tReleaseTexture(ref this.txフレーム.Drums);
                 CDTXMania.tReleaseTexture(ref this.txゲージ);

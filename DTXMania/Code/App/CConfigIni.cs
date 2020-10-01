@@ -638,7 +638,8 @@ namespace DTXMania
         public CKeyAssign KeyAssign;
 
         public STDGBVALUE<int> nLaneDisp;
-        public STDGBVALUE<bool> bJudgeLineDisp;
+		public STDGBVALUE<bool> bDisplayJudge;
+		public STDGBVALUE<bool> bJudgeLineDisp;
         public STDGBVALUE<bool> bLaneFlush;
 
         public int nPedalLagTime;   //#xxxxx 2013.07.11 kairera0467
@@ -649,8 +650,8 @@ namespace DTXMania
 		public bool bSaveScoreIfModifiedPlaySpeed;
 		public int n曲が選択されてからプレビュー音が鳴るまでのウェイトms;
 		public int n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms;
-		public int n自動再生音量;
-		public int n手動再生音量;
+		public int n自動再生音量;  // nAutoVolume
+		public int n手動再生音量;  // nChipVolume
 		public int n選曲リストフォントのサイズdot;
         public int[] nNameColor;
 		public STDGBVALUE<int> n表示可能な最小コンボ数;
@@ -1177,7 +1178,11 @@ namespace DTXMania
             this.nLaneDisp.Drums = 0;
             this.nLaneDisp.Guitar = 0;
             this.nLaneDisp.Bass = 0;
-            this.bJudgeLineDisp = new STDGBVALUE<bool>();
+			this.bDisplayJudge = new STDGBVALUE<bool>();
+			this.bDisplayJudge.Drums = true;
+			this.bDisplayJudge.Guitar = true;
+			this.bDisplayJudge.Bass = true;
+			this.bJudgeLineDisp = new STDGBVALUE<bool>();
             this.bJudgeLineDisp.Drums = true;
             this.bJudgeLineDisp.Guitar = true;
             this.bJudgeLineDisp.Bass = true;
@@ -2029,11 +2034,16 @@ namespace DTXMania
             sw.WriteLine("GuitarLaneDisp={0}", (int)this.nLaneDisp.Guitar);
             sw.WriteLine("BassLaneDisp={0}", (int)this.nLaneDisp.Bass);
             sw.WriteLine();
-            sw.WriteLine("; 判定ライン表示");
-            sw.WriteLine("DrumsJudgeLineDisp={0}", this.bJudgeLineDisp.Drums ? 1 : 0);
-            sw.WriteLine("GuitarJudgeLineDisp={0}", this.bJudgeLineDisp.Guitar ? 1 : 0);
-            sw.WriteLine("BassJudgeLineDisp={0}", this.bJudgeLineDisp.Bass ? 1 : 0);
-            sw.WriteLine();
+            sw.WriteLine("; Display Judgement");
+            sw.WriteLine("DrumsDisplayJudge={0}", this.bDisplayJudge.Drums ? 1 : 0);
+            sw.WriteLine("GuitarDisplayJudge={0}", this.bDisplayJudge.Guitar ? 1 : 0);
+            sw.WriteLine("BassDisplayJudge={0}", this.bDisplayJudge.Bass ? 1 : 0);
+			sw.WriteLine();
+			sw.WriteLine("; 判定ライン表示");
+			sw.WriteLine("DrumsJudgeLineDisp={0}", this.bJudgeLineDisp.Drums ? 1 : 0);
+			sw.WriteLine("GuitarJudgeLineDisp={0}", this.bJudgeLineDisp.Guitar ? 1 : 0);
+			sw.WriteLine("BassJudgeLineDisp={0}", this.bJudgeLineDisp.Bass ? 1 : 0);
+			sw.WriteLine();
             sw.WriteLine("; レーンフラッシュ表示");
             sw.WriteLine("DrumsLaneFlush={0}", this.bLaneFlush.Drums ? 1 : 0);
             sw.WriteLine("GuitarLaneFlush={0}", this.bLaneFlush.Guitar ? 1 : 0);
@@ -3189,19 +3199,31 @@ namespace DTXMania
                                             {
                                                 this.nLaneDisp.Bass = CConversion.nGetNumberIfInRange(str4, 0, 4, (int)this.nLaneDisp.Bass);
                                             }
-                                            else if (str3.Equals("DrumsJudgeLineDisp"))
+                                            else if (str3.Equals("DrumsDisplayJudge"))
                                             {
-                                                this.bJudgeLineDisp.Drums = CConversion.bONorOFF(str4[0]);
+                                                this.bDisplayJudge.Drums = CConversion.bONorOFF(str4[0]);
                                             }
-                                            else if( str3.Equals( "GuitarJudgeLineDisp" ) )
+                                            else if( str3.Equals("GuitarDisplayJudge") )
                                             {
-                                                this.bJudgeLineDisp.Guitar = CConversion.bONorOFF(str4[0]);
+                                                this.bDisplayJudge.Guitar = CConversion.bONorOFF(str4[0]);
                                             }
-                                            else if( str3.Equals( "BassJudgeLineDisp" ) )
+                                            else if( str3.Equals("BassDisplayJudge") )
                                             {
-                                                this.bJudgeLineDisp.Bass = CConversion.bONorOFF(str4[0]);
+                                                this.bDisplayJudge.Bass = CConversion.bONorOFF(str4[0]);
                                             }
-                                            else if (str3.Equals("DrumsLaneFlush"))
+											else if (str3.Equals("DrumsJudgeLineDisp"))
+											{
+												this.bJudgeLineDisp.Drums = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("GuitarJudgeLineDisp"))
+											{
+												this.bJudgeLineDisp.Guitar = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("BassJudgeLineDisp"))
+											{
+												this.bJudgeLineDisp.Bass = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("DrumsLaneFlush"))
                                             {
                                                 this.bLaneFlush.Drums = CConversion.bONorOFF(str4[0]);
                                             }

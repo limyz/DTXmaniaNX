@@ -27,7 +27,7 @@ namespace DTXMania
 
         public override int OnUpdateAndDraw()
         {
-            if (!base.bNotActivated)
+            if (!base.bNotActivated && CDTXMania.ConfigIni.bDisplayJudge.Drums)
             {
                 int index = 0;
                 #region[ 座標など定義 ]

@@ -79,7 +79,7 @@ namespace DTXMania
 				//---------------------
 				#endregion
 
-				if (!bIsTrainingMode && (CDTXMania.ConfigIni.bSaveScoreIfModifiedPlaySpeed || CDTXMania.ConfigIni.nPlaySpeed == 20))
+				if (CDTXMania.ConfigIni.bScoreIniを出力する && !bIsTrainingMode && (CDTXMania.ConfigIni.bSaveScoreIfModifiedPlaySpeed || CDTXMania.ConfigIni.nPlaySpeed == 20))
 				{
 					#region [ Calculate results ]
 					//---------------------
@@ -207,7 +207,8 @@ namespace DTXMania
 
 							//---------------------------------------------------------------------/
 						}
-						if (CDTXMania.ConfigIni.bScoreIniを出力する)
+						// Already checked
+						//if (CDTXMania.ConfigIni.bScoreIniを出力する)
 						{
 							ini.tExport(str);
 						}

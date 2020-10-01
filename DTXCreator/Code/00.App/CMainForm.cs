@@ -382,6 +382,16 @@ namespace DTXCreator
 			}
 			this.mgr譜面管理者.tRefreshDisplayLanes();
 			#endregion
+			#region [ 選択モード/編集モードの設定 ]
+			if (this.appアプリ設定.InitialOperationMode)
+			{
+				this.t選択モードにする();
+			}
+			else
+			{
+				this.t編集モードにする();
+			}
+			#endregion
 		}
 		private void tアプリ設定の保存()
 		{
@@ -626,8 +636,15 @@ namespace DTXCreator
 			//-----------------
 			this.mgr選択モード管理者 = new CSelectionModeManager( this );
 			this.mgr編集モード管理者 = new CEditModeManager( this );
-			
-			this.t編集モードにする();
+
+			if (this.appアプリ設定.InitialOperationMode)
+			{
+				this.t選択モードにする();
+			}
+			else
+			{
+				this.t編集モードにする();
+			}
 			//-----------------
 			#endregion
 
@@ -637,6 +654,11 @@ namespace DTXCreator
 			#region [ 未保存フラグをクリアする。]
 			//-----------------
 			this.b未保存 = false;
+			//-----------------
+			#endregion
+			#region [ 再生制御用フラグを立てる。(DTXVに必ずリロードさせるため) ]
+			//-----------------
+			this.bDTXファイルを開いた = true;
 			//-----------------
 			#endregion
 		}
@@ -912,6 +934,9 @@ namespace DTXCreator
 			//-----------------
 			#endregion
 
+			#region [ Viewer用の一時ファイルを削除する (修正＋保存、直後のViewer再生時に、直前の修正が反映されなくなることへの対応) ]
+			tViewer用の一時ファイルを削除する();
+			#endregion
 
 			// 後処理。
 
@@ -1513,159 +1538,189 @@ namespace DTXCreator
 		#endregion
 		#region [ DTXViewer での再生_停止 ]
 		//-----------------
-		private void tシナリオ_Viewerで最初から再生する()
+		private void tシナリオ_Viewerで最初から再生する()  // play from the beginning
 		{
-			this.tViewer用の一時ファイルを出力する( false );
+			#region [ DTXViewer 用の一時ファイルを出力する。]
+			//-----------------
+			this.tViewer用の一時ファイルを出力する(false, this.b未保存 | !this.b前回BGMありで再生した | this.b再生速度を変更した | this.bDTXファイルを開いた);
+			this.b前回BGMありで再生した = true;
+			//-----------------
+			#endregion
 
 			#region [ 再生開始オプション引数に一時ファイルを指定して DTXViewer プロセスを起動する。]
 			//-----------------
 			try
 			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
-				Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
+				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
 				//-----------------
 				#endregion
-				
+
 				#region [ 実行中の DTXViewer に再生オプションを渡す。 ]
 				//-----------------
-				Process.Start( strDTXViewerのパス, 
-					this.appアプリ設定.ViewerInfo.PlayStartOption + " " + this.strViewer演奏用一時ファイル名 );
+				Process.Start(strDTXViewerのパス,
+					this.appアプリ設定.ViewerInfo.PlaySoundOption + this.appアプリ設定.ViewerInfo.PlayStartOption + " " +
+					"\"" + this.strViewer演奏用一時ファイル名 + "\""
+					).WaitForInputIdle(20 * 1000);
 				//-----------------
 				#endregion
 			}
-			catch( Exception )
+			catch (Exception)
 			{
 				#region [ 失敗ダイアログを表示する。]
 				//-----------------
 				MessageBox.Show(
 					Resources.strプロセスの起動に失敗しましたMSG,
 					Resources.strエラーダイアログのタイトル,
-					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
+					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
 				//-----------------
 				#endregion
 			}
 			//-----------------
 			#endregion
 		}
-		private void tシナリオ_Viewerで現在位置から再生する()
-		{
-			this.tViewer用の一時ファイルを出力する( false );
-
-			try
-			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
-
-				#region [ DTXViewer が起動していなければ起動する。]
-				//-----------------
-				
-				Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
-				
-				//-----------------
-				#endregion
-
-				#region [ 実行中の DTXViewer に再生オプションを渡す。 ]
-				//-----------------
-				
-				CMeasure c小節 =
-					this.mgr譜面管理者.p譜面先頭からの位置gridを含む小節を返す( this.mgr譜面管理者.n現在の譜面表示下辺の譜面先頭からの位置grid );
-				
-				Process.Start( strDTXViewerのパス,
-					this.appアプリ設定.ViewerInfo.PlayStartFromOption + c小節.n小節番号0to3599 + " " + this.strViewer演奏用一時ファイル名 );
-				
-				//-----------------
-				#endregion
-			}
-			catch( Exception )
-			{
-				#region [ 失敗ダイアログを表示する。]
-				//-----------------
-				MessageBox.Show(
-					Resources.strプロセスの起動に失敗しましたMSG,
-					Resources.strエラーダイアログのタイトル, 
-					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
-				//-----------------
-				#endregion
-			}
-		}
-		private void tシナリオ_Viewerで現在位置からBGMのみ再生する()
+		private void tシナリオ_Viewerで現在位置から再生する()  // play from current position
 		{
 			#region [ DTXViewer 用の一時ファイルを出力する。]
 			//-----------------
-			this.tViewer用の一時ファイルを出力する( true );
+			this.tViewer用の一時ファイルを出力する(false, this.b未保存 | !this.b前回BGMありで再生した | this.b再生速度を変更した | this.bDTXファイルを開いた);
+			this.b前回BGMありで再生した = true;
 			//-----------------
 			#endregion
 
 			try
 			{
-				string strDTXViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
-				Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
+				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
 				//-----------------
 				#endregion
 
 				#region [ 実行中の DTXViewer に再生オプションを渡す。 ]
 				//-----------------
-				CMeasure c小節 = this.mgr譜面管理者.p譜面先頭からの位置gridを含む小節を返す( this.mgr譜面管理者.n現在の譜面表示下辺の譜面先頭からの位置grid );
-				Process.Start( strDTXViewerのパス,
-					this.appアプリ設定.ViewerInfo.PlayStartFromOption + c小節.n小節番号0to3599 + " " + this.strViewer演奏用一時ファイル名 );
+
+				CMeasure c小節 =
+					this.mgr譜面管理者.p譜面先頭からの位置gridを含む小節を返す(this.mgr譜面管理者.n現在の譜面表示下辺の譜面先頭からの位置grid);
+
+				Process.Start(strDTXViewerのパス,
+					this.appアプリ設定.ViewerInfo.PlaySoundOption + this.appアプリ設定.ViewerInfo.PlayStartFromOption + c小節.n小節番号0to3599 + " " +
+					"\"" + this.strViewer演奏用一時ファイル名 + "\""
+					).WaitForInputIdle(20 * 1000);
+
 				//-----------------
 				#endregion
 			}
-			catch( Exception )
+			catch (Exception)
 			{
 				#region [ 失敗ダイアログを表示する。]
 				//-----------------
 				MessageBox.Show(
 					Resources.strプロセスの起動に失敗しましたMSG,
 					Resources.strエラーダイアログのタイトル,
-					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
+					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+				//-----------------
+				#endregion
+			}
+
+		}
+		private void tシナリオ_Viewerで現在位置からBGMのみ再生する()  // play only BGM from current position
+		{
+			#region [ DTXViewer 用の一時ファイルを出力する。]
+			//-----------------
+			this.tViewer用の一時ファイルを出力する(true, this.b未保存 | this.b前回BGMありで再生した | this.b再生速度を変更した | this.bDTXファイルを開いた);
+			this.b前回BGMありで再生した = false;
+			//-----------------
+			#endregion
+
+			try
+			{
+				string strDTXViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
+
+				#region [ DTXViewer が起動していなければ起動する。]
+				//-----------------
+				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
+				//-----------------
+				#endregion
+
+				#region [ 実行中の DTXViewer に再生オプションを渡す。 ]
+				//-----------------
+				CMeasure c小節 = this.mgr譜面管理者.p譜面先頭からの位置gridを含む小節を返す(this.mgr譜面管理者.n現在の譜面表示下辺の譜面先頭からの位置grid);
+				Process.Start(strDTXViewerのパス,
+					this.appアプリ設定.ViewerInfo.PlaySoundOption + this.appアプリ設定.ViewerInfo.PlayStartFromOption + c小節.n小節番号0to3599 + " " +
+					"\"" + this.strViewer演奏用一時ファイル名 + "\""
+					).WaitForInputIdle(20 * 1000);
+				//-----------------
+				#endregion
+			}
+			catch (Exception)
+			{
+				#region [ 失敗ダイアログを表示する。]
+				//-----------------
+				MessageBox.Show(
+					Resources.strプロセスの起動に失敗しましたMSG,
+					Resources.strエラーダイアログのタイトル,
+					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
 				//-----------------
 				#endregion
 			}
 		}
-		private void tシナリオ_Viewerを再生停止する()
+		private void tシナリオ_Viewerを再生停止する()  // stop playing
 		{
 			try
 			{
-				string strViewerのパス = this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path;
+				string strViewerのパス = this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM);
 
 				#region [ 実行中の DTXViewer に再生停止オプションを渡す。 ]
 				//-----------------
 
 				// 停止のときは１回のプロセス起動で完結(BMSV仕様)
 
-				Process.Start( strViewerのパス, this.appアプリ設定.ViewerInfo.PlayStopOption );
+				Process.Start(strViewerのパス, this.appアプリ設定.ViewerInfo.PlayStopOption);
 
 				//-----------------
 				#endregion
 
 			}
-			catch( Exception )
+			catch (Exception)
 			{
 				#region [ 失敗ダイアログを表示する。]
 				//-----------------
 				MessageBox.Show(
 					Resources.strプロセスの起動に失敗しましたMSG,
 					Resources.strエラーダイアログのタイトル,
-					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
+					MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
 				//-----------------
 				#endregion
 			}
 		}
 
 		private string strViewer演奏用一時ファイル名 = "";
-		private void tViewer用の一時ファイルを出力する( bool bBGMのみ出力 )
+		private void tViewer用の一時ファイルを出力する(bool bBGMのみ出力, bool b前回から更新があった)  // create a temporary file for Viewer
 		{
 			// 一時ファイル名を自動生成。
 
+			// 前回から更新がなければ(連続して再生ボタンを押した、など)、前回の生成ファイルをそのまま返す。
+			// (初めての再生の場合は、tempファイル未生成のため、このまま生成フローを続ける。)
+			if (!b前回から更新があった && File.Exists(Path.Combine(this.mgr譜面管理者.strPATH_WAV, this.strViewer演奏用一時ファイル名)))
+			{
+				return;
+			}
+
+			// 再生速度変更フラグをリセット。
+			b再生速度を変更した = false;
+			bDTXファイルを開いた = false;
+
 			//this.strViewer演奏用一時ファイル名 = Path.GetTempFileName();			//
-			this.strViewer演奏用一時ファイル名 = makeTempDTX.GetTempFileName();		// #24746 2011.4.1 yyagi add; a countermeasure for temp-flooding
-			
+			this.strViewer演奏用一時ファイル名 = makeTempDTX.GetTempFileName();       // #24746 2011.4.1 yyagi add; a countermeasure for temp-flooding
+
 			// 一時ファイルにDTXを出力。
 
 			this.mgr譜面管理者.strPATH_WAV = this.str作業フォルダ名;
@@ -1677,14 +1732,14 @@ namespace DTXCreator
 				bool bSwitchCulture = false;
 				if (CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator == ",")
 				{
-					Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB", false);	// #24241, #24790 2011.4.8 yyagi: switch culture where the country uses period as the decimal point
-					bSwitchCulture = true;													// I mistook here using CurrentUICulture. Use CurrentCulture to work correctly.
+					Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB", false);  // #24241, #24790 2011.4.8 yyagi: switch culture where the country uses period as the decimal point
+					bSwitchCulture = true;                                                  // I mistook here using CurrentUICulture. Use CurrentCulture to work correctly.
 				}
 				#endregion
 				#region [ 一時ファイルにDTXを出力する。 ]
 				//-----------------
-				StreamWriter sw = new StreamWriter( this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding( 0x3a4 ) );
-				new CDTXInputOutput( this ).tDTX出力( sw, bBGMのみ出力 );
+				StreamWriter sw = new StreamWriter(this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding(0x3a4));
+				new CDTXInputOutput(this).tDTX出力(sw, bBGMのみ出力);
 				sw.Close();
 				//-----------------
 				#endregion
@@ -1699,6 +1754,10 @@ namespace DTXCreator
 			{
 				this.mgr譜面管理者.strPATH_WAV = "";
 			}
+		}
+		private void tViewer用の一時ファイルを削除する()  // delete temporary file for Viewer
+		{
+			this.strViewer演奏用一時ファイル名 = "";      // #35351 2015.7.23 yyagi add; to fix viewer plyback correctly just after save.
 		}
 		//-----------------
 		#endregion
@@ -2011,6 +2070,9 @@ namespace DTXCreator
 		#region [ private ]
 		//-----------------
 		private bool _b未保存 = true;
+		private bool b前回BGMありで再生した = true;
+		private bool b再生速度を変更した = false;
+		private bool bDTXファイルを開いた = false;
 		private Point pt選択モードのコンテクストメニューを開いたときのマウスの位置;
 		private int n現在のガイド間隔4to64or0 = 16;		// 初期は16分間隔
 		private bool b選択チップがある
@@ -2029,9 +2091,9 @@ namespace DTXCreator
 			}
 		}
 
-		private void tDTXV演奏関連のボタンとメニューのEnabledの設定()
+		public void tDTXV演奏関連のボタンとメニューのEnabledの設定()
 		{
-			if( File.Exists( this.strDTXCのあるフォルダ名 + this.appアプリ設定.ViewerInfo.Path ) )
+			if( File.Exists(this.appアプリ設定.ViewerInfo.bViewerIsDTXV ? this.appアプリ設定.ViewerInfo.PathDTXV : (this.strDTXCのあるフォルダ名 + AppSetting.Viewer.FileNameDTXM)) )
 			{
 				// DTXViewer が存在するなら Enable
 

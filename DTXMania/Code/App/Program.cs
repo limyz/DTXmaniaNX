@@ -67,6 +67,10 @@ namespace DTXMania
 				string newLine = Environment.NewLine;
 				bool bDllNotFound = false;
 
+				Trace.WriteLine("Current Directory: " + Environment.CurrentDirectory);
+				Trace.WriteLine("EXEのあるフォルダ: " + Path.GetDirectoryName(Application.ExecutablePath));
+				Environment.CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+
 				#region [DLL Existence check]
 				if (!tDLLの存在チェック("dll\\FDK.dll",
 					"FDK.dll またはその依存するdllが存在しません。" + newLine + "DTXManiaをダウンロードしなおしてください。",
@@ -158,6 +162,73 @@ namespace DTXMania
 				mutex二重起動防止用 = null;
 				
 				// END #24615 2011.03.09 from
+			}
+			else    // DTXManiaが既に起動中
+			{
+
+				// → 引数が0個の時はそのまま終了
+				// 1個( コンパクトモード or DTXV -S) か2個 (DTXV -Nxxx ファイル名)のときは、そのプロセスにコマンドラインを丸々投げて終了する
+
+				for (int i = 0; i < 5; i++)   // 検索結果のハンドルがZeroになることがあるので、200ms間隔で5回リトライする
+				{
+					#region [ 既に起動中のDTXManiaプロセスを検索する。]
+					// このやり方だと、ShowInTaskbar=falseでタスクバーに表示されないパターンの時に検索に失敗するようだが
+					// DTXManiaでそのパターンはない？のでこのままいく。
+					// FindWindowを使えばこのパターンにも対応できるが、C#でビルドするアプリはウインドウクラス名を自前指定できないので、これは使わない。
+
+					Process current = Process.GetCurrentProcess();
+					Process[] running = Process.GetProcessesByName(current.ProcessName);
+					Process target = null;
+					//IntPtr hWnd = FindWindow( null, "DTXMania .NET style release " + CDTXMania.VERSION );
+
+					foreach (Process p in running)
+					{
+						if (p.Id != current.Id) // プロセス名は同じでかつ、プロセスIDが自分自身とは異なるものを探す
+						{
+							if (p.MainModule.FileName == current.MainModule.FileName && p.MainWindowHandle != IntPtr.Zero)
+							{
+								target = p;
+								break;
+							}
+						}
+					}
+					#endregion
+
+					#region [ 起動中のDTXManiaがいれば、そのプロセスにコマンドラインを投げる ]
+					if (target != null)
+					{
+						string[] commandLineArgs = Environment.GetCommandLineArgs();
+						if (commandLineArgs != null && commandLineArgs.Length > 1)
+						{
+							string arg = null;
+							for (int j = 1; j < commandLineArgs.Length; j++)
+							{
+								if (j == 1)
+								{
+									arg += commandLineArgs[j];
+								}
+								else
+								{
+									arg += " " + "\"" + commandLineArgs[j] + "\"";
+								}
+							}
+
+							Trace.TraceInformation( "Message=" + arg + ", len(w/o null)=" + arg.Length );
+
+							if (arg != null)
+							{
+								FDK.CSendMessage.sendmessage(target.MainWindowHandle, current.MainWindowHandle, arg);
+							}
+						}
+						break;
+					}
+					#endregion
+					else
+					{
+						Trace.TraceInformation("メッセージ送信先のプロセスが見つからず。5回リトライします。");
+						Thread.Sleep(200);
+					}
+				}
 			}
 		}
 	}
