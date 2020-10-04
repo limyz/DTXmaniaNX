@@ -1014,6 +1014,11 @@ namespace DTXMania
 				//-----------------------------
 				if( c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX )
 				{
+					if (c曲リストノード.strSkinPath != "" && !listStrBoxDefSkinSubfolderFullName.Contains(c曲リストノード.strSkinPath))
+					{
+						listStrBoxDefSkinSubfolderFullName.Add(c曲リストノード.strSkinPath);
+					}
+
 					CSongListNode itemBack = new CSongListNode();
 					itemBack.eNodeType = CSongListNode.ENodeType.BACKBOX;
 					itemBack.strタイトル = "<< BACK";
@@ -1022,11 +1027,6 @@ namespace DTXMania
 
 					itemBack.strSkinPath = ( c曲リストノード.r親ノード == null ) ?
 						"" : c曲リストノード.r親ノード.strSkinPath;
-
-					if ( itemBack.strSkinPath != "" && !listStrBoxDefSkinSubfolderFullName.Contains( itemBack.strSkinPath ) )
-					{
-						listStrBoxDefSkinSubfolderFullName.Add( itemBack.strSkinPath );
-					}
 
 					itemBack.strBreadcrumbs = ( itemBack.r親ノード == null ) ?
 						itemBack.strタイトル : itemBack.r親ノード.strBreadcrumbs + " > " + itemBack.strタイトル;
