@@ -1445,7 +1445,7 @@ for (int i = 0; i < 3; i++) {
                                             break;
 
                                         case (int)CScoreIni.ERANK.E:
-                                            str = string.Format("Cleared (E: {0:F2}{1})", ps);
+                                            str = string.Format("Cleared (E: {0:F2}{1})", ps, strSpeed);
                                             break;
 
                                         case (int)CScoreIni.ERANK.UNKNOWN:	// #23534 2010.10.28 yyagi add: 演奏チップが0個のとき

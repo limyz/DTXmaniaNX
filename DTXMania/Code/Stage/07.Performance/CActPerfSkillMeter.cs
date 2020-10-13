@@ -36,6 +36,8 @@ namespace DTXMania
         private int[] nGraphGauge_XPos = new int[ 2 ];
         private int nPart = 0;
 
+        public bool bIsTrainingMode = false;
+
 		// プロパティ
 
         public double dbグラフ値現在_渡
@@ -208,8 +210,11 @@ namespace DTXMania
                     //ゲージ本体
                     int nGaugeSize = (int)(434.0f * (float)this.dbグラフ値現在 / 100.0f);
                     int nPosY = this.nGraphUsePart == 0 ? 527 - nGaugeSize : 587 - nGaugeSize;
-                    this.txグラフ_ゲージ.nTransparency = 255;
-                    this.txグラフ_ゲージ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart] + 45 + nGraphSizeOffset, nPosY, new Rectangle(2, 2, 30, nGaugeSize));
+                    if (!this.bIsTrainingMode)
+                    {
+                        this.txグラフ_ゲージ.nTransparency = 255;
+                        this.txグラフ_ゲージ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart] + 45 + nGraphSizeOffset, nPosY, new Rectangle(2, 2, 30, nGaugeSize));
+                    }
                     //ゲージ比較
                     int nTargetGaugeSize = (int)( 434.0f * ( (float)this.dbグラフ値目標 / 100.0f ) );
                     int nTargetGaugePosY = this.nGraphUsePart == 0 ? 527 - nTargetGaugeSize : 587 - nTargetGaugeSize;
