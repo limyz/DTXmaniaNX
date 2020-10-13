@@ -809,7 +809,7 @@ namespace DTXMania
 
 		public static string Path( string strファイルの相対パス )
 		{
-			if ( strBoxDefSkinSubfolderFullName == "" || !bUseBoxDefSkin )
+			if (string.IsNullOrEmpty(strBoxDefSkinSubfolderFullName) || !bUseBoxDefSkin )
 			{
 				return System.IO.Path.Combine( strSystemSkinSubfolderFullName, strファイルの相対パス );
 			}
