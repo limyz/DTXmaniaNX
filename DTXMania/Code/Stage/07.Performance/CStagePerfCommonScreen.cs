@@ -754,7 +754,24 @@ namespace DTXMania
 
         protected long LoopBeginMs;
         protected long LoopEndMs;
-        public bool bIsTrainingMode;
+
+        // Use a property instead of a field to automatically set training mode on the graph too
+        private bool _bIsTrainingMode;
+        public bool bIsTrainingMode
+        {
+            get
+            {
+                return this._bIsTrainingMode;
+            }
+            set
+            {
+                this._bIsTrainingMode = value;
+                if (this.actGraph != null)
+                {
+                    actGraph.bIsTrainingMode = value;
+                }
+            }
+        }
 
         public void AddMixer(CSound cs, bool _b演奏終了後も再生が続くチップである)
         {
