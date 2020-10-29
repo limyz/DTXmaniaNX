@@ -199,9 +199,16 @@ namespace DTXMania
                     {
                         this.txグラフ.tDraw2D(CDTXMania.app.Device, nGraphBG_XPos[this.nGraphUsePart], nGraphBG_YPos, new Rectangle(2, 2, 251, 584));
                     }
-                    
+
                     //自己ベスト数値表示
-                    this.t達成率文字表示( nGraphBG_XPos[ this.nGraphUsePart ] + 136, nGraphBG_YPos + 501, string.Format( "{0,6:##0.00}" + "%", this.dbGraphValue_PersonalBest ) );
+                    if (CDTXMania.ConfigIni.bSmallGraph)
+                    {
+                        this.t達成率文字表示( nGraphBG_XPos[ this.nGraphUsePart ] - 3, nGraphBG_YPos + 531, string.Format( "{0,6:##0.00}" + "%", this.dbGraphValue_PersonalBest ) );
+                    }
+                    else
+                    {
+                        this.t達成率文字表示(nGraphBG_XPos[this.nGraphUsePart] + 136, nGraphBG_YPos + 501, string.Format("{0,6:##0.00}" + "%", this.dbGraphValue_PersonalBest));
+                    }
                 }
 
                 //ゲージ現在
