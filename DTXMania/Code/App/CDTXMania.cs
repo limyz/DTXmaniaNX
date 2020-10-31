@@ -26,7 +26,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "Ver3.70 GD (NX 1.00 200911)";
+        public static readonly string VERSION = "NX 1.01 201031";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009
