@@ -119,7 +119,7 @@ namespace DTXMania
 					this.txパネル本体.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
 
                     if ( this.tx文字列パネル != null )
-                        this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, this.n本体X + 0x20, this.n本体Y + 0x20 );
+                        this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, this.n本体X + 18, this.n本体Y + 0x20 );
 				}
 			}
 			return 0;
