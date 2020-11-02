@@ -1480,7 +1480,7 @@ namespace DTXMania
 				dbLevel = dbLevel / 10.0 + nLevelDec / 100.0;
 			}
 
-			if (CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
+			if (CDTXMania.ConfigIni.bDrumsEnabled && CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
 			{
 				return 0;
 			}
