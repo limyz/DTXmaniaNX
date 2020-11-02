@@ -263,7 +263,7 @@ namespace DTXMania
                     //--------------------
                     Color clNameColor = Color.White;
                     Color clNameColorLower = Color.White;
-                    switch( CDTXMania.ConfigIni.nNameColor[ 0 ] )
+                    switch( CDTXMania.ConfigIni.nNameColor[ i+1 ] )
                     {
                         case 0:
                             clNameColor = Color.White;
