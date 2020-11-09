@@ -112,9 +112,10 @@ namespace DTXMania
 				#endregion
 				if (!bDllNotFound)
 				{
-#if DEBUG && TEST_ENGLISH
-					Thread.CurrentThread.CurrentCulture = new CultureInfo( "en-US" );
-#endif
+					if (CultureInfo.CurrentCulture.TwoLetterISOLanguageName != "ja")
+					{
+						Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+					}
 
 					DWM.EnableComposition(false);   // Disable AeroGrass temporally
 
