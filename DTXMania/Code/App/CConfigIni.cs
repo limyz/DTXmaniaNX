@@ -597,7 +597,8 @@ namespace DTXMania
 		public bool b選曲リストフォントを太字にする;
         public bool bDirectShowMode;
 		public bool bFullScreenMode;
-        public int n初期ウィンドウ開始位置X; // #30675 2013.02.04 ikanick add
+		public bool bFullScreenExclusive;
+		public int n初期ウィンドウ開始位置X; // #30675 2013.02.04 ikanick add
 	    public int n初期ウィンドウ開始位置Y;
 		public int nウインドウwidth;				// #23510 2010.10.31 yyagi add
 		public int nウインドウheight;				// #23510 2010.10.31 yyagi add
@@ -782,7 +783,7 @@ namespace DTXMania
 				}
 			}
 		}
-		public bool bウィンドウモード
+		public bool bWindowMode
 		{
 			get
 			{
@@ -1120,6 +1121,7 @@ namespace DTXMania
 			this.strDTXManiaのバージョン = "Unknown";
 			this.str曲データ検索パス = @".\";
 			this.bFullScreenMode = false;
+			this.bFullScreenExclusive = true;
 			this.bVerticalSyncWait = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
@@ -1490,6 +1492,9 @@ namespace DTXMania
 			sw.WriteLine( "; Screen mode. (0:Window, 1:Fullscreen)" );
 			sw.WriteLine( "FullScreen={0}", this.bFullScreenMode ? 1 : 0 );
             sw.WriteLine();
+			sw.WriteLine("; Fullscreen mode uses DirectX exclusive mode instead of maximized window. (0:Maximized window, 1:Exclusive)");
+			sw.WriteLine("FullScreenExclusive={0}", this.bFullScreenExclusive ? 1 : 0);
+			sw.WriteLine();
 			sw.WriteLine("; ウインドウモード時の画面幅");				// #23510 2010.10.31 yyagi add
 			sw.WriteLine("; A width size in the window mode.");			//
 			sw.WriteLine("WindowWidth={0}", this.nウインドウwidth);		//
@@ -2520,7 +2525,11 @@ namespace DTXMania
                                             {
                                                 this.bFullScreenMode = CConversion.bONorOFF(str4[0]);
                                             }
-                                            else if (str3.Equals("WindowWidth"))		// #23510 2010.10.31 yyagi add
+											else if (str3.Equals("FullScreenExclusive"))
+											{
+												this.bFullScreenExclusive = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("WindowWidth"))		// #23510 2010.10.31 yyagi add
                                             {
                                                 this.nウインドウwidth = CConversion.nGetNumberIfInRange(str4, 1, 65535, this.nウインドウwidth);
                                                 if (this.nウインドウwidth <= 0)
