@@ -61,3 +61,10 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Additional settings for DTXMania NX
+###############################################################################
+
+# Config.ini is in Japanese encoding, recognized as binary. Allow text diff.
+Config.ini diff
