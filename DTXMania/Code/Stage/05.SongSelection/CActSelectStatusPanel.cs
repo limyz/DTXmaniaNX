@@ -314,26 +314,26 @@ namespace DTXMania
                                 #region [ 選択曲の Lv の描画 ]
                                 if ((cスコア != null) && (this.txDifficultyNumber != null))
                                 {
+                                    // convert the level back into a whole number (0-999) to make it easier to work with
+                                    int nLevel = (n現在選択中の曲のレベル難易度毎DGB[i][j] * 10) + n現在選択中の曲のレベル小数点難易度毎DGB[i][j];
+                                    bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0;
+                                    bool bHasSong = b現在選択中の曲に譜面がある[i][j];
 
-                                    if (n選択中の曲のレベル難易度毎[i] > 100)
+                                    int nX = nBoxX + nPanelW - 77;
+                                    int nY = nBoxY + nPanelH - 35;
+                                    if (bHasSong)
                                     {
-                                        n難易度整数[i] = (int)this.n現在選択中の曲のレベル難易度毎DGB[i][j] / 100;
-                                        n難易度小数[i] = (n選択中の曲のレベル難易度毎[i] - (n難易度整数[i] * 100));
+                                        if (bShowClassicLevel)
+                                            tDrawDifficulty(nX, nY, string.Format(@"{0,2:00}", nLevel / 10));
+                                        else
+                                            tDrawDifficulty(nX, nY, string.Format(@"{0,1:0}.{1,2:00}", nLevel / 100, nLevel % 100));
                                     }
                                     else
                                     {
-                                        n難易度整数[i] = (int)this.n現在選択中の曲のレベル難易度毎DGB[i][j] / 10;
-                                        n難易度小数[i] = (this.n現在選択中の曲のレベル難易度毎DGB[i][j] - (n難易度整数[i] * 10)) * 10;
-                                        n難易度小数[i] += this.n現在選択中の曲のレベル小数点難易度毎DGB[i][j];
-                                    }
-
-                                    if (this.str難易度ラベル[i] != null && this.b現在選択中の曲に譜面がある[i][j])
-                                    {
-                                        this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, string.Format("{0,4:0.00}", ((double)n難易度整数[i]) + (((double)n難易度小数[i]) / 100)));
-                                    }
-                                    else if ((this.str難易度ラベル[i] != null && !this.b現在選択中の曲に譜面がある[i][j]) || CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.RANDOM)
-                                    {
-                                        this.tDrawDifficulty(nBoxX + nPanelW - 77, nBoxY + nPanelH - 35, ("-.--"));
+                                        if (bShowClassicLevel)
+                                            tDrawDifficulty(nX, nY, @"--");
+                                        else
+                                            tDrawDifficulty(nX, nY, @"-.--");
                                     }
                                 }
                                 #endregion
