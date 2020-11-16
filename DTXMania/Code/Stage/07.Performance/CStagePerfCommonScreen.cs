@@ -13,6 +13,7 @@ using SharpDX.Direct3D9;
 using DirectShowLib;
 using FDK;
 
+using Color = System.Drawing.Color;
 using Rectangle = System.Drawing.Rectangle;
 using SlimDXKey = SlimDX.DirectInput.Key;
 
@@ -423,6 +424,10 @@ namespace DTXMania
                     this.tx判定画像anime_2 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_JudgeStrings_XG.png" ) );
                     this.tx判定画像anime_3 = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\7_JudgeStrings_XG.png" ) );
                 }
+                if (CDTXMania.ConfigIni.nShowPlaySpeed == (int)EShowPlaySpeed.ON)
+                {
+                    tGeneratePlaySpeedTexture();
+                }
 
                 base.OnManagedCreateResources();
             }
@@ -438,6 +443,7 @@ namespace DTXMania
                 CDTXMania.tReleaseTexture(ref this.tx判定画像anime_2);
                 CDTXMania.tReleaseTexture(ref this.tx判定画像anime_3);
                 CDTXMania.tReleaseTexture(ref this.txBonusEffect);
+                CDTXMania.tReleaseTexture(ref this.txPlaySpeed);
                 base.OnManagedReleaseResources();
             }
         }
@@ -729,6 +735,7 @@ namespace DTXMania
         protected CTexture txWailingFrame;
         protected CTexture txChip;  // txチップ
         protected CTexture txHitBar;  // txヒットバー
+        protected CTexture txPlaySpeed;
         public CTexture tx判定画像anime;     //2013.8.2 kairera0467 アニメーションの場合はあらかじめこっちで読み込む。
         public CTexture tx判定画像anime_2;   //2014.3.16 kairera0467 棒とかで必要になる。
         public CTexture tx判定画像anime_3;
@@ -2053,6 +2060,18 @@ namespace DTXMania
                     Trace.TraceInformation("REMOVE LOOP CSoundManager.rcPerformanceTimer.nCurrentTime=" + CSoundManager.rcPerformanceTimer.nCurrentTime + ", CDTXMania.Timer.nCurrentTime=" + CDTXMania.Timer.nCurrentTime);
                     this.LoopBeginMs = -1;
                     this.LoopEndMs = -1;
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.DecreasePlaySpeed))
+                {
+                    // Decrease Play Speed
+                    this.bIsTrainingMode = true;
+                    this.tChangePlaySpeed(-1);
+                }
+                else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.IncreasePlaySpeed))
+                {
+                    // Increase Play Speed
+                    this.bIsTrainingMode = true;
+                    this.tChangePlaySpeed(1);
                 }
 
                 if (!CDTXMania.ConfigIni.bReverse.Drums && keyboard.bKeyPressing((int)SlimDXKey.PageUp))
@@ -5534,33 +5553,34 @@ namespace DTXMania
             this.actAVI.Stop();
             this.actBGA.Stop();
 
-            // If we are going backward, we need to unhit some chips, and reset TopChip
-            // If we are going forward, this is not needed, TopChip will automaticaly catch up at next frame
+            // Loop to set new nCurrentTopChip
+            // Also, if we are going backward, we need to unhit some chips, and reset TopChip
             this.nCurrentTopChip = 0;
             bool bIsTopChipSet = false;
-            if (nNewPosition < oldPosition)
+            for (int nCurrentChip = 0; nCurrentChip < CDTXMania.DTX.listChip.Count; nCurrentChip++)
             {
-                for (int nCurrentChip = 0; nCurrentChip < CDTXMania.DTX.listChip.Count; nCurrentChip++)
+                CDTX.CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
+
+                if (bIsTopChipSet && pChip.nPlaybackTimeMs > oldPosition)
                 {
-                    CDTX.CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
+                    break;
+                }
 
-                    if (pChip.nPlaybackTimeMs > oldPosition)
+                if (pChip.nPlaybackTimeMs >= nNewPosition)
+                {
+                    if (!bIsTopChipSet)
                     {
-                        break;
+                        this.nCurrentTopChip = nCurrentChip;
+                        bIsTopChipSet = true;
+                        if (nNewPosition > oldPosition)
+                        {
+                            break;
+                        }
                     }
-
-                    if (pChip.nPlaybackTimeMs >= nNewPosition)
+                    // Unhit the chip so it displays again (and is hittable again)
+                    if (pChip.bHit)
                     {
-                        if (!bIsTopChipSet)
-                        {
-                            this.nCurrentTopChip = nCurrentChip;
-                            bIsTopChipSet = true;
-                        }
-                        // Unhit the chip so it displays again (and is hittable again)
-                        if (pChip.bHit)
-                        {
-                            pChip.bHit = false;
-                        }
+                        pChip.bHit = false;
                     }
                 }
             }
@@ -5589,6 +5609,9 @@ namespace DTXMania
                             int j = wc.n現在再生中のサウンド番号;
                             if (wc.rSound[j] != null)
                             {
+                                // Needed only if the tJumpInSong is called by tChangePlaySpeed
+                                wc.rSound[j].dbPlaySpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20.0;
+
                                 wc.rSound[j].tPausePlayback();
                                 wc.rSound[j].tChangePlaybackPosition(nNewPosition - pChip.nPlaybackTimeMs);
                                 pausedCSound.Add(wc.rSound[j]);
@@ -5615,6 +5638,53 @@ namespace DTXMania
 
             this.bPAUSE = false;
             CSoundManager.rcPerformanceTimer.tResume();
+        }
+
+        protected void tChangePlaySpeed(int nSpeedOffset)
+        {
+            Trace.TraceInformation(((nSpeedOffset>0) ? "Increase" : "Decrease") + " Play Speed from " + CDTXMania.ConfigIni.nPlaySpeed + " to " + (CDTXMania.ConfigIni.nPlaySpeed+nSpeedOffset));
+
+            double dbOldSpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20;
+            CDTXMania.ConfigIni.nPlaySpeed += nSpeedOffset;
+            double dbNewSpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20;
+
+            foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
+            {
+                chip.nPlaybackTimeMs = (int)(((double)chip.nPlaybackTimeMs * dbOldSpeed) / dbNewSpeed);
+            }
+            if (this.LoopBeginMs != -1)
+            {
+                this.LoopBeginMs = (int)(((double)this.LoopBeginMs * dbOldSpeed) / dbNewSpeed);
+            }
+            if (this.LoopEndMs != -1)
+            {
+                this.LoopEndMs = (int)(((double)this.LoopEndMs * dbOldSpeed) / dbNewSpeed);
+            }
+
+            CSoundManager.rcPerformanceTimer.nCurrentTime = (int)(((double)CSoundManager.rcPerformanceTimer.nCurrentTime * dbOldSpeed) / dbNewSpeed);
+
+            tJumpInSong(CSoundManager.rcPerformanceTimer.nCurrentTime);
+
+            // Display new play speed
+            if (CDTXMania.ConfigIni.nShowPlaySpeed == (int)EShowPlaySpeed.ON || CDTXMania.ConfigIni.nShowPlaySpeed == (int)EShowPlaySpeed.IF_CHANGED_IN_GAME)
+            {
+                tGeneratePlaySpeedTexture();
+            }
+        }
+
+        private void tGeneratePlaySpeedTexture()
+        {
+            CDTXMania.tReleaseTexture(ref this.txPlaySpeed);
+            if (CDTXMania.ConfigIni.nPlaySpeed != 20)
+            {
+                double d = (double)(CDTXMania.ConfigIni.nPlaySpeed / 20.0);
+                String strModifiedPlaySpeed = "Play Speed: x" + d.ToString("0.000");
+                CPrivateFastFont pfModifiedPlaySpeed = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 18, FontStyle.Regular);
+                Bitmap bmpModifiedPlaySpeed = pfModifiedPlaySpeed.DrawPrivateFont(strModifiedPlaySpeed, CPrivateFont.DrawMode.Edge, Color.White, Color.White, Color.Black, Color.Red, true);
+                this.txPlaySpeed = CDTXMania.tGenerateTexture(bmpModifiedPlaySpeed, false);
+                bmpModifiedPlaySpeed.Dispose();
+                pfModifiedPlaySpeed.Dispose();
+            }
         }
 
         protected void tSetSettingsForDTXV()

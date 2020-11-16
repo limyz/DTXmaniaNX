@@ -1674,6 +1674,14 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.SkipBackward);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemIncreasePlaySpeed)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.IncreasePlaySpeed);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemDecreasePlaySpeed)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.DecreasePlaySpeed);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemRestart)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Restart);
@@ -1930,6 +1938,16 @@ namespace DTXMania
                 "",
                 "Skip backward assign:\n To assign key/pads for Skip backward (rewind).");
             this.listItems.Add(this.iKeyAssignSystemSkipBackward);
+
+            this.iKeyAssignSystemIncreasePlaySpeed = new CItemBase("Increase play speed",
+                "",
+                "Increase play speed assign:\n To assign key/pads for increasing play speed.");
+            this.listItems.Add(this.iKeyAssignSystemIncreasePlaySpeed);
+
+            this.iKeyAssignSystemDecreasePlaySpeed = new CItemBase("Decrease play speed",
+                "",
+                "Decrease play speed assign:\n To assign key/pads for decreasing play speed.");
+            this.listItems.Add(this.iKeyAssignSystemDecreasePlaySpeed);
 
             this.iKeyAssignSystemRestart = new CItemBase("Restart",
                 "",
@@ -2728,6 +2746,8 @@ namespace DTXMania
         private CItemBase iKeyAssignSystemLoopDelete;
         private CItemBase iKeyAssignSystemSkipForward;
         private CItemBase iKeyAssignSystemSkipBackward;
+        private CItemBase iKeyAssignSystemIncreasePlaySpeed;
+        private CItemBase iKeyAssignSystemDecreasePlaySpeed;
         private CItemBase iKeyAssignSystemRestart;
         private CItemBase iKeyAssignSystemReturnToMenu;		// #24609
 

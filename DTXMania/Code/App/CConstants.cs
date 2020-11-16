@@ -110,6 +110,8 @@ namespace DTXMania
 		LoopDelete,
 		SkipForward,
 		SkipBackward, // = Rewind
+		IncreasePlaySpeed,
+		DecreasePlaySpeed,
 		Restart,
 		MAX,          // Gatekeeper
 		UNKNOWN = EPad.UNKNOWN
@@ -286,6 +288,14 @@ namespace DTXMania
 		ON,				// 判定に依らず全て表示する
 		GREAT_POOR		// GREAT-MISSの時のみ表示する(PERFECT時は表示しない)
 	}
+
+	internal enum EShowPlaySpeed
+    {
+		OFF,
+		ON,
+		IF_CHANGED_IN_GAME
+    }
+
     /// <summary>
     /// 使用するAUTOゴーストデータの種類 (#35411 chnmr0)
     /// </summary>
