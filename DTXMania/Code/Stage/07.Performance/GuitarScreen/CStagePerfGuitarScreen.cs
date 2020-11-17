@@ -199,8 +199,9 @@ namespace DTXMania
                 this.tUpdateAndDraw_Combo();
 				this.tUpdateAndDraw_PerformanceInformation();
 				//this.tUpdateAndDraw_WailingFrame();
+				this.tUpdateAndDraw_PlaySpeed();
 
-                this.tUpdateAndDraw_ChipFireGB();
+				this.tUpdateAndDraw_ChipFireGB();
 				this.tUpdateAndDraw_STAGEFAILED();
                 flag2 = this.tUpdateAndDraw_FadeIn_Out();
                 if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
@@ -403,7 +404,15 @@ namespace DTXMania
 			base.tUpdateAndDraw_PerformanceInformation( 500, 257 );
 		}
 
-        protected override void tJudgeLineMovingUpandDown()
+		private void tUpdateAndDraw_PlaySpeed()
+		{
+			if (this.txPlaySpeed != null)
+			{
+				this.txPlaySpeed.tDraw2D(CDTXMania.app.Device, 600, 687);
+			}
+		}
+
+		protected override void tJudgeLineMovingUpandDown()
         {
 
         }

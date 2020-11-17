@@ -307,6 +307,28 @@ namespace DTXMania
 						this.padSkipBackward = value;
 					}
 				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] IncreasePlaySpeed
+				{
+					get
+					{
+						return this.padIncreasePlaySpeed;
+					}
+					set
+					{
+						this.padIncreasePlaySpeed = value;
+					}
+				}
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] DecreasePlaySpeed
+				{
+					get
+					{
+						return this.padDecreasePlaySpeed;
+					}
+					set
+					{
+						this.padDecreasePlaySpeed = value;
+					}
+				}
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] Restart
 				{
 					get
@@ -374,6 +396,12 @@ namespace DTXMania
 
 							case (int)EKeyConfigPad.SkipBackward:
 								return this.padSkipBackward;
+
+							case (int)EKeyConfigPad.IncreasePlaySpeed:
+								return this.padIncreasePlaySpeed;
+
+							case (int)EKeyConfigPad.DecreasePlaySpeed:
+								return this.padDecreasePlaySpeed;
 
 							case (int)EKeyConfigPad.Restart:
 								return this.padRestart;
@@ -452,6 +480,14 @@ namespace DTXMania
 								this.padSkipBackward = value;
 								return;
 
+							case (int)EKeyConfigPad.IncreasePlaySpeed:
+								this.padIncreasePlaySpeed = value;
+								return;
+
+							case (int)EKeyConfigPad.DecreasePlaySpeed:
+								this.padDecreasePlaySpeed = value;
+								return;
+
 							case (int)EKeyConfigPad.Restart:
 								this.padRestart = value;
 								return;
@@ -479,6 +515,8 @@ namespace DTXMania
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopDelete;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipForward;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipBackward;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padIncreasePlaySpeed;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padDecreasePlaySpeed;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padRestart;
 				//-----------------
 				#endregion
@@ -713,6 +751,7 @@ namespace DTXMania
         public STDGBVALUE<int> nJudgeLinePosOffset; // #31602 2013.6.23 yyagi 判定ライン表示位置のオフセット
         public int nShowLagType;					// #25370 2011.6.5 yyagi ズレ時間表示機能
         public int nShowLagTypeColor;
+		public int nShowPlaySpeed;
         public STDGBVALUE<int> nHidSud;
         public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
 		public int nPoliphonicSounds;				// #28228 2012.5.1 yyagi レーン毎の最大同時発音数
@@ -1328,6 +1367,7 @@ namespace DTXMania
 			this.nRisky = 0;							// #23539 2011.7.26 yyagi RISKYモード
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
             this.nShowLagTypeColor = 0;
+			this.nShowPlaySpeed = (int)EShowPlaySpeed.IF_CHANGED_IN_GAME;
 			this.bIsAutoResultCapture = false;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
             #region [ XGオプション ]
@@ -1725,7 +1765,10 @@ namespace DTXMania
             sw.WriteLine("; 演奏中の曲情報の表示(0:OFF, 1:ON)");
             sw.WriteLine("ShowMusicInfo={0}", this.bShowMusicInfo ? 1 : 0);
             sw.WriteLine();
-            sw.WriteLine("; 読み込み画面、演奏画面、ネームプレート、リザルト画面の曲名で使用するフォント名");
+			sw.WriteLine("; Show custom play speed (0:OFF, 1:ON, 2:If changed in game)");    //
+			sw.WriteLine("ShowPlaySpeed={0}", this.nShowPlaySpeed);                         //
+			sw.WriteLine();
+			sw.WriteLine("; 読み込み画面、演奏画面、ネームプレート、リザルト画面の曲名で使用するフォント名");
             sw.WriteLine("DisplayFontName={0}", this.str曲名表示フォント);
             sw.WriteLine();
             #endregion
@@ -2316,6 +2359,12 @@ namespace DTXMania
 			sw.Write("SkipBackward=");
 			this.tWriteKey(sw, this.KeyAssign.System.SkipBackward);
 			sw.WriteLine();
+			sw.Write("IncreasePlaySpeed=");
+			this.tWriteKey(sw, this.KeyAssign.System.IncreasePlaySpeed);
+			sw.WriteLine();
+			sw.Write("DecreasePlaySpeed=");
+			this.tWriteKey(sw, this.KeyAssign.System.DecreasePlaySpeed);
+			sw.WriteLine();
 			sw.Write("Restart=");
 			this.tWriteKey(sw, this.KeyAssign.System.Restart);
 			sw.WriteLine();
@@ -2773,7 +2822,11 @@ namespace DTXMania
                                             {
                                                 this.bShowMusicInfo = CConversion.bONorOFF(str4[0]);
                                             }
-                                            else if (str3.Equals("DisplayFontName"))
+											else if (str3.Equals("ShowPlaySpeed"))
+											{
+												this.nShowPlaySpeed = CConversion.nGetNumberIfInRange(str4, 0, 2, this.nShowPlaySpeed);
+											}
+											else if (str3.Equals("DisplayFontName"))
                                             {
                                                 this.str曲名表示フォント = str4;
                                             }
@@ -3663,6 +3716,14 @@ namespace DTXMania
 										else if (str3.Equals("SkipBackward"))
 										{
 											this.tReadAndSetSkey(str4, this.KeyAssign.System.SkipBackward);
+										}
+										else if (str3.Equals("IncreasePlaySpeed"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.IncreasePlaySpeed);
+										}
+										else if (str3.Equals("DecreasePlaySpeed"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.DecreasePlaySpeed);
 										}
 										else if (str3.Equals("Restart"))
 										{

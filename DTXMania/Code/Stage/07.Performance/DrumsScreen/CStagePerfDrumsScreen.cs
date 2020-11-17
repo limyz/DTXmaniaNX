@@ -346,6 +346,7 @@ namespace DTXMania
                 this.tUpdateAndDraw_JudgementString1_ForNormalPosition();
                 this.tUpdateAndDraw_JudgementString2_ForPositionOnJudgementLine();
                 this.tUpdateAndDraw_ChipFireD();
+                this.tUpdateAndDraw_PlaySpeed();
                 this.tUpdateAndDraw_STAGEFAILED();
                 bすべてのチップが判定された = true;
                 if (bIsFinishedFadeout)
@@ -792,7 +793,15 @@ namespace DTXMania
 			base.tUpdateAndDraw_PerformanceInformation( 1000, 257 );
 		}
 
-		protected override void tHandleInput_Drums()
+        private void tUpdateAndDraw_PlaySpeed()
+        {
+            if (this.txPlaySpeed != null)
+            {
+                this.txPlaySpeed.tDraw2D(CDTXMania.app.Device, 25, 200);
+            }
+        }
+
+        protected override void tHandleInput_Drums()
         {
 
             for (int nPad = 0; nPad < (int)EPad.MAX; nPad++)
