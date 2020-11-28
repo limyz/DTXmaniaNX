@@ -62,10 +62,10 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
-			DrumHitRanges = new CHitRanges(@"DRUM", nDefaultSize: -1);
-			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL", nDefaultSize: -1);
-			GuitarHitRanges = new CHitRanges(@"GUITAR", nDefaultSize: -1);
-			BassHitRanges = new CHitRanges(@"BASS", nDefaultSize: -1);
+			DrumHitRanges = new CHitRanges(nDefaultSize: -1);
+			DrumPedalHitRanges = new CHitRanges(nDefaultSize: -1);
+			GuitarHitRanges = new CHitRanges(nDefaultSize: -1);
+			BassHitRanges = new CHitRanges(nDefaultSize: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
@@ -164,8 +164,8 @@ namespace DTXMania
 								// map the legacy hit ranges to apply to each category
 								// they should only appear when reading from a legacy box.def,
 								// so simply copy all values over whenever there is a change
-								CHitRanges legacyRanges = new CHitRanges(string.Empty);
-								if (tTryReadHitRangesField(str, legacyRanges))
+								CHitRanges legacyRanges = new CHitRanges();
+								if (tTryReadHitRangesField(str, string.Empty, legacyRanges))
 								{
 									DrumHitRanges.tCopyFrom(legacyRanges);
 									DrumPedalHitRanges.tCopyFrom(legacyRanges);
@@ -174,16 +174,16 @@ namespace DTXMania
 									continue;
 								}
 
-								if (tTryReadHitRangesField(str, DrumHitRanges))
+								if (tTryReadHitRangesField(str, @"DRUM", DrumHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, DrumPedalHitRanges))
+								if (tTryReadHitRangesField(str, @"DRUMPEDAL", DrumPedalHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, GuitarHitRanges))
+								if (tTryReadHitRangesField(str, @"GUITAR", GuitarHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, BassHitRanges))
+								if (tTryReadHitRangesField(str, @"BASS", BassHitRanges))
 									continue;
 							}
 						}
@@ -202,29 +202,30 @@ namespace DTXMania
 		/// Read the box.def <see cref="CHitRanges"/> field, if any, described by the given parameters into the given <see cref="CHitRanges"/>.
 		/// </summary>
 		/// <param name="strLine">The raw box.def line being read from.</param>
+		/// <param name="strName">The unique identifier of <paramref name="ranges"/>.</param>
 		/// <param name="ranges">The <see cref="CHitRanges"/> to read into.</param>
 		/// <returns>Whether or not a field was read.</returns>
-		private bool tTryReadHitRangesField(string strLine, CHitRanges ranges)
+		private bool tTryReadHitRangesField(string strLine, string strName, CHitRanges ranges)
 		{
 			switch (strLine)
 			{
 				// perfect range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.strName}PERFECTRANGE", out var r):
+				case var l when tTryReadInt(l, $@"#{strName}PERFECTRANGE", out var r):
 					ranges.nPerfectSize = r;
 					return true;
 
 				// great range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.strName}GREATRANGE", out var r):
+				case var l when tTryReadInt(l, $@"#{strName}GREATRANGE", out var r):
 					ranges.nGreatSize = r;
 					return true;
 
 				// good range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.strName}GOODRANGE", out var r):
+				case var l when tTryReadInt(l, $@"#{strName}GOODRANGE", out var r):
 					ranges.nGoodSize = r;
 					return true;
 
 				// poor range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.strName}POORRANGE", out var r):
+				case var l when tTryReadInt(l, $@"#{strName}POORRANGE", out var r):
 					ranges.nPoorSize = r;
 					return true;
 

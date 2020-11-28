@@ -9,12 +9,6 @@ namespace DTXMania
     public class CHitRanges
     {
         /// <summary>
-        /// The unique identifier of this set, or <see cref="null"/> if there is none.
-        /// </summary>
-        [NonSerialized]
-        public readonly string strName;
-
-        /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Perfect"/> range.
         /// </summary>
         public int nPerfectSize;
@@ -34,9 +28,8 @@ namespace DTXMania
         /// </summary>
         public int nPoorSize;
 
-        public CHitRanges(string strName = null, int nDefaultSize = 0)
+        public CHitRanges(int nDefaultSize = 0)
         {
-            this.strName = strName;
             nPerfectSize = nGreatSize = nGoodSize = nPoorSize = nDefaultSize;
         }
 
