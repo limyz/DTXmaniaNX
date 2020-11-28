@@ -581,26 +581,18 @@ namespace DTXMania
 							{
 								sb.Append( ", FontColor=" + c曲リストノード.col文字色 );
 							}
-							if( c曲リストノード.nPerfect範囲ms != -1 )
-							{
-								sb.Append( ", Perfect=" + c曲リストノード.nPerfect範囲ms + "ms" );
-							}
-							if( c曲リストノード.nGreat範囲ms != -1 )
-							{
-								sb.Append( ", Great=" + c曲リストノード.nGreat範囲ms + "ms" );
-							}
-							if( c曲リストノード.nGood範囲ms != -1 )
-							{
-								sb.Append( ", Good=" + c曲リストノード.nGood範囲ms + "ms" );
-							}
-							if( c曲リストノード.nPoor範囲ms != -1 )
-							{
-								sb.Append( ", Poor=" + c曲リストノード.nPoor範囲ms + "ms" );
-							}
+
+							// hit ranges
+							tTryAppendHitRanges(c曲リストノード.DrumHitRanges, @"Drum", sb);
+							tTryAppendHitRanges(c曲リストノード.DrumPedalHitRanges, @"DrumPedal", sb);
+							tTryAppendHitRanges(c曲リストノード.GuitarHitRanges, @"Guitar", sb);
+							tTryAppendHitRanges(c曲リストノード.BassHitRanges, @"Bass", sb);
+
 							if ( ( c曲リストノード.strSkinPath != null ) && ( c曲リストノード.strSkinPath.Length > 0 ) )
 							{
 								sb.Append( ", SkinPath=" + c曲リストノード.strSkinPath );
 							}
+
 							Trace.TraceInformation( sb.ToString() );
 						}
 						finally
@@ -626,6 +618,28 @@ namespace DTXMania
 				#endregion
 			}
 		}
+
+		/// <summary>
+		/// Append all the set values, if any, of the given <see cref="CHitRanges"/> to the given <see cref="StringBuilder"/>.
+		/// </summary>
+		/// <param name="ranges">The <see cref="CHitRanges"/> to append the values of.</param>
+		/// <param name="strName">The unique identifier of <paramref name="ranges"/>.</param>
+		/// <param name="builder">The <see cref="StringBuilder"/> to append to.</param>
+		private void tTryAppendHitRanges(CHitRanges ranges, string strName, StringBuilder builder)
+		{
+			if (ranges.nPerfectSize >= 0)
+				builder.Append($@", {strName}Perfect={ranges.nPerfectSize}ms");
+
+			if (ranges.nGreatSize >= 0)
+				builder.Append($@", {strName}Great={ranges.nGreatSize}ms");
+
+			if (ranges.nGoodSize >= 0)
+				builder.Append($@", {strName}Good={ranges.nGoodSize}ms");
+
+			if (ranges.nPoorSize >= 0)
+				builder.Append($@", {strName}Poor={ranges.nPoorSize}ms");
+		}
+
 		//-----------------
 		#endregion
 		#region [ Reflect score cache in song list ]
