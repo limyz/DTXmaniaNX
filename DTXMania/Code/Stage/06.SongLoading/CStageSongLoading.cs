@@ -640,7 +640,7 @@ namespace DTXMania
 
                                 if( ghostLag <= 127 )
                                 {
-                                    EJudgement eJudge = this.e指定時刻からChipのJUDGEを返す( ghostLag, 0 );
+                                    EJudgement eJudge = this.e指定時刻からChipのJUDGEを返す( ghostLag, 0, (EInstrumentPart)i );
 
                                     switch( eJudge )
                                     {
@@ -910,30 +910,23 @@ namespace DTXMania
                 this.nLagTime = nLagTime;
             }
         }
-        protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime )
-		{
-			//if ( pChip != null )
-			{
-                int nDeltaTime = Math.Abs((int)nTime + nInputAdjustTime);
-				if ( nDeltaTime <= CDTXMania.nPerfectRangeMs )
-				{
-					return EJudgement.Perfect;
-				}
-				if ( nDeltaTime <= CDTXMania.nGreatRangeMs )
-				{
-					return EJudgement.Great;
-				}
-				if ( nDeltaTime <= CDTXMania.nGoodRangeMs )
-				{
-					return EJudgement.Good;
-				}
-				if ( nDeltaTime <= CDTXMania.nPoorRangeMs )
-				{
-					return EJudgement.Poor;
-				}
-			}
-			return EJudgement.Miss;
-		}
+        protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime, EInstrumentPart part )
+        {
+            int nDeltaTime = Math.Abs((int)nTime + nInputAdjustTime);
+
+            switch (part)
+            {
+                case EInstrumentPart.DRUMS:
+                    // TODO: ghosts do not track columns, so pedal ranges cannot be used
+                    return CDTXMania.DrumHitRanges.tGetJudgement(nDeltaTime);
+                case EInstrumentPart.GUITAR:
+                    return CDTXMania.GuitarHitRanges.tGetJudgement(nDeltaTime);
+                case EInstrumentPart.BASS:
+                    return CDTXMania.BassHitRanges.tGetJudgement(nDeltaTime);
+                default:
+                    return EJudgement.Miss;
+            }
+        }
         //-----------------
         private void ReadGhost( string filename, List<int> list ) // #35411 2015.08.19 chnmr0 add
         {

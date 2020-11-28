@@ -50,5 +50,27 @@ namespace DTXMania
             nGoodSize = (first.nGoodSize >= 0) ? first.nGoodSize : fallback.nGoodSize,
             nPoorSize = (first.nPoorSize >= 0) ? first.nPoorSize : fallback.nPoorSize,
         };
+
+        /// <summary>
+        /// Get the <see cref="EJudgement"/> which would occur from hitting a chip at the given absolute offset from its playback time, when using this set.
+        /// </summary>
+        /// <param name="nDeltaTimeMs">The absolute offset, in milliseconds, from the <see cref="CDTX.CChip.nPlaybackTimeMs"/> of the chip.</param>
+        /// <returns>The <see cref="EJudgement"/> for the given delta time.</returns>
+        public EJudgement tGetJudgement(int nDeltaTimeMs)
+        {
+            switch (nDeltaTimeMs)
+            {
+                case var t when t <= nPerfectSize:
+                    return EJudgement.Perfect;
+                case var t when t <= nGreatSize:
+                    return EJudgement.Great;
+                case var t when t <= nGoodSize:
+                    return EJudgement.Good;
+                case var t when t <= nPoorSize:
+                    return EJudgement.Poor;
+                default:
+                    return EJudgement.Miss;
+            }
+        }
     }
 }
