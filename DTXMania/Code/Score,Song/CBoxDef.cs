@@ -14,10 +14,39 @@ namespace DTXMania
 		public Color Color;
 		public string Comment;
 		public string Genre;
-		public int GoodRange;
-		public int GreatRange;
-		public int PerfectRange;
-		public int PoorRange;
+
+		/// <summary>
+		/// The custom <see cref="CHitRanges"/> for all drum chips, except pedals, wthin this box.
+		/// </summary>
+		/// <remarks>
+		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// </remarks>
+		public CHitRanges DrumHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="CHitRanges"/> for drum pedal chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// </remarks>
+		public CHitRanges DrumPedalHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="CHitRanges"/> for guitar chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// </remarks>
+		public CHitRanges GuitarHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="CHitRanges"/> for bass guitar chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// </remarks>
+		public CHitRanges BassHitRanges;
+
 		public string Preimage;
 		public string Premovie;
 		public string Presound;
@@ -37,12 +66,40 @@ namespace DTXMania
 			this.Premovie = "";
 			this.Presound = "";
 			this.Color = ColorTranslator.FromHtml( "White" );
-			this.PerfectRange = -1;
-			this.GreatRange = -1;
-			this.GoodRange = -1;
-			this.PoorRange = -1;
 			this.SkinPath = "";
             this.Difficlty = false;
+
+			DrumHitRanges = new CHitRanges(@"DRUM")
+			{
+				Perfect = -1,
+				Great = -1,
+				Good = -1,
+				Poor = -1,
+			};
+
+			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL")
+			{
+				Perfect = -1,
+				Great = -1,
+				Good = -1,
+				Poor = -1,
+			};
+
+			GuitarHitRanges = new CHitRanges(@"GUITAR")
+			{
+				Perfect = -1,
+				Great = -1,
+				Good = -1,
+				Poor = -1,
+			};
+
+			BassHitRanges = new CHitRanges(@"BASS")
+			{
+				Perfect = -1,
+				Great = -1,
+				Good = -1,
+				Poor = -1,
+			};
 		}
 		public CBoxDef( string boxdefファイル名 )
 			: this()
@@ -111,38 +168,6 @@ namespace DTXMania
 							{
 								this.Color = ColorTranslator.FromHtml( str.Substring( 10 ).Trim( ignoreChars ) );
 							}
-							else if( str.StartsWith( "#PERFECTRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 13 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.PerfectRange = range;
-								}
-							}
-							else if( str.StartsWith( "#GREATRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 11 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.GreatRange = range;
-								}
-							}
-							else if( str.StartsWith( "#GOODRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 10 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.GoodRange = range;
-								}
-							}
-							else if( str.StartsWith( "#POORRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 10 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.PoorRange = range;
-								}
-							}
                             else if ( str.StartsWith( "#DIFFICULTY", StringComparison.OrdinalIgnoreCase ) )
 							{
 								int range = 0;
@@ -161,6 +186,34 @@ namespace DTXMania
 									this.Difficlty = b;
 								}
 							}
+							else
+							{
+								// hit ranges
+								// map the legacy hit ranges to apply to each category
+								// they should only appear when reading from a legacy box.def,
+								// so simply copy all values over whenever there is a change
+								CHitRanges legacyRanges = new CHitRanges(string.Empty);
+								if (tTryReadHitRangesField(str, legacyRanges))
+								{
+									DrumHitRanges.CopyFrom(legacyRanges);
+									DrumPedalHitRanges.CopyFrom(legacyRanges);
+									GuitarHitRanges.CopyFrom(legacyRanges);
+									BassHitRanges.CopyFrom(legacyRanges);
+									continue;
+								}
+
+								if (tTryReadHitRangesField(str, DrumHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, DrumPedalHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, GuitarHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, BassHitRanges))
+									continue;
+							}
 						}
 						continue;
 					}
@@ -171,6 +224,68 @@ namespace DTXMania
 				}
 			}
 			reader.Close();
+		}
+
+		/// <summary>
+		/// Read the box.def <see cref="CHitRanges"/> field, if any, described by the given parameters into the given <see cref="CHitRanges"/>.
+		/// </summary>
+		/// <param name="strLine">The raw box.def line being read from.</param>
+		/// <param name="ranges">The <see cref="CHitRanges"/> to read into.</param>
+		/// <returns>Whether or not a field was read.</returns>
+		private bool tTryReadHitRangesField(string strLine, CHitRanges ranges)
+		{
+			switch (strLine)
+			{
+				// perfect range size (±ms)
+				case var l when tTryReadInt(l, $@"#{ranges.Name}PERFECTRANGE", out var r):
+					ranges.Perfect = r;
+					return true;
+
+				// great range size (±ms)
+				case var l when tTryReadInt(l, $@"#{ranges.Name}GREATRANGE", out var r):
+					ranges.Great = r;
+					return true;
+
+				// good range size (±ms)
+				case var l when tTryReadInt(l, $@"#{ranges.Name}GOODRANGE", out var r):
+					ranges.Good = r;
+					return true;
+
+				// poor range size (±ms)
+				case var l when tTryReadInt(l, $@"#{ranges.Name}POORRANGE", out var r):
+					ranges.Poor = r;
+					return true;
+
+				// unknown field
+				default:
+					return false;
+			}
+		}
+
+		/// <summary>
+		/// Read the box.def <see cref="int"/> field, if any, described by the given parameters into the given <see cref="int"/>.
+		/// </summary>
+		/// <param name="strLine">The raw box.def line being read from.</param>
+		/// <param name="strFieldName">The name of the field to try and read.</param>
+		/// <param name="iValue">The <see cref="int"/> to read into.</param>
+		/// <returns>Whether or not the field was read.</returns>
+		private bool tTryReadInt(string strLine, string strFieldName, out int iValue)
+		{
+			// write a default value in case of a failure
+			iValue = -1;
+
+			// ensure the line is for the given field
+			string strPrefix = $@"#{strFieldName}";
+			if (!strLine.StartsWith(strPrefix, StringComparison.OrdinalIgnoreCase))
+				return false;
+
+			// read the value into the given int, stripping the field name and ignored characters
+			char[] chIgnoredCharacters = new[] { ':', ' ', '\t' };
+			string strValue = strLine.Substring(strPrefix.Length).Trim(chIgnoredCharacters);
+			if (!int.TryParse(strValue, out iValue))
+				return false;
+
+			return true;
 		}
 	}
 }
