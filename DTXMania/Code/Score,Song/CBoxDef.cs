@@ -62,10 +62,10 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
-			DrumHitRanges = new CHitRanges(@"DRUM", defaultRange: -1);
-			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL", defaultRange: -1);
-			GuitarHitRanges = new CHitRanges(@"GUITAR", defaultRange: -1);
-			BassHitRanges = new CHitRanges(@"BASS", defaultRange: -1);
+			DrumHitRanges = new CHitRanges(@"DRUM", nDefaultSize: -1);
+			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL", nDefaultSize: -1);
+			GuitarHitRanges = new CHitRanges(@"GUITAR", nDefaultSize: -1);
+			BassHitRanges = new CHitRanges(@"BASS", nDefaultSize: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
@@ -167,10 +167,10 @@ namespace DTXMania
 								CHitRanges legacyRanges = new CHitRanges(string.Empty);
 								if (tTryReadHitRangesField(str, legacyRanges))
 								{
-									DrumHitRanges.CopyFrom(legacyRanges);
-									DrumPedalHitRanges.CopyFrom(legacyRanges);
-									GuitarHitRanges.CopyFrom(legacyRanges);
-									BassHitRanges.CopyFrom(legacyRanges);
+									DrumHitRanges.tCopyFrom(legacyRanges);
+									DrumPedalHitRanges.tCopyFrom(legacyRanges);
+									GuitarHitRanges.tCopyFrom(legacyRanges);
+									BassHitRanges.tCopyFrom(legacyRanges);
 									continue;
 								}
 
@@ -209,23 +209,23 @@ namespace DTXMania
 			switch (strLine)
 			{
 				// perfect range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.Name}PERFECTRANGE", out var r):
-					ranges.Perfect = r;
+				case var l when tTryReadInt(l, $@"#{ranges.strName}PERFECTRANGE", out var r):
+					ranges.nPerfectSize = r;
 					return true;
 
 				// great range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.Name}GREATRANGE", out var r):
-					ranges.Great = r;
+				case var l when tTryReadInt(l, $@"#{ranges.strName}GREATRANGE", out var r):
+					ranges.nGreatSize = r;
 					return true;
 
 				// good range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.Name}GOODRANGE", out var r):
-					ranges.Good = r;
+				case var l when tTryReadInt(l, $@"#{ranges.strName}GOODRANGE", out var r):
+					ranges.nGoodSize = r;
 					return true;
 
 				// poor range size (±ms)
-				case var l when tTryReadInt(l, $@"#{ranges.Name}POORRANGE", out var r):
-					ranges.Poor = r;
+				case var l when tTryReadInt(l, $@"#{ranges.strName}POORRANGE", out var r):
+					ranges.nPoorSize = r;
 					return true;
 
 				// unknown field

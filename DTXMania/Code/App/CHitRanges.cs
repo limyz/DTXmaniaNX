@@ -12,32 +12,32 @@ namespace DTXMania
         /// The unique identifier of this set, or <see cref="null"/> if there is none.
         /// </summary>
         [NonSerialized]
-        public readonly string Name;
+        public readonly string strName;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Perfect"/> range.
         /// </summary>
-        public int Perfect;
+        public int nPerfectSize;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Great"/> range.
         /// </summary>
-        public int Great;
+        public int nGreatSize;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Great"/> range.
         /// </summary>
-        public int Good;
+        public int nGoodSize;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Poor"/> range.
         /// </summary>
-        public int Poor;
+        public int nPoorSize;
 
-        public CHitRanges(string name = null, int defaultRange = 0)
+        public CHitRanges(string strName = null, int nDefaultSize = 0)
         {
-            Name = name;
-            Perfect = Great = Good = Poor = defaultRange;
+            this.strName = strName;
+            nPerfectSize = nGreatSize = nGoodSize = nPoorSize = nDefaultSize;
         }
 
         /// <summary>
@@ -50,24 +50,24 @@ namespace DTXMania
         /// <param name="first">The set that should be checked first for a value.</param>
         /// <param name="fallback">The set containing values to fall back to if the first set does not have one.</param>
         /// <returns>The new <see cref="CHitRanges"/> composed of the two given sets.</returns>
-        public static CHitRanges Compose(CHitRanges first, CHitRanges fallback) => new CHitRanges
+        public static CHitRanges tCompose(CHitRanges first, CHitRanges fallback) => new CHitRanges
         {
-            Perfect = (first.Perfect >= 0) ? first.Perfect : fallback.Perfect,
-            Great = (first.Great >= 0) ? first.Great : fallback.Great,
-            Good = (first.Good >= 0) ? first.Good : fallback.Good,
-            Poor = (first.Poor >= 0) ? first.Poor : fallback.Poor,
+            nPerfectSize = (first.nPerfectSize >= 0) ? first.nPerfectSize : fallback.nPerfectSize,
+            nGreatSize = (first.nGreatSize >= 0) ? first.nGreatSize : fallback.nGreatSize,
+            nGoodSize = (first.nGoodSize >= 0) ? first.nGoodSize : fallback.nGoodSize,
+            nPoorSize = (first.nPoorSize >= 0) ? first.nPoorSize : fallback.nPoorSize,
         };
 
         /// <summary>
         /// Copy all the values from the given <see cref="CHitRanges"/> into this set.
         /// </summary>
         /// <param name="other">The <see cref="CHitRanges"/> to copy from.</param>
-        public void CopyFrom(CHitRanges other)
+        public void tCopyFrom(CHitRanges other)
         {
-            Perfect = other.Perfect;
-            Great = other.Great;
-            Good = other.Good;
-            Poor = other.Poor;
+            nPerfectSize = other.nPerfectSize;
+            nGreatSize = other.nGreatSize;
+            nGoodSize = other.nGoodSize;
+            nPoorSize = other.nPoorSize;
         }
     }
 }

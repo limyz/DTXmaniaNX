@@ -564,13 +564,13 @@ namespace DTXMania
             // TODO: pedal hit ranges
             switch (nDeltaTimeMs)
             {
-                case var value when value <= CDTXMania.DrumHitRanges.Perfect:
+                case var value when value <= CDTXMania.DrumHitRanges.nPerfectSize:
                     return EJudgement.Perfect;
-                case var value when value <= CDTXMania.DrumHitRanges.Great:
+                case var value when value <= CDTXMania.DrumHitRanges.nGreatSize:
                     return EJudgement.Great;
-                case var value when value <= CDTXMania.DrumHitRanges.Good:
+                case var value when value <= CDTXMania.DrumHitRanges.nGoodSize:
                     return EJudgement.Good;
-                case var value when value <= CDTXMania.DrumHitRanges.Poor:
+                case var value when value <= CDTXMania.DrumHitRanges.nPoorSize:
                     return EJudgement.Poor;
                 default:
                     return EJudgement.Miss;

@@ -1314,36 +1314,36 @@ namespace DTXMania
 
 			DrumHitRanges = new CHitRanges(@"Drum")
 			{
-				Perfect = 34,
-				Great = 67,
-				Good = 84,
-				Poor = 117,
+				nPerfectSize = 34,
+				nGreatSize = 67,
+				nGoodSize = 84,
+				nPoorSize = 117,
 			};
 
 			// TODO: proper default drum pedal ranges
 			DrumPedalHitRanges = new CHitRanges(@"DrumPedal")
 			{
-				Perfect = 34,
-				Great = 67,
-				Good = 84,
-				Poor = 117,
+				nPerfectSize = 34,
+				nGreatSize = 67,
+				nGoodSize = 84,
+				nPoorSize = 117,
 			};
 
 			// TODO: proper default guitar ranges
 			GuitarHitRanges = new CHitRanges(@"Guitar")
 			{
-				Perfect = 34,
-				Great = 67,
-				Good = 84,
-				Poor = 117,
+				nPerfectSize = 34,
+				nGreatSize = 67,
+				nGoodSize = 84,
+				nPoorSize = 117,
 			};
 
 			BassHitRanges = new CHitRanges(@"Bass")
 			{
-				Perfect = 34,
-				Great = 67,
-				Good = 84,
-				Poor = 117,
+				nPerfectSize = 34,
+				nGreatSize = 67,
+				nGoodSize = 84,
+				nPoorSize = 117,
 			};
 
             #endregion
@@ -2391,10 +2391,10 @@ namespace DTXMania
 		/// <param name="writer">The <see cref="StreamWriter"/> to write to.</param>
 		private void tWriteHitRanges(CHitRanges ranges, StreamWriter writer)
 		{
-			writer.WriteLine($@"{ranges.Name}Perfect={ranges.Perfect}");
-			writer.WriteLine($@"{ranges.Name}Great={ranges.Great}");
-			writer.WriteLine($@"{ranges.Name}Good={ranges.Good}");
-			writer.WriteLine($@"{ranges.Name}Poor={ranges.Poor}");
+			writer.WriteLine($@"{ranges.strName}Perfect={ranges.nPerfectSize}");
+			writer.WriteLine($@"{ranges.strName}Great={ranges.nGreatSize}");
+			writer.WriteLine($@"{ranges.strName}Good={ranges.nGoodSize}");
+			writer.WriteLine($@"{ranges.strName}Poor={ranges.nPoorSize}");
 		}
 
 		public void tReadFromFile( string iniファイル名 )
@@ -3548,10 +3548,10 @@ namespace DTXMania
 										CHitRanges legacyRanges = new CHitRanges(string.Empty);
 										if (tTryReadHitRangesField(str3, str4, legacyRanges))
 										{
-											DrumHitRanges.CopyFrom(legacyRanges);
-											DrumPedalHitRanges.CopyFrom(legacyRanges);
-											GuitarHitRanges.CopyFrom(legacyRanges);
-											BassHitRanges.CopyFrom(legacyRanges);
+											DrumHitRanges.tCopyFrom(legacyRanges);
+											DrumPedalHitRanges.tCopyFrom(legacyRanges);
+											GuitarHitRanges.tCopyFrom(legacyRanges);
+											BassHitRanges.tCopyFrom(legacyRanges);
 											continue;
 										}
 
@@ -3793,23 +3793,23 @@ namespace DTXMania
 			switch (strFieldName)
 			{
 				// perfect range size (±ms)
-				case var n when n == $@"{ranges.Name}Perfect":
-					ranges.Perfect = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Perfect);
+				case var n when n == $@"{ranges.strName}Perfect":
+					ranges.nPerfectSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPerfectSize);
 					return true;
 
 				// great range size (±ms)
-				case var n when n == $@"{ranges.Name}Great":
-					ranges.Great = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Great);
+				case var n when n == $@"{ranges.strName}Great":
+					ranges.nGreatSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGreatSize);
 					return true;
 
 				// good range size (±ms)
-				case var n when n == $@"{ranges.Name}Good":
-					ranges.Good = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Good);
+				case var n when n == $@"{ranges.strName}Good":
+					ranges.nGoodSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGoodSize);
 					return true;
 
 				// poor range size (±ms)
-				case var n when n == $@"{ranges.Name}Poor":
-					ranges.Poor = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Poor);
+				case var n when n == $@"{ranges.strName}Poor":
+					ranges.nPoorSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPoorSize);
 					return true;
 
 				// unknown field
