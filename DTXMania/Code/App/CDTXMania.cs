@@ -97,66 +97,83 @@ namespace DTXMania
             get;
             set;
         }
-        public static int nPerfectRangeMs
+
+        /// <summary>
+        /// The <see cref="CHitRanges"/> for all drum chips, except pedals, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// </summary>
+        public static CHitRanges DrumHitRanges
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong != null)
+                if (stageSongSelection.rConfirmedSong is var confirmedSong)
                 {
-                    CSongListNode c曲リストノード = stageSongSelection.rConfirmedSong.r親ノード;
-                    if (((c曲リストノード != null) && (c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX)) && (c曲リストノード.nPerfect範囲ms >= 0))
-                    {
-                        return c曲リストノード.nPerfect範囲ms;
-                    }
+                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                    return CHitRanges.Compose(confirmedNode.DrumHitRanges, ConfigIni.DrumHitRanges);
                 }
-                return ConfigIni.nヒット範囲ms.Perfect;
+                else
+                {
+                    return ConfigIni.DrumHitRanges;
+                }
             }
         }
-        public static int nGreatRangeMs
+
+        /// <summary>
+        /// The <see cref="CHitRanges"/> for all drum pedal chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// </summary>
+        public static CHitRanges DrumPedalHitRanges
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong != null)
+                if (stageSongSelection.rConfirmedSong is var confirmedSong)
                 {
-                    CSongListNode c曲リストノード = stageSongSelection.rConfirmedSong.r親ノード;
-                    if (((c曲リストノード != null) && (c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX)) && (c曲リストノード.nGreat範囲ms >= 0))
-                    {
-                        return c曲リストノード.nGreat範囲ms;
-                    }
+                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                    return CHitRanges.Compose(confirmedNode.DrumPedalHitRanges, ConfigIni.DrumPedalHitRanges);
                 }
-                return ConfigIni.nヒット範囲ms.Great;
+                else
+                {
+                    return ConfigIni.DrumPedalHitRanges;
+                }
             }
         }
-        public static int nGoodRangeMs
+
+        /// <summary>
+        /// The <see cref="CHitRanges"/> for guitar chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// </summary>
+        public static CHitRanges GuitarHitRanges
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong != null)
+                if (stageSongSelection.rConfirmedSong is var confirmedSong)
                 {
-                    CSongListNode c曲リストノード = stageSongSelection.rConfirmedSong.r親ノード;
-                    if (((c曲リストノード != null) && (c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX)) && (c曲リストノード.nGood範囲ms >= 0))
-                    {
-                        return c曲リストノード.nGood範囲ms;
-                    }
+                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                    return CHitRanges.Compose(confirmedNode.GuitarHitRanges, ConfigIni.GuitarHitRanges);
                 }
-                return ConfigIni.nヒット範囲ms.Good;
+                else
+                {
+                    return ConfigIni.GuitarHitRanges;
+                }
             }
         }
-        public static int nPoorRangeMs
+
+        /// <summary>
+        /// The <see cref="CHitRanges"/> for bass guitar chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// </summary>
+        public static CHitRanges BassHitRanges
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong != null)
+                if (stageSongSelection.rConfirmedSong is var confirmedSong)
                 {
-                    CSongListNode c曲リストノード = stageSongSelection.rConfirmedSong.r親ノード;
-                    if (((c曲リストノード != null) && (c曲リストノード.eNodeType == CSongListNode.ENodeType.BOX)) && (c曲リストノード.nPoor範囲ms >= 0))
-                    {
-                        return c曲リストノード.nPoor範囲ms;
-                    }
+                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                    return CHitRanges.Compose(confirmedNode.BassHitRanges, ConfigIni.BassHitRanges);
                 }
-                return ConfigIni.nヒット範囲ms.Poor;
+                else
+                {
+                    return ConfigIni.BassHitRanges;
+                }
             }
         }
+
         public static CPad Pad
         {
             get;

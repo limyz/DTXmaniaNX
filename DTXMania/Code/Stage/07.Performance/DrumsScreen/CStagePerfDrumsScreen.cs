@@ -561,15 +561,16 @@ namespace DTXMania
 
         protected override EJudgement tGetJudgement(int nDeltaTimeMs)
         {
+            // TODO: pedal hit ranges
             switch (nDeltaTimeMs)
             {
-                case var value when value <= CDTXMania.nPerfectRangeMs:
+                case var value when value <= CDTXMania.DrumHitRanges.Perfect:
                     return EJudgement.Perfect;
-                case var value when value <= CDTXMania.nGreatRangeMs:
+                case var value when value <= CDTXMania.DrumHitRanges.Great:
                     return EJudgement.Great;
-                case var value when value <= CDTXMania.nGoodRangeMs:
+                case var value when value <= CDTXMania.DrumHitRanges.Good:
                     return EJudgement.Good;
-                case var value when value <= CDTXMania.nPoorRangeMs:
+                case var value when value <= CDTXMania.DrumHitRanges.Poor:
                     return EJudgement.Poor;
                 default:
                     return EJudgement.Miss;

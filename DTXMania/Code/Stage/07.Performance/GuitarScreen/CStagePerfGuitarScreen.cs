@@ -332,13 +332,13 @@ namespace DTXMania
 		{
 			switch (nDeltaTimeMs)
 			{
-				case var value when value <= CDTXMania.nPerfectRangeMs:
+				case var value when value <= CDTXMania.GuitarHitRanges.Perfect:
 					return EJudgement.Perfect;
-				case var value when value <= CDTXMania.nGreatRangeMs:
+				case var value when value <= CDTXMania.GuitarHitRanges.Great:
 					return EJudgement.Great;
-				case var value when value <= CDTXMania.nGoodRangeMs:
+				case var value when value <= CDTXMania.GuitarHitRanges.Good:
 					return EJudgement.Good;
-				case var value when value <= CDTXMania.nPoorRangeMs:
+				case var value when value <= CDTXMania.GuitarHitRanges.Poor:
 					return EJudgement.Poor;
 				default:
 					return EJudgement.Miss;

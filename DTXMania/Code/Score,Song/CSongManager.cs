@@ -436,22 +436,14 @@ namespace DTXMania
 								}
 							}
 						}
-						if ( boxdef.PerfectRange >= 0 )
-						{
-							c曲リストノード.nPerfect範囲ms = boxdef.PerfectRange;
-						}
-						if( boxdef.GreatRange >= 0 )
-						{
-							c曲リストノード.nGreat範囲ms = boxdef.GreatRange;
-						}
-						if( boxdef.GoodRange >= 0 )
-						{
-							c曲リストノード.nGood範囲ms = boxdef.GoodRange;
-						}
-						if( boxdef.PoorRange >= 0 )
-						{
-							c曲リストノード.nPoor範囲ms = boxdef.PoorRange;
-						}
+
+						// copy hit ranges from the box.def
+						// these can always be copied regardless of being set,
+						// as song list nodes and boxdefs use the same method to indicate an unset range
+						c曲リストノード.DrumHitRanges.CopyFrom(boxdef.DrumHitRanges);
+						c曲リストノード.DrumPedalHitRanges.CopyFrom(boxdef.DrumPedalHitRanges);
+						c曲リストノード.GuitarHitRanges.CopyFrom(boxdef.GuitarHitRanges);
+						c曲リストノード.BassHitRanges.CopyFrom(boxdef.BassHitRanges);
 					}
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -539,10 +531,10 @@ namespace DTXMania
 	
 					
 					c曲リストノード.list子リスト = new List<CSongListNode>();
-					c曲リストノード.nPerfect範囲ms = boxdef.PerfectRange;
-					c曲リストノード.nGreat範囲ms = boxdef.GreatRange;
-					c曲リストノード.nGood範囲ms = boxdef.GoodRange;
-					c曲リストノード.nPoor範囲ms = boxdef.PoorRange;
+					c曲リストノード.DrumHitRanges.CopyFrom(boxdef.DrumHitRanges);
+					c曲リストノード.DrumPedalHitRanges.CopyFrom(boxdef.DrumPedalHitRanges);
+					c曲リストノード.GuitarHitRanges.CopyFrom(boxdef.GuitarHitRanges);
+					c曲リストノード.BassHitRanges.CopyFrom(boxdef.BassHitRanges);
 					listノードリスト.Add( c曲リストノード );
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{

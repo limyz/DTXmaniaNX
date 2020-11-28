@@ -933,22 +933,22 @@ namespace DTXMania
 		/// <summary>
 		/// The <see cref="CHitRanges"/> for all drum chips, except pedals.
 		/// </summary>
-		public CHitRanges drumHitRanges;
+		public CHitRanges DrumHitRanges;
 
 		/// <summary>
 		/// The <see cref="CHitRanges"/> for drum pedal chips.
 		/// </summary>
-		public CHitRanges drumPedalHitRanges;
+		public CHitRanges DrumPedalHitRanges;
 
 		/// <summary>
 		/// The <see cref="CHitRanges"/> for guitar chips.
 		/// </summary>
-		public CHitRanges guitarHitRanges;
+		public CHitRanges GuitarHitRanges;
 
 		/// <summary>
 		/// The <see cref="CHitRanges"/> for bass guitar chips.
 		/// </summary>
-		public CHitRanges bassHitRanges;
+		public CHitRanges BassHitRanges;
 
 		public STLANEVALUE nVelocityMin;
 		[StructLayout( LayoutKind.Sequential )]
@@ -1312,7 +1312,7 @@ namespace DTXMania
 
 			#region [ HitRange ]
 
-			drumHitRanges = new CHitRanges(@"Drum")
+			DrumHitRanges = new CHitRanges(@"Drum")
 			{
 				Perfect = 34,
 				Great = 67,
@@ -1321,7 +1321,7 @@ namespace DTXMania
 			};
 
 			// TODO: proper default drum pedal ranges
-			drumPedalHitRanges = new CHitRanges(@"DrumPedal")
+			DrumPedalHitRanges = new CHitRanges(@"DrumPedal")
 			{
 				Perfect = 34,
 				Great = 67,
@@ -1330,7 +1330,7 @@ namespace DTXMania
 			};
 
 			// TODO: proper default guitar ranges
-			guitarHitRanges = new CHitRanges(@"Guitar")
+			GuitarHitRanges = new CHitRanges(@"Guitar")
 			{
 				Perfect = 34,
 				Great = 67,
@@ -1338,7 +1338,7 @@ namespace DTXMania
 				Poor = 117,
 			};
 
-			bassHitRanges = new CHitRanges(@"Bass")
+			BassHitRanges = new CHitRanges(@"Bass")
 			{
 				Perfect = 34,
 				Great = 67,
@@ -2204,16 +2204,16 @@ namespace DTXMania
 			sw.WriteLine("; Hit ranges for each judgement type (in ± milliseconds)");
 			sw.WriteLine();
 			sw.WriteLine("; Drum chips, except pedals");
-			tWriteHitRanges(drumHitRanges, sw);
+			tWriteHitRanges(DrumHitRanges, sw);
 			sw.WriteLine();
 			sw.WriteLine("; Drum pedal chips");
-			tWriteHitRanges(drumPedalHitRanges, sw);
+			tWriteHitRanges(DrumPedalHitRanges, sw);
 			sw.WriteLine();
 			sw.WriteLine("; Guitar chips");
-			tWriteHitRanges(guitarHitRanges, sw);
+			tWriteHitRanges(GuitarHitRanges, sw);
 			sw.WriteLine();
 			sw.WriteLine("; Bass chips");
-			tWriteHitRanges(bassHitRanges, sw);
+			tWriteHitRanges(BassHitRanges, sw);
 			sw.WriteLine();
 			sw.WriteLine( ";-------------------" );
 			#endregion
@@ -3548,23 +3548,23 @@ namespace DTXMania
 										CHitRanges legacyRanges = new CHitRanges(string.Empty);
 										if (tTryReadHitRangesField(str3, str4, legacyRanges))
 										{
-											drumHitRanges.CopyFrom(legacyRanges);
-											drumPedalHitRanges.CopyFrom(legacyRanges);
-											guitarHitRanges.CopyFrom(legacyRanges);
-											bassHitRanges.CopyFrom(legacyRanges);
+											DrumHitRanges.CopyFrom(legacyRanges);
+											DrumPedalHitRanges.CopyFrom(legacyRanges);
+											GuitarHitRanges.CopyFrom(legacyRanges);
+											BassHitRanges.CopyFrom(legacyRanges);
 											continue;
 										}
 
-										if (tTryReadHitRangesField(str3, str4, drumHitRanges))
+										if (tTryReadHitRangesField(str3, str4, DrumHitRanges))
 											continue;
 
-										if (tTryReadHitRangesField(str3, str4, drumPedalHitRanges))
+										if (tTryReadHitRangesField(str3, str4, DrumPedalHitRanges))
 											continue;
 
-										if (tTryReadHitRangesField(str3, str4, guitarHitRanges))
+										if (tTryReadHitRangesField(str3, str4, GuitarHitRanges))
 											continue;
 
-										if (tTryReadHitRangesField(str3, str4, bassHitRanges))
+										if (tTryReadHitRangesField(str3, str4, BassHitRanges))
 											continue;
 
 										continue;
