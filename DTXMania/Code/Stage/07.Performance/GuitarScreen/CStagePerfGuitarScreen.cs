@@ -328,18 +328,30 @@ namespace DTXMania
 			return eJudgeResult;
 		}
 
-		protected override EJudgement tGetJudgement(int nDeltaTimeMs)
+		protected override EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs)
 		{
-			switch (nDeltaTimeMs)
+			switch (chip.nChannelNumber)
 			{
-				case var value when value <= CDTXMania.GuitarHitRanges.nPerfectSize:
-					return EJudgement.Perfect;
-				case var value when value <= CDTXMania.GuitarHitRanges.nGreatSize:
-					return EJudgement.Great;
-				case var value when value <= CDTXMania.GuitarHitRanges.nGoodSize:
-					return EJudgement.Good;
-				case var value when value <= CDTXMania.GuitarHitRanges.nPoorSize:
-					return EJudgement.Poor;
+				// values referenced from CDTX
+
+				// guitar chips
+				case var c when
+					(0x20 <= c && c <= 0x27) ||
+					(0x93 <= c && c <= 0x9f) ||
+					(0xa9 <= c && c <= 0xaf) ||
+					(0xd0 <= c && c <= 0xd3):
+					return CDTXMania.GuitarHitRanges.tGetJudgement(nDeltaTimeMs);
+
+				// bass guitar chips
+				case var c when
+					(0xa0 <= c && c <= 0xa7) ||
+					(0xc5 <= c && c <= 0xc6) ||
+					(0xc8 <= c && c <= 0xcf) ||
+					(0xda <= c && c <= 0xdf) ||
+					(0xe1 <= c && c <= 0xe8):
+					return CDTXMania.BassHitRanges.tGetJudgement(nDeltaTimeMs);
+
+				// unknown
 				default:
 					return EJudgement.Miss;
 			}

@@ -840,17 +840,18 @@ namespace DTXMania
                 // #35411 modify end
 
                 int nDeltaTime = Math.Abs( lag );
-                return tGetJudgement(nDeltaTime);
+                return tGetJudgement(pChip, nDeltaTime);
             }
             return EJudgement.Miss;
         }
 
         /// <summary>
-        /// Get the <see cref="EJudgement"/> which would occur from hitting a chip at the given absolute offset from its playback time.
+        /// Get the <see cref="EJudgement"/> which would occur from hitting the given <see cref="CDTX.CChip"/> at the given absolute offset from its playback time.
         /// </summary>
+        /// <param name="chip">The <see cref="CDTX.CChip"/> that the judgement is being retrieved for.</param>
         /// <param name="nDeltaTimeMs">The absolute offset, in milliseconds, from the <see cref="CDTX.CChip.nPlaybackTimeMs"/> of the chip.</param>
-        /// <returns>The <see cref="EJudgement"/> for the given delta time.</returns>
-        protected abstract EJudgement tGetJudgement(int nDeltaTimeMs);
+        /// <returns>The <see cref="EJudgement"/> for <paramref name="chip"/> from <paramref name="nDeltaTimeMs"/>.</returns>
+        protected abstract EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs);
 
         protected CDTX.CChip r空うちChip(EInstrumentPart part, EPad pad)
         {

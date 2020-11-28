@@ -559,19 +559,24 @@ namespace DTXMania
 			return eJudgeResult;
 		}
 
-        protected override EJudgement tGetJudgement(int nDeltaTimeMs)
+        protected override EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs)
         {
-            // TODO: pedal hit ranges
-            switch (nDeltaTimeMs)
+            switch (chip.nChannelNumber)
             {
-                case var value when value <= CDTXMania.DrumHitRanges.nPerfectSize:
-                    return EJudgement.Perfect;
-                case var value when value <= CDTXMania.DrumHitRanges.nGreatSize:
-                    return EJudgement.Great;
-                case var value when value <= CDTXMania.DrumHitRanges.nGoodSize:
-                    return EJudgement.Good;
-                case var value when value <= CDTXMania.DrumHitRanges.nPoorSize:
-                    return EJudgement.Poor;
+                // values referenced from CDTX
+
+                // drum pedal chips
+                case 0x13: //kick
+                case 0x1b: //left pedal
+                case 0x1c: //left bass drum
+                    return CDTXMania.DrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // all drum chips
+                case var c when
+                    (0x11 <= c && c <= 0x1c):
+                    return CDTXMania.DrumHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // unknown
                 default:
                     return EJudgement.Miss;
             }
