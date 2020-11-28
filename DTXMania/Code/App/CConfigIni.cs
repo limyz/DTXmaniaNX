@@ -1312,43 +1312,19 @@ namespace DTXMania
 
 			#region [ HitRange ]
 
-			DrumHitRanges = new CHitRanges
-			{
-				nPerfectSize = 34,
-				nGreatSize = 67,
-				nGoodSize = 84,
-				nPoorSize = 117,
-			};
+			// TODO: proper default drum ranges
+			DrumHitRanges = CHitRanges.tCreateDTXHitRanges();
 
 			// TODO: proper default drum pedal ranges
-			DrumPedalHitRanges = new CHitRanges
-			{
-				nPerfectSize = 34,
-				nGreatSize = 67,
-				nGoodSize = 84,
-				nPoorSize = 117,
-			};
+			DrumPedalHitRanges = CHitRanges.tCreateDTXHitRanges();
 
 			// TODO: proper default guitar ranges
-			GuitarHitRanges = new CHitRanges
-			{
-				nPerfectSize = 34,
-				nGreatSize = 67,
-				nGoodSize = 84,
-				nPoorSize = 117,
-			};
+			GuitarHitRanges = CHitRanges.tCreateDTXHitRanges();
+			BassHitRanges = CHitRanges.tCreateDTXHitRanges();
 
-			BassHitRanges = new CHitRanges
-			{
-				nPerfectSize = 34,
-				nGreatSize = 67,
-				nGoodSize = 84,
-				nPoorSize = 117,
-			};
+			#endregion
 
-            #endregion
-
-            this.ConfigIniファイル名 = "";
+			this.ConfigIniファイル名 = "";
 			this.dicJoystick = new Dictionary<int, string>( 10 );
 			this.tSetDefaultKeyAssignments();
             #region [ velocityMin ]
@@ -2198,7 +2174,7 @@ namespace DTXMania
 			sw.WriteLine( ";-------------------" );
 			#endregion
             #region [ HitRange ]
-            sw.WriteLine("[HitRange]");
+			sw.WriteLine("[HitRange]");
 			sw.WriteLine();
 			sw.WriteLine("; Perfect～Poor とみなされる範囲[ms]");
 			sw.WriteLine("; Hit ranges for each judgement type (in ± milliseconds)");

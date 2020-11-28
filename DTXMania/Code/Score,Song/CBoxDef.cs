@@ -19,7 +19,7 @@ namespace DTXMania
 		/// The custom <see cref="CHitRanges"/> for all drum chips, except pedals, wthin this box.
 		/// </summary>
 		/// <remarks>
-		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
 		/// </remarks>
 		public CHitRanges DrumHitRanges;
 
@@ -27,7 +27,7 @@ namespace DTXMania
 		/// The custom <see cref="CHitRanges"/> for drum pedal chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
 		/// </remarks>
 		public CHitRanges DrumPedalHitRanges;
 
@@ -35,7 +35,7 @@ namespace DTXMania
 		/// The custom <see cref="CHitRanges"/> for guitar chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
 		/// </remarks>
 		public CHitRanges GuitarHitRanges;
 
@@ -43,7 +43,7 @@ namespace DTXMania
 		/// The custom <see cref="CHitRanges"/> for bass guitar chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// As each range can be individually overridden, if an individual range is less than zero then it uses the global value.
+		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
 		/// </remarks>
 		public CHitRanges BassHitRanges;
 

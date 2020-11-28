@@ -19,7 +19,7 @@ namespace DTXMania
         public int nGreatSize;
 
         /// <summary>
-        /// The size, in ± milliseconds, of the <see cref="EJudgement.Great"/> range.
+        /// The size, in ± milliseconds, of the <see cref="EJudgement.Good"/> range.
         /// </summary>
         public int nGoodSize;
 
@@ -32,6 +32,21 @@ namespace DTXMania
         {
             nPerfectSize = nGreatSize = nGoodSize = nPoorSize = nDefaultSize;
         }
+
+        /// <summary>
+        /// Create a new <see cref="CHitRanges"/> with the default DTXMania judgement ranges.
+        /// </summary>
+        /// <remarks>
+        /// This exists as a legacy method to obtain these values in usages where they served as defaults.
+        /// </remarks>
+        /// <returns>A default DTXMania <see cref="CHitRanges"/>.</returns>
+        public static CHitRanges tCreateDTXHitRanges() => new CHitRanges
+        {
+            nPerfectSize = 34,
+            nGreatSize = 67,
+            nGoodSize = 84,
+            nPoorSize = 117,
+        };
 
         /// <summary>
         /// Compose and return a new <see cref="CHitRanges"/> from the values of the two given sets.
