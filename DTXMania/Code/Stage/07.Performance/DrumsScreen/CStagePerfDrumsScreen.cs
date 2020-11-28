@@ -559,6 +559,23 @@ namespace DTXMania
 			return eJudgeResult;
 		}
 
+        protected override EJudgement tGetJudgement(int nDeltaTimeMs)
+        {
+            switch (nDeltaTimeMs)
+            {
+                case var value when value <= CDTXMania.nPerfectRangeMs:
+                    return EJudgement.Perfect;
+                case var value when value <= CDTXMania.nGreatRangeMs:
+                    return EJudgement.Great;
+                case var value when value <= CDTXMania.nGoodRangeMs:
+                    return EJudgement.Good;
+                case var value when value <= CDTXMania.nPoorRangeMs:
+                    return EJudgement.Poor;
+                default:
+                    return EJudgement.Miss;
+            }
+        }
+
 		protected override void tチップのヒット処理_BadならびにTight時のMiss( EInstrumentPart part )
 		{
 			this.tチップのヒット処理_BadならびにTight時のMiss( part, 0, EInstrumentPart.DRUMS );
