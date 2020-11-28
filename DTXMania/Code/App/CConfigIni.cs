@@ -2368,10 +2368,10 @@ namespace DTXMania
 		/// <param name="writer">The <see cref="StreamWriter"/> to write to.</param>
 		private void tWriteHitRanges(CHitRanges ranges, string strName, StreamWriter writer)
 		{
-			writer.WriteLine($@"{strName}Perfect={ranges.nPerfectSize}");
-			writer.WriteLine($@"{strName}Great={ranges.nGreatSize}");
-			writer.WriteLine($@"{strName}Good={ranges.nGoodSize}");
-			writer.WriteLine($@"{strName}Poor={ranges.nPoorSize}");
+			writer.WriteLine($@"{strName}Perfect={ranges.nPerfectSizeMs}");
+			writer.WriteLine($@"{strName}Great={ranges.nGreatSizeMs}");
+			writer.WriteLine($@"{strName}Good={ranges.nGoodSizeMs}");
+			writer.WriteLine($@"{strName}Poor={ranges.nPoorSizeMs}");
 		}
 
 		public void tReadFromFile( string iniファイル名 )
@@ -3772,22 +3772,22 @@ namespace DTXMania
 			{
 				// perfect range size (±ms)
 				case var n when n == $@"{strName}Perfect":
-					ranges.nPerfectSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPerfectSize);
+					ranges.nPerfectSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPerfectSizeMs);
 					return true;
 
 				// great range size (±ms)
 				case var n when n == $@"{strName}Great":
-					ranges.nGreatSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGreatSize);
+					ranges.nGreatSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGreatSizeMs);
 					return true;
 
 				// good range size (±ms)
 				case var n when n == $@"{strName}Good":
-					ranges.nGoodSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGoodSize);
+					ranges.nGoodSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nGoodSizeMs);
 					return true;
 
 				// poor range size (±ms)
 				case var n when n == $@"{strName}Poor":
-					ranges.nPoorSize = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPoorSize);
+					ranges.nPoorSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.nPoorSizeMs);
 					return true;
 
 				// unknown field

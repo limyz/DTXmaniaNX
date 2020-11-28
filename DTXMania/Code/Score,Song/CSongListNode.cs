@@ -39,10 +39,10 @@ namespace DTXMania
 		public Color col文字色 = Color.White;
 		public List<CSongListNode> listランダム用ノードリスト;
 		public List<CSongListNode> list子リスト;
-		public CHitRanges DrumHitRanges = new CHitRanges(nDefaultSize: -1);
-		public CHitRanges DrumPedalHitRanges = new CHitRanges(nDefaultSize: -1);
-		public CHitRanges GuitarHitRanges = new CHitRanges(nDefaultSize: -1);
-		public CHitRanges BassHitRanges = new CHitRanges(nDefaultSize: -1);
+		public CHitRanges DrumHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+		public CHitRanges DrumPedalHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+		public CHitRanges GuitarHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+		public CHitRanges BassHitRanges = new CHitRanges(nDefaultSizeMs: -1);
 		public int nスコア数;
 		public string pathSetDefの絶対パス = "";
 		public CSongListNode r親ノード;

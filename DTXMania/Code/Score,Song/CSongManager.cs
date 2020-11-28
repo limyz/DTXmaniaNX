@@ -627,17 +627,17 @@ namespace DTXMania
 		/// <param name="builder">The <see cref="StringBuilder"/> to append to.</param>
 		private void tTryAppendHitRanges(CHitRanges ranges, string strName, StringBuilder builder)
 		{
-			if (ranges.nPerfectSize >= 0)
-				builder.Append($@", {strName}Perfect={ranges.nPerfectSize}ms");
+			if (ranges.nPerfectSizeMs >= 0)
+				builder.Append($@", {strName}Perfect={ranges.nPerfectSizeMs}ms");
 
-			if (ranges.nGreatSize >= 0)
-				builder.Append($@", {strName}Great={ranges.nGreatSize}ms");
+			if (ranges.nGreatSizeMs >= 0)
+				builder.Append($@", {strName}Great={ranges.nGreatSizeMs}ms");
 
-			if (ranges.nGoodSize >= 0)
-				builder.Append($@", {strName}Good={ranges.nGoodSize}ms");
+			if (ranges.nGoodSizeMs >= 0)
+				builder.Append($@", {strName}Good={ranges.nGoodSizeMs}ms");
 
-			if (ranges.nPoorSize >= 0)
-				builder.Append($@", {strName}Poor={ranges.nPoorSize}ms");
+			if (ranges.nPoorSizeMs >= 0)
+				builder.Append($@", {strName}Poor={ranges.nPoorSizeMs}ms");
 		}
 
 		//-----------------

@@ -11,26 +11,26 @@ namespace DTXMania
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Perfect"/> range.
         /// </summary>
-        public int nPerfectSize;
+        public int nPerfectSizeMs;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Great"/> range.
         /// </summary>
-        public int nGreatSize;
+        public int nGreatSizeMs;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Good"/> range.
         /// </summary>
-        public int nGoodSize;
+        public int nGoodSizeMs;
 
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Poor"/> range.
         /// </summary>
-        public int nPoorSize;
+        public int nPoorSizeMs;
 
-        public CHitRanges(int nDefaultSize = 0)
+        public CHitRanges(int nDefaultSizeMs = 0)
         {
-            nPerfectSize = nGreatSize = nGoodSize = nPoorSize = nDefaultSize;
+            nPerfectSizeMs = nGreatSizeMs = nGoodSizeMs = nPoorSizeMs = nDefaultSizeMs;
         }
 
         /// <summary>
@@ -42,10 +42,10 @@ namespace DTXMania
         /// <returns>A default DTXMania <see cref="CHitRanges"/>.</returns>
         public static CHitRanges tCreateDTXHitRanges() => new CHitRanges
         {
-            nPerfectSize = 34,
-            nGreatSize = 67,
-            nGoodSize = 84,
-            nPoorSize = 117,
+            nPerfectSizeMs = 34,
+            nGreatSizeMs = 67,
+            nGoodSizeMs = 84,
+            nPoorSizeMs = 117,
         };
 
         /// <summary>
@@ -60,10 +60,10 @@ namespace DTXMania
         /// <returns>The new <see cref="CHitRanges"/> composed of the two given sets.</returns>
         public static CHitRanges tCompose(CHitRanges first, CHitRanges fallback) => new CHitRanges
         {
-            nPerfectSize = (first.nPerfectSize >= 0) ? first.nPerfectSize : fallback.nPerfectSize,
-            nGreatSize = (first.nGreatSize >= 0) ? first.nGreatSize : fallback.nGreatSize,
-            nGoodSize = (first.nGoodSize >= 0) ? first.nGoodSize : fallback.nGoodSize,
-            nPoorSize = (first.nPoorSize >= 0) ? first.nPoorSize : fallback.nPoorSize,
+            nPerfectSizeMs = (first.nPerfectSizeMs >= 0) ? first.nPerfectSizeMs : fallback.nPerfectSizeMs,
+            nGreatSizeMs = (first.nGreatSizeMs >= 0) ? first.nGreatSizeMs : fallback.nGreatSizeMs,
+            nGoodSizeMs = (first.nGoodSizeMs >= 0) ? first.nGoodSizeMs : fallback.nGoodSizeMs,
+            nPoorSizeMs = (first.nPoorSizeMs >= 0) ? first.nPoorSizeMs : fallback.nPoorSizeMs,
         };
 
         /// <summary>
@@ -75,13 +75,13 @@ namespace DTXMania
         {
             switch (nDeltaTimeMs)
             {
-                case var t when t <= nPerfectSize:
+                case var t when t <= nPerfectSizeMs:
                     return EJudgement.Perfect;
-                case var t when t <= nGreatSize:
+                case var t when t <= nGreatSizeMs:
                     return EJudgement.Great;
-                case var t when t <= nGoodSize:
+                case var t when t <= nGoodSizeMs:
                     return EJudgement.Good;
-                case var t when t <= nPoorSize:
+                case var t when t <= nPoorSizeMs:
                     return EJudgement.Poor;
                 default:
                     return EJudgement.Miss;

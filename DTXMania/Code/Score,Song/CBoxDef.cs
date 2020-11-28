@@ -62,10 +62,10 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
-			DrumHitRanges = new CHitRanges(nDefaultSize: -1);
-			DrumPedalHitRanges = new CHitRanges(nDefaultSize: -1);
-			GuitarHitRanges = new CHitRanges(nDefaultSize: -1);
-			BassHitRanges = new CHitRanges(nDefaultSize: -1);
+			DrumHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+			DrumPedalHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+			GuitarHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+			BassHitRanges = new CHitRanges(nDefaultSizeMs: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
@@ -211,22 +211,22 @@ namespace DTXMania
 			{
 				// perfect range size (±ms)
 				case var l when tTryReadInt(l, $@"#{strName}PERFECTRANGE", out var r):
-					ranges.nPerfectSize = r;
+					ranges.nPerfectSizeMs = r;
 					return true;
 
 				// great range size (±ms)
 				case var l when tTryReadInt(l, $@"#{strName}GREATRANGE", out var r):
-					ranges.nGreatSize = r;
+					ranges.nGreatSizeMs = r;
 					return true;
 
 				// good range size (±ms)
 				case var l when tTryReadInt(l, $@"#{strName}GOODRANGE", out var r):
-					ranges.nGoodSize = r;
+					ranges.nGoodSizeMs = r;
 					return true;
 
 				// poor range size (±ms)
 				case var l when tTryReadInt(l, $@"#{strName}POORRANGE", out var r):
-					ranges.nPoorSize = r;
+					ranges.nPoorSizeMs = r;
 					return true;
 
 				// unknown field
