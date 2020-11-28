@@ -101,8 +101,8 @@ namespace DTXMania
                 Drums.bMIDIUsed = this.bMIDIUsed.Drums;
                 Drums.bJoypadUsed = this.bJoypadUsed.Drums;
                 Drums.bMouseUsed = this.bMouseUsed.Drums;
-                Drums.PrimaryHitRanges.tCopyFrom(CDTXMania.DrumHitRanges);
-                Drums.SecondaryHitRanges.tCopyFrom(CDTXMania.DrumPedalHitRanges);
+                Drums.PrimaryHitRanges = CDTXMania.DrumHitRanges;
+                Drums.SecondaryHitRanges = CDTXMania.DrumPedalHitRanges;
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
@@ -171,8 +171,8 @@ namespace DTXMania
                 Guitar.bMIDIUsed = this.bMIDIUsed.Guitar;
                 Guitar.bJoypadUsed = this.bJoypadUsed.Guitar;
                 Guitar.bMouseUsed = this.bMouseUsed.Guitar;
-                Guitar.PrimaryHitRanges.tCopyFrom(CDTXMania.GuitarHitRanges);
-                Guitar.SecondaryHitRanges.tCopyFrom(new CHitRanges());
+                Guitar.PrimaryHitRanges = CDTXMania.GuitarHitRanges;
+                Guitar.SecondaryHitRanges = new CHitRanges();
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
@@ -241,8 +241,8 @@ namespace DTXMania
                 Bass.bMIDIUsed = this.bMIDIUsed.Bass;				//
                 Bass.bJoypadUsed = this.bJoypadUsed.Bass;		//
                 Bass.bMouseUsed = this.bMouseUsed.Bass;					//
-                Bass.PrimaryHitRanges.tCopyFrom(CDTXMania.BassHitRanges);
-                Bass.SecondaryHitRanges.tCopyFrom(new CHitRanges());
+                Bass.PrimaryHitRanges = CDTXMania.BassHitRanges;
+                Bass.SecondaryHitRanges = new CHitRanges();
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);

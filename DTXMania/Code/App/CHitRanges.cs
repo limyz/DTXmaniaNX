@@ -50,17 +50,5 @@ namespace DTXMania
             nGoodSize = (first.nGoodSize >= 0) ? first.nGoodSize : fallback.nGoodSize,
             nPoorSize = (first.nPoorSize >= 0) ? first.nPoorSize : fallback.nPoorSize,
         };
-
-        /// <summary>
-        /// Copy all the values from the given <see cref="CHitRanges"/> into this set.
-        /// </summary>
-        /// <param name="other">The <see cref="CHitRanges"/> to copy from.</param>
-        public void tCopyFrom(CHitRanges other)
-        {
-            nPerfectSize = other.nPerfectSize;
-            nGreatSize = other.nGreatSize;
-            nGoodSize = other.nGoodSize;
-            nPoorSize = other.nPoorSize;
-        }
     }
 }

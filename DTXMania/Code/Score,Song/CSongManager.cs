@@ -440,10 +440,10 @@ namespace DTXMania
 						// copy hit ranges from the box.def
 						// these can always be copied regardless of being set,
 						// as song list nodes and boxdefs use the same method to indicate an unset range
-						c曲リストノード.DrumHitRanges.tCopyFrom(boxdef.DrumHitRanges);
-						c曲リストノード.DrumPedalHitRanges.tCopyFrom(boxdef.DrumPedalHitRanges);
-						c曲リストノード.GuitarHitRanges.tCopyFrom(boxdef.GuitarHitRanges);
-						c曲リストノード.BassHitRanges.tCopyFrom(boxdef.BassHitRanges);
+						c曲リストノード.DrumHitRanges = boxdef.DrumHitRanges;
+						c曲リストノード.DrumPedalHitRanges = boxdef.DrumPedalHitRanges;
+						c曲リストノード.GuitarHitRanges = boxdef.GuitarHitRanges;
+						c曲リストノード.BassHitRanges = boxdef.BassHitRanges;
 					}
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -531,10 +531,10 @@ namespace DTXMania
 	
 					
 					c曲リストノード.list子リスト = new List<CSongListNode>();
-					c曲リストノード.DrumHitRanges.tCopyFrom(boxdef.DrumHitRanges);
-					c曲リストノード.DrumPedalHitRanges.tCopyFrom(boxdef.DrumPedalHitRanges);
-					c曲リストノード.GuitarHitRanges.tCopyFrom(boxdef.GuitarHitRanges);
-					c曲リストノード.BassHitRanges.tCopyFrom(boxdef.BassHitRanges);
+					c曲リストノード.DrumHitRanges = boxdef.DrumHitRanges;
+					c曲リストノード.DrumPedalHitRanges = boxdef.DrumPedalHitRanges;
+					c曲リストノード.GuitarHitRanges = boxdef.GuitarHitRanges;
+					c曲リストノード.BassHitRanges = boxdef.BassHitRanges;
 					listノードリスト.Add( c曲リストノード );
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{

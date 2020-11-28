@@ -74,10 +74,10 @@ namespace DTXMania
 			newNode.col文字色 = this.col文字色;
 			newNode.listランダム用ノードリスト = this.listランダム用ノードリスト;
 			newNode.list子リスト = this.list子リスト;
-			newNode.DrumHitRanges.tCopyFrom(DrumHitRanges);
-			newNode.DrumPedalHitRanges.tCopyFrom(DrumPedalHitRanges);
-			newNode.GuitarHitRanges.tCopyFrom(GuitarHitRanges);
-			newNode.BassHitRanges.tCopyFrom(BassHitRanges);
+			newNode.DrumHitRanges = DrumHitRanges;
+			newNode.DrumPedalHitRanges = DrumPedalHitRanges;
+			newNode.GuitarHitRanges = GuitarHitRanges;
+			newNode.BassHitRanges = BassHitRanges;
 			newNode.nスコア数 = this.nスコア数;
 			newNode.pathSetDefの絶対パス = this.pathSetDefの絶対パス;
 			newNode.r親ノード = this.r親ノード;

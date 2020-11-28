@@ -2824,26 +2824,26 @@ for (int i = 0; i < 3; i++) {
                 // 0: hiscore drums
                 // 1: hiskill drums
                 // primary = all except pedals, secondary = pedals
-                ini.stSection[0].PrimaryHitRanges.tCopyFrom(DrumHitRanges);
-                ini.stSection[0].SecondaryHitRanges.tCopyFrom(DrumPedalHitRanges);
-                ini.stSection[1].PrimaryHitRanges.tCopyFrom(DrumHitRanges);
-                ini.stSection[1].SecondaryHitRanges.tCopyFrom(DrumPedalHitRanges);
+                ini.stSection[0].PrimaryHitRanges = DrumHitRanges;
+                ini.stSection[0].SecondaryHitRanges = DrumPedalHitRanges;
+                ini.stSection[1].PrimaryHitRanges = DrumHitRanges;
+                ini.stSection[1].SecondaryHitRanges = DrumPedalHitRanges;
 
                 // 2: hiscore guitar
                 // 3: hiskill guitar
                 // primary = all, secondary = unused (zero out)
-                ini.stSection[2].PrimaryHitRanges.tCopyFrom(GuitarHitRanges);
-                ini.stSection[2].SecondaryHitRanges.tCopyFrom(new CHitRanges());
-                ini.stSection[3].PrimaryHitRanges.tCopyFrom(GuitarHitRanges);
-                ini.stSection[3].SecondaryHitRanges.tCopyFrom(new CHitRanges());
+                ini.stSection[2].PrimaryHitRanges = GuitarHitRanges;
+                ini.stSection[2].SecondaryHitRanges = new CHitRanges();
+                ini.stSection[3].PrimaryHitRanges = GuitarHitRanges;
+                ini.stSection[3].SecondaryHitRanges = new CHitRanges();
 
                 // 4: hiscore bass guitar
                 // 5: hiskill bass guitar
                 // primary = all, secondary = unused (zero out)
-                ini.stSection[4].PrimaryHitRanges.tCopyFrom(BassHitRanges);
-                ini.stSection[4].SecondaryHitRanges.tCopyFrom(new CHitRanges());
-                ini.stSection[5].PrimaryHitRanges.tCopyFrom(BassHitRanges);
-                ini.stSection[5].SecondaryHitRanges.tCopyFrom(new CHitRanges());
+                ini.stSection[4].PrimaryHitRanges = BassHitRanges;
+                ini.stSection[4].SecondaryHitRanges = new CHitRanges();
+                ini.stSection[5].PrimaryHitRanges = BassHitRanges;
+                ini.stSection[5].SecondaryHitRanges = new CHitRanges();
             }
             ini.stFile.BGMAdjust = DTX.nBGMAdjust;
             CScoreIni.tGetIsUpdateNeeded(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);

@@ -167,10 +167,10 @@ namespace DTXMania
 								CHitRanges legacyRanges = new CHitRanges();
 								if (tTryReadHitRangesField(str, string.Empty, legacyRanges))
 								{
-									DrumHitRanges.tCopyFrom(legacyRanges);
-									DrumPedalHitRanges.tCopyFrom(legacyRanges);
-									GuitarHitRanges.tCopyFrom(legacyRanges);
-									BassHitRanges.tCopyFrom(legacyRanges);
+									DrumHitRanges = legacyRanges;
+									DrumPedalHitRanges = legacyRanges;
+									GuitarHitRanges = legacyRanges;
+									BassHitRanges = legacyRanges;
 									continue;
 								}
 
