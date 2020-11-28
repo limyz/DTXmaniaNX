@@ -62,44 +62,16 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
+			DrumHitRanges = new CHitRanges(@"DRUM", defaultRange: -1);
+			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL", defaultRange: -1);
+			GuitarHitRanges = new CHitRanges(@"GUITAR", defaultRange: -1);
+			BassHitRanges = new CHitRanges(@"BASS", defaultRange: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
 			this.Color = ColorTranslator.FromHtml( "White" );
 			this.SkinPath = "";
             this.Difficlty = false;
-
-			DrumHitRanges = new CHitRanges(@"DRUM")
-			{
-				Perfect = -1,
-				Great = -1,
-				Good = -1,
-				Poor = -1,
-			};
-
-			DrumPedalHitRanges = new CHitRanges(@"DRUMPEDAL")
-			{
-				Perfect = -1,
-				Great = -1,
-				Good = -1,
-				Poor = -1,
-			};
-
-			GuitarHitRanges = new CHitRanges(@"GUITAR")
-			{
-				Perfect = -1,
-				Great = -1,
-				Good = -1,
-				Poor = -1,
-			};
-
-			BassHitRanges = new CHitRanges(@"BASS")
-			{
-				Perfect = -1,
-				Great = -1,
-				Good = -1,
-				Poor = -1,
-			};
 		}
 		public CBoxDef( string boxdefファイル名 )
 			: this()

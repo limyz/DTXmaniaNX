@@ -30,9 +30,10 @@
         /// </summary>
         public int Poor;
 
-        public CHitRanges(string name)
+        public CHitRanges(string name, int defaultRange = 0)
         {
             Name = name;
+            Perfect = Great = Good = Poor = defaultRange;
         }
 
         /// <summary>
