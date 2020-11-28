@@ -101,10 +101,8 @@ namespace DTXMania
                 Drums.bMIDIUsed = this.bMIDIUsed.Drums;
                 Drums.bJoypadUsed = this.bJoypadUsed.Drums;
                 Drums.bMouseUsed = this.bMouseUsed.Drums;
-                Drums.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Drums.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Drums.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Drums.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Drums.PrimaryHitRanges.CopyFrom(CDTXMania.DrumHitRanges);
+                Drums.SecondaryHitRanges.CopyFrom(CDTXMania.DrumPedalHitRanges);
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
@@ -173,10 +171,8 @@ namespace DTXMania
                 Guitar.bMIDIUsed = this.bMIDIUsed.Guitar;
                 Guitar.bJoypadUsed = this.bJoypadUsed.Guitar;
                 Guitar.bMouseUsed = this.bMouseUsed.Guitar;
-                Guitar.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Guitar.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Guitar.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Guitar.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Guitar.PrimaryHitRanges.CopyFrom(CDTXMania.GuitarHitRanges);
+                Guitar.SecondaryHitRanges.CopyFrom(new CHitRanges());
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
@@ -245,10 +241,8 @@ namespace DTXMania
                 Bass.bMIDIUsed = this.bMIDIUsed.Bass;				//
                 Bass.bJoypadUsed = this.bJoypadUsed.Bass;		//
                 Bass.bMouseUsed = this.bMouseUsed.Bass;					//
-                Bass.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Bass.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Bass.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Bass.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Bass.PrimaryHitRanges.CopyFrom(CDTXMania.BassHitRanges);
+                Bass.SecondaryHitRanges.CopyFrom(new CHitRanges());
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);

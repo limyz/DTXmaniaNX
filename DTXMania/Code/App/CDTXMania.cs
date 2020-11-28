@@ -105,15 +105,11 @@ namespace DTXMania
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong is var confirmedSong)
-                {
-                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
+                if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
                     return CHitRanges.Compose(confirmedNode.DrumHitRanges, ConfigIni.DrumHitRanges);
-                }
-                else
-                {
-                    return ConfigIni.DrumHitRanges;
-                }
+
+                return ConfigIni.DrumHitRanges;
             }
         }
 
@@ -124,15 +120,11 @@ namespace DTXMania
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong is var confirmedSong)
-                {
-                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
+                if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
                     return CHitRanges.Compose(confirmedNode.DrumPedalHitRanges, ConfigIni.DrumPedalHitRanges);
-                }
-                else
-                {
-                    return ConfigIni.DrumPedalHitRanges;
-                }
+
+                return ConfigIni.DrumPedalHitRanges;
             }
         }
 
@@ -143,15 +135,11 @@ namespace DTXMania
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong is var confirmedSong)
-                {
-                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
+                if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
                     return CHitRanges.Compose(confirmedNode.GuitarHitRanges, ConfigIni.GuitarHitRanges);
-                }
-                else
-                {
-                    return ConfigIni.GuitarHitRanges;
-                }
+
+                return ConfigIni.GuitarHitRanges;
             }
         }
 
@@ -162,15 +150,11 @@ namespace DTXMania
         {
             get
             {
-                if (stageSongSelection.rConfirmedSong is var confirmedSong)
-                {
-                    CSongListNode confirmedNode = confirmedSong.r親ノード;
+                CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
+                if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
                     return CHitRanges.Compose(confirmedNode.BassHitRanges, ConfigIni.BassHitRanges);
-                }
-                else
-                {
-                    return ConfigIni.BassHitRanges;
-                }
+
+                return ConfigIni.BassHitRanges;
             }
         }
 
@@ -2836,13 +2820,30 @@ for (int i = 0; i < 3; i++) {
                 ini.stFile.Title = DTX.TITLE;
                 ini.stFile.Name = DTX.strファイル名;
                 ini.stFile.Hash = CScoreIni.tComputeFileMD5(DTX.strファイル名の絶対パス);
-                for (int i = 0; i < 6; i++)
-                {
-                    ini.stSection[i].nPerfectRangeMs = nPerfectRangeMs;
-                    ini.stSection[i].nGreatRangeMs = nGreatRangeMs;
-                    ini.stSection[i].nGoodRangeMs = nGoodRangeMs;
-                    ini.stSection[i].nPoorRangeMs = nPoorRangeMs;
-                }
+
+                // 0: hiscore drums
+                // 1: hiskill drums
+                // primary = all except pedals, secondary = pedals
+                ini.stSection[0].PrimaryHitRanges.CopyFrom(DrumHitRanges);
+                ini.stSection[0].SecondaryHitRanges.CopyFrom(DrumPedalHitRanges);
+                ini.stSection[1].PrimaryHitRanges.CopyFrom(DrumHitRanges);
+                ini.stSection[1].SecondaryHitRanges.CopyFrom(DrumPedalHitRanges);
+
+                // 2: hiscore guitar
+                // 3: hiskill guitar
+                // primary = all, secondary = unused (zero out)
+                ini.stSection[2].PrimaryHitRanges.CopyFrom(GuitarHitRanges);
+                ini.stSection[2].SecondaryHitRanges.CopyFrom(new CHitRanges());
+                ini.stSection[3].PrimaryHitRanges.CopyFrom(GuitarHitRanges);
+                ini.stSection[3].SecondaryHitRanges.CopyFrom(new CHitRanges());
+
+                // 4: hiscore bass guitar
+                // 5: hiskill bass guitar
+                // primary = all, secondary = unused (zero out)
+                ini.stSection[4].PrimaryHitRanges.CopyFrom(BassHitRanges);
+                ini.stSection[4].SecondaryHitRanges.CopyFrom(new CHitRanges());
+                ini.stSection[5].PrimaryHitRanges.CopyFrom(BassHitRanges);
+                ini.stSection[5].SecondaryHitRanges.CopyFrom(new CHitRanges());
             }
             ini.stFile.BGMAdjust = DTX.nBGMAdjust;
             CScoreIni.tGetIsUpdateNeeded(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);

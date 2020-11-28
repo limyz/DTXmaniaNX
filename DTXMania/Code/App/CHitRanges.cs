@@ -1,13 +1,17 @@
-﻿namespace DTXMania
+﻿using System;
+
+namespace DTXMania
 {
     /// <summary>
     /// A set of hit ranges for each <see cref="EJudgement"/>.
     /// </summary>
+    [Serializable]
     public class CHitRanges
     {
         /// <summary>
         /// The unique identifier of this set, or <see cref="null"/> if there is none.
         /// </summary>
+        [NonSerialized]
         public readonly string Name;
 
         /// <summary>
