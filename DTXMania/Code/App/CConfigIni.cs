@@ -3546,25 +3546,25 @@ namespace DTXMania
 										// they will only appear when the program is running from an unmigrated state,
 										// so simply copy all values over whenever there is a change
 										CHitRanges legacyRanges = new CHitRanges(string.Empty);
-										if (tReadHitRangesField(str3, str4, legacyRanges))
+										if (tTryReadHitRangesField(str3, str4, legacyRanges))
 										{
-											drumHitRanges = legacyRanges;
-											drumPedalHitRanges = legacyRanges;
-											guitarHitRanges = legacyRanges;
-											bassHitRanges = legacyRanges;
+											drumHitRanges.CopyFrom(legacyRanges);
+											drumPedalHitRanges.CopyFrom(legacyRanges);
+											guitarHitRanges.CopyFrom(legacyRanges);
+											bassHitRanges.CopyFrom(legacyRanges);
 											continue;
 										}
 
-										if (tReadHitRangesField(str3, str4, drumHitRanges))
+										if (tTryReadHitRangesField(str3, str4, drumHitRanges))
 											continue;
 
-										if (tReadHitRangesField(str3, str4, drumPedalHitRanges))
+										if (tTryReadHitRangesField(str3, str4, drumPedalHitRanges))
 											continue;
 
-										if (tReadHitRangesField(str3, str4, guitarHitRanges))
+										if (tTryReadHitRangesField(str3, str4, guitarHitRanges))
 											continue;
 
-										if (tReadHitRangesField(str3, str4, bassHitRanges))
+										if (tTryReadHitRangesField(str3, str4, bassHitRanges))
 											continue;
 
 										continue;
@@ -3787,28 +3787,28 @@ namespace DTXMania
 		/// <param name="strFieldValue">The value of the INI field being read from.</param>
 		/// <param name="ranges">The <see cref="CHitRanges"/> to read into.</param>
 		/// <returns>Whether or not a field was read.</returns>
-		private bool tReadHitRangesField(string strFieldName, string strFieldValue, CHitRanges ranges)
+		private bool tTryReadHitRangesField(string strFieldName, string strFieldValue, CHitRanges ranges)
 		{
 			const int nRangeMin = 0, nRangeMax = 0x3e7;
 			switch (strFieldName)
 			{
-				// perfect window (±ms)
-				case var strName when strName == $@"{ranges.Name}Perfect":
+				// perfect range size (±ms)
+				case var n when n == $@"{ranges.Name}Perfect":
 					ranges.Perfect = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Perfect);
 					return true;
 
-				// great window (±ms)
-				case var strName when strName == $@"{ranges.Name}Great":
+				// great range size (±ms)
+				case var n when n == $@"{ranges.Name}Great":
 					ranges.Great = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Great);
 					return true;
 
-				// good window (±ms)
-				case var strName when strName == $@"{ranges.Name}Good":
+				// good range size (±ms)
+				case var n when n == $@"{ranges.Name}Good":
 					ranges.Good = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Good);
 					return true;
 
-				// poor window (±ms)
-				case var strName when strName == $@"{ranges.Name}Poor":
+				// poor range size (±ms)
+				case var n when n == $@"{ranges.Name}Poor":
 					ranges.Poor = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, ranges.Poor);
 					return true;
 

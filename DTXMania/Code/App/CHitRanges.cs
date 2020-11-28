@@ -34,5 +34,17 @@
         {
             Name = name;
         }
+
+        /// <summary>
+        /// Copy all the values from the given <see cref="CHitRanges"/> into this set.
+        /// </summary>
+        /// <param name="other">The <see cref="CHitRanges"/> to copy from.</param>
+        public void CopyFrom(CHitRanges other)
+        {
+            Perfect = other.Perfect;
+            Great = other.Great;
+            Good = other.Good;
+            Poor = other.Poor;
+        }
     }
 }
