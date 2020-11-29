@@ -1238,71 +1238,71 @@ namespace DTXMania
 											}
 											else
 											{
-												int.TryParse(para, out var iValue);
+												int.TryParse(para, out var nValue);
 												switch (item)
 												{
 													// legacy perfect range size (±ms)
 													case @"PerfectRange":
-														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = iValue;
-														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = nValue;
+														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// legacy great range size (±ms)
 													case @"GreatRange":
-														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = iValue;
-														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = nValue;
+														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// legacy good range size (±ms)
 													case @"GoodRange":
-														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = iValue;
-														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = nValue;
+														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// legacy poor range size (±ms)
 													case @"PoorRange":
-														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = iValue;
-														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = nValue;
+														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = nValue;
 														break;
 
 													// primary perfect range size (±ms)
 													case @"PrimaryPerfectRange":
-														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// primary great range size (±ms)
 													case @"PrimaryGreatRange":
-														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// primary good range size (±ms)
 													case @"PrimaryGoodRange":
-														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// primary poor range size (±ms)
 													case @"PrimaryPoorRange":
-														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = iValue;
+														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = nValue;
 														break;
 
 													// secondary perfect range size (±ms)
 													case @"SecondaryPerfectRange":
-														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = iValue;
+														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// secondary great range size (±ms)
 													case @"SecondaryGreatRange":
-														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = iValue;
+														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// secondary good range size (±ms)
 													case @"SecondaryGoodRange":
-														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = iValue;
+														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// secondary poor range size (±ms)
 													case @"SecondaryPoorRange":
-														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = iValue;
+														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = nValue;
 														break;
 												}
 											}

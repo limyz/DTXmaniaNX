@@ -210,22 +210,22 @@ namespace DTXMania
 			switch (strLine)
 			{
 				// perfect range size (±ms)
-				case var l when tTryReadInt(l, $@"#{strName}PERFECTRANGE", out var r):
+				case var l when tTryReadInt(l, $@"{strName}PERFECTRANGE", out var r):
 					ranges.nPerfectSizeMs = r;
 					return true;
 
 				// great range size (±ms)
-				case var l when tTryReadInt(l, $@"#{strName}GREATRANGE", out var r):
+				case var l when tTryReadInt(l, $@"{strName}GREATRANGE", out var r):
 					ranges.nGreatSizeMs = r;
 					return true;
 
 				// good range size (±ms)
-				case var l when tTryReadInt(l, $@"#{strName}GOODRANGE", out var r):
+				case var l when tTryReadInt(l, $@"{strName}GOODRANGE", out var r):
 					ranges.nGoodSizeMs = r;
 					return true;
 
 				// poor range size (±ms)
-				case var l when tTryReadInt(l, $@"#{strName}POORRANGE", out var r):
+				case var l when tTryReadInt(l, $@"{strName}POORRANGE", out var r):
 					ranges.nPoorSizeMs = r;
 					return true;
 
@@ -240,12 +240,12 @@ namespace DTXMania
 		/// </summary>
 		/// <param name="strLine">The raw box.def line being read from.</param>
 		/// <param name="strFieldName">The name of the field to try and read.</param>
-		/// <param name="iValue">The <see cref="int"/> to read into.</param>
+		/// <param name="nValue">The <see cref="int"/> to read into.</param>
 		/// <returns>Whether or not the field was read.</returns>
-		private bool tTryReadInt(string strLine, string strFieldName, out int iValue)
+		private bool tTryReadInt(string strLine, string strFieldName, out int nValue)
 		{
 			// write a default value in case of a failure
-			iValue = -1;
+			nValue = 0;
 
 			// ensure the line is for the given field
 			string strPrefix = $@"#{strFieldName}";
@@ -255,7 +255,7 @@ namespace DTXMania
 			// read the value into the given int, stripping the field name and ignored characters
 			char[] chIgnoredCharacters = new[] { ':', ' ', '\t' };
 			string strValue = strLine.Substring(strPrefix.Length).Trim(chIgnoredCharacters);
-			if (!int.TryParse(strValue, out iValue))
+			if (!int.TryParse(strValue, out nValue))
 				return false;
 
 			return true;
