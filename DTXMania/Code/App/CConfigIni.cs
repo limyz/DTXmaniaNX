@@ -3521,14 +3521,14 @@ namespace DTXMania
 									case ESectionType.HitRange:
 										// map the legacy hit ranges to apply to each category
 										// they will only appear when the program is running from an unmigrated state,
-										// so simply copy all values over whenever there is a change
-										STHitRanges stLegacyHitRanges = new STHitRanges();
+										// so simply copy values over whenever there is a change
+										STHitRanges stLegacyHitRanges = new STHitRanges(nDefaultSizeMs: -1);
 										if (tTryReadHitRangesField(str3, str4, string.Empty, ref stLegacyHitRanges))
 										{
-											stDrumHitRanges = stLegacyHitRanges;
-											stDrumPedalHitRanges = stLegacyHitRanges;
-											stGuitarHitRanges = stLegacyHitRanges;
-											stBassHitRanges = stLegacyHitRanges;
+											stDrumHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumHitRanges);
+											stDrumPedalHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumPedalHitRanges);
+											stGuitarHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stGuitarHitRanges);
+											stBassHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stBassHitRanges);
 											continue;
 										}
 

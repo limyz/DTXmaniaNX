@@ -163,14 +163,14 @@ namespace DTXMania
 								// hit ranges
 								// map the legacy hit ranges to apply to each category
 								// they should only appear when reading from a legacy box.def,
-								// so simply copy all values over whenever there is a change
-								STHitRanges stLegacyHitRanges = new STHitRanges();
+								// so simply copy values over whenever there is a change
+								STHitRanges stLegacyHitRanges = new STHitRanges(nDefaultSizeMs: -1);
 								if (tTryReadHitRangesField(str, string.Empty, ref stLegacyHitRanges))
 								{
-									stDrumHitRanges = stLegacyHitRanges;
-									stDrumPedalHitRanges = stLegacyHitRanges;
-									stGuitarHitRanges = stLegacyHitRanges;
-									stBassHitRanges = stLegacyHitRanges;
+									stDrumHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumHitRanges);
+									stDrumPedalHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumPedalHitRanges);
+									stGuitarHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stGuitarHitRanges);
+									stBassHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stBassHitRanges);
 									continue;
 								}
 
