@@ -912,19 +912,19 @@ namespace DTXMania
         }
         protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, int nInputAdjustTime, EInstrumentPart part )
         {
-            int nDeltaTime = Math.Abs((int)nTime + nInputAdjustTime);
-
+            int nDeltaTimeMs = Math.Abs((int)nTime + nInputAdjustTime);
             switch (part)
             {
                 case EInstrumentPart.DRUMS:
                     // TODO: ghosts do not track columns, so pedal ranges cannot be used
-                    return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTimeMs);
                 case EInstrumentPart.GUITAR:
-                    return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTimeMs);
                 case EInstrumentPart.BASS:
-                    return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
+                case EInstrumentPart.UNKNOWN:
                 default:
-                    return EJudgement.Miss;
+                    return STHitRanges.tCreateDTXHitRanges().tGetJudgement(nDeltaTimeMs);
             }
         }
         //-----------------

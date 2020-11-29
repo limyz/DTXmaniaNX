@@ -328,35 +328,6 @@ namespace DTXMania
 			return eJudgeResult;
 		}
 
-		protected override EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs)
-		{
-			switch (chip.nChannelNumber)
-			{
-				// values referenced from CDTX
-
-				// guitar chips
-				case var c when
-					(0x20 <= c && c <= 0x27) ||
-					(0x93 <= c && c <= 0x9f) ||
-					(0xa9 <= c && c <= 0xaf) ||
-					(0xd0 <= c && c <= 0xd3):
-					return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTimeMs);
-
-				// bass guitar chips
-				case var c when
-					(0xa0 <= c && c <= 0xa7) ||
-					(0xc5 <= c && c <= 0xc6) ||
-					(0xc8 <= c && c <= 0xcf) ||
-					(0xda <= c && c <= 0xdf) ||
-					(0xe1 <= c && c <= 0xe8):
-					return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
-
-				// unknown
-				default:
-					return EJudgement.Miss;
-			}
-		}
-
 		protected override void tチップのヒット処理_BadならびにTight時のMiss( EInstrumentPart part )
 		{
 			this.tチップのヒット処理_BadならびにTight時のMiss( part, 0, EInstrumentPart.GUITAR );

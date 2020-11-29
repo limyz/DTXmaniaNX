@@ -825,33 +825,56 @@ namespace DTXMania
 
 		protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, CDTX.CChip pChip, int nInputAdjustTime, bool saveLag = true )
         {
-            if (pChip != null)
+            if (pChip == null)
+                return EJudgement.Miss;
+
+            // #35411 2015.08.22 chnmr0 modified add check save lag flag for ghost
+            int lag = (int)(nTime + nInputAdjustTime - pChip.nPlaybackTimeMs);
+            if (saveLag)
             {
-                // #35411 2015.08.22 chnmr0 modified add check save lag flag for ghost
-                int lag = (int)(nTime + nInputAdjustTime - pChip.nPlaybackTimeMs);
-                if (saveLag)
-                {
-                    pChip.nLag = lag;       // #23580 2011.1.3 yyagi: add "nInputAdjustTime" to add input timing adjust feature
-					if (pChip.eInstrumentPart != EInstrumentPart.UNKNOWN)
-					{
-						pChip.nCurrentComboForGhost = this.actCombo.nCurrentCombo[(int)pChip.eInstrumentPart];
-					}
-                }
-                // #35411 modify end
-
-                int nDeltaTime = Math.Abs( lag );
-                return tGetJudgement(pChip, nDeltaTime);
+                pChip.nLag = lag;       // #23580 2011.1.3 yyagi: add "nInputAdjustTime" to add input timing adjust feature
+				if (pChip.eInstrumentPart != EInstrumentPart.UNKNOWN)
+				{
+					pChip.nCurrentComboForGhost = this.actCombo.nCurrentCombo[(int)pChip.eInstrumentPart];
+				}
             }
-            return EJudgement.Miss;
-        }
+            // #35411 modify end
 
-        /// <summary>
-        /// Get the <see cref="EJudgement"/> which would occur from hitting the given <see cref="CDTX.CChip"/> at the given absolute offset from its playback time.
-        /// </summary>
-        /// <param name="chip">The <see cref="CDTX.CChip"/> that the judgement is being retrieved for.</param>
-        /// <param name="nDeltaTimeMs">The absolute offset, in milliseconds, from the <see cref="CDTX.CChip.nPlaybackTimeMs"/> of the chip.</param>
-        /// <returns>The <see cref="EJudgement"/> for <paramref name="chip"/> from <paramref name="nDeltaTimeMs"/>.</returns>
-        protected abstract EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs);
+            // chips for all instrument parts are passed here, so processing cannot be delegated to subclasses
+            // note that unknown part chips can also be passed, such as measure and quarter lines
+            // in these cases it expects to receive default hit ranges
+            int nDeltaTimeMs = Math.Abs(lag);
+            switch (pChip.eInstrumentPart)
+            {
+                // drum chips
+                case EInstrumentPart.DRUMS:
+                    switch (pChip.nChannelNumber)
+                    {
+                        // drum pedal chips
+                        case 0x13: //kick
+                        case 0x1b: //left pedal
+                        case 0x1c: //left bass drum
+                            return CDTXMania.stDrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                        // all other drum chips
+                        default:
+                            return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTimeMs);
+                    }
+
+                // guitar chips
+                case EInstrumentPart.GUITAR:
+                    return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // bass chips
+                case EInstrumentPart.BASS:
+                    return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // all other chips (measure lines, quarter lines, etc.)
+                case EInstrumentPart.UNKNOWN:
+                default:
+                    return STHitRanges.tCreateDTXHitRanges().tGetJudgement(nDeltaTimeMs);
+            }
+        }
 
         protected CDTX.CChip r空うちChip(EInstrumentPart part, EPad pad)
         {

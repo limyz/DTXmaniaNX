@@ -559,29 +559,6 @@ namespace DTXMania
 			return eJudgeResult;
 		}
 
-        protected override EJudgement tGetJudgement(CDTX.CChip chip, int nDeltaTimeMs)
-        {
-            switch (chip.nChannelNumber)
-            {
-                // values referenced from CDTX
-
-                // drum pedal chips
-                case 0x13: //kick
-                case 0x1b: //left pedal
-                case 0x1c: //left bass drum
-                    return CDTXMania.stDrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
-
-                // all drum chips
-                case var c when
-                    (0x11 <= c && c <= 0x1c):
-                    return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTimeMs);
-
-                // unknown
-                default:
-                    return EJudgement.Miss;
-            }
-        }
-
 		protected override void tチップのヒット処理_BadならびにTight時のMiss( EInstrumentPart part )
 		{
 			this.tチップのヒット処理_BadならびにTight時のMiss( part, 0, EInstrumentPart.DRUMS );
