@@ -340,7 +340,7 @@ namespace DTXMania
 					(0x93 <= c && c <= 0x9f) ||
 					(0xa9 <= c && c <= 0xaf) ||
 					(0xd0 <= c && c <= 0xd3):
-					return CDTXMania.GuitarHitRanges.tGetJudgement(nDeltaTimeMs);
+					return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTimeMs);
 
 				// bass guitar chips
 				case var c when
@@ -349,7 +349,7 @@ namespace DTXMania
 					(0xc8 <= c && c <= 0xcf) ||
 					(0xda <= c && c <= 0xdf) ||
 					(0xe1 <= c && c <= 0xe8):
-					return CDTXMania.BassHitRanges.tGetJudgement(nDeltaTimeMs);
+					return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
 
 				// unknown
 				default:

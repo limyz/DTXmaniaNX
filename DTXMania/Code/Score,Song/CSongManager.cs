@@ -440,10 +440,10 @@ namespace DTXMania
 						// copy hit ranges from the box.def
 						// these can always be copied regardless of being set,
 						// as song list nodes and boxdefs use the same method to indicate an unset range
-						c曲リストノード.DrumHitRanges = boxdef.DrumHitRanges;
-						c曲リストノード.DrumPedalHitRanges = boxdef.DrumPedalHitRanges;
-						c曲リストノード.GuitarHitRanges = boxdef.GuitarHitRanges;
-						c曲リストノード.BassHitRanges = boxdef.BassHitRanges;
+						c曲リストノード.stDrumHitRanges = boxdef.stDrumHitRanges;
+						c曲リストノード.stDrumPedalHitRanges = boxdef.stDrumPedalHitRanges;
+						c曲リストノード.stGuitarHitRanges = boxdef.stGuitarHitRanges;
+						c曲リストノード.stBassHitRanges = boxdef.stBassHitRanges;
 					}
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -531,10 +531,10 @@ namespace DTXMania
 	
 					
 					c曲リストノード.list子リスト = new List<CSongListNode>();
-					c曲リストノード.DrumHitRanges = boxdef.DrumHitRanges;
-					c曲リストノード.DrumPedalHitRanges = boxdef.DrumPedalHitRanges;
-					c曲リストノード.GuitarHitRanges = boxdef.GuitarHitRanges;
-					c曲リストノード.BassHitRanges = boxdef.BassHitRanges;
+					c曲リストノード.stDrumHitRanges = boxdef.stDrumHitRanges;
+					c曲リストノード.stDrumPedalHitRanges = boxdef.stDrumPedalHitRanges;
+					c曲リストノード.stGuitarHitRanges = boxdef.stGuitarHitRanges;
+					c曲リストノード.stBassHitRanges = boxdef.stBassHitRanges;
 					listノードリスト.Add( c曲リストノード );
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -583,10 +583,10 @@ namespace DTXMania
 							}
 
 							// hit ranges
-							tTryAppendHitRanges(c曲リストノード.DrumHitRanges, @"Drum", sb);
-							tTryAppendHitRanges(c曲リストノード.DrumPedalHitRanges, @"DrumPedal", sb);
-							tTryAppendHitRanges(c曲リストノード.GuitarHitRanges, @"Guitar", sb);
-							tTryAppendHitRanges(c曲リストノード.BassHitRanges, @"Bass", sb);
+							tTryAppendHitRanges(c曲リストノード.stDrumHitRanges, @"Drum", sb);
+							tTryAppendHitRanges(c曲リストノード.stDrumPedalHitRanges, @"DrumPedal", sb);
+							tTryAppendHitRanges(c曲リストノード.stGuitarHitRanges, @"Guitar", sb);
+							tTryAppendHitRanges(c曲リストノード.stBassHitRanges, @"Bass", sb);
 
 							if ( ( c曲リストノード.strSkinPath != null ) && ( c曲リストノード.strSkinPath.Length > 0 ) )
 							{
@@ -620,24 +620,24 @@ namespace DTXMania
 		}
 
 		/// <summary>
-		/// Append all the set values, if any, of the given <see cref="CHitRanges"/> to the given <see cref="StringBuilder"/>.
+		/// Append all the set values, if any, of the given <see cref="STHitRanges"/> to the given <see cref="StringBuilder"/>.
 		/// </summary>
-		/// <param name="ranges">The <see cref="CHitRanges"/> to append the values of.</param>
-		/// <param name="strName">The unique identifier of <paramref name="ranges"/>.</param>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to append the values of.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
 		/// <param name="builder">The <see cref="StringBuilder"/> to append to.</param>
-		private void tTryAppendHitRanges(CHitRanges ranges, string strName, StringBuilder builder)
+		private void tTryAppendHitRanges(STHitRanges stHitRanges, string strName, StringBuilder builder)
 		{
-			if (ranges.nPerfectSizeMs >= 0)
-				builder.Append($@", {strName}Perfect={ranges.nPerfectSizeMs}ms");
+			if (stHitRanges.nPerfectSizeMs >= 0)
+				builder.Append($@", {strName}Perfect={stHitRanges.nPerfectSizeMs}ms");
 
-			if (ranges.nGreatSizeMs >= 0)
-				builder.Append($@", {strName}Great={ranges.nGreatSizeMs}ms");
+			if (stHitRanges.nGreatSizeMs >= 0)
+				builder.Append($@", {strName}Great={stHitRanges.nGreatSizeMs}ms");
 
-			if (ranges.nGoodSizeMs >= 0)
-				builder.Append($@", {strName}Good={ranges.nGoodSizeMs}ms");
+			if (stHitRanges.nGoodSizeMs >= 0)
+				builder.Append($@", {strName}Good={stHitRanges.nGoodSizeMs}ms");
 
-			if (ranges.nPoorSizeMs >= 0)
-				builder.Append($@", {strName}Poor={ranges.nPoorSizeMs}ms");
+			if (stHitRanges.nPoorSizeMs >= 0)
+				builder.Append($@", {strName}Poor={stHitRanges.nPoorSizeMs}ms");
 		}
 
 		//-----------------

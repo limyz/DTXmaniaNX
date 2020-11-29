@@ -569,12 +569,12 @@ namespace DTXMania
                 case 0x13: //kick
                 case 0x1b: //left pedal
                 case 0x1c: //left bass drum
-                    return CDTXMania.DrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
+                    return CDTXMania.stDrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
 
                 // all drum chips
                 case var c when
                     (0x11 <= c && c <= 0x1c):
-                    return CDTXMania.DrumHitRanges.tGetJudgement(nDeltaTimeMs);
+                    return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTimeMs);
 
                 // unknown
                 default:

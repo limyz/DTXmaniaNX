@@ -16,36 +16,36 @@ namespace DTXMania
 		public string Genre;
 
 		/// <summary>
-		/// The custom <see cref="CHitRanges"/> for all drum chips, except pedals, wthin this box.
+		/// The custom <see cref="STHitRanges"/> for all drum chips, except pedals, wthin this box.
 		/// </summary>
 		/// <remarks>
-		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
 		/// </remarks>
-		public CHitRanges DrumHitRanges;
+		public STHitRanges stDrumHitRanges;
 
 		/// <summary>
-		/// The custom <see cref="CHitRanges"/> for drum pedal chips within this box.
+		/// The custom <see cref="STHitRanges"/> for drum pedal chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
 		/// </remarks>
-		public CHitRanges DrumPedalHitRanges;
+		public STHitRanges stDrumPedalHitRanges;
 
 		/// <summary>
-		/// The custom <see cref="CHitRanges"/> for guitar chips within this box.
+		/// The custom <see cref="STHitRanges"/> for guitar chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
 		/// </remarks>
-		public CHitRanges GuitarHitRanges;
+		public STHitRanges stGuitarHitRanges;
 
 		/// <summary>
-		/// The custom <see cref="CHitRanges"/> for bass guitar chips within this box.
+		/// The custom <see cref="STHitRanges"/> for bass guitar chips within this box.
 		/// </summary>
 		/// <remarks>
-		/// Note that individual values of this set can be set, as it is intended to be used with <see cref="CHitRanges.tCompose(CHitRanges, CHitRanges)"/>.
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
 		/// </remarks>
-		public CHitRanges BassHitRanges;
+		public STHitRanges stBassHitRanges;
 
 		public string Preimage;
 		public string Premovie;
@@ -62,10 +62,10 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
-			DrumHitRanges = new CHitRanges(nDefaultSizeMs: -1);
-			DrumPedalHitRanges = new CHitRanges(nDefaultSizeMs: -1);
-			GuitarHitRanges = new CHitRanges(nDefaultSizeMs: -1);
-			BassHitRanges = new CHitRanges(nDefaultSizeMs: -1);
+			stDrumHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stDrumPedalHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stGuitarHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stBassHitRanges = new STHitRanges(nDefaultSizeMs: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
@@ -164,26 +164,26 @@ namespace DTXMania
 								// map the legacy hit ranges to apply to each category
 								// they should only appear when reading from a legacy box.def,
 								// so simply copy all values over whenever there is a change
-								CHitRanges legacyRanges = new CHitRanges();
-								if (tTryReadHitRangesField(str, string.Empty, legacyRanges))
+								STHitRanges stLegacyHitRanges = new STHitRanges();
+								if (tTryReadHitRangesField(str, string.Empty, ref stLegacyHitRanges))
 								{
-									DrumHitRanges = legacyRanges;
-									DrumPedalHitRanges = legacyRanges;
-									GuitarHitRanges = legacyRanges;
-									BassHitRanges = legacyRanges;
+									stDrumHitRanges = stLegacyHitRanges;
+									stDrumPedalHitRanges = stLegacyHitRanges;
+									stGuitarHitRanges = stLegacyHitRanges;
+									stBassHitRanges = stLegacyHitRanges;
 									continue;
 								}
 
-								if (tTryReadHitRangesField(str, @"DRUM", DrumHitRanges))
+								if (tTryReadHitRangesField(str, @"DRUM", ref stDrumHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, @"DRUMPEDAL", DrumPedalHitRanges))
+								if (tTryReadHitRangesField(str, @"DRUMPEDAL", ref stDrumPedalHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, @"GUITAR", GuitarHitRanges))
+								if (tTryReadHitRangesField(str, @"GUITAR", ref stGuitarHitRanges))
 									continue;
 
-								if (tTryReadHitRangesField(str, @"BASS", BassHitRanges))
+								if (tTryReadHitRangesField(str, @"BASS", ref stBassHitRanges))
 									continue;
 							}
 						}
@@ -199,34 +199,34 @@ namespace DTXMania
 		}
 
 		/// <summary>
-		/// Read the box.def <see cref="CHitRanges"/> field, if any, described by the given parameters into the given <see cref="CHitRanges"/>.
+		/// Read the box.def <see cref="STHitRanges"/> field, if any, described by the given parameters into the given <see cref="STHitRanges"/>.
 		/// </summary>
 		/// <param name="strLine">The raw box.def line being read from.</param>
-		/// <param name="strName">The unique identifier of <paramref name="ranges"/>.</param>
-		/// <param name="ranges">The <see cref="CHitRanges"/> to read into.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to read into.</param>
 		/// <returns>Whether or not a field was read.</returns>
-		private bool tTryReadHitRangesField(string strLine, string strName, CHitRanges ranges)
+		private bool tTryReadHitRangesField(string strLine, string strName, ref STHitRanges stHitRanges)
 		{
 			switch (strLine)
 			{
 				// perfect range size (±ms)
 				case var l when tTryReadInt(l, $@"{strName}PERFECTRANGE", out var r):
-					ranges.nPerfectSizeMs = r;
+					stHitRanges.nPerfectSizeMs = r;
 					return true;
 
 				// great range size (±ms)
 				case var l when tTryReadInt(l, $@"{strName}GREATRANGE", out var r):
-					ranges.nGreatSizeMs = r;
+					stHitRanges.nGreatSizeMs = r;
 					return true;
 
 				// good range size (±ms)
 				case var l when tTryReadInt(l, $@"{strName}GOODRANGE", out var r):
-					ranges.nGoodSizeMs = r;
+					stHitRanges.nGoodSizeMs = r;
 					return true;
 
 				// poor range size (±ms)
 				case var l when tTryReadInt(l, $@"{strName}POORRANGE", out var r):
-					ranges.nPoorSizeMs = r;
+					stHitRanges.nPoorSizeMs = r;
 					return true;
 
 				// unknown field

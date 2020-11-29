@@ -6,7 +6,7 @@ namespace DTXMania
     /// A set of hit ranges for each <see cref="EJudgement"/>.
     /// </summary>
     [Serializable]
-    public class CHitRanges
+    public struct STHitRanges
     {
         /// <summary>
         /// The size, in ± milliseconds, of the <see cref="EJudgement.Perfect"/> range.
@@ -28,19 +28,19 @@ namespace DTXMania
         /// </summary>
         public int nPoorSizeMs;
 
-        public CHitRanges(int nDefaultSizeMs = 0)
+        public STHitRanges(int nDefaultSizeMs = 0)
         {
             nPerfectSizeMs = nGreatSizeMs = nGoodSizeMs = nPoorSizeMs = nDefaultSizeMs;
         }
 
         /// <summary>
-        /// Create a new <see cref="CHitRanges"/> with the default DTXMania judgement ranges.
+        /// Create a new <see cref="STHitRanges"/> with the default DTXMania judgement ranges.
         /// </summary>
         /// <remarks>
         /// This exists as a legacy method to obtain these values in usages where they served as defaults.
         /// </remarks>
-        /// <returns>A default DTXMania <see cref="CHitRanges"/>.</returns>
-        public static CHitRanges tCreateDTXHitRanges() => new CHitRanges
+        /// <returns>A default DTXMania <see cref="STHitRanges"/>.</returns>
+        public static STHitRanges tCreateDTXHitRanges() => new STHitRanges
         {
             nPerfectSizeMs = 34,
             nGreatSizeMs = 67,
@@ -49,7 +49,7 @@ namespace DTXMania
         };
 
         /// <summary>
-        /// Compose and return a new <see cref="CHitRanges"/> from the values of the two given sets.
+        /// Compose and return a new <see cref="STHitRanges"/> from the values of the two given sets.
         /// </summary>
         /// <remarks>
         /// A value within a set is considererd set when it is greater than or equal to zero. <br/>
@@ -57,8 +57,8 @@ namespace DTXMania
         /// </remarks>
         /// <param name="first">The set that should be checked first for a value.</param>
         /// <param name="fallback">The set containing values to fall back to if the first set does not have one.</param>
-        /// <returns>The new <see cref="CHitRanges"/> composed of the two given sets.</returns>
-        public static CHitRanges tCompose(CHitRanges first, CHitRanges fallback) => new CHitRanges
+        /// <returns>The new <see cref="STHitRanges"/> composed of the two given sets.</returns>
+        public static STHitRanges tCompose(STHitRanges first, STHitRanges fallback) => new STHitRanges
         {
             nPerfectSizeMs = (first.nPerfectSizeMs >= 0) ? first.nPerfectSizeMs : fallback.nPerfectSizeMs,
             nGreatSizeMs = (first.nGreatSizeMs >= 0) ? first.nGreatSizeMs : fallback.nGreatSizeMs,

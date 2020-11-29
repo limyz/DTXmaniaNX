@@ -101,8 +101,8 @@ namespace DTXMania
                 Drums.bMIDIUsed = this.bMIDIUsed.Drums;
                 Drums.bJoypadUsed = this.bJoypadUsed.Drums;
                 Drums.bMouseUsed = this.bMouseUsed.Drums;
-                Drums.PrimaryHitRanges = CDTXMania.DrumHitRanges;
-                Drums.SecondaryHitRanges = CDTXMania.DrumPedalHitRanges;
+                Drums.stPrimaryHitRanges = CDTXMania.stDrumHitRanges;
+                Drums.stSecondaryHitRanges = CDTXMania.stDrumPedalHitRanges;
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
@@ -171,8 +171,8 @@ namespace DTXMania
                 Guitar.bMIDIUsed = this.bMIDIUsed.Guitar;
                 Guitar.bJoypadUsed = this.bJoypadUsed.Guitar;
                 Guitar.bMouseUsed = this.bMouseUsed.Guitar;
-                Guitar.PrimaryHitRanges = CDTXMania.GuitarHitRanges;
-                Guitar.SecondaryHitRanges = new CHitRanges();
+                Guitar.stPrimaryHitRanges = CDTXMania.stGuitarHitRanges;
+                Guitar.stSecondaryHitRanges = new STHitRanges();
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
@@ -241,8 +241,8 @@ namespace DTXMania
                 Bass.bMIDIUsed = this.bMIDIUsed.Bass;				//
                 Bass.bJoypadUsed = this.bJoypadUsed.Bass;		//
                 Bass.bMouseUsed = this.bMouseUsed.Bass;					//
-                Bass.PrimaryHitRanges = CDTXMania.BassHitRanges;
-                Bass.SecondaryHitRanges = new CHitRanges();
+                Bass.stPrimaryHitRanges = CDTXMania.stBassHitRanges;
+                Bass.stSecondaryHitRanges = new STHitRanges();
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);

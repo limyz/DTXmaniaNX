@@ -191,22 +191,22 @@ namespace DTXMania
 			public string Hash;
 
 			/// <summary>
-			/// The primary <see cref="CHitRanges"/> used to achieve the score.
+			/// The primary <see cref="STHitRanges"/> used to achieve the score.
 			/// </summary>
 			/// <remarks>
 			/// For drums, "primary" refers to all non-pedal chips. <br/>
 			/// For guitar and bass guitar, this refers to all chips.
 			/// </remarks>
-			public CHitRanges PrimaryHitRanges;
+			public STHitRanges stPrimaryHitRanges;
 
 			/// <summary>
-			/// The secondary <see cref="CHitRanges"/> used to achieve the score.
+			/// The secondary <see cref="STHitRanges"/> used to achieve the score.
 			/// </summary>
 			/// <remarks>
 			/// For drums, "secondary" refers to all pedal chips. <br/>
 			/// For guitar and bass guitar, this is unused.
 			/// </remarks>
-			public CHitRanges SecondaryHitRanges;
+			public STHitRanges stSecondaryHitRanges;
 
 			public int nGoodCount;
 			public int nGreatCount;
@@ -292,8 +292,8 @@ namespace DTXMania
 				this.bDrumsEnabled = true;
 				this.bSTAGEFAILEDEnabled = true;
 				this.eDamageLevel = EDamageLevel.Normal;
-				PrimaryHitRanges = CHitRanges.tCreateDTXHitRanges();
-				SecondaryHitRanges = CHitRanges.tCreateDTXHitRanges();
+				stPrimaryHitRanges = STHitRanges.tCreateDTXHitRanges();
+				stSecondaryHitRanges = STHitRanges.tCreateDTXHitRanges();
 				this.strDTXManiaVersion = "Unknown";
 				this.strDateTime = "";
 				this.Hash = "00000000000000000000000000000000";
@@ -1241,68 +1241,80 @@ namespace DTXMania
 												int.TryParse(para, out var nValue);
 												switch (item)
 												{
+													// legacy hit ranges
+													// map legacy hit ranges to both primary and secondary,
+													// to emulate the previous behaviour of both being identical
+
 													// legacy perfect range size (±ms)
 													case @"PerfectRange":
-														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = nValue;
-														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nPerfectSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// legacy great range size (±ms)
 													case @"GreatRange":
-														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = nValue;
-														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nGreatSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// legacy good range size (±ms)
 													case @"GoodRange":
-														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = nValue;
-														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nGoodSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// legacy poor range size (±ms)
 													case @"PoorRange":
-														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = nValue;
-														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nPoorSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nPoorSizeMs = nValue;
 														break;
+
+													// primary hit ranges
 
 													// primary perfect range size (±ms)
 													case @"PrimaryPerfectRange":
-														cPerformanceEntry.PrimaryHitRanges.nPerfectSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// primary great range size (±ms)
 													case @"PrimaryGreatRange":
-														cPerformanceEntry.PrimaryHitRanges.nGreatSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// primary good range size (±ms)
 													case @"PrimaryGoodRange":
-														cPerformanceEntry.PrimaryHitRanges.nGoodSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// primary poor range size (±ms)
 													case @"PrimaryPoorRange":
-														cPerformanceEntry.PrimaryHitRanges.nPoorSizeMs = nValue;
+														cPerformanceEntry.stPrimaryHitRanges.nPoorSizeMs = nValue;
 														break;
+
+													// secondary hit ranges
 
 													// secondary perfect range size (±ms)
 													case @"SecondaryPerfectRange":
-														cPerformanceEntry.SecondaryHitRanges.nPerfectSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nPerfectSizeMs = nValue;
 														break;
 
 													// secondary great range size (±ms)
 													case @"SecondaryGreatRange":
-														cPerformanceEntry.SecondaryHitRanges.nGreatSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nGreatSizeMs = nValue;
 														break;
 
 													// secondary good range size (±ms)
 													case @"SecondaryGoodRange":
-														cPerformanceEntry.SecondaryHitRanges.nGoodSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nGoodSizeMs = nValue;
 														break;
 
 													// secondary poor range size (±ms)
 													case @"SecondaryPoorRange":
-														cPerformanceEntry.SecondaryHitRanges.nPoorSizeMs = nValue;
+														cPerformanceEntry.stSecondaryHitRanges.nPoorSizeMs = nValue;
+														break;
+
+													// unknown field
+													default:
 														break;
 												}
 											}
@@ -1415,14 +1427,14 @@ namespace DTXMania
 				writer.WriteLine( "UseMIDIIN={0}", this.stSection[ i ].bMIDIUsed ? 1 : 0 );
 				writer.WriteLine( "UseJoypad={0}", this.stSection[ i ].bJoypadUsed ? 1 : 0 );
 				writer.WriteLine( "UseMouse={0}", this.stSection[ i ].bMouseUsed ? 1 : 0 );
-				writer.WriteLine($@"PrimaryPerfectRange={stSection[i].PrimaryHitRanges.nPerfectSizeMs}");
-				writer.WriteLine($@"PrimaryGreatRange={stSection[i].PrimaryHitRanges.nGreatSizeMs}");
-				writer.WriteLine($@"PrimaryGoodRange={stSection[i].PrimaryHitRanges.nGoodSizeMs}");
-				writer.WriteLine($@"PrimaryPoorRange={stSection[i].PrimaryHitRanges.nPoorSizeMs}");
-				writer.WriteLine($@"SecondaryPerfectRange={stSection[i].SecondaryHitRanges.nPerfectSizeMs}");
-				writer.WriteLine($@"SecondaryGreatRange={stSection[i].SecondaryHitRanges.nGreatSizeMs}");
-				writer.WriteLine($@"SecondaryGoodRange={stSection[i].SecondaryHitRanges.nGoodSizeMs}");
-				writer.WriteLine($@"SecondaryPoorRange={stSection[i].SecondaryHitRanges.nPoorSizeMs}");
+				writer.WriteLine($@"PrimaryPerfectRange={stSection[i].stPrimaryHitRanges.nPerfectSizeMs}");
+				writer.WriteLine($@"PrimaryGreatRange={stSection[i].stPrimaryHitRanges.nGreatSizeMs}");
+				writer.WriteLine($@"PrimaryGoodRange={stSection[i].stPrimaryHitRanges.nGoodSizeMs}");
+				writer.WriteLine($@"PrimaryPoorRange={stSection[i].stPrimaryHitRanges.nPoorSizeMs}");
+				writer.WriteLine($@"SecondaryPerfectRange={stSection[i].stSecondaryHitRanges.nPerfectSizeMs}");
+				writer.WriteLine($@"SecondaryGreatRange={stSection[i].stSecondaryHitRanges.nGreatSizeMs}");
+				writer.WriteLine($@"SecondaryGoodRange={stSection[i].stSecondaryHitRanges.nGoodSizeMs}");
+				writer.WriteLine($@"SecondaryPoorRange={stSection[i].stSecondaryHitRanges.nPoorSizeMs}");
 				writer.WriteLine( "DTXManiaVersion={0}", this.stSection[ i ].strDTXManiaVersion );
 				writer.WriteLine( "DateTime={0}", this.stSection[ i ].strDateTime );
 				writer.WriteLine( "Hash={0}", this.stSection[ i ].Hash );
@@ -1891,14 +1903,14 @@ namespace DTXMania
 			builder.Append( boolToChar( cc.bMIDIUsed ) );
 			builder.Append( boolToChar( cc.bJoypadUsed ) );
 			builder.Append( boolToChar( cc.bMouseUsed ) );
-			builder.Append(cc.PrimaryHitRanges.nPerfectSizeMs);
-			builder.Append(cc.PrimaryHitRanges.nGreatSizeMs);
-			builder.Append(cc.PrimaryHitRanges.nGoodSizeMs);
-			builder.Append(cc.PrimaryHitRanges.nPoorSizeMs);
-			builder.Append(cc.SecondaryHitRanges.nPerfectSizeMs);
-			builder.Append(cc.SecondaryHitRanges.nGreatSizeMs);
-			builder.Append(cc.SecondaryHitRanges.nGoodSizeMs);
-			builder.Append(cc.SecondaryHitRanges.nPoorSizeMs);
+			builder.Append(cc.stPrimaryHitRanges.nPerfectSizeMs);
+			builder.Append(cc.stPrimaryHitRanges.nGreatSizeMs);
+			builder.Append(cc.stPrimaryHitRanges.nGoodSizeMs);
+			builder.Append(cc.stPrimaryHitRanges.nPoorSizeMs);
+			builder.Append(cc.stSecondaryHitRanges.nPerfectSizeMs);
+			builder.Append(cc.stSecondaryHitRanges.nGreatSizeMs);
+			builder.Append(cc.stSecondaryHitRanges.nGoodSizeMs);
+			builder.Append(cc.stSecondaryHitRanges.nPoorSizeMs);
 			builder.Append( cc.strDTXManiaVersion );
 			builder.Append( cc.strDateTime );
 

@@ -99,62 +99,62 @@ namespace DTXMania
         }
 
         /// <summary>
-        /// The <see cref="CHitRanges"/> for all drum chips, except pedals, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// The <see cref="STHitRanges"/> for all drum chips, except pedals, composed from the confirmed <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
         /// </summary>
-        public static CHitRanges DrumHitRanges
+        public static STHitRanges stDrumHitRanges
         {
             get
             {
                 CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
                 if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
-                    return CHitRanges.tCompose(confirmedNode.DrumHitRanges, ConfigIni.DrumHitRanges);
+                    return STHitRanges.tCompose(confirmedNode.stDrumHitRanges, ConfigIni.stDrumHitRanges);
 
-                return ConfigIni.DrumHitRanges;
+                return ConfigIni.stDrumHitRanges;
             }
         }
 
         /// <summary>
-        /// The <see cref="CHitRanges"/> for all drum pedal chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// The <see cref="STHitRanges"/> for all drum pedal chips, composed from the confirmed <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
         /// </summary>
-        public static CHitRanges DrumPedalHitRanges
+        public static STHitRanges stDrumPedalHitRanges
         {
             get
             {
                 CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
                 if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
-                    return CHitRanges.tCompose(confirmedNode.DrumPedalHitRanges, ConfigIni.DrumPedalHitRanges);
+                    return STHitRanges.tCompose(confirmedNode.stDrumPedalHitRanges, ConfigIni.stDrumPedalHitRanges);
 
-                return ConfigIni.DrumPedalHitRanges;
+                return ConfigIni.stDrumPedalHitRanges;
             }
         }
 
         /// <summary>
-        /// The <see cref="CHitRanges"/> for guitar chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// The <see cref="STHitRanges"/> for guitar chips, composed from the confirmed <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
         /// </summary>
-        public static CHitRanges GuitarHitRanges
+        public static STHitRanges stGuitarHitRanges
         {
             get
             {
                 CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
                 if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
-                    return CHitRanges.tCompose(confirmedNode.GuitarHitRanges, ConfigIni.GuitarHitRanges);
+                    return STHitRanges.tCompose(confirmedNode.stGuitarHitRanges, ConfigIni.stGuitarHitRanges);
 
-                return ConfigIni.GuitarHitRanges;
+                return ConfigIni.stGuitarHitRanges;
             }
         }
 
         /// <summary>
-        /// The <see cref="CHitRanges"/> for bass guitar chips, composed from the current <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
+        /// The <see cref="STHitRanges"/> for bass guitar chips, composed from the confirmed <see cref="CSongListNode"/> and <see cref="CConfigIni"/> settings.
         /// </summary>
-        public static CHitRanges BassHitRanges
+        public static STHitRanges stBassHitRanges
         {
             get
             {
                 CSongListNode confirmedNode = stageSongSelection.rConfirmedSong?.r親ノード;
                 if (confirmedNode?.eNodeType == CSongListNode.ENodeType.BOX)
-                    return CHitRanges.tCompose(confirmedNode.BassHitRanges, ConfigIni.BassHitRanges);
+                    return STHitRanges.tCompose(confirmedNode.stBassHitRanges, ConfigIni.stBassHitRanges);
 
-                return ConfigIni.BassHitRanges;
+                return ConfigIni.stBassHitRanges;
             }
         }
 
@@ -2824,26 +2824,26 @@ for (int i = 0; i < 3; i++) {
                 // 0: hiscore drums
                 // 1: hiskill drums
                 // primary = all except pedals, secondary = pedals
-                ini.stSection[0].PrimaryHitRanges = DrumHitRanges;
-                ini.stSection[0].SecondaryHitRanges = DrumPedalHitRanges;
-                ini.stSection[1].PrimaryHitRanges = DrumHitRanges;
-                ini.stSection[1].SecondaryHitRanges = DrumPedalHitRanges;
+                ini.stSection[0].stPrimaryHitRanges = stDrumHitRanges;
+                ini.stSection[0].stSecondaryHitRanges = stDrumPedalHitRanges;
+                ini.stSection[1].stPrimaryHitRanges = stDrumHitRanges;
+                ini.stSection[1].stSecondaryHitRanges = stDrumPedalHitRanges;
 
                 // 2: hiscore guitar
                 // 3: hiskill guitar
                 // primary = all, secondary = unused (zero out)
-                ini.stSection[2].PrimaryHitRanges = GuitarHitRanges;
-                ini.stSection[2].SecondaryHitRanges = new CHitRanges();
-                ini.stSection[3].PrimaryHitRanges = GuitarHitRanges;
-                ini.stSection[3].SecondaryHitRanges = new CHitRanges();
+                ini.stSection[2].stPrimaryHitRanges = stGuitarHitRanges;
+                ini.stSection[2].stSecondaryHitRanges = new STHitRanges();
+                ini.stSection[3].stPrimaryHitRanges = stGuitarHitRanges;
+                ini.stSection[3].stSecondaryHitRanges = new STHitRanges();
 
                 // 4: hiscore bass guitar
                 // 5: hiskill bass guitar
                 // primary = all, secondary = unused (zero out)
-                ini.stSection[4].PrimaryHitRanges = BassHitRanges;
-                ini.stSection[4].SecondaryHitRanges = new CHitRanges();
-                ini.stSection[5].PrimaryHitRanges = BassHitRanges;
-                ini.stSection[5].SecondaryHitRanges = new CHitRanges();
+                ini.stSection[4].stPrimaryHitRanges = stBassHitRanges;
+                ini.stSection[4].stSecondaryHitRanges = new STHitRanges();
+                ini.stSection[5].stPrimaryHitRanges = stBassHitRanges;
+                ini.stSection[5].stSecondaryHitRanges = new STHitRanges();
             }
             ini.stFile.BGMAdjust = DTX.nBGMAdjust;
             CScoreIni.tGetIsUpdateNeeded(out bIsUpdatedDrums, out bIsUpdatedGuitar, out bIsUpdatedBass);

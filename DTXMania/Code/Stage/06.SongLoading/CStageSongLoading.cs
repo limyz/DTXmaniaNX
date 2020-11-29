@@ -918,11 +918,11 @@ namespace DTXMania
             {
                 case EInstrumentPart.DRUMS:
                     // TODO: ghosts do not track columns, so pedal ranges cannot be used
-                    return CDTXMania.DrumHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTime);
                 case EInstrumentPart.GUITAR:
-                    return CDTXMania.GuitarHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTime);
                 case EInstrumentPart.BASS:
-                    return CDTXMania.BassHitRanges.tGetJudgement(nDeltaTime);
+                    return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTime);
                 default:
                     return EJudgement.Miss;
             }
