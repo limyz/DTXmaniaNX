@@ -114,6 +114,8 @@
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Configuration\ESetting.cs" />
+    <Compile Include="Code\Configuration\CConfigurationStore.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
     <Compile Include="Code\Stage\CDTXVmode.cs" />
