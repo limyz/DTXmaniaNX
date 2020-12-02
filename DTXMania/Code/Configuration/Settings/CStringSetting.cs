@@ -5,10 +5,13 @@
     /// </summary>
     public class CStringSetting : ISetting<string>
     {
+        public ESettingCategory eCategory { get; }
+
         public string strKey { get; }
 
-        public CStringSetting(string strKey)
+        public CStringSetting(ESettingCategory eCategory, string strKey)
         {
+            this.eCategory = eCategory;
             this.strKey = strKey;
         }
 

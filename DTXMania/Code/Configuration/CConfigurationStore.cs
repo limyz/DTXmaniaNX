@@ -43,14 +43,15 @@ namespace DTXMania.Configuration
                 // select the first value for the given setting
                 // as the key column is unique constrained there can only be one value per key
                 // and as defaults are set on construction a key can never not be set
-                command.CommandText = @"SELECT value, key FROM settings WHERE key = ($key) LIMIT 1;";
+                command.CommandText = @"SELECT value, category, key FROM settings WHERE category = ($category) AND key = ($key) LIMIT 1;";
+                command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
 
                 using (var reader = command.ExecuteReader())
                 {
                     // this should never happen, but throw an exception just in case
                     if (!reader.Read())
-                        throw new CMissingSettingRowException(setting.strKey);
+                        throw new CMissingSettingRowException(setting.eCategory, setting.strKey);
 
                     string strValue = reader.GetString(0);
                     return setting.tDecode(strValue);
@@ -76,7 +77,8 @@ namespace DTXMania.Configuration
             using (var command = connection.CreateCommand())
             {
                 // insert the given value for the given setting, possibly replacing an existing row
-                command.CommandText = $@"{strCommand} INTO settings(key, value) VALUES (($key), ($value))";
+                command.CommandText = $@"{strCommand} INTO settings(category, key, value) VALUES (($category), ($key), ($value))";
+                command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
                 command.Parameters.AddWithValue(@"$value", setting.tEncode(value));
                 command.ExecuteNonQuery();
@@ -93,8 +95,10 @@ namespace DTXMania.Configuration
                 // create the settings table
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS settings
                 (
-                    key TEXT UNIQUE NOT NULL,
-                    value TEXT NOT NULL
+                    category TEXT NOT NULL,
+                    key TEXT NOT NULL,
+                    value TEXT NOT NULL,
+                    UNIQUE(category, key)
                 );";
 
                 command.ExecuteNonQuery();
@@ -119,8 +123,8 @@ namespace DTXMania.Configuration
 
         private class CMissingSettingRowException : Exception
         {
-            public CMissingSettingRowException(string strKey)
-                : base($"Unable to select setting row for key. ({strKey})")
+            public CMissingSettingRowException(ESettingCategory eCategory, string strKey)
+                : base($"Unable to select setting row for category and key. ({eCategory}, {strKey})")
             {
             }
         }

@@ -15,10 +15,13 @@
         /// </summary>
         private readonly int? nMaxValue;
 
+        public ESettingCategory eCategory { get; }
+
         public string strKey { get; }
 
-        public CIntSetting(string strKey, int? nMinValue = null, int? nMaxValue = null)
+        public CIntSetting(ESettingCategory eCategory, string strKey, int? nMinValue = null, int? nMaxValue = null)
         {
+            this.eCategory = eCategory;
             this.strKey = strKey;
             this.nMinValue = nMinValue;
             this.nMaxValue = nMaxValue;

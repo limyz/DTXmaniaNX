@@ -9,6 +9,11 @@ namespace DTXMania.Configuration.Settings
     public interface ISetting<T>
     {
         /// <summary>
+        /// The category that this setting is within.
+        /// </summary>
+        ESettingCategory eCategory { get; }
+
+        /// <summary>
         /// The unique internal identifier of this setting.
         /// </summary>
         string strKey { get; }

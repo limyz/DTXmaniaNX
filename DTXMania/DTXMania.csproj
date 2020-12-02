@@ -119,6 +119,7 @@
     <Compile Include="Code\Configuration\Settings\CIntSetting.cs" />
     <Compile Include="Code\Configuration\CConfigurationStore.cs" />
     <Compile Include="Code\Configuration\Settings\CStringSetting.cs" />
+    <Compile Include="Code\Configuration\Settings\ESettingCategory.cs" />
     <Compile Include="Code\Configuration\Settings\ISetting.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />

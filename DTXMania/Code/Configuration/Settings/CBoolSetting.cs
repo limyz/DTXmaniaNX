@@ -5,10 +5,13 @@
     /// </summary>
     public class CBoolSetting : ISetting<bool>
     {
+        public ESettingCategory eCategory { get; }
+
         public string strKey { get; }
 
-        public CBoolSetting(string strKey)
+        public CBoolSetting(ESettingCategory eCategory, string strKey)
         {
+            this.eCategory = eCategory;
             this.strKey = strKey;
         }
 
