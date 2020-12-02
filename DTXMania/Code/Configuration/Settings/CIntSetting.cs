@@ -1,4 +1,4 @@
-﻿namespace DTXMania
+﻿namespace DTXMania.Configuration.Settings
 {
     /// <summary>
     /// An <see cref="int"/>-backed <see cref="ISetting{T}"/>.

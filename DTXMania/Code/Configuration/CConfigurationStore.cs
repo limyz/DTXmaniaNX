@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DTXMania.Configuration.Settings;
+using System;
 using System.Data.SQLite;
 
-namespace DTXMania
+namespace DTXMania.Configuration
 {
     /// <summary>
     /// A database-backed store of <see cref="ISetting{T}"/> values.
@@ -101,10 +102,17 @@ namespace DTXMania
         }
 
         /// <summary>
-        /// Set each available <see cref="ISetting{T}"/> within <see cref="CSettings"/> that has not yet been set within this store to its default value.
+        /// Set each available <see cref="ISetting{T}"/> within <see cref="CSetting"/> that has not yet been set within this store to its default value.
         /// </summary>
         private void tSetDefaults()
         {
+            // use a transaction to bulk insert
+            using (var transaction = connection.BeginTransaction())
+            {
+                // ...
+
+                transaction.Commit();
+            }
         }
 
         #region Exceptions

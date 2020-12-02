@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DTXMania
+namespace DTXMania.Configuration.Settings
 {
     /// <summary>
     /// An <see cref="Enum"/>-backed <see cref="ISetting{T}"/>.

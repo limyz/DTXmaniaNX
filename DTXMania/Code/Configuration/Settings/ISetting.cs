@@ -1,4 +1,6 @@
-﻿namespace DTXMania
+﻿using DTXMania.Configuration;
+
+namespace DTXMania.Configuration.Settings
 {
     /// <summary>
     /// A keyed value which can be get and set within a <see cref="CConfigurationStore"/>.
