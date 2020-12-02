@@ -41,8 +41,8 @@ namespace DTXMania.Configuration
             using (var command = connection.CreateCommand())
             {
                 // select the first value for the given setting
-                // as the key column is unique constrained there can only be one value per key
-                // and as defaults are set on construction a key can never not be set
+                // as the key and category columns are unique constrained there can only be one value per setting
+                // and as defaults are set on construction a setting can never not be set
                 command.CommandText = @"SELECT value, category, key FROM settings WHERE category = ($category) AND key = ($key) LIMIT 1;";
                 command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
@@ -64,19 +64,22 @@ namespace DTXMania.Configuration
         /// </summary>
         /// <typeparam name="T">The type of the value to set.</typeparam>
         /// <param name="setting">The <see cref="ISetting{T}"/> to set the value of.</param>
-        /// <param name="value">The <typeparamref name="T"/> to set.</param>
+        /// <param name="value">The <typeparamref name="T"/> value to set.</param>
         /// <param name="bReplaceValue">Whether an existing value for <paramref name="setting"/> should be replaced by <paramref name="value"/>, or left as is.</param>
         public void tSet<T>(ISetting<T> setting, T value, bool bReplaceValue = true)
         {
-            string strCommand;
-            if (bReplaceValue)
-                strCommand = @"INSERT OR REPLACE";
-            else
-                strCommand = @"INSERT OR IGNORE";
-
             using (var command = connection.CreateCommand())
             {
-                // insert the given value for the given setting, possibly replacing an existing row
+                // insert the given value for the given setting
+                // the unique constraint on the category and key columns causes a conflict when setting a new value for a setting
+                // if the existing value should be replaced, then replace the existing row when this conflict occurs
+                // but if it should not, then ignore the insertion
+                string strCommand;
+                if (bReplaceValue)
+                    strCommand = @"INSERT OR REPLACE";
+                else
+                    strCommand = @"INSERT OR IGNORE";
+
                 command.CommandText = $@"{strCommand} INTO settings(category, key, value) VALUES (($category), ($key), ($value))";
                 command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
@@ -93,6 +96,7 @@ namespace DTXMania.Configuration
             using (var command = connection.CreateCommand())
             {
                 // create the settings table
+                // create a unique constraint for the category and key columns to only allow one value per-setting
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS settings
                 (
                     category TEXT NOT NULL,
