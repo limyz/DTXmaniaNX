@@ -114,6 +114,7 @@
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Configuration\CSetting.cs" />
     <Compile Include="Code\Configuration\Settings\CBoolSetting.cs" />
     <Compile Include="Code\Configuration\Settings\CEnumSetting.cs" />
     <Compile Include="Code\Configuration\Settings\CIntSetting.cs" />
