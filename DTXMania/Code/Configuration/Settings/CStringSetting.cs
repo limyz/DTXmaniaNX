@@ -1,7 +1,7 @@
 ﻿namespace DTXMania.Configuration.Settings
 {
     /// <summary>
-    /// A <see cref="string"/>-backed <see cref="ISetting{T}"/>.
+    /// An <see cref="ISetting{T}"/> with a <see cref="string"/> value.
     /// </summary>
     public class CStringSetting : ISetting<string>
     {

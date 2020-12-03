@@ -1,7 +1,7 @@
 ﻿namespace DTXMania.Configuration.Settings
 {
     /// <summary>
-    /// A <see cref="bool"/>-backed <see cref="ISetting{T}"/>.
+    /// An <see cref="ISetting{T}"/> with a <see cref="bool"/> value.
     /// </summary>
     public class CBoolSetting : ISetting<bool>
     {

@@ -10,7 +10,7 @@ namespace DTXMania.Configuration
     public class CConfigurationStore : IDisposable
     {
         /// <summary>
-        /// The open <see cref="SQLiteConnection"/> to this store's database.
+        /// The open connection to this store's database.
         /// </summary>
         private SQLiteConnection connection;
 
@@ -18,9 +18,7 @@ namespace DTXMania.Configuration
         {
             connection = new SQLiteConnection(@"Data Source=config.db;Version=3;");
             connection.Open();
-
             tInitialise();
-            tSetDefaults();
         }
 
         public void Dispose()
@@ -93,9 +91,10 @@ namespace DTXMania.Configuration
         /// </summary>
         private void tInitialise()
         {
+            // create tables
+            // settings
             using (var command = connection.CreateCommand())
             {
-                // create the settings table
                 // create a unique constraint for the category and key columns to only allow one value per-setting
                 command.CommandText = @"CREATE TABLE IF NOT EXISTS Settings
                 (
@@ -107,12 +106,15 @@ namespace DTXMania.Configuration
 
                 command.ExecuteNonQuery();
             }
+
+            // initialise default settings
+            tInitialiseDefaults();
         }
 
         /// <summary>
-        /// Set each available <see cref="ISetting{T}"/> within <see cref="CSetting"/> that has not yet been set within this store to its default value.
+        /// Set the value of each available <see cref="ISetting{T}"/> within <see cref="CSetting"/> that has not yet been set within this store to its default value.
         /// </summary>
-        private void tSetDefaults()
+        private void tInitialiseDefaults()
         {
             // use a transaction to bulk insert
             using (var transaction = connection.BeginTransaction())

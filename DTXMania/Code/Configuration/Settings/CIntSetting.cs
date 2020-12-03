@@ -1,17 +1,17 @@
 ﻿namespace DTXMania.Configuration.Settings
 {
     /// <summary>
-    /// An <see cref="int"/>-backed <see cref="ISetting{T}"/>.
+    /// An <see cref="ISetting{T}"/> with an <see cref="int"/> value.
     /// </summary>
     public class CIntSetting : ISetting<int>
     {
         /// <summary>
-        /// The inclusive minimum value that this setting's value can be, or <see cref="null"/> if their is no lower limit.
+        /// The inclusive minimum value that this setting's value can be, or <see cref="null"/> if there is no lower limit.
         /// </summary>
         private readonly int? nMinValue;
 
         /// <summary>
-        /// The inclusive maximum value that this setting's value can be, or <see cref="null"/> if their is no upper limit.
+        /// The inclusive maximum value that this setting's value can be, or <see cref="null"/> if there is no upper limit.
         /// </summary>
         private readonly int? nMaxValue;
 

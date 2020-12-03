@@ -3,7 +3,7 @@
 namespace DTXMania.Configuration.Settings
 {
     /// <summary>
-    /// An <see cref="Enum"/>-backed <see cref="ISetting{T}"/>.
+    /// An <see cref="ISetting{T}"/> with an <see cref="Enum"/> value.
     /// </summary>
     /// <typeparam name="T">The enumerated type of this setting's value.</typeparam>
     public class CEnumSetting<T> : ISetting<T> where T : Enum
