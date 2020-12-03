@@ -43,7 +43,7 @@ namespace DTXMania.Configuration
                 // select the first value for the given setting
                 // as the key and category columns are unique constrained there can only be one value per setting
                 // and as defaults are set on construction a setting can never not be set
-                command.CommandText = @"SELECT value, category, key FROM settings WHERE category = ($category) AND key = ($key) LIMIT 1;";
+                command.CommandText = @"SELECT Value, Category, Key FROM settings WHERE Category = ($category) AND Key = ($key) LIMIT 1;";
                 command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
 
@@ -80,7 +80,7 @@ namespace DTXMania.Configuration
                 else
                     strCommand = @"INSERT OR IGNORE";
 
-                command.CommandText = $@"{strCommand} INTO settings(category, key, value) VALUES (($category), ($key), ($value))";
+                command.CommandText = $@"{strCommand} INTO Settings(Category, Key, Value) VALUES (($category), ($key), ($value))";
                 command.Parameters.AddWithValue(@"$category", setting.eCategory.ToString());
                 command.Parameters.AddWithValue(@"$key", setting.strKey);
                 command.Parameters.AddWithValue(@"$value", setting.tEncode(value));
@@ -97,11 +97,11 @@ namespace DTXMania.Configuration
             {
                 // create the settings table
                 // create a unique constraint for the category and key columns to only allow one value per-setting
-                command.CommandText = @"CREATE TABLE IF NOT EXISTS settings
+                command.CommandText = @"CREATE TABLE IF NOT EXISTS Settings
                 (
-                    category TEXT NOT NULL,
-                    key TEXT NOT NULL,
-                    value TEXT NOT NULL,
+                    Category TEXT NOT NULL,
+                    Key TEXT NOT NULL,
+                    Value TEXT NOT NULL,
                     UNIQUE(category, key)
                 );";
 
