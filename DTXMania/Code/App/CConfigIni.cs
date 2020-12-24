@@ -1312,15 +1312,10 @@ namespace DTXMania
 
 			#region [ HitRange ]
 
-			// TODO: proper default drum ranges
-			stDrumHitRanges = STHitRanges.tCreateDTXHitRanges();
-
-			// TODO: proper default drum pedal ranges
-			stDrumPedalHitRanges = STHitRanges.tCreateDTXHitRanges();
-
-			// TODO: proper default guitar ranges
-			stGuitarHitRanges = STHitRanges.tCreateDTXHitRanges();
-			stBassHitRanges = STHitRanges.tCreateDTXHitRanges();
+			stDrumHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stDrumPedalHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stGuitarHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stBassHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
 
 			#endregion
 

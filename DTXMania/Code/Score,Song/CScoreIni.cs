@@ -292,8 +292,8 @@ namespace DTXMania
 				this.bDrumsEnabled = true;
 				this.bSTAGEFAILEDEnabled = true;
 				this.eDamageLevel = EDamageLevel.Normal;
-				stPrimaryHitRanges = STHitRanges.tCreateDTXHitRanges();
-				stSecondaryHitRanges = STHitRanges.tCreateDTXHitRanges();
+				stPrimaryHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+				stSecondaryHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
 				this.strDTXManiaVersion = "Unknown";
 				this.strDateTime = "";
 				this.Hash = "00000000000000000000000000000000";

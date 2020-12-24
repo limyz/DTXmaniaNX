@@ -924,7 +924,7 @@ namespace DTXMania
                     return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
                 case EInstrumentPart.UNKNOWN:
                 default:
-                    return STHitRanges.tCreateDTXHitRanges().tGetJudgement(nDeltaTimeMs);
+                    return STHitRanges.tCreateDefaultDTXHitRanges().tGetJudgement(nDeltaTimeMs);
             }
         }
         //-----------------

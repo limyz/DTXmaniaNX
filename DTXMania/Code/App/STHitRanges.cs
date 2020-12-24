@@ -40,7 +40,7 @@ namespace DTXMania
         /// This exists as a legacy method to obtain these values in usages where they served as defaults.
         /// </remarks>
         /// <returns>A default DTXMania <see cref="STHitRanges"/>.</returns>
-        public static STHitRanges tCreateDTXHitRanges() => new STHitRanges
+        public static STHitRanges tCreateDefaultDTXHitRanges() => new STHitRanges
         {
             nPerfectSizeMs = 34,
             nGreatSizeMs = 67,

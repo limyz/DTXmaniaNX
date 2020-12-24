@@ -872,7 +872,7 @@ namespace DTXMania
                 // all other chips (measure lines, quarter lines, etc.)
                 case EInstrumentPart.UNKNOWN:
                 default:
-                    return STHitRanges.tCreateDTXHitRanges().tGetJudgement(nDeltaTimeMs);
+                    return STHitRanges.tCreateDefaultDTXHitRanges().tGetJudgement(nDeltaTimeMs);
             }
         }
 
