@@ -929,58 +929,26 @@ namespace DTXMania
 		}
         public bool bTimeStretch;					// #23664 2013.2.24 yyagi ピッチ変更無しで再生速度を変更するかどうか
 		public STAUTOPLAY bAutoPlay;
-		public STRANGE nヒット範囲ms;
-		[StructLayout( LayoutKind.Sequential )]
-		public struct STRANGE
-		{
-			public int Perfect;
-			public int Great;
-			public int Good;
-			public int Poor;
-			public int this[ int index ]
-			{
-				get
-				{
-					switch( index )
-					{
-						case 0:
-							return this.Perfect;
 
-						case 1:
-							return this.Great;
+		/// <summary>
+		/// The <see cref="STHitRanges"/> for all drum chips, except pedals.
+		/// </summary>
+		public STHitRanges stDrumHitRanges;
 
-						case 2:
-							return this.Good;
+		/// <summary>
+		/// The <see cref="STHitRanges"/> for drum pedal chips.
+		/// </summary>
+		public STHitRanges stDrumPedalHitRanges;
 
-						case 3:
-							return this.Poor;
-					}
-					throw new IndexOutOfRangeException();
-				}
-				set
-				{
-					switch( index )
-					{
-						case 0:
-							this.Perfect = value;
-							return;
+		/// <summary>
+		/// The <see cref="STHitRanges"/> for guitar chips.
+		/// </summary>
+		public STHitRanges stGuitarHitRanges;
 
-						case 1:
-							this.Great = value;
-							return;
-
-						case 2:
-							this.Good = value;
-							return;
-
-						case 3:
-							this.Poor = value;
-							return;
-					}
-					throw new IndexOutOfRangeException();
-				}
-			}
-		}
+		/// <summary>
+		/// The <see cref="STHitRanges"/> for bass guitar chips.
+		/// </summary>
+		public STHitRanges stBassHitRanges;
 
 		public STLANEVALUE nVelocityMin;
 		[StructLayout( LayoutKind.Sequential )]
@@ -1340,12 +1308,17 @@ namespace DTXMania
             this.bAutoPlay.BsP = true;
 			this.bAutoPlay.BsPick = true;
 			this.bAutoPlay.BsW = true;
-            #endregion
-            this.nヒット範囲ms = new STRANGE();
-			this.nヒット範囲ms.Perfect = 34;
-			this.nヒット範囲ms.Great = 67;
-			this.nヒット範囲ms.Good = 84;
-			this.nヒット範囲ms.Poor = 117;
+			#endregion
+
+			#region [ HitRange ]
+
+			stDrumHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stDrumPedalHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stGuitarHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+			stBassHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
+
+			#endregion
+
 			this.ConfigIniファイル名 = "";
 			this.dicJoystick = new Dictionary<int, string>( 10 );
 			this.tSetDefaultKeyAssignments();
@@ -2195,15 +2168,23 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.WriteLine( ";-------------------" );
 			#endregion
-
             #region [ HitRange ]
-            sw.WriteLine( "[HitRange]" );
+			sw.WriteLine(@"[HitRange]");
 			sw.WriteLine();
-			sw.WriteLine( "; Perfect～Poor とみなされる範囲[ms]" );
-			sw.WriteLine( "Perfect={0}", this.nヒット範囲ms.Perfect );
-			sw.WriteLine( "Great={0}", this.nヒット範囲ms.Great );
-			sw.WriteLine( "Good={0}", this.nヒット範囲ms.Good );
-			sw.WriteLine( "Poor={0}", this.nヒット範囲ms.Poor );
+			sw.WriteLine(@"; Perfect～Poor とみなされる範囲[ms]");
+			sw.WriteLine(@"; Hit ranges for each judgement type (in ± milliseconds)");
+			sw.WriteLine();
+			sw.WriteLine(@"; Drum chips, except pedals");
+			tWriteHitRanges(stDrumHitRanges, @"Drum", sw);
+			sw.WriteLine();
+			sw.WriteLine(@"; Drum pedal chips");
+			tWriteHitRanges(stDrumPedalHitRanges, @"DrumPedal", sw);
+			sw.WriteLine();
+			sw.WriteLine(@"; Guitar chips");
+			tWriteHitRanges(stGuitarHitRanges, @"Guitar", sw);
+			sw.WriteLine();
+			sw.WriteLine(@"; Bass chips");
+			tWriteHitRanges(stBassHitRanges, @"Bass", sw);
 			sw.WriteLine();
 			sw.WriteLine( ";-------------------" );
 			#endregion
@@ -2373,6 +2354,21 @@ namespace DTXMania
 			
 			sw.Close();
 		}
+
+		/// <summary>
+		/// Write the given <see cref="STHitRanges"/> as INI fields to the given <see cref="StreamWriter"/>.
+		/// </summary>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to write.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
+		/// <param name="writer">The <see cref="StreamWriter"/> to write to.</param>
+		private void tWriteHitRanges(STHitRanges stHitRanges, string strName, StreamWriter writer)
+		{
+			writer.WriteLine($@"{strName}Perfect={stHitRanges.nPerfectSizeMs}");
+			writer.WriteLine($@"{strName}Great={stHitRanges.nGreatSizeMs}");
+			writer.WriteLine($@"{strName}Good={stHitRanges.nGoodSizeMs}");
+			writer.WriteLine($@"{strName}Poor={stHitRanges.nPoorSizeMs}");
+		}
+
 		public void tReadFromFile( string iniファイル名 )
 		{
 			this.ConfigIniファイル名 = iniファイル名;
@@ -3518,22 +3514,31 @@ namespace DTXMania
                                     #region [ [HitRange] ]
                                     //-----------------------------
 									case ESectionType.HitRange:
-										if( str3.Equals( "Perfect" ) )
+										// map the legacy hit ranges to apply to each category
+										// they will only appear when the program is running from an unmigrated state,
+										// so simply copy values over whenever there is a change
+										STHitRanges stLegacyHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+										if (tTryReadHitRangesField(str3, str4, string.Empty, ref stLegacyHitRanges))
 										{
-											this.nヒット範囲ms.Perfect = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Perfect );
-											}
-										else if( str3.Equals( "Great" ) )
-										{
-											this.nヒット範囲ms.Great = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Great );
+											stDrumHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumHitRanges);
+											stDrumPedalHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumPedalHitRanges);
+											stGuitarHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stGuitarHitRanges);
+											stBassHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stBassHitRanges);
+											continue;
 										}
-										else if( str3.Equals( "Good" ) )
-										{
-											this.nヒット範囲ms.Good = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Good );
-										}
-										else if( str3.Equals( "Poor" ) )
-										{
-											this.nヒット範囲ms.Poor = CConversion.nGetNumberIfInRange( str4, 0, 0x3e7, this.nヒット範囲ms.Poor );
-										}
+
+										if (tTryReadHitRangesField(str3, str4, @"Drum", ref stDrumHitRanges))
+											continue;
+
+										if (tTryReadHitRangesField(str3, str4, @"DrumPedal", ref stDrumPedalHitRanges))
+											continue;
+
+										if (tTryReadHitRangesField(str3, str4, @"Guitar", ref stGuitarHitRanges))
+											continue;
+
+										if (tTryReadHitRangesField(str3, str4, @"Bass", ref stBassHitRanges))
+											continue;
+
 										continue;
 									//-----------------------------
 									#endregion
@@ -3744,6 +3749,45 @@ namespace DTXMania
 						continue;
 					}
 				}
+			}
+		}
+
+		/// <summary>
+		/// Read the INI <see cref="STHitRanges"/> field, if any, described by the given parameters into the given <see cref="STHitRanges"/>.
+		/// </summary>
+		/// <param name="strFieldName">The name of the INI field being read from.</param>
+		/// <param name="strFieldValue">The value of the INI field being read from.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to read into.</param>
+		/// <returns>Whether or not a field was read.</returns>
+		private bool tTryReadHitRangesField(string strFieldName, string strFieldValue, string strName, ref STHitRanges stHitRanges)
+		{
+			const int nRangeMin = 0, nRangeMax = 0x3e7;
+			switch (strFieldName)
+			{
+				// perfect range size (±ms)
+				case var n when n == $@"{strName}Perfect":
+					stHitRanges.nPerfectSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, stHitRanges.nPerfectSizeMs);
+					return true;
+
+				// great range size (±ms)
+				case var n when n == $@"{strName}Great":
+					stHitRanges.nGreatSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, stHitRanges.nGreatSizeMs);
+					return true;
+
+				// good range size (±ms)
+				case var n when n == $@"{strName}Good":
+					stHitRanges.nGoodSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, stHitRanges.nGoodSizeMs);
+					return true;
+
+				// poor range size (±ms)
+				case var n when n == $@"{strName}Poor":
+					stHitRanges.nPoorSizeMs = CConversion.nGetNumberIfInRange(strFieldValue, nRangeMin, nRangeMax, stHitRanges.nPoorSizeMs);
+					return true;
+
+				// unknown field
+				default:
+					return false;
 			}
 		}
 

@@ -101,10 +101,8 @@ namespace DTXMania
                 Drums.bMIDIUsed = this.bMIDIUsed.Drums;
                 Drums.bJoypadUsed = this.bJoypadUsed.Drums;
                 Drums.bMouseUsed = this.bMouseUsed.Drums;
-                Drums.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Drums.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Drums.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Drums.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Drums.stPrimaryHitRanges = CDTXMania.stDrumHitRanges;
+                Drums.stSecondaryHitRanges = CDTXMania.stDrumPedalHitRanges;
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
@@ -173,10 +171,8 @@ namespace DTXMania
                 Guitar.bMIDIUsed = this.bMIDIUsed.Guitar;
                 Guitar.bJoypadUsed = this.bJoypadUsed.Guitar;
                 Guitar.bMouseUsed = this.bMouseUsed.Guitar;
-                Guitar.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Guitar.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Guitar.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Guitar.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Guitar.stPrimaryHitRanges = CDTXMania.stGuitarHitRanges;
+                Guitar.stSecondaryHitRanges = new STHitRanges();
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
@@ -245,10 +241,8 @@ namespace DTXMania
                 Bass.bMIDIUsed = this.bMIDIUsed.Bass;				//
                 Bass.bJoypadUsed = this.bJoypadUsed.Bass;		//
                 Bass.bMouseUsed = this.bMouseUsed.Bass;					//
-                Bass.nPerfectRangeMs = CDTXMania.nPerfectRangeMs;
-                Bass.nGreatRangeMs = CDTXMania.nGreatRangeMs;
-                Bass.nGoodRangeMs = CDTXMania.nGoodRangeMs;
-                Bass.nPoorRangeMs = CDTXMania.nPoorRangeMs;
+                Bass.stPrimaryHitRanges = CDTXMania.stBassHitRanges;
+                Bass.stSecondaryHitRanges = new STHitRanges();
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);
@@ -831,40 +825,57 @@ namespace DTXMania
 
 		protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, CDTX.CChip pChip, int nInputAdjustTime, bool saveLag = true )
         {
-            if (pChip != null)
-            {
-                // #35411 2015.08.22 chnmr0 modified add check save lag flag for ghost
-                int lag = (int)(nTime + nInputAdjustTime - pChip.nPlaybackTimeMs);
-                if (saveLag)
-                {
-                    pChip.nLag = lag;       // #23580 2011.1.3 yyagi: add "nInputAdjustTime" to add input timing adjust feature
-					if (pChip.eInstrumentPart != EInstrumentPart.UNKNOWN)
-					{
-						pChip.nCurrentComboForGhost = this.actCombo.nCurrentCombo[(int)pChip.eInstrumentPart];
-					}
-                }
-                // #35411 modify end
+            if (pChip == null)
+                return EJudgement.Miss;
 
-                int nDeltaTime = Math.Abs( lag );
-                if (nDeltaTime <= CDTXMania.nPerfectRangeMs)
-                {
-                    return EJudgement.Perfect;
-                }
-                if (nDeltaTime <= CDTXMania.nGreatRangeMs)
-                {
-                    return EJudgement.Great;
-                }
-                if (nDeltaTime <= CDTXMania.nGoodRangeMs)
-                {
-                    return EJudgement.Good;
-                }
-                if (nDeltaTime <= CDTXMania.nPoorRangeMs)
-                {
-                    return EJudgement.Poor;
-                }
+            // #35411 2015.08.22 chnmr0 modified add check save lag flag for ghost
+            int lag = (int)(nTime + nInputAdjustTime - pChip.nPlaybackTimeMs);
+            if (saveLag)
+            {
+                pChip.nLag = lag;       // #23580 2011.1.3 yyagi: add "nInputAdjustTime" to add input timing adjust feature
+				if (pChip.eInstrumentPart != EInstrumentPart.UNKNOWN)
+				{
+					pChip.nCurrentComboForGhost = this.actCombo.nCurrentCombo[(int)pChip.eInstrumentPart];
+				}
             }
-            return EJudgement.Miss;
+            // #35411 modify end
+
+            // chips for all instrument parts are passed here, so processing cannot be delegated to subclasses
+            // note that unknown part chips can also be passed, such as measure and quarter lines
+            // in these cases it expects to receive default hit ranges
+            int nDeltaTimeMs = Math.Abs(lag);
+            switch (pChip.eInstrumentPart)
+            {
+                // drum chips
+                case EInstrumentPart.DRUMS:
+                    switch (pChip.nChannelNumber)
+                    {
+                        // drum pedal chips
+                        case 0x13: //kick
+                        case 0x1b: //left pedal
+                        case 0x1c: //left bass drum
+                            return CDTXMania.stDrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                        // all other drum chips
+                        default:
+                            return CDTXMania.stDrumHitRanges.tGetJudgement(nDeltaTimeMs);
+                    }
+
+                // guitar chips
+                case EInstrumentPart.GUITAR:
+                    return CDTXMania.stGuitarHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // bass chips
+                case EInstrumentPart.BASS:
+                    return CDTXMania.stBassHitRanges.tGetJudgement(nDeltaTimeMs);
+
+                // all other chips (measure lines, quarter lines, etc.)
+                case EInstrumentPart.UNKNOWN:
+                default:
+                    return STHitRanges.tCreateDefaultDTXHitRanges().tGetJudgement(nDeltaTimeMs);
+            }
         }
+
         protected CDTX.CChip r空うちChip(EInstrumentPart part, EPad pad)
         {
             switch (part)

@@ -327,6 +327,7 @@ namespace DTXMania
             }
 			return eJudgeResult;
 		}
+
 		protected override void tチップのヒット処理_BadならびにTight時のMiss( EInstrumentPart part )
 		{
 			this.tチップのヒット処理_BadならびにTight時のMiss( part, 0, EInstrumentPart.GUITAR );

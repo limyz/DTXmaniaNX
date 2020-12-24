@@ -436,22 +436,14 @@ namespace DTXMania
 								}
 							}
 						}
-						if ( boxdef.PerfectRange >= 0 )
-						{
-							c曲リストノード.nPerfect範囲ms = boxdef.PerfectRange;
-						}
-						if( boxdef.GreatRange >= 0 )
-						{
-							c曲リストノード.nGreat範囲ms = boxdef.GreatRange;
-						}
-						if( boxdef.GoodRange >= 0 )
-						{
-							c曲リストノード.nGood範囲ms = boxdef.GoodRange;
-						}
-						if( boxdef.PoorRange >= 0 )
-						{
-							c曲リストノード.nPoor範囲ms = boxdef.PoorRange;
-						}
+
+						// copy hit ranges from the box.def
+						// these can always be copied regardless of being set,
+						// as song list nodes and boxdefs use the same method to indicate an unset range
+						c曲リストノード.stDrumHitRanges = boxdef.stDrumHitRanges;
+						c曲リストノード.stDrumPedalHitRanges = boxdef.stDrumPedalHitRanges;
+						c曲リストノード.stGuitarHitRanges = boxdef.stGuitarHitRanges;
+						c曲リストノード.stBassHitRanges = boxdef.stBassHitRanges;
 					}
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -539,10 +531,10 @@ namespace DTXMania
 	
 					
 					c曲リストノード.list子リスト = new List<CSongListNode>();
-					c曲リストノード.nPerfect範囲ms = boxdef.PerfectRange;
-					c曲リストノード.nGreat範囲ms = boxdef.GreatRange;
-					c曲リストノード.nGood範囲ms = boxdef.GoodRange;
-					c曲リストノード.nPoor範囲ms = boxdef.PoorRange;
+					c曲リストノード.stDrumHitRanges = boxdef.stDrumHitRanges;
+					c曲リストノード.stDrumPedalHitRanges = boxdef.stDrumPedalHitRanges;
+					c曲リストノード.stGuitarHitRanges = boxdef.stGuitarHitRanges;
+					c曲リストノード.stBassHitRanges = boxdef.stBassHitRanges;
 					listノードリスト.Add( c曲リストノード );
 					if( CDTXMania.ConfigIni.bLogSongSearch )
 					{
@@ -589,26 +581,18 @@ namespace DTXMania
 							{
 								sb.Append( ", FontColor=" + c曲リストノード.col文字色 );
 							}
-							if( c曲リストノード.nPerfect範囲ms != -1 )
-							{
-								sb.Append( ", Perfect=" + c曲リストノード.nPerfect範囲ms + "ms" );
-							}
-							if( c曲リストノード.nGreat範囲ms != -1 )
-							{
-								sb.Append( ", Great=" + c曲リストノード.nGreat範囲ms + "ms" );
-							}
-							if( c曲リストノード.nGood範囲ms != -1 )
-							{
-								sb.Append( ", Good=" + c曲リストノード.nGood範囲ms + "ms" );
-							}
-							if( c曲リストノード.nPoor範囲ms != -1 )
-							{
-								sb.Append( ", Poor=" + c曲リストノード.nPoor範囲ms + "ms" );
-							}
+
+							// hit ranges
+							tTryAppendHitRanges(c曲リストノード.stDrumHitRanges, @"Drum", sb);
+							tTryAppendHitRanges(c曲リストノード.stDrumPedalHitRanges, @"DrumPedal", sb);
+							tTryAppendHitRanges(c曲リストノード.stGuitarHitRanges, @"Guitar", sb);
+							tTryAppendHitRanges(c曲リストノード.stBassHitRanges, @"Bass", sb);
+
 							if ( ( c曲リストノード.strSkinPath != null ) && ( c曲リストノード.strSkinPath.Length > 0 ) )
 							{
 								sb.Append( ", SkinPath=" + c曲リストノード.strSkinPath );
 							}
+
 							Trace.TraceInformation( sb.ToString() );
 						}
 						finally
@@ -634,6 +618,28 @@ namespace DTXMania
 				#endregion
 			}
 		}
+
+		/// <summary>
+		/// Append all the set values, if any, of the given <see cref="STHitRanges"/> to the given <see cref="StringBuilder"/>.
+		/// </summary>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to append the values of.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
+		/// <param name="builder">The <see cref="StringBuilder"/> to append to.</param>
+		private void tTryAppendHitRanges(STHitRanges stHitRanges, string strName, StringBuilder builder)
+		{
+			if (stHitRanges.nPerfectSizeMs >= 0)
+				builder.Append($@", {strName}Perfect={stHitRanges.nPerfectSizeMs}ms");
+
+			if (stHitRanges.nGreatSizeMs >= 0)
+				builder.Append($@", {strName}Great={stHitRanges.nGreatSizeMs}ms");
+
+			if (stHitRanges.nGoodSizeMs >= 0)
+				builder.Append($@", {strName}Good={stHitRanges.nGoodSizeMs}ms");
+
+			if (stHitRanges.nPoorSizeMs >= 0)
+				builder.Append($@", {strName}Poor={stHitRanges.nPoorSizeMs}ms");
+		}
+
 		//-----------------
 		#endregion
 		#region [ Reflect score cache in song list ]

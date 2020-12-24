@@ -14,10 +14,39 @@ namespace DTXMania
 		public Color Color;
 		public string Comment;
 		public string Genre;
-		public int GoodRange;
-		public int GreatRange;
-		public int PerfectRange;
-		public int PoorRange;
+
+		/// <summary>
+		/// The custom <see cref="STHitRanges"/> for all drum chips, except pedals, wthin this box.
+		/// </summary>
+		/// <remarks>
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
+		/// </remarks>
+		public STHitRanges stDrumHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="STHitRanges"/> for drum pedal chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
+		/// </remarks>
+		public STHitRanges stDrumPedalHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="STHitRanges"/> for guitar chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
+		/// </remarks>
+		public STHitRanges stGuitarHitRanges;
+
+		/// <summary>
+		/// The custom <see cref="STHitRanges"/> for bass guitar chips within this box.
+		/// </summary>
+		/// <remarks>
+		/// Note that individual values of this set can be set while others are not, as it is intended to be used with <see cref="STHitRanges.tCompose(STHitRanges, STHitRanges)"/>.
+		/// </remarks>
+		public STHitRanges stBassHitRanges;
+
 		public string Preimage;
 		public string Premovie;
 		public string Presound;
@@ -33,14 +62,14 @@ namespace DTXMania
 			this.Artist = "";
 			this.Comment = "BOX に移動します。";
 			this.Genre = "";
+			stDrumHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stDrumPedalHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stGuitarHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+			stBassHitRanges = new STHitRanges(nDefaultSizeMs: -1);
 			this.Preimage = "";
 			this.Premovie = "";
 			this.Presound = "";
 			this.Color = ColorTranslator.FromHtml( "White" );
-			this.PerfectRange = -1;
-			this.GreatRange = -1;
-			this.GoodRange = -1;
-			this.PoorRange = -1;
 			this.SkinPath = "";
             this.Difficlty = false;
 		}
@@ -111,38 +140,6 @@ namespace DTXMania
 							{
 								this.Color = ColorTranslator.FromHtml( str.Substring( 10 ).Trim( ignoreChars ) );
 							}
-							else if( str.StartsWith( "#PERFECTRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 13 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.PerfectRange = range;
-								}
-							}
-							else if( str.StartsWith( "#GREATRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 11 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.GreatRange = range;
-								}
-							}
-							else if( str.StartsWith( "#GOODRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 10 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.GoodRange = range;
-								}
-							}
-							else if( str.StartsWith( "#POORRANGE", StringComparison.OrdinalIgnoreCase ) )
-							{
-								int range = 0;
-								if ( int.TryParse( str.Substring( 10 ).Trim( ignoreChars ), out range ) && ( range >= 0 ) )
-								{
-									this.PoorRange = range;
-								}
-							}
                             else if ( str.StartsWith( "#DIFFICULTY", StringComparison.OrdinalIgnoreCase ) )
 							{
 								int range = 0;
@@ -161,6 +158,34 @@ namespace DTXMania
 									this.Difficlty = b;
 								}
 							}
+							else
+							{
+								// hit ranges
+								// map the legacy hit ranges to apply to each category
+								// they should only appear when reading from a legacy box.def,
+								// so simply copy values over whenever there is a change
+								STHitRanges stLegacyHitRanges = new STHitRanges(nDefaultSizeMs: -1);
+								if (tTryReadHitRangesField(str, string.Empty, ref stLegacyHitRanges))
+								{
+									stDrumHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumHitRanges);
+									stDrumPedalHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stDrumPedalHitRanges);
+									stGuitarHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stGuitarHitRanges);
+									stBassHitRanges = STHitRanges.tCompose(stLegacyHitRanges, stBassHitRanges);
+									continue;
+								}
+
+								if (tTryReadHitRangesField(str, @"DRUM", ref stDrumHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, @"DRUMPEDAL", ref stDrumPedalHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, @"GUITAR", ref stGuitarHitRanges))
+									continue;
+
+								if (tTryReadHitRangesField(str, @"BASS", ref stBassHitRanges))
+									continue;
+							}
 						}
 						continue;
 					}
@@ -171,6 +196,69 @@ namespace DTXMania
 				}
 			}
 			reader.Close();
+		}
+
+		/// <summary>
+		/// Read the box.def <see cref="STHitRanges"/> field, if any, described by the given parameters into the given <see cref="STHitRanges"/>.
+		/// </summary>
+		/// <param name="strLine">The raw box.def line being read from.</param>
+		/// <param name="strName">The unique identifier of <paramref name="stHitRanges"/>.</param>
+		/// <param name="stHitRanges">The <see cref="STHitRanges"/> to read into.</param>
+		/// <returns>Whether or not a field was read.</returns>
+		private bool tTryReadHitRangesField(string strLine, string strName, ref STHitRanges stHitRanges)
+		{
+			switch (strLine)
+			{
+				// perfect range size (±ms)
+				case var l when tTryReadInt(l, $@"{strName}PERFECTRANGE", out var r):
+					stHitRanges.nPerfectSizeMs = r;
+					return true;
+
+				// great range size (±ms)
+				case var l when tTryReadInt(l, $@"{strName}GREATRANGE", out var r):
+					stHitRanges.nGreatSizeMs = r;
+					return true;
+
+				// good range size (±ms)
+				case var l when tTryReadInt(l, $@"{strName}GOODRANGE", out var r):
+					stHitRanges.nGoodSizeMs = r;
+					return true;
+
+				// poor range size (±ms)
+				case var l when tTryReadInt(l, $@"{strName}POORRANGE", out var r):
+					stHitRanges.nPoorSizeMs = r;
+					return true;
+
+				// unknown field
+				default:
+					return false;
+			}
+		}
+
+		/// <summary>
+		/// Read the box.def <see cref="int"/> field, if any, described by the given parameters into the given <see cref="int"/>.
+		/// </summary>
+		/// <param name="strLine">The raw box.def line being read from.</param>
+		/// <param name="strFieldName">The name of the field to try and read.</param>
+		/// <param name="nValue">The <see cref="int"/> to read into.</param>
+		/// <returns>Whether or not the field was read.</returns>
+		private bool tTryReadInt(string strLine, string strFieldName, out int nValue)
+		{
+			// write a default value in case of a failure
+			nValue = 0;
+
+			// ensure the line is for the given field
+			string strPrefix = $@"#{strFieldName}";
+			if (!strLine.StartsWith(strPrefix, StringComparison.OrdinalIgnoreCase))
+				return false;
+
+			// read the value into the given int, stripping the field name and ignored characters
+			char[] chIgnoredCharacters = new[] { ':', ' ', '\t' };
+			string strValue = strLine.Substring(strPrefix.Length).Trim(chIgnoredCharacters);
+			if (!int.TryParse(strValue, out nValue))
+				return false;
+
+			return true;
 		}
 	}
 }
