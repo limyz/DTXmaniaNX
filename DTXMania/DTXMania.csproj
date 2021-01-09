@@ -39,6 +39,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +63,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>0219</NoWarn>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowedReferenceRelatedFileExtensions>none</AllowedReferenceRelatedFileExtensions>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005">
@@ -98,6 +101,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.113.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
@@ -110,6 +116,14 @@
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Configuration\CSetting.cs" />
+    <Compile Include="Code\Configuration\Settings\CBoolSetting.cs" />
+    <Compile Include="Code\Configuration\Settings\CEnumSetting.cs" />
+    <Compile Include="Code\Configuration\Settings\CIntSetting.cs" />
+    <Compile Include="Code\Configuration\CConfigurationStore.cs" />
+    <Compile Include="Code\Configuration\Settings\CStringSetting.cs" />
+    <Compile Include="Code\Configuration\Settings\ESettingCategory.cs" />
+    <Compile Include="Code\Configuration\Settings\ISetting.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
     <Compile Include="Code\Stage\CDTXVmode.cs" />
@@ -126,6 +140,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="DTXManiaGR.exe.x86.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -283,4 +298,25 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.113.3\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+
+  <!-- Copy NuGet DLLs to output\dll\ -->
+  <ItemDefinitionGroup>
+    <ReferenceCopyLocalPaths>
+      <DestinationSubDirectory>dll\</DestinationSubDirectory>
+    </ReferenceCopyLocalPaths>
+  </ItemDefinitionGroup>
+
+  <!-- Copy System.Data.SQLite Interop DLLs to output\dll\ -->
+  <Target Name="ChangeSQLiteInteropFilesOutDir" BeforeTargets="CopySQLiteInteropFiles;CleanSQLiteInteropFiles">
+    <PropertyGroup>
+      <OutDir>..\Runtime\dll\</OutDir>
+    </PropertyGroup>
+  </Target>
 </Project>
