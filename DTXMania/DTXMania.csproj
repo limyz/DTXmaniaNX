@@ -67,7 +67,13 @@
       <HintPath>..\Runtime\dll\DirectShowLib-2005.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DiscordRPC">
+      <HintPath>..\Runtime\dll\DiscordRPC.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Runtime\dll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX">
       <HintPath>..\Runtime\dll\SharpDX.dll</HintPath>
       <Private>False</Private>
