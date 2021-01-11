@@ -1,13 +1,23 @@
-﻿using System;
+﻿using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using FDK;
 
 namespace DTXMania
 {
-	public class CStage : CActivity
+	public abstract class CStage : CActivity
 	{
 		// プロパティ
+
+		/// <summary>
+		/// The presence used to indicate the user's activity within this stage, or <see langword="null"/> if there is none.
+		/// </summary>
+		protected virtual RichPresence Presence => new CDTXRichPresence
+		{
+			State = "In Menu",
+			Details = "Idle",
+		};
 
 		internal enum EHitJudgement
 		{
@@ -66,5 +76,20 @@ namespace DTXMania
 			演奏_STAGE_RESTART
 		}
         public bool bIsStageFailed;
+
+		public override void OnActivate()
+		{
+			base.OnActivate();
+			DisplayPresence();
+		}
+
+		/// <summary>
+		/// Display the current <see cref="Presence"/> of this stage.
+		/// </summary>
+		protected void DisplayPresence()
+		{
+			if (Presence is var presence && presence != null)
+				CDTXMania.DiscordRichPresence.SetPresence(presence);
+		}
 	}
 }

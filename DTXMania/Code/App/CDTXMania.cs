@@ -56,6 +56,9 @@ namespace DTXMania
             get;
             private set;
         }
+
+        public static CDiscordRichPresence DiscordRichPresence { get; private set; }
+
         public static CDTX DTX
         {
             get
@@ -2469,6 +2472,9 @@ for (int i = 0; i < 3; i++) {
             //---------------------
             #endregion
 
+            #region [ Discord Rich Presence ]
+            DiscordRichPresence = new CDiscordRichPresence();
+            #endregion
 
             Trace.TraceInformation("アプリケーションの初期化を完了しました。");
 
@@ -2803,6 +2809,12 @@ for (int i = 0; i < 3; i++) {
                 }
                 //---------------------
                 #endregion
+
+                #region [ Discord Rich Presence ]
+                DiscordRichPresence.Dispose();
+                DiscordRichPresence = null;
+                #endregion
+
                 Trace.TraceInformation("アプリケーションの終了処理を完了しました。");
 
 
