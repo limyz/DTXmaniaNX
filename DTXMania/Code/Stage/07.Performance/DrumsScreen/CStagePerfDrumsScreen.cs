@@ -194,7 +194,7 @@ namespace DTXMania
 
                     base.bJustStartedUpdate = false;
 
-                    // re-display presence now that the initial timer reset has been performed
+                    // display presence now that the initial timer reset has been performed
                     tDisplayPresence();
                 }
 

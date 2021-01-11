@@ -966,7 +966,7 @@ namespace DTXMania
 		public string strDiscordRichPresenceLargeImageKey;
 
 		/// <summary>
-		/// The unique identifier of the small image to display alongside presences when playing in drums mode.
+		/// The unique identifier of the small image to display alongside presences when playing in drum mode.
 		/// </summary>
 		public string strDiscordRichPresenceSmallImageKeyDrums;
 
@@ -2226,18 +2226,18 @@ namespace DTXMania
 			sw.WriteLine(@"[DiscordRichPresence]");
 			sw.WriteLine();
 			sw.WriteLine("; Enable Rich Presence integration (0:OFF, 1:ON)");
-			sw.WriteLine($"Enable={(bDiscordRichPresenceEnabled ? @"1" : @"0")}");
+			sw.WriteLine($"Enable={(bDiscordRichPresenceEnabled ? 1 : 0)}");
 			sw.WriteLine();
 			sw.WriteLine("; Unique client identifier of the Discord Application to use");
 			sw.WriteLine($"ApplicationID={strDiscordRichPresenceApplicationID}");
 			sw.WriteLine();
-			sw.WriteLine("; Unique identifier of the large image to display");
+			sw.WriteLine("; Unique identifier of the large image to display alongside presences");
 			sw.WriteLine($"LargeImage={strDiscordRichPresenceLargeImageKey}");
 			sw.WriteLine();
-			sw.WriteLine("; Unique identifier of the small image to display in drums mode");
+			sw.WriteLine("; Unique identifier of the small image to display alongside presences in drum mode");
 			sw.WriteLine($"SmallImageDrums={strDiscordRichPresenceSmallImageKeyDrums}");
 			sw.WriteLine();
-			sw.WriteLine("; Unique identifier of the small image to display in guitar mode");
+			sw.WriteLine("; Unique identifier of the small image to display alongside presences in guitar mode");
 			sw.WriteLine($"SmallImageGuitar={strDiscordRichPresenceSmallImageKeyGuitar}");
 			sw.WriteLine();
 			sw.WriteLine(@";-------------------");
