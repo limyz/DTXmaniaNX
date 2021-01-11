@@ -195,7 +195,7 @@ namespace DTXMania
                     base.bJustStartedUpdate = false;
 
                     // re-display presence now that the initial timer reset has been performed
-                    DisplayPresence();
+                    tDisplayPresence();
                 }
 
                 if ((CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && !this.bIsTrainingMode && this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))

@@ -5682,7 +5682,7 @@ namespace DTXMania
             CSoundManager.rcPerformanceTimer.tResume();
 
             // re-display presence with new timestamps
-            DisplayPresence();
+            tDisplayPresence();
         }
 
         protected void tChangePlaySpeed(int nSpeedOffset)
@@ -5717,7 +5717,7 @@ namespace DTXMania
             }
 
             // re-display presence with new timestamps
-            DisplayPresence();
+            tDisplayPresence();
         }
 
         private void tGeneratePlaySpeedTexture()

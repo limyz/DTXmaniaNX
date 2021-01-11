@@ -57,6 +57,9 @@ namespace DTXMania
             private set;
         }
 
+        /// <summary>
+        /// The shared Rich Presence integration instance.
+        /// </summary>
         public static CDiscordRichPresence DiscordRichPresence { get; private set; }
 
         public static CDTX DTX

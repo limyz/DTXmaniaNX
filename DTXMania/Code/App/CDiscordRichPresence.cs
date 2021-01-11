@@ -1,5 +1,4 @@
 ﻿using DiscordRPC;
-using DiscordRPC.Message;
 using System;
 using System.Diagnostics;
 
@@ -25,7 +24,7 @@ namespace DTXMania
 
         public CDiscordRichPresence()
         {
-            client = new DiscordRpcClient(application_id);
+            client = new DiscordRpcClient(str_application_id);
             client.OnReady += (s, a) => Trace.TraceInformation($"Discord Rich Presence ready.");
             client.OnError += (s, a) => Trace.TraceError($"Discord Rich Presence error: {a.Message} ({a.Code})");
 
@@ -50,6 +49,6 @@ namespace DTXMania
         /// Set this instance's presence to the given <see cref="RichPresence"/>.
         /// </summary>
         /// <param name="presence">The presence to set.</param>
-        public void SetPresence(RichPresence presence) => client.SetPresence(presence);
+        public void tSetPresence(RichPresence presence) => client.SetPresence(presence);
     }
 }

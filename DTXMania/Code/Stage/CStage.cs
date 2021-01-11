@@ -80,16 +80,16 @@ namespace DTXMania
 		public override void OnActivate()
 		{
 			base.OnActivate();
-			DisplayPresence();
+			tDisplayPresence();
 		}
 
 		/// <summary>
 		/// Display the current <see cref="Presence"/> of this stage.
 		/// </summary>
-		protected void DisplayPresence()
+		protected void tDisplayPresence()
 		{
 			if (Presence is var presence && presence != null)
-				CDTXMania.DiscordRichPresence.SetPresence(presence);
+				CDTXMania.DiscordRichPresence.tSetPresence(presence);
 		}
 	}
 }
