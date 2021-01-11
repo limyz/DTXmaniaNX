@@ -26,9 +26,17 @@ namespace DTXMania
         public CDiscordRichPresence()
         {
             client = new DiscordRpcClient(application_id);
-            client.OnReady += onReady;
-            client.OnConnectionFailed += (s, a) => client.Deinitialize();
-            client.OnError += onError;
+            client.OnReady += (s, a) => Trace.TraceInformation($"Discord Rich Presence ready.");
+            client.OnError += (s, a) => Trace.TraceError($"Discord Rich Presence error: {a.Message} ({a.Code})");
+
+            // if this occurs then discord is likely not open,
+            // so dont continue spamming connection attempts
+            client.OnConnectionFailed += (s, a) =>
+            {
+                Trace.TraceInformation($"Unable to connect to Discord, disabling Rich Presence.");
+                client.Deinitialize();
+            };
+
             client.Initialize();
         }
 
@@ -43,9 +51,5 @@ namespace DTXMania
         /// </summary>
         /// <param name="presence">The presence to set.</param>
         public void SetPresence(RichPresence presence) => client.SetPresence(presence);
-
-        private void onReady(object sender, ReadyMessage args) => Trace.TraceInformation($"Discord Rich Presence ready.");
-
-        private void onError(object sender, ErrorMessage args) => Trace.TraceError($"Discord Rich Presence error: {args.Message} ({args.Code})");
     }
 }
