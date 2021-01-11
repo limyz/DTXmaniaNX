@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
@@ -14,6 +15,13 @@ namespace DTXMania
 	internal class CStageSongSelection : CStage
 	{
 		// プロパティ
+
+		protected override RichPresence Presence => new CDTXRichPresence
+		{
+			State = "In Menu",
+			Details = "Selecting a song",
+		};
+
 		public int nScrollbarRelativeYCoordinate
 		{
 			get

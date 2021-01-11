@@ -111,7 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\App\CCommandParse.cs" />
+    <Compile Include="Code\App\CDiscordRichPresence.cs" />
     <Compile Include="Code\App\CDTX2WAVmode.cs" />
+    <Compile Include="Code\App\CDTXRichPresence.cs" />
     <Compile Include="Code\App\STHitRanges.cs" />
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
