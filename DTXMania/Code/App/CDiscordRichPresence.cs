@@ -13,18 +13,13 @@ namespace DTXMania
     public class CDiscordRichPresence : IDisposable
     {
         /// <summary>
-        /// The unique identifier of the Discord Application used to present Rich Presence.
-        /// </summary>
-        private const string application_id = @"<CLIENT ID>";
-
-        /// <summary>
         /// The client used by this instance.
         /// </summary>
         private DiscordRpcClient client;
 
-        public CDiscordRichPresence()
+        public CDiscordRichPresence(string strApplicationID)
         {
-            client = new DiscordRpcClient(str_application_id);
+            client = new DiscordRpcClient(strApplicationID);
             client.OnReady += (s, a) => Trace.TraceInformation($"Discord Rich Presence ready.");
             client.OnError += (s, a) => Trace.TraceError($"Discord Rich Presence error: {a.Message} ({a.Code})");
 

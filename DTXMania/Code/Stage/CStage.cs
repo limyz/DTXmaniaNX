@@ -89,7 +89,7 @@ namespace DTXMania
 		protected void tDisplayPresence()
 		{
 			if (Presence is var presence && presence != null)
-				CDTXMania.DiscordRichPresence.tSetPresence(presence);
+				CDTXMania.DiscordRichPresence?.tSetPresence(presence);
 		}
 	}
 }

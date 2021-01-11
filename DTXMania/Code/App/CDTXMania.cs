@@ -58,7 +58,7 @@ namespace DTXMania
         }
 
         /// <summary>
-        /// The shared Rich Presence integration instance.
+        /// The shared Rich Presence integration instance, or <see langword="null"/> if it is disabled.
         /// </summary>
         public static CDiscordRichPresence DiscordRichPresence { get; private set; }
 
@@ -2476,7 +2476,8 @@ for (int i = 0; i < 3; i++) {
             #endregion
 
             #region [ Discord Rich Presence ]
-            DiscordRichPresence = new CDiscordRichPresence();
+            if (ConfigIni.bDiscordRichPresenceEnabled)
+                DiscordRichPresence = new CDiscordRichPresence(ConfigIni.strDiscordRichPresenceApplicationID);
             #endregion
 
             Trace.TraceInformation("アプリケーションの初期化を完了しました。");
@@ -2814,7 +2815,7 @@ for (int i = 0; i < 3; i++) {
                 #endregion
 
                 #region [ Discord Rich Presence ]
-                DiscordRichPresence.Dispose();
+                DiscordRichPresence?.Dispose();
                 DiscordRichPresence = null;
                 #endregion
 

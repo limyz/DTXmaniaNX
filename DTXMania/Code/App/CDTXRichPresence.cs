@@ -11,9 +11,9 @@ namespace DTXMania
         {
             Assets = new Assets()
             {
-                LargeImageKey = @"placeholder",
+                LargeImageKey = CDTXMania.ConfigIni.strDiscordRichPresenceLargeImageKey,
                 LargeImageText = CDTXMania.VERSION,
-                SmallImageKey = @"placeholder",
+                SmallImageKey = CDTXMania.ConfigIni.bGuitarRevolutionMode ? CDTXMania.ConfigIni.strDiscordRichPresenceSmallImageKeyGuitar : CDTXMania.ConfigIni.strDiscordRichPresenceSmallImageKeyDrums,
                 SmallImageText = CDTXMania.ConfigIni.bGuitarRevolutionMode ? "Guitar and Bass" : "Drums",
             };
         }
