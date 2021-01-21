@@ -115,7 +115,7 @@ namespace DTXMania
                 new string[] { "0%", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%" });
             this.listItems.Add(this.iSystemMovieAlpha);
 
-            this.iCommonPlaySpeed = new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.nPlaySpeed,
+            this.iCommonPlaySpeed = new CItemInteger("PlaySpeed", CConstants.PLAYSPEED_MIN, CConstants.PLAYSPEED_MAX, CDTXMania.ConfigIni.nPlaySpeed,
                 "曲の演奏速度を、速くしたり\n"+
                 "遅くしたりすることができます。\n"+
                 "※一部のサウンドカードでは、\n"+

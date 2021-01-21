@@ -99,7 +99,7 @@ namespace DTXMania
                 " the number of Poor/Miss times to be\n" +
                 " FAILED.\n" +
                 "Set 0 to disable Risky mode."));
-            l.Add(new CItemInteger("PlaySpeed", 5, 40, CDTXMania.ConfigIni.nPlaySpeed,
+            l.Add(new CItemInteger("PlaySpeed", CConstants.PLAYSPEED_MIN, CConstants.PLAYSPEED_MAX, CDTXMania.ConfigIni.nPlaySpeed,
                 "曲の演奏速度を、速くしたり遅くした\n" +
                 "りすることができます。\n" +
                 "（※一部のサウンドカードでは正しく\n" +

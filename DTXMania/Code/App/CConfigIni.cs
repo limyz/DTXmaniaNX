@@ -3105,7 +3105,7 @@ namespace DTXMania
 											}
 											else if( str3.Equals( "PlaySpeed" ) )
 											{
-												this.nPlaySpeed = CConversion.nGetNumberIfInRange( str4, 5, 40, this.nPlaySpeed );
+												this.nPlaySpeed = CConversion.nGetNumberIfInRange( str4, CConstants.PLAYSPEED_MIN, CConstants.PLAYSPEED_MAX, this.nPlaySpeed );
 											}
 											else if (str3.Equals("SaveScoreIfModifiedPlaySpeed"))
 											{
