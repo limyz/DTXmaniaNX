@@ -2075,14 +2075,20 @@ namespace DTXMania
                 else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.DecreasePlaySpeed))
                 {
                     // Decrease Play Speed
-                    this.bIsTrainingMode = true;
-                    this.tChangePlaySpeed(-1);
+                    if (CDTXMania.ConfigIni.nPlaySpeed > CConstants.PLAYSPEED_MIN)
+                    {
+                        this.bIsTrainingMode = true;
+                        this.tChangePlaySpeed(-1);
+                    }
                 }
                 else if (CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.IncreasePlaySpeed))
                 {
                     // Increase Play Speed
-                    this.bIsTrainingMode = true;
-                    this.tChangePlaySpeed(1);
+                    if (CDTXMania.ConfigIni.nPlaySpeed < CConstants.PLAYSPEED_MAX)
+                    {
+                        this.bIsTrainingMode = true;
+                        this.tChangePlaySpeed(1);
+                    }
                 }
 
                 if (!CDTXMania.ConfigIni.bReverse.Drums && keyboard.bKeyPressing((int)SlimDXKey.PageUp))

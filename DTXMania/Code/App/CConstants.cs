@@ -785,6 +785,8 @@ namespace DTXMania
 		public const int SCORE_H = 0x18;
 		public const int SCORE_W = 12;
 		public const int SUDDEN_POS = 200;
+		public const int PLAYSPEED_MIN = 5;
+		public const int PLAYSPEED_MAX = 40;
 
 		public class Drums
 		{
