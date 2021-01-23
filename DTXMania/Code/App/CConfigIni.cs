@@ -1346,10 +1346,10 @@ namespace DTXMania
 
 			#region [ DiscordRichPresence ]
 			bDiscordRichPresenceEnabled = true;
-			strDiscordRichPresenceApplicationID = @"<PLACEHOLDER>";
-			strDiscordRichPresenceLargeImageKey = @"<PLACEHOLDER>";
-			strDiscordRichPresenceSmallImageKeyDrums = @"<PLACEHOLDER>";
-			strDiscordRichPresenceSmallImageKeyGuitar = @"<PLACEHOLDER>";
+			strDiscordRichPresenceApplicationID = @"802329379979657257";
+			strDiscordRichPresenceLargeImageKey = @"dtxmania";
+			strDiscordRichPresenceSmallImageKeyDrums = @"drums";
+			strDiscordRichPresenceSmallImageKeyGuitar = @"guitar";
 			#endregion
 
 			this.ConfigIniファイル名 = "";
