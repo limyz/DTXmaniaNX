@@ -950,6 +950,31 @@ namespace DTXMania
 		/// </summary>
 		public STHitRanges stBassHitRanges;
 
+		/// <summary>
+		/// Whether or not Discord Rich Presence integration is enabled.
+		/// </summary>
+		public bool bDiscordRichPresenceEnabled;
+
+		/// <summary>
+		/// The unique client identifier of the Discord Application to use for Discord Rich Presence integration.
+		/// </summary>
+		public string strDiscordRichPresenceApplicationID;
+
+		/// <summary>
+		/// The unique identifier of the large image to display alongside presences.
+		/// </summary>
+		public string strDiscordRichPresenceLargeImageKey;
+
+		/// <summary>
+		/// The unique identifier of the small image to display alongside presences when playing in drum mode.
+		/// </summary>
+		public string strDiscordRichPresenceSmallImageKeyDrums;
+
+		/// <summary>
+		/// The unique identifier of the small image to display alongside presences when playing in guitar mode.
+		/// </summary>
+		public string strDiscordRichPresenceSmallImageKeyGuitar;
+
 		public STLANEVALUE nVelocityMin;
 		[StructLayout( LayoutKind.Sequential )]
 		public struct STLANEVALUE
@@ -1317,6 +1342,14 @@ namespace DTXMania
 			stGuitarHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
 			stBassHitRanges = STHitRanges.tCreateDefaultDTXHitRanges();
 
+			#endregion
+
+			#region [ DiscordRichPresence ]
+			bDiscordRichPresenceEnabled = true;
+			strDiscordRichPresenceApplicationID = @"802329379979657257";
+			strDiscordRichPresenceLargeImageKey = @"dtxmania";
+			strDiscordRichPresenceSmallImageKeyDrums = @"drums";
+			strDiscordRichPresenceSmallImageKeyGuitar = @"guitar";
 			#endregion
 
 			this.ConfigIniファイル名 = "";
@@ -2188,6 +2221,28 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.WriteLine( ";-------------------" );
 			#endregion
+
+			#region [ Discord Rich Presence ]
+			sw.WriteLine(@"[DiscordRichPresence]");
+			sw.WriteLine();
+			sw.WriteLine("; Enable Rich Presence integration (0:OFF, 1:ON)");
+			sw.WriteLine($"Enable={(bDiscordRichPresenceEnabled ? 1 : 0)}");
+			sw.WriteLine();
+			sw.WriteLine("; Unique client identifier of the Discord Application to use");
+			sw.WriteLine($"ApplicationID={strDiscordRichPresenceApplicationID}");
+			sw.WriteLine();
+			sw.WriteLine("; Unique identifier of the large image to display alongside presences");
+			sw.WriteLine($"LargeImage={strDiscordRichPresenceLargeImageKey}");
+			sw.WriteLine();
+			sw.WriteLine("; Unique identifier of the small image to display alongside presences in drum mode");
+			sw.WriteLine($"SmallImageDrums={strDiscordRichPresenceSmallImageKeyDrums}");
+			sw.WriteLine();
+			sw.WriteLine("; Unique identifier of the small image to display alongside presences in guitar mode");
+			sw.WriteLine($"SmallImageGuitar={strDiscordRichPresenceSmallImageKeyGuitar}");
+			sw.WriteLine();
+			sw.WriteLine(@";-------------------");
+			#endregion
+
 			#region [ GUID ]
 			sw.WriteLine( "[GUID]" );
 			sw.WriteLine();
@@ -2427,6 +2482,10 @@ namespace DTXMania
 							else if ( str2.Equals( "HitRange" ) )
 							{
 								unknown = ESectionType.HitRange;
+							}
+							else if (str2.Equals(@"DiscordRichPresence"))
+							{
+								unknown = ESectionType.DiscordRichPresence;
 							}
 							else if ( str2.Equals( "GUID" ) )
 							{
@@ -3543,6 +3602,29 @@ namespace DTXMania
 									//-----------------------------
 									#endregion
 
+									#region [ [DiscordRichPresence] ]
+									case ESectionType.DiscordRichPresence:
+										switch (str3)
+										{
+											case @"Enable":
+												bDiscordRichPresenceEnabled = CConversion.bONorOFF(str4[0]);
+												break;
+											case @"ApplicationID":
+												strDiscordRichPresenceApplicationID = str4;
+												break;
+											case @"LargeImage":
+												strDiscordRichPresenceLargeImageKey = str4;
+												break;
+											case @"SmallImageDrums":
+												strDiscordRichPresenceSmallImageKeyDrums = str4;
+												break;
+											case @"SmallImageGuitar":
+												strDiscordRichPresenceSmallImageKeyGuitar = str4;
+												break;
+										}
+										continue;
+									#endregion
+
 									#region [ [GUID] ]
 									//-----------------------------
 									case ESectionType.GUID:
@@ -3824,6 +3906,7 @@ namespace DTXMania
 			PlayOption,
 			AutoPlay,
 			HitRange,
+			DiscordRichPresence,
 			GUID,
 			DrumsKeyAssign,
 			GuitarKeyAssign,

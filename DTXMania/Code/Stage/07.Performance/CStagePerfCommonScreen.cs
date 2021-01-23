@@ -1,3 +1,4 @@
+using DiscordRPC;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Diagnostics;
 using System.Threading;
+using System.Linq;
 using SharpDX;
 using SharpDX.Direct3D9;
 using DirectShowLib;
@@ -24,6 +26,35 @@ namespace DTXMania
     /// </summary>
     internal abstract class CStagePerfCommonScreen : CStage
     {
+        protected override RichPresence Presence
+        {
+            get
+            {
+                // if presence is displayed before this point then it will use
+                // the unitialised timer time, displaying an incorrect timestamp
+                // so dont display any presence until initialisation has occurred
+                if (bJustStartedUpdate)
+                    return null;
+
+                var stSongInformation = CDTXMania.stageSongSelection.rSelectedScore.SongInformation;
+                var rConfirmedSong = CDTXMania.stageSongSelection.rConfirmedSong;
+                var nConfirmedDifficulty = CDTXMania.stageSongSelection.nConfirmedSongDifficulty;
+                var nEndTimeMs = CDTXMania.DTX.listChip.OrderBy(c => c.nPlaybackTimeMs).LastOrDefault()?.nPlaybackTimeMs ?? 0;
+                return new CDTXRichPresence
+                {
+                    State = "In Game",
+
+                    // artist - title [difficulty]
+                    // some songs omit the artist, so dont include the dash separator in such cases
+                    Details = $"{(string.IsNullOrEmpty(stSongInformation.ArtistName) ? string.Empty : $"{stSongInformation.ArtistName} - ")}{rConfirmedSong.strタイトル} [{rConfirmedSong.arDifficultyLabel[nConfirmedDifficulty]}]",
+
+                    // playback speed is automatically applied as chip timings are modified,
+                    // but the current time must be accounted for in start/end to display correct timestamps when seeking around
+                    Timestamps = Timestamps.FromTimeSpan((nEndTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) / 1000.0),
+                };
+            }
+        }
+
         // プロパティ
 
         public CStagePerfCommonScreen()
@@ -5655,6 +5686,9 @@ namespace DTXMania
 
             this.bPAUSE = false;
             CSoundManager.rcPerformanceTimer.tResume();
+
+            // re-display presence with new timestamps
+            tDisplayPresence();
         }
 
         protected void tChangePlaySpeed(int nSpeedOffset)
@@ -5687,6 +5721,9 @@ namespace DTXMania
             {
                 tGeneratePlaySpeedTexture();
             }
+
+            // re-display presence with new timestamps
+            tDisplayPresence();
         }
 
         private void tGeneratePlaySpeedTexture()

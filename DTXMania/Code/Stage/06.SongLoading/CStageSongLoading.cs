@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
@@ -19,6 +20,9 @@ namespace DTXMania
 {
     internal class CStageSongLoading : CStage
     {
+        // retain presence from song select
+        protected override RichPresence Presence => null;
+
         // コンストラクタ
 
         public CStageSongLoading()

@@ -157,6 +157,9 @@ namespace DTXMania
 					}
 
 					base.bJustStartedUpdate = false;
+
+					// display presence now that the initial timer reset has been performed
+					tDisplayPresence();
 				}
 				if( CDTXMania.ConfigIni.bSTAGEFAILEDEnabled && !this.bIsTrainingMode && ( base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
 				{
