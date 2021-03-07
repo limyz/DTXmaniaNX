@@ -1,5 +1,4 @@
-﻿using DiscordRPC;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
@@ -7,6 +6,8 @@ using System.Drawing;
 using System.Diagnostics;
 using System.IO;
 using FDK;
+using DirectShowLib;
+using DiscordRPC;
 
 using SlimDXKey = SlimDX.DirectInput.Key;
 
@@ -14,15 +15,15 @@ namespace DTXMania
 {
 	internal class CStageSongSelection : CStage
 	{
-		// プロパティ
+        // プロパティ
 
-		protected override RichPresence Presence => new CDTXRichPresence
-		{
-			State = "In Menu",
-			Details = "Selecting a song",
-		};
+        protected override RichPresence Presence => new CDTXRichPresence
+        {
+            State = "In Menu",
+            Details = "Selecting a song",
+        };
 
-		public int nScrollbarRelativeYCoordinate
+        public int nScrollbarRelativeYCoordinate
 		{
 			get
 			{
@@ -248,6 +249,8 @@ namespace DTXMania
 				this.txTopPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_header panel.png" ), false );
 				this.txBottomPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_footer panel.png" ), false );
 				this.prvFontSearchInputNotification = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 14, FontStyle.Regular);
+				this.dsBackgroundVideo = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\5_background.mp4"), CDTXMania.app.WindowHandle, true);
+				this.txBPMLabel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_BPM.png"), false);
 
 				base.OnManagedCreateResources();
 			}
@@ -257,10 +260,12 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 CDTXMania.t安全にDisposeする( ref this.r現在演奏中のスコアの背景動画 );
+				CDTXMania.t安全にDisposeする(ref this.dsBackgroundVideo);
 
 				CDTXMania.tReleaseTexture( ref this.txBackground);
 				CDTXMania.tReleaseTexture( ref this.txTopPanel);
 				CDTXMania.tReleaseTexture( ref this.txBottomPanel);
+				CDTXMania.tReleaseTexture(ref this.txBPMLabel);
 				//
 				CDTXMania.t安全にDisposeする(ref this.txSearchInputNotification);
 				CDTXMania.t安全にDisposeする(ref this.prvFontSearchInputNotification);
@@ -295,15 +300,47 @@ namespace DTXMania
 
 				this.ct登場時アニメ用共通.tUpdate();
 
+				//Draw background video and image
+				if(this.dsBackgroundVideo != null)
+                {
+					this.dsBackgroundVideo.t再生開始();
+					this.dsBackgroundVideo.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
+					this.dsBackgroundVideo.bループ再生 = true;
+
+					if (this.lDshowPosition == this.lStopPosition)
+					{
+						this.dsBackgroundVideo.MediaSeeking.SetPositions(
+						DsLong.FromInt64((long)(0)),
+						AMSeekingSeekingFlags.AbsolutePositioning,
+						0,
+						AMSeekingSeekingFlags.NoPositioning);
+					}
+
+					this.dsBackgroundVideo.t現時点における最新のスナップイメージをTextureに転写する(this.txBackground);
+				}
+
 				if( this.txBackground != null )
-					this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
+                {
+					if (this.dsBackgroundVideo != null && this.dsBackgroundVideo.b上下反転)
+					{
+						this.txBackground.tDraw2DUpsideDown(CDTXMania.app.Device, 0, 0);
+					}
+					else
+					{
+						this.txBackground.tDraw2D(CDTXMania.app.Device, 0, 0);						
+					}
+				}
+
+				if (this.txBPMLabel != null)
+					this.txBPMLabel.tDraw2D(CDTXMania.app.Device, 32, 288);
 
 				this.actPreimagePanel.OnUpdateAndDraw();
 			//	this.bIsEnumeratingSongs = !this.actPreimageパネル.bIsPlayingPremovie;				// #27060 2011.3.2 yyagi: #PREMOVIE再生中は曲検索を中断する
 
-				this.actStatusPanel.OnUpdateAndDraw();
+				//this.actStatusPanel.OnUpdateAndDraw();
 				this.actArtistComment.OnUpdateAndDraw();
 				this.actSongList.OnUpdateAndDraw();
+				this.actStatusPanel.OnUpdateAndDraw();
 				this.actPerHistoryPanel.OnUpdateAndDraw();
 				int y = 0;
 				if( this.ct登場時アニメ用共通.b進行中 )
@@ -826,6 +863,10 @@ namespace DTXMania
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
+		private CTexture txBPMLabel;
+		private CDirectShow dsBackgroundVideo; // background Video
+		private long lDshowPosition;
+		private long lStopPosition;
 
 		//
 		private Font ftSearchInputNotificationFont;
