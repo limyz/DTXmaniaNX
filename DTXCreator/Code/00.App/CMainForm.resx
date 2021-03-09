@@ -112,36 +112,36 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainerタブと譜面を分割.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainerタブと譜面を分割.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 52</value>
+    <value>0, 49</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 308</value>
+    <value>247, 334</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 25</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonRESULTIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Text" xml:space="preserve">
     <value>...</value>
   </data>
-  <metadata name="toolTipツールチップ.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolTipツールチップ.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>572, 17</value>
   </metadata>
   <data name="buttonRESULTIMAGE参照.ToolTip" xml:space="preserve">
@@ -151,7 +151,7 @@
     <value>buttonRESULTIMAGE参照</value>
   </data>
   <data name="&gt;&gt;buttonRESULTIMAGE参照.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonRESULTIMAGE参照.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -163,10 +163,10 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonBACKGROUND参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 283</value>
+    <value>247, 307</value>
   </data>
   <data name="buttonBACKGROUND参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="buttonBACKGROUND参照.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -181,7 +181,7 @@
     <value>buttonBACKGROUND参照</value>
   </data>
   <data name="&gt;&gt;buttonBACKGROUND参照.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonBACKGROUND参照.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -193,10 +193,10 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonSTAGEFILE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 258</value>
+    <value>247, 280</value>
   </data>
   <data name="buttonSTAGEFILE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="buttonSTAGEFILE参照.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -211,7 +211,7 @@
     <value>buttonSTAGEFILE参照</value>
   </data>
   <data name="&gt;&gt;buttonSTAGEFILE参照.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonSTAGEFILE参照.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -223,10 +223,10 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonPREIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 233</value>
+    <value>247, 252</value>
   </data>
   <data name="buttonPREIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="buttonPREIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -241,7 +241,7 @@
     <value>buttonPREIMAGE参照</value>
   </data>
   <data name="&gt;&gt;buttonPREIMAGE参照.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPREIMAGE参照.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -253,10 +253,10 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonPREVIEW参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 208</value>
+    <value>247, 225</value>
   </data>
   <data name="buttonPREVIEW参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>25, 25</value>
   </data>
   <data name="buttonPREVIEW参照.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -272,7 +272,7 @@
     <value>buttonPREVIEW参照</value>
   </data>
   <data name="&gt;&gt;buttonPREVIEW参照.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPREVIEW参照.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -284,10 +284,10 @@
     <value>True</value>
   </data>
   <data name="labeRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 311</value>
+    <value>11, 337</value>
   </data>
   <data name="labeRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 12</value>
+    <value>66, 13</value>
   </data>
   <data name="labeRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -306,7 +306,7 @@ The image size is 204x269.</value>
     <value>labeRESULTIMAGE</value>
   </data>
   <data name="&gt;&gt;labeRESULTIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labeRESULTIMAGE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -318,10 +318,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 286</value>
+    <value>18, 310</value>
   </data>
   <data name="labelBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 12</value>
+    <value>61, 13</value>
   </data>
   <data name="labelBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -340,7 +340,7 @@ The image size is 640x480.</value>
     <value>labelBACKGROUND</value>
   </data>
   <data name="&gt;&gt;labelBACKGROUND.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelBACKGROUND.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -352,10 +352,10 @@ The image size is 640x480.</value>
     <value>True</value>
   </data>
   <data name="labelSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 261</value>
+    <value>5, 283</value>
   </data>
   <data name="labelSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 12</value>
+    <value>74, 13</value>
   </data>
   <data name="labelSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -374,7 +374,7 @@ The image size is 640x480.</value>
     <value>labelSTAGEFILE</value>
   </data>
   <data name="&gt;&gt;labelSTAGEFILE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelSTAGEFILE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -386,10 +386,10 @@ The image size is 640x480.</value>
     <value>True</value>
   </data>
   <data name="labelPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 236</value>
+    <value>26, 256</value>
   </data>
   <data name="labelPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 12</value>
+    <value>51, 13</value>
   </data>
   <data name="labelPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -408,7 +408,7 @@ The image size is 204x269.</value>
     <value>labelPREIMAGE</value>
   </data>
   <data name="&gt;&gt;labelPREIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelPREIMAGE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -420,10 +420,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 213</value>
+    <value>33, 231</value>
   </data>
   <data name="labelPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 12</value>
+    <value>45, 13</value>
   </data>
   <data name="labelPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -441,7 +441,7 @@ The image size is 204x269.</value>
     <value>labelPREVIEW</value>
   </data>
   <data name="&gt;&gt;labelPREVIEW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelPREVIEW.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -453,10 +453,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 308</value>
+    <value>85, 334</value>
   </data>
   <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 19</value>
+    <value>156, 20</value>
   </data>
   <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -469,7 +469,7 @@ The image size is 204x269.</value>
     <value>textBoxRESULTIMAGE</value>
   </data>
   <data name="&gt;&gt;textBoxRESULTIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxRESULTIMAGE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -481,10 +481,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 283</value>
+    <value>85, 307</value>
   </data>
   <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 19</value>
+    <value>156, 20</value>
   </data>
   <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -497,7 +497,7 @@ The image size is 640x480.</value>
     <value>textBoxBACKGROUND</value>
   </data>
   <data name="&gt;&gt;textBoxBACKGROUND.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxBACKGROUND.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -509,10 +509,10 @@ The image size is 640x480.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 258</value>
+    <value>85, 280</value>
   </data>
   <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 19</value>
+    <value>156, 20</value>
   </data>
   <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -525,7 +525,7 @@ The image size is 204x269.</value>
     <value>textBoxSTAGEFILE</value>
   </data>
   <data name="&gt;&gt;textBoxSTAGEFILE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxSTAGEFILE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -537,10 +537,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 233</value>
+    <value>85, 252</value>
   </data>
   <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 19</value>
+    <value>156, 20</value>
   </data>
   <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -553,7 +553,7 @@ The image size is 204x269.</value>
     <value>textBoxPREIMAGE</value>
   </data>
   <data name="&gt;&gt;textBoxPREIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPREIMAGE.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -565,10 +565,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 208</value>
+    <value>85, 225</value>
   </data>
   <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 19</value>
+    <value>156, 20</value>
   </data>
   <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -580,7 +580,7 @@ The image size is 204x269.</value>
     <value>textBoxPREVIEW</value>
   </data>
   <data name="&gt;&gt;textBoxPREVIEW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxPREVIEW.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -592,10 +592,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 182</value>
+    <value>85, 197</value>
   </data>
   <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
+    <value>187, 20</value>
   </data>
   <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -607,7 +607,7 @@ The image size is 204x269.</value>
     <value>textBoxパネル</value>
   </data>
   <data name="&gt;&gt;textBoxパネル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxパネル.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -619,10 +619,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 185</value>
+    <value>18, 200</value>
   </data>
   <data name="labelパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 12</value>
+    <value>59, 13</value>
   </data>
   <data name="labelパネル.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -640,7 +640,7 @@ The image size is 204x269.</value>
     <value>labelパネル</value>
   </data>
   <data name="&gt;&gt;labelパネル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelパネル.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -652,10 +652,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 157</value>
+    <value>33, 170</value>
   </data>
   <data name="labelBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 12</value>
+    <value>45, 13</value>
   </data>
   <data name="labelBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -674,7 +674,7 @@ The image size is 204x269.</value>
     <value>labelBLEVEL</value>
   </data>
   <data name="&gt;&gt;labelBLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelBLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -683,10 +683,10 @@ The image size is 204x269.</value>
     <value>17</value>
   </data>
   <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 154</value>
+    <value>85, 167</value>
   </data>
   <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>36, 20</value>
   </data>
   <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -702,7 +702,7 @@ The image size is 204x269.</value>
     <value>textBoxBLEVEL</value>
   </data>
   <data name="&gt;&gt;textBoxBLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxBLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -714,7 +714,7 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 154</value>
+    <value>124, 167</value>
   </data>
   <data name="hScrollBarBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 17</value>
@@ -730,7 +730,7 @@ The image size is 204x269.</value>
     <value>hScrollBarBLEVEL</value>
   </data>
   <data name="&gt;&gt;hScrollBarBLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hScrollBarBLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -742,10 +742,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 136</value>
+    <value>29, 147</value>
   </data>
   <data name="labelGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 12</value>
+    <value>50, 13</value>
   </data>
   <data name="labelGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -765,7 +765,7 @@ The image size is 204x269.</value>
     <value>labelGLEVEL</value>
   </data>
   <data name="&gt;&gt;labelGLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelGLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -774,10 +774,10 @@ The image size is 204x269.</value>
     <value>20</value>
   </data>
   <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 133</value>
+    <value>85, 144</value>
   </data>
   <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>36, 20</value>
   </data>
   <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -793,7 +793,7 @@ The image size is 204x269.</value>
     <value>textBoxGLEVEL</value>
   </data>
   <data name="&gt;&gt;textBoxGLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxGLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -805,7 +805,7 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 133</value>
+    <value>124, 144</value>
   </data>
   <data name="hScrollBarGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 17</value>
@@ -821,7 +821,7 @@ The image size is 204x269.</value>
     <value>hScrollBarGLEVEL</value>
   </data>
   <data name="&gt;&gt;hScrollBarGLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hScrollBarGLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -833,10 +833,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 115</value>
+    <value>33, 125</value>
   </data>
   <data name="labelDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 12</value>
+    <value>47, 13</value>
   </data>
   <data name="labelDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -855,7 +855,7 @@ The image size is 204x269.</value>
     <value>labelDLEVEL</value>
   </data>
   <data name="&gt;&gt;labelDLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -864,10 +864,10 @@ The image size is 204x269.</value>
     <value>23</value>
   </data>
   <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 112</value>
+    <value>85, 121</value>
   </data>
   <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>36, 20</value>
   </data>
   <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -883,7 +883,7 @@ The image size is 204x269.</value>
     <value>textBoxDLEVEL</value>
   </data>
   <data name="&gt;&gt;textBoxDLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxDLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -895,7 +895,7 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 112</value>
+    <value>124, 121</value>
   </data>
   <data name="hScrollBarDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 17</value>
@@ -911,7 +911,7 @@ The image size is 204x269.</value>
     <value>hScrollBarDLEVEL</value>
   </data>
   <data name="&gt;&gt;hScrollBarDLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hScrollBarDLEVEL.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -923,10 +923,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 83</value>
+    <value>50, 90</value>
   </data>
   <data name="labelBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>30, 13</value>
   </data>
   <data name="labelBPM.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -944,7 +944,7 @@ The image size is 204x269.</value>
     <value>labelBPM</value>
   </data>
   <data name="&gt;&gt;labelBPM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelBPM.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -956,10 +956,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 59</value>
+    <value>26, 64</value>
   </data>
   <data name="labelコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>51, 13</value>
   </data>
   <data name="labelコメント.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -977,7 +977,7 @@ The image size is 204x269.</value>
     <value>labelコメント</value>
   </data>
   <data name="&gt;&gt;labelコメント.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelコメント.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -989,10 +989,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="label製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 34</value>
+    <value>44, 37</value>
   </data>
   <data name="label製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 12</value>
+    <value>30, 13</value>
   </data>
   <data name="label製作者.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1010,7 +1010,7 @@ The image size is 204x269.</value>
     <value>label製作者</value>
   </data>
   <data name="&gt;&gt;label製作者.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label製作者.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1022,10 +1022,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="label曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 9</value>
+    <value>50, 10</value>
   </data>
   <data name="label曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 12</value>
+    <value>27, 13</value>
   </data>
   <data name="label曲名.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1043,7 +1043,7 @@ The image size is 204x269.</value>
     <value>label曲名</value>
   </data>
   <data name="&gt;&gt;label曲名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label曲名.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1052,10 +1052,10 @@ The image size is 204x269.</value>
     <value>29</value>
   </data>
   <data name="numericUpDownBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 81</value>
+    <value>85, 88</value>
   </data>
   <data name="numericUpDownBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
+    <value>68, 20</value>
   </data>
   <data name="numericUpDownBPM.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1070,7 +1070,7 @@ The image size is 204x269.</value>
     <value>numericUpDownBPM</value>
   </data>
   <data name="&gt;&gt;numericUpDownBPM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;numericUpDownBPM.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1082,10 +1082,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 56</value>
+    <value>85, 61</value>
   </data>
   <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
+    <value>187, 20</value>
   </data>
   <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1097,7 +1097,7 @@ The image size is 204x269.</value>
     <value>textBoxコメント</value>
   </data>
   <data name="&gt;&gt;textBoxコメント.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBoxコメント.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1109,10 +1109,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 31</value>
+    <value>85, 34</value>
   </data>
   <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
+    <value>187, 20</value>
   </data>
   <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1124,7 +1124,7 @@ The image size is 204x269.</value>
     <value>textBox製作者</value>
   </data>
   <data name="&gt;&gt;textBox製作者.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox製作者.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1136,10 +1136,13 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 6</value>
+    <value>85, 7</value>
+  </data>
+  <data name="textBox曲名.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>10, 19</value>
   </data>
   <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 19</value>
+    <value>187, 20</value>
   </data>
   <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1151,7 +1154,7 @@ The image size is 204x269.</value>
     <value>textBox曲名</value>
   </data>
   <data name="&gt;&gt;textBox曲名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox曲名.Parent" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1166,7 +1169,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage基本情報.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 415</value>
+    <value>278, 461</value>
   </data>
   <data name="tabPage基本情報.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1178,7 +1181,7 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;tabPage基本情報.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage基本情報.Parent" xml:space="preserve">
     <value>tabControl情報パネル</value>
@@ -1226,13 +1229,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewWAVリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewWAVリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewWAVリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 384</value>
+    <value>272, 421</value>
   </data>
   <data name="listViewWAVリスト.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1241,7 +1244,7 @@ The image size is 204x269.</value>
     <value>listViewWAVリスト</value>
   </data>
   <data name="&gt;&gt;listViewWAVリスト.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;listViewWAVリスト.Parent" xml:space="preserve">
     <value>tabPageWAV</value>
@@ -1249,7 +1252,7 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;listViewWAVリスト.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolStripWAVツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripWAVツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 387</value>
   </metadata>
   <data name="toolStripWAVツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1322,7 +1325,7 @@ The image size is 204x269.</value>
     <value>Play sound on click</value>
   </data>
   <data name="toolStripWAVツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 387</value>
+    <value>3, 424</value>
   </data>
   <data name="toolStripWAVツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1338,7 +1341,7 @@ The image size is 204x269.</value>
     <value>toolStripWAVツールバー</value>
   </data>
   <data name="&gt;&gt;toolStripWAVツールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripWAVツールバー.Parent" xml:space="preserve">
     <value>tabPageWAV</value>
@@ -1353,7 +1356,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageWAV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 415</value>
+    <value>278, 452</value>
   </data>
   <data name="tabPageWAV.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1365,7 +1368,7 @@ The image size is 204x269.</value>
     <value>tabPageWAV</value>
   </data>
   <data name="&gt;&gt;tabPageWAV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageWAV.Parent" xml:space="preserve">
     <value>tabControl情報パネル</value>
@@ -1401,13 +1404,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewBMPリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewBMPリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewBMPリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 384</value>
+    <value>272, 421</value>
   </data>
   <data name="listViewBMPリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1416,7 +1419,7 @@ The image size is 204x269.</value>
     <value>listViewBMPリスト</value>
   </data>
   <data name="&gt;&gt;listViewBMPリスト.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;listViewBMPリスト.Parent" xml:space="preserve">
     <value>tabPageBMP</value>
@@ -1424,7 +1427,7 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;listViewBMPリスト.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolStripBMPツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripBMPツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 387</value>
   </metadata>
   <data name="toolStripBMPツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1449,7 +1452,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripBMPツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 387</value>
+    <value>3, 424</value>
   </data>
   <data name="toolStripBMPツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1465,7 +1468,7 @@ The image size is 204x269.</value>
     <value>toolStripBMPツールバー</value>
   </data>
   <data name="&gt;&gt;toolStripBMPツールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripBMPツールバー.Parent" xml:space="preserve">
     <value>tabPageBMP</value>
@@ -1480,7 +1483,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageBMP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 415</value>
+    <value>278, 452</value>
   </data>
   <data name="tabPageBMP.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1492,7 +1495,7 @@ The image size is 204x269.</value>
     <value>tabPageBMP</value>
   </data>
   <data name="&gt;&gt;tabPageBMP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageBMP.Parent" xml:space="preserve">
     <value>tabControl情報パネル</value>
@@ -1522,13 +1525,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewAVIリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewAVIリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewAVIリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 384</value>
+    <value>272, 421</value>
   </data>
   <data name="listViewAVIリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1537,7 +1540,7 @@ The image size is 204x269.</value>
     <value>listViewAVIリスト</value>
   </data>
   <data name="&gt;&gt;listViewAVIリスト.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;listViewAVIリスト.Parent" xml:space="preserve">
     <value>tabPageAVI</value>
@@ -1545,7 +1548,7 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;listViewAVIリスト.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="toolStripAVIツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripAVIツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>3, 387</value>
   </metadata>
   <data name="toolStripAVIツールバー.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1576,7 +1579,7 @@ The image size is 204x269.</value>
     <value>Move down</value>
   </data>
   <data name="toolStripAVIツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 387</value>
+    <value>3, 424</value>
   </data>
   <data name="toolStripAVIツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1591,7 +1594,7 @@ The image size is 204x269.</value>
     <value>toolStripAVIツールバー</value>
   </data>
   <data name="&gt;&gt;toolStripAVIツールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripAVIツールバー.Parent" xml:space="preserve">
     <value>tabPageAVI</value>
@@ -1606,7 +1609,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageAVI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 415</value>
+    <value>278, 452</value>
   </data>
   <data name="tabPageAVI.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1618,7 +1621,7 @@ The image size is 204x269.</value>
     <value>tabPageAVI</value>
   </data>
   <data name="&gt;&gt;tabPageAVI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageAVI.Parent" xml:space="preserve">
     <value>tabControl情報パネル</value>
@@ -1633,7 +1636,7 @@ The image size is 204x269.</value>
     <value>3, 3</value>
   </data>
   <data name="textBox自由入力欄.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
+    <value>10, 11, 10, 11</value>
   </data>
   <data name="textBox自由入力欄.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1642,7 +1645,7 @@ The image size is 204x269.</value>
     <value>Both</value>
   </data>
   <data name="textBox自由入力欄.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 409</value>
+    <value>272, 446</value>
   </data>
   <data name="textBox自由入力欄.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1651,7 +1654,7 @@ The image size is 204x269.</value>
     <value>textBox自由入力欄</value>
   </data>
   <data name="&gt;&gt;textBox自由入力欄.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox自由入力欄.Parent" xml:space="preserve">
     <value>tabPage自由入力</value>
@@ -1666,7 +1669,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage自由入力.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 415</value>
+    <value>278, 452</value>
   </data>
   <data name="tabPage自由入力.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1678,7 +1681,7 @@ The image size is 204x269.</value>
     <value>tabPage自由入力</value>
   </data>
   <data name="&gt;&gt;tabPage自由入力.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPage自由入力.Parent" xml:space="preserve">
     <value>tabControl情報パネル</value>
@@ -1693,7 +1696,7 @@ The image size is 204x269.</value>
     <value>0, 0</value>
   </data>
   <data name="tabControl情報パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 441</value>
+    <value>286, 487</value>
   </data>
   <data name="tabControl情報パネル.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1702,7 +1705,7 @@ The image size is 204x269.</value>
     <value>tabControl情報パネル</value>
   </data>
   <data name="&gt;&gt;tabControl情報パネル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControl情報パネル.Parent" xml:space="preserve">
     <value>splitContainerタブと譜面を分割.Panel1</value>
@@ -1714,7 +1717,7 @@ The image size is 204x269.</value>
     <value>splitContainerタブと譜面を分割.Panel1</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel1.Parent" xml:space="preserve">
     <value>splitContainerタブと譜面を分割</value>
@@ -1732,7 +1735,7 @@ The image size is 204x269.</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="pictureBox譜面パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 424</value>
+    <value>184, 468</value>
   </data>
   <data name="pictureBox譜面パネル.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1741,7 +1744,7 @@ The image size is 204x269.</value>
     <value>pictureBox譜面パネル</value>
   </data>
   <data name="&gt;&gt;pictureBox譜面パネル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox譜面パネル.Parent" xml:space="preserve">
     <value>splitContainerタブと譜面を分割.Panel2</value>
@@ -1753,7 +1756,7 @@ The image size is 204x269.</value>
     <value>Bottom</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 424</value>
+    <value>0, 470</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>424, 17</value>
@@ -1765,7 +1768,7 @@ The image size is 204x269.</value>
     <value>hScrollBar譜面用水平スクロールバー</value>
   </data>
   <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.Parent" xml:space="preserve">
     <value>splitContainerタブと譜面を分割.Panel2</value>
@@ -1777,7 +1780,7 @@ The image size is 204x269.</value>
     <value>splitContainerタブと譜面を分割.Panel2</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Parent" xml:space="preserve">
     <value>splitContainerタブと譜面を分割</value>
@@ -1786,7 +1789,7 @@ The image size is 204x269.</value>
     <value>1</value>
   </data>
   <data name="splitContainerタブと譜面を分割.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 441</value>
+    <value>714, 487</value>
   </data>
   <data name="splitContainerタブと譜面を分割.SplitterDistance" type="System.Int32, mscorlib">
     <value>286</value>
@@ -1798,7 +1801,7 @@ The image size is 204x269.</value>
     <value>splitContainerタブと譜面を分割</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1806,11 +1809,11 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="statusStripステータスバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="statusStripステータスバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 493</value>
   </metadata>
   <data name="statusStripステータスバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 493</value>
+    <value>0, 536</value>
   </data>
   <data name="statusStripステータスバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>731, 22</value>
@@ -1825,7 +1828,7 @@ The image size is 204x269.</value>
     <value>statusStripステータスバー</value>
   </data>
   <data name="&gt;&gt;statusStripステータスバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusStripステータスバー.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1833,14 +1836,14 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;statusStripステータスバー.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <metadata name="menuStripメニューバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="menuStripメニューバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
   <data name="toolStripMenuItem新規.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+N</value>
   </data>
   <data name="toolStripMenuItem新規.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="toolStripMenuItem新規.Text" xml:space="preserve">
     <value>&amp;New</value>
@@ -1849,7 +1852,7 @@ The image size is 204x269.</value>
     <value>Ctrl+O</value>
   </data>
   <data name="toolStripMenuItem開く.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="toolStripMenuItem開く.Text" xml:space="preserve">
     <value>&amp;Open...</value>
@@ -1858,28 +1861,28 @@ The image size is 204x269.</value>
     <value>Ctrl+S</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Text" xml:space="preserve">
     <value>&amp;Save</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Text" xml:space="preserve">
     <value>Save &amp;As ...</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 6</value>
+    <value>152, 6</value>
   </data>
   <data name="toolStripMenuItem終了.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>155, 22</value>
   </data>
   <data name="toolStripMenuItem終了.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
   <data name="toolStripMenuItemファイル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 22</value>
+    <value>37, 20</value>
   </data>
   <data name="toolStripMenuItemファイル.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -1888,7 +1891,7 @@ The image size is 204x269.</value>
     <value>Ctrl+Z</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Text" xml:space="preserve">
     <value>&amp;Undo</value>
@@ -1897,13 +1900,13 @@ The image size is 204x269.</value>
     <value>Ctrl+Y</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Text" xml:space="preserve">
     <value>&amp;Redo</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="toolStripMenuItem切り取り.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1912,7 +1915,7 @@ The image size is 204x269.</value>
     <value>Ctrl+X</value>
   </data>
   <data name="toolStripMenuItem切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem切り取り.Text" xml:space="preserve">
     <value>Cu&amp;t</value>
@@ -1924,7 +1927,7 @@ The image size is 204x269.</value>
     <value>Ctrl+C</value>
   </data>
   <data name="toolStripMenuItemコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItemコピー.Text" xml:space="preserve">
     <value>&amp;Copy</value>
@@ -1936,7 +1939,7 @@ The image size is 204x269.</value>
     <value>Ctrl+V</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Text" xml:space="preserve">
     <value>&amp;Paste</value>
@@ -1948,55 +1951,55 @@ The image size is 204x269.</value>
     <value>Del</value>
   </data>
   <data name="toolStripMenuItem削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem削除.Text" xml:space="preserve">
     <value>&amp;Delete</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="toolStripMenuItemすべて選択.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+A</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Text" xml:space="preserve">
     <value>Select &amp;All</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="toolStripMenuItem選択モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem選択モード.Text" xml:space="preserve">
     <value>&amp;Select mode</value>
   </data>
   <data name="toolStripMenuItem編集モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem編集モード.Text" xml:space="preserve">
     <value>&amp;Edit mode</value>
   </data>
   <data name="toolStripMenuItemモード切替.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>F8</value>
+    <value>Ctrl+Space</value>
   </data>
   <data name="toolStripMenuItemモード切替.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItemモード切替.Text" xml:space="preserve">
     <value>Switch &amp;Mode</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 6</value>
+    <value>205, 6</value>
   </data>
   <data name="toolStripMenuItem検索.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
   </data>
   <data name="toolStripMenuItem検索.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem検索.Text" xml:space="preserve">
     <value>&amp;Find...</value>
@@ -2005,85 +2008,85 @@ The image size is 204x269.</value>
     <value>Ctrl+H</value>
   </data>
   <data name="toolStripMenuItem置換.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 22</value>
+    <value>208, 22</value>
   </data>
   <data name="toolStripMenuItem置換.Text" xml:space="preserve">
     <value>Replace(&amp;Q)</value>
   </data>
   <data name="toolStripMenuItem編集.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 22</value>
+    <value>39, 20</value>
   </data>
   <data name="toolStripMenuItem編集.Text" xml:space="preserve">
     <value>&amp;Edit</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Text" xml:space="preserve">
     <value>Chip &amp;palette</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Text" xml:space="preserve">
     <value>1/&amp;4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Text" xml:space="preserve">
     <value>1/&amp;8</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Text" xml:space="preserve">
     <value>1/1&amp;2</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Text" xml:space="preserve">
     <value>1/1&amp;6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Text" xml:space="preserve">
     <value>1/24</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Text" xml:space="preserve">
     <value>1/&amp;32</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Text" xml:space="preserve">
     <value>1/48</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Text" xml:space="preserve">
     <value>1/64</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Text" xml:space="preserve">
     <value>&amp;Free</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 6</value>
+    <value>129, 6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Text" xml:space="preserve">
     <value>&amp;Wide</value>
@@ -2092,19 +2095,19 @@ The image size is 204x269.</value>
     <value>F4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>132, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Text" xml:space="preserve">
     <value>&amp;Narrow</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Text" xml:space="preserve">
     <value>&amp;Guide margin</value>
   </data>
   <data name="toolStripMenuItem表示.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 22</value>
+    <value>44, 20</value>
   </data>
   <data name="toolStripMenuItem表示.Text" xml:space="preserve">
     <value>&amp;View</value>
@@ -2113,7 +2116,7 @@ The image size is 204x269.</value>
     <value>F5</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Text" xml:space="preserve">
     <value>Play from &amp;top</value>
@@ -2122,13 +2125,13 @@ The image size is 204x269.</value>
     <value>F6</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Text" xml:space="preserve">
     <value>&amp;Play from current part</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Text" xml:space="preserve">
     <value>Play &amp;BGM from current part</value>
@@ -2137,25 +2140,25 @@ The image size is 204x269.</value>
     <value>F7</value>
   </data>
   <data name="toolStripMenuItem再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItem再生停止.Text" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
   <data name="toolStripMenuItem再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 22</value>
+    <value>41, 20</value>
   </data>
   <data name="toolStripMenuItem再生.Text" xml:space="preserve">
     <value>&amp;Play</value>
   </data>
   <data name="toolStripMenuItemオプション.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>111, 22</value>
   </data>
   <data name="toolStripMenuItemオプション.Text" xml:space="preserve">
     <value>&amp;Option</value>
   </data>
   <data name="toolStripMenuItemツール.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 22</value>
+    <value>41, 20</value>
   </data>
   <data name="toolStripMenuItemツール.Text" xml:space="preserve">
     <value>&amp;Tool</value>
@@ -2164,19 +2167,19 @@ The image size is 204x269.</value>
     <value>F1</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Text" xml:space="preserve">
     <value>DTXCreator &amp;Manual</value>
   </data>
   <data name="toolStripMenuItemバージョン.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="toolStripMenuItemバージョン.Text" xml:space="preserve">
     <value>&amp;Version</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 22</value>
+    <value>44, 20</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Text" xml:space="preserve">
     <value>&amp;Help</value>
@@ -2185,7 +2188,7 @@ The image size is 204x269.</value>
     <value>0, 0</value>
   </data>
   <data name="menuStripメニューバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 26</value>
+    <value>731, 24</value>
   </data>
   <data name="menuStripメニューバー.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2197,7 +2200,7 @@ The image size is 204x269.</value>
     <value>menuStripメニューバー</value>
   </data>
   <data name="&gt;&gt;menuStripメニューバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuStripメニューバー.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2205,14 +2208,14 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;menuStripメニューバー.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="toolStripツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripツールバー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 26</value>
   </metadata>
   <data name="toolStripButton新規作成.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton新規作成.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton新規作成.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2224,7 +2227,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton開く.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton開く.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2237,7 +2240,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton上書き保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton上書き保存.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2246,7 +2249,7 @@ The image size is 204x269.</value>
     <value>Save to file</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButton切り取り.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2255,7 +2258,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton切り取り.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2271,7 +2274,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButtonコピー.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2287,7 +2290,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton貼り付け.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2303,7 +2306,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton削除.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2313,7 +2316,7 @@ The image size is 204x269.</value>
 </value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonアンドゥ.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2322,7 +2325,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButtonアンドゥ.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2337,7 +2340,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonリドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButtonリドゥ.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2347,13 +2350,13 @@ The image size is 204x269.</value>
 </value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButtonチップパレット.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButtonチップパレット.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2362,7 +2365,7 @@ The image size is 204x269.</value>
     <value>Chip palette</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2398,7 +2401,7 @@ The image size is 204x269.</value>
     <value>x10</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 26</value>
+    <value>75, 25</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.ToolTipText" xml:space="preserve">
     <value>Vertical sizing</value>
@@ -2434,7 +2437,7 @@ The image size is 204x269.</value>
     <value>20</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 26</value>
+    <value>75, 25</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.ToolTipText" xml:space="preserve">
     <value>Guide margin</value>
@@ -2443,7 +2446,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton選択モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton選択モード.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2456,7 +2459,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton編集モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton編集モード.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2465,13 +2468,13 @@ The image size is 204x269.</value>
     <value>Edit mode</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripButton先頭から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton先頭から再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2483,7 +2486,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton現在位置から再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2495,7 +2498,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2507,7 +2510,7 @@ The image size is 204x269.</value>
     <value>Magenta</value>
   </data>
   <data name="toolStripButton再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 23</value>
+    <value>23, 22</value>
   </data>
   <data name="toolStripButton再生停止.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2552,19 +2555,19 @@ The image size is 204x269.</value>
     <value>x0.5</value>
   </data>
   <data name="toolStripComboBox演奏速度.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 26</value>
+    <value>75, 25</value>
   </data>
   <data name="toolStripComboBox演奏速度.ToolTipText" xml:space="preserve">
     <value>Play speed (#DTXVPLAYSPEED)</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 26</value>
+    <value>6, 25</value>
   </data>
   <data name="toolStripツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 26</value>
+    <value>0, 24</value>
   </data>
   <data name="toolStripツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 26</value>
+    <value>731, 25</value>
   </data>
   <data name="toolStripツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2576,7 +2579,7 @@ The image size is 204x269.</value>
     <value>toolStripツールバー</value>
   </data>
   <data name="&gt;&gt;toolStripツールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripツールバー.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2588,10 +2591,10 @@ The image size is 204x269.</value>
     <value>Right</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>714, 52</value>
+    <value>714, 49</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 441</value>
+    <value>17, 487</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2600,7 +2603,7 @@ The image size is 204x269.</value>
     <value>vScrollBar譜面用垂直スクロールバー</value>
   </data>
   <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.VScrollBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.VScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2608,95 +2611,95 @@ The image size is 204x269.</value>
   <data name="&gt;&gt;vScrollBar譜面用垂直スクロールバー.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="contextMenuStrip譜面右メニュー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="contextMenuStrip譜面右メニュー.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>203, 39</value>
   </metadata>
   <data name="toolStripMenuItem選択チップの切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの切り取り.Text" xml:space="preserve">
     <value>Cu&amp;t selected chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Text" xml:space="preserve">
     <value>&amp;Copy selected chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Text" xml:space="preserve">
     <value>&amp;Paste chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Text" xml:space="preserve">
     <value>&amp;Delete selected chip(s)</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 6</value>
+    <value>189, 6</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Text" xml:space="preserve">
     <value>Select &amp;All</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Text" xml:space="preserve">
     <value>Select all in the &amp;lane []</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Text" xml:space="preserve">
     <value>Select all in the pa&amp;rt []</value>
   </data>
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 6</value>
+    <value>189, 6</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Text" xml:space="preserve">
     <value>Change part length(&amp;B)</value>
   </data>
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 6</value>
+    <value>189, 6</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Text" xml:space="preserve">
     <value>&amp;Insert part</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Text" xml:space="preserve">
     <value>D&amp;elete part</value>
   </data>
   <data name="contextMenuStrip譜面右メニュー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 198</value>
+    <value>193, 242</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Name" xml:space="preserve">
     <value>contextMenuStrip譜面右メニュー</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>731, 515</value>
+    <value>731, 558</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3124,7 +3127,7 @@ The image size is 204x269.</value>
 </value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 38</value>
+    <value>16, 39</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DTXCreator</value>
@@ -3133,666 +3136,678 @@ The image size is 204x269.</value>
     <value>columnHeaderWAV_ラベル</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_ラベル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_番号.Name" xml:space="preserve">
     <value>columnHeaderWAV_番号</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_番号.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_ファイル名.Name" xml:space="preserve">
     <value>columnHeaderWAV_ファイル名</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_ファイル名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_音量.Name" xml:space="preserve">
     <value>columnHeaderWAV_音量</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_音量.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_位置.Name" xml:space="preserve">
     <value>columnHeaderWAV_位置</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_位置.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_BGM.Name" xml:space="preserve">
     <value>columnHeaderWAV_BGM</value>
   </data>
   <data name="&gt;&gt;columnHeaderWAV_BGM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリスト上移動.Name" xml:space="preserve">
     <value>toolStripButtonWAVリスト上移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリスト上移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリスト下移動.Name" xml:space="preserve">
     <value>toolStripButtonWAVリスト下移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリスト下移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
     <value>toolStripSeparator13</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生開始.Name" xml:space="preserve">
     <value>toolStripButtonWAVリストプレビュー再生開始</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生開始.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生停止.Name" xml:space="preserve">
     <value>toolStripButtonWAVリストプレビュー再生停止</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュー再生停止.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
     <value>toolStripSeparator14</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュースイッチ.Name" xml:space="preserve">
     <value>toolStripButtonWAVリストプレビュースイッチ</value>
   </data>
   <data name="&gt;&gt;toolStripButtonWAVリストプレビュースイッチ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_TEX.Name" xml:space="preserve">
     <value>columnHeaderBMP_TEX</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_TEX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_ラベル.Name" xml:space="preserve">
     <value>columnHeaderBMP_ラベル</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_ラベル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_BMP番号.Name" xml:space="preserve">
     <value>columnHeaderBMP_BMP番号</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_BMP番号.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_ファイル名.Name" xml:space="preserve">
     <value>columnHeaderBMP_ファイル名</value>
   </data>
   <data name="&gt;&gt;columnHeaderBMP_ファイル名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonBMPリスト上移動.Name" xml:space="preserve">
     <value>toolStripButtonBMPリスト上移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonBMPリスト上移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonBMPリスト下移動.Name" xml:space="preserve">
     <value>toolStripButtonBMPリスト下移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonBMPリスト下移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_ラベル.Name" xml:space="preserve">
     <value>columnHeaderAVI_ラベル</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_ラベル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_AVI番号.Name" xml:space="preserve">
     <value>columnHeaderAVI_AVI番号</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_AVI番号.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_ファイル名.Name" xml:space="preserve">
     <value>columnHeaderAVI_ファイル名</value>
   </data>
   <data name="&gt;&gt;columnHeaderAVI_ファイル名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonAVIリスト上移動.Name" xml:space="preserve">
     <value>toolStripButtonAVIリスト上移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonAVIリスト上移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonAVIリスト下移動.Name" xml:space="preserve">
     <value>toolStripButtonAVIリスト下移動</value>
   </data>
   <data name="&gt;&gt;toolStripButtonAVIリスト下移動.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemファイル.Name" xml:space="preserve">
     <value>toolStripMenuItemファイル</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemファイル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem新規.Name" xml:space="preserve">
     <value>toolStripMenuItem新規</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem新規.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem開く.Name" xml:space="preserve">
     <value>toolStripMenuItem開く</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem開く.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem上書き保存.Name" xml:space="preserve">
     <value>toolStripMenuItem上書き保存</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem上書き保存.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem名前を付けて保存.Name" xml:space="preserve">
     <value>toolStripMenuItem名前を付けて保存</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem名前を付けて保存.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
     <value>toolStripSeparator1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem終了.Name" xml:space="preserve">
     <value>toolStripMenuItem終了</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem終了.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem編集.Name" xml:space="preserve">
     <value>toolStripMenuItem編集</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem編集.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemアンドゥ.Name" xml:space="preserve">
     <value>toolStripMenuItemアンドゥ</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemアンドゥ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemリドゥ.Name" xml:space="preserve">
     <value>toolStripMenuItemリドゥ</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemリドゥ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem切り取り.Name" xml:space="preserve">
     <value>toolStripMenuItem切り取り</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem切り取り.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemコピー.Name" xml:space="preserve">
     <value>toolStripMenuItemコピー</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemコピー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem貼り付け.Name" xml:space="preserve">
     <value>toolStripMenuItem貼り付け</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem貼り付け.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem削除.Name" xml:space="preserve">
     <value>toolStripMenuItem削除</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem削除.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemすべて選択.Name" xml:space="preserve">
     <value>toolStripMenuItemすべて選択</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemすべて選択.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
     <value>toolStripSeparator4</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択モード.Name" xml:space="preserve">
     <value>toolStripMenuItem選択モード</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択モード.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem編集モード.Name" xml:space="preserve">
     <value>toolStripMenuItem編集モード</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem編集モード.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemモード切替.Name" xml:space="preserve">
     <value>toolStripMenuItemモード切替</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemモード切替.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem検索.Name" xml:space="preserve">
     <value>toolStripMenuItem検索</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem検索.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem置換.Name" xml:space="preserve">
     <value>toolStripMenuItem置換</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem置換.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem表示.Name" xml:space="preserve">
     <value>toolStripMenuItem表示</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem表示.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemチップパレット.Name" xml:space="preserve">
     <value>toolStripMenuItemチップパレット</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemチップパレット.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔4分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔4分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔4分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔8分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔8分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔8分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔12分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔12分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔12分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔16分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔16分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔16分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔24分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔24分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔24分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔32分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔32分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔32分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔48分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔48分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔48分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔64分.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔64分</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔64分.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔フリー.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔フリー</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔フリー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
     <value>toolStripSeparator6</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔拡大.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔拡大</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔拡大.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔縮小.Name" xml:space="preserve">
     <value>toolStripMenuItemガイド間隔縮小</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemガイド間隔縮小.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem再生.Name" xml:space="preserve">
     <value>toolStripMenuItem再生</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem先頭から再生.Name" xml:space="preserve">
     <value>toolStripMenuItem先頭から再生</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem先頭から再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem現在位置から再生.Name" xml:space="preserve">
     <value>toolStripMenuItem現在位置から再生</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem現在位置から再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem現在位置からBGMのみ再生.Name" xml:space="preserve">
     <value>toolStripMenuItem現在位置からBGMのみ再生</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem現在位置からBGMのみ再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem再生停止.Name" xml:space="preserve">
     <value>toolStripMenuItem再生停止</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem再生停止.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemツール.Name" xml:space="preserve">
     <value>toolStripMenuItemツール</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemツール.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemオプション.Name" xml:space="preserve">
     <value>toolStripMenuItemオプション</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemオプション.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemヘルプ.Name" xml:space="preserve">
     <value>toolStripMenuItemヘルプ</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemヘルプ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemDTXCreaterマニュアル.Name" xml:space="preserve">
     <value>toolStripMenuItemDTXCreaterマニュアル</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemDTXCreaterマニュアル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemバージョン.Name" xml:space="preserve">
     <value>toolStripMenuItemバージョン</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemバージョン.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton新規作成.Name" xml:space="preserve">
     <value>toolStripButton新規作成</value>
   </data>
   <data name="&gt;&gt;toolStripButton新規作成.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton開く.Name" xml:space="preserve">
     <value>toolStripButton開く</value>
   </data>
   <data name="&gt;&gt;toolStripButton開く.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton上書き保存.Name" xml:space="preserve">
     <value>toolStripButton上書き保存</value>
   </data>
   <data name="&gt;&gt;toolStripButton上書き保存.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton切り取り.Name" xml:space="preserve">
     <value>toolStripButton切り取り</value>
   </data>
   <data name="&gt;&gt;toolStripButton切り取り.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonコピー.Name" xml:space="preserve">
     <value>toolStripButtonコピー</value>
   </data>
   <data name="&gt;&gt;toolStripButtonコピー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton貼り付け.Name" xml:space="preserve">
     <value>toolStripButton貼り付け</value>
   </data>
   <data name="&gt;&gt;toolStripButton貼り付け.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton削除.Name" xml:space="preserve">
     <value>toolStripButton削除</value>
   </data>
   <data name="&gt;&gt;toolStripButton削除.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
     <value>toolStripSeparator8</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonアンドゥ.Name" xml:space="preserve">
     <value>toolStripButtonアンドゥ</value>
   </data>
   <data name="&gt;&gt;toolStripButtonアンドゥ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonリドゥ.Name" xml:space="preserve">
     <value>toolStripButtonリドゥ</value>
   </data>
   <data name="&gt;&gt;toolStripButtonリドゥ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
     <value>toolStripSeparator9</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButtonチップパレット.Name" xml:space="preserve">
     <value>toolStripButtonチップパレット</value>
   </data>
   <data name="&gt;&gt;toolStripButtonチップパレット.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
     <value>toolStripSeparator10</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripComboBox譜面拡大率.Name" xml:space="preserve">
     <value>toolStripComboBox譜面拡大率</value>
   </data>
   <data name="&gt;&gt;toolStripComboBox譜面拡大率.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripComboBoxガイド間隔.Name" xml:space="preserve">
     <value>toolStripComboBoxガイド間隔</value>
   </data>
   <data name="&gt;&gt;toolStripComboBoxガイド間隔.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton選択モード.Name" xml:space="preserve">
     <value>toolStripButton選択モード</value>
   </data>
   <data name="&gt;&gt;toolStripButton選択モード.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton編集モード.Name" xml:space="preserve">
     <value>toolStripButton編集モード</value>
   </data>
   <data name="&gt;&gt;toolStripButton編集モード.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
     <value>toolStripSeparator11</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton先頭から再生.Name" xml:space="preserve">
     <value>toolStripButton先頭から再生</value>
   </data>
   <data name="&gt;&gt;toolStripButton先頭から再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton現在位置から再生.Name" xml:space="preserve">
     <value>toolStripButton現在位置から再生</value>
   </data>
   <data name="&gt;&gt;toolStripButton現在位置から再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton現在位置からBGMのみ再生.Name" xml:space="preserve">
     <value>toolStripButton現在位置からBGMのみ再生</value>
   </data>
   <data name="&gt;&gt;toolStripButton現在位置からBGMのみ再生.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton再生停止.Name" xml:space="preserve">
     <value>toolStripButton再生停止</value>
   </data>
   <data name="&gt;&gt;toolStripButton再生停止.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripComboBox演奏速度.Name" xml:space="preserve">
     <value>toolStripComboBox演奏速度</value>
   </data>
   <data name="&gt;&gt;toolStripComboBox演奏速度.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
     <value>toolStripSeparator12</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolTipツールチップ.Name" xml:space="preserve">
     <value>toolTipツールチップ</value>
   </data>
   <data name="&gt;&gt;toolTipツールチップ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの切り取り.Name" xml:space="preserve">
     <value>toolStripMenuItem選択チップの切り取り</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの切り取り.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップのコピー.Name" xml:space="preserve">
     <value>toolStripMenuItem選択チップのコピー</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップのコピー.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの貼り付け.Name" xml:space="preserve">
     <value>toolStripMenuItem選択チップの貼り付け</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの貼り付け.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの削除.Name" xml:space="preserve">
     <value>toolStripMenuItem選択チップの削除</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem選択チップの削除.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
     <value>toolStripSeparator15</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemすべてのチップの選択.Name" xml:space="preserve">
     <value>toolStripMenuItemすべてのチップの選択</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItemすべてのチップの選択.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemレーン内のすべてのチップの選択.Name" xml:space="preserve">
+    <value>toolStripMenuItemレーン内のすべてのチップの選択</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItemレーン内のすべてのチップの選択.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節内のすべてのチップの選択.Name" xml:space="preserve">
+    <value>toolStripMenuItem小節内のすべてのチップの選択</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem小節内のすべてのチップの選択.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator16.Name" xml:space="preserve">
     <value>toolStripSeparator16</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節長変更.Name" xml:space="preserve">
     <value>toolStripMenuItem小節長変更</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節長変更.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
     <value>toolStripSeparator17</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節の挿入.Name" xml:space="preserve">
     <value>toolStripMenuItem小節の挿入</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節の挿入.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節の削除.Name" xml:space="preserve">
     <value>toolStripMenuItem小節の削除</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem小節の削除.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>Cメインフォーム</value>
+    <value>CMainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
