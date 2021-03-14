@@ -275,7 +275,7 @@ namespace DTXMania
             {
                 if( chip.bIsAutoPlayed )
                 {
-					if (chip.nChannelNumber != 0x28 && chip.nChannelNumber != 0xA8) // Guitar/Bass Wailing は OK
+					if (chip.nChannelNumber != EChannel.Guitar_Wailing && chip.nChannelNumber != EChannel.Bass_Wailing) // Guitar/Bass Wailing は OK
 					{
 						saveCond[(int)(chip.eInstrumentPart)] = false;
 					}
@@ -714,10 +714,10 @@ namespace DTXMania
 												break;
 										}
 									}
-									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= 0x11 ) ) && ( rChip.nChannelNumber <= 0x1b ) )
+									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= EChannel.HiHatClose ) ) && ( rChip.nChannelNumber <= EChannel.LeftPedal ) )
 									{
-										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - 0x11 ];
-										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == 0x11 ) || ( ( rChip.nChannelNumber == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
+										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - EChannel.HiHatClose ];
+										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == EChannel.HiHatClose ) || ( ( rChip.nChannelNumber == EChannel.HiHatOpen ) && ( this.n最後に再生したHHのチャンネル番号 != EChannel.HiHatOpen ) ) ) )
 										{
 											CDTXMania.DTX.tStopPlayingWav( this.n最後に再生したHHのWAV番号 );
 											this.n最後に再生したHHのWAV番号 = rChip.nIntegerValue_InternalNumber;
@@ -791,7 +791,7 @@ namespace DTXMania
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;				// #24509 2011.3.14 yyagi
 		private readonly int[] nチャンネル0Atoレーン07;
 		private int n最後に再生したHHのWAV番号;
-		private int n最後に再生したHHのチャンネル番号;
+		private EChannel n最後に再生したHHのチャンネル番号;
 		private CSound rResultSound;
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル

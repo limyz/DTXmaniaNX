@@ -377,7 +377,7 @@ namespace DTXMania
                 //				Debug.WriteLine( "CH=" + pChip.nChannelNumber.ToString( "x2" ) + ", 整数値=" + pChip.nIntegerValue +  ", time=" + pChip.nPlaybackTimeMs );
                 if (pChip.nPlaybackTimeMs <= 0)
                 {
-                    if (pChip.nChannelNumber == 0xEA)
+                    if (pChip.nChannelNumber == EChannel.MixChannel1_unc)
                     {
                         pChip.bHit = true;
                         //						Debug.WriteLine( "first [DA] BAR=" + pChip.nPlaybackPosition / 384 + " ch=" + pChip.nChannelNumber.ToString( "x2" ) + ", wav=" + pChip.nIntegerValue + ", time=" + pChip.nPlaybackTimeMs );
@@ -710,7 +710,7 @@ namespace DTXMania
         protected STDGBVALUE<CCounter> ctChipPatternAnimation;
         protected abstract void tJudgeLineMovingUpandDown();
         protected EPerfScreenReturnValue eReturnValueAfterFadeOut;
-        protected readonly int[,] nBGAスコープチャンネルマップ = new int[,] { { 0xc4, 0xc7, 0xd5, 0xd6, 0xd7, 0xd8, 0xd9, 0xe0 }, { 4, 7, 0x55, 0x56, 0x57, 0x58, 0x59, 0x60 } };
+        protected readonly EChannel[,] nBGAスコープチャンネルマップ = new EChannel[,] { { EChannel.BGALayer1_Swap, EChannel.BGALayer2_Swap, EChannel.BGALayer3_Swap, EChannel.BGALayer4_Swap, EChannel.BGALayer5_Swap, EChannel.BGALayer6_Swap, EChannel.BGALayer7_Swap, EChannel.BGALayer8_Swap }, { EChannel.BGALayer1, EChannel.BGALayer2, EChannel.BGALayer3, EChannel.BGALayer4, EChannel.BGALayer5, EChannel.BGALayer6, EChannel.BGALayer7, EChannel.BGALayer8 } };
         protected readonly int[] nチャンネル0Atoパッド08 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9, 9 };
         protected readonly int[] nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 9, 0, 8, 8 };
         //                         RD LC  LP  RD
@@ -733,7 +733,7 @@ namespace DTXMania
         protected static int nJudgeLineMinPosY;
         protected static int nShutterMaxPosY;
         protected static int nShutterMinPosY;
-        protected int nLastPlayedHHChannelNumber;
+        protected EChannel nLastPlayedHHChannelNumber;
         protected List<int> LLastPlayedHHWAVNumber;		// #23921 2011.1.4 yyagi: change "int" to "List<int>", for recording multiple wav No.
         protected STLANEVALUE<int> nLastPlayedWAVNumber;	// #26388 2011.11.8 yyagi: change "nLastPlayedWAVNumber.GUITAR" and "nLastPlayedWAVNumber.BASS"
         //							into "nLastPlayedWAVNumber";
@@ -882,9 +882,9 @@ namespace DTXMania
                     switch (pChip.nChannelNumber)
                     {
                         // drum pedal chips
-                        case 0x13: //kick
-                        case 0x1b: //left pedal
-                        case 0x1c: //left bass drum
+                        case EChannel.BassDrum: //kick
+                        case EChannel.LeftPedal: //left pedal
+                        case EChannel.LeftBassDrum: //left bass drum
                             return CDTXMania.stDrumPedalHitRanges.tGetJudgement(nDeltaTimeMs);
 
                         // all other drum chips
@@ -1058,8 +1058,9 @@ namespace DTXMania
             }
             return null;
         }
-        protected CDTX.CChip r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(long nTime, int nChannel, int nInputAdjustTime)
+        protected CDTX.CChip r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(long nTime, int int_nChannel, int nInputAdjustTime)
         {
+            EChannel nChannel = (EChannel)int_nChannel;
             sw2.Start();
             nTime += nInputAdjustTime;						// #24239 2011.1.23 yyagi InputAdjust
 
@@ -1078,9 +1079,9 @@ namespace DTXMania
             for (; nIndex_NearestChip_Future < count; nIndex_NearestChip_Future++)
             {
                 CDTX.CChip chip = CDTXMania.DTX.listChip[nIndex_NearestChip_Future];
-                if (((0x11 <= nChannel) && (nChannel <= 0x1c)))
+                if (((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum)))
                 {
-                    if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == (nChannel + 0x20)))
+                    if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
                     {
                         if (chip.nPlaybackTimeMs > nTime)
                         {
@@ -1090,7 +1091,7 @@ namespace DTXMania
                     }
                     continue;	// ほんの僅かながら高速化
                 }
-                else if ((nChannel == 0x2F && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((0x20 <= nChannel && nChannel <= 0x28) || (0x93 <= nChannel && nChannel <= 0x9F) || (0xA9 <= nChannel && nChannel <= 0xAF) || (0xD0 <= nChannel && nChannel <= 0xD3)) && chip.nChannelNumber == nChannel))
+                else if ((nChannel == EChannel.Guitar_WailingSound && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
                 {
                     if (chip.nPlaybackTimeMs > nTime)
                     {
@@ -1098,7 +1099,7 @@ namespace DTXMania
                     }
                     nIndex_InitialPositionSearchingToPast = nIndex_NearestChip_Future;
                 }
-                else if ((nChannel == 0x4F) && (chip.eInstrumentPart == EInstrumentPart.BASS) || (((0xA0 <= nChannel && nChannel <= 0xA8) || (0xC5 <= nChannel && nChannel <= 0xC6) || (0xC8 <= nChannel && nChannel <= 0xCF) || (0xDA <= nChannel && nChannel <= 0xDF) || (0xE1 <= nChannel && nChannel <= 0xE8)) && chip.nChannelNumber == nChannel))
+                else if ((nChannel == EChannel.BonusEffect) && (chip.eInstrumentPart == EInstrumentPart.BASS) || (((EChannel.Bass_Open <= nChannel && nChannel <= EChannel.Bass_Wailing) || (EChannel.Bass_xxxYx <= nChannel && nChannel <= EChannel.Bass_xxBYx) || (EChannel.Bass_xGxYx <= nChannel && nChannel <= EChannel.Bass_xxBxP) || (EChannel.Bass_xGxxP <= nChannel && nChannel <= EChannel.Bass_RGBxP) || (EChannel.Bass_xxxYP <= nChannel && nChannel <= EChannel.Bass_RGBYP)) && chip.nChannelNumber == nChannel))
                 {
                     if (chip.nPlaybackTimeMs > nTime)
                     {
@@ -1113,23 +1114,23 @@ namespace DTXMania
             for (; nIndex_NearestChip_Past >= 0; nIndex_NearestChip_Past--)
             {
                 CDTX.CChip chip = listChip[nIndex_NearestChip_Past];
-                if ((0x11 <= nChannel) && (nChannel <= 0x1c))
+                if ((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum))
                 {
-                    if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == (nChannel + 0x20)))
+                    if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
                     {
                         break;
                     }
                 }
-                else if ((nChannel == 0x2F && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((0x20 <= nChannel && nChannel <= 0x28) || (0x93 <= nChannel && nChannel <= 0x9F) || (0xA9 <= nChannel && nChannel <= 0xAF) || (0xD0 <= nChannel && nChannel <= 0xD3)) && chip.nChannelNumber == nChannel))
+                else if ((nChannel == EChannel.Guitar_WailingSound && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
                 {
-                    if ((0x20 <= chip.nChannelNumber && chip.nChannelNumber <= 0x28) || (((0x20 <= nChannel && nChannel <= 0x28) || (0x93 <= nChannel && nChannel <= 0x9F) || (0xA9 <= nChannel && nChannel <= 0xAF) || (0xD0 <= nChannel && nChannel <= 0xD3)) && chip.nChannelNumber == nChannel))
+                    if ((EChannel.Guitar_Open <= chip.nChannelNumber && chip.nChannelNumber <= EChannel.Guitar_Wailing) || (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
                         break;
                     }
                 }
-                else if (((nChannel == 0xAF && chip.eInstrumentPart == EInstrumentPart.BASS) || (((0xA0 <= nChannel && nChannel <= 0xA8) || (0xC5 <= nChannel && nChannel <= 0xC6) || (0xC8 <= nChannel && nChannel <= 0xCF) || (0xDA <= nChannel && nChannel <= 0xDF) || (0xE1 <= nChannel && nChannel <= 0xE8)) && chip.nChannelNumber == nChannel)))
+                else if (((nChannel == EChannel.Guitar_xGBYP && chip.eInstrumentPart == EInstrumentPart.BASS) || (((EChannel.Bass_Open <= nChannel && nChannel <= EChannel.Bass_Wailing) || (EChannel.Bass_xxxYx <= nChannel && nChannel <= EChannel.Bass_xxBYx) || (EChannel.Bass_xGxYx <= nChannel && nChannel <= EChannel.Bass_xxBxP) || (EChannel.Bass_xGxxP <= nChannel && nChannel <= EChannel.Bass_RGBxP) || (EChannel.Bass_xxxYP <= nChannel && nChannel <= EChannel.Bass_RGBYP)) && chip.nChannelNumber == nChannel)))
                 {
-                    if ((0xA0 <= nChannel && nChannel <= 0xA8) || (((0xC5 <= nChannel && nChannel <= 0xC6) || (0xC8 <= nChannel && nChannel <= 0xCF) || (0xDA <= nChannel && nChannel <= 0xDF) || (0xE1 <= nChannel && nChannel <= 0xE8)) && chip.nChannelNumber == nChannel))
+                    if ((EChannel.Bass_Open <= nChannel && nChannel <= EChannel.Bass_Wailing) || (((EChannel.Bass_xxxYx <= nChannel && nChannel <= EChannel.Bass_xxBYx) || (EChannel.Bass_xGxYx <= nChannel && nChannel <= EChannel.Bass_xxBxP) || (EChannel.Bass_xGxxP <= nChannel && nChannel <= EChannel.Bass_RGBxP) || (EChannel.Bass_xxxYP <= nChannel && nChannel <= EChannel.Bass_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
                         break;
                     }
@@ -1189,14 +1190,14 @@ namespace DTXMania
                     case EInstrumentPart.DRUMS:
                         #region [ DRUMS ]
                         {
-                            int index = pChip.nChannelNumber;
-                            if ((0x11 <= index) && (index <= 0x1c))
+                            EChannel index = pChip.nChannelNumber;
+                            if ((EChannel.HiHatClose <= index) && (index <= EChannel.LeftBassDrum))
                             {
                                 index -= 0x11;
                             }
-                            else if ((0x31 <= index) && (index <= 0x3c))
+                            else if ((EChannel.HiHatClose_Hidden <= index) && (index <= EChannel.LeftBassDrum_Hidden))
                             {
-                                index -= 0x31;
+                                index -= EChannel.HiHatClose_Hidden;
                             }
                             // mute sound (auto)
                             // 4A: 84: HH (HO/HC)
@@ -1205,16 +1206,16 @@ namespace DTXMania
                             // 4D: 87: LC
                             // 2A: 88: Gt
                             // AA: 89: Bs
-                            else if (0x84 == index)	// 仮に今だけ追加 HHは消音処理があるので overwriteフラグ系の処理は改めて不要
+                            else if (EChannel.SE24 == index)	// 仮に今だけ追加 HHは消音処理があるので overwriteフラグ系の処理は改めて不要
                             {
                                 index = 0;
                             }
-                            else if ((0x85 <= index) && (index <= 0x87))	// 仮に今だけ追加
+                            else if ((EChannel.SE25 <= index) && (index <= EChannel.SE27))	// 仮に今だけ追加
                             {
                                 //            CY    RD    LC
-                                int[] ch = { 0x16, 0x19, 0x1A };
-                                pChip.nChannelNumber = ch[pChip.nChannelNumber - 0x85];
-                                index = pChip.nChannelNumber - 0x11;
+                                EChannel[] ch = { EChannel.Cymbal, EChannel.RideCymbal, EChannel.LeftCymbal };
+                                pChip.nChannelNumber = ch[pChip.nChannelNumber - EChannel.SE25];
+                                index = (EChannel)(pChip.nChannelNumber - EChannel.HiHatClose);
                                 overwrite = true;
                             }
                             else
@@ -1222,8 +1223,8 @@ namespace DTXMania
                                 return;
                             }
 
-                            int nLane = this.nチャンネル0Atoレーン07[index];
-                            if (((((nLane == 1) && (index == 0)) && ((this.nLastPlayedHHChannelNumber != 0x18) && (this.nLastPlayedHHChannelNumber != 0x38))) || ((((nLane == 8)) && ((index == 10) && (this.nLastPlayedHHChannelNumber != 0x18))) && (this.nLastPlayedHHChannelNumber != 0x38))) && CDTXMania.ConfigIni.bMutingLP)
+                            int nLane = this.nチャンネル0Atoレーン07[(int)index];
+                            if (((((nLane == 1) && (index == 0)) && ((this.nLastPlayedHHChannelNumber != EChannel.HiHatOpen) && (this.nLastPlayedHHChannelNumber != EChannel.HiHatOpen_Hidden))) || ((((nLane == 8)) && ((index == EChannel.BMS_reserved_0A) && (this.nLastPlayedHHChannelNumber != EChannel.HiHatOpen))) && (this.nLastPlayedHHChannelNumber != EChannel.HiHatOpen_Hidden))) && CDTXMania.ConfigIni.bMutingLP)
                             {
                                 for (int i = 0; i < this.LLastPlayedHHWAVNumber.Count; i++)
                                 {
@@ -1234,10 +1235,10 @@ namespace DTXMania
                             }
                             switch (index)
                             {
-                                case 0:
-                                case 7:
-                                case 0x20:
-                                case 0x27:
+                                case EChannel.Nil:
+                                case EChannel.BGALayer2:
+                                case EChannel.Guitar_Open:
+                                case EChannel.Guitar_RGBxx:
                                     if (this.LLastPlayedHHWAVNumber.Count >= 0x10)
                                     {
                                         this.LLastPlayedHHWAVNumber.RemoveAt(0);
@@ -1311,7 +1312,7 @@ namespace DTXMania
                     {
                         int nInputAdjustTime = bPChipIsAutoPlay ? 0 : this.nInputAdjustTimeMs.Drums;
                         eJudgeResult = (bCorrectLane) ? this.e指定時刻からChipのJUDGEを返す(nHitTime, pChip, nInputAdjustTime) : EJudgement.Miss;
-                        this.actJudgeString.Start(this.nチャンネル0Atoレーン07[pChip.nChannelNumber - 0x11], bPChipIsAutoPlay ? EJudgement.Auto : eJudgeResult, pChip.nLag);
+                        this.actJudgeString.Start(this.nチャンネル0Atoレーン07[pChip.nChannelNumber - EChannel.HiHatClose], bPChipIsAutoPlay ? EJudgement.Auto : eJudgeResult, pChip.nLag);
                     }
                     break;
 
@@ -1333,7 +1334,7 @@ namespace DTXMania
 
                 case EInstrumentPart.UNKNOWN:
                     {
-                        if (pChip.nChannelNumber == 0x4F)
+                        if (pChip.nChannelNumber == EChannel.BonusEffect)
                         {
                             int nInputAdjustTime = bPChipIsAutoPlay ? 0 : this.nInputAdjustTimeMs.Drums;
                             eJudgeResult = (bCorrectLane) ? this.e指定時刻からChipのJUDGEを返す(nHitTime, pChip, nInputAdjustTime) : EJudgement.Miss;
@@ -1469,7 +1470,7 @@ namespace DTXMania
                     break;
 
                 case EInstrumentPart.UNKNOWN:
-                    if (pChip.nChannelNumber == 0x4F)
+                    if (pChip.nChannelNumber == EChannel.BonusEffect)
                     {
                         switch (eJudgeResult)
                         {
@@ -1790,8 +1791,9 @@ namespace DTXMania
         {
             return this.r指定時刻に一番近い未ヒットChip(nTime, nChannelFlag, nInputAdjustTime, 0);
         }
-        protected CDTX.CChip r指定時刻に一番近い未ヒットChip(long nTime, int nChannel, int nInputAdjustTime, int n検索範囲時間ms)
+        protected CDTX.CChip r指定時刻に一番近い未ヒットChip(long nTime, int int_nChannel, int nInputAdjustTime, int n検索範囲時間ms)
         {
+            EChannel nChannel = (EChannel)int_nChannel;
             sw2.Start();
             //Trace.TraceInformation( "nTime={0}, nChannel={1:x2}, 現在のTop={2}", nTime, nChannel,CDTXMania.DTX.listChip[ this.nCurrentTopChip ].nPlaybackTimeMs );
             nTime += nInputAdjustTime;
@@ -1816,9 +1818,9 @@ namespace DTXMania
                 CDTX.CChip chip = listChip[nIndex_NearestChip_Future];
                 if (!chip.bHit)
                 {
-                    if ((0x11 <= nChannel) && (nChannel <= 0x1c))
+                    if ((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum))
                     {
-                        if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == (nChannel + 0x20)))
+                        if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
                         {
                             if (chip.nPlaybackTimeMs > nTime)
                             {
@@ -1828,7 +1830,7 @@ namespace DTXMania
                         }
                         continue;
                     }
-                    else if ((nChannel == 0x2F && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((0x20 <= nChannel && nChannel <= 0x28) || (0x93 <= nChannel && nChannel <= 0x9F) || (0xA9 <= nChannel && nChannel <= 0xAF) || (0xD0 <= nChannel && nChannel <= 0xD3)) && chip.nChannelNumber == nChannel))
+                    else if ((nChannel == EChannel.Guitar_WailingSound && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
                         if (chip.nPlaybackTimeMs > nTime)
                         {
@@ -1836,7 +1838,7 @@ namespace DTXMania
                         }
                         nIndex_InitialPositionSearchingToPast = nIndex_NearestChip_Future;
                     }
-                    else if ((nChannel == 0xAF && chip.eInstrumentPart == EInstrumentPart.BASS) || (((nChannel >= 0xA0 && nChannel <= 0xA8) || (0xC5 == nChannel) || (nChannel == 0xC6) || (nChannel >= 0xC8 && nChannel <= 0xCF) || (nChannel >= 0xDA && nChannel <= 0xDF) || (nChannel >= 0xE1 && nChannel <= 0xE8)) && chip.nChannelNumber == nChannel))
+                    else if ((nChannel == EChannel.Guitar_xGBYP && chip.eInstrumentPart == EInstrumentPart.BASS) || (((nChannel >= EChannel.Bass_Open && nChannel <= EChannel.Bass_Wailing) || (EChannel.Bass_xxxYx == nChannel) || (nChannel == EChannel.Bass_xxBYx) || (nChannel >= EChannel.Bass_xGxYx && nChannel <= EChannel.Bass_xxBxP) || (nChannel >= EChannel.Bass_xGxxP && nChannel <= EChannel.Bass_RGBxP) || (nChannel >= EChannel.Bass_xxxYP && nChannel <= EChannel.Bass_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
                         if (chip.nPlaybackTimeMs > nTime)
                         {
@@ -1854,26 +1856,26 @@ namespace DTXMania
                 CDTX.CChip chip = listChip[nIndex_NearestChip_Past];
                 if ((!chip.bHit) &&
                         (
-                            ((nChannel >= 0x11) && (nChannel <= 0x1c) &&
-                                ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == (nChannel + 0x20)))
+                            ((nChannel >= EChannel.HiHatClose) && (nChannel <= EChannel.LeftBassDrum) &&
+                                ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
                             )
                             ||
                             (
-                                ((nChannel == 0x2f) && (chip.eInstrumentPart == EInstrumentPart.GUITAR)) ||
-                                (((nChannel >= 0x20) && (nChannel <= 0x28)) ||
-                                (0x93 <= nChannel && nChannel <= 0x9F) ||
-                                (0xA9 <= nChannel && nChannel <= 0xAF) ||
-                                (0xD0 <= nChannel && nChannel <= 0xD3)
+                                ((nChannel == EChannel.Guitar_WailingSound) && (chip.eInstrumentPart == EInstrumentPart.GUITAR)) ||
+                                (((nChannel >= EChannel.Guitar_Open) && (nChannel <= EChannel.Guitar_Wailing)) ||
+                                (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) ||
+                                (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) ||
+                                (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)
                                 && (chip.nChannelNumber == nChannel))
                             )
                             ||
                             (
-                                ((nChannel == 0xaf) && (chip.eInstrumentPart == EInstrumentPart.BASS)) ||
-                                (((nChannel >= 0xA0) && (nChannel <= 0xa8)) ||
-                                (0xC5 <= nChannel && nChannel <= 0xC6) ||
-                                (0xC8 <= nChannel && nChannel <= 0xCF) ||
-                                (0xDA <= nChannel && nChannel <= 0xDF) ||
-                                (0xE1 <= nChannel && nChannel <= 0xE8)
+                                ((nChannel == EChannel.Guitar_xGBYP) && (chip.eInstrumentPart == EInstrumentPart.BASS)) ||
+                                (((nChannel >= EChannel.Bass_Open) && (nChannel <= EChannel.Bass_Wailing)) ||
+                                (EChannel.Bass_xxxYx <= nChannel && nChannel <= EChannel.Bass_xxBYx) ||
+                                (EChannel.Bass_xGxYx <= nChannel && nChannel <= EChannel.Bass_xxBxP) ||
+                                (EChannel.Bass_xGxxP <= nChannel && nChannel <= EChannel.Bass_RGBxP) ||
+                                (EChannel.Bass_xxxYP <= nChannel && nChannel <= EChannel.Bass_RGBYP)
                                 && (chip.nChannelNumber == nChannel))
                             )
                         )
@@ -2565,24 +2567,24 @@ namespace DTXMania
                     //描画順の都合上こちらから描画。
 
                     #region [ 11-1c: Drums ]
-                    case 0x11:	// ドラム演奏
-                    case 0x12:
-                    case 0x13:
-                    case 0x14:
-                    case 0x15:
-                    case 0x16:
-                    case 0x17:
-                    case 0x18:
-                    case 0x19:
-                    case 0x1a:
-                    case 0x1b:
-                    case 0x1c:
+                    case EChannel.HiHatClose:	// ドラム演奏
+                    case EChannel.Snare:
+                    case EChannel.BassDrum:
+                    case EChannel.HighTom:
+                    case EChannel.LowTom:
+                    case EChannel.Cymbal:
+                    case EChannel.FloorTom:
+                    case EChannel.HiHatOpen:
+                    case EChannel.RideCymbal:
+                    case EChannel.LeftCymbal:
+                    case EChannel.LeftPedal:
+                    case EChannel.LeftBassDrum:
                         this.tUpdateAndDraw_Chip_Drums(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
 
                     #region [ 01: BGM ]
-                    case 0x01:	// BGM
+                    case EChannel.BGM:	// BGM
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2594,7 +2596,7 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 03: BPM変更 ]
-                    case 0x03:	// BPM変更
+                    case EChannel.BPM:	// BPM変更
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2614,14 +2616,14 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 04, 07, 55, 56,57, 58, 59, 60:レイヤーBGA ]
-                    case 0x04:	// レイヤーBGA
-                    case 0x07:
-                    case 0x55:
-                    case 0x56:
-                    case 0x57:
-                    case 0x58:
-                    case 0x59:
-                    case 0x60:
+                    case EChannel.BGALayer1:	// レイヤーBGA
+                    case EChannel.BGALayer2:
+                    case EChannel.BGALayer3:
+                    case EChannel.BGALayer4:
+                    case EChannel.BGALayer5:
+                    case EChannel.BGALayer6:
+                    case EChannel.BGALayer7:
+                    case EChannel.BGALayer8:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2662,7 +2664,7 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 08: BPM変更(拡張) ]
-                    case 0x08:	// BPM変更(拡張)
+                    case EChannel.BPMEx:	// BPM変更(拡張)
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2686,7 +2688,7 @@ namespace DTXMania
                     #endregion
 
                     #region [ 1f: フィルインサウンド(ドラム) ]
-                    case 0x1f:	// フィルインサウンド(ドラム)
+                    case EChannel.DrumsFillin:	// フィルインサウンド(ドラム)
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2695,51 +2697,51 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 20-27: ギター演奏 ]
-                    case 0x20:	// ギター演奏
-                    case 0x21:
-                    case 0x22:
-                    case 0x23:
-                    case 0x24:
-                    case 0x25:
-                    case 0x26:
-                    case 0x27:
+                    case EChannel.Guitar_Open:	// ギター演奏
+                    case EChannel.Guitar_xxBxx:
+                    case EChannel.Guitar_xGxxx:
+                    case EChannel.Guitar_xGBxx:
+                    case EChannel.Guitar_Rxxxx:
+                    case EChannel.Guitar_RxBxx:
+                    case EChannel.Guitar_RGxxx:
+                    case EChannel.Guitar_RGBxx:
 
 
-                    case 0x93:
-                    case 0x94:
-                    case 0x95:
-                    case 0x96:
-                    case 0x97:
-                    case 0x98:
-                    case 0x99:
-                    case 0x9A:
-                    case 0x9B:
-                    case 0x9C:
-                    case 0x9D:
-                    case 0x9E:
-                    case 0x9F:
-                    case 0xA9:
-                    case 0xAA:
-                    case 0xAB:
-                    case 0xAC:
-                    case 0xAD:
-                    case 0xAE:
-                    case 0xAF:
-                    case 0xD0:
-                    case 0xD1:
-                    case 0xD2:
-                    case 0xD3:
+                    case EChannel.Guitar_xxxYx:
+                    case EChannel.Guitar_xxBYx:
+                    case EChannel.Guitar_xGxYx:
+                    case EChannel.Guitar_xGBYx:
+                    case EChannel.Guitar_RxxYx:
+                    case EChannel.Guitar_RxBYx:
+                    case EChannel.Guitar_RGxYx:
+                    case EChannel.Guitar_RGBYx:
+                    case EChannel.Guitar_xxxxP:
+                    case EChannel.Guitar_xxBxP:
+                    case EChannel.Guitar_xGxxP:
+                    case EChannel.Guitar_xGBxP:
+                    case EChannel.Guitar_RxxxP:
+                    case EChannel.Guitar_RxBxP:
+                    case EChannel.Guitar_RGxxP:
+                    case EChannel.Guitar_RGBxP:
+                    case EChannel.Guitar_xxxYP:
+                    case EChannel.Guitar_xxBYP:
+                    case EChannel.Guitar_xGxYP:
+                    case EChannel.Guitar_xGBYP:
+                    case EChannel.Guitar_RxxYP:
+                    case EChannel.Guitar_RxBYP:
+                    case EChannel.Guitar_RGxYP:
+                    case EChannel.Guitar_RGBYP:
 
                         this.tUpdateAndDraw_Chip_GuitarBass(configIni, ref dTX, ref pChip, EInstrumentPart.GUITAR);
                         break;
                     #endregion
                     #region [ 28: ウェイリング(ギター) ]
-                    case 0x28:	// ウェイリング(ギター)
+                    case EChannel.Guitar_Wailing:	// ウェイリング(ギター)
                         this.tUpdateAndDraw_Chip_Guitar_Wailing(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
                     #region [ 2f: ウェイリングサウンド(ギター) ]
-                    case 0x2f:	// ウェイリングサウンド(ギター)
+                    case EChannel.Guitar_WailingSound:	// ウェイリングサウンド(ギター)
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Guitar < 0))
                         {
                             pChip.bHit = true;
@@ -2748,18 +2750,18 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 31-3a: 不可視チップ配置(ドラム) ]
-                    case 0x31:	// 不可視チップ配置(ドラム)
-                    case 0x32:
-                    case 0x33:
-                    case 0x34:
-                    case 0x35:
-                    case 0x36:
-                    case 0x37:
-                    case 0x38:
-                    case 0x39:
-                    case 0x3a:
-                    case 0x3b:
-                    case 0x3c:
+                    case EChannel.HiHatClose_Hidden:	// 不可視チップ配置(ドラム)
+                    case EChannel.Snare_Hidden:
+                    case EChannel.BassDrum_Hidden:
+                    case EChannel.HighTom_Hidden:
+                    case EChannel.LowTom_Hidden:
+                    case EChannel.Cymbal_Hidden:
+                    case EChannel.FloorTom_Hidden:
+                    case EChannel.HiHatOpen_Hidden:
+                    case EChannel.RideCymbal_Hidden:
+                    case EChannel.LeftCymbal_Hidden:
+                    case EChannel.LeftPedal_Hidden:
+                    case EChannel.LeftBassDrum_Hidden:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2767,10 +2769,10 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 4F、4E、4D、4C: ボーナス ]
-                    case 0x4C:
-                    case 0x4D:
-                    case 0x4E:
-                    case 0x4F:  //追加した順番の都合上、4F、4E____という順でBonus1、Bonus2___という割り当てになってます。
+                    case EChannel.BonusEffect_Min:
+                    case EChannel.BonusEffect2:
+                    case EChannel.BonusEffect3:
+                    case EChannel.BonusEffect:  //追加した順番の都合上、4F、4E____という順でBonus1、Bonus2___という割り当てになってます。
                         //this.t進行描画_チップ_ボーナス(configIni, ref dTX, ref pChip);
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
@@ -2780,7 +2782,7 @@ namespace DTXMania
                     #endregion
 
                     #region [ 52: MIDIコーラス ]
-                    case 0x52:	// MIDIコーラス
+                    case EChannel.MIDIChorus:	// MIDIコーラス
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2788,13 +2790,13 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 53: フィルイン ]
-                    case 0x53:	// フィルイン
+                    case EChannel.FillIn:	// フィルイン
                         this.tUpdateAndDraw_Chip_FillIn(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
                     #region [ 54, 5A: 動画再生 ]
-                    case 0x54:	// 動画再生
-                    case 0x5A:
+                    case EChannel.Movie:	// 動画再生
+                    case EChannel.MovieFull:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -2821,52 +2823,52 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 61-92: 自動再生(BGM, SE) ]
-                    case 0x61:
-                    case 0x62:
-                    case 0x63:
-                    case 0x64:	// 自動再生(BGM, SE)
-                    case 0x65:
-                    case 0x66:
-                    case 0x67:
-                    case 0x68:
-                    case 0x69:
-                    case 0x70:
-                    case 0x71:
-                    case 0x72:
-                    case 0x73:
-                    case 0x74:
-                    case 0x75:
-                    case 0x76:
-                    case 0x77:
-                    case 0x78:
-                    case 0x79:
-                    case 0x80:
-                    case 0x81:
-                    case 0x82:
-                    case 0x83:
-                    case 0x90:
-                    case 0x91:
-                    case 0x92:
+                    case EChannel.SE01:
+                    case EChannel.SE02:
+                    case EChannel.SE03:
+                    case EChannel.SE04:	// 自動再生(BGM, SE)
+                    case EChannel.SE05:
+                    case EChannel.SE06:
+                    case EChannel.SE07:
+                    case EChannel.SE08:
+                    case EChannel.SE09:
+                    case EChannel.SE10:
+                    case EChannel.SE11:
+                    case EChannel.SE12:
+                    case EChannel.SE13:
+                    case EChannel.SE14:
+                    case EChannel.SE15:
+                    case EChannel.SE16:
+                    case EChannel.SE17:
+                    case EChannel.SE18:
+                    case EChannel.SE19:
+                    case EChannel.SE20:
+                    case EChannel.SE21:
+                    case EChannel.SE22:
+                    case EChannel.SE23:
+                    case EChannel.SE30:
+                    case EChannel.SE31:
+                    case EChannel.SE32:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
                             if (configIni.bBGM音を発声する)
                             {
-                                dTX.tStopPlayingWav(this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - 0x61]);
+                                dTX.tStopPlayingWav(this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01]);
                                 dTX.tPlayChip(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
-                                this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - 0x61] = pChip.nIntegerValue_InternalNumber;
+                                this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01] = pChip.nIntegerValue_InternalNumber;
                             }
                         }
                         break;
                     #endregion
 
                     #region [ 84-89: 仮: override sound ]	// #26338 2011.11.8 yyagi
-                    case 0x84:	// HH (HO/HC)
-                    case 0x85:	// CY
-                    case 0x86:	// RD
-                    case 0x87:	// LC
-                    case 0x88:	// Guitar
-                    case 0x89:	// Bass
+                    case EChannel.SE24:	// HH (HO/HC)
+                    case EChannel.SE25:	// CY
+                    case EChannel.SE26:	// RD
+                    case EChannel.SE27:	// LC
+                    case EChannel.SE28:	// Guitar
+                    case EChannel.SE29:	// Bass
                         // mute sound (auto)
                         // 4A: 84: HH (HO/HC)
                         // 4B: 85: CY
@@ -2885,7 +2887,7 @@ namespace DTXMania
                             pChip.bHit = true;
                             EInstrumentPart[] p = { EInstrumentPart.DRUMS, EInstrumentPart.DRUMS, EInstrumentPart.DRUMS, EInstrumentPart.DRUMS, EInstrumentPart.GUITAR, EInstrumentPart.BASS };
 
-                            EInstrumentPart pp = p[pChip.nChannelNumber - 0x84];
+                            EInstrumentPart pp = p[pChip.nChannelNumber - EChannel.SE24];
 
                             //							if ( pp == EInstrumentPart.DRUMS ) {			// pChip.nChannelNumber= ..... HHとか、ドラムの場合は変える。
                             //								//            HC    CY    RD    LC
@@ -2898,44 +2900,44 @@ namespace DTXMania
                     #endregion
 
                     #region [ a0-a7: ベース演奏 ]
-                    case 0xa0:	// ベース演奏
-                    case 0xa1:
-                    case 0xa2:
-                    case 0xa3:
-                    case 0xa4:
-                    case 0xa5:
-                    case 0xa6:
-                    case 0xa7:
+                    case EChannel.Bass_Open:	// ベース演奏
+                    case EChannel.Bass_xxBxx:
+                    case EChannel.Bass_xGxxx:
+                    case EChannel.Bass_xGBxx:
+                    case EChannel.Bass_Rxxxx:
+                    case EChannel.Bass_RxBxx:
+                    case EChannel.Bass_RGxxx:
+                    case EChannel.Bass_RGBxx:
 
-                    case 0xC5:
-                    case 0xC6:
-                    case 0xC8:
-                    case 0xC9:
-                    case 0xCA:
-                    case 0xCB:
-                    case 0xCC:
-                    case 0xCD:
-                    case 0xCE:
-                    case 0xCF:
-                    case 0xDA:
-                    case 0xDB:
-                    case 0xDC:
-                    case 0xDD:
-                    case 0xDE:
-                    case 0xDF:
-                    case 0xE1:
-                    case 0xE2:
-                    case 0xE3:
-                    case 0xE4:
-                    case 0xE5:
-                    case 0xE6:
-                    case 0xE7:
-                    case 0xE8:
+                    case EChannel.Bass_xxxYx:
+                    case EChannel.Bass_xxBYx:
+                    case EChannel.Bass_xGxYx:
+                    case EChannel.Bass_xGBYx:
+                    case EChannel.Bass_RxxYx:
+                    case EChannel.Bass_RxBYx:
+                    case EChannel.Bass_RGxYx:
+                    case EChannel.Bass_RGBYx:
+                    case EChannel.Bass_xxxxP:
+                    case EChannel.Bass_xxBxP:
+                    case EChannel.Bass_xGxxP:
+                    case EChannel.Bass_xGBxP:
+                    case EChannel.Bass_RxxxP:
+                    case EChannel.Bass_RxBxP:
+                    case EChannel.Bass_RGxxP:
+                    case EChannel.Bass_RGBxP:
+                    case EChannel.Bass_xxxYP:
+                    case EChannel.Bass_xxBYP:
+                    case EChannel.Bass_xGxYP:
+                    case EChannel.Bass_xGBYP:
+                    case EChannel.Bass_RxxYP:
+                    case EChannel.Bass_RxBYP:
+                    case EChannel.Bass_RGxYP:
+                    case EChannel.Bass_RGBYP:
                         this.tUpdateAndDraw_Chip_GuitarBass(configIni, ref dTX, ref pChip, EInstrumentPart.BASS);
                         break;
                     #endregion
                     #region [ a8: ウェイリング(ベース) ]
-                    case 0xa8:	// ウェイリング(ベース)
+                    case EChannel.Bass_Wailing:	// ウェイリング(ベース)
                         this.tUpdateAndDraw_Chip_Bass_Wailing(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
@@ -2951,50 +2953,50 @@ namespace DTXMania
                         */
                     #endregion
                     #region [ b1-b9, bc: 空打ち音設定(ドラム) ]
-                    case 0xb1:	// 空打ち音設定(ドラム)
-                    case 0xb2:
-                    case 0xb3:
-                    case 0xb4:
-                    case 0xb5:
-                    case 0xb6:
-                    case 0xb7:
-                    case 0xb8:
-                    case 0xb9:
-                    case 0xbc:
-                    case 0xbd:
-                    case 0xbe:
+                    case EChannel.HiHatClose_NoChip:	// 空打ち音設定(ドラム)
+                    case EChannel.Snare_NoChip:
+                    case EChannel.BassDrum_NoChip:
+                    case EChannel.HighTom_NoChip:
+                    case EChannel.LowTom_NoChip:
+                    case EChannel.Cymbal_NoChip:
+                    case EChannel.FloorTom_NoChip:
+                    case EChannel.HiHatOpen_NoChip:
+                    case EChannel.RideCymbal_NoChip:
+                    case EChannel.LeftCymbal_NoChip:
+                    case EChannel.LeftPedal_NoChip:
+                    case EChannel.LeftBassDrum_NoChip:
                         this.tUpdateAndDraw_Chip_NoSound_Drums(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
                     #region [ ba: 空打ち音設定(ギター) ]
-                    case 0xba:	// 空打ち音設定(ギター)
+                    case EChannel.Guitar_NoChip:	// 空打ち音設定(ギター)
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Guitar < 0))
                         {
                             pChip.bHit = true;
                             this.r現在の空うちギターChip = pChip;
-                            pChip.nChannelNumber = 0x20;
+                            pChip.nChannelNumber = EChannel.Guitar_Open;
                         }
                         break;
                     #endregion
                     #region [ bb: 空打ち音設定(ベース) ]
-                    case 0xbb:	// 空打ち音設定(ベース)
+                    case EChannel.Bass_NoChip:	// 空打ち音設定(ベース)
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Bass < 0))
                         {
                             pChip.bHit = true;
                             this.r現在の空うちベースChip = pChip;
-                            pChip.nChannelNumber = 0xA0;
+                            pChip.nChannelNumber = EChannel.Bass_Open;
                         }
                         break;
                     #endregion
                     #region [ c4, c7, d5-d9, e0: BGA画像入れ替え ]
-                    case 0xc4:
-                    case 0xc7:
-                    case 0xd5:
-                    case 0xd6:	// BGA画像入れ替え
-                    case 0xd7:
-                    case 0xd8:
-                    case 0xd9:
-                    case 0xe0:
+                    case EChannel.BGALayer1_Swap:
+                    case EChannel.BGALayer2_Swap:
+                    case EChannel.BGALayer3_Swap:
+                    case EChannel.BGALayer4_Swap:	// BGA画像入れ替え
+                    case EChannel.BGALayer5_Swap:
+                    case EChannel.BGALayer6_Swap:
+                    case EChannel.BGALayer7_Swap:
+                    case EChannel.BGALayer8_Swap:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -3012,7 +3014,7 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ ea: ミキサーへチップ音追加 ]
-                    case 0xEA:
+                    case EChannel.MixChannel1_unc:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             //Debug.WriteLine("[DA(AddMixer)] BAR=" + pChip.nPlaybackPosition / 384 + " ch=" + pChip.nChannelNumber.ToString("x2") + ", wav=" + pChip.nIntegerValue.ToString("x2") + ", time=" + pChip.nPlaybackTimeMs);
@@ -3033,7 +3035,7 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ eb: ミキサーからチップ音削除 ]
-                    case 0xEB:
+                    case EChannel.MixChannel2_unc:
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             //Debug.WriteLine("[DB(RemoveMixer)] BAR=" + pChip.nPlaybackPosition / 384 + " ch=" + pChip.nChannelNumber.ToString("x2") + ", wav=" + pChip.nIntegerValue.ToString("x2") + ", time=" + pChip.nPlaybackTimeMs);
@@ -3116,14 +3118,14 @@ namespace DTXMania
                 switch (pChip.nChannelNumber)
                 {
                     #region [ 50: 小節線 ]
-                    case 0x50:	// 小節線
+                    case EChannel.BarLine:	// 小節線
                         {
                             this.tUpdateAndDraw_Chip_BarLine(configIni, ref dTX, ref pChip);
                             break;
                         }
                     #endregion
                     #region [ 51: 拍線 ]
-                    case 0x51:	// 拍線
+                    case EChannel.BeatLine:	// 拍線
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -3214,18 +3216,18 @@ namespace DTXMania
                 switch (pChip.nChannelNumber)
                 {
                     #region [ 11-1c: ドラム演奏 ]
-                    case 0x11:	// ドラム演奏
-                    case 0x12:
-                    case 0x13:
-                    case 0x14:
-                    case 0x15:
-                    case 0x16:
-                    case 0x17:
-                    case 0x18:
-                    case 0x19:
-                    case 0x1a:
-                    case 0x1b:
-                    case 0x1c:
+                    case EChannel.HiHatClose:	// ドラム演奏
+                    case EChannel.Snare:
+                    case EChannel.BassDrum:
+                    case EChannel.HighTom:
+                    case EChannel.LowTom:
+                    case EChannel.Cymbal:
+                    case EChannel.FloorTom:
+                    case EChannel.HiHatOpen:
+                    case EChannel.RideCymbal:
+                    case EChannel.LeftCymbal:
+                    case EChannel.LeftPedal:
+                    case EChannel.LeftBassDrum:
                         this.tUpdateAndDraw_Chip_PatternOnly_Drums(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
@@ -3254,306 +3256,306 @@ namespace DTXMania
             bool bGtBsO = false;
             switch (pChip.nChannelNumber)
             {
-                case 0x20:
+                case EChannel.Guitar_Open:
                     bGtBsO = true;
                     break;
-                case 0x21:
+                case EChannel.Guitar_xxBxx:
                     bGtBsB = true;
                     break;
-                case 0x22:
+                case EChannel.Guitar_xGxxx:
                     bGtBsG = true;
                     break;
-                case 0x23:
-                    bGtBsG = true;
-                    bGtBsB = true;
-                    break;
-                case 0x24:
-                    bGtBsR = true;
-                    break;
-                case 0x25:
-                    bGtBsR = true;
-                    bGtBsB = true;
-                    break;
-                case 0x26:
-                    bGtBsR = true;
-                    bGtBsG = true;
-                    break;
-                case 0x27:
-                    bGtBsR = true;
+                case EChannel.Guitar_xGBxx:
                     bGtBsG = true;
                     bGtBsB = true;
                     break;
-                case 0x28:
+                case EChannel.Guitar_Rxxxx:
+                    bGtBsR = true;
+                    break;
+                case EChannel.Guitar_RxBxx:
+                    bGtBsR = true;
+                    bGtBsB = true;
+                    break;
+                case EChannel.Guitar_RGxxx:
+                    bGtBsR = true;
+                    bGtBsG = true;
+                    break;
+                case EChannel.Guitar_RGBxx:
+                    bGtBsR = true;
+                    bGtBsG = true;
+                    bGtBsB = true;
+                    break;
+                case EChannel.Guitar_Wailing:
                     bGtBsW = true;
                     break;
                 default:
                     switch (pChip.nChannelNumber)
                     {
-                        case 0x93:
+                        case EChannel.Guitar_xxxYx:
                             bGtBsY = true;
                             break;
-                        case 0x94:
+                        case EChannel.Guitar_xxBYx:
                             bGtBsB = true;
                             bGtBsY = true;
                             break;
-                        case 0x95:
+                        case EChannel.Guitar_xGxYx:
                             bGtBsG = true;
                             bGtBsY = true;
                             break;
-                        case 0x96:
+                        case EChannel.Guitar_xGBYx:
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsY = true;
                             break;
-                        case 0x97:
+                        case EChannel.Guitar_RxxYx:
                             bGtBsR = true;
                             bGtBsY = true;
                             break;
-                        case 0x98:
+                        case EChannel.Guitar_RxBYx:
                             bGtBsR = true;
                             bGtBsB = true;
                             bGtBsY = true;
                             break;
-                        case 0x99:
+                        case EChannel.Guitar_RGxYx:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsY = true;
                             break;
-                        case 0x9A:
+                        case EChannel.Guitar_RGBYx:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsY = true;
                             break;
-                        case 0x9B:
+                        case EChannel.Guitar_xxxxP:
                             bGtBsP = true;
                             break;
-                        case 0x9C:
+                        case EChannel.Guitar_xxBxP:
                             bGtBsB = true;
                             bGtBsP = true;
                             break;
-                        case 0x9D:
+                        case EChannel.Guitar_xGxxP:
                             bGtBsG = true;
                             bGtBsP = true;
                             break;
-                        case 0x9E:
+                        case EChannel.Guitar_xGBxP:
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsP = true;
                             break;
-                        case 0x9F:
+                        case EChannel.Guitar_RxxxP:
                             bGtBsR = true;
                             bGtBsP = true;
                             break;
 
-                        case 0xA0:
+                        case EChannel.Bass_Open:
                             bGtBsO = true;
                             break;
-                        case 0xA1:
+                        case EChannel.Bass_xxBxx:
                             bGtBsB = true;
                             break;
-                        case 0xA2:
+                        case EChannel.Bass_xGxxx:
                             bGtBsG = true;
                             break;
-                        case 0xA3:
+                        case EChannel.Bass_xGBxx:
                             bGtBsG = true;
                             bGtBsB = true;
                             break;
-                        case 0xA4:
+                        case EChannel.Bass_Rxxxx:
                             bGtBsR = true;
                             break;
-                        case 0xA5:
+                        case EChannel.Bass_RxBxx:
                             bGtBsR = true;
                             bGtBsB = true;
                             break;
-                        case 0xA6:
+                        case EChannel.Bass_RGxxx:
                             bGtBsR = true;
                             bGtBsG = true;
                             break;
-                        case 0xA7:
+                        case EChannel.Bass_RGBxx:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsB = true;
                             break;
 
 
-                        case 0xA8:
+                        case EChannel.Bass_Wailing:
                             bGtBsW = true;
                             break;
-                        case 0xA9:
+                        case EChannel.Guitar_RxBxP:
                             bGtBsR = true;
                             bGtBsB = true;
                             bGtBsP = true;
                             break;
-                        case 0xAA:
+                        case EChannel.Guitar_RGxxP:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsP = true;
                             break;
-                        case 0xAB:
+                        case EChannel.Guitar_RGBxP:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsP = true;
                             break;
-                        case 0xAC:
+                        case EChannel.Guitar_xxxYP:
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xAD:
+                        case EChannel.Guitar_xxBYP:
                             bGtBsB = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xAE:
+                        case EChannel.Guitar_xGxYP:
                             bGtBsG = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xAF:
-                            bGtBsG = true;
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-
-                        case 0xC5:
-                            bGtBsY = true;
-                            break;
-                        case 0xC6:
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            break;
-
-                        case 0xC8:
-                            bGtBsG = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xC9:
-                            bGtBsG = true;
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xCA:
-                            bGtBsR = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xCB:
-                            bGtBsR = true;
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xCC:
-                            bGtBsR = true;
-                            bGtBsG = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xCD:
-                            bGtBsR = true;
-                            bGtBsG = true;
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            break;
-                        case 0xCE:
-                            bGtBsP = true;
-                            break;
-                        case 0xCF:
-                            bGtBsB = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xD0:
-                            bGtBsR = true;
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xD1:
-                            bGtBsR = true;
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xD2:
-                            bGtBsR = true;
-                            bGtBsG = true;
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xD3:
-                            bGtBsR = true;
+                        case EChannel.Guitar_xGBYP:
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
 
+                        case EChannel.Bass_xxxYx:
+                            bGtBsY = true;
+                            break;
+                        case EChannel.Bass_xxBYx:
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            break;
 
-                        case 0xDA:
-                            bGtBsG = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xDB:
-                            bGtBsG = true;
-                            bGtBsB = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xDC:
-                            bGtBsR = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xDD:
-                            bGtBsR = true;
-                            bGtBsB = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xDE:
-                            bGtBsR = true;
-                            bGtBsG = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xDF:
-                            bGtBsR = true;
-                            bGtBsG = true;
-                            bGtBsB = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xE1:
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xE2:
-                            bGtBsB = true;
-                            bGtBsY = true;
-                            bGtBsP = true;
-                            break;
-                        case 0xE3:
+                        case EChannel.Bass_xGxYx:
                             bGtBsG = true;
                             bGtBsY = true;
-                            bGtBsP = true;
                             break;
-                        case 0xE4:
+                        case EChannel.Bass_xGBYx:
                             bGtBsG = true;
                             bGtBsB = true;
                             bGtBsY = true;
+                            break;
+                        case EChannel.Bass_RxxYx:
+                            bGtBsR = true;
+                            bGtBsY = true;
+                            break;
+                        case EChannel.Bass_RxBYx:
+                            bGtBsR = true;
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            break;
+                        case EChannel.Bass_RGxYx:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsY = true;
+                            break;
+                        case EChannel.Bass_RGBYx:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            break;
+                        case EChannel.Bass_xxxxP:
                             bGtBsP = true;
                             break;
-                        case 0xE5:
+                        case EChannel.Bass_xxBxP:
+                            bGtBsB = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Guitar_RxxYP:
                             bGtBsR = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xE6:
+                        case EChannel.Guitar_RxBYP:
                             bGtBsR = true;
                             bGtBsB = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xE7:
+                        case EChannel.Guitar_RGxYP:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-                        case 0xE8:
+                        case EChannel.Guitar_RGBYP:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+
+
+                        case EChannel.Bass_xGxxP:
+                            bGtBsG = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_xGBxP:
+                            bGtBsG = true;
+                            bGtBsB = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RxxxP:
+                            bGtBsR = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RxBxP:
+                            bGtBsR = true;
+                            bGtBsB = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RGxxP:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RGBxP:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsB = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_xxxYP:
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_xxBYP:
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_xGxYP:
+                            bGtBsG = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_xGBYP:
+                            bGtBsG = true;
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RxxYP:
+                            bGtBsR = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RxBYP:
+                            bGtBsR = true;
+                            bGtBsB = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RGxYP:
+                            bGtBsR = true;
+                            bGtBsG = true;
+                            bGtBsY = true;
+                            bGtBsP = true;
+                            break;
+                        case EChannel.Bass_RGBYP:
                             bGtBsR = true;
                             bGtBsG = true;
                             bGtBsB = true;
@@ -3565,7 +3567,7 @@ namespace DTXMania
             }
             if (pChip.eInstrumentPart == EInstrumentPart.DRUMS)
             {
-                if (bIsAutoPlay[this.nチャンネル0Atoレーン07[pChip.nChannelNumber - 0x11]])
+                if (bIsAutoPlay[this.nチャンネル0Atoレーン07[pChip.nChannelNumber - EChannel.HiHatClose]])
                 {
                     bPChipIsAutoPlay = true;
                 }
@@ -3678,233 +3680,233 @@ namespace DTXMania
                 bool bChipHasP = false;
                 bool bChipHasW = false;
                 bool bChipIsO = false;
-                int nチャンネル番号 = pChip.nChannelNumber;
+                EChannel nチャンネル番号 = pChip.nChannelNumber;
 
                 switch (nチャンネル番号)
                 {
-                    case 0x20:
+                    case EChannel.Guitar_Open:
                         bChipIsO = true;
                         break;
-                    case 0x21:
+                    case EChannel.Guitar_xxBxx:
                         bChipHasB = true;
                         break;
-                    case 0x22:
+                    case EChannel.Guitar_xGxxx:
                         bChipHasG = true;
                         break;
-                    case 0x23:
-                        bChipHasG = true;
-                        bChipHasB = true;
-                        break;
-                    case 0x24:
-                        bChipHasR = true;
-                        break;
-                    case 0x25:
-                        bChipHasR = true;
-                        bChipHasB = true;
-                        break;
-                    case 0x26:
-                        bChipHasR = true;
-                        bChipHasG = true;
-                        break;
-                    case 0x27:
-                        bChipHasR = true;
+                    case EChannel.Guitar_xGBxx:
                         bChipHasG = true;
                         bChipHasB = true;
                         break;
-                    case 0x28:
+                    case EChannel.Guitar_Rxxxx:
+                        bChipHasR = true;
+                        break;
+                    case EChannel.Guitar_RxBxx:
+                        bChipHasR = true;
+                        bChipHasB = true;
+                        break;
+                    case EChannel.Guitar_RGxxx:
+                        bChipHasR = true;
+                        bChipHasG = true;
+                        break;
+                    case EChannel.Guitar_RGBxx:
+                        bChipHasR = true;
+                        bChipHasG = true;
+                        bChipHasB = true;
+                        break;
+                    case EChannel.Guitar_Wailing:
                         bChipHasW = true;
                         break;
                     default:
                         switch (nチャンネル番号)
                         {
-                            case 0x93:
+                            case EChannel.Guitar_xxxYx:
                                 bChipHasY = true;
                                 break;
-                            case 0x94:
+                            case EChannel.Guitar_xxBYx:
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x95:
+                            case EChannel.Guitar_xGxYx:
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x96:
+                            case EChannel.Guitar_xGBYx:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x97:
+                            case EChannel.Guitar_RxxYx:
                                 bChipHasR = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x98:
+                            case EChannel.Guitar_RxBYx:
                                 bChipHasR = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x99:
+                            case EChannel.Guitar_RGxYx:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x9a:
+                            case EChannel.Guitar_RGBYx:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
-                            case 0x9B:
+                            case EChannel.Guitar_xxxxP:
                                 bChipHasP = true;
                                 break;
-                            case 0x9C:
+                            case EChannel.Guitar_xxBxP:
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0x9D:
+                            case EChannel.Guitar_xGxxP:
                                 bChipHasG = true;
                                 bChipHasP = true;
                                 break;
-                            case 0x9E:
+                            case EChannel.Guitar_xGBxP:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0x9F:
+                            case EChannel.Guitar_RxxxP:
                                 bChipHasR = true;
                                 bChipHasP = true;
                                 break;
 
-                            case 0xA0:
+                            case EChannel.Bass_Open:
                                 bChipIsO = true;
                                 break;
-                            case 0xA1:
+                            case EChannel.Bass_xxBxx:
                                 bChipHasB = true;
                                 break;
-                            case 0xA2:
+                            case EChannel.Bass_xGxxx:
                                 bChipHasG = true;
                                 break;
-                            case 0xA3:
-                                bChipHasG = true;
-                                bChipHasB = true;
-                                break;
-                            case 0xA4:
-                                bChipHasR = true;
-                                break;
-                            case 0xA5:
-                                bChipHasR = true;
-                                bChipHasB = true;
-                                break;
-                            case 0xA6:
-                                bChipHasR = true;
-                                bChipHasG = true;
-                                break;
-                            case 0xA7:
-                                bChipHasR = true;
+                            case EChannel.Bass_xGBxx:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 break;
-                            case 0xA8:
+                            case EChannel.Bass_Rxxxx:
+                                bChipHasR = true;
+                                break;
+                            case EChannel.Bass_RxBxx:
+                                bChipHasR = true;
+                                bChipHasB = true;
+                                break;
+                            case EChannel.Bass_RGxxx:
+                                bChipHasR = true;
+                                bChipHasG = true;
+                                break;
+                            case EChannel.Bass_RGBxx:
+                                bChipHasR = true;
+                                bChipHasG = true;
+                                bChipHasB = true;
+                                break;
+                            case EChannel.Bass_Wailing:
                                 bChipHasW = true;
                                 break;
 
-                            case 0xA9:
+                            case EChannel.Guitar_RxBxP:
                                 bChipHasR = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAA:
+                            case EChannel.Guitar_RGxxP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAB:
+                            case EChannel.Guitar_RGBxP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAC:
+                            case EChannel.Guitar_xxxYP:
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAD:
+                            case EChannel.Guitar_xxBYP:
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAE:
+                            case EChannel.Guitar_xGxYP:
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xAF:
+                            case EChannel.Guitar_xGBYP:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xC5:
+                            case EChannel.Bass_xxxYx:
                                 bChipHasY = true;
                                 break;
-                            case 0xC6:
+                            case EChannel.Bass_xxBYx:
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
 
-                            case 0xC8:
+                            case EChannel.Bass_xGxYx:
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 break;
-                            case 0xC9:
-                                bChipHasG = true;
-                                bChipHasB = true;
-                                bChipHasY = true;
-                                break;
-                            case 0xCA:
-                                bChipHasR = true;
-                                bChipHasY = true;
-                                break;
-                            case 0xCB:
-                                bChipHasR = true;
-                                bChipHasB = true;
-                                bChipHasY = true;
-                                break;
-                            case 0xCC:
-                                bChipHasR = true;
-                                bChipHasG = true;
-                                bChipHasY = true;
-                                break;
-                            case 0xCD:
-                                bChipHasR = true;
+                            case EChannel.Bass_xGBYx:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 break;
-                            case 0xCE:
+                            case EChannel.Bass_RxxYx:
+                                bChipHasR = true;
+                                bChipHasY = true;
+                                break;
+                            case EChannel.Bass_RxBYx:
+                                bChipHasR = true;
+                                bChipHasB = true;
+                                bChipHasY = true;
+                                break;
+                            case EChannel.Bass_RGxYx:
+                                bChipHasR = true;
+                                bChipHasG = true;
+                                bChipHasY = true;
+                                break;
+                            case EChannel.Bass_RGBYx:
+                                bChipHasR = true;
+                                bChipHasG = true;
+                                bChipHasB = true;
+                                bChipHasY = true;
+                                break;
+                            case EChannel.Bass_xxxxP:
                                 bChipHasP = true;
                                 break;
-                            case 0xCF:
+                            case EChannel.Bass_xxBxP:
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xD0:
+                            case EChannel.Guitar_RxxYP:
                                 bChipHasR = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xD1:
+                            case EChannel.Guitar_RxBYP:
                                 bChipHasR = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xD2:
+                            case EChannel.Guitar_RGxYP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xD3:
+                            case EChannel.Guitar_RGBYP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasB = true;
@@ -3913,75 +3915,75 @@ namespace DTXMania
                                 break;
 
 
-                            case 0xDA:
+                            case EChannel.Bass_xGxxP:
                                 bChipHasG = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xDB:
+                            case EChannel.Bass_xGBxP:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
 
-                            case 0xDC:
+                            case EChannel.Bass_RxxxP:
                                 bChipHasR = true;
                                 bChipHasP = true;
                                 break;
 
-                            case 0xDD:
+                            case EChannel.Bass_RxBxP:
                                 bChipHasR = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xDE:
+                            case EChannel.Bass_RGxxP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xDF:
+                            case EChannel.Bass_RGBxP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE1:
+                            case EChannel.Bass_xxxYP:
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE2:
+                            case EChannel.Bass_xxBYP:
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE3:
+                            case EChannel.Bass_xGxYP:
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE4:
+                            case EChannel.Bass_xGBYP:
                                 bChipHasG = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE5:
+                            case EChannel.Bass_RxxYP:
                                 bChipHasR = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE6:
+                            case EChannel.Bass_RxBYP:
                                 bChipHasR = true;
                                 bChipHasB = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE7:
+                            case EChannel.Bass_RGxYP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasY = true;
                                 bChipHasP = true;
                                 break;
-                            case 0xE8:
+                            case EChannel.Bass_RGBYP:
                                 bChipHasR = true;
                                 bChipHasG = true;
                                 bChipHasB = true;
@@ -4696,121 +4698,121 @@ namespace DTXMania
 
                 switch (chip.nChannelNumber)
                 {
-                    case 0x20:
+                    case EChannel.Guitar_Open:
                         break;
-                    case 0x21:
+                    case EChannel.Guitar_xxBxx:
                         bAutoGuitarB = true;
                         break;
-                    case 0x22:
+                    case EChannel.Guitar_xGxxx:
                         bAutoGuitarG = true;
                         break;
-                    case 0x23:
+                    case EChannel.Guitar_xGBxx:
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         break;
-                    case 0x24:
+                    case EChannel.Guitar_Rxxxx:
                         bAutoGuitarR = true;
                         break;
-                    case 0x25:
+                    case EChannel.Guitar_RxBxx:
                         bAutoGuitarR = true;
                         bAutoGuitarB = true;
                         break;
-                    case 0x26:
+                    case EChannel.Guitar_RGxxx:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         break;
-                    case 0x27:
+                    case EChannel.Guitar_RGBxx:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         break;
 
-                    case 0x93:
+                    case EChannel.Guitar_xxxYx:
                         bAutoGuitarY = true;
                         break;
-                    case 0x94:
+                    case EChannel.Guitar_xxBYx:
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x95:
+                    case EChannel.Guitar_xGxYx:
                         bAutoGuitarG = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x96:
+                    case EChannel.Guitar_xGBYx:
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x97:
+                    case EChannel.Guitar_RxxYx:
                         bAutoGuitarR = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x98:
+                    case EChannel.Guitar_RxBYx:
                         bAutoGuitarR = true;
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x99:
+                    case EChannel.Guitar_RGxYx:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x9A:
+                    case EChannel.Guitar_RGBYx:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         break;
-                    case 0x9B:
+                    case EChannel.Guitar_xxxxP:
                         bAutoGuitarP = true;
                         break;
-                    case 0x9C:
+                    case EChannel.Guitar_xxBxP:
                         bAutoGuitarB = true;
                         bAutoGuitarP = true;
                         break;
-                    case 0x9D:
+                    case EChannel.Guitar_xGxxP:
                         bAutoGuitarG = true;
                         bAutoGuitarP = true;
                         break;
-                    case 0x9E:
+                    case EChannel.Guitar_xGBxP:
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         bAutoGuitarP = true;
                         break;
-                    case 0x9F:
+                    case EChannel.Guitar_RxxxP:
                         bAutoGuitarR = true;
                         bAutoGuitarP = true;
                         break;
 
                     //BASS
-                    case 0xA1:
+                    case EChannel.Bass_xxBxx:
                         bAutoBassB = true;
                         break;
 
-                    case 0xA2:
+                    case EChannel.Bass_xGxxx:
                         bAutoBassG = true;
                         break;
 
-                    case 0xA3:
+                    case EChannel.Bass_xGBxx:
                         bAutoBassG = true;
                         bAutoBassB = true;
                         break;
 
-                    case 0xA4:
+                    case EChannel.Bass_Rxxxx:
                         bAutoBassR = true;
                         break;
 
-                    case 0xA5:
+                    case EChannel.Bass_RxBxx:
                         bAutoBassR = true;
                         bAutoBassB = true;
                         break;
 
-                    case 0xA6:
+                    case EChannel.Bass_RGxxx:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         break;
 
-                    case 0xA7:
+                    case EChannel.Bass_RGBxx:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         bAutoBassB = true;
@@ -4818,190 +4820,190 @@ namespace DTXMania
 
                     //A8 WAILING(BASS)
 
-                    case 0xA9:
+                    case EChannel.Guitar_RxBxP:
                         bAutoGuitarR = true;
                         bAutoGuitarB = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xAA:
+                    case EChannel.Guitar_RGxxP:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xAB:
+                    case EChannel.Guitar_RGBxP:
                         bAutoGuitarR = true;
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xAC:
+                    case EChannel.Guitar_xxxYP:
                         bAutoGuitarY = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xAD:
-                        bAutoGuitarB = true;
-                        bAutoGuitarY = true;
-                        bAutoGuitarP = true;
-                        break;
-
-                    case 0xAE:
-                        bAutoGuitarG = true;
-                        bAutoGuitarY = true;
-                        bAutoGuitarP = true;
-                        break;
-
-                    case 0xAF:
-                        bAutoGuitarG = true;
+                    case EChannel.Guitar_xxBYP:
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xC5:
-                        bAutoBassY = true;
-                        break;
-
-                    case 0xC6:
-                        bAutoBassB = true;
-                        bAutoBassY = true;
-                        break;
-
-                    case 0xC8:
-                        bAutoBassG = true;
-                        bAutoBassY = true;
-                        break;
-
-                    case 0xC9:
-                        bAutoBassG = true;
-                        bAutoBassB = true;
-                        bAutoBassY = true;
-                        break;
-
-                    case 0xCA:
-                        bAutoBassR = true;
-                        bAutoBassY = true;
-                        break;
-
-                    case 0xCB:
-                        bAutoBassR = true;
-                        bAutoBassB = true;
-                        bAutoBassY = true;
-                        break;
-                    case 0xCC:
-                        bAutoBassR = true;
-                        bAutoBassG = true;
-                        bAutoBassY = true;
-                        break;
-                    case 0xCD:
-                        bAutoBassR = true;
-                        bAutoBassG = true;
-                        bAutoBassB = true;
-                        bAutoBassY = true;
-                        break;
-                    case 0xCE:
-                        bAutoBassP = true;
-                        break;
-                    case 0xCF:
-                        bAutoBassB = true;
-                        bAutoBassP = true;
-                        break;
-
-                    case 0xD0:
-                        bAutoGuitarR = true;
-                        bAutoGuitarY = true;
-                        bAutoGuitarP = true;
-                        break;
-                    case 0xD1:
-                        bAutoGuitarR = true;
-                        bAutoGuitarB = true;
-                        bAutoGuitarY = true;
-                        bAutoGuitarP = true;
-                        break;
-                    case 0xD2:
-                        bAutoGuitarR = true;
+                    case EChannel.Guitar_xGxYP:
                         bAutoGuitarG = true;
                         bAutoGuitarY = true;
                         bAutoGuitarP = true;
                         break;
-                    case 0xD3:
-                        bAutoGuitarR = true;
+
+                    case EChannel.Guitar_xGBYP:
                         bAutoGuitarG = true;
                         bAutoGuitarB = true;
                         bAutoGuitarY = true;
                         bAutoGuitarP = true;
                         break;
 
-                    case 0xDA:
+                    case EChannel.Bass_xxxYx:
+                        bAutoBassY = true;
+                        break;
+
+                    case EChannel.Bass_xxBYx:
+                        bAutoBassB = true;
+                        bAutoBassY = true;
+                        break;
+
+                    case EChannel.Bass_xGxYx:
+                        bAutoBassG = true;
+                        bAutoBassY = true;
+                        break;
+
+                    case EChannel.Bass_xGBYx:
+                        bAutoBassG = true;
+                        bAutoBassB = true;
+                        bAutoBassY = true;
+                        break;
+
+                    case EChannel.Bass_RxxYx:
+                        bAutoBassR = true;
+                        bAutoBassY = true;
+                        break;
+
+                    case EChannel.Bass_RxBYx:
+                        bAutoBassR = true;
+                        bAutoBassB = true;
+                        bAutoBassY = true;
+                        break;
+                    case EChannel.Bass_RGxYx:
+                        bAutoBassR = true;
+                        bAutoBassG = true;
+                        bAutoBassY = true;
+                        break;
+                    case EChannel.Bass_RGBYx:
+                        bAutoBassR = true;
+                        bAutoBassG = true;
+                        bAutoBassB = true;
+                        bAutoBassY = true;
+                        break;
+                    case EChannel.Bass_xxxxP:
+                        bAutoBassP = true;
+                        break;
+                    case EChannel.Bass_xxBxP:
+                        bAutoBassB = true;
+                        bAutoBassP = true;
+                        break;
+
+                    case EChannel.Guitar_RxxYP:
+                        bAutoGuitarR = true;
+                        bAutoGuitarY = true;
+                        bAutoGuitarP = true;
+                        break;
+                    case EChannel.Guitar_RxBYP:
+                        bAutoGuitarR = true;
+                        bAutoGuitarB = true;
+                        bAutoGuitarY = true;
+                        bAutoGuitarP = true;
+                        break;
+                    case EChannel.Guitar_RGxYP:
+                        bAutoGuitarR = true;
+                        bAutoGuitarG = true;
+                        bAutoGuitarY = true;
+                        bAutoGuitarP = true;
+                        break;
+                    case EChannel.Guitar_RGBYP:
+                        bAutoGuitarR = true;
+                        bAutoGuitarG = true;
+                        bAutoGuitarB = true;
+                        bAutoGuitarY = true;
+                        bAutoGuitarP = true;
+                        break;
+
+                    case EChannel.Bass_xGxxP:
                         bAutoBassG = true;
                         bAutoBassP = true;
                         break;
-                    case 0xDB:
+                    case EChannel.Bass_xGBxP:
                         bAutoBassG = true;
                         bAutoBassB = true;
                         bAutoBassP = true;
                         break;
-                    case 0xDC:
+                    case EChannel.Bass_RxxxP:
                         bAutoBassR = true;
                         bAutoBassP = true;
                         break;
-                    case 0xDD:
+                    case EChannel.Bass_RxBxP:
                         bAutoBassR = true;
                         bAutoBassB = true;
                         bAutoBassP = true;
                         break;
-                    case 0xDE:
+                    case EChannel.Bass_RGxxP:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         bAutoBassP = true;
                         break;
-                    case 0xDF:
+                    case EChannel.Bass_RGBxP:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         bAutoBassB = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE1:
+                    case EChannel.Bass_xxxYP:
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE2:
+                    case EChannel.Bass_xxBYP:
                         bAutoBassB = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE3:
+                    case EChannel.Bass_xGxYP:
                         bAutoBassG = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE4:
+                    case EChannel.Bass_xGBYP:
                         bAutoBassG = true;
                         bAutoBassB = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE5:
+                    case EChannel.Bass_RxxYP:
                         bAutoBassR = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE6:
+                    case EChannel.Bass_RxBYP:
                         bAutoBassR = true;
                         bAutoBassB = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE7:
+                    case EChannel.Bass_RGxYP:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         bAutoBassY = true;
                         bAutoBassP = true;
                         break;
-                    case 0xE8:
+                    case EChannel.Bass_RGBYP:
                         bAutoBassR = true;
                         bAutoBassG = true;
                         bAutoBassB = true;
@@ -5126,240 +5128,169 @@ namespace DTXMania
                             bool bChipHasB = false;
                             bool bChipHasY = false;
                             bool bChipHasP = false;
-                            bool bChipHasW = ((pChip.nChannelNumber & 0x0F) == 0x08);
+                            bool bChipHasW = (((int)pChip.nChannelNumber & 0x0F) == 0x08);
                             bool bChipIsO = false;
                             bool bSuccessOPEN = bChipIsO && (autoR || pushingR == 0) && (autoG || pushingG == 0) && (autoB || pushingB == 0) && (autoY || pushingY == 0) && (autoP || pushingP == 0);
 
                             switch (pChip.nChannelNumber)
                             {
-                                case 0x20:
+                                case EChannel.Guitar_Open:
                                     bChipIsO = true;
                                     break;
-                                case 0x21:
+                                case EChannel.Guitar_xxBxx:
                                     bChipHasB = true;
                                     break;
-                                case 0x22:
+                                case EChannel.Guitar_xGxxx:
                                     bChipHasG = true;
                                     break;
-                                case 0x23:
-                                    bChipHasG = true;
-                                    bChipHasB = true;
-                                    break;
-                                case 0x24:
-                                    bChipHasR = true;
-                                    break;
-                                case 0x25:
-                                    bChipHasR = true;
-                                    bChipHasB = true;
-                                    break;
-                                case 0x26:
-                                    bChipHasR = true;
-                                    bChipHasG = true;
-                                    break;
-                                case 0x27:
-                                    bChipHasR = true;
+                                case EChannel.Guitar_xGBxx:
                                     bChipHasG = true;
                                     bChipHasB = true;
                                     break;
-                                case 0x28:
+                                case EChannel.Guitar_Rxxxx:
+                                    bChipHasR = true;
+                                    break;
+                                case EChannel.Guitar_RxBxx:
+                                    bChipHasR = true;
+                                    bChipHasB = true;
+                                    break;
+                                case EChannel.Guitar_RGxxx:
+                                    bChipHasR = true;
+                                    bChipHasG = true;
+                                    break;
+                                case EChannel.Guitar_RGBxx:
+                                    bChipHasR = true;
+                                    bChipHasG = true;
+                                    bChipHasB = true;
+                                    break;
+                                case EChannel.Guitar_Wailing:
                                     bChipHasW = true;
                                     break;
                                 default:
                                     switch (pChip.nChannelNumber)
                                     {
-                                        case 0x93:
+                                        case EChannel.Guitar_xxxYx:
                                             bChipHasY = true;
                                             break;
-                                        case 0x94:
+                                        case EChannel.Guitar_xxBYx:
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x95:
+                                        case EChannel.Guitar_xGxYx:
                                             bChipHasG = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x96:
+                                        case EChannel.Guitar_xGBYx:
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x97:
+                                        case EChannel.Guitar_RxxYx:
                                             bChipHasR = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x98:
+                                        case EChannel.Guitar_RxBYx:
                                             bChipHasR = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x99:
+                                        case EChannel.Guitar_RGxYx:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasY = true;
                                             break;
                                         //OK
 
-                                        case 0x9A:
+                                        case EChannel.Guitar_RGBYx:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             break;
-                                        case 0x9B:
+                                        case EChannel.Guitar_xxxxP:
                                             bChipHasP = true;
                                             break;
-                                        case 0x9C:
+                                        case EChannel.Guitar_xxBxP:
                                             bChipHasB = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0x9D:
+                                        case EChannel.Guitar_xGxxP:
                                             bChipHasG = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0x9E:
+                                        case EChannel.Guitar_xGBxP:
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0x9F:
+                                        case EChannel.Guitar_RxxxP:
                                             bChipHasR = true;
                                             bChipHasP = true;
                                             break;
                                         //OK
 
-                                        case 0xA1:
+                                        case EChannel.Bass_xxBxx:
                                             bChipHasB = true;
                                             break;
-                                        case 0xA2:
+                                        case EChannel.Bass_xGxxx:
                                             bChipHasG = true;
                                             break;
-                                        case 0xA3:
+                                        case EChannel.Bass_xGBxx:
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             break;
-                                        case 0xA4:
+                                        case EChannel.Bass_Rxxxx:
                                             bChipHasR = true;
                                             break;
-                                        case 0xA5:
+                                        case EChannel.Bass_RxBxx:
                                             bChipHasR = true;
                                             bChipHasB = true;
                                             break;
-                                        case 0xA6:
+                                        case EChannel.Bass_RGxxx:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             break;
-                                        case 0xA7:
+                                        case EChannel.Bass_RGBxx:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             break;
                                         //OK
-                                        case 0xA8:
+                                        case EChannel.Bass_Wailing:
                                             bChipHasW = true;
                                             break;
 
-                                        case 0xA9:
+                                        case EChannel.Guitar_RxBxP:
                                             bChipHasR = true;
                                             bChipHasB = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAA:
+                                        case EChannel.Guitar_RGxxP:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAB:
+                                        case EChannel.Guitar_RGBxP:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAC:
+                                        case EChannel.Guitar_xxxYP:
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAD:
+                                        case EChannel.Guitar_xxBYP:
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAE:
+                                        case EChannel.Guitar_xGxYP:
                                             bChipHasG = true;
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xAF:
-                                            bChipHasG = true;
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            bChipHasP = true;
-                                            break;
-                                        //OK
-
-                                        case 0xC5:
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xC6:
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xC8:
-                                            bChipHasG = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xC9:
-                                            bChipHasG = true;
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xCA:
-                                            bChipHasR = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xCB:
-                                            bChipHasR = true;
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xCC:
-                                            bChipHasR = true;
-                                            bChipHasG = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xCD:
-                                            bChipHasR = true;
-                                            bChipHasG = true;
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            break;
-                                        case 0xCE:
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xCF:
-                                            bChipHasB = true;
-                                            bChipHasP = true;
-                                            break;
-                                        //OK
-
-                                        case 0xD0:
-                                            bChipHasR = true;
-                                            bChipHasY = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xD1:
-                                            bChipHasR = true;
-                                            bChipHasB = true;
-                                            bChipHasY = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xD2:
-                                            bChipHasR = true;
-                                            bChipHasG = true;
-                                            bChipHasY = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xD3:
-                                            bChipHasR = true;
+                                        case EChannel.Guitar_xGBYP:
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
@@ -5367,73 +5298,144 @@ namespace DTXMania
                                             break;
                                         //OK
 
-                                        case 0xDA:
-                                            bChipHasG = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xDB:
-                                            bChipHasG = true;
-                                            bChipHasB = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xDC:
-                                            bChipHasR = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xDD:
-                                            bChipHasR = true;
-                                            bChipHasB = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xDE:
-                                            bChipHasR = true;
-                                            bChipHasG = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xDF:
-                                            bChipHasR = true;
-                                            bChipHasG = true;
-                                            bChipHasB = true;
-                                            bChipHasP = true;
-                                            break;
-                                        case 0xE1:
+                                        case EChannel.Bass_xxxYx:
                                             bChipHasY = true;
-                                            bChipHasP = true;
                                             break;
-                                        case 0xE2:
+                                        case EChannel.Bass_xxBYx:
                                             bChipHasB = true;
                                             bChipHasY = true;
-                                            bChipHasP = true;
                                             break;
-                                        case 0xE3:
+                                        case EChannel.Bass_xGxYx:
                                             bChipHasG = true;
                                             bChipHasY = true;
-                                            bChipHasP = true;
                                             break;
-                                        case 0xE4:
+                                        case EChannel.Bass_xGBYx:
                                             bChipHasG = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
+                                            break;
+                                        case EChannel.Bass_RxxYx:
+                                            bChipHasR = true;
+                                            bChipHasY = true;
+                                            break;
+                                        case EChannel.Bass_RxBYx:
+                                            bChipHasR = true;
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            break;
+                                        case EChannel.Bass_RGxYx:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasY = true;
+                                            break;
+                                        case EChannel.Bass_RGBYx:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            break;
+                                        case EChannel.Bass_xxxxP:
                                             bChipHasP = true;
                                             break;
-                                        case 0xE5:
+                                        case EChannel.Bass_xxBxP:
+                                            bChipHasB = true;
+                                            bChipHasP = true;
+                                            break;
+                                        //OK
+
+                                        case EChannel.Guitar_RxxYP:
                                             bChipHasR = true;
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xE6:
+                                        case EChannel.Guitar_RxBYP:
                                             bChipHasR = true;
                                             bChipHasB = true;
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xE7:
+                                        case EChannel.Guitar_RGxYP:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasY = true;
                                             bChipHasP = true;
                                             break;
-                                        case 0xE8:
+                                        case EChannel.Guitar_RGBYP:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        //OK
+
+                                        case EChannel.Bass_xGxxP:
+                                            bChipHasG = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_xGBxP:
+                                            bChipHasG = true;
+                                            bChipHasB = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RxxxP:
+                                            bChipHasR = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RxBxP:
+                                            bChipHasR = true;
+                                            bChipHasB = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RGxxP:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RGBxP:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasB = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_xxxYP:
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_xxBYP:
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_xGxYP:
+                                            bChipHasG = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_xGBYP:
+                                            bChipHasG = true;
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RxxYP:
+                                            bChipHasR = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RxBYP:
+                                            bChipHasR = true;
+                                            bChipHasB = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RGxYP:
+                                            bChipHasR = true;
+                                            bChipHasG = true;
+                                            bChipHasY = true;
+                                            bChipHasP = true;
+                                            break;
+                                        case EChannel.Bass_RGBYP:
                                             bChipHasR = true;
                                             bChipHasG = true;
                                             bChipHasB = true;

@@ -119,6 +119,7 @@
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Score,Song\EChannel.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
     <Compile Include="Code\Stage\CDTXVmode.cs" />
@@ -293,7 +294,6 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-
   <!-- Copy NuGet DLLs to output\dll\ -->
   <ItemDefinitionGroup>
     <ReferenceCopyLocalPaths>
