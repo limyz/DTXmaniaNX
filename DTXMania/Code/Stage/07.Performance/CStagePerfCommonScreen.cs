@@ -727,7 +727,7 @@ namespace DTXMania
         //   HH SD BD HT LT FT CY HHO RD LC LP LBD
         protected readonly int[] nパッド0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 9, 0, 8, 8 };
         protected readonly float[,] fDamageGaugeDelta = new float[,] { { 0.004f, 0.006f, 0.006f }, { 0.002f, 0.003f, 0.003f }, { 0f, 0f, 0f }, { -0.02f, -0.03f, -0.03f }, { -0.05f, -0.05f, -0.05f } };
-        protected readonly float[] fDamageLevelFactor = new float[] { 0.5f, 1f, 1.5f };
+        protected readonly float[] fDamageLevelFactor = new float[] { 0.25f, 0.5f, 0.75f }; //Original: 0.5f, 1f, 1.5f
 
         public STDGBVALUE<int> nJudgeLinePosY = new STDGBVALUE<int>();//(CDTXMania.ConfigIni.bReverse.Drums ? 159 : 561);
         public STDGBVALUE<int> nShutterInPosY = new STDGBVALUE<int>();
