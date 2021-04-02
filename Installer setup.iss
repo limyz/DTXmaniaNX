@@ -11,7 +11,7 @@
 
 // custom setup info
 #define MyAppSetupName "DTXManiaNX"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.2.1"
 #define MyAppPublisher "limyz"
 #define MyAppURL "https://github.com/limyz/DTXmaniaNX"
 #define MyAppSupportURL "https://discord.gg/Q8xeugf"
