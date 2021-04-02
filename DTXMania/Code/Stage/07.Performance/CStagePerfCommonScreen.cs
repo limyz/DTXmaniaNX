@@ -40,13 +40,21 @@ namespace DTXMania
                 var rConfirmedSong = CDTXMania.stageSongSelection.rConfirmedSong;
                 var nConfirmedDifficulty = CDTXMania.stageSongSelection.nConfirmedSongDifficulty;
                 var nEndTimeMs = CDTXMania.DTX.listChip.OrderBy(c => c.nPlaybackTimeMs).LastOrDefault()?.nPlaybackTimeMs ?? 0;
+
+                //Shorten details string to avoid hitting max of 128 bytes
+                string detailsString = $"{rConfirmedSong.strタイトル}";
+                if(detailsString.Length > 50)
+                {
+                    detailsString = detailsString.Substring(0, 50);
+                }
+                detailsString += $" [{rConfirmedSong.arDifficultyLabel[nConfirmedDifficulty]}]";
                 return new CDTXRichPresence
                 {
                     State = "In Game",
 
-                    // artist - title [difficulty]
+                    // title [difficulty]
                     // some songs omit the artist, so dont include the dash separator in such cases
-                    Details = $"{(string.IsNullOrEmpty(stSongInformation.ArtistName) ? string.Empty : $"{stSongInformation.ArtistName} - ")}{rConfirmedSong.strタイトル} [{rConfirmedSong.arDifficultyLabel[nConfirmedDifficulty]}]",
+                    Details = detailsString,
 
                     // playback speed is automatically applied as chip timings are modified,
                     // but the current time must be accounted for in start/end to display correct timestamps when seeking around
