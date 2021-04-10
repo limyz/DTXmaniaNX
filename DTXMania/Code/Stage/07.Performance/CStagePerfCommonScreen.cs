@@ -33,7 +33,7 @@ namespace DTXMania
                 // if presence is displayed before this point then it will use
                 // the unitialised timer time, displaying an incorrect timestamp
                 // so dont display any presence until initialisation has occurred
-                if (bJustStartedUpdate)
+                if (bJustStartedUpdate || CDTXMania.bCompactMode)
                     return null;
 
                 var stSongInformation = CDTXMania.stageSongSelection.rSelectedScore.SongInformation;
