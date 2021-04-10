@@ -2476,7 +2476,7 @@ for (int i = 0; i < 3; i++) {
             #endregion
 
             #region [ Discord Rich Presence ]
-            if (ConfigIni.bDiscordRichPresenceEnabled)
+            if (ConfigIni.bDiscordRichPresenceEnabled && !bCompactMode)
                 DiscordRichPresence = new CDiscordRichPresence(ConfigIni.strDiscordRichPresenceApplicationID);
             #endregion
 
