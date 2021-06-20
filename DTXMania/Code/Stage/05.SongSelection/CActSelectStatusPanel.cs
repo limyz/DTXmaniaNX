@@ -319,12 +319,12 @@ namespace DTXMania
                                     bool bHasSong = b現在選択中の曲に譜面がある[i][j];
                                     bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0 ||
                                                              (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
-                                                             !CDTXMania.DTX.bチップがある.LeftCymbal &&
-                                                             !CDTXMania.DTX.bチップがある.LP &&
-                                                             !CDTXMania.DTX.bチップがある.LBD &&
-                                                             !CDTXMania.DTX.bチップがある.FT &&
-                                                             !CDTXMania.DTX.bチップがある.Ride &&
-                                                             !CDTXMania.DTX.b強制的にXG譜面にする);
+                                                             !(CDTXMania?.DTX?.bチップがある?.LeftCymbal ?? true) &&
+                                                             !(CDTXMania?.DTX?.bチップがある?.LP ?? true) &&
+                                                             !(CDTXMania?.DTX?.bチップがある?.LBD ?? true) &&
+                                                             !(CDTXMania?.DTX?.bチップがある?.FT ?? true) &&
+                                                             !(CDTXMania?.DTX?.bチップがある?.Ride ?? true) &&
+                                                             !(CDTXMania?.DTX?.b強制的にXG譜面にする ?? true));
 
                                     int nX = nBoxX + nPanelW - 77;
                                     int nY = nBoxY + nPanelH - 35;
