@@ -317,15 +317,21 @@ namespace DTXMania
                                     // convert the level back into a whole number (0-999) to make it easier to work with
                                     int nLevel = (n現在選択中の曲のレベル難易度毎DGB[i][j] * 10) + n現在選択中の曲のレベル小数点難易度毎DGB[i][j];
                                     bool bHasSong = b現在選択中の曲に譜面がある[i][j];
-                                    bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0 ||
-                                                             (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
-                                                             !CDTXMania.DTX.bチップがある.LeftCymbal &&
-                                                             !CDTXMania.DTX.bチップがある.LP &&
-                                                             !CDTXMania.DTX.bチップがある.LBD &&
-                                                             !CDTXMania.DTX.bチップがある.FT &&
-                                                             !CDTXMania.DTX.bチップがある.Ride &&
-                                                             !CDTXMania.DTX.b強制的にXG譜面にする);
-
+                                    bool bClassChartModeSet = CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする;
+                                    if(CDTXMania.DTX != null)
+                                    {
+                                        bClassChartModeSet = bClassChartModeSet && (
+                                            !CDTXMania.DTX.bチップがある.LeftCymbal &&
+                                            !CDTXMania.DTX.bチップがある.LP &&
+                                            !CDTXMania.DTX.bチップがある.LBD &&
+                                            !CDTXMania.DTX.bチップがある.FT &&
+                                            !CDTXMania.DTX.bチップがある.Ride &&
+                                            !CDTXMania.DTX.b強制的にXG譜面にする
+                                            );
+                                    }
+                                    
+                                    bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0 || bClassChartModeSet;
+                                    
                                     int nX = nBoxX + nPanelW - 77;
                                     int nY = nBoxY + nPanelH - 35;
                                     if (bHasSong)
