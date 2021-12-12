@@ -873,7 +873,7 @@ namespace DTXMania
                                     c曲リストノード.arScore[ i ].SongInformation.bScoreExists.Bass = cdtx.bチップがある.Bass;
 									c曲リストノード.arScore[ i ].SongInformation.SongType = cdtx.e種別;
 									c曲リストノード.arScore[ i ].SongInformation.Bpm = cdtx.BPM;
-									c曲リストノード.arScore[ i ].SongInformation.Duration = 0;	//  (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].nPlaybackTimeMs;
+									c曲リストノード.arScore[ i ].SongInformation.Duration = (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].nPlaybackTimeMs;
 									this.nNbScoresFromFile++;
 									cdtx.OnDeactivate();
 //Debug.WriteLine( "★" + this.nNbScoresFromFile + " " + c曲リストノード.arScore[ i ].SongInformation.Title );

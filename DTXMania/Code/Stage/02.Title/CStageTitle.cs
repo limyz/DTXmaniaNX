@@ -12,7 +12,7 @@ namespace DTXMania
 {
 	internal class CStageTitle : CStage
 	{
-		public static readonly string VERSION_DISPLAY = "DTX:NX:A:A:2020091100";
+		public static readonly string VERSION_DISPLAY = "DTX:NX:A:A:2021040200";
 		// コンストラクタ
 
 		public CStageTitle()

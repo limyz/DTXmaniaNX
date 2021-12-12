@@ -332,7 +332,7 @@ namespace DTXMania
 				}
 
 				if (this.txBPMLabel != null)
-					this.txBPMLabel.tDraw2D(CDTXMania.app.Device, 32, 288);
+					this.txBPMLabel.tDraw2D(CDTXMania.app.Device, 32, 258);
 
 				this.actPreimagePanel.OnUpdateAndDraw();
 			//	this.bIsEnumeratingSongs = !this.actPreimageパネル.bIsPlayingPremovie;				// #27060 2011.3.2 yyagi: #PREMOVIE再生中は曲検索を中断する

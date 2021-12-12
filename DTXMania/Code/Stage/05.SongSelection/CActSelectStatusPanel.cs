@@ -152,7 +152,6 @@ namespace DTXMania
                 this.txDifficultyNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_level number.png"));
                 this.txAchievementRateNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill number.png"));
                 this.txBPM数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm font.png"));
-                this.txBPM画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm icon.png"));
                 base.OnManagedCreateResources();
             }
         }
@@ -168,7 +167,6 @@ namespace DTXMania
                 CDTXMania.tReleaseTexture(ref this.txDifficultyNumber);
                 CDTXMania.tReleaseTexture(ref this.txAchievementRateNumber);
                 CDTXMania.tReleaseTexture(ref this.txBPM数字);
-                CDTXMania.tReleaseTexture(ref this.txBPM画像);
                 base.OnManagedReleaseResources();
             }
         }
@@ -215,7 +213,7 @@ namespace DTXMania
                 CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
 
                 #region [ 選択曲の BPM の描画 ]
-                if (CDTXMania.stageSongSelection.r現在選択中の曲 != null && this.txBPM画像 != null)
+                if (CDTXMania.stageSongSelection.r現在選択中の曲 != null)
                 {
 
                     int nBPM位置X = 490;
@@ -228,24 +226,35 @@ namespace DTXMania
                     }
 
                     string strBPM;
+                    string strDuration = "";
                     switch (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType)
                     {
                         case CSongListNode.ENodeType.SCORE:
                             {
                                 int bpm_int = (int)Math.Round(cスコア.SongInformation.Bpm);
                                 strBPM = bpm_int.ToString();
+                                int duration = cスコア.SongInformation.Duration;
+                                TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, duration);
+                                strDuration = timeSpan.ToString(@"m\:ss");
+                                //strDuration = duration.ToString();                                
                                 break;
                             }
                         default:
                             {
-                                strBPM = "---";
+                                strBPM = "";
+                                strDuration = "";
                                 break;
                             }
                     }
 
-                    this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
-                    this.tDrawBPM(nBPM位置X + 17, nBPM位置Y + 25, string.Format("{0,3:###}", strBPM));
-                    //CDTXMania.act文字コンソール.tPrint(50, 570, CCharacterConsole.Eフォント種別.白, string.Format("BPM:{0:####0}", this.n現在選択中の曲のBPM));
+                    //this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
+                    this.tDrawBPM(nBPM位置X + 20, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
+                    //Length of Song
+                    this.tDrawBPM(nBPM位置X + 17, nBPM位置Y - 7, strDuration);
+                    //if(strDuration != "")
+                    //{
+                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 50, CCharacterConsole.EFontType.White, string.Format("Length  {0}", strDuration));
+                    //}                    
                 }
                 #endregion
 
@@ -573,7 +582,7 @@ namespace DTXMania
             new ST数字('7', new Rectangle(7 * 12, 0, 12, 20)),
             new ST数字('8', new Rectangle(8 * 12, 0, 12, 20)),
             new ST数字('9', new Rectangle(9 * 12, 0, 12, 20)),
-            new ST数字('-', new Rectangle(10 * 12, 0, 12, 20)),
+            new ST数字(':', new Rectangle(10 * 12 + 3, 0, 6, 20)),
             new ST数字('p', new Rectangle(11 * 12, 0, 12, 20)),
         };
         private readonly ST難易度数字[] stDifficultyNumber = new ST難易度数字[]
@@ -616,7 +625,7 @@ namespace DTXMania
         private CTexture txDifficultyNumber;
         private CTexture txAchievementRateNumber;
         private CTexture txBPM数字;
-        private CTexture txBPM画像;
+        //private CTexture txBPM画像;
         private int nCheckDifficultyLabelDisplayAndReturnScrollDirection()
         {
             int num = 0;
@@ -720,19 +729,21 @@ namespace DTXMania
         {
             for (int j = 0; j < str.Length; j++)
             {
+                int currCharWidth = 12;
                 for (int i = 0; i < this.st数字.Length; i++)
                 {
                     if (this.st数字[i].ch == str[j])
                     {
-                        Rectangle rectangle = new Rectangle(this.st数字[i].rc.X, this.st数字[i].rc.Y, 12, 20);
+                        Rectangle rectangle = new Rectangle(this.st数字[i].rc.X, this.st数字[i].rc.Y, this.st数字[i].rc.Width, this.st数字[i].rc.Height);
                         if (this.txBPM数字 != null)
                         {
                             this.txBPM数字.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
+                        currCharWidth = this.st数字[i].rc.Width;
                         break;
                     }
                 }
-                x += 12;
+                x += currCharWidth;
             }
         }
         //-----------------
