@@ -1418,6 +1418,30 @@ namespace DTXMania
 				}
             }
 
+			public void swapGuitarBassLaneChipCounters() 
+			{				
+				int temp_R = this.GuitarR;
+				int temp_G = this.GuitarG;
+				int temp_B = this.GuitarB;
+				int temp_Y = this.GuitarY;
+				int temp_P = this.GuitarP;
+				int temp_Open = this.GuitarOpen;
+
+				this.GuitarR = this.BassR;
+				this.GuitarG = this.BassG;
+				this.GuitarB = this.BassB;
+				this.GuitarY = this.BassY;
+				this.GuitarP = this.BassP;
+				this.GuitarOpen = this.BassOpen;
+
+				this.BassR = temp_R;
+				this.BassG = temp_G;
+				this.BassB = temp_B;
+				this.BassY = temp_Y;
+				this.BassP = temp_P;
+				this.BassOpen = temp_Open;
+			}
+
 			public int chipCountInLane(ELane eLane)
 			{
 				switch (eLane)
@@ -4668,6 +4692,9 @@ namespace DTXMania
 			t = this.nVisibleChipsCount.Bass;
 			this.nVisibleChipsCount.Bass = this.nVisibleChipsCount.Guitar;
 			this.nVisibleChipsCount.Guitar = t;
+
+			//Swap Guitar Bass Lane chip info
+			this.nVisibleChipsCount.swapGuitarBassLaneChipCounters();
 
 			bool ts = this.bチップがある.Bass;
 			this.bチップがある.Bass = this.bチップがある.Guitar;
