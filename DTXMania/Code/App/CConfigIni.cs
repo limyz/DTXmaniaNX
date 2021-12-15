@@ -1182,7 +1182,7 @@ namespace DTXMania
             this.DisplayBonusEffects = true;
             this.eRDPosition = ERDPosition.RCRD;
             this.nInfoType = 0;
-            this.nSkillMode = 0;
+            this.nSkillMode = 1;
             this.eAttackEffect.Drums = EType.A;
             this.eAttackEffect.Guitar = EType.A;
             this.eAttackEffect.Bass = EType.A;
@@ -1345,11 +1345,11 @@ namespace DTXMania
 			#endregion
 
 			#region [ DiscordRichPresence ]
-			bDiscordRichPresenceEnabled = true;
-			strDiscordRichPresenceApplicationID = @"802329379979657257";
-			strDiscordRichPresenceLargeImageKey = @"dtxmania";
-			strDiscordRichPresenceSmallImageKeyDrums = @"drums";
-			strDiscordRichPresenceSmallImageKeyGuitar = @"guitar";
+			this.bDiscordRichPresenceEnabled = false;
+			this.strDiscordRichPresenceApplicationID = @"802329379979657257";
+			this.strDiscordRichPresenceLargeImageKey = @"dtxmania";
+			this.strDiscordRichPresenceSmallImageKeyDrums = @"drums";
+			this.strDiscordRichPresenceSmallImageKeyGuitar = @"guitar";
 			#endregion
 
 			this.ConfigIniファイル名 = "";

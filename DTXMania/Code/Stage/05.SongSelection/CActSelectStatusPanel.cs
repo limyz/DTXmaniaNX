@@ -227,6 +227,10 @@ namespace DTXMania
 
                     string strBPM;
                     string strDuration = "";
+                    string strTotalNotes = "";
+                    string strDrumNotes = "";
+                    string strGuitarNotes = "";
+                    string strBassNotes = "";
                     switch (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType)
                     {
                         case CSongListNode.ENodeType.SCORE:
@@ -236,7 +240,46 @@ namespace DTXMania
                                 int duration = cスコア.SongInformation.Duration;
                                 TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, duration);
                                 strDuration = timeSpan.ToString(@"m\:ss");
-                                //strDuration = duration.ToString();                                
+                                //strDuration = duration.ToString();
+                                strTotalNotes = String.Format("Total Notes: (D){0} (G){1} (B){2}",
+                                    cスコア.SongInformation.chipCountByInstrument.Drums,
+                                    cスコア.SongInformation.chipCountByInstrument.Guitar,
+                                    cスコア.SongInformation.chipCountByInstrument.Bass);
+                                if(cスコア.SongInformation.chipCountByInstrument.Drums > 0)
+                                {
+                                    strDrumNotes = String.Format("D: {0} {1} {2} {3} {4} {5} {6} {7} {8}",
+                                        cスコア.SongInformation.chipCountByLane[ELane.LC],
+                                        cスコア.SongInformation.chipCountByLane[ELane.HH],
+                                        cスコア.SongInformation.chipCountByLane[ELane.SD],
+                                        cスコア.SongInformation.chipCountByLane[ELane.LP],
+                                        cスコア.SongInformation.chipCountByLane[ELane.HT],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BD],
+                                        cスコア.SongInformation.chipCountByLane[ELane.LT],
+                                        cスコア.SongInformation.chipCountByLane[ELane.FT],
+                                        cスコア.SongInformation.chipCountByLane[ELane.CY]);
+                                }
+                                if (cスコア.SongInformation.chipCountByInstrument.Guitar > 0)
+                                {
+                                    strGuitarNotes = String.Format("G: {0} {1} {2} {3} {4} {5}",
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtR],
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtG],
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtB],
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtY],
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtP],
+                                        cスコア.SongInformation.chipCountByLane[ELane.GtPick]
+                                        );
+                                }
+                                if (cスコア.SongInformation.chipCountByInstrument.Bass > 0)
+                                {
+                                    strBassNotes = String.Format("B: {0} {1} {2} {3} {4} {5}",
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsR],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsG],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsB],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsY],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsP],
+                                        cスコア.SongInformation.chipCountByLane[ELane.BsPick]
+                                        );
+                                }
                                 break;
                             }
                         default:
@@ -251,10 +294,24 @@ namespace DTXMania
                     this.tDrawBPM(nBPM位置X + 20, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
                     //Length of Song
                     this.tDrawBPM(nBPM位置X + 17, nBPM位置Y - 7, strDuration);
-                    //if(strDuration != "")
+                    
+                    //Testing only
+                    //if (strTotalNotes != "")
                     //{
-                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 50, CCharacterConsole.EFontType.White, string.Format("Length  {0}", strDuration));
-                    //}                    
+                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 35, CCharacterConsole.EFontType.White, strTotalNotes);
+                    //}
+                    //if (strDrumNotes != "")
+                    //{
+                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 95, CCharacterConsole.EFontType.White, strDrumNotes);
+                    //}
+                    //if (strGuitarNotes != "")
+                    //{
+                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 75, CCharacterConsole.EFontType.White, strGuitarNotes);
+                    //}
+                    //if (strBassNotes != "")
+                    //{
+                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 55, CCharacterConsole.EFontType.White, strBassNotes);
+                    //}
                 }
                 #endregion
 

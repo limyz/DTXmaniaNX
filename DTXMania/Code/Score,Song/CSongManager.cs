@@ -811,8 +811,35 @@ namespace DTXMania
 			cスコア.SongInformation.Bpm = br.ReadDouble();
 			cスコア.SongInformation.Duration = br.ReadInt32();
 
+			//
+			cスコア.SongInformation.chipCountByInstrument.Drums = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.LC] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.HH] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.SD] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.LP] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.HT] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BD] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.LT] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.FT] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.CY] = br.ReadInt32();
 
-//Debug.WriteLine( "songs.db: " + cスコア.FileInformation.AbsoluteFilePath );
+			cスコア.SongInformation.chipCountByInstrument.Guitar = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtR] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtG] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtB] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtY] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtP] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.GtPick] = br.ReadInt32();
+
+			cスコア.SongInformation.chipCountByInstrument.Bass = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsR] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsG] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsB] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsY] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsP] = br.ReadInt32();
+			cスコア.SongInformation.chipCountByLane[ELane.BsPick] = br.ReadInt32();
+
+			//Debug.WriteLine( "songs.db: " + cスコア.FileInformation.AbsoluteFilePath );
 			return cスコア;
 		}
 		//-----------------
@@ -874,6 +901,41 @@ namespace DTXMania
 									c曲リストノード.arScore[ i ].SongInformation.SongType = cdtx.e種別;
 									c曲リストノード.arScore[ i ].SongInformation.Bpm = cdtx.BPM;
 									c曲リストノード.arScore[ i ].SongInformation.Duration = (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].nPlaybackTimeMs;
+
+									//
+									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Drums = cdtx.nVisibleChipsCount.Drums;
+									{
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LC] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LC);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HH] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HH);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.SD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.SD);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LP);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HT);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BD);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LT);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.FT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.FT);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.CY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.CY);
+									}
+
+									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Guitar = cdtx.nVisibleChipsCount.Guitar;
+									{
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtR);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtG);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtB);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtY);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtP);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtPick);
+									}
+
+									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Bass = cdtx.nVisibleChipsCount.Bass;
+									{
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsR);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsG);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsB);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsY);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsP);
+										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsPick);
+									}
+
 									this.nNbScoresFromFile++;
 									cdtx.OnDeactivate();
 //Debug.WriteLine( "★" + this.nNbScoresFromFile + " " + c曲リストノード.arScore[ i ].SongInformation.Title );
@@ -1178,6 +1240,35 @@ namespace DTXMania
 					bw.Write( (int) node.arScore[ i ].SongInformation.SongType );
 					bw.Write( node.arScore[ i ].SongInformation.Bpm );
 					bw.Write( node.arScore[ i ].SongInformation.Duration );
+
+					//New Data: Chip counts for Instrument and Lanes
+					bw.Write(node.arScore[i].SongInformation.chipCountByInstrument.Drums);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.LC]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.HH]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.SD]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.LP]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.HT]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BD]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.LT]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.FT]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.CY]);
+
+					bw.Write(node.arScore[i].SongInformation.chipCountByInstrument.Guitar);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtR]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtG]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtB]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtY]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtP]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.GtPick]);
+
+					bw.Write(node.arScore[i].SongInformation.chipCountByInstrument.Bass);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsR]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsG]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsB]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsY]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsP]);
+					bw.Write(node.arScore[i].SongInformation.chipCountByLane[ELane.BsPick]);
+
 					this.nNbScoresForSongsDB++;
 				}
 			}
