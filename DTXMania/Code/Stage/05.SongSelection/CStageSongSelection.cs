@@ -762,7 +762,7 @@ namespace DTXMania
 
 					if(this.txSearchInputNotification != null)
                     {
-						this.txSearchInputNotification.tDraw2D(CDTXMania.app.Device, 10, 160);
+						this.txSearchInputNotification.tDraw2D(CDTXMania.app.Device, 10, 130);
                     }
 
 				}

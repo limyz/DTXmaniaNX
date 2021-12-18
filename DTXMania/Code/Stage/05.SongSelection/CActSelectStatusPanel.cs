@@ -221,6 +221,7 @@ namespace DTXMania
                 {
                     CDTXMania.tReleaseTexture(ref this.txGBChipsBarLine[i]);
                 }
+                CDTXMania.tReleaseTexture(ref this.txSkillPointPanel);
                 base.OnManagedReleaseResources();
             }
         }
@@ -428,6 +429,10 @@ namespace DTXMania
                     //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 55, CCharacterConsole.EFontType.White, strBassNotes);
                     //}                    
                 }
+                #endregion
+
+                #region [Skill Point Panel]
+                this.txSkillPointPanel.tDraw2D(CDTXMania.app.Device, 32, 180);
                 #endregion
 
                 #region [Draw Graphs Panels]
