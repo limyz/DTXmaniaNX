@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
-using SharpDX;
+//using SharpDX;
 using FDK;
 
 using Rectangle = System.Drawing.Rectangle;
@@ -152,6 +152,9 @@ namespace DTXMania
                 this.txDifficultyNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_level number.png"));
                 this.txAchievementRateNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill number.png"));
                 this.txBPM数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm font.png"));
+                this.txDrumsGraphPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_graph panel drums.png"));
+                this.txGuitarBassGraphPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_graph panel guitar bass.png"));
+                txGenerateGraphBarLine();
                 base.OnManagedCreateResources();
             }
         }
@@ -167,6 +170,16 @@ namespace DTXMania
                 CDTXMania.tReleaseTexture(ref this.txDifficultyNumber);
                 CDTXMania.tReleaseTexture(ref this.txAchievementRateNumber);
                 CDTXMania.tReleaseTexture(ref this.txBPM数字);
+                CDTXMania.tReleaseTexture(ref this.txDrumsGraphPanel);
+                CDTXMania.tReleaseTexture(ref this.txGuitarBassGraphPanel);
+                for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+                {
+                    CDTXMania.tReleaseTexture(ref this.txDrumChipsBarLine[i]);
+                }
+                for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+                {
+                    CDTXMania.tReleaseTexture(ref this.txGBChipsBarLine[i]);
+                }
                 base.OnManagedReleaseResources();
             }
         }
@@ -211,7 +224,10 @@ namespace DTXMania
                 // 描画
 
                 CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
-
+                int nPanelNoteCount = 0;
+                int[] arrChipsByLane = null;//9 lane for drums, 6 for guitar/bass
+                //0 for Drums, 1 for GuitarBass
+                int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
                 #region [ 選択曲の BPM の描画 ]
                 if (CDTXMania.stageSongSelection.r現在選択中の曲 != null)
                 {
@@ -227,10 +243,9 @@ namespace DTXMania
 
                     string strBPM;
                     string strDuration = "";
-                    string strTotalNotes = "";
                     string strDrumNotes = "";
                     string strGuitarNotes = "";
-                    string strBassNotes = "";
+                    string strBassNotes = "";                    
                     switch (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType)
                     {
                         case CSongListNode.ENodeType.SCORE:
@@ -239,19 +254,14 @@ namespace DTXMania
                                 strBPM = bpm_int.ToString();
                                 int duration = cスコア.SongInformation.Duration;
                                 TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, duration);
-                                strDuration = timeSpan.ToString(@"m\:ss");
-                                //strDuration = duration.ToString();
-                                strTotalNotes = String.Format("Total Notes: (D){0} (G){1} (B){2}",
-                                    cスコア.SongInformation.chipCountByInstrument.Drums,
-                                    cスコア.SongInformation.chipCountByInstrument.Guitar,
-                                    cスコア.SongInformation.chipCountByInstrument.Bass);
+                                strDuration = timeSpan.ToString(@"m\:ss");                                
                                 if(cスコア.SongInformation.chipCountByInstrument.Drums > 0)
                                 {
                                     strDrumNotes = String.Format("D: {0} {1} {2} {3} {4} {5} {6} {7} {8}",
                                         cスコア.SongInformation.chipCountByLane[ELane.LC],
                                         cスコア.SongInformation.chipCountByLane[ELane.HH],
-                                        cスコア.SongInformation.chipCountByLane[ELane.SD],
                                         cスコア.SongInformation.chipCountByLane[ELane.LP],
+                                        cスコア.SongInformation.chipCountByLane[ELane.SD],
                                         cスコア.SongInformation.chipCountByLane[ELane.HT],
                                         cスコア.SongInformation.chipCountByLane[ELane.BD],
                                         cスコア.SongInformation.chipCountByLane[ELane.LT],
@@ -280,6 +290,60 @@ namespace DTXMania
                                         cスコア.SongInformation.chipCountByLane[ELane.BsPick]
                                         );
                                 }
+                                                                
+                                //DrOnly always show Drum
+                                //GROnly show either Bass or Guitar
+                                if(nDGmode == 0)
+                                {
+                                    if (cスコア.SongInformation.chipCountByInstrument.Drums > 0)
+                                    {
+                                        nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Drums;
+                                        arrChipsByLane = new int[] { 
+                                            cスコア.SongInformation.chipCountByLane[ELane.LC],
+                                            cスコア.SongInformation.chipCountByLane[ELane.HH],
+                                            cスコア.SongInformation.chipCountByLane[ELane.LP],
+                                            cスコア.SongInformation.chipCountByLane[ELane.SD],
+                                            cスコア.SongInformation.chipCountByLane[ELane.HT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.BD],
+                                            cスコア.SongInformation.chipCountByLane[ELane.LT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.FT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.CY]
+                                        };
+                                    }
+                                }
+                                else
+                                {
+                                    if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                                    {
+                                        if (cスコア.SongInformation.chipCountByInstrument.Bass > 0)
+                                        {
+                                            nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Bass;
+                                            arrChipsByLane = new int[] {
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsR],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsG],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsB],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsY],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsP],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsPick]
+                                            };
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (cスコア.SongInformation.chipCountByInstrument.Guitar > 0)
+                                        {                                            
+                                            nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Guitar;
+                                            arrChipsByLane = new int[] {
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtR],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtG],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtB],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtY],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtP],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtPick]
+                                            };
+                                        }
+                                    }
+                                }
                                 break;
                             }
                         default:
@@ -294,12 +358,8 @@ namespace DTXMania
                     this.tDrawBPM(nBPM位置X + 20, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
                     //Length of Song
                     this.tDrawBPM(nBPM位置X + 17, nBPM位置Y - 7, strDuration);
-                    
+
                     //Testing only
-                    //if (strTotalNotes != "")
-                    //{
-                    //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 35, CCharacterConsole.EFontType.White, strTotalNotes);
-                    //}
                     //if (strDrumNotes != "")
                     //{
                     //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 95, CCharacterConsole.EFontType.White, strDrumNotes);
@@ -311,15 +371,74 @@ namespace DTXMania
                     //if (strBassNotes != "")
                     //{
                     //    CDTXMania.actDisplayString.tPrint(nBPM位置X - 50, nBPM位置Y - 55, CCharacterConsole.EFontType.White, strBassNotes);
-                    //}
+                    //}                    
                 }
                 #endregion
 
+                #region [Draw Graphs Panels]
+
+                int nGraphBaseX = 15;
+                int nGraphBaseY = 368; // 350 + 18
+
+                if (CDTXMania.ConfigIni.bGuitarEnabled)
+                {
+                    if(this.txGuitarBassGraphPanel != null)
+                    {
+                        this.txGuitarBassGraphPanel.tDraw2D(CDTXMania.app.Device, nGraphBaseX, nGraphBaseY);
+                    }                    
+                }
+                else
+                {
+                    if(this.txDrumsGraphPanel != null)
+                    {
+                        this.txDrumsGraphPanel.tDraw2D(CDTXMania.app.Device, nGraphBaseX, nGraphBaseY);
+                    }                    
+                }
+
+                //Draw total notes
+                if(nPanelNoteCount > 0)
+                {
+                    string strPanelNoteCount = string.Format("{0}", nPanelNoteCount);
+                    int nTotalNotesPosX = nGraphBaseX + 66 - (strPanelNoteCount.Length - 1) * (this.st数字[0].rc.Width / 2);
+                    int nTotalNotesPosY = nGraphBaseY + 298;
+                    this.tDrawBPM(nTotalNotesPosX, nTotalNotesPosY, strPanelNoteCount);
+                }
+                //Draw Bar Graph for Chips per lane
+                if (arrChipsByLane != null)
+                {
+                    int nBarMaxHeight = 252;
+                    int[] chipsBarHeights = nCalculateChipsBarPxHeight(arrChipsByLane, nBarMaxHeight);
+
+                    if (CDTXMania.ConfigIni.bGuitarEnabled)
+                    {
+                        if(chipsBarHeights.Length == this.txGBChipsBarLine.Length)
+                        {
+                            for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+                            {
+                                this.txGBChipsBarLine[i].tDraw2D(CDTXMania.app.Device,
+                                    nGraphBaseX + 38 + i * 10, nGraphBaseY + 21 + (nBarMaxHeight - chipsBarHeights[i]), new Rectangle(0, 0, 4, chipsBarHeights[i]));
+                            }
+                        }                        
+                    }
+                    else
+                    {
+                        if(chipsBarHeights.Length == this.txDrumChipsBarLine.Length)
+                        {
+                            for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+                            {
+                                this.txDrumChipsBarLine[i].tDraw2D(CDTXMania.app.Device,
+                                    nGraphBaseX + 31 + i * 8, nGraphBaseY + 21 + (nBarMaxHeight - chipsBarHeights[i]), new Rectangle(0, 0, 4, chipsBarHeights[i]));
+                            }
+                        }
+                    }
+
+                }
+                #endregion
                 //-----------------
 
                 int[] nPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
 
-                int nBaseX = 30;
+                int nBaseX = 130;
                 int nBaseY = 350;//350
 
                 int n難易度文字X = 70;
@@ -682,7 +801,33 @@ namespace DTXMania
         private CTexture txDifficultyNumber;
         private CTexture txAchievementRateNumber;
         private CTexture txBPM数字;
+        private CTexture txDrumsGraphPanel;
+        private CTexture txGuitarBassGraphPanel;
         //private CTexture txBPM画像;
+        //private CTexture txTestSolidLine;
+        private CTexture[] txDrumChipsBarLine = new CTexture[9];
+        private Color[] clDrumChipsBarColors = new Color[9]
+        {
+            Color.PaleVioletRed,
+            Color.DeepSkyBlue,
+            Color.HotPink,
+            Color.Yellow,
+            Color.Green,
+            Color.MediumPurple,
+            Color.Red,
+            Color.Orange,
+            Color.DeepSkyBlue
+        };
+        private CTexture[] txGBChipsBarLine = new CTexture[6];
+        private Color[] clGBChipsBarColors = new Color[6]
+        {
+            Color.Red,
+            Color.Green,
+            Color.DeepSkyBlue,
+            Color.Yellow,
+            Color.HotPink,
+            Color.White
+        };
         private int nCheckDifficultyLabelDisplayAndReturnScrollDirection()
         {
             int num = 0;
@@ -719,6 +864,64 @@ namespace DTXMania
                 return -1;
             }
             return 0;
+        }
+
+        private void txGenerateGraphBarLine()
+        {
+            int nBarWidth = 4;
+            int nBarHeight = 252;
+
+            for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+            {
+                using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+                {
+                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+                    {
+                        barGraphics.FillRectangle(new SolidBrush(this.clDrumChipsBarColors[i]), 0, 0, tempBarBitmap.Width, tempBarBitmap.Height);
+                    }
+                    this.txDrumChipsBarLine[i] = CDTXMania.tGenerateTexture(tempBarBitmap);
+                }
+            }
+
+            for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+            {
+                using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+                {
+                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+                    {
+                        barGraphics.FillRectangle(new SolidBrush(this.clGBChipsBarColors[i]), 0, 0, tempBarBitmap.Width, tempBarBitmap.Height);
+                    }
+                    this.txGBChipsBarLine[i] = CDTXMania.tGenerateTexture(tempBarBitmap);
+                }
+            }
+
+        }
+
+        private int[] nCalculateChipsBarPxHeight(int[] arrChipCount, int nMaxBarLength)
+        {
+            if(arrChipCount != null)
+            {
+                int[] nChipsBarPxHeight = new int[arrChipCount.Length];
+
+                //Official formula to compute bar Height is unknown (Need to RE)
+                //Use a Placeholder formula for now
+                //int nMaxFactor = nTotalNoteCount / arrChipCount.Length;
+                int nMaxFactor = 300;
+                //Capped by upper and lower bound
+                //nMaxFactor = nMaxFactor < nLowerBound ? nLowerBound : nMaxFactor;
+                //nMaxFactor = nMaxFactor > nUpperBound ? nUpperBound : nMaxFactor;
+
+                for (int i = 0; i < nChipsBarPxHeight.Length; i++)
+                {
+                    int nChipPxHeight = arrChipCount[i] * nMaxBarLength / nMaxFactor;
+                    nChipPxHeight = nChipPxHeight > nMaxBarLength ? nMaxBarLength : nChipPxHeight;
+                    nChipsBarPxHeight[i] = nChipPxHeight;
+                }
+
+                return nChipsBarPxHeight;
+            }
+
+            return null;
         }
         private void tDrawAchievementRate(int x, int y, string str)
         {
