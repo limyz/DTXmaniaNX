@@ -270,6 +270,7 @@ namespace DTXMania
                 int[] arrChipsByLane = null;//9 lane for drums, 6 for guitar/bass
                 //0 for Drums, 1 for GuitarBass
                 int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
+                string strSP = "";
                 #region [ 選択曲の BPM の描画 ]
                 if (CDTXMania.stageSongSelection.r現在選択中の曲 != null)
                 {
@@ -355,6 +356,7 @@ namespace DTXMania
                                         if (this.dbDrumSP > 0.00)
                                         {
                                             strHighestSP = string.Format("Drums SP: {0,6:##0.00} from Diff {1}", this.dbDrumSP, this.nDrumDiffRank);
+                                            strSP = string.Format("{0,6:##0.00}", this.dbDrumSP);
                                         }                                        
                                     }
                                 }
@@ -363,6 +365,7 @@ namespace DTXMania
                                     if (this.dbGBSP > 0.00)
                                     {
                                         strHighestSP = string.Format("GB SP: {0,6:##0.00} from Diff {1} of Type {2}", this.dbGBSP, this.nGBDiffRank, this.nSpInGuitarOrBass);
+                                        strSP = string.Format("{0,6:##0.00}", this.dbGBSP);
                                     }
 
                                     if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
@@ -407,9 +410,9 @@ namespace DTXMania
                     }
 
                     //this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
-                    this.tDrawBPM(nBPM位置X + 20, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
+                    this.tDrawBPM(nBPM位置X + 45, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
                     //Length of Song
-                    this.tDrawBPM(nBPM位置X + 17, nBPM位置Y - 7, strDuration);
+                    this.tDrawBPM(nBPM位置X + 42, nBPM位置Y - 7, strDuration);
 
                     //Testing only
                     //if(strHighestSP != "" && CDTXMania.ConfigIni.nSkillMode == 1)
@@ -432,7 +435,16 @@ namespace DTXMania
                 #endregion
 
                 #region [Skill Point Panel]
-                this.txSkillPointPanel.tDraw2D(CDTXMania.app.Device, 32, 180);
+                if(this.txSkillPointPanel != null)
+                {
+                    this.txSkillPointPanel.tDraw2D(CDTXMania.app.Device, 32, 180);
+                }
+                
+                if(strSP != "")
+                {
+                    this.tDrawSkillPoints(32 + 60, 200, strSP);
+                }
+
                 #endregion
 
                 #region [Draw Graphs Panels]
@@ -814,6 +826,7 @@ namespace DTXMania
          */
         private CSongListNode r直前の曲;
         public string[] str難易度ラベル = new string[] { "", "", "", "", "" };
+        
         private readonly ST数字[] st数字 = new ST数字[]
         {
             new ST数字('0', new Rectangle(0 * 12, 0, 12, 20)),
@@ -860,6 +873,21 @@ namespace DTXMania
             new ST達成率数字('.', new Rectangle(10 * 12, 0, 6, 20)),
             new ST達成率数字('%', new Rectangle(11 * 12 - 6, 0, 12, 20))
         };
+        private readonly ST数字[] stLargeCharPositions = new ST数字[]
+        {
+            new ST数字('0', new Rectangle(0 * 28, 0, 28, 42)),
+            new ST数字('1', new Rectangle(1 * 28, 0, 28, 42)),
+            new ST数字('2', new Rectangle(2 * 28, 0, 28, 42)),
+            new ST数字('3', new Rectangle(3 * 28, 0, 28, 42)),
+            new ST数字('4', new Rectangle(4 * 28, 0, 28, 42)),
+            new ST数字('5', new Rectangle(5 * 28, 0, 28, 42)),
+            new ST数字('6', new Rectangle(6 * 28, 0, 28, 42)),
+            new ST数字('7', new Rectangle(7 * 28, 0, 28, 42)),
+            new ST数字('8', new Rectangle(8 * 28, 0, 28, 42)),
+            new ST数字('9', new Rectangle(9 * 28, 0, 28, 42)),
+            new ST数字('.', new Rectangle(10 * 28, 0, 10, 42))
+        };
+
         private readonly Rectangle rcunused = new Rectangle(0, 0x21, 80, 15);
         public CTexture txパネル本体;
         private CTexture txランク;
@@ -1023,6 +1051,30 @@ namespace DTXMania
                 }
             }
         }
+
+        private void tDrawSkillPoints(int x, int y, string str)
+        {
+            for (int j = 0; j < str.Length; j++)
+            {
+                char c = str[j];
+                int currCharWidth = this.stDifficultyNumber[0].rc.Width;//Initialize to first char width of 28
+                for (int i = 0; i < this.stDifficultyNumber.Length; i++)
+                {
+                    if (this.stDifficultyNumber[i].ch == c)
+                    {
+                        Rectangle rectangle = new Rectangle(this.stDifficultyNumber[i].rc.X, this.stDifficultyNumber[i].rc.Y, this.stDifficultyNumber[i].rc.Width, this.stDifficultyNumber[i].rc.Height);
+                        if (this.txDifficultyNumber != null)
+                        {
+                            this.txDifficultyNumber.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
+                        }
+                        currCharWidth = this.stDifficultyNumber[i].rc.Width;
+                        break;
+                    }
+                }
+                x += currCharWidth;
+            }
+        }
+
         private void tDrawDifficulty(int x, int y, string str)
         {
             for (int j = 0; j < str.Length; j++)
