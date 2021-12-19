@@ -292,6 +292,7 @@ namespace DTXMania
 						this.actFIFO.tフェードイン開始();
 						base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					}
+					this.ctSearchInputDisplayCounter = new CCounter(0, 1, 10000, CDTXMania.Timer);
 					this.tSelectedSongChanged();
 					base.bJustStartedUpdate = false;
 				}
@@ -299,6 +300,11 @@ namespace DTXMania
 				#endregion
 
 				this.ct登場時アニメ用共通.tUpdate();
+				this.ctSearchInputDisplayCounter.tUpdate();
+                if (this.ctSearchInputDisplayCounter.bReachedEndValue)
+                {
+					this.tUpdateSearchNotification("");
+                }
 
 				//Draw background video and image
 				if(this.dsBackgroundVideo != null)
@@ -733,6 +739,7 @@ namespace DTXMania
 							}
 
 							this.tUpdateSearchNotification(searchOutcome);
+							this.ctSearchInputDisplayCounter.tStart(0, 1, 10000, CDTXMania.Timer);
 							CDTXMania.Skin.soundDecide.tPlay();
 						}
 						else if(strSearchString == CSongSearch.ExitSwitch)
@@ -743,6 +750,7 @@ namespace DTXMania
 								CDTXMania.SongManager.listSongBeforeSearch = null;
 								this.actSongList.SearchUpdate();
 								this.tUpdateSearchNotification("Exit Search Mode");
+								this.ctSearchInputDisplayCounter.tStart(0, 1, 10000, CDTXMania.Timer);
 								CDTXMania.Skin.soundDecide.tPlay();
 							}
                             else
@@ -858,6 +866,7 @@ namespace DTXMania
 		private bool bBGMPlayed;  // bBGM再生済み
 		private STKeyRepeatCounter ctKeyRepeat;  // ctキー反復用
 		public CCounter ct登場時アニメ用共通;
+		private CCounter ctSearchInputDisplayCounter;
 		private EReturnValue eReturnValueWhenFadeOutCompleted;  // eフェードアウト完了時の戻り値
 		private Font ftFont;  // ftフォント
 		private CTexture txBottomPanel;  // tx下部パネル
