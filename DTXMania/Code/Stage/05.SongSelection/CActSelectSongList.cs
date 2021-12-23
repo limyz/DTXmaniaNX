@@ -542,6 +542,7 @@ namespace DTXMania
 			if( this.bNotActivated )
 				return;
 
+			this.strDefaultPreImage = CSkin.Path(@"Graphics\5_preimage default.png");
 			this.txSongNameBar.Score = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar score.png" ), false );
 			this.txSongNameBar.Box = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar box.png" ), false );
 			this.txSongNameBar.Other = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_bar other.png" ), false );
@@ -560,7 +561,8 @@ namespace DTXMania
 				this.tGenerateSongNameBar(i, this.stBarInformation[i].strTitleString, this.stBarInformation[i].colLetter);
 				this.tGeneratePreviewImageTexture(i, this.stBarInformation[i].strPreviewImageFullPath, this.stBarInformation[i].eBarType);
 			}
-				
+
+			
 
 			int c = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1;
 			#region [ Songs not found画像 ]
@@ -986,7 +988,7 @@ namespace DTXMania
 							#endregion
 							#region [ Draw Preview Image ]
 							if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 3, y - 3);
+								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 8, y - 3);
 							#endregion
 
 							#region [ スキル値を描画。]
@@ -1018,7 +1020,7 @@ namespace DTXMania
 							#endregion
 							#region [ Draw Preview Image ]
 							if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 26, y + 3);
+								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 31, y + 2);
 							#endregion
 
 							#region [ スキル値を描画。]
@@ -1067,7 +1069,7 @@ namespace DTXMania
 						#endregion
 						#region [ Draw Preview Image ]
 						if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 3, y選曲 - 3);
+							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 8, y選曲 - 3);
 						#endregion
 						#region [ タイトル名テクスチャを描画。]
 						//-----------------
@@ -1125,7 +1127,7 @@ namespace DTXMania
 						#endregion
 						#region [ Draw Preview Image ]
 						if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 26, y + 3);
+							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 31, y + 2);
 						#endregion
 						#region [ スキル値を描画。]
 						//-----------------34
@@ -1306,10 +1308,11 @@ namespace DTXMania
 		private STSongSelectionBar txSongSelectionBar;  // tx選曲バー
 		private CPrivateFastFont prvFont;
         private CPrivateFastFont prvFontSmall;
+		private string strDefaultPreImage;
 
-        //2014.04.05.kairera0467 GITADORAグラデーションの色。
-        //本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
-        public Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
+		//2014.04.05.kairera0467 GITADORAグラデーションの色。
+		//本当は共通のクラスに設置してそれを参照する形にしたかったが、なかなかいいメソッドが無いため、とりあえず個別に設置。
+		public Color clGITADORAgradationTopColor = Color.FromArgb(0, 220, 200);
         public Color clGITADORAgradationBottomColor = Color.FromArgb(255, 250, 40);
 
 		private int nCurrentPosition = 0;
@@ -1577,7 +1580,7 @@ namespace DTXMania
         {
 			if(eBarType == EBarType.Box)
             {
-				return new Point(-40, 0);
+				return new Point(0, 0);
 			}
 
 			return new Point(0, 0);
@@ -1591,13 +1594,18 @@ namespace DTXMania
 			try
 			{
 				CDTXMania.t安全にDisposeする(ref this.stBarInformation[nBarIndex].txPreviewImage);
+				string strSelectedPreviewImagePath = strPreviewImagePath;
+				if(!File.Exists(strSelectedPreviewImagePath))
+                {
+					strSelectedPreviewImagePath = this.strDefaultPreImage;
+                }
 
-				if (File.Exists(strPreviewImagePath) && eBarType != EBarType.Box)
+				if (File.Exists(strSelectedPreviewImagePath))
                 {
 					Bitmap bitmap = new Bitmap(44, 44);
 					using (Graphics graphics = Graphics.FromImage(bitmap))
 					{
-						using (Bitmap preImage = new Bitmap(strPreviewImagePath))
+						using (Bitmap preImage = new Bitmap(strSelectedPreviewImagePath))
 						{
 							graphics.SmoothingMode = SmoothingMode.HighQuality;
 							graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
