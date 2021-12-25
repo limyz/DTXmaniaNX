@@ -463,6 +463,7 @@ namespace DTXMania
 					i != (int)SlimDXKey.LeftArrow &&
 					i != (int)SlimDXKey.RightArrow &&
 					i != (int)SlimDXKey.Delete &&
+					i != (int)SlimDXKey.Return &&
 					 CDTXMania.InputManager.Keyboard.bKeyPressed( i ) )
 				{
 					CDTXMania.Skin.soundDecide.tPlay();
