@@ -605,7 +605,8 @@ namespace DTXMania
                                     // ギターとベースのキーを入れ替え
                                     //CDTXMania.ConfigIni.SwapGuitarBassKeyAssign();
                                     CDTXMania.ConfigIni.bIsSwappedGuitarBass = !CDTXMania.ConfigIni.bIsSwappedGuitarBass;
-                                }
+									this.actSongList.tSwapClearLamps();
+								}
                             }
                             #endregion
                             #region [ Yx2 Bass: ギターとベースを入れ替え ]
@@ -621,7 +622,8 @@ namespace DTXMania
                                     // ギターとベースのキーを入れ替え
                                     //CDTXMania.ConfigIni.SwapGuitarBassKeyAssign();
                                     CDTXMania.ConfigIni.bIsSwappedGuitarBass = !CDTXMania.ConfigIni.bIsSwappedGuitarBass;
-                                }
+									this.actSongList.tSwapClearLamps();
+								}
                             }
                             #endregion
                             #region [ Px2 Guitar: 簡易CONFIG ]

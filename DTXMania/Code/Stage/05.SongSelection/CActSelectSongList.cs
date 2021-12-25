@@ -211,6 +211,15 @@ namespace DTXMania
 			}
 		}
 
+		//Regenerate the clear lamps texture after GB Swap event occur
+		public void tSwapClearLamps() 
+        {
+			for (int i = 0; i < 13; i++)
+            {				
+				this.tGenerateClearLampTexture(i, this.stBarInformation[i].nClearLamps);
+            }
+        }
+
 		public bool tGoIntoBOX()  //tBOXに入る
 		{
 			bool ret = false;
@@ -256,6 +265,7 @@ namespace DTXMania
 			{
 				this.tGenerateSongNameBar( i, this.stBarInformation[ i ].strTitleString, this.stBarInformation[ i ].colLetter );
 				this.tGeneratePreviewImageTexture(i, this.stBarInformation[i].strPreviewImageFullPath, this.stBarInformation[i].eBarType);
+				this.tGenerateClearLampTexture(i, this.stBarInformation[i].nClearLamps);
 			}
 		}
 		public void tMoveToNext()  // t次に移動
@@ -560,6 +570,7 @@ namespace DTXMania
             {
 				this.tGenerateSongNameBar(i, this.stBarInformation[i].strTitleString, this.stBarInformation[i].colLetter);
 				this.tGeneratePreviewImageTexture(i, this.stBarInformation[i].strPreviewImageFullPath, this.stBarInformation[i].eBarType);
+				this.tGenerateClearLampTexture(i, this.stBarInformation[i].nClearLamps);
 			}
 
 			
@@ -632,6 +643,7 @@ namespace DTXMania
             {
 				CDTXMania.t安全にDisposeする(ref this.stBarInformation[i].txTitleName);
 				CDTXMania.t安全にDisposeする(ref this.stBarInformation[i].txPreviewImage);
+				CDTXMania.t安全にDisposeする(ref this.stBarInformation[i].txClearLamp);
 			}
 				
 
@@ -808,6 +820,11 @@ namespace DTXMania
 						//Load the image (NOTE: May have performance issue)
 						this.tGeneratePreviewImageTexture(index, this.stBarInformation[index].strPreviewImageFullPath, this.stBarInformation[index].eBarType);
 						// stバー情報[] の内容を1行ずつずらす。
+						//Update Clear Lamp values
+						this.updateBarClearLampValue(index, song);
+						//Draw Clear lamps for new song in list
+						this.tGenerateClearLampTexture(index, this.stBarInformation[index].nClearLamps);
+
 
 						//CSongListNode song2 = this.rSelectedSong;
 						//for( int i = 0; i < 5; i++ )
@@ -879,6 +896,10 @@ namespace DTXMania
 						//Load the image (NOTE: May have performance issue)
 						this.tGeneratePreviewImageTexture(index, this.stBarInformation[index].strPreviewImageFullPath, this.stBarInformation[index].eBarType);
 						// stバー情報[] の内容を1行ずつずらす。
+						//Update Clear Lamp values
+						this.updateBarClearLampValue(index, song);
+						//Draw Clear lamps for new song in list
+						this.tGenerateClearLampTexture(index, this.stBarInformation[index].nClearLamps);
 
 						//CSongListNode song2 = this.rSelectedSong;
 						//for( int i = 0; i < 5; i++ )
@@ -988,13 +1009,16 @@ namespace DTXMania
 							#endregion
 							#region [ Draw Preview Image ]
 							if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 8, y - 3);
+								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 7, y - 3);
 							#endregion
-
+							#region [Draw Clear Lamps]
+							if (this.stBarInformation[nパネル番号].txClearLamp != null)
+								this.stBarInformation[nパネル番号].txClearLamp.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標, y + 1);
+							#endregion
 							#region [ スキル値を描画。]
 							//-----------------25
-							if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
-                                this.tDrawSkillValue( i選択曲バーX座標 + 6, y + 12, this.stBarInformation[nパネル番号].nSkillValue[(int)this.eInstrumentPart]);
+							//if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
+                            //    this.tDrawSkillValue( i選択曲バーX座標 + 6, y + 12, this.stBarInformation[nパネル番号].nSkillValue[(int)this.eInstrumentPart]);
 							//-----------------
 							#endregion
 						}
@@ -1015,18 +1039,21 @@ namespace DTXMania
 							//-----------------
 							Point titleOffsets = this.getTitleOffsetsForBarType(this.stBarInformation[nパネル番号].eBarType);
 							if ( this.stBarInformation[ nパネル番号 ].txTitleName != null )
-								this.stBarInformation[ nパネル番号 ].txTitleName.tDraw2D( CDTXMania.app.Device, x + 78 + titleOffsets.X, y + 6 + titleOffsets.Y);
+								this.stBarInformation[ nパネル番号 ].txTitleName.tDraw2D( CDTXMania.app.Device, x + 78 + titleOffsets.X, y + 5 + titleOffsets.Y);
 							//-----------------
 							#endregion
 							#region [ Draw Preview Image ]
 							if (this.stBarInformation[nパネル番号].txPreviewImage != null)
 								this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 31, y + 2);
 							#endregion
-
+							#region [Draw Clear Lamps]
+							if (this.stBarInformation[nパネル番号].txClearLamp != null)
+								this.stBarInformation[nパネル番号].txClearLamp.tDraw2D(CDTXMania.app.Device, x + 24, y + 6);
+							#endregion
 							#region [ スキル値を描画。]
 							//-----------------34
-							if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
-								this.tDrawSkillValue( x + 30, y + 18, this.stBarInformation[ nパネル番号 ].nSkillValue[ (int) this.eInstrumentPart ] );
+							//if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
+							//	this.tDrawSkillValue( x + 30, y + 18, this.stBarInformation[ nパネル番号 ].nSkillValue[ (int) this.eInstrumentPart ] );
 							//-----------------
 							#endregion
 						}
@@ -1069,7 +1096,11 @@ namespace DTXMania
 						#endregion
 						#region [ Draw Preview Image ]
 						if (this.stBarInformation[nパネル番号].txPreviewImage != null)
-							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 8, y選曲 - 3);
+							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標 + 7, y選曲 - 3);
+						#endregion
+						#region [Draw Clear Lamps]
+						if (this.stBarInformation[nパネル番号].txClearLamp != null)
+							this.stBarInformation[nパネル番号].txClearLamp.tDraw2D(CDTXMania.app.Device, i選択曲バーX座標, y選曲 + 1);
 						#endregion
 						#region [ タイトル名テクスチャを描画。]
 						//-----------------
@@ -1104,8 +1135,8 @@ namespace DTXMania
 						#endregion
 						#region [ スキル値を描画。]
 						//-----------------25
-						if( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
-                            this.tDrawSkillValue(i選択曲バーX座標 + 6, y選曲 + 12, this.stBarInformation[nパネル番号].nSkillValue[(int)this.eInstrumentPart]);
+						//if( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
+                        //    this.tDrawSkillValue(i選択曲バーX座標 + 6, y選曲 + 12, this.stBarInformation[nパネル番号].nSkillValue[(int)this.eInstrumentPart]);
 						//-----------------
 						#endregion
 					}
@@ -1122,17 +1153,21 @@ namespace DTXMania
 						//-----------------
 						Point titleOffsets = this.getTitleOffsetsForBarType(this.stBarInformation[nパネル番号].eBarType);
 						if ( this.stBarInformation[ nパネル番号 ].txTitleName != null )
-							this.stBarInformation[ nパネル番号 ].txTitleName.tDraw2D( CDTXMania.app.Device, x + 78 + titleOffsets.X, y + 6 + titleOffsets.Y);
+							this.stBarInformation[ nパネル番号 ].txTitleName.tDraw2D( CDTXMania.app.Device, x + 78 + titleOffsets.X, y + 5 + titleOffsets.Y);
 						//-----------------
 						#endregion
 						#region [ Draw Preview Image ]
 						if (this.stBarInformation[nパネル番号].txPreviewImage != null)
 							this.stBarInformation[nパネル番号].txPreviewImage.tDraw2D(CDTXMania.app.Device, x + 31, y + 2);
 						#endregion
+						#region [Draw Clear Lamps]
+						if (this.stBarInformation[nパネル番号].txClearLamp != null)
+							this.stBarInformation[nパネル番号].txClearLamp.tDraw2D(CDTXMania.app.Device, x + 24, y + 6);
+						#endregion
 						#region [ スキル値を描画。]
 						//-----------------34
-						if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
-							this.tDrawSkillValue( x + 30, y + 18, this.stBarInformation[ nパネル番号 ].nSkillValue[ (int) this.eInstrumentPart ] );
+						//if ( ( this.stBarInformation[ nパネル番号 ].eBarType == EBarType.Score ) && ( this.eInstrumentPart != EInstrumentPart.UNKNOWN ) )
+						//	this.tDrawSkillValue( x + 30, y + 18, this.stBarInformation[ nパネル番号 ].nSkillValue[ (int) this.eInstrumentPart ] );
 						//-----------------
 						#endregion
 					}
@@ -1232,6 +1267,7 @@ namespace DTXMania
 			public CTexture txPreviewImage;// txプレビュー画像
 			public CTexture txClearLamp;// txクリアランプ
 			public string strPreviewImageFullPath; // 
+			public STDGBVALUE<int[]> nClearLamps;
 		}
 
 		private struct STSongSelectionBar  // ST選曲バー
@@ -1467,12 +1503,43 @@ namespace DTXMania
 
 				//
 				this.stBarInformation[i].strPreviewImageFullPath = this.sGetPreviewImagePath(song.arScore[nNearestScoreIndex]);
+				//
+				this.updateBarClearLampValue(i, song);			
 
 				song = this.rNextSong( song );
 			}			
 
 			this.nSelectedRow = 5;
 		}
+
+		private void updateBarClearLampValue(int index, CSongListNode cSong)
+        {
+			for (int j = 0; j < 3; j++)
+			{
+				this.stBarInformation[index].nClearLamps[j] = new int[5] { 0, 0, 0, 0, 0 };
+
+				for (int k = 0; k < 5; k++)
+				{
+					if (cSong.arScore[k] != null)
+					{
+						if (cSong.arScore[k].SongInformation.HighSkill[j] > 0.0)
+						{
+							if(cSong.arDifficultyLabel[k] != null)
+                            {
+								this.stBarInformation[index].nClearLamps[j][k] = 1;
+							}
+                            else
+                            {
+								//Use 2 as value for uncategorised clear
+								this.stBarInformation[index].nClearLamps[j][k] = 2;
+                            }
+							
+						}
+					}
+				}
+			}
+		}
+
 		private void tDrawBar( int x, int y, EBarType type, bool b選択曲)  // tバーの描画
 		{
 			if( x >= SampleFramework.GameWindowSize.Width || y >= SampleFramework.GameWindowSize.Height )
@@ -1622,6 +1689,60 @@ namespace DTXMania
 				Trace.TraceError("Fail to load preview image for Bar[{0}]", nBarIndex);
 				this.stBarInformation[nBarIndex].txPreviewImage = null;
 			}
+		}
+
+		private void tGenerateClearLampTexture(int nBarIndex, STDGBVALUE<int[]> sClearLampValues)
+        {
+			if (nBarIndex < 0 || nBarIndex > 12)
+				return;
+
+			//Decide to show Drum, Guitar or Bass based on current configuration
+			//0 for Drums, 1 for Guitar, 2 for Bass
+			int nDGBmode = (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1);
+            if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+            {
+				nDGBmode = 2;
+            }
+
+			try
+			{
+				CDTXMania.t安全にDisposeする(ref this.stBarInformation[nBarIndex].txClearLamp);
+
+				Bitmap bitmap = new Bitmap(7, 41);
+				SolidBrush[] lampBrushes = { 
+					new SolidBrush(Color.FromArgb(255, 148, 215, 255)),
+					new SolidBrush(Color.FromArgb(255, 255, 239, 65)),
+					new SolidBrush(Color.FromArgb(255, 255, 65, 116)),
+					new SolidBrush(Color.FromArgb(255, 255, 66, 255)),
+					new SolidBrush(Color.FromArgb(255, 255, 255, 255))
+				};
+				using (Graphics graphics = Graphics.FromImage(bitmap))
+				{
+                    for (int i = 0; i < 5; i++)
+                    {
+						if(sClearLampValues[nDGBmode][i] == 1)
+                        {
+							graphics.FillRectangle(lampBrushes[i], 1, 33 - 8 * i, 5, 7);
+						}
+						else if(sClearLampValues[nDGBmode][i] == 2)
+                        {
+							graphics.FillRectangle(lampBrushes[4], 1, 1, 5, 7);
+						}
+					}
+					this.stBarInformation[nBarIndex].txClearLamp = CDTXMania.tGenerateTexture(bitmap);
+				}
+				bitmap.Dispose();
+                for (int i = 0; i < 5; i++)
+                {
+					lampBrushes[i].Dispose();
+				}
+			}
+			catch (CTextureCreateFailedException)
+			{
+				Trace.TraceError("Fail to generate Clear Lamp Texture Bar[{0}]", nBarIndex);
+				this.stBarInformation[nBarIndex].txClearLamp = null;
+			}
+
 		}
 
 
