@@ -77,9 +77,9 @@ namespace DTXMania
 
                 //Do SP comparison and return only highest per game type
                 this.dbDrumSP = 0.0;
-                this.nDrumDiffRank = -1;
+                this.nDrumSPDiffRank = -1;
                 this.dbGBSP = 0.0;
-                this.nGBDiffRank = -1;
+                this.nGBSPDiffRank = -1;
                 this.nSpInGuitarOrBass = 0;//G:0 B:1
                 for (int i = 0; i < 5; i++)
                 {
@@ -87,24 +87,35 @@ namespace DTXMania
                     if(dbCurrentSkillPointForAllDifficulty[i].Drums > dbDrumSP)
                     {
                         this.dbDrumSP = dbCurrentSkillPointForAllDifficulty[i].Drums;
-                        this.nDrumDiffRank = i;
+                        this.nDrumSPDiffRank = i;
                     }
 
                     //Guitar/Bass
                     if (dbCurrentSkillPointForAllDifficulty[i].Guitar > dbGBSP)
                     {
                         this.dbGBSP = dbCurrentSkillPointForAllDifficulty[i].Guitar;
-                        this.nGBDiffRank = i;
+                        this.nGBSPDiffRank = i;
                         this.nSpInGuitarOrBass = 0;
                     }
 
                     if (dbCurrentSkillPointForAllDifficulty[i].Bass > dbGBSP)
                     {
                         this.dbGBSP = dbCurrentSkillPointForAllDifficulty[i].Bass;
-                        this.nGBDiffRank = i;
+                        this.nGBSPDiffRank = i;
                         this.nSpInGuitarOrBass = 1;
                     }
                 }
+
+                //Check arDifficultyLabel for all null
+                this.bHasMultipleDiff = false;
+                for (int i = 0; i < 5; i++)
+                {
+                    if(c曲リストノード.arDifficultyLabel[i] != null)
+                    {
+                        this.bHasMultipleDiff = true;
+                        break;
+                    }
+                }                
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -355,7 +366,7 @@ namespace DTXMania
                                         };
                                         if (this.dbDrumSP > 0.00)
                                         {
-                                            strHighestSP = string.Format("Drums SP: {0,6:##0.00} from Diff {1}", this.dbDrumSP, this.nDrumDiffRank);
+                                            strHighestSP = string.Format("Drums SP: {0,6:##0.00} from Diff {1}", this.dbDrumSP, this.nDrumSPDiffRank);
                                             strSP = string.Format("{0,6:##0.00}", this.dbDrumSP);
                                         }                                        
                                     }
@@ -364,7 +375,7 @@ namespace DTXMania
                                 {
                                     if (this.dbGBSP > 0.00)
                                     {
-                                        strHighestSP = string.Format("GB SP: {0,6:##0.00} from Diff {1} of Type {2}", this.dbGBSP, this.nGBDiffRank, this.nSpInGuitarOrBass);
+                                        strHighestSP = string.Format("GB SP: {0,6:##0.00} from Diff {1} of Type {2}", this.dbGBSP, this.nGBSPDiffRank, this.nSpInGuitarOrBass);
                                         strSP = string.Format("{0,6:##0.00}", this.dbGBSP);
                                     }
 
@@ -447,6 +458,8 @@ namespace DTXMania
 
                 #endregion
 
+                
+
                 #region [Draw Graphs Panels]
 
                 int nGraphBaseX = 15;
@@ -528,11 +541,11 @@ namespace DTXMania
                 {
                     this.txパネル本体.tDraw2D(CDTXMania.app.Device, nBaseX, nBaseY);
 
+                    int nPanelW = 187;
+                    int nPanelH = 60;
+
                     for (int j = 0; j < 3; j++)
                     {
-
-                        int nPanelW = 187;
-                        int nPanelH = 60;
 
                         if (this.tx難易度パネル != null)
                         {
@@ -619,7 +632,7 @@ namespace DTXMania
                                 {
                                     if (this.txランク != null)
                                     {
-                                        nRankW = this.txランク.szImageSize.Width / 9;
+                                        nRankW = 35;// this.txランク.szImageSize.Width / 9;
 
                                         #region [ 選択曲の FullCombo Excellent の 描画 ]
                                         if (this.db現在選択中の曲の最高スキル値難易度毎[i][j] == 100)
@@ -696,7 +709,7 @@ namespace DTXMania
                             {
                                 if (this.txランク != null)
                                 {
-                                    nRankW = this.txランク.szImageSize.Width / 9;
+                                    nRankW = 35;// this.txランク.szImageSize.Width / 9;
 
                                     #region [ 選択曲の FullCombo Excellent の 描画 ]
                                     if (this.db現在選択中の曲の最高スキル値[j] == 100)
@@ -730,6 +743,40 @@ namespace DTXMania
 
                         }
                     }
+
+                    #region [Draw Skill Badge on matched Difficulty for Drum]
+                    int nBadgeWidth = 35;
+                    if (this.nDrumSPDiffRank != -1)
+                    {
+                        int nDiffOffset = this.nDrumSPDiffRank;
+                        if (!this.bHasMultipleDiff)
+                        {
+                            //For songs without multiple diff defined in set.def, set offset to highest 
+                            nDiffOffset = 4;
+                        }
+                        int nDGBIndex = 0;
+                        int nBoxX = 130 + this.txパネル本体.szImageSize.Width + (nPanelW * (nPart[nDGBIndex] - 3));
+                        int nBoxY = (391 + ((4 - nDiffOffset) * 60)) - 2;
+                        this.txランク.tDraw2D(CDTXMania.app.Device, nBoxX + 75, nBoxY + 5, new Rectangle(nBadgeWidth * 9, 0, nBadgeWidth, this.txランク.szImageSize.Height));                       
+                    }
+                    #endregion
+
+                    #region [Draw Skill Badge on matched Difficulty for Guitar Bass]
+                    if (this.nGBSPDiffRank != -1)
+                    {
+                        int nDiffOffset = this.nGBSPDiffRank;
+                        if (!this.bHasMultipleDiff)
+                        {
+                            //For songs without multiple diff defined in set.def, set offset to highest 
+                            nDiffOffset = 4;
+                        }
+                        int nDGBIndex = 1 + nSpInGuitarOrBass;
+                        int nBoxX = 130 + this.txパネル本体.szImageSize.Width + (nPanelW * (nPart[nDGBIndex] - 3));
+                        int nBoxY = (391 + ((4 - nDiffOffset) * 60)) - 2;
+                        this.txランク.tDraw2D(CDTXMania.app.Device, nBoxX + 75, nBoxY + 5, new Rectangle(nBadgeWidth * 9, 0, nBadgeWidth, this.txランク.szImageSize.Height));
+                    }
+                    #endregion
+
                 }
                 #endregion
                 #region [ 難易度文字列の描画 ]
@@ -801,10 +848,11 @@ namespace DTXMania
         private STDGBVALUE<int>[] n現在選択中の曲の最高ランク難易度毎 = new STDGBVALUE<int>[5];
         //
         private double dbDrumSP = 0.0;
-        private int nDrumDiffRank = -1;
+        private int nDrumSPDiffRank = -1;
         private double dbGBSP = 0.0;
-        private int nGBDiffRank = -1;
+        private int nGBSPDiffRank = -1;
         private int nSpInGuitarOrBass = 0;//G:0 B:1
+        private bool bHasMultipleDiff = false;
 
         private int n現在選択中の曲の難易度;
         private int n難易度開始文字位置;
