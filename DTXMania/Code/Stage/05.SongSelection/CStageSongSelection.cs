@@ -128,7 +128,10 @@ namespace DTXMania
 			//
 			base.listChildActivities.Add(this.actTextBox = new CActTextBox());
 
-			this.CommandHistory = new CCommandHistory();		// #24063 2011.1.16 yyagi
+			this.CommandHistory = new CCommandHistory();        // #24063 2011.1.16 yyagi
+			//
+			this.bCheckDrumsEnabled = CDTXMania.ConfigIni.bDrumsEnabled;
+			this.bCheckRandSubBox = CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする;
 		}
 		
 		
@@ -202,8 +205,26 @@ namespace DTXMania
 				base.OnActivate();
 
 				this.actTextBox.t検索説明文を表示する設定にする();
-				this.actStatusPanel.tSelectedSongChanged();	// 最大ランクを更新
+				this.actStatusPanel.tSelectedSongChanged(); // 最大ランクを更新
 
+				//Reset random list upon reactivation only when a change in config for drumsEnabled or RandSubBox is detected
+				bool bToReset = false;
+				if(this.bCheckDrumsEnabled != CDTXMania.ConfigIni.bDrumsEnabled)
+                {
+					bToReset = true;
+					this.bCheckDrumsEnabled = CDTXMania.ConfigIni.bDrumsEnabled;
+                }
+
+				if(this.bCheckRandSubBox != CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする)
+                {
+					bToReset = true;
+					this.bCheckRandSubBox = CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする;
+                }
+				
+				if (bToReset)
+                {
+					this.tResetRandomListForNode(null);
+				}				
 			}
 			finally
 			{
@@ -390,11 +411,11 @@ namespace DTXMania
 						break;
 
 					case CStage.EPhase.選曲_NowLoading画面へのフェードアウト:
-//						if( this.actFOtoNowLoading.OnUpdateAndDraw() == 0 )
-//						{
-//							break;
-//						}
-						return (int) this.eReturnValueWhenFadeOutCompleted;
+                        //if (this.actFOtoNowLoading.OnUpdateAndDraw() == 0)
+                        //{
+                        //    break;
+                        //}
+                        return (int) this.eReturnValueWhenFadeOutCompleted;
 				}
 				if( !this.bBGMPlayed && ( base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
 				{
@@ -884,6 +905,10 @@ namespace DTXMania
 		private CPrivateFastFont prvFontSearchInputNotification;
 		private CTexture txSearchInputNotification = null;
 
+		//
+		private bool bCheckDrumsEnabled = false;
+		private bool bCheckRandSubBox = false;
+
 		private struct STCommandTime		// #24063 2011.1.16 yyagi コマンド入力時刻の記録用
 		{
 			public EInstrumentPart eInst;		// 使用楽器
@@ -996,6 +1021,10 @@ namespace DTXMania
 				int count = song.listランダム用ノードリスト.Count;
 				if( count == 0 )
 				{
+					this.tUpdateSearchNotification(string.Format("Random Song List is empty for {0} mode",
+					CDTXMania.ConfigIni.bDrumsEnabled ? "Drum" : "Guitar/Bass"
+					));
+					this.ctSearchInputDisplayCounter.tStart(0, 1, 10000, CDTXMania.Timer);
 					return;
 				}
 				int[] numArray = new int[ count ];
@@ -1057,14 +1086,59 @@ namespace DTXMania
 			this.rConfirmedSong = this.actSongList.rSelectedSong;
 			this.rChosenScore = this.actSongList.rSelectedScore;
 			this.nConfirmedSongDifficulty = this.actSongList.n現在選択中の曲の現在の難易度レベル;
-			if( ( this.rConfirmedSong != null ) && ( this.rChosenScore != null ) )
+			//
+			bool bScoreExistForMode = this.tCheckScoreExistForMode(this.rChosenScore);
+			if ( ( this.rConfirmedSong != null ) && ( this.rChosenScore != null ) && bScoreExistForMode)
 			{
 				this.eReturnValueWhenFadeOutCompleted = EReturnValue.Selected;
-			//	this.actFOtoNowLoading.tStartFadeOut();				// #27787 2012.3.10 yyagi 曲決定時の画面フェードアウトの省略
+//				this.actFOtoNowLoading.tStartFadeOut();                 // #27787 2012.3.10 yyagi 曲決定時の画面フェードアウトの省略
 				base.ePhaseID = CStage.EPhase.選曲_NowLoading画面へのフェードアウト;
+			}
+            else
+            {
+				this.tUpdateSearchNotification(string.Format("Score unavailable for {0} mode",
+					CDTXMania.ConfigIni.bDrumsEnabled ? "Drum":"Guitar/Bass"
+					));
+				this.ctSearchInputDisplayCounter.tStart(0, 1, 10000, CDTXMania.Timer);
 			}
 			CDTXMania.Skin.bgm選曲画面.t停止する();
 		}
+
+		private bool tCheckScoreExistForMode(CScore score)
+        {
+			bool bScoreExistForMode = CDTXMania.ConfigIni.bDrumsEnabled && score.SongInformation.bScoreExists.Drums;
+			if (!bScoreExistForMode)
+			{
+				bScoreExistForMode = CDTXMania.ConfigIni.bGuitarEnabled &&
+					(score.SongInformation.bScoreExists.Guitar || score.SongInformation.bScoreExists.Bass);
+			}
+			return bScoreExistForMode;
+		}
+
+		private void tResetRandomListForNode(CSongListNode song)
+        {
+			//If songNode is null, start from root and recursively call each child
+			if (song == null && CDTXMania.SongManager.listSongRoot.Count > 0)
+			{
+				foreach (CSongListNode cSong in CDTXMania.SongManager.listSongRoot)
+				{
+					tResetRandomListForNode(cSong);
+				}
+			}
+            else
+            {
+				song.listランダム用ノードリスト = null;
+				song.stackRandomPerformanceNumber = new Stack<int>();
+				if(song.list子リスト != null)
+                {
+					foreach (CSongListNode cSong in song.list子リスト)
+					{
+						tResetRandomListForNode(cSong);
+					}
+				}
+            }
+        }
+
 		private List<CSongListNode> t指定された曲が存在する場所の曲を列挙する_子リスト含む( CSongListNode song )
 		{
 			List<CSongListNode> list = new List<CSongListNode>();
@@ -1075,7 +1149,25 @@ namespace DTXMania
 				{
 					if( ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE ) || ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 					{
-						list.Add( c曲リストノード );
+						//Check that at least one score is available for current game mode
+						bool bAtLeastOneScoreExist = false;
+                        for (int i = 0; i < 5; i++)
+                        {
+							if(c曲リストノード.arScore[i] != null)
+                            {
+								bAtLeastOneScoreExist = this.tCheckScoreExistForMode(c曲リストノード.arScore[i]);
+								if(bAtLeastOneScoreExist)
+                                {
+									break;
+                                }
+                            }
+						}
+
+						//Add to list only if score exist for current mode
+						if(bAtLeastOneScoreExist)
+                        {
+							list.Add(c曲リストノード);
+						}						
 					}
 					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする )
 					{
@@ -1095,7 +1187,24 @@ namespace DTXMania
 				{
 					if( ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE ) || ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 					{
-						list.Add( c曲リストノード );
+						//Check that at least one score is available for current game mode
+						bool bAtLeastOneScoreExist = false;
+						for (int i = 0; i < 5; i++)
+						{
+							if (c曲リストノード.arScore[i] != null)
+							{
+								bAtLeastOneScoreExist = this.tCheckScoreExistForMode(c曲リストノード.arScore[i]);
+								if (bAtLeastOneScoreExist)
+								{
+									break;
+								}
+							}
+						}
+						//Add to list only if score exist for current mode
+						if (bAtLeastOneScoreExist)
+						{
+							list.Add(c曲リストノード);
+						}
 					}
 					if( ( c曲リストノード.list子リスト != null ) && CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする )
 					{
