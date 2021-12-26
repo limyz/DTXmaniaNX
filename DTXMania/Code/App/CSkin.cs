@@ -927,7 +927,7 @@ namespace DTXMania
                 sw.WriteLine();
                 sw.WriteLine( "; ネームプレートタイプ" );
                 sw.WriteLine( "; 0:タイプA XG2風の表示がされます。" );
-                sw.WriteLine( "; 1:タイプB XG風の表示がされます。このタイプでは7_NamePlate_XG.png、7_Difficlty_XG.pngが読み込まれます。" );
+                sw.WriteLine( "; 1:タイプB XG風の表示がされます。このタイプでは7_NamePlate_XG.png、7_Difficulty_XG.pngが読み込まれます。" );
                 sw.WriteLine( "NamePlateType={0}", (int)CDTXMania.ConfigIni.eNamePlate );
                 sw.WriteLine();
                 sw.WriteLine( "; 動くドラムセット(0:ON, 1:OFF, 2:NONE)" );

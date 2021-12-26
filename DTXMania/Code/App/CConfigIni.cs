@@ -1157,7 +1157,7 @@ namespace DTXMania
 			this.bVerticalSyncWait = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
-            this.bDirectShowMode = false;
+            this.bDirectShowMode = true;
 			this.nウインドウwidth = SampleFramework.GameWindowSize.Width;			// #23510 2010.10.31 yyagi add
 			this.nウインドウheight = SampleFramework.GameWindowSize.Height;			// 
             this.nMovieMode = 1;
@@ -1173,7 +1173,7 @@ namespace DTXMania
 			this.n非フォーカス時スリープms = 1;			// #23568 2010.11.04 ikanick add
 			this._bGuitar有効 = false;
 			this._bDrums有効 = true;
-			this.nBGAlpha = 100;
+			this.nBGAlpha = 255;
 			this.eDamageLevel = EDamageLevel.Normal;
 			this.bSTAGEFAILEDEnabled = true;
 			this.bAVIEnabled = true;
@@ -1181,7 +1181,7 @@ namespace DTXMania
 			this.bFillInEnabled = true;
             this.DisplayBonusEffects = true;
             this.eRDPosition = ERDPosition.RCRD;
-            this.nInfoType = 0;
+            this.nInfoType = 1;
             this.nSkillMode = 1;
             this.eAttackEffect.Drums = EType.A;
             this.eAttackEffect.Guitar = EType.A;
@@ -1260,7 +1260,7 @@ namespace DTXMania
 			this.bScoreIniを出力する = true;
 			this.bランダムセレクトで子BOXを検索対象とする = true;
 			this.n表示可能な最小コンボ数 = new STDGBVALUE<int>();
-			this.n表示可能な最小コンボ数.Drums = 11;
+			this.n表示可能な最小コンボ数.Drums = 10;
 			this.n表示可能な最小コンボ数.Guitar = 2;
 			this.n表示可能な最小コンボ数.Bass = 2;
 			this.str選曲リストフォント = "MS PGothic";
@@ -1269,7 +1269,7 @@ namespace DTXMania
 			this.n自動再生音量 = 80;
 			this.n手動再生音量 = 100;
 			this.bOutputLogs = true;
-            this.b曲名表示をdefのものにする = false;
+            this.b曲名表示をdefのものにする = true;
 			this.b演奏音を強調する = new STDGBVALUE<bool>();
 			this.bSudden = new STDGBVALUE<bool>();
 			this.bHidden = new STDGBVALUE<bool>();
@@ -1374,7 +1374,7 @@ namespace DTXMania
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
             this.nShowLagTypeColor = 0;
 			this.nShowPlaySpeed = (int)EShowPlaySpeed.IF_CHANGED_IN_GAME;
-			this.bIsAutoResultCapture = false;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
+			this.bIsAutoResultCapture = true;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
             #region [ XGオプション ]
             this.bLivePoint = true;
@@ -1383,7 +1383,7 @@ namespace DTXMania
             #endregion
 
             #region [ GDオプション ]
-            this.b難易度表示をXG表示にする = false;
+            this.b難易度表示をXG表示にする = true;
             this.bShowScore = true;
             this.bShowMusicInfo = true;
             this.str曲名表示フォント = "MS PGothic";
@@ -1763,7 +1763,7 @@ namespace DTXMania
 			sw.WriteLine();
             #region [ GDオプション ]
             sw.WriteLine( "; 選曲画面の難易度表示をXG表示にする (0:OFF, 1:ON)");
-            sw.WriteLine( "Difficlty={0}", this.b難易度表示をXG表示にする ? 1 : 0);
+            sw.WriteLine( "Difficulty={0}", this.b難易度表示をXG表示にする ? 1 : 0);
             sw.WriteLine();
             sw.WriteLine("; スコアの表示(0:OFF, 1:ON)");
             sw.WriteLine("ShowScore={0}", this.bShowScore ? 1 : 0);
@@ -2027,7 +2027,7 @@ namespace DTXMania
             #region [ XGオプション ]
             sw.WriteLine("; ネームプレートタイプ");
             sw.WriteLine("; 0:タイプA XG2風の表示がされます。 ");
-            sw.WriteLine("; 1:タイプB XG風の表示がされます。このタイプでは7_NamePlate_XG.png、7_Difficlty_XG.pngが読み込まれます。");
+            sw.WriteLine("; 1:タイプB XG風の表示がされます。このタイプでは7_NamePlate_XG.png、7_Difficulty_XG.pngが読み込まれます。");
             sw.WriteLine("NamePlateType={0}", (int)this.eNamePlate);
             sw.WriteLine();
             sw.WriteLine("; 動くドラムセット(0:ON, 1:OFF, 2:NONE)");
@@ -2865,7 +2865,7 @@ namespace DTXMania
                                                 this.b演奏情報を表示する = CConversion.bONorOFF(str4[0]);
                                             }
                                             #region [ GDオプション ]
-                                            else if (str3.Equals("Difficlty"))
+                                            else if (str3.Equals("Difficulty"))
                                             {
                                                 this.b難易度表示をXG表示にする = CConversion.bONorOFF(str4[0]);
                                             }
@@ -4041,15 +4041,15 @@ namespace DTXMania
 			string strDefaultKeyAssign = @"
 [DrumsKeyAssign]
 
-HH=K033,M042,M093
-SD=K012,K013,M025,M026,M027,M028,M029,M031,M032,M034,M037,M038,M040,M0113
-BD=K0126,K048,M033,M035,M036,M0112
-HT=K031,K015,M048,M050
-LT=K011,K016,M047
-FT=K023,K017,M041,M043,M045
-CY=K022,K019,M049,M052,M055,M057,M091
-HO=K028,M046,M092
-RD=K047,K020,M051,M053,M059,M089
+HH=K033
+SD=K012,K013
+BD=K0126,K048
+HT=K031,K015
+LT=K011,K016
+FT=K023,K017
+CY=K022,K019
+HO=K028
+RD=K047,K020
 LC=K035,K010
 LP=K087
 LBD=K077
