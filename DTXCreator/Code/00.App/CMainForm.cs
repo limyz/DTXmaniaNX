@@ -4841,10 +4841,15 @@ namespace DTXCreator
 		{
 			this.tシナリオ_Viewerを再生停止する();
 		}
-		//-----------------
-		#endregion
+        //-----------------
+        #endregion
 
-		//-----------------
-		#endregion
-	}
+        //-----------------
+        #endregion
+
+        private void toolStripComboBox演奏速度_SelectedIndexChanged(object sender, EventArgs e)
+        {
+			this.b再生速度を変更した = true;
+        }
+    }
 }

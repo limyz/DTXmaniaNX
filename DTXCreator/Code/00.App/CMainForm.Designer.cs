@@ -1453,6 +1453,7 @@
             resources.GetString("toolStripComboBox演奏速度.Items9"),
             resources.GetString("toolStripComboBox演奏速度.Items10")});
             this.toolStripComboBox演奏速度.Name = "toolStripComboBox演奏速度";
+            this.toolStripComboBox演奏速度.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox演奏速度_SelectedIndexChanged);
             // 
             // toolStripSeparator12
             // 
