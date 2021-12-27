@@ -3895,7 +3895,14 @@ namespace DTXMania
 						}
 					}
 					while ( this.t入力_コメントをスキップする( ref ce ) );
-				#endregion
+					#endregion
+
+					//For DTXVMode, always overwrite Config PlaySpeed with DTXVPlaySpeed
+					if (CDTXMania.DTXVmode.Enabled)
+					{
+						Trace.TraceInformation(string.Format("DTXVMode Enabled. Set PlaySpeed to {0}", this.dbDTXVPlaySpeed));
+						CDTXMania.ConfigIni.nPlaySpeed = (int)(this.dbDTXVPlaySpeed * 20.0);
+					}
 					//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 					//Trace.TraceInformation( "抜き出し時間:             {0}", span.ToString() );
 					//timeBeginLoad = DateTime.Now;
