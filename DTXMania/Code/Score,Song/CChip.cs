@@ -47,6 +47,109 @@ namespace DTXMania
 				}
 			}
 		}
+
+		public bool bChipIsOpenNote
+        {
+            get
+            {
+				switch (this.nChannelNumber)
+				{
+					case EChannel.Guitar_Open:
+					case EChannel.Bass_Open:
+						return true;
+				}
+				return false;
+			}
+        }
+
+		public bool bChannelWithVisibleChip
+        {
+            get
+            {
+				switch (this.nChannelNumber)
+				{					
+					case EChannel.HiHatClose:
+					case EChannel.Snare:
+					case EChannel.BassDrum:
+					case EChannel.HighTom:
+					case EChannel.LowTom:
+					case EChannel.Cymbal:
+					case EChannel.FloorTom:
+					case EChannel.HiHatOpen:
+					case EChannel.RideCymbal:
+					case EChannel.LeftCymbal:
+					case EChannel.LeftPedal:
+					case EChannel.LeftBassDrum:
+					case EChannel.Guitar_Open:
+					case EChannel.Guitar_xxBxx:
+					case EChannel.Guitar_xGxxx:
+					case EChannel.Guitar_xGBxx:
+					case EChannel.Guitar_Rxxxx:
+					case EChannel.Guitar_RxBxx:
+					case EChannel.Guitar_RGxxx:
+					case EChannel.Guitar_RGBxx:
+					case EChannel.Guitar_xxxYx:
+					case EChannel.Guitar_xxBYx:
+					case EChannel.Guitar_xGxYx:
+					case EChannel.Guitar_xGBYx:
+					case EChannel.Guitar_RxxYx:
+					case EChannel.Guitar_RxBYx:
+					case EChannel.Guitar_RGxYx:
+					case EChannel.Guitar_RGBYx:
+					case EChannel.Guitar_xxxxP:
+					case EChannel.Guitar_xxBxP:
+					case EChannel.Guitar_xGxxP:
+					case EChannel.Guitar_xGBxP:
+					case EChannel.Guitar_RxxxP:
+					case EChannel.Bass_Open:
+					case EChannel.Bass_xxBxx:
+					case EChannel.Bass_xGxxx:
+					case EChannel.Bass_xGBxx:
+					case EChannel.Bass_Rxxxx:
+					case EChannel.Bass_RxBxx:
+					case EChannel.Bass_RGxxx:
+					case EChannel.Bass_RGBxx:
+					case EChannel.Guitar_RxBxP:
+					case EChannel.Guitar_RGxxP:
+					case EChannel.Guitar_RGBxP:
+					case EChannel.Guitar_xxxYP:
+					case EChannel.Guitar_xxBYP:
+					case EChannel.Guitar_xGxYP:
+					case EChannel.Guitar_xGBYP:
+					case EChannel.Bass_xxxYx:
+					case EChannel.Bass_xxBYx:
+					case EChannel.Bass_xGxYx:
+					case EChannel.Bass_xGBYx:
+					case EChannel.Bass_RxxYx:
+					case EChannel.Bass_RxBYx:
+					case EChannel.Bass_RGxYx:
+					case EChannel.Bass_RGBYx:
+					case EChannel.Bass_xxxxP:
+					case EChannel.Bass_xxBxP:
+					case EChannel.Guitar_RxxYP:
+					case EChannel.Guitar_RxBYP:
+					case EChannel.Guitar_RGxYP:
+					case EChannel.Guitar_RGBYP:
+					case EChannel.Bass_xGxxP:
+					case EChannel.Bass_xGBxP:
+					case EChannel.Bass_RxxxP:
+					case EChannel.Bass_RxBxP:
+					case EChannel.Bass_RGxxP:
+					case EChannel.Bass_RGBxP:
+					case EChannel.Bass_xxxYP:
+					case EChannel.Bass_xxBYP:
+					case EChannel.Bass_xGxYP:
+					case EChannel.Bass_xGBYP:
+					case EChannel.Bass_RxxYP:
+					case EChannel.Bass_RxBYP:
+					case EChannel.Bass_RGxYP:
+					case EChannel.Bass_RGBYP:
+						return true;
+				}
+				return false;
+			}
+        }
+
 		public bool bWAVを使うチャンネルである
 		{
 			get
@@ -218,6 +321,11 @@ namespace DTXMania
 		public int n楽器パートでの出現順;                // #35411 2015.08.20 chnmr0
 		public bool bTargetGhost判定済み;               // #35411 2015.08.22 chnmr0
 
+		//Long Notes Data members
+		public CChip chipロングノート終端 { get; set; }
+		public bool bロングノートである => chipロングノート終端 != null;
+		public bool bロングノートHit中 { get; set; }
+
 		public CChip()
 		{
 			this.nDistanceFromBar = new STDGBVALUE<int>()
@@ -226,6 +334,7 @@ namespace DTXMania
 				Guitar = 0,
 				Bass = 0,
 			};
+			chipロングノート終端 = null;
 		}
 		public void t初期化()
 		{
@@ -329,6 +438,25 @@ namespace DTXMania
 
 			double _db再生速度 = /*( CDTXMania.DTXVmode.Enabled ) ? CDTXMania.DTX.dbDTXVPlaySpeed :*/ CDTXMania.DTX.db再生速度;
 			return (int)(nDuration / _db再生速度);
+		}
+
+		public void ComputeDistanceFromBar(long nCurrentTime, STDGBVALUE<double> dbPerformanceScrollSpeed) 
+		{
+			const double speed = 286;   // BPM150の時の1小節の長さ[dot]
+										//XGのHS4.5が1289。思えばBPMじゃなくて拍の長さが関係あるよね。
+			double ScrollSpeedDrums = (dbPerformanceScrollSpeed.Drums + 1.0) * 0.5 * 37.5 * speed / 60000.0;
+			double ScrollSpeedGuitar = (dbPerformanceScrollSpeed.Guitar + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
+			double ScrollSpeedBass = (dbPerformanceScrollSpeed.Bass + 1.0) * 0.5 * 0.5 * 37.5 * speed / 60000.0;
+
+			this.nDistanceFromBar.Drums = (int)((this.nPlaybackTimeMs - nCurrentTime) * ScrollSpeedDrums);
+			this.nDistanceFromBar.Guitar = (int)((this.nPlaybackTimeMs - nCurrentTime) * ScrollSpeedGuitar);
+			this.nDistanceFromBar.Bass = (int)((this.nPlaybackTimeMs - nCurrentTime) * ScrollSpeedBass);
+
+			//New: Compute Distance for End of Long Note chip
+			if(chipロングノート終端 != null)
+            {
+				chipロングノート終端.ComputeDistanceFromBar(nCurrentTime, dbPerformanceScrollSpeed);
+            }
 		}
 
 		#region [ IComparable 実装 ]

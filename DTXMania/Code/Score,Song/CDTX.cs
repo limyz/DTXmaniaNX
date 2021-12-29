@@ -3746,6 +3746,11 @@ namespace DTXMania
 						int n発声位置 = 0;
 						int ms = 0;
 						int nBar = 0;
+						//
+						STDGBVALUE<CChip> cCandidateStartHold = default(STDGBVALUE<CChip>);
+						cCandidateStartHold.Drums = null;
+						cCandidateStartHold.Guitar = null;
+						cCandidateStartHold.Bass = null;
 						foreach ( CChip chip in this.listChip )
 						{
 							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
@@ -3832,7 +3837,54 @@ namespace DTXMania
                                             this.t指定された発声位置と同じ位置の指定したチップにボーナスフラグを立てる( chip.nPlaybackPosition, chip.nIntegerValue );
                                             #endregion
                                         }
-										continue;
+                                        //Process Long Notes for Guitar and Bass
+                                        else if(chip.nChannelNumber == EChannel.Guitar_LongNote || chip.nChannelNumber == EChannel.Bass_LongNote)
+                                        {
+											#region [Long Note Processing]
+											
+											EInstrumentPart eChipPart = (chip.nChannelNumber == EChannel.Guitar_LongNote) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
+											//Check if this chip coincide with a KeyPress if currently no candidate start hold 
+											if (cCandidateStartHold[(int)eChipPart] == null)
+											{
+												foreach (CChip chip2 in this.listChip)
+												{
+													if(chip2.nPlaybackPosition == chip.nPlaybackPosition &&
+														(eChipPart == chip2.eInstrumentPart && chip2.bChannelWithVisibleChip) &&
+														!chip2.bChipIsOpenNote)
+                                                    {
+														cCandidateStartHold[(int)eChipPart] = chip2;
+														break;
+                                                    }
+												}
+											}
+											//Check for EndHold note rule violation
+                                            else
+                                            {
+												foreach (CChip chip2 in this.listChip)
+                                                {
+													if(chip2.eInstrumentPart == eChipPart && chip2.bChannelWithVisibleChip &&
+														chip2.nPlaybackPosition > cCandidateStartHold[(int)eChipPart].nPlaybackPosition &&
+														chip2.nPlaybackPosition <= chip.nPlaybackPosition
+														)
+                                                    {
+														cCandidateStartHold[(int)eChipPart] = null;
+														break;
+													}
+                                                }
+
+												//If candidate start hold survives
+												if(cCandidateStartHold[(int)eChipPart] != null)
+                                                {
+													//TODO: To assign eInstrumentPart to chip or not?
+													cCandidateStartHold[(int)eChipPart].chipロングノート終端 = chip;
+													//Reset
+													cCandidateStartHold[(int)eChipPart] = null;
+												}
+											}
+											
+											#endregion
+										}
+                                        continue;
 									}
 							}
 							if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
