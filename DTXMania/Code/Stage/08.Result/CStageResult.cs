@@ -28,7 +28,7 @@ namespace DTXMania
 		public STDGBVALUE<int> nRankValue;
 		public STDGBVALUE<int> nNbPerformances;
 		public int n総合ランク値;
-		public CDTX.CChip[] rEmptyDrumChip;
+		public CChip[] rEmptyDrumChip;
 		public STDGBVALUE<CScoreIni.CPerformanceEntry> stPerformanceEntry;
 		public bool bIsTrainingMode;
 
@@ -40,7 +40,7 @@ namespace DTXMania
 			this.stPerformanceEntry.Drums = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Guitar = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Bass = new CScoreIni.CPerformanceEntry();
-			this.rEmptyDrumChip = new CDTX.CChip[ 10 ];
+			this.rEmptyDrumChip = new CChip[ 10 ];
 			this.n総合ランク値 = -1;
             this.nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9 };
 			base.eStageID = CStage.EStage.Result;
@@ -271,7 +271,7 @@ namespace DTXMania
             saveCond.Guitar = true;
             saveCond.Bass = true;
             
-            foreach( CDTX.CChip chip in CDTXMania.DTX.listChip )
+            foreach( CChip chip in CDTXMania.DTX.listChip )
             {
                 if( chip.bIsAutoPlayed )
                 {
@@ -342,7 +342,7 @@ namespace DTXMania
             }
 
             int cnt = 0;
-            foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+            foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
             {
                 if (chip.eInstrumentPart == inst)
                 {
@@ -358,7 +358,7 @@ namespace DTXMania
                     using (BinaryWriter bw = new BinaryWriter(fs))
                     {
                         bw.Write((Int32)cnt);
-                        foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
                         {
                             if (chip.eInstrumentPart == inst)
                             {
@@ -672,7 +672,7 @@ namespace DTXMania
 									{
 										continue;
 									}
-									CDTX.CChip rChip = this.rEmptyDrumChip[ i ];
+									CChip rChip = this.rEmptyDrumChip[ i ];
 									if( rChip == null )
 									{
 										switch( ( (EPad) i ) )

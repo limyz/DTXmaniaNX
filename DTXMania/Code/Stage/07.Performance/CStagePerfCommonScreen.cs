@@ -323,7 +323,7 @@ namespace DTXMania
                     this.nHitCount_IncAuto[ k ] = new CHITCOUNTOFRANK();
                     this.nヒット数_TargetGhost[ k ] = new CHITCOUNTOFRANK(); // #35411 2015.08.21 chnmr0 add
                 }
-                this.queWailing[k] = new Queue<CDTX.CChip>();
+                this.queWailing[k] = new Queue<CChip>();
                 this.r現在の歓声Chip[k] = null;
             }
             for (int i = 0; i < 3; i++)
@@ -380,7 +380,7 @@ namespace DTXMania
             this.bPAUSE = false;
 
             #region [ Sounds that should be registered in the mixer before starting playing (chip sounds that will be played immediately after the start of the performance) ]
-            foreach (CDTX.CChip pChip in listChip)
+            foreach (CChip pChip in listChip)
             {
                 //				Debug.WriteLine( "CH=" + pChip.nChannelNumber.ToString( "x2" ) + ", 整数値=" + pChip.nIntegerValue +  ", time=" + pChip.nPlaybackTimeMs );
                 if (pChip.nPlaybackTimeMs <= 0)
@@ -558,19 +558,19 @@ namespace DTXMania
         [StructLayout(LayoutKind.Sequential)]
         protected struct STKARAUCHI
         {
-            public CDTX.CChip HH;
-            public CDTX.CChip SD;
-            public CDTX.CChip BD;
-            public CDTX.CChip HT;
-            public CDTX.CChip LT;
-            public CDTX.CChip FT;
-            public CDTX.CChip CY;
-            public CDTX.CChip HHO;
-            public CDTX.CChip RD;
-            public CDTX.CChip LC;
-            public CDTX.CChip LP;
-            public CDTX.CChip LBD;
-            public CDTX.CChip this[int index]
+            public CChip HH;
+            public CChip SD;
+            public CChip BD;
+            public CChip HT;
+            public CChip LT;
+            public CChip FT;
+            public CChip CY;
+            public CChip HHO;
+            public CChip RD;
+            public CChip LC;
+            public CChip LP;
+            public CChip LBD;
+            public CChip this[int index]
             {
                 get
                 {
@@ -758,13 +758,13 @@ namespace DTXMania
         private CCounter[] ctTimer = new CCounter[3];
         public bool bブーストボーナス = false;
 
-        protected STDGBVALUE<Queue<CDTX.CChip>> queWailing;
-        protected STDGBVALUE<CDTX.CChip> r現在の歓声Chip;
-        protected CDTX.CChip r現在の空うちギターChip;
+        protected STDGBVALUE<Queue<CChip>> queWailing;
+        protected STDGBVALUE<CChip> r現在の歓声Chip;
+        protected CChip r現在の空うちギターChip;
         protected STKARAUCHI r現在の空うちドラムChip;
-        protected CDTX.CChip r現在の空うちベースChip;
-        protected CDTX.CChip rNextGuitarChip;
-        protected CDTX.CChip rNextBassChip;
+        protected CChip r現在の空うちベースChip;
+        protected CChip rNextGuitarChip;
+        protected CChip rNextBassChip;
         protected CTexture txWailingFrame;
         protected CTexture txChip;  // txチップ
         protected CTexture txHitBar;  // txヒットバー
@@ -785,7 +785,7 @@ namespace DTXMania
         //		protected int nRisky_InitialVar, nRiskyTime;		// #23559 2011.7.28 yyagi → CAct演奏ゲージ共通クラスに隠蔽
         protected int nPolyphonicSounds;
 
-        protected List<CDTX.CChip> listChip;
+        protected List<CChip> listChip;
         protected Dictionary<int, CDTX.CWAV> listWAV;
 
         protected Stopwatch sw;		// 2011.6.13 最適化検討用のストップウォッチ
@@ -862,7 +862,7 @@ namespace DTXMania
             }
         }
 
-		protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, CDTX.CChip pChip, int nInputAdjustTime, bool saveLag = true )
+		protected EJudgement e指定時刻からChipのJUDGEを返す( long nTime, CChip pChip, int nInputAdjustTime, bool saveLag = true )
         {
             if (pChip == null)
                 return EJudgement.Miss;
@@ -915,7 +915,7 @@ namespace DTXMania
             }
         }
 
-        protected CDTX.CChip r空うちChip(EInstrumentPart part, EPad pad)
+        protected CChip r空うちChip(EInstrumentPart part, EPad pad)
         {
             switch (part)
             {
@@ -1066,7 +1066,7 @@ namespace DTXMania
             }
             return null;
         }
-        protected CDTX.CChip r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(long nTime, int int_nChannel, int nInputAdjustTime)
+        protected CChip r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(long nTime, int int_nChannel, int nInputAdjustTime)
         {
             EChannel nChannel = (EChannel)int_nChannel;
             sw2.Start();
@@ -1086,7 +1086,7 @@ namespace DTXMania
             }
             for (; nIndex_NearestChip_Future < count; nIndex_NearestChip_Future++)
             {
-                CDTX.CChip chip = CDTXMania.DTX.listChip[nIndex_NearestChip_Future];
+                CChip chip = CDTXMania.DTX.listChip[nIndex_NearestChip_Future];
                 if (((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum)))
                 {
                     if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
@@ -1121,7 +1121,7 @@ namespace DTXMania
             //while ( nIndex_NearestChip_Past >= 0 )			// 過去方向への検索
             for (; nIndex_NearestChip_Past >= 0; nIndex_NearestChip_Past--)
             {
-                CDTX.CChip chip = listChip[nIndex_NearestChip_Past];
+                CChip chip = listChip[nIndex_NearestChip_Past];
                 if ((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum))
                 {
                     if ((chip.nChannelNumber == nChannel) || (chip.nChannelNumber == ((int)nChannel + EChannel.Guitar_Open)))
@@ -1164,8 +1164,8 @@ namespace DTXMania
                 return listChip[nIndex_NearestChip_Future];
             }
             // 検索対象が過去未来の双方に見つかったなら、より近い方を採用する
-            CDTX.CChip nearestChip_Future = listChip[nIndex_NearestChip_Future];
-            CDTX.CChip nearestChip_Past = listChip[nIndex_NearestChip_Past];
+            CChip nearestChip_Future = listChip[nIndex_NearestChip_Future];
+            CChip nearestChip_Past = listChip[nIndex_NearestChip_Past];
             int nDiffTime_Future = Math.Abs((int)(nTime - nearestChip_Future.nPlaybackTimeMs));
             int nDiffTime_Past = Math.Abs((int)(nTime - nearestChip_Past.nPlaybackTimeMs));
             if (nDiffTime_Future >= nDiffTime_Past)
@@ -1176,19 +1176,19 @@ namespace DTXMania
             sw2.Stop();
             return nearestChip_Future;
         }
-        protected void tPlaySound(CDTX.CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part)
+        protected void tPlaySound(CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part)
         {
             this.tPlaySound(rChip, n再生開始システム時刻ms, part, CDTXMania.ConfigIni.n手動再生音量, false, false);
         }
-        protected void tPlaySound(CDTX.CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量)
+        protected void tPlaySound(CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量)
         {
             this.tPlaySound(rChip, n再生開始システム時刻ms, part, n音量, false, false);
         }
-        protected void tPlaySound(CDTX.CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量, bool bモニタ)
+        protected void tPlaySound(CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量, bool bモニタ)
         {
             this.tPlaySound(rChip, n再生開始システム時刻ms, part, n音量, bモニタ, false);
         }
-        protected void tPlaySound(CDTX.CChip pChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量, bool bモニタ, bool b音程をずらして再生)
+        protected void tPlaySound(CChip pChip, long n再生開始システム時刻ms, EInstrumentPart part, int n音量, bool bモニタ, bool b音程をずらして再生)
         {
             if (pChip != null)
             {
@@ -1294,16 +1294,16 @@ namespace DTXMania
                 this.actStatusPanel.tSetDifficultyLabelFromScript( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
             }
         }
-        protected EJudgement tProcessChipHit(long nHitTime, CDTX.CChip pChip)  // tチップのヒット処理
+        protected EJudgement tProcessChipHit(long nHitTime, CChip pChip)  // tチップのヒット処理
         {
             return tProcessChipHit(nHitTime, pChip, true);
         }
-        protected abstract EJudgement tProcessChipHit(long nHitTime, CDTX.CChip pChip, bool bCorrectLane);  // tチップのヒット処理
-        protected EJudgement tProcessChipHit(long nHitTime, CDTX.CChip pChip, EInstrumentPart screenmode)		// EInstrumentPart screenmode
+        protected abstract EJudgement tProcessChipHit(long nHitTime, CChip pChip, bool bCorrectLane);  // tチップのヒット処理
+        protected EJudgement tProcessChipHit(long nHitTime, CChip pChip, EInstrumentPart screenmode)		// EInstrumentPart screenmode
         {
             return tProcessChipHit(nHitTime, pChip, screenmode, true);
         }
-        protected EJudgement tProcessChipHit(long nHitTime, CDTX.CChip pChip, EInstrumentPart screenmode, bool bCorrectLane)
+        protected EJudgement tProcessChipHit(long nHitTime, CChip pChip, EInstrumentPart screenmode, bool bCorrectLane)
         {
             pChip.bHit = true;
             if (pChip.eInstrumentPart == EInstrumentPart.UNKNOWN)
@@ -1795,11 +1795,11 @@ namespace DTXMania
             }
         }
 
-        protected CDTX.CChip r指定時刻に一番近い未ヒットChip(long nTime, int nChannelFlag, int nInputAdjustTime)
+        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int nChannelFlag, int nInputAdjustTime)
         {
             return this.r指定時刻に一番近い未ヒットChip(nTime, nChannelFlag, nInputAdjustTime, 0);
         }
-        protected CDTX.CChip r指定時刻に一番近い未ヒットChip(long nTime, int int_nChannel, int nInputAdjustTime, int n検索範囲時間ms)
+        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int int_nChannel, int nInputAdjustTime, int n検索範囲時間ms)
         {
             EChannel nChannel = (EChannel)int_nChannel;
             sw2.Start();
@@ -1823,7 +1823,7 @@ namespace DTXMania
             //			while ( nIndex_NearestChip_Future < count )	// 未来方向への検索
             for (; nIndex_NearestChip_Future < count; nIndex_NearestChip_Future++)
             {
-                CDTX.CChip chip = listChip[nIndex_NearestChip_Future];
+                CChip chip = listChip[nIndex_NearestChip_Future];
                 if (!chip.bHit)
                 {
                     if ((EChannel.HiHatClose <= nChannel) && (nChannel <= EChannel.LeftBassDrum))
@@ -1861,7 +1861,7 @@ namespace DTXMania
             //			while ( nIndex_NearestChip_Past >= 0 )		// 過去方向への検索
             for (; nIndex_NearestChip_Past >= 0; nIndex_NearestChip_Past--)
             {
-                CDTX.CChip chip = listChip[nIndex_NearestChip_Past];
+                CChip chip = listChip[nIndex_NearestChip_Past];
                 if ((!chip.bHit) &&
                         (
                             ((nChannel >= EChannel.HiHatClose) && (nChannel <= EChannel.LeftBassDrum) &&
@@ -1898,7 +1898,7 @@ namespace DTXMania
                 sw2.Stop();
                 return null;
             }
-            CDTX.CChip nearestChip;	// = null;	// 以下のifブロックのいずれかで必ずnearestChipには非nullが代入されるので、null初期化を削除
+            CChip nearestChip;	// = null;	// 以下のifブロックのいずれかで必ずnearestChipには非nullが代入されるので、null初期化を削除
             if (nIndex_NearestChip_Future >= count)											// 検索対象が未来方向には見つからなかった(しかし過去方向には見つかった)場合
             {
                 nearestChip = listChip[nIndex_NearestChip_Past];
@@ -1934,7 +1934,7 @@ namespace DTXMania
             return nearestChip;
         }
 
-        protected CDTX.CChip r次に来る指定楽器Chipを更新して返す(EInstrumentPart inst)
+        protected CChip r次に来る指定楽器Chipを更新して返す(EInstrumentPart inst)
         {
             switch ((int)inst)
             {
@@ -1946,13 +1946,13 @@ namespace DTXMania
                     return null;
             }
         }
-        protected CDTX.CChip r次にくるギターChipを更新して返す()
+        protected CChip r次にくるギターChipを更新して返す()
         {
             int nInputAdjustTime = this.bIsAutoPlay.GtPick ? 0 : this.nInputAdjustTimeMs.Guitar;
             this.rNextGuitarChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0x2f, nInputAdjustTime, 500);
             return this.rNextGuitarChip;
         }
-        protected CDTX.CChip r次にくるベースChipを更新して返す()  // r次にくるベースChipを更新して返す
+        protected CChip r次にくるベースChipを更新して返す()  // r次にくるベースChipを更新して返す
         {
             int nInputAdjustTime = this.bIsAutoPlay.BsPick ? 0 : this.nInputAdjustTimeMs.Bass;
             this.rNextBassChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0xaf, nInputAdjustTime, 500);
@@ -2497,7 +2497,7 @@ namespace DTXMania
             CConfigIni configIni = CDTXMania.ConfigIni;
             for (int nCurrentTopChip = this.nCurrentTopChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
-                CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
+                CChip pChip = dTX.listChip[nCurrentTopChip];
                 //Debug.WriteLine( "nCurrentTopChip=" + nCurrentTopChip + ", ch=" + pChip.nChannelNumber.ToString("x2") + ", 発音位置=" + pChip.nPlaybackPosition + ", 発声時刻ms=" + pChip.nPlaybackTimeMs );
                 pChip.nDistanceFromBar.Drums = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedDrums);
                 pChip.nDistanceFromBar.Guitar = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedGuitar);
@@ -2889,7 +2889,7 @@ namespace DTXMania
                         //	CDTXMania.DTX.tPlayChip( pChip, n再生開始システム時刻ms, 8, nVolume, bモニタ, b音程をずらして再生 );
                         //	this.nLastPlayedWAVNumber.Guitar = pChip.nIntegerValue_InternalNumber;
 
-                        //	protected void tPlaySound( CDTX.CChip pChip, long n再生開始システム時刻ms, EInstrumentPart part, int nVolume, bool bモニタ, bool b音程をずらして再生 )
+                        //	protected void tPlaySound( CChip pChip, long n再生開始システム時刻ms, EInstrumentPart part, int nVolume, bool bモニタ, bool b音程をずらして再生 )
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
@@ -3101,7 +3101,7 @@ namespace DTXMania
             CConfigIni configIni = CDTXMania.ConfigIni;            
             for (int nCurrentTopChip = this.nCurrentTopChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
-                CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
+                CChip pChip = dTX.listChip[nCurrentTopChip];
                 //Debug.WriteLine( "nCurrentTopChip=" + nCurrentTopChip + ", ch=" + pChip.nChannelNumber.ToString("x2") + ", 発音位置=" + pChip.nPlaybackPosition + ", 発声時刻ms=" + pChip.nPlaybackTimeMs );
                 pChip.nDistanceFromBar.Drums = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedDrums);
                 pChip.nDistanceFromBar.Guitar = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedGuitar);
@@ -3199,7 +3199,7 @@ namespace DTXMania
             CConfigIni configIni = CDTXMania.ConfigIni;
             for (int nCurrentTopChip = this.nCurrentTopChip; nCurrentTopChip < dTX.listChip.Count; nCurrentTopChip++)
             {
-                CDTX.CChip pChip = dTX.listChip[nCurrentTopChip];
+                CChip pChip = dTX.listChip[nCurrentTopChip];
                 //Debug.WriteLine( "nCurrentTopChip=" + nCurrentTopChip + ", ch=" + pChip.nChannelNumber.ToString("x2") + ", 発音位置=" + pChip.nPlaybackPosition + ", 発声時刻ms=" + pChip.nPlaybackTimeMs );
                 pChip.nDistanceFromBar.Drums = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedDrums);
                 pChip.nDistanceFromBar.Guitar = (int)((pChip.nPlaybackTimeMs - CSoundManager.rcPerformanceTimer.nCurrentTime) * ScrollSpeedGuitar);
@@ -3252,7 +3252,7 @@ namespace DTXMania
             return false;
         }
 
-        public bool bCheckAutoPlay(CDTX.CChip pChip)
+        public bool bCheckAutoPlay(CChip pChip)
         {
             bool bPChipIsAutoPlay = false;
             bool bGtBsR = false;
@@ -3621,12 +3621,12 @@ namespace DTXMania
         }
 
 
-        protected abstract void tUpdateAndDraw_Chip_Drums(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        protected abstract void tUpdateAndDraw_Chip_PatternOnly_Drums(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
-        //protected abstract void t進行描画_チップ_ギター( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip );
-        protected abstract void tUpdateAndDraw_Chip_GuitarBass(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, EInstrumentPart inst);  // t進行描画_チップ_ギターベース
+        protected abstract void tUpdateAndDraw_Chip_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
+        protected abstract void tUpdateAndDraw_Chip_PatternOnly_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
+        //protected abstract void t進行描画_チップ_ギター( CConfigIni configIni, ref CDTX dTX, ref CChip pChip );
+        protected abstract void tUpdateAndDraw_Chip_GuitarBass(CConfigIni configIni, ref CDTX dTX, ref CChip pChip, EInstrumentPart inst);  // t進行描画_チップ_ギターベース
 
-        protected void tUpdateAndDraw_Chip_GuitarBass(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, EInstrumentPart inst,  // t進行描画_チップ_ギターベース
+        protected void tUpdateAndDraw_Chip_GuitarBass(CConfigIni configIni, ref CDTX dTX, ref CChip pChip, EInstrumentPart inst,  // t進行描画_チップ_ギターベース
             int barYNormal, int barYReverse, int showRangeY0, int showRangeY1, int openXg, int openXb,
             int rectOpenOffsetX, int rectOpenOffsetY, int openChipWidth, int chipHeight,
             int chipWidth, int guitarNormalX, int guitarLeftyX, int bassNormalX, int bassLeftyX, int drawDeltaX, int chipTexDeltaX)
@@ -4199,7 +4199,7 @@ namespace DTXMania
 							this.tProcessChipHit( pChip.nPlaybackTimeMs + ghostLag, pChip, false );
 						}
 						int chWailingChip = ( inst == EInstrumentPart.GUITAR ) ? 0x28 : 0xA8;
-						CDTX.CChip item = this.r指定時刻に一番近い未ヒットChip( pChip.nPlaybackTimeMs + ghostLag, chWailingChip, this.nInputAdjustTimeMs[ instIndex ], 140 );
+						CChip item = this.r指定時刻に一番近い未ヒットChip( pChip.nPlaybackTimeMs + ghostLag, chWailingChip, this.nInputAdjustTimeMs[ instIndex ], 140 );
 						if ( item != null && !bMiss )
 						{
 							this.queWailing[ instIndex ].Enqueue( item );
@@ -4325,7 +4325,7 @@ namespace DTXMania
         }
 
 
-        protected virtual void tUpdateAndDraw_Chip_GuitarBass_Wailing(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, EInstrumentPart inst)
+        protected virtual void tUpdateAndDraw_Chip_GuitarBass_Wailing(CConfigIni configIni, ref CDTX dTX, ref CChip pChip, EInstrumentPart inst)
         {
             int indexInst = (int)inst;
             if (configIni.bGuitarEnabled)
@@ -4401,24 +4401,24 @@ namespace DTXMania
             }
             pChip.bHit = true;
         }
-        protected virtual void tUpdateAndDraw_Chip_Guitar_Wailing(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected virtual void tUpdateAndDraw_Chip_Guitar_Wailing(CConfigIni configIni, ref CDTX dTX, ref CChip pChip)
         {
             tUpdateAndDraw_Chip_GuitarBass_Wailing(configIni, ref dTX, ref pChip, EInstrumentPart.GUITAR);
         }
-        protected abstract void tUpdateAndDraw_Chip_FillIn(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);  // t進行描画_チップ_フィルイン
-        protected abstract void tUpdateAndDraw_Chip_Bonus(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void tUpdateAndDraw_Chip_FillIn(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);  // t進行描画_チップ_フィルイン
+        protected abstract void tUpdateAndDraw_Chip_Bonus(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
         protected void tUpdateAndDraw_FillInEffect()  // t進行描画_フィルインエフェクト
         {
             this.actFillin.OnUpdateAndDraw();
         }
-        protected abstract void tUpdateAndDraw_Chip_BarLine(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);
+        protected abstract void tUpdateAndDraw_Chip_BarLine(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
         protected abstract void tDraw_LoopLine(CConfigIni configIni, bool bIsEnd);
-        //protected abstract void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip );
-        protected virtual void tUpdateAndDraw_Chip_Bass_Wailing(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)  // t進行描画_チップ_ベース_ウェイリング
+        //protected abstract void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CChip pChip );
+        protected virtual void tUpdateAndDraw_Chip_Bass_Wailing(CConfigIni configIni, ref CDTX dTX, ref CChip pChip)  // t進行描画_チップ_ベース_ウェイリング
         {
             tUpdateAndDraw_Chip_GuitarBass_Wailing(configIni, ref dTX, ref pChip, EInstrumentPart.BASS);
         }
-        protected abstract void tUpdateAndDraw_Chip_NoSound_Drums(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip);  // t進行描画_チップ_空打ち音設定_ドラム
+        protected abstract void tUpdateAndDraw_Chip_NoSound_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);  // t進行描画_チップ_空打ち音設定_ドラム
         protected void tUpdateAndDraw_ChipAnimation()
         {
             for (int i = 0; i < 3; i++)			// 0=drums, 1=guitar, 2=bass
@@ -4690,7 +4690,7 @@ namespace DTXMania
 
             //			if ( bIsAutoPlay[ (int) ELane.Guitar - 1 + indexInst ] )	// このような、バグの入りやすい書き方(GT/BSのindex値が他と異なる)はいずれ見直したい
             //			{
-            CDTX.CChip chip = this.r次に来る指定楽器Chipを更新して返す(inst);
+            CChip chip = this.r次に来る指定楽器Chipを更新して返す(inst);
             if (chip != null)
             {
                 bool bAutoGuitarR = false;
@@ -5126,7 +5126,7 @@ namespace DTXMania
                         this.tSaveInputMethod(inst);
                         long nTime = eventPick.nTimeStamp - CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻;
                         int chWailingSound = (inst == EInstrumentPart.GUITAR) ? 0x2F : 0xAF;
-                        CDTX.CChip pChip = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst]);	// EInstrumentPart.GUITARなチップ全てにヒットする
+                        CChip pChip = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst]);	// EInstrumentPart.GUITARなチップ全てにヒットする
                         EJudgement e判定 = this.e指定時刻からChipのJUDGEを返す(nTime, pChip, this.nInputAdjustTimeMs[indexInst]);
                         //Trace.TraceInformation("ch={0:x2}, mask1={1:x1}, mask2={2:x2}", pChip.nChannelNumber,  ( pChip.nChannelNumber & ~nAutoMask ) & 0x0F, ( flagRGB & ~nAutoMask) & 0x0F );
                         if (pChip != null)
@@ -5482,7 +5482,7 @@ namespace DTXMania
                                 this.tProcessChipHit(nTime, pChip);
                                 this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], e判定 == EJudgement.Poor);
                                 int chWailingChip = (inst == EInstrumentPart.GUITAR) ? 0x28 : 0xA8;
-                                CDTX.CChip item = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingChip, this.nInputAdjustTimeMs[indexInst], 140);
+                                CChip item = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingChip, this.nInputAdjustTimeMs[indexInst], 140);
                                 if (item != null)
                                 {
                                     this.queWailing[indexInst].Enqueue(item);
@@ -5492,7 +5492,7 @@ namespace DTXMania
                         }
 
                         // 以下、間違いレーンでのピック時
-                        CDTX.CChip NoChipPicked = (inst == EInstrumentPart.GUITAR) ? this.r現在の空うちギターChip : this.r現在の空うちベースChip;
+                        CChip NoChipPicked = (inst == EInstrumentPart.GUITAR) ? this.r現在の空うちギターChip : this.r現在の空うちベースChip;
                         if ((NoChipPicked != null) || ((NoChipPicked = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst])) != null))
                         {
                             this.tPlaySound(NoChipPicked, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], true);
@@ -5522,7 +5522,7 @@ namespace DTXMania
         {
             int indexInst = (int)inst;
             long nTimeWailed = nTimeStamp_Wailed - CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻;
-            CDTX.CChip chipWailing;
+            CChip chipWailing;
             while ((this.queWailing[indexInst].Count > 0) && ((chipWailing = this.queWailing[indexInst].Dequeue()) != null))
             {
                 if ((nTimeWailed - chipWailing.nPlaybackTimeMs) <= 1000)		// #24245 2011.1.26 yyagi: 800 -> 1000
@@ -5584,7 +5584,7 @@ namespace DTXMania
             int nTopChip = 0;
             for (int i = 0; i < CDTXMania.DTX.listChip.Count; i++)
             {
-                CDTX.CChip pChip = CDTXMania.DTX.listChip[i];
+                CChip pChip = CDTXMania.DTX.listChip[i];
                 if (pChip.nPlaybackPosition >= 384 * nStartBar)
                 {
                     nTopChip = i;
@@ -5617,7 +5617,7 @@ namespace DTXMania
             bool bIsTopChipSet = false;
             for (int nCurrentChip = 0; nCurrentChip < CDTXMania.DTX.listChip.Count; nCurrentChip++)
             {
-                CDTX.CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
+                CChip pChip = CDTXMania.DTX.listChip[nCurrentChip];
 
                 if (bIsTopChipSet && pChip.nPlaybackTimeMs > oldPosition)
                 {
@@ -5649,7 +5649,7 @@ namespace DTXMania
             #region [ BGMやギターなど、演奏開始のタイミングで再生がかかっているサウンドのの途中再生開始 ] // (CDTXのt入力・行解析・チップ配置()で小節番号が+1されているのを削っておくこと)
             for (int i = this.nCurrentTopChip; i >= 0; i--)
             {
-                CDTX.CChip pChip = CDTXMania.DTX.listChip[i];
+                CChip pChip = CDTXMania.DTX.listChip[i];
                 int nDuration = pChip.GetDuration();
 
                 if ((pChip.nPlaybackTimeMs + nDuration > 0) && (pChip.nPlaybackTimeMs <= nNewPosition) && (nNewPosition <= pChip.nPlaybackTimeMs + nDuration))
@@ -5709,7 +5709,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.nPlaySpeed += nSpeedOffset;
             double dbNewSpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20;
 
-            foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
+            foreach (CChip chip in CDTXMania.DTX.listChip)
             {
                 chip.nPlaybackTimeMs = (int)(((double)chip.nPlaybackTimeMs * dbOldSpeed) / dbNewSpeed);
             }

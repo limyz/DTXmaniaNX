@@ -1374,7 +1374,7 @@ for (int i = 0; i < 3; i++) {
                                 //-----------------------------
                                 CScoreIni.CPerformanceEntry cPerfEntry_Drums, cPerfEntry_Guitar, cPerfEntry_Bass;
                                 bool bIsTrainingMode = false;
-                                CDTX.CChip[] chipArray = new CDTX.CChip[10];
+                                CChip[] chipArray = new CChip[10];
                                 if (ConfigIni.bGuitarRevolutionMode)
                                 {
                                     stagePerfGuitarScreen.tStorePerfResults(out cPerfEntry_Drums, out cPerfEntry_Guitar, out cPerfEntry_Bass, out bIsTrainingMode);

@@ -324,7 +324,7 @@ namespace DTXMania
         }
         public void SkipStart(int n移動開始時刻ms)
         {
-            foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
+            foreach (CChip chip in CDTXMania.DTX.listChip)
             {
                 if (chip.nPlaybackTimeMs > n移動開始時刻ms)
                 {

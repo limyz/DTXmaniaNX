@@ -65,7 +65,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < CDTXMania.DTX.listChip.Count; i++ )
 			{
-				CDTX.CChip chip = CDTXMania.DTX.listChip[ i ];
+				CChip chip = CDTXMania.DTX.listChip[ i ];
 				if( chip.nPlaybackTimeMs > n移動開始時刻ms )
 				{
 					return;
