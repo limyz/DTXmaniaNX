@@ -1113,153 +1113,153 @@ namespace DTXMania
 				}
 			}
 
-			public void incrementChipCount(int channelNum)
+			public void incrementChipCount(EChannel channelNum)
             {
                 switch (channelNum)
                 {
 					//Guitar Channels
-					case 0x20:
+					case EChannel.Guitar_Open:
 						this.GuitarOpen++;
 						break;
-					case 0x21:
+					case EChannel.Guitar_xxBxx:
 						this.GuitarB++;
 						break;
-					case 0x22:
+					case EChannel.Guitar_xGxxx:
 						this.GuitarG++;
 						break;
-					case 0x23:
-						this.GuitarG++;
-						this.GuitarB++;
-						break;
-					case 0x24:
-						this.GuitarR++;
-						break;
-					case 0x25:
-						this.GuitarR++;
-						this.GuitarB++;
-						break;
-					case 0x26:
-						this.GuitarR++;
-						this.GuitarG++;
-						break;
-					case 0x27:
-						this.GuitarR++;
+					case EChannel.Guitar_xGBxx:
 						this.GuitarG++;
 						this.GuitarB++;
 						break;
-					case 0x28:
+					case EChannel.Guitar_Rxxxx:
+						this.GuitarR++;
+						break;
+					case EChannel.Guitar_RxBxx:
+						this.GuitarR++;
+						this.GuitarB++;
+						break;
+					case EChannel.Guitar_RGxxx:
+						this.GuitarR++;
+						this.GuitarG++;
+						break;
+					case EChannel.Guitar_RGBxx:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						break;
+					case EChannel.Guitar_Wailing:
 						//Guitar Wail
 						break;
-					case 0x93:
+					case EChannel.Guitar_xxxYx:
 						this.GuitarY++;
 						break;
-					case 0x94:
+					case EChannel.Guitar_xxBYx:
 						this.GuitarB++;
 						this.GuitarY++;
 						break;
-					case 0x95:
+					case EChannel.Guitar_xGxYx:
 						this.GuitarG++;
 						this.GuitarY++;
 						break;
-					case 0x96:
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarY++;
-						break;
-					case 0x97:
-						this.GuitarR++;
-						this.GuitarY++;
-						break;
-					case 0x98:
-						this.GuitarR++;
-						this.GuitarB++;
-						this.GuitarY++;
-						break;
-					case 0x99:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarY++;
-						break;
-					case 0x9A:
-						this.GuitarR++;
+					case EChannel.Guitar_xGBYx:
 						this.GuitarG++;
 						this.GuitarB++;
 						this.GuitarY++;
 						break;
-					case 0x9B:
-						this.GuitarP++;
-						break;
-					case 0x9C:
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0x9D:
-						this.GuitarG++;
-						this.GuitarP++;
-						break;
-					case 0x9E:
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0x9F:
+					case EChannel.Guitar_RxxYx:
 						this.GuitarR++;
-						this.GuitarP++;
-						break;
-					case 0xA9:
-						this.GuitarR++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0xAA:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarP++;
-						break;
-					case 0xAB:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0xAC:
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAD:
+					case EChannel.Guitar_RxBYx:
+						this.GuitarR++;
 						this.GuitarB++;
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAE:
+					case EChannel.Guitar_RGxYx:
+						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAF:
+					case EChannel.Guitar_RGBYx:
+						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarB++;
 						this.GuitarY++;
+						break;
+					case EChannel.Guitar_xxxxP:
 						this.GuitarP++;
 						break;
-					case 0xD0:
+					case EChannel.Guitar_xxBxP:
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGxxP:
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGBxP:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxxxP:
 						this.GuitarR++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxBxP:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGxxP:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGBxP:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xxxYP:
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD1:
-						this.GuitarR++;
+					case EChannel.Guitar_xxBYP:
 						this.GuitarB++;
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD2:
+					case EChannel.Guitar_xGxYP:
+						this.GuitarG++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGBYP:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxxYP:
+						this.GuitarR++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxBYP:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGxYP:
 						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD3:
+					case EChannel.Guitar_RGBYP:
 						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarB++;
@@ -1267,148 +1267,148 @@ namespace DTXMania
 						this.GuitarP++;
 						break;
 					//Bass
-					case 0xA0:
+					case EChannel.Bass_Open:
 						this.BassOpen++;
 						break;
-					case 0xA1:
+					case EChannel.Bass_xxBxx:
 						this.BassB++;
 						break;
-					case 0xA2:
+					case EChannel.Bass_xGxxx:
 						this.BassG++;
 						break;
-					case 0xA3:
-						this.BassG++;
-						this.BassB++;
-						break;
-					case 0xA4:
-						this.BassR++;
-						break;
-					case 0xA5:
-						this.BassR++;
-						this.BassB++;
-						break;
-					case 0xA6:
-						this.BassR++;
-						this.BassG++;
-						break;
-					case 0xA7:
-						this.BassR++;
+					case EChannel.Bass_xGBxx:
 						this.BassG++;
 						this.BassB++;
 						break;
-					case 0xA8:
+					case EChannel.Bass_Rxxxx:
+						this.BassR++;
+						break;
+					case EChannel.Bass_RxBxx:
+						this.BassR++;
+						this.BassB++;
+						break;
+					case EChannel.Bass_RGxxx:
+						this.BassR++;
+						this.BassG++;
+						break;
+					case EChannel.Bass_RGBxx:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						break;
+					case EChannel.Bass_Wailing:
 						//Bass Wail
 						break;
-					case 0xC5:
+					case EChannel.Bass_xxxYx:
 						this.BassY++;
 						break;
-					case 0xC6:
+					case EChannel.Bass_xxBYx:
 						this.BassB++;
 						this.BassY++;
 						break;
-					case 0xC8:
+					case EChannel.Bass_xGxYx:
 						this.BassG++;
 						this.BassY++;
 						break;
-					case 0xC9:
-						this.BassG++;
-						this.BassB++;
-						this.BassY++;
-						break;
-					case 0xCA:
-						this.BassR++;
-						this.BassY++;
-						break;
-					case 0xCB:
-						this.BassR++;
-						this.BassB++;
-						this.BassY++;
-						break;
-					case 0xCC:
-						this.BassR++;
-						this.BassG++;
-						this.BassY++;
-						break;
-					case 0xCD:
-						this.BassR++;
+					case EChannel.Bass_xGBYx:
 						this.BassG++;
 						this.BassB++;
 						this.BassY++;
 						break;
-					case 0xCE:
-						this.BassP++;
-						break;
-					case 0xCF:
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDA:
-						this.BassG++;
-						this.BassP++;
-						break;
-					case 0xDB:
-						this.BassG++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDC:
+					case EChannel.Bass_RxxYx:
 						this.BassR++;
-						this.BassP++;
-						break;
-					case 0xDD:
-						this.BassR++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDE:
-						this.BassR++;
-						this.BassG++;
-						this.BassP++;
-						break;
-					case 0xDF:
-						this.BassR++;
-						this.BassG++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xE1:
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE2:
+					case EChannel.Bass_RxBYx:
+						this.BassR++;
 						this.BassB++;
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE3:
+					case EChannel.Bass_RGxYx:
+						this.BassR++;
 						this.BassG++;
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE4:
+					case EChannel.Bass_RGBYx:
+						this.BassR++;
 						this.BassG++;
 						this.BassB++;
 						this.BassY++;
+						break;
+					case EChannel.Bass_xxxxP:
 						this.BassP++;
 						break;
-					case 0xE5:
+					case EChannel.Bass_xxBxP:
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGxxP:
+						this.BassG++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGBxP:
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxxxP:
 						this.BassR++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxBxP:
+						this.BassR++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGxxP:
+						this.BassR++;
+						this.BassG++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGBxP:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xxxYP:
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE6:
-						this.BassR++;
+					case EChannel.Bass_xxBYP:
 						this.BassB++;
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE7:
+					case EChannel.Bass_xGxYP:
+						this.BassG++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGBYP:
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxxYP:
+						this.BassR++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxBYP:
+						this.BassR++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGxYP:
 						this.BassR++;
 						this.BassG++;
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE8:
+					case EChannel.Bass_RGBYP:
 						this.BassR++;
 						this.BassG++;
 						this.BassB++;
