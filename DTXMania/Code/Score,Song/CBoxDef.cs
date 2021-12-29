@@ -52,7 +52,7 @@ namespace DTXMania
 		public string Presound;
 		public string Title;
 		public string SkinPath;		// ""ならユーザー指定スキン、さもなくばbox.def指定スキン。
-        public bool Difficlty;
+        public bool Difficulty;
 
 		// コンストラクタ
 
@@ -71,7 +71,7 @@ namespace DTXMania
 			this.Presound = "";
 			this.Color = ColorTranslator.FromHtml( "White" );
 			this.SkinPath = "";
-            this.Difficlty = false;
+            this.Difficulty = false;
 		}
 		public CBoxDef( string boxdefファイル名 )
 			: this()
@@ -155,7 +155,7 @@ namespace DTXMania
                                         b = true;
                                     }
 
-									this.Difficlty = b;
+									this.Difficulty = b;
 								}
 							}
 							else

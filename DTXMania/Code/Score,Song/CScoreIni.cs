@@ -1552,7 +1552,7 @@ namespace DTXMania
 
             return ret;
         }
-		internal static double tCalculateGameSkillFromPlayingSkill(double dbLevel, int nLevelDec, double dbPlayingSkill)
+		internal static double tCalculateGameSkillFromPlayingSkill(double dbLevel, int nLevelDec, double dbPlayingSkill, bool bLivePlay = true)
 		{
 			if (dbLevel >= 100)
 			{
@@ -1563,10 +1563,11 @@ namespace DTXMania
 				dbLevel = dbLevel / 10.0 + nLevelDec / 100.0;
 			}
 
-			if (CDTXMania.ConfigIni.bDrumsEnabled && CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
+			if (bLivePlay && CDTXMania.ConfigIni.bDrumsEnabled && CDTXMania.ConfigIni.bAllDrumsAreAutoPlay)
 			{
 				return 0;
 			}
+
 			return dbPlayingSkill * dbLevel * 0.2;
 		}
 		internal static double tCalculatePlayingSkill(int nTotal, int nPerfect, int nGreat, int nGood, int nPoor, int nMiss, int nCombo, EInstrumentPart inst, STAUTOPLAY bAutoPlay)

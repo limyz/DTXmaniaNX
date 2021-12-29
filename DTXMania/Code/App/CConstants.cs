@@ -158,6 +158,7 @@ namespace DTXMania
 		DRUMS	= 0,
 		GUITAR	= 1,
 		BASS	= 2,
+		//SYSTEM  = 3,
 		UNKNOWN	= 99
 	}
 	public enum EKeyConfigPart	// : EInstrumentPart

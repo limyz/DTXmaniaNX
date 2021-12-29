@@ -72,6 +72,11 @@ namespace DTXMania
             public int Duration;
             public STDGBVALUE<bool> b完全にCLASSIC譜面である;
             public STDGBVALUE<bool> bScoreExists;
+            //
+            //public STDGBVALUE<EUseLanes> 使用レーン数;
+            public STDGBVALUE<int> chipCountByInstrument;
+            public Dictionary<ELane, int> chipCountByLane;
+            public STDGBVALUE<string> progress;
 
             [Serializable]
             [StructLayout(LayoutKind.Sequential)]
@@ -285,6 +290,22 @@ namespace DTXMania
             this.SongInformation.bScoreExists.Drums = false;
             this.SongInformation.bScoreExists.Guitar = false;
             this.SongInformation.bScoreExists.Bass = false;
+            //
+            this.SongInformation.chipCountByInstrument = default(STDGBVALUE<int>);
+            this.SongInformation.chipCountByLane = new Dictionary<ELane, int>();
+            this.SongInformation.progress = new STDGBVALUE<string>()
+            {
+                Drums = "",
+                Guitar = "",
+                Bass = ""
+            };
+
+            for (ELane eLane = ELane.LC; eLane < ELane.BGM; eLane++)
+            {
+                this.SongInformation.chipCountByLane[eLane] = 0;
+            }
+
+
         }
     }
 }

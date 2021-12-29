@@ -305,7 +305,16 @@ namespace DTXMania
                 bIsFinishedFadeout = this.tUpdateAndDraw_FadeIn_Out();
                 if (bIsFinishedPlaying && (base.ePhaseID == CStage.EPhase.Common_DefaultState) )
                 {
-                    if ((this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
+                    if (CDTXMania.DTXVmode.Enabled)
+                    {
+                        if (CDTXMania.Timer.b停止していない)
+                        {
+                            CDTXMania.Timer.tPause();
+                        }
+                        Thread.Sleep(5);
+                        // Keep waiting for next message from DTX Creator
+                    }
+                    else if ((this.actGauge.IsFailed(EInstrumentPart.DRUMS)) && (base.ePhaseID == CStage.EPhase.Common_DefaultState))
                     {
                         this.actStageFailed.Start();
                         CDTXMania.DTX.tStopPlayingAllChips();

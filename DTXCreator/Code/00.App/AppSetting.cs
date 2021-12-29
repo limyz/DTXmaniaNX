@@ -379,8 +379,8 @@ namespace DTXCreator
 
 		public class Viewer
 		{
-			public const string FileNameDTXM = "DTXManiaGR.exe";
-			public string PathDTXV = "";
+			public const string FileNameDTXM = "DTXManiaNX.exe";
+			public string PathDTXV = Directory.GetCurrentDirectory() + @"\dll\DTXV.exe";
 			public bool bViewerIsDTXV = false;
 
 			public string PlayStartFromOption = "-N";

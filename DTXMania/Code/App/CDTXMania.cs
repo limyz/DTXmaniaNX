@@ -26,7 +26,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "NX 1.2.0 20210109";
+        public static readonly string VERSION = "NX 1.3.0 20211228";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009
@@ -2476,7 +2476,7 @@ for (int i = 0; i < 3; i++) {
             #endregion
 
             #region [ Discord Rich Presence ]
-            if (ConfigIni.bDiscordRichPresenceEnabled)
+            if (ConfigIni.bDiscordRichPresenceEnabled && !bCompactMode)
                 DiscordRichPresence = new CDiscordRichPresence(ConfigIni.strDiscordRichPresenceApplicationID);
             #endregion
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
-using SharpDX;
+//using SharpDX;
 using FDK;
 
 using Rectangle = System.Drawing.Rectangle;
@@ -25,6 +25,7 @@ namespace DTXMania
             if ((c曲リストノード != null) && (cスコア != null))
             {
                 this.n現在選択中の曲の難易度 = CDTXMania.stageSongSelection.nSelectedSongDifficultyLevel;
+                STDGBVALUE<double>[] dbCurrentSkillPointForAllDifficulty = new STDGBVALUE<double>[5];
                 for (int i = 0; i < 3; i++)
                 {
                     if (CDTXMania.ConfigIni.nSkillMode == 0)
@@ -42,6 +43,7 @@ namespace DTXMania
                     this.b現在選択中の曲の譜面[i] = cスコア.SongInformation.bScoreExists[i];
                     this.n現在選択中の曲のレベル[i] = cスコア.SongInformation.Level[i];
                     this.n現在選択中の曲のレベル小数点[ i ] = cスコア.SongInformation.LevelDec[ i ];
+
                     for (int j = 0; j < 5; j++)
                     {
                         if (c曲リストノード.arScore[j] != null)
@@ -58,6 +60,12 @@ namespace DTXMania
                                 // Fix github.com/limyz/DTXmaniaXG/issues/33
                                 //this.n現在選択中の曲の最高ランク難易度毎[j][i] = (DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) == (int)DTXMania.CScoreIni.ERANK.S && DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]) >= 95 ? DTXMania.CScoreIni.tCalculateRank(0, cスコア.SongInformation.HighSkill[i]) : c曲リストノード.arScore[j].SongInformation.BestRank[i]);
                                 this.n現在選択中の曲の最高ランク難易度毎[j][i] = DTXMania.CScoreIni.tCalculateRank(0, c曲リストノード.arScore[j].SongInformation.HighSkill[i]);
+                                dbCurrentSkillPointForAllDifficulty[j][i] = DTXMania.CScoreIni.tCalculateGameSkillFromPlayingSkill(
+                                    c曲リストノード.arScore[j].SongInformation.Level[i],
+                                    c曲リストノード.arScore[j].SongInformation.LevelDec[i],
+                                    c曲リストノード.arScore[j].SongInformation.HighSkill[i],
+                                    false
+                                    );
                             }
 
                             this.db現在選択中の曲の最高スキル値難易度毎[j][i] = c曲リストノード.arScore[j].SongInformation.HighSkill[i];
@@ -66,6 +74,49 @@ namespace DTXMania
                         }
                     }
                 }
+
+                //Do SP comparison and return only highest per game type
+                this.dbDrumSP = 0.0;
+                this.nDrumSPDiffRank = -1;
+                this.dbGBSP = 0.0;
+                this.nGBSPDiffRank = -1;
+                this.nSpInGuitarOrBass = 0;//G:0 B:1
+                for (int i = 0; i < 5; i++)
+                {
+                    //Drum
+                    if(dbCurrentSkillPointForAllDifficulty[i].Drums > dbDrumSP)
+                    {
+                        this.dbDrumSP = dbCurrentSkillPointForAllDifficulty[i].Drums;
+                        this.nDrumSPDiffRank = i;
+                    }
+
+                    //Guitar/Bass
+                    if (dbCurrentSkillPointForAllDifficulty[i].Guitar > dbGBSP)
+                    {
+                        this.dbGBSP = dbCurrentSkillPointForAllDifficulty[i].Guitar;
+                        this.nGBSPDiffRank = i;
+                        this.nSpInGuitarOrBass = 0;
+                    }
+
+                    if (dbCurrentSkillPointForAllDifficulty[i].Bass > dbGBSP)
+                    {
+                        this.dbGBSP = dbCurrentSkillPointForAllDifficulty[i].Bass;
+                        this.nGBSPDiffRank = i;
+                        this.nSpInGuitarOrBass = 1;
+                    }
+                }
+
+                //Check arDifficultyLabel for all null
+                this.bHasMultipleDiff = false;
+                for (int i = 0; i < 5; i++)
+                {
+                    if(c曲リストノード.arDifficultyLabel[i] != null)
+                    {
+                        this.bHasMultipleDiff = true;
+                        break;
+                    }
+                }                
+
                 for (int i = 0; i < 5; i++)
                 {
                     if (c曲リストノード.arScore[i] != null)
@@ -152,7 +203,10 @@ namespace DTXMania
                 this.txDifficultyNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_level number.png"));
                 this.txAchievementRateNumber = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill number.png"));
                 this.txBPM数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm font.png"));
-                this.txBPM画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_bpm icon.png"));
+                this.txDrumsGraphPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_graph panel drums.png"));
+                this.txGuitarBassGraphPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_graph panel guitar bass.png"));
+                this.txSkillPointPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill point panel.png"));
+                txGenerateGraphBarLine();
                 base.OnManagedCreateResources();
             }
         }
@@ -168,7 +222,17 @@ namespace DTXMania
                 CDTXMania.tReleaseTexture(ref this.txDifficultyNumber);
                 CDTXMania.tReleaseTexture(ref this.txAchievementRateNumber);
                 CDTXMania.tReleaseTexture(ref this.txBPM数字);
-                CDTXMania.tReleaseTexture(ref this.txBPM画像);
+                CDTXMania.tReleaseTexture(ref this.txDrumsGraphPanel);
+                CDTXMania.tReleaseTexture(ref this.txGuitarBassGraphPanel);
+                for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+                {
+                    CDTXMania.tReleaseTexture(ref this.txDrumChipsBarLine[i]);
+                }
+                for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+                {
+                    CDTXMania.tReleaseTexture(ref this.txGBChipsBarLine[i]);
+                }
+                CDTXMania.tReleaseTexture(ref this.txSkillPointPanel);
                 base.OnManagedReleaseResources();
             }
         }
@@ -213,9 +277,13 @@ namespace DTXMania
                 // 描画
 
                 CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
-
+                int nPanelNoteCount = 0;
+                int[] arrChipsByLane = null;//9 lane for drums, 6 for guitar/bass
+                //0 for Drums, 1 for GuitarBass
+                int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
+                string strSP = "";
                 #region [ 選択曲の BPM の描画 ]
-                if (CDTXMania.stageSongSelection.r現在選択中の曲 != null && this.txBPM画像 != null)
+                if (CDTXMania.stageSongSelection.r現在選択中の曲 != null)
                 {
 
                     int nBPM位置X = 490;
@@ -228,32 +296,179 @@ namespace DTXMania
                     }
 
                     string strBPM;
+                    //string strDrumNotes = "";
+                    //string strGuitarNotes = "";
+                    //string strBassNotes = "";
+                    //string strHighestSP = "";
+                    string strDuration;
                     switch (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType)
                     {
                         case CSongListNode.ENodeType.SCORE:
                             {
                                 int bpm_int = (int)Math.Round(cスコア.SongInformation.Bpm);
                                 strBPM = bpm_int.ToString();
+                                int duration = cスコア.SongInformation.Duration;
+                                TimeSpan timeSpan = new TimeSpan(0, 0, 0, 0, duration);
+                                strDuration = timeSpan.ToString(@"m\:ss");
+                                
+                                //DrOnly always show Drum
+                                //GROnly show either Bass or Guitar
+                                if (nDGmode == 0)
+                                {
+                                    if (cスコア.SongInformation.chipCountByInstrument.Drums > 0)
+                                    {
+                                        nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Drums;
+                                        arrChipsByLane = new int[] {
+                                            cスコア.SongInformation.chipCountByLane[ELane.LC],
+                                            cスコア.SongInformation.chipCountByLane[ELane.HH],
+                                            cスコア.SongInformation.chipCountByLane[ELane.LP],
+                                            cスコア.SongInformation.chipCountByLane[ELane.SD],
+                                            cスコア.SongInformation.chipCountByLane[ELane.HT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.BD],
+                                            cスコア.SongInformation.chipCountByLane[ELane.LT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.FT],
+                                            cスコア.SongInformation.chipCountByLane[ELane.CY]
+                                        };
+                                        if (this.dbDrumSP > 0.00)
+                                        {                                            
+                                            strSP = string.Format("{0,6:##0.00}", this.dbDrumSP);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (this.dbGBSP > 0.00)
+                                    {                                       
+                                        strSP = string.Format("{0,6:##0.00}", this.dbGBSP);
+                                    }
+
+                                    if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                                    {
+                                        if (cスコア.SongInformation.chipCountByInstrument.Bass > 0)
+                                        {
+                                            nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Bass;
+                                            arrChipsByLane = new int[] {
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsR],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsG],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsB],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsY],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsP],
+                                                cスコア.SongInformation.chipCountByLane[ELane.BsPick]
+                                            };
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (cスコア.SongInformation.chipCountByInstrument.Guitar > 0)
+                                        {
+                                            nPanelNoteCount = cスコア.SongInformation.chipCountByInstrument.Guitar;
+                                            arrChipsByLane = new int[] {
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtR],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtG],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtB],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtY],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtP],
+                                                cスコア.SongInformation.chipCountByLane[ELane.GtPick]
+                                            };
+                                        }
+                                    }
+                                }
                                 break;
                             }
                         default:
                             {
-                                strBPM = "---";
+                                strBPM = "";
+                                strDuration = "";
                                 break;
                             }
                     }
 
-                    this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
-                    this.tDrawBPM(nBPM位置X + 17, nBPM位置Y + 25, string.Format("{0,3:###}", strBPM));
-                    //CDTXMania.act文字コンソール.tPrint(50, 570, CCharacterConsole.Eフォント種別.白, string.Format("BPM:{0:####0}", this.n現在選択中の曲のBPM));
+                    //this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
+                    this.tDrawBPM(nBPM位置X + 45, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
+                    //Length of Song
+                    this.tDrawBPM(nBPM位置X + 42, nBPM位置Y - 7, strDuration);                
                 }
                 #endregion
 
+                #region [Skill Point Panel]
+                if(this.txSkillPointPanel != null)
+                {
+                    this.txSkillPointPanel.tDraw2D(CDTXMania.app.Device, 32, 180);
+                }
+                
+                if(strSP != "")
+                {
+                    this.tDrawSkillPoints(32 + 60, 200, strSP);
+                }
+
+                #endregion
+
+                
+
+                #region [Draw Graphs Panels]
+
+                int nGraphBaseX = 15;
+                int nGraphBaseY = 368; // 350 + 18
+
+                if (CDTXMania.ConfigIni.bGuitarEnabled)
+                {
+                    if(this.txGuitarBassGraphPanel != null)
+                    {
+                        this.txGuitarBassGraphPanel.tDraw2D(CDTXMania.app.Device, nGraphBaseX, nGraphBaseY);
+                    }                    
+                }
+                else
+                {
+                    if(this.txDrumsGraphPanel != null)
+                    {
+                        this.txDrumsGraphPanel.tDraw2D(CDTXMania.app.Device, nGraphBaseX, nGraphBaseY);
+                    }                    
+                }
+
+                //Draw total notes
+                if(nPanelNoteCount > 0)
+                {
+                    string strPanelNoteCount = string.Format("{0}", nPanelNoteCount);
+                    int nTotalNotesPosX = nGraphBaseX + 66 - (strPanelNoteCount.Length - 1) * (this.st数字[0].rc.Width / 2);
+                    int nTotalNotesPosY = nGraphBaseY + 298;
+                    this.tDrawBPM(nTotalNotesPosX, nTotalNotesPosY, strPanelNoteCount);
+                }
+                //Draw Bar Graph for Chips per lane
+                if (arrChipsByLane != null)
+                {
+                    int nBarMaxHeight = 252;
+                    int[] chipsBarHeights = nCalculateChipsBarPxHeight(arrChipsByLane, nBarMaxHeight);
+
+                    if (CDTXMania.ConfigIni.bGuitarEnabled)
+                    {
+                        if(chipsBarHeights.Length == this.txGBChipsBarLine.Length)
+                        {
+                            for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+                            {
+                                this.txGBChipsBarLine[i].tDraw2D(CDTXMania.app.Device,
+                                    nGraphBaseX + 38 + i * 10, nGraphBaseY + 21 + (nBarMaxHeight - chipsBarHeights[i]), new Rectangle(0, 0, 4, chipsBarHeights[i]));
+                            }
+                        }                        
+                    }
+                    else
+                    {
+                        if(chipsBarHeights.Length == this.txDrumChipsBarLine.Length)
+                        {
+                            for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+                            {
+                                this.txDrumChipsBarLine[i].tDraw2D(CDTXMania.app.Device,
+                                    nGraphBaseX + 31 + i * 8, nGraphBaseY + 21 + (nBarMaxHeight - chipsBarHeights[i]), new Rectangle(0, 0, 4, chipsBarHeights[i]));
+                            }
+                        }
+                    }
+
+                }
+                #endregion
                 //-----------------
 
                 int[] nPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
 
-                int nBaseX = 30;
+                int nBaseX = 130;
                 int nBaseY = 350;//350
 
                 int n難易度文字X = 70;
@@ -271,11 +486,11 @@ namespace DTXMania
                 {
                     this.txパネル本体.tDraw2D(CDTXMania.app.Device, nBaseX, nBaseY);
 
+                    int nPanelW = 187;
+                    int nPanelH = 60;
+
                     for (int j = 0; j < 3; j++)
                     {
-
-                        int nPanelW = 187;
-                        int nPanelH = 60;
 
                         if (this.tx難易度パネル != null)
                         {
@@ -317,15 +532,21 @@ namespace DTXMania
                                     // convert the level back into a whole number (0-999) to make it easier to work with
                                     int nLevel = (n現在選択中の曲のレベル難易度毎DGB[i][j] * 10) + n現在選択中の曲のレベル小数点難易度毎DGB[i][j];
                                     bool bHasSong = b現在選択中の曲に譜面がある[i][j];
-                                    bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0 ||
-                                                             (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
-                                                             !CDTXMania.DTX.bチップがある.LeftCymbal &&
-                                                             !CDTXMania.DTX.bチップがある.LP &&
-                                                             !CDTXMania.DTX.bチップがある.LBD &&
-                                                             !CDTXMania.DTX.bチップがある.FT &&
-                                                             !CDTXMania.DTX.bチップがある.Ride &&
-                                                             !CDTXMania.DTX.b強制的にXG譜面にする);
-
+                                    bool bClassChartModeSet = CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする;
+                                    if(CDTXMania.DTX != null)
+                                    {
+                                        bClassChartModeSet = bClassChartModeSet && (
+                                            !CDTXMania.DTX.bチップがある.LeftCymbal &&
+                                            !CDTXMania.DTX.bチップがある.LP &&
+                                            !CDTXMania.DTX.bチップがある.LBD &&
+                                            !CDTXMania.DTX.bチップがある.FT &&
+                                            !CDTXMania.DTX.bチップがある.Ride &&
+                                            !CDTXMania.DTX.b強制的にXG譜面にする
+                                            );
+                                    }
+                                    
+                                    bool bShowClassicLevel = CDTXMania.ConfigIni.nSkillMode == 0 || bClassChartModeSet;
+                                    
                                     int nX = nBoxX + nPanelW - 77;
                                     int nY = nBoxY + nPanelH - 35;
                                     if (bHasSong)
@@ -356,7 +577,7 @@ namespace DTXMania
                                 {
                                     if (this.txランク != null)
                                     {
-                                        nRankW = this.txランク.szImageSize.Width / 9;
+                                        nRankW = 35;// this.txランク.szImageSize.Width / 9;
 
                                         #region [ 選択曲の FullCombo Excellent の 描画 ]
                                         if (this.db現在選択中の曲の最高スキル値難易度毎[i][j] == 100)
@@ -433,7 +654,7 @@ namespace DTXMania
                             {
                                 if (this.txランク != null)
                                 {
-                                    nRankW = this.txランク.szImageSize.Width / 9;
+                                    nRankW = 35;// this.txランク.szImageSize.Width / 9;
 
                                     #region [ 選択曲の FullCombo Excellent の 描画 ]
                                     if (this.db現在選択中の曲の最高スキル値[j] == 100)
@@ -462,10 +683,45 @@ namespace DTXMania
                                 else
                                     this.tDrawAchievementRate(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                 #endregion
+                                
                             }
 
                         }
                     }
+
+                    #region [Draw Skill Badge on matched Difficulty for Drum]
+                    int nBadgeWidth = 35;
+                    if (this.nDrumSPDiffRank != -1)
+                    {
+                        int nDiffOffset = this.nDrumSPDiffRank;
+                        if (!this.bHasMultipleDiff)
+                        {
+                            //For songs without multiple diff defined in set.def, set offset to highest 
+                            nDiffOffset = 4;
+                        }
+                        int nDGBIndex = 0;
+                        int nBoxX = 130 + this.txパネル本体.szImageSize.Width + (nPanelW * (nPart[nDGBIndex] - 3));
+                        int nBoxY = (391 + ((4 - nDiffOffset) * 60)) - 2;
+                        this.txランク.tDraw2D(CDTXMania.app.Device, nBoxX + 75, nBoxY + 5, new Rectangle(nBadgeWidth * 9, 0, nBadgeWidth, this.txランク.szImageSize.Height));                       
+                    }
+                    #endregion
+
+                    #region [Draw Skill Badge on matched Difficulty for Guitar Bass]
+                    if (this.nGBSPDiffRank != -1)
+                    {
+                        int nDiffOffset = this.nGBSPDiffRank;
+                        if (!this.bHasMultipleDiff)
+                        {
+                            //For songs without multiple diff defined in set.def, set offset to highest 
+                            nDiffOffset = 4;
+                        }
+                        int nDGBIndex = 1 + nSpInGuitarOrBass;
+                        int nBoxX = 130 + this.txパネル本体.szImageSize.Width + (nPanelW * (nPart[nDGBIndex] - 3));
+                        int nBoxY = (391 + ((4 - nDiffOffset) * 60)) - 2;
+                        this.txランク.tDraw2D(CDTXMania.app.Device, nBoxX + 75, nBoxY + 5, new Rectangle(nBadgeWidth * 9, 0, nBadgeWidth, this.txランク.szImageSize.Height));
+                    }
+                    #endregion
+
                 }
                 #endregion
                 #region [ 難易度文字列の描画 ]
@@ -535,6 +791,14 @@ namespace DTXMania
         private int[] n選択中の曲のレベル難易度毎 = new int[5];
         private STDGBVALUE<int> n現在選択中の曲の最高ランク;
         private STDGBVALUE<int>[] n現在選択中の曲の最高ランク難易度毎 = new STDGBVALUE<int>[5];
+        //
+        private double dbDrumSP = 0.0;
+        private int nDrumSPDiffRank = -1;
+        private double dbGBSP = 0.0;
+        private int nGBSPDiffRank = -1;
+        private int nSpInGuitarOrBass = 0;//G:0 B:1
+        private bool bHasMultipleDiff = false;
+
         private int n現在選択中の曲の難易度;
         private int n難易度開始文字位置;
         private const int n難易度表示可能文字数 = 0x24;
@@ -555,6 +819,7 @@ namespace DTXMania
          */
         private CSongListNode r直前の曲;
         public string[] str難易度ラベル = new string[] { "", "", "", "", "" };
+        
         private readonly ST数字[] st数字 = new ST数字[]
         {
             new ST数字('0', new Rectangle(0 * 12, 0, 12, 20)),
@@ -567,7 +832,7 @@ namespace DTXMania
             new ST数字('7', new Rectangle(7 * 12, 0, 12, 20)),
             new ST数字('8', new Rectangle(8 * 12, 0, 12, 20)),
             new ST数字('9', new Rectangle(9 * 12, 0, 12, 20)),
-            new ST数字('-', new Rectangle(10 * 12, 0, 12, 20)),
+            new ST数字(':', new Rectangle(10 * 12 + 3, 0, 6, 20)),
             new ST数字('p', new Rectangle(11 * 12, 0, 12, 20)),
         };
         private readonly ST難易度数字[] stDifficultyNumber = new ST難易度数字[]
@@ -601,6 +866,21 @@ namespace DTXMania
             new ST達成率数字('.', new Rectangle(10 * 12, 0, 6, 20)),
             new ST達成率数字('%', new Rectangle(11 * 12 - 6, 0, 12, 20))
         };
+        private readonly ST数字[] stLargeCharPositions = new ST数字[]
+        {
+            new ST数字('0', new Rectangle(0 * 28, 0, 28, 42)),
+            new ST数字('1', new Rectangle(1 * 28, 0, 28, 42)),
+            new ST数字('2', new Rectangle(2 * 28, 0, 28, 42)),
+            new ST数字('3', new Rectangle(3 * 28, 0, 28, 42)),
+            new ST数字('4', new Rectangle(4 * 28, 0, 28, 42)),
+            new ST数字('5', new Rectangle(5 * 28, 0, 28, 42)),
+            new ST数字('6', new Rectangle(6 * 28, 0, 28, 42)),
+            new ST数字('7', new Rectangle(7 * 28, 0, 28, 42)),
+            new ST数字('8', new Rectangle(8 * 28, 0, 28, 42)),
+            new ST数字('9', new Rectangle(9 * 28, 0, 28, 42)),
+            new ST数字('.', new Rectangle(10 * 28, 0, 10, 42))
+        };
+
         private readonly Rectangle rcunused = new Rectangle(0, 0x21, 80, 15);
         public CTexture txパネル本体;
         private CTexture txランク;
@@ -610,7 +890,34 @@ namespace DTXMania
         private CTexture txDifficultyNumber;
         private CTexture txAchievementRateNumber;
         private CTexture txBPM数字;
-        private CTexture txBPM画像;
+        private CTexture txDrumsGraphPanel;
+        private CTexture txGuitarBassGraphPanel;
+        //private CTexture txBPM画像;
+        //private CTexture txTestSolidLine;
+        private CTexture[] txDrumChipsBarLine = new CTexture[9];
+        private Color[] clDrumChipsBarColors = new Color[9]
+        {
+            Color.PaleVioletRed,
+            Color.DeepSkyBlue,
+            Color.HotPink,
+            Color.Yellow,
+            Color.Green,
+            Color.MediumPurple,
+            Color.Red,
+            Color.Orange,
+            Color.DeepSkyBlue
+        };
+        private CTexture[] txGBChipsBarLine = new CTexture[6];
+        private Color[] clGBChipsBarColors = new Color[6]
+        {
+            Color.Red,
+            Color.Green,
+            Color.DeepSkyBlue,
+            Color.Yellow,
+            Color.HotPink,
+            Color.White
+        };
+        private CTexture txSkillPointPanel;
         private int nCheckDifficultyLabelDisplayAndReturnScrollDirection()
         {
             int num = 0;
@@ -648,6 +955,64 @@ namespace DTXMania
             }
             return 0;
         }
+
+        private void txGenerateGraphBarLine()
+        {
+            int nBarWidth = 4;
+            int nBarHeight = 252;
+
+            for (int i = 0; i < this.txDrumChipsBarLine.Length; i++)
+            {
+                using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+                {
+                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+                    {
+                        barGraphics.FillRectangle(new SolidBrush(this.clDrumChipsBarColors[i]), 0, 0, tempBarBitmap.Width, tempBarBitmap.Height);
+                    }
+                    this.txDrumChipsBarLine[i] = CDTXMania.tGenerateTexture(tempBarBitmap);
+                }
+            }
+
+            for (int i = 0; i < this.txGBChipsBarLine.Length; i++)
+            {
+                using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+                {
+                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+                    {
+                        barGraphics.FillRectangle(new SolidBrush(this.clGBChipsBarColors[i]), 0, 0, tempBarBitmap.Width, tempBarBitmap.Height);
+                    }
+                    this.txGBChipsBarLine[i] = CDTXMania.tGenerateTexture(tempBarBitmap);
+                }
+            }
+
+        }
+
+        private int[] nCalculateChipsBarPxHeight(int[] arrChipCount, int nMaxBarLength)
+        {
+            if(arrChipCount != null)
+            {
+                int[] nChipsBarPxHeight = new int[arrChipCount.Length];
+
+                //Official formula to compute bar Height is unknown (Need to RE)
+                //Use a Placeholder formula for now
+                //int nMaxFactor = nTotalNoteCount / arrChipCount.Length;
+                int nMaxFactor = 300;
+                //Capped by upper and lower bound
+                //nMaxFactor = nMaxFactor < nLowerBound ? nLowerBound : nMaxFactor;
+                //nMaxFactor = nMaxFactor > nUpperBound ? nUpperBound : nMaxFactor;
+
+                for (int i = 0; i < nChipsBarPxHeight.Length; i++)
+                {
+                    int nChipPxHeight = arrChipCount[i] * nMaxBarLength / nMaxFactor;
+                    nChipPxHeight = nChipPxHeight > nMaxBarLength ? nMaxBarLength : nChipPxHeight;
+                    nChipsBarPxHeight[i] = nChipPxHeight;
+                }
+
+                return nChipsBarPxHeight;
+            }
+
+            return null;
+        }
         private void tDrawAchievementRate(int x, int y, string str)
         {
             for (int j = 0; j < str.Length; j++)
@@ -679,6 +1044,30 @@ namespace DTXMania
                 }
             }
         }
+
+        private void tDrawSkillPoints(int x, int y, string str)
+        {
+            for (int j = 0; j < str.Length; j++)
+            {
+                char c = str[j];
+                int currCharWidth = this.stDifficultyNumber[0].rc.Width;//Initialize to first char width of 28
+                for (int i = 0; i < this.stDifficultyNumber.Length; i++)
+                {
+                    if (this.stDifficultyNumber[i].ch == c)
+                    {
+                        Rectangle rectangle = new Rectangle(this.stDifficultyNumber[i].rc.X, this.stDifficultyNumber[i].rc.Y, this.stDifficultyNumber[i].rc.Width, this.stDifficultyNumber[i].rc.Height);
+                        if (this.txDifficultyNumber != null)
+                        {
+                            this.txDifficultyNumber.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
+                        }
+                        currCharWidth = this.stDifficultyNumber[i].rc.Width;
+                        break;
+                    }
+                }
+                x += currCharWidth;
+            }
+        }
+
         private void tDrawDifficulty(int x, int y, string str)
         {
             for (int j = 0; j < str.Length; j++)
@@ -714,19 +1103,21 @@ namespace DTXMania
         {
             for (int j = 0; j < str.Length; j++)
             {
+                int currCharWidth = 12;
                 for (int i = 0; i < this.st数字.Length; i++)
                 {
                     if (this.st数字[i].ch == str[j])
                     {
-                        Rectangle rectangle = new Rectangle(this.st数字[i].rc.X, this.st数字[i].rc.Y, 12, 20);
+                        Rectangle rectangle = new Rectangle(this.st数字[i].rc.X, this.st数字[i].rc.Y, this.st数字[i].rc.Width, this.st数字[i].rc.Height);
                         if (this.txBPM数字 != null)
                         {
                             this.txBPM数字.tDraw2D(CDTXMania.app.Device, x, y, rectangle);
                         }
+                        currCharWidth = this.st数字[i].rc.Width;
                         break;
                     }
                 }
-                x += 12;
+                x += currCharWidth;
             }
         }
         //-----------------

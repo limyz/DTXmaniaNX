@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DTXMania</RootNamespace>
-    <AssemblyName>DTXManiaGR</AssemblyName>
+    <AssemblyName>DTXManiaNX</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>dtx.ico</ApplicationIcon>
@@ -18,7 +18,7 @@
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
-    <ApplicationManifest>DTXManiaGR.exe.x86.manifest</ApplicationManifest>
+    <ApplicationManifest>DTXManiaNX.exe.x86.manifest</ApplicationManifest>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -135,7 +135,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="DTXManiaGR.exe.x86.manifest" />
+    <None Include="DTXManiaNX.exe.x86.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

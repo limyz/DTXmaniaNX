@@ -959,18 +959,33 @@ namespace DTXMania
 
 		public struct STLANEINT
 		{
-			public int HH;
-			public int SD;
-			public int BD;
-			public int HT;
-			public int LT;
-			public int CY;
-			public int FT;
-			public int HHO;
-			public int RD;
-			public int LC;
-            public int LP;
-            public int LBD;
+			private int HH;
+			private int SD;
+			private int BD;
+			private int HT;
+			private int LT;
+			private int CY;
+			private int FT;
+			private int HHO;
+			private int RD;
+			private int LC;
+			private int LP;
+			private int LBD;
+
+			//Guitar
+			private int GuitarR;
+			private int GuitarG;
+			private int GuitarB;
+			private int GuitarY;
+			private int GuitarP;
+			private int GuitarOpen;
+			//Bass
+			private int BassR;
+			private int BassG;
+			private int BassB;
+			private int BassY;
+			private int BassP;
+			private int BassOpen;
 
 			public int Drums
 			{
@@ -980,8 +995,9 @@ namespace DTXMania
 				}
 			}
 			public int Guitar;
-			public int Bass;
 
+			public int Bass;
+			
 			public int this[ int index ]
 			{
 				get
@@ -1023,13 +1039,10 @@ namespace DTXMania
 
                         case 11:
                             return this.LBD;
-
-                        case 12:
-                            return this.Guitar;
-
-                        case 13:
-                            return this.Bass;
-
+						case 12:							
+							return this.Guitar;
+						case 13:
+							return this.Bass;
 					}
 					throw new IndexOutOfRangeException();
 				}
@@ -1088,18 +1101,400 @@ namespace DTXMania
                         case 11:
                             this.LBD = value;
                             return;
-
-                        case 12:
-                            this.Guitar = value;
-                            return;
-
-                        case 13:
-                            this.Bass = value;
-                            return;
+						case 12:
+							this.Guitar = value;
+							return;
+						case 13:
+							this.Bass = value;
+							return;
 
 					}
 					throw new IndexOutOfRangeException();
 				}
+			}
+
+			public void incrementChipCount(int channelNum)
+            {
+                switch (channelNum)
+                {
+					//Guitar Channels
+					case 0x20:
+						this.GuitarOpen++;
+						break;
+					case 0x21:
+						this.GuitarB++;
+						break;
+					case 0x22:
+						this.GuitarG++;
+						break;
+					case 0x23:
+						this.GuitarG++;
+						this.GuitarB++;
+						break;
+					case 0x24:
+						this.GuitarR++;
+						break;
+					case 0x25:
+						this.GuitarR++;
+						this.GuitarB++;
+						break;
+					case 0x26:
+						this.GuitarR++;
+						this.GuitarG++;
+						break;
+					case 0x27:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						break;
+					case 0x28:
+						//Guitar Wail
+						break;
+					case 0x93:
+						this.GuitarY++;
+						break;
+					case 0x94:
+						this.GuitarB++;
+						this.GuitarY++;
+						break;
+					case 0x95:
+						this.GuitarG++;
+						this.GuitarY++;
+						break;
+					case 0x96:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						break;
+					case 0x97:
+						this.GuitarR++;
+						this.GuitarY++;
+						break;
+					case 0x98:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarY++;
+						break;
+					case 0x99:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarY++;
+						break;
+					case 0x9A:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						break;
+					case 0x9B:
+						this.GuitarP++;
+						break;
+					case 0x9C:
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case 0x9D:
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case 0x9E:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case 0x9F:
+						this.GuitarR++;
+						this.GuitarP++;
+						break;
+					case 0xA9:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case 0xAA:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case 0xAB:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case 0xAC:
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xAD:
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xAE:
+						this.GuitarG++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xAF:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xD0:
+						this.GuitarR++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xD1:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xD2:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case 0xD3:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					//Bass
+					case 0xA0:
+						this.BassOpen++;
+						break;
+					case 0xA1:
+						this.BassB++;
+						break;
+					case 0xA2:
+						this.BassG++;
+						break;
+					case 0xA3:
+						this.BassG++;
+						this.BassB++;
+						break;
+					case 0xA4:
+						this.BassR++;
+						break;
+					case 0xA5:
+						this.BassR++;
+						this.BassB++;
+						break;
+					case 0xA6:
+						this.BassR++;
+						this.BassG++;
+						break;
+					case 0xA7:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						break;
+					case 0xA8:
+						//Bass Wail
+						break;
+					case 0xC5:
+						this.BassY++;
+						break;
+					case 0xC6:
+						this.BassB++;
+						this.BassY++;
+						break;
+					case 0xC8:
+						this.BassG++;
+						this.BassY++;
+						break;
+					case 0xC9:
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						break;
+					case 0xCA:
+						this.BassR++;
+						this.BassY++;
+						break;
+					case 0xCB:
+						this.BassR++;
+						this.BassB++;
+						this.BassY++;
+						break;
+					case 0xCC:
+						this.BassR++;
+						this.BassG++;
+						this.BassY++;
+						break;
+					case 0xCD:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						break;
+					case 0xCE:
+						this.BassP++;
+						break;
+					case 0xCF:
+						this.BassB++;
+						this.BassP++;
+						break;
+					case 0xDA:
+						this.BassG++;
+						this.BassP++;
+						break;
+					case 0xDB:
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case 0xDC:
+						this.BassR++;
+						this.BassP++;
+						break;
+					case 0xDD:
+						this.BassR++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case 0xDE:
+						this.BassR++;
+						this.BassG++;
+						this.BassP++;
+						break;
+					case 0xDF:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case 0xE1:
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE2:
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE3:
+						this.BassG++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE4:
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE5:
+						this.BassR++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE6:
+						this.BassR++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE7:
+						this.BassR++;
+						this.BassG++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case 0xE8:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+				}
+            }
+
+			public void swapGuitarBassLaneChipCounters() 
+			{				
+				int temp_R = this.GuitarR;
+				int temp_G = this.GuitarG;
+				int temp_B = this.GuitarB;
+				int temp_Y = this.GuitarY;
+				int temp_P = this.GuitarP;
+				int temp_Open = this.GuitarOpen;
+
+				this.GuitarR = this.BassR;
+				this.GuitarG = this.BassG;
+				this.GuitarB = this.BassB;
+				this.GuitarY = this.BassY;
+				this.GuitarP = this.BassP;
+				this.GuitarOpen = this.BassOpen;
+
+				this.BassR = temp_R;
+				this.BassG = temp_G;
+				this.BassB = temp_B;
+				this.BassY = temp_Y;
+				this.BassP = temp_P;
+				this.BassOpen = temp_Open;
+			}
+
+			public int chipCountInLane(ELane eLane)
+			{
+				switch (eLane)
+				{
+					case ELane.LC:
+						return this.LC;
+					case ELane.HH:
+						return this.HH + this.HHO;
+					case ELane.SD:
+						return this.SD;
+					case ELane.LP:
+						return this.LP + this.LBD;
+					//case ELane.LBD:
+					//	return this.LBD;
+					case ELane.HT:
+						return this.HT;
+					case ELane.BD:
+						return this.BD;
+					case ELane.LT:
+						return this.LT;
+					case ELane.FT:
+						return this.FT;
+					case ELane.CY:
+						return this.CY + this.RD;
+					//case ELane.RD:
+					//	return this.RD;
+					case ELane.GtR:
+						return this.GuitarR;
+					case ELane.GtG:
+						return this.GuitarG;
+					case ELane.GtB:
+						return this.GuitarB;
+					case ELane.GtY:
+						return this.GuitarY;
+					case ELane.GtP:
+						return this.GuitarP;
+					case ELane.GtPick:
+						return this.GuitarOpen;
+					case ELane.BsR:
+						return this.BassR;
+					case ELane.BsG:
+						return this.BassG;
+					case ELane.BsB:
+						return this.BassB;
+					case ELane.BsY:
+						return this.BassY;
+					case ELane.BsP:
+						return this.BassP;
+					case ELane.BsPick:
+						return this.BassOpen;
+				}
+
+				throw new IndexOutOfRangeException();
 			}
 		}
 		public struct STRESULT
@@ -3500,7 +3895,14 @@ namespace DTXMania
 						}
 					}
 					while ( this.t入力_コメントをスキップする( ref ce ) );
-				#endregion
+					#endregion
+
+					//For DTXVMode, always overwrite Config PlaySpeed with DTXVPlaySpeed
+					if (CDTXMania.DTXVmode.Enabled)
+					{
+						Trace.TraceInformation(string.Format("DTXVMode Enabled. Set PlaySpeed to {0}", this.dbDTXVPlaySpeed));
+						CDTXMania.ConfigIni.nPlaySpeed = (int)(this.dbDTXVPlaySpeed * 20.0);
+					}
 					//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
 					//Trace.TraceInformation( "抜き出し時間:             {0}", span.ToString() );
 					//timeBeginLoad = DateTime.Now;
@@ -3851,10 +4253,12 @@ namespace DTXMania
                             if ( ( EChannel.Guitar_Open <= c ) && ( c <= EChannel.Guitar_RGBxx ) || ( EChannel.Guitar_xxxYx <= c ) && ( c <= EChannel.Guitar_RxxxP ) || ( EChannel.Guitar_RxBxP <= c ) && ( c <= EChannel.Guitar_xGBYP ) || ( EChannel.Guitar_RxxYP <= c ) && ( c <= EChannel.Guitar_RGBYP ) )
                             {
 								this.nVisibleChipsCount.Guitar++;
+								this.nVisibleChipsCount.incrementChipCount(c);
 							}
                             if ( ( EChannel.Bass_Open <= c ) && ( c <= EChannel.Bass_RGBxx ) || ( EChannel.Bass_xxxYx <= c ) && ( c <= EChannel.Bass_xxBYx ) || ( EChannel.Bass_xGxYx <= c ) && ( c <= EChannel.Bass_xxBxP ) || ( EChannel.Bass_xGxxP <= c ) && ( c <= EChannel.Bass_RGBxP ) || ( EChannel.Bass_xxxYP <= c ) && ( c <= EChannel.Bass_RGBYP ) )
                             {
 								this.nVisibleChipsCount.Bass++;
+								this.nVisibleChipsCount.incrementChipCount(c);
 							}
                             if ( ( c >= EChannel.BonusEffect_Min ) && ( c <= EChannel.BonusEffect ) )
                             {
@@ -4295,6 +4699,9 @@ namespace DTXMania
 			t = this.nVisibleChipsCount.Bass;
 			this.nVisibleChipsCount.Bass = this.nVisibleChipsCount.Guitar;
 			this.nVisibleChipsCount.Guitar = t;
+
+			//Swap Guitar Bass Lane chip info
+			this.nVisibleChipsCount.swapGuitarBassLaneChipCounters();
 
 			bool ts = this.bチップがある.Bass;
 			this.bチップがある.Bass = this.bチップがある.Guitar;

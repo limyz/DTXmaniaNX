@@ -15,7 +15,7 @@
 #define MyAppPublisher "limyz"
 #define MyAppURL "https://github.com/limyz/DTXmaniaNX"
 #define MyAppSupportURL "https://discord.gg/Q8xeugf"
-#define MyAppExeName "DTXManiaGR.exe"
+#define MyAppExeName "DTXManiaNX.exe"
 #define MyAppCopyright "Copyright © 2020-2021 DTXManiaNX"
 
 [Setup]
@@ -391,11 +391,9 @@ Source: "netcorecheck_x64.exe"; Flags: dontcopy noencryption
 
 [Files]
 Source: "Runtime\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Runtime\{#MyAppExeName}.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\DTXCreator.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\DTXCreator.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Runtime\DTXCreatorSetting.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Runtime\DTXManiaGR.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Runtime\DTXManiaGR.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\FDK.MemoryRenderer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\Manual.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\readme_jp.txt"; DestDir: "{app}"; Flags: ignoreversion

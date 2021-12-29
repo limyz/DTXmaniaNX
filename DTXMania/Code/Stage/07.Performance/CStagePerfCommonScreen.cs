@@ -33,20 +33,28 @@ namespace DTXMania
                 // if presence is displayed before this point then it will use
                 // the unitialised timer time, displaying an incorrect timestamp
                 // so dont display any presence until initialisation has occurred
-                if (bJustStartedUpdate)
+                if (bJustStartedUpdate || CDTXMania.bCompactMode)
                     return null;
 
                 var stSongInformation = CDTXMania.stageSongSelection.rSelectedScore.SongInformation;
                 var rConfirmedSong = CDTXMania.stageSongSelection.rConfirmedSong;
                 var nConfirmedDifficulty = CDTXMania.stageSongSelection.nConfirmedSongDifficulty;
                 var nEndTimeMs = CDTXMania.DTX.listChip.OrderBy(c => c.nPlaybackTimeMs).LastOrDefault()?.nPlaybackTimeMs ?? 0;
+
+                //Shorten details string to avoid hitting max of 128 bytes
+                string detailsString = $"{rConfirmedSong.strタイトル}";
+                if(detailsString.Length > 50)
+                {
+                    detailsString = detailsString.Substring(0, 50);
+                }
+                detailsString += $" [{rConfirmedSong.arDifficultyLabel[nConfirmedDifficulty]}]";
                 return new CDTXRichPresence
                 {
                     State = "In Game",
 
-                    // artist - title [difficulty]
+                    // title [difficulty]
                     // some songs omit the artist, so dont include the dash separator in such cases
-                    Details = $"{(string.IsNullOrEmpty(stSongInformation.ArtistName) ? string.Empty : $"{stSongInformation.ArtistName} - ")}{rConfirmedSong.strタイトル} [{rConfirmedSong.arDifficultyLabel[nConfirmedDifficulty]}]",
+                    Details = detailsString,
 
                     // playback speed is automatically applied as chip timings are modified,
                     // but the current time must be accounted for in start/end to display correct timestamps when seeking around
@@ -719,7 +727,7 @@ namespace DTXMania
         //   HH SD BD HT LT FT CY HHO RD LC LP LBD
         protected readonly int[] nパッド0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 6, 7, 1, 9, 0, 8, 8 };
         protected readonly float[,] fDamageGaugeDelta = new float[,] { { 0.004f, 0.006f, 0.006f }, { 0.002f, 0.003f, 0.003f }, { 0f, 0f, 0f }, { -0.02f, -0.03f, -0.03f }, { -0.05f, -0.05f, -0.05f } };
-        protected readonly float[] fDamageLevelFactor = new float[] { 0.5f, 1f, 1.5f };
+        protected readonly float[] fDamageLevelFactor = new float[] { 0.25f, 0.5f, 0.75f }; //Original: 0.5f, 1f, 1.5f
 
         public STDGBVALUE<int> nJudgeLinePosY = new STDGBVALUE<int>();//(CDTXMania.ConfigIni.bReverse.Drums ? 159 : 561);
         public STDGBVALUE<int> nShutterInPosY = new STDGBVALUE<int>();

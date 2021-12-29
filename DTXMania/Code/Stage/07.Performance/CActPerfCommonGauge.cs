@@ -142,7 +142,7 @@ namespace DTXMania
 			{ -0.050f, -0.050f, -0.050f  }
 		};
 		public float[] fDamageLevelFactor = {
-			0.5f, 1.0f, 1.5f
+			0.25f, 0.5f, 0.75f //Original: 0.5f, 1.0f, 1.5f
 		};
 		// ----------------------------------
 #endregion
@@ -153,7 +153,7 @@ namespace DTXMania
 			double fDamage;
 
 #if true	// DAMAGELEVELTUNING
-            if (CDTXMania.ConfigIni.nSkillMode == 1)
+            if (CDTXMania.ConfigIni.nSkillMode == 1)// 0: Classic 1: XG
             {
                 fDamageGaugeDelta[0, 0] =  0.005f;
                 fDamageGaugeDelta[1, 0] =  0.001f;
