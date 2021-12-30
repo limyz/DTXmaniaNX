@@ -967,8 +967,8 @@ namespace DTXMania
                 "無効になります。",
                 "Turn ON to move some Bass Drum chips\n" +
                 "to the LBD lane.\n" +
-                "Use this setting for old-style 2-bass DTX scores\n" +
-                "without LP & LBD chips)");
+                "Use this setting for old-style double-bass DTX simfiles\n" +
+                "without LP & LBD chips.");
             this.listItems.Add(this.iDrumsAssignToLBD);
 
             this.iDrumsDkdkType = new CItemList("DkdkType", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eDkdkType.Drums,
@@ -976,12 +976,12 @@ namespace DTXMania
                 "L R: デフォルト\n" +
                 "R L: 始動足変更\n" +
                 "R Only: dkdk1レーン化",
-                "To change the style of double-bass-\n" +
-                "concerned chips.\n" +
-                "L R: default\n" +
-                "R L: changes the beginning foot\n" +
-                "R Only: puts bass chips into single\n" +
-                "lane",
+                "Change how double-bass \n" +
+                " chips are displayed during gameplay.\n" +
+                "L R: Default\n" +
+                "R L: Changes the starting foot.\n" +
+                "R Only: Shifts bass chips into a\n" +
+                "single lane",
                 new string[] { "L R", "R L", "R Only" });
             this.listItems.Add(this.iDrumsDkdkType);
 
@@ -991,10 +991,10 @@ namespace DTXMania
                 "B: XG仕様9レーン\n" +
                 "C: CLASSIC仕様6レーン",
 
-                "To change the number of lanes.\n" +
-                "10: default 10 lanes\n" +
-                "9: XG style 9 lanes\n" +
-                "6: classic style 6 lanes",
+                "Change the number of drum lanes.\n" +
+                "10: Default 10 lanes.\n" +
+                "9: XG style 9 lanes.\n" +
+                "6: Classic 6 lanes.",
                 new string[] { "10", "9", "6" });
             this.listItems.Add(this.iDrumsNumOfLanes);
 
@@ -1007,13 +1007,13 @@ namespace DTXMania
                 "Hyper:1拍ごとに交換\n" +
                 "Master:死ぬがよい\n" +
                 "Another:丁度よくバラける",
-                "Drums chips (pads) come randomly.\n" +
-                "Mirror: \n" +
-                "Part: swapping lanes randomly\n" +
-                "Super: swapping for each measure\n" +
-                "Hyper: swapping for each 1/4 measure\n" +
-                "Master: game over...\n" +
-                "Another: moderately swapping each\n" +
+                "Control how drum pad chips appear randomly.\n" +
+                "Mirror: Swap chips in a mirror image.\n" +
+                "Part: Swap lanes randomly.\n" +
+                "Super: Swap for each measure.\n" +
+                "Hyper: Swap for each 1/4 measure.\n" +
+                "Master: Expect to fail.\n" +
+                "Another: Moderately swap each \n" +
                 "chip randomly",
                 new string[] { "OFF", "Mirror", "Part", "Super", "Hyper", "Master", "Another" });
             this.listItems.Add(this.iDrumsRandomPad);
@@ -1026,12 +1026,13 @@ namespace DTXMania
                 "Hyper:1拍ごとに交換\n" +
                 "Master:死ぬがよい\n" +
                 "Another:丁度よくバラける",
-                "Drums chips (pedals) come randomly.\n" +
-                "Part: swapping lanes randomly\n" +
-                "Super: swapping for each measure\n" +
-                "Hyper: swapping for each 1/4 measure\n" +
-                "Master: game over...\n" +
-                "Another: moderately swapping each\n" +
+                "Control how drum pedal chips appear randomly.\n" +
+                "Mirror: Swap chips in a mirror image.\n" +
+                "Part: Swap lanes randomly.\n" +
+                "Super: Swap for each measure.\n" +
+                "Hyper: Swap for each 1/4 measure.\n" +
+                "Master: Expect to fail.\n" +
+                "Another: Moderately swap each \n" +
                 "chip randomly",
                 new string[] { "OFF", "Mirror", "Part", "Super", "Hyper", "Master", "Another" });
             this.listItems.Add(this.iDrumsRandomPedal);
