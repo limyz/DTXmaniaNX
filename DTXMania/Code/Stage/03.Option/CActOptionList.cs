@@ -107,15 +107,15 @@ namespace DTXMania
 			this.list項目リスト.Add( this.iDrumsComboPosition );
 			this.iDrumsSudden = new CItemToggle("Sudden", CDTXMania.ConfigIni.bSudden.Drums,
 				"ドラムチップが譜面の下の方から表\n示されるようになります。",
-				"Drums chips appear suddenly near\nthe judgement line.");
+				"Drum chips appear suddenly near\nthe judgement line.");
 			this.list項目リスト.Add( this.iDrumsSudden );
 			this.iDrumsHidden = new CItemToggle( "Hidden", CDTXMania.ConfigIni.bHidden.Drums,
 				"ドラムチップが譜面の下の方で表示\nされなくなります。",
-				"Drums chips disappear suddenly\nnear the judgement line.");
+				"Drum chips disappear suddenly\nnear the judgement line.");
 			this.list項目リスト.Add( this.iDrumsHidden );
 			this.iDrumsReverse = new CItemToggle( "Reverse", CDTXMania.ConfigIni.bReverse.Drums,
 				"ドラムチップが譜面の下から上に流\nれるようになります。",
-				"Drums chips scroll up the lanes\ninstead of down the lanes.");
+				"Drum chips scroll up the lanes\ninstead of down the lanes.");
 			this.list項目リスト.Add( this.iDrumsReverse );
 			this.iDrumsPosition = new CItemList( "Position", CItemBase.Eパネル種別.通常, (int) CDTXMania.ConfigIni.判定文字表示位置.Drums,
 				"ドラムの判定文字の表示位置を指定\nします。\n  P-A: レーン上\n  P-B: 判定ライン下\n  OFF: 表示しない",
