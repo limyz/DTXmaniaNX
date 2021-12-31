@@ -762,7 +762,9 @@ namespace DTXMania
             this.iDrumsHAZARD = new CItemToggle("Hazard Mode", CDTXMania.ConfigIni.bHAZARD,
                 "ドSハザードモード\n" +
                 "GREAT以下の判定でも回数が減ります。",
-                "Turn ON to decrease the excite gauge if the judgment is anthing less than PERFECT.");
+                "Only allow two POOR/MISS hits for a song before GAME OVER is triggered.\n"
+                "\n"+
+                "This mode greatly increases the damage sustained to the excite gauge when you play POOR or MISS hits.");
             this.listItems.Add(this.iDrumsHAZARD);
 
             this.iDrumsTight = new CItemToggle("Tight", CDTXMania.ConfigIni.bTight,
@@ -2833,7 +2835,7 @@ namespace DTXMania
         private CItemInteger iSystemChipVolume;
         private CItemList iSystemCYGroup;
         private CItemToggle iSystemCymbalFree;
-        private CItemList iSystemexciteLevel;
+        private CItemList iSysteExciteLevel;
         private CItemToggle iSystemDebugInfo;
         private CItemToggle iSystemFillIn;
         private CItemList iSystemFTGroup;
