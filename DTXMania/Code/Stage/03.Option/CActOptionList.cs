@@ -6,6 +6,13 @@ using System.Drawing;
 using SlimDX;
 using FDK;
 
+/*
+    ###IMPORTANT###
+    This file provides definitions for some classes in DTXMania\Code\Stage\04.Config\CActConfigList.cs (confirmed by limyz in PR#121)
+	Any textual changes to UI text strings will not be visible in the UI.
+	Instead make these changes in DTXMania\Code\Stage\04.Config\CActConfigList.cs
+*/
+
 namespace DTXMania
 {
 	internal class CActOptionList : CActivity

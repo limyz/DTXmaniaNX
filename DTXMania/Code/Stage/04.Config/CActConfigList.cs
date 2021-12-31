@@ -89,9 +89,11 @@ namespace DTXMania
             this.listItems.Add(this.iSystemReloadDTX);
 
             int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
-            this.iSystemGRmode = new CItemList("Drums & GR ", CItemBase.EPanelType.Normal, nDGmode,
-                "使用楽器の選択：\nDrOnly: ドラムのみ有効にします。\nGROnly: ギター/ベースのみの専用画面を\n用います。",
-                "Instrument selection:\nDrOnly: Activate Drums screen.\nGROnly: Activate single screen for Guitar and Bass.\n",
+            this.iSystemGRmode = new CItemList("Drums & GR", CItemBase.EPanelType.Normal, nDGmode,
+                "使用楽器の選択:\nDrOnly: ドラムのみ有効にします。\nGROnly: ギター/ベースのみの専用画面を\n用います。",
+                "Instrument selection:\n"+
+                "DrOnly: Activate Drums screen.\n"+
+                "GROnly: Activate single screen for Guitar and Bass.\n",
                 new string[] { "DrOnly", "GROnly" });
             this.listItems.Add(this.iSystemGRmode);
 
@@ -99,13 +101,18 @@ namespace DTXMania
                 "設定した回数分\n" +
                 "ミスをすると、強制的に\n"+
                 "STAGE FAILEDになります。",
-                "Risky mode:\nNumber of mistakes (Poor/Miss) before getting STAGE FAILED.\n"+
+                "The number of (Poor/Miss) judgements before you fail a stage.\n"+
                 "Set 0 to disable Risky mode.");
             this.listItems.Add(this.iSystemRisky);
 
             this.iSystemMovieMode = new CItemList("Movie Mode", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.nMovieMode,
                 "Movie Mode:\n0 = 非表示\n1 = 全画面\n2 = ウインドウモード\n3 = 全画面&ウインドウ\n演奏中にF5キーで切り替え。",
-                "Movie Mode:\n0 = Hide\n1 = Full screen\n2 = Window mode\n3 = Both Full screen and window\nUse F5 to switch during game.",
+                "Control how background animations (BGA) appear during gameplay:\n"+
+                "Off: Hide background animations (BGA)\n"+
+                "Full Screen: Show BGA behind the chip lanes.\n"+
+                "Window Mode: Show BGA in a window next to the lanes.\n"+
+                "Both: Full Screen and Windowed BGA appear.\n"+
+                "TIP: Use [F5] to switch modes during gameplay.",
                 new string[] { "Off", "Full Screen", "Window Mode", "Both" });
             this.listItems.Add(this.iSystemMovieMode);
 
@@ -121,7 +128,8 @@ namespace DTXMania
                 "※一部のサウンドカードでは、\n"+
                 "正しく再生できない可能性が\n"+
                 "あります。）",
-                "Change the song speed.\nFor example, you can play in half speed by setting PlaySpeed = 0.500 for practice.\nNote: It also changes the song's pitch.");
+                "Change the song playback speed (and its pitch).\n"+
+                "For example, you can set 0.500 for practicing the song at half-speed.");
             this.listItems.Add(this.iCommonPlaySpeed);
 
             this.iSystemTimeStretch = new CItemToggle("TimeStretch", CDTXMania.ConfigIni.bTimeStretch,
@@ -130,8 +138,7 @@ namespace DTXMania
                 "演奏速度の変更を、\n" +
                 "周波数変更ではなく\n" +
                 "タイムストレッチで行います。",
-                "PlaySpeed mode:\n" +
-                "Turn ON to use time stretch instead of frequency change.");
+                "When using PlaySpeed mode, turn ON to use time stretch instead of pitch change for BGM playback.");
             this.listItems.Add(this.iSystemTimeStretch);
 
             this.iSystemSkillMode = new CItemList("SkillMode", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.nSkillMode,
@@ -140,7 +147,9 @@ namespace DTXMania
                 "ランク計算です。\n" +
                 "XG:XGシリーズの達成率計算とV7以降の\n" +
                 "スコア計算です。",
-                "Skill rate and score calculation method\nCLASSIC: Pre-V6 score calculation and pre-V8 rank calculation\nXG: Current score and rank calculation",
+                "Change the skill rate and score calculation method:\n"+
+                "CLASSIC: Pre-V6 score calculation and pre-V8 rank calculation.\n"+
+                "XG: Current score and rank calculation",
                 new string[] { "CLASSIC", "XG" });
             this.listItems.Add(this.iSystemSkillMode);
 
@@ -158,7 +167,7 @@ namespace DTXMania
                 "ONにするとゲージが\n" +
                 "なくなった時にSTAGE FAILED" +
                 "となり演奏が中断されます。",
-                "Turn OFF to disable STAGE FAILED.");
+                "Turn OFF to keep playing the song after the excite gauge is depleted (GAME OVER).");
             this.listItems.Add(this.iSystemStageFailed);
 
             this.iSystemRandomFromSubBox = new CItemToggle("RandSubBox", CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする,
@@ -251,15 +260,16 @@ namespace DTXMania
                 "Turn ON if you want to be cheered at the end of fill-in zone.");
             this.listItems.Add(this.iSystemAudienceSound);
 
-            this.iSystemDamageLevel = new CItemList("DamageLevel", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eDamageLevel,
+            this.iSystemDamageLevel = new CItemList("Damage Level", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eDamageLevel,
                 "Miss時のゲージの減少度合い\n"+
                 "を指定します。\n"+
                 "Risky時は無効となります",
-                "Set how quickly the damage gauge decreases when you miss chips.\nThis setting is ignored when Risky is set to 1 or higher.",
+                "Set how quickly the excite gauge decreases when you miss chips.\n" +
+                "This setting is ignored when Risky is set to 1 or higher.",
                 new string[] { "Small", "Normal", "Large" });
             this.listItems.Add(this.iSystemDamageLevel);
 
-            this.iSystemSaveScore = new CItemToggle("SaveScore", CDTXMania.ConfigIni.bScoreIniを出力する,
+            this.iSystemSaveScore = new CItemToggle("Save Score", CDTXMania.ConfigIni.bScoreIniを出力する,
                 "演奏記録の保存：\n"+
                 "ONで演奏記録を.score.iniに\n"+
                 "保存します。\n",
@@ -335,7 +345,7 @@ namespace DTXMania
             this.iAutoAddGage = new CItemToggle("AutoAddGage", CDTXMania.ConfigIni.bAutoAddGage,
                 "ONの場合、AUTO判定も\n"+
                 "ゲージに加算されます。\n",
-                "Turn ON to have AUTO chips be counted in the overall judgment of a song as well as top-up the damage gauge.");
+                "Turn ON to have AUTO chips be counted in the overall judgment of a song as well as top-up the excite gauge.");
             this.listItems.Add(this.iAutoAddGage);
 
             this.iSystemBufferedInput = new CItemToggle("BufferedInput", CDTXMania.ConfigIni.bバッファ入力を行う,
@@ -725,17 +735,17 @@ namespace DTXMania
             this.iDrumsHAZARD = new CItemToggle("HAZARD", CDTXMania.ConfigIni.bHAZARD,
                 "ドSハザードモード\n" +
                 "GREAT以下の判定でも回数が減ります。",
-                "Turn ON to decrease the damage gauge if the judgment\nis anthing less than PERFECT. Good Luck!",
+                "Turn ON to decrease the excite gauge if the judgment is anthing less than PERFECT.")
             this.listItems.Add(this.iDrumsHAZARD);
 
             this.iDrumsTight = new CItemToggle("Tight", CDTXMania.ConfigIni.bTight,
                 "ドラムチップのないところでパッドを\n" +
                 "叩くとミスになります。",
-				"Any pad hits not linked to a note\nare graded as a MISS.",
+				"Any pad hits not linked to a note are graded as a MISS.");
             this.listItems.Add(this.iDrumsTight);
 
             this.iSystemHHGroup = new CItemList("HH Group", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eHHGroup,
-                "ハイハットレーン打ち分け設定：\n" +
+                "ハイハットレーン打ち分け設定:\n" +
                 "左シンバル、ハイハットオープン、ハ\n" +
                 "イハットクローズの打ち分け方法を指\n" +
                 "定します。\n" +
@@ -744,15 +754,15 @@ namespace DTXMania
                 "  HH-2 ... LC | ( HHC & HHO )\n" +
                 "  HH-3 ... LC & HHC & HHO\n" +
                 "\n",
-                "HH-0: LC|HC|HO; all are separated.\n" +
-                "HH-1: LC&(HC|HO);\n" +
-                " HC and HO are separted.\n" +
-                " LC is grouped with HC and HHO.\n" +
-                "HH-2: LC|(HC&HO);\n" +
-                " LC and HHs are separated.\n" +
-                " HC and HO are grouped.\n" +
-                "HH-3: LC&HC&HO; all are grouped.\n" +
-                "\n",
+                "Control how HiHat open (HHO) and close (HHC) and Left Cymbal (LC) lanes are grouped:\n"+
+                "HH-0: LC|HC|HO all are separated.\n" +
+                "HH-1: LC&(HC|HO)\n" +
+                "- HC and HO are separated.\n" +
+                "- LC is grouped with HC and HHO.\n" +
+                "HH-2: LC|(HC&HO)\n" +
+                "- LC and HHs are separated.\n" +
+                "- HC and HO are grouped.\n" +
+                "HH-3: LC&HC&HO; all are grouped.",
                 new string[] { "HH-0", "HH-1", "HH-2", "HH-3" });
             this.listItems.Add(this.iSystemHHGroup);
 
@@ -762,6 +772,7 @@ namespace DTXMania
                 "を指定します。\n" +
                 "  FT-0 ... LT | FT\n" +
                 "  FT-1 ... LT & FT\n",
+                "Control how Low Tom (LT) and Floor Tom (FT) lanes are grouped:\n"+
                 "FT-0: LT|FT\n" +
                 " LT and FT are separated.\n" +
                 "FT-1: LT&FT\n" +
@@ -775,6 +786,7 @@ namespace DTXMania
                 "け方法を指定します。\n" +
                 "  CY-0 ... CY | RD\n" +
                 "  CY-1 ... CY & RD\n",
+                "Control how Right Cymbal (CY) and Ride Cymbal (RD) lanes are grouped:\n"+
                 "CY-0: CY|RD\n" +
                 " CY and RD are separated.\n" +
                 "CY-1: CY&RD\n" +
@@ -790,6 +802,15 @@ namespace DTXMania
                 "  BD-1 ... LP | LBD & BD\n" +
                 "  BD-2 ... LP & LBD | BD\n" +
                 "  BD-3 ... LP & LBD & BD\n",
+                "Control how Left Pedal (LP) Left Bass Pedal (LBD) and Right Bass Pedal (BD) lanes are grouped:\n"+
+                "BD-0: LP | LBD | BD all are separated.\n" +
+                "BD-1: LP | (LBD | BD)\n" +
+                "- LP is separated from LBD and BD.\n" +
+                "- LBD and BD are grouped.\n" +
+                "BD-2: LP |(LBD & BD)\n" +
+                "- LP and LBD are grouped.\n" +
+                "- BD is separated.\n" +
+                "BD-3: LP & LBD & BD all are grouped.",
                 new string[] { "BD-0", "BD-1", "BD-2", "BD-3" });
             this.listItems.Add(this.iSystemBDGroup);
 
@@ -2787,7 +2808,7 @@ namespace DTXMania
         private CItemInteger iSystemChipVolume;
         private CItemList iSystemCYGroup;
         private CItemToggle iSystemCymbalFree;
-        private CItemList iSystemDamageLevel;
+        private CItemList iSystemexciteLevel;
         private CItemToggle iSystemDebugInfo;
         private CItemToggle iSystemFillIn;
         private CItemList iSystemFTGroup;
