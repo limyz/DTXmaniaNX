@@ -325,6 +325,8 @@ namespace DTXMania
                 }
                 this.queWailing[k] = new Queue<CChip>();
                 this.r現在の歓声Chip[k] = null;
+                //
+                this.chipロングノートHit中[k] = null;
             }
             for (int i = 0; i < 3; i++)
             {
@@ -812,6 +814,9 @@ namespace DTXMania
                 }
             }
         }
+
+        //Long notes
+        private STDGBVALUE<CChip> chipロングノートHit中;
 
         public void AddMixer(CSound cs, bool _b演奏終了後も再生が続くチップである)
         {
@@ -1306,6 +1311,13 @@ namespace DTXMania
         protected EJudgement tProcessChipHit(long nHitTime, CChip pChip, EInstrumentPart screenmode, bool bCorrectLane)
         {
             pChip.bHit = true;
+            //New for Long Notes
+            if (pChip.bロングノートである)
+            {
+                pChip.bロングノートHit中 = true;
+                chipロングノートHit中[(int)pChip.eInstrumentPart] = pChip;
+            }
+
             if (pChip.eInstrumentPart == EInstrumentPart.UNKNOWN)
             {
                 this.bAUTOでないチップが１つでもバーを通過した = true;
@@ -1452,6 +1464,12 @@ namespace DTXMania
                             if (!bPChipIsAutoPlay)
                             {
                                 this.nHitCount_ExclAuto[indexInst].Miss++;
+                            }
+                            if (eJudgeResult == EJudgement.Miss)
+                            {
+                                pChip.bロングノートHit中 = false;
+                                chipロングノートHit中[indexInst] = null;
+                                //pChip.bMissForGhost = true;
                             }
                             break;
                         default:	// #24068 2011.1.10 ikanick changed
@@ -2486,6 +2504,28 @@ namespace DTXMania
                 return true;
             }
 
+            //New for Hold Notes
+            //I don't know what is this for but it is in AL
+            //Updates nCurrentTopChip for Long Notes
+            #region [Update nCurrentTopChip for Long Notes]
+            CChip cChip = CDTXMania.DTX.listChip[this.nCurrentTopChip];
+            if (cChip.bHit && cChip.nDistanceFromBar.Drums < -200 && cChip.nDistanceFromBar.Guitar < -200 && cChip.nDistanceFromBar.Bass < -200)
+            {
+                if (cChip.bロングノートである)
+                {
+                    CChip chipロングノート終端 = cChip.chipロングノート終端;
+                    if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -200 && chipロングノート終端.nDistanceFromBar.Guitar < -200 && chipロングノート終端.nDistanceFromBar.Bass < -200)
+                    {
+                        this.nCurrentTopChip++;
+                    }
+                }
+                else
+                {
+                    this.nCurrentTopChip++;
+                }
+            }
+            #endregion
+
             const double speed = 286;	// BPM150の時の1小節の長さ[dot]
             //XGのHS4.5が1289。思えばBPMじゃなくて拍の長さが関係あるよね。
 
@@ -2512,7 +2552,18 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;
-                    ++this.nCurrentTopChip;
+                    if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    {
+                        CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                        if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                        {
+                            this.nCurrentTopChip++;
+                        }
+                    }
+                    else
+                    {
+                        ++this.nCurrentTopChip;
+                    }
                     continue;
                 }
 
@@ -2950,6 +3001,23 @@ namespace DTXMania
                         this.tUpdateAndDraw_Chip_Bass_Wailing(configIni, ref dTX, ref pChip);
                         break;
                     #endregion
+                    #region [2c, 2d: Hold notes]
+                    case EChannel.Guitar_LongNote:
+                    case EChannel.Bass_LongNote:
+                        {
+                            if (!pChip.bHit && pChip.nDistanceFromBar.Drums <= 0)
+                            {
+                                pChip.bHit = true;
+                                EInstrumentPart index = (pChip.nChannelNumber == EChannel.Guitar_LongNote ? EInstrumentPart.GUITAR : EInstrumentPart.BASS);
+                                if (chipロングノートHit中[(int)index] != null && chipロングノートHit中[(int)index].chipロングノート終端 == pChip)
+                                {
+                                    chipロングノートHit中[(int)index].bロングノートHit中 = false;
+                                    chipロングノートHit中[(int)index] = null;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
                     #region [ af: ウェイリングサウンド(ベース) ]
                     /*
 					case 0xaf:	// ウェイリングサウンド(ベース)
@@ -3117,7 +3185,9 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;
-                    ++this.nCurrentTopChip;
+                    {
+                        ++this.nCurrentTopChip;
+                    }
                     continue;
                 }
 
@@ -3215,8 +3285,10 @@ namespace DTXMania
                 // #28026 2012.4.5 yyagi; 信心ワールドエンドの曲終了後リザルトになかなか行かない問題の修正
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
-                    //					nCurrentTopChip = ++this.nCurrentTopChip;
-                    ++this.nCurrentTopChip;
+                    //					nCurrentTopChip = ++this.nCurrentTopChip;                    
+                    {
+                        ++this.nCurrentTopChip;
+                    }
                     continue;
                 }
 
@@ -4007,7 +4079,8 @@ namespace DTXMania
 
                 #region [ chip描画 ]
                 int OPEN = (inst == EInstrumentPart.GUITAR) ? 10 : 10;
-                if (!pChip.bHit && pChip.bVisible)
+                //if (!pChip.bHit && pChip.bVisible)
+                if ((!pChip.bHit || pChip.bロングノートである) && pChip.bVisible)
                 {
                     int y = configIni.bReverse[instIndex] ? (barYReverse - pChip.nDistanceFromBar[instIndex]) : (barYNormal + pChip.nDistanceFromBar[instIndex]);
                     if ((showRangeY0 < y) && (y < showRangeY1))
@@ -4032,12 +4105,53 @@ namespace DTXMania
                             }
                             int deltaX = (configIni.bLeft[instIndex]) ? -drawDeltaX : +drawDeltaX;
 
+                            //
+                            int num3 = 0;
+                            if (pChip.bロングノートである)
+                            {
+                                if (pChip.chipロングノート終端.nDistanceFromBar[(int)inst] <= 0)
+                                {
+                                    return;
+                                }
+                                num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst] - pChip.nDistanceFromBar[(int)inst];
+                                if (pChip.bHit && pChip.bロングノートHit中)
+                                {                                    
+                                    num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst];
+                                }
+
+                                //TEST
+                                //num3 = 200;
+                            }
+
                             //Trace.TraceInformation( "chip={0:x2}, EInstrumentPart={1}, x={2}", pChip.nChannelNumber, inst, x );
                             if (bChipHasR)
                             {
                                 if (inst == EInstrumentPart.GUITAR)
                                 {
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 244 : 88), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
+                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 244 : 88);
+                                    Rectangle rect1 = new Rectangle(0, 0, 38, 10);
+                                    //this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    this.txChip.vcScaleRatio.Y = 1f;
+                                    if (!pChip.bHit)
+                                    {
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    }
+                                    if (pChip.bロングノートである)
+                                    {
+                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                        Rectangle rectangle2 = rect1;
+                                        rectangle2.Y += 3;
+                                        rectangle2.Height = 8;
+                                        this.txChip.nTransparency = 128;
+                                        if (pChip.bHit && !pChip.bロングノートHit中)
+                                        //if(false)
+                                        {
+                                            CTexture obj = txChip;
+                                            obj.nTransparency = obj.nTransparency / 2;
+                                        }                                        
+                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                    }
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
@@ -4048,7 +4162,30 @@ namespace DTXMania
                             {
                                 if (inst == EInstrumentPart.GUITAR)
                                 {
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
+                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127);
+                                    Rectangle rect1 = new Rectangle(38, 0, 38, 10);
+                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
+                                    this.txChip.vcScaleRatio.Y = 1f;
+                                    if (!pChip.bHit)
+                                    {
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    }
+                                    if (pChip.bロングノートである)
+                                    {
+                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                        Rectangle rectangle2 = rect1;
+                                        rectangle2.Y += 3;
+                                        rectangle2.Height = 8;
+                                        this.txChip.nTransparency = 128;
+                                        if (pChip.bHit && !pChip.bロングノートHit中)
+                                        //if (false)
+                                        {
+                                            CTexture obj = txChip;
+                                            obj.nTransparency = obj.nTransparency / 2;
+                                        }
+                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                    }
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
@@ -4059,7 +4196,30 @@ namespace DTXMania
                             {
                                 if (inst == EInstrumentPart.GUITAR)
                                 {
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, 166, y - chipHeight / 2, new Rectangle(76, 0, 38, 10));
+                                    int num8 = 166;
+                                    Rectangle rect1 = new Rectangle(76, 0, 38, 10);
+                                    //this.txChip.tDraw2D(CDTXMania.app.Device, 166, y - chipHeight / 2, new Rectangle(76, 0, 38, 10));
+                                    this.txChip.vcScaleRatio.Y = 1f;
+                                    if (!pChip.bHit)
+                                    {
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    }
+                                    if (pChip.bロングノートである)
+                                    {
+                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                        Rectangle rectangle2 = rect1;
+                                        rectangle2.Y += 3;
+                                        rectangle2.Height = 8;
+                                        this.txChip.nTransparency = 128;
+                                        if (pChip.bHit && !pChip.bロングノートHit中)
+                                        //if (false)
+                                        {
+                                            CTexture obj = txChip;
+                                            obj.nTransparency = obj.nTransparency / 2;
+                                        }
+                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                    }
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
@@ -4070,7 +4230,30 @@ namespace DTXMania
                             {
                                 if (inst == EInstrumentPart.GUITAR)
                                 {
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
+                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205);
+                                    Rectangle rect1 = new Rectangle(114, 0, 38, 10);
+                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
+                                    this.txChip.vcScaleRatio.Y = 1f;
+                                    if (!pChip.bHit)
+                                    {
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    }
+                                    if (pChip.bロングノートである)
+                                    {
+                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                        Rectangle rectangle2 = rect1;
+                                        rectangle2.Y += 3;
+                                        rectangle2.Height = 8;
+                                        this.txChip.nTransparency = 128;
+                                        if (pChip.bHit && !pChip.bロングノートHit中)
+                                        //if (false)
+                                        {
+                                            CTexture obj = txChip;
+                                            obj.nTransparency = obj.nTransparency / 2;
+                                        }
+                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                    }
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
@@ -4081,7 +4264,30 @@ namespace DTXMania
                             {
                                 if (inst == EInstrumentPart.GUITAR)
                                 {
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
+                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244);
+                                    Rectangle rect1 = new Rectangle(152, 0, 38, 10);
+                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
+                                    this.txChip.vcScaleRatio.Y = 1f;
+                                    if (!pChip.bHit)
+                                    {
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                    }
+                                    if (pChip.bロングノートである)
+                                    {
+                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                        Rectangle rectangle2 = rect1;
+                                        rectangle2.Y += 3;
+                                        rectangle2.Height = 8;
+                                        this.txChip.nTransparency = 128;
+                                        if (pChip.bHit && !pChip.bロングノートHit中)
+                                        //if (false)
+                                        {
+                                            CTexture obj = txChip;
+                                            obj.nTransparency = obj.nTransparency / 2;
+                                        }
+                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                    }
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
@@ -4091,10 +4297,11 @@ namespace DTXMania
                         }
                     }
                 }
+
                 #endregion
-				//if ( ( configIni.bAutoPlay.Guitar && !pChip.bHit ) && ( pChip.nDistanceFromBar.Guitar < 0 ) )
-				//if ( ( !pChip.bHit ) && ( pChip.nDistanceFromBar[ instIndex ] < 0 ) )
-                
+                //if ( ( configIni.bAutoPlay.Guitar && !pChip.bHit ) && ( pChip.nDistanceFromBar.Guitar < 0 ) )
+                //if ( ( !pChip.bHit ) && ( pChip.nDistanceFromBar[ instIndex ] < 0 ) )
+
                 // #35411 2015.08.20 chnmr0 modified
                 // 従来のAUTO処理に加えてプレーヤーゴーストの再生機能を追加
                 bool autoPlayCondition = (!pChip.bHit) && (pChip.nDistanceFromBar[instIndex] < 0);
@@ -4693,7 +4900,14 @@ namespace DTXMania
 
             //			if ( bIsAutoPlay[ (int) ELane.Guitar - 1 + indexInst ] )	// このような、バグの入りやすい書き方(GT/BSのindex値が他と異なる)はいずれ見直したい
             //			{
-            CChip chip = this.r次に来る指定楽器Chipを更新して返す(inst);
+            //CChip chip = this.r次に来る指定楽器Chipを更新して返す(inst);
+            CChip chip = ((chipロングノートHit中[(int)inst] == null) ? r次に来る指定楽器Chipを更新して返す(inst) : chipロングノートHit中[(int)inst]);
+            int nChipColorFlag = 0;
+            bool bChipColorHasR = false;
+            bool bChipColorHasG = false;
+            bool bChipColorHasB = false;
+            bool bChipColorHasY = false;
+            bool bChipColorHasP = false;
             if (chip != null)
             {
                 bool bAutoGuitarR = false;
@@ -5076,6 +5290,15 @@ namespace DTXMania
                     this.actRGB.Push(P);
                 }
                 //バグが起こる場所(推定)　こ↑こ↓まで
+
+                //New: Set ChipColorFlag, regardless of instrument
+                bChipColorHasR = bAutoGuitarR || bAutoBassR;
+                bChipColorHasG = bAutoGuitarG || bAutoBassG;
+                bChipColorHasB = bAutoGuitarB || bAutoBassB;
+                bChipColorHasY = bAutoGuitarY || bAutoBassY;
+                bChipColorHasP = bAutoGuitarP || bAutoBassP;
+
+                nChipColorFlag = (bChipColorHasR ? 4 : 0) | (bChipColorHasG ? 2 : 0) | (bChipColorHasB ? 1 : 0) | (bChipColorHasY ? 16 : 0) | (bChipColorHasP ? 32 : 0);
             }
             //			else
             {
@@ -5090,7 +5313,7 @@ namespace DTXMania
                 this.tSaveInputMethod(inst);
                 int pushingP = CDTXMania.Pad.bPressing(inst, EPad.P) ? 32 : 0;
                 this.tSaveInputMethod(inst);
-                int flagRGB = pushingR | pushingG | pushingB | pushingY | pushingP;
+                int nKeyPressRGBFlag = pushingR | pushingG | pushingB | pushingY | pushingP;
                 if (pushingR != 0)
                 {
                     this.actLaneFlushGB.Start(R);
@@ -5116,6 +5339,53 @@ namespace DTXMania
                     this.actLaneFlushGB.Start(P);
                     this.actRGB.Push(P);
                 }
+                //TODO: Add Input processing for Long Notes
+                if (chipロングノートHit中[(int)inst] != null)
+                {
+                    CChip cChip2 = chipロングノートHit中[(int)inst];
+                    //bool[] arrayBoolFromEChannel2 = EnumConverter.GetArrayBoolFromEChannel(cChip2.eチャンネル番号);
+                    //int num4 = nRGBYPのbool配列からマスク値を返す(arrayBoolFromEChannel2);
+                    //if ((num4 & ~num2) == (num3 & ~num2))
+                    if ((nChipColorFlag & ~nAutoMask & 0x3F) == (nKeyPressRGBFlag & ~nAutoMask & 0x3F))
+                    {
+                        if ((nChipColorFlag & nAutoMask & 0x3F) != nChipColorFlag)
+                        {
+                            actGauge.Damage(inst, cChip2.eInstrumentPart, EJudgement.Good);
+                        }
+                        
+                        //
+                        if ((bChipColorHasR && (autoR || pushingR != 0)))
+                        {
+                            this.actChipFireGB.Start(R);
+                        }
+                        if ((bChipColorHasG && (autoG || pushingG != 0)))
+                        {
+                            this.actChipFireGB.Start(G);
+                        }
+                        if ((bChipColorHasB && (autoB || pushingB != 0)))
+                        {
+                            this.actChipFireGB.Start(B);
+                        }
+                        if ((bChipColorHasY && (autoY || pushingY != 0)))
+                        {
+                            this.actChipFireGB.Start(Y);
+                        }
+                        if ((bChipColorHasP && (autoP || pushingP != 0)))
+                        {
+                            this.actChipFireGB.Start(P);
+                        }
+                    }
+                    else if (e指定時刻からChipのJUDGEを返す(CSoundManager.rcPerformanceTimer.nCurrentTime, chipロングノートHit中[(int)inst].chipロングノート終端, CDTXMania.ConfigIni.nInputAdjustTimeMs[(int)inst]) >= EJudgement.Miss)
+                    {
+                        cChip2.bロングノートHit中 = false;
+                        chipロングノートHit中[(int)inst] = null;
+                        //EPad e = ((inst == EInstrumentPart.GUITAR) ? EPad.GtPick : EPad.BsPick);
+                        int nWaveChannelNum = (inst == EInstrumentPart.GUITAR) ? nLastPlayedWAVNumber.GtPick : nLastPlayedWAVNumber.BsPick;
+                        //CDTXMania.DTX.tStopPlayingWav(n最後に再生した実WAV番号[e]);
+                        CDTXMania.DTX.tStopPlayingWav(nWaveChannelNum);
+                    }
+                }
+
                 // auto pickだとここから先に行かないので注意
                 List<STInputEvent> events = CDTXMania.Pad.GetEvents(inst, EPad.Pick);
                 if ((events != null) && (events.Count > 0))
@@ -5459,7 +5729,7 @@ namespace DTXMania
                             }
 
                             int num17 = (bChipHasR ? 4 : 0) | (bChipHasG ? 2 : 0) | (bChipHasB ? 1 : 0) | (bChipHasY ? 16 : 0) | (bChipHasP ? 32 : 0);
-                            if (pChip != null && (num17 & ~nAutoMask & 0x3F) == (flagRGB & ~nAutoMask & 0x3F) && e判定 != EJudgement.Miss)
+                            if (pChip != null && (num17 & ~nAutoMask & 0x3F) == (nKeyPressRGBFlag & ~nAutoMask & 0x3F) && e判定 != EJudgement.Miss)
                             {
 
                                 if ((bChipHasR && (autoR || pushingR != 0)) || bSuccessOPEN)
@@ -5613,6 +5883,8 @@ namespace DTXMania
             //Stop any AVI and BGA
             this.actAVI.Stop();
             this.actBGA.Stop();
+            //Reset Hold note cache
+            this.chipロングノートHit中 = default(STDGBVALUE<CChip>);
 
             // Loop to set new nCurrentTopChip
             // Also, if we are going backward, we need to unhit some chips, and reset TopChip
@@ -5642,6 +5914,12 @@ namespace DTXMania
                     if (pChip.bHit)
                     {
                         pChip.bHit = false;
+                    }
+
+                    //NEW: Reset Long Note too
+                    if (pChip.bロングノートHit中)
+                    {
+                        pChip.bロングノートHit中 = false;
                     }
                 }
             }
@@ -5816,7 +6094,8 @@ namespace DTXMania
             CDTXMania.Timer.tPause();       // 再生時刻カウンタ停止
 
             this.nCurrentTopChip = CDTXMania.DTX.listChip.Count - 1;   // 終端にシーク
-
+            //Reset Hold note cache
+            this.chipロングノートHit中 = default(STDGBVALUE<CChip>);
             // 自分自身のOn活性化()相当の処理もすべき。
         }
     }
