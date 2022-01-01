@@ -638,6 +638,7 @@ namespace DTXMania
 						}
 						if ( ( rect.Bottom > rect.Top ) && ( this.txChip != null ) )
 						{
+							this.txChip.vcScaleRatio.Y = 1f;
 							this.txChip.tDraw2D( CDTXMania.app.Device, drawX, ( y - numA ) + numC, rect );
 						}
 					}
@@ -834,6 +835,7 @@ namespace DTXMania
 						}
 						if ( ( rect.Bottom > rect.Top ) && ( this.txChip != null ) )
 						{
+							this.txChip.vcScaleRatio.Y = 1.0f;
                             this.txChip.tDraw2D(CDTXMania.app.Device, drawX, (y - numA) + numC, rect);
 						}
 					}
@@ -876,9 +878,11 @@ namespace DTXMania
                 int y = CDTXMania.ConfigIni.bReverse.Guitar ? ((this.nJudgeLinePosY.Guitar - pChip.nDistanceFromBar.Guitar) + 0) : ((this.nJudgeLinePosY.Guitar + pChip.nDistanceFromBar.Guitar) + 9);
                 if ( ( dTX.bチップがある.Guitar && ( y > 104 ) ) && ( ( y < 670 ) && ( this.txChip != null ) ) )
                 {
-                    if( CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1 )
-					    this.txChip.tDraw2D( CDTXMania.app.Device, 88, y, new Rectangle( 0, 20, 193, 2 ) );
-
+					if (CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1)
+					{
+						this.txChip.vcScaleRatio.Y = 1f;
+						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y, new Rectangle(0, 20, 193, 2));
+					}
                     if ( configIni.b演奏情報を表示する )
                     {
                         int n小節番号 = n小節番号plus1 - 1;
@@ -889,7 +893,11 @@ namespace DTXMania
                 if ( ( dTX.bチップがある.Bass && ( y > 104 ) ) && ( ( y < 670 ) && ( this.txChip != null ) ) )
                 {
                     if( CDTXMania.ConfigIni.nLaneDisp.Bass == 0 || CDTXMania.ConfigIni.nLaneDisp.Bass == 1 )
-					    this.txChip.tDraw2D( CDTXMania.app.Device, 959, y, new Rectangle( 0, 20, 193, 2 ) );
+                    {
+						this.txChip.vcScaleRatio.Y = 1f;
+						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y, new Rectangle(0, 20, 193, 2));
+					}
+					    
 
                     if ( configIni.b演奏情報を表示する )
                     {
@@ -920,6 +928,7 @@ namespace DTXMania
 
 					if (CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1)
 					{
+						this.txChip.vcScaleRatio.Y = 1.0f;
 						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y - 1, new Rectangle(0, 20, 193, 2));
 						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y + 1, new Rectangle(0, 20, 193, 2));
 					}
@@ -932,6 +941,7 @@ namespace DTXMania
 
 					if (CDTXMania.ConfigIni.nLaneDisp.Bass == 0 || CDTXMania.ConfigIni.nLaneDisp.Bass == 1)
 					{
+						this.txChip.vcScaleRatio.Y = 1.0f;
 						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y - 1, new Rectangle(0, 20, 193, 2));
 						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y + 1, new Rectangle(0, 20, 193, 2));
 					}

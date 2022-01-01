@@ -2552,15 +2552,15 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;
-                    if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
-                    {
-                        CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
-                        if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
-                        {
-                            this.nCurrentTopChip++;
-                        }
-                    }
-                    else
+                    //if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    //{
+                    //    CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                    //    if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                    //    {
+                    //        this.nCurrentTopChip++;
+                    //    }
+                    //}
+                    //else
                     {
                         ++this.nCurrentTopChip;
                     }
@@ -3223,6 +3223,7 @@ namespace DTXMania
                                 l_drumPanelWidth = 447;
                                 l_xOffset = 72;
                             }
+                            //this.txChip.vcScaleRatio.Y = 1f;
                             this.txChip.tDraw2D(CDTXMania.app.Device, 0x127 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 1) : ((this.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 1), new Rectangle(0, 772, l_drumPanelWidth, 2));
                         }
                         break;
@@ -4090,6 +4091,7 @@ namespace DTXMania
                             int nアニメカウンタ現在の値 = this.ctChipPatternAnimation[instIndex].nCurrentValue;
                             if (bChipIsO)
                             {
+                                this.txChip.vcScaleRatio.Y = 1f;
                                 int xo = (inst == EInstrumentPart.GUITAR) ? 88 : 959;
                                 this.txChip.tDraw2D(CDTXMania.app.Device, xo, y - 2, new Rectangle(0, 10, 196, 10));
                             }
@@ -4155,6 +4157,7 @@ namespace DTXMania
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
+                                    this.txChip.vcScaleRatio.Y = 1f;
                                     this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1115 : 959), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
                                 }
                             }
@@ -4189,6 +4192,7 @@ namespace DTXMania
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
+                                    this.txChip.vcScaleRatio.Y = 1f;
                                     this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1076 : 998), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
                                 }
                             }
@@ -4223,6 +4227,7 @@ namespace DTXMania
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
+                                    this.txChip.vcScaleRatio.Y = 1f;
                                     this.txChip.tDraw2D(CDTXMania.app.Device, 1036, y - chipHeight / 2, new Rectangle(76, 0, 38, 10));
                                 }
                             }
@@ -4257,6 +4262,7 @@ namespace DTXMania
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
+                                    this.txChip.vcScaleRatio.Y = 1f;
                                     this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 998 : 1076), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
                                 }
                             }
@@ -4291,6 +4297,7 @@ namespace DTXMania
                                 }
                                 else if (inst == EInstrumentPart.BASS)
                                 {
+                                    this.txChip.vcScaleRatio.Y = 1f;
                                     this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 959 : 1115), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
                                 }
                             }
