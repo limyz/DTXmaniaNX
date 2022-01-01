@@ -3223,7 +3223,7 @@ namespace DTXMania
                                 l_drumPanelWidth = 447;
                                 l_xOffset = 72;
                             }
-                            //this.txChip.vcScaleRatio.Y = 1f;
+                            this.txChip.vcScaleRatio.Y = 1f;
                             this.txChip.tDraw2D(CDTXMania.app.Device, 0x127 + l_xOffset, configIni.bReverse.Drums ? ((this.nJudgeLinePosY.Drums + pChip.nDistanceFromBar.Drums) - 1) : ((this.nJudgeLinePosY.Drums - pChip.nDistanceFromBar.Drums) - 1), new Rectangle(0, 772, l_drumPanelWidth, 2));
                         }
                         break;
@@ -4136,6 +4136,7 @@ namespace DTXMania
                                     this.txChip.vcScaleRatio.Y = 1f;
                                     if (!pChip.bHit)
                                     {
+                                        this.txChip.nTransparency = pChip.nTransparency;
                                         this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
                                     }
                                     if (pChip.bロングノートである)
@@ -4171,6 +4172,7 @@ namespace DTXMania
                                     this.txChip.vcScaleRatio.Y = 1f;
                                     if (!pChip.bHit)
                                     {
+                                        this.txChip.nTransparency = pChip.nTransparency;
                                         this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
                                     }
                                     if (pChip.bロングノートである)
@@ -4206,6 +4208,7 @@ namespace DTXMania
                                     this.txChip.vcScaleRatio.Y = 1f;
                                     if (!pChip.bHit)
                                     {
+                                        this.txChip.nTransparency = pChip.nTransparency;
                                         this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
                                     }
                                     if (pChip.bロングノートである)
@@ -4241,6 +4244,7 @@ namespace DTXMania
                                     this.txChip.vcScaleRatio.Y = 1f;
                                     if (!pChip.bHit)
                                     {
+                                        this.txChip.nTransparency = pChip.nTransparency;
                                         this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
                                     }
                                     if (pChip.bロングノートである)
@@ -4276,6 +4280,7 @@ namespace DTXMania
                                     this.txChip.vcScaleRatio.Y = 1f;
                                     if (!pChip.bHit)
                                     {
+                                        this.txChip.nTransparency = pChip.nTransparency;
                                         this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
                                     }
                                     if (pChip.bロングノートである)
