@@ -4119,7 +4119,25 @@ namespace DTXMania
                 {
                     int yBarPos = configIni.bReverse[instIndex] ? barYReverse : barYNormal;
                     int y = configIni.bReverse[instIndex] ? (barYReverse - pChip.nDistanceFromBar[instIndex]) : (barYNormal + pChip.nDistanceFromBar[instIndex]);
-                    //if ((showRangeY0 < y) && (y < showRangeY1))
+
+                    //
+                    int num3 = 0;
+                    if (pChip.bロングノートである)
+                    {
+                        if (pChip.chipロングノート終端.nDistanceFromBar[(int)inst] <= 0)
+                        {
+                            return;
+                        }
+                        num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst] - pChip.nDistanceFromBar[(int)inst];
+                        if (pChip.bHit && pChip.bロングノートHit中)
+                        {
+                            y = yBarPos;
+                            num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst];
+                        }
+
+                    }
+
+                    if ((showRangeY0 < y) && (y < showRangeY1))
                     {
                         if (this.txChip != null)
                         {
@@ -4142,22 +4160,7 @@ namespace DTXMania
                             }
                             int deltaX = (configIni.bLeft[instIndex]) ? -drawDeltaX : +drawDeltaX;
 
-                            //
-                            int num3 = 0;
-                            if (pChip.bロングノートである)
-                            {
-                                if (pChip.chipロングノート終端.nDistanceFromBar[(int)inst] <= 0)
-                                {
-                                    return;
-                                }
-                                num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst] - pChip.nDistanceFromBar[(int)inst];
-                                if (pChip.bHit && pChip.bロングノートHit中)
-                                {
-                                    y = yBarPos;
-                                    num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst];
-                                }
-
-                            }
+                            
 
                             //Refactored code for drawing
                             int[] nChipXPos = {
