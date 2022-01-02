@@ -2499,13 +2499,12 @@ namespace DTXMania
             {
                 return true;
             }
-            if (this.nCurrentTopChip == -1)
-            {
-                return true;
-            }
+            //if (this.nCurrentTopChip == -1)
+            //{
+            //    return true;
+            //}
 
-            //New for Hold Notes
-            //I don't know what is this for but it is in AL
+            //Update currentTopChip index when current top chip has moved past bar
             //Updates nCurrentTopChip for Long Notes
             #region [Update nCurrentTopChip for Long Notes]
             CChip cChip = CDTXMania.DTX.listChip[this.nCurrentTopChip];
@@ -2552,19 +2551,22 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;
-                    //if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
-                    //{
-                    //    CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
-                    //    if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
-                    //    {
-                    //        this.nCurrentTopChip++;
-                    //    }
-                    //}
-                    //else
+
+                    if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    {
+                        CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                        if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                        {
+                            this.nCurrentTopChip++;
+                            continue;
+                        }
+                    }
+                    else
                     {
                         ++this.nCurrentTopChip;
+                        continue;
                     }
-                    continue;
+                    
                 }
 
                 bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
@@ -3006,11 +3008,14 @@ namespace DTXMania
                     case EChannel.Bass_LongNote:
                         {
                             if (!pChip.bHit && pChip.nDistanceFromBar.Drums <= 0)
-                            {
+                            {                                
                                 pChip.bHit = true;
                                 EInstrumentPart index = (pChip.nChannelNumber == EChannel.Guitar_LongNote ? EInstrumentPart.GUITAR : EInstrumentPart.BASS);
                                 if (chipロングノートHit中[(int)index] != null && chipロングノートHit中[(int)index].chipロングノート終端 == pChip)
                                 {
+                                    //Set bHit to true here, which applies only to EndHold notes.
+                                    //If StartHold note bHit is not set to true, bar will persist animation but game cannot end
+                                    //pChip.bHit = true;
                                     chipロングノートHit中[(int)index].bロングノートHit中 = false;
                                     chipロングノートHit中[(int)index] = null;
                                 }
@@ -3185,10 +3190,20 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;
+                    if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    {
+                        CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                        if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                        {
+                            this.nCurrentTopChip++;
+                            continue;
+                        }
+                    }
+                    else
                     {
                         ++this.nCurrentTopChip;
+                        continue;
                     }
-                    continue;
                 }
 
                 bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
@@ -3287,10 +3302,29 @@ namespace DTXMania
                 if ((dTX.listChip[this.nCurrentTopChip].nDistanceFromBar.Drums < -65) && dTX.listChip[this.nCurrentTopChip].bHit)
                 {
                     //					nCurrentTopChip = ++this.nCurrentTopChip;                    
+                    //if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    //{
+                    //    CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                    //    if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                    //    {
+                    //        this.nCurrentTopChip++;
+                    //    }
+                    //}
+
+                    if (dTX.listChip[this.nCurrentTopChip].bロングノートである)
+                    {
+                        CChip chipロングノート終端 = dTX.listChip[this.nCurrentTopChip].chipロングノート終端;
+                        if (chipロングノート終端.bHit && chipロングノート終端.nDistanceFromBar.Drums < -65)
+                        {
+                            this.nCurrentTopChip++;
+                            continue;
+                        }
+                    }
+                    else
                     {
                         ++this.nCurrentTopChip;
+                        continue;
                     }
-                    continue;
                 }
 
                 bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
@@ -4083,8 +4117,9 @@ namespace DTXMania
                 //if (!pChip.bHit && pChip.bVisible)
                 if ((!pChip.bHit || pChip.bロングノートである) && pChip.bVisible)
                 {
+                    int yBarPos = configIni.bReverse[instIndex] ? barYReverse : barYNormal;
                     int y = configIni.bReverse[instIndex] ? (barYReverse - pChip.nDistanceFromBar[instIndex]) : (barYNormal + pChip.nDistanceFromBar[instIndex]);
-                    if ((showRangeY0 < y) && (y < showRangeY1))
+                    //if ((showRangeY0 < y) && (y < showRangeY1))
                     {
                         if (this.txChip != null)
                         {
@@ -4117,7 +4152,8 @@ namespace DTXMania
                                 }
                                 num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst] - pChip.nDistanceFromBar[(int)inst];
                                 if (pChip.bHit && pChip.bロングノートHit中)
-                                {                                    
+                                {
+                                    y = yBarPos;
                                     num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst];
                                 }
 
@@ -4307,7 +4343,7 @@ namespace DTXMania
                                 }
                             }
                         }
-                    }
+                    }                   
                 }
 
                 #endregion

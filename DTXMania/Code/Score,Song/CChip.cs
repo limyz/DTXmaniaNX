@@ -453,9 +453,9 @@ namespace DTXMania
 			this.nDistanceFromBar.Bass = (int)((this.nPlaybackTimeMs - nCurrentTime) * ScrollSpeedBass);
 
 			//New: Compute Distance for End of Long Note chip
-			if(chipロングノート終端 != null)
+			if(this.bロングノートである)
             {
-				chipロングノート終端.ComputeDistanceFromBar(nCurrentTime, dbPerformanceScrollSpeed);
+				this.chipロングノート終端.ComputeDistanceFromBar(nCurrentTime, dbPerformanceScrollSpeed);
             }
 		}
 
