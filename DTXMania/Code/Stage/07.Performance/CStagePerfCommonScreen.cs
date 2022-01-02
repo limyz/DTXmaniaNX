@@ -3012,10 +3012,7 @@ namespace DTXMania
                                 pChip.bHit = true;
                                 EInstrumentPart index = (pChip.nChannelNumber == EChannel.Guitar_LongNote ? EInstrumentPart.GUITAR : EInstrumentPart.BASS);
                                 if (chipロングノートHit中[(int)index] != null && chipロングノートHit中[(int)index].chipロングノート終端 == pChip)
-                                {
-                                    //Set bHit to true here, which applies only to EndHold notes.
-                                    //If StartHold note bHit is not set to true, bar will persist animation but game cannot end
-                                    //pChip.bHit = true;
+                                {                                    
                                     chipロングノートHit中[(int)index].bロングノートHit中 = false;
                                     chipロングノートHit中[(int)index] = null;
                                 }

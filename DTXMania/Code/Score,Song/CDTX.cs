@@ -3139,7 +3139,12 @@ namespace DTXMania
 						case ERandomMode.HYPERRANDOM:	// レーンの本数も変わる
 							nRGBレーンビットパターン = (int)nランダム化前チャンネル番号 & 7;
 							// n新RGBレーンビットパターン = (int)Eレーンビットパターン.OPEN;	// この値は結局未使用なので削除
-							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);	// #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
+							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);  // #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
+                            //New: Set flag to false (disable Open) when chip has long note
+                            if (chip.bロングノートである)
+                            {
+								flag = false;
+                            }
 							if (((nRGBレーンビットパターン != (int)Eレーンビットパターン.xxB) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.xGx)) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.Rxx))		// xxB, xGx, Rxx レーン1本相当
 							{
 								break;															// レーン1本相当でなければ、とりあえず先に進む
