@@ -4157,192 +4157,79 @@ namespace DTXMania
                                     num3 = pChip.chipロングノート終端.nDistanceFromBar[(int)inst];
                                 }
 
-                                //TEST
-                                //num3 = 200;
                             }
 
+                            //Refactored code for drawing
+                            int[] nChipXPos = {
+                                inst == EInstrumentPart.GUITAR ? 88 : 959,
+                                inst == EInstrumentPart.GUITAR ? 127 : 998,
+                                inst == EInstrumentPart.GUITAR ? 166 : 1036,
+                                inst == EInstrumentPart.GUITAR ? 205 : 1076,
+                                inst == EInstrumentPart.GUITAR ? 244 : 1115
+                            };
+                            
+                            if(inst == EInstrumentPart.GUITAR && CDTXMania.ConfigIni.bLeft.Guitar)
+                            {
+                                Array.Reverse(nChipXPos);
+                            }
+
+                            if (inst == EInstrumentPart.BASS && CDTXMania.ConfigIni.bLeft.Bass)
+                            {
+                                Array.Reverse(nChipXPos);
+                            }
+
+                            Rectangle[] rChipTxRectArray = {
+                            new Rectangle(0, 0, 38, 10),
+                            new Rectangle(38, 0, 38, 10),
+                            new Rectangle(76, 0, 38, 10),
+                            new Rectangle(114, 0, 38, 10),
+                            new Rectangle(152, 0, 38, 10)
+                            };
+
+                            bool[] bChipColorFlags = {
+                            bChipHasR,
+                            bChipHasG,
+                            bChipHasB,
+                            bChipHasY,
+                            bChipHasP
+                            };
+
+                            for (int i = 0; i < bChipColorFlags.Length; i++)
+                            {
+                                if (bChipColorFlags[i])
+                                {
+                                    if(inst == EInstrumentPart.GUITAR || inst == EInstrumentPart.BASS)
+                                    {
+                                        int num8 = nChipXPos[i];
+                                        Rectangle rect1 = rChipTxRectArray[i];
+                                        //this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                        this.txChip.vcScaleRatio.Y = 1f;
+                                        if (!pChip.bHit)
+                                        {
+                                            this.txChip.nTransparency = pChip.nTransparency;
+                                            this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
+                                        }
+                                        if (pChip.bロングノートである)
+                                        {
+                                            //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
+                                            Rectangle rectangle2 = rect1;
+                                            rectangle2.Y += 3;
+                                            rectangle2.Height = 5;
+                                            this.txChip.nTransparency = 128;
+                                            if (pChip.bHit && !pChip.bロングノートHit中)
+                                            //if(false)
+                                            {
+                                                CTexture obj = txChip;
+                                                obj.nTransparency = obj.nTransparency / 2;
+                                            }
+                                            this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
+                                            this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
+                                        }
+                                    }
+                                }
+                            }
                             //Trace.TraceInformation( "chip={0:x2}, EInstrumentPart={1}, x={2}", pChip.nChannelNumber, inst, x );
-                            if (bChipHasR)
-                            {
-                                if (inst == EInstrumentPart.GUITAR)
-                                {
-                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 244 : 88);
-                                    Rectangle rect1 = new Rectangle(0, 0, 38, 10);
-                                    //this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    if (!pChip.bHit)
-                                    {
-                                        this.txChip.nTransparency = pChip.nTransparency;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    }
-                                    if (pChip.bロングノートである)
-                                    {
-                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
-                                        Rectangle rectangle2 = rect1;
-                                        rectangle2.Y += 3;
-                                        rectangle2.Height = 8;
-                                        this.txChip.nTransparency = 128;
-                                        if (pChip.bHit && !pChip.bロングノートHit中)
-                                        //if(false)
-                                        {
-                                            CTexture obj = txChip;
-                                            obj.nTransparency = obj.nTransparency / 2;
-                                        }                                        
-                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
-                                    }
-                                }
-                                else if (inst == EInstrumentPart.BASS)
-                                {
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1115 : 959), y - chipHeight / 2, new Rectangle(0, 0, 38, 10));
-                                }
-                            }
-                            if (bChipHasG)
-                            {
-                                if (inst == EInstrumentPart.GUITAR)
-                                {
-                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127);
-                                    Rectangle rect1 = new Rectangle(38, 0, 38, 10);
-                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 205 : 127), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    if (!pChip.bHit)
-                                    {
-                                        this.txChip.nTransparency = pChip.nTransparency;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    }
-                                    if (pChip.bロングノートである)
-                                    {
-                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
-                                        Rectangle rectangle2 = rect1;
-                                        rectangle2.Y += 3;
-                                        rectangle2.Height = 8;
-                                        this.txChip.nTransparency = 128;
-                                        if (pChip.bHit && !pChip.bロングノートHit中)
-                                        //if (false)
-                                        {
-                                            CTexture obj = txChip;
-                                            obj.nTransparency = obj.nTransparency / 2;
-                                        }
-                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
-                                    }
-                                }
-                                else if (inst == EInstrumentPart.BASS)
-                                {
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 1076 : 998), y - chipHeight / 2, new Rectangle(38, 0, 38, 10));
-                                }
-                            }
-                            if (bChipHasB)
-                            {
-                                if (inst == EInstrumentPart.GUITAR)
-                                {
-                                    int num8 = 166;
-                                    Rectangle rect1 = new Rectangle(76, 0, 38, 10);
-                                    //this.txChip.tDraw2D(CDTXMania.app.Device, 166, y - chipHeight / 2, new Rectangle(76, 0, 38, 10));
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    if (!pChip.bHit)
-                                    {
-                                        this.txChip.nTransparency = pChip.nTransparency;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    }
-                                    if (pChip.bロングノートである)
-                                    {
-                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
-                                        Rectangle rectangle2 = rect1;
-                                        rectangle2.Y += 3;
-                                        rectangle2.Height = 8;
-                                        this.txChip.nTransparency = 128;
-                                        if (pChip.bHit && !pChip.bロングノートHit中)
-                                        //if (false)
-                                        {
-                                            CTexture obj = txChip;
-                                            obj.nTransparency = obj.nTransparency / 2;
-                                        }
-                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
-                                    }
-                                }
-                                else if (inst == EInstrumentPart.BASS)
-                                {
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, 1036, y - chipHeight / 2, new Rectangle(76, 0, 38, 10));
-                                }
-                            }
-                            if (bChipHasY)
-                            {
-                                if (inst == EInstrumentPart.GUITAR)
-                                {
-                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205);
-                                    Rectangle rect1 = new Rectangle(114, 0, 38, 10);
-                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 127 : 205), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    if (!pChip.bHit)
-                                    {
-                                        this.txChip.nTransparency = pChip.nTransparency;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    }
-                                    if (pChip.bロングノートである)
-                                    {
-                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
-                                        Rectangle rectangle2 = rect1;
-                                        rectangle2.Y += 3;
-                                        rectangle2.Height = 8;
-                                        this.txChip.nTransparency = 128;
-                                        if (pChip.bHit && !pChip.bロングノートHit中)
-                                        //if (false)
-                                        {
-                                            CTexture obj = txChip;
-                                            obj.nTransparency = obj.nTransparency / 2;
-                                        }
-                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
-                                    }
-                                }
-                                else if (inst == EInstrumentPart.BASS)
-                                {
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 998 : 1076), y - chipHeight / 2, new Rectangle(114, 0, 38, 10));
-                                }
-                            }
-                            if (bChipHasP)
-                            {
-                                if (inst == EInstrumentPart.GUITAR)
-                                {
-                                    int num8 = (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244);
-                                    Rectangle rect1 = new Rectangle(152, 0, 38, 10);
-                                    //this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Guitar ? 88 : 244), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    if (!pChip.bHit)
-                                    {
-                                        this.txChip.nTransparency = pChip.nTransparency;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - chipHeight / 2, rect1);
-                                    }
-                                    if (pChip.bロングノートである)
-                                    {
-                                        //_ = (bool)CDTXMania.Instance.ConfigIni.bReverse[inst];
-                                        Rectangle rectangle2 = rect1;
-                                        rectangle2.Y += 3;
-                                        rectangle2.Height = 8;
-                                        this.txChip.nTransparency = 128;
-                                        if (pChip.bHit && !pChip.bロングノートHit中)
-                                        //if (false)
-                                        {
-                                            CTexture obj = txChip;
-                                            obj.nTransparency = obj.nTransparency / 2;
-                                        }
-                                        this.txChip.vcScaleRatio.Y = 1f * (float)num3 / (float)rectangle2.Height;
-                                        this.txChip.tDraw2D(CDTXMania.app.Device, num8, y - (CDTXMania.ConfigIni.bReverse[(int)inst] ? num3 : 0), rectangle2);
-                                    }
-                                }
-                                else if (inst == EInstrumentPart.BASS)
-                                {
-                                    this.txChip.vcScaleRatio.Y = 1f;
-                                    this.txChip.tDraw2D(CDTXMania.app.Device, (CDTXMania.ConfigIni.bLeft.Bass ? 959 : 1115), y - chipHeight / 2, new Rectangle(152, 0, 38, 10));
-                                }
-                            }
-                        }
+                         }
                     }                   
                 }
 
