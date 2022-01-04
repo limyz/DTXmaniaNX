@@ -127,7 +127,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 bool flag = false;
-                bool flag2 = false;
+                bool bIsFinishedFadeout = false;
 
 				if( base.bJustStartedUpdate )
 				{
@@ -206,19 +206,74 @@ namespace DTXMania
 
 				this.tUpdateAndDraw_ChipFireGB();
 				this.tUpdateAndDraw_STAGEFAILED();
-                flag2 = this.tUpdateAndDraw_FadeIn_Out();
+                bIsFinishedFadeout = this.tUpdateAndDraw_FadeIn_Out();
                 if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
                 {
                     this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
                     base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
                     this.actFOStageClear.tStartFadeOut();
                 }
-				if( flag2 )
+				if( bIsFinishedFadeout )
 				{
                     if (!CDTXMania.Skin.soundStageClear.b再生中)
                     {
                         Debug.WriteLine("Total OnUpdateAndDraw=" + sw.ElapsedMilliseconds + "ms");
-                        return (int)this.eReturnValueAfterFadeOut;
+
+						//Update Guitar score like in PerfDrumsScreen
+						int nNumberOfMistakes = base.nHitCount_ExclAuto.Guitar.Miss + base.nHitCount_ExclAuto.Guitar.Poor;
+						if(nNumberOfMistakes == 0)
+                        {
+							{
+								int nNumberPerfects = base.nHitCount_ExclAuto.Guitar.Perfect;
+								if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay)
+								{
+									nNumberPerfects = base.nHitCount_IncAuto.Guitar.Perfect;
+								}
+								if (nNumberPerfects == CDTXMania.DTX.nVisibleChipsCount.Guitar)
+								#region[ エクセ ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Guitar += 30000;									
+								}
+								#endregion
+								else
+								#region[ フルコン ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Guitar += 15000;									
+								}
+								#endregion
+							}
+						}
+
+						//Repeat for Bass
+						nNumberOfMistakes = base.nHitCount_ExclAuto.Bass.Miss + base.nHitCount_ExclAuto.Bass.Poor;
+						if (nNumberOfMistakes == 0)
+						{
+							{
+								int nNumberPerfects = base.nHitCount_ExclAuto.Bass.Perfect;
+								if (CDTXMania.ConfigIni.bAllBassAreAutoPlay)
+								{
+									nNumberPerfects = base.nHitCount_IncAuto.Bass.Perfect;
+								}
+								if (nNumberPerfects == CDTXMania.DTX.nVisibleChipsCount.Bass)
+								#region[ エクセ ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Bass += 30000;
+								}
+								#endregion
+								else
+								#region[ フルコン ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Bass += 15000;
+								}
+								#endregion
+							}
+						}
+
+						return (int)this.eReturnValueAfterFadeOut;
                     }
 				}
 				if (base.ePhaseID == CStage.EPhase.演奏_STAGE_RESTART)

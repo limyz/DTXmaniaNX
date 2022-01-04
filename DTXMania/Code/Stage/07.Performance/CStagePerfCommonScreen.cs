@@ -327,6 +327,10 @@ namespace DTXMania
                 this.r現在の歓声Chip[k] = null;
                 //
                 this.chipロングノートHit中[k] = null;
+                this.nCurrentLongNoteDuration[k] = 0;
+                this.nロングノートPart[k] = 0;
+                //
+                this.nAccumulatedLongNoteBonusScore[k] = 0;
             }
             for (int i = 0; i < 3; i++)
             {
@@ -815,8 +819,14 @@ namespace DTXMania
             }
         }
 
-        //Long notes
+        //Long notes Cache variables
         private STDGBVALUE<CChip> chipロングノートHit中;
+        private STDGBVALUE<int> nロングノートPart; //0 to 5, default 0
+        private STDGBVALUE<int> nCurrentLongNoteDuration; //in ms
+
+        //Long Note Accumulated Bonus (For Max score computation only)
+        private STDGBVALUE<int> nAccumulatedLongNoteBonusScore;
+
 
         public void AddMixer(CSound cs, bool _b演奏終了後も再生が続くチップである)
         {
@@ -1311,11 +1321,13 @@ namespace DTXMania
         protected EJudgement tProcessChipHit(long nHitTime, CChip pChip, EInstrumentPart screenmode, bool bCorrectLane)
         {
             pChip.bHit = true;
-            //New for Long Notes
+            //Start of Long Note
             if (pChip.bロングノートである)
             {
                 pChip.bロングノートHit中 = true;
                 chipロングノートHit中[(int)pChip.eInstrumentPart] = pChip;
+                nCurrentLongNoteDuration[(int)pChip.eInstrumentPart] = pChip.chipロングノート終端.nPlaybackTimeMs - pChip.nPlaybackTimeMs;
+                nロングノートPart[(int)pChip.eInstrumentPart] = 0;
             }
 
             if (pChip.eInstrumentPart == EInstrumentPart.UNKNOWN)
@@ -1469,6 +1481,8 @@ namespace DTXMania
                             {
                                 pChip.bロングノートHit中 = false;
                                 chipロングノートHit中[indexInst] = null;
+                                nCurrentLongNoteDuration[indexInst] = 0;
+                                nロングノートPart[indexInst] = 0;
                                 //pChip.bMissForGhost = true;
                             }
                             break;
@@ -1596,6 +1610,8 @@ namespace DTXMania
                             else if (this.nHitCount_IncAuto[(int)pChip.eInstrumentPart].Perfect >= nComboMax)
                             {
                                 nScoreDelta = 1000000.0f - (float)this.actScore.nCurrentTrueScore[(int)pChip.eInstrumentPart];
+                                //Also add bonus score from Long Note
+                                nScoreDelta = nScoreDelta + this.nAccumulatedLongNoteBonusScore[(int)pChip.eInstrumentPart];
                                 //nScoreDelta = 1000000.0f - (1000000.0f / (1275.0f + 50.0f / (nComboMax - 50.0f))) * ((1275.0f + 50.0f * (nComboMax - 49.0f)));
                             }
                             //1000000-PERFECT基準値×50×(その曲のMAXCOMBO-25.5)
@@ -1696,6 +1712,8 @@ namespace DTXMania
                             else if (this.nHitCount_IncAuto[(int)pChip.eInstrumentPart].Perfect >= nComboMax)
                             {
                                 nScoreDelta = 1000000.0f - (float)this.actScore.nCurrentTrueScore[(int)pChip.eInstrumentPart];
+                                //Also add bonus score from Long Note
+                                nScoreDelta = nScoreDelta + this.nAccumulatedLongNoteBonusScore[(int)pChip.eInstrumentPart];
                                 //nScoreDelta = 1000000.0f - (1000000.0f / (1275.0f + 50.0f / (nComboMax - 50.0f))) * ((1275.0f + 50.0f * (nComboMax - 49.0f)));
                             }
                             //1000000-PERFECT基準値×50×(その曲のMAXCOMBO-25.5)
@@ -1717,6 +1735,7 @@ namespace DTXMania
                         }
                         else if (nCombos == nComboMax || this.nHitCount_ExclAuto[(int)pChip.eInstrumentPart].Perfect == nComboMax)
                         {
+                            
                         }
                         else
                         {
@@ -3015,6 +3034,8 @@ namespace DTXMania
                                 {                                    
                                     chipロングノートHit中[(int)index].bロングノートHit中 = false;
                                     chipロングノートHit中[(int)index] = null;
+                                    nCurrentLongNoteDuration[(int)index] = 0;
+                                    nロングノートPart[(int)index] = 0;
                                 }
                             }
                         }
@@ -4134,7 +4155,7 @@ namespace DTXMania
 
                     }
 
-                    if ((showRangeY0 < y) && (y < showRangeY1))
+                    //if ((showRangeY0 < y) && (y < showRangeY1))
                     {
                         if (this.txChip != null)
                         {
@@ -4216,8 +4237,7 @@ namespace DTXMania
                                             rectangle2.Y += 3;
                                             rectangle2.Height = 5;
                                             this.txChip.nTransparency = 128;
-                                            if (pChip.bHit && !pChip.bロングノートHit中)
-                                            //if(false)
+                                            if (pChip.bHit && !pChip.bロングノートHit中)                                            
                                             {
                                                 CTexture obj = txChip;
                                                 obj.nTransparency = obj.nTransparency / 2;
@@ -5274,7 +5294,7 @@ namespace DTXMania
                     this.actLaneFlushGB.Start(P);
                     this.actRGB.Push(P);
                 }
-                //TODO: Add Input processing for Long Notes
+                //Add Input processing for Long Notes
                 if (chipロングノートHit中[(int)inst] != null)
                 {
                     CChip cChip2 = chipロングノートHit中[(int)inst];
@@ -5309,11 +5329,28 @@ namespace DTXMania
                         {
                             this.actChipFireGB.Start(P);
                         }
+
+                        //Check Long Note status
+                        if(this.nロングノートPart[(int)inst] < 5)
+                        {
+                            int nLongNoteNextPart = this.nロングノートPart[(int)inst] + 1;
+                            int nLongNoteNextPartTime = chipロングノートHit中[(int)inst].nPlaybackTimeMs + (nLongNoteNextPart * this.nCurrentLongNoteDuration[(int)inst] / 6);
+                            if(CSoundManager.rcPerformanceTimer.nCurrentTime >= nLongNoteNextPartTime)
+                            {
+                                //Fire off 100 bonus pt up to 500 pts for holding long notes
+                                this.actScore.Add(inst, bIsAutoPlay, 100);
+                                //Also accumulate Bonus score to eventually correct Max score computation
+                                this.nAccumulatedLongNoteBonusScore[(int)inst] += 100;
+                                this.nロングノートPart[(int)inst]++;
+                            }
+                        }
                     }
                     else if (e指定時刻からChipのJUDGEを返す(CSoundManager.rcPerformanceTimer.nCurrentTime, chipロングノートHit中[(int)inst].chipロングノート終端, CDTXMania.ConfigIni.nInputAdjustTimeMs[(int)inst]) >= EJudgement.Miss)
                     {
                         cChip2.bロングノートHit中 = false;
                         chipロングノートHit中[(int)inst] = null;
+                        nCurrentLongNoteDuration[(int)inst] = 0;
+                        nロングノートPart[(int)inst] = 0;
                         //EPad e = ((inst == EInstrumentPart.GUITAR) ? EPad.GtPick : EPad.BsPick);
                         int nWaveChannelNum = (inst == EInstrumentPart.GUITAR) ? nLastPlayedWAVNumber.GtPick : nLastPlayedWAVNumber.BsPick;
                         //CDTXMania.DTX.tStopPlayingWav(n最後に再生した実WAV番号[e]);
@@ -5820,6 +5857,11 @@ namespace DTXMania
             this.actBGA.Stop();
             //Reset Hold note cache
             this.chipロングノートHit中 = default(STDGBVALUE<CChip>);
+            this.nロングノートPart = default(STDGBVALUE<int>);
+            this.nCurrentLongNoteDuration = default(STDGBVALUE<int>);
+
+            //Reset Accumulated Score
+            this.nAccumulatedLongNoteBonusScore = default(STDGBVALUE<int>);
 
             // Loop to set new nCurrentTopChip
             // Also, if we are going backward, we need to unhit some chips, and reset TopChip
@@ -6031,6 +6073,10 @@ namespace DTXMania
             this.nCurrentTopChip = CDTXMania.DTX.listChip.Count - 1;   // 終端にシーク
             //Reset Hold note cache
             this.chipロングノートHit中 = default(STDGBVALUE<CChip>);
+            this.nロングノートPart = default(STDGBVALUE<int>);
+            this.nCurrentLongNoteDuration = default(STDGBVALUE<int>);
+            //
+            this.nAccumulatedLongNoteBonusScore = default(STDGBVALUE<int>);
             // 自分自身のOn活性化()相当の処理もすべき。
         }
     }
