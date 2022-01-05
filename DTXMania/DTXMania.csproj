@@ -123,6 +123,7 @@
     <Compile Include="Code\Score,Song\EChannel.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
+    <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarBonus.cs" />
     <Compile Include="Code\Stage\CDTXVmode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

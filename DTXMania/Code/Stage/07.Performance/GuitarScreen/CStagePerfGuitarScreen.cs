@@ -25,6 +25,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actAVI = new CActPerfAVI() );
 			base.listChildActivities.Add( this.actBGA = new CActPerfBGA() );
             base.listChildActivities.Add( this.actGraph = new CActPerfSkillMeter() );
+			base.listChildActivities.Add(this.actGuitarBonus = new CActPerfGuitarBonus());
 //			base.listChildActivities.Add( this.actPanel = new CActPerfPanelString() );
 			base.listChildActivities.Add( this.actScrollSpeed = new CActPerfScrollSpeed() );
 			base.listChildActivities.Add( this.actStatusPanel = new CActPerfGuitarStatusPanel() );
@@ -184,7 +185,7 @@ namespace DTXMania
 
 				this.tUpdateAndDraw_DANGER();
 
-				this.tUpdateAndDraw_WailingBonus();
+				this.tUpdateAndDraw_WailingBonus();				
 				this.tUpdateAndDraw_ScrollSpeed();
 				this.tUpdateAndDraw_ChipAnimation();
                 this.tUpdateAndDraw_BarLines(EInstrumentPart.GUITAR);
@@ -205,6 +206,7 @@ namespace DTXMania
 				this.tUpdateAndDraw_PlaySpeed();
 
 				this.tUpdateAndDraw_ChipFireGB();
+				this.tUpdateAndDraw_GuitarBonus();
 				this.tUpdateAndDraw_STAGEFAILED();
                 bIsFinishedFadeout = this.tUpdateAndDraw_FadeIn_Out();
                 if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )

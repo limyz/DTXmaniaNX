@@ -711,6 +711,7 @@ namespace DTXMania
         protected CActPerfCommonWailingBonus actWailingBonus;
         public CActPerfScrollSpeed actScrollSpeed;
         protected CActPerfSkillMeter actGraph;
+        protected CActPerfGuitarBonus actGuitarBonus;
         protected bool bPAUSE;
         protected STDGBVALUE<bool> bMIDIUsed;
         protected STDGBVALUE<bool> bKeyboardUsed;
@@ -2453,6 +2454,14 @@ namespace DTXMania
             if ((base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED) && (base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED_フェードアウト))
             {
                 this.actWailingBonus.OnUpdateAndDraw();
+            }
+        }
+
+        protected void tUpdateAndDraw_GuitarBonus()
+        {
+            if ((base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED) && (base.ePhaseID != CStage.EPhase.演奏_STAGE_FAILED_フェードアウト))
+            {
+                this.actGuitarBonus.OnUpdateAndDraw();
             }
         }
         protected abstract void tUpdateAndDraw_WailingFrame();
@@ -5341,6 +5350,9 @@ namespace DTXMania
                                 this.actScore.Add(inst, bIsAutoPlay, 100);
                                 //Also accumulate Bonus score to eventually correct Max score computation
                                 this.nAccumulatedLongNoteBonusScore[(int)inst] += 100;
+                                //Set off Bonus Score animation
+                                this.actGuitarBonus.startBonus(inst);
+                                //Increment part number
                                 this.nロングノートPart[(int)inst]++;
                             }
                         }
