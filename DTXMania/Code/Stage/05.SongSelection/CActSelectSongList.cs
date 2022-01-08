@@ -1704,45 +1704,47 @@ namespace DTXMania
 				nDGBmode = 2;
             }
 
-			try
-			{
-				CDTXMania.t安全にDisposeする(ref this.stBarInformation[nBarIndex].txClearLamp);
+			if(sClearLampValues[nDGBmode] != null)
+            {
+				try
+				{
+					CDTXMania.t安全にDisposeする(ref this.stBarInformation[nBarIndex].txClearLamp);
 
-				Bitmap bitmap = new Bitmap(7, 41);
-				SolidBrush[] lampBrushes = { 
+					Bitmap bitmap = new Bitmap(7, 41);
+					SolidBrush[] lampBrushes = {
 					new SolidBrush(Color.FromArgb(255, 148, 215, 255)),
 					new SolidBrush(Color.FromArgb(255, 255, 239, 65)),
 					new SolidBrush(Color.FromArgb(255, 255, 65, 116)),
 					new SolidBrush(Color.FromArgb(255, 255, 66, 255)),
 					new SolidBrush(Color.FromArgb(255, 255, 255, 255))
 				};
-				using (Graphics graphics = Graphics.FromImage(bitmap))
-				{
-                    for (int i = 0; i < 5; i++)
-                    {
-						if(sClearLampValues[nDGBmode][i] == 1)
-                        {
-							graphics.FillRectangle(lampBrushes[i], 1, 33 - 8 * i, 5, 7);
+					using (Graphics graphics = Graphics.FromImage(bitmap))
+					{
+						for (int i = 0; i < 5; i++)
+						{
+							if (sClearLampValues[nDGBmode][i] == 1)
+							{
+								graphics.FillRectangle(lampBrushes[i], 1, 33 - 8 * i, 5, 7);
+							}
+							else if (sClearLampValues[nDGBmode][i] == 2)
+							{
+								graphics.FillRectangle(lampBrushes[4], 1, 1, 5, 7);
+							}
 						}
-						else if(sClearLampValues[nDGBmode][i] == 2)
-                        {
-							graphics.FillRectangle(lampBrushes[4], 1, 1, 5, 7);
-						}
+						this.stBarInformation[nBarIndex].txClearLamp = CDTXMania.tGenerateTexture(bitmap);
 					}
-					this.stBarInformation[nBarIndex].txClearLamp = CDTXMania.tGenerateTexture(bitmap);
+					bitmap.Dispose();
+					for (int i = 0; i < 5; i++)
+					{
+						lampBrushes[i].Dispose();
+					}
 				}
-				bitmap.Dispose();
-                for (int i = 0; i < 5; i++)
-                {
-					lampBrushes[i].Dispose();
+				catch (CTextureCreateFailedException)
+				{
+					Trace.TraceError("Fail to generate Clear Lamp Texture Bar[{0}]", nBarIndex);
+					this.stBarInformation[nBarIndex].txClearLamp = null;
 				}
 			}
-			catch (CTextureCreateFailedException)
-			{
-				Trace.TraceError("Fail to generate Clear Lamp Texture Bar[{0}]", nBarIndex);
-				this.stBarInformation[nBarIndex].txClearLamp = null;
-			}
-
 		}
 
 
