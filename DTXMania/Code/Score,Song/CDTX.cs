@@ -484,389 +484,11 @@ namespace DTXMania
 			}
 
 		}
-		public class CChip : IComparable<CDTX.CChip>, ICloneable
-		{
-			public bool bHit;
-			public bool bVisible = true;    // b可視
-			public double dbChipSizeRatio = 1.0;
-			public double db実数値;
-			public EAVIType eAVI種別;
-			public EBGAType eBGA種別;
-			public EInstrumentPart eInstrumentPart = EInstrumentPart.UNKNOWN;
-			public int nChannelNumber;
-			public STDGBVALUE<int> nDistanceFromBar;
-			public int nIntegerValue;       // n整数値
-			public int nIntegerValue_InternalNumber; // n整数値_内部番号
-			public int n総移動時間;
-			public int nTransparency = 0xff;
-			public int nPlaybackPosition;   // n発声位置
-			public int nPlaybackTimeMs;     // n発声時刻ms
-			public bool bBonusChip;
-			public int nLag;				// 2011.2.1 yyagi
-            public int nCurrentComboForGhost; // 2015.9.29 chnmr0 fork
-			public CDTX.CAVI rAVI;
-            public CDTX.CDirectShow rDShow;
-			public CDTX.CAVIPAN rAVIPan;
-			public CDTX.CBGA rBGA;
-			public CDTX.CBGAPAN rBGAPan;
-			public CDTX.CBMP rBMP;
-			public CDTX.CBMPTEX rBMPTEX;
-			public bool bBPMチップである
-			{
-				get
-				{
-					if (this.nChannelNumber == 3 || this.nChannelNumber == 8) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-			}
-			public bool bWAVを使うチャンネルである
-			{
-				get
-				{
-					switch( this.nChannelNumber )
-					{
-						case 0x01:
-						case 0x11:
-						case 0x12:
-						case 0x13:
-						case 0x14:
-						case 0x15:
-						case 0x16:
-						case 0x17:
-						case 0x18:
-						case 0x19:
-						case 0x1a:
-                        case 0x1b:
-                        case 0x1c:
-						case 0x1f:
-						case 0x20:
-						case 0x21:
-						case 0x22:
-						case 0x23:
-						case 0x24:
-						case 0x25:
-						case 0x26:
-						case 0x27:
-						case 0x2f:
-						case 0x31:
-						case 0x32:
-						case 0x33:
-						case 0x34:
-						case 0x35:
-						case 0x36:
-						case 0x37:
-						case 0x38:
-						case 0x39:
-						case 0x3a:
-						case 0x61:
-						case 0x62:
-						case 0x63:
-						case 0x64:
-						case 0x65:
-						case 0x66:
-						case 0x67:
-						case 0x68:
-						case 0x69:
-						case 0x70:
-						case 0x71:
-						case 0x72:
-						case 0x73:
-						case 0x74:
-						case 0x75:
-						case 0x76:
-						case 0x77:
-						case 0x78:
-						case 0x79:
-						case 0x80:
-						case 0x81:
-						case 0x82:
-						case 0x83:
-						case 0x84:
-						case 0x85:
-						case 0x86:
-						case 0x87:
-						case 0x88:
-						case 0x89:
-						case 0x90:
-						case 0x91:
-						case 0x92:
-
-                        case 147:
-                        case 148:
-                        case 149:
-                        case 150:
-                        case 151:
-                        case 152:
-                        case 153:
-                        case 154:
-                        case 155:
-                        case 156:
-                        case 157:
-                        case 158:
-                        case 159:
-
-						case 0xa0:
-						case 0xa1:
-						case 0xa2:
-						case 0xa3:
-						case 0xa4:
-						case 0xa5:
-						case 0xa6:
-						case 0xa7:
-
-                        case 0xa9:
-                        case 0xaa:
-                        case 0xab:
-                        case 0xac:
-                        case 0xad:
-                        case 0xae:
-
-						case 0xaf:
-						case 0xb1:
-						case 0xb2:
-						case 0xb3:
-						case 0xb4:
-						case 0xb5:
-						case 0xb6:
-						case 0xb7:
-						case 0xb8:
-						case 0xb9:
-						case 0xba:
-						case 0xbb:
-						case 0xbc:
-
-                        case 0xbd:
-                        case 0xbe:
-
-                        case 0xC5:
-                        case 198:
-                        case 200:
-                        case 201:
-                        case 202:
-                        case 203:
-                        case 204:
-                        case 205:
-                        case 206:
-                        case 207:
-                        case 208:
-                        case 209:
-                        case 210:
-                        case 211:
-                        case 218:
-                        case 219:
-                        case 220:
-                        case 221:
-                        case 222:
-                        case 223:
-                        case 0xE1:
-                        case 0xE2:
-                        case 0xE3:
-                        case 0xE4:
-                        case 0xE5:
-                        case 0xE6:
-                        case 0xE7:
-                        case 0xE8:
-							return true;
-					}
-					return false;
-				}
-			}
-			public bool b自動再生音チャンネルである
-			{
-				get
-				{
-					int num = this.nChannelNumber;
-					if( ( ( ( num != 1 ) && ( ( 0x61 > num ) || ( num > 0x69 ) ) ) && ( ( 0x70 > num ) || ( num > 0x79 ) ) ) && ( ( 0x80 > num ) || ( num > 0x89 ) ) )
-					{
-						return ( ( 0x90 <= num ) && ( num <= 0x92 ) );
-					}
-					return true;
-				}
-			}
-			public bool bIsAutoPlayed;						// 2011.6.10 yyagi
-            public bool bChipKeepsPlayingAfterPerfEnds; // #32248 2013.10.14 yyagi
-
-            //fork
-            public int n楽器パートでの出現順;                // #35411 2015.08.20 chnmr0
-            public bool bTargetGhost判定済み;               // #35411 2015.08.22 chnmr0
-			
-			public CChip()
-			{
-				this.nDistanceFromBar = new STDGBVALUE<int>() {
-					Drums = 0,
-					Guitar = 0,
-					Bass = 0,
-				};
-			}
-			public void t初期化()
-			{
-				this.nChannelNumber = 0;
-				this.nIntegerValue = 0;
-				this.nIntegerValue_InternalNumber = 0;
-				this.db実数値 = 0.0;
-				this.nPlaybackPosition = 0;
-				this.nPlaybackTimeMs = 0;
-                this.bBonusChip = false;
-				this.nLag = -999;
-                this.n楽器パートでの出現順 = -1;
-                this.bTargetGhost判定済み = false;
-				this.bIsAutoPlayed = false;
-                this.bChipKeepsPlayingAfterPerfEnds = false;
-				this.dbChipSizeRatio = 1.0;
-				this.bHit = false;
-				this.bVisible = true;
-				this.eInstrumentPart = EInstrumentPart.UNKNOWN;
-				this.nTransparency = 0xff;
-				this.nDistanceFromBar.Drums = 0;
-				this.nDistanceFromBar.Guitar = 0;
-				this.nDistanceFromBar.Bass = 0;
-				this.n総移動時間 = 0;
-			}
-			public override string ToString()
-			{
-				string[] chToStr = 
-				{
-					"??", "バックコーラス", "小節長変更", "BPM変更", "BMPレイヤ1", "??", "??", "BMPレイヤ2",
-					"BPM変更(拡張)", "??", "??", "??", "??", "??", "??", "??",
-					"??", "HHClose", "Snare", "Kick", "HiTom", "LowTom", "Cymbal", "FloorTom",
-					"HHOpen", "RideCymbal", "LeftCymbal", "LeftPedal", "LeftBassDrum", "", "", "ドラム歓声切替",
-					"ギターOPEN", "ギター - - B", "ギター - G -", "ギター - G B", "ギター R - -", "ギター R - B", "ギター R G -", "ギター R G B",
-					"ギターWailing", "??", "??", "??", "??", "??", "??", "ギターWailing音切替",
-					"??", "HHClose(不可視)", "Snare(不可視)", "Kick(不可視)", "HiTom(不可視)", "LowTom(不可視)", "Cymbal(不可視)", "FloorTom(不可視)",
-					"HHOpen(不可視)", "RideCymbal(不可視)", "LeftCymbal(不可視)", "LeftPedal(不可視)", "LeftBassDrum(不可視)", "??", "??", "??",
-					"??", "??", "??", "??", "??", "??", "??", "??", 
-					"??", "??", "??", "??", "??", "??", "??", "??", 
-					"小節線", "拍線", "MIDIコーラス", "フィルイン", "AVI", "??", "BMPレイヤ4", "BMPレイヤ5",
-					"BMPレイヤ6", "BMPレイヤ7", "AVIWIDE", "??", "??", "??", "??", "??", 
-					"BMPレイヤ8", "SE01", "SE02", "SE03", "SE04", "SE05", "SE06", "SE07",
-					"SE08", "SE09", "??", "??", "??", "??", "??", "??", 
-					"SE10", "SE11", "SE12", "SE13", "SE14", "SE15", "SE16", "SE17",
-					"SE18", "SE19", "??", "??", "??", "??", "??", "??", 
-					"SE20", "SE21", "SE22", "SE23", "SE24", "SE25", "SE26", "SE27",
-					"SE28", "SE29", "??", "??", "??", "??", "??", "??", 
-					"SE30", "SE31", "SE32", "---Y-", "--BY-", "-G-Y-", "-GBY-", "R--Y-", 
-					"R-BY-", "RG-Y", "RGBY-", "----P", "--B-P", "-G--P", "-GB-P", "R---P", 
-					"ベースOPEN", "ベース - - B", "ベース - G -", "ベース - G B", "ベース R - -", "ベース R - B", "ベース R G -", "ベース R G B",
-					"ベースWailing", "??", "??", "??", "??", "??", "??", "ベースWailing音切替",
-					"??", "HHClose(空うち)", "Snare(空うち)", "Kick(空うち)", "HiTom(空うち)", "LowTom(空うち)", "Cymbal(空うち)", "FloorTom(空うち)",
-					"HHOpen(空うち)", "RideCymbal(空うち)", "ギター(空打ち)", "ベース(空打ち)", "LeftCymbal(空うち)", "LeftPedal(空うち)", "LeftBassDrum(空うち)", "??", 
-					"??", "??", "??", "??", "BGAスコープ画像切替1", "??", "??", "BGAスコープ画像切替2",
-					"??", "??", "??", "??", "??", "??", "??", "??", 
-					"??", "??", "??", "??", "??", "BGAスコープ画像切替3", "BGAスコープ画像切替4", "BGAスコープ画像切替5",
-					"BGAスコープ画像切替6", "BGAスコープ画像切替7", "??", "??", "??", "??", "??", "??", 
-					"BGAスコープ画像切替8"
-				};
-				return string.Format( "CChip: 位置:{0:D4}.{1:D3}, 時刻{2:D6}, Ch:{3:X2}({4}), Pn:{5}({11})(内部{6}), Pd:{7}, Sz:{8}, UseWav:{9}, Auto:{10}",
-					this.nPlaybackPosition / 384, this.nPlaybackPosition % 384,
-					this.nPlaybackTimeMs,
-					this.nChannelNumber, chToStr[ this.nChannelNumber ],
-					this.nIntegerValue, this.nIntegerValue_InternalNumber,
-					this.db実数値,
-					this.dbChipSizeRatio,
-					this.bWAVを使うチャンネルである,
-					this.b自動再生音チャンネルである,
-					CDTX.tZZ( this.nIntegerValue ) );
-			}
-			/// <summary>
-			/// チップの再生長を取得する。現状、WAVチップとBGAチップでのみ使用可能。
-			/// </summary>
-			/// <returns>再生長(ms)</returns>
-			public int GetDuration()
-			{
-				int nDuration = 0;
-
-				if ( this.bWAVを使うチャンネルである )		// WAV
-				{
-					CDTX.CWAV wc;
-					CDTXMania.DTX.listWAV.TryGetValue( this.nIntegerValue_InternalNumber, out wc );
-					if ( wc == null )
-					{
-						nDuration = 0;
-					}
-					else
-					{
-						nDuration = ( wc.rSound[ 0 ] == null ) ? 0 : wc.rSound[ 0 ].nTotalPlayTimeMs;
-					}
-				}
-				else if ( this.nChannelNumber == 0x54 || this.nChannelNumber == 0x5A )	// AVI
-				{
-					if ( this.rAVI != null && this.rAVI.avi != null )
-					{
-						int dwRate = (int) this.rAVI.avi.dwレート;
-						int dwScale = (int) this.rAVI.avi.dwスケール;
-						nDuration = (int) ( 1000.0f * dwScale / dwRate * this.rAVI.avi.GetMaxFrameCount() );
-					}
-				}
-
-				double _db再生速度 = /*( CDTXMania.DTXVmode.Enabled ) ? CDTXMania.DTX.dbDTXVPlaySpeed :*/ CDTXMania.DTX.db再生速度;
-				return (int) ( nDuration / _db再生速度 );
-			}
-
-			#region [ IComparable 実装 ]
-			//-----------------
-			public int CompareTo( CDTX.CChip other )
-			{
-                //チップの重なり順を決める。16進数で16個ずつ並んでいます。
-				byte[] n優先度 = new byte[] {
-					5, 5, 3, 3, 5, 5, 5, 5, 3, 5, 5, 5, 5, 5, 5, 5, //0x00 ～ 0x0F
-					5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 5, 5, 5, //0x10 ～ 0x1F　ドラム演奏
-					7, 7, 7, 7, 7, 7, 7, 7, 5, 5, 5, 5, 5, 5, 5, 5, //0x20 ～ 0x2F　ギター演奏
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0x30 ～ 0x3F　ドラム不可視
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 8, //0x40 ～ 0x4F　未使用(0x4Fはボーナスチップ)
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0x50 ～ 0x5F　小節線、拍線、フィル、AVIなど
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0x60 ～ 0x6F　BGA、SE
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0x70 ～ 0x7F　SE
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0x80 ～ 0x8F　SE
-					5, 5, 5, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, //0x90 ～ 0x9F　SE、Guitar5レーン
-					7, 7, 7, 7, 7, 7, 7, 7, 5, 7, 7, 7, 7, 7, 7, 7, //0xA0 ～ 0xAF　
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0xB0 ～ 0xBF　
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0xC0 ～ 0xCF　
-					7, 7, 7, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0xD0 ～ 0xDF　
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0xE0 ～ 0xEF　
-					5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, //0xF0 ～ 0xFF　
-				};
-
-
-				// まずは位置で比較。
-
-				if( this.nPlaybackPosition < other.nPlaybackPosition )
-					return -1;
-
-				if( this.nPlaybackPosition > other.nPlaybackPosition )
-					return 1;
-
-
-				// 位置が同じなら優先度で比較。
-
-				if( n優先度[ this.nChannelNumber ] < n優先度[ other.nChannelNumber ] )
-					return -1;
-
-				if( n優先度[ this.nChannelNumber ] > n優先度[ other.nChannelNumber ] )
-					return 1;
-
-
-				// 位置も優先度も同じなら同じと返す。
-
-				return 0;
-			}
-			//-----------------
-			#endregion
-            /// <summary>
-			/// shallow copyです。
-			/// </summary>
-			/// <returns></returns>
-			public object Clone()
-			{
-				return MemberwiseClone();
-			}
-		}
+		
 		public class CWAV : IDisposable
 		{
 			public bool bBGMとして使う;
-			public List<int> listこのWAVを使用するチャンネル番号の集合 = new List<int>( 16 );
+			public List<EChannel> listこのWAVを使用するチャンネル番号の集合 = new List<EChannel>( 16 );
 			public int nチップサイズ = 100;
 			public int n位置;
 			public long[] nPauseTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
@@ -1113,153 +735,153 @@ namespace DTXMania
 				}
 			}
 
-			public void incrementChipCount(int channelNum)
+			public void incrementChipCount(EChannel channelNum)
             {
                 switch (channelNum)
                 {
 					//Guitar Channels
-					case 0x20:
+					case EChannel.Guitar_Open:
 						this.GuitarOpen++;
 						break;
-					case 0x21:
+					case EChannel.Guitar_xxBxx:
 						this.GuitarB++;
 						break;
-					case 0x22:
+					case EChannel.Guitar_xGxxx:
 						this.GuitarG++;
 						break;
-					case 0x23:
-						this.GuitarG++;
-						this.GuitarB++;
-						break;
-					case 0x24:
-						this.GuitarR++;
-						break;
-					case 0x25:
-						this.GuitarR++;
-						this.GuitarB++;
-						break;
-					case 0x26:
-						this.GuitarR++;
-						this.GuitarG++;
-						break;
-					case 0x27:
-						this.GuitarR++;
+					case EChannel.Guitar_xGBxx:
 						this.GuitarG++;
 						this.GuitarB++;
 						break;
-					case 0x28:
+					case EChannel.Guitar_Rxxxx:
+						this.GuitarR++;
+						break;
+					case EChannel.Guitar_RxBxx:
+						this.GuitarR++;
+						this.GuitarB++;
+						break;
+					case EChannel.Guitar_RGxxx:
+						this.GuitarR++;
+						this.GuitarG++;
+						break;
+					case EChannel.Guitar_RGBxx:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						break;
+					case EChannel.Guitar_Wailing:
 						//Guitar Wail
 						break;
-					case 0x93:
+					case EChannel.Guitar_xxxYx:
 						this.GuitarY++;
 						break;
-					case 0x94:
+					case EChannel.Guitar_xxBYx:
 						this.GuitarB++;
 						this.GuitarY++;
 						break;
-					case 0x95:
+					case EChannel.Guitar_xGxYx:
 						this.GuitarG++;
 						this.GuitarY++;
 						break;
-					case 0x96:
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarY++;
-						break;
-					case 0x97:
-						this.GuitarR++;
-						this.GuitarY++;
-						break;
-					case 0x98:
-						this.GuitarR++;
-						this.GuitarB++;
-						this.GuitarY++;
-						break;
-					case 0x99:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarY++;
-						break;
-					case 0x9A:
-						this.GuitarR++;
+					case EChannel.Guitar_xGBYx:
 						this.GuitarG++;
 						this.GuitarB++;
 						this.GuitarY++;
 						break;
-					case 0x9B:
-						this.GuitarP++;
-						break;
-					case 0x9C:
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0x9D:
-						this.GuitarG++;
-						this.GuitarP++;
-						break;
-					case 0x9E:
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0x9F:
+					case EChannel.Guitar_RxxYx:
 						this.GuitarR++;
-						this.GuitarP++;
-						break;
-					case 0xA9:
-						this.GuitarR++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0xAA:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarP++;
-						break;
-					case 0xAB:
-						this.GuitarR++;
-						this.GuitarG++;
-						this.GuitarB++;
-						this.GuitarP++;
-						break;
-					case 0xAC:
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAD:
+					case EChannel.Guitar_RxBYx:
+						this.GuitarR++;
 						this.GuitarB++;
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAE:
+					case EChannel.Guitar_RGxYx:
+						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarY++;
-						this.GuitarP++;
 						break;
-					case 0xAF:
+					case EChannel.Guitar_RGBYx:
+						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarB++;
 						this.GuitarY++;
+						break;
+					case EChannel.Guitar_xxxxP:
 						this.GuitarP++;
 						break;
-					case 0xD0:
+					case EChannel.Guitar_xxBxP:
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGxxP:
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGBxP:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxxxP:
 						this.GuitarR++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxBxP:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGxxP:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGBxP:
+						this.GuitarR++;
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xxxYP:
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD1:
-						this.GuitarR++;
+					case EChannel.Guitar_xxBYP:
 						this.GuitarB++;
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD2:
+					case EChannel.Guitar_xGxYP:
+						this.GuitarG++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_xGBYP:
+						this.GuitarG++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxxYP:
+						this.GuitarR++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RxBYP:
+						this.GuitarR++;
+						this.GuitarB++;
+						this.GuitarY++;
+						this.GuitarP++;
+						break;
+					case EChannel.Guitar_RGxYP:
 						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarY++;
 						this.GuitarP++;
 						break;
-					case 0xD3:
+					case EChannel.Guitar_RGBYP:
 						this.GuitarR++;
 						this.GuitarG++;
 						this.GuitarB++;
@@ -1267,148 +889,148 @@ namespace DTXMania
 						this.GuitarP++;
 						break;
 					//Bass
-					case 0xA0:
+					case EChannel.Bass_Open:
 						this.BassOpen++;
 						break;
-					case 0xA1:
+					case EChannel.Bass_xxBxx:
 						this.BassB++;
 						break;
-					case 0xA2:
+					case EChannel.Bass_xGxxx:
 						this.BassG++;
 						break;
-					case 0xA3:
-						this.BassG++;
-						this.BassB++;
-						break;
-					case 0xA4:
-						this.BassR++;
-						break;
-					case 0xA5:
-						this.BassR++;
-						this.BassB++;
-						break;
-					case 0xA6:
-						this.BassR++;
-						this.BassG++;
-						break;
-					case 0xA7:
-						this.BassR++;
+					case EChannel.Bass_xGBxx:
 						this.BassG++;
 						this.BassB++;
 						break;
-					case 0xA8:
+					case EChannel.Bass_Rxxxx:
+						this.BassR++;
+						break;
+					case EChannel.Bass_RxBxx:
+						this.BassR++;
+						this.BassB++;
+						break;
+					case EChannel.Bass_RGxxx:
+						this.BassR++;
+						this.BassG++;
+						break;
+					case EChannel.Bass_RGBxx:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						break;
+					case EChannel.Bass_Wailing:
 						//Bass Wail
 						break;
-					case 0xC5:
+					case EChannel.Bass_xxxYx:
 						this.BassY++;
 						break;
-					case 0xC6:
+					case EChannel.Bass_xxBYx:
 						this.BassB++;
 						this.BassY++;
 						break;
-					case 0xC8:
+					case EChannel.Bass_xGxYx:
 						this.BassG++;
 						this.BassY++;
 						break;
-					case 0xC9:
-						this.BassG++;
-						this.BassB++;
-						this.BassY++;
-						break;
-					case 0xCA:
-						this.BassR++;
-						this.BassY++;
-						break;
-					case 0xCB:
-						this.BassR++;
-						this.BassB++;
-						this.BassY++;
-						break;
-					case 0xCC:
-						this.BassR++;
-						this.BassG++;
-						this.BassY++;
-						break;
-					case 0xCD:
-						this.BassR++;
+					case EChannel.Bass_xGBYx:
 						this.BassG++;
 						this.BassB++;
 						this.BassY++;
 						break;
-					case 0xCE:
-						this.BassP++;
-						break;
-					case 0xCF:
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDA:
-						this.BassG++;
-						this.BassP++;
-						break;
-					case 0xDB:
-						this.BassG++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDC:
+					case EChannel.Bass_RxxYx:
 						this.BassR++;
-						this.BassP++;
-						break;
-					case 0xDD:
-						this.BassR++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xDE:
-						this.BassR++;
-						this.BassG++;
-						this.BassP++;
-						break;
-					case 0xDF:
-						this.BassR++;
-						this.BassG++;
-						this.BassB++;
-						this.BassP++;
-						break;
-					case 0xE1:
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE2:
+					case EChannel.Bass_RxBYx:
+						this.BassR++;
 						this.BassB++;
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE3:
+					case EChannel.Bass_RGxYx:
+						this.BassR++;
 						this.BassG++;
 						this.BassY++;
-						this.BassP++;
 						break;
-					case 0xE4:
+					case EChannel.Bass_RGBYx:
+						this.BassR++;
 						this.BassG++;
 						this.BassB++;
 						this.BassY++;
+						break;
+					case EChannel.Bass_xxxxP:
 						this.BassP++;
 						break;
-					case 0xE5:
+					case EChannel.Bass_xxBxP:
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGxxP:
+						this.BassG++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGBxP:
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxxxP:
 						this.BassR++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxBxP:
+						this.BassR++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGxxP:
+						this.BassR++;
+						this.BassG++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGBxP:
+						this.BassR++;
+						this.BassG++;
+						this.BassB++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xxxYP:
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE6:
-						this.BassR++;
+					case EChannel.Bass_xxBYP:
 						this.BassB++;
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE7:
+					case EChannel.Bass_xGxYP:
+						this.BassG++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_xGBYP:
+						this.BassG++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxxYP:
+						this.BassR++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RxBYP:
+						this.BassR++;
+						this.BassB++;
+						this.BassY++;
+						this.BassP++;
+						break;
+					case EChannel.Bass_RGxYP:
 						this.BassR++;
 						this.BassG++;
 						this.BassY++;
 						this.BassP++;
 						break;
-					case 0xE8:
+					case EChannel.Bass_RGBYP:
 						this.BassR++;
 						this.BassG++;
 						this.BassB++;
@@ -1842,27 +1464,27 @@ namespace DTXMania
 
 			#region [ 2011.1.1 yyagi GDA->DTX変換テーブル リファクタ後 ]
 			STGDAPARAM[] stgdaparamArray = new STGDAPARAM[] {		// GDA->DTX conversion table
-				new STGDAPARAM("TC", 0x03),	new STGDAPARAM("BL", 0x02),	new STGDAPARAM("GS", 0x29),
-				new STGDAPARAM("DS", 0x30),	new STGDAPARAM("FI", 0x53),	new STGDAPARAM("HH", 0x11),
-				new STGDAPARAM("SD", 0x12),	new STGDAPARAM("BD", 0x13),	new STGDAPARAM("HT", 0x14),
-				new STGDAPARAM("LT", 0x15),	new STGDAPARAM("CY", 0x16),	new STGDAPARAM("G1", 0x21),
-				new STGDAPARAM("G2", 0x22),	new STGDAPARAM("G3", 0x23),	new STGDAPARAM("G4", 0x24),
-				new STGDAPARAM("G5", 0x25),	new STGDAPARAM("G6", 0x26),	new STGDAPARAM("G7", 0x27),
-				new STGDAPARAM("GW", 0x28),	new STGDAPARAM("01", 0x61),	new STGDAPARAM("02", 0x62),
-				new STGDAPARAM("03", 0x63),	new STGDAPARAM("04", 0x64),	new STGDAPARAM("05", 0x65),
-				new STGDAPARAM("06", 0x66),	new STGDAPARAM("07", 0x67),	new STGDAPARAM("08", 0x68),
-				new STGDAPARAM("09", 0x69),	new STGDAPARAM("0A", 0x70),	new STGDAPARAM("0B", 0x71),
-				new STGDAPARAM("0C", 0x72),	new STGDAPARAM("0D", 0x73),	new STGDAPARAM("0E", 0x74),
-				new STGDAPARAM("0F", 0x75),	new STGDAPARAM("10", 0x76),	new STGDAPARAM("11", 0x77),
-				new STGDAPARAM("12", 0x78),	new STGDAPARAM("13", 0x79),	new STGDAPARAM("14", 0x80),
-				new STGDAPARAM("15", 0x81),	new STGDAPARAM("16", 0x82),	new STGDAPARAM("17", 0x83),
-				new STGDAPARAM("18", 0x84),	new STGDAPARAM("19", 0x85),	new STGDAPARAM("1A", 0x86),
-				new STGDAPARAM("1B", 0x87),	new STGDAPARAM("1C", 0x88),	new STGDAPARAM("1D", 0x89),
-				new STGDAPARAM("1E", 0x90),	new STGDAPARAM("1F", 0x91),	new STGDAPARAM("20", 0x92),
-				new STGDAPARAM("B1", 0xA1),	new STGDAPARAM("B2", 0xA2),	new STGDAPARAM("B3", 0xA3),
-				new STGDAPARAM("B4", 0xA4),	new STGDAPARAM("B5", 0xA5),	new STGDAPARAM("B6", 0xA6),
-				new STGDAPARAM("B7", 0xA7),	new STGDAPARAM("BW", 0xA8),	new STGDAPARAM("G0", 0x20),
-				new STGDAPARAM("B0", 0xA0)
+				new STGDAPARAM("TC", EChannel.BPM),	new STGDAPARAM("BL", EChannel.BarLength),	new STGDAPARAM("GS", EChannel.flowspeed_gt_nouse),
+				new STGDAPARAM("DS", EChannel.flowspeed_dr_nouse),	new STGDAPARAM("FI", EChannel.FillIn),	new STGDAPARAM("HH", EChannel.HiHatClose),
+				new STGDAPARAM("SD", EChannel.Snare),	new STGDAPARAM("BD", EChannel.BassDrum),	new STGDAPARAM("HT", EChannel.HighTom),
+				new STGDAPARAM("LT", EChannel.LowTom),	new STGDAPARAM("CY", EChannel.Cymbal),	new STGDAPARAM("G1", EChannel.Guitar_xxBxx),
+				new STGDAPARAM("G2", EChannel.Guitar_xGxxx),	new STGDAPARAM("G3", EChannel.Guitar_xGBxx),	new STGDAPARAM("G4", EChannel.Guitar_Rxxxx),
+				new STGDAPARAM("G5", EChannel.Guitar_RxBxx),	new STGDAPARAM("G6", EChannel.Guitar_RGxxx),	new STGDAPARAM("G7", EChannel.Guitar_RGBxx),
+				new STGDAPARAM("GW", EChannel.Guitar_Wailing),	new STGDAPARAM("01", EChannel.SE01),	new STGDAPARAM("02", EChannel.SE02),
+				new STGDAPARAM("03", EChannel.SE03),	new STGDAPARAM("04", EChannel.SE04),	new STGDAPARAM("05", EChannel.SE05),
+				new STGDAPARAM("06", EChannel.SE06),	new STGDAPARAM("07", EChannel.SE07),	new STGDAPARAM("08", EChannel.SE08),
+				new STGDAPARAM("09", EChannel.SE09),	new STGDAPARAM("0A", EChannel.SE10),	new STGDAPARAM("0B", EChannel.SE11),
+				new STGDAPARAM("0C", EChannel.SE12),	new STGDAPARAM("0D", EChannel.SE13),	new STGDAPARAM("0E", EChannel.SE14),
+				new STGDAPARAM("0F", EChannel.SE15),	new STGDAPARAM("10", EChannel.SE16),	new STGDAPARAM("11", EChannel.SE17),
+				new STGDAPARAM("12", EChannel.SE18),	new STGDAPARAM("13", EChannel.SE19),	new STGDAPARAM("14", EChannel.SE20),
+				new STGDAPARAM("15", EChannel.SE21),	new STGDAPARAM("16", EChannel.SE22),	new STGDAPARAM("17", EChannel.SE23),
+				new STGDAPARAM("18", EChannel.SE24),	new STGDAPARAM("19", EChannel.SE25),	new STGDAPARAM("1A", EChannel.SE26),
+				new STGDAPARAM("1B", EChannel.SE27),	new STGDAPARAM("1C", EChannel.SE28),	new STGDAPARAM("1D", EChannel.SE29),
+				new STGDAPARAM("1E", EChannel.SE30),	new STGDAPARAM("1F", EChannel.SE31),	new STGDAPARAM("20", EChannel.SE32),
+				new STGDAPARAM("B1", EChannel.Bass_xxBxx),	new STGDAPARAM("B2", EChannel.Bass_xGxxx),	new STGDAPARAM("B3", EChannel.Bass_xGBxx),
+				new STGDAPARAM("B4", EChannel.Bass_Rxxxx),	new STGDAPARAM("B5", EChannel.Bass_RxBxx),	new STGDAPARAM("B6", EChannel.Bass_RGxxx),
+				new STGDAPARAM("B7", EChannel.Bass_RGBxx),	new STGDAPARAM("BW", EChannel.Bass_Wailing),	new STGDAPARAM("G0", EChannel.Guitar_Open),
+				new STGDAPARAM("B0", EChannel.Bass_Open)
 			};
 			this.stGDAParam = stgdaparamArray;
 			#endregion
@@ -1956,7 +1578,7 @@ namespace DTXMania
 			{
 				foreach( CChip chip in this.listChip )
 				{
-					if( chip.nChannelNumber == 0x54 || chip.nChannelNumber == 0x5A )
+					if( chip.nChannelNumber == EChannel.Movie || chip.nChannelNumber == EChannel.MovieFull)
 					{
 						chip.eAVI種別 = EAVIType.Unknown;
 						chip.rAVI = null;
@@ -2145,7 +1767,7 @@ namespace DTXMania
 				foreach ( CChip chip in this.listChip )
 				{
 					#region [ BGAPAN/BGA/BMPTEX/BMP ]
-					if ( ( ( ( chip.nChannelNumber == 4 ) || ( chip.nChannelNumber == 7 ) ) || ( ( chip.nChannelNumber >= 0x55 ) && ( chip.nChannelNumber <= 0x59 ) ) ) || ( chip.nChannelNumber == 0x60 ) )
+					if ( ( ( ( chip.nChannelNumber == EChannel.BGALayer1) || ( chip.nChannelNumber == EChannel.BGALayer2) ) || ( ( chip.nChannelNumber >= EChannel.BGALayer3) && ( chip.nChannelNumber <= EChannel.BGALayer7) ) ) || ( chip.nChannelNumber == EChannel.BGALayer8) )
 					{
 						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
@@ -2211,7 +1833,7 @@ namespace DTXMania
 					}
 					#endregion
 					#region [ BGA入れ替え ]
-					if ( ( ( ( chip.nChannelNumber == 0xc4 ) || ( chip.nChannelNumber == 0xc7 ) ) || ( ( chip.nChannelNumber >= 0xd5 ) && ( chip.nChannelNumber <= 0xd9 ) ) ) || ( chip.nChannelNumber == 0xe0 ) )
+					if ( ( ( ( chip.nChannelNumber == EChannel.BGALayer1_Swap) || ( chip.nChannelNumber == EChannel.BGALayer2_Swap) ) || ( ( chip.nChannelNumber >= EChannel.BGALayer3_Swap) && ( chip.nChannelNumber <= EChannel.BGALayer7_Swap) ) ) || ( chip.nChannelNumber == EChannel.BGALayer8_Swap) )
 					{
 						chip.eBGA種別 = EBGAType.Unknown;
 						chip.rBMP = null;
@@ -2238,9 +1860,9 @@ namespace DTXMania
             if (part == EInstrumentPart.DRUMS && bAssignToLBD)
             {
                 bool flag = false;
-                foreach (CDTX.CChip current in this.listChip)
+                foreach (CChip current in this.listChip)
                 {
-                    if (part == EInstrumentPart.DRUMS && (current.nChannelNumber == 27 || current.nChannelNumber == 28))
+                    if (part == EInstrumentPart.DRUMS && (current.nChannelNumber == EChannel.LeftPedal || current.nChannelNumber == EChannel.LeftBassDrum))
                     {
                         flag = true;
                         break;
@@ -2250,16 +1872,16 @@ namespace DTXMania
                 {
                     int num = 0;
                     bool flag2 = false;
-                    foreach (CDTX.CChip current2 in this.listChip)
+                    foreach (CChip current2 in this.listChip)
                     {
-                        if (part == EInstrumentPart.DRUMS && current2.nChannelNumber == 19)
+                        if (part == EInstrumentPart.DRUMS && current2.nChannelNumber == EChannel.BassDrum)
                         {
                             if (!flag2 && current2.nPlaybackTimeMs - num < 150)
                             {
-                                current2.nChannelNumber = 28;
+                                current2.nChannelNumber = EChannel.LeftBassDrum;
                             }
                             num = current2.nPlaybackTimeMs;
-                            flag2 = (current2.nChannelNumber == 28);
+                            flag2 = (current2.nChannelNumber == EChannel.LeftBassDrum);
                         }
                     }
                 }
@@ -2277,8 +1899,8 @@ namespace DTXMania
                     int num3 = 0;
                     int num4 = 0;
                     int num5 = -1;
-                    int num6 = 0;
-                    int num7 = 0;
+                    EChannel num6 = 0;
+					EChannel num7 = 0;
                     bool flag = false;
                     for (int i = 0; i < 1000; i++)
                     {
@@ -2287,18 +1909,18 @@ namespace DTXMania
                     foreach (CChip chip in this.listChip)
                     {
                         bool flag2 = false;
-                        int num9 = chip.nChannelNumber;
-                        if ((part == EInstrumentPart.DRUMS) && ((num9 == 0x13) || (num9 == 0x1c)))
+                        EChannel num9 = chip.nChannelNumber;
+                        if ((part == EInstrumentPart.DRUMS) && ((num9 == EChannel.BassDrum) || (num9 == EChannel.LeftBassDrum)))
                         {
                             num++;
-                            if (((num6 == 0x13) && (chip.nPlaybackPosition == num3)) || ((num6 == 0x1c) && (chip.nPlaybackPosition == num4)))
+                            if (((num6 == EChannel.BassDrum) && (chip.nPlaybackPosition == num3)) || ((num6 == EChannel.LeftBassDrum) && (chip.nPlaybackPosition == num4)))
                             {
-                                chip.nChannelNumber = (num7 == 0x13) ? 0x1c : 0x13;
+                                chip.nChannelNumber = (num7 == EChannel.BassDrum) ? EChannel.LeftBassDrum : EChannel.BassDrum;
                                 flag2 = true;
                             }
-                            else if (num9 == 0x1c)
+                            else if (num9 == EChannel.LeftBassDrum)
                             {
-                                if ((num6 == 0x13) && ((chip.nPlaybackPosition - num3) <= 0x60))
+                                if ((num6 == EChannel.BassDrum) && ((chip.nPlaybackPosition - num3) <= 0x60))
                                 {
                                     if (!flag)
                                     {
@@ -2307,11 +1929,11 @@ namespace DTXMania
                                             numArray[index++] = num - 1;
                                         }
                                         flag = true;
-                                        chip.nChannelNumber = 0x13;
+                                        chip.nChannelNumber = EChannel.BassDrum;
                                     }
                                     else
                                     {
-                                        chip.nChannelNumber = 0x13;
+                                        chip.nChannelNumber = EChannel.BassDrum;
                                     }
                                     num5 = chip.nPlaybackPosition - num3;
                                 }
@@ -2324,7 +1946,7 @@ namespace DTXMania
                             }
                             else
                             {
-                                if ((num6 == 0x1c) && ((chip.nPlaybackPosition - num4) <= 0x60))
+                                if ((num6 == EChannel.LeftBassDrum) && ((chip.nPlaybackPosition - num4) <= 0x60))
                                 {
                                     if (!flag)
                                     {
@@ -2332,7 +1954,7 @@ namespace DTXMania
                                         {
                                             numArray[index++] = num - 1;
                                             flag = true;
-                                            chip.nChannelNumber = 0x1c;
+                                            chip.nChannelNumber = EChannel.LeftBassDrum;
                                         }
                                         else
                                         {
@@ -2345,7 +1967,7 @@ namespace DTXMania
                                     }
                                     else
                                     {
-                                        chip.nChannelNumber = 0x1c;
+                                        chip.nChannelNumber = EChannel.LeftBassDrum;
                                     }
                                     num5 = chip.nPlaybackPosition - num4;
                                 }
@@ -2358,7 +1980,7 @@ namespace DTXMania
                             }
                             num6 = num9;
                             num7 = chip.nChannelNumber;
-                            if (num9 == 0x13)
+                            if (num9 == EChannel.BassDrum)
                             {
                                 num3 = chip.nPlaybackPosition;
                                 int num1 = chip.nPlaybackTimeMs;
@@ -2374,13 +1996,13 @@ namespace DTXMania
                     index = 0;
                     foreach (CChip chip2 in this.listChip)
                     {
-                        int num10 = chip2.nChannelNumber;
-                        if ((part == EInstrumentPart.DRUMS) && ((num10 == 0x13) || (num10 == 0x1c)))
+                        EChannel num10 = chip2.nChannelNumber;
+                        if ((part == EInstrumentPart.DRUMS) && ((num10 == EChannel.BassDrum) || (num10 == EChannel.LeftBassDrum)))
                         {
                             num++;
                             if (num == numArray[index])
                             {
-                                chip2.nChannelNumber = (num10 == 0x13) ? 0x1c : 0x13;
+                                chip2.nChannelNumber = (num10 == EChannel.BassDrum) ? EChannel.LeftBassDrum : EChannel.BassDrum;
                                 index++;
                             }
                         }
@@ -2391,16 +2013,16 @@ namespace DTXMania
                     int num11 = 0;
                     foreach (CChip chip3 in this.listChip)
                     {
-                        int num12 = chip3.nChannelNumber;
-                        if ((part == EInstrumentPart.DRUMS) && ((num12 == 0x13) || (num12 == 0x1c)))
+                        EChannel num12 = chip3.nChannelNumber;
+                        if ((part == EInstrumentPart.DRUMS) && ((num12 == EChannel.BassDrum) || (num12 == EChannel.LeftBassDrum)))
                         {
                             if (num11 == chip3.nPlaybackPosition)
                             {
-                                chip3.nChannelNumber = 0x76;
+                                chip3.nChannelNumber = EChannel.SE16;
                             }
-                            else if (num12 == 0x1c)
+                            else if (num12 == EChannel.LeftBassDrum)
                             {
-                                chip3.nChannelNumber = 0x13;
+                                chip3.nChannelNumber = EChannel.BassDrum;
                             }
                             num11 = chip3.nPlaybackPosition;
                         }
@@ -2420,16 +2042,16 @@ namespace DTXMania
                 {
                     foreach (CChip chip in this.listChip)
                     {
-                        int nチャンネル番号 = chip.nChannelNumber;
-                        if ((part == EInstrumentPart.DRUMS) && ((nチャンネル番号 == 0x19) || (nチャンネル番号 == 0x16)))
+						EChannel nチャンネル番号 = chip.nChannelNumber;
+                        if ((part == EInstrumentPart.DRUMS) && ((nチャンネル番号 == EChannel.RideCymbal) || (nチャンネル番号 == EChannel.Cymbal)))
                         {
                             if (num == chip.nPlaybackPosition)
                             {
-                                chip.nChannelNumber = 0x1a;
+                                chip.nChannelNumber = EChannel.LeftCymbal;
                             }
-                            else if (nチャンネル番号 == 0x19)
+                            else if (nチャンネル番号 == EChannel.RideCymbal)
                             {
-                                chip.nChannelNumber = 0x16;
+                                chip.nChannelNumber = EChannel.Cymbal;
                             }
                             num = chip.nPlaybackPosition;
                         }
@@ -2439,89 +2061,89 @@ namespace DTXMania
                 {
                     bool flag = false;
                     bool flag2 = false;
-                    int num3 = 0;
-                    int num4 = 0;
+                    EChannel num3 = 0;
+                    EChannel num4 = 0;
                     int num5 = 0;
                     int num6 = 0;
                     foreach (CChip chip in this.listChip)
                     {
-                        int num7 = chip.nChannelNumber;
-                        if ((part == EInstrumentPart.DRUMS) && ((num7 >= 0x11) || (num7 <= 0x1c)))
+                        EChannel num7 = chip.nChannelNumber;
+                        if ((part == EInstrumentPart.DRUMS) && ((num7 >= EChannel.HiHatClose) || (num7 <= EChannel.LeftBassDrum)))
                         {
                             switch (num7)
                             {
-                                case 0x11:
-                                case 0x16:
-                                case 0x18:
+                                case EChannel.HiHatClose:
+                                case EChannel.Cymbal:
+                                case EChannel.HiHatOpen:
                                     if (num6 == chip.nPlaybackPosition)
                                     {
-                                        chip.nChannelNumber = (num4 == 0x16) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = (num4 == EChannel.Cymbal) ? EChannel.HiHatClose : EChannel.Cymbal;
                                     }
-                                    flag2 = num7 == 0x16;
+                                    flag2 = num7 == EChannel.Cymbal;
                                     num4 = chip.nChannelNumber;
                                     num6 = chip.nPlaybackPosition;
                                     continue;
 
 
-                                case 0x12:
-                                case 0x13:
+                                case EChannel.Snare:
+                                case EChannel.BassDrum:
                                     {
                                         continue;
                                     }
-                                case 0x14:
+                                case EChannel.HighTom:
                                     {
-                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == 20)) ? 0x15 : 20;
+                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == EChannel.HighTom)) ? EChannel.LowTom : EChannel.HighTom;
                                         flag = false;
                                         num3 = chip.nChannelNumber;
                                         num5 = chip.nPlaybackPosition;
                                         continue;
                                     }
-                                case 0x15:
+                                case EChannel.LowTom:
                                     if (num5 != chip.nPlaybackPosition)
                                     {
                                         if (flag)
                                         {
-                                            chip.nChannelNumber = 20;
+                                            chip.nChannelNumber = EChannel.HighTom;
                                         }
                                     }
-                                    if (num3 == 0x15)
+                                    if (num3 == EChannel.LowTom)
                                     {
-                                        chip.nChannelNumber = 20;
+                                        chip.nChannelNumber = EChannel.HighTom;
                                     }
                                     num3 = chip.nChannelNumber;
                                     num5 = chip.nPlaybackPosition;
                                     continue;
 
-                                case 0x17:
+                                case EChannel.FloorTom:
                                     {
-                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == 0x15)) ? 20 : 0x15;
+                                        chip.nChannelNumber = ((num5 == chip.nPlaybackPosition) && (num3 == EChannel.LowTom)) ? EChannel.HighTom : EChannel.LowTom;
                                         flag = true;
                                         num3 = chip.nChannelNumber;
                                         num5 = chip.nPlaybackPosition;
                                         continue;
                                     }
-                                case 0x19:
+                                case EChannel.RideCymbal:
                                     {
-                                        chip.nChannelNumber = ((num6 == chip.nPlaybackPosition) && (num4 == 0x16)) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = ((num6 == chip.nPlaybackPosition) && (num4 == EChannel.Cymbal)) ? EChannel.HiHatClose : EChannel.Cymbal;
                                         flag2 = true;
                                         num4 = chip.nChannelNumber;
                                         num6 = chip.nPlaybackPosition;
                                         continue;
                                     }
-                                case 0x1a:
+                                case EChannel.LeftCymbal:
                                     if (num6 != chip.nPlaybackPosition)
                                     {
-                                        chip.nChannelNumber = (flag2 && ((chip.nPlaybackPosition - num6) <= 0xc0)) ? 0x11 : 0x16;
+                                        chip.nChannelNumber = (flag2 && ((chip.nPlaybackPosition - num6) <= 0xc0)) ? EChannel.HiHatClose : EChannel.Cymbal;
                                     }
-                                    chip.nChannelNumber = (num4 == 0x16) ? 0x11 : 0x16;
+                                    chip.nChannelNumber = (num4 == EChannel.Cymbal) ? EChannel.HiHatClose : EChannel.Cymbal;
                                     num4 = chip.nChannelNumber;
                                     num6 = chip.nPlaybackPosition;
                                     continue;
 
-                                case 0x1b:
-                                case 0x1c:
+                                case EChannel.LeftPedal:
+                                case EChannel.LeftBassDrum:
                                     {
-                                        chip.nChannelNumber = 0x76;
+                                        chip.nChannelNumber = EChannel.SE16;
                                         continue;
                                     }
                             }
@@ -2533,53 +2155,53 @@ namespace DTXMania
             }
         }
 
-        private static void tミラーチップのチャンネルを指定する( CDTX.CChip chip, int nミラー化前チャンネル番号 )
+        private static void tミラーチップのチャンネルを指定する( CChip chip, EChannel nミラー化前チャンネル番号 )
         {
             switch( nミラー化前チャンネル番号 )
             {
-                case 0x11:
-                case 0x18:
+                case EChannel.HiHatClose:
+                case EChannel.HiHatOpen:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.B )
                     {
-                        chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A ) ? 0x19 : 0x16 );
+                        chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A ) ? EChannel.RideCymbal : EChannel.Cymbal );
                         return;
                     }
                     break;
-                case 0x12:
-                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 21 : 23 );
+                case EChannel.Snare:
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? EChannel.LowTom : EChannel.FloorTom );
                     return;
-                case 0x13:
+                case EChannel.BassDrum:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                     {
-                        chip.nChannelNumber = 0x1C;
+                        chip.nChannelNumber = EChannel.LeftBassDrum;
                         return;
                     }
                     break;
-                case 0x14:
+                case EChannel.HighTom:
                     if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                     {
-                        chip.nChannelNumber = 0x15;
+                        chip.nChannelNumber = EChannel.LowTom;
                         return;
                     }
                     break;
-                case 0x15:
-                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x12 : 0x14);
+                case EChannel.LowTom:
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? EChannel.Snare : EChannel.HighTom);
                     return;
-                case 0x16:
-                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? 0x11 : 0x1A);
+                case EChannel.Cymbal:
+                    chip.nChannelNumber = ( (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.C ) ? EChannel.HiHatClose : EChannel.LeftCymbal);
                     return;
-                case 0x17:
-                    chip.nChannelNumber = 0x12;
+                case EChannel.FloorTom:
+                    chip.nChannelNumber = EChannel.Snare;
                     return;
-                case 0x19:
-                    chip.nChannelNumber = 0x11;
+                case EChannel.RideCymbal:
+                    chip.nChannelNumber = EChannel.HiHatClose;
                     return;
-                case 0x1A:
-                    chip.nChannelNumber = 0x16;
+                case EChannel.LeftCymbal:
+                    chip.nChannelNumber = EChannel.Cymbal;
                     return;
-                case 0x1B:
-                case 0x1C:
-                    chip.nChannelNumber = 0x13;
+                case EChannel.LeftPedal:
+                case EChannel.LeftBassDrum:
+                    chip.nChannelNumber = EChannel.BassDrum;
                     break;
                 default:
                     return;
@@ -2589,10 +2211,10 @@ namespace DTXMania
         {
             if (part == EInstrumentPart.DRUMS && eRandom == ERandomMode.MIRROR)
             {
-                foreach (CDTX.CChip current in this.listChip)
+                foreach (CChip current in this.listChip)
                 {
-                    int nチャンネル番号 = current.nChannelNumber;
-                    if (part == EInstrumentPart.DRUMS && 0x11 <= nチャンネル番号 && nチャンネル番号 != 0x13 && nチャンネル番号 <= 0x1A)
+					EChannel nチャンネル番号 = current.nChannelNumber;
+                    if (part == EInstrumentPart.DRUMS && EChannel.HiHatClose <= nチャンネル番号 && nチャンネル番号 != EChannel.BassDrum && nチャンネル番号 <= EChannel.LeftCymbal)
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
                     }
@@ -2602,7 +2224,7 @@ namespace DTXMania
             {
                 if (CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
                 {
-                    int num = 0;
+					EChannel num = 0;
                     int num2 = 0;
                     int num3 = 0;
                     int num4 = -10000;
@@ -2613,9 +2235,9 @@ namespace DTXMania
                     {
                         while (enumerator.MoveNext())
                         {
-                            CDTX.CChip current = enumerator.Current;
-                            int nチャンネル番号 = current.nChannelNumber;
-                            if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号 && nチャンネル番号 <= 26 && nチャンネル番号 != 19)
+                            CChip current = enumerator.Current;
+							EChannel nチャンネル番号 = current.nChannelNumber;
+                            if (part == EInstrumentPart.DRUMS && EChannel.HiHatClose <= nチャンネル番号 && nチャンネル番号 <= EChannel.LeftCymbal && nチャンネル番号 != EChannel.BassDrum)
                             {
                                 switch (eRandom)
                                 {
@@ -2639,18 +2261,18 @@ namespace DTXMania
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
                                     case ERandomMode.MASTERRANDOM:
-                                        if (nチャンネル番号 == 18 || nチャンネル番号 == 20 || nチャンネル番号 == 21 || nチャンネル番号 == 23)
+                                        if (nチャンネル番号 == EChannel.Snare || nチャンネル番号 == EChannel.HighTom || nチャンネル番号 == EChannel.LowTom || nチャンネル番号 == EChannel.FloorTom)
                                         {
                                             if (num3 != current.nPlaybackPosition || num2 != 2)
                                             {
-                                                current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + 17;
+                                                current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + EChannel.HiHatClose;
                                             }
                                             else
                                             {
                                                 int num5 = 0;
                                                 while (num5 == 0)
                                                 {
-                                                    current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + 17;
+                                                    current.nChannelNumber = array2[CDTXMania.Random.Next(4)] + EChannel.HiHatClose;
                                                     num5 = 1;
                                                     if (current.nChannelNumber == num)
                                                     {
@@ -2664,14 +2286,14 @@ namespace DTXMania
                                         {
                                             if (num3 != current.nPlaybackPosition || num2 != 1)
                                             {
-                                                current.nChannelNumber = array[CDTXMania.Random.Next(4)] + 17;
+                                                current.nChannelNumber = array[CDTXMania.Random.Next(4)] + EChannel.HiHatClose;
                                             }
                                             else
                                             {
                                                 int num6 = 0;
                                                 while (num6 == 0)
                                                 {
-                                                    current.nChannelNumber = array[CDTXMania.Random.Next(4)] + 17;
+                                                    current.nChannelNumber = array[CDTXMania.Random.Next(4)] + EChannel.HiHatClose;
                                                     num6 = 1;
                                                     if (current.nChannelNumber == num)
                                                     {
@@ -2685,25 +2307,25 @@ namespace DTXMania
                                         num = current.nChannelNumber;
                                         break;
                                     case ERandomMode.ANOTHERRANDOM:
-                                        if (nチャンネル番号 == 17 || nチャンネル番号 == 24 || nチャンネル番号 == 26)
+                                        if (nチャンネル番号 == EChannel.HiHatClose || nチャンネル番号 == EChannel.HiHatOpen || nチャンネル番号 == EChannel.LeftCymbal)
                                         {
                                             if (num2 != 1 || num3 != current.nPlaybackPosition)
                                             {
                                                 if (CDTXMania.Random.Next(4) == 0)
                                                 {
-                                                    current.nChannelNumber = ((nチャンネル番号 == 26) ? 17 : 26);
+                                                    current.nChannelNumber = ((nチャンネル番号 == EChannel.LeftCymbal) ? EChannel.HiHatClose : EChannel.LeftCymbal);
                                                 }
                                                 else
                                                 {
-                                                    if (nチャンネル番号 == 24)
+                                                    if (nチャンネル番号 == EChannel.HiHatOpen)
                                                     {
-                                                        current.nChannelNumber = 17;
+                                                        current.nChannelNumber = EChannel.HiHatClose;
                                                     }
                                                 }
                                             }
                                             else
                                             {
-                                                current.nChannelNumber = ((num == 17 || num == 24) ? 26 : 17);
+                                                current.nChannelNumber = ((num == EChannel.HiHatClose || num == EChannel.HiHatOpen) ? EChannel.LeftCymbal : EChannel.HiHatClose);
                                             }
                                             num = current.nChannelNumber;
                                             num2 = 1;
@@ -2711,18 +2333,18 @@ namespace DTXMania
                                         }
                                         else
                                         {
-                                            if (nチャンネル番号 == 18 || nチャンネル番号 == 20)
+                                            if (nチャンネル番号 == EChannel.Snare || nチャンネル番号 == EChannel.HighTom)
                                             {
                                                 if (num2 != 2 || num3 != current.nPlaybackPosition)
                                                 {
                                                     if (CDTXMania.Random.Next(4) == 0)
                                                     {
-                                                        current.nChannelNumber = ((nチャンネル番号 == 18) ? 20 : 18);
+                                                        current.nChannelNumber = ((nチャンネル番号 == EChannel.Snare) ? EChannel.HighTom : EChannel.Snare);
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    current.nChannelNumber = ((num == 18) ? 20 : 18);
+                                                    current.nChannelNumber = ((num == EChannel.Snare) ? EChannel.HighTom : EChannel.Snare);
                                                 }
                                                 num = current.nChannelNumber;
                                                 num2 = 2;
@@ -2730,18 +2352,18 @@ namespace DTXMania
                                             }
                                             else
                                             {
-                                                if (nチャンネル番号 == 21 || nチャンネル番号 == 23)
+                                                if (nチャンネル番号 == EChannel.LowTom || nチャンネル番号 == EChannel.FloorTom)
                                                 {
                                                     if (num2 != 5 || num3 != current.nPlaybackPosition)
                                                     {
                                                         if (CDTXMania.Random.Next(4) == 0)
                                                         {
-                                                            current.nChannelNumber = ((nチャンネル番号 == 21) ? 23 : 21);
+                                                            current.nChannelNumber = ((nチャンネル番号 == EChannel.LowTom) ? EChannel.FloorTom : EChannel.LowTom);
                                                         }
                                                     }
                                                     else
                                                     {
-                                                        current.nChannelNumber = ((num == 21) ? 23 : 21);
+                                                        current.nChannelNumber = ((num == EChannel.LowTom) ? EChannel.FloorTom : EChannel.LowTom);
                                                     }
                                                     num = current.nChannelNumber;
                                                     num2 = 5;
@@ -2749,18 +2371,18 @@ namespace DTXMania
                                                 }
                                                 else
                                                 {
-                                                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A && (nチャンネル番号 == 22 || nチャンネル番号 == 25))
+                                                    if (CDTXMania.ConfigIni.eNumOfLanes.Drums == DTXMania.EType.A && (nチャンネル番号 == EChannel.Cymbal || nチャンネル番号 == EChannel.RideCymbal))
                                                     {
                                                         if (num2 != 6 || num3 != current.nPlaybackPosition)
                                                         {
                                                             if (CDTXMania.Random.Next(4) == 0)
                                                             {
-                                                                current.nChannelNumber = ((nチャンネル番号 == 22) ? 25 : 22);
+                                                                current.nChannelNumber = ((nチャンネル番号 == EChannel.Cymbal) ? EChannel.RideCymbal : EChannel.Cymbal);
                                                             }
                                                         }
                                                         else
                                                         {
-                                                            current.nChannelNumber = ((num == 22) ? 25 : 22);
+                                                            current.nChannelNumber = ((num == EChannel.Cymbal) ? EChannel.RideCymbal : EChannel.Cymbal);
                                                         }
                                                         num = current.nChannelNumber;
                                                         num2 = 6;
@@ -2776,15 +2398,15 @@ namespace DTXMania
                         return;
                     }
                 }
-                int num7 = 0;
+				EChannel num7 = 0;
                 int num8 = 0;
                 int num9 = -10000;
                 int[] n乱数排列数列;
                 CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
-                foreach (CDTX.CChip current2 in this.listChip)
+                foreach (CChip current2 in this.listChip)
                 {
-                    int nチャンネル番号2 = current2.nChannelNumber;
-                    if (part == EInstrumentPart.DRUMS && 17 <= nチャンネル番号2 && nチャンネル番号2 <= 24 && nチャンネル番号2 != 19)
+					EChannel nチャンネル番号2 = current2.nChannelNumber;
+                    if (part == EInstrumentPart.DRUMS && EChannel.HiHatClose <= nチャンネル番号2 && nチャンネル番号2 <= EChannel.HiHatOpen && nチャンネル番号2 != EChannel.BassDrum)
                     {
                         switch (eRandom)
                         {
@@ -2810,7 +2432,7 @@ namespace DTXMania
                             case ERandomMode.MASTERRANDOM:
                                 do
                                 {
-                                    current2.nChannelNumber = ((CDTXMania.Random.Next(5) >= 2) ? (CDTXMania.Random.Next(3) + 20) : (CDTXMania.Random.Next(2) + 17));
+                                    current2.nChannelNumber = ((CDTXMania.Random.Next(5) >= 2) ? (CDTXMania.Random.Next(3) + EChannel.HighTom) : (CDTXMania.Random.Next(2) + EChannel.HiHatClose));
                                 }
                                 while (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7);
                                 num7 = current2.nChannelNumber;
@@ -2819,112 +2441,112 @@ namespace DTXMania
                             case ERandomMode.ANOTHERRANDOM:
                                 switch (nチャンネル番号2)
                                 {
-                                    case 17:
-                                    case 24:
+                                    case EChannel.HiHatClose:
+                                    case EChannel.HiHatOpen:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nChannelNumber = 18;
+                                            current2.nChannelNumber = EChannel.Snare;
                                         }
                                         else
                                         {
-                                            if (nチャンネル番号2 == 24)
+                                            if (nチャンネル番号2 == EChannel.HiHatOpen)
                                             {
-                                                current2.nChannelNumber = 17;
+                                                current2.nChannelNumber = EChannel.HiHatClose;
                                             }
                                         }
                                         if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            current2.nChannelNumber = ((num7 == 17) ? 18 : 17);
+                                            current2.nChannelNumber = ((num7 == EChannel.HiHatClose) ? EChannel.Snare : EChannel.HiHatClose);
                                         }
                                         num7 = current2.nChannelNumber;
                                         num8 = current2.nPlaybackPosition;
                                         break;
-                                    case 18:
+                                    case EChannel.Snare:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HiHatClose : EChannel.HighTom);
                                         }
                                         if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            if (num7 == 17)
+                                            if (num7 == EChannel.HiHatClose)
                                             {
-                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.Snare : EChannel.HighTom);
                                             }
                                             else
                                             {
-                                                if (num7 == 18)
+                                                if (num7 == EChannel.Snare)
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 20);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HiHatClose : EChannel.HighTom);
                                                 }
                                                 else
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 17 : 18);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HiHatClose : EChannel.Snare);
                                                 }
                                             }
                                         }
                                         num7 = current2.nChannelNumber;
                                         num8 = current2.nPlaybackPosition;
                                         break;
-                                    case 20:
+                                    case EChannel.HighTom:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.Snare : EChannel.LowTom);
                                         }
                                         if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            if (num7 == 18)
+                                            if (num7 == EChannel.Snare)
                                             {
-                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HighTom : EChannel.LowTom);
                                             }
                                             else
                                             {
-                                                if (num7 == 20)
+                                                if (num7 == EChannel.HighTom)
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 21);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.Snare : EChannel.LowTom);
                                                 }
                                                 else
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 18 : 20);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.Snare : EChannel.HighTom);
                                                 }
                                             }
                                         }
                                         num7 = current2.nChannelNumber;
                                         num8 = current2.nPlaybackPosition;
                                         break;
-                                    case 21:
+                                    case EChannel.LowTom:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
+                                            current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HighTom : EChannel.Cymbal);
                                         }
                                         if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            if (num7 == 20)
+                                            if (num7 == EChannel.HighTom)
                                             {
-                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 21 : 22);
+                                                current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.LowTom : EChannel.Cymbal);
                                             }
                                             else
                                             {
-                                                if (num7 == 21)
+                                                if (num7 == EChannel.LowTom)
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 22);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HighTom : EChannel.Cymbal);
                                                 }
                                                 else
                                                 {
-                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? 20 : 21);
+                                                    current2.nChannelNumber = ((CDTXMania.Random.Next(2) == 0) ? EChannel.HighTom : EChannel.LowTom);
                                                 }
                                             }
                                         }
                                         num7 = current2.nChannelNumber;
                                         num8 = current2.nPlaybackPosition;
                                         break;
-                                    case 22:
+                                    case EChannel.Cymbal:
                                         if (CDTXMania.Random.Next(4) == 0)
                                         {
-                                            current2.nChannelNumber = 21;
+                                            current2.nChannelNumber = EChannel.LowTom;
                                         }
                                         if (num8 == current2.nPlaybackPosition && current2.nChannelNumber == num7)
                                         {
-                                            current2.nChannelNumber = ((num7 == 22) ? 21 : 22);
+                                            current2.nChannelNumber = ((num7 == EChannel.Cymbal) ? EChannel.LowTom : EChannel.Cymbal);
                                         }
                                         num7 = current2.nChannelNumber;
                                         num8 = current2.nPlaybackPosition;
@@ -2940,10 +2562,10 @@ namespace DTXMania
         {
             if (part == EInstrumentPart.DRUMS && eRandomPedal == ERandomMode.MIRROR)
             {
-                foreach (CDTX.CChip current in this.listChip)
+                foreach (CChip current in this.listChip)
                 {
-                    int nチャンネル番号 = current.nChannelNumber;
-                    if (part == EInstrumentPart.DRUMS && (nチャンネル番号 == 0x13 || nチャンネル番号 == 0x1B || nチャンネル番号 == 0x1C))
+					EChannel nチャンネル番号 = current.nChannelNumber;
+                    if (part == EInstrumentPart.DRUMS && (nチャンネル番号 == EChannel.BassDrum || nチャンネル番号 == EChannel.LeftPedal || nチャンネル番号 == EChannel.LeftBassDrum))
                     {
                         CDTX.tミラーチップのチャンネルを指定する(current, nチャンネル番号);
                     }
@@ -2952,28 +2574,28 @@ namespace DTXMania
             else if (part == EInstrumentPart.DRUMS && eRandomPedal != ERandomMode.OFF && CDTXMania.ConfigIni.eNumOfLanes.Drums != DTXMania.EType.C)
             {
                 int num = CDTXMania.Random.Next(2);
-                int num2 = 0;
+				EChannel num2 = 0;
                 int num3 = 0;
                 int num4 = -10000;
-                foreach (CDTX.CChip current in this.listChip)
+                foreach (CChip current in this.listChip)
                 {
-                    int num5 = current.nChannelNumber;
-                    if (part == EInstrumentPart.DRUMS && (num5 == 19 || num5 == 27 || num5 == 28))
+                    EChannel num5 = current.nChannelNumber;
+                    if (part == EInstrumentPart.DRUMS && (num5 == EChannel.BassDrum || num5 == EChannel.LeftPedal || num5 == EChannel.LeftBassDrum))
                     {
-                        if (num5 == 28)
+                        if (num5 == EChannel.LeftBassDrum)
                         {
-                            num5 = 27;
+                            num5 = EChannel.LeftPedal;
                         }
                         switch (eRandomPedal)
                         {
                             case ERandomMode.RANDOM:
-                                if (num5 == 19)
+                                if (num5 == EChannel.BassDrum)
                                 {
-                                    current.nChannelNumber = ((num == 0) ? 19 : 0x1B);
+                                    current.nChannelNumber = ((num == 0) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 else
                                 {
-                                    current.nChannelNumber = ((num == 1) ? 19 : 0x1B);
+                                    current.nChannelNumber = ((num == 1) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 break;
                             case ERandomMode.SUPERRANDOM:
@@ -2982,13 +2604,13 @@ namespace DTXMania
                                     num4 = current.nPlaybackPosition / 384;
                                     num = CDTXMania.Random.Next(2);
                                 }
-                                if (num5 == 19)
+                                if (num5 == EChannel.BassDrum)
                                 {
-                                    current.nChannelNumber = ((num == 0) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 0) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 else
                                 {
-                                    current.nChannelNumber = ((num == 1) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 1) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 break;
                             case ERandomMode.HYPERRANDOM:
@@ -2997,31 +2619,31 @@ namespace DTXMania
                                     num4 = current.nPlaybackPosition / 96;
                                     num = CDTXMania.Random.Next(2);
                                 }
-                                if (num5 == 19)
+                                if (num5 == EChannel.BassDrum)
                                 {
-                                    current.nChannelNumber = ((num == 0) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 0) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 else
                                 {
-                                    current.nChannelNumber = ((num == 1) ? 19 : 27);
+                                    current.nChannelNumber = ((num == 1) ? EChannel.BassDrum : EChannel.LeftPedal);
                                 }
                                 break;
                             case ERandomMode.MASTERRANDOM:
                                 if (num3 != current.nPlaybackPosition)
                                 {
                                     num = CDTXMania.Random.Next(2);
-                                    if (num5 == 19)
+                                    if (num5 == EChannel.BassDrum)
                                     {
-                                        current.nChannelNumber = ((num == 0) ? 19 : 27);
+                                        current.nChannelNumber = ((num == 0) ? EChannel.BassDrum : EChannel.LeftPedal);
                                     }
                                     else
                                     {
-                                        current.nChannelNumber = ((num == 1) ? 19 : 27);
+                                        current.nChannelNumber = ((num == 1) ? EChannel.BassDrum : EChannel.LeftPedal);
                                     }
                                 }
                                 else
                                 {
-                                    current.nChannelNumber = ((num2 == 19) ? 27 : 19);
+                                    current.nChannelNumber = ((num2 == EChannel.BassDrum) ? EChannel.LeftPedal : EChannel.BassDrum);
                                 }
                                 num3 = current.nPlaybackPosition;
                                 num2 = current.nChannelNumber;
@@ -3031,19 +2653,19 @@ namespace DTXMania
                                 {
                                     if (CDTXMania.Random.Next(4) == 0)
                                     {
-                                        current.nChannelNumber = ((num5 == 19) ? 27 : 19);
+                                        current.nChannelNumber = ((num5 == EChannel.BassDrum) ? EChannel.LeftPedal : EChannel.BassDrum);
                                     }
                                     else
                                     {
-                                        if (current.nChannelNumber == 28)
+                                        if (current.nChannelNumber == EChannel.LeftBassDrum)
                                         {
-                                            current.nChannelNumber = 27;
+                                            current.nChannelNumber = EChannel.LeftPedal;
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    current.nChannelNumber = ((num2 == 19) ? 27 : 19);
+                                    current.nChannelNumber = ((num2 == EChannel.BassDrum) ? EChannel.LeftPedal : EChannel.BassDrum);
                                 }
                                 num2 = current.nChannelNumber;
                                 num3 = current.nPlaybackPosition;
@@ -3053,36 +2675,36 @@ namespace DTXMania
                 }
             }
         }
-        private static void t乱数を各チャンネルに指定する(int[] nシンバルグループ, int[] nタムグループ, CDTX.CChip chip, int nランダム化前チャンネル番号)
+        private static void t乱数を各チャンネルに指定する(int[] nシンバルグループ, int[] nタムグループ, CChip chip, EChannel nランダム化前チャンネル番号)
         {
             switch (nランダム化前チャンネル番号)
             {
-                case 17:
-                case 24:
-                    chip.nChannelNumber = nシンバルグループ[0] + 17;
+                case EChannel.HiHatClose:
+                case EChannel.HiHatOpen:
+                    chip.nChannelNumber = nシンバルグループ[0] + EChannel.HiHatClose;
                     return;
-                case 18:
-                    chip.nChannelNumber = nタムグループ[0] + 17;
+                case EChannel.Snare:
+                    chip.nChannelNumber = nタムグループ[0] + EChannel.HiHatClose;
                     return;
-                case 19:
+                case EChannel.BassDrum:
                     break;
-                case 20:
-                    chip.nChannelNumber = nタムグループ[1] + 17;
+                case EChannel.HighTom:
+                    chip.nChannelNumber = nタムグループ[1] + EChannel.HiHatClose;
                     return;
-                case 21:
-                    chip.nChannelNumber = nタムグループ[2] + 17;
+                case EChannel.LowTom:
+                    chip.nChannelNumber = nタムグループ[2] + EChannel.HiHatClose;
                     return;
-                case 22:
-                    chip.nChannelNumber = nシンバルグループ[1] + 17;
+                case EChannel.Cymbal:
+                    chip.nChannelNumber = nシンバルグループ[1] + EChannel.HiHatClose;
                     return;
-                case 23:
-                    chip.nChannelNumber = nタムグループ[3] + 17;
+                case EChannel.FloorTom:
+                    chip.nChannelNumber = nタムグループ[3] + EChannel.HiHatClose;
                     return;
-                case 25:
-                    chip.nChannelNumber = nシンバルグループ[2] + 17;
+                case EChannel.RideCymbal:
+                    chip.nChannelNumber = nシンバルグループ[2] + EChannel.HiHatClose;
                     return;
-                case 26:
-                    chip.nChannelNumber = nシンバルグループ[3] + 17;
+                case EChannel.LeftCymbal:
+                    chip.nChannelNumber = nシンバルグループ[3] + EChannel.HiHatClose;
                     break;
                 default:
                     return;
@@ -3127,28 +2749,28 @@ namespace DTXMania
                 }
             }
         }
-        private static void t乱数を各チャンネルに指定する_クラシック(int[] n乱数排列数列, CDTX.CChip chip, int nランダム化前チャンネル番号)
+        private static void t乱数を各チャンネルに指定する_クラシック(int[] n乱数排列数列, CChip chip, EChannel nランダム化前チャンネル番号)
         {
             switch (nランダム化前チャンネル番号)
             {
-                case 0x11:
-                case 0x18:
-                    chip.nChannelNumber = n乱数排列数列[0] + 0x11;
+                case EChannel.HiHatClose:
+                case EChannel.HiHatOpen:
+                    chip.nChannelNumber = n乱数排列数列[0] + EChannel.HiHatClose;
                     return;
-                case 0x12:
-                    chip.nChannelNumber = n乱数排列数列[1] + 0x11;
+                case EChannel.Snare:
+                    chip.nChannelNumber = n乱数排列数列[1] + EChannel.HiHatClose;
                     return;
-                case 0x13:
-                case 0x17:
+                case EChannel.BassDrum:
+                case EChannel.FloorTom:
                     break;
-                case 0x14:
-                    chip.nChannelNumber = n乱数排列数列[2] + 0x11;
+                case EChannel.HighTom:
+                    chip.nChannelNumber = n乱数排列数列[2] + EChannel.HiHatClose;
                     return;
-                case 0x15:
-                    chip.nChannelNumber = n乱数排列数列[3] + 0x11;
+                case EChannel.LowTom:
+                    chip.nChannelNumber = n乱数排列数列[3] + EChannel.HiHatClose;
                     return;
-                case 0x16:
-                    chip.nChannelNumber = n乱数排列数列[4] + 0x11;
+                case EChannel.Cymbal:
+                    chip.nChannelNumber = n乱数排列数列[4] + EChannel.HiHatClose;
                     break;
                 default:
                     return;
@@ -3176,41 +2798,41 @@ namespace DTXMania
         {
             //ボーナスチップの内部番号→チャンネル番号変換
             //初期値は0で問題無いはず。
-            int n変換後のレーン番号 = 0;
-            int n変換後のレーン番号2 = 0; //HH、LP用
+            EChannel n変換後のレーン番号 = 0;
+            EChannel n変換後のレーン番号2 = 0; //HH、LP用
             switch( nレーン )
             {
                 case 1:
-                    n変換後のレーン番号 = 0x1A;
+                    n変換後のレーン番号 = EChannel.LeftCymbal;
                     break;
                 case 2:
-                    n変換後のレーン番号 = 0x11;
-                    n変換後のレーン番号2 = 0x18;
+                    n変換後のレーン番号 = EChannel.HiHatClose;
+                    n変換後のレーン番号2 = EChannel.HiHatOpen;
                     break;
                 case 3:
-                    n変換後のレーン番号 = 0x1B;
-                    n変換後のレーン番号2 = 0x1C;
+                    n変換後のレーン番号 = EChannel.LeftPedal;
+                    n変換後のレーン番号2 = EChannel.LeftBassDrum;
                     break;
                 case 4:
-                    n変換後のレーン番号 = 0x12;
+                    n変換後のレーン番号 = EChannel.Snare;
                     break;
                 case 5:
-                    n変換後のレーン番号 = 0x14;
+                    n変換後のレーン番号 = EChannel.HighTom;
                     break;
                 case 6:
-                    n変換後のレーン番号 = 0x13;
+                    n変換後のレーン番号 = EChannel.BassDrum;
                     break;
                 case 7:
-                    n変換後のレーン番号 = 0x15;
+                    n変換後のレーン番号 = EChannel.LowTom;
                     break;
                 case 8:
-                    n変換後のレーン番号 = 0x17;
+                    n変換後のレーン番号 = EChannel.FloorTom;
                     break;
                 case 9:
-                    n変換後のレーン番号 = 0x16;
+                    n変換後のレーン番号 = EChannel.Cymbal;
                     break;
                 case 10:
-                    n変換後のレーン番号 = 0x19;
+                    n変換後のレーン番号 = EChannel.RideCymbal;
                     break;
             }
 
@@ -3497,9 +3119,9 @@ namespace DTXMania
 						n小節番号 = chip.nPlaybackPosition / 384;
 						n小節内乱数6通り = CDTXMania.Random.Next( 6 );
 					}
-					int nランダム化前チャンネル番号 = chip.nChannelNumber;
-					if(		( ( ( part != EInstrumentPart.GUITAR ) || ( 0x20 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0x27 ) )
-						&&	( ( ( part != EInstrumentPart.BASS )   || ( 0xA0 > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > 0xa7 ) )
+					EChannel nランダム化前チャンネル番号 = chip.nChannelNumber;
+					if(		( ( ( part != EInstrumentPart.GUITAR ) || ( EChannel.Guitar_Open > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > EChannel.Guitar_RGBxx ) )
+						&&	( ( ( part != EInstrumentPart.BASS )   || ( EChannel.Bass_Open > nランダム化前チャンネル番号 ) ) || ( nランダム化前チャンネル番号 > EChannel.Bass_RGBxx ) )
 					)
 					{
 						continue;
@@ -3507,17 +3129,22 @@ namespace DTXMania
 					switch( eRandom )
 					{
 						case ERandomMode.RANDOM:		// 1小節単位でレーンのR/G/Bがランダムに入れ替わる
-							chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ n小節内乱数6通り, nランダム化前チャンネル番号 & 0x07 ];
+							chip.nChannelNumber = (EChannel) ( ( (int)nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ n小節内乱数6通り, (int)nランダム化前チャンネル番号 & 0x07 ]);
 							continue;	// goto Label_02C4;
 
 						case ERandomMode.SUPERRANDOM:	// チップごとにR/G/Bがランダムで入れ替わる(レーンの本数までは変わらない)。
-							chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ CDTXMania.Random.Next( 6 ), nランダム化前チャンネル番号 & 0x07 ];
+							chip.nChannelNumber = (EChannel)( ((int)nランダム化前チャンネル番号 & 0xF0 ) | nランダムレーン候補[ CDTXMania.Random.Next( 6 ), (int)nランダム化前チャンネル番号 & 0x07 ]);
 							continue;	// goto Label_02C4;
 
 						case ERandomMode.HYPERRANDOM:	// レーンの本数も変わる
-							nRGBレーンビットパターン = nランダム化前チャンネル番号 & 7;
+							nRGBレーンビットパターン = (int)nランダム化前チャンネル番号 & 7;
 							// n新RGBレーンビットパターン = (int)Eレーンビットパターン.OPEN;	// この値は結局未使用なので削除
-							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);	// #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
+							flag = ((part == EInstrumentPart.GUITAR) && this.bチップがある.OpenGuitar) || ((part == EInstrumentPart.BASS) && this.bチップがある.OpenBass);  // #23546 2010.10.28 yyagi fixed (bチップがある.Bass→bチップがある.OpenBass)
+                            //New: Set flag to false (disable Open) when chip has long note
+                            if (chip.bロングノートである)
+                            {
+								flag = false;
+                            }
 							if (((nRGBレーンビットパターン != (int)Eレーンビットパターン.xxB) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.xGx)) && (nRGBレーンビットパターン != (int)Eレーンビットパターン.Rxx))		// xxB, xGx, Rxx レーン1本相当
 							{
 								break;															// レーン1本相当でなければ、とりあえず先に進む
@@ -3619,7 +3246,7 @@ namespace DTXMania
 							break;	// goto Label_02B2;
 					}
 				Label_02B2:
-					chip.nChannelNumber = ( nランダム化前チャンネル番号 & 0xF0 ) | n新RGBレーンビットパターン;
+					chip.nChannelNumber = (EChannel)(( (int)nランダム化前チャンネル番号 & 0xF0 ) | n新RGBレーンビットパターン);
 //				Label_02C4:
 //					GOTO_END++;		// goto用のダミーコード
 				}
@@ -3691,14 +3318,14 @@ namespace DTXMania
 
 			for( int i = 0; i < this.listChip.Count; i++ )
 			{
-				int nChannelNumber = this.listChip[ i ].nChannelNumber;
+				EChannel nChannelNumber = this.listChip[ i ].nChannelNumber;
 				if( ( (
-						( nChannelNumber == 1 ) ||
-						( ( 0x61 <= nChannelNumber ) && ( nChannelNumber <= 0x69 ) )
+						( nChannelNumber == EChannel.BGM) ||
+						( (EChannel.SE01 <= nChannelNumber ) && ( nChannelNumber <= EChannel.SE09) )
 					  ) ||
-						( ( 0x70 <= nChannelNumber ) && ( nChannelNumber <= 0x79 ) )
+						( (EChannel.SE10 <= nChannelNumber ) && ( nChannelNumber <= EChannel.SE19) )
 					) ||
-					( ( ( 0x80 <= nChannelNumber ) && ( nChannelNumber <= 0x89 ) ) || ( ( 0x90 <= nChannelNumber ) && ( nChannelNumber <= 0x92 ) ) )
+					( ( (EChannel.SE20 <= nChannelNumber ) && ( nChannelNumber <= EChannel.SE29) ) || ( (EChannel.SE30 <= nChannelNumber ) && ( nChannelNumber <= EChannel.SE32) ) )
 				  )
 				{
 					this.listChip[ i ].nPlaybackTimeMs += nBGMAdjustの増減値;
@@ -3914,7 +3541,7 @@ namespace DTXMania
 					if ( !this.bヘッダのみ )
 					{
 						#region [ BPM/BMP初期化 ]
-						int ch;
+						EChannel ch;
 						CBPM cbpm = null;
 						foreach ( CBPM cbpm2 in this.listBPM.Values )
 						{
@@ -3933,7 +3560,7 @@ namespace DTXMania
 							this.listBPM.Add( cbpm.n内部番号, cbpm );
 							CChip chip = new CChip();
 							chip.nPlaybackPosition = 0;
-							chip.nChannelNumber = 8;		// 拡張BPM
+							chip.nChannelNumber = EChannel.BPMEx;		// 拡張BPM
 							chip.nIntegerValue = 0;
 							chip.nIntegerValue_InternalNumber = cbpm.n内部番号;
 							this.listChip.Insert( 0, chip );
@@ -3942,7 +3569,7 @@ namespace DTXMania
 						{
 							CChip chip = new CChip();
 							chip.nPlaybackPosition = 0;
-							chip.nChannelNumber = 8;		// 拡張BPM
+							chip.nChannelNumber = EChannel.BPMEx;		// 拡張BPM
 							chip.nIntegerValue = 0;
 							chip.nIntegerValue_InternalNumber = cbpm.n内部番号;
 							this.listChip.Insert( 0, chip );
@@ -3951,7 +3578,7 @@ namespace DTXMania
 						{
 							CChip chip = new CChip();
 							chip.nPlaybackPosition = 0;
-							chip.nChannelNumber = 4;		// BGA (レイヤBGA1)
+							chip.nChannelNumber = EChannel.BGALayer1;		// BGA (レイヤBGA1)
 							chip.nIntegerValue = 0;
 							chip.nIntegerValue_InternalNumber = 0;
 							this.listChip.Insert( 0, chip );
@@ -4025,7 +3652,7 @@ namespace DTXMania
 							{
 								CChip chip = new CChip();
 								chip.nPlaybackPosition = tick384;
-								chip.nChannelNumber = 0x50;	// 小節線
+								chip.nChannelNumber = EChannel.BarLine;	// 小節線
 								chip.nIntegerValue = 36 * 36 - 1;
 								this.listChip.Add( chip );
 							}
@@ -4037,7 +3664,7 @@ namespace DTXMania
 								int n発声位置_C1_同一小節内 = 0;
 								while ( ( nChipNo_C1 < this.listChip.Count ) && ( this.listChip[ nChipNo_C1 ].nPlaybackPosition < ( tick384 + 384 ) ) )
 								{
-									if ( this.listChip[ nChipNo_C1 ].nChannelNumber == 0xc1 )				// 拍線シフトの検出
+									if ( this.listChip[ nChipNo_C1 ].nChannelNumber == EChannel.BeatLineShift )				// 拍線シフトの検出
 									{
 										n発声位置_C1_同一小節内 = this.listChip[ nChipNo_C1 ].nPlaybackPosition - tick384;
 									}
@@ -4049,7 +3676,7 @@ namespace DTXMania
 								}
 								while ( ( nChipNo_BarLength < this.listChip.Count ) && ( this.listChip[ nChipNo_BarLength ].nPlaybackPosition <= tick384 ) )
 								{
-									if ( this.listChip[ nChipNo_BarLength ].nChannelNumber == 0x02 )		// bar lengthの検出
+									if ( this.listChip[ nChipNo_BarLength ].nChannelNumber == EChannel.BarLength)		// bar lengthの検出
 									{
 										barlength = this.listChip[ nChipNo_BarLength ].db実数値;
 									}
@@ -4066,7 +3693,7 @@ namespace DTXMania
 									{
 										CChip chip = new CChip();
 										chip.nPlaybackPosition = tick384 + ( tickBeat + n発声位置_C1_同一小節内 );
-										chip.nChannelNumber = 0x51;						// beat line 拍線
+										chip.nChannelNumber = EChannel.BeatLine;						// beat line 拍線
 										chip.nIntegerValue = 36 * 36 - 1;
 										this.listChip.Add( chip );
 									}
@@ -4083,7 +3710,7 @@ namespace DTXMania
 						for ( int i = 0; i < this.listChip.Count; i++ )
 						{
 							bool bChangedBeatBarStatus = false;
-							if ( ( this.listChip[ i ].nChannelNumber == 0xc2 ) )
+							if ( ( this.listChip[ i ].nChannelNumber == EChannel.BeatLineDisplay ) )
 							{
 								if ( this.listChip[ i ].nIntegerValue == 1 )				// BAR/BEAT LINE = ON
 								{
@@ -4107,7 +3734,7 @@ namespace DTXMania
 							}
 							for ( int j = startIndex; j <= i; j++ )
 							{
-								if ( ( ( this.listChip[ j ].nChannelNumber == 0x50 ) || ( this.listChip[ j ].nChannelNumber == 0x51 ) ) &&
+								if ( ( ( this.listChip[ j ].nChannelNumber == EChannel.BarLine ) || ( this.listChip[ j ].nChannelNumber == EChannel.BeatLine ) ) &&
 									( this.listChip[ j ].nIntegerValue == ( 36 * 36 - 1 ) ) )
 								{
 									this.listChip[ j ].bVisible = bShowBeatBarLine;
@@ -4124,6 +3751,11 @@ namespace DTXMania
 						int n発声位置 = 0;
 						int ms = 0;
 						int nBar = 0;
+						//
+						STDGBVALUE<CChip> cCandidateStartHold = default(STDGBVALUE<CChip>);
+						cCandidateStartHold.Drums = null;
+						cCandidateStartHold.Guitar = null;
+						cCandidateStartHold.Bass = null;
 						foreach ( CChip chip in this.listChip )
 						{
 							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
@@ -4137,42 +3769,42 @@ namespace DTXMania
 							ch = chip.nChannelNumber;
 							switch ( ch )
 							{
-								case 0x02:	// BarLength
+								case EChannel.BarLength:	// BarLength
 									{
 										n発声位置 = chip.nPlaybackPosition;
 										ms = chip.nPlaybackTimeMs;
 										dbBarLength = chip.db実数値;
 										continue;
 									}
-								case 0x03:	// BPM
+								case EChannel.BPM:	// BPM
 									{
 										n発声位置 = chip.nPlaybackPosition;
 										ms = chip.nPlaybackTimeMs;
 										bpm = this.BASEBPM + chip.nIntegerValue;
 										continue;
 									}
-								case 0x04:	// BGA (レイヤBGA1)
-								case 0x07:	// レイヤBGA2
-								case 0x55:	// レイヤBGA3
-								case 0x56:	// レイヤBGA4
-								case 0x57:	// レイヤBGA5
-								case 0x58:	// レイヤBGA6
-								case 0x59:	// レイヤBGA7
-								case 0x60:	// レイヤBGA8
+								case EChannel.BGALayer1:	// BGA (レイヤBGA1)
+								case EChannel.BGALayer2:	// レイヤBGA2
+								case EChannel.BGALayer3:	// レイヤBGA3
+								case EChannel.BGALayer4:	// レイヤBGA4
+								case EChannel.BGALayer5:	// レイヤBGA5
+								case EChannel.BGALayer6:	// レイヤBGA6
+								case EChannel.BGALayer7:	// レイヤBGA7
+								case EChannel.BGALayer8:	// レイヤBGA8
 									break;
 
-								case 0x05:	// Extended Object (非対応)
-								case 0x06:	// Missアニメ (非対応)
+								case EChannel.ExObj_nouse:	// Extended Object (非対応)
+								case EChannel.MissAnimation_nouse:	// Missアニメ (非対応)
 								//case 0x5A:	// 未定義
-								case 0x5b:	// 未定義
-								case 0x5c:	// 未定義
-								case 0x5d:	// 未定義
-								case 0x5e:	// 未定義
-								case 0x5f:	// 未定義
+								case EChannel.nouse_5b:	// 未定義
+								case EChannel.nouse_5c:	// 未定義
+								case EChannel.nouse_5d:	// 未定義
+								case EChannel.nouse_5e:	// 未定義
+								case EChannel.nouse_5f:	// 未定義
 									{
 										continue;
 									}
-								case 0x08:	// 拡張BPM
+								case EChannel.BPMEx:	// 拡張BPM
 									{
 										n発声位置 = chip.nPlaybackPosition;
 										ms = chip.nPlaybackTimeMs;
@@ -4182,7 +3814,7 @@ namespace DTXMania
 										}
 										continue;
 									}
-								case 0x54:	// 動画再生
+								case EChannel.Movie:	// 動画再生
 									{
 										if ( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 										{
@@ -4192,7 +3824,7 @@ namespace DTXMania
 										}
 										continue;
 									}
-                                case 0x5A:	// 動画再生
+                                case EChannel.MovieFull:	// 動画再生 (Full)
                                     {
                                         if (this.listAVIPAN.ContainsKey(chip.nIntegerValue))
                                         {
@@ -4204,13 +3836,60 @@ namespace DTXMania
                                     }
 								default:
 									{
-                                        if( chip.nChannelNumber >= 0x4C && chip.nChannelNumber <= 0x4F )
+                                        if( chip.nChannelNumber >= EChannel.BonusEffect_Min && chip.nChannelNumber <= EChannel.BonusEffect )
                                         {
                                             #region [ TEST ]
                                             this.t指定された発声位置と同じ位置の指定したチップにボーナスフラグを立てる( chip.nPlaybackPosition, chip.nIntegerValue );
                                             #endregion
                                         }
-										continue;
+                                        //Process Long Notes for Guitar and Bass
+                                        else if(chip.nChannelNumber == EChannel.Guitar_LongNote || chip.nChannelNumber == EChannel.Bass_LongNote)
+                                        {
+											#region [Long Note Processing]
+											
+											EInstrumentPart eChipPart = (chip.nChannelNumber == EChannel.Guitar_LongNote) ? EInstrumentPart.GUITAR : EInstrumentPart.BASS;
+											//Check if this chip coincide with a KeyPress if currently no candidate start hold 
+											if (cCandidateStartHold[(int)eChipPart] == null)
+											{
+												foreach (CChip chip2 in this.listChip)
+												{
+													if(chip2.nPlaybackPosition == chip.nPlaybackPosition &&
+														(eChipPart == chip2.eInstrumentPart && chip2.bChannelWithVisibleChip) &&
+														!chip2.bChipIsOpenNote)
+                                                    {
+														cCandidateStartHold[(int)eChipPart] = chip2;
+														break;
+                                                    }
+												}
+											}
+											//Check for EndHold note rule violation
+                                            else
+                                            {
+												foreach (CChip chip2 in this.listChip)
+                                                {
+													if(chip2.eInstrumentPart == eChipPart && chip2.bChannelWithVisibleChip &&
+														chip2.nPlaybackPosition > cCandidateStartHold[(int)eChipPart].nPlaybackPosition &&
+														chip2.nPlaybackPosition <= chip.nPlaybackPosition
+														)
+                                                    {
+														cCandidateStartHold[(int)eChipPart] = null;
+														break;
+													}
+                                                }
+
+												//If candidate start hold survives
+												if(cCandidateStartHold[(int)eChipPart] != null)
+                                                {
+													//TODO: To assign eInstrumentPart to chip or not?
+													cCandidateStartHold[(int)eChipPart].chipロングノート終端 = chip;
+													//Reset
+													cCandidateStartHold[(int)eChipPart] = null;
+												}
+											}
+											
+											#endregion
+										}
+                                        continue;
 									}
 							}
 							if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
@@ -4245,22 +3924,22 @@ namespace DTXMania
 						}
 						foreach ( CChip chip in this.listChip )
 						{
-							int c = chip.nChannelNumber;
-							if ( ( 0x11 <= c ) && ( c <= 0x1c ) )
+							EChannel c = chip.nChannelNumber;
+							if ( ( EChannel.HiHatClose <= c ) && ( c <= EChannel.LeftBassDrum ) )
 							{
-								this.nVisibleChipsCount[ c - 0x11 ]++;
+								this.nVisibleChipsCount[ c - EChannel.HiHatClose ]++;
 							}
-                            if ( ( 0x20 <= c ) && ( c <= 0x27 ) || ( 0x93 <= c ) && ( c <= 0x9F ) || ( 0xA9 <= c ) && ( c <= 0xAF ) || ( 0xD0 <= c ) && ( c <= 0xD3 ) )
+                            if ( ( EChannel.Guitar_Open <= c ) && ( c <= EChannel.Guitar_RGBxx ) || ( EChannel.Guitar_xxxYx <= c ) && ( c <= EChannel.Guitar_RxxxP ) || ( EChannel.Guitar_RxBxP <= c ) && ( c <= EChannel.Guitar_xGBYP ) || ( EChannel.Guitar_RxxYP <= c ) && ( c <= EChannel.Guitar_RGBYP ) )
                             {
 								this.nVisibleChipsCount.Guitar++;
 								this.nVisibleChipsCount.incrementChipCount(c);
 							}
-                            if ( ( 0xA0 <= c ) && ( c <= 0xA7 ) || ( 0xC5 <= c ) && ( c <= 0xC6 ) || ( 0xC8 <= c ) && ( c <= 0xCF ) || ( 0xDA <= c ) && ( c <= 0xDF ) || ( 0xE1 <= c ) && ( c <= 0xE8 ) )
+                            if ( ( EChannel.Bass_Open <= c ) && ( c <= EChannel.Bass_RGBxx ) || ( EChannel.Bass_xxxYx <= c ) && ( c <= EChannel.Bass_xxBYx ) || ( EChannel.Bass_xGxYx <= c ) && ( c <= EChannel.Bass_xxBxP ) || ( EChannel.Bass_xGxxP <= c ) && ( c <= EChannel.Bass_RGBxP ) || ( EChannel.Bass_xxxYP <= c ) && ( c <= EChannel.Bass_RGBYP ) )
                             {
 								this.nVisibleChipsCount.Bass++;
 								this.nVisibleChipsCount.incrementChipCount(c);
 							}
-                            if ( ( c >= 0x4C ) && ( c <= 0x4F ) )
+                            if ( ( c >= EChannel.BonusEffect_Min ) && ( c <= EChannel.BonusEffect ) )
                             {
                                 this.nボーナスチップ数++;
                             }
@@ -4276,7 +3955,7 @@ namespace DTXMania
                             {
                                 this.listWAV[chip.nIntegerValue_InternalNumber].listこのWAVを使用するチャンネル番号の集合.Add(chip.nChannelNumber);
 
-                                int c = chip.nChannelNumber >> 4;
+                                int c = (int)chip.nChannelNumber >> 4;
                                 switch (c)
                                 {
                                     case 0x01:
@@ -4291,7 +3970,7 @@ namespace DTXMania
                                     case 0x09:
                                         this.listWAV[chip.nIntegerValue_InternalNumber].bIsSESound = true; break;
                                     case 0x00:
-                                        if (chip.nChannelNumber == 0x01)
+                                        if (chip.nChannelNumber == EChannel.BGM)
                                         {
                                             this.listWAV[chip.nIntegerValue_InternalNumber].bIsBGMSound = true; break;
                                         }
@@ -4404,37 +4083,37 @@ namespace DTXMania
 				{
 					// BGM, 演奏チャネル, 不可視サウンド, フィルインサウンド, 空打ち音はミキサー管理の対象
 					// BGM:
-					case 0x01:
+					case EChannel.BGM:
 					// Dr playing channels
-					case 0x11:	case 0x12:	case 0x13:	case 0x14:	case 0x15:	case 0x16:	case 0x17:	case 0x18:	case 0x19:	case 0x1A:  case 0x1B:  case 0x1C:
+					case EChannel.HiHatClose:	case EChannel.Snare:	case EChannel.BassDrum:	case EChannel.HighTom:	case EChannel.LowTom:	case EChannel.Cymbal:	case EChannel.FloorTom:	case EChannel.HiHatOpen:	case EChannel.RideCymbal:	case EChannel.LeftCymbal:  case EChannel.LeftPedal:  case EChannel.LeftBassDrum:
 					// Gt playing channels
-					case 0x20:	case 0x21:	case 0x22:	case 0x23:	case 0x24:	case 0x25:	case 0x26:	case 0x27:	case 0x28:
-                    case 0x93:　case 0x94:　case 0x95:　case 0x96:　case 0x97:　case 0x98:　case 0x99:　case 0x9A:　case 0x9B:  case 0x9C:　case 0x9D:　case 0x9E:　case 0x9F:
-                    case 0xA9:  case 0xAA:　case 0xAB:　case 0xAC:　case 0xAD:　case 0xAE:　case 0xAF:
-                    case 0xD0:  case 0xD1:  case 0xD2:  case 0xD3:
+					case EChannel.Guitar_Open:	case EChannel.Guitar_xxBxx:	case EChannel.Guitar_xGxxx:	case EChannel.Guitar_xGBxx:	case EChannel.Guitar_Rxxxx:	case EChannel.Guitar_RxBxx:	case EChannel.Guitar_RGxxx:	case EChannel.Guitar_RGBxx:	case EChannel.Guitar_Wailing:
+                    case EChannel.Guitar_xxxYx:　case EChannel.Guitar_xxBYx:　case EChannel.Guitar_xGxYx:　case EChannel.Guitar_xGBYx:　case EChannel.Guitar_RxxYx:　case EChannel.Guitar_RxBYx:　case EChannel.Guitar_RGxYx:　case EChannel.Guitar_RGBYx:　case EChannel.Guitar_xxxxP:  case EChannel.Guitar_xxBxP:　case EChannel.Guitar_xGxxP:　case EChannel.Guitar_xGBxP:　case EChannel.Guitar_RxxxP:
+                    case EChannel.Guitar_RxBxP:  case EChannel.Guitar_RGxxP:　case EChannel.Guitar_RGBxP:　case EChannel.Guitar_xxxYP:　case EChannel.Guitar_xxBYP:　case EChannel.Guitar_xGxYP:　case EChannel.Guitar_xGBYP:
+                    case EChannel.Guitar_RxxYP:  case EChannel.Guitar_RxBYP:  case EChannel.Guitar_RGxYP:  case EChannel.Guitar_RGBYP:
 					// Bs playing channels
-					case 0xA0:	case 0xA1:	case 0xA2:	case 0xA3:	case 0xA4:	case 0xA5:	case 0xA6:	case 0xA7:	case 0xA8:
-                    case 0xC5:  case 0xC6:  case 0xC8:  case 0xC9:  case 0xCA:  case 0xCB:  case 0xCC:  case 0xCD:  case 0xCE:  case 0xCF:
-                    case 0xDA:  case 0xDB:  case 0xDC:  case 0xDD:  case 0xDE:  case 0xDF:
-                    case 0xE1:  case 0xE2:  case 0xE3:  case 0xE4:  case 0xE5:  case 0xE6:  case 0xE7:  case 0xE8:
+					case EChannel.Bass_Open:	case EChannel.Bass_xxBxx:	case EChannel.Bass_xGxxx:	case EChannel.Bass_xGBxx:	case EChannel.Bass_Rxxxx:	case EChannel.Bass_RxBxx:	case EChannel.Bass_RGxxx:	case EChannel.Bass_RGBxx:	case EChannel.Bass_Wailing:
+                    case EChannel.Bass_xxxYx:  case EChannel.Bass_xxBYx:  case EChannel.Bass_xGxYx:  case EChannel.Bass_xGBYx:  case EChannel.Bass_RxxYx:  case EChannel.Bass_RxBYx:  case EChannel.Bass_RGxYx:  case EChannel.Bass_RGBYx:  case EChannel.Bass_xxxxP:  case EChannel.Bass_xxBxP:
+                    case EChannel.Bass_xGxxP:  case EChannel.Bass_xGBxP:  case EChannel.Bass_RxxxP:  case EChannel.Bass_RxBxP:  case EChannel.Bass_RGxxP:  case EChannel.Bass_RGBxP:
+                    case EChannel.Bass_xxxYP:  case EChannel.Bass_xxBYP:  case EChannel.Bass_xGxYP:  case EChannel.Bass_xGBYP:  case EChannel.Bass_RxxYP:  case EChannel.Bass_RxBYP:  case EChannel.Bass_RGxYP:  case EChannel.Bass_RGBYP:
 					// Dr invisible chips
-					case 0x31:	case 0x32:	case 0x33:	case 0x34:	case 0x35:	case 0x36:	case 0x37:
-					case 0x38:	case 0x39:	case 0x3A:  case 0x3B:　case 0x3C:
+					case EChannel.HiHatClose_Hidden:	case EChannel.Snare_Hidden:	case EChannel.BassDrum_Hidden:	case EChannel.HighTom_Hidden:	case EChannel.LowTom_Hidden:	case EChannel.Cymbal_Hidden:	case EChannel.FloorTom_Hidden:
+					case EChannel.HiHatOpen_Hidden:	case EChannel.RideCymbal_Hidden:	case EChannel.LeftCymbal_Hidden:  case EChannel.LeftPedal_Hidden:　case EChannel.LeftBassDrum_Hidden:
 					// Dr/Gt/Bs blank hits
-					case 0xB1:	case 0xB2:	case 0xB3:	case 0xB4:	case 0xB5:	case 0xB6:	case 0xB7:	case 0xB8:
-					case 0xB9:	case 0xBA:	case 0xBB:	case 0xBC:　case 0xBD:　case 0xBE:
+					case EChannel.HiHatClose_NoChip:	case EChannel.Snare_NoChip:	case EChannel.BassDrum_NoChip:	case EChannel.HighTom_NoChip:	case EChannel.LowTom_NoChip:	case EChannel.Cymbal_NoChip:	case EChannel.FloorTom_NoChip:	case EChannel.HiHatOpen_NoChip:
+					case EChannel.RideCymbal_NoChip:	case EChannel.Guitar_NoChip:	case EChannel.Bass_NoChip:	case EChannel.LeftCymbal_NoChip:　case EChannel.LeftPedal_NoChip:　case EChannel.LeftBassDrum_NoChip:
 					// Fill-in sounds
-					case 0x1F:	case 0x2F:	//case 0xAF:
+					case EChannel.DrumsFillin:	case EChannel.Guitar_WailingSound:	//case 0xAF:
 					// Auto-playing chips
-					case 0x61:	case 0x62:	case 0x63:	case 0x64:	case 0x65:	case 0x66:	case 0x67:	case 0x68:	case 0x69:
-					case 0x70:	case 0x71:	case 0x72:	case 0x73:	case 0x74:	case 0x75:	case 0x76:	case 0x77:	case 0x78:	case 0x79:
-					case 0x80:	case 0x81:	case 0x82:	case 0x83:	case 0x84:	case 0x85:	case 0x86:	case 0x87:	case 0x88:	case 0x89:
-					case 0x90:	case 0x91:	case 0x92:
+					case EChannel.SE01:	case EChannel.SE02:	case EChannel.SE03:	case EChannel.SE04:	case EChannel.SE05:	case EChannel.SE06:	case EChannel.SE07:	case EChannel.SE08:	case EChannel.SE09:
+					case EChannel.SE10:	case EChannel.SE11:	case EChannel.SE12:	case EChannel.SE13:	case EChannel.SE14:	case EChannel.SE15:	case EChannel.SE16:	case EChannel.SE17:	case EChannel.SE18:	case EChannel.SE19:
+					case EChannel.SE20:	case EChannel.SE21:	case EChannel.SE22:	case EChannel.SE23:	case EChannel.SE24:	case EChannel.SE25:	case EChannel.SE26:	case EChannel.SE27:	case EChannel.SE28:	case EChannel.SE29:
+					case EChannel.SE30:	case EChannel.SE31:	case EChannel.SE32:
 
 						#region [ 発音1秒前のタイミングを記録 ]
 						int n発音前余裕ms = 1000, n発音後余裕ms = 800;
 						{
-							int ch = pChip.nChannelNumber >> 4;
+							int ch = (int)pChip.nChannelNumber >> 4;
 							if ( ch == 0x02 || ch == 0x0A )
 							{
 								n発音前余裕ms = 800;
@@ -4446,7 +4125,7 @@ namespace DTXMania
 								n発音前余裕ms = 500;
 							}
 						}
-						if ( pChip.nChannelNumber == 0x01 )	// BGMチップは即ミキサーに追加
+						if ( pChip.nChannelNumber == EChannel.BGM )	// BGMチップは即ミキサーに追加
 						{
 							if ( listWAV.ContainsKey( pChip.nIntegerValue_InternalNumber ) )
 							{
@@ -4467,7 +4146,7 @@ namespace DTXMania
 
 						CChip c_AddMixer = new CChip()
 						{
-							nChannelNumber = 0xEA,
+							nChannelNumber = EChannel.MixChannel1_unc,
 							nIntegerValue = pChip.nIntegerValue,
 							nIntegerValue_InternalNumber = pChip.nIntegerValue_InternalNumber,
 							nPlaybackTimeMs = nAddMixer時刻ms,
@@ -4537,7 +4216,7 @@ namespace DTXMania
 							}
 							CChip c = new CChip()											// mixer削除時刻を更新(遅延)する
 							{
-								nChannelNumber = 0xEB,
+								nChannelNumber = EChannel.MixChannel2_unc,
 								nIntegerValue = listRemoveTiming[ index ].nIntegerValue,
 								nIntegerValue_InternalNumber = listRemoveTiming[ index ].nIntegerValue_InternalNumber,
 								nPlaybackTimeMs = n新RemoveMixer時刻ms,
@@ -4553,7 +4232,7 @@ namespace DTXMania
 						{																	// 発音していたが既にmixer削除確定していたなら
 							CChip c = new CChip()											// 新しくmixer削除候補として追加する
 							{
-								nChannelNumber = 0xEB,
+								nChannelNumber = EChannel.MixChannel2_unc,
 								nIntegerValue = pChip.nIntegerValue,
 								nIntegerValue_InternalNumber = pChip.nIntegerValue_InternalNumber,
 								nPlaybackTimeMs = n新RemoveMixer時刻ms,
@@ -4647,45 +4326,45 @@ namespace DTXMania
 				if( listChip[ i ].eInstrumentPart == EInstrumentPart.BASS )
                 {
 					listChip[ i ].eInstrumentPart = EInstrumentPart.GUITAR;
-                    if( listChip[ i ].nChannelNumber >= 0xA0 && listChip[ i ].nChannelNumber <= 0xA8 )
-					    listChip[ i ].nChannelNumber -= ( 0xA0 - 0x20 );
-                    else if( listChip[ i ].nChannelNumber == 0xC5 || listChip[ i ].nChannelNumber == 0xC6 )
+                    if( listChip[ i ].nChannelNumber >= EChannel.Bass_Open && listChip[ i ].nChannelNumber <= EChannel.Bass_Wailing )
+					    listChip[ i ].nChannelNumber -= ( EChannel.Bass_Open - EChannel.Guitar_Open );
+                    else if( listChip[ i ].nChannelNumber == EChannel.Bass_xxxYx || listChip[ i ].nChannelNumber == EChannel.Bass_xxBYx )
                         listChip[ i ].nChannelNumber -= 0x32;
-                    else if( listChip[ i ].nChannelNumber >= 0xC8 && listChip[ i ].nChannelNumber <= 0xCF )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xGxYx && listChip[ i ].nChannelNumber <= EChannel.Bass_xxBxP )
                         listChip[ i ].nChannelNumber -= 0x33;
-                    else if( listChip[ i ].nChannelNumber >= 0xDA && listChip[ i ].nChannelNumber <= 0xDC )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xGxxP && listChip[ i ].nChannelNumber <= EChannel.Bass_RxxxP )
                         listChip[ i ].nChannelNumber -= 0x3D;
-                    else if( listChip[ i ].nChannelNumber >= 0xDD && listChip[ i ].nChannelNumber <= 0xDF )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_RxBxP && listChip[ i ].nChannelNumber <= EChannel.Bass_RGBxP )
                         listChip[ i ].nChannelNumber -= 0x34;
-                    else if( listChip[ i ].nChannelNumber >= 0xE1 && listChip[ i ].nChannelNumber <= 0xE8 )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Bass_RGBYP )
                         listChip[ i ].nChannelNumber -= 0x35;
 				}
 				else if( listChip[i].eInstrumentPart == EInstrumentPart.GUITAR )
 				{
 					listChip[ i ].eInstrumentPart = EInstrumentPart.BASS;
 
-                    if( listChip[ i ].nChannelNumber >= 0x20 && listChip[ i ].nChannelNumber <= 0x28 )
-					    listChip[ i ].nChannelNumber += ( 0xA0 - 0x20 );
-                    else if( listChip[ i ].nChannelNumber == 0x93 || listChip[ i ].nChannelNumber == 0x94 )
+                    if( listChip[ i ].nChannelNumber >= EChannel.Guitar_Open && listChip[ i ].nChannelNumber <= EChannel.Guitar_Wailing )
+					    listChip[ i ].nChannelNumber += ( EChannel.Bass_Open - EChannel.Guitar_Open );
+                    else if( listChip[ i ].nChannelNumber == EChannel.Guitar_xxxYx || listChip[ i ].nChannelNumber == EChannel.Guitar_xxBYx )
                         listChip[ i ].nChannelNumber += 0x32;
-                    else if( listChip[ i ].nChannelNumber >= 0x95 && listChip[ i ].nChannelNumber <= 0x9C )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xGxYx && listChip[ i ].nChannelNumber <= EChannel.Guitar_xxBxP )
                         listChip[ i ].nChannelNumber += 0x33;
-                    else if( listChip[ i ].nChannelNumber >= 0x9D && listChip[ i ].nChannelNumber <= 0x9F )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xGxxP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RxxxP )
                         listChip[ i ].nChannelNumber += 0x3D;
-                    else if( listChip[ i ].nChannelNumber >= 0xA9 && listChip[ i ].nChannelNumber <= 0xAB )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_RxBxP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RGBxP )
                         listChip[ i ].nChannelNumber += 0x34;
-                    else if( listChip[ i ].nChannelNumber >= 0xAC && listChip[ i ].nChannelNumber <= 0xD3 )
+                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RGBYP )
                         listChip[ i ].nChannelNumber += 0x35;
 				}
 
                 //Wailing
-				else if ( listChip[ i ].nChannelNumber == 0x28 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				else if ( listChip[ i ].nChannelNumber == EChannel.Guitar_Wailing )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
 				{
-					listChip[ i ].nChannelNumber += ( 0xA0 - 0x20 );
+					listChip[ i ].nChannelNumber += ( EChannel.Bass_Open - EChannel.Guitar_Open );
 				}
-				else if ( listChip[ i ].nChannelNumber == 0xA8 )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				else if ( listChip[ i ].nChannelNumber == EChannel.Bass_Wailing )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
 				{
-					listChip[ i ].nChannelNumber -= ( 0xA0 - 0x20 );
+					listChip[ i ].nChannelNumber -= ( EChannel.Bass_Open - EChannel.Guitar_Open );
 				}
 			}
 			int t = this.LEVEL.Bass;
@@ -4851,9 +4530,9 @@ namespace DTXMania
 		private struct STGDAPARAM
 		{
 			public string strGDAのチャンネル文字列;	
-			public int nDTXのチャンネル番号;
+			public EChannel nDTXのチャンネル番号;
 
-			public STGDAPARAM( string strGDAのチャンネル文字列, int nDTXのチャンネル番号 )		// 2011.1.1 yyagi 構造体のコンストラクタ追加(初期化簡易化のため)
+			public STGDAPARAM( string strGDAのチャンネル文字列, EChannel nDTXのチャンネル番号 )		// 2011.1.1 yyagi 構造体のコンストラクタ追加(初期化簡易化のため)
 			{
 				this.strGDAのチャンネル文字列 = strGDAのチャンネル文字列;
 				this.nDTXのチャンネル番号 = nDTXのチャンネル番号;
@@ -6890,7 +6569,7 @@ namespace DTXMania
 
 			#region [ nチャンネル番号 を取得する。]
 			//-----------------
-			int nチャンネル番号 = -1;
+			EChannel nChannelNumber = EChannel.Invalid;
 
 			// ファイルフォーマットによって処理が異なる。
 
@@ -6904,11 +6583,11 @@ namespace DTXMania
 				{
 					if( strチャンネル文字列.Equals( param.strGDAのチャンネル文字列, StringComparison.OrdinalIgnoreCase ) )
 					{
-						nチャンネル番号 = param.nDTXのチャンネル番号;
+						nChannelNumber = param.nDTXのチャンネル番号;
 						break;	// 置き換え成功
 					}
 				}
-				if( nチャンネル番号 < 0 )
+				if( nChannelNumber < 0 )
 					return false;	// 置き換え失敗
 				//-----------------
 				#endregion
@@ -6917,9 +6596,9 @@ namespace DTXMania
 			{
 				#region [ (B) その他の場合：チャンネル番号は16進数2桁。]
 				//-----------------
-				nチャンネル番号 = CConversion.nConvert2DigitHexadecimalStringToNumber( strコマンド.Substring( 3, 2 ) );
+				nChannelNumber = (EChannel)( CConversion.nConvert2DigitHexadecimalStringToNumber( strコマンド.Substring( 3, 2 ) ));
 
-				if( nチャンネル番号 < 0 )
+				if( nChannelNumber < 0 )
 					return false;
 				//-----------------
 				#endregion
@@ -6928,108 +6607,108 @@ namespace DTXMania
 			#endregion
 			#region [ 取得したチャンネル番号で、this.bチップがある に該当があれば設定する。]
 			//-----------------
-			if( ( nチャンネル番号 >= 0x11 ) && ( nチャンネル番号 <= 0x1c ) )
+			if( ( nChannelNumber >= EChannel.HiHatClose ) && ( nChannelNumber <= EChannel.LeftBassDrum ) )
 			{
 				this.bチップがある.Drums = true;
 			}
-			else if( ( nチャンネル番号 >= 0x20 ) && ( nチャンネル番号 <= 0x27 ) || ( nチャンネル番号 >= 0x93 ) && ( nチャンネル番号 <= 0x9F ) || ( nチャンネル番号 >= 0xAA ) && ( nチャンネル番号 <= 0xAF ) || ( nチャンネル番号 >= 0xD0 ) && ( nチャンネル番号 <= 0xD3 ) )
+			else if( ( nChannelNumber >= EChannel.Guitar_Open ) && ( nChannelNumber <= EChannel.Guitar_RGBxx ) || ( nChannelNumber >= EChannel.Guitar_xxxYx ) && ( nChannelNumber <= EChannel.Guitar_RxxxP ) || ( nChannelNumber >= EChannel.Guitar_RGxxP ) && ( nChannelNumber <= EChannel.Guitar_xGBYP ) || ( nChannelNumber >= EChannel.Guitar_RxxYP ) && ( nChannelNumber <= EChannel.Guitar_RGBYP ) )
 			{
 				this.bチップがある.Guitar = true;
 			}
-			else if( ( nチャンネル番号 >= 0xA0 ) && ( nチャンネル番号 <= 0xa7 ) || ( nチャンネル番号 == 0xC5 ) || ( nチャンネル番号 == 0xC6 ) || ( nチャンネル番号 >= 0xC8 ) && ( nチャンネル番号 <= 0xCF ) || ( nチャンネル番号 >= 0xDA ) && ( nチャンネル番号 <= 0xDF ) || ( nチャンネル番号 >= 0xE1 ) && ( nチャンネル番号 <= 0xE8 )  )
+			else if( ( nChannelNumber >= EChannel.Bass_Open ) && ( nChannelNumber <= EChannel.Bass_RGBxx ) || ( nChannelNumber == EChannel.Bass_xxxYx ) || ( nChannelNumber == EChannel.Bass_xxBYx ) || ( nChannelNumber >= EChannel.Bass_xGxYx ) && ( nChannelNumber <= EChannel.Bass_xxBxP ) || ( nChannelNumber >= EChannel.Bass_xGxxP ) && ( nChannelNumber <= EChannel.Bass_RGBxP ) || ( nChannelNumber >= EChannel.Bass_xxxYP ) && ( nChannelNumber <= EChannel.Bass_RGBYP )  )
 			{
 				this.bチップがある.Bass = true;
 			}
-			switch( nチャンネル番号 )
+			switch( nChannelNumber )
 			{
-                case 0x17:
+                case EChannel.FloorTom:
                     this.bチップがある.FT = true;
                     break;
 
-				case 0x18:
+				case EChannel.HiHatOpen:
 					this.bチップがある.HHOpen = true;
 					break;
 
-				case 0x19:
+				case EChannel.RideCymbal:
 					this.bチップがある.Ride = true;
 					break;
 
-				case 0x1a:
+				case EChannel.LeftCymbal:
 					this.bチップがある.LeftCymbal = true;
 					break;
 
-                case 0x1b:
+                case EChannel.LeftPedal:
                     this.bチップがある.LP = true;
                     break;
 
-                case 0x1c:
+                case EChannel.LeftBassDrum:
                     this.bチップがある.LBD = true;
                     break;
 
-				case 0x20:
+				case EChannel.Guitar_Open:
 					this.bチップがある.OpenGuitar = true;
 					break;
 
-                case 0x54:
-                case 0x5A:
+                case EChannel.Movie:
+                case EChannel.MovieFull:
                     this.bチップがある.AVI = true;
                     break;
 
-                case 0x93:
-                case 0x94:
-                case 0x95:
-                case 0x96:
-                case 0x97:
-                case 0x98:
-                case 0x99:
-                case 0x9A:
-                case 0x9B:
-                case 0x9C:
-                case 0x9D:
-                case 0x9E:
-                case 0x9F:
-                case 0xA9:
-                case 0xAA:
-                case 0xAB:
-                case 0xAC:
-                case 0xAD:
-                case 0xAE:
-                case 0xAF:
-                case 0xD0:
-                case 0xD1:
-                case 0xD2:
-                case 0xD3:
+                case EChannel.Guitar_xxxYx:
+                case EChannel.Guitar_xxBYx:
+                case EChannel.Guitar_xGxYx:
+                case EChannel.Guitar_xGBYx:
+                case EChannel.Guitar_RxxYx:
+                case EChannel.Guitar_RxBYx:
+                case EChannel.Guitar_RGxYx:
+                case EChannel.Guitar_RGBYx:
+                case EChannel.Guitar_xxxxP:
+                case EChannel.Guitar_xxBxP:
+                case EChannel.Guitar_xGxxP:
+                case EChannel.Guitar_xGBxP:
+                case EChannel.Guitar_RxxxP:
+                case EChannel.Guitar_RxBxP:
+                case EChannel.Guitar_RGxxP:
+                case EChannel.Guitar_RGBxP:
+                case EChannel.Guitar_xxxYP:
+                case EChannel.Guitar_xxBYP:
+                case EChannel.Guitar_xGxYP:
+                case EChannel.Guitar_xGBYP:
+                case EChannel.Guitar_RxxYP:
+                case EChannel.Guitar_RxBYP:
+                case EChannel.Guitar_RGxYP:
+                case EChannel.Guitar_RGBYP:
                     this.bチップがある.YPGuitar = true;
                     break;
 
-                case 0xC5:
-                case 0xC6:
-                case 0xC8:
-                case 0xC9:
-                case 0xCA:
-                case 0xCB:
-                case 0xCC:
-                case 0xCD:
-                case 0xCE:
-                case 0xCF:
-                case 0xDA:
-                case 0xDB:
-                case 0xDC:
-                case 0xDD:
-                case 0xDE:
-                case 0xDF:
-                case 0xE1:
-                case 0xE2:
-                case 0xE3:
-                case 0xE4:
-                case 0xE5:
-                case 0xE6:
-                case 0xE7:
-                case 0xE8:
+                case EChannel.Bass_xxxYx:
+                case EChannel.Bass_xxBYx:
+                case EChannel.Bass_xGxYx:
+                case EChannel.Bass_xGBYx:
+                case EChannel.Bass_RxxYx:
+                case EChannel.Bass_RxBYx:
+                case EChannel.Bass_RGxYx:
+                case EChannel.Bass_RGBYx:
+                case EChannel.Bass_xxxxP:
+                case EChannel.Bass_xxBxP:
+                case EChannel.Bass_xGxxP:
+                case EChannel.Bass_xGBxP:
+                case EChannel.Bass_RxxxP:
+                case EChannel.Bass_RxBxP:
+                case EChannel.Bass_RGxxP:
+                case EChannel.Bass_RGBxP:
+                case EChannel.Bass_xxxYP:
+                case EChannel.Bass_xxBYP:
+                case EChannel.Bass_xGxYP:
+                case EChannel.Bass_xGBYP:
+                case EChannel.Bass_RxxYP:
+                case EChannel.Bass_RxBYP:
+                case EChannel.Bass_RGxYP:
+                case EChannel.Bass_RGBYP:
                     this.bチップがある.YPBass = true;
                     break;
 
-				case 0xA0:
+				case EChannel.Bass_Open:
 					this.bチップがある.OpenBass = true;
 					break;
 			}
@@ -7041,7 +6720,7 @@ namespace DTXMania
 
 			#region [ 小節長変更(Ch.02)は他のチャンネルとはパラメータが特殊なので、先にとっとと終わらせる。 ]
 			//-----------------
-			if( nチャンネル番号 == 0x02 )
+			if( nChannelNumber == EChannel.BarLength )
 			{
 				// 小節長倍率を取得する。
 
@@ -7058,7 +6737,7 @@ namespace DTXMania
 				this.listChip.Insert(
 					0,
 					new CChip() {
-						nChannelNumber = nチャンネル番号,
+						nChannelNumber = nChannelNumber,
 						db実数値 = db小節長倍率,
 						nPlaybackPosition = n小節番号 * 384,
 					} );
@@ -7114,7 +6793,7 @@ namespace DTXMania
 				//-----------------
 				int nオブジェクト数値 = 0;
 
-				if( nチャンネル番号 == 0x03 )
+				if( nChannelNumber == EChannel.BPM )
 				{
 					// Ch.03 のみ 16進数2桁。
 					nオブジェクト数値 = CConversion.nConvert2DigitHexadecimalStringToNumber( strパラメータ.Substring( i * 2, 2 ) );
@@ -7134,22 +6813,22 @@ namespace DTXMania
 
 				var chip = new CChip();
 
-				chip.nChannelNumber = nチャンネル番号;
+				chip.nChannelNumber = nChannelNumber;
 				chip.nPlaybackPosition = ( n小節番号 * 384 ) + ( ( 384 * i ) / ( n文字数 / 2 ) );
 				chip.nIntegerValue = nオブジェクト数値;
 				chip.nIntegerValue_InternalNumber = nオブジェクト数値;
 
 				#region [ chip.e楽器パート = ... ]
 				//-----------------
-				if( ( nチャンネル番号 >= 0x11 ) && ( nチャンネル番号 <= 0x1C ) )
+				if( ( nChannelNumber >= EChannel.HiHatClose ) && ( nChannelNumber <= EChannel.LeftBassDrum ) )
 				{
 					chip.eInstrumentPart = EInstrumentPart.DRUMS;
 				}
-                if ( ( nチャンネル番号 >= 0x20 && nチャンネル番号 <= 0x27 ) || ( nチャンネル番号 >= 0x93 && nチャンネル番号 <= 0x9F ) || ( nチャンネル番号 >= 0xA9 && nチャンネル番号 <= 0xAF ) || ( nチャンネル番号 >= 0xD0 && nチャンネル番号 <= 0xD3 ) )
+                if ( ( nChannelNumber >= EChannel.Guitar_Open && nChannelNumber <= EChannel.Guitar_RGBxx ) || ( nChannelNumber >= EChannel.Guitar_xxxYx && nChannelNumber <= EChannel.Guitar_RxxxP ) || ( nChannelNumber >= EChannel.Guitar_RxBxP && nChannelNumber <= EChannel.Guitar_xGBYP ) || ( nChannelNumber >= EChannel.Guitar_RxxYP && nChannelNumber <= EChannel.Guitar_RGBYP ) )
                 {
                     chip.eInstrumentPart = EInstrumentPart.GUITAR;
                 }
-                if ( ( nチャンネル番号 >= 0xA0 && nチャンネル番号 <= 0xA7 ) || ( nチャンネル番号 == 0xC5 ) || ( nチャンネル番号 == 0xC6 ) || ( nチャンネル番号 >= 0xC8 && nチャンネル番号 <= 0xCF ) || ( nチャンネル番号 >= 0xDA && nチャンネル番号 <= 0xDF ) || ( nチャンネル番号 >= 0xE1 && nチャンネル番号 <= 0xE8 ) )
+                if ( ( nChannelNumber >= EChannel.Bass_Open && nChannelNumber <= EChannel.Bass_RGBxx ) || ( nChannelNumber == EChannel.Bass_xxxYx ) || ( nChannelNumber == EChannel.Bass_xxBYx ) || ( nChannelNumber >= EChannel.Bass_xGxYx && nChannelNumber <= EChannel.Bass_xxBxP ) || ( nChannelNumber >= EChannel.Bass_xGxxP && nChannelNumber <= EChannel.Bass_RGBxP ) || ( nChannelNumber >= EChannel.Bass_xxxYP && nChannelNumber <= EChannel.Bass_RGBYP ) )
                 {
                     chip.eInstrumentPart = EInstrumentPart.BASS;
                 }
@@ -7175,7 +6854,7 @@ namespace DTXMania
 
 				#region [ フィルインON/OFFチャンネル(Ch.53)の場合、発声位置を少し前後にずらす。]
 				//-----------------
-				if( nチャンネル番号 == 0x53 )
+				if( nChannelNumber == EChannel.FillIn )
 				{
 					// ずらすのは、フィルインONチップと同じ位置にいるチップでも確実にフィルインが発動し、
 					// 同様に、フィルインOFFチップと同じ位置にいるチップでも確実にフィルインが終了するようにするため。

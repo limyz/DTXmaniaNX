@@ -28,7 +28,7 @@ namespace DTXMania
 		public STDGBVALUE<int> nRankValue;
 		public STDGBVALUE<int> nNbPerformances;
 		public int n総合ランク値;
-		public CDTX.CChip[] rEmptyDrumChip;
+		public CChip[] rEmptyDrumChip;
 		public STDGBVALUE<CScoreIni.CPerformanceEntry> stPerformanceEntry;
 		public bool bIsTrainingMode;
 
@@ -40,7 +40,7 @@ namespace DTXMania
 			this.stPerformanceEntry.Drums = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Guitar = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Bass = new CScoreIni.CPerformanceEntry();
-			this.rEmptyDrumChip = new CDTX.CChip[ 10 ];
+			this.rEmptyDrumChip = new CChip[ 10 ];
 			this.n総合ランク値 = -1;
             this.nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9 };
 			base.eStageID = CStage.EStage.Result;
@@ -271,11 +271,11 @@ namespace DTXMania
             saveCond.Guitar = true;
             saveCond.Bass = true;
             
-            foreach( CDTX.CChip chip in CDTXMania.DTX.listChip )
+            foreach( CChip chip in CDTXMania.DTX.listChip )
             {
                 if( chip.bIsAutoPlayed )
                 {
-					if (chip.nChannelNumber != 0x28 && chip.nChannelNumber != 0xA8) // Guitar/Bass Wailing は OK
+					if (chip.nChannelNumber != EChannel.Guitar_Wailing && chip.nChannelNumber != EChannel.Bass_Wailing) // Guitar/Bass Wailing は OK
 					{
 						saveCond[(int)(chip.eInstrumentPart)] = false;
 					}
@@ -342,7 +342,7 @@ namespace DTXMania
             }
 
             int cnt = 0;
-            foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+            foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
             {
                 if (chip.eInstrumentPart == inst)
                 {
@@ -358,7 +358,7 @@ namespace DTXMania
                     using (BinaryWriter bw = new BinaryWriter(fs))
                     {
                         bw.Write((Int32)cnt);
-                        foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
                         {
                             if (chip.eInstrumentPart == inst)
                             {
@@ -672,7 +672,7 @@ namespace DTXMania
 									{
 										continue;
 									}
-									CDTX.CChip rChip = this.rEmptyDrumChip[ i ];
+									CChip rChip = this.rEmptyDrumChip[ i ];
 									if( rChip == null )
 									{
 										switch( ( (EPad) i ) )
@@ -714,10 +714,10 @@ namespace DTXMania
 												break;
 										}
 									}
-									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= 0x11 ) ) && ( rChip.nChannelNumber <= 0x1b ) )
+									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= EChannel.HiHatClose ) ) && ( rChip.nChannelNumber <= EChannel.LeftPedal ) )
 									{
-										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - 0x11 ];
-										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == 0x11 ) || ( ( rChip.nChannelNumber == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
+										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - EChannel.HiHatClose ];
+										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == EChannel.HiHatClose ) || ( ( rChip.nChannelNumber == EChannel.HiHatOpen ) && ( this.n最後に再生したHHのチャンネル番号 != EChannel.HiHatOpen ) ) ) )
 										{
 											CDTXMania.DTX.tStopPlayingWav( this.n最後に再生したHHのWAV番号 );
 											this.n最後に再生したHHのWAV番号 = rChip.nIntegerValue_InternalNumber;
@@ -791,7 +791,7 @@ namespace DTXMania
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;				// #24509 2011.3.14 yyagi
 		private readonly int[] nチャンネル0Atoレーン07;
 		private int n最後に再生したHHのWAV番号;
-		private int n最後に再生したHHのチャンネル番号;
+		private EChannel n最後に再生したHHのチャンネル番号;
 		private CSound rResultSound;
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル

@@ -69,7 +69,7 @@ namespace DTXMania
         /// <summary>
         /// Get the <see cref="EJudgement"/> which would occur from hitting a chip at the given absolute offset from its playback time, when using this set.
         /// </summary>
-        /// <param name="nDeltaTimeMs">The absolute offset, in milliseconds, from the <see cref="CDTX.CChip.nPlaybackTimeMs"/> of the chip.</param>
+        /// <param name="nDeltaTimeMs">The absolute offset, in milliseconds, from the <see cref="CChip.nPlaybackTimeMs"/> of the chip.</param>
         /// <returns>The <see cref="EJudgement"/> for <paramref name="nDeltaTimeMs"/>.</returns>
         public EJudgement tGetJudgement(int nDeltaTimeMs)
         {

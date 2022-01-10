@@ -817,6 +817,7 @@ namespace DTXCreator.Score
             this.listレーン.Add( new CLane( CLane.E種別.GtY, "GtY", 0,    0,    false, Color.FromArgb( alpha, 0xff, 0xff, 0 ), 0, width, CLane.ELaneType.Guitar, true ) );
 			this.listレーン.Add( new CLane( CLane.E種別.GtP, "GtP", 0,    0,    false, Color.FromArgb( alpha, 0xff, 0, 0xff ), 0, width, CLane.ELaneType.Guitar, true ) );
 			this.listレーン.Add( new CLane( CLane.E種別.GtW, "GtW", 0x28, 0x28, true,  Color.FromArgb( alpha, 160, 160, 160 ), 0, width, CLane.ELaneType.Guitar, true ) );
+			this.listレーン.Add( new CLane( CLane.E種別.GtL, "GtL", 0x2C, 0x2C, false,  Color.FromArgb( alpha, 240, 192, 160), 0, width, CLane.ELaneType.Guitar, true));
 
 			this.listレーン.Add( new CLane( CLane.E種別.BsV, "BsV", 0,    0,    true,  Color.FromArgb( alpha, 160, 160, 160 ), 0, width, CLane.ELaneType.Bass, true ) );
 			this.listレーン.Add( new CLane( CLane.E種別.BsR, "BsR", 0,    0,    false, Color.FromArgb( alpha, 0xff, 0, 0 ), 0, width, CLane.ELaneType.Bass, true ) );
@@ -825,6 +826,7 @@ namespace DTXCreator.Score
             this.listレーン.Add( new CLane( CLane.E種別.BsY, "BsY", 0,    0,    false, Color.FromArgb( alpha, 0xff, 0xff, 0), 0, width, CLane.ELaneType.Bass, true));
             this.listレーン.Add( new CLane( CLane.E種別.BsP, "BsP", 0,    0,    false, Color.FromArgb( alpha, 0xff, 0, 0xff), 0, width, CLane.ELaneType.Bass, true));
             this.listレーン.Add( new CLane( CLane.E種別.BsW, "BsW", 0xa8, 0xa8, true,  Color.FromArgb( alpha, 160, 160, 160), 0, width, CLane.ELaneType.Bass, true));
+			this.listレーン.Add( new CLane( CLane.E種別.BsL, "BsL", 0x2D, 0x2D, false,  Color.FromArgb( alpha, 240, 192, 160), 0, width, CLane.ELaneType.Bass, true));
 
 			this.listレーン.Add( new CLane( CLane.E種別.AVI, "AVI", 0x54, 0x54, true,  Color.FromArgb( alpha, 160, 160, 160 ), 0, width, CLane.ELaneType.AVI1_2, true ) );
             //this.listレーン.Add( new Cレーン( Cレーン.E種別.AVI, "AVI2", 0x55, 0x55, false, Color.FromArgb(alpha, 160, 160, 160), 0, width, Cレーン.ELaneType.AVI1_2, true));

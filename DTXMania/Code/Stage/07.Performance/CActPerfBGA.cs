@@ -20,7 +20,7 @@ namespace DTXMania
 		
 		// メソッド
 
-		public void ChangeScope( int nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex )
+		public void ChangeScope( EChannel nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex )
 		{
 			for( int i = 0; i < 8; i++ )
 			{
@@ -32,11 +32,11 @@ namespace DTXMania
 				}
 			}
 		}
-		public void Start( int nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex, int n開始サイズW, int n開始サイズH, int n終了サイズW, int n終了サイズH, int n画像側開始位置X, int n画像側開始位置Y, int n画像側終了位置X, int n画像側終了位置Y, int n表示側開始位置X, int n表示側開始位置Y, int n表示側終了位置X, int n表示側終了位置Y, int n総移動時間ms )
+		public void Start( EChannel nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex, int n開始サイズW, int n開始サイズH, int n終了サイズW, int n終了サイズH, int n画像側開始位置X, int n画像側開始位置Y, int n画像側終了位置X, int n画像側終了位置Y, int n表示側開始位置X, int n表示側開始位置Y, int n表示側終了位置X, int n表示側終了位置Y, int n総移動時間ms )
 		{
 			this.Start( nチャンネル, bmp, bmptex, n開始サイズW, n開始サイズH, n終了サイズW, n終了サイズH, n画像側開始位置X, n画像側開始位置Y, n画像側終了位置X, n画像側終了位置Y, n表示側開始位置X, n表示側開始位置Y, n表示側終了位置X, n表示側終了位置Y, n総移動時間ms, -1 );
 		}
-		public void Start( int nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex, int n開始サイズW, int n開始サイズH, int n終了サイズW, int n終了サイズH, int n画像側開始位置X, int n画像側開始位置Y, int n画像側終了位置X, int n画像側終了位置Y, int n表示側開始位置X, int n表示側開始位置Y, int n表示側終了位置X, int n表示側終了位置Y, int n総移動時間ms, int n移動開始時刻ms )
+		public void Start(EChannel nチャンネル, CDTX.CBMP bmp, CDTX.CBMPTEX bmptex, int n開始サイズW, int n開始サイズH, int n終了サイズW, int n終了サイズH, int n画像側開始位置X, int n画像側開始位置Y, int n画像側終了位置X, int n画像側終了位置Y, int n表示側開始位置X, int n表示側開始位置Y, int n表示側終了位置X, int n表示側終了位置Y, int n総移動時間ms, int n移動開始時刻ms )
 		{
 			for( int i = 0; i < 8; i++ )
 			{
@@ -65,7 +65,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < CDTXMania.DTX.listChip.Count; i++ )
 			{
-				CDTX.CChip chip = CDTXMania.DTX.listChip[ i ];
+				CChip chip = CDTXMania.DTX.listChip[ i ];
 				if( chip.nPlaybackTimeMs > n移動開始時刻ms )
 				{
 					return;
@@ -301,7 +301,7 @@ namespace DTXMania
 		}
 
         private CTexture txBGAバックパネル;
-		private readonly int[] nChannel = new int[] { 4, 7, 0x55, 0x56, 0x57, 0x58, 0x59, 0x60 };
+		private readonly EChannel[] nChannel = new EChannel[] { EChannel.BGALayer1, EChannel.BGALayer2, EChannel.BGALayer3, EChannel.BGALayer4, EChannel.BGALayer5, EChannel.BGALayer6, EChannel.BGALayer7, EChannel.BGALayer8 };
 		private Surface sfBackBuffer;
 		private STLAYER[] stLayer = new STLAYER[ 8 ];
 		//-----------------

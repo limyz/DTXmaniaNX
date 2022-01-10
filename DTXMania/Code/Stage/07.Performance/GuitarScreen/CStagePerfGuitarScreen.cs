@@ -25,6 +25,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actAVI = new CActPerfAVI() );
 			base.listChildActivities.Add( this.actBGA = new CActPerfBGA() );
             base.listChildActivities.Add( this.actGraph = new CActPerfSkillMeter() );
+			base.listChildActivities.Add(this.actGuitarBonus = new CActPerfGuitarBonus());
 //			base.listChildActivities.Add( this.actPanel = new CActPerfPanelString() );
 			base.listChildActivities.Add( this.actScrollSpeed = new CActPerfScrollSpeed() );
 			base.listChildActivities.Add( this.actStatusPanel = new CActPerfGuitarStatusPanel() );
@@ -127,7 +128,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                 bool flag = false;
-                bool flag2 = false;
+                bool bIsFinishedFadeout = false;
 
 				if( base.bJustStartedUpdate )
 				{
@@ -184,7 +185,7 @@ namespace DTXMania
 
 				this.tUpdateAndDraw_DANGER();
 
-				this.tUpdateAndDraw_WailingBonus();
+				this.tUpdateAndDraw_WailingBonus();				
 				this.tUpdateAndDraw_ScrollSpeed();
 				this.tUpdateAndDraw_ChipAnimation();
                 this.tUpdateAndDraw_BarLines(EInstrumentPart.GUITAR);
@@ -205,20 +206,76 @@ namespace DTXMania
 				this.tUpdateAndDraw_PlaySpeed();
 
 				this.tUpdateAndDraw_ChipFireGB();
+				this.tUpdateAndDraw_GuitarBonus();
 				this.tUpdateAndDraw_STAGEFAILED();
-                flag2 = this.tUpdateAndDraw_FadeIn_Out();
+                bIsFinishedFadeout = this.tUpdateAndDraw_FadeIn_Out();
                 if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
                 {
                     this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
                     base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
                     this.actFOStageClear.tStartFadeOut();
                 }
-				if( flag2 )
+				if( bIsFinishedFadeout )
 				{
                     if (!CDTXMania.Skin.soundStageClear.b再生中)
                     {
                         Debug.WriteLine("Total OnUpdateAndDraw=" + sw.ElapsedMilliseconds + "ms");
-                        return (int)this.eReturnValueAfterFadeOut;
+
+						//Update Guitar score like in PerfDrumsScreen
+						int nNumberOfMistakes = base.nHitCount_ExclAuto.Guitar.Miss + base.nHitCount_ExclAuto.Guitar.Poor;
+						if(nNumberOfMistakes == 0)
+                        {
+							{
+								int nNumberPerfects = base.nHitCount_ExclAuto.Guitar.Perfect;
+								if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay)
+								{
+									nNumberPerfects = base.nHitCount_IncAuto.Guitar.Perfect;
+								}
+								if (nNumberPerfects == CDTXMania.DTX.nVisibleChipsCount.Guitar)
+								#region[ エクセ ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Guitar += 30000;									
+								}
+								#endregion
+								else
+								#region[ フルコン ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Guitar += 15000;									
+								}
+								#endregion
+							}
+						}
+
+						//Repeat for Bass
+						nNumberOfMistakes = base.nHitCount_ExclAuto.Bass.Miss + base.nHitCount_ExclAuto.Bass.Poor;
+						if (nNumberOfMistakes == 0)
+						{
+							{
+								int nNumberPerfects = base.nHitCount_ExclAuto.Bass.Perfect;
+								if (CDTXMania.ConfigIni.bAllBassAreAutoPlay)
+								{
+									nNumberPerfects = base.nHitCount_IncAuto.Bass.Perfect;
+								}
+								if (nNumberPerfects == CDTXMania.DTX.nVisibleChipsCount.Bass)
+								#region[ エクセ ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Bass += 30000;
+								}
+								#endregion
+								else
+								#region[ フルコン ]
+								{
+									if (CDTXMania.ConfigIni.nSkillMode == 1)
+										this.actScore.nCurrentTrueScore.Bass += 15000;
+								}
+								#endregion
+							}
+						}
+
+						return (int)this.eReturnValueAfterFadeOut;
                     }
 				}
 				if (base.ePhaseID == CStage.EPhase.演奏_STAGE_RESTART)
@@ -267,7 +324,7 @@ namespace DTXMania
         public bool bサビ区間;
         public double UnitTime;
 
-		protected override EJudgement tProcessChipHit( long nHitTime, CDTX.CChip pChip, bool bCorrectLane )
+		protected override EJudgement tProcessChipHit( long nHitTime, CChip pChip, bool bCorrectLane )
 		{
 			EJudgement eJudgeResult = tProcessChipHit( nHitTime, pChip, EInstrumentPart.GUITAR, bCorrectLane );
             if(pChip.eInstrumentPart == EInstrumentPart.GUITAR)
@@ -455,7 +512,7 @@ namespace DTXMania
 			}
 			base.tGenerateBackgroundTexture( DefaultBgFilename, bgrect, BgFilename );
 		}
-        protected override void tUpdateAndDraw_Chip_PatternOnly_Drums(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected override void tUpdateAndDraw_Chip_PatternOnly_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip)
         {
             // int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nChannelNumber - 0x11 ];
             if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
@@ -464,7 +521,7 @@ namespace DTXMania
                 //this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
             }
         }
-        protected override void tUpdateAndDraw_Chip_Drums(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected override void tUpdateAndDraw_Chip_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip)
 		{
 			// int indexSevenLanes = this.nチャンネル0Atoレーン07[ pChip.nChannelNumber - 0x11 ];
 			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
@@ -473,13 +530,13 @@ namespace DTXMania
                 this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, EInstrumentPart.DRUMS, dTX.nモニタを考慮した音量(EInstrumentPart.DRUMS));
 			}
 		}
-		protected override void tUpdateAndDraw_Chip_GuitarBass( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, EInstrumentPart inst )
+		protected override void tUpdateAndDraw_Chip_GuitarBass( CConfigIni configIni, ref CDTX dTX, ref CChip pChip, EInstrumentPart inst )
 		{
 			base.tUpdateAndDraw_Chip_GuitarBass( configIni, ref dTX, ref pChip, inst,
                 this.nJudgeLinePosY[ (int) inst ] + 10, this.nJudgeLinePosY[ (int) inst ] + 1, 104, 670, 0, 0, 0, 11, 196, 10, 38, 38, 1000, 1000, 1000, 38, 38);
 		}
 #if false
-		protected override void t進行描画_チップ_ギターベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip, E楽器パート inst )
+		protected override void t進行描画_チップ_ギターベース( CConfigIni configIni, ref CDTX dTX, ref CChip pChip, E楽器パート inst )
 		{
 			int instIndex = (int) inst;
 			if ( configIni.bGuitar有効 )
@@ -590,7 +647,7 @@ namespace DTXMania
 			}
 		}
 #endif
-		protected override void tUpdateAndDraw_Chip_Guitar_Wailing( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_Guitar_Wailing( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			if ( configIni.bGuitarEnabled )
 			{
@@ -638,6 +695,7 @@ namespace DTXMania
 						}
 						if ( ( rect.Bottom > rect.Top ) && ( this.txChip != null ) )
 						{
+							this.txChip.vcScaleRatio.Y = 1f;
 							this.txChip.tDraw2D( CDTXMania.app.Device, drawX, ( y - numA ) + numC, rect );
 						}
 					}
@@ -656,7 +714,7 @@ namespace DTXMania
 			}
 			base.tUpdateAndDraw_Chip_Guitar_Wailing( configIni, ref dTX, ref pChip );
 		}
-		protected override void tUpdateAndDraw_Chip_FillIn( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_FillIn( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
@@ -687,7 +745,7 @@ namespace DTXMania
 #endif
 
 		}
-        protected override void tUpdateAndDraw_Chip_Bonus(CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip)
+        protected override void tUpdateAndDraw_Chip_Bonus(CConfigIni configIni, ref CDTX dTX, ref CChip pChip)
         {
             if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
             {
@@ -695,7 +753,7 @@ namespace DTXMania
             }
         }
 #if false
-		protected override void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void t進行描画_チップ_ベース( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			if ( configIni.bGuitar有効 )
 			{
@@ -786,7 +844,7 @@ namespace DTXMania
 			}
 		}
 #endif
-        protected override void tUpdateAndDraw_Chip_Bass_Wailing( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+        protected override void tUpdateAndDraw_Chip_Bass_Wailing( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			if ( configIni.bGuitarEnabled )
 			{
@@ -834,6 +892,7 @@ namespace DTXMania
 						}
 						if ( ( rect.Bottom > rect.Top ) && ( this.txChip != null ) )
 						{
+							this.txChip.vcScaleRatio.Y = 1.0f;
                             this.txChip.tDraw2D(CDTXMania.app.Device, drawX, (y - numA) + numC, rect);
 						}
 					}
@@ -852,14 +911,14 @@ namespace DTXMania
 				base.tUpdateAndDraw_Chip_Bass_Wailing( configIni, ref dTX, ref pChip );
 			}
 		}
-		protected override void tUpdateAndDraw_Chip_NoSound_Drums( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_NoSound_Drums( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
 				pChip.bHit = true;
 			}
 		}
-		protected override void tUpdateAndDraw_Chip_BarLine( CConfigIni configIni, ref CDTX dTX, ref CDTX.CChip pChip )
+		protected override void tUpdateAndDraw_Chip_BarLine( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
 			int n小節番号plus1 = pChip.nPlaybackPosition / 0x180;
 			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
@@ -876,9 +935,11 @@ namespace DTXMania
                 int y = CDTXMania.ConfigIni.bReverse.Guitar ? ((this.nJudgeLinePosY.Guitar - pChip.nDistanceFromBar.Guitar) + 0) : ((this.nJudgeLinePosY.Guitar + pChip.nDistanceFromBar.Guitar) + 9);
                 if ( ( dTX.bチップがある.Guitar && ( y > 104 ) ) && ( ( y < 670 ) && ( this.txChip != null ) ) )
                 {
-                    if( CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1 )
-					    this.txChip.tDraw2D( CDTXMania.app.Device, 88, y, new Rectangle( 0, 20, 193, 2 ) );
-
+					if (CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1)
+					{
+						this.txChip.vcScaleRatio.Y = 1f;
+						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y, new Rectangle(0, 20, 193, 2));
+					}
                     if ( configIni.b演奏情報を表示する )
                     {
                         int n小節番号 = n小節番号plus1 - 1;
@@ -889,7 +950,11 @@ namespace DTXMania
                 if ( ( dTX.bチップがある.Bass && ( y > 104 ) ) && ( ( y < 670 ) && ( this.txChip != null ) ) )
                 {
                     if( CDTXMania.ConfigIni.nLaneDisp.Bass == 0 || CDTXMania.ConfigIni.nLaneDisp.Bass == 1 )
-					    this.txChip.tDraw2D( CDTXMania.app.Device, 959, y, new Rectangle( 0, 20, 193, 2 ) );
+                    {
+						this.txChip.vcScaleRatio.Y = 1f;
+						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y, new Rectangle(0, 20, 193, 2));
+					}
+					    
 
                     if ( configIni.b演奏情報を表示する )
                     {
@@ -920,6 +985,7 @@ namespace DTXMania
 
 					if (CDTXMania.ConfigIni.nLaneDisp.Guitar == 0 || CDTXMania.ConfigIni.nLaneDisp.Guitar == 1)
 					{
+						this.txChip.vcScaleRatio.Y = 1.0f;
 						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y - 1, new Rectangle(0, 20, 193, 2));
 						this.txChip.tDraw2D(CDTXMania.app.Device, 88, y + 1, new Rectangle(0, 20, 193, 2));
 					}
@@ -932,6 +998,7 @@ namespace DTXMania
 
 					if (CDTXMania.ConfigIni.nLaneDisp.Bass == 0 || CDTXMania.ConfigIni.nLaneDisp.Bass == 1)
 					{
+						this.txChip.vcScaleRatio.Y = 1.0f;
 						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y - 1, new Rectangle(0, 20, 193, 2));
 						this.txChip.tDraw2D(CDTXMania.app.Device, 959, y + 1, new Rectangle(0, 20, 193, 2));
 					}
