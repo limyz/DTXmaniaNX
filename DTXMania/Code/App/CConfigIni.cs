@@ -858,7 +858,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) ELane.GtR; i <= (int) ELane.GtW; i++ )
+				for ( int i = (int) ELane.GtR; i <= (int) ELane.GtPick; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{
@@ -872,7 +872,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) ELane.BsR; i <= (int) ELane.BsW; i++ )
+				for ( int i = (int) ELane.BsR; i <= (int) ELane.BsPick; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{

@@ -1816,7 +1816,15 @@ namespace DTXMania
                         {
                             nAutoLanes++;
                         }
-                        ret /= Math.Sqrt(nAutoLanes + 1);
+						if (bAutoPlay.GtY)
+						{
+							nAutoLanes++;
+						}
+						if (bAutoPlay.GtP)
+						{
+							nAutoLanes++;
+						}
+						ret /= Math.Sqrt(nAutoLanes + 1);
                         #endregion
                     }
                     break;
@@ -1845,7 +1853,15 @@ namespace DTXMania
                         {
                             nAutoLanes++;
                         }
-                        ret /= Math.Sqrt(nAutoLanes + 1);
+						if (bAutoPlay.BsY)
+						{
+							nAutoLanes++;
+						}
+						if (bAutoPlay.BsP)
+						{
+							nAutoLanes++;
+						}
+						ret /= Math.Sqrt(nAutoLanes + 1);
                         #endregion
                     }
                     break;
