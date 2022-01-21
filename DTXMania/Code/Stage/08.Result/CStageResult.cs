@@ -239,6 +239,8 @@ namespace DTXMania
 								if (this.bNewRecordSkill[m])
 								{
 									cScore.SongInformation.HighSkill[m] = this.stPerformanceEntry[m].dbPerformanceSkill;
+									// New Song Progress for new skill record
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
 								}
 
 								if (this.bNewRecordRank[m])

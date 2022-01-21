@@ -144,6 +144,7 @@ namespace DTXMania
                 Drums.stSecondaryHitRanges = CDTXMania.stDrumPedalHitRanges;
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
+                Drums.strProgress = "";// actプログレスバー.GetScoreIniString(EPart.Drums);
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
             }
         }
@@ -214,6 +215,7 @@ namespace DTXMania
                 Guitar.stSecondaryHitRanges = new STHitRanges();
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
+                Guitar.strProgress = ""; // actプログレスバー.GetScoreIniString(EPart.Guitar);
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
             }
         }
@@ -284,6 +286,7 @@ namespace DTXMania
                 Bass.stSecondaryHitRanges = new STHitRanges();
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
+                Bass.strProgress = "";// actプログレスバー.GetScoreIniString(EPart.Bass);
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);
             }
         }

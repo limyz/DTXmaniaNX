@@ -810,7 +810,11 @@ namespace DTXMania
 			cスコア.SongInformation.SongType = (CDTX.EType) br.ReadInt32();
 			cスコア.SongInformation.Bpm = br.ReadDouble();
 			cスコア.SongInformation.Duration = br.ReadInt32();
-
+			//Read Progress after Duration
+			cスコア.SongInformation.progress.Drums = br.ReadString();
+			cスコア.SongInformation.progress.Guitar = br.ReadString();
+			cスコア.SongInformation.progress.Bass = br.ReadString();
+			
 			//
 			cスコア.SongInformation.chipCountByInstrument.Drums = br.ReadInt32();
 			cスコア.SongInformation.chipCountByLane[ELane.LC] = br.ReadInt32();
@@ -1240,6 +1244,10 @@ namespace DTXMania
 					bw.Write( (int) node.arScore[ i ].SongInformation.SongType );
 					bw.Write( node.arScore[ i ].SongInformation.Bpm );
 					bw.Write( node.arScore[ i ].SongInformation.Duration );
+					//Write to Progress here
+					bw.Write(node.arScore[i].SongInformation.progress.Drums);
+					bw.Write(node.arScore[i].SongInformation.progress.Guitar);
+					bw.Write(node.arScore[i].SongInformation.progress.Bass);
 
 					//New Data: Chip counts for Instrument and Lanes
 					bw.Write(node.arScore[i].SongInformation.chipCountByInstrument.Drums);
@@ -1814,6 +1822,13 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 					score.SongInformation.HighSkill[ n楽器番号 ] = ini.stSection[ n ].dbPerformanceSkill;
                     score.SongInformation.HighSongSkill[ n楽器番号 ] = ini.stSection[ n ].dbGameSkill;
 					score.SongInformation.FullCombo[ n楽器番号 ] = ini.stSection[ n ].bIsFullCombo | ini.stSection[ n楽器番号 * 2 ].bIsFullCombo;
+					//New for Progress
+					score.SongInformation.progress[n楽器番号] = ini.stSection[n].strProgress;					
+					if(score.SongInformation.progress[n楽器番号] == "")
+                    {
+						//TODO: Read from another file if progress string is empty
+						//score.SongInformation.progress[n楽器番号] = "";
+					}
 				}
 				score.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;
 				score.SongInformation.NbPerformances.Guitar = ini.stFile.PlayCountGuitar;
