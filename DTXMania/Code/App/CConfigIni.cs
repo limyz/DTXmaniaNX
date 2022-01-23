@@ -787,6 +787,21 @@ namespace DTXMania
 				}
 			}
 		}
+
+		public bool bInstrumentAvailable(EInstrumentPart inst)
+		{
+			switch (inst)
+			{
+				case EInstrumentPart.DRUMS:
+					return this._bDrums有効;
+				case EInstrumentPart.GUITAR:
+				case EInstrumentPart.BASS:
+					return this._bGuitar有効;
+				default:
+					return false;
+			}
+		}
+
 		public bool bEnterがキー割り当てのどこにも使用されていない
 		{
 			get
@@ -882,6 +897,25 @@ namespace DTXMania
 				return true;
 			}
 		}
+
+		public bool bIsAutoPlay(EInstrumentPart inst)
+		{
+			bool result = false;
+			switch (inst)
+			{
+				case EInstrumentPart.DRUMS:
+					result = bAllDrumsAreAutoPlay;
+					break;
+				case EInstrumentPart.GUITAR:
+					result = bAllGuitarsAreAutoPlay;
+					break;
+				case EInstrumentPart.BASS:
+					result = bAllBassAreAutoPlay;
+					break;
+			}
+			return result;
+		}
+
 		public bool b演奏情報を表示しない
 		{
 			get
