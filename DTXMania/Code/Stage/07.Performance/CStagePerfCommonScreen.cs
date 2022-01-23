@@ -144,7 +144,7 @@ namespace DTXMania
                 Drums.stSecondaryHitRanges = CDTXMania.stDrumPedalHitRanges;
                 Drums.strDTXManiaVersion = CDTXMania.VERSION;
                 Drums.strDateTime = DateTime.Now.ToString();
-                Drums.strProgress = "";// actプログレスバー.GetScoreIniString(EPart.Drums);
+                Drums.strProgress = this.actProgressBar.GetScoreIniString(EInstrumentPart.DRUMS);
                 Drums.Hash = CScoreIni.tComputePerformanceSectionMD5(Drums);
             }
         }
@@ -215,7 +215,7 @@ namespace DTXMania
                 Guitar.stSecondaryHitRanges = new STHitRanges();
                 Guitar.strDTXManiaVersion = CDTXMania.VERSION;
                 Guitar.strDateTime = DateTime.Now.ToString();
-                Guitar.strProgress = ""; // actプログレスバー.GetScoreIniString(EPart.Guitar);
+                Guitar.strProgress = this.actProgressBar.GetScoreIniString(EInstrumentPart.GUITAR);
                 Guitar.Hash = CScoreIni.tComputePerformanceSectionMD5(Guitar);
             }
         }
@@ -286,7 +286,7 @@ namespace DTXMania
                 Bass.stSecondaryHitRanges = new STHitRanges();
                 Bass.strDTXManiaVersion = CDTXMania.VERSION;
                 Bass.strDateTime = DateTime.Now.ToString();
-                Bass.strProgress = "";// actプログレスバー.GetScoreIniString(EPart.Bass);
+                Bass.strProgress = this.actProgressBar.GetScoreIniString(EInstrumentPart.BASS);
                 Bass.Hash = CScoreIni.tComputePerformanceSectionMD5(Bass);
             }
         }
@@ -715,6 +715,7 @@ namespace DTXMania
         public CActPerfScrollSpeed actScrollSpeed;
         protected CActPerfSkillMeter actGraph;
         protected CActPerfGuitarBonus actGuitarBonus;
+        protected CActPerfProgressBar actProgressBar;
         protected bool bPAUSE;
         protected STDGBVALUE<bool> bMIDIUsed;
         protected STDGBVALUE<bool> bKeyboardUsed;
@@ -1393,6 +1394,12 @@ namespace DTXMania
                 {
                     actGauge.Damage(screenmode, pChip.eInstrumentPart, eJudgeResult);
                 }
+            }
+
+            //Update progressBar
+            if (!bPChipIsAutoPlay && (eJudgeResult == EJudgement.Perfect || eJudgeResult == EJudgement.Great || eJudgeResult == EJudgement.Good))
+            {
+                this.actProgressBar.Hit(screenmode, pChip.nPlaybackTimeMs, eJudgeResult);
             }
 
             switch (pChip.eInstrumentPart)

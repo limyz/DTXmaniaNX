@@ -1827,7 +1827,8 @@ Debug.WriteLine( dBPM + ":" + c曲リストノード.strタイトル );
 					if(score.SongInformation.progress[n楽器番号] == "")
                     {
 						//TODO: Read from another file if progress string is empty
-						//score.SongInformation.progress[n楽器番号] = "";
+						//Set a hard-coded 64 char string for now
+						score.SongInformation.progress[n楽器番号] = "0000000000000000000000000000000000000000000000000000000000000000";
 					}
 				}
 				score.SongInformation.NbPerformances.Drums = ini.stFile.PlayCountDrums;

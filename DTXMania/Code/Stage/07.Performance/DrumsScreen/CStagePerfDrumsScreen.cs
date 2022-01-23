@@ -46,6 +46,7 @@ namespace DTXMania
             base.listChildActivities.Add( this.actFOStageClear = new CActFIFOWhiteClear());
             base.listChildActivities.Add( this.actFillin = new CActPerfDrumsFillingEffect() );
             base.listChildActivities.Add( this.actLVFont = new CActLVLNFont() );
+            base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar());
 //          base.listChildActivities.Add( this.actChipFireGB = new CActPerfDrumsChipFireGB());
 //			base.listChildActivities.Add( this.actLaneFlushGB = new CActPerfDrumsLaneFlushGB() );
 //			base.listChildActivities.Add( this.actRGB = new CActPerfDrumsRGB() );
@@ -359,6 +360,8 @@ namespace DTXMania
                 this.tUpdateAndDraw_JudgementString2_ForPositionOnJudgementLine();
                 this.tUpdateAndDraw_ChipFireD();
                 this.tUpdateAndDraw_PlaySpeed();
+                //
+                this.actProgressBar.OnUpdateAndDraw();
                 this.tUpdateAndDraw_STAGEFAILED();
                 bすべてのチップが判定された = true;
                 if (bIsFinishedFadeout)

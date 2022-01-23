@@ -26,7 +26,13 @@ namespace DTXMania
 			this.ct登場用 = null;
 			this.epartプレイ楽器 = EInstrumentPart.DRUMS;
 			this.nWidth = 20;
-			this.nHeight = 1080;
+			this.nHeight = 540; //1080;
+
+			//
+			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(854, 15);
+			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(332, 70);
+			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1202, 70);
+		
 			//n区間分割数 = 54;
 			this.nブロック最大数 = 5;
 			this.n楽器毎のチップ数基準値.Drums = 1600;
@@ -44,7 +50,7 @@ namespace DTXMania
 					}
 					if (!b演奏画面以外からの呼び出し && CDTXMania.ConfigIni.bInstrumentAvailable(ePart) && CDTXMania.DTX.bチップがある[(int)ePart])
 					{
-						int x = 200;//(int)CDTXMania.Instance.ConfigIni.cdInstX[ePart][CDTXMania.Instance.ConfigIni.eActiveInst] + CDTXMania.Instance.ConfigIni.n楽器W_チップ倍率反映済(ePart);
+						int x = this.pBarPosition[(int)ePart].X;//(int)CDTXMania.Instance.ConfigIni.cdInstX[ePart][CDTXMania.Instance.ConfigIni.eActiveInst] + CDTXMania.Instance.ConfigIni.n楽器W_チップ倍率反映済(ePart);
 						int y = 0;
 						p表示位置[(int)ePart] = new Point(x, y);
 					}
@@ -191,7 +197,7 @@ namespace DTXMania
 						continue;
 					}
 					int num = p表示位置[(int)ePart].X + (b演奏画面以外からの呼び出し ? 20 : 0);
-					int num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0);
+					int num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + this.pBarPosition[(int)ePart].Y;
 					if (b演奏画面以外からの呼び出し)
 					{
 						num += (int)((double)(-60 - p表示位置[(int)ePart].X) * Math.Cos(Math.PI / 200.0 * (double)ct登場用.nCurrentValue));
@@ -208,19 +214,19 @@ namespace DTXMania
 					if (!b演奏画面以外からの呼び出し)
 					{
 						tx縦線.tDraw2D(CDTXMania.app.Device, num + nWidth, num2);
-						int num3 = (int)((double)((CTimerBase)CDTXMania.Timer).n現在時刻ms / (double)nLastChipTime * 1080.0);
+						int num3 = (int)((double)((CTimerBase)CDTXMania.Timer).n現在時刻ms / (double)nLastChipTime * nHeightFactor);
 						if (num3 > nHeight)
 						{
 							num3 = nHeight;
 						}
 						Rectangle rectangle = new Rectangle(0, 0, tx進捗.szTextureSize.Width, num3);
-						num2 = nHeight - num3;
+						num2 = nHeight - num3 + this.pBarPosition[(int)ePart].Y;
 						tx進捗.tDraw2D(CDTXMania.app.Device, num, num2, rectangle);
 					}
 					for (int i = 0; i < n区間分割数; i++)
 					{
 						C区間 c区間 = L区間[(int)ePart][i];
-						num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + c区間.rect矩形描画サイズ.Y;
+						num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + c区間.rect矩形描画サイズ.Y + this.pBarPosition[(int)ePart].Y;
 						if (c区間.nチップ数 <= 0)
 						{
 							continue;
@@ -266,7 +272,7 @@ namespace DTXMania
 				} 				
 			}
 			CDTXMania.t安全にDisposeする(ref tx背景);
-			int num = 256; // (b演奏画面以外からの呼び出し ? 128 : ((int)CDTXMania.Instance.ConfigIni.nBGAlpha));
+			int num = 255; // (b演奏画面以外からの呼び出し ? 128 : ((int)CDTXMania.Instance.ConfigIni.nBGAlpha));
 			using (Bitmap bitmap3 = new Bitmap(nWidth + ((!b演奏画面以外からの呼び出し) ? 2 : 0), nHeight))
 			{
 				using (Bitmap bitmap2 = new Bitmap(20, 20))
@@ -461,7 +467,7 @@ namespace DTXMania
 
 		private STDGBVALUE<List<C区間>> L区間;
 
-		public static int n区間分割数 = 54;
+		public static int n区間分割数 = 64;
 
 		private int nブロック最大数;
 
@@ -488,6 +494,11 @@ namespace DTXMania
 		private int nWidth;
 
 		private int nHeight;
+
+		private STDGBVALUE<Point> pBarPosition;
+
+		//This value must match value of nHeight
+		private readonly double nHeightFactor = 540.0;
 
 		private readonly bool b演奏画面以外からの呼び出し;
 

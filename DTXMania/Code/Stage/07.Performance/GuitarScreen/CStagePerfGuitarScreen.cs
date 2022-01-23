@@ -42,6 +42,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actFO = new CActFIFOBlack() );
 			base.listChildActivities.Add( this.actFOClear = new CActFIFOWhite() );
             base.listChildActivities.Add( this.actFOStageClear = new CActFIFOWhiteClear());
+			base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar());
 		}
 
 
@@ -204,6 +205,8 @@ namespace DTXMania
 				this.tUpdateAndDraw_PerformanceInformation();
 				//this.tUpdateAndDraw_WailingFrame();
 				this.tUpdateAndDraw_PlaySpeed();
+				//
+				this.actProgressBar.OnUpdateAndDraw();
 
 				this.tUpdateAndDraw_ChipFireGB();
 				this.tUpdateAndDraw_GuitarBonus();
