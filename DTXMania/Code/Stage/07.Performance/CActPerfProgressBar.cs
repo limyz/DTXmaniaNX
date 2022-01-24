@@ -227,10 +227,10 @@ namespace DTXMania
 					{
 						CProgressSection c区間 = listProgressSection[(int)ePart][i];
 						num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + c区間.rectDrawingFrame.Y + this.pBarPosition[(int)ePart].Y;
-						if (c区間.nChipCount <= 0)
-						{
-							continue;
-						}
+						//if (c区間.nChipCount <= 0)
+						//{
+						//	continue;
+						//}
 						if (!CDTXMania.ConfigIni.bIsAutoPlay(ePart) || b演奏画面以外からの呼び出し)
 						{
 							if ((i + 1) * nLastChipTime / nSectionIntervalCount - 1 > ((CTimerBase)CDTXMania.Timer).n現在時刻ms && !b演奏画面以外からの呼び出し)
@@ -244,19 +244,25 @@ namespace DTXMania
 									c区間.bIsAttempted = true;
                                 }
 								
-								if (c区間.nHitCount == c区間.nChipCount)
-								{
-									tx黄.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
-								}
-								else
-								{
-									tx青.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
-								}
+								if(c区間.nChipCount > 0)
+                                {
+									if (c区間.nHitCount == c区間.nChipCount)
+									{
+										tx黄.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+									}
+									else
+									{
+										tx青.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+									}
+								}								
 							} 
 						}
 						else
 						{
-							tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+							if (c区間.nChipCount > 0)
+							{
+								tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+							}								
 						}
 					}
 				}
