@@ -34,7 +34,7 @@ namespace DTXMania
 			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1202, 70);
 		
 			//n区間分割数 = 54;
-			this.nブロック最大数 = 5;
+			this.nブロック最大数 = 10;
 			this.n楽器毎のチップ数基準値.Drums = 1600;
 			this.n楽器毎のチップ数基準値.Guitar = 800;
 			this.n楽器毎のチップ数基準値.Bass = 800;
@@ -43,10 +43,10 @@ namespace DTXMania
 			{
 				for (EInstrumentPart ePart = EInstrumentPart.DRUMS; ePart <= EInstrumentPart.BASS; ePart++)
 				{
-					L区間[(int)ePart] = new List<C区間>();
-					for (int i = 0; i < n区間分割数; i++)
+					listProgressSection[(int)ePart] = new List<CProgressSection>();
+					for (int i = 0; i < nSectionIntervalCount; i++)
 					{
-						L区間[(int)ePart].Add(new C区間());
+						listProgressSection[(int)ePart].Add(new CProgressSection());
 					}
 					if (!b演奏画面以外からの呼び出し && CDTXMania.ConfigIni.bInstrumentAvailable(ePart) && CDTXMania.DTX.bチップがある[(int)ePart])
 					{
@@ -68,27 +68,27 @@ namespace DTXMania
 					{
 						if (item.eInstrumentPart >= EInstrumentPart.DRUMS && item.eInstrumentPart <= EInstrumentPart.BASS)
 						{
-							int index = item.nPlaybackTimeMs * n区間分割数 / nLastChipTime;
-							L区間[(int)item.eInstrumentPart][index].nチップ数++;
+							int index = item.nPlaybackTimeMs * nSectionIntervalCount / nLastChipTime;
+							listProgressSection[(int)item.eInstrumentPart][index].nChipCount++;
 						}
 					}
 				}
 				for (EInstrumentPart ePart2 = EInstrumentPart.DRUMS; ePart2 <= EInstrumentPart.BASS; ePart2++)
 				{
-					double num = (double)n楽器毎のチップ数基準値[(int)ePart2] / (double)nブロック最大数 / (double)n区間分割数;
+					double num = (double)n楽器毎のチップ数基準値[(int)ePart2] / (double)nブロック最大数 / (double)nSectionIntervalCount;
 					int y2 = nHeight;
-					for (int j = 0; j < n区間分割数; j++)
+					for (int j = 0; j < nSectionIntervalCount; j++)
 					{
-						C区間 c区間 = L区間[(int)ePart2][j];
-						int num2 = (int)((double)c区間.nチップ数 / num) + 1;
+						CProgressSection c区間 = listProgressSection[(int)ePart2][j];
+						int num2 = (int)((double)c区間.nChipCount / num) + 1;
 						if (num2 > nブロック最大数)
 						{
 							num2 = nブロック最大数;
 						}
-						c区間.rect矩形描画サイズ.Y = (int)Math.Round((double)nHeight - ((double)j + 1.0) * (double)nHeight / (double)n区間分割数);
-						c区間.rect矩形描画サイズ.Width = num2 * (nWidth / nブロック最大数);
-						c区間.rect矩形描画サイズ.Height = y2 - c区間.rect矩形描画サイズ.Y;
-						y2 = c区間.rect矩形描画サイズ.Y;
+						c区間.rectDrawingFrame.Y = (int)Math.Round((double)nHeight - ((double)j + 1.0) * (double)nHeight / (double)nSectionIntervalCount);
+						c区間.rectDrawingFrame.Width = num2 * (nWidth / nブロック最大数);
+						c区間.rectDrawingFrame.Height = y2 - c区間.rectDrawingFrame.Y;
+						y2 = c区間.rectDrawingFrame.Y;
 					}
 				}
 			}
@@ -223,32 +223,40 @@ namespace DTXMania
 						num2 = nHeight - num3 + this.pBarPosition[(int)ePart].Y;
 						tx進捗.tDraw2D(CDTXMania.app.Device, num, num2, rectangle);
 					}
-					for (int i = 0; i < n区間分割数; i++)
+					for (int i = 0; i < nSectionIntervalCount; i++)
 					{
-						C区間 c区間 = L区間[(int)ePart][i];
-						num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + c区間.rect矩形描画サイズ.Y + this.pBarPosition[(int)ePart].Y;
-						if (c区間.nチップ数 <= 0)
+						CProgressSection c区間 = listProgressSection[(int)ePart][i];
+						num2 = p表示位置[(int)ePart].Y + (b演奏画面以外からの呼び出し ? 20 : 0) + c区間.rectDrawingFrame.Y + this.pBarPosition[(int)ePart].Y;
+						if (c区間.nChipCount <= 0)
 						{
 							continue;
 						}
 						if (!CDTXMania.ConfigIni.bIsAutoPlay(ePart) || b演奏画面以外からの呼び出し)
 						{
-							if ((i + 1) * nLastChipTime / n区間分割数 - 1 > ((CTimerBase)CDTXMania.Timer).n現在時刻ms && !b演奏画面以外からの呼び出し)
+							if ((i + 1) * nLastChipTime / nSectionIntervalCount - 1 > ((CTimerBase)CDTXMania.Timer).n現在時刻ms && !b演奏画面以外からの呼び出し)
 							{
-								tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rect矩形描画サイズ);
+								tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
 							}
-							else if (c区間.nヒット数 == c区間.nチップ数)
+							else 
 							{
-								tx黄.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rect矩形描画サイズ);
-							}
-							else
-							{
-								tx青.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rect矩形描画サイズ);
-							}
+                                if (!c区間.bIsAttempted)
+                                {
+									c区間.bIsAttempted = true;
+                                }
+								
+								if (c区間.nHitCount == c区間.nChipCount)
+								{
+									tx黄.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+								}
+								else
+								{
+									tx青.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
+								}
+							} 
 						}
 						else
 						{
-							tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rect矩形描画サイズ);
+							tx灰.tDraw2D(CDTXMania.app.Device, num, num2, c区間.rectDrawingFrame);
 						}
 					}
 				}
@@ -324,19 +332,46 @@ namespace DTXMania
 		{
 			if (judge == EJudgement.Perfect || judge == EJudgement.Great || judge == EJudgement.Good)
 			{
-				L区間[(int)inst][nTime * n区間分割数 / nLastChipTime].nヒット数++;
+				listProgressSection[(int)inst][nTime * nSectionIntervalCount / nLastChipTime].nHitCount++;
 			}
 		}
 
 		public string GetScoreIniString(EInstrumentPart inst)
 		{
 			string text = "";
-			for (int i = 0; i < n区間分割数; i++)
+			for (int i = 0; i < nSectionIntervalCount; i++)
 			{
-				C区間 c区間 = L区間[(int)inst][i];
-				text += ((c区間.nチップ数 > 0) ? ((c区間.nヒット数 == c区間.nチップ数) ? "2" : "1") : "0");
+				CProgressSection c区間 = listProgressSection[(int)inst][i];
+				//text += ((c区間.nChipCount > 0) ? ((c区間.nHitCount == c区間.nChipCount) ? "2" : "1") : "0");
+				text += GetSectionChar(c区間);
 			}
 			return text;
+		}
+
+		private string GetSectionChar(CProgressSection cProgressSection) 
+		{
+			string ret = "0";
+            if (cProgressSection.bIsAttempted)
+            {
+				if (cProgressSection.nChipCount > 0)
+				{
+					if (cProgressSection.nHitCount == cProgressSection.nChipCount)
+					{
+						ret = "2";
+					}
+                    else
+                    {
+						ret = "1";
+                    }
+				}
+                else
+                {
+					//TODO: May need to check for nHitCount == nChipCount here too
+					ret = "3"; 
+                }
+			}
+			
+			return ret;
 		}
 
 		public void t選択曲が変更された()
@@ -347,12 +382,12 @@ namespace DTXMania
 			}
 			for (EInstrumentPart ePart = EInstrumentPart.DRUMS; ePart <= EInstrumentPart.BASS; ePart++)
 			{
-				for (int i = 0; i < n区間分割数; i++)
+				for (int i = 0; i < nSectionIntervalCount; i++)
 				{
-					C区間 c区間 = L区間[(int)ePart][i];
-					c区間.nチップ数 = 0;
-					c区間.nヒット数 = 0;
-					c区間.rect矩形描画サイズ.Width = 0;
+					CProgressSection c区間 = listProgressSection[(int)ePart][i];
+					c区間.nChipCount = 0;
+					c区間.nHitCount = 0;
+					c区間.rectDrawingFrame.Width = 0;
 				}
 			}
 			CScore r現在選択中のスコア = CDTXMania.stageSongSelection.rSelectedScore;
@@ -386,12 +421,12 @@ namespace DTXMania
 		{
 			for (EInstrumentPart ePart = EInstrumentPart.DRUMS; ePart <= EInstrumentPart.BASS; ePart++)
 			{
-				for (int i = 0; i < n区間分割数; i++)
+				for (int i = 0; i < nSectionIntervalCount; i++)
 				{
-					C区間 c区間 = L区間[(int)ePart][i];
-					c区間.nチップ数 = 0;
-					c区間.nヒット数 = 0;
-					c区間.rect矩形描画サイズ.Width = 0;
+					CProgressSection c区間 = listProgressSection[(int)ePart][i];
+					c区間.nChipCount = 0;
+					c区間.nHitCount = 0;
+					c区間.rectDrawingFrame.Width = 0;
 				}
 			}
 			epartプレイ楽器 = eInstrumentPart;//CDTXMania.stageSongSelection.tオートを参考にこれからプレイするであろうパートを推測する();
@@ -404,17 +439,32 @@ namespace DTXMania
 
 		private void tプログレス配列から区間情報を設定する(char[] arrプログレス)
 		{
-			if (arrプログレス.Length == n区間分割数)
+			if (arrプログレス.Length == nSectionIntervalCount)
 			{
-				_ = nHeight / n区間分割数;
-				for (int i = 0; i < n区間分割数; i++)
+				_ = nHeight / nSectionIntervalCount;
+				for (int i = 0; i < nSectionIntervalCount; i++)
 				{
-					C区間 c区間 = L区間[(int)epartプレイ楽器][i];
-					c区間.nチップ数 = ((arrプログレス[i] != '0') ? 1 : 0);
-					c区間.nヒット数 = ((arrプログレス[i] == '2') ? 1 : 0);
-					_ = (double)n楽器毎のチップ数基準値[(int)epartプレイ楽器] / (double)nブロック最大数 / (double)n区間分割数;
-					int num = ((c区間.nチップ数 > 0) ? nブロック最大数 : 0);
-					c区間.rect矩形描画サイズ.Width = num * (nWidth / nブロック最大数);
+					CProgressSection cSection = listProgressSection[(int)epartプレイ楽器][i];
+					/* AL definition
+					 * 
+					 '0': No chips (Yellow)
+					 '1': Has chips with some misses (Blue)
+					 '2': Has chips with no misses (Yellow)
+
+					to be changed to
+
+					'0': Section Not attempted (Black)
+					'1': Has chips with some misses (Blue)
+					'2': Has chips with no misses (Yellow)
+					'3': No chips aka Free Pass (Yellow)
+					 
+					 */
+					cSection.bIsAttempted = arrプログレス[i] != '0';
+					cSection.nChipCount = ((arrプログレス[i] == '1' || arrプログレス[i] == '2') ? 1 : 0);
+					cSection.nHitCount = ((arrプログレス[i] == '2') ? 1 : 0);
+					_ = (double)n楽器毎のチップ数基準値[(int)epartプレイ楽器] / (double)nブロック最大数 / (double)nSectionIntervalCount;
+					int num = ((cSection.nChipCount > 0) ? nブロック最大数 : 0);
+					cSection.rectDrawingFrame.Width = num * (nWidth / nブロック最大数);
 				}
 			}
 		}
@@ -432,12 +482,12 @@ namespace DTXMania
 			{
 				p表示位置[(int)ePart] = new Point(本体x, 本体y);
 				int y = nHeight;
-				for (int i = 0; i < n区間分割数; i++)
+				for (int i = 0; i < nSectionIntervalCount; i++)
 				{
-					C区間 c区間 = L区間[(int)ePart][i];
-					c区間.rect矩形描画サイズ.Y = (int)Math.Round((double)nHeight - ((double)i + 1.0) * (double)nHeight / (double)n区間分割数);
-					c区間.rect矩形描画サイズ.Height = y - c区間.rect矩形描画サイズ.Y;
-					y = c区間.rect矩形描画サイズ.Y;
+					CProgressSection c区間 = listProgressSection[(int)ePart][i];
+					c区間.rectDrawingFrame.Y = (int)Math.Round((double)nHeight - ((double)i + 1.0) * (double)nHeight / (double)nSectionIntervalCount);
+					c区間.rectDrawingFrame.Height = y - c区間.rectDrawingFrame.Y;
+					y = c区間.rectDrawingFrame.Y;
 				}
 			}
 		}
@@ -446,28 +496,32 @@ namespace DTXMania
 
 		#region [ private ]
 		//-----------------
-		public class C区間
+		public class CProgressSection
 		{
-			public int nチップ数;
+			public int nChipCount;
 
-			public int nヒット数;
+			public int nHitCount;
 
-			public bool bミスした;
+			public bool bHasMistakes;
 
-			public Rectangle rect矩形描画サイズ;
+			//New
+			public bool bIsAttempted;
 
-			public C区間()
+			public Rectangle rectDrawingFrame;
+
+			public CProgressSection()
 			{
-				nチップ数 = 0;
-				nヒット数 = 0;
-				bミスした = true;
-				rect矩形描画サイズ = new Rectangle(0, 0, 1, 1);
+				nChipCount = 0;
+				nHitCount = 0;
+				bHasMistakes = true;
+				bIsAttempted = false;
+				rectDrawingFrame = new Rectangle(0, 0, 1, 1);
 			}
 		}
 
-		private STDGBVALUE<List<C区間>> L区間;
+		private STDGBVALUE<List<CProgressSection>> listProgressSection;
 
-		public static int n区間分割数 = 64;
+		public static int nSectionIntervalCount = 64;
 
 		private int nブロック最大数;
 
