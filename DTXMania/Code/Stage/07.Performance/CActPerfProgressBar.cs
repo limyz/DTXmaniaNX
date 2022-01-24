@@ -29,9 +29,9 @@ namespace DTXMania
 			this.nHeight = 540; //1080;
 
 			//
-			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(859, 15);
-			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(337, 70);
-			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1207, 70);
+			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(854, 15);
+			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(332, 70);
+			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1202, 70);
 		
 			//n区間分割数 = 54;
 			this.nブロック最大数 = 10;
@@ -215,7 +215,7 @@ namespace DTXMania
 					//
 					if (txBestProgressBarRecord[(int)ePart] != null)
 					{
-						txBestProgressBarRecord[(int)ePart].tDraw2D(CDTXMania.app.Device, num - 5, num2);
+						txBestProgressBarRecord[(int)ePart].tDraw2D(CDTXMania.app.Device, num + 22, num2);
 					}
 					if (epartプレイ楽器 == EInstrumentPart.UNKNOWN)
 					{
@@ -298,7 +298,7 @@ namespace DTXMania
 
 		private void txGenerateProgressBarLine(ref CTexture txProgressBarTexture, string strProgressBar)
 		{
-			int nBarWidth = 5;
+			int nBarWidth = 8;
 			int nBarHeight = this.nHeight; //294;
 
 			char[] arrProgress = strProgressBar.ToCharArray();
@@ -322,16 +322,29 @@ namespace DTXMania
 								nColorIndex = 0;
 							}
 							//Draw current section
-							barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[nColorIndex]), 0, nCurrentPosY, tempBarBitmap.Width, nCurrentSectionHeight);
+							barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[nColorIndex]), 2, nCurrentPosY, tempBarBitmap.Width - 4, nCurrentSectionHeight);
 						}
+						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 0, 0, 2, tempBarBitmap.Height);
+						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 6, 0, 2, tempBarBitmap.Height);
 					}
 					txProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
 				}
 			}
             else
             {
-				CDTXMania.t安全にDisposeする(ref txProgressBarTexture);
-            }
+				using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+				{
+					using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+					{
+						barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[0]), 2, 0, tempBarBitmap.Width - 4, tempBarBitmap.Height);
+						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 0, 0, 2, tempBarBitmap.Height);
+						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 6, 0, 2, tempBarBitmap.Height);
+					}
+					txProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
+				}
+				
+				//CDTXMania.t安全にDisposeする(ref txProgressBarTexture);
+			}
 
 		}
 
