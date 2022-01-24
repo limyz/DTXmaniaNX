@@ -29,9 +29,9 @@ namespace DTXMania
 			this.nHeight = 540; //1080;
 
 			//
-			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(854, 15);
-			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(332, 70);
-			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1202, 70);
+			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(859, 15);
+			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(337, 70);
+			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1207, 70);
 		
 			//n区間分割数 = 54;
 			this.nブロック最大数 = 10;
@@ -62,7 +62,7 @@ namespace DTXMania
 
 				//Compute duration for each time-slice in L区間
 				if (!b演奏画面以外からの呼び出し)
-				{
+				{					
 					nLastChipTime = CDTXMania.DTX.listChip[CDTXMania.DTX.listChip.Count - 1].nPlaybackTimeMs;
 					foreach (CChip item in CDTXMania.DTX.listChip)
 					{
@@ -115,6 +115,7 @@ namespace DTXMania
         {
 			if (!base.bNotActivated)
 			{
+				tCreateBestProgressBarRecordTexture(CDTXMania.stageSongSelection.rChosenScore);
 				tサイズが絡むテクスチャの生成();
 				using (Bitmap bitmap = new Bitmap(64, 64))
 				{
@@ -157,6 +158,10 @@ namespace DTXMania
 				CDTXMania.t安全にDisposeする(ref tx灰);
 				CDTXMania.t安全にDisposeする(ref tx黄);
 				CDTXMania.t安全にDisposeする(ref tx青);
+
+				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Drums);
+				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Guitar);
+				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Bass);
 
 				base.OnManagedReleaseResources();
 			}				
@@ -207,6 +212,11 @@ namespace DTXMania
 						txパネル用.tDraw2D(CDTXMania.app.Device, num - 20, num2 - 20);
 					}
 					tx背景.tDraw2D(CDTXMania.app.Device, num, num2);
+					//
+					if (txBestProgressBarRecord[(int)ePart] != null)
+					{
+						txBestProgressBarRecord[(int)ePart].tDraw2D(CDTXMania.app.Device, num - 5, num2);
+					}
 					if (epartプレイ楽器 == EInstrumentPart.UNKNOWN)
 					{
 						continue;
@@ -265,10 +275,64 @@ namespace DTXMania
 							}								
 						}
 					}
+				
+					
 				}
 
 			}
 			return 0;
+		}
+
+		private void tCreateBestProgressBarRecordTexture(CScore cScore) 
+		{
+			for (EInstrumentPart ePart = EInstrumentPart.DRUMS; ePart <= EInstrumentPart.BASS; ePart++)
+			{
+				CTexture currTexture = null;
+				txGenerateProgressBarLine(ref currTexture, 
+					cScore.SongInformation.progress[(int)ePart]
+					);
+
+				txBestProgressBarRecord[(int)ePart] = currTexture;
+			}
+		}
+
+		private void txGenerateProgressBarLine(ref CTexture txProgressBarTexture, string strProgressBar)
+		{
+			int nBarWidth = 5;
+			int nBarHeight = this.nHeight; //294;
+
+			char[] arrProgress = strProgressBar.ToCharArray();
+			if (arrProgress.Length == nSectionIntervalCount)
+			{
+				using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
+				{
+					using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+					{
+						int nOffsetY = nBarHeight;
+						for (int i = 0; i < nSectionIntervalCount; i++)
+						{
+							int nCurrentPosY = (int)Math.Round((double)nBarHeight - ((double)i + 1.0) * (double)nBarHeight / (double)CActPerfProgressBar.nSectionIntervalCount);
+							int nCurrentSectionHeight = nOffsetY - nCurrentPosY;
+							nOffsetY = nCurrentPosY;
+
+							int nColorIndex = (int)(arrProgress[i] - '0');
+							//Handle out of range
+							if (nColorIndex < 0 || nColorIndex > 3)
+							{
+								nColorIndex = 0;
+							}
+							//Draw current section
+							barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[nColorIndex]), 0, nCurrentPosY, tempBarBitmap.Width, nCurrentSectionHeight);
+						}
+					}
+					txProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
+				}
+			}
+            else
+            {
+				CDTXMania.t安全にDisposeする(ref txProgressBarTexture);
+            }
+
 		}
 
 		private void tサイズが絡むテクスチャの生成()
@@ -549,6 +613,8 @@ namespace DTXMania
 
 		private CTexture tx青;
 
+		private STDGBVALUE<CTexture> txBestProgressBarRecord;
+
 		private STDGBVALUE<Point> p表示位置;
 
 		private int nWidth;
@@ -565,6 +631,14 @@ namespace DTXMania
 		private EInstrumentPart epartプレイ楽器;
 
 		private CCounter ct登場用;
+
+		private Color[] clProgressBarColors = new Color[4]
+		{
+			Color.Black,
+			Color.DeepSkyBlue,
+			Color.Yellow,
+			Color.Yellow
+		};
 
 		//-----------------
 		#endregion
