@@ -195,19 +195,19 @@ namespace DTXMania
                 this.tUpdateAndDraw_RGBButton();
                 this.tUpdateAndDraw_GuitarBass_JudgementLine();
 				this.tUpdateAndDraw_JudgementString();
-                this.tUpdateAndDraw_Gauge();
+				this.actProgressBar.OnUpdateAndDraw();
+				this.tUpdateAndDraw_Gauge();
                 if (CDTXMania.ConfigIni.nInfoType == 1)
 				    this.tUpdateAndDraw_StatusPanel();
                 if (CDTXMania.ConfigIni.bShowScore)
                     this.tUpdateAndDraw_Score();
-                this.tUpdateAndDraw_Graph();
+				
+				this.tUpdateAndDraw_Graph();
                 this.tUpdateAndDraw_Combo();
 				this.tUpdateAndDraw_PerformanceInformation();
 				//this.tUpdateAndDraw_WailingFrame();
 				this.tUpdateAndDraw_PlaySpeed();
-				//
-				this.actProgressBar.OnUpdateAndDraw();
-
+				
 				this.tUpdateAndDraw_ChipFireGB();
 				this.tUpdateAndDraw_GuitarBonus();
 				this.tUpdateAndDraw_STAGEFAILED();

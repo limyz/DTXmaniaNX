@@ -352,6 +352,7 @@ namespace DTXMania
 //                  this.t進行描画_パネル文字列();
                 if (CDTXMania.ConfigIni.nInfoType == 1)
                     this.tUpdateAndDraw_StatusPanel();
+                this.actProgressBar.OnUpdateAndDraw();
                 this.tUpdateAndDraw_Gauge();
                 this.tUpdateAndDraw_Combo();
                 this.tUpdateAndDraw_Graph();
@@ -361,7 +362,7 @@ namespace DTXMania
                 this.tUpdateAndDraw_ChipFireD();
                 this.tUpdateAndDraw_PlaySpeed();
                 //
-                this.actProgressBar.OnUpdateAndDraw();
+                
                 this.tUpdateAndDraw_STAGEFAILED();
                 bすべてのチップが判定された = true;
                 if (bIsFinishedFadeout)

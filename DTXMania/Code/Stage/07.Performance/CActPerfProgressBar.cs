@@ -29,9 +29,9 @@ namespace DTXMania
 			this.nHeight = 540; //1080;
 
 			//
-			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(854, 15);
-			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(332, 70);
-			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1202, 70);
+			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(855, 15);
+			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(334, 70);
+			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1204, 70);
 		
 			//n区間分割数 = 54;
 			this.nブロック最大数 = 10;
@@ -143,6 +143,9 @@ namespace DTXMania
 					tx青 = CDTXMania.tGenerateTexture(bitmap3);
 				}
 
+				txProgressBarBackgroundDrums = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Drum_Progress_bg.png"));
+				txProgressBarBackgroundGuitar = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Guitar_Progress_bg.png"));
+				
 				base.OnManagedCreateResources();
 			}				
         }
@@ -162,6 +165,9 @@ namespace DTXMania
 				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Drums);
 				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Guitar);
 				CDTXMania.t安全にDisposeする(ref this.txBestProgressBarRecord.Bass);
+
+				CDTXMania.t安全にDisposeする(ref this.txProgressBarBackgroundDrums);
+				CDTXMania.t安全にDisposeする(ref this.txProgressBarBackgroundGuitar);
 
 				base.OnManagedReleaseResources();
 			}				
@@ -211,8 +217,19 @@ namespace DTXMania
 					{
 						txパネル用.tDraw2D(CDTXMania.app.Device, num - 20, num2 - 20);
 					}
+
+					if(ePart == EInstrumentPart.DRUMS)
+                    {
+						txProgressBarBackgroundDrums.tDraw2D(CDTXMania.app.Device, num-2, 0);
+                    }
+                    else
+                    {
+						txProgressBarBackgroundGuitar.tDraw2D(CDTXMania.app.Device, num-2, 0);
+					}
+
 					tx背景.tDraw2D(CDTXMania.app.Device, num, num2);
-					//
+					
+					//Draw Best Record
 					if (txBestProgressBarRecord[(int)ePart] != null)
 					{
 						txBestProgressBarRecord[(int)ePart].tDraw2D(CDTXMania.app.Device, num + 22, num2);
@@ -325,7 +342,7 @@ namespace DTXMania
 							barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[nColorIndex]), 2, nCurrentPosY, tempBarBitmap.Width - 4, nCurrentSectionHeight);
 						}
 						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 0, 0, 2, tempBarBitmap.Height);
-						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 6, 0, 2, tempBarBitmap.Height);
+						barGraphics.FillRectangle(new SolidBrush(Color.Gray), 6, 0, 1, tempBarBitmap.Height);
 					}
 					txProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
 				}
@@ -627,6 +644,10 @@ namespace DTXMania
 		private CTexture tx青;
 
 		private STDGBVALUE<CTexture> txBestProgressBarRecord;
+
+		private CTexture txProgressBarBackgroundDrums;
+
+		private CTexture txProgressBarBackgroundGuitar;
 
 		private STDGBVALUE<Point> p表示位置;
 
