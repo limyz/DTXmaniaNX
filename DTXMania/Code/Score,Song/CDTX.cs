@@ -3880,7 +3880,13 @@ namespace DTXMania
 												//If candidate start hold survives
 												if(cCandidateStartHold[(int)eChipPart] != null)
                                                 {
-													//TODO: To assign eInstrumentPart to chip or not?
+													//Note:
+													//Assigning eInstrumentPart is necessary to prevent bugs related to swapping guitar/bass infos.
+													//Doing it here, however, will cause this chip to be evaluated again for possible CandidateStartHold chip
+													//at a later iteration in the outer loop
+													//This is why the rule that disallow EndHold notes to coincide with any visible chips is required
+													//to prevent any discrepancies
+													chip.eInstrumentPart = eChipPart;
 													cCandidateStartHold[(int)eChipPart].chipロングノート終端 = chip;
 													//Reset
 													cCandidateStartHold[(int)eChipPart] = null;
@@ -4338,6 +4344,12 @@ namespace DTXMania
                         listChip[ i ].nChannelNumber -= 0x34;
                     else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Bass_RGBYP )
                         listChip[ i ].nChannelNumber -= 0x35;
+
+					//New for EndLong notes
+					if (listChip[i].nChannelNumber == EChannel.Bass_LongNote) 
+					{
+						listChip[i].nChannelNumber = EChannel.Guitar_LongNote;												
+					}
 				}
 				else if( listChip[i].eInstrumentPart == EInstrumentPart.GUITAR )
 				{
@@ -4355,6 +4367,11 @@ namespace DTXMania
                         listChip[ i ].nChannelNumber += 0x34;
                     else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RGBYP )
                         listChip[ i ].nChannelNumber += 0x35;
+					//New for EndLong notes
+					if (listChip[i].nChannelNumber == EChannel.Guitar_LongNote)
+					{
+						listChip[i].nChannelNumber = EChannel.Bass_LongNote;                        						
+					}
 				}
 
                 //Wailing
