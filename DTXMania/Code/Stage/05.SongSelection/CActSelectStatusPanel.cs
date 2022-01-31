@@ -986,35 +986,8 @@ namespace DTXMania
             int nBarWidth = 4;
             int nBarHeight = 294; //294;
 
-            char[] arrProgress = strProgressBar.ToCharArray();
-            if (arrProgress.Length == CActPerfProgressBar.nSectionIntervalCount)
-            {
-                using (Bitmap tempBarBitmap = new Bitmap(nBarWidth, nBarHeight))
-                {
-                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
-                    {
-                        int nOffsetY = nBarHeight;
-                        for (int i = 0; i < CActPerfProgressBar.nSectionIntervalCount; i++)
-                        {
-                            int nCurrentPosY = (int)Math.Round((double)nBarHeight - ((double)i + 1.0) * (double)nBarHeight / (double)CActPerfProgressBar.nSectionIntervalCount);
-                            int nCurrentSectionHeight = nOffsetY - nCurrentPosY;
-                            nOffsetY = nCurrentPosY;
+            CActPerfProgressBar.txGenerateProgressBarHelper(ref this.txProgressBar, strProgressBar, nBarWidth, nBarHeight, CActPerfProgressBar.nSectionIntervalCount);
 
-                            int nColorIndex = (int)(arrProgress[i] - '0');
-                            //Handle out of range
-                            if(nColorIndex < 0 || nColorIndex > 3)
-                            {
-                                nColorIndex = 0;
-                            }
-                            //Draw current section
-                            barGraphics.FillRectangle(new SolidBrush(this.clProgressBarColors[nColorIndex]), 0, nCurrentPosY, tempBarBitmap.Width, nCurrentSectionHeight);
-                        }
-                    }
-                    this.txProgressBar = CDTXMania.tGenerateTexture(tempBarBitmap);
-                }
-            }
-
-            
         }
 
         private void tDrawProgressBar(string strProgressBar, int nPosX, int nPosY) 

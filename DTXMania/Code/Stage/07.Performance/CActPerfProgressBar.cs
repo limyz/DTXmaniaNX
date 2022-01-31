@@ -366,6 +366,64 @@ namespace DTXMania
 
 		}
 
+		public static void txGenerateProgressBarHelper(ref CTexture txRefProgressBarTexture, string strProgressBar, int nWidth, int nHeight, int nIntervals) 
+		{
+			if(strProgressBar == null)
+            {
+				return;
+            }
+
+			//
+			Color[] clBarColors = new Color[4]
+			{
+				Color.Black,
+				Color.DeepSkyBlue,
+				Color.Yellow,
+				Color.Yellow
+			};
+
+            char[] arrProgress = strProgressBar.ToCharArray();
+            if (arrProgress.Length == nIntervals)
+            {
+                using (Bitmap tempBarBitmap = new Bitmap(nWidth, nHeight))
+                {
+                    using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+                    {
+                        int nOffsetY = nHeight;
+                        for (int i = 0; i < nIntervals; i++)
+                        {
+                            int nCurrentPosY = (int)Math.Round((double)nHeight - ((double)i + 1.0) * (double)nHeight / (double)nIntervals);
+                            int nCurrentSectionHeight = nOffsetY - nCurrentPosY;
+                            nOffsetY = nCurrentPosY;
+
+                            int nColorIndex = (int)(arrProgress[i] - '0');
+                            //Handle out of range
+                            if (nColorIndex < 0 || nColorIndex > 3)
+                            {
+                                nColorIndex = 0;
+                            }
+                            //Draw current section
+                            barGraphics.FillRectangle(new SolidBrush(clBarColors[nColorIndex]), 0, nCurrentPosY, tempBarBitmap.Width, nCurrentSectionHeight);
+                        }
+                    }
+                    txRefProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
+                }
+            }
+			else
+			{
+				using (Bitmap tempBarBitmap = new Bitmap(nWidth, nHeight))
+				{
+					using (Graphics barGraphics = Graphics.FromImage(tempBarBitmap))
+					{
+						barGraphics.FillRectangle(new SolidBrush(clBarColors[0]), 0, 0, tempBarBitmap.Width, tempBarBitmap.Height);
+					}
+					txRefProgressBarTexture = CDTXMania.tGenerateTexture(tempBarBitmap);
+				}
+
+				//CDTXMania.t安全にDisposeする(ref txProgressBarTexture);
+			}
+		}
+
 		private void tサイズが絡むテクスチャの生成()
 		{
 			CDTXMania.t安全にDisposeする(ref txパネル用);

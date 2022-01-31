@@ -237,7 +237,7 @@ namespace DTXMania
             int n左2X = 30;
             int n右2X = 1000;
 
-            this.n本体Y = 248;
+            this.n本体Y = 260;
 
             for (int j = 0; j < 3; j++)
             {
@@ -430,6 +430,28 @@ namespace DTXMania
 
                 this.tGetDifficultyLabelFromScript( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
 
+                //Progress Bars
+                for (int i = 0; i < 3; i++)
+                {
+                    //Best Record (Previous)
+                    CTexture bestRecordProgressBarTexture = this.txPreviousBestProgressBar[i];
+                    CDTXMania.t安全にDisposeする(ref bestRecordProgressBarTexture);
+                    CActPerfProgressBar.txGenerateProgressBarHelper(
+                        ref bestRecordProgressBarTexture,
+                        CDTXMania.stageResult.strBestProgressBarRecord[i], 4, 425,
+                        CActPerfProgressBar.nSectionIntervalCount);
+                    this.txPreviousBestProgressBar[i] = bestRecordProgressBarTexture;
+
+                    //Current Progress Bar
+                    CTexture currProgressBarTexture = this.txCurrentProgressBar[i];
+                    CDTXMania.t安全にDisposeする(ref currProgressBarTexture);
+                    CActPerfProgressBar.txGenerateProgressBarHelper(
+                        ref currProgressBarTexture,
+                        CDTXMania.stageResult.strCurrProgressBarRecord[i], 12, 425, 
+                        CActPerfProgressBar.nSectionIntervalCount);
+                    this.txCurrentProgressBar[i] = currProgressBarTexture;
+                }
+
                 base.OnManagedCreateResources();
             }
 		}
@@ -452,6 +474,13 @@ namespace DTXMania
                     CDTXMania.tReleaseTexture( ref this.txExciteGauge[ i ] );
                     CDTXMania.tReleaseTexture( ref this.txCharacter[ i ] );
                 }
+                //
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Drums);
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Guitar);
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Bass);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Drums);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Guitar);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Bass);
                 base.OnManagedReleaseResources();
             }
         }
@@ -524,6 +553,10 @@ namespace DTXMania
                     if(this.tx難易度パネル != null)
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
                     this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[j], 290 + this.n本体Y, str);
+
+                    //Draw Progress Bars
+                    this.txCurrentProgressBar[j].tDraw2D(CDTXMania.app.Device, 258 + this.n本体X[j], 2 + this.n本体Y);
+                    this.txPreviousBestProgressBar[j].tDraw2D(CDTXMania.app.Device, 272 + this.n本体X[j], 2 + this.n本体Y);
 
                     string strScore = string.Format("{0,7:######0}", CDTXMania.stageResult.stPerformanceEntry[j].nスコア);
                     for (int i = 0; i < 7; i++)
@@ -614,6 +647,9 @@ namespace DTXMania
         //New texture % and MAX
         private CTexture txPercent;
         private CTexture txSkillMax;
+        //
+        private STDGBVALUE<CTexture> txPreviousBestProgressBar;
+        private STDGBVALUE<CTexture> txCurrentProgressBar;
 
         private void tDrawStringSmall(int x, int y, string str)
         {
