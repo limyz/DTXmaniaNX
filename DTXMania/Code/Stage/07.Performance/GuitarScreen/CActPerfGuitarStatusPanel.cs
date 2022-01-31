@@ -177,25 +177,14 @@ namespace DTXMania
 
             if (!CDTXMania.DTX.bチップがある.Bass)
             {
-                if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
-                {
-                    this.n本体X[1] = 0;
-                }
-                else
-                {
-                    this.n本体X[2] = 0;
-                }
+                //fisyher: No need to check bIsSwappedGuitarBass because guitar-bass info are already swapped at this point
+                this.n本体X[2] = 0;
+                
             }
             else if (!CDTXMania.DTX.bチップがある.Guitar)
             {
-                if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
-                {
-                    this.n本体X[2] = 0;
-                }
-                else
-                {
-                    this.n本体X[1] = 0;
-                }
+                //fisyher: No need to check bIsSwappedGuitarBass because guitar-bass info are already swapped at this point
+                this.n本体X[1] = 0;                
             }
             else if (CDTXMania.ConfigIni.bGraph有効.Guitar || CDTXMania.ConfigIni.bGraph有効.Bass )
             {
@@ -234,7 +223,7 @@ namespace DTXMania
             }
             CDTXMania.t安全にDisposeする( ref this.prv表示用フォント );
             CDTXMania.t安全にDisposeする( ref this.prv称号フォント );
-            CDTXMania.tReleaseTexture(ref this.txスキルパネル);
+            CDTXMania.t安全にDisposeする(ref this.txスキルパネル);
             CDTXMania.tReleaseTexture(ref this.txパネル文字[0]);
             CDTXMania.tReleaseTexture(ref this.txパネル文字[1]);
             CDTXMania.tReleaseTexture(ref this.tx難易度パネル);

@@ -345,7 +345,7 @@ namespace DTXMania
                 this.ctTimer[i] = new CCounter(0, 3000, 1, CDTXMania.Timer);
             }
             this.bAUTOでないチップが１つでもバーを通過した = false;
-            base.OnActivate();
+            //base.OnActivate();
             this.tSetStatusPanel();
             //this.tパネル文字列の設定();
             this.nJudgeLinePosY.Drums = (CDTXMania.ConfigIni.bReverse.Drums ? 159 + CDTXMania.ConfigIni.nJudgeLine.Drums : 561 - CDTXMania.ConfigIni.nJudgeLine.Drums);
@@ -425,6 +425,8 @@ namespace DTXMania
             this.bブーストボーナス = false;
             this.sw = new Stopwatch();
             this.sw2 = new Stopwatch();
+            base.OnActivate();
+            //this.tSetStatusPanel();
             //			this.gclatencymode = GCSettings.LatencyMode;
             //          GCSettings.LatencyMode = GCLatencyMode.Batch; // 演奏画面中はGCを抑止する
         }
