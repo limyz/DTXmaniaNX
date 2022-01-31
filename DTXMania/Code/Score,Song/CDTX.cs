@@ -3880,13 +3880,7 @@ namespace DTXMania
 												//If candidate start hold survives
 												if(cCandidateStartHold[(int)eChipPart] != null)
                                                 {
-													//Note:
-													//Assigning eInstrumentPart is necessary to prevent bugs related to swapping guitar/bass infos.
-													//Doing it here, however, will cause this chip to be evaluated again for possible CandidateStartHold chip
-													//at a later iteration in the outer loop
-													//This is why the rule that disallow EndHold notes to coincide with any visible chips is required
-													//to prevent any discrepancies
-													chip.eInstrumentPart = eChipPart;
+													
 													cCandidateStartHold[(int)eChipPart].chipロングノート終端 = chip;
 													//Reset
 													cCandidateStartHold[(int)eChipPart] = null;
@@ -4329,59 +4323,56 @@ namespace DTXMania
 		{
 			for( int i = this.listChip.Count - 1; i >= 0; i-- )
             {
-				if( listChip[ i ].eInstrumentPart == EInstrumentPart.BASS )
-                {
-					listChip[ i ].eInstrumentPart = EInstrumentPart.GUITAR;
-                    if( listChip[ i ].nChannelNumber >= EChannel.Bass_Open && listChip[ i ].nChannelNumber <= EChannel.Bass_Wailing )
-					    listChip[ i ].nChannelNumber -= ( EChannel.Bass_Open - EChannel.Guitar_Open );
-                    else if( listChip[ i ].nChannelNumber == EChannel.Bass_xxxYx || listChip[ i ].nChannelNumber == EChannel.Bass_xxBYx )
-                        listChip[ i ].nChannelNumber -= 0x32;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xGxYx && listChip[ i ].nChannelNumber <= EChannel.Bass_xxBxP )
-                        listChip[ i ].nChannelNumber -= 0x33;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xGxxP && listChip[ i ].nChannelNumber <= EChannel.Bass_RxxxP )
-                        listChip[ i ].nChannelNumber -= 0x3D;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_RxBxP && listChip[ i ].nChannelNumber <= EChannel.Bass_RGBxP )
-                        listChip[ i ].nChannelNumber -= 0x34;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Bass_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Bass_RGBYP )
-                        listChip[ i ].nChannelNumber -= 0x35;
-
-					//New for EndLong notes
-					if (listChip[i].nChannelNumber == EChannel.Bass_LongNote) 
-					{
-						listChip[i].nChannelNumber = EChannel.Guitar_LongNote;												
-					}
-				}
-				else if( listChip[i].eInstrumentPart == EInstrumentPart.GUITAR )
+				if (listChip[i].eInstrumentPart == EInstrumentPart.BASS)
 				{
-					listChip[ i ].eInstrumentPart = EInstrumentPart.BASS;
-
-                    if( listChip[ i ].nChannelNumber >= EChannel.Guitar_Open && listChip[ i ].nChannelNumber <= EChannel.Guitar_Wailing )
-					    listChip[ i ].nChannelNumber += ( EChannel.Bass_Open - EChannel.Guitar_Open );
-                    else if( listChip[ i ].nChannelNumber == EChannel.Guitar_xxxYx || listChip[ i ].nChannelNumber == EChannel.Guitar_xxBYx )
-                        listChip[ i ].nChannelNumber += 0x32;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xGxYx && listChip[ i ].nChannelNumber <= EChannel.Guitar_xxBxP )
-                        listChip[ i ].nChannelNumber += 0x33;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xGxxP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RxxxP )
-                        listChip[ i ].nChannelNumber += 0x3D;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_RxBxP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RGBxP )
-                        listChip[ i ].nChannelNumber += 0x34;
-                    else if( listChip[ i ].nChannelNumber >= EChannel.Guitar_xxxYP && listChip[ i ].nChannelNumber <= EChannel.Guitar_RGBYP )
-                        listChip[ i ].nChannelNumber += 0x35;
-					//New for EndLong notes
-					if (listChip[i].nChannelNumber == EChannel.Guitar_LongNote)
-					{
-						listChip[i].nChannelNumber = EChannel.Bass_LongNote;                        						
-					}
+					listChip[i].eInstrumentPart = EInstrumentPart.GUITAR;
+					if (listChip[i].nChannelNumber >= EChannel.Bass_Open && listChip[i].nChannelNumber <= EChannel.Bass_Wailing)
+						listChip[i].nChannelNumber -= (EChannel.Bass_Open - EChannel.Guitar_Open);
+					else if (listChip[i].nChannelNumber == EChannel.Bass_xxxYx || listChip[i].nChannelNumber == EChannel.Bass_xxBYx)
+						listChip[i].nChannelNumber -= 0x32;
+					else if (listChip[i].nChannelNumber >= EChannel.Bass_xGxYx && listChip[i].nChannelNumber <= EChannel.Bass_xxBxP)
+						listChip[i].nChannelNumber -= 0x33;
+					else if (listChip[i].nChannelNumber >= EChannel.Bass_xGxxP && listChip[i].nChannelNumber <= EChannel.Bass_RxxxP)
+						listChip[i].nChannelNumber -= 0x3D;
+					else if (listChip[i].nChannelNumber >= EChannel.Bass_RxBxP && listChip[i].nChannelNumber <= EChannel.Bass_RGBxP)
+						listChip[i].nChannelNumber -= 0x34;
+					else if (listChip[i].nChannelNumber >= EChannel.Bass_xxxYP && listChip[i].nChannelNumber <= EChannel.Bass_RGBYP)
+						listChip[i].nChannelNumber -= 0x35;
 				}
+				else if (listChip[i].eInstrumentPart == EInstrumentPart.GUITAR)
+				{
+					listChip[i].eInstrumentPart = EInstrumentPart.BASS;
 
-                //Wailing
-				else if ( listChip[ i ].nChannelNumber == EChannel.Guitar_Wailing )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
-				{
-					listChip[ i ].nChannelNumber += ( EChannel.Bass_Open - EChannel.Guitar_Open );
+					if (listChip[i].nChannelNumber >= EChannel.Guitar_Open && listChip[i].nChannelNumber <= EChannel.Guitar_Wailing)
+						listChip[i].nChannelNumber += (EChannel.Bass_Open - EChannel.Guitar_Open);
+					else if (listChip[i].nChannelNumber == EChannel.Guitar_xxxYx || listChip[i].nChannelNumber == EChannel.Guitar_xxBYx)
+						listChip[i].nChannelNumber += 0x32;
+					else if (listChip[i].nChannelNumber >= EChannel.Guitar_xGxYx && listChip[i].nChannelNumber <= EChannel.Guitar_xxBxP)
+						listChip[i].nChannelNumber += 0x33;
+					else if (listChip[i].nChannelNumber >= EChannel.Guitar_xGxxP && listChip[i].nChannelNumber <= EChannel.Guitar_RxxxP)
+						listChip[i].nChannelNumber += 0x3D;
+					else if (listChip[i].nChannelNumber >= EChannel.Guitar_RxBxP && listChip[i].nChannelNumber <= EChannel.Guitar_RGBxP)
+						listChip[i].nChannelNumber += 0x34;
+					else if (listChip[i].nChannelNumber >= EChannel.Guitar_xxxYP && listChip[i].nChannelNumber <= EChannel.Guitar_RGBYP)
+						listChip[i].nChannelNumber += 0x35;					
 				}
-				else if ( listChip[ i ].nChannelNumber == EChannel.Bass_Wailing )		// #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				//Long Notes
+				else if (listChip[i].nChannelNumber == EChannel.Guitar_LongNote) 
 				{
-					listChip[ i ].nChannelNumber -= ( EChannel.Bass_Open - EChannel.Guitar_Open );
+					listChip[i].nChannelNumber = EChannel.Bass_LongNote;
+				}
+				else if (listChip[i].nChannelNumber == EChannel.Bass_LongNote)
+				{
+					listChip[i].nChannelNumber = EChannel.Guitar_LongNote;
+				}
+				//Wailing
+				else if (listChip[i].nChannelNumber == EChannel.Guitar_Wailing)     // #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				{
+					listChip[i].nChannelNumber += (EChannel.Bass_Open - EChannel.Guitar_Open);
+				}
+				else if (listChip[i].nChannelNumber == EChannel.Bass_Wailing)       // #25215 2011.5.21 yyagi wailingはE楽器パート.UNKNOWNが割り当てられているので個別に対応
+				{
+					listChip[i].nChannelNumber -= (EChannel.Bass_Open - EChannel.Guitar_Open);
 				}
 			}
 			int t = this.LEVEL.Bass;
