@@ -1161,7 +1161,25 @@ namespace DTXMania
 
             CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped = !CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped;
         }
-		
+
+		public EInstrumentPart GetFlipInst(EInstrumentPart inst)
+		{
+			EInstrumentPart retPart = inst;
+			if (bIsSwappedGuitarBass)
+			{
+				switch (inst)
+				{
+					case EInstrumentPart.GUITAR:
+						retPart = EInstrumentPart.BASS;
+						break;
+					case EInstrumentPart.BASS:
+						retPart = EInstrumentPart.GUITAR;
+						break;
+				}
+			}
+			return retPart;
+		}
+
 		// コンストラクタ
 
 		public CConfigIni()

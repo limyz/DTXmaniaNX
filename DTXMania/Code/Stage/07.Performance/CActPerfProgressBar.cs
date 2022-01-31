@@ -304,9 +304,10 @@ namespace DTXMania
 		{
 			for (EInstrumentPart ePart = EInstrumentPart.DRUMS; ePart <= EInstrumentPart.BASS; ePart++)
 			{
+				//Need to check for guitar/bass swap because Hi-Scores, Hi-Skills records are never swapped during Performance
 				CTexture currTexture = null;
 				txGenerateProgressBarLine(ref currTexture, 
-					cScore.SongInformation.progress[(int)ePart]
+					cScore.SongInformation.progress[(int)CDTXMania.ConfigIni.GetFlipInst(ePart)]
 					);
 
 				txBestProgressBarRecord[(int)ePart] = currTexture;
