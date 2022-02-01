@@ -1468,7 +1468,65 @@ namespace DTXMania
             }
             return (int)ERANK.UNKNOWN;
         }
+
+		/*
+		 Compare 2 progress bars for Stage Failed only
+		 */
+		internal static bool tCheckIfUpdateProgressBarRecordOrNot(string strBestProgress, string strCurrProgress) 
+		{
+			bool ret = false;
+			//Current record is invalid
+			if (strCurrProgress.Length != CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return false;
+            }
+
+			//Best Progress record does not exist
+			if(strBestProgress.Length != CActPerfProgressBar.nSectionIntervalCount && 
+				strCurrProgress.Length == CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return true;
+            }
+
+			int nBestProgressLength = tProgressBarLength(strBestProgress);
+			int nCurrProgressLength = tProgressBarLength(strCurrProgress);
+
+			//If Best record is a clear, progress record is updated only based on skill for now 
+			if(nBestProgressLength == CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return false;
+            }
+
+			//
+			if(nCurrProgressLength >= nBestProgressLength)
+            {
+				ret = true;
+            }
+
+			return ret;
+			
+		}
         
+		internal static int tProgressBarLength(string strProgressBar)
+        {
+			if (strProgressBar.Length != CActPerfProgressBar.nSectionIntervalCount)
+			{
+				return 0;
+			}
+
+			char[] arrCurrProgress = strProgressBar.ToCharArray();
+			int nCurrProgressLength = 0;
+			for (int i = 0; i < arrCurrProgress.Length; i++)
+			{
+				if (arrCurrProgress[i] == '0')
+				{
+					break;
+				}
+				nCurrProgressLength++;
+			}
+			return nCurrProgressLength;
+		}
+
         /// <summary>
         /// nDummy 適当な数値を入れてください。特に使いません。
         /// dRate 達成率を入れます。
