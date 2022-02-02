@@ -231,7 +231,7 @@ namespace DTXMania
 		{
             #region [ 本体位置 ]
 
-            int n左1X = 180;
+            int n左1X = 136;
             int n右1X = 850;
 
             int n左2X = 30;
@@ -247,7 +247,7 @@ namespace DTXMania
 
             if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
-                this.n本体X[0] = n左1X;
+                this.n本体X[0] = 180;
                 this.nスコアX[0] = n左2X;
             }
             else if (CDTXMania.ConfigIni.bGuitarEnabled)
