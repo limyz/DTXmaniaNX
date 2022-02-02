@@ -322,7 +322,8 @@ namespace DTXMania
                 //Load new textures
                 this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
                 this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
-
+                //
+                this.txProgressBarPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_progress_bar_panel.png"));
                 for ( int i = 0; i < 3; i++ )
                 {
                     this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ i ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ i ];
@@ -468,6 +469,7 @@ namespace DTXMania
                 //Free new texture
                 CDTXMania.tReleaseTexture(ref this.txPercent);
                 CDTXMania.tReleaseTexture(ref this.txSkillMax);
+                CDTXMania.tReleaseTexture(ref this.txProgressBarPanel);
                 for ( int i = 0; i < 3; i++ )
                 {
                     CDTXMania.tReleaseTexture( ref this.txネームプレート用文字[ i ] );
@@ -554,9 +556,15 @@ namespace DTXMania
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
                     this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[j], 290 + this.n本体Y, str);
 
+                    //Draw Progress Bar Panels first
+                    if(this.txProgressBarPanel != null)
+                    {
+                        this.txProgressBarPanel.tDraw2D(CDTXMania.app.Device, 255 + this.n本体X[j], 1 + this.n本体Y);
+                    }
+
                     //Draw Progress Bars
-                    this.txCurrentProgressBar[j].tDraw2D(CDTXMania.app.Device, 258 + this.n本体X[j], 2 + this.n本体Y);
-                    this.txPreviousBestProgressBar[j].tDraw2D(CDTXMania.app.Device, 272 + this.n本体X[j], 2 + this.n本体Y);
+                    this.txCurrentProgressBar[j].tDraw2D(CDTXMania.app.Device, 256 + this.n本体X[j], 2 + this.n本体Y);
+                    this.txPreviousBestProgressBar[j].tDraw2D(CDTXMania.app.Device, 270 + this.n本体X[j], 2 + this.n本体Y);
 
                     string strScore = string.Format("{0,7:######0}", CDTXMania.stageResult.stPerformanceEntry[j].nスコア);
                     for (int i = 0; i < 7; i++)
@@ -650,6 +658,8 @@ namespace DTXMania
         //
         private STDGBVALUE<CTexture> txPreviousBestProgressBar;
         private STDGBVALUE<CTexture> txCurrentProgressBar;
+        //
+        private CTexture txProgressBarPanel;
 
         private void tDrawStringSmall(int x, int y, string str)
         {
