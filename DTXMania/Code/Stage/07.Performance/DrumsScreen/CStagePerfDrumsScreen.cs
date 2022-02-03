@@ -215,6 +215,7 @@ namespace DTXMania
                 this.tDraw_LoopLines();
                 this.tUpdateAndDraw_Chip_PatternOnly( EInstrumentPart.DRUMS );
                 bIsFinishedPlaying = this.tUpdateAndDraw_Chips( EInstrumentPart.DRUMS );
+                this.actProgressBar.OnUpdateAndDraw();
                 #region[ シャッター ]
                 //シャッターを使うのはLC、LP、FT、RDレーンのみ。その他のレーンでは一切使用しない。
                 //If Skill Mode is CLASSIC, always display lvl as Classic Style
@@ -352,7 +353,7 @@ namespace DTXMania
 //                  this.t進行描画_パネル文字列();
                 if (CDTXMania.ConfigIni.nInfoType == 1)
                     this.tUpdateAndDraw_StatusPanel();
-                this.actProgressBar.OnUpdateAndDraw();
+                //this.actProgressBar.OnUpdateAndDraw();
                 this.tUpdateAndDraw_Gauge();
                 this.tUpdateAndDraw_Combo();
                 this.tUpdateAndDraw_Graph();
