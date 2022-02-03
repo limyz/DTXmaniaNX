@@ -257,6 +257,12 @@ namespace DTXMania
 								{
 									cScore.SongInformation.BestRank[m] = this.nRankValue[m];
 								}
+
+								//Check if Progress record existed or not; if not, update anyway
+								if(CScoreIni.tProgressBarLength(cScore.SongInformation.progress[m]) == 0)
+                                {
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
+								}
 							}
 						}
 					}

@@ -1509,7 +1509,7 @@ namespace DTXMania
         
 		internal static int tProgressBarLength(string strProgressBar)
         {
-			if (strProgressBar.Length != CActPerfProgressBar.nSectionIntervalCount)
+			if (strProgressBar == null || strProgressBar.Length != CActPerfProgressBar.nSectionIntervalCount)
 			{
 				return 0;
 			}
