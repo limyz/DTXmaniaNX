@@ -30,8 +30,8 @@ namespace DTXMania
 
 			//
 			this.pBarPosition[(int)EInstrumentPart.DRUMS] = new Point(855, 15);
-			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(334, 70);
-			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1204, 70);
+			this.pBarPosition[(int)EInstrumentPart.GUITAR] = new Point(334, 85);
+			this.pBarPosition[(int)EInstrumentPart.BASS] = new Point(1204, 85);
 		
 			//n区間分割数 = 54;
 			this.nブロック最大数 = 10;
@@ -220,11 +220,11 @@ namespace DTXMania
 
 					if(ePart == EInstrumentPart.DRUMS)
                     {
-						txProgressBarBackgroundDrums.tDraw2D(CDTXMania.app.Device, num-2, 0);
+						txProgressBarBackgroundDrums.tDraw2D(CDTXMania.app.Device, num-2, num2 - 15);
                     }
                     else
                     {
-						txProgressBarBackgroundGuitar.tDraw2D(CDTXMania.app.Device, num-2, 0);
+						txProgressBarBackgroundGuitar.tDraw2D(CDTXMania.app.Device, num-2, num2 - 70);
 					}
 
 					tx背景.tDraw2D(CDTXMania.app.Device, num, num2);
