@@ -188,6 +188,7 @@ namespace DTXMania
 			public STDGBVALUE<ERandomMode> eRandom;
 			public EDamageLevel eDamageLevel;
 			public STDGBVALUE<float> fScrollSpeed;
+
 			public string Hash;
 
 			/// <summary>
@@ -227,6 +228,9 @@ namespace DTXMania
 			public bool レーン9モード;
 			public int nRisky;		// #23559 2011.6.20 yyagi 0=OFF, 1-10=Risky
 			public string strDateTime;
+
+			//
+			public string strProgress;
 
 			public CPerformanceEntry()
 			{
@@ -297,6 +301,7 @@ namespace DTXMania
 				this.strDTXManiaVersion = "Unknown";
 				this.strDateTime = "";
 				this.Hash = "00000000000000000000000000000000";
+				this.strProgress = "";
 				this.レーン9モード = true;
 				this.nRisky = 0;									// #23559 2011.6.20 yyagi
 			}
@@ -1228,6 +1233,10 @@ namespace DTXMania
 											{
 												cPerformanceEntry.strDateTime = para;
 											}
+											else if (item.Equals("Progress"))
+											{
+												cPerformanceEntry.strProgress = para;
+											}
 											else if ( item.Equals( "Hash" ) )
 											{
 												cPerformanceEntry.Hash = para;
@@ -1435,9 +1444,10 @@ namespace DTXMania
 				writer.WriteLine($@"SecondaryGreatRange={stSection[i].stSecondaryHitRanges.nGreatSizeMs}");
 				writer.WriteLine($@"SecondaryGoodRange={stSection[i].stSecondaryHitRanges.nGoodSizeMs}");
 				writer.WriteLine($@"SecondaryPoorRange={stSection[i].stSecondaryHitRanges.nPoorSizeMs}");
-				writer.WriteLine( "DTXManiaVersion={0}", this.stSection[ i ].strDTXManiaVersion );
-				writer.WriteLine( "DateTime={0}", this.stSection[ i ].strDateTime );
-				writer.WriteLine( "Hash={0}", this.stSection[ i ].Hash );
+				writer.WriteLine("DTXManiaVersion={0}", this.stSection[ i ].strDTXManiaVersion );
+				writer.WriteLine("DateTime={0}", this.stSection[ i ].strDateTime );
+				writer.WriteLine("Progress={0}", this.stSection[i].strProgress);
+				writer.WriteLine("Hash={0}", this.stSection[ i ].Hash );
 			}
 			writer.Close();
 		}
@@ -1458,7 +1468,65 @@ namespace DTXMania
             }
             return (int)ERANK.UNKNOWN;
         }
+
+		/*
+		 Compare 2 progress bars for Stage Failed only
+		 */
+		internal static bool tCheckIfUpdateProgressBarRecordOrNot(string strBestProgress, string strCurrProgress) 
+		{
+			bool ret = false;
+			//Current record is invalid
+			if (strCurrProgress.Length != CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return false;
+            }
+
+			//Best Progress record does not exist
+			if(strBestProgress.Length != CActPerfProgressBar.nSectionIntervalCount && 
+				strCurrProgress.Length == CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return true;
+            }
+
+			int nBestProgressLength = tProgressBarLength(strBestProgress);
+			int nCurrProgressLength = tProgressBarLength(strCurrProgress);
+
+			//If Best record is a clear, progress record is updated only based on skill for now 
+			if(nBestProgressLength == CActPerfProgressBar.nSectionIntervalCount)
+            {
+				return false;
+            }
+
+			//
+			if(nCurrProgressLength >= nBestProgressLength)
+            {
+				ret = true;
+            }
+
+			return ret;
+			
+		}
         
+		internal static int tProgressBarLength(string strProgressBar)
+        {
+			if (strProgressBar == null || strProgressBar.Length != CActPerfProgressBar.nSectionIntervalCount)
+			{
+				return 0;
+			}
+
+			char[] arrCurrProgress = strProgressBar.ToCharArray();
+			int nCurrProgressLength = 0;
+			for (int i = 0; i < arrCurrProgress.Length; i++)
+			{
+				if (arrCurrProgress[i] == '0')
+				{
+					break;
+				}
+				nCurrProgressLength++;
+			}
+			return nCurrProgressLength;
+		}
+
         /// <summary>
         /// nDummy 適当な数値を入れてください。特に使いません。
         /// dRate 達成率を入れます。

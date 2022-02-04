@@ -1324,7 +1324,144 @@ for (int i = 0; i < 3; i++) {
                             case (int)EPerfScreenReturnValue.StageFailure:
                                 #region [ 演奏失敗(StageFailed) ]
                                 //-----------------------------
-                                scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Stage failed");
+                                {
+                                    //New extract performance record
+                                    CScoreIni.CPerformanceEntry cPerf_Drums, cPerf_Guitar, cPerf_Bass;
+                                    bool bTrainingMode = false;
+                                    CChip[] chipsArray = new CChip[10];
+                                    if (ConfigIni.bGuitarRevolutionMode)
+                                    {
+                                        stagePerfGuitarScreen.tStorePerfResults(out cPerf_Drums, out cPerf_Guitar, out cPerf_Bass, out bTrainingMode);
+                                    }
+                                    else
+                                    {
+                                        stagePerfDrumsScreen.tStorePerfResults(out cPerf_Drums, out cPerf_Guitar, out cPerf_Bass, out chipsArray, out bTrainingMode);
+                                    }
+                                    //Original
+                                    //scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新("Stage failed");
+
+                                    //Save Performance Records if necessary
+                                    if (!bTrainingMode) 
+                                    {
+                                        //Swap if required
+                                        if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)       // #24063 2011.1.24 yyagi Gt/Bsを入れ替えていたなら、演奏結果も入れ替える
+                                        {
+                                            CScoreIni.CPerformanceEntry t;
+                                            t = cPerf_Guitar;
+                                            cPerf_Guitar = cPerf_Bass;
+                                            cPerf_Bass = t;
+                                        }
+
+                                        string strInstrument = "";
+                                        string strPerfSkill = "";
+                                        //STDGBVALUE<string> strCurrProgressBars;
+                                        STDGBVALUE<bool> bToSaveProgressBarRecord;
+                                        bToSaveProgressBarRecord.Drums = false;
+                                        bToSaveProgressBarRecord.Guitar = false;
+                                        bToSaveProgressBarRecord.Bass = false;
+                                        STDGBVALUE<bool> bNewProgressBarRecord;
+                                        bNewProgressBarRecord.Drums = false;
+                                        bNewProgressBarRecord.Guitar = false;
+                                        bNewProgressBarRecord.Bass = false;
+                                        bool bGuitarAndBass = false;
+                                        if (!cPerf_Drums.b全AUTOである && cPerf_Drums.nTotalChipsCount > 0)
+                                        {
+                                            //Drums played
+                                            strInstrument = " Drums";
+                                            bToSaveProgressBarRecord.Drums = true;
+                                        }
+                                        else if (!cPerf_Guitar.b全AUTOである && cPerf_Guitar.nTotalChipsCount > 0)
+                                        {
+                                            if (!cPerf_Bass.b全AUTOである && cPerf_Bass.nTotalChipsCount > 0)
+                                            {
+                                                // Guitar and bass played together
+                                                bGuitarAndBass = true;
+                                                strInstrument = " G+B";
+                                                bToSaveProgressBarRecord.Guitar = true;
+                                                bToSaveProgressBarRecord.Bass = true;
+                                            }
+                                            else 
+                                            {
+                                                // Guitar only played
+                                                strInstrument = " Guitar";
+                                                bToSaveProgressBarRecord.Guitar = true;
+                                            }
+                                            
+                                        }
+                                        else
+                                        {
+                                            //Bass only played
+                                            strInstrument = " Bass";
+                                            bToSaveProgressBarRecord.Bass = true;
+                                        }
+
+                                        string str = "";
+                                        string strSpeed = "";
+                                        if (CDTXMania.ConfigIni.nPlaySpeed != 20)
+                                        {
+                                            double d = (double)(CDTXMania.ConfigIni.nPlaySpeed / 20.0);
+                                            strSpeed = (bGuitarAndBass ? " x" : " Speed x") + d.ToString("0.00");
+                                        }
+                                        str = string.Format("Stage failed{0} {1}", strInstrument, strSpeed);
+
+                                        scoreIni = this.tScoreIniへBGMAdjustとHistoryとPlayCountを更新(str);
+
+                                        CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
+
+                                        if (bToSaveProgressBarRecord.Drums)
+                                        {
+                                            scoreIni.stSection.LastPlayDrums.strProgress = cPerf_Drums.strProgress;
+                                            
+                                            if(CScoreIni.tCheckIfUpdateProgressBarRecordOrNot(cScore.SongInformation.progress.Drums, cPerf_Drums.strProgress))
+                                            {
+                                                scoreIni.stSection.HiSkillDrums.strProgress = cPerf_Drums.strProgress;
+                                                bNewProgressBarRecord.Drums = true;
+                                            }
+                                        }
+                                        if (bToSaveProgressBarRecord.Guitar)
+                                        {
+                                            scoreIni.stSection.LastPlayGuitar.strProgress = cPerf_Guitar.strProgress;
+                                            if (CScoreIni.tCheckIfUpdateProgressBarRecordOrNot(cScore.SongInformation.progress.Guitar, cPerf_Guitar.strProgress))
+                                            {
+                                                scoreIni.stSection.HiSkillGuitar.strProgress = cPerf_Guitar.strProgress;
+                                                bNewProgressBarRecord.Guitar = true;
+                                            }
+                                        }
+                                        if (bToSaveProgressBarRecord.Bass)
+                                        {
+                                            scoreIni.stSection.LastPlayBass.strProgress = cPerf_Bass.strProgress;
+                                            if (CScoreIni.tCheckIfUpdateProgressBarRecordOrNot(cScore.SongInformation.progress.Bass, cPerf_Bass.strProgress))
+                                            {
+                                                scoreIni.stSection.HiSkillBass.strProgress = cPerf_Bass.strProgress;
+                                                bNewProgressBarRecord.Bass = true;
+                                            }
+                                        }
+
+                                        scoreIni.tExport(DTX.strファイル名の絶対パス + ".score.ini");
+
+                                        if (!CDTXMania.bCompactMode)
+                                        {                                            
+                                            bool[] b更新が必要か否か = new bool[3];
+                                            CScoreIni.tGetIsUpdateNeeded(out b更新が必要か否か[0], out b更新が必要か否か[1], out b更新が必要か否か[2]);
+                                            if (bNewProgressBarRecord.Drums)
+                                            {
+                                                // New Song Progress
+                                                cScore.SongInformation.progress.Drums = cPerf_Drums.strProgress;
+                                            }
+                                            if (bNewProgressBarRecord.Guitar)
+                                            {
+                                                // New Song Progress
+                                                cScore.SongInformation.progress.Guitar = cPerf_Guitar.strProgress;
+                                            }
+                                            if (bNewProgressBarRecord.Bass)
+                                            {
+                                                // New Song Progress
+                                                cScore.SongInformation.progress.Bass = cPerf_Bass.strProgress;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
 
                                 #region [ プラグイン On演奏失敗() の呼び出し ]
                                 //---------------------
@@ -1420,10 +1557,13 @@ for (int i = 0; i < 3; i++) {
                                             nRank = CScoreIni.tCalculateOverallRankValue(cPerfEntry_Drums, cPerfEntry_Guitar, cPerfEntry_Bass);
                                             strInstrument = " G+B";
                                         }
-                                        // Guitar only played
-                                        strPerfSkill = String.Format(" {0:F2}", cPerfEntry_Guitar.dbPerformanceSkill);
-                                        nRank = (CDTXMania.ConfigIni.nSkillMode == 0) ? CScoreIni.tCalculateRankOld(cPerfEntry_Guitar) : CScoreIni.tCalculateRank(0, cPerfEntry_Guitar.dbPerformanceSkill);
-                                        strInstrument = " Guitar";
+                                        else 
+                                        {
+                                            // Guitar only played
+                                            strPerfSkill = String.Format(" {0:F2}", cPerfEntry_Guitar.dbPerformanceSkill);
+                                            nRank = (CDTXMania.ConfigIni.nSkillMode == 0) ? CScoreIni.tCalculateRankOld(cPerfEntry_Guitar) : CScoreIni.tCalculateRank(0, cPerfEntry_Guitar.dbPerformanceSkill);
+                                            strInstrument = " Guitar";
+                                        }                                        
                                     }
                                     else
                                     {

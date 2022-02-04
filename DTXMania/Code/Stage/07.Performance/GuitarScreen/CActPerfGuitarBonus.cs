@@ -64,7 +64,7 @@ namespace DTXMania
 
                 if (CDTXMania.ConfigIni.bShowScore)
                 {
-                    drawBonusScoreAnimation(EInstrumentPart.GUITAR, new Point(303, 45));
+                    drawBonusScoreAnimation(EInstrumentPart.GUITAR, new Point(333, 45));
                     drawBonusScoreAnimation(EInstrumentPart.BASS, new Point(885, 45));                    
                 }
 

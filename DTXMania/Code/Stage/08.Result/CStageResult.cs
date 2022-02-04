@@ -32,6 +32,9 @@ namespace DTXMania
 		public STDGBVALUE<CScoreIni.CPerformanceEntry> stPerformanceEntry;
 		public bool bIsTrainingMode;
 
+		//Progress Bar temp variables
+		public STDGBVALUE<string> strBestProgressBarRecord;
+		public STDGBVALUE<string> strCurrProgressBarRecord;
 
 		// コンストラクタ
 
@@ -50,6 +53,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actParameterPanel = new CActResultParameterPanel() );
 			base.listChildActivities.Add( this.actRank = new CActResultRank() );
 			base.listChildActivities.Add( this.actSongBar = new CActResultSongBar() );
+			//base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar(true) );
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFO = new CActFIFOBlack() );
 		}
@@ -124,6 +128,12 @@ namespace DTXMania
 							{
 								this.nRankValue[i] = CScoreIni.tCalculateRankOld(part);
 							}
+
+							//Save progress bar records
+							CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
+							this.strBestProgressBarRecord[i] = cScore.SongInformation.progress[i];
+							//May not need to save this...
+							this.strCurrProgressBarRecord[i] = this.stPerformanceEntry[i].strProgress;
 						}
 					}
 					this.n総合ランク値 = CScoreIni.tCalculateOverallRankValue(this.stPerformanceEntry.Drums, this.stPerformanceEntry.Guitar, this.stPerformanceEntry.Bass);
@@ -239,11 +249,19 @@ namespace DTXMania
 								if (this.bNewRecordSkill[m])
 								{
 									cScore.SongInformation.HighSkill[m] = this.stPerformanceEntry[m].dbPerformanceSkill;
+									// New Song Progress for new skill record
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
 								}
 
 								if (this.bNewRecordRank[m])
 								{
 									cScore.SongInformation.BestRank[m] = this.nRankValue[m];
+								}
+
+								//Check if Progress record existed or not; if not, update anyway
+								if(CScoreIni.tProgressBarLength(cScore.SongInformation.progress[m]) == 0)
+                                {
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
 								}
 							}
 						}
@@ -253,6 +271,8 @@ namespace DTXMania
 				}
 
 				base.OnActivate();
+				//this.actProgressBar.t表示レイアウトを設定する(180, 540, 20, 460);
+				//this.actProgressBar.t演奏記録から区間情報を設定する(st演奏記録);
 			}
 			finally
 			{
@@ -787,6 +807,7 @@ namespace DTXMania
 		private CActResultRank actRank;
 		private CActResultImage actResultImage;
 		private CActResultSongBar actSongBar;
+		//private CActPerfProgressBar actProgressBar;
 		private bool bAnimationComplete;  // bアニメが完了
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;				// #24509 2011.3.14 yyagi
 		private readonly int[] nチャンネル0Atoレーン07;

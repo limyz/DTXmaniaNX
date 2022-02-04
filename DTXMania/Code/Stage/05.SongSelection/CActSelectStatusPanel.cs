@@ -115,8 +115,8 @@ namespace DTXMania
                         this.bHasMultipleDiff = true;
                         break;
                     }
-                }                
-
+                }
+                
                 for (int i = 0; i < 5; i++)
                 {
                     if (c曲リストノード.arScore[i] != null)
@@ -189,6 +189,7 @@ namespace DTXMania
             this.ct登場アニメ用 = null;
             this.ct難易度スクロール用 = null;
             this.ct難易度矢印用 = null;
+            this.strCurrentProgressBar = "";
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
@@ -207,6 +208,7 @@ namespace DTXMania
                 this.txGuitarBassGraphPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_graph panel guitar bass.png"));
                 this.txSkillPointPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_skill point panel.png"));
                 txGenerateGraphBarLine();
+                txGenerateProgressBarLine("");
                 base.OnManagedCreateResources();
             }
         }
@@ -233,6 +235,7 @@ namespace DTXMania
                     CDTXMania.tReleaseTexture(ref this.txGBChipsBarLine[i]);
                 }
                 CDTXMania.tReleaseTexture(ref this.txSkillPointPanel);
+                CDTXMania.tReleaseTexture(ref this.txProgressBar);
                 base.OnManagedReleaseResources();
             }
         }
@@ -278,10 +281,12 @@ namespace DTXMania
 
                 CScore cスコア = CDTXMania.stageSongSelection.rSelectedScore;
                 int nPanelNoteCount = 0;
-                int[] arrChipsByLane = null;//9 lane for drums, 6 for guitar/bass
+                //9 lane for drums, 6 for guitar/bass
+                int[] arrChipsByLane = null;
                 //0 for Drums, 1 for GuitarBass
                 int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
                 string strSP = "";
+                string strProgressText = "";
                 #region [ 選択曲の BPM の描画 ]
                 if (CDTXMania.stageSongSelection.r現在選択中の曲 != null)
                 {
@@ -333,6 +338,9 @@ namespace DTXMania
                                         {                                            
                                             strSP = string.Format("{0,6:##0.00}", this.dbDrumSP);
                                         }
+
+                                        //Get Progress data here
+                                        strProgressText = cスコア.SongInformation.progress.Drums;
                                     }
                                 }
                                 else
@@ -355,6 +363,8 @@ namespace DTXMania
                                                 cスコア.SongInformation.chipCountByLane[ELane.BsP],
                                                 cスコア.SongInformation.chipCountByLane[ELane.BsPick]
                                             };
+                                            //Get Progress data here
+                                            strProgressText = cスコア.SongInformation.progress.Bass;
                                         }
                                     }
                                     else
@@ -370,6 +380,8 @@ namespace DTXMania
                                                 cスコア.SongInformation.chipCountByLane[ELane.GtP],
                                                 cスコア.SongInformation.chipCountByLane[ELane.GtPick]
                                             };
+                                            //Get Progress data here
+                                            strProgressText = cスコア.SongInformation.progress.Guitar;
                                         }
                                     }
                                 }
@@ -463,6 +475,10 @@ namespace DTXMania
                     }
 
                 }
+
+                //Draw Progress Bar
+                tDrawProgressBar(strProgressText, nGraphBaseX + 18, nGraphBaseY + 21);
+                
                 #endregion
                 //-----------------
 
@@ -798,6 +814,7 @@ namespace DTXMania
         private int nGBSPDiffRank = -1;
         private int nSpInGuitarOrBass = 0;//G:0 B:1
         private bool bHasMultipleDiff = false;
+        private string strCurrentProgressBar = "";
 
         private int n現在選択中の曲の難易度;
         private int n難易度開始文字位置;
@@ -918,6 +935,14 @@ namespace DTXMania
             Color.White
         };
         private CTexture txSkillPointPanel;
+        private CTexture txProgressBar;
+        private Color[] clProgressBarColors = new Color[4]
+        {
+            Color.Black,
+            Color.DeepSkyBlue,
+            Color.Yellow,
+            Color.Yellow
+        };
         private int nCheckDifficultyLabelDisplayAndReturnScrollDirection()
         {
             int num = 0;
@@ -954,6 +979,31 @@ namespace DTXMania
                 return -1;
             }
             return 0;
+        }
+
+        private void txGenerateProgressBarLine(string strProgressBar) 
+        {
+            int nBarWidth = 4;
+            int nBarHeight = 294; //294;
+
+            CActPerfProgressBar.txGenerateProgressBarHelper(ref this.txProgressBar, strProgressBar, nBarWidth, nBarHeight, CActPerfProgressBar.nSectionIntervalCount);
+
+        }
+
+        private void tDrawProgressBar(string strProgressBar, int nPosX, int nPosY) 
+        { 
+            if(!this.strCurrentProgressBar.Equals(strProgressBar))
+            {
+                //Recreate texture only if string is different
+                CDTXMania.tReleaseTexture(ref this.txProgressBar);
+                txGenerateProgressBarLine(strProgressBar);
+                this.strCurrentProgressBar = strProgressBar;
+            }
+
+            if (this.txProgressBar != null)
+            {
+                this.txProgressBar.tDraw2D(CDTXMania.app.Device, nPosX, nPosY);
+            }
         }
 
         private void txGenerateGraphBarLine()

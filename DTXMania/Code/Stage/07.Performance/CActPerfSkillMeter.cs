@@ -158,7 +158,7 @@ namespace DTXMania
                             this.nPart = 0;
                     }
 
-                    this.nGraphBG_XPos.Drums = (CDTXMania.ConfigIni.bSmallGraph ? 850 : 870);
+                    this.nGraphBG_XPos.Drums = (CDTXMania.ConfigIni.bSmallGraph ? 880 : 900);//850 : 870
                     this.nGraphBG_XPos.Guitar = 356;
                     this.nGraphBG_XPos.Bass = 647;
                     this.nGraphBG_YPos = this.nGraphUsePart == 0 ? 50 : 110;

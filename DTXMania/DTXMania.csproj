@@ -120,9 +120,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Code\Score,Song\CChip.cs" />
+    <Compile Include="Code\Score,Song\CProgress.cs" />
     <Compile Include="Code\Score,Song\EChannel.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
+    <Compile Include="Code\Stage\07.Performance\CActPerfProgressBar.cs" />
     <Compile Include="Code\Stage\07.Performance\GuitarScreen\CActPerfGuitarBonus.cs" />
     <Compile Include="Code\Stage\CDTXVmode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
