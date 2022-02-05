@@ -44,7 +44,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\Runtime\</OutputPath>
     <DefineConstants>TRACE;DEBUG;USE_ENGLISHRESOURCE_ USE_GERMANRESOURCE_</DefineConstants>
     <WarningLevel>0</WarningLevel>
     <NoWarn>0219</NoWarn>
