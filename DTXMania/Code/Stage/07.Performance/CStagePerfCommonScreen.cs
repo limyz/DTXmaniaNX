@@ -1342,7 +1342,7 @@ namespace DTXMania
                 this.bAUTOでないチップが１つでもバーを通過した = true;
             }
             bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
-            //bool bPChipIsAutoPlay = false; // Test code only Fisyher
+            //bPChipIsAutoPlay = false; // Test code only Fisyher
             pChip.bIsAutoPlayed = bPChipIsAutoPlay;			// 2011.6.10 yyagi
             EJudgement eJudgeResult = EJudgement.Auto;
             switch (pChip.eInstrumentPart)
@@ -5407,8 +5407,7 @@ namespace DTXMania
                             bool bChipHasY = false;
                             bool bChipHasP = false;
                             bool bChipHasW = (((int)pChip.nChannelNumber & 0x0F) == 0x08);
-                            bool bChipIsO = false;
-                            bool bSuccessOPEN = bChipIsO && (autoR || pushingR == 0) && (autoG || pushingG == 0) && (autoB || pushingB == 0) && (autoY || pushingY == 0) && (autoP || pushingP == 0);
+                            bool bChipIsO = false;                            
 
                             switch (pChip.nChannelNumber)
                             {
@@ -5724,6 +5723,8 @@ namespace DTXMania
                                     }
                                     break;
                             }
+
+                            bool bSuccessOPEN = bChipIsO && (autoR || pushingR == 0) && (autoG || pushingG == 0) && (autoB || pushingB == 0) && (autoY || pushingY == 0) && (autoP || pushingP == 0);
 
                             int num17 = (bChipHasR ? 4 : 0) | (bChipHasG ? 2 : 0) | (bChipHasB ? 1 : 0) | (bChipHasY ? 16 : 0) | (bChipHasP ? 32 : 0);
                             if (pChip != null && (num17 & ~nAutoMask & 0x3F) == (nKeyPressRGBFlag & ~nAutoMask & 0x3F) && e判定 != EJudgement.Miss)
