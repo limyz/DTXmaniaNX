@@ -841,6 +841,66 @@ namespace FDK
 				CCommon.tReleaseComObject( ref audioRenderer );
 			}
 		}
+
+		public static void ConnectNullRendererFromSampleGrabber(IGraphBuilder graphBuilder, IBaseFilter sampleGrabber)
+		{
+			IBaseFilter videoRenderer = null;
+			IPin inputVPin = null;
+			IBaseFilter audioRenderer = null;
+			IPin inputAPin = null;
+			IPin ppPin = null;
+			IPin ppPin2 = null;
+			IPin obj = null;
+			IPin obj2 = null;
+			try
+			{
+				SearchMMRenderers(graphBuilder, out videoRenderer, out inputVPin, out audioRenderer, out inputAPin);
+				if (videoRenderer != null && inputVPin != null)
+				{
+					DsError.ThrowExceptionForHR(inputVPin.ConnectedTo(out ppPin));
+					DsError.ThrowExceptionForHR(inputVPin.Disconnect());
+					DsError.ThrowExceptionForHR(ppPin.Disconnect());
+					DsError.ThrowExceptionForHR(graphBuilder.RemoveFilter(videoRenderer));
+					IBaseFilter baseFilter = new NullRenderer() as IBaseFilter;
+					DsError.ThrowExceptionForHR(graphBuilder.AddFilter(baseFilter, "Video Null Renderer"));
+					DsError.ThrowExceptionForHR(baseFilter.FindPin("In", out ppPin2));
+					DsError.ThrowExceptionForHR(ppPin2.Disconnect());
+					DsError.ThrowExceptionForHR(sampleGrabber.FindPin("Out", out obj));
+					if (obj.ConnectedTo(out obj2) == 0)
+					{
+						DsError.ThrowExceptionForHR(obj2.Disconnect());
+						DsError.ThrowExceptionForHR(obj.Disconnect());
+					}
+					DsError.ThrowExceptionForHR(obj.Connect(ppPin2, null));
+				}
+				if (audioRenderer != null && inputAPin != null)
+				{
+					CCommon.tReleaseComObject(ref ppPin);
+					DsError.ThrowExceptionForHR(inputAPin.ConnectedTo(out ppPin));
+					DsError.ThrowExceptionForHR(inputAPin.Disconnect());
+					DsError.ThrowExceptionForHR(ppPin.Disconnect());
+					DsError.ThrowExceptionForHR(graphBuilder.RemoveFilter(audioRenderer));
+					IBaseFilter baseFilter2 = new NullRenderer() as IBaseFilter;
+					DsError.ThrowExceptionForHR(graphBuilder.AddFilter(baseFilter2, "Audio Null Renderer"));
+					CCommon.tReleaseComObject(ref ppPin2);
+					DsError.ThrowExceptionForHR(baseFilter2.FindPin("In", out ppPin2));
+					DsError.ThrowExceptionForHR(ppPin.Connect(ppPin2, null));
+				}
+			}
+			finally
+			{
+				CCommon.tReleaseComObject(ref ppPin);
+				CCommon.tReleaseComObject(ref inputVPin);
+				CCommon.tReleaseComObject(ref videoRenderer);
+				CCommon.tReleaseComObject(ref audioRenderer);
+				CCommon.tReleaseComObject(ref inputAPin);
+				CCommon.tReleaseComObject(ref ppPin2);
+				CCommon.tReleaseComObject(ref obj);
+				CCommon.tReleaseComObject(ref obj2);
+			}
+		}
+
+
 		public static void tビデオレンダラをグラフから除去する( IGraphBuilder graphBuilder )
 		{
 			int hr = 0;
@@ -1080,6 +1140,145 @@ namespace FDK
 				DsError.ThrowExceptionForHR( hr );
 			}
 		}
+
+		private static void SearchMMRenderers(IFilterGraph graph, out IBaseFilter videoRenderer, out IPin inputVPin, out IBaseFilter audioRenderer, out IPin inputAPin)
+		{
+			int num = 0;
+			string text = null;
+			string Id = null;
+			string text2 = null;
+			string Id2 = null;
+			num = graph.EnumFilters(out var ppEnum);
+			DsError.ThrowExceptionForHR(num);
+			try
+			{
+				IBaseFilter[] array = new IBaseFilter[1];
+				while (ppEnum.Next(1, array, IntPtr.Zero) == 0)
+				{
+					try
+					{
+						bool flag = false;
+						num = array[0].EnumPins(out var ppEnum2);
+						DsError.ThrowExceptionForHR(num);
+						try
+						{
+							IPin[] array2 = new IPin[1];
+							while (ppEnum2.Next(1, array2, IntPtr.Zero) == 0)
+							{
+								try
+								{
+									if (!flag)
+									{
+										num = array2[0].QueryDirection(out var pPinDir);
+										DsError.ThrowExceptionForHR(num);
+										if (pPinDir == PinDirection.Output)
+										{
+											flag = true;
+										}
+									}
+								}
+								finally
+								{
+									CCommon.tReleaseComObject(ref array2[0]);
+								}
+							}
+						}
+						finally
+						{
+							CCommon.tReleaseComObject(ref ppEnum2);
+						}
+						if (flag)
+						{
+							continue;
+						}
+						num = array[0].EnumPins(out ppEnum2);
+						DsError.ThrowExceptionForHR(num);
+						try
+						{
+							IPin[] array3 = new IPin[1];
+							while (ppEnum2.Next(1, array3, IntPtr.Zero) == 0)
+							{
+								try
+								{
+									if (!string.IsNullOrEmpty(text))
+									{
+										continue;
+									}
+									AMMediaType aMMediaType = new AMMediaType();
+									num = array3[0].ConnectionMediaType(aMMediaType);
+									if (num == -2147220983)
+									{
+										continue;
+									}
+									DsError.ThrowExceptionForHR(num);
+									try
+									{
+										if (aMMediaType.majorType.Equals(MediaType.Video))
+										{
+											num = array[0].QueryFilterInfo(out var pInfo);
+											DsError.ThrowExceptionForHR(num);
+											text = pInfo.achName;
+											CCommon.tReleaseComObject(ref pInfo.pGraph);
+											num = array3[0].QueryId(out Id);
+											DsError.ThrowExceptionForHR(num);
+										}
+										else if (aMMediaType.majorType.Equals(MediaType.Audio))
+										{
+											num = array[0].QueryFilterInfo(out var pInfo2);
+											DsError.ThrowExceptionForHR(num);
+											text2 = pInfo2.achName;
+											CCommon.tReleaseComObject(ref pInfo2.pGraph);
+											num = array3[0].QueryId(out Id2);
+											DsError.ThrowExceptionForHR(num);
+										}
+									}
+									finally
+									{
+										DsUtils.FreeAMMediaType(aMMediaType);
+									}
+								}
+								finally
+								{
+									CCommon.tReleaseComObject(ref array3[0]);
+								}
+							}
+						}
+						finally
+						{
+							CCommon.tReleaseComObject(ref ppEnum2);
+						}
+					}
+					finally
+					{
+						CCommon.tReleaseComObject(ref array[0]);
+					}
+				}
+			}
+			finally
+			{
+				CCommon.tReleaseComObject(ref ppEnum);
+			}
+			videoRenderer = null;
+			inputVPin = null;
+			audioRenderer = null;
+			inputAPin = null;
+			if (!string.IsNullOrEmpty(text))
+			{
+				num = graph.FindFilterByName(text, out videoRenderer);
+				DsError.ThrowExceptionForHR(num);
+				num = videoRenderer.FindPin(Id, out inputVPin);
+				DsError.ThrowExceptionForHR(num);
+			}
+			if (!string.IsNullOrEmpty(text2))
+			{
+				num = graph.FindFilterByName(text2, out audioRenderer);
+				DsError.ThrowExceptionForHR(num);
+				num = audioRenderer.FindPin(Id2, out inputAPin);
+				DsError.ThrowExceptionForHR(num);
+			}
+		}
+
+
 		private static IBaseFilter tオーディオレンダラを探して返す( IFilterGraph graph )
 		{
 			int hr = 0;
