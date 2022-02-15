@@ -59,46 +59,61 @@ namespace DTXMania
 
 		public class CAVI : IDisposable
 		{
-			public CAvi avi;
+			public CAviDS avi;
 			private bool bDispose済み;
 			public int n番号;
 			public string strコメント文 = "";
 			public string strファイル名 = "";
+			public double dbPlaySpeed = 1.0;
+
+			public CAVI(int number, string filename, string comment, double playSpeed)
+			{
+				n番号 = number;
+				strファイル名 = filename;
+				strコメント文 = comment;
+				dbPlaySpeed = playSpeed;
+				//taskLoad = null;
+			}
 
 			public void OnDeviceCreated()
 			{
 				#region [ strAVIファイル名の作成。]
 				//-----------------
 				string strAVIファイル名;
-                strAVIファイル名 = CSkin.Path(@"Graphics\7_Movie.avi");
-				if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
-					strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
-				else
-					strAVIファイル名 = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PATH + this.strファイル名;
+                //strAVIファイル名 = CSkin.Path(@"Graphics\7_Movie.avi");
+
+				if (CDTXMania.DTX == null || Path.IsPathRooted(this.strファイル名))
+				{
+					strAVIファイル名 = this.strファイル名;
+				}
+				else 
+				{
+					if (!string.IsNullOrEmpty(CDTXMania.DTX.PATH_WAV))
+						strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
+					else
+						strAVIファイル名 = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PATH + this.strファイル名;
+				}
+				
 				//-----------------
 				#endregion
 
 				if( !File.Exists( strAVIファイル名 ) )
 				{
 					//Trace.TraceWarning( "ファイルが存在しません。({0})({1})", this.strコメント文, strAVIファイル名 );
-                    Trace.TraceWarning("ファイルが存在しません。代わりに汎用AVIを再生します。({0})({1})", this.strコメント文, strAVIファイル名);
-					//this.avi = null;
-
+                    Trace.TraceWarning("File does not exist. ({0})({1})", this.strコメント文, strAVIファイル名);
+					
                     CDTXMania.app.b汎用ムービーである = true;
-                    if (!File.Exists(strAVIファイル名))
-                    {
-                        Trace.TraceWarning("汎用AVIファイルが存在しません。({0})({1})", this.strコメント文, strAVIファイル名);
-                        this.avi = null;
-                        return;
-                    }
+					this.avi = null;
+					return;
+					
 				}
 
 				// AVI の生成。
 
 				try
 				{
-					this.avi = new CAvi( strAVIファイル名 );
-					Trace.TraceInformation( "動画を生成しました。({0})({1})({2}frames)", this.strコメント文, strAVIファイル名, this.avi.GetMaxFrameCount() );
+					this.avi = new CAviDS( strAVIファイル名, dbPlaySpeed);
+					Trace.TraceInformation("動画を生成しました。({0})({1})({2}msec)", this.strコメント文, strAVIファイル名, this.avi.GetDuration() );
                     CDTXMania.app.b汎用ムービーである = false;
 				}
 				catch( Exception e )
@@ -124,18 +139,18 @@ namespace DTXMania
 				{
 					#region [ strAVIファイル名 の作成。 ]
 					//-----------------
-					string strAVIファイル名;
-					if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
-						strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
-					else
-						strAVIファイル名 = CDTXMania.DTX.strFolderName + this.strファイル名;
+					//string strAVIファイル名;
+					//if( !string.IsNullOrEmpty( CDTXMania.DTX.PATH_WAV ) )
+					//	strAVIファイル名 = CDTXMania.DTX.PATH_WAV + this.strファイル名;
+					//else
+					//	strAVIファイル名 = CDTXMania.DTX.strFolderName + this.strファイル名;
 					//-----------------
 					#endregion
 
 					this.avi.Dispose();
 					this.avi = null;
 					
-					Trace.TraceInformation( "動画を解放しました。({0})({1})", this.strコメント文, strAVIファイル名 );
+					Trace.TraceInformation( "動画を解放しました。({0})({1})", this.strコメント文, this.strファイル名);
 				}
 
 				this.bDispose済み = true;
@@ -1351,7 +1366,7 @@ namespace DTXMania
 		public STDGBVALUE<int> LEVEL;
         public STDGBVALUE<int> LEVELDEC;
 		public Dictionary<int, CAVI> listAVI;
-        public Dictionary<int, CDirectShow> listDS;
+        //public Dictionary<int, CDirectShow> listDS;
 		public Dictionary<int, CAVIPAN> listAVIPAN;
 		public Dictionary<int, CBGA> listBGA;
 		public Dictionary<int, CBGAPAN> listBGAPAN;
@@ -1567,13 +1582,13 @@ namespace DTXMania
 					cavi.OnDeviceCreated();
 				}
 			}
-            if( this.listDS != null && CDTXMania.ConfigIni.bDirectShowMode == true)
-            {
-                foreach( CDirectShow cds in this.listDS.Values)
-                {
-                    cds.OnDeviceCreated();
-                }
-            }
+            //if( this.listDS != null && CDTXMania.ConfigIni.bDirectShowMode == true)
+            //{
+            //    foreach( CDirectShow cds in this.listDS.Values)
+            //    {
+            //        cds.OnDeviceCreated();
+            //    }
+            //}
 			if( !this.bヘッダのみ &&  this.b動画読み込み )
 			{
 				foreach( CChip chip in this.listChip )
@@ -1582,7 +1597,7 @@ namespace DTXMania
 					{
 						chip.eAVI種別 = EAVIType.Unknown;
 						chip.rAVI = null;
-                        chip.rDShow = null;
+                        //chip.rDShow = null;
 						chip.rAVIPan = null;
 						if( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 						{
@@ -1591,18 +1606,18 @@ namespace DTXMania
 							{
 								chip.eAVI種別 = EAVIType.AVIPAN;
 								chip.rAVI = this.listAVI[ cavipan.nAVI番号 ];
-                                if(CDTXMania.ConfigIni.bDirectShowMode == true)
-                                    chip.rDShow = this.listDS[ cavipan.nAVI番号 ];
+                                //if(CDTXMania.ConfigIni.bDirectShowMode == true)
+                                //    chip.rDShow = this.listDS[ cavipan.nAVI番号 ];
 								chip.rAVIPan = cavipan;
 								continue;
 							}
 						}
-						if( this.listAVI.ContainsKey( chip.nIntegerValue ) && ( this.listAVI[ chip.nIntegerValue ].avi != null ) || ( this.listDS.ContainsKey( chip.nIntegerValue ) && ( this.listDS[ chip.nIntegerValue ].dshow != null ) ) )
+						if( this.listAVI.ContainsKey( chip.nIntegerValue ) && ( this.listAVI[ chip.nIntegerValue ].avi != null ) /*|| ( this.listDS.ContainsKey( chip.nIntegerValue ) && ( this.listDS[ chip.nIntegerValue ].dshow != null ) )*/ )
 						{
 							chip.eAVI種別 = EAVIType.AVI;
 							chip.rAVI = this.listAVI[ chip.nIntegerValue ];
-                            if( CDTXMania.ConfigIni.bDirectShowMode == true )
-                                chip.rDShow = this.listDS[ chip.nIntegerValue ];
+                            //if( CDTXMania.ConfigIni.bDirectShowMode == true )
+                            //    chip.rDShow = this.listDS[ chip.nIntegerValue ];
 						}
 					}
 				}
@@ -4025,10 +4040,10 @@ namespace DTXMania
 							{
 								Trace.TraceInformation( cavi.ToString() );
 							}
-                            foreach ( CDirectShow cds in this.listDS.Values)
-                            {
-                                Trace.TraceInformation( cds.ToString());
-                            }
+                            //foreach ( CDirectShow cds in this.listDS.Values)
+                            //{
+                            //    Trace.TraceInformation( cds.ToString());
+                            //}
 							foreach ( CAVIPAN cavipan in this.listAVIPAN.Values )
 							{
 								Trace.TraceInformation( cavipan.ToString() );
@@ -4409,7 +4424,7 @@ namespace DTXMania
 			this.listBGA = new Dictionary<int, CBGA>();
 			this.listAVIPAN = new Dictionary<int, CAVIPAN>();
 			this.listAVI = new Dictionary<int, CAVI>();
-            this.listDS = new Dictionary<int, CDirectShow>();
+            //this.listDS = new Dictionary<int, CDirectShow>();
 			this.listChip = new List<CChip>();
 			base.OnActivate();
 		}
@@ -4447,14 +4462,14 @@ namespace DTXMania
 				}
 				this.listAVI = null;
 			}
-            if (this.listDS != null)
-            {
-                foreach (CDirectShow cds in this.listDS.Values)
-                {
-                    cds.Dispose();
-                }
-                this.listDS= null;
-            }
+            //if (this.listDS != null)
+            //{
+            //    foreach (CDirectShow cds in this.listDS.Values)
+            //    {
+            //        cds.Dispose();
+            //    }
+            //    this.listDS= null;
+            //}
 			if( this.listBPM != null )
 			{
 				this.listBPM.Clear();
@@ -4515,13 +4530,13 @@ namespace DTXMania
 						cavi.Dispose();
 					}
 				}
-                if (this.listDS != null)
-                {
-                    foreach (CDirectShow cds in this.listDS.Values)
-                    {
-                        cds.Dispose();
-                    }
-                }
+                //if (this.listDS != null)
+                //{
+                //    foreach (CDirectShow cds in this.listDS.Values)
+                //    {
+                //        cds.Dispose();
+                //    }
+                //}
 				base.OnManagedReleaseResources();
 			}
 		}
@@ -5182,28 +5197,29 @@ namespace DTXMania
 
 			#region [ AVIリストに {zz, avi} の組を登録する。 ]
 			//-----------------
-			var avi = new CAVI() {
-				n番号 = zz,
-				strファイル名 = strパラメータ,
-				strコメント文 = strコメント,
-			};
+			var avi = new CAVI(zz, strパラメータ, strコメント, (double)CDTXMania.ConfigIni.nPlaySpeed);
+			//{
+			//	n番号 = zz,
+			//	strファイル名 = strパラメータ,
+			//	strコメント文 = strコメント,
+			//};
 
 			if( this.listAVI.ContainsKey( zz ) )	// 既にリスト中に存在しているなら削除。後のものが有効。
 				this.listAVI.Remove( zz );
 
 			this.listAVI.Add( zz, avi );
 
-            var ds = new CDirectShow()
-            {
-                n番号 = zz,
-                strファイル名 = strパラメータ,
-                strコメント文 = strコメント,
-            };
+            //var ds = new CDirectShow()
+            //{
+            //    n番号 = zz,
+            //    strファイル名 = strパラメータ,
+            //    strコメント文 = strコメント,
+            //};
 
-            if (this.listDS.ContainsKey(zz))	// 既にリスト中に存在しているなら削除。後のものが有効。
-                this.listDS.Remove(zz);
+            //if (this.listDS.ContainsKey(zz))	// 既にリスト中に存在しているなら削除。後のものが有効。
+            //    this.listDS.Remove(zz);
 
-            this.listDS.Add(zz, ds);
+            //this.listDS.Add(zz, ds);
 			//-----------------
 			#endregion
 
