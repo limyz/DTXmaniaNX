@@ -43,6 +43,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actFOClear = new CActFIFOWhite() );
             base.listChildActivities.Add( this.actFOStageClear = new CActFIFOWhiteClear());
 			base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar());
+			base.listChildActivities.Add( this.actBackgroundAVI = new CActSelectBackgroundAVI());
 		}
 
 
