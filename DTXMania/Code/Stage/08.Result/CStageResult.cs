@@ -56,6 +56,7 @@ namespace DTXMania
 			//base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar(true) );
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFO = new CActFIFOBlack() );
+			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActSelectBackgroundAVI());
 		}
 
 		
@@ -429,13 +430,30 @@ namespace DTXMania
 				CDTXMania.SoundManager.tDiscard( this.rResultSound );
 				this.rResultSound = null;
 			}
+
+			if (this.rBackgroundVideoAVI != null)
+			{
+				this.rBackgroundVideoAVI.Dispose();
+				this.rBackgroundVideoAVI = null;
+			}
+
 			base.OnDeactivate();
 		}
 		public override void OnManagedCreateResources()
 		{
 			if( !base.bNotActivated )
 			{
-                this.ds背景動画 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\8_background.mp4"), CDTXMania.app.WindowHandle, true);
+				//
+				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
+				this.rBackgroundVideoAVI.OnDeviceCreated();
+				if (rBackgroundVideoAVI.avi != null)
+				{					
+					this.actBackgroundVideoAVI.bLoop = true;
+					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 0, -1);
+					Trace.TraceInformation("Playing Background video for Result Screen");
+				}
+
+				//this.ds背景動画 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\8_background.mp4"), CDTXMania.app.WindowHandle, true);
 				this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\8_background.jpg" ) );
                 switch (CDTXMania.stageResult.n総合ランク値)
                 {
@@ -501,7 +519,10 @@ namespace DTXMania
                 {
 					this.ctPlayNewRecord = null;
                 }
-                CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
+
+				actBackgroundVideoAVI.Stop();
+
+				//CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
 				CDTXMania.tReleaseTexture( ref this.txBackground );
 				CDTXMania.tReleaseTexture( ref this.txTopPanel );
 				CDTXMania.tReleaseTexture( ref this.txBottomPanel );
@@ -569,23 +590,29 @@ namespace DTXMania
 					base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					base.bJustStartedUpdate = false;
 				}
-                if( this.ds背景動画 != null )
-                {
-                    this.ds背景動画.t再生開始();
-                    this.ds背景動画.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
-                    this.ds背景動画.bループ再生 = true;
+
+				
+				//Draw Background video  via CActPerfAVI methods
+				this.actBackgroundVideoAVI.tUpdateAndDraw();
+
+				//if ( this.ds背景動画 != null )
+    //            {
+    //                this.ds背景動画.t再生開始();
+    //                this.ds背景動画.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
+    //                this.ds背景動画.bループ再生 = true;
                     
-                    if (this.lDshowPosition == this.lStopPosition)
-                    {
-                        this.ds背景動画.MediaSeeking.SetPositions(
-                        DsLong.FromInt64((long)(0)),
-                        AMSeekingSeekingFlags.AbsolutePositioning,
-                        0,
-                        AMSeekingSeekingFlags.NoPositioning);
-                    }
+    //                if (this.lDshowPosition == this.lStopPosition)
+    //                {
+    //                    this.ds背景動画.MediaSeeking.SetPositions(
+    //                    DsLong.FromInt64((long)(0)),
+    //                    AMSeekingSeekingFlags.AbsolutePositioning,
+    //                    0,
+    //                    AMSeekingSeekingFlags.NoPositioning);
+    //                }
                     
-                    this.ds背景動画.t現時点における最新のスナップイメージをTextureに転写する( this.txBackground );
-                }
+    //                this.ds背景動画.t現時点における最新のスナップイメージをTextureに転写する( this.txBackground );
+    //            }
+
 				this.bAnimationComplete = true;
 				if( this.ct登場用.b進行中 )
 				{
@@ -613,17 +640,11 @@ namespace DTXMania
 
 				// 描画
 
-				if( this.txBackground != null )
+				if( this.txBackground != null && this.rBackgroundVideoAVI.avi == null)
 				{
-                    if( this.ds背景動画 != null && this.ds背景動画.b上下反転 )
-                    {
-                        this.txBackground.tDraw2DUpsideDown( CDTXMania.app.Device, 0, 0 );
-                    }
-                    else
-                    {
-					    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
-                    }
+                    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
 				}
+
 				if( this.ct登場用.b進行中 && ( this.txTopPanel != null ) )
 				{
 					double num2 = ( (double) this.ct登場用.nCurrentValue ) / 100.0;
@@ -806,7 +827,7 @@ namespace DTXMania
 		private CActResultParameterPanel actParameterPanel;
 		private CActResultRank actRank;
 		private CActResultImage actResultImage;
-		private CActResultSongBar actSongBar;
+		private CActResultSongBar actSongBar;		
 		//private CActPerfProgressBar actProgressBar;
 		private bool bAnimationComplete;  // bアニメが完了
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;				// #24509 2011.3.14 yyagi
@@ -818,9 +839,12 @@ namespace DTXMania
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
 
-		private CDirectShow ds背景動画;
+		//private CDirectShow ds背景動画;
         private long lDshowPosition;
         private long lStopPosition;
+
+		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
+		private CDTX.CAVI rBackgroundVideoAVI;
 
 		#region [ #24609 リザルト画像をpngで保存する ]		// #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
 		/// <summary>

@@ -169,6 +169,7 @@
     <Compile Include="Code\04.Graphics\BitmapUtil.cs" />
     <Compile Include="Code\04.Graphics\CAero.cs" />
     <Compile Include="Code\04.Graphics\CAvi.cs" />
+    <Compile Include="Code\04.Graphics\CAviDS.cs" />
     <Compile Include="Code\04.Graphics\CTaskBar.cs" />
     <Compile Include="Code\04.Graphics\CTextureAutofold.cs" />
     <Compile Include="Code\04.Graphics\VertexFormat\ColoredVertex.cs" />

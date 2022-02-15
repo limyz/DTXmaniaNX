@@ -143,6 +143,7 @@
     <Compile Include="Code\Score,Song\CChip.cs" />
     <Compile Include="Code\Score,Song\CProgress.cs" />
     <Compile Include="Code\Score,Song\EChannel.cs" />
+    <Compile Include="Code\Stage\05.SongSelection\CActSelectBackgroundAVI.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CActTextBox.cs" />
     <Compile Include="Code\Stage\05.SongSelection\CSongSearch.cs" />
     <Compile Include="Code\Stage\07.Performance\CActPerfProgressBar.cs" />

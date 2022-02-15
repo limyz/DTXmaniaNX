@@ -81,7 +81,7 @@ namespace DTXMania
         /// <para>現在演奏中の曲のスコアに対応する背景動画。</para>
         /// <para>r現在演奏中の曲のスコア の読み込み時に、自動検索_抽出_生成される。</para>
         /// </summary>
-        public CDirectShow r現在演奏中のスコアの背景動画 = null;
+        //public CDirectShow r現在演奏中のスコアの背景動画 = null;
 		public int nSelectedSongDifficultyLevel
 		{
 			get
@@ -123,6 +123,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actInformation = new CActSelectInformation() );
 			base.listChildActivities.Add( this.actSortSongs = new CActSortSongs() );
 			base.listChildActivities.Add( this.actShowCurrentPosition = new CActSelectShowCurrentPosition() );
+			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActSelectBackgroundAVI());
 			base.listChildActivities.Add( this.actQuickConfig = new CActSelectQuickConfig() );
 
 			//
@@ -238,7 +239,13 @@ namespace DTXMania
 			Trace.Indent();
 			try
 			{
-				if( this.ftFont != null )
+				if (this.rBackgroundVideoAVI != null)
+				{
+					this.rBackgroundVideoAVI.Dispose();
+					this.rBackgroundVideoAVI = null;
+				}
+
+				if ( this.ftFont != null )
 				{
 					this.ftFont.Dispose();
 					this.ftFont = null;
@@ -270,8 +277,18 @@ namespace DTXMania
 				this.txTopPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_header panel.png" ), false );
 				this.txBottomPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\5_footer panel.png" ), false );
 				this.prvFontSearchInputNotification = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 14, FontStyle.Regular);
-				this.dsBackgroundVideo = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\5_background.mp4"), CDTXMania.app.WindowHandle, true);
+				//this.dsBackgroundVideo = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\5_background.mp4"), CDTXMania.app.WindowHandle, true);
 				this.txBPMLabel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_BPM.png"), false);
+
+				//
+				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\5_background.mp4"), "", 20.0);
+				this.rBackgroundVideoAVI.OnDeviceCreated();
+				if (rBackgroundVideoAVI.avi != null)
+				{					
+					this.actBackgroundVideoAVI.bLoop = true;
+					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 0, -1);
+					Trace.TraceInformation("選曲ムービーを有効化しました。");
+				}
 
 				base.OnManagedCreateResources();
 			}
@@ -280,8 +297,10 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                CDTXMania.t安全にDisposeする( ref this.r現在演奏中のスコアの背景動画 );
-				CDTXMania.t安全にDisposeする(ref this.dsBackgroundVideo);
+				actBackgroundVideoAVI.Stop();
+				
+				//CDTXMania.t安全にDisposeする( ref this.r現在演奏中のスコアの背景動画 );
+				//CDTXMania.t安全にDisposeする(ref this.dsBackgroundVideo);			
 
 				CDTXMania.tReleaseTexture( ref this.txBackground);
 				CDTXMania.tReleaseTexture( ref this.txTopPanel);
@@ -327,35 +346,31 @@ namespace DTXMania
 					this.tUpdateSearchNotification("");
                 }
 
+				//Draw Background video  via CActPerfAVI methods
+				this.actBackgroundVideoAVI.tUpdateAndDraw();
 				//Draw background video and image
-				if(this.dsBackgroundVideo != null)
+				//if(this.dsBackgroundVideo != null)
+    //            {
+				//	this.dsBackgroundVideo.t再生開始();
+				//	this.dsBackgroundVideo.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
+				//	this.dsBackgroundVideo.bループ再生 = true;
+
+				//	if (this.lDshowPosition == this.lStopPosition)
+				//	{
+				//		this.dsBackgroundVideo.MediaSeeking.SetPositions(
+				//		DsLong.FromInt64((long)(0)),
+				//		AMSeekingSeekingFlags.AbsolutePositioning,
+				//		0,
+				//		AMSeekingSeekingFlags.NoPositioning);
+				//	}
+
+				//	this.dsBackgroundVideo.t現時点における最新のスナップイメージをTextureに転写する(this.txBackground);
+				//}
+
+				if( this.txBackground != null && this.rBackgroundVideoAVI.avi == null)
                 {
-					this.dsBackgroundVideo.t再生開始();
-					this.dsBackgroundVideo.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
-					this.dsBackgroundVideo.bループ再生 = true;
-
-					if (this.lDshowPosition == this.lStopPosition)
-					{
-						this.dsBackgroundVideo.MediaSeeking.SetPositions(
-						DsLong.FromInt64((long)(0)),
-						AMSeekingSeekingFlags.AbsolutePositioning,
-						0,
-						AMSeekingSeekingFlags.NoPositioning);
-					}
-
-					this.dsBackgroundVideo.t現時点における最新のスナップイメージをTextureに転写する(this.txBackground);
-				}
-
-				if( this.txBackground != null )
-                {
-					if (this.dsBackgroundVideo != null && this.dsBackgroundVideo.b上下反転)
-					{
-						this.txBackground.tDraw2DUpsideDown(CDTXMania.app.Device, 0, 0);
-					}
-					else
-					{
-						this.txBackground.tDraw2D(CDTXMania.app.Device, 0, 0);						
-					}
+					this.txBackground.tDraw2D(CDTXMania.app.Device, 0, 0);
+					//Removed drawing upside down	
 				}
 
 				if (this.txBPMLabel != null)
@@ -879,6 +894,7 @@ namespace DTXMania
 		private CActSelectPerfHistoryPanel actPerHistoryPanel;  // act演奏履歴パネル
 		private CActSelectSongList actSongList;
 		private CActSelectShowCurrentPosition actShowCurrentPosition;
+		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
 
 		private CActSortSongs actSortSongs;
 		private CActSelectQuickConfig actQuickConfig;
@@ -896,7 +912,8 @@ namespace DTXMania
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
 		private CTexture txBPMLabel;
-		private CDirectShow dsBackgroundVideo; // background Video
+		//private CDirectShow dsBackgroundVideo; // background Video
+		private CDTX.CAVI rBackgroundVideoAVI;// background Video using CAVI class
 		private long lDshowPosition;
 		private long lStopPosition;
 

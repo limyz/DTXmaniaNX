@@ -450,12 +450,32 @@ namespace DTXMania
             queueMixerSound.Clear();
             queueMixerSound = null;
             //          GCSettings.LatencyMode = this.gclatencymode;
+            if (this.caviGenericBackgroundVideo != null)
+            {
+                this.caviGenericBackgroundVideo.Dispose();
+                this.caviGenericBackgroundVideo = null;
+            }
+
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
         {
             if (!base.bNotActivated)
             {
+                //
+                this.caviGenericBackgroundVideo = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\7_Movie.mp4"), "", 20.0);
+                this.caviGenericBackgroundVideo.OnDeviceCreated();
+                if (caviGenericBackgroundVideo.avi != null)
+                {
+                    Trace.TraceInformation("Generic Background video loaded successfully");
+                    this.actBackgroundAVI.bLoop = true;
+                    this.actBackgroundAVI.Start(EChannel.MovieFull, caviGenericBackgroundVideo, 0, -1);
+                    this.bGenericVideoEnabled = true;
+                }
+                else
+                {
+                    this.bGenericVideoEnabled = false;
+                }
                 this.tGenerateBackgroundTexture();
 
 				this.txWailingFrame = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlay wailing cursor.png" ) );
@@ -480,6 +500,8 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
+                this.actBackgroundAVI.Stop();
+
                 CDTXMania.tReleaseTexture(ref this.tx背景);
 
                 CDTXMania.tReleaseTexture(ref this.txWailingFrame);
@@ -718,6 +740,7 @@ namespace DTXMania
         protected CActPerfSkillMeter actGraph;
         protected CActPerfGuitarBonus actGuitarBonus;
         protected CActPerfProgressBar actProgressBar;
+        protected CActSelectBackgroundAVI actBackgroundAVI;
         protected bool bPAUSE;
         protected STDGBVALUE<bool> bMIDIUsed;
         protected STDGBVALUE<bool> bKeyboardUsed;
@@ -807,6 +830,10 @@ namespace DTXMania
 
         protected long LoopBeginMs;
         protected long LoopEndMs;
+
+        //Generic video object
+        private CDTX.CAVI caviGenericBackgroundVideo;
+        private bool bGenericVideoEnabled;
 
         // Use a property instead of a field to automatically set training mode on the graph too
         private bool _bIsTrainingMode;
@@ -2910,15 +2937,17 @@ namespace DTXMania
                                     case EAVIType.AVI:
                                         if (pChip.rAVI != null)
                                         {
-                                            this.actAVI.Start(pChip.nChannelNumber, pChip.rAVI, pChip.rDShow, 278, 355, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, pChip.nPlaybackTimeMs);
-                                        }
+                                            this.actAVI.bLoop = false;
+                                            this.actAVI.Start(pChip.nChannelNumber, pChip.rAVI, 278, 355, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, pChip.nPlaybackTimeMs);
+                                        }                                        
                                         break;
 
                                     case EAVIType.AVIPAN:
                                         if (pChip.rAVIPan != null)
                                         {
-                                            this.actAVI.Start(pChip.nChannelNumber, pChip.rAVI, pChip.rDShow, pChip.rAVIPan.sz開始サイズ.Width, pChip.rAVIPan.sz開始サイズ.Height, pChip.rAVIPan.sz終了サイズ.Width, pChip.rAVIPan.sz終了サイズ.Height, pChip.rAVIPan.pt動画側開始位置.X, pChip.rAVIPan.pt動画側開始位置.Y, pChip.rAVIPan.pt動画側終了位置.X, pChip.rAVIPan.pt動画側終了位置.Y, pChip.rAVIPan.pt表示側開始位置.X, pChip.rAVIPan.pt表示側開始位置.Y, pChip.rAVIPan.pt表示側終了位置.X, pChip.rAVIPan.pt表示側終了位置.Y, pChip.n総移動時間, pChip.nPlaybackTimeMs);
-                                        }
+                                            this.actAVI.bLoop = false;
+                                            this.actAVI.Start(pChip.nChannelNumber, pChip.rAVI, pChip.rAVIPan.sz開始サイズ.Width, pChip.rAVIPan.sz開始サイズ.Height, pChip.rAVIPan.sz終了サイズ.Width, pChip.rAVIPan.sz終了サイズ.Height, pChip.rAVIPan.pt動画側開始位置.X, pChip.rAVIPan.pt動画側開始位置.Y, pChip.rAVIPan.pt動画側終了位置.X, pChip.rAVIPan.pt動画側終了位置.Y, pChip.rAVIPan.pt表示側開始位置.X, pChip.rAVIPan.pt表示側開始位置.Y, pChip.rAVIPan.pt表示側終了位置.X, pChip.rAVIPan.pt表示側終了位置.Y, pChip.n総移動時間, pChip.nPlaybackTimeMs);
+                                        }                                        
                                         break;
                                 }
                             }
@@ -4681,8 +4710,11 @@ namespace DTXMania
         }
         protected void tUpdateAndDraw_Background()
         {
-
-            if (this.tx背景 != null)
+            //Draw either Background image or video
+            if (this.bGenericVideoEnabled) {
+                this.actBackgroundAVI.tUpdateAndDraw();
+            }
+            else if (this.tx背景 != null)
             {
                 this.tx背景.tDraw2D(CDTXMania.app.Device, 0, 0);
             }

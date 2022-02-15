@@ -31,7 +31,7 @@ namespace DTXMania
 		{
 			get
 			{
-				return (this.avi != null);
+				return (this.rAVI != null);
 			}
 		}
 
@@ -50,10 +50,10 @@ namespace DTXMania
 		{
 			this.ct登場アニメ用 = null;
 			this.ct遅延表示 = null;
-			if( this.avi != null )
+			if( this.rAVI != null )
 			{
-				this.avi.Dispose();
-				this.avi = null;
+				this.rAVI.Dispose();
+				this.rAVI = null;
 			}
 			base.OnDeactivate();
 		}
@@ -114,21 +114,21 @@ namespace DTXMania
 						this.b新しいプレビューファイルを読み込んだ = true;
 					}
 				}
-				else if( ( ( this.avi != null ) && ( this.sfAVI画像 != null ) ) && ( this.nAVI再生開始時刻 != -1 ) )
-				{
-					int time = (int) ( ( CDTXMania.Timer.nCurrentTime - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
-					int frameNoFromTime = this.avi.GetFrameNoFromTime( time );
-					if( frameNoFromTime >= this.avi.GetMaxFrameCount() )
-					{
-						this.nAVI再生開始時刻 = CDTXMania.Timer.nCurrentTime;
-					}
-					else if( ( this.n前回描画したフレーム番号 != frameNoFromTime ) && !this.b動画フレームを作成した )
-					{
-						this.b動画フレームを作成した = true;
-						this.n前回描画したフレーム番号 = frameNoFromTime;
-						this.pAVIBmp = this.avi.GetFramePtr( frameNoFromTime );
-					}
-				}
+				//else if( ( ( this.rAVI != null ) && ( this.sfAVI画像 != null ) ) && ( this.nAVI再生開始時刻 != -1 ) )
+				//{
+				//	int time = (int) ( ( CDTXMania.Timer.nCurrentTime - this.nAVI再生開始時刻 ) * ( ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0 ) );
+				//	int frameNoFromTime = this.rAVI.GetFrameNoFromTime( time );
+				//	if( frameNoFromTime >= this.rAVI.GetMaxFrameCount() )
+				//	{
+				//		this.nAVI再生開始時刻 = CDTXMania.Timer.nCurrentTime;
+				//	}
+				//	else if( ( this.n前回描画したフレーム番号 != frameNoFromTime ) && !this.b動画フレームを作成した )
+				//	{
+				//		this.b動画フレームを作成した = true;
+				//		this.n前回描画したフレーム番号 = frameNoFromTime;
+				//		this.pAVIBmp = this.rAVI.GetFramePtr( frameNoFromTime );
+				//	}
+				//}
                 else
                 {
                     if( this.b新しいプレビューファイルをまだ読み込んでいない )
@@ -151,7 +151,7 @@ namespace DTXMania
 
 		#region [ private ]
 		//-----------------
-		private CAvi avi;
+		private CDTX.CAVI rAVI;
 		private bool b動画フレームを作成した;
 		private CCounter ct遅延表示;
 		private CCounter ct登場アニメ用;
@@ -215,10 +215,10 @@ namespace DTXMania
 		}
 		private void tプレビュー画像_動画の変更()
 		{
-			if( this.avi != null )
+			if( this.rAVI != null )
 			{
-				this.avi.Dispose();
-				this.avi = null;
+				this.rAVI.Dispose();
+				this.rAVI = null;
 			}
 			this.pAVIBmp = IntPtr.Zero;
 			this.nAVI再生開始時刻 = -1;
@@ -279,10 +279,10 @@ namespace DTXMania
 				{
 					return true;
 				}
-				if( this.avi != null )
+				if( this.rAVI != null )
 				{
-					this.avi.Dispose();
-					this.avi = null;
+					this.rAVI.Dispose();
+					this.rAVI = null;
 				}
 				this.str現在のファイル名 = filename;
 				if( !File.Exists( this.str現在のファイル名 ) )
@@ -292,7 +292,10 @@ namespace DTXMania
 				}
 				try
 				{
-					this.avi = new CAvi( filename );
+					CDTX.CAVI cAVI = new CDTX.CAVI(0, filename, "", (int)CDTXMania.ConfigIni.nPlaySpeed);
+					cAVI.OnDeviceCreated();
+
+					this.rAVI = cAVI;
 					this.nAVI再生開始時刻 = CDTXMania.Timer.nCurrentTime;
 					this.n前回描画したフレーム番号 = -1;
 					this.b動画フレームを作成した = false;
@@ -302,7 +305,7 @@ namespace DTXMania
 				catch
 				{
 					Trace.TraceError( "動画の生成に失敗しました。({0})", new object[] { filename } );
-					this.avi = null;
+					this.rAVI = null;
 					this.nAVI再生開始時刻 = -1;
 				}
 			}
@@ -501,16 +504,16 @@ namespace DTXMania
 						BitmapUtil.BITMAPINFOHEADER* pBITMAPINFOHEADER = (BitmapUtil.BITMAPINFOHEADER*) this.pAVIBmp.ToPointer();
 						if( pBITMAPINFOHEADER->biBitCount == 0x18 )
 						{
-							switch( num5 )
-							{
-								case 2:
-									this.avi.tBitmap24ToGraphicsStreamR5G6B5( pBITMAPINFOHEADER, dataPointer, this.sfAVI画像.Description.Width, this.sfAVI画像.Description.Height );
-									break;
+							//switch( num5 )
+							//{
+							//	case 2:
+							//		this.rAVI.tBitmap24ToGraphicsStreamR5G6B5( pBITMAPINFOHEADER, dataPointer, this.sfAVI画像.Description.Width, this.sfAVI画像.Description.Height );
+							//		break;
 
-								case 4:
-									this.avi.tBitmap24ToGraphicsStreamX8R8G8B8( pBITMAPINFOHEADER, dataPointer, this.sfAVI画像.Description.Width, this.sfAVI画像.Description.Height );
-									break;
-							}
+							//	case 4:
+							//		this.rAVI.tBitmap24ToGraphicsStreamX8R8G8B8( pBITMAPINFOHEADER, dataPointer, this.sfAVI画像.Description.Width, this.sfAVI画像.Description.Height );
+							//		break;
+							//}
 						}
 						this.sfAVI画像.UnlockRectangle();
 						this.b動画フレームを作成した = false;

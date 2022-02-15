@@ -27,7 +27,7 @@ namespace DTXMania
 		public int nLag;                // 2011.2.1 yyagi
 		public int nCurrentComboForGhost; // 2015.9.29 chnmr0 fork
 		internal CDTX.CAVI rAVI;
-		internal CDTX.CDirectShow rDShow;
+		//internal CDTX.CDirectShow rDShow;
 		internal CDTX.CAVIPAN rAVIPan;
 		internal CDTX.CBGA rBGA;
 		internal CDTX.CBGAPAN rBGAPan;
@@ -430,9 +430,10 @@ namespace DTXMania
 			{
 				if (this.rAVI != null && this.rAVI.avi != null)
 				{
-					int dwRate = (int)this.rAVI.avi.dwレート;
-					int dwScale = (int)this.rAVI.avi.dwスケール;
-					nDuration = (int)(1000.0f * dwScale / dwRate * this.rAVI.avi.GetMaxFrameCount());
+					nDuration = this.rAVI.avi.GetDuration();
+					//int dwRate = (int)this.rAVI.avi.dwレート;
+					//int dwScale = (int)this.rAVI.avi.dwスケール;
+					//nDuration = (int)(1000.0f * dwScale / dwRate * this.rAVI.avi.GetMaxFrameCount());
 				}
 			}
 

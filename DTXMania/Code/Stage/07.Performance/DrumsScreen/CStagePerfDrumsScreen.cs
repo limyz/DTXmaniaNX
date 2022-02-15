@@ -47,12 +47,13 @@ namespace DTXMania
             base.listChildActivities.Add( this.actFillin = new CActPerfDrumsFillingEffect() );
             base.listChildActivities.Add( this.actLVFont = new CActLVLNFont() );
             base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar());
-//          base.listChildActivities.Add( this.actChipFireGB = new CActPerfDrumsChipFireGB());
-//			base.listChildActivities.Add( this.actLaneFlushGB = new CActPerfDrumsLaneFlushGB() );
-//			base.listChildActivities.Add( this.actRGB = new CActPerfDrumsRGB() );
-//			base.listChildActivities.Add( this.actWailingBonus = new CActPerfDrumsWailingBonus() );
-//          base.listChildActivities.Add( this.actStageCleared = new CAct演奏ステージクリア());
-		}
+            base.listChildActivities.Add(this.actBackgroundAVI = new CActSelectBackgroundAVI());
+            //          base.listChildActivities.Add( this.actChipFireGB = new CActPerfDrumsChipFireGB());
+            //			base.listChildActivities.Add( this.actLaneFlushGB = new CActPerfDrumsLaneFlushGB() );
+            //			base.listChildActivities.Add( this.actRGB = new CActPerfDrumsRGB() );
+            //			base.listChildActivities.Add( this.actWailingBonus = new CActPerfDrumsWailingBonus() );
+            //          base.listChildActivities.Add( this.actStageCleared = new CAct演奏ステージクリア());
+        }
 
 
 		// Methods
