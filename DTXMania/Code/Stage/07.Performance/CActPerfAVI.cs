@@ -422,9 +422,7 @@ namespace DTXMania
             base.OnActivate();
         }
         public override void OnDeactivate()
-        {
-            //if (this.dsBGV != null)
-            //    this.dsBGV.Dispose();
+        {            
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
@@ -471,7 +469,7 @@ namespace DTXMania
         public override void OnManagedReleaseResources()
         {
             if (!base.bNotActivated)
-            {
+            {                
                 //特殊テクスチャ 3枚
                 if (this.tx描画用 != null)
                 {
@@ -1023,7 +1021,7 @@ namespace DTXMania
                         //}
                         if( !this.bUseMRenderer && this.bUseCAviDS )
                         {
-                            if( this.rAVI.avi != null )
+                            if(this.rAVI != null && this.rAVI.avi != null )
                             {
                                 this.rAVI.avi.Pause();
                             }
@@ -1039,7 +1037,7 @@ namespace DTXMania
                         //}
                         if( !this.bUseMRenderer && this.bUseCAviDS )
                         {
-                            if( this.rAVI.avi != null )
+                            if(this.rAVI != null && this.rAVI.avi != null )
                             {
                                 this.rAVI.avi.Run();
                             }
@@ -1128,6 +1126,8 @@ namespace DTXMania
         public IntPtr pBmp;
         private int position;
         private int position2;
+        //NOTE: This is a soft reference to externally initialized object
+        //Do not call Dispose() for rAVI
         private CDTX.CAVI rAVI;
         public bool bIsPreviewMovie { get; set; }
         public bool bHasBGA { get; set; }

@@ -18,7 +18,7 @@ namespace DTXMania
         public void Start(EChannel nチャンネル番号, CDTX.CAVI rAVI, int n総移動時間ms, int n移動開始時刻ms)
         {
             //2016.01.21 kairera0467 VfW時代のコードを除去+大改造
-            Trace.TraceInformation("CActPerfAVI: Start(): " + rAVI.strファイル名);
+            Trace.TraceInformation("CActSelectBackgroundAVI: Start(): " + rAVI.strファイル名);
 
             this.rAVI = rAVI;
             #region[ アスペクト比からどっちを使うか判別 ]
@@ -237,6 +237,8 @@ namespace DTXMania
         //DTXNX is 1280 by 720
         private readonly float fullScreenHeightPx = 1280f;
         private readonly float fullScreenWidthPx = 720f;
+        //NOTE: This is a soft reference to externally initialized object
+        //Do not call Dispose() for rAVI
         private CDTX.CAVI rAVI;
         
         #endregion
