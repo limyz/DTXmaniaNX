@@ -123,7 +123,7 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actInformation = new CActSelectInformation() );
 			base.listChildActivities.Add( this.actSortSongs = new CActSortSongs() );
 			base.listChildActivities.Add( this.actShowCurrentPosition = new CActSelectShowCurrentPosition() );
-			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActPerfAVI(false));
+			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActSelectBackgroundAVI());
 			base.listChildActivities.Add( this.actQuickConfig = new CActSelectQuickConfig() );
 
 			//
@@ -284,10 +284,9 @@ namespace DTXMania
 				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\5_background.mp4"), "", 20.0);
 				this.rBackgroundVideoAVI.OnDeviceCreated();
 				if (rBackgroundVideoAVI.avi != null)
-				{
-					this.actBackgroundVideoAVI.bFullScreenMovie = true;
+				{					
 					this.actBackgroundVideoAVI.bLoop = true;
-					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 1280, 720, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, true);
+					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 0, -1);
 					Trace.TraceInformation("選曲ムービーを有効化しました。");
 				}
 
@@ -348,7 +347,7 @@ namespace DTXMania
                 }
 
 				//Draw Background video  via CActPerfAVI methods
-				this.actBackgroundVideoAVI.tUpdateAndDraw(0,0);
+				this.actBackgroundVideoAVI.tUpdateAndDraw();
 				//Draw background video and image
 				//if(this.dsBackgroundVideo != null)
     //            {
@@ -895,7 +894,7 @@ namespace DTXMania
 		private CActSelectPerfHistoryPanel actPerHistoryPanel;  // act演奏履歴パネル
 		private CActSelectSongList actSongList;
 		private CActSelectShowCurrentPosition actShowCurrentPosition;
-		private readonly CActPerfAVI actBackgroundVideoAVI;
+		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
 
 		private CActSortSongs actSortSongs;
 		private CActSelectQuickConfig actQuickConfig;

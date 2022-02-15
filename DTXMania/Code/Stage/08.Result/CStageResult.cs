@@ -56,7 +56,7 @@ namespace DTXMania
 			//base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar(true) );
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFO = new CActFIFOBlack() );
-			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActPerfAVI(false));
+			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActSelectBackgroundAVI());
 		}
 
 		
@@ -444,13 +444,12 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
 				//
-				this.rBackgroundVideoAVI = new CDTX.CAVI(1300, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
+				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
 				this.rBackgroundVideoAVI.OnDeviceCreated();
-				if (CDTXMania.rCurrentStage == CDTXMania.stageResult /*&& !bManagedリソースの解放通知*/ && rBackgroundVideoAVI.avi != null)
-				{
-					this.actBackgroundVideoAVI.bFullScreenMovie = true;
+				if (rBackgroundVideoAVI.avi != null)
+				{					
 					this.actBackgroundVideoAVI.bLoop = true;
-					this.actBackgroundVideoAVI.Start(EChannel.Movie, rBackgroundVideoAVI, 1920, 1080, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, true);
+					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 0, -1);
 					Trace.TraceInformation("Playing Background video for Result Screen");
 				}
 
@@ -594,7 +593,7 @@ namespace DTXMania
 
 				
 				//Draw Background video  via CActPerfAVI methods
-				this.actBackgroundVideoAVI.tUpdateAndDraw(0, 0);
+				this.actBackgroundVideoAVI.tUpdateAndDraw();
 
 				//if ( this.ds背景動画 != null )
     //            {
@@ -641,17 +640,11 @@ namespace DTXMania
 
 				// 描画
 
-				if( this.txBackground != null )
+				if( this.txBackground != null && this.rBackgroundVideoAVI.avi == null)
 				{
-                    //if( this.ds背景動画 != null && this.ds背景動画.b上下反転 )
-                    //{
-                    //    this.txBackground.tDraw2DUpsideDown( CDTXMania.app.Device, 0, 0 );
-                    //}
-                    //else
-                    {
-					    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
-                    }
+                    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
 				}
+
 				if( this.ct登場用.b進行中 && ( this.txTopPanel != null ) )
 				{
 					double num2 = ( (double) this.ct登場用.nCurrentValue ) / 100.0;
@@ -850,7 +843,7 @@ namespace DTXMania
         private long lDshowPosition;
         private long lStopPosition;
 
-		private readonly CActPerfAVI actBackgroundVideoAVI;
+		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
 		private CDTX.CAVI rBackgroundVideoAVI;
 
 		#region [ #24609 リザルト画像をpngで保存する ]		// #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
