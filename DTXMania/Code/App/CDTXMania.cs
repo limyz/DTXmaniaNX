@@ -2064,8 +2064,16 @@ for (int i = 0; i < 3; i++) {
                         CDTXMania.ConfigIni.bGuitarEnabled = false;
                     }
 
+                    //Disable Movie and FullScreen mode
                     CDTXMania.ConfigIni.bFullScreenMode = false;
                     CDTXMania.ConfigIni.nMovieMode = 2;
+
+                    //Set windows size to 640 x 360 and set its position to a fixed location
+                    CDTXMania.ConfigIni.nウインドウwidth = 640;
+                    CDTXMania.ConfigIni.nウインドウheight = 360;
+                    CDTXMania.ConfigIni.n初期ウィンドウ開始位置X = 5;
+                    CDTXMania.ConfigIni.n初期ウィンドウ開始位置Y = 100;
+                    
                     /*CDTXMania.ConfigIni.rcWindow_backup = CDTXMania.ConfigIni.rcWindow;       // #36612 2016.9.12 yyagi
                     CDTXMania.ConfigIni.rcWindow.W = CDTXMania.ConfigIni.rcViewerWindow.W;
                     CDTXMania.ConfigIni.rcWindow.H = CDTXMania.ConfigIni.rcViewerWindow.H;
