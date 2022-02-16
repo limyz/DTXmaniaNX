@@ -252,6 +252,18 @@ namespace DTXMania
                     }
                 }
 
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Cancel
+				{
+					get
+					{
+						return this.padCancel;
+					}
+					set
+					{
+						this.padCancel = value;
+					}
+				}
+
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] Capture
 				{
 					get
@@ -382,6 +394,9 @@ namespace DTXMania
                             case (int) EKeyConfigPad.LBD:
                                 return this.padLBD;
 
+							case (int) EKeyConfigPad.Cancel:
+								return this.padCancel;
+
 							case (int) EKeyConfigPad.Capture:
 								return this.padCapture;
 
@@ -460,6 +475,10 @@ namespace DTXMania
 								this.padLBD = value;
 								return;
 
+							case (int) EKeyConfigPad.Cancel:
+								this.padCancel = value;
+								return;
+
 							case (int) EKeyConfigPad.Capture:
 								this.padCapture = value;
 								return;
@@ -510,6 +529,7 @@ namespace DTXMania
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSD_G;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLP;
                 private CConfigIni.CKeyAssign.STKEYASSIGN[] padLBD;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCancel; 
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCapture;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopCreate;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopDelete;
@@ -2392,6 +2412,9 @@ namespace DTXMania
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Guitar.Decide );
 			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Guitar.Cancel);
+			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			#region [ BassKeyAssign ]
@@ -2420,6 +2443,9 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Bass.Decide );
+			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Bass.Cancel);
 			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
@@ -3781,6 +3807,10 @@ namespace DTXMania
 											{
 												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Decide );
 											}
+											else if (str3.Equals("Cancel"))
+											{
+												this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Cancel);
+											}
 											continue;
 										}
 									//-----------------------------
@@ -3820,6 +3850,10 @@ namespace DTXMania
 										else if( str3.Equals( "Decide" ) )
 										{
 											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Decide );
+										}
+										else if (str3.Equals("Cancel"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.Bass.Cancel);
 										}
 										continue;
 									//-----------------------------
@@ -4116,6 +4150,7 @@ P=K058
 Pick=K0115,K046,J06
 Wail=K0116
 Decide=K060
+Cancel=K0115
 
 [BassKeyAssign]
 
@@ -4127,6 +4162,7 @@ P=K094
 Pick=K0103,K0100,J08
 Wail=K089
 Decide=K096
+Cancel=K0103
 
 [SystemKeyAssign]
 Capture=K065

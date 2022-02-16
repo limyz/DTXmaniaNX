@@ -1612,6 +1612,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Decide);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Cancel);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarHelp)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Help);
@@ -1649,6 +1653,10 @@ namespace DTXMania
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassDecide)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Decide);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Cancel);
             }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassHelp)
             {
@@ -2086,6 +2094,11 @@ namespace DTXMania
                 "Guitar key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignGuitarDecide);
 
+            this.iKeyAssignGuitarCancel = new CItemBase("Cancel",
+                "ギターのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Guitar key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignGuitarCancel);
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.KeyAssignGuitar;
@@ -2141,6 +2154,11 @@ namespace DTXMania
                 "ベースのキー設定：\n決定ボタンへのキーの割り当てを設\n定します。",
                 "Bass key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignBassDecide);
+
+            this.iKeyAssignBassCancel = new CItemBase("Cancel",
+                "ベースのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Bass key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignBassCancel);
 
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
@@ -2762,6 +2780,7 @@ namespace DTXMania
         private CItemBase iKeyAssignBassPick;
         private CItemBase iKeyAssignBassWail;
         private CItemBase iKeyAssignBassDecide;
+        private CItemBase iKeyAssignBassCancel;
         private CItemBase iKeyAssignBassReturnToMenu;
 
         public CItemBase iKeyAssignDrumsBD;
@@ -2786,6 +2805,7 @@ namespace DTXMania
         private CItemBase iKeyAssignGuitarPick;
         private CItemBase iKeyAssignGuitarWail;
         private CItemBase iKeyAssignGuitarDecide;
+        private CItemBase iKeyAssignGuitarCancel;
         private CItemBase iKeyAssignGuitarReturnToMenu;
 
         private CItemToggle iLogOutputLog;

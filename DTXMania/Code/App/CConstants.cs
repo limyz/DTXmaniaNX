@@ -78,6 +78,7 @@ namespace DTXMania
 		//HP		= 10,	// #27029 2012.1.4 from
 		LP      = 10,
         LBD     = 11,
+		Cancel  = 12,   // fisyher: New Cancel/Go Back Key
         MAX,			// 門番用として定義
 		UNKNOWN = 99
 	}
@@ -105,6 +106,7 @@ namespace DTXMania
 		//HP		= EPad.HP,		// #27029 2012.1.4 from
         LP      = EPad.LP,
         LBD     = EPad.LBD,
+		Cancel  = EPad.Cancel,     // fisyher: New Cancel/Go Back Key
 		Capture,
 		LoopCreate,
 		LoopDelete,
@@ -141,7 +143,8 @@ namespace DTXMania
         P       = 512,
         LP      = 1024,
         LBD     = 2048,
-		UNKNOWN = 4096
+		Cancel  = 4096,
+		UNKNOWN = 8192
 	}
 	public enum ERandomMode
 	{
