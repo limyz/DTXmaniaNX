@@ -583,6 +583,7 @@ namespace DTXMania
             #region [ DTXCreator/DTX2WAVからの指示 ]
             if (this.Window.IsReceivedMessage)  // ウインドウメッセージで、
             {
+                //Received message from DTXCreator
                 string strMes = this.Window.strMessage;
                 this.Window.IsReceivedMessage = false;
                 if (strMes != null)
@@ -592,6 +593,9 @@ namespace DTXMania
 
                     if (DTXVmode.Enabled)
                     {
+                        //Bring DTXViewer to the front whenever a DTXCreator Play DTX button is triggered
+                        this.Window.Activate();
+
                         bCompactMode = true;
                         strCompactModeFile = DTXVmode.filename;
                         /*if (DTXVmode.Command == CDTXVmode.ECommand.Preview)
