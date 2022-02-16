@@ -736,7 +736,7 @@ namespace DTXMania
 					}
 
 					#region [Test text field]
-					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Backspace))
+					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.Search))
 					{
 						CDTXMania.Skin.soundDecide.tPlay();
 						this.actTextBox.t表示();
