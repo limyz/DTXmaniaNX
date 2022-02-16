@@ -252,6 +252,18 @@ namespace DTXMania
                     }
                 }
 
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Cancel
+				{
+					get
+					{
+						return this.padCancel;
+					}
+					set
+					{
+						this.padCancel = value;
+					}
+				}
+
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] Capture
 				{
 					get
@@ -261,6 +273,18 @@ namespace DTXMania
 					set
 					{
 						this.padCapture = value;
+					}
+				}
+
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Search
+				{
+					get
+					{
+						return this.padSearch;
+					}
+					set
+					{
+						this.padSearch = value;
 					}
 				}
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] LoopCreate
@@ -382,8 +406,14 @@ namespace DTXMania
                             case (int) EKeyConfigPad.LBD:
                                 return this.padLBD;
 
+							case (int) EKeyConfigPad.Cancel:
+								return this.padCancel;
+
 							case (int) EKeyConfigPad.Capture:
 								return this.padCapture;
+
+							case (int)EKeyConfigPad.Search:
+								return this.padSearch;
 
 							case (int)EKeyConfigPad.LoopCreate:
 								return this.padLoopCreate;
@@ -460,8 +490,16 @@ namespace DTXMania
 								this.padLBD = value;
 								return;
 
+							case (int) EKeyConfigPad.Cancel:
+								this.padCancel = value;
+								return;
+
 							case (int) EKeyConfigPad.Capture:
 								this.padCapture = value;
+								return;
+
+							case (int)EKeyConfigPad.Search:
+								this.padSearch = value;
 								return;
 
 							case (int)EKeyConfigPad.LoopCreate:
@@ -510,7 +548,9 @@ namespace DTXMania
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSD_G;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLP;
                 private CConfigIni.CKeyAssign.STKEYASSIGN[] padLBD;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCancel; 
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCapture;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSearch;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopCreate;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopDelete;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipForward;
@@ -2392,6 +2432,9 @@ namespace DTXMania
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Guitar.Decide );
 			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Guitar.Cancel);
+			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			#region [ BassKeyAssign ]
@@ -2421,6 +2464,9 @@ namespace DTXMania
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Bass.Decide );
 			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Bass.Cancel);
+			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			#region [ SystemkeyAssign ]
@@ -2428,6 +2474,9 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.Write( "Capture=" );
 			this.tWriteKey( sw, this.KeyAssign.System.Capture );
+			sw.WriteLine();
+			sw.Write("Search=");
+			this.tWriteKey(sw, this.KeyAssign.System.Search);
 			sw.WriteLine();
 			sw.Write( "Help=" );
 			this.tWriteKey( sw, this.KeyAssign.Guitar.Help );
@@ -3781,6 +3830,10 @@ namespace DTXMania
 											{
 												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Decide );
 											}
+											else if (str3.Equals("Cancel"))
+											{
+												this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Cancel);
+											}
 											continue;
 										}
 									//-----------------------------
@@ -3821,6 +3874,10 @@ namespace DTXMania
 										{
 											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Decide );
 										}
+										else if (str3.Equals("Cancel"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.Bass.Cancel);
+										}
 										continue;
 									//-----------------------------
 									#endregion
@@ -3832,7 +3889,11 @@ namespace DTXMania
 										{
 											this.tReadAndSetSkey( str4, this.KeyAssign.System.Capture );
 										}
-                                        else if (str3.Equals("Help"))
+										else if (str3.Equals("Search"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.Search);
+										}
+										else if (str3.Equals("Help"))
                                         {
                                             this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Help);
                                         }
@@ -4116,6 +4177,7 @@ P=K058
 Pick=K0115,K046,J06
 Wail=K0116
 Decide=K060
+Cancel=K0115
 
 [BassKeyAssign]
 
@@ -4127,12 +4189,20 @@ P=K094
 Pick=K0103,K0100,J08
 Wail=K089
 Decide=K096
+Cancel=K0103
 
 [SystemKeyAssign]
 Capture=K065
+Search=K042
 Help=K064
 Pause=K0110
-Restart=K042
+LoopCreate=
+LoopDelete=
+SkipForward=
+SkipBackward=
+IncreasePlaySpeed=
+DecreasePlaySpeed=
+Restart=K052
 ";
 			tReadFromString( strDefaultKeyAssign );
 		}

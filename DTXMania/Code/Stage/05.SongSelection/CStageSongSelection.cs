@@ -462,7 +462,7 @@ namespace DTXMania
 					if ( !this.actSortSongs.bIsActivePopupMenu && !this.actQuickConfig.bIsActivePopupMenu && !CDTXMania.app.bテキスト入力中)
 					{
                         #region [ ESC ]
-                        if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)) && ((this.actSongList.rSelectedSong != null) && (this.actSongList.rSelectedSong.r親ノード == null))))
+                        if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Escape) || ((CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Cancel)) && ((this.actSongList.rSelectedSong != null) && (this.actSongList.rSelectedSong.r親ノード == null))))
                         {	// [ESC]
                             CDTXMania.Skin.soundCancel.tPlay();
                             this.eReturnValueWhenFadeOutCompleted = EReturnValue.ReturnToTitle;
@@ -568,7 +568,7 @@ namespace DTXMania
                             }
                             #endregion
                             #region [ Upstairs ]
-                            if (((this.actSongList.rSelectedSong != null) && (this.actSongList.rSelectedSong.r親ノード != null)) && (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Pick)))
+                            if (((this.actSongList.rSelectedSong != null) && (this.actSongList.rSelectedSong.r親ノード != null)) && (CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC) || CDTXMania.Pad.bPressedGB(EPad.Cancel)))
                             {
                                 this.actPresound.tサウンド停止();
                                 CDTXMania.Skin.soundCancel.tPlay();
@@ -736,7 +736,7 @@ namespace DTXMania
 					}
 
 					#region [Test text field]
-					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Backspace))
+					if (!CDTXMania.app.bテキスト入力中 && CDTXMania.Pad.bPressed(EKeyConfigPart.SYSTEM, EKeyConfigPad.Search))
 					{
 						CDTXMania.Skin.soundDecide.tPlay();
 						this.actTextBox.t表示();

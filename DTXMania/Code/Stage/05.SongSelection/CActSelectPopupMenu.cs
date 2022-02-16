@@ -256,7 +256,7 @@ namespace DTXMania
                     #region [ キー入力: キャンセル ]
                     else if (CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Escape)
                         || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)
-                        || CDTXMania.Pad.bPressedGB(EPad.Pick))
+                        || CDTXMania.Pad.bPressedGB(EPad.Cancel))
                     {	// キャンセル
                         CDTXMania.Skin.soundCancel.tPlay();
                         tCancel();

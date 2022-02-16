@@ -1612,6 +1612,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Decide);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Cancel);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarHelp)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Help);
@@ -1650,6 +1654,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Decide);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Cancel);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassHelp)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Help);
@@ -1657,6 +1665,10 @@ namespace DTXMania
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemCapture)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemSearch)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Search);
             }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemLoopCreate)
             {
@@ -1909,6 +1921,11 @@ namespace DTXMania
                 "Capture key assign:\nTo assign key for screen capture.\n (You can use keyboard only. You can't\nuse pads to capture screenshot.");
             this.listItems.Add(this.iKeyAssignSystemCapture);
 
+            this.iKeyAssignSystemSearch = new CItemBase("Search",
+                "サーチボタンのキー設定：\nサーチボタンへのキーの割り当\nてを設定します。",
+                "Search button key assign:\nTo assign key for Search Button.");
+            this.listItems.Add(this.iKeyAssignSystemSearch);
+
             this.iKeyAssignGuitarHelp = new CItemBase("Help",
                 "ヘルプボタンのキー設定：\nヘルプボタンへのキーの割り当\nてを設定します。",
                 "Help button key assign:\nTo assign key/pads for Help button.");
@@ -2086,6 +2103,11 @@ namespace DTXMania
                 "Guitar key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignGuitarDecide);
 
+            this.iKeyAssignGuitarCancel = new CItemBase("Cancel",
+                "ギターのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Guitar key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignGuitarCancel);
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.KeyAssignGuitar;
@@ -2141,6 +2163,11 @@ namespace DTXMania
                 "ベースのキー設定：\n決定ボタンへのキーの割り当てを設\n定します。",
                 "Bass key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignBassDecide);
+
+            this.iKeyAssignBassCancel = new CItemBase("Cancel",
+                "ベースのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Bass key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignBassCancel);
 
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
@@ -2742,6 +2769,7 @@ namespace DTXMania
         private CCounter ctTriangleArrowAnimation;
         private EMenuType eMenuType;
         private CItemBase iKeyAssignSystemCapture;			// #24609
+        private CItemBase iKeyAssignSystemSearch;
         private CItemBase iKeyAssignSystemLoopCreate;
         private CItemBase iKeyAssignSystemLoopDelete;
         private CItemBase iKeyAssignSystemSkipForward;
@@ -2762,6 +2790,7 @@ namespace DTXMania
         private CItemBase iKeyAssignBassPick;
         private CItemBase iKeyAssignBassWail;
         private CItemBase iKeyAssignBassDecide;
+        private CItemBase iKeyAssignBassCancel;
         private CItemBase iKeyAssignBassReturnToMenu;
 
         public CItemBase iKeyAssignDrumsBD;
@@ -2786,6 +2815,7 @@ namespace DTXMania
         private CItemBase iKeyAssignGuitarPick;
         private CItemBase iKeyAssignGuitarWail;
         private CItemBase iKeyAssignGuitarDecide;
+        private CItemBase iKeyAssignGuitarCancel;
         private CItemBase iKeyAssignGuitarReturnToMenu;
 
         private CItemToggle iLogOutputLog;
