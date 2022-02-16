@@ -1666,6 +1666,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemSearch)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Search);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemLoopCreate)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.LoopCreate);
@@ -1916,6 +1920,11 @@ namespace DTXMania
                 "キャプチャキー設定：\n画面キャプチャのキーの割り当てを設\n定します。",
                 "Capture key assign:\nTo assign key for screen capture.\n (You can use keyboard only. You can't\nuse pads to capture screenshot.");
             this.listItems.Add(this.iKeyAssignSystemCapture);
+
+            this.iKeyAssignSystemSearch = new CItemBase("Search",
+                "サーチボタンのキー設定：\nサーチボタンへのキーの割り当\nてを設定します。",
+                "Search button key assign:\nTo assign key for Search Button.");
+            this.listItems.Add(this.iKeyAssignSystemSearch);
 
             this.iKeyAssignGuitarHelp = new CItemBase("Help",
                 "ヘルプボタンのキー設定：\nヘルプボタンへのキーの割り当\nてを設定します。",
@@ -2760,6 +2769,7 @@ namespace DTXMania
         private CCounter ctTriangleArrowAnimation;
         private EMenuType eMenuType;
         private CItemBase iKeyAssignSystemCapture;			// #24609
+        private CItemBase iKeyAssignSystemSearch;
         private CItemBase iKeyAssignSystemLoopCreate;
         private CItemBase iKeyAssignSystemLoopDelete;
         private CItemBase iKeyAssignSystemSkipForward;

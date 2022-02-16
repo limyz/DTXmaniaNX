@@ -107,7 +107,9 @@ namespace DTXMania
         LP      = EPad.LP,
         LBD     = EPad.LBD,
 		Cancel  = EPad.Cancel,     // fisyher: New Cancel/Go Back Key
+		//Non-Pad System buttons
 		Capture,
+		Search,
 		LoopCreate,
 		LoopDelete,
 		SkipForward,
