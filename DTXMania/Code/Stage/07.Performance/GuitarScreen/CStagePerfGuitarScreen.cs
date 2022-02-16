@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Threading;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Diagnostics;
@@ -129,7 +130,7 @@ namespace DTXMania
 		{
 			if( !base.bNotActivated )
 			{
-                bool flag = false;
+                bool bIsFinishedPlaying = false;
                 bool bIsFinishedFadeout = false;
 
 				if( base.bJustStartedUpdate )
@@ -192,7 +193,7 @@ namespace DTXMania
 				this.tUpdateAndDraw_ChipAnimation();
                 this.tUpdateAndDraw_BarLines(EInstrumentPart.GUITAR);
 				this.tDraw_LoopLines();
-				flag = this.tUpdateAndDraw_Chips(EInstrumentPart.GUITAR);
+				bIsFinishedPlaying = this.tUpdateAndDraw_Chips(EInstrumentPart.GUITAR);
                 this.tUpdateAndDraw_RGBButton();
                 this.tUpdateAndDraw_GuitarBass_JudgementLine();
 				this.tUpdateAndDraw_JudgementString();
@@ -213,11 +214,24 @@ namespace DTXMania
 				this.tUpdateAndDraw_GuitarBonus();
 				this.tUpdateAndDraw_STAGEFAILED();
                 bIsFinishedFadeout = this.tUpdateAndDraw_FadeIn_Out();
-                if ( flag && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
+                if ( bIsFinishedPlaying && (base.ePhaseID == CStage.EPhase.Common_DefaultState ) )
                 {
-                    this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
-                    base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
-                    this.actFOStageClear.tStartFadeOut();
+					//Pause the timer when finished playing in DTXVMode
+					if (CDTXMania.DTXVmode.Enabled)
+					{
+						if (CDTXMania.Timer.b停止していない)
+						{
+							CDTXMania.Timer.tPause();
+						}
+						Thread.Sleep(5);
+						// Keep waiting for next message from DTX Creator
+					}
+					else 
+					{
+						this.eReturnValueAfterFadeOut = EPerfScreenReturnValue.StageClear;
+						base.ePhaseID = CStage.EPhase.演奏_STAGE_CLEAR_フェードアウト;
+						this.actFOStageClear.tStartFadeOut();
+					}
                 }
 				if( bIsFinishedFadeout )
 				{
