@@ -314,7 +314,7 @@ namespace DTXMania
             // 曲データの一覧取得中は、キー入力を無効化する
             if (!CDTXMania.EnumSongs.IsEnumerating || CDTXMania.actEnumSongs.bコマンドでの曲データ取得 != true)
             {
-                if ((CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Escape) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)) || CDTXMania.Pad.bPressedGB(EPad.Pick))
+                if ((CDTXMania.InputManager.Keyboard.bKeyPressed((int)SlimDXKey.Escape) || CDTXMania.Pad.bPressed(EInstrumentPart.DRUMS, EPad.LC)) || CDTXMania.Pad.bPressedGB(EPad.Cancel))
                 {
                     CDTXMania.Skin.soundCancel.tPlay();
                     if (!this.bFocusIsOnMenu)

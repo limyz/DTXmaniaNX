@@ -267,7 +267,7 @@ namespace DTXMania
 				|| CDTXMania.actPluginOccupyingInput != null )
 				return 0;
 
-			if( ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDXKey.Escape ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) ) || CDTXMania.Pad.bPressedGB( EPad.Pick ) )
+			if( ( CDTXMania.InputManager.Keyboard.bKeyPressed( (int)SlimDXKey.Escape ) || CDTXMania.Pad.bPressed( EInstrumentPart.DRUMS, EPad.LC ) ) || CDTXMania.Pad.bPressedGB( EPad.Cancel) )
 			{
 				CDTXMania.Skin.soundCancel.tPlay();
 				if( !this.bFocusIsOnMenu )
