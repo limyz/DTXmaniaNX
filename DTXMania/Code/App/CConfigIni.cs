@@ -4193,7 +4193,7 @@ Cancel=K0103
 
 [SystemKeyAssign]
 Capture=K065
-Search=K052
+Search=K042
 Help=K064
 Pause=K0110
 LoopCreate=
@@ -4202,7 +4202,7 @@ SkipForward=
 SkipBackward=
 IncreasePlaySpeed=
 DecreasePlaySpeed=
-Restart=K042
+Restart=K052
 ";
 			tReadFromString( strDefaultKeyAssign );
 		}
