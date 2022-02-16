@@ -2085,6 +2085,11 @@ for (int i = 0; i < 3; i++) {
                     CDTXMania.ConfigIni.eRandom.Bass = ERandomMode.OFF;
                     CDTXMania.ConfigIni.eRandomPedal.Drums = ERandomMode.OFF;
 
+                    //Set scroll speed to fixed values
+                    CDTXMania.ConfigIni.nScrollSpeed.Drums = 3;//1.5
+                    CDTXMania.ConfigIni.nScrollSpeed.Guitar = 4;//2.0
+                    CDTXMania.ConfigIni.nScrollSpeed.Bass = 4;//2.0
+
                     /*CDTXMania.ConfigIni.rcWindow_backup = CDTXMania.ConfigIni.rcWindow;       // #36612 2016.9.12 yyagi
                     CDTXMania.ConfigIni.rcWindow.W = CDTXMania.ConfigIni.rcViewerWindow.W;
                     CDTXMania.ConfigIni.rcWindow.H = CDTXMania.ConfigIni.rcViewerWindow.H;
