@@ -319,6 +319,10 @@ namespace DTXMania
 						this.actCombo.nCurrentCombo[inst] = 0;
 						this.actCombo.nCurrentCombo.HighestValue[inst] = 0;
 						base.actScore.nCurrentTrueScore[inst] = 0;
+
+						//
+						this.nTimingHitCount[inst].nLate = 0;
+						this.nTimingHitCount[inst].nEarly = 0;
 					}
 				}
 

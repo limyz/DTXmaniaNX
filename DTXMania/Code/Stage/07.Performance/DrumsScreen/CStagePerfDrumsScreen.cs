@@ -453,6 +453,10 @@ namespace DTXMania
                     this.actCombo.nCurrentCombo.Drums = 0;
                     this.actCombo.nCurrentCombo.HighestValue.Drums = 0;
                     base.actScore.nCurrentTrueScore.Drums = 0;
+
+                    //
+                    this.nTimingHitCount.Drums.nLate = 0;
+                    this.nTimingHitCount.Drums.nEarly = 0;
                 }
 
                 // キー入力

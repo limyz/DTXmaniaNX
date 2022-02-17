@@ -325,6 +325,8 @@ namespace DTXMania
                     this.nHitCount_ExclAuto[ k ] = new CHITCOUNTOFRANK();
                     this.nHitCount_IncAuto[ k ] = new CHITCOUNTOFRANK();
                     this.nヒット数_TargetGhost[ k ] = new CHITCOUNTOFRANK(); // #35411 2015.08.21 chnmr0 add
+
+                    this.nTimingHitCount[k] = new CLAGTIMINGHITCOUNT();
                 }
                 this.queWailing[k] = new Queue<CChip>();
                 this.r現在の歓声Chip[k] = null;
@@ -580,6 +582,55 @@ namespace DTXMania
             }
         }
 
+        public class CLAGTIMINGHITCOUNT 
+        {
+
+            public enum ETiming
+            {
+                Late,                
+                Early,                
+                Unknown
+            }
+
+            // Fields
+            public int nLate;
+            //public int nPerfect;
+            public int nEarly;
+            //public int nOutOfRange;
+
+            // Properties
+            public int this[ETiming index]
+            {
+                get
+                {
+                    switch (index)
+                    {
+                        case ETiming.Late:
+                            return this.nLate;
+
+                        case ETiming.Early:
+                            return this.nEarly;
+                    }
+                    throw new IndexOutOfRangeException();
+                }
+                set
+                {
+                    switch (index)
+                    {
+                        case ETiming.Late:
+                            this.nLate = value;
+                            return;
+
+                        case ETiming.Early:
+                            this.nEarly = value;
+                            return;
+                    }
+                    throw new IndexOutOfRangeException();
+                }
+            }
+
+        }
+
         static CStagePerfCommonScreen()
         {
             nJudgeLineMinPosY = 461;//(CDTXMania.ConfigIni.bReverse.Drums ? 259 : 461);
@@ -771,6 +822,9 @@ namespace DTXMania
         public long n現在のスコア = 0;
         public STDGBVALUE<CHITCOUNTOFRANK> nHitCount_ExclAuto;
         public STDGBVALUE<CHITCOUNTOFRANK> nHitCount_IncAuto;
+        //
+        protected STDGBVALUE<CLAGTIMINGHITCOUNT> nTimingHitCount;
+
         protected int nCurrentTopChip = -1;
         protected int[] nLastPlayedBGMWAVNumber = new int[50];
         protected static int nJudgeLineMaxPosY;
@@ -1431,6 +1485,12 @@ namespace DTXMania
                 this.actProgressBar.Hit(screenmode, pChip.nPlaybackTimeMs, eJudgeResult);
             }
 
+            //Update Lag Timing Counter data
+            if (!bPChipIsAutoPlay)
+            {
+                this.tUpdateLagTimingCounter(pChip, screenmode, eJudgeResult);
+            }
+
             switch (pChip.eInstrumentPart)
             {
                 case EInstrumentPart.DRUMS:
@@ -1837,6 +1897,47 @@ namespace DTXMania
 
             return eJudgeResult;
         }
+
+        private void tUpdateLagTimingCounter(CChip pChip, EInstrumentPart screenmode, EJudgement eJudgeResult) 
+        {
+            if (pChip.eInstrumentPart == EInstrumentPart.UNKNOWN)
+            {
+                return;
+            }
+
+            if (pChip.eInstrumentPart == EInstrumentPart.DRUMS && screenmode != EInstrumentPart.DRUMS) 
+            {
+                return;
+            }
+
+            if ((pChip.eInstrumentPart == EInstrumentPart.GUITAR ||
+                pChip.eInstrumentPart == EInstrumentPart.BASS) &&
+                screenmode != EInstrumentPart.GUITAR
+                )
+            {
+                return;
+            }
+
+            switch (eJudgeResult)
+            {
+                case EJudgement.Miss:
+                case EJudgement.Bad:
+                case EJudgement.Poor:
+                case EJudgement.Good:
+                case EJudgement.Great:
+                case EJudgement.Perfect:
+                    if (pChip.nLag > 0)
+                    {
+                        this.nTimingHitCount[(int)pChip.eInstrumentPart].nLate++;
+                    }
+                    else
+                    {
+                        this.nTimingHitCount[(int)pChip.eInstrumentPart].nEarly++;
+                    }
+                    break;
+            }
+        }
+        
         protected abstract void tチップのヒット処理_BadならびにTight時のMiss(EInstrumentPart part);
         protected abstract void tチップのヒット処理_BadならびにTight時のMiss(EInstrumentPart part, int nLane);
         protected void tチップのヒット処理_BadならびにTight時のMiss(EInstrumentPart part, EInstrumentPart screenmode)
