@@ -673,7 +673,7 @@ namespace DTXMania
 		public bool bVerticalSyncWait;
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
-        public bool bDirectShowMode;
+        //public bool bDirectShowMode;
 		public bool bFullScreenMode;
 		public bool bFullScreenExclusive;
 		public int n初期ウィンドウ開始位置X; // #30675 2013.02.04 ikanick add
@@ -1250,7 +1250,7 @@ namespace DTXMania
 			this.bVerticalSyncWait = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
-            this.bDirectShowMode = true;
+            //this.bDirectShowMode = true;
 			this.nウインドウwidth = SampleFramework.GameWindowSize.Width;			// #23510 2010.10.31 yyagi add
 			this.nウインドウheight = SampleFramework.GameWindowSize.Height;			// 
             this.nMovieMode = 1;
@@ -1744,9 +1744,6 @@ namespace DTXMania
 			sw.WriteLine( "Drums={0}", this.bDrumsEnabled ? 1 : 0 );
 			sw.WriteLine();
             #endregion
-            sw.WriteLine( "; DirectShowでのワイドクリップ再生 (0:OFF, 1:ON)");
-            sw.WriteLine( "DirectShowMode={0}", this.bDirectShowMode ? 1 : 0);
-            sw.WriteLine();
 			sw.WriteLine( "; 背景画像の半透明割合(0:透明～255:不透明)" );
 			sw.WriteLine( "; Transparency for background image in playing screen.(0:tranaparent - 255:no transparent)" );
 			sw.WriteLine( "BGAlpha={0}", this.nBGAlpha );
@@ -2845,11 +2842,7 @@ namespace DTXMania
                                             else if (str3.Equals("Drums"))
                                             {
                                                 this.bDrumsEnabled = CConversion.bONorOFF(str4[0]);
-                                            }
-                                            else if (str3.Equals("DirectShowMode"))
-                                            {
-                                                this.bDirectShowMode = CConversion.bONorOFF(str4[0]);
-                                            }
+                                            }                                            
                                             else if (str3.Equals("BGAlpha"))
                                             {
                                                 this.n背景の透過度 = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.n背景の透過度);

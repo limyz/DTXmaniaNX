@@ -193,13 +193,6 @@ namespace DTXMania
                 "Turn ON to enable video (AVI) playback.\nThis requires some processing power.");
             this.listItems.Add(this.iSystemAVI);
 
-            this.iSystemDirectShowMode = new CItemToggle("DirectShowMode", CDTXMania.ConfigIni.bDirectShowMode,
-                "このオプションが有効の場合、ワイドクリップ\n" +
-                "の動画をDirectShowを使って描画します。\n" +
-                "旧サイズのクリップは従来の方式で描画します。",
-                "If this option is enabled, draw Wide clips using DirectShow.");
-            this.listItems.Add(this.iSystemDirectShowMode);
-
             this.iSystemBGA = new CItemToggle("BGA", CDTXMania.ConfigIni.bBGAEnabled,
                 "BGAの使用：\n画像(BGA)を表示可能にする場合に\nON にします。BGA の再生には、それ\nなりのマシンパワーが必要とされます。",
                 "Turn ON to enable background animation (BGA) playback.\nThis requires some processing power.");
@@ -2830,7 +2823,7 @@ namespace DTXMania
         private CItemInteger iSystemAutoChipVolume;
         private CItemToggle iSystemAVI;
         private CItemToggle iSystemBGA;
-        private CItemToggle iSystemDirectShowMode;
+        //private CItemToggle iSystemDirectShowMode;
         private CItemInteger iSystemBGAlpha;
         private CItemToggle iSystemBGMSound;
         private CItemInteger iSystemChipVolume;
@@ -3136,7 +3129,6 @@ namespace DTXMania
             CDTXMania.ConfigIni.bバッファ入力を行う = this.iSystemBufferedInput.bON;
             CDTXMania.ConfigIni.bAVIEnabled = this.iSystemAVI.bON;
             CDTXMania.ConfigIni.bBGAEnabled = this.iSystemBGA.bON;
-            CDTXMania.ConfigIni.bDirectShowMode = this.iSystemDirectShowMode.bON;
             CDTXMania.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = this.iSystemPreviewSoundWait.nCurrentValue;
             CDTXMania.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = this.iSystemPreviewImageWait.nCurrentValue;
             CDTXMania.ConfigIni.b演奏情報を表示する = this.iSystemDebugInfo.bON;
