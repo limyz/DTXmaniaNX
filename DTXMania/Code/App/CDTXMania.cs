@@ -26,7 +26,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "NX 1.3.0 20211228";
+        public static readonly string VERSION = "v1.3.0 20211228";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009
@@ -2014,6 +2014,7 @@ for (int i = 0; i < 3; i++) {
             #region [ Detect compact mode、or start as DTXViewer/DTX2WAV ]
             bCompactMode = false;
             strCompactModeFile = "";
+            string appName = "DTXManiaNX";
             string[] commandLineArgs = Environment.GetCommandLineArgs();
             if ((commandLineArgs != null) && (commandLineArgs.Length > 1))
             {
@@ -2093,6 +2094,12 @@ for (int i = 0; i < 3; i++) {
                     CDTXMania.ConfigIni.nScrollSpeed.Drums = 3;//1.5
                     CDTXMania.ConfigIni.nScrollSpeed.Guitar = 4;//2.0
                     CDTXMania.ConfigIni.nScrollSpeed.Bass = 4;//2.0
+
+                    //全オート
+                    for (int i = 0; i < (int)ELane.MAX; i++)
+                    {
+                        CDTXMania.ConfigIni.bAutoPlay[i] = true;
+                    }
 
                     /*CDTXMania.ConfigIni.rcWindow_backup = CDTXMania.ConfigIni.rcWindow;       // #36612 2016.9.12 yyagi
                     CDTXMania.ConfigIni.rcWindow.W = CDTXMania.ConfigIni.rcViewerWindow.W;
@@ -2244,15 +2251,18 @@ for (int i = 0; i < 3; i++) {
                 if (DTXVmode.Enabled)
                 {
                     Trace.TraceInformation("Start in DTXV mode. [{0}]", strCompactModeFile);
+                    appName = "DTXViewerNX";
                 }
                 else if (DTX2WAVmode.Enabled)
                 {
                     Trace.TraceInformation("Start in DTX2WAV mode. [{0}]", strCompactModeFile);
                     DTX2WAVmode.SendMessage2DTX2WAV("BOOT");
+                    appName = "DTX2WAV";
                 }
                 else
                 {
                     Trace.TraceInformation("Start in compact mode. [{0}]", strCompactModeFile);
+                    appName = "DTXManiaNX (Compact)";
                 }
             }
             else
@@ -2263,7 +2273,8 @@ for (int i = 0; i < 3; i++) {
 
             #region [ Initialize window ]
             //---------------------
-            this.strWindowTitle = "DTXMania .NET style release " + VERSION;
+            string process64bitText = Environment.Is64BitProcess ? "x64(64-bit) " : "";            
+            this.strWindowTitle = appName + " " + process64bitText + VERSION;
             base.Window.StartPosition = FormStartPosition.Manual;                                                       // #30675 2013.02.04 ikanick add
             base.Window.Location = new Point(ConfigIni.n初期ウィンドウ開始位置X, ConfigIni.n初期ウィンドウ開始位置Y);   // #30675 2013.02.04 ikanick add
 
