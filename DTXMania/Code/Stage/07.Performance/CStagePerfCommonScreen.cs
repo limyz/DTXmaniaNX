@@ -584,7 +584,6 @@ namespace DTXMania
 
         public class CLAGTIMINGHITCOUNT 
         {
-
             public enum ETiming
             {
                 Late,                

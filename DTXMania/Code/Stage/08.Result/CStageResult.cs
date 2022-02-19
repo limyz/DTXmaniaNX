@@ -838,9 +838,11 @@ namespace DTXMania
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
+		//Copy from CStagePerfCommonScreen
+		public STDGBVALUE<CStagePerfCommonScreen.CLAGTIMINGHITCOUNT> nTimingHitCount;
 
 		//private CDirectShow ds背景動画;
-        private long lDshowPosition;
+		private long lDshowPosition;
         private long lStopPosition;
 
 		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
