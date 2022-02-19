@@ -317,6 +317,12 @@ namespace DTXMania
 				new string[] { "TYPE-A", "TYPE-B" } );
 			this.listItems.Add( this.iSystemShowLagColor );
 
+            this.iSystemShowLagHitCount = new CItemToggle("ShowLagHitCount", CDTXMania.ConfigIni.bShowLagHitCount,
+                "ズレヒット数表示:\n演奏と結果画面に早ズレ、遅ズレヒット数で表示する場合はONにします", //fisyher: Constructed using DeepL, feedback welcomed to improved accuracy
+                "ShowLagHitCount:\nTurn ON to display Early/Late Hit Counters in Performance and Result Screen.");
+            this.listItems.Add(this.iSystemShowLagHitCount);
+
+
             this.iSystemAutoResultCapture = new CItemToggle("AutoSaveResult", CDTXMania.ConfigIni.bIsAutoResultCapture,
                 "ONにすると、NewRecord時に\n"+
                 "自動でリザルト画像を\n"+
@@ -2860,6 +2866,7 @@ namespace DTXMania
         private CItemToggle iSystemVSyncWait;
         private CItemList iSystemShowLag;					// #25370 2011.6.3 yyagi
         private CItemList iSystemShowLagColor;
+        private CItemToggle iSystemShowLagHitCount;         // fisyher new config item
         private CItemToggle iSystemAutoResultCapture;		// #25399 2011.6.9 yyagi
         private CItemToggle iSystemBufferedInput;
         private CItemInteger iSystemRisky;					// #23559 2011.7.27 yyagi
@@ -3149,6 +3156,7 @@ namespace DTXMania
 
             CDTXMania.ConfigIni.nShowLagType = this.iSystemShowLag.n現在選択されている項目番号;				// #25370 2011.6.3 yyagi
             CDTXMania.ConfigIni.nShowLagTypeColor = this.iSystemShowLagColor.n現在選択されている項目番号;
+            CDTXMania.ConfigIni.bShowLagHitCount = this.iSystemShowLagHitCount.bON;
             CDTXMania.ConfigIni.bIsAutoResultCapture = this.iSystemAutoResultCapture.bON;					// #25399 2011.6.9 yyagi
             CDTXMania.ConfigIni.bAutoAddGage = this.iAutoAddGage.bON;
             CDTXMania.ConfigIni.nInfoType = this.iInfoType.n現在選択されている項目番号;

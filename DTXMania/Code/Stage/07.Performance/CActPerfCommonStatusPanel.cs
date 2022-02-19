@@ -42,6 +42,32 @@ namespace DTXMania
                 this.stパネルマップ[i].status = status[i];
                 this.stパネルマップ[i].label = labels[i];
             }
+
+            //Initialize positions of character in lag text sprite
+            int nWidth = 15;
+            int nHeight = 19;
+            Point ptRedTextOffset = new Point(64, 64);
+            List<ST文字位置Ex> LagCountBlueTextList = new List<ST文字位置Ex>();
+            List<ST文字位置Ex> LagCountRedTextList = new List<ST文字位置Ex>();
+            int[] nPosXArray = { 0, 15, 30, 45, 0, 15, 30, 45, 0, 15 };
+            int[] nPosYArray = { 0, 0, 0, 0, 19, 19, 19, 19, 38, 38 };
+            for (int i = 0; i < nPosXArray.Length; i++)
+            {
+                ST文字位置Ex stCurrText = new ST文字位置Ex();
+                stCurrText.ch = (char)('0' + i);
+                stCurrText.rect = new Rectangle(nPosXArray[i], nPosYArray[i], nWidth, nHeight);
+                LagCountBlueTextList.Add(stCurrText);
+
+                ST文字位置Ex stNextCurrText = new ST文字位置Ex();
+                stNextCurrText.ch = (char)('0' + i);
+                stNextCurrText.rect = new Rectangle(nPosXArray[i] + ptRedTextOffset.X,
+                    nPosYArray[i] + ptRedTextOffset.Y, nWidth, nHeight);
+                LagCountRedTextList.Add(stNextCurrText);
+            }
+
+            this.stLagCountBlueText = LagCountBlueTextList.ToArray();
+            this.stLagCountRedText = LagCountRedTextList.ToArray();
+
             base.bNotActivated = true;
         }
 
@@ -158,6 +184,13 @@ namespace DTXMania
             public string label;
             public int status;
         }
+        //-----------------
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ST文字位置Ex
+        {
+            public char ch;
+            public Rectangle rect;
+        }
         public long nCurrentScore;
         public long n現在のスコアGuitar;
         public long n現在のスコアBass;
@@ -166,6 +199,10 @@ namespace DTXMania
         public int nStatus;
         protected Rectangle rectDiffPanelPoint;
         public STATUSPANEL[] stパネルマップ;
+        protected readonly ST文字位置Ex[] stLagCountBlueText;//15x19 start at 0,0
+        protected readonly ST文字位置Ex[] stLagCountRedText;//15x19 start at 64,64
+
+
         //-----------------
         #endregion
     }

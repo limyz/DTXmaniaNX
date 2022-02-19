@@ -791,6 +791,7 @@ namespace DTXMania
         public STDGBVALUE<int> nJudgeLinePosOffset; // #31602 2013.6.23 yyagi 判定ライン表示位置のオフセット
         public int nShowLagType;					// #25370 2011.6.5 yyagi ズレ時間表示機能
         public int nShowLagTypeColor;
+		public bool bShowLagHitCount;				// fisyher New Config to enable hit count display or not
 		public int nShowPlaySpeed;
         public STDGBVALUE<int> nHidSud;
         public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
@@ -1465,6 +1466,7 @@ namespace DTXMania
 			this.nRisky = 0;							// #23539 2011.7.26 yyagi RISKYモード
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
             this.nShowLagTypeColor = 0;
+			this.bShowLagHitCount = false;
 			this.nShowPlaySpeed = (int)EShowPlaySpeed.IF_CHANGED_IN_GAME;
 			this.bIsAutoResultCapture = true;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
@@ -1921,8 +1923,11 @@ namespace DTXMania
 			sw.WriteLine( "; Whether displaying the lag times from the just timing or not." );	//
 			sw.WriteLine( "ShowLagTime={0}", this.nShowLagType );							//
 			sw.WriteLine();
-			sw.WriteLine( "; 判定ズレ時間表示の色(0:Slow青、Fast赤, 1:Slow赤、Fast青)" );
-			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );							//
+			sw.WriteLine("; 判定ズレ時間表示の色(0:Slow赤、Fast青, 1:Slow青、Fast赤)");
+			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );                         //
+			sw.WriteLine();
+			sw.WriteLine("; 判定ズレヒット数表示(0:OFF, 1:ON)");
+			sw.WriteLine("ShowLagHitCount={0}", this.bShowLagHitCount ? 1 : 0);                         //
 			sw.WriteLine();
 			sw.WriteLine( "; リザルト画像自動保存機能(0:OFF, 1:ON)" );						// #25399 2011.6.9 yyagi
 			sw.WriteLine( "; Set ON if you'd like to save result screen image automatically");	//
@@ -3039,7 +3044,11 @@ namespace DTXMania
                                             {
                                                 this.nShowLagTypeColor = CConversion.nGetNumberIfInRange( str4, 0, 1, this.nShowLagTypeColor );
                                             }
-                                            else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
+											else if (str3.Equals("ShowLagHitCount"))          //fisyher: New field
+											{
+												this.bShowLagHitCount = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
                                             {
                                                 this.bTimeStretch = CConversion.bONorOFF(str4[0]);
                                             }

@@ -823,7 +823,7 @@ namespace DTXMania
         public STDGBVALUE<CHITCOUNTOFRANK> nHitCount_ExclAuto;
         public STDGBVALUE<CHITCOUNTOFRANK> nHitCount_IncAuto;
         //
-        protected STDGBVALUE<CLAGTIMINGHITCOUNT> nTimingHitCount;
+        public STDGBVALUE<CLAGTIMINGHITCOUNT> nTimingHitCount;
 
         protected int nCurrentTopChip = -1;
         protected int[] nLastPlayedBGMWAVNumber = new int[50];
@@ -6200,6 +6200,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bBGM音を発声する = true;
             CDTXMania.ConfigIni.nRisky = 0;
             CDTXMania.ConfigIni.nShowLagType = (int)EShowLagType.OFF;
+            CDTXMania.ConfigIni.bShowLagHitCount = false;
             //CDTXMania.ConfigIni.bForceScalingAVI = false;		// DTXVモード時の各種表示要素の表示座標を「譜面制作者のカスタマイズ状態」にするか「DTXMania初期状態」にするかで
             // 悩みました。
         }
