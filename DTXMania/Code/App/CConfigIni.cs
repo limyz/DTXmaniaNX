@@ -1382,7 +1382,7 @@ namespace DTXMania
 				this.bHidden[ i ] = false;
 				this.bReverse[ i ] = false;
 				this.eRandom[ i ] = ERandomMode.OFF;
-				this.bLight[ i ] = false;
+				this.bLight[ i ] = true; //fisyher: Change to default true, following actual game
 				this.bLeft[ i ] = false;
 				this.JudgementStringPosition[ i ] = EType.A;
 				this.nScrollSpeed[ i ] = 1;
