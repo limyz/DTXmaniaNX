@@ -2230,7 +2230,7 @@ namespace DTXMania
                 {
                     ChangeInputAdjustTimeInPlaying(keyboard, +1);
                 }
-                else if (!this.bPAUSE && (base.ePhaseID == CStage.EPhase.Common_DefaultState) && (keyboard.bKeyPressed((int)SlimDXKey.Escape)))
+                else if (!this.bPAUSE && (base.ePhaseID == CStage.EPhase.Common_DefaultState) && !CDTXMania.DTXVmode.Enabled && (keyboard.bKeyPressed((int)SlimDXKey.Escape)))
                 {	// escape (exit)
                     this.actFO.tStartFadeOut();
                     base.ePhaseID = CStage.EPhase.Common_FadeOut;

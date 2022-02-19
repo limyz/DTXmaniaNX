@@ -594,7 +594,20 @@ namespace DTXMania
                     if (DTXVmode.Enabled)
                     {
                         //Bring DTXViewer to the front whenever a DTXCreator Play DTX button is triggered
+                        if (!this.Window.Visible)
+                        {
+                            this.Window.Show();
+                        }
+
+                        if (this.Window.WindowState == FormWindowState.Minimized)
+                        {
+                            this.Window.WindowState = FormWindowState.Normal;
+                        }
+
                         this.Window.Activate();
+                        this.Window.TopMost = true;  // important
+                        this.Window.TopMost = false; // important
+                        this.Window.Focus();         // important
 
                         bCompactMode = true;
                         strCompactModeFile = DTXVmode.filename;
