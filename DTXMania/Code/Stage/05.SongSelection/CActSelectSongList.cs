@@ -583,7 +583,7 @@ namespace DTXMania
 				using( Graphics graphics = Graphics.FromImage( image ) )
 				{
 					string[] s1 = { "曲データが見つかりません。", "Songs not found." };
-					string[] s2 = { "曲データをDTXManiaGR.exe以下の", "You need to install songs." };
+					string[] s2 = { "曲データをDTXManiaNX.exe以下の", "You need to install songs." };
 					string[] s3 = { "フォルダにインストールして下さい。", "" };
 					graphics.DrawString( s1[c], this.ftSongListFont, Brushes.DarkGray, (float) 2f, (float) 2f );
 					graphics.DrawString( s1[c], this.ftSongListFont, Brushes.White, (float) 0f, (float) 0f );

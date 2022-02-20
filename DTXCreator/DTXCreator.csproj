@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>Code\99.Resources\DTXC.ico</ApplicationIcon>
-    <ApplicationManifest>DTXCreator.exe.x86.manifest</ApplicationManifest>
+    <ApplicationManifest>DTXCreator.exe.manifest</ApplicationManifest>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -194,7 +194,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="DTXCreator.exe.x86.manifest" />
+    <None Include="DTXCreator.exe.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
