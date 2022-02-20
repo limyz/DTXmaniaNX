@@ -1412,20 +1412,20 @@ namespace DTXMania
             this.bAutoPlay.LBD = false;
 			//this.bAutoPlay.Guitar = true;
 			//this.bAutoPlay.Bass = true;
-			this.bAutoPlay.GtR = true;
-			this.bAutoPlay.GtG = true;
-			this.bAutoPlay.GtB = true;
-            this.bAutoPlay.GtY = true;
-            this.bAutoPlay.GtP = true;
-			this.bAutoPlay.GtPick = true;
-			this.bAutoPlay.GtW = true;
-			this.bAutoPlay.BsR = true;
-			this.bAutoPlay.BsG = true;
-			this.bAutoPlay.BsB = true;
-            this.bAutoPlay.BsY = true;
-            this.bAutoPlay.BsP = true;
-			this.bAutoPlay.BsPick = true;
-			this.bAutoPlay.BsW = true;
+			this.bAutoPlay.GtR = false;
+			this.bAutoPlay.GtG = false;
+			this.bAutoPlay.GtB = false;
+            this.bAutoPlay.GtY = false;
+            this.bAutoPlay.GtP = false;
+			this.bAutoPlay.GtPick = false;
+			this.bAutoPlay.GtW = false;
+			this.bAutoPlay.BsR = false;
+			this.bAutoPlay.BsG = false;
+			this.bAutoPlay.BsB = false;
+            this.bAutoPlay.BsY = false;
+            this.bAutoPlay.BsP = false;
+			this.bAutoPlay.BsPick = false;
+			this.bAutoPlay.BsW = false;
 			#endregion
 
 			#region [ HitRange ]
