@@ -213,6 +213,32 @@ namespace DTXMania
             this.st難易度数字位置 = st難易度文字位置Ar;
 
             this.ptFullCombo位置 = new Point[] { new Point(220, 160), new Point(0xdf, 0xed), new Point(0x141, 0xed) };
+
+            //Initialize positions of character in lag text sprite
+            int nWidth = 15;
+            int nHeight = 19;
+            Point ptRedTextOffset = new Point(64, 64);
+            List<ST文字位置Ex> LagCountBlueTextList = new List<ST文字位置Ex>();
+            List<ST文字位置Ex> LagCountRedTextList = new List<ST文字位置Ex>();
+            int[] nPosXArray = { 0, 15, 30, 45, 0, 15, 30, 45, 0, 15 };
+            int[] nPosYArray = { 0, 0, 0, 0, 19, 19, 19, 19, 38, 38 };
+            for (int i = 0; i < nPosXArray.Length; i++)
+            {
+                ST文字位置Ex stCurrText = new ST文字位置Ex();
+                stCurrText.ch = (char)('0' + i);
+                stCurrText.rect = new Rectangle(nPosXArray[i], nPosYArray[i], nWidth, nHeight);
+                LagCountBlueTextList.Add(stCurrText);
+
+                ST文字位置Ex stNextCurrText = new ST文字位置Ex();
+                stNextCurrText.ch = (char)('0' + i);
+                stNextCurrText.rect = new Rectangle(nPosXArray[i] + ptRedTextOffset.X,
+                    nPosYArray[i] + ptRedTextOffset.Y, nWidth, nHeight);
+                LagCountRedTextList.Add(stNextCurrText);
+            }
+
+            this.stLagCountBlueText = LagCountBlueTextList.ToArray();
+            this.stLagCountRedText = LagCountRedTextList.ToArray();
+
             base.bNotActivated = true;
         }
 
@@ -231,13 +257,13 @@ namespace DTXMania
 		{
             #region [ 本体位置 ]
 
-            int n左1X = 180;
+            int n左1X = 136;
             int n右1X = 850;
 
             int n左2X = 30;
             int n右2X = 1000;
 
-            this.n本体Y = 248;
+            this.n本体Y = 260;
 
             for (int j = 0; j < 3; j++)
             {
@@ -247,7 +273,7 @@ namespace DTXMania
 
             if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
-                this.n本体X[0] = n左1X;
+                this.n本体X[0] = 180;
                 this.nスコアX[0] = n左2X;
             }
             else if (CDTXMania.ConfigIni.bGuitarEnabled)
@@ -310,7 +336,6 @@ namespace DTXMania
                 this.txCharacter[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
                 this.txCharacter[2] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_numbers_large.png"));
                 this.txNewRecord = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_New Record.png"));
-                this.txSkillPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
                 this.txExciteGauge = new CTexture[3];
                 this.txExciteGauge[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Gauge.png"));
                 this.txExciteGauge[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_gauge_bar.png"));
@@ -322,7 +347,9 @@ namespace DTXMania
                 //Load new textures
                 this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
                 this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
-
+                //
+                this.txProgressBarPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_progress_bar_panel.png"));
+                this.txLagHitCount = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_lag numbers.png"));
                 for ( int i = 0; i < 3; i++ )
                 {
                     this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ i ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ i ];
@@ -430,6 +457,28 @@ namespace DTXMania
 
                 this.tGetDifficultyLabelFromScript( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ] );
 
+                //Progress Bars
+                for (int i = 0; i < 3; i++)
+                {
+                    //Best Record (Previous)
+                    CTexture bestRecordProgressBarTexture = this.txPreviousBestProgressBar[i];
+                    CDTXMania.t安全にDisposeする(ref bestRecordProgressBarTexture);
+                    CActPerfProgressBar.txGenerateProgressBarHelper(
+                        ref bestRecordProgressBarTexture,
+                        CDTXMania.stageResult.strBestProgressBarRecord[i], 4, 425,
+                        CActPerfProgressBar.nSectionIntervalCount);
+                    this.txPreviousBestProgressBar[i] = bestRecordProgressBarTexture;
+
+                    //Current Progress Bar
+                    CTexture currProgressBarTexture = this.txCurrentProgressBar[i];
+                    CDTXMania.t安全にDisposeする(ref currProgressBarTexture);
+                    CActPerfProgressBar.txGenerateProgressBarHelper(
+                        ref currProgressBarTexture,
+                        CDTXMania.stageResult.strCurrProgressBarRecord[i], 12, 425, 
+                        CActPerfProgressBar.nSectionIntervalCount);
+                    this.txCurrentProgressBar[i] = currProgressBarTexture;
+                }
+
                 base.OnManagedCreateResources();
             }
 		}
@@ -446,12 +495,21 @@ namespace DTXMania
                 //Free new texture
                 CDTXMania.tReleaseTexture(ref this.txPercent);
                 CDTXMania.tReleaseTexture(ref this.txSkillMax);
+                CDTXMania.tReleaseTexture(ref this.txProgressBarPanel);
                 for ( int i = 0; i < 3; i++ )
                 {
                     CDTXMania.tReleaseTexture( ref this.txネームプレート用文字[ i ] );
                     CDTXMania.tReleaseTexture( ref this.txExciteGauge[ i ] );
                     CDTXMania.tReleaseTexture( ref this.txCharacter[ i ] );
                 }
+                CDTXMania.tReleaseTexture(ref this.txLagHitCount);
+                //
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Drums);
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Guitar);
+                CDTXMania.t安全にDisposeする(ref this.txPreviousBestProgressBar.Bass);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Drums);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Guitar);
+                CDTXMania.t安全にDisposeする(ref this.txCurrentProgressBar.Bass);
                 base.OnManagedReleaseResources();
             }
         }
@@ -525,6 +583,16 @@ namespace DTXMania
                         this.tx難易度パネル.tDraw2D(CDTXMania.app.Device, 14 + this.n本体X[j], 266 + this.n本体Y, new Rectangle( this.rectDiffPanelPoint.X, this.rectDiffPanelPoint.Y, 60, 60));
                     this.tレベル数字描画((bCLASSIC == true ? 26 : 18) + this.n本体X[j], 290 + this.n本体Y, str);
 
+                    //Draw Progress Bar Panels first
+                    if(this.txProgressBarPanel != null)
+                    {
+                        this.txProgressBarPanel.tDraw2D(CDTXMania.app.Device, 255 + this.n本体X[j], 1 + this.n本体Y);
+                    }
+
+                    //Draw Progress Bars
+                    this.txCurrentProgressBar[j].tDraw2D(CDTXMania.app.Device, 256 + this.n本体X[j], 2 + this.n本体Y);
+                    this.txPreviousBestProgressBar[j].tDraw2D(CDTXMania.app.Device, 270 + this.n本体X[j], 2 + this.n本体Y);
+
                     string strScore = string.Format("{0,7:######0}", CDTXMania.stageResult.stPerformanceEntry[j].nスコア);
                     for (int i = 0; i < 7; i++)
                     {
@@ -567,6 +635,18 @@ namespace DTXMania
                             //ふるこん
                         }
                     }
+                                        
+                    //Draw Lag Counters if Lag Display is on
+                    if (CDTXMania.ConfigIni.bShowLagHitCount)
+                    {
+                        //Type-A is Early-Blue, Late-Red
+                        bool bTypeAColor = CDTXMania.ConfigIni.nShowLagTypeColor == 0;
+
+                        this.tDrawLagCounterText(this.n本体X[j] + 170, this.n本体Y + 335,
+                            string.Format("{0,4:###0}", CDTXMania.stageResult.nTimingHitCount[j].nEarly), !bTypeAColor);
+                        this.tDrawLagCounterText(this.n本体X[j] + 245, this.n本体Y + 335,
+                            string.Format("{0,4:###0}", CDTXMania.stageResult.nTimingHitCount[j].nLate), bTypeAColor);
+                    }
                 }
             }
             if (!this.ct表示用.bReachedEndValue)
@@ -585,6 +665,14 @@ namespace DTXMania
 			public char ch;
 			public Point pt;
 		}
+
+        //-----------------
+        [StructLayout(LayoutKind.Sequential)]
+        private struct ST文字位置Ex
+        {
+            public char ch;
+            public Rectangle rect;
+        }
 
         private CCounter ct表示用;
         private STDGBVALUE<int> n本体X;
@@ -614,6 +702,15 @@ namespace DTXMania
         //New texture % and MAX
         private CTexture txPercent;
         private CTexture txSkillMax;
+        //
+        private STDGBVALUE<CTexture> txPreviousBestProgressBar;
+        private STDGBVALUE<CTexture> txCurrentProgressBar;
+        //
+        private CTexture txProgressBarPanel;
+        private CTexture txLagHitCount;
+
+        private readonly ST文字位置Ex[] stLagCountBlueText;//15x19 start at 0,0
+        private readonly ST文字位置Ex[] stLagCountRedText;//15x19 start at 64,64
 
         private void tDrawStringSmall(int x, int y, string str)
         {
@@ -685,6 +782,36 @@ namespace DTXMania
                 x += (ch == '.' ? 12 : 28);
 			}
 		}
+
+        //Note: Lag Text is draw right-justified
+        //i.e. x,y is the top right corner of rect
+        private void tDrawLagCounterText(int x, int y, string str, bool isRed)
+        {
+            ST文字位置Ex[] currTextPosStructArray = isRed ? this.stLagCountRedText : this.stLagCountBlueText;
+
+            for (int j = str.Length - 1; j >= 0; j--)
+            {
+                for (int i = 0; i < currTextPosStructArray.Length; i++)
+                {
+                    if (currTextPosStructArray[i].ch == str[j])
+                    {
+                        Rectangle rectangle = new Rectangle(
+                            currTextPosStructArray[i].rect.X,
+                            currTextPosStructArray[i].rect.Y,
+                            currTextPosStructArray[i].rect.Width,
+                            currTextPosStructArray[i].rect.Height);
+
+                        if (this.txLagHitCount != null)
+                        {
+                            this.txLagHitCount.tDraw2D(CDTXMania.app.Device, x - currTextPosStructArray[i].rect.Width, y, rectangle);
+                        }
+                        break;
+                    }
+                }
+                //15 is width of char in txLag
+                x -= 15;
+            }
+        }
         private void t特大文字表示(int x, int y, string str)
         {
             this.t特大文字表示(x, y, str, false);

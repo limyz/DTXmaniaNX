@@ -28,10 +28,13 @@ namespace DTXMania
 		public STDGBVALUE<int> nRankValue;
 		public STDGBVALUE<int> nNbPerformances;
 		public int n総合ランク値;
-		public CDTX.CChip[] rEmptyDrumChip;
+		public CChip[] rEmptyDrumChip;
 		public STDGBVALUE<CScoreIni.CPerformanceEntry> stPerformanceEntry;
 		public bool bIsTrainingMode;
 
+		//Progress Bar temp variables
+		public STDGBVALUE<string> strBestProgressBarRecord;
+		public STDGBVALUE<string> strCurrProgressBarRecord;
 
 		// コンストラクタ
 
@@ -40,7 +43,7 @@ namespace DTXMania
 			this.stPerformanceEntry.Drums = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Guitar = new CScoreIni.CPerformanceEntry();
 			this.stPerformanceEntry.Bass = new CScoreIni.CPerformanceEntry();
-			this.rEmptyDrumChip = new CDTX.CChip[ 10 ];
+			this.rEmptyDrumChip = new CChip[ 10 ];
 			this.n総合ランク値 = -1;
             this.nチャンネル0Atoレーン07 = new int[] { 1, 2, 3, 4, 5, 7, 6, 1, 8, 0, 9 };
 			base.eStageID = CStage.EStage.Result;
@@ -50,8 +53,10 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actParameterPanel = new CActResultParameterPanel() );
 			base.listChildActivities.Add( this.actRank = new CActResultRank() );
 			base.listChildActivities.Add( this.actSongBar = new CActResultSongBar() );
+			//base.listChildActivities.Add( this.actProgressBar = new CActPerfProgressBar(true) );
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFO = new CActFIFOBlack() );
+			base.listChildActivities.Add(this.actBackgroundVideoAVI = new CActSelectBackgroundAVI());
 		}
 
 		
@@ -124,6 +129,12 @@ namespace DTXMania
 							{
 								this.nRankValue[i] = CScoreIni.tCalculateRankOld(part);
 							}
+
+							//Save progress bar records
+							CScore cScore = CDTXMania.stageSongSelection.rChosenScore;
+							this.strBestProgressBarRecord[i] = cScore.SongInformation.progress[i];
+							//May not need to save this...
+							this.strCurrProgressBarRecord[i] = this.stPerformanceEntry[i].strProgress;
 						}
 					}
 					this.n総合ランク値 = CScoreIni.tCalculateOverallRankValue(this.stPerformanceEntry.Drums, this.stPerformanceEntry.Guitar, this.stPerformanceEntry.Bass);
@@ -239,11 +250,19 @@ namespace DTXMania
 								if (this.bNewRecordSkill[m])
 								{
 									cScore.SongInformation.HighSkill[m] = this.stPerformanceEntry[m].dbPerformanceSkill;
+									// New Song Progress for new skill record
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
 								}
 
 								if (this.bNewRecordRank[m])
 								{
 									cScore.SongInformation.BestRank[m] = this.nRankValue[m];
+								}
+
+								//Check if Progress record existed or not; if not, update anyway
+								if(CScoreIni.tProgressBarLength(cScore.SongInformation.progress[m]) == 0)
+                                {
+									cScore.SongInformation.progress[m] = this.stPerformanceEntry[m].strProgress;
 								}
 							}
 						}
@@ -253,6 +272,8 @@ namespace DTXMania
 				}
 
 				base.OnActivate();
+				//this.actProgressBar.t表示レイアウトを設定する(180, 540, 20, 460);
+				//this.actProgressBar.t演奏記録から区間情報を設定する(st演奏記録);
 			}
 			finally
 			{
@@ -271,11 +292,11 @@ namespace DTXMania
             saveCond.Guitar = true;
             saveCond.Bass = true;
             
-            foreach( CDTX.CChip chip in CDTXMania.DTX.listChip )
+            foreach( CChip chip in CDTXMania.DTX.listChip )
             {
                 if( chip.bIsAutoPlayed )
                 {
-					if (chip.nChannelNumber != 0x28 && chip.nChannelNumber != 0xA8) // Guitar/Bass Wailing は OK
+					if (chip.nChannelNumber != EChannel.Guitar_Wailing && chip.nChannelNumber != EChannel.Bass_Wailing) // Guitar/Bass Wailing は OK
 					{
 						saveCond[(int)(chip.eInstrumentPart)] = false;
 					}
@@ -342,7 +363,7 @@ namespace DTXMania
             }
 
             int cnt = 0;
-            foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+            foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
             {
                 if (chip.eInstrumentPart == inst)
                 {
@@ -358,7 +379,7 @@ namespace DTXMania
                     using (BinaryWriter bw = new BinaryWriter(fs))
                     {
                         bw.Write((Int32)cnt);
-                        foreach (DTXMania.CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        foreach (DTXMania.CChip chip in CDTXMania.DTX.listChip)
                         {
                             if (chip.eInstrumentPart == inst)
                             {
@@ -409,13 +430,30 @@ namespace DTXMania
 				CDTXMania.SoundManager.tDiscard( this.rResultSound );
 				this.rResultSound = null;
 			}
+
+			if (this.rBackgroundVideoAVI != null)
+			{
+				this.rBackgroundVideoAVI.Dispose();
+				this.rBackgroundVideoAVI = null;
+			}
+
 			base.OnDeactivate();
 		}
 		public override void OnManagedCreateResources()
 		{
 			if( !base.bNotActivated )
 			{
-                this.ds背景動画 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\8_background.mp4"), CDTXMania.app.WindowHandle, true);
+				//
+				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
+				this.rBackgroundVideoAVI.OnDeviceCreated();
+				if (rBackgroundVideoAVI.avi != null)
+				{					
+					this.actBackgroundVideoAVI.bLoop = true;
+					this.actBackgroundVideoAVI.Start(EChannel.MovieFull, rBackgroundVideoAVI, 0, -1);
+					Trace.TraceInformation("Playing Background video for Result Screen");
+				}
+
+				//this.ds背景動画 = CDTXMania.t失敗してもスキップ可能なDirectShowを生成する(CSkin.Path(@"Graphics\8_background.mp4"), CDTXMania.app.WindowHandle, true);
 				this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\8_background.jpg" ) );
                 switch (CDTXMania.stageResult.n総合ランク値)
                 {
@@ -481,7 +519,10 @@ namespace DTXMania
                 {
 					this.ctPlayNewRecord = null;
                 }
-                CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
+
+				actBackgroundVideoAVI.Stop();
+
+				//CDTXMania.t安全にDisposeする( ref this.ds背景動画 );
 				CDTXMania.tReleaseTexture( ref this.txBackground );
 				CDTXMania.tReleaseTexture( ref this.txTopPanel );
 				CDTXMania.tReleaseTexture( ref this.txBottomPanel );
@@ -549,23 +590,29 @@ namespace DTXMania
 					base.ePhaseID = CStage.EPhase.Common_FadeIn;
 					base.bJustStartedUpdate = false;
 				}
-                if( this.ds背景動画 != null )
-                {
-                    this.ds背景動画.t再生開始();
-                    this.ds背景動画.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
-                    this.ds背景動画.bループ再生 = true;
+
+				
+				//Draw Background video  via CActPerfAVI methods
+				this.actBackgroundVideoAVI.tUpdateAndDraw();
+
+				//if ( this.ds背景動画 != null )
+    //            {
+    //                this.ds背景動画.t再生開始();
+    //                this.ds背景動画.MediaSeeking.GetPositions(out this.lDshowPosition, out this.lStopPosition);
+    //                this.ds背景動画.bループ再生 = true;
                     
-                    if (this.lDshowPosition == this.lStopPosition)
-                    {
-                        this.ds背景動画.MediaSeeking.SetPositions(
-                        DsLong.FromInt64((long)(0)),
-                        AMSeekingSeekingFlags.AbsolutePositioning,
-                        0,
-                        AMSeekingSeekingFlags.NoPositioning);
-                    }
+    //                if (this.lDshowPosition == this.lStopPosition)
+    //                {
+    //                    this.ds背景動画.MediaSeeking.SetPositions(
+    //                    DsLong.FromInt64((long)(0)),
+    //                    AMSeekingSeekingFlags.AbsolutePositioning,
+    //                    0,
+    //                    AMSeekingSeekingFlags.NoPositioning);
+    //                }
                     
-                    this.ds背景動画.t現時点における最新のスナップイメージをTextureに転写する( this.txBackground );
-                }
+    //                this.ds背景動画.t現時点における最新のスナップイメージをTextureに転写する( this.txBackground );
+    //            }
+
 				this.bAnimationComplete = true;
 				if( this.ct登場用.b進行中 )
 				{
@@ -593,17 +640,11 @@ namespace DTXMania
 
 				// 描画
 
-				if( this.txBackground != null )
+				if( this.txBackground != null && this.rBackgroundVideoAVI.avi == null)
 				{
-                    if( this.ds背景動画 != null && this.ds背景動画.b上下反転 )
-                    {
-                        this.txBackground.tDraw2DUpsideDown( CDTXMania.app.Device, 0, 0 );
-                    }
-                    else
-                    {
-					    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
-                    }
+                    this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
 				}
+
 				if( this.ct登場用.b進行中 && ( this.txTopPanel != null ) )
 				{
 					double num2 = ( (double) this.ct登場用.nCurrentValue ) / 100.0;
@@ -672,7 +713,7 @@ namespace DTXMania
 									{
 										continue;
 									}
-									CDTX.CChip rChip = this.rEmptyDrumChip[ i ];
+									CChip rChip = this.rEmptyDrumChip[ i ];
 									if( rChip == null )
 									{
 										switch( ( (EPad) i ) )
@@ -714,10 +755,10 @@ namespace DTXMania
 												break;
 										}
 									}
-									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= 0x11 ) ) && ( rChip.nChannelNumber <= 0x1b ) )
+									if( ( ( rChip != null ) && ( rChip.nChannelNumber >= EChannel.HiHatClose ) ) && ( rChip.nChannelNumber <= EChannel.LeftPedal ) )
 									{
-										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - 0x11 ];
-										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == 0x11 ) || ( ( rChip.nChannelNumber == 0x18 ) && ( this.n最後に再生したHHのチャンネル番号 != 0x18 ) ) ) )
+										int nLane = this.nチャンネル0Atoレーン07[ rChip.nChannelNumber - EChannel.HiHatClose ];
+										if( ( nLane == 1 ) && ( ( rChip.nChannelNumber == EChannel.HiHatClose ) || ( ( rChip.nChannelNumber == EChannel.HiHatOpen ) && ( this.n最後に再生したHHのチャンネル番号 != EChannel.HiHatOpen ) ) ) )
 										{
 											CDTXMania.DTX.tStopPlayingWav( this.n最後に再生したHHのWAV番号 );
 											this.n最後に再生したHHのWAV番号 = rChip.nIntegerValue_InternalNumber;
@@ -786,20 +827,26 @@ namespace DTXMania
 		private CActResultParameterPanel actParameterPanel;
 		private CActResultRank actRank;
 		private CActResultImage actResultImage;
-		private CActResultSongBar actSongBar;
+		private CActResultSongBar actSongBar;		
+		//private CActPerfProgressBar actProgressBar;
 		private bool bAnimationComplete;  // bアニメが完了
 		private bool bIsCheckedWhetherResultScreenShouldSaveOrNot;				// #24509 2011.3.14 yyagi
 		private readonly int[] nチャンネル0Atoレーン07;
 		private int n最後に再生したHHのWAV番号;
-		private int n最後に再生したHHのチャンネル番号;
+		private EChannel n最後に再生したHHのチャンネル番号;
 		private CSound rResultSound;
 		private CTexture txBottomPanel;  // tx下部パネル
 		private CTexture txTopPanel;  // tx上部パネル
 		private CTexture txBackground;  // tx背景
+		//Copy from CStagePerfCommonScreen
+		public STDGBVALUE<CStagePerfCommonScreen.CLAGTIMINGHITCOUNT> nTimingHitCount;
 
-		private CDirectShow ds背景動画;
-        private long lDshowPosition;
+		//private CDirectShow ds背景動画;
+		private long lDshowPosition;
         private long lStopPosition;
+
+		private readonly CActSelectBackgroundAVI actBackgroundVideoAVI;
+		private CDTX.CAVI rBackgroundVideoAVI;
 
 		#region [ #24609 リザルト画像をpngで保存する ]		// #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
 		/// <summary>

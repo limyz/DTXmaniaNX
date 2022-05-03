@@ -593,7 +593,7 @@ namespace DTXMania
                         {
                             curCount[i] = 0;
                         }
-                        foreach (CDTX.CChip chip in CDTXMania.DTX.listChip)
+                        foreach (CChip chip in CDTXMania.DTX.listChip)
                         {
                             if (chip.eInstrumentPart != EInstrumentPart.UNKNOWN)
                             {

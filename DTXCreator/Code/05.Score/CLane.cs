@@ -23,13 +23,15 @@ namespace DTXCreator.Score
             GtY,
             GtP,
             GtW,
-            BsV,
+			BsV,
             BsR,
             BsG,
             BsB,
             BsY,
             BsP,
-            BsW
+            BsW, 
+			GtL,			
+			BsL
         }
 		public enum ELaneType
 		{
