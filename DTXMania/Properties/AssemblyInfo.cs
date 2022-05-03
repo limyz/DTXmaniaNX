@@ -6,12 +6,12 @@ using System.Resources;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("DTXManiaXG verK")]
+[assembly: AssemblyTitle("DTXManiaNX")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DTXManiaGR")]
-[assembly: AssemblyCopyright( "原作:Copyright (C) 2000-2019 DTXMania Group" )]
+[assembly: AssemblyProduct("DTXManiaNX")]
+[assembly: AssemblyCopyright( "Copyright (C) 2000-2019 DTXMania Group" )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,8 +33,8 @@ using System.Resources;
 // すべての値を指定するか、下のように '*' を使ってビルドおよびリビジョン番号を 
 // 既定値にすることができます:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion( "3.6.2.0" )]
-[assembly: AssemblyFileVersion( "0.0.0.0" )]
+[assembly: AssemblyVersion( "1.4.0.0" )]
+[assembly: AssemblyFileVersion( "1.4.0.0" )]
 [assembly: NeutralResourcesLanguageAttribute("ja-JP")]
 
 // このアセンブリは「ライブラリ」である（難読化ツールへの指示）。

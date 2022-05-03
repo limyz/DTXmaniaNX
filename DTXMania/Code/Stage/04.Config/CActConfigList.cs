@@ -215,15 +215,8 @@ namespace DTXMania
                 "Video playback requires some processing power.");
             this.listItems.Add(this.iSystemAVI);
 
-            this.iSystemDirectShowMode = new CItemToggle("Direct Show Mode", CDTXMania.ConfigIni.bDirectShowMode,
-                "このオプションが有効の場合、ワイドクリップ\n" +
-                "の動画をDirectShowを使って描画します。\n" +
-                "旧サイズのクリップは従来の方式で描画します。",
-                "Allow DirectShow to display wide video clips.");
-            this.listItems.Add(this.iSystemDirectShowMode);
-
-            this.iSystemBGA = new CItemToggle("Background Animation", CDTXMania.ConfigIni.bBGAEnabled,
-                "BGAの使用: \n画像(BGA)を表示可能にする場合に\nON にします。BGA の再生には、それ\nなりのマシンパワーが必要とされます。",
+            this.iSystemBGA = new CItemToggle("BGA", CDTXMania.ConfigIni.bBGAEnabled,
+                "BGAの使用：\n画像(BGA)を表示可能にする場合に\nON にします。BGA の再生には、それ\nなりのマシンパワーが必要とされます。",
                 "Allow background animation (BGA) playback.\n"+
                 "\n"+
                 "Background animations require some processing power.");
@@ -350,7 +343,13 @@ namespace DTXMania
 				new string[] { "TYPE-A", "TYPE-B" } );
 			this.listItems.Add( this.iSystemShowLagColor );
 
-            this.iSystemAutoResultCapture = new CItemToggle("Auto-save Result", CDTXMania.ConfigIni.bIsAutoResultCapture,
+            this.iSystemShowLagHitCount = new CItemToggle("ShowLagHitCount", CDTXMania.ConfigIni.bShowLagHitCount,
+                "ズレヒット数表示:\n演奏と結果画面に早ズレ、遅ズレヒット数で表示する場合はONにします", //fisyher: Constructed using DeepL, feedback welcomed to improved accuracy
+                "ShowLagHitCount:\nTurn ON to display Early/Late Hit Counters in Performance and Result Screen.");
+            this.listItems.Add(this.iSystemShowLagHitCount);
+
+
+            this.iSystemAutoResultCapture = new CItemToggle("AutoSaveResult", CDTXMania.ConfigIni.bIsAutoResultCapture,
                 "ONにすると、NewRecord時に\n"+
                 "自動でリザルト画像を\n"+
                 "曲データと同じフォルダに\n"+
@@ -1647,6 +1646,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Decide);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Cancel);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignGuitarHelp)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.GUITAR, EKeyConfigPad.Help);
@@ -1685,6 +1688,10 @@ namespace DTXMania
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Decide);
             }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassCancel)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Cancel);
+            }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignBassHelp)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.BASS, EKeyConfigPad.Help);
@@ -1692,6 +1699,10 @@ namespace DTXMania
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemCapture)
             {
                 CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Capture);
+            }
+            else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemSearch)
+            {
+                CDTXMania.stageConfig.tNotifyPadSelection(EKeyConfigPart.SYSTEM, EKeyConfigPad.Search);
             }
             else if (this.listItems[this.nCurrentSelection] == this.iKeyAssignSystemLoopCreate)
             {
@@ -1944,6 +1955,11 @@ namespace DTXMania
                 "Capture key assign:\nTo assign key for screen capture.\n (You can use keyboard only. You can't\nuse pads to capture screenshot.");
             this.listItems.Add(this.iKeyAssignSystemCapture);
 
+            this.iKeyAssignSystemSearch = new CItemBase("Search",
+                "サーチボタンのキー設定：\nサーチボタンへのキーの割り当\nてを設定します。",
+                "Search button key assign:\nTo assign key for Search Button.");
+            this.listItems.Add(this.iKeyAssignSystemSearch);
+
             this.iKeyAssignGuitarHelp = new CItemBase("Help",
                 "ヘルプボタンのキー設定: \nヘルプボタンへのキーの割り当\nてを設定します。",
                 "Help button key assign:\nTo assign key/pads for Help button.");
@@ -2121,6 +2137,11 @@ namespace DTXMania
                 "Guitar key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignGuitarDecide);
 
+            this.iKeyAssignGuitarCancel = new CItemBase("Cancel",
+                "ギターのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Guitar key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignGuitarCancel);
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.KeyAssignGuitar;
@@ -2176,6 +2197,11 @@ namespace DTXMania
                 "ベースのキー設定: \n決定ボタンへのキーの割り当てを設\n定します。",
                 "Bass key assign:\nTo assign key/pads for Decide button.");
             this.listItems.Add(this.iKeyAssignBassDecide);
+
+            this.iKeyAssignBassCancel = new CItemBase("Cancel",
+                "ベースのキー設定：\n取消ボタンへのキーの割り当てを設\n定します。",
+                "Bass key assign:\nTo assign key/pads for Cancel button.");
+            this.listItems.Add(this.iKeyAssignBassCancel);
 
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
@@ -2777,6 +2803,7 @@ namespace DTXMania
         private CCounter ctTriangleArrowAnimation;
         private EMenuType eMenuType;
         private CItemBase iKeyAssignSystemCapture;			// #24609
+        private CItemBase iKeyAssignSystemSearch;
         private CItemBase iKeyAssignSystemLoopCreate;
         private CItemBase iKeyAssignSystemLoopDelete;
         private CItemBase iKeyAssignSystemSkipForward;
@@ -2797,6 +2824,7 @@ namespace DTXMania
         private CItemBase iKeyAssignBassPick;
         private CItemBase iKeyAssignBassWail;
         private CItemBase iKeyAssignBassDecide;
+        private CItemBase iKeyAssignBassCancel;
         private CItemBase iKeyAssignBassReturnToMenu;
 
         public CItemBase iKeyAssignDrumsBD;
@@ -2821,6 +2849,7 @@ namespace DTXMania
         private CItemBase iKeyAssignGuitarPick;
         private CItemBase iKeyAssignGuitarWail;
         private CItemBase iKeyAssignGuitarDecide;
+        private CItemBase iKeyAssignGuitarCancel;
         private CItemBase iKeyAssignGuitarReturnToMenu;
 
         private CItemToggle iLogOutputLog;
@@ -2829,7 +2858,7 @@ namespace DTXMania
         private CItemInteger iSystemAutoChipVolume;
         private CItemToggle iSystemAVI;
         private CItemToggle iSystemBGA;
-        private CItemToggle iSystemDirectShowMode;
+        //private CItemToggle iSystemDirectShowMode;
         private CItemInteger iSystemBGAlpha;
         private CItemToggle iSystemBGMSound;
         private CItemInteger iSystemChipVolume;
@@ -2865,6 +2894,7 @@ namespace DTXMania
         private CItemToggle iSystemVSyncWait;
         private CItemList iSystemShowLag;					// #25370 2011.6.3 yyagi
         private CItemList iSystemShowLagColor;
+        private CItemToggle iSystemShowLagHitCount;         // fisyher new config item
         private CItemToggle iSystemAutoResultCapture;		// #25399 2011.6.9 yyagi
         private CItemToggle iSystemBufferedInput;
         private CItemInteger iSystemRisky;					// #23559 2011.7.27 yyagi
@@ -3135,7 +3165,6 @@ namespace DTXMania
             CDTXMania.ConfigIni.bバッファ入力を行う = this.iSystemBufferedInput.bON;
             CDTXMania.ConfigIni.bAVIEnabled = this.iSystemAVI.bON;
             CDTXMania.ConfigIni.bBGAEnabled = this.iSystemBGA.bON;
-            CDTXMania.ConfigIni.bDirectShowMode = this.iSystemDirectShowMode.bON;
             CDTXMania.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = this.iSystemPreviewSoundWait.nCurrentValue;
             CDTXMania.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = this.iSystemPreviewImageWait.nCurrentValue;
             CDTXMania.ConfigIni.b演奏情報を表示する = this.iSystemDebugInfo.bON;
@@ -3155,6 +3184,7 @@ namespace DTXMania
 
             CDTXMania.ConfigIni.nShowLagType = this.iSystemShowLag.n現在選択されている項目番号;				// #25370 2011.6.3 yyagi
             CDTXMania.ConfigIni.nShowLagTypeColor = this.iSystemShowLagColor.n現在選択されている項目番号;
+            CDTXMania.ConfigIni.bShowLagHitCount = this.iSystemShowLagHitCount.bON;
             CDTXMania.ConfigIni.bIsAutoResultCapture = this.iSystemAutoResultCapture.bON;					// #25399 2011.6.9 yyagi
             CDTXMania.ConfigIni.bAutoAddGage = this.iAutoAddGage.bON;
             CDTXMania.ConfigIni.nInfoType = this.iInfoType.n現在選択されている項目番号;

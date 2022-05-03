@@ -11,12 +11,12 @@
 
 // custom setup info
 #define MyAppSetupName "DTXManiaNX"
-#define MyAppVersion "1.3.0"
+#define MyAppVersion "1.4.0"
 #define MyAppPublisher "limyz"
 #define MyAppURL "https://github.com/limyz/DTXmaniaNX"
 #define MyAppSupportURL "https://discord.gg/Q8xeugf"
 #define MyAppExeName "DTXManiaNX.exe"
-#define MyAppCopyright "Copyright © 2020-2021 DTXManiaNX"
+#define MyAppCopyright "Copyright © 2020-2022 DTXManiaNX"
 
 [Setup]
 AppId={{235AD645-2C6B-4FA5-911F-0BCA5D539F97}
@@ -394,7 +394,6 @@ Source: "Runtime\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\{#MyAppExeName}.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\DTXCreator.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\DTXCreator.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Runtime\FDK.MemoryRenderer.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\Manual.chm"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\readme_jp.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Runtime\dll\*"; DestDir: "{app}\dll"; Flags: ignoreversion recursesubdirs createallsubdirs

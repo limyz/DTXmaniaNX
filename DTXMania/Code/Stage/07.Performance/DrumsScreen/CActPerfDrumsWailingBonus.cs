@@ -22,7 +22,7 @@ namespace DTXMania
 		//{
 		//    this.Start( part, null );
 		//}
-		public override void Start( EInstrumentPart part, CDTX.CChip r歓声Chip )
+		public override void Start( EInstrumentPart part, CChip r歓声Chip )
 		{
 			if( ( part == EInstrumentPart.GUITAR ) || ( part == EInstrumentPart.BASS ) )
 			{

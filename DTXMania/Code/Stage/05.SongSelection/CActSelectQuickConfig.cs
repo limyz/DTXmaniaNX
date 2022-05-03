@@ -207,14 +207,14 @@ namespace DTXMania
                 automode = 0;	// All Auto
             }
             else if (CDTXMania.ConfigIni.bAutoPlay.GtR == true && CDTXMania.ConfigIni.bAutoPlay.GtG == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtB == true && CDTXMania.ConfigIni.bAutoPlay.GtY == true && CDTXMania.ConfigIni.bAutoPlay.GtP == true && CDTXMania.ConfigIni.bAutoPlay.GtPick == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtW == false)
+                        CDTXMania.ConfigIni.bAutoPlay.GtB == true && CDTXMania.ConfigIni.bAutoPlay.GtY == true && CDTXMania.ConfigIni.bAutoPlay.GtP == true && CDTXMania.ConfigIni.bAutoPlay.GtPick == false //&&
+                        /*CDTXMania.ConfigIni.bAutoPlay.GtW == false*/)
             {
                 automode = 1;	// Auto Neck
             }
             else if (CDTXMania.ConfigIni.bAutoPlay.GtR == false && CDTXMania.ConfigIni.bAutoPlay.GtG == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtB == false && CDTXMania.ConfigIni.bAutoPlay.GtY == false && CDTXMania.ConfigIni.bAutoPlay.GtP == false && CDTXMania.ConfigIni.bAutoPlay.GtPick == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtW == false)
+                        CDTXMania.ConfigIni.bAutoPlay.GtB == false && CDTXMania.ConfigIni.bAutoPlay.GtY == false && CDTXMania.ConfigIni.bAutoPlay.GtP == false && CDTXMania.ConfigIni.bAutoPlay.GtPick == true //&&
+                        /*CDTXMania.ConfigIni.bAutoPlay.GtW == false*/)
             {
                 automode = 2;	// Auto Pick
             }
@@ -236,14 +236,14 @@ namespace DTXMania
                 automode = 0;	// All Auto
             }
             else if (CDTXMania.ConfigIni.bAutoPlay.BsR == true && CDTXMania.ConfigIni.bAutoPlay.BsB == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsB == true && CDTXMania.ConfigIni.bAutoPlay.BsPick == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsW == false)
+                        CDTXMania.ConfigIni.bAutoPlay.BsB == true && CDTXMania.ConfigIni.bAutoPlay.BsPick == false //&&
+                        /*CDTXMania.ConfigIni.bAutoPlay.BsW == false*/)
             {
                 automode = 1;	// Auto Neck
             }
             else if (CDTXMania.ConfigIni.bAutoPlay.BsR == false && CDTXMania.ConfigIni.bAutoPlay.BsB == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsB == false && CDTXMania.ConfigIni.bAutoPlay.BsPick == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsW == false)
+                        CDTXMania.ConfigIni.bAutoPlay.BsB == false && CDTXMania.ConfigIni.bAutoPlay.BsPick == true //&&
+                        /*CDTXMania.ConfigIni.bAutoPlay.BsW == false*/)
             {
                 automode = 2;	// Auto Pick
             }

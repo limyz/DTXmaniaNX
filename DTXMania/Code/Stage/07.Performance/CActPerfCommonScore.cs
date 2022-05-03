@@ -63,26 +63,28 @@ namespace DTXMania
 				#endregion
 				#region [ Gutiar ]
 				case EInstrumentPart.GUITAR:
-					if ( !CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay )
+					if (!CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay)
 					{
-						#region [ Auto Wailing ]
-						if ( bAutoPlay.GtW )
+						//Removed penalty for Auto-Wailing here as it does not actually add any score
+						//If Wailing Bonus score are to be added later, then check for Auto-Wailing and apply penalty separately
+						#region [ Auto Pick ]
+						if (bAutoPlay.GtPick)
 						{
 							rev /= 2;
 						}
 						#endregion
-						#region [ Auto Pick ]
-						if ( bAutoPlay.GtPick )
-						{
-							rev /= 3;
-						}
-						#endregion
 						#region [ Auto Neck ]
-						if ( bAutoPlay.GtR || bAutoPlay.GtG || bAutoPlay.GtB )
+						if (bAutoPlay.GtR || bAutoPlay.GtG || bAutoPlay.GtB || bAutoPlay.GtY || bAutoPlay.GtP)
 						{
-							rev /= 4;
+							rev /= 2;
 						}
 						#endregion
+					}
+					else if (CDTXMania.ConfigIni.bAllGuitarsAreAutoPlay && 
+						!CDTXMania.ConfigIni.bAutoAddGage) 
+					{
+						//If fully auto and AutoAddGage is not enabled, score delta should always be 0
+						rev = 0.0;
 					}
 					break;
 				#endregion
@@ -90,24 +92,26 @@ namespace DTXMania
 				case EInstrumentPart.BASS:
 					if ( !CDTXMania.ConfigIni.bAllBassAreAutoPlay )
 					{
-						#region [ Auto Wailing ]
-						if ( bAutoPlay.BsW )
+						//Removed penalty for Auto-Wailing here as it does not actually add any score
+						//If Wailing Bonus score are to be added later, then check for Auto-Wailing and apply penalty separately
+						#region [ Auto Pick ]
+						if ( bAutoPlay.BsPick )
 						{
 							rev /= 2;
 						}
 						#endregion
-						#region [ Auto Pick ]
-						if ( bAutoPlay.BsPick )
-						{
-							rev /= 3;
-						}
-						#endregion
 						#region [ Auto Neck ]
-						if ( bAutoPlay.BsR || bAutoPlay.BsG || bAutoPlay.BsB )
+						if ( bAutoPlay.BsR || bAutoPlay.BsG || bAutoPlay.BsB || bAutoPlay.BsY || bAutoPlay.BsP)
 						{
-							rev /= 4;
+							rev /= 2;
 						}
 						#endregion
+					}
+					else if (CDTXMania.ConfigIni.bAllBassAreAutoPlay &&
+						!CDTXMania.ConfigIni.bAutoAddGage)
+					{
+						//If fully auto and AutoAddGage is not enabled, score delta should always be 0
+						rev = 0.0;
 					}
 					break;
 				#endregion

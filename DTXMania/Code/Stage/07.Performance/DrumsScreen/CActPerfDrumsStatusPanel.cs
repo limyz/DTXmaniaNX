@@ -179,36 +179,29 @@ namespace DTXMania
             this.n本体Y = 250;
             
             #endregion
-
-            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
-            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
-            this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
-            this.txパネル文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
-            this.txパネル文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
-            this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
-            this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
-            //Load new textures
-            this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
-            this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
-
+                        
             base.OnActivate();
         }
         public override void OnDeactivate()
-        {
-            CDTXMania.tReleaseTexture(ref this.txスキルパネル);
-            CDTXMania.tReleaseTexture(ref this.txパネル文字[0]);
-            CDTXMania.tReleaseTexture(ref this.txパネル文字[1]);
-            CDTXMania.tReleaseTexture(ref this.tx難易度パネル);
-            CDTXMania.tReleaseTexture(ref this.tx難易度用数字);
-            //Free new texture
-            CDTXMania.tReleaseTexture(ref this.txPercent);
-            CDTXMania.tReleaseTexture(ref this.txSkillMax);
+        {            
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
         {
             if( !base.bNotActivated )
             {
+                this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);
+                this.prv称号フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 12, FontStyle.Regular);
+                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.txパネル文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
+                this.txパネル文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
+                this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
+                this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
+                //Load new textures
+                this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
+                this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
+                this.txLagHitCount = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_lag numbers.png"));
+
                 this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 0 ];
                 this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 0 ];
 
@@ -303,9 +296,7 @@ namespace DTXMania
                 graネームプレート用.DrawImage( bmpCardName, -2f, 26f );
                 graネームプレート用.DrawImage( bmpTitleName, 6f, 8f );
                 #endregion
-
-                this.prv表示用フォント.Dispose();
-                this.prv称号フォント.Dispose();
+                                
                 bmpCardName.Dispose();
                 bmpTitleName.Dispose();
                 this.txネームプレート用文字 = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
@@ -320,6 +311,18 @@ namespace DTXMania
         {
             if( !base.bNotActivated )
             {
+                CDTXMania.t安全にDisposeする(ref this.prv表示用フォント);
+                CDTXMania.t安全にDisposeする(ref this.prv称号フォント);
+                CDTXMania.tReleaseTexture(ref this.txスキルパネル);
+                CDTXMania.tReleaseTexture(ref this.txパネル文字[0]);
+                CDTXMania.tReleaseTexture(ref this.txパネル文字[1]);
+                CDTXMania.tReleaseTexture(ref this.tx難易度パネル);
+                CDTXMania.tReleaseTexture(ref this.tx難易度用数字);
+                //Free new texture
+                CDTXMania.tReleaseTexture(ref this.txPercent);
+                CDTXMania.tReleaseTexture(ref this.txSkillMax);
+                CDTXMania.tReleaseTexture(ref this.txLagHitCount);
+
                 CDTXMania.tReleaseTexture( ref this.txネームプレート用文字 );
                 base.OnManagedReleaseResources();
             }
@@ -417,7 +420,19 @@ namespace DTXMania
                         this.txPercent.tDraw2D(CDTXMania.app.Device, 217 + this.n本体X[i], 287 + this.n本体Y);
                 }
 
-                if(bCLASSIC)
+                //Draw Lag Counters if Lag Display is on
+                if (CDTXMania.ConfigIni.bShowLagHitCount)
+                {
+                    //Type-A is Early-Blue, Late-Red
+                    bool bTypeAColor = CDTXMania.ConfigIni.nShowLagTypeColor == 0;
+
+                    this.tDrawLagCounterText(this.n本体X[i] + 170, this.n本体Y + 335,
+                        string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nTimingHitCount[i].nEarly), !bTypeAColor);
+                    this.tDrawLagCounterText(this.n本体X[i] + 245, this.n本体Y + 335,
+                        string.Format("{0,4:###0}", CDTXMania.stagePerfDrumsScreen.nTimingHitCount[i].nLate), bTypeAColor);
+                }
+
+                if (bCLASSIC)
                 {
                     this.t大文字表示(88 + this.n本体X[i], 363 + this.n本体Y, string.Format("{0,6:##0.00}", CDTXMania.stagePerfDrumsScreen.actStatusPanel.db現在の達成率.Drums * (CDTXMania.DTX.LEVEL[i] * 0.0033) ));
                 }
@@ -462,6 +477,7 @@ namespace DTXMania
         //New texture % and MAX
         private CTexture txPercent;
         private CTexture txSkillMax;
+        private CTexture txLagHitCount;
 
         private void t小文字表示(int x, int y, string str)
         {
@@ -480,6 +496,36 @@ namespace DTXMania
                     }
                 }
                 x += 20;
+            }
+        }
+
+        //Note: Lag Text is draw right-justified
+        //i.e. x,y is the top right corner of rect
+        private void tDrawLagCounterText(int x, int y, string str, bool isRed)
+        {
+            ST文字位置Ex[] currTextPosStructArray = isRed ? this.stLagCountRedText : this.stLagCountBlueText;
+
+            for (int j = str.Length - 1; j >= 0; j--)
+            {
+                for (int i = 0; i < currTextPosStructArray.Length; i++)
+                {
+                    if (currTextPosStructArray[i].ch == str[j])
+                    {
+                        Rectangle rectangle = new Rectangle(
+                            currTextPosStructArray[i].rect.X,
+                            currTextPosStructArray[i].rect.Y,
+                            currTextPosStructArray[i].rect.Width,
+                            currTextPosStructArray[i].rect.Height);
+
+                        if (this.txLagHitCount != null)
+                        {
+                            this.txLagHitCount.tDraw2D(CDTXMania.app.Device, x - currTextPosStructArray[i].rect.Width, y, rectangle);
+                        }
+                        break;
+                    }
+                }
+                //15 is width of char in txLag
+                x -= 15;
             }
         }
         private void t大文字表示(int x, int y, string str)

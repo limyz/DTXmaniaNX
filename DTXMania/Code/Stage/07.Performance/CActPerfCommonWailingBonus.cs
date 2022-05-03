@@ -19,7 +19,7 @@ namespace DTXMania
 		{
 			this.Start( part, null );
 		}
-		public abstract void Start( EInstrumentPart part, CDTX.CChip r歓声Chip );
+		public abstract void Start( EInstrumentPart part, CChip r歓声Chip );
 
 
 

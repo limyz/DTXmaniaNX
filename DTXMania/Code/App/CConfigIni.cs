@@ -252,6 +252,18 @@ namespace DTXMania
                     }
                 }
 
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Cancel
+				{
+					get
+					{
+						return this.padCancel;
+					}
+					set
+					{
+						this.padCancel = value;
+					}
+				}
+
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] Capture
 				{
 					get
@@ -261,6 +273,18 @@ namespace DTXMania
 					set
 					{
 						this.padCapture = value;
+					}
+				}
+
+				public CConfigIni.CKeyAssign.STKEYASSIGN[] Search
+				{
+					get
+					{
+						return this.padSearch;
+					}
+					set
+					{
+						this.padSearch = value;
 					}
 				}
 				public CConfigIni.CKeyAssign.STKEYASSIGN[] LoopCreate
@@ -382,8 +406,14 @@ namespace DTXMania
                             case (int) EKeyConfigPad.LBD:
                                 return this.padLBD;
 
+							case (int) EKeyConfigPad.Cancel:
+								return this.padCancel;
+
 							case (int) EKeyConfigPad.Capture:
 								return this.padCapture;
+
+							case (int)EKeyConfigPad.Search:
+								return this.padSearch;
 
 							case (int)EKeyConfigPad.LoopCreate:
 								return this.padLoopCreate;
@@ -460,8 +490,16 @@ namespace DTXMania
 								this.padLBD = value;
 								return;
 
+							case (int) EKeyConfigPad.Cancel:
+								this.padCancel = value;
+								return;
+
 							case (int) EKeyConfigPad.Capture:
 								this.padCapture = value;
+								return;
+
+							case (int)EKeyConfigPad.Search:
+								this.padSearch = value;
 								return;
 
 							case (int)EKeyConfigPad.LoopCreate:
@@ -510,7 +548,9 @@ namespace DTXMania
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSD_G;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLP;
                 private CConfigIni.CKeyAssign.STKEYASSIGN[] padLBD;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCancel; 
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padCapture;
+				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSearch;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopCreate;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padLoopDelete;
 				private CConfigIni.CKeyAssign.STKEYASSIGN[] padSkipForward;
@@ -633,7 +673,7 @@ namespace DTXMania
 		public bool bVerticalSyncWait;
 		public bool b選曲リストフォントを斜体にする;
 		public bool b選曲リストフォントを太字にする;
-        public bool bDirectShowMode;
+        //public bool bDirectShowMode;
 		public bool bFullScreenMode;
 		public bool bFullScreenExclusive;
 		public int n初期ウィンドウ開始位置X; // #30675 2013.02.04 ikanick add
@@ -751,6 +791,7 @@ namespace DTXMania
         public STDGBVALUE<int> nJudgeLinePosOffset; // #31602 2013.6.23 yyagi 判定ライン表示位置のオフセット
         public int nShowLagType;					// #25370 2011.6.5 yyagi ズレ時間表示機能
         public int nShowLagTypeColor;
+		public bool bShowLagHitCount;				// fisyher New Config to enable hit count display or not
 		public int nShowPlaySpeed;
         public STDGBVALUE<int> nHidSud;
         public bool bIsAutoResultCapture;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能のON/OFF制御
@@ -787,6 +828,21 @@ namespace DTXMania
 				}
 			}
 		}
+
+		public bool bInstrumentAvailable(EInstrumentPart inst)
+		{
+			switch (inst)
+			{
+				case EInstrumentPart.DRUMS:
+					return this._bDrums有効;
+				case EInstrumentPart.GUITAR:
+				case EInstrumentPart.BASS:
+					return this._bGuitar有効;
+				default:
+					return false;
+			}
+		}
+
 		public bool bEnterがキー割り当てのどこにも使用されていない
 		{
 			get
@@ -858,7 +914,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) ELane.GtR; i <= (int) ELane.GtW; i++ )
+				for ( int i = (int) ELane.GtR; i <= (int) ELane.GtPick; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{
@@ -872,7 +928,7 @@ namespace DTXMania
 		{
 			get
 			{
-				for ( int i = (int) ELane.BsR; i <= (int) ELane.BsW; i++ )
+				for ( int i = (int) ELane.BsR; i <= (int) ELane.BsPick; i++ )
 				{
 					if ( !this.bAutoPlay[ i ] )
 					{
@@ -882,6 +938,25 @@ namespace DTXMania
 				return true;
 			}
 		}
+
+		public bool bIsAutoPlay(EInstrumentPart inst)
+		{
+			bool result = false;
+			switch (inst)
+			{
+				case EInstrumentPart.DRUMS:
+					result = bAllDrumsAreAutoPlay;
+					break;
+				case EInstrumentPart.GUITAR:
+					result = bAllGuitarsAreAutoPlay;
+					break;
+				case EInstrumentPart.BASS:
+					result = bAllBassAreAutoPlay;
+					break;
+			}
+			return result;
+		}
+
 		public bool b演奏情報を表示しない
 		{
 			get
@@ -1127,7 +1202,25 @@ namespace DTXMania
 
             CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped = !CDTXMania.ConfigIni.bIsSwappedGuitarBass_AutoFlagsAreSwapped;
         }
-		
+
+		public EInstrumentPart GetFlipInst(EInstrumentPart inst)
+		{
+			EInstrumentPart retPart = inst;
+			if (bIsSwappedGuitarBass)
+			{
+				switch (inst)
+				{
+					case EInstrumentPart.GUITAR:
+						retPart = EInstrumentPart.BASS;
+						break;
+					case EInstrumentPart.BASS:
+						retPart = EInstrumentPart.GUITAR;
+						break;
+				}
+			}
+			return retPart;
+		}
+
 		// コンストラクタ
 
 		public CConfigIni()
@@ -1157,7 +1250,7 @@ namespace DTXMania
 			this.bVerticalSyncWait = true;
             this.n初期ウィンドウ開始位置X = 0; // #30675 2013.02.04 ikanick add
             this.n初期ウィンドウ開始位置Y = 0;
-            this.bDirectShowMode = true;
+            //this.bDirectShowMode = true;
 			this.nウインドウwidth = SampleFramework.GameWindowSize.Width;			// #23510 2010.10.31 yyagi add
 			this.nウインドウheight = SampleFramework.GameWindowSize.Height;			// 
             this.nMovieMode = 1;
@@ -1289,7 +1382,7 @@ namespace DTXMania
 				this.bHidden[ i ] = false;
 				this.bReverse[ i ] = false;
 				this.eRandom[ i ] = ERandomMode.OFF;
-				this.bLight[ i ] = false;
+				this.bLight[ i ] = true; //fisyher: Change to default true, following actual game
 				this.bLeft[ i ] = false;
 				this.JudgementStringPosition[ i ] = EType.A;
 				this.nScrollSpeed[ i ] = 1;
@@ -1319,20 +1412,20 @@ namespace DTXMania
             this.bAutoPlay.LBD = false;
 			//this.bAutoPlay.Guitar = true;
 			//this.bAutoPlay.Bass = true;
-			this.bAutoPlay.GtR = true;
-			this.bAutoPlay.GtG = true;
-			this.bAutoPlay.GtB = true;
-            this.bAutoPlay.GtY = true;
-            this.bAutoPlay.GtP = true;
-			this.bAutoPlay.GtPick = true;
-			this.bAutoPlay.GtW = true;
-			this.bAutoPlay.BsR = true;
-			this.bAutoPlay.BsG = true;
-			this.bAutoPlay.BsB = true;
-            this.bAutoPlay.BsY = true;
-            this.bAutoPlay.BsP = true;
-			this.bAutoPlay.BsPick = true;
-			this.bAutoPlay.BsW = true;
+			this.bAutoPlay.GtR = false;
+			this.bAutoPlay.GtG = false;
+			this.bAutoPlay.GtB = false;
+            this.bAutoPlay.GtY = false;
+            this.bAutoPlay.GtP = false;
+			this.bAutoPlay.GtPick = false;
+			this.bAutoPlay.GtW = false;
+			this.bAutoPlay.BsR = false;
+			this.bAutoPlay.BsG = false;
+			this.bAutoPlay.BsB = false;
+            this.bAutoPlay.BsY = false;
+            this.bAutoPlay.BsP = false;
+			this.bAutoPlay.BsPick = false;
+			this.bAutoPlay.BsW = false;
 			#endregion
 
 			#region [ HitRange ]
@@ -1373,6 +1466,7 @@ namespace DTXMania
 			this.nRisky = 0;							// #23539 2011.7.26 yyagi RISKYモード
 			this.nShowLagType = (int) EShowLagType.OFF;	// #25370 2011.6.3 yyagi ズレ時間表示
             this.nShowLagTypeColor = 0;
+			this.bShowLagHitCount = false;
 			this.nShowPlaySpeed = (int)EShowPlaySpeed.IF_CHANGED_IN_GAME;
 			this.bIsAutoResultCapture = true;			// #25399 2011.6.9 yyagi リザルト画像自動保存機能ON/OFF
 
@@ -1650,9 +1744,6 @@ namespace DTXMania
 			sw.WriteLine( "Drums={0}", this.bDrumsEnabled ? 1 : 0 );
 			sw.WriteLine();
             #endregion
-            sw.WriteLine( "; DirectShowでのワイドクリップ再生 (0:OFF, 1:ON)");
-            sw.WriteLine( "DirectShowMode={0}", this.bDirectShowMode ? 1 : 0);
-            sw.WriteLine();
 			sw.WriteLine( "; 背景画像の半透明割合(0:透明～255:不透明)" );
 			sw.WriteLine( "; Transparency for background image in playing screen.(0:tranaparent - 255:no transparent)" );
 			sw.WriteLine( "BGAlpha={0}", this.nBGAlpha );
@@ -1829,8 +1920,11 @@ namespace DTXMania
 			sw.WriteLine( "; Whether displaying the lag times from the just timing or not." );	//
 			sw.WriteLine( "ShowLagTime={0}", this.nShowLagType );							//
 			sw.WriteLine();
-			sw.WriteLine( "; 判定ズレ時間表示の色(0:Slow青、Fast赤, 1:Slow赤、Fast青)" );
-			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );							//
+			sw.WriteLine("; 判定ズレ時間表示の色(0:Slow赤、Fast青, 1:Slow青、Fast赤)");
+			sw.WriteLine( "ShowLagTimeColor={0}", this.nShowLagTypeColor );                         //
+			sw.WriteLine();
+			sw.WriteLine("; 判定ズレヒット数表示(0:OFF, 1:ON)");
+			sw.WriteLine("ShowLagHitCount={0}", this.bShowLagHitCount ? 1 : 0);                         //
 			sw.WriteLine();
 			sw.WriteLine( "; リザルト画像自動保存機能(0:OFF, 1:ON)" );						// #25399 2011.6.9 yyagi
 			sw.WriteLine( "; Set ON if you'd like to save result screen image automatically");	//
@@ -2340,6 +2434,9 @@ namespace DTXMania
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Guitar.Decide );
 			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Guitar.Cancel);
+			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			#region [ BassKeyAssign ]
@@ -2369,6 +2466,9 @@ namespace DTXMania
 			sw.Write( "Decide=" );
 			this.tWriteKey( sw, this.KeyAssign.Bass.Decide );
 			sw.WriteLine();
+			sw.Write("Cancel=");
+			this.tWriteKey(sw, this.KeyAssign.Bass.Cancel);
+			sw.WriteLine();
 			sw.WriteLine();
 			#endregion
 			#region [ SystemkeyAssign ]
@@ -2376,6 +2476,9 @@ namespace DTXMania
 			sw.WriteLine();
 			sw.Write( "Capture=" );
 			this.tWriteKey( sw, this.KeyAssign.System.Capture );
+			sw.WriteLine();
+			sw.Write("Search=");
+			this.tWriteKey(sw, this.KeyAssign.System.Search);
 			sw.WriteLine();
 			sw.Write( "Help=" );
 			this.tWriteKey( sw, this.KeyAssign.Guitar.Help );
@@ -2739,11 +2842,7 @@ namespace DTXMania
                                             else if (str3.Equals("Drums"))
                                             {
                                                 this.bDrumsEnabled = CConversion.bONorOFF(str4[0]);
-                                            }
-                                            else if (str3.Equals("DirectShowMode"))
-                                            {
-                                                this.bDirectShowMode = CConversion.bONorOFF(str4[0]);
-                                            }
+                                            }                                            
                                             else if (str3.Equals("BGAlpha"))
                                             {
                                                 this.n背景の透過度 = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.n背景の透過度);
@@ -2938,7 +3037,11 @@ namespace DTXMania
                                             {
                                                 this.nShowLagTypeColor = CConversion.nGetNumberIfInRange( str4, 0, 1, this.nShowLagTypeColor );
                                             }
-                                            else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
+											else if (str3.Equals("ShowLagHitCount"))          //fisyher: New field
+											{
+												this.bShowLagHitCount = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("TimeStretch"))				// #23664 2013.2.24 yyagi
                                             {
                                                 this.bTimeStretch = CConversion.bONorOFF(str4[0]);
                                             }
@@ -3729,6 +3832,10 @@ namespace DTXMania
 											{
 												this.tReadAndSetSkey( str4, this.KeyAssign.Guitar.Decide );
 											}
+											else if (str3.Equals("Cancel"))
+											{
+												this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Cancel);
+											}
 											continue;
 										}
 									//-----------------------------
@@ -3769,6 +3876,10 @@ namespace DTXMania
 										{
 											this.tReadAndSetSkey( str4, this.KeyAssign.Bass.Decide );
 										}
+										else if (str3.Equals("Cancel"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.Bass.Cancel);
+										}
 										continue;
 									//-----------------------------
 									#endregion
@@ -3780,7 +3891,11 @@ namespace DTXMania
 										{
 											this.tReadAndSetSkey( str4, this.KeyAssign.System.Capture );
 										}
-                                        else if (str3.Equals("Help"))
+										else if (str3.Equals("Search"))
+										{
+											this.tReadAndSetSkey(str4, this.KeyAssign.System.Search);
+										}
+										else if (str3.Equals("Help"))
                                         {
                                             this.tReadAndSetSkey(str4, this.KeyAssign.Guitar.Help);
                                         }
@@ -4064,6 +4179,7 @@ P=K058
 Pick=K0115,K046,J06
 Wail=K0116
 Decide=K060
+Cancel=K0115
 
 [BassKeyAssign]
 
@@ -4075,12 +4191,20 @@ P=K094
 Pick=K0103,K0100,J08
 Wail=K089
 Decide=K096
+Cancel=K0103
 
 [SystemKeyAssign]
 Capture=K065
+Search=K042
 Help=K064
 Pause=K0110
-Restart=K042
+LoopCreate=
+LoopDelete=
+SkipForward=
+SkipBackward=
+IncreasePlaySpeed=
+DecreasePlaySpeed=
+Restart=K052
 ";
 			tReadFromString( strDefaultKeyAssign );
 		}

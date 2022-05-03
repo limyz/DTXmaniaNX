@@ -420,7 +420,7 @@ namespace DTXMania
             }
         }
 
-        public void Start(int nLane, bool bボーナス, int n代入番号)
+        public void Start(int nLane, bool bボーナス, EChannel n代入番号)
         {
             for (int j = 0; j < 4; j++)
             {
