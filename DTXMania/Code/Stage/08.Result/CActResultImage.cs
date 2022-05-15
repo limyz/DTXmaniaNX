@@ -37,11 +37,6 @@ namespace DTXMania
             this.n本体X = 0x1d5;
             this.n本体Y = 0x11b;
 
-            this.ftSongNameFont = new System.Drawing.Font("Impact", 24f, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.ftSongDifficultyFont = new System.Drawing.Font("Impact", 15f, FontStyle.Regular);
-            this.ftSongNameFont = new System.Drawing.Font("ＤＦＧ平成ゴシック体W7", 21f, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.iDrumSpeed = Image.FromFile(CSkin.Path(@"Graphics\7_panel_icons.jpg"));
-            this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
             base.OnActivate();
 
         }
@@ -50,14 +45,17 @@ namespace DTXMania
             if (this.ct登場用 != null)
             {
                 this.ct登場用 = null;
-            }
-            CDTXMania.tReleaseTexture(ref this.txジャケットパネル);
+            }            
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
         {
             if (!base.bNotActivated)
             {
+                this.ftSongDifficultyFont = new System.Drawing.Font("Impact", 15f, FontStyle.Regular);
+                this.iDrumSpeed = Image.FromFile(CSkin.Path(@"Graphics\7_panel_icons.jpg"));
+                this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
+
                 this.txリザルト画像がないときの画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_preimage default.png"));
                 if (CDTXMania.ConfigIni.bストイックモード)
                 {
@@ -177,6 +175,9 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
+                CDTXMania.t安全にDisposeする(ref this.ftSongDifficultyFont);
+                CDTXMania.t安全にDisposeする(ref this.iDrumSpeed);
+                CDTXMania.tReleaseTexture(ref this.txジャケットパネル);
                 CDTXMania.tReleaseTexture(ref this.txリザルト画像);
                 CDTXMania.tReleaseTexture(ref this.txリザルト画像がないときの画像);
                 CDTXMania.tReleaseTexture(ref this.txSongName);
@@ -255,8 +256,7 @@ namespace DTXMania
         #region [ private ]
         //-----------------
         private CCounter ct登場用;
-        private System.Drawing.Font ftSongDifficultyFont;
-        private System.Drawing.Font ftSongNameFont;
+        private System.Drawing.Font ftSongDifficultyFont;        
         private Image iDrumSpeed;
         private int n本体X;
         private int n本体Y;

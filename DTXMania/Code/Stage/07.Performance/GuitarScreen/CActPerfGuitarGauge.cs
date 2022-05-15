@@ -25,7 +25,7 @@ namespace DTXMania
         public override void OnActivate()
         {
             base.n本体X.Guitar = 80;
-            base.n本体X.Bass = 912 + 290;
+            base.n本体X.Bass = 912 + 290 + 38;
             base.OnActivate();
         }
         public override void OnDeactivate()
