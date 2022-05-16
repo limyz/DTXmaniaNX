@@ -721,7 +721,7 @@ namespace DTXMania
                                 actEnumSongs.OnActivate();
                                 CDTXMania.stageSongSelection.bIsEnumeratingSongs = true;
                                 EnumSongs.Init(CDTXMania.SongManager.listSongsDB, CDTXMania.SongManager.nNbScoresFromSongsDB);	// songs.db情報と、取得した曲数を、新インスタンスにも与える
-                                EnumSongs.StartEnumFromDisk();		// 曲検索スレッドの起動_開始
+                                EnumSongs.StartEnumFromDisk(false);		// 曲検索スレッドの起動_開始
                                 if (CDTXMania.SongManager.nNbScoresFromSongsDB == 0)	// もし初回起動なら、検索スレッドのプライオリティをLowestでなくNormalにする
                                 {
                                     EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);

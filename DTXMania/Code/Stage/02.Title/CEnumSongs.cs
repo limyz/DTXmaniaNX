@@ -133,7 +133,7 @@ namespace DTXMania
         /// <summary>
         /// 曲検索スレッドの開始
         /// </summary>
-        public void StartEnumFromDisk()
+        public void StartEnumFromDisk(bool readCache)
         {
             if (state == DTXEnumState.None || state == DTXEnumState.CompletelyDone)
             {
@@ -148,11 +148,12 @@ namespace DTXMania
                 {
                     this.Songs管理 = new CSongManager();
                 }
-                this.thDTXFileEnumerate = new Thread(new ThreadStart(this.t曲リストの構築2));
+                this.thDTXFileEnumerate = new Thread(new ParameterizedThreadStart(this.t曲リストの構築2));
                 this.thDTXFileEnumerate.Name = "曲リストの構築";
                 this.thDTXFileEnumerate.IsBackground = true;
-                this.thDTXFileEnumerate.Priority = System.Threading.ThreadPriority.Lowest;
-                this.thDTXFileEnumerate.Start();
+                //Is this really necessary?
+                //this.thDTXFileEnumerate.Priority = System.Threading.ThreadPriority.Lowest;
+                this.thDTXFileEnumerate.Start(readCache);
             }
         }
 
@@ -399,7 +400,7 @@ namespace DTXMania
         /// 起動してタイトル画面に遷移した後にバックグラウンドで発生させる曲検索
         /// #27060 2012.2.6 yyagi
         /// </summary>
-        private void t曲リストの構築2()
+        private void t曲リストの構築2(object argObject)
         {
             // ！注意！
             // 本メソッドは別スレッドで動作するが、プラグイン側でカレントディレクトリを変更しても大丈夫なように、
@@ -410,15 +411,103 @@ namespace DTXMania
             bool bIsAvailableSongList = false;
             bool bIsAvailableSongsDB = false;
             bool bSucceededFastBoot = false;
+            bool bReadCache = (bool)argObject;
 
             try
             {
+                Trace.TraceInformation("Read cache option: " + bReadCache);
+                if (bReadCache)
+                {
+                    try
+                    {
+                        #region [ 00) songlist.dbの読み込みによる曲リストの構築  ]
+                        //-----------------------------
+                        //CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動00_songlistから曲リストを作成する;
+
+                        Trace.TraceInformation("1) songlist.dbを読み込みます。");
+                        Trace.Indent();
+
+                        try
+                        {
+                            if (!CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる)
+                            {
+                                CSongManager s = new CSongManager();
+                                s = Deserialize(strPathSongList);       // 直接this.Songs管理にdeserialize()結果を代入するのは避ける。nullにされてしまうことがあるため。
+                                if (s != null)
+                                {
+                                    this.Songs管理 = s;
+                                }
+
+                                int scores = this.Songs管理.nNbScoresFound;
+                                Trace.TraceInformation("songlist.db の読み込みを完了しました。[{0}スコア]", scores);
+
+                            }
+                            else
+                            {
+                                Trace.TraceInformation("初回の起動であるかまたはDTXManiaのバージョンが上がったため、songlist.db の読み込みをスキップします。");
+
+                            }
+                        }
+                        finally
+                        {
+                            Trace.Unindent();
+                        }
+
+                        #endregion
+
+                        #region [ 1) songs.db の読み込み ]
+                        //-----------------------------
+                        //CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動1_SongsDBからスコアキャッシュを構築;
+
+                        Trace.TraceInformation("2) songs.db を読み込みます。");
+                        Trace.Indent();
+
+                        try
+                        {
+                            if (!CDTXMania.ConfigIni.bConfigIniがないかDTXManiaのバージョンが異なる)
+                            {
+                                try
+                                {
+                                    this.Songs管理.tReadSongsDB(strPathSongsDB);
+                                }
+                                catch
+                                {
+                                    Trace.TraceError("songs.db の読み込みに失敗しました。");
+                                }
+
+                                int scores = (this.Songs管理 == null) ? 0 : this.Songs管理.nNbScoresFromSongsDB;    // 読み込み途中でアプリ終了した場合など、CDTXMania.SongManager がnullの場合があるので注意
+                                Trace.TraceInformation("songs.db の読み込みを完了しました。[{0}スコア]", scores);
+
+                            }
+                            else
+                            {
+                                Trace.TraceInformation("初回の起動であるかまたはDTXManiaのバージョンが上がったため、songs.db の読み込みをスキップします。");
+
+                            }
+                        }
+                        finally
+                        {
+                            Trace.Unindent();
+                        }
+                        //-----------------------------
+                        #endregion
+                    }
+                    finally
+                    {
+                        CDTXMania.SongManager = this.Songs管理;
+                        //Reset temporary SongManager
+                        this.Songs管理 = new CSongManager();
+                        //Init temporary SongManager with SongListDB and Count
+                        this.Songs管理.listSongsDB = CDTXMania.SongManager.listSongsDB;
+                        this.Songs管理.nNbScoresFromSongsDB = CDTXMania.SongManager.nNbScoresForSongsDB;
+
+                    }                    
+                }
 
                 #region [ 2) 曲データの検索 ]
                 //-----------------------------
                 //	base.ePhaseID = CStage.EPhase.起動2_曲を検索してリストを作成する;
-
-                Trace.TraceInformation("enum2) 曲データを検索します。");
+                Trace.TraceInformation("enum2) 曲データを検索します。");                
                 Trace.Indent();
 
                 try

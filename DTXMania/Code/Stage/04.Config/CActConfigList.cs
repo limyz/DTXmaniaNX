@@ -85,8 +85,14 @@ namespace DTXMania
             this.iSystemReloadDTX = new CItemBase("Reload Songs", CItemBase.EPanelType.Normal,
                 "曲データの一覧情報を\n"+
                 "取得し直します。",
-                "Reload song data.");
+                "Clear song list cache and fully reload song data from disk.");
             this.listItems.Add(this.iSystemReloadDTX);
+
+            this.iSystemFastReloadDTX = new CItemBase("Fast Reload", CItemBase.EPanelType.Normal,
+                "曲データの一覧情報を\n" +
+                "取得し直します。",
+                "Detect changes in DTX Data folder from song list cache and load these changes only.\nWARNING: This feature is experimental and may corrupt the song list cache. Select Reload Songs if something goes wrong.");
+            this.listItems.Add(this.iSystemFastReloadDTX);
 
             int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
             this.iSystemGRmode = new CItemList("Drums & GR ", CItemBase.EPanelType.Normal, nDGmode,
@@ -1863,7 +1869,23 @@ namespace DTXMania
                         CDTXMania.actEnumSongs.OnDeactivate();
                     }
 
-                    CDTXMania.EnumSongs.StartEnumFromDisk();
+                    CDTXMania.EnumSongs.StartEnumFromDisk(false);
+                    CDTXMania.EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);
+                    CDTXMania.actEnumSongs.bコマンドでの曲データ取得 = true;
+                    CDTXMania.actEnumSongs.OnActivate();
+                }
+                #endregion
+                #region [Fast Reload Option]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemFastReloadDTX)				// #32081 2013.10.21 yyagi
+                {
+                    if (CDTXMania.EnumSongs.IsEnumerating)
+                    {
+                        // Debug.WriteLine( "バックグラウンドでEnumeratingSongs中だったので、一旦中断します。" );
+                        CDTXMania.EnumSongs.Abort();
+                        CDTXMania.actEnumSongs.OnDeactivate();
+                    }
+
+                    CDTXMania.EnumSongs.StartEnumFromDisk(true);
                     CDTXMania.EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);
                     CDTXMania.actEnumSongs.bコマンドでの曲データ取得 = true;
                     CDTXMania.actEnumSongs.OnActivate();
@@ -3044,6 +3066,7 @@ namespace DTXMania
         private CItemList iSystemSkinSubfolder;				// #28195 2012.5.2 yyagi
         private CItemToggle iSystemUseBoxDefSkin;			// #28195 2012.5.6 yyagi
         private CItemBase iSystemReloadDTX;					// #32081 2013.10.21 yyagi
+        private CItemBase iSystemFastReloadDTX;             // #141 2022.5.15 fisyher
 
         private int tPreviousItem(int nItem)
         {
