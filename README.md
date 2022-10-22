@@ -30,4 +30,4 @@ https://osdn.net/projects/dtxmaniaxg-verk
 
 ## Community Support
 For additional help or support, ask away in DTXMania on Discord! 
-[https://discord.gg/Q8xeugf](https://discord.gg/Q8xeugf)
+[https://discord.gg/ST5MWHe](https://discord.gg/ST5MWHe)
