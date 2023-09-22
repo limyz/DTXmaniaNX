@@ -240,6 +240,10 @@ namespace DTXMania
 			}
 			public void tPlay()
 			{
+				tPlay(100);
+			}
+			public void tPlay( int nVolume )
+			{
 				if ( this.bReadNotTried )
 				{
 					try
@@ -260,8 +264,10 @@ namespace DTXMania
 				}
 				CSound sound = this.rSound[ this.n次に鳴るサウンド番号 ];
 				if( sound != null )
-					sound.tStartPlaying( this.bループ );
-
+				{
+					sound.nVolume = nVolume;
+					sound.tStartPlaying(this.bループ);
+				}
 				this.n次に鳴るサウンド番号 = 1 - this.n次に鳴るサウンド番号;
 			}
 			public void t停止する()
@@ -351,6 +357,7 @@ namespace DTXMania
         public CSystemSound soundBasic = null;
         public CSystemSound soundAdvanced = null;
         public CSystemSound soundExtreme = null;
+		public CSystemSound soundMetronome = null;
 		public readonly int nシステムサウンド数 = (int)ESystemSound.Count;
 		public CSystemSound this[ ESystemSound sound ]
 		{
@@ -694,7 +701,8 @@ namespace DTXMania
 			this.bgmコンフィグ画面		= new CSystemSound( @"Sounds\Config BGM.ogg",		true,  true,  false );
 			this.bgm選曲画面			= new CSystemSound( @"Sounds\Select BGM.ogg",		true,  true,  false );
             this.bgm結果画面            = new CSystemSound( @"Sounds\Result BGM.ogg",      true,  true,  false);
-		}
+            this.soundMetronome     = new CSystemSound(@"Sounds\Metronome.ogg",         false, false, false);
+        }
 
 		public void ReloadSkin()
 		{

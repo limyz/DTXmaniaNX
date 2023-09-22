@@ -519,6 +519,10 @@ namespace DTXMania
                 "Settings for the system key/pad inputs.");
             this.listItems.Add(this.iSystemGoToKeyAssign);
 
+            this.iSystemMetronome = new CItemToggle("Metronome", CDTXMania.ConfigIni.bMetronome,
+                "メトロノームを有効にします。", "Enable Metronome.");
+            this.listItems.Add( this.iSystemMetronome );
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.System;
@@ -2935,6 +2939,7 @@ namespace DTXMania
         private CItemBase iGuitarGoToKeyAssign;
         private CItemBase iBassGoToKeyAssign;
         private CItemBase iSystemGoToKeyAssign;		// #24609
+        private CItemBase iSystemMetronome;         // 2023.9.22 henryzx
 
         private CItemList iSystemGRmode;
         private CItemToggle iSystemMusicNameDispDef;

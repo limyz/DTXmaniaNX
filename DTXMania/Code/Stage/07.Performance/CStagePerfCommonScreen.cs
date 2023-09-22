@@ -1378,7 +1378,7 @@ namespace DTXMania
                         CDTXMania.DTX.tPlayChip(pChip, n再生開始システム時刻ms, (int)ELane.Bass, n音量, bモニタ, b音程をずらして再生);
                         this.nLastPlayedWAVNumber.Bass = pChip.nIntegerValue_InternalNumber;
                         return;
-                        #endregion
+                    #endregion
 
                     default:
                         break;
@@ -3393,6 +3393,11 @@ namespace DTXMania
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
+
+                            if (CDTXMania.ConfigIni.bMetronome)
+                            {
+                                CDTXMania.Skin.soundMetronome.tPlay(40);
+                            }
                         }
                         if ((ePlayMode == EInstrumentPart.DRUMS) && (configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.bVisible && (this.txChip != null))
                         {
