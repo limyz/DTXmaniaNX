@@ -687,6 +687,7 @@ namespace DTXMania
         //public int nASIOBufferSizeMs; // #24820 2012.12.28 yyagi ASIOのバッファサイズ
         public int nASIODevice; // #24820 2013.1.17 yyagi ASIOデバイス
 		public bool bEventDrivenWASAPI;
+		public bool bMetronome; // 2023.9.22 henryzx
 		public bool bUseOSTimer;
         public bool bDynamicBassMixerManagement; // #24820
 		public int nMasterVolume;
@@ -1724,6 +1725,12 @@ namespace DTXMania
 
 			sw.WriteLine("; WASAPI使用時にEventDrivenモードを使う");
 			sw.WriteLine("EventDrivenWASAPI={0}", this.bEventDrivenWASAPI ? 1 : 0);
+			sw.WriteLine();
+
+			sw.WriteLine("; Enable Embedded Metronome");
+			sw.WriteLine("; Please make sure Metronome.ogg exists in Your current skin sounds folder");
+            sw.WriteLine("; e.g. ./System/{Skin}/Sounds/Metronome.ogg");
+            sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
 			sw.WriteLine();
 
 			sw.WriteLine("; 全体ボリュームの設定");
@@ -2818,6 +2825,10 @@ namespace DTXMania
 											else if (str3.Equals("EventDrivenWASAPI"))
 											{
 												this.bEventDrivenWASAPI = CConversion.bONorOFF(str4[0]);
+											}
+											else if (str3.Equals("Metronome"))
+											{
+												this.bMetronome = CConversion.bONorOFF(str4[0]);
 											}
 											else if (str3.Equals("MasterVolume"))
 											{
