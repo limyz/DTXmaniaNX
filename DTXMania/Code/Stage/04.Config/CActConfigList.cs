@@ -1873,6 +1873,12 @@ namespace DTXMania
                     CDTXMania.actEnumSongs.OnActivate();
                 }
                 #endregion
+                #region [ Metronome ]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemMetronome)
+                {
+                    CDTXMania.ConfigIni.bMetronome = !CDTXMania.ConfigIni.bMetronome;
+                }
+                #endregion
             }
         }
 
