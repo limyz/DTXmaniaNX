@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Diagnostics;
 using System.Text;
 using System.Drawing;
@@ -93,6 +94,18 @@ namespace DTXMania
                 "取得し直します。",
                 "Detect changes in DTX Data folder from song list cache and load these changes only.\nWARNING: This feature is experimental and may corrupt the song list cache. Select Reload Songs if something goes wrong.");
             this.listItems.Add(this.iSystemFastReloadDTX);
+
+            this.iSystemImportConfig = new CItemBase("Import Config", CItemBase.EPanelType.Normal,
+                "config.iniファイルから設定\n" +
+                "を再読み込みする。",
+                "Import settings from an external config.ini file");
+            this.listItems.Add(this.iSystemImportConfig);
+
+            this.iSystemExportConfig = new CItemBase("Export Config", CItemBase.EPanelType.Normal,
+                "config.iniファイルから設定\n" +
+                "を再読み込みする。",
+                "Export current settings to a file");
+            this.listItems.Add(this.iSystemExportConfig);
 
             int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
             this.iSystemGRmode = new CItemList("Drums & GR ", CItemBase.EPanelType.Normal, nDGmode,
@@ -1891,6 +1904,79 @@ namespace DTXMania
                     CDTXMania.actEnumSongs.OnActivate();
                 }
                 #endregion
+                #region [Import Config]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemImportConfig)				// #32081 2013.10.21 yyagi
+                {
+                    //Import Config                 
+                    var fileContent = string.Empty;
+                    var filePath = string.Empty;
+
+                    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+                    {
+                        openFileDialog.InitialDirectory = ".\\";
+                        openFileDialog.FileName = "config.ini";
+                        openFileDialog.Filter = "ini files (*.ini)|*.ini";
+                        openFileDialog.FilterIndex = 2;
+                        openFileDialog.RestoreDirectory = true;
+
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            //Get the path of specified file
+                            filePath = openFileDialog.FileName;
+
+                            Trace.TraceInformation("Selected File to import: " + filePath);
+                            try
+                            {
+                                //NOTE: This does not actually affect the actual configuration as reading from config.ini to set config values is done only during initialization
+                                //i.e. There is no 2-way binding for Config.ini
+                                //CConfigIni newConfig = new CConfigIni(filePath);
+                                //CDTXMania.ConfigIni = newConfig;
+                            }
+                            catch (Exception)
+                            {
+                                Trace.TraceError("Fail to import config file");
+                            }
+                            
+
+                        }
+                        else
+                        {
+                            Trace.TraceInformation("Cancel import of config");
+                        }
+                    }
+                }
+                #endregion
+                #region [Export Config]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemExportConfig)				//
+                {
+                    //Export Config                    
+                    var fileContent = string.Empty;
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.InitialDirectory = ".\\";
+                        saveFileDialog.FileName = "config.ini";
+                        saveFileDialog.Filter = "ini files (*.ini)|*.ini";
+                        saveFileDialog.FilterIndex = 2;
+                        saveFileDialog.RestoreDirectory = true;
+
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            //Get the path of specified file
+                            string filePath = saveFileDialog.FileName;
+                            Trace.TraceInformation("Selected File to export: " + filePath);
+                            //Ensure changes are recorded to config.ini internally
+                            this.tRecordToConfigIni();
+                            CDTXMania.ConfigIni.tWrite(filePath);	// CONFIGだけ
+                        }
+                        else 
+                        {
+                            Trace.TraceInformation("Cancel export of config");
+                        }
+                    }
+
+                    
+                }
+                #endregion
             }
         }
 
@@ -3067,7 +3153,8 @@ namespace DTXMania
         private CItemToggle iSystemUseBoxDefSkin;			// #28195 2012.5.6 yyagi
         private CItemBase iSystemReloadDTX;					// #32081 2013.10.21 yyagi
         private CItemBase iSystemFastReloadDTX;             // #141 2022.5.15 fisyher
-
+        private CItemBase iSystemImportConfig;              // 2022.5.15 fisyher
+        private CItemBase iSystemExportConfig;              // 2022.5.20 fisyher
         private int tPreviousItem(int nItem)
         {
             if (--nItem < 0)
