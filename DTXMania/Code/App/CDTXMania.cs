@@ -54,7 +54,7 @@ namespace DTXMania
         public static CConfigIni ConfigIni
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>

@@ -4909,7 +4909,7 @@ namespace DTXMania
                     matrix2.Matrix00 = 1f;
                     matrix2.Matrix11 = 1f;
                     matrix2.Matrix22 = 1f;
-                    matrix2.Matrix33 = ((float)CDTXMania.ConfigIni.n背景の透過度) / 255f;
+                    matrix2.Matrix33 = ((float)CDTXMania.ConfigIni.nBackgroundTransparency) / 255f;
                     matrix2.Matrix44 = 1f;
                     ColorMatrix newColorMatrix = matrix2;
                     ImageAttributes imageAttr = new ImageAttributes();

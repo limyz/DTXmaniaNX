@@ -132,7 +132,7 @@ namespace DTXMania
 				this.txレーンフレームGB = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\ScreenPlayDrums lane parts guitar.png" ) );
                 if( this.txレーンフレームGB != null )
 				{
-					this.txレーンフレームGB.nTransparency = 0xff - CDTXMania.ConfigIni.n背景の透過度;
+					this.txレーンフレームGB.nTransparency = 0xff - CDTXMania.ConfigIni.nBackgroundTransparency;
 				}
                  */
 

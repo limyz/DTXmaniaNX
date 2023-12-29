@@ -98,13 +98,13 @@ namespace DTXMania
             this.iSystemImportConfig = new CItemBase("Import Config", CItemBase.EPanelType.Normal,
                 "config.iniファイルから設定\n" +
                 "を再読み込みする。",
-                "Import settings from an external config.ini file");
+                "Import and apply settings from an external config.ini file.\nNOTE: Certain configurations such as Window Size and Position require restart of the application to take effect.");
             this.listItems.Add(this.iSystemImportConfig);
 
             this.iSystemExportConfig = new CItemBase("Export Config", CItemBase.EPanelType.Normal,
                 "config.iniファイルから設定\n" +
                 "を再読み込みする。",
-                "Export current settings to a file");
+                "Export current settings to an external .ini file");
             this.listItems.Add(this.iSystemExportConfig);
 
             int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
@@ -244,7 +244,7 @@ namespace DTXMania
                 "Show song information on playing BGA area (FPS, BPM, total time etc)\nYou can turn ON/OFF the indications by pushing [Del] while playing drums, guitar or bass.");
             this.listItems.Add(this.iSystemDebugInfo);
 
-            this.iSystemBGAlpha = new CItemInteger("BG Alpha", 0, 0xff, CDTXMania.ConfigIni.n背景の透過度,
+            this.iSystemBGAlpha = new CItemInteger("BG Alpha", 0, 0xff, CDTXMania.ConfigIni.nBackgroundTransparency,
                 "背景画像をDTXManiaの\n"+
                 "背景画像と合成する際の\n"+
                 "背景画像の透明度を\n"+
@@ -1905,7 +1905,7 @@ namespace DTXMania
                 }
                 #endregion
                 #region [Import Config]
-                else if (this.listItems[this.nCurrentSelection] == this.iSystemImportConfig)				// #32081 2013.10.21 yyagi
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemImportConfig)				// #2022.5.16 fisyher
                 {
                     //Import Config                 
                     var fileContent = string.Empty;
@@ -1927,10 +1927,10 @@ namespace DTXMania
                             Trace.TraceInformation("Selected File to import: " + filePath);
                             try
                             {
-                                //NOTE: This does not actually affect the actual configuration as reading from config.ini to set config values is done only during initialization
-                                //i.e. There is no 2-way binding for Config.ini
-                                //CConfigIni newConfig = new CConfigIni(filePath);
-                                //CDTXMania.ConfigIni = newConfig;
+                                CConfigIni newConfig = new CConfigIni(filePath);
+                                CDTXMania.ConfigIni = newConfig;
+                                //Update the display values in config page to ensure UI is in-sync
+                                this.tUpdateDisplayValuesFromConfigIni();
                             }
                             catch (Exception)
                             {
@@ -1964,7 +1964,7 @@ namespace DTXMania
                             //Get the path of specified file
                             string filePath = saveFileDialog.FileName;
                             Trace.TraceInformation("Selected File to export: " + filePath);
-                            //Ensure changes are recorded to config.ini internally
+                            //Ensure changes are recorded to config.ini internally before export
                             this.tRecordToConfigIni();
                             CDTXMania.ConfigIni.tWrite(filePath);	// CONFIGだけ
                         }
@@ -3183,6 +3183,214 @@ namespace DTXMania
         {
             this.iBassR.bON = this.iBassG.bON = this.iBassB.bON = this.iBassY.bON = this.iBassP.bON = this.iBassPick.bON = this.iBassW.bON = bAutoON;
         }
+
+        private void tUpdateDisplayValuesFromConfigIni() {
+            #region [ System Configuration ]
+
+            this.iCommonPlaySpeed.nCurrentValue = CDTXMania.ConfigIni.nPlaySpeed;
+            int nDGmode = (CDTXMania.ConfigIni.bGuitarEnabled ? 1 : 1) + (CDTXMania.ConfigIni.bDrumsEnabled ? 0 : 1) - 1;
+            this.iSystemGRmode.n現在選択されている項目番号 = nDGmode;
+
+            if (this.iSystemFullscreen.bON != CDTXMania.ConfigIni.bFullScreenMode)
+            {
+                //NOTE: The assignment is done in reverse because ConfigIni.bFullScreenMode will be toggled by the Draw method once the update flag is set to true
+                CDTXMania.ConfigIni.bFullScreenMode = this.iSystemFullscreen.bON;
+                CDTXMania.app.b次のタイミングで全画面_ウィンドウ切り替えを行う = true;
+                //Since actual value has changed, the UI should also reflect this
+                this.iSystemFullscreen.bON = !this.iSystemFullscreen.bON;
+            }            
+            this.iSystemStageFailed.bON = CDTXMania.ConfigIni.bSTAGEFAILEDEnabled;
+            this.iSystemRandomFromSubBox.bON = CDTXMania.ConfigIni.bランダムセレクトで子BOXを検索対象とする;
+
+            this.iSystemAdjustWaves.bON = CDTXMania.ConfigIni.bWave再生位置自動調整機能有効;
+
+            if (this.iSystemVSyncWait.bON != CDTXMania.ConfigIni.bVerticalSyncWait) {
+                CDTXMania.app.b次のタイミングで垂直帰線同期切り替えを行う = true;
+            }            
+            this.iSystemVSyncWait.bON = CDTXMania.ConfigIni.bVerticalSyncWait;
+            this.iSystemBufferedInput.bON = CDTXMania.ConfigIni.bバッファ入力を行う;
+            this.iSystemAVI.bON = CDTXMania.ConfigIni.bAVIEnabled;
+            this.iSystemBGA.bON = CDTXMania.ConfigIni.bBGAEnabled; 
+            this.iSystemPreviewSoundWait.nCurrentValue = CDTXMania.ConfigIni.n曲が選択されてからプレビュー音が鳴るまでのウェイトms;
+            this.iSystemPreviewImageWait.nCurrentValue = CDTXMania.ConfigIni.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms;
+            this.iSystemDebugInfo.bON = CDTXMania.ConfigIni.b演奏情報を表示する;
+            this.iSystemMovieMode.n現在選択されている項目番号 = CDTXMania.ConfigIni.nMovieMode;
+            this.iSystemMovieAlpha.n現在選択されている項目番号 = CDTXMania.ConfigIni.nMovieAlpha;
+            this.iSystemBGAlpha.nCurrentValue = CDTXMania.ConfigIni.nBackgroundTransparency;
+            this.iSystemBGMSound.bON = CDTXMania.ConfigIni.bBGM音を発声する;
+            this.iSystemAudienceSound.bON = CDTXMania.ConfigIni.b歓声を発声する;
+            this.iSystemDamageLevel.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eDamageLevel;
+            this.iSystemSaveScore.bON = CDTXMania.ConfigIni.bScoreIniを出力する;
+
+            this.iLogOutputLog.bON = CDTXMania.ConfigIni.bOutputLogs;
+            this.iSystemChipVolume.nCurrentValue = CDTXMania.ConfigIni.n手動再生音量;
+            this.iSystemAutoChipVolume.nCurrentValue = CDTXMania.ConfigIni.n自動再生音量;
+            this.iSystemStageEffect.bON = CDTXMania.ConfigIni.DisplayBonusEffects;
+
+            this.iSystemShowLag.n現在選択されている項目番号 = CDTXMania.ConfigIni.nShowLagType;
+            this.iSystemShowLagColor.n現在選択されている項目番号 = CDTXMania.ConfigIni.nShowLagTypeColor;
+            this.iSystemShowLagHitCount.bON = CDTXMania.ConfigIni.bShowLagHitCount;
+            this.iSystemAutoResultCapture.bON = CDTXMania.ConfigIni.bIsAutoResultCapture;
+            this.iAutoAddGage.bON = CDTXMania.ConfigIni.bAutoAddGage;
+            this.iInfoType.n現在選択されている項目番号 = CDTXMania.ConfigIni.nInfoType;
+            this.iSystemRisky.nCurrentValue = CDTXMania.ConfigIni.nRisky;
+
+            this.iSystemDifficulty.bON = CDTXMania.ConfigIni.b難易度表示をXG表示にする;
+            this.iSystemShowScore.bON = CDTXMania.ConfigIni.bShowScore;
+            this.iSystemShowMusicInfo.bON = CDTXMania.ConfigIni.bShowMusicInfo;
+
+            //Handle updating of CDTXMania.ConfigIni.strSystemSkinSubfolderFullName back to UI value
+            int nSkinIndex = -1;
+            for (int i = 0; i < skinSubFolders.Length; i++)
+            {
+                if (skinSubFolders[i] == CDTXMania.ConfigIni.strSystemSkinSubfolderFullName) {
+                    nSkinIndex = i;
+                    break;
+                }
+            }
+
+            if (nSkinIndex != -1) {
+
+                this.iSystemSkinSubfolder.n現在選択されている項目番号 = nSkinIndex;
+                this.nSkinIndex = nSkinIndex;
+                CDTXMania.Skin.SetCurrentSkinSubfolderFullName(CDTXMania.ConfigIni.strSystemSkinSubfolderFullName, true);
+            }
+
+            this.iSystemUseBoxDefSkin.bON = CDTXMania.ConfigIni.bUseBoxDefSkin;
+            this.iSystemSkillMode.n現在選択されている項目番号 = CDTXMania.ConfigIni.nSkillMode;
+            this.iSystemClassicNotes.bON = CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする;
+
+            this.iSystemSoundType.n現在選択されている項目番号 = CDTXMania.ConfigIni.nSoundDeviceType;
+            this.iSystemWASAPIBufferSizeMs.nCurrentValue = CDTXMania.ConfigIni.nWASAPIBufferSizeMs;
+            //CDTXMania.ConfigIni.nASIOBufferSizeMs = this.iSystemASIOBufferSizeMs.nCurrentValue; 
+            this.iSystemASIODevice.n現在選択されている項目番号 = CDTXMania.ConfigIni.nASIODevice;
+            this.iSystemSoundTimerType.bON = CDTXMania.ConfigIni.bUseOSTimer;
+            this.iSystemMasterVolume.nCurrentValue = CDTXMania.ConfigIni.nMasterVolume;
+
+            this.iSystemTimeStretch.bON = CDTXMania.ConfigIni.bTimeStretch;
+            this.iSystemMusicNameDispDef.bON = CDTXMania.ConfigIni.b曲名表示をdefのものにする;
+            this.iSystemBGMAdjust.nCurrentValue = CDTXMania.ConfigIni.nCommonBGMAdjustMs;
+
+            #endregion
+
+            #region [ Bass Configuration]
+            this.iBassR.bON = CDTXMania.ConfigIni.bAutoPlay.BsR;
+            this.iBassG.bON = CDTXMania.ConfigIni.bAutoPlay.BsG;
+            this.iBassB.bON = CDTXMania.ConfigIni.bAutoPlay.BsB;
+            this.iBassY.bON = CDTXMania.ConfigIni.bAutoPlay.BsY;
+            this.iBassP.bON = CDTXMania.ConfigIni.bAutoPlay.BsP;
+            this.iBassPick.bON = CDTXMania.ConfigIni.bAutoPlay.BsPick;
+            this.iBassW.bON = CDTXMania.ConfigIni.bAutoPlay.BsW;
+            this.iBassScrollSpeed.nCurrentValue = CDTXMania.ConfigIni.nScrollSpeed.Bass;
+            this.iBassHIDSUD.n現在選択されている項目番号 = CDTXMania.ConfigIni.nHidSud.Bass;
+            this.iBassReverse.bON = CDTXMania.ConfigIni.bReverse.Bass;
+            this.iBassPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.JudgementStringPosition.Bass;
+            this.iBassRandom.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandom.Bass;
+            this.iBassLight.bON = CDTXMania.ConfigIni.bLight.Bass;
+            this.iBassLeft.bON = CDTXMania.ConfigIni.bLeft.Bass;
+            this.iBassInputAdjustTimeMs.nCurrentValue = CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass;		// #23580 2011.1.3 yyagi
+
+            this.iBassLaneFlush.bON = CDTXMania.ConfigIni.bLaneFlush.Bass;
+            this.iBassLaneDisp.n現在選択されている項目番号 = CDTXMania.ConfigIni.nLaneDisp.Bass;
+            this.iBassJudgeLineDisp.bON = CDTXMania.ConfigIni.bJudgeLineDisp.Bass;
+            this.iBassAttackEffect.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eAttackEffect.Bass;
+            this.iBassJudgeLinePos.nCurrentValue = CDTXMania.ConfigIni.nJudgeLine.Bass;
+            this.iBassShutterInPos.nCurrentValue = CDTXMania.ConfigIni.nShutterInSide.Bass;
+            this.iBassShutterOutPos.nCurrentValue = CDTXMania.ConfigIni.nShutterOutSide.Bass;
+
+            this.iSystemSoundMonitorBass.bON = CDTXMania.ConfigIni.b演奏音を強調する.Bass;
+            this.iSystemMinComboBass.nCurrentValue = CDTXMania.ConfigIni.n表示可能な最小コンボ数.Bass;
+            this.iBassGraph.bON = CDTXMania.ConfigIni.bGraph有効.Bass;
+            #endregion
+
+            #region [ Guitar Configuration]
+            this.iGuitarR.bON = CDTXMania.ConfigIni.bAutoPlay.GtR;
+            this.iGuitarG.bON = CDTXMania.ConfigIni.bAutoPlay.GtG;
+            this.iGuitarB.bON = CDTXMania.ConfigIni.bAutoPlay.GtB;
+            this.iGuitarY.bON = CDTXMania.ConfigIni.bAutoPlay.GtY;
+            this.iGuitarP.bON = CDTXMania.ConfigIni.bAutoPlay.GtP;
+            this.iGuitarPick.bON = CDTXMania.ConfigIni.bAutoPlay.GtPick;
+            this.iGuitarW.bON = CDTXMania.ConfigIni.bAutoPlay.GtW;
+            this.iGuitarScrollSpeed.nCurrentValue = CDTXMania.ConfigIni.nScrollSpeed.Guitar;
+            this.iGuitarHIDSUD.n現在選択されている項目番号 = CDTXMania.ConfigIni.nHidSud.Guitar;
+            this.iGuitarReverse.bON = CDTXMania.ConfigIni.bReverse.Guitar;
+            this.iGuitarPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.JudgementStringPosition.Guitar;
+            this.iGuitarRandom.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandom.Guitar;
+            this.iGuitarLight.bON = CDTXMania.ConfigIni.bLight.Guitar;
+            this.iGuitarLeft.bON = CDTXMania.ConfigIni.bLeft.Guitar;
+            this.iGuitarInputAdjustTimeMs.nCurrentValue = CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar;
+
+            this.iGuitarLaneFlush.bON = CDTXMania.ConfigIni.bLaneFlush.Guitar;
+            this.iGuitarLaneDisp.n現在選択されている項目番号 = CDTXMania.ConfigIni.nLaneDisp.Guitar;
+            this.iGuitarJudgeLineDisp.bON = CDTXMania.ConfigIni.bJudgeLineDisp.Guitar;
+            this.iGuitarAttackEffect.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eAttackEffect.Guitar;
+            this.iGuitarJudgeLinePos.nCurrentValue = CDTXMania.ConfigIni.nJudgeLine.Guitar;
+            this.iGuitarShutterInPos.nCurrentValue = CDTXMania.ConfigIni.nShutterInSide.Guitar;
+            this.iGuitarShutterOutPos.nCurrentValue = CDTXMania.ConfigIni.nShutterOutSide.Guitar;
+
+            this.iSystemMinComboGuitar.nCurrentValue = CDTXMania.ConfigIni.n表示可能な最小コンボ数.Guitar;
+            this.iSystemSoundMonitorGuitar.bON = CDTXMania.ConfigIni.b演奏音を強調する.Guitar;
+            this.iGuitarGraph.bON = CDTXMania.ConfigIni.bGraph有効.Guitar;
+            #endregion
+
+            #region [ Drums Configuration]
+            this.iDrumsLeftCymbal.bON = CDTXMania.ConfigIni.bAutoPlay.LC;
+            this.iDrumsHiHat.bON = CDTXMania.ConfigIni.bAutoPlay.HH;
+            this.iDrumsSnare.bON = CDTXMania.ConfigIni.bAutoPlay.SD;
+            this.iDrumsBass.bON = CDTXMania.ConfigIni.bAutoPlay.BD;
+            this.iDrumsHighTom.bON = CDTXMania.ConfigIni.bAutoPlay.HT;
+            this.iDrumsLowTom.bON = CDTXMania.ConfigIni.bAutoPlay.LT;
+            this.iDrumsFloorTom.bON = CDTXMania.ConfigIni.bAutoPlay.FT;
+            this.iDrumsCymbal.bON = CDTXMania.ConfigIni.bAutoPlay.CY;
+            this.iDrumsRide.bON = CDTXMania.ConfigIni.bAutoPlay.RD;
+            this.iDrumsLeftPedal.bON = CDTXMania.ConfigIni.bAutoPlay.LP;
+            this.iDrumsLeftBassDrum.bON = CDTXMania.ConfigIni.bAutoPlay.LBD;
+            this.iDrumsScrollSpeed.nCurrentValue = CDTXMania.ConfigIni.nScrollSpeed.Drums;
+            this.iDrumsReverse.bON = CDTXMania.ConfigIni.bReverse.Drums;
+            this.iDrumsPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.JudgementStringPosition.Drums;
+            this.iDrumsTight.bON = CDTXMania.ConfigIni.bTight;
+            this.iDrumsInputAdjustTimeMs.nCurrentValue = CDTXMania.ConfigIni.nInputAdjustTimeMs.Drums;
+            this.iDrumsHIDSUD.n現在選択されている項目番号 = CDTXMania.ConfigIni.nHidSud.Drums;
+
+            this.iSystemHHGroup.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eHHGroup;
+            this.iSystemFTGroup.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eFTGroup;
+            this.iSystemCYGroup.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eCYGroup;
+            this.iSystemBDGroup.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eBDGroup;
+            this.iSystemHitSoundPriorityHH.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eHitSoundPriorityHH;
+            this.iSystemHitSoundPriorityFT.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eHitSoundPriorityFT;
+            this.iSystemHitSoundPriorityCY.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eHitSoundPriorityCY;
+            this.iDrumsHHOGraphics.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eHHOGraphics.Drums;
+            this.iDrumsLBDGraphics.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eLBDGraphics.Drums;
+            this.iDrumsRDPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRDPosition;
+            this.iSystemFillIn.bON = CDTXMania.ConfigIni.bFillInEnabled;
+            this.iSystemSoundMonitorDrums.bON = CDTXMania.ConfigIni.b演奏音を強調する.Drums;
+            this.iSystemHitSound.bON = CDTXMania.ConfigIni.bドラム打音を発声する;
+            this.iSystemMinComboDrums.nCurrentValue = CDTXMania.ConfigIni.n表示可能な最小コンボ数.Drums;
+            this.iSystemCymbalFree.bON = CDTXMania.ConfigIni.bシンバルフリー;
+            this.iDrumsLaneType.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eLaneType.Drums;
+
+            this.iDrumsLaneDisp.n現在選択されている項目番号 = CDTXMania.ConfigIni.nLaneDisp.Drums;
+            this.iDrumsJudgeLineDisp.bON = CDTXMania.ConfigIni.bJudgeLineDisp.Drums;
+            this.iDrumsLaneFlush.bON = CDTXMania.ConfigIni.bLaneFlush.Drums;
+
+            this.iMutingLP.bON = CDTXMania.ConfigIni.bMutingLP;
+            this.iDrumsAssignToLBD.bON = CDTXMania.ConfigIni.bAssignToLBD.Drums;
+
+            this.iDrumsRandomPad.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandom.Drums;
+            this.iDrumsRandomPedal.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandomPedal.Drums;
+            this.iDrumsNumOfLanes.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eNumOfLanes.Drums;
+            this.iDrumsDkdkType.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eDkdkType.Drums;
+
+            this.iDrumsHAZARD.bON = CDTXMania.ConfigIni.bHAZARD;
+            this.iDrumsAttackEffect.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eAttackEffect.Drums;
+            this.iDrumsJudgeLinePos.nCurrentValue = CDTXMania.ConfigIni.nJudgeLine.Drums;
+            this.iDrumsShutterInPos.nCurrentValue = CDTXMania.ConfigIni.nShutterInSide.Drums;
+            this.iDrumsShutterOutPos.nCurrentValue = CDTXMania.ConfigIni.nShutterOutSide.Drums;
+            this.iDrumsComboDisp.bON = CDTXMania.ConfigIni.bドラムコンボ文字の表示;
+            this.iDrumsGraph.bON = CDTXMania.ConfigIni.bGraph有効.Drums;
+            #endregion
+        }
+
         private void tRecordToConfigIni()
         {
             switch (this.eMenuType)
@@ -3244,7 +3452,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.b演奏情報を表示する = this.iSystemDebugInfo.bON;
             CDTXMania.ConfigIni.nMovieMode = this.iSystemMovieMode.n現在選択されている項目番号;
             CDTXMania.ConfigIni.nMovieAlpha = this.iSystemMovieAlpha.n現在選択されている項目番号;
-            CDTXMania.ConfigIni.n背景の透過度 = this.iSystemBGAlpha.nCurrentValue;
+            CDTXMania.ConfigIni.nBackgroundTransparency = this.iSystemBGAlpha.nCurrentValue;
             CDTXMania.ConfigIni.bBGM音を発声する = this.iSystemBGMSound.bON;
             CDTXMania.ConfigIni.b歓声を発声する = this.iSystemAudienceSound.bON;
             CDTXMania.ConfigIni.eDamageLevel = (EDamageLevel)this.iSystemDamageLevel.n現在選択されている項目番号;
