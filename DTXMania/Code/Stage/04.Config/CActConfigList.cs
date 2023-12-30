@@ -1979,12 +1979,6 @@ namespace DTXMania
                     }
                 }
                 #endregion
-                #region [ Metronome ]
-                else if (this.listItems[this.nCurrentSelection] == this.iSystemMetronome)
-                {
-                    CDTXMania.ConfigIni.bMetronome = !CDTXMania.ConfigIni.bMetronome;
-                }
-                #endregion
                 
             }
         }   
@@ -3052,7 +3046,7 @@ namespace DTXMania
         private CItemBase iGuitarGoToKeyAssign;
         private CItemBase iBassGoToKeyAssign;
         private CItemBase iSystemGoToKeyAssign;		// #24609
-        private CItemBase iSystemMetronome;         // 2023.9.22 henryzx
+        private CItemToggle iSystemMetronome;         // 2023.9.22 henryzx // 2023.12.30 Changed to CItemToggle
 
         private CItemList iSystemGRmode;
         private CItemToggle iSystemMusicNameDispDef;
@@ -3280,6 +3274,7 @@ namespace DTXMania
             this.iSystemTimeStretch.bON = CDTXMania.ConfigIni.bTimeStretch;
             this.iSystemMusicNameDispDef.bON = CDTXMania.ConfigIni.b曲名表示をdefのものにする;
             this.iSystemBGMAdjust.nCurrentValue = CDTXMania.ConfigIni.nCommonBGMAdjustMs;
+            this.iSystemMetronome.bON = CDTXMania.ConfigIni.bMetronome;
 
             #endregion
 
@@ -3481,6 +3476,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.bAutoAddGage = this.iAutoAddGage.bON;
             CDTXMania.ConfigIni.nInfoType = this.iInfoType.n現在選択されている項目番号;
             CDTXMania.ConfigIni.nRisky = this.iSystemRisky.nCurrentValue;										// #23559 2911.7.27 yyagi
+            CDTXMania.ConfigIni.bMetronome = this.iSystemMetronome.bON;     // 2023.12.30 fisyher
 
             #region [ GDオプション ]
             
