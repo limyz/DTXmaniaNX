@@ -538,6 +538,10 @@ namespace DTXMania
                 "Settings for the system key/pad inputs.");
             this.listItems.Add(this.iSystemGoToKeyAssign);
 
+            this.iSystemMetronome = new CItemToggle("Metronome", CDTXMania.ConfigIni.bMetronome,
+                "メトロノームを有効にします。", "Enable Metronome.");
+            this.listItems.Add( this.iSystemMetronome );
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.System;
@@ -1845,17 +1849,17 @@ namespace DTXMania
                 }
                 #endregion
                 #region[ ギター_ベースグラフ ]
-                else if( this.listItems[ this.nCurrentSelection ] == this.iGuitarGraph )
+                else if (this.listItems[this.nCurrentSelection] == this.iGuitarGraph)
                 {
-                    if( this.iGuitarGraph.bON == true )
+                    if (this.iGuitarGraph.bON == true)
                     {
                         CDTXMania.ConfigIni.bGraph有効.Bass = false;
                         this.iBassGraph.bON = false;
                     }
                 }
-                else if( this.listItems[ this.nCurrentSelection ] == this.iBassGraph )
+                else if (this.listItems[this.nCurrentSelection] == this.iBassGraph)
                 {
-                    if( this.iBassGraph.bON == true )
+                    if (this.iBassGraph.bON == true)
                     {
                         CDTXMania.ConfigIni.bGraph有効.Guitar = false;
                         this.iGuitarGraph.bON = false;
@@ -1936,7 +1940,7 @@ namespace DTXMania
                             {
                                 Trace.TraceError("Fail to import config file");
                             }
-                            
+
 
                         }
                         else
@@ -1968,17 +1972,22 @@ namespace DTXMania
                             this.tRecordToConfigIni();
                             CDTXMania.ConfigIni.tWrite(filePath);	// CONFIGだけ
                         }
-                        else 
+                        else
                         {
                             Trace.TraceInformation("Cancel export of config");
                         }
                     }
-
-                    
                 }
                 #endregion
+                #region [ Metronome ]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemMetronome)
+                {
+                    CDTXMania.ConfigIni.bMetronome = !CDTXMania.ConfigIni.bMetronome;
+                }
+                #endregion
+                
             }
-        }
+        }   
 
         private void tGenerateSkinSample()
         {
@@ -3043,6 +3052,7 @@ namespace DTXMania
         private CItemBase iGuitarGoToKeyAssign;
         private CItemBase iBassGoToKeyAssign;
         private CItemBase iSystemGoToKeyAssign;		// #24609
+        private CItemBase iSystemMetronome;         // 2023.9.22 henryzx
 
         private CItemList iSystemGRmode;
         private CItemToggle iSystemMusicNameDispDef;
