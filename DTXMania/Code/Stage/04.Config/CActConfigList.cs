@@ -1935,10 +1935,16 @@ namespace DTXMania
                                 CDTXMania.ConfigIni = newConfig;
                                 //Update the display values in config page to ensure UI is in-sync
                                 this.tUpdateDisplayValuesFromConfigIni();
+                                //Update Toast Message
+                                string fileName = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                                this.tUpdateToastMessage(string.Format("Imported {0} successfully.", fileName));
+                                this.ctToastMessageCounter.tStart(0, 1, 10000, CDTXMania.Timer);
                             }
                             catch (Exception)
                             {
                                 Trace.TraceError("Fail to import config file");
+                                this.tUpdateToastMessage("Error importing selected file.");
+                                this.ctToastMessageCounter.tStart(0, 1, 10000, CDTXMania.Timer);
                             }
 
 
@@ -1970,7 +1976,11 @@ namespace DTXMania
                             Trace.TraceInformation("Selected File to export: " + filePath);
                             //Ensure changes are recorded to config.ini internally before export
                             this.tRecordToConfigIni();
-                            CDTXMania.ConfigIni.tWrite(filePath);	// CONFIGだけ
+                            CDTXMania.ConfigIni.tWrite(filePath);   // CONFIGだけ
+                            //Update Toast Message
+                            string fileName = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+                            this.tUpdateToastMessage(string.Format("Configurations exported to {0}.", fileName));
+                            this.ctToastMessageCounter.tStart(0, 1, 10000, CDTXMania.Timer);
                         }
                         else
                         {
@@ -2365,6 +2375,7 @@ namespace DTXMania
             this.n現在のスクロールカウンタ = 0;
             this.nスクロール用タイマ値 = -1;
             this.ctTriangleArrowAnimation = new CCounter();
+            this.ctToastMessageCounter = new CCounter(0, 1, 10000, CDTXMania.Timer);
 
             this.iSystemSoundType_initial = this.iSystemSoundType.n現在選択されている項目番号; // CONFIGに入ったときの値を保持しておく
             this.iSystemWASAPIBufferSizeMs_initial = this.iSystemWASAPIBufferSizeMs.nCurrentValue; // CONFIG脱出時にこの値から変更されているようなら
@@ -2450,6 +2461,7 @@ namespace DTXMania
             this.txLane = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Paret.png"));
             this.txShutter = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_shutter.png"));
             this.txSkinSample1 = null;		// スキン選択時に動的に設定するため、ここでは初期化しない
+            this.prvFontForToastMessage = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 14, FontStyle.Regular);
             base.OnManagedCreateResources();
         }
         public override void OnManagedReleaseResources()
@@ -2467,6 +2479,8 @@ namespace DTXMania
             CDTXMania.tReleaseTexture(ref this.txLane);
             CDTXMania.tReleaseTexture(ref this.txJudgementLine);
             CDTXMania.tReleaseTexture(ref this.txShutter);
+            CDTXMania.tReleaseTexture(ref this.txToastMessage);
+            CDTXMania.t安全にDisposeする(ref this.prvFontForToastMessage);
             base.OnManagedReleaseResources();
         }
 
@@ -2612,6 +2626,13 @@ namespace DTXMania
             //-----------------
             #endregion
 
+            #region [ Update Toast Message Counter] 
+            this.ctToastMessageCounter.tUpdate();
+            if (this.ctToastMessageCounter.bReachedEndValue)
+            {
+                this.tUpdateToastMessage("");
+            }
+            #endregion
 
             // 描画
 
@@ -2853,6 +2874,15 @@ namespace DTXMania
             }
             //-----------------
             #endregion
+
+            #region [ Draw Toast Message ]
+
+            if (this.txToastMessage != null)
+            {
+                this.txToastMessage.tDraw2D(CDTXMania.app.Device, 15, 325);
+            }
+            #endregion
+
             return 0;
         }
 
@@ -3018,6 +3048,9 @@ namespace DTXMania
         private CTexture tx通常項目行パネル;
         private CTexture txカーソル;
         private CTexture tx説明文パネル;
+        private CTexture txToastMessage;
+        private CPrivateFastFont prvFontForToastMessage;
+        private CCounter ctToastMessageCounter;
 
         private CPrivateFastFont prvFont;
         //private List<string> list項目リスト_str最終描画名;
@@ -3629,6 +3662,22 @@ namespace DTXMania
             CDTXMania.ConfigIni.n表示可能な最小コンボ数.Guitar = this.iSystemMinComboGuitar.nCurrentValue;
             CDTXMania.ConfigIni.b演奏音を強調する.Guitar = this.iSystemSoundMonitorGuitar.bON;
             CDTXMania.ConfigIni.bGraph有効.Guitar = this.iGuitarGraph.bON;
+        }
+
+        private void tUpdateToastMessage(string strMessage) {
+            CDTXMania.t安全にDisposeする(ref this.txToastMessage);
+
+            if (strMessage != "" && this.prvFontForToastMessage != null)
+            {                
+                Bitmap bmpItem = this.prvFontForToastMessage.DrawPrivateFont(strMessage, Color.White, Color.Black);
+                this.txToastMessage = CDTXMania.tGenerateTexture(bmpItem);                
+                CDTXMania.t安全にDisposeする(ref bmpItem);
+            }
+            else 
+            {
+                this.txToastMessage = null;
+            }
+
         }
         //-----------------
         #endregion
