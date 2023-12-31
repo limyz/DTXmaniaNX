@@ -969,7 +969,7 @@ namespace DTXMania
 				this.b演奏情報を表示する = !value;
 			}
 		}
-		public int n背景の透過度
+		public int nBackgroundTransparency
 		{
 			get
 			{
@@ -2856,7 +2856,7 @@ namespace DTXMania
                                             }                                            
                                             else if (str3.Equals("BGAlpha"))
                                             {
-                                                this.n背景の透過度 = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.n背景の透過度);
+                                                this.nBackgroundTransparency = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.nBackgroundTransparency);
                                             }
                                             else if (str3.Equals("DamageLevel"))
                                             {
