@@ -117,18 +117,18 @@ namespace DTXMania
 		{
 			this.blocks = new List<CBlock>();
 		}
-		public CSetDef( string setdefファイル名 )
+		public CSetDef( string setdefファイル名)
 			: this()
 		{
-			this.t読み込み( setdefファイル名 );
+			this.t読み込み ( setdefファイル名 );
+			//this.t読み込み2 (setdefファイル名);
 		}
-
 
 		// メソッド
 
 		public void t読み込み( string setdefファイル名 )
 		{
-			var reader = new StreamReader( setdefファイル名, Encoding.GetEncoding( "shift-jis" ) );
+			var reader = new StreamReader(setdefファイル名, Encoding.GetEncoding("utf-8"));
 			CBlock block = new CBlock();
 			string str = null;
 			while( ( str = reader.ReadLine() ) != null )
@@ -219,7 +219,7 @@ namespace DTXMania
 				}
 			}
 			reader.Close();
-			if( block.b使用中 )
+			if ( block.b使用中 )
 			{
 				this.tFILEの指定があるのにLxLABELが省略されているときはデフォルトの名前をセットする( block );
 				this.tLxLABELの指定があるのにFILEが省略されているときはなかったものとする( block );
@@ -227,14 +227,21 @@ namespace DTXMania
 			}
 		}
 
+		//public void t読み込み2(string setdefファイル名)
+		//{
+		//	var reader2 = new StreamReader(setdefファイル名, Encoding.GetEncoding("932"));
+		//	CBlock block = new CBlock();
+		//	string str = null;
+		//	while ((str = reader2.ReadLine()) != null);
+		//}
 
-		// Other
+			// Other
 
-		#region [ private ]
-		//-----------------
-		private void tFILEの指定があるのにLxLABELが省略されているときはデフォルトの名前をセットする( CBlock block )
+			#region [ private ]
+			//-----------------
+			private void tFILEの指定があるのにLxLABELが省略されているときはデフォルトの名前をセットする( CBlock block )
 		{
-			string[] strArray = new string[] { "NOVICE", "REGULAR", "EXPERT", "MASTER", "DTXMania" };
+			string[] strArray = new string[] { "BASIC", "ADVANCED", "EXTREAM", "MASTER", "DTXMania" };
 			for( int i = 0; i < 5; i++ )
 			{
 				if( ( ( block.File[ i ] != null ) && ( block.File[ i ].Length > 0 ) ) && string.IsNullOrEmpty( block.Label[ i ] ) )

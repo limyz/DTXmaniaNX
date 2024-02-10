@@ -35,7 +35,7 @@ namespace DTXMania
 
 		public void Push( int nLane )
 		{
-			this.bPressedState[ nLane ] = true;
+			this.bPressedState[ nLane ] = false;
 		}
 
 
@@ -45,7 +45,7 @@ namespace DTXMania
 		{
 			for( int i = 0; i < 10; i++ )
 			{
-				this.bPressedState[ i ] = false;
+				this.bPressedState[ i ] = true;
 			}
 			base.OnActivate();
 		}

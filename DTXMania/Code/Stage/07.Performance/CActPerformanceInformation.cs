@@ -52,28 +52,28 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
                     y += 0x143;
-                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("BGM/D/G/B Adj: {0:####0}/{1:####0}/{2:####0}/{3:####0} ms", CDTXMania.DTX.nBGMAdjust, CDTXMania.ConfigIni.nInputAdjustTimeMs.Drums, CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar, CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass));
+                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("BGM/D/G/B Adj  : {0:####0}/{1:####0}/{2:####0}/{3:####0} ms", CDTXMania.DTX.nBGMAdjust, CDTXMania.ConfigIni.nInputAdjustTimeMs.Drums, CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar, CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass));
                     y -= 0x10;
-                    CDTXMania.actDisplayString.tPrint( x, y, CCharacterConsole.EFontType.White, string.Format( "BGMAdjCommon : {0:####0} ms", CDTXMania.ConfigIni.nCommonBGMAdjustMs ) );
+                    CDTXMania.actDisplayString.tPrint( x, y, CCharacterConsole.EFontType.White, string.Format( "BGMAdjCommon   : {0:####0} ms", CDTXMania.ConfigIni.nCommonBGMAdjustMs ) );
                     y -= 0x10;
                     int num = (CDTXMania.DTX.listChip.Count > 0) ? CDTXMania.DTX.listChip[CDTXMania.DTX.listChip.Count - 1].nPlaybackTimeMs : 0;
-                    string str = "Time: " + ((((double)CDTXMania.Timer.nCurrentTime) / 1000.0)).ToString("####0.00") + " / " + ((((double)num) / 1000.0)).ToString("####0.00");
+                    string str = "Time: " + (((CDTXMania.Timer.nCurrentTime / 60) / 1000)).ToString("###00:") + ((((double)CDTXMania.Timer.nCurrentTime / 1000) % 60 )).ToString("###00.00") + " / " + (((num) / 60 / 1000)).ToString("###00:") + (((num) / 1000.0 % 60)).ToString("###00.00");
                     CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, str);
                     y -= 0x10;
-                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Part:          {0:####0}", this.n小節番号));
+                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Part           : {0:####0}", this.n小節番号));
                     y -= 0x10;
-                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("BPM:           {0:####0.00}", this.dbBPM));
+                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("BPM            : {0:####0.0000}", this.dbBPM));
                     y -= 0x10;
-                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Frame:         {0:####0} fps", CDTXMania.FPS.n現在のFPS));
+                    CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Frame          : {0:####0} fps", CDTXMania.FPS.n現在のFPS));
                     y -= 0x10;
                     
                     if (CDTXMania.ConfigIni.nSoundDeviceType != 0)
                     {
-                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound CPU : {0:####0.00}%", CDTXMania.SoundManager.GetCPUusage()));
+                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound CPU      : {0:####0.00}%", CDTXMania.SoundManager.GetCPUusage()));
                         y -= 0x10;
-                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound Mixing:  {0:####0}", CDTXMania.SoundManager.GetMixingStreams()));
+                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound Mixing   : {0:####0}", CDTXMania.SoundManager.GetMixingStreams()));
                         y -= 0x10;
-                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound Streams: {0:####0}", CDTXMania.SoundManager.GetStreams()));
+                        CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Sound Streams  : {0:####0}", CDTXMania.SoundManager.GetStreams()));
                         y -= 0x10;
                     }
 			}

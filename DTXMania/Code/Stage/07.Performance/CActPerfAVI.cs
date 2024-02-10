@@ -9,7 +9,6 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using DirectShowLib;
 using FDK;
-
 using Rectangle = System.Drawing.Rectangle;
 using Point = System.Drawing.Point;
 
@@ -30,7 +29,6 @@ namespace DTXMania
             
             base.bNotActivated = true;
         }
-
 
         // メソッド
         
@@ -122,7 +120,6 @@ namespace DTXMania
                             this.tx描画用.vcScaleRatio.X = this.ratio1;
                             this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
-
 
                         if( this.framewidth > 420 )
                         {
@@ -222,7 +219,6 @@ namespace DTXMania
                             this.tx描画用.vcScaleRatio.X = this.ratio1;
                             this.tx描画用.vcScaleRatio.Y = this.ratio1;
                         }
-
 
                         if (this.framewidth > 420)
                         {
@@ -580,7 +576,7 @@ namespace DTXMania
                                     {
                                         this.tx描画用.vcScaleRatio = this.vclip;
                                         //this.tx描画用.tDraw2D( CDTXMania.app.Device, 882, 0 );
-                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 882, 0 );
+                                        this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 885, 87 );
                                     }
                                     else if( CDTXMania.ConfigIni.bGuitarEnabled )
                                     {
@@ -679,7 +675,7 @@ namespace DTXMania
                             else
                             {
                                 this.ratio2 = 270f / ( (float)this.frameheight );
-                                this.position2 = 5 + this.n本体X + (int)( ( 260 - ( this.framewidth * this.ratio2 ) ) / 2f );
+                                this.position2 = 5 + this.n本体X + (int)( ( 260f - ( this.framewidth * this.ratio2 ) ) / 2f );
                             }
                             if( this.txクリップパネル != null )
                                 this.txクリップパネル.tDraw2D( CDTXMania.app.Device, this.n本体X, this.n本体Y );
@@ -701,7 +697,7 @@ namespace DTXMania
                         {
                             #region[ スキルメーター無効 ]
                             this.n本体X = 854;
-                            this.n本体Y = 142;
+                            this.n本体Y = 299;
 
                             if( this.fClipアスペクト比 > 1.77f )
                             {
@@ -759,12 +755,12 @@ namespace DTXMania
                         this.tx描画用.vcScaleRatio = this.smallvc;
                         
                         {
-                            if( this.rAVI != null )
+                            if(this.n総移動時間ms != -1 && this.rAVI != null)
                             {
                                 if( this.fClipアスペクト比 < 1.77f )
-                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, this.position2, 5 + this.n本体Y );
+                                    this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, this.position2, 5 + this.n本体Y );
                                 else
-                                    this.tx描画用.tDraw2D( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
+                                    this.tx描画用.tDraw2DUpsideDown( CDTXMania.app.Device, 30 + this.n本体X, this.position2 );
                             }
                         }
                         #endregion

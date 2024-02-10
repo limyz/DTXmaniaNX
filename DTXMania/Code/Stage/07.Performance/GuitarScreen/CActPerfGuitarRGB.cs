@@ -14,7 +14,6 @@ namespace DTXMania
 			base.bNotActivated = true;
 		}
 
-
 		// CActivity 実装（共通クラスからの差分のみ）
 
 		public override int OnUpdateAndDraw()
@@ -28,7 +27,7 @@ namespace DTXMania
 
                 //CLASSICシャッター(レーンシャッター)は未実装。
                 //if ((CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする == true ) && ((CDTXMania.DTX.bチップがある.LeftCymbal == false) && ( CDTXMania.DTX.bチップがある.FT == false ) && ( CDTXMania.DTX.bチップがある.Ride == false ) && ( CDTXMania.DTX.bチップがある.LP == false )))
-                {
+                /*{
                     //if ( this.txLaneCover != null )
                     {
                         //旧画像
@@ -70,7 +69,7 @@ namespace DTXMania
                             }
                         }
                     }
-                }
+                }*/
 
                 #region[ シャッター 変数]
                 if (base.txShutter != null)
@@ -126,7 +125,7 @@ namespace DTXMania
                             base.txRGB.tDraw2D(CDTXMania.app.Device, 67, 670, new Rectangle(0, 128, 277, 50));
 
                         if (this.nシャッター上.Guitar == 0)
-                            base.txRGB.tDraw2D(CDTXMania.app.Device, 67, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Guitar ? 64 : 0), 277, 64));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 66, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Guitar ? 64 : 0), 277, 64));
                     }
 
                     if (base.txShutter != null)
@@ -173,7 +172,7 @@ namespace DTXMania
                             base.txRGB.tDraw2D(CDTXMania.app.Device, 937, 670, new Rectangle(0, 128, 277, 50));
 
                         if (this.nシャッター上.Bass == 0)
-                            base.txRGB.tDraw2D(CDTXMania.app.Device, 937, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Bass ? 64 : 0), 277, 64));
+                            base.txRGB.tDraw2D(CDTXMania.app.Device, 936, 42, new Rectangle(0, (CDTXMania.ConfigIni.bLeft.Bass ? 64 : 0), 277, 64));
                     }
 
                     if (base.txShutter != null)

@@ -29,7 +29,7 @@ namespace DTXMania
 
 
 		/// <summary>
-		/// DTXManiaGR.exe 引数の分析
+		/// DTXManiaNX.exe 引数の分析
 		/// </summary>
 		/// <param name="arg"></param>
 		/// <returns>DTXMania/DTXV/DTX2WAV どのモードで起動されたかを返す</returns>

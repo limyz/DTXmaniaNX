@@ -101,6 +101,17 @@ namespace DTXMania
 					case EChannel.Guitar_xGxxP:
 					case EChannel.Guitar_xGBxP:
 					case EChannel.Guitar_RxxxP:
+					case EChannel.Guitar_RxBxP:
+					case EChannel.Guitar_RGxxP:
+					case EChannel.Guitar_RGBxP:
+					case EChannel.Guitar_xxxYP:
+					case EChannel.Guitar_xxBYP:
+					case EChannel.Guitar_xGxYP:
+					case EChannel.Guitar_xGBYP:
+					case EChannel.Guitar_RxxYP:
+					case EChannel.Guitar_RxBYP:
+					case EChannel.Guitar_RGxYP:
+					case EChannel.Guitar_RGBYP:
 					case EChannel.Bass_Open:
 					case EChannel.Bass_xxBxx:
 					case EChannel.Bass_xGxxx:
@@ -109,13 +120,6 @@ namespace DTXMania
 					case EChannel.Bass_RxBxx:
 					case EChannel.Bass_RGxxx:
 					case EChannel.Bass_RGBxx:
-					case EChannel.Guitar_RxBxP:
-					case EChannel.Guitar_RGxxP:
-					case EChannel.Guitar_RGBxP:
-					case EChannel.Guitar_xxxYP:
-					case EChannel.Guitar_xxBYP:
-					case EChannel.Guitar_xGxYP:
-					case EChannel.Guitar_xGBYP:
 					case EChannel.Bass_xxxYx:
 					case EChannel.Bass_xxBYx:
 					case EChannel.Bass_xGxYx:
@@ -126,10 +130,6 @@ namespace DTXMania
 					case EChannel.Bass_RGBYx:
 					case EChannel.Bass_xxxxP:
 					case EChannel.Bass_xxBxP:
-					case EChannel.Guitar_RxxYP:
-					case EChannel.Guitar_RxBYP:
-					case EChannel.Guitar_RGxYP:
-					case EChannel.Guitar_RGBYP:
 					case EChannel.Bass_xGxxP:
 					case EChannel.Bass_xGBxP:
 					case EChannel.Bass_RxxxP:
@@ -149,7 +149,6 @@ namespace DTXMania
 				return false;
 			}
         }
-
 		public bool bWAVを使うチャンネルである
 		{
 			get
@@ -170,14 +169,6 @@ namespace DTXMania
 					case EChannel.LeftPedal:
 					case EChannel.LeftBassDrum:
 					case EChannel.DrumsFillin:
-					case EChannel.Guitar_Open:
-					case EChannel.Guitar_xxBxx:
-					case EChannel.Guitar_xGxxx:
-					case EChannel.Guitar_xGBxx:
-					case EChannel.Guitar_Rxxxx:
-					case EChannel.Guitar_RxBxx:
-					case EChannel.Guitar_RGxxx:
-					case EChannel.Guitar_RGBxx:
 					case EChannel.Guitar_WailingSound:
 					case EChannel.HiHatClose_Hidden:
 					case EChannel.Snare_Hidden:
@@ -189,6 +180,20 @@ namespace DTXMania
 					case EChannel.HiHatOpen_Hidden:
 					case EChannel.RideCymbal_Hidden:
 					case EChannel.LeftCymbal_Hidden:
+					case EChannel.HiHatClose_NoChip:
+					case EChannel.Snare_NoChip:
+					case EChannel.BassDrum_NoChip:
+					case EChannel.HighTom_NoChip:
+					case EChannel.LowTom_NoChip:
+					case EChannel.Cymbal_NoChip:
+					case EChannel.FloorTom_NoChip:
+					case EChannel.HiHatOpen_NoChip:
+					case EChannel.RideCymbal_NoChip:
+					case EChannel.Guitar_NoChip:
+					case EChannel.Bass_NoChip:
+					case EChannel.LeftCymbal_NoChip:
+					case EChannel.LeftPedal_NoChip:
+					case EChannel.LeftBassDrum_NoChip:
 					case EChannel.SE01:
 					case EChannel.SE02:
 					case EChannel.SE03:
@@ -222,6 +227,14 @@ namespace DTXMania
 					case EChannel.SE31:
 					case EChannel.SE32:
 
+					case EChannel.Guitar_Open:
+					case EChannel.Guitar_xxBxx:
+					case EChannel.Guitar_xGxxx:
+					case EChannel.Guitar_xGBxx:
+					case EChannel.Guitar_Rxxxx:
+					case EChannel.Guitar_RxBxx:
+					case EChannel.Guitar_RGxxx:
+					case EChannel.Guitar_RGBxx:
 					case EChannel.Guitar_xxxYx:
 					case EChannel.Guitar_xxBYx:
 					case EChannel.Guitar_xGxYx:
@@ -235,6 +248,17 @@ namespace DTXMania
 					case EChannel.Guitar_xGxxP:
 					case EChannel.Guitar_xGBxP:
 					case EChannel.Guitar_RxxxP:
+					case EChannel.Guitar_RxBxP:
+					case EChannel.Guitar_RGxxP:
+					case EChannel.Guitar_RGBxP:
+					case EChannel.Guitar_xxxYP:
+					case EChannel.Guitar_xxBYP:
+					case EChannel.Guitar_xGxYP:
+					case EChannel.Guitar_xGBYP:
+					case EChannel.Guitar_RxxYP:
+					case EChannel.Guitar_RxBYP:
+					case EChannel.Guitar_RGxYP:
+					case EChannel.Guitar_RGBYP:
 
 					case EChannel.Bass_Open:
 					case EChannel.Bass_xxBxx:
@@ -244,31 +268,6 @@ namespace DTXMania
 					case EChannel.Bass_RxBxx:
 					case EChannel.Bass_RGxxx:
 					case EChannel.Bass_RGBxx:
-
-					case EChannel.Guitar_RxBxP:
-					case EChannel.Guitar_RGxxP:
-					case EChannel.Guitar_RGBxP:
-					case EChannel.Guitar_xxxYP:
-					case EChannel.Guitar_xxBYP:
-					case EChannel.Guitar_xGxYP:
-
-					case EChannel.Guitar_xGBYP:
-					case EChannel.HiHatClose_NoChip:
-					case EChannel.Snare_NoChip:
-					case EChannel.BassDrum_NoChip:
-					case EChannel.HighTom_NoChip:
-					case EChannel.LowTom_NoChip:
-					case EChannel.Cymbal_NoChip:
-					case EChannel.FloorTom_NoChip:
-					case EChannel.HiHatOpen_NoChip:
-					case EChannel.RideCymbal_NoChip:
-					case EChannel.Guitar_NoChip:
-					case EChannel.Bass_NoChip:
-					case EChannel.LeftCymbal_NoChip:
-
-					case EChannel.LeftPedal_NoChip:
-					case EChannel.LeftBassDrum_NoChip:
-
 					case EChannel.Bass_xxxYx:
 					case EChannel.Bass_xxBYx:
 					case EChannel.Bass_xGxYx:
@@ -279,10 +278,6 @@ namespace DTXMania
 					case EChannel.Bass_RGBYx:
 					case EChannel.Bass_xxxxP:
 					case EChannel.Bass_xxBxP:
-					case EChannel.Guitar_RxxYP:
-					case EChannel.Guitar_RxBYP:
-					case EChannel.Guitar_RGxYP:
-					case EChannel.Guitar_RGBYP:
 					case EChannel.Bass_xGxxP:
 					case EChannel.Bass_xGBxP:
 					case EChannel.Bass_RxxxP:
@@ -395,7 +390,7 @@ namespace DTXMania
 					"BGAスコープ画像切替8"
 				};
 			return string.Format("CChip: 位置:{0:D4}.{1:D3}, 時刻{2:D6}, Ch:{3:X2}({4}), Pn:{5}({11})(内部{6}), Pd:{7}, Sz:{8}, UseWav:{9}, Auto:{10}",
-				this.nPlaybackPosition / 384, this.nPlaybackPosition % 384,
+				this.nPlaybackPosition / 1920, this.nPlaybackPosition % 1920,
 				this.nPlaybackTimeMs,
 				this.nChannelNumber, chToStr[(int)this.nChannelNumber],
 				this.nIntegerValue, this.nIntegerValue_InternalNumber,

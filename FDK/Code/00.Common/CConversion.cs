@@ -9,7 +9,7 @@ namespace FDK
 		// プロパティ
 
 		public static readonly string strBase16Characters = "0123456789ABCDEFabcdef";
-		public static readonly string strBase36Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+		public static readonly string strBase62Characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		
 
 		// メソッド
@@ -101,37 +101,37 @@ namespace FDK
 
 			return digit2 * 16 + digit1;
 		}
-		public static int nConvert2DigitBase36StringToNumber( string strNum)  // n36進数2桁の文字列を数値に変換して返す
+		public static int nConvert2DigitBase62StringToNumber( string strNum)  // n62進数2桁の文字列を数値に変換して返す
 		{
 			if( strNum.Length < 2 )
 				return -1;
 
-			int digit2 = strBase36Characters.IndexOf( strNum[ 0 ] );
+			int digit2 = strBase62Characters.IndexOf( strNum[ 0 ] );
 			if( digit2 < 0 )
 				return -1;
 
-			if( digit2 >= 36 )
-				digit2 -= (36 - 10);		// A,B,C... -> 1,2,3...
+			if( digit2 >= 62 )
+				digit2 -= (62 - 10);		// A,B,C... -> 1,2,3...
 
-			int digit1 = strBase36Characters.IndexOf( strNum[ 1 ] );
+			int digit1 = strBase62Characters.IndexOf( strNum[ 1 ] );
 			if( digit1 < 0 )
 				return -1;
 
-			if( digit1 >= 36 )
-				digit1 -= (36 - 10);
+			if( digit1 >= 62 )
+				digit1 -= (62 - 10);
 
-			return digit2 * 36 + digit1;
+			return digit2 * 62 + digit1;
 		}
 		public static int nConvert3DigitMeasureNumberToNumber( string strNum)  // n小節番号の文字列3桁を数値に変換して返す
 		{
 			if( strNum.Length >= 3 )
 			{
-				int digit3 = strBase36Characters.IndexOf( strNum[ 0 ] );
+				int digit3 = strBase62Characters.IndexOf( strNum[ 0 ] );
 				if( digit3 < 0 )
 					return -1;
 
-				if( digit3 >= 36 )									// 3桁目は36進数
-					digit3 -= (36 - 10);
+				if( digit3 >= 62 )									// 3桁目は36進数
+					digit3 -= (62 - 10);
 
 				int digit2 = strBase16Characters.IndexOf( strNum[ 1 ] );	// 2桁目は10進数
 				if( ( digit2 < 0 ) || ( digit2 > 9 ) )
@@ -152,7 +152,7 @@ namespace FDK
 			int digit4 = num / 100;
 			int digit2 = ( num % 100 ) / 10;
 			int digit1 = ( num % 100 ) % 10;
-			char ch3 = strBase36Characters[ digit4 ];
+			char ch3 = strBase62Characters[ digit4 ];
 			char ch2 = strBase16Characters[ digit2 ];
 			char ch1 = strBase16Characters[ digit1 ];
 			return ( ch3.ToString() + ch2.ToString() + ch1.ToString() );
@@ -166,13 +166,13 @@ namespace FDK
 			char ch1 = strBase16Characters[ num % 0x10 ];
 			return ( ch2.ToString() + ch1.ToString() );
 		}
-		public static string strConvertNumberTo2DigitBase36String( int num)  // str数値を36進数2桁に変換して返す
+		public static string strConvertNumberTo2DigitBase62String( int num)  // str数値を62進数2桁に変換して返す
 		{
-			if( ( num < 0 ) || ( num >= 36 * 36 ) )
+			if( ( num < 0 ) || ( num >= 62 * 62 ) )
 				return "00";
 
-			char ch2 = strBase36Characters[ num / 36 ];
-			char ch1 = strBase36Characters[ num % 36 ];
+			char ch2 = strBase62Characters[ num / 62 ];
+			char ch1 = strBase62Characters[ num % 62 ];
 			return ( ch2.ToString() + ch1.ToString() );
 		}
 

@@ -7,7 +7,6 @@ using System.IO;
 using SharpDX;
 using SharpDX.Direct3D9;
 using FDK;
-
 using Rectangle = System.Drawing.Rectangle;
 
 namespace DTXMania
@@ -18,18 +17,18 @@ namespace DTXMania
 
         public CActPerfDrumsPad()
         {
-            ST基本位置[] st基本位置Array = new ST基本位置[10];
+            ST基本位置[] st基本位置Array = new ST基本位置[11];
 
             //LC
             ST基本位置 st基本位置 = new ST基本位置();
-            st基本位置.x = 263;
+            st基本位置.x = 262;
             st基本位置.y = 10;
             st基本位置.rc = new Rectangle(0, 0, 0x60, 0x60);
             st基本位置Array[0] = st基本位置;
 
             //HH
             ST基本位置 st基本位置2 = new ST基本位置();
-            st基本位置2.x = 336;
+            st基本位置2.x = 335;
             st基本位置2.y = 10;
             st基本位置2.rc = new Rectangle(0x60, 0, 0x60, 0x60);
             st基本位置Array[1] = st基本位置2;
@@ -37,13 +36,13 @@ namespace DTXMania
             //SD
             ST基本位置 st基本位置3 = new ST基本位置();
             st基本位置3.x = 446;
-            st基本位置3.y = 10;
+            st基本位置3.y = 11;
             st基本位置3.rc = new Rectangle(0, 0x60, 0x60, 0x60);
             st基本位置Array[2] = st基本位置3;
 
             //BD
             ST基本位置 st基本位置4 = new ST基本位置();
-            st基本位置4.x = 565;
+            st基本位置4.x = 564;
             st基本位置4.y = 10;
             st基本位置4.rc = new Rectangle(0, 0xc0, 0x60, 0x60);
             st基本位置Array[3] = st基本位置4;
@@ -51,21 +50,21 @@ namespace DTXMania
             //HT
             ST基本位置 st基本位置5 = new ST基本位置();
             st基本位置5.x = 510;
-            st基本位置5.y = 10;
+            st基本位置5.y = 9;
             st基本位置5.rc = new Rectangle(0x60, 0x60, 0x60, 0x60);
             st基本位置Array[4] = st基本位置5;
 
             //LT
             ST基本位置 st基本位置6 = new ST基本位置();
             st基本位置6.x = 622;
-            st基本位置6.y = 10;
+            st基本位置6.y = 11;
             st基本位置6.rc = new Rectangle(0xc0, 0x60, 0x60, 0x60);
             st基本位置Array[5] = st基本位置6;
 
             //FT
             ST基本位置 st基本位置7 = new ST基本位置();
             st基本位置7.x = 672;
-            st基本位置7.y = 10;
+            st基本位置7.y = 11;
             st基本位置7.rc = new Rectangle(288, 0x60, 0x60, 0x60);
             st基本位置Array[6] = st基本位置7;
 

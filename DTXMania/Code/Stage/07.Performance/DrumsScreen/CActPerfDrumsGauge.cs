@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Diagnostics;
 using SharpDX;
 using FDK;
-
 using Rectangle = System.Drawing.Rectangle;
 
 namespace DTXMania
@@ -76,12 +75,12 @@ namespace DTXMania
                     base.txハイスピ.tDraw2D(CDTXMania.app.Device, -37 + base.n本体X.Drums + base.txフレーム.Drums.szImageSize.Width, (CDTXMania.ConfigIni.bReverse.Drums ? 35 : 634), new Rectangle(0, CDTXMania.ConfigIni.nScrollSpeed.Drums * 48, 42, 48));
                     if (base.db現在のゲージ値.Drums == 1.0 && base.txフルゲージ != null)
                     {
-                        base.txフルゲージ.tDraw2D(CDTXMania.app.Device, 20 + base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 37 : 635), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width - 63, 31));
+                        base.txフルゲージ.tDraw2D(CDTXMania.app.Device, 19 + base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 37 : 634), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width - 63, 31));
                     }
                     else
                     {
                         base.txゲージ.vcScaleRatio.X = (float)base.db現在のゲージ値.Drums;
-                        base.txゲージ.tDraw2D(CDTXMania.app.Device, 20 + base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 37 : 635), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width - 63, 31));
+                        base.txゲージ.tDraw2D(CDTXMania.app.Device, 19 + base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 37 : 634), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width - 63, 31));
                     }
                     base.txフレーム.Drums.tDraw2D(CDTXMania.app.Device, base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 28 : 626), new Rectangle(0, 47, base.txフレーム.Drums.szImageSize.Width, 47));
                 }

@@ -17,7 +17,6 @@ using SampleFramework;
 using DTXMania.Properties;
 using System.Reflection;
 using DirectShowLib;
-
 using Point = System.Drawing.Point;
 
 namespace DTXMania
@@ -26,7 +25,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "v1.4.0 20220220";
+        public static readonly string VERSION = "v1.5.2 2023123100 -sizuku Edition-";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009
@@ -409,7 +408,6 @@ namespace DTXMania
                 }
             }
         }
-
 
         #region [ #24609 リザルト画像をpngで保存する ]		// #24609 2011.3.14 yyagi; to save result screen in case BestRank or HiSkill.
         /// <summary>
@@ -1403,7 +1401,6 @@ for (int i = 0; i < 3; i++) {
                                                 strInstrument = " Guitar";
                                                 bToSaveProgressBarRecord.Guitar = true;
                                             }
-                                            
                                         }
                                         else
                                         {
@@ -1477,7 +1474,6 @@ for (int i = 0; i < 3; i++) {
                                             }
                                         }
                                     }
-                                    
                                 }
 
                                 #region [ プラグイン On演奏失敗() の呼び出し ]
@@ -1565,7 +1561,7 @@ for (int i = 0; i < 3; i++) {
                                     if (!cPerfEntry_Drums.b全AUTOである && cPerfEntry_Drums.nTotalChipsCount > 0)
                                     {
                                         //Drums played
-                                        strPerfSkill = String.Format(" {0:F2}", cPerfEntry_Drums.dbPerformanceSkill);
+                                        strPerfSkill = String.Format("{0:F2}", cPerfEntry_Drums.dbPerformanceSkill);
                                         nRank = (CDTXMania.ConfigIni.nSkillMode == 0) ? CScoreIni.tCalculateRankOld(cPerfEntry_Drums) : CScoreIni.tCalculateRank(0, cPerfEntry_Drums.dbPerformanceSkill);
                                     }
                                     else if (!cPerfEntry_Guitar.b全AUTOである && cPerfEntry_Guitar.nTotalChipsCount > 0)
@@ -1576,22 +1572,22 @@ for (int i = 0; i < 3; i++) {
                                             bGuitarAndBass = true;
                                             strPerfSkill = String.Format("{0:F2}/{1:F2}", cPerfEntry_Guitar.dbPerformanceSkill, cPerfEntry_Bass.dbPerformanceSkill);
                                             nRank = CScoreIni.tCalculateOverallRankValue(cPerfEntry_Drums, cPerfEntry_Guitar, cPerfEntry_Bass);
-                                            strInstrument = " G+B";
+                                            strInstrument = "G+B";
                                         }
                                         else 
                                         {
                                             // Guitar only played
-                                            strPerfSkill = String.Format(" {0:F2}", cPerfEntry_Guitar.dbPerformanceSkill);
+                                            strPerfSkill = String.Format("{0:F2}", cPerfEntry_Guitar.dbPerformanceSkill);
                                             nRank = (CDTXMania.ConfigIni.nSkillMode == 0) ? CScoreIni.tCalculateRankOld(cPerfEntry_Guitar) : CScoreIni.tCalculateRank(0, cPerfEntry_Guitar.dbPerformanceSkill);
-                                            strInstrument = " Guitar";
+                                            strInstrument = "Guitar";
                                         }                                        
                                     }
                                     else
                                     {
                                         //Bass only played
-                                        strPerfSkill = String.Format(" {0:F2}", cPerfEntry_Bass.dbPerformanceSkill);
+                                        strPerfSkill = String.Format("{0:F2}", cPerfEntry_Bass.dbPerformanceSkill);
                                         nRank = (CDTXMania.ConfigIni.nSkillMode == 0) ? CScoreIni.tCalculateRankOld(cPerfEntry_Bass) : CScoreIni.tCalculateRank(0, cPerfEntry_Bass.dbPerformanceSkill);
-                                        strInstrument = " Bass";
+                                        strInstrument = "Bass";
                                     }
 
                                     string str = "";
@@ -1933,7 +1929,7 @@ for (int i = 0; i < 3; i++) {
 #if DEBUG
             strEXEのあるフォルダ = Environment.CurrentDirectory + @"\";
 #else
-            strEXEのあるフォルダ = Path.GetDirectoryName(Application.ExecutablePath) + @"\";	// #23629 2010.11.9 yyagi: set correct pathname where DTXManiaGR.exe is.
+            strEXEのあるフォルダ = Path.GetDirectoryName(Application.ExecutablePath) + @"\";	// #23629 2010.11.9 yyagi: set correct pathname where DTXManiaNX.exe is.
 #endif
             // END #23629 2010.11.13 from
             //-----------------
@@ -1966,7 +1962,7 @@ for (int i = 0; i < 3; i++) {
             {
                 try
                 {
-                    Trace.Listeners.Add(new CTraceLogListener(new StreamWriter("DTXManiaLog.txt", false, Encoding.GetEncoding("shift-jis"))));
+                    Trace.Listeners.Add(new CTraceLogListener(new StreamWriter("DTXManiaLog.txt", false, Encoding.GetEncoding("utf-8"))));
                 }
                 catch (System.UnauthorizedAccessException)			// #24481 2011.2.20 yyagi
                 {
@@ -2045,7 +2041,7 @@ for (int i = 0; i < 3; i++) {
                         arg += commandLineArgs[i];
                     }
                 }
-                Trace.TraceInformation("Parsing arguments: {0}。", arg);
+                Trace.TraceInformation("Parsing arguments:{0}。", arg);
                 CommandParse.ParseArguments(arg, ref DTXVmode, ref DTX2WAVmode);
                 if (DTXVmode.Enabled)
                 {
@@ -2087,9 +2083,9 @@ for (int i = 0; i < 3; i++) {
                     CDTXMania.ConfigIni.nMovieMode = 2;
 
                     //Set windows size to 640 x 360 and set its position to a fixed location
-                    CDTXMania.ConfigIni.nウインドウwidth = 640;
-                    CDTXMania.ConfigIni.nウインドウheight = 360;
-                    CDTXMania.ConfigIni.n初期ウィンドウ開始位置X = 5;
+                    CDTXMania.ConfigIni.nウインドウwidth = 1280;
+                    CDTXMania.ConfigIni.nウインドウheight = 720;
+                    CDTXMania.ConfigIni.n初期ウィンドウ開始位置X = 100;
                     CDTXMania.ConfigIni.n初期ウィンドウ開始位置Y = 100;
 
                     //Disable Reverse options in DTXVMode
@@ -2193,12 +2189,12 @@ for (int i = 0; i < 3; i++) {
                     //CDTXMania.ConfigIni.nClickHighVolume.Value = 0;
                     //CDTXMania.ConfigIni.nClickLowVolume.Value = 0;
 
-                    //自動再生音量=100
-                    CDTXMania.ConfigIni.n自動再生音量 = 100;  // nAutoVolume
-                    CDTXMania.ConfigIni.n手動再生音量 = 100;  // nChipVolume
+                    //自動再生音量=127
+                    CDTXMania.ConfigIni.n自動再生音量 = 127;  // nAutoVolume
+                    CDTXMania.ConfigIni.n手動再生音量 = 127;  // nChipVolume
 
-                    //マスターボリューム100
-                    //CDTXMania.ConfigIni.nMasterVolume.Value = 100;	// DTX2WAV側から設定するので、ここでは触らない
+                    //マスターボリューム127
+                    //CDTXMania.ConfigIni.nMasterVolume.Value = 127;	// DTX2WAV側から設定するので、ここでは触らない
 
                     //StageFailedオフ
                     CDTXMania.ConfigIni.bSTAGEFAILEDEnabled = false;
@@ -3016,7 +3012,6 @@ for (int i = 0; i < 3; i++) {
                 #endregion
 
                 Trace.TraceInformation("アプリケーションの終了処理を完了しました。");
-
 
                 this.b終了処理完了済み = true;
             }

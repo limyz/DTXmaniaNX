@@ -217,7 +217,7 @@ namespace FDK
 		/// <summary>
 		/// 録音機能で使うミキサーボリューム
 		/// </summary>
-		public static int[] nMixerVolume = { 100, 100, 100, 100, 100, 100 };    // BGM,SE,Drums,Guitar,Bass, Unknown(Unknownだけは外部から更新されないので事実上100で固定)
+		public static int[] nMixerVolume = { 127, 127, 127, 127, 127, 127 };    // BGM,SE,Drums,Guitar,Bass, Unknown(Unknownだけは外部から更新されないので事実上127で固定)
 
 		/// <summary>
 		/// 録音機能で使う、エンコーダーパス (DLLフォルダ)
@@ -674,7 +674,7 @@ namespace FDK
 											//		private WaitCallback _cbRemoveMixerChannel;
 
 		/// <summary>
-		/// <para>0:最小～100:原音</para>
+		/// <para>0:最小～127:原音</para>
 		/// </summary>
 		public int nVolume  // n音量
 		{
@@ -685,8 +685,8 @@ namespace FDK
 					float f音量 = 0.0f;
 					if (!Bass.BASS_ChannelGetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_VOL, ref f音量))
 						//if ( BassMix.BASS_Mixer_ChannelGetEnvelopePos( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_VOL, ref f音量 ) == -1 )
-						return 100;
-					return (int)(f音量 * 100);
+						return 127;
+					return (int)(f音量 * 127);
 				}
 				else if (this.bIsDirectSound)
 				{
@@ -698,7 +698,7 @@ namespace FDK
 			{
 				if (this.bIsBASS)
 				{
-					float f音量 = Math.Min(Math.Max(value, 0), 100) / 100.0f; // 0～100 → 0.0～1.0
+					float f音量 = Math.Min(Math.Max(value, 0), 127) / 127.0f; // 0～127 → 0.0～1.0
 																			//var nodes = new BASS_MIXER_NODE[ 1 ] { new BASS_MIXER_NODE( 0, f音量 ) };
 																			//BassMix.BASS_Mixer_ChannelSetEnvelope( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_VOL, nodes );
 					Bass.BASS_ChannelSetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_VOL, f音量);
@@ -714,7 +714,7 @@ namespace FDK
 					}
 					else
 					{
-						this._n音量db = (int)((20.0 * Math.Log10(((double)this._n音量) / 100.0)) * 100.0);
+						this._n音量db = (int)((20.0 * Math.Log10(((double)this._n音量) / 127.0)) * 127.0);
 					}
 
 					this.Buffer.Volume = this._n音量db;
@@ -723,7 +723,7 @@ namespace FDK
 		}
 
 		/// <summary>
-		/// <para>左:-100～中央:0～100:右。set のみ。</para>
+		/// <para>左:-127～中央:0～127:右。set のみ。</para>
 		/// </summary>
 		public int nPosition  // n位置
 		{
@@ -735,46 +735,106 @@ namespace FDK
 					if (!Bass.BASS_ChannelGetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, ref f位置))
 						//if( BassMix.BASS_Mixer_ChannelGetEnvelopePos( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_PAN, ref f位置 ) == -1 )
 						return 0;
-					return (int)(f位置 * 100);
+					return (int)(f位置 * 127);
 				}
 				else if (this.bIsDirectSound)
 				{
 					return this._n位置;
 				}
-				return -9999;
+				return -12700;
 			}
 			set
 			{
 				if (this.bIsBASS)
 				{
-					float f位置 = Math.Min(Math.Max(value, -100), 100) / 100.0f;  // -100～100 → -1.0～1.0
+					float f位置 = Math.Min(Math.Max(value, -127), 127) / 127.0f;  // -127～127 → -1.0～1.0
 																				//var nodes = new BASS_MIXER_NODE[ 1 ] { new BASS_MIXER_NODE( 0, f位置 ) };
 																				//BassMix.BASS_Mixer_ChannelSetEnvelope( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_PAN, nodes );
 					Bass.BASS_ChannelSetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, f位置);
 				}
 				else if (this.bIsDirectSound)
 				{
-					this._n位置 = Math.Min(Math.Max(-100, value), 100);       // -100～100
+					this._n位置 = Math.Min(Math.Max(-127, value), 127);       // -127～127
 
 					if (this._n位置 == 0)
 					{
 						this._n位置db = 0;
 					}
-					else if (this._n位置 == -100)
+					else if (this._n位置 == -127)
 					{
 						this._n位置db = -10000;
 					}
-					else if (this._n位置 == 100)
+					else if (this._n位置 == 127)
 					{
 						this._n位置db = 10000;
 					}
 					else if (this._n位置 < 0)
 					{
-						this._n位置db = (int)((20.0 * Math.Log10(((double)(this._n位置 + 100)) / 100.0)) * 100.0);
+						this._n位置db = (int)((20.0 * Math.Log10(((double)(this._n位置 + 127)) / 127.0)) * 127.0);
 					}
 					else
 					{
-						this._n位置db = (int)((-20.0 * Math.Log10(((double)(100 - this._n位置)) / 100.0)) * 100.0);
+						this._n位置db = (int)((-20.0 * Math.Log10(((double)(127 - this._n位置)) / 127.0)) * 127.0);
+					}
+
+					this.Buffer.Pan = this._n位置db;
+				}
+			}
+		}
+
+		/// <summary>
+		/// <para>左:0～中央:64～127:右。set のみ。</para>
+		/// </summary>
+		public int nPositionAC  // n位置
+		{
+			get
+			{
+				if (this.bIsBASS)
+				{
+					float f位置 = 0.0f;
+					if (!Bass.BASS_ChannelGetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, ref f位置))
+						//if( BassMix.BASS_Mixer_ChannelGetEnvelopePos( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_PAN, ref f位置 ) == -1 )
+						return 0;
+					return (int)(f位置 * 127);
+				}
+				else if (this.bIsDirectSound)
+				{
+					return this._n位置;
+				}
+				return -0;
+			}
+			set
+			{
+				if (this.bIsBASS)
+				{
+					float f位置 = Math.Min(Math.Max(value, 0), 127) / 127.0f;  // 0～127 → -1.0～1.0
+																				//var nodes = new BASS_MIXER_NODE[ 1 ] { new BASS_MIXER_NODE( 0, f位置 ) };
+																				//BassMix.BASS_Mixer_ChannelSetEnvelope( this.hBassStream, BASSMIXEnvelope.BASS_MIXER_ENV_PAN, nodes );
+					Bass.BASS_ChannelSetAttribute(this.hBassStream, BASSAttribute.BASS_ATTRIB_PAN, f位置);
+				}
+				else if (this.bIsDirectSound)
+				{
+					this._n位置 = Math.Min(Math.Max(0, value), 127);       // 0～127
+
+					if (this._n位置 == 0)
+					{
+						this._n位置db = 0;
+					}
+					else if (this._n位置 == 0)
+					{
+						this._n位置db = 0;
+					}
+					else if (this._n位置 == 127)
+					{
+						this._n位置db = 10000;
+					}
+					else if (this._n位置 < 0)
+					{
+						this._n位置db = (int)((20.0 * Math.Log10(((double)(this._n位置 + 127)) / 127.0)) * 127.0);
+					}
+					else
+					{
+						this._n位置db = (int)((-20.0 * Math.Log10(((double)(127 - this._n位置)) / 127.0)) * 127.0);
 					}
 
 					this.Buffer.Pan = this._n位置db;
@@ -817,7 +877,7 @@ namespace FDK
 
 		public CSound()
 		{
-			this.nVolume = 100;
+			this.nVolume = 127;
 			this.nPosition = 0;
 			this._db周波数倍率 = 1.0;
 			this._db再生速度 = 1.0;
@@ -1613,7 +1673,7 @@ namespace FDK
 		}
 		private int _n位置 = 0;
 		private int _n位置db;
-		private int _n音量 = 100;
+		private int _n音量 = 127;
 		private int _n音量db;
 		private long nBytes = 0;
 		private int n一時停止回数 = 0;

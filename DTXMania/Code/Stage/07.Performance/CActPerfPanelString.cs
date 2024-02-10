@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using SharpDX;
 using FDK;
-
 using Color = System.Drawing.Color;
 
 namespace DTXMania
@@ -58,13 +57,13 @@ namespace DTXMania
 
             if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
-                this.n曲名X = 950;
-                this.n曲名Y = 630;
+                this.n曲名X = 962;
+                this.n曲名Y = 26;
             }
             else if (CDTXMania.ConfigIni.bGuitarEnabled)
             {
-                this.n曲名X = 500;
-                this.n曲名Y = 630;
+                this.n曲名X = 484;
+                this.n曲名Y = 656;
             }
 
 //          this.n文字列の長さdot = 0;
@@ -83,6 +82,7 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
                 this.txジャケットパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanel.png"));
+                this.txジャケットパネル2 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_JacketPanelG.png"));
                 string path = CDTXMania.DTX.strFolderName + CDTXMania.DTX.PREIMAGE;
                 if (!File.Exists(path))
                 {
@@ -93,7 +93,7 @@ namespace DTXMania
                     this.txジャケット画像 = CDTXMania.tGenerateTexture(path);
                 }
 
-//              this.SetPanelString(this.strパネル文字列);
+                //              this.SetPanelString(this.strパネル文字列);
 
                 #region[ 曲名、アーティスト名テクスチャの生成 ]
                 if (string.IsNullOrEmpty(CDTXMania.DTX.TITLE) || (!CDTXMania.bCompactMode && CDTXMania.ConfigIni.b曲名表示をdefのものにする))
@@ -101,13 +101,13 @@ namespace DTXMania
                 else
                     this.strSongName = CDTXMania.DTX.TITLE;
 
-                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 20, FontStyle.Regular);
+                this.pfタイトル = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 16, FontStyle.Regular);
                 Bitmap bmpSongName = new Bitmap(1, 1);
                 bmpSongName = this.pfタイトル.DrawPrivateFont(this.strSongName, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txSongName = CDTXMania.tGenerateTexture(bmpSongName, false);
                 bmpSongName.Dispose();
 
-                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 15, FontStyle.Regular);
+                this.pfアーティスト = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str選曲リストフォント), 13, FontStyle.Regular);
                 Bitmap bmpArtistName = new Bitmap(1, 1);
                 bmpArtistName = this.pfアーティスト.DrawPrivateFont(CDTXMania.DTX.ARTIST, CPrivateFont.DrawMode.Edge, Color.Black, Color.Black, this.clGITADORAgradationTopColor, this.clGITADORAgradationBottomColor, true);
                 this.txArtistName = CDTXMania.tGenerateTexture(bmpArtistName, false);
@@ -163,45 +163,58 @@ namespace DTXMania
 
                 if (CDTXMania.ConfigIni.bDrumsEnabled)
                 {
-                    this.nジャケットX = 915;
-                    this.nジャケットY = 287;
+                    this.nジャケットX = 898;
+                    this.nジャケットY = 14;
+
+                    this.txジャケット画像.vcScaleRatio.X = 60.0f / this.txジャケット画像.szImageSize.Width;
+                    this.txジャケット画像.vcScaleRatio.Y = 60.0f / this.txジャケット画像.szImageSize.Height;
 
                     /*
                     this.txジャケット画像.vcScaleRatio.X = 245.0f / ((float)this.txジャケット画像.szImageSize.Width);
                     this.txジャケット画像.vcScaleRatio.Y = 245.0f / ((float)this.txジャケット画像.szImageSize.Height);
                     this.txジャケット画像.fZAxisRotation = 0.3f;
                     this.txジャケット画像.tDraw2D(CDTXMania.app.Device, 960, 350, new Rectangle(0, 0, this.txジャケット画像.szImageSize.Width, this.txジャケット画像.szImageSize.Height));
-                     */
 
                     mat *= SharpDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
                     mat *= SharpDX.Matrix.Translation(400f, -227f, 0f);
-                    mat *= SharpDX.Matrix.RotationZ(0.3f);
+                    mat *= SharpDX.Matrix.RotationZ(0.3f);*/
                 }
 
                 if (CDTXMania.ConfigIni.bGuitarEnabled)
                 {
-                    this.nジャケットX = 467;
-                    this.nジャケットY = 287;
+                    this.nジャケットX = 609;
+                    this.nジャケットY = 596;
 
+                    this.txジャケット画像.vcScaleRatio.X = 60.0f / this.txジャケット画像.szImageSize.Width;
+                    this.txジャケット画像.vcScaleRatio.Y = 60.0f / this.txジャケット画像.szImageSize.Height;
+
+                    /*if (this.txジャケット画像.szImageSize.Width > 122.5f)
                     mat *= SharpDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
                     mat *= SharpDX.Matrix.Translation(-28f, -94.5f, 0f);
-                    mat *= SharpDX.Matrix.RotationZ(0.3f);
+                    mat *= SharpDX.Matrix.RotationZ(0.3f);*/
+                }
+                if (CDTXMania.ConfigIni.bDrumsEnabled)
+                {
+                    //if (this.txジャケットパネル != null)
+                    this.txジャケットパネル.tDraw2D(CDTXMania.app.Device, 886, 3);
                 }
 
-                if (this.txジャケットパネル != null)
-                    this.txジャケットパネル.tDraw2D(CDTXMania.app.Device, this.nジャケットX, this.nジャケットY);
+                if (CDTXMania.ConfigIni.bGuitarEnabled)
+                {
+                    this.txジャケットパネル2.tDraw2D(CDTXMania.app.Device, 483, 569);
+                }
 
                 if (this.txジャケット画像 != null)
-                    this.txジャケット画像.tDraw3D(CDTXMania.app.Device, mat);
+                    this.txジャケット画像.tDraw2D(CDTXMania.app.Device, this.nジャケットX, this.nジャケットY);
 
-                if (this.txSongName.szImageSize.Width > 320)
-                    this.txSongName.vcScaleRatio.X = 320f / this.txSongName.szImageSize.Width;
+                if (this.txSongName.szImageSize.Width > 326f)
+                    this.txSongName.vcScaleRatio.X = 326f / (float)this.txSongName.szImageSize.Width;
 
-                if (this.txArtistName.szImageSize.Width > 320)
-                    this.txArtistName.vcScaleRatio.X = 320f / this.txArtistName.szImageSize.Width;
+                if (this.txArtistName.szImageSize.Width > 326f)
+                    this.txArtistName.vcScaleRatio.X = 326f / (float)this.txArtistName.szImageSize.Width;
 
                 this.txSongName.tDraw2D(CDTXMania.app.Device, this.n曲名X, this.n曲名Y);
-                this.txArtistName.tDraw2D(CDTXMania.app.Device, this.n曲名X, this.n曲名Y + 35);
+                this.txArtistName.tDraw2D(CDTXMania.app.Device, this.n曲名X, this.n曲名Y + 23);
             }
             return 0;
         }
@@ -221,6 +234,7 @@ namespace DTXMania
         private string strSongName;
 //      private CTexture txPanel;
         private CTexture txジャケットパネル;
+        private CTexture txジャケットパネル2;
         private CTexture txジャケット画像;
         private CTexture txSongName;
         private CTexture txArtistName;

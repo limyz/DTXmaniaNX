@@ -174,7 +174,6 @@ namespace DTXMania
 		SYSTEM,
 		UNKNOWN	= EInstrumentPart.UNKNOWN
 	}
-
 	public enum EPlaybackPriority
 	{
 		ChipOverPadPriority,
@@ -183,7 +182,7 @@ namespace DTXMania
 	internal enum EInputDevice
 	{
 		Keyboard	= 0,
-		MIDI入力		= 1,
+		MIDI入力	= 1,
 		Joypad		= 2,
 		Mouse		= 3,
 		Unknown		= -1
@@ -198,8 +197,6 @@ namespace DTXMania
 		Bad		= 5,
 		Auto
 	}
-
-
 
 	internal enum E判定文字表示位置
 	{
@@ -420,7 +417,6 @@ namespace DTXMania
 		public T BsPick;
 		public T BsW;
 		public T BGM;
-
 		public T this[ int index ]
 		{
 			get
@@ -575,7 +571,6 @@ namespace DTXMania
 		}
 	}
 
-
 	[StructLayout( LayoutKind.Sequential )]
 	public struct STAUTOPLAY								// Eレーンとindexを一致させること
 	{
@@ -634,23 +629,65 @@ namespace DTXMania
 						return this.RD;
                     case (int) ELane.LBD:
                         return this.LBD;
-                    case (int)ELane.Guitar:
-                        if (!this.GtR) return false;
-                        if (!this.GtG) return false;
-                        if (!this.GtB) return false;
-                        if (!this.GtY) return false;
-                        if (!this.GtP) return false;
-                        if (!this.GtPick) return false;
-                        if (!this.GtW) return false;
+                    case (int) ELane.Guitar:
+						if (!this.GtR)
+						{
+							return false;
+						}
+						if (!this.GtG)
+						{
+							return false;
+						}
+						if (!this.GtB)
+						{
+							return false;
+						}
+                        if (!this.GtY)
+						{
+							return false;
+						}
+						if (!this.GtP)
+						{
+							return false;
+						}
+						if (!this.GtPick)
+						{
+							return false;
+						}
+						if (!this.GtW)
+						{
+							return false;
+						}
                         return true;
-                    case (int)ELane.Bass:
-                        if (!this.BsR) return false;
-                        if (!this.BsG) return false;
-                        if (!this.BsB) return false;
-                        if (!this.BsY) return false;
-                        if (!this.BsP) return false;
-                        if (!this.BsPick) return false;
-                        if (!this.BsW) return false;
+                    case (int) ELane.Bass:
+						if (!this.BsR)
+						{
+							return false;
+						}
+						if (!this.BsG)
+						{
+							return false;
+						}
+						if (!this.BsB)
+						{
+							return false;
+						}
+						if (!this.BsY)
+						{
+							return false;
+						}
+						if (!this.BsP)
+						{
+							return false;
+						}
+						if (!this.BsPick)
+						{
+							return false;
+						}
+						if (!this.BsW)
+						{
+							return false;
+						}
                         return true;
 					case (int) ELane.GtR:
 						return this.GtR;
@@ -720,11 +757,11 @@ namespace DTXMania
                     case (int) ELane.LBD:
                         this.LBD = value;
                         return;
-                    case (int)ELane.Guitar:
+                    case (int) ELane.Guitar:
                         this.GtR = this.GtG = this.GtB = this.GtY = this.GtP = this.GtPick = this.GtW = value;
                         //this.GtR = this.GtG = this.GtB = this.GtPick = this.GtW = value;
                         return;
-                    case (int)ELane.Bass:
+                    case (int) ELane.Bass:
                         this.BsR = this.BsG = this.BsB = this.BsY = this.BsP = this.BsPick = this.BsW = value;
                         //this.BsR = this.BsG = this.BsB = this.BsPick = this.BsW = value;
                         return;
@@ -776,7 +813,6 @@ namespace DTXMania
 		}
 	}
 
-
 	internal class CConstants
 	{
 		public const int BGA_H = 1280;
@@ -793,7 +829,6 @@ namespace DTXMania
 		public const int SUDDEN_POS = 200;
 		public const int PLAYSPEED_MIN = 5;
 		public const int PLAYSPEED_MAX = 40;
-
 		public class Drums
 		{
             public const int BAR_Y = 0x1a6;

@@ -97,7 +97,7 @@ namespace FDK
 		{
 			get
 			{
-				return (int)100;
+				return (int)127;
 			}
 			set
 			{
@@ -110,7 +110,6 @@ namespace FDK
 			get;
 			protected set;
 		}
-
 
 		// メソッド
 

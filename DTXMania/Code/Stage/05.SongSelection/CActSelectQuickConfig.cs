@@ -152,43 +152,68 @@ namespace DTXMania
             {
                 automode = 0;	// All Auto
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false && CDTXMania.ConfigIni.bAutoPlay.HH == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BD == false && CDTXMania.ConfigIni.bAutoPlay.SD == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.HT == false && CDTXMania.ConfigIni.bAutoPlay.LT == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.FT == false && CDTXMania.ConfigIni.bAutoPlay.CY == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.LP == true && CDTXMania.ConfigIni.bAutoPlay.LBD == true)
+            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HH == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.SD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.FT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.CY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LP == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.LBD == true)
             {
                 automode = 1;	// Auto LP
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false && CDTXMania.ConfigIni.bAutoPlay.HH == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BD == true && CDTXMania.ConfigIni.bAutoPlay.SD == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.HT == false && CDTXMania.ConfigIni.bAutoPlay.LT == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.FT == false && CDTXMania.ConfigIni.bAutoPlay.CY == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.LP == false && CDTXMania.ConfigIni.bAutoPlay.LBD == false)
+            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HH == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BD == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.SD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.FT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.CY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LBD == false)
             {
                 automode = 2;	// Auto BD
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false && CDTXMania.ConfigIni.bAutoPlay.HH == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BD == true && CDTXMania.ConfigIni.bAutoPlay.SD == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.HT == false && CDTXMania.ConfigIni.bAutoPlay.LT == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.FT == false && CDTXMania.ConfigIni.bAutoPlay.CY == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.LP == true && CDTXMania.ConfigIni.bAutoPlay.LBD == true)
+            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HH == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BD == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.SD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.FT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.CY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LP == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.LBD == true)
             {
                 automode = 3;	// 2Pedal Auto
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.LC == true && CDTXMania.ConfigIni.bAutoPlay.HH == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.BD == false && CDTXMania.ConfigIni.bAutoPlay.SD == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.HT == false && CDTXMania.ConfigIni.bAutoPlay.LT == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.FT == true && CDTXMania.ConfigIni.bAutoPlay.CY == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.LP == true && CDTXMania.ConfigIni.bAutoPlay.LBD == true)
+            else if (CDTXMania.ConfigIni.bAutoPlay.LC == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.HH == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.SD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.FT == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.CY == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.LP == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.LBD == true)
             {
                 automode = 4;	// 3 Auto
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false && CDTXMania.ConfigIni.bAutoPlay.HH == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BD == false && CDTXMania.ConfigIni.bAutoPlay.SD == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.HT == false && CDTXMania.ConfigIni.bAutoPlay.LT == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.FT == false && CDTXMania.ConfigIni.bAutoPlay.CY == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.LP == false && CDTXMania.ConfigIni.bAutoPlay.LBD == false)
+            else if (CDTXMania.ConfigIni.bAutoPlay.LC == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HH == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.SD == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.HT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.FT == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.CY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.LBD == false)
             {
                 automode = 6;	// OFF
             }
@@ -206,21 +231,33 @@ namespace DTXMania
             {
                 automode = 0;	// All Auto
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == true && CDTXMania.ConfigIni.bAutoPlay.GtG == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtB == true && CDTXMania.ConfigIni.bAutoPlay.GtY == true && CDTXMania.ConfigIni.bAutoPlay.GtP == true && CDTXMania.ConfigIni.bAutoPlay.GtPick == false //&&
-                        /*CDTXMania.ConfigIni.bAutoPlay.GtW == false*/)
+            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtG == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtB == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtY == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtP == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtPick == false)
+                    /*&& CDTXMania.ConfigIni.bAutoPlay.GtW == false*/
             {
                 automode = 1;	// Auto Neck
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == false && CDTXMania.ConfigIni.bAutoPlay.GtG == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtB == false && CDTXMania.ConfigIni.bAutoPlay.GtY == false && CDTXMania.ConfigIni.bAutoPlay.GtP == false && CDTXMania.ConfigIni.bAutoPlay.GtPick == true //&&
-                        /*CDTXMania.ConfigIni.bAutoPlay.GtW == false*/)
+            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtG == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtB == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtPick == true) //                                                   
+                //&% CDTXMania.ConfigIni.bAutoPlay.GtW == false*/
             {
                 automode = 2;	// Auto Pick
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == false && CDTXMania.ConfigIni.bAutoPlay.GtB == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtB == false && CDTXMania.ConfigIni.bAutoPlay.GtY == false && CDTXMania.ConfigIni.bAutoPlay.GtP == false && CDTXMania.ConfigIni.bAutoPlay.GtPick == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.GtW == false)
+            else if (CDTXMania.ConfigIni.bAutoPlay.GtR == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtG == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtB == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtPick == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.GtW == false)
             {
                 automode = 4;	// OFF
             }
@@ -235,21 +272,33 @@ namespace DTXMania
             {
                 automode = 0;	// All Auto
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == true && CDTXMania.ConfigIni.bAutoPlay.BsB == true &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsB == true && CDTXMania.ConfigIni.bAutoPlay.BsPick == false //&&
-                        /*CDTXMania.ConfigIni.bAutoPlay.BsW == false*/)
+            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsG == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsB == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsY == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsP == true &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsPick == false)
+            /*&& CDTXMania.ConfigIni.bAutoPlay.GtW == false*/
             {
                 automode = 1;	// Auto Neck
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == false && CDTXMania.ConfigIni.bAutoPlay.BsB == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsB == false && CDTXMania.ConfigIni.bAutoPlay.BsPick == true //&&
-                        /*CDTXMania.ConfigIni.bAutoPlay.BsW == false*/)
+            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsG == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsB == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsPick == true) //                                                   
+                                                                   //&% CDTXMania.ConfigIni.bAutoPlay.GtW == false*/
             {
                 automode = 2;	// Auto Pick
             }
-            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == false && CDTXMania.ConfigIni.bAutoPlay.BsB == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsB == false && CDTXMania.ConfigIni.bAutoPlay.BsPick == false &&
-                        CDTXMania.ConfigIni.bAutoPlay.BsW == false)
+            else if (CDTXMania.ConfigIni.bAutoPlay.BsR == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsG == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsB == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsY == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsP == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsPick == false &&
+                     CDTXMania.ConfigIni.bAutoPlay.BsW == false)
             {
                 automode = 4;	// OFF
             }

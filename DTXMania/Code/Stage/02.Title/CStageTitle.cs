@@ -5,14 +5,13 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Drawing;
 using FDK;
-
 using SlimDXKey = SlimDX.DirectInput.Key;
 
 namespace DTXMania
 {
 	internal class CStageTitle : CStage
 	{
-		public static readonly string VERSION_DISPLAY = "DTX:NX:A:A:2022022000";
+		public static readonly string VERSION_DISPLAY = "DTX:S:Z:K:20230123100";
 		// コンストラクタ
 
 		public CStageTitle()
@@ -23,7 +22,6 @@ namespace DTXMania
 			base.listChildActivities.Add( this.actFI = new CActFIFOWhite() );
 			base.listChildActivities.Add( this.actFO = new CActFIFOWhite() );
 		}
-
 
 		// CStage 実装
 
@@ -274,7 +272,6 @@ namespace DTXMania
 			CONFIG,
 			EXIT
 		}
-
 
 		// Other
 

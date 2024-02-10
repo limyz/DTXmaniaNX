@@ -444,7 +444,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
 				//
-				this.rBackgroundVideoAVI = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
+				this.rBackgroundVideoAVI = new CDTX.CAVI(1280, CSkin.Path(@"Graphics\8_background.mp4"), "", 20.0);
 				this.rBackgroundVideoAVI.OnDeviceCreated();
 				if (rBackgroundVideoAVI.avi != null)
 				{					

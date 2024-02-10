@@ -67,10 +67,10 @@ namespace FDK
 				}
 				else
 				{
-					Trace.TraceInformation("WASAPI Master Volume Get Success: " + (f音量 * 100));
+					Trace.TraceInformation("WASAPI Master Volume Get Success: " + (f音量 * 127));
 
 				}
-				return (int)(f音量 * 100);
+				return (int)(f音量 * 127);
 			}
 			set
 			{
@@ -79,7 +79,7 @@ namespace FDK
 
 				//				bool b = BassWasapi.BASS_WASAPI_SetVolume( BASSWASAPIVolume.BASS_WASAPI_VOL_SESSION, (float) ( value / 100 ) );
 				//				bool b = BassWasapi.BASS_WASAPI_SetVolume( BASSWASAPIVolume.BASS_WASAPI_CURVE_WINDOWS, (float) ( value / 100 ) );
-				bool b = Bass.BASS_ChannelSetAttribute(this.hMixer, BASSAttribute.BASS_ATTRIB_VOL, (float)(value / 100.0));
+				bool b = Bass.BASS_ChannelSetAttribute(this.hMixer, BASSAttribute.BASS_ATTRIB_VOL, (float)(value / 127.0));
 				// If you would like to have a volume control in exclusive mode too, and you're using the BASSmix add-on,
 				// you can adjust the source's BASS_ATTRIB_VOL setting via BASS_ChannelSetAttribute.
 				// しかし、hMixerに対するBASS_ChannelSetAttribute()でBASS_ATTRIB_VOLを変更: なぜか出力音量に反映されず
@@ -517,7 +517,7 @@ namespace FDK
 				}
 
 				// Mixerのボリューム設定
-				Bass.BASS_ChannelSetAttribute(this.hMixer_Chips[i], BASSAttribute.BASS_ATTRIB_VOL, CSoundManager.nMixerVolume[i] / 100.0f);
+				Bass.BASS_ChannelSetAttribute(this.hMixer_Chips[i], BASSAttribute.BASS_ATTRIB_VOL, CSoundManager.nMixerVolume[i] / 127.0f);
 				//Trace.TraceInformation("Vol{0}: {1}", i, CSound管理.nMixerVolume[i]);
 
 #if TEST_MultiThreadedMixer

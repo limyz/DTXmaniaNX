@@ -282,7 +282,7 @@ namespace DTXMania
 				{
 					SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 					string strExt = fileinfo.Extension.ToLower();
-					if( ( strExt.Equals( ".dtx" ) || strExt.Equals( ".gda" ) ) || ( ( strExt.Equals( ".g2d" ) || strExt.Equals( ".bms" ) ) || strExt.Equals( ".bme" ) ) )
+					if(( strExt.Equals( ".dtx" ) || strExt.Equals( ".gda" )) || (( strExt.Equals( ".g2d" ) || strExt.Equals( ".bms" ) || strExt.Equals( ".bme" ))  || strExt.Equals( ".gdn" )))
 					{
 						CSongListNode c曲リストノード = new CSongListNode();
 						c曲リストノード.eNodeType = CSongListNode.ENodeType.SCORE;
@@ -815,7 +815,6 @@ namespace DTXMania
 			cスコア.SongInformation.progress.Guitar = br.ReadString();
 			cスコア.SongInformation.progress.Bass = br.ReadString();
 			
-			//
 			cスコア.SongInformation.chipCountByInstrument.Drums = br.ReadInt32();
 			cスコア.SongInformation.chipCountByLane[ELane.LC] = br.ReadInt32();
 			cスコア.SongInformation.chipCountByLane[ELane.HH] = br.ReadInt32();

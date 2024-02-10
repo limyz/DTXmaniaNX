@@ -10,7 +10,6 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using System.Drawing.Text;
 using FDK;
-
 using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
@@ -314,7 +313,8 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\6_background.jpg" ) );
+                this.txBackground = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\6_background.png" ) );
+                this.txBackground2 = CDTXMania.tGenerateTexture(CSkin.Path( @"Graphics\6_backgroundGF.png") );
                 this.txLevel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\6_LevelNumber.png" ) );
                 this.txDifficultyPanel = CDTXMania.tGenerateTexture( CSkin.Path( @"Graphics\6_Difficulty.png" ) );
                 this.txPartPanel = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\6_Part.png"));
@@ -369,6 +369,7 @@ namespace DTXMania
                 //テクスチャ11枚
                 //2018.03.15 kairera0467 PrivateFontが抜けていた＆フォント生成直後に解放するようにしてみる
                 CDTXMania.tReleaseTexture( ref this.txBackground );
+                CDTXMania.tReleaseTexture( ref this.txBackground2);
                 CDTXMania.tReleaseTexture( ref this.txJacket );
                 CDTXMania.tReleaseTexture( ref this.txTitle );
                 CDTXMania.tReleaseTexture( ref this.txArtist );
@@ -435,6 +436,9 @@ namespace DTXMania
             if( this.txBackground != null )
                 this.txBackground.tDraw2D( CDTXMania.app.Device, 0, 0 );
 
+            if (CDTXMania.ConfigIni.bGuitarEnabled)
+                this.txBackground2.tDraw2D(CDTXMania.app.Device, 0, 0);
+
             string strDTXFilePath = (CDTXMania.bCompactMode) ?
             CDTXMania.strCompactModeFile : CDTXMania.stageSongSelection.rChosenScore.FileInformation.AbsoluteFilePath;
             CDTX cdtx = new CDTX(strDTXFilePath, true);
@@ -459,33 +463,30 @@ namespace DTXMania
                 Trace.TraceError( ex.StackTrace );
             }
 
-
             int y = 184;
 
             if( this.txJacket != null )
             {
-                Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(384.0f / this.txJacket.szImageSize.Width, 384.0f / this.txJacket.szImageSize.Height, 1f);
-                mat *= Matrix.Translation(206f, 66f, 0f);
-                mat *= Matrix.RotationZ(0.28f);
+                this.txJacket.vcScaleRatio.X = 384.0f / this.txJacket.szImageSize.Width;
+                this.txJacket.vcScaleRatio.Y = 384.0f / this.txJacket.szImageSize.Height;
 
-                this.txJacket.tDraw3D(CDTXMania.app.Device, mat);
+                this.txJacket.tDraw2D(CDTXMania.app.Device, 100, 79);
             }
 
             if (this.txTitle != null)
             {
-                if (this.txTitle.szImageSize.Width > 625)
-                    this.txTitle.vcScaleRatio.X = 625f / this.txTitle.szImageSize.Width;
+                if (this.txTitle.szImageSize.Width > 780)
+                    this.txTitle.vcScaleRatio.X = 780f / this.txTitle.szImageSize.Width;
 
-                this.txTitle.tDraw2D(CDTXMania.app.Device, 190, 285);
+                this.txTitle.tDraw2D(CDTXMania.app.Device, 522, 260);
             }
 
             if (this.txArtist != null)
             {
-                if (this.txArtist.szImageSize.Width > 625)
-                    this.txArtist.vcScaleRatio.X = 625f / this.txArtist.szImageSize.Width;
+                if (this.txArtist.szImageSize.Width > 780)
+                    this.txArtist.vcScaleRatio.X = 780f / this.txArtist.szImageSize.Width;
 
-                this.txArtist.tDraw2D(CDTXMania.app.Device, 190, 360);
+                this.txArtist.tDraw2D(CDTXMania.app.Device, 522, 334);
             }
 
             int[] iPart = { 0, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 2 : 1, CDTXMania.ConfigIni.bIsSwappedGuitarBass ? 1 : 2 };
@@ -508,11 +509,11 @@ namespace DTXMania
                     if (DTXLevel != 0 || DTXLevelDeci != 0)
                     {
                         //Always display CLASSIC style if Skill Mode is Classic
-                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
-                            CDTXMania.stageSongSelection.rChosenScore.SongInformation.b完全にCLASSIC譜面である[j] && 
+                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                            CDTXMania.stageSongSelection.rChosenScore.SongInformation.b完全にCLASSIC譜面である[j] &&
                             !cdtx.b強制的にXG譜面にする))
                         {
-                            this.tDrawStringLarge(187 + k, 152, string.Format("{0:00}", DTXLevel));
+                            this.tDrawStringLarge(521 + k, 124, string.Format("{0:00}", DTXLevel));
                         }
                         else
                         {
@@ -525,34 +526,53 @@ namespace DTXMania
                             {
                                 DTXLevel = cdtx.LEVEL[j] / 10;
                                 DTXLevelDeci = ((cdtx.LEVEL[j] - DTXLevel * 10) * 10) + cdtx.LEVELDEC[j];
-                            }                            
-                            
-                            this.txLevel.tDraw2D(CDTXMania.app.Device, 282 + k, 243, new Rectangle(1000, 92, 30, 38));
-                            this.tDrawStringLarge(187 + k, 152, string.Format("{0:0}", DTXLevel));
-                            this.tDrawStringLarge(307 + k, 152, string.Format("{0:00}", DTXLevelDeci));
-
+                            }
+                            /*this.txLevel.tDraw2D(CDTXMania.app.Device, 614 + k, 245, new Rectangle(1000, 92, 30, 38));
+                            this.tDrawStringLarge(519 + k, 152, string.Format("{0:0}", DTXLevel));
+                            this.tDrawStringLarge(639 + k, 152, string.Format("{0:00}", DTXLevelDeci));*/
                         }
-
                         if (this.txPartPanel != null)
-                            this.txPartPanel.tDraw2D(CDTXMania.app.Device, 191 + k, 52, new Rectangle(0, j * 50, 262, 50));
+                            this.txPartPanel.tDraw2D(CDTXMania.app.Device, 523 + k, 79, new Rectangle(0, j * 175, 292, 175));
 
                         //this.txJacket.Dispose();
                         if (!CDTXMania.bCompactMode && !CDTXMania.DTXVmode.Enabled && !CDTXMania.DTX2WAVmode.Enabled)
-                            this.tDrawDifficultyPanel( CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[ CDTXMania.stageSongSelection.nConfirmedSongDifficulty ], 191 + k, 102 );
-
-                        k = 700;
+                            this.tDrawDifficultyPanel(CDTXMania.stageSongSelection.rConfirmedSong.arDifficultyLabel[CDTXMania.stageSongSelection.nConfirmedSongDifficulty], 523 + k, 79);
+                        this.txLevel.tDraw2D(CDTXMania.app.Device, 614 + k, 217, new Rectangle(1000, 92, 30, 38));
+                        this.tDrawStringLarge(521 + k, 124, string.Format("{0:0}", DTXLevel));
+                        this.tDrawStringLarge(639 + k, 124, string.Format("{0:00}", DTXLevelDeci));
+                        k = 400;
                     }
                 }
 
                 if (i == 2 && k == 0)
                 {
                     if (this.txPartPanel != null && CDTXMania.ConfigIni.bDrumsEnabled)
-                        this.txPartPanel.tDraw2D(CDTXMania.app.Device, 191, 52, new Rectangle(0, 0, 262, 50));
+                    {
+                        if (CDTXMania.DTX.bチップがある.Drums)
+                            this.txPartPanel.tDraw2D(CDTXMania.app.Device, 523, 79, new Rectangle(0, 0, 292, 175));
+                    }
 
-                    if (this.txDifficultyPanel != null)
-                        this.txDifficultyPanel.tDraw2D(CDTXMania.app.Device, 191, 102, new Rectangle(0, this.nIndex * 50, 262, 50));
+                    if (this.txPartPanel != null && CDTXMania.ConfigIni.bGuitarEnabled)
+                    {
+                        if (CDTXMania.DTX.bチップがある.Guitar)
+                        {
+                            this.txPartPanel.tDraw2D(CDTXMania.app.Device, 523, 79, new Rectangle(175, 0, 292, 175));
+                        }
+
+                        if (this.txPartPanel != null && CDTXMania.ConfigIni.bGuitarEnabled)
+                        {
+                            if (CDTXMania.DTX.bチップがある.Bass)
+                            {
+                                if (CDTXMania.ConfigIni.bIsSwappedGuitarBass)
+                                    this.txPartPanel.tDraw2D(CDTXMania.app.Device, 523, 79, new Rectangle(350, 0, 292, 175));
+                            }
+                            if (this.txDifficultyPanel != null)
+                                this.txDifficultyPanel.tDraw2D(CDTXMania.app.Device, 523, 79, new Rectangle(0, this.nIndex * 175, 292, 175));
+                        }
+                    }
                 }
             }
+            
             //-----------------------------
             #endregion
 
@@ -872,6 +892,7 @@ namespace DTXMania
         private CTexture txArtist;
         private CTexture txJacket;
         private CTexture txBackground;
+        private CTexture txBackground2;
         private CTexture txDifficultyPanel;
         private CTexture txPartPanel;
 
@@ -1092,60 +1113,60 @@ namespace DTXMania
         {
             string strRawScriptFile;
 
-            Rectangle rect = new Rectangle( 0, 0, 262, 50 );
+            Rectangle rect = new Rectangle( 0, 0, 292, 175 );
 
             //ファイルの存在チェック
-            if( File.Exists( CSkin.Path( @"Script\difficult.dtxs" ) ) )
+            if ( File.Exists( CSkin.Path( @"Script\difficult.dtxs" ) ) )
             {
                 //スクリプトを開く
-                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding( "Shift_JIS" ) );
+                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding("Shift_JIS") );
                 strRawScriptFile = reader.ReadToEnd();
 
                 strRawScriptFile = strRawScriptFile.Replace( Environment.NewLine, "\n" );
                 string[] delimiter = { "\n" };
                 string[] strSingleLine = strRawScriptFile.Split( delimiter, StringSplitOptions.RemoveEmptyEntries );
 
-                for( int i = 0; i < strSingleLine.Length; i++ )
+                for (int i = 0; i < strSingleLine.Length; i++)
                 {
-                    if( strSingleLine[ i ].StartsWith( "//" ) )
+                    if (strSingleLine[i].StartsWith("//"))
                         continue; //コメント行の場合は無視
 
                     //まずSplit
-                    string[] arScriptLine = strSingleLine[ i ].Split( ',' );
+                    string[] arScriptLine = strSingleLine[i].Split(',');
 
-                    if( ( arScriptLine.Length >= 4 && arScriptLine.Length <= 5 ) == false )
+                    if ((arScriptLine.Length >= 4 && arScriptLine.Length <= 5) == false)
                         continue; //引数が4つか5つじゃなければ無視。
 
-                    if( arScriptLine[ 0 ] != "6" )
+                    if (arScriptLine[0] != "6")
                         continue; //使用するシーンが違うなら無視。
 
-                    if( arScriptLine.Length == 4 )
+                    if (arScriptLine.Length == 4)
                     {
-                        if( String.Compare( arScriptLine[ 1 ], strラベル名, true ) != 0 )
+                        if (String.Compare(arScriptLine[1], strラベル名, true) != 0)
                             continue; //ラベル名が違うなら無視。大文字小文字区別しない
                     }
-                    else if( arScriptLine.Length == 5 )
+                    else if (arScriptLine.Length == 5)
                     {
-                        if( arScriptLine[ 4 ] == "1" )
+                        if (arScriptLine[4] == "1")
                         {
-                            if( arScriptLine[ 1 ] != strラベル名 )
+                            if (arScriptLine[1] != strラベル名)
                                 continue; //ラベル名が違うなら無視。
                         }
                         else
                         {
-                            if( String.Compare( arScriptLine[ 1 ], strラベル名, true ) != 0 )
+                            if (String.Compare(arScriptLine[1], strラベル名, true) != 0)
                                 continue; //ラベル名が違うなら無視。大文字小文字区別しない
                         }
                     }
-                    rect.X = Convert.ToInt32( arScriptLine[ 2 ] );
-                    rect.Y = Convert.ToInt32( arScriptLine[ 3 ] );
+                    rect.X = Convert.ToInt32(arScriptLine[2]);
+                    rect.Y = Convert.ToInt32(arScriptLine[3]);
 
                     break;
                 }
             }
 
-            if( this.txDifficultyPanel != null )
-                this.txDifficultyPanel.tDraw2D( CDTXMania.app.Device, nX, nY, rect );
+            if (this.txDifficultyPanel != null)
+                this.txDifficultyPanel.tDraw2D(CDTXMania.app.Device, nX, nY, rect);
         }
         #endregion
     }

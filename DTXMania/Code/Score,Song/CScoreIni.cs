@@ -594,7 +594,7 @@ namespace DTXMania
 			if( File.Exists( iniファイル名 ) )
 			{
 				string str;
-				StreamReader reader = new StreamReader( iniファイル名, Encoding.GetEncoding( "shift-jis" ) );
+				StreamReader reader = new StreamReader( iniファイル名, Encoding.GetEncoding("shift-jis") );
 				while( ( str = reader.ReadLine() ) != null )
 				{
 					str = str.Replace( '\t', ' ' ).TrimStart( new char[] { '\t', ' ' } );
@@ -1357,7 +1357,7 @@ namespace DTXMania
 			this.iniFileDirectoryName = Path.GetDirectoryName( iniファイル名 );
 			this.iniFilename = Path.GetFileName( iniファイル名 );
 
-			StreamWriter writer = new StreamWriter( iniファイル名, false, Encoding.GetEncoding( "shift-jis" ) );
+			StreamWriter writer = new StreamWriter( iniファイル名, false, Encoding.GetEncoding("shift-jis") );
 			writer.WriteLine( "[File]" );
 			writer.WriteLine( "Title={0}", this.stFile.Title );
 			writer.WriteLine( "Name={0}", this.stFile.Name );
@@ -1950,8 +1950,10 @@ namespace DTXMania
 			builder.Append( cc.nMissCount );
 			builder.Append( cc.nMaxCombo );
 			builder.Append( cc.nTotalChipsCount );
-			for( int i = 0; i < 10; i++ )
-				builder.Append( boolToChar( cc.bAutoPlay[ i ] ) );
+			for (int i = 0; i < 10; i++)
+			{
+				builder.Append(boolToChar(cc.bAutoPlay[i]));
+			}
 			builder.Append( boolToChar( cc.bTight ) );
 			builder.Append( boolToChar( cc.bSudden.Drums ) );
 			builder.Append( boolToChar( cc.bSudden.Guitar ) );
@@ -1999,7 +2001,7 @@ namespace DTXMania
 			builder.Append( cc.strDTXManiaVersion );
 			builder.Append( cc.strDateTime );
 
-			byte[] bytes = Encoding.GetEncoding( "shift-jis" ).GetBytes( builder.ToString() );
+			byte[] bytes = Encoding.GetEncoding("shift-jis").GetBytes( builder.ToString() );
 			StringBuilder builder2 = new StringBuilder(0x21);
 			{
 				MD5CryptoServiceProvider m = new MD5CryptoServiceProvider();

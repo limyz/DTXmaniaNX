@@ -240,6 +240,10 @@ namespace DTXMania
 			}
 			public void tPlay()
 			{
+				tPlay(127);
+			}
+			public void tPlay(int nVolume)
+			{
 				if ( this.bReadNotTried )
 				{
 					try
@@ -260,7 +264,10 @@ namespace DTXMania
 				}
 				CSound sound = this.rSound[ this.n次に鳴るサウンド番号 ];
 				if( sound != null )
-					sound.tStartPlaying( this.bループ );
+				{
+					sound.nVolume = nVolume;
+					sound.tStartPlaying(this.bループ);
+				}
 
 				this.n次に鳴るサウンド番号 = 1 - this.n次に鳴るサウンド番号;
 			}
@@ -351,6 +358,7 @@ namespace DTXMania
         public CSystemSound soundBasic = null;
         public CSystemSound soundAdvanced = null;
         public CSystemSound soundExtreme = null;
+		public CSystemSound soundMetronome = null;
 		public readonly int nシステムサウンド数 = (int)ESystemSound.Count;
 		public CSystemSound this[ ESystemSound sound ]
 		{
@@ -667,33 +675,34 @@ namespace DTXMania
 				}
 			}
 			this.soundCursorMovement	= new CSystemSound( @"Sounds\Move.ogg",			false, false, false );
-			this.soundDecide			= new CSystemSound( @"Sounds\Decide.ogg",			false, false, false );
-			this.soundChange			= new CSystemSound( @"Sounds\Change.ogg",			false, false, false );
-			this.soundCancel			= new CSystemSound( @"Sounds\Cancel.ogg",			false, false, true  );
-			this.soundAudience			= new CSystemSound( @"Sounds\Audience.ogg",		false, false,  true  );
+			this.soundDecide			= new CSystemSound( @"Sounds\Decide.ogg",		false, false, false );
+			this.soundChange			= new CSystemSound( @"Sounds\Change.ogg",		false, false, false );
+			this.soundCancel			= new CSystemSound( @"Sounds\Cancel.ogg",		false, false, true  );
+			this.soundAudience			= new CSystemSound( @"Sounds\Audience.ogg",		false, false, true  );
 			this.soundSTAGEFAILED音		= new CSystemSound( @"Sounds\Stage failed.ogg",	false, true,  true  );
-			this.soundGameStart		= new CSystemSound( @"Sounds\Game start.ogg",		false, false, false );
-			this.soundGameEnd		= new CSystemSound( @"Sounds\Game end.ogg",		false, true,  false );
-			this.soundStageClear	= new CSystemSound( @"Sounds\Stage clear.ogg",		false, true,  false );
-			this.soundFullCombo		= new CSystemSound( @"Sounds\Full combo.ogg",		false, false, true  );
-            this.soundNewRecord          = new CSystemSound( @"Sounds\New Record.ogg",      false, false, true  );
-            this.soundExcellent    = new CSystemSound( @"Sounds\Excellent.ogg",       false, false, true  );
-			this.soundNowLoading		= new CSystemSound( @"Sounds\Now loading.ogg",		false, true,  true  );
-			this.soundTitle		= new CSystemSound( @"Sounds\Title.ogg",			false, true,  false );
-            this.soundDecideSong            = new CSystemSound( @"Sounds\MusicDecide.ogg",     false, false, false );
-            this.soundNovice            = new CSystemSound( @"Sounds\Novice.ogg",          false, false, false );
-            this.soundRegular           = new CSystemSound( @"Sounds\Regular.ogg",         false, false, false );
-			this.soundExpert		    = new CSystemSound( @"Sounds\Expert.ogg",		    false, false, false );
-            this.soundBasic             = new CSystemSound( @"Sounds\Basic.ogg",           false, false, false );
-            this.soundAdvanced          = new CSystemSound( @"Sounds\Advanced.ogg",        false, false, false );
-			this.soundExtreme	        = new CSystemSound( @"Sounds\Extreme.ogg",		    false, false, false );
-			this.soundMaster		    = new CSystemSound( @"Sounds\Master.ogg",			false, false, false );
-            this.soundSelectMusic       = new CSystemSound( @"Sounds\SelectMusic.ogg",     false, false, false );
-			this.bgm起動画面			= new CSystemSound( @"Sounds\Setup BGM.ogg",		true,  true,  false );
-			this.bgmオプション画面		= new CSystemSound( @"Sounds\Option BGM.ogg",		true,  true,  false );
-			this.bgmコンフィグ画面		= new CSystemSound( @"Sounds\Config BGM.ogg",		true,  true,  false );
-			this.bgm選曲画面			= new CSystemSound( @"Sounds\Select BGM.ogg",		true,  true,  false );
-            this.bgm結果画面            = new CSystemSound( @"Sounds\Result BGM.ogg",      true,  true,  false);
+			this.soundGameStart			= new CSystemSound( @"Sounds\Game start.ogg",	false, false, false );
+			this.soundGameEnd			= new CSystemSound( @"Sounds\Game end.ogg",		false, true,  false );
+			this.soundStageClear		= new CSystemSound( @"Sounds\Stage clear.ogg",	false, true,  false );
+			this.soundFullCombo			= new CSystemSound( @"Sounds\Full combo.ogg",	false, false, true  );
+            this.soundNewRecord         = new CSystemSound( @"Sounds\New Record.ogg",   false, false, true  );
+            this.soundExcellent			= new CSystemSound( @"Sounds\Excellent.ogg",    false, false, true  );
+			this.soundNowLoading		= new CSystemSound( @"Sounds\Now loading.ogg",	false, true,  true  );
+			this.soundTitle				= new CSystemSound( @"Sounds\Title.ogg",		false, true,  false );
+            this.soundDecideSong        = new CSystemSound( @"Sounds\MusicDecide.ogg",  false, false, false );
+            this.soundNovice            = new CSystemSound( @"Sounds\Novice.ogg",       false, false, false );
+            this.soundRegular           = new CSystemSound( @"Sounds\Regular.ogg",      false, false, false );
+			this.soundExpert		    = new CSystemSound( @"Sounds\Expert.ogg",		false, false, false );
+            this.soundBasic             = new CSystemSound( @"Sounds\Basic.ogg",        false, false, false );
+            this.soundAdvanced          = new CSystemSound( @"Sounds\Advanced.ogg",     false, false, false );
+			this.soundExtreme	        = new CSystemSound( @"Sounds\Extreme.ogg",		false, false, false );
+			this.soundMaster		    = new CSystemSound( @"Sounds\Master.ogg",		false, false, false );
+            this.soundSelectMusic       = new CSystemSound( @"Sounds\SelectMusic.ogg",  false, false, false );
+			this.bgm起動画面			= new CSystemSound( @"Sounds\Setup BGM.ogg",	true,  true,  false );
+			this.bgmオプション画面		= new CSystemSound( @"Sounds\Option BGM.ogg",	true,  true,  false );
+			this.bgmコンフィグ画面		= new CSystemSound( @"Sounds\Config BGM.ogg",	true,  true,  false );
+			this.bgm選曲画面			= new CSystemSound( @"Sounds\Select BGM.ogg",	true,  true,  false );
+            this.bgm結果画面            = new CSystemSound( @"Sounds\Result BGM.ogg",   true,  true,  false );
+			this.soundMetronome			= new CSystemSound( @"Sounds\Metronome.ogg",	false, false, false );
 		}
 
 		public void ReloadSkin()
@@ -895,7 +904,7 @@ namespace DTXMania
             {
                 string str;
 				//this.tClearAllKeyAssignments();
-				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding( "unicode" ) ) )
+				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding( "utf-8" ) ) )
                 {
 				    str = reader.ReadToEnd();
                 }
@@ -910,7 +919,7 @@ namespace DTXMania
         {
             if( File.Exists( CSkin.Path( @"SkinConfig.ini" ) ) )
             {
-                StreamWriter sw = new StreamWriter( CSkin.Path( @"SkinConfig.ini" ), false, Encoding.GetEncoding( "unicode" ) );
+                StreamWriter sw = new StreamWriter( CSkin.Path( @"SkinConfig.ini" ), false, Encoding.GetEncoding( "utf-8" ) );
                 sw.WriteLine( "; スキンごとでの設定ファイル。現在テスト段階です。" );
                 sw.WriteLine( "; ここで設定した数値が優先的に使用されます。" );
                 sw.WriteLine( ";" );

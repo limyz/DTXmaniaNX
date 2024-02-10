@@ -110,12 +110,5 @@ namespace DTXMania
 			}
 			return 0;
 		}
-
-		// Other
-
-		#region [ private ]
-		//-----------------
-		//-----------------
-		#endregion
 	}
 }

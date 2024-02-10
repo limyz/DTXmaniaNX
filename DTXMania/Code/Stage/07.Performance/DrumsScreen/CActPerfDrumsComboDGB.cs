@@ -72,9 +72,9 @@ namespace DTXMania
             if( CDTXMania.ConfigIni.bドラムコンボ文字の表示 )
             {
                 if (CDTXMania.ConfigIni.bGraph有効.Drums && CDTXMania.ConfigIni.bSmallGraph)
-                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1275, 60);
+                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1275, 80);
                 else
-                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1245, 60);
+                    base.tDrawCombo_Drums(nCombo値, nジャンプインデックス, 1245, 80);
             }
 
             this.n火薬カウント = (nCombo値 / 100);

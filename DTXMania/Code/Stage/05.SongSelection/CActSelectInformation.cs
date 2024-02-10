@@ -37,7 +37,7 @@ namespace DTXMania
 			if( !base.bNotActivated )
 			{
 				string[] infofiles = {		// #25381 2011.6.4 yyagi
-				   @"Graphics\5_information.png" ,
+				   @"Graphics\5_informatione.png" ,
 				   @"Graphics\5_informatione.png"
 				};
 				int c = ( CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja" ) ? 0 : 1; 

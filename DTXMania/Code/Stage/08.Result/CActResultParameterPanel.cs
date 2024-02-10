@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using SharpDX;
 using FDK;
-
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
 using Color = System.Drawing.Color;
@@ -273,7 +272,7 @@ namespace DTXMania
 
             if (CDTXMania.ConfigIni.bDrumsEnabled)
             {
-                this.n本体X[0] = 180;
+                this.n本体X[0] = 136;
                 this.nスコアX[0] = n左2X;
             }
             else if (CDTXMania.ConfigIni.bGuitarEnabled)
@@ -305,7 +304,6 @@ namespace DTXMania
                         this.nスコアX[2] = n右2X;
                     }
                 }
-
             }
             #endregion
 
@@ -555,7 +553,6 @@ namespace DTXMania
                     this.tDrawStringSmall(80 + this.n本体X[j], 162 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nPoorCount_ExclAuto));
                     this.tDrawStringSmall(80 + this.n本体X[j], 192 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMissCount_ExclAuto));
                     this.tDrawStringSmall(80 + this.n本体X[j], 222 + this.n本体Y, string.Format("{0,4:###0}", CDTXMania.stageResult.stPerformanceEntry[j].nMaxCombo));
-
 
                     this.tDrawStringSmall(167 + this.n本体X[j], 72 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fPerfect率[j])));
                     this.tDrawStringSmall(167 + this.n本体X[j], 102 + this.n本体Y, string.Format("{0,3:##0}%", (int)Math.Round(CDTXMania.stageResult.fGreat率[j])));
@@ -936,7 +933,7 @@ namespace DTXMania
             if( File.Exists( CSkin.Path( @"Script\difficult.dtxs" ) ) )
             {
                 //スクリプトを開く
-                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding( "Shift_JIS" ) );
+                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding( "utf-8" ) );
                 strRawScriptFile = reader.ReadToEnd();
 
                 strRawScriptFile = strRawScriptFile.Replace( Environment.NewLine, "\n" );

@@ -11,7 +11,6 @@ namespace DTXMania
 {
     internal class CActPerfGuitarGauge : CActPerfCommonGauge
     {
-
         // コンストラクタ
 
         public CActPerfGuitarGauge()
@@ -19,12 +18,11 @@ namespace DTXMania
             base.bNotActivated = true;
         }
 
-
         // CActivity 実装
 
         public override void OnActivate()
         {
-            base.n本体X.Guitar = 80;
+            base.n本体X.Guitar = 79;
             base.n本体X.Bass = 912 + 290;
             base.OnActivate();
         }
@@ -141,9 +139,5 @@ namespace DTXMania
 
         // Other
 
-        #region [ private ]
-        //-----------------
-        //-----------------
-        #endregion
     }
 }

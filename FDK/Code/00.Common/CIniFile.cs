@@ -54,7 +54,7 @@ namespace FDK
 			CSection section = null;
 			try
 			{
-				sr = new StreamReader( this.strFilename, Encoding.GetEncoding( "Shift_JIS" ) );	// ファイルが存在しない場合は例外発生。
+				sr = new StreamReader( this.strFilename, Encoding.GetEncoding( "utf-8" ) );	// ファイルが存在しない場合は例外発生。
 
 				string line;
 				while( ( line = sr.ReadLine() ) != null )
@@ -114,7 +114,7 @@ namespace FDK
 			StreamWriter sw = null;
 			try
 			{
-				sw = new StreamWriter( this.strFilename, false, Encoding.GetEncoding( "Shift_JIS" ) );	// オープン失敗の場合は例外発生。
+				sw = new StreamWriter( this.strFilename, false, Encoding.GetEncoding( "utf-8" ) );	// オープン失敗の場合は例外発生。
 
 				foreach( CSection section in this.Sections )
 				{

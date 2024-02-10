@@ -14,7 +14,6 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using DirectShowLib;
 using FDK;
-
 using Color = System.Drawing.Color;
 using Rectangle = System.Drawing.Rectangle;
 using SlimDXKey = SlimDX.DirectInput.Key;
@@ -464,8 +463,7 @@ namespace DTXMania
         {
             if (!base.bNotActivated)
             {
-                //
-                this.caviGenericBackgroundVideo = new CDTX.CAVI(1290, CSkin.Path(@"Graphics\7_Movie.mp4"), "", 20.0);
+                this.caviGenericBackgroundVideo = new CDTX.CAVI(1280, CSkin.Path(@"Graphics\7_Movie.mp4"), "", 20.0);
                 this.caviGenericBackgroundVideo.OnDeviceCreated();
                 if (caviGenericBackgroundVideo.avi != null)
                 {
@@ -503,9 +501,7 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
                 this.actBackgroundAVI.Stop();
-
                 CDTXMania.tReleaseTexture(ref this.tx背景);
-
                 CDTXMania.tReleaseTexture(ref this.txWailingFrame);
                 CDTXMania.tReleaseTexture(ref this.tx判定画像anime);
                 CDTXMania.tReleaseTexture(ref this.tx判定画像anime_2);
@@ -1909,10 +1905,7 @@ namespace DTXMania
                 return;
             }
 
-            if ((pChip.eInstrumentPart == EInstrumentPart.GUITAR ||
-                pChip.eInstrumentPart == EInstrumentPart.BASS) &&
-                screenmode != EInstrumentPart.GUITAR
-                )
+            if ((pChip.eInstrumentPart == EInstrumentPart.GUITAR || pChip.eInstrumentPart == EInstrumentPart.BASS) && screenmode != EInstrumentPart.GUITAR)
             {
                 return;
             }
@@ -2136,6 +2129,7 @@ namespace DTXMania
             this.rNextBassChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0xaf, nInputAdjustTime, 500);
             return this.rNextBassChip;
         }
+
 
         protected void ChangeInputAdjustTimeInPlaying(IInputDevice keyboard, int plusminus)		// #23580 2011.1.16 yyagi UI for InputAdjustTime in playing screen.
         {
@@ -2528,7 +2522,6 @@ namespace DTXMania
                 }
             }
         }
-
         protected void tSaveInputMethod(EInstrumentPart part)
         {
             if (CDTXMania.Pad.stDetectedDevice.Keyboard)
@@ -2619,8 +2612,6 @@ namespace DTXMania
                 }
             }
         }
-
-
         protected void tUpdateAndDraw_ChipFireGB()
         {
             this.actChipFireGB.OnUpdateAndDraw();
@@ -2640,7 +2631,6 @@ namespace DTXMania
             this.actPanel.SetPanelString(string.IsNullOrEmpty(CDTXMania.DTX.PANEL) ? CDTXMania.stageSongSelection.rConfirmedSong.strタイトル : CDTXMania.DTX.PANEL);
         }
          */
-
         protected void tUpdateAndDraw_Gauge()
         {
             this.actGauge.OnUpdateAndDraw();
@@ -2734,7 +2724,6 @@ namespace DTXMania
                         ++this.nCurrentTopChip;
                         continue;
                     }
-                    
                 }
 
                 bool bPChipIsAutoPlay = bCheckAutoPlay(pChip);
@@ -2935,7 +2924,6 @@ namespace DTXMania
                     case EChannel.Guitar_RxBxx:
                     case EChannel.Guitar_RGxxx:
                     case EChannel.Guitar_RGBxx:
-
 
                     case EChannel.Guitar_xxxYx:
                     case EChannel.Guitar_xxBYx:
@@ -3393,6 +3381,10 @@ namespace DTXMania
                         if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
                         {
                             pChip.bHit = true;
+                            if (CDTXMania.ConfigIni.bMetronome)
+                            {
+                                CDTXMania.Skin.soundMetronome.tPlay(64);
+                            }
                         }
                         if ((ePlayMode == EInstrumentPart.DRUMS) && (configIni.nLaneDisp.Drums == 0 || configIni.nLaneDisp.Drums == 1) && pChip.bVisible && (this.txChip != null))
                         {
@@ -3665,7 +3657,6 @@ namespace DTXMania
                             bGtBsB = true;
                             break;
 
-
                         case EChannel.Bass_Wailing:
                             bGtBsW = true;
                             break;
@@ -3774,7 +3765,6 @@ namespace DTXMania
                             bGtBsY = true;
                             bGtBsP = true;
                             break;
-
 
                         case EChannel.Bass_xGxxP:
                             bGtBsG = true;
@@ -3888,9 +3878,9 @@ namespace DTXMania
                     if (bGtBsR == true && bIsAutoPlay[(int)ELane.BsR] == false) bPChipIsAutoPlay = false;
                     else if (bGtBsG == true && bIsAutoPlay[(int)ELane.BsG] == false) bPChipIsAutoPlay = false;
                     else if (bGtBsB == true && bIsAutoPlay[(int)ELane.BsB] == false) bPChipIsAutoPlay = false;
-                    else if (bGtBsW == true && bIsAutoPlay[(int)ELane.BsW] == false) bPChipIsAutoPlay = false;
                     else if (bGtBsY == true && bIsAutoPlay[(int)ELane.BsY] == false) bPChipIsAutoPlay = false;
                     else if (bGtBsP == true && bIsAutoPlay[(int)ELane.BsP] == false) bPChipIsAutoPlay = false;
+                    else if (bGtBsW == true && bIsAutoPlay[(int)ELane.BsW] == false) bPChipIsAutoPlay = false;
                     else if (bGtBsO == true &&
                         (bIsAutoPlay[(int)ELane.BsR] == false || bIsAutoPlay[(int)ELane.BsG] == false || bIsAutoPlay[(int)ELane.BsB] == false || bIsAutoPlay[(int)ELane.BsY] == false || bIsAutoPlay[(int)ELane.BsP] == false))
                         bPChipIsAutoPlay = false;
@@ -3898,7 +3888,6 @@ namespace DTXMania
             }
             return bPChipIsAutoPlay;
         }
-
 
         protected abstract void tUpdateAndDraw_Chip_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
         protected abstract void tUpdateAndDraw_Chip_PatternOnly_Drums(CConfigIni configIni, ref CDTX dTX, ref CChip pChip);
@@ -4201,7 +4190,6 @@ namespace DTXMania
                                 bChipHasP = true;
                                 break;
 
-
                             case EChannel.Bass_xGxxP:
                                 bChipHasG = true;
                                 bChipHasP = true;
@@ -4314,7 +4302,7 @@ namespace DTXMania
                             if (bChipIsO)
                             {
                                 this.txChip.vcScaleRatio.Y = 1f;
-                                int xo = (inst == EInstrumentPart.GUITAR) ? 88 : 959;
+                                int xo = (inst == EInstrumentPart.GUITAR) ? 87 : 957;
                                 this.txChip.tDraw2D(CDTXMania.app.Device, xo, y - 2, new Rectangle(0, 10, 196, 10));
                             }
                             Rectangle rc = new Rectangle(rectOpenOffsetX, chipHeight, chipWidth, 10);
@@ -4333,11 +4321,11 @@ namespace DTXMania
 
                             //Refactored code for drawing
                             int[] nChipXPos = {
-                                inst == EInstrumentPart.GUITAR ? 88 : 959,
-                                inst == EInstrumentPart.GUITAR ? 127 : 998,
-                                inst == EInstrumentPart.GUITAR ? 166 : 1036,
-                                inst == EInstrumentPart.GUITAR ? 205 : 1076,
-                                inst == EInstrumentPart.GUITAR ? 244 : 1115
+                                inst == EInstrumentPart.GUITAR ? 87 : 957,
+                                inst == EInstrumentPart.GUITAR ? 126 : 996,
+                                inst == EInstrumentPart.GUITAR ? 165 : 1035,
+                                inst == EInstrumentPart.GUITAR ? 204 : 1074,
+                                inst == EInstrumentPart.GUITAR ? 243 : 1113
                             };
                             
                             if(inst == EInstrumentPart.GUITAR && CDTXMania.ConfigIni.bLeft.Guitar)
@@ -4639,8 +4627,6 @@ namespace DTXMania
 				this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, inst, dTX.nモニタを考慮した音量( inst ) );
 			}
         }
-
-
         protected virtual void tUpdateAndDraw_Chip_GuitarBass_Wailing(CConfigIni configIni, ref CDTX dTX, ref CChip pChip, EInstrumentPart inst)
         {
             int indexInst = (int)inst;
@@ -4782,7 +4768,6 @@ namespace DTXMania
                         break;
                     }
                     return true;
-
             }
             return false;
         }
@@ -4820,7 +4805,6 @@ namespace DTXMania
             }
             //CDTXMania.app.Device.Clear( ClearFlags.ZBuffer | ClearFlags.Target, Color.Black, 0f, 0 );
         }
-
         protected void tUpdateAndDraw_JudgementLine()  // t進行描画_判定ライン
         {
             if (CDTXMania.ConfigIni.bDrumsEnabled)
@@ -4847,7 +4831,6 @@ namespace DTXMania
                     this.actLVFont.tDrawString(295, (CDTXMania.ConfigIni.bReverse.Drums ? y - 20 : y + 8), CDTXMania.ConfigIni.nJudgeLine.Drums.ToString());
             }
         }
-
         protected void tUpdateAndDraw_JudgementString()  // t進行描画_判定文字列
         {
             this.actJudgeString.OnUpdateAndDraw();
@@ -4866,15 +4849,12 @@ namespace DTXMania
                 this.actJudgeString.OnUpdateAndDraw();
             }
         }
-
         protected void tUpdateAndDraw_ScrollSpeed()
         {
             this.actScrollSpeed.OnUpdateAndDraw();
         }
 
         protected abstract void tGenerateBackgroundTexture();
-
-
 
         protected void tGenerateBackgroundTexture(string DefaultBgFilename, Rectangle bgrect, string bgfilename)
         {
@@ -4957,7 +4937,6 @@ namespace DTXMania
             }
             image.Dispose();
         }
-
         protected virtual void tHandleInput_Guitar()
         {
             tHandleInput_GuitarBass(EInstrumentPart.GUITAR);
@@ -4966,7 +4945,6 @@ namespace DTXMania
         {
             tHandleInput_GuitarBass(EInstrumentPart.BASS);
         }
-
 
         protected virtual void tHandleInput_GuitarBass(EInstrumentPart inst)
         {
@@ -4992,13 +4970,13 @@ namespace DTXMania
             int B = R + 2;
             int Y = R + 3;
             int P = R + 4;
-            bool autoW = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtW : bIsAutoPlay.BsW;
-            bool autoR = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtR : bIsAutoPlay.BsR;
-            bool autoG = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtG : bIsAutoPlay.BsG;
-            bool autoB = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtB : bIsAutoPlay.BsB;
-            bool autoY = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtY : bIsAutoPlay.BsY;
-            bool autoP = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtP : bIsAutoPlay.BsP;
-            bool autoPick = (inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtPick : bIsAutoPlay.BsPick;
+            bool autoW = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtW : bIsAutoPlay.BsW);
+            bool autoR = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtR : bIsAutoPlay.BsR);
+            bool autoG = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtG : bIsAutoPlay.BsG);
+            bool autoB = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtB : bIsAutoPlay.BsB);
+            bool autoY = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtY : bIsAutoPlay.BsY);
+            bool autoP = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtP : bIsAutoPlay.BsP);
+            bool autoPick = ((inst == EInstrumentPart.GUITAR) ? bIsAutoPlay.GtPick : bIsAutoPlay.BsPick);
             int nAutoW = (autoW) ? 8 : 0;
             int nAutoR = (autoR) ? 4 : 0;
             int nAutoG = (autoG) ? 2 : 0;
@@ -5345,58 +5323,66 @@ namespace DTXMania
                         bAutoBassP = true;
                         break;
                 }
-                //オートさん専用
-                if (bAutoGuitarR && bIsAutoPlay.GtR)
-                {
-                    this.actLaneFlushGB.Start(0);
-                    this.actRGB.Push(R);
-                }
-                if (bAutoGuitarG && bIsAutoPlay.GtG)
-                {
-                    this.actLaneFlushGB.Start(1);
-                    this.actRGB.Push(G);
-                }
-                if (bAutoGuitarB && bIsAutoPlay.GtB)
-                {
-                    this.actLaneFlushGB.Start(2);
-                    this.actRGB.Push(B);
-                }
-                if (bAutoGuitarY && bIsAutoPlay.GtY)
-                {
-                    this.actLaneFlushGB.Start(3);
-                    this.actRGB.Push(Y);
-                }
-                if (bAutoGuitarP && bIsAutoPlay.GtP)
-                {
-                    this.actLaneFlushGB.Start(4);
-                    this.actRGB.Push(P);
-                }
 
-                //バグが起こる場所(推定)　こ↑こ↓から
-                if (bAutoBassR && bIsAutoPlay.BsR)
+                switch (inst)
                 {
-                    this.actLaneFlushGB.Start(5);
-                    this.actRGB.Push(R);
-                }
-                if (bAutoBassG && bIsAutoPlay.BsG)
-                {
-                    this.actLaneFlushGB.Start(6);
-                    this.actRGB.Push(G);
-                }
-                if (bAutoBassB && bIsAutoPlay.BsB)
-                {
-                    this.actLaneFlushGB.Start(7);
-                    this.actRGB.Push(B);
-                }
-                if (bAutoBassY && bIsAutoPlay.BsY)
-                {
-                    this.actLaneFlushGB.Start(8);
-                    this.actRGB.Push(Y);
-                }
-                if (bAutoBassP && bIsAutoPlay.BsP)
-                {
-                    this.actLaneFlushGB.Start(9);
-                    this.actRGB.Push(P);
+                    case EInstrumentPart.GUITAR:
+                        //オートさん専用
+                        if (bAutoGuitarR && bIsAutoPlay.GtR)
+                        {
+                            this.actLaneFlushGB.Start(0);
+                            this.actRGB.Push(R);
+                        }
+                        if (bAutoGuitarG && bIsAutoPlay.GtG)
+                        {
+                            this.actLaneFlushGB.Start(1);
+                            this.actRGB.Push(G);
+                        }
+                        if (bAutoGuitarB && bIsAutoPlay.GtB)
+                        {
+                            this.actLaneFlushGB.Start(2);
+                            this.actRGB.Push(B);
+                        }
+                        if (bAutoGuitarY && bIsAutoPlay.GtY)
+                        {
+                            this.actLaneFlushGB.Start(3);
+                            this.actRGB.Push(Y);
+                        }
+                        if (bAutoGuitarP && bIsAutoPlay.GtP)
+                        {
+                            this.actLaneFlushGB.Start(4);
+                            this.actRGB.Push(P);
+                        }
+                        break;
+
+                    case EInstrumentPart.BASS:
+                        //バグが起こる場所(推定)　こ↑こ↓から
+                        if (bAutoBassR && bIsAutoPlay.BsR)
+                        {
+                            this.actLaneFlushGB.Start(5);
+                            this.actRGB.Push(R);
+                        }
+                        if (bAutoBassG && bIsAutoPlay.BsG)
+                        {
+                            this.actLaneFlushGB.Start(6);
+                            this.actRGB.Push(G);
+                        }
+                        if (bAutoBassB && bIsAutoPlay.BsB)
+                        {
+                            this.actLaneFlushGB.Start(7);
+                            this.actRGB.Push(B);
+                        }
+                        if (bAutoBassY && bIsAutoPlay.BsY)
+                        {
+                            this.actLaneFlushGB.Start(8);
+                            this.actRGB.Push(Y);
+                        }
+                        if (bAutoBassP && bIsAutoPlay.BsP)
+                        {
+                            this.actLaneFlushGB.Start(9);
+                            this.actRGB.Push(P);
+                        }
+                        break;
                 }
                 //バグが起こる場所(推定)　こ↑こ↓まで
 
@@ -5461,8 +5447,7 @@ namespace DTXMania
                         {
                             actGauge.Damage(inst, cChip2.eInstrumentPart, EJudgement.Good);
                         }
-                        
-                        //
+
                         if ((bChipColorHasR && (autoR || pushingR != 0)))
                         {
                             this.actChipFireGB.Start(R);
@@ -5920,7 +5905,6 @@ namespace DTXMania
                 }
             }
         }
-
         private void DoWailingFromQueue(EInstrumentPart inst, long nTimeStamp_Wailed, bool autoW)
         {
             int indexInst = (int)inst;
@@ -5951,10 +5935,8 @@ namespace DTXMania
                 }
             }
         }
-
         private void tBoostBonus()
         {
-
             for (int i = 0; i < 1; i++)
             {
 
@@ -5962,7 +5944,6 @@ namespace DTXMania
                 {
                     this.ctTimer[i].tStop();
                 }
-
             }
 
             for (int i = 0; i < 1; i++)
@@ -5977,7 +5958,6 @@ namespace DTXMania
                         this.bブーストボーナス = false;
                     }
                 }
-
             }
         }
 
@@ -5988,7 +5968,7 @@ namespace DTXMania
             for (int i = 0; i < CDTXMania.DTX.listChip.Count; i++)
             {
                 CChip pChip = CDTXMania.DTX.listChip[i];
-                if (pChip.nPlaybackPosition >= 384 * nStartBar)
+                if (pChip.nPlaybackPosition >= 1920 * nStartBar)
                 {
                     nTopChip = i;
                     break;
@@ -6062,7 +6042,7 @@ namespace DTXMania
             //Adjust BGM to new position
             List<CSound> pausedCSound = new List<CSound>();
 
-            #region [ BGMやギターなど、演奏開始のタイミングで再生がかかっているサウンドのの途中再生開始 ] // (CDTXのt入力・行解析・チップ配置()で小節番号が+1されているのを削っておくこと)
+            #region [ BGMやギターなど、演奏開始のタイミングで再生がかかっているサウンドの途中再生開始 ] // (CDTXのt入力・行解析・チップ配置()で小節番号が+1されているのを削っておくこと)
             for (int i = this.nCurrentTopChip; i >= 0; i--)
             {
                 CChip pChip = CDTXMania.DTX.listChip[i];

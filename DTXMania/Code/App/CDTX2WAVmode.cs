@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -63,7 +62,7 @@ namespace DTXMania
             set;
         }
 
-        public int[] nMixerVolume = { 100, 100, 100, 100, 100, 100 };
+        public int[] nMixerVolume = { 127, 127, 127, 127, 127, 127 };
 
         /// <summary>
         /// コンストラクタ

@@ -9,7 +9,6 @@ using System.Diagnostics;
 using System.Threading;
 using SharpDX;
 using FDK;
-
 using Rectangle = System.Drawing.Rectangle;
 using System.Windows.Forms;
 
@@ -812,7 +811,7 @@ namespace DTXMania
 
 		protected override void tUpdateAndDraw_PerformanceInformation()
 		{
-			base.tUpdateAndDraw_PerformanceInformation( 1000, 257 );
+			base.tUpdateAndDraw_PerformanceInformation( 23, -94 );
 		}
 
         private void tUpdateAndDraw_PlaySpeed()
@@ -3854,11 +3853,16 @@ namespace DTXMania
         }
 		protected override void tUpdateAndDraw_Chip_BarLine( CConfigIni configIni, ref CDTX dTX, ref CChip pChip )
 		{
-			int n小節番号plus1 = pChip.nPlaybackPosition / 384;
+			int n小節番号plus1 = pChip.nPlaybackPosition / 1920;
 			if ( !pChip.bHit && ( pChip.nDistanceFromBar.Drums < 0 ) )
 			{
 				pChip.bHit = true;
-				this.actPlayInfo.n小節番号 = n小節番号plus1 - 1;
+                if (CDTXMania.ConfigIni.bMetronome)
+                {
+                    CDTXMania.Skin.soundMetronome.tPlay();
+                }
+
+                this.actPlayInfo.n小節番号 = n小節番号plus1 - 1;
                 if ( configIni.bWave再生位置自動調整機能有効 && bIsDirectSound )
 				{
 					dTX.tAutoCorrectWavPlaybackPosition();

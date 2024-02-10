@@ -52,8 +52,7 @@ namespace DTXMania
             RxBYP,
             RGxYP,
             RGBYP
-		};
-
+		}
 
 		// クラス
 
@@ -105,7 +104,6 @@ namespace DTXMania
                     CDTXMania.app.b汎用ムービーである = true;
 					this.avi = null;
 					return;
-					
 				}
 
 				// AVI の生成。
@@ -125,7 +123,7 @@ namespace DTXMania
 			}
 			public override string ToString()
 			{
-				return string.Format( "CAVI{0}: File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
+				return string.Format( "CAVI{0}:File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
 			}
 
 			#region [ IDisposable 実装 ]
@@ -201,7 +199,7 @@ namespace DTXMania
 			}
 			public override string ToString()
 			{
-				return string.Format( "CAVI{0}: File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
+				return string.Format( "CAVI{0}:File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
 			}
 
 			#region [ IDisposable 実装 ]
@@ -248,7 +246,7 @@ namespace DTXMania
 
 			public override string ToString()
 			{
-				return string.Format( "CAVIPAN{0}: AVI:{14}, 開始サイズ:{1}x{2}, 終了サイズ:{3}x{4}, 動画側開始位置:{5}x{6}, 動画側終了位置:{7}x{8}, 表示側開始位置:{9}x{10}, 表示側終了位置:{11}x{12}, 移動時間:{13}ct",
+				return string.Format( "CAVIPAN{0}:AVI:{14}, 開始サイズ:{1}x{2}, 終了サイズ:{3}x{4}, 動画側開始位置:{5}x{6}, 動画側終了位置:{7}x{8}, 表示側開始位置:{9}x{10}, 表示側終了位置:{11}x{12}, 移動時間:{13}ct",
 					CDTX.tZZ( this.n番号 ),
 					this.sz開始サイズ.Width, this.sz開始サイズ.Height,
 					this.sz終了サイズ.Width, this.sz終了サイズ.Height,
@@ -270,7 +268,7 @@ namespace DTXMania
 
 			public override string ToString()
 			{
-				return string.Format( "CBGA{0}, BMP:{1}, 画像側左上座標:{2}x{3}, 画像側右下座標:{4}x{5}, 表示座標:{6}x{7}",
+				return string.Format( "CBGA:{0}, BMP:{1}, 画像側左上座標:{2}x{3}, 画像側右下座標:{4}x{5}, 表示座標:{6}x{7}",
 					CDTX.tZZ( this.n番号 ),
 					CDTX.tZZ( this.nBMP番号 ),
 					this.pt画像側左上座標.X, this.pt画像側左上座標.Y,
@@ -292,7 +290,7 @@ namespace DTXMania
 
 			public override string ToString()
 			{
-				return string.Format( "CBGAPAN{0}: BMP:{14}, 開始サイズ:{1}x{2}, 終了サイズ:{3}x{4}, 画像側開始位置:{5}x{6}, 画像側終了位置:{7}x{8}, 表示側開始位置:{9}x{10}, 表示側終了位置:{11}x{12}, 移動時間:{13}ct",
+				return string.Format( "CBGAPAN{0}:BMP:{14}, 開始サイズ:{1}x{2}, 終了サイズ:{3}x{4}, 画像側開始位置:{5}x{6}, 画像側終了位置:{7}x{8}, 表示側開始位置:{9}x{10}, 表示側終了位置:{11}x{12}, 移動時間:{13}ct",
 					CDTX.tZZ( this.nBMP番号 ),
 					this.sz開始サイズ.Width, this.sz開始サイズ.Height,
 					this.sz終了サイズ.Width, this.sz終了サイズ.Height,
@@ -316,7 +314,7 @@ namespace DTXMania
 			}
 			public override string ToString()
 			{
-				return string.Format( "CBMP{0}: File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
+				return string.Format( "CBMP{0}:File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
 			}
 
 		}
@@ -332,7 +330,7 @@ namespace DTXMania
 			}
 			public override string ToString()
 			{
-				return string.Format( "CBMPTEX{0}: File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
+				return string.Format( "CBMPTEX{0}:File:{1}, Comment:{2}", CDTX.tZZ( this.n番号 ), this.strファイル名, this.strコメント文 );
 			}
 		}
 		public class CBMPbase : IDisposable
@@ -437,7 +435,6 @@ namespace DTXMania
 					bitmap.Dispose();
 				}
 			}
-
 			public virtual void PutLog( string strテクスチャファイル名 )
 			{
 			}
@@ -507,7 +504,7 @@ namespace DTXMania
 			public int nチップサイズ = 100;
 			public int n位置;
 			public long[] nPauseTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
-			public int n音量 = 100;
+			public int n音量 = 127;
 			public int n現在再生中のサウンド番号;
 			public long[] nPlayStartTime = new long[ CDTXMania.ConfigIni.nPoliphonicSounds ];	// 4
 			public int n内部番号;
@@ -539,7 +536,7 @@ namespace DTXMania
 				
 				if( this.n表記上の番号 == this.n内部番号 )
 				{
-					sb.Append( string.Format( "CWAV{0}: ", CDTX.tZZ( this.n表記上の番号 ) ) );
+					sb.Append( string.Format( "CWAV{0}:", CDTX.tZZ( this.n表記上の番号 ) ) );
 				}
 				else
 				{
@@ -574,7 +571,6 @@ namespace DTXMania
 							Trace.TraceInformation( "サウンドを解放しました。({0})({1})", this.strコメント文, this.strファイル名 );
 					}
 				}
-
 				this.bDisposed済み = true;
 			}
 			~CWAV()
@@ -632,7 +628,6 @@ namespace DTXMania
 				}
 			}
 			public int Guitar;
-
 			public int Bass;
 			
 			public int this[ int index ]
@@ -676,8 +671,10 @@ namespace DTXMania
 
                         case 11:
                             return this.LBD;
+
 						case 12:							
 							return this.Guitar;
+
 						case 13:
 							return this.Bass;
 					}
@@ -738,9 +735,11 @@ namespace DTXMania
                         case 11:
                             this.LBD = value;
                             return;
+
 						case 12:
 							this.Guitar = value;
 							return;
+
 						case 13:
 							this.Bass = value;
 							return;
@@ -1343,7 +1342,6 @@ namespace DTXMania
 			}
 		}
 
-
 		// プロパティ
 
 		public int nBGMAdjust
@@ -1381,7 +1379,7 @@ namespace DTXMania
 		public STLANEINT nVisibleChipsCount;
         public int nボーナスチップ数;
 		public const int n最大音数 = 4;
-		public const int n小節の解像度 = 384;
+		public const int n小節の解像度 = 1920;
 		public string PANEL;
 		public string PATH_WAV;
         public string PATH;
@@ -1402,7 +1400,7 @@ namespace DTXMania
 		public string strFolderName;
 		public string TITLE;
         public bool b強制的にXG譜面にする;
-        public bool bVol137to100;
+        public bool bVol127to100;
         public double dbDTXVPlaySpeed;
 #if TEST_NOTEOFFMODE
 		public STLANEVALUE<bool> b演奏で直前の音を消音する;
@@ -1465,41 +1463,81 @@ namespace DTXMania
 			this.strファイル名 = "";
 			this.strFolderName = "";
 			this.strファイル名の絶対パス = "";
-			this.n無限管理WAV = new int[ 36 * 36 ];
-			this.n無限管理BPM = new int[ 36 * 36 ];
-			this.n無限管理VOL = new int[ 36 * 36 ];
-			this.n無限管理PAN = new int[ 36 * 36 ];
-			this.n無限管理SIZE = new int[ 36 * 36 ];
+			this.n無限管理WAV = new int[ 62 * 62 ];
+			this.n無限管理BPM = new int[ 62 * 62 ];
+			this.n無限管理VOL = new int[ 62 * 62 ];
+			this.n無限管理PAN = new int[ 62 * 62 ];
+			this.n無限管理SIZE = new int[ 62 * 62 ];
 			this.nRESULTIMAGE用優先順位 = new int[ 7 ];
 			this.nRESULTMOVIE用優先順位 = new int[ 7 ];
 			this.nRESULTSOUND用優先順位 = new int[ 7 ];
             this.b強制的にXG譜面にする = false;
-            this.bVol137to100 = false;
+            this.bVol127to100 = false;
 
 
 			#region [ 2011.1.1 yyagi GDA->DTX変換テーブル リファクタ後 ]
 			STGDAPARAM[] stgdaparamArray = new STGDAPARAM[] {		// GDA->DTX conversion table
-				new STGDAPARAM("TC", EChannel.BPM),	new STGDAPARAM("BL", EChannel.BarLength),	new STGDAPARAM("GS", EChannel.flowspeed_gt_nouse),
-				new STGDAPARAM("DS", EChannel.flowspeed_dr_nouse),	new STGDAPARAM("FI", EChannel.FillIn),	new STGDAPARAM("HH", EChannel.HiHatClose),
-				new STGDAPARAM("SD", EChannel.Snare),	new STGDAPARAM("BD", EChannel.BassDrum),	new STGDAPARAM("HT", EChannel.HighTom),
-				new STGDAPARAM("LT", EChannel.LowTom),	new STGDAPARAM("CY", EChannel.Cymbal),	new STGDAPARAM("G1", EChannel.Guitar_xxBxx),
-				new STGDAPARAM("G2", EChannel.Guitar_xGxxx),	new STGDAPARAM("G3", EChannel.Guitar_xGBxx),	new STGDAPARAM("G4", EChannel.Guitar_Rxxxx),
-				new STGDAPARAM("G5", EChannel.Guitar_RxBxx),	new STGDAPARAM("G6", EChannel.Guitar_RGxxx),	new STGDAPARAM("G7", EChannel.Guitar_RGBxx),
-				new STGDAPARAM("GW", EChannel.Guitar_Wailing),	new STGDAPARAM("01", EChannel.SE01),	new STGDAPARAM("02", EChannel.SE02),
-				new STGDAPARAM("03", EChannel.SE03),	new STGDAPARAM("04", EChannel.SE04),	new STGDAPARAM("05", EChannel.SE05),
-				new STGDAPARAM("06", EChannel.SE06),	new STGDAPARAM("07", EChannel.SE07),	new STGDAPARAM("08", EChannel.SE08),
-				new STGDAPARAM("09", EChannel.SE09),	new STGDAPARAM("0A", EChannel.SE10),	new STGDAPARAM("0B", EChannel.SE11),
-				new STGDAPARAM("0C", EChannel.SE12),	new STGDAPARAM("0D", EChannel.SE13),	new STGDAPARAM("0E", EChannel.SE14),
-				new STGDAPARAM("0F", EChannel.SE15),	new STGDAPARAM("10", EChannel.SE16),	new STGDAPARAM("11", EChannel.SE17),
-				new STGDAPARAM("12", EChannel.SE18),	new STGDAPARAM("13", EChannel.SE19),	new STGDAPARAM("14", EChannel.SE20),
-				new STGDAPARAM("15", EChannel.SE21),	new STGDAPARAM("16", EChannel.SE22),	new STGDAPARAM("17", EChannel.SE23),
-				new STGDAPARAM("18", EChannel.SE24),	new STGDAPARAM("19", EChannel.SE25),	new STGDAPARAM("1A", EChannel.SE26),
-				new STGDAPARAM("1B", EChannel.SE27),	new STGDAPARAM("1C", EChannel.SE28),	new STGDAPARAM("1D", EChannel.SE29),
-				new STGDAPARAM("1E", EChannel.SE30),	new STGDAPARAM("1F", EChannel.SE31),	new STGDAPARAM("20", EChannel.SE32),
-				new STGDAPARAM("B1", EChannel.Bass_xxBxx),	new STGDAPARAM("B2", EChannel.Bass_xGxxx),	new STGDAPARAM("B3", EChannel.Bass_xGBxx),
-				new STGDAPARAM("B4", EChannel.Bass_Rxxxx),	new STGDAPARAM("B5", EChannel.Bass_RxBxx),	new STGDAPARAM("B6", EChannel.Bass_RGxxx),
-				new STGDAPARAM("B7", EChannel.Bass_RGBxx),	new STGDAPARAM("BW", EChannel.Bass_Wailing),	new STGDAPARAM("G0", EChannel.Guitar_Open),
-				new STGDAPARAM("B0", EChannel.Bass_Open)
+				new STGDAPARAM("TC", EChannel.BPM),
+				new STGDAPARAM("BL", EChannel.BarLength),
+				new STGDAPARAM("GS", EChannel.flowspeed_gt_nouse),
+				new STGDAPARAM("DS", EChannel.flowspeed_dr_nouse),
+				new STGDAPARAM("FI", EChannel.FillIn),
+				new STGDAPARAM("HH", EChannel.HiHatClose),
+				new STGDAPARAM("SD", EChannel.Snare),
+				new STGDAPARAM("BD", EChannel.BassDrum),
+				new STGDAPARAM("HT", EChannel.HighTom),
+				new STGDAPARAM("LT", EChannel.LowTom),
+				new STGDAPARAM("CY", EChannel.Cymbal),
+				new STGDAPARAM("G0", EChannel.Guitar_Open),
+				new STGDAPARAM("G1", EChannel.Guitar_xxBxx),
+				new STGDAPARAM("G2", EChannel.Guitar_xGxxx),
+				new STGDAPARAM("G3", EChannel.Guitar_xGBxx),
+				new STGDAPARAM("G4", EChannel.Guitar_Rxxxx),
+				new STGDAPARAM("G5", EChannel.Guitar_RxBxx),
+				new STGDAPARAM("G6", EChannel.Guitar_RGxxx),
+				new STGDAPARAM("G7", EChannel.Guitar_RGBxx),
+				new STGDAPARAM("GW", EChannel.Guitar_Wailing),
+				new STGDAPARAM("01", EChannel.SE01),
+				new STGDAPARAM("02", EChannel.SE02),
+				new STGDAPARAM("03", EChannel.SE03),
+				new STGDAPARAM("04", EChannel.SE04),
+				new STGDAPARAM("05", EChannel.SE05),
+				new STGDAPARAM("06", EChannel.SE06),
+				new STGDAPARAM("07", EChannel.SE07),
+				new STGDAPARAM("08", EChannel.SE08),
+				new STGDAPARAM("09", EChannel.SE09),
+				new STGDAPARAM("0A", EChannel.SE10),
+				new STGDAPARAM("0B", EChannel.SE11),
+				new STGDAPARAM("0C", EChannel.SE12),
+				new STGDAPARAM("0D", EChannel.SE13),
+				new STGDAPARAM("0E", EChannel.SE14),
+				new STGDAPARAM("0F", EChannel.SE15),
+				new STGDAPARAM("10", EChannel.SE16),
+				new STGDAPARAM("11", EChannel.SE17),
+				new STGDAPARAM("12", EChannel.SE18),
+				new STGDAPARAM("13", EChannel.SE19),
+				new STGDAPARAM("14", EChannel.SE20),
+				new STGDAPARAM("15", EChannel.SE21),
+				new STGDAPARAM("16", EChannel.SE22),
+				new STGDAPARAM("17", EChannel.SE23),
+				new STGDAPARAM("18", EChannel.SE24),
+				new STGDAPARAM("19", EChannel.SE25),
+				new STGDAPARAM("1A", EChannel.SE26),
+				new STGDAPARAM("1B", EChannel.SE27),
+				new STGDAPARAM("1C", EChannel.SE28),
+				new STGDAPARAM("1D", EChannel.SE29),
+				new STGDAPARAM("1E", EChannel.SE30),
+				new STGDAPARAM("1F", EChannel.SE31),
+				new STGDAPARAM("20", EChannel.SE32),
+				new STGDAPARAM("B0", EChannel.Bass_Open),
+				new STGDAPARAM("B1", EChannel.Bass_xxBxx),
+				new STGDAPARAM("B2", EChannel.Bass_xGxxx),
+				new STGDAPARAM("B3", EChannel.Bass_xGBxx),
+				new STGDAPARAM("B4", EChannel.Bass_Rxxxx),
+				new STGDAPARAM("B5", EChannel.Bass_RxBxx),
+				new STGDAPARAM("B6", EChannel.Bass_RGxxx),
+				new STGDAPARAM("B7", EChannel.Bass_RGBxx),
+				new STGDAPARAM("BW", EChannel.Bass_Wailing)
 			};
 			this.stGDAParam = stgdaparamArray;
 			#endregion
@@ -1537,7 +1575,6 @@ namespace DTXMania
 			this.OnActivate();
 			this.tRead( strファイル名, bヘッダのみ, db再生速度, nBGMAdjust );
 		}
-
 
 		// メソッド
 
@@ -2045,8 +2082,6 @@ namespace DTXMania
                 }
             }
         }
- 
-
 
         public void t譜面仕様変更(EInstrumentPart part, DTXMania.EType eNumOfLanes)
         {
@@ -2098,7 +2133,6 @@ namespace DTXMania
                                     num4 = chip.nChannelNumber;
                                     num6 = chip.nPlaybackPosition;
                                     continue;
-
 
                                 case EChannel.Snare:
                                 case EChannel.BassDrum:
@@ -2164,7 +2198,6 @@ namespace DTXMania
                             }
                         }
                         continue;
-
                     }
                 }
             }
@@ -2260,17 +2293,17 @@ namespace DTXMania
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
                                     case ERandomMode.SUPERRANDOM:
-                                        if (current.nPlaybackPosition / 384 != num4)
+                                        if (current.nPlaybackPosition / 1920 != num4)
                                         {
-                                            num4 = current.nPlaybackPosition / 384;
+                                            num4 = current.nPlaybackPosition / 1920;
                                             CDTX.tグループランダム分配作業(out array, out array2);
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
                                         break;
                                     case ERandomMode.HYPERRANDOM:
-                                        if (current.nPlaybackPosition / 96 != num4)
+                                        if (current.nPlaybackPosition / 1920 != num4)
                                         {
-                                            num4 = current.nPlaybackPosition / 96;
+                                            num4 = current.nPlaybackPosition / 1920;
                                             CDTX.tグループランダム分配作業(out array, out array2);
                                         }
                                         CDTX.t乱数を各チャンネルに指定する(array, array2, current, nチャンネル番号);
@@ -2429,17 +2462,17 @@ namespace DTXMania
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
                             case ERandomMode.SUPERRANDOM:
-                                if (current2.nPlaybackPosition / 384 != num9)
+                                if (current2.nPlaybackPosition / 1920 != num9)
                                 {
-                                    num9 = current2.nPlaybackPosition / 384;
+                                    num9 = current2.nPlaybackPosition / 1920;
                                     CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
                                 break;
                             case ERandomMode.HYPERRANDOM:
-                                if (current2.nPlaybackPosition / 96 != num9)
+                                if (current2.nPlaybackPosition / 1920 != num9)
                                 {
-                                    num9 = current2.nPlaybackPosition / 96;
+                                    num9 = current2.nPlaybackPosition / 1920;
                                     CDTX.t乱数排列数列生成作業_クラシック(out n乱数排列数列);
                                 }
                                 CDTX.t乱数を各チャンネルに指定する_クラシック(n乱数排列数列, current2, nチャンネル番号2);
@@ -2614,9 +2647,9 @@ namespace DTXMania
                                 }
                                 break;
                             case ERandomMode.SUPERRANDOM:
-                                if (current.nPlaybackPosition / 384 != num4)
+                                if (current.nPlaybackPosition / 1920 != num4)
                                 {
-                                    num4 = current.nPlaybackPosition / 384;
+                                    num4 = current.nPlaybackPosition / 1920;
                                     num = CDTXMania.Random.Next(2);
                                 }
                                 if (num5 == EChannel.BassDrum)
@@ -2629,9 +2662,9 @@ namespace DTXMania
                                 }
                                 break;
                             case ERandomMode.HYPERRANDOM:
-                                if (current.nPlaybackPosition / 96 != num4)
+                                if (current.nPlaybackPosition / 1920 != num4)
                                 {
-                                    num4 = current.nPlaybackPosition / 96;
+                                    num4 = current.nPlaybackPosition / 1920;
                                     num = CDTXMania.Random.Next(2);
                                 }
                                 if (num5 == EChannel.BassDrum)
@@ -2862,9 +2895,7 @@ namespace DTXMania
                     }
                 }
             }
-            
         }
-
 		public void tチップの再生(CChip rChip, long n再生開始システム時刻ms)
 		{
 			this.tチップの再生(rChip, n再生開始システム時刻ms, CDTXMania.ConfigIni.n自動再生音量, false, false);
@@ -2903,7 +2934,7 @@ namespace DTXMania
 						}
 						sound.dbPlaySpeed = ((double)CDTXMania.ConfigIni.nPlaySpeed) / 20.0;
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
-						sound.nVolume = (int)(((double)(nVol * wc.n音量)) / 100.0);
+						sound.nVolume = (int)(((double)(nVol * wc.n音量)) / 127.0);
 						sound.nPosition = wc.n位置;
 						sound.tStartPlaying();
 					}
@@ -2912,7 +2943,6 @@ namespace DTXMania
 				}
 			}
 		}
-
 		public void tAutoCorrectWavPlaybackPosition()  // tWave再生位置自動補正
 		{
 			foreach( CWAV cwav in this.listWAV.Values )
@@ -3004,7 +3034,7 @@ namespace DTXMania
 					//try
 					//{
 					//    cwav.rSound[ 0 ] = CDTXMania.SoundManager.tGenerateSound( str );
-					//    cwav.rSound[ 0 ].nVolume = 100;
+					//    cwav.rSound[ 0 ].nVolume = 127;
 					//    if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 					//    {
 					//        Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -3035,7 +3065,7 @@ namespace DTXMania
 					try
 					{
 						cwav.rSound[ 0 ] = CDTXMania.SoundManager.tGenerateSound( str );
-						cwav.rSound[ 0 ].nVolume = 100;
+						cwav.rSound[ 0 ].nVolume = 127;
 						if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 						{
 							Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -3080,7 +3110,7 @@ namespace DTXMania
 							try
 							{
 								cwav.rSound[ i ] = CDTXMania.SoundManager.tGenerateSound( str );
-								cwav.rSound[ i ].nVolume = 100;
+								cwav.rSound[ i ].nVolume = 127;
 								if ( CDTXMania.ConfigIni.bLog作成解放ログ出力 )
 								{
 									Trace.TraceInformation( "サウンドを作成しました。({3})({0})({1})({2}bytes)", cwav.strコメント文, str, cwav.rSound[ 0 ].nサウンドバッファサイズ, cwav.rSound[ 0 ].bストリーム再生する ? "Stream" : "OnMemory" );
@@ -3108,13 +3138,13 @@ namespace DTXMania
 		}
 		public static string tZZ( int n )
 		{
-			if( n < 0 || n >= 36 * 36 )
+			if( n < 0 || n >= 62 * 62 )
 				return "!!";	// オーバー／アンダーフロー。
 
-			// n を36進数2桁の文字列にして返す。
+			// n を62進数2桁の文字列にして返す。
 
-			string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			return new string( new char[] { str[ n / 36 ], str[ n % 36 ] } );
+			string str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+			return new string( new char[] { str[ n / 62 ], str[ n % 62 ] } );
 		}
 		public void tRandomizeGuitarAndBass(EInstrumentPart part, ERandomMode eRandom)
 		{
@@ -3129,9 +3159,9 @@ namespace DTXMania
 					int nRGBレーンビットパターン;
 					int n新RGBレーンビットパターン = 0;				// 「未割り当てのローカル変数」ビルドエラー回避のために0を初期値に設定
 					bool flag;
-					if( ( chip.nPlaybackPosition / 384 ) != n小節番号 )		// 小節が変化したら
+					if( ( chip.nPlaybackPosition / 1920 ) != n小節番号 )		// 小節が変化したら
 					{
-						n小節番号 = chip.nPlaybackPosition / 384;
+						n小節番号 = chip.nPlaybackPosition / 1920;
 						n小節内乱数6通り = CDTXMania.Random.Next( 6 );
 					}
 					EChannel nランダム化前チャンネル番号 = chip.nChannelNumber;
@@ -3311,7 +3341,7 @@ namespace DTXMania
 						}
 						sound.dbPlaySpeed = ( (double) CDTXMania.ConfigIni.nPlaySpeed ) / 20.0;
 						// 再生速度によって、WASAPI/ASIOで使う使用mixerが決まるため、付随情報の設定(音量/PAN)は、再生速度の設定後に行う
-						sound.nVolume = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 100.0 );
+						sound.nVolume = (int) ( ( (double) ( nVol * wc.n音量 ) ) / 127.0 );
 						sound.nPosition = wc.n位置;
 						sound.tStartPlaying();
 					}
@@ -3444,7 +3474,7 @@ namespace DTXMania
 					//DateTime timeBeginLoad = DateTime.Now;
 					//TimeSpan span;
 
-					StreamReader reader = new StreamReader( strファイル名, Encoding.GetEncoding( "shift-jis" ) );
+					StreamReader reader = new StreamReader( strファイル名, Encoding.GetEncoding("shift-jis") );
 					string str2 = reader.ReadToEnd();
 					reader.Close();
 					//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
@@ -3482,7 +3512,7 @@ namespace DTXMania
 				//Trace.TraceInformation( "改行カット時間:           {0}", span.ToString() );
 				//timeBeginLoad = DateTime.Now;
 				#region [ 初期化 ]
-				for ( int j = 0; j < 36 * 36; j++ )
+				for ( int j = 0; j < 62 * 62; j++ )
 				{
 					this.n無限管理WAV[ j ] = -j;
 					this.n無限管理BPM[ j ] = -j;
@@ -3552,7 +3582,7 @@ namespace DTXMania
 					this.n無限管理BPM = null;
 					this.n無限管理VOL = null;
 					this.n無限管理PAN = null;
-					this.n無限管理SIZE = null;
+					//this.n無限管理SIZE = null;
 					if ( !this.bヘッダのみ )
 					{
 						#region [ BPM/BMP初期化 ]
@@ -3571,7 +3601,7 @@ namespace DTXMania
 							cbpm = new CBPM();
 							cbpm.n内部番号 = this.n内部番号BPM1to++;
 							cbpm.n表記上の番号 = 0;
-							cbpm.dbBPM値 = 120.0;
+							cbpm.dbBPM値 = 120.0000;
 							this.listBPM.Add( cbpm.n内部番号, cbpm );
 							CChip chip = new CChip();
 							chip.nPlaybackPosition = 0;
@@ -3615,7 +3645,7 @@ namespace DTXMania
 							}
 							if ( cwav.n音量 < 0 )
 							{
-								cwav.n音量 = 100;
+								cwav.n音量 = 127;
 							}
 						}
 						#endregion
@@ -3662,34 +3692,34 @@ namespace DTXMania
 							// (ここまでの一部チップ登録を、listChip.Add(c)から同Insert(0,c)に変更してある)
 							// これにより、数ms程度ながらここでのソートも高速化されている。
 							double barlength = 1.0;
-							int nEndOfSong = ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition + 384 ) - ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition % 384 );
-							for ( int tick384 = 0; tick384 <= nEndOfSong; tick384 += 384 )	// 小節線の挿入　(後に出てくる拍子線とループをまとめようとするなら、forループの終了条件の微妙な違いに注意が必要)
+							int nEndOfSong = ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition + 1920 ) - ( this.listChip[ this.listChip.Count - 1 ].nPlaybackPosition % 1920 );
+							for ( int tick1920 = 0; tick1920 <= nEndOfSong; tick1920 += 1920 )	// 小節線の挿入　(後に出てくる拍子線とループをまとめようとするなら、forループの終了条件の微妙な違いに注意が必要)
 							{
 								CChip chip = new CChip();
-								chip.nPlaybackPosition = tick384;
+								chip.nPlaybackPosition = tick1920;
 								chip.nChannelNumber = EChannel.BarLine;	// 小節線
-								chip.nIntegerValue = 36 * 36 - 1;
+								chip.nIntegerValue = 62 * 62 - 1;
 								this.listChip.Add( chip );
 							}
 							//this.listChip.Sort();				// ここでのソートは不要。ただし最後にソートすること
 							int nChipNo_BarLength = 0;
 							int nChipNo_C1 = 0;
-							for ( int tick384 = 0; tick384 < nEndOfSong; tick384 += 384 )
+							for ( int tick1920 = 0; tick1920 < nEndOfSong; tick1920 += 1920 )
 							{
 								int n発声位置_C1_同一小節内 = 0;
-								while ( ( nChipNo_C1 < this.listChip.Count ) && ( this.listChip[ nChipNo_C1 ].nPlaybackPosition < ( tick384 + 384 ) ) )
+								while ( ( nChipNo_C1 < this.listChip.Count ) && ( this.listChip[ nChipNo_C1 ].nPlaybackPosition < ( tick1920 + 1920 ) ) )
 								{
 									if ( this.listChip[ nChipNo_C1 ].nChannelNumber == EChannel.BeatLineShift )				// 拍線シフトの検出
 									{
-										n発声位置_C1_同一小節内 = this.listChip[ nChipNo_C1 ].nPlaybackPosition - tick384;
+										n発声位置_C1_同一小節内 = this.listChip[ nChipNo_C1 ].nPlaybackPosition - tick1920;
 									}
 									nChipNo_C1++;
 								}
 								if ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) )
 								{
-									barlength = 1.0;
+									barlength = 0.2;
 								}
-								while ( ( nChipNo_BarLength < this.listChip.Count ) && ( this.listChip[ nChipNo_BarLength ].nPlaybackPosition <= tick384 ) )
+								while ( ( nChipNo_BarLength < this.listChip.Count ) && ( this.listChip[ nChipNo_BarLength ].nPlaybackPosition <= tick1920 ) )
 								{
 									if ( this.listChip[ nChipNo_BarLength ].nChannelNumber == EChannel.BarLength)		// bar lengthの検出
 									{
@@ -3699,17 +3729,17 @@ namespace DTXMania
 								}
 								for ( int i = 0; i < 100; i++ )								// 拍線の挿入
 								{
-									int tickBeat = (int) ( ( (double) ( 384 * i ) ) / ( 4.0 * barlength ) );
-									if ( ( tickBeat + n発声位置_C1_同一小節内 ) >= 384 )
+									int tickBeat = (int) ( ( (double) ( 1920 * i ) ) / ( 4.0 * barlength ) );
+									if ( ( tickBeat + n発声位置_C1_同一小節内 ) >= 1920 )
 									{
 										break;
 									}
-									if ( ( ( tickBeat + n発声位置_C1_同一小節内 ) % 384 ) != 0 )
+									if ( ( ( tickBeat + n発声位置_C1_同一小節内 ) % 1920 ) != 0 )
 									{
 										CChip chip = new CChip();
-										chip.nPlaybackPosition = tick384 + ( tickBeat + n発声位置_C1_同一小節内 );
+										chip.nPlaybackPosition = tick1920 + ( tickBeat + n発声位置_C1_同一小節内 );
 										chip.nChannelNumber = EChannel.BeatLine;						// beat line 拍線
-										chip.nIntegerValue = 36 * 36 - 1;
+										chip.nIntegerValue = 62 * 62 - 1;
 										this.listChip.Add( chip );
 									}
 								}
@@ -3750,7 +3780,7 @@ namespace DTXMania
 							for ( int j = startIndex; j <= i; j++ )
 							{
 								if ( ( ( this.listChip[ j ].nChannelNumber == EChannel.BarLine ) || ( this.listChip[ j ].nChannelNumber == EChannel.BeatLine ) ) &&
-									( this.listChip[ j ].nIntegerValue == ( 36 * 36 - 1 ) ) )
+									( this.listChip[ j ].nIntegerValue == ( 62 * 62 - 1 ) ) )
 								{
 									this.listChip[ j ].bVisible = bShowBeatBarLine;
 								}
@@ -3761,7 +3791,7 @@ namespace DTXMania
 						//Trace.TraceInformation( "C2 [拍線_小節線表示指定]:  {0}", span.ToString() );
 						//timeBeginLoad = DateTime.Now;
 						#region [ 発声時刻の計算 ]
-						double bpm = 120.0;
+						double bpm = 120.0000;
 						double dbBarLength = 1.0;
 						int n発声位置 = 0;
 						int ms = 0;
@@ -3773,14 +3803,16 @@ namespace DTXMania
 						cCandidateStartHold.Bass = null;
 						foreach ( CChip chip in this.listChip )
 						{
-							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
-							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
+							//chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm / 5 ) );
+							double playbackTimeMs = ms + 0x271 * (chip.nPlaybackPosition - n発声位置) * dbBarLength / bpm / 5; //#164
+							chip.nPlaybackTimeMs = (int)Math.Round(playbackTimeMs); //#164
+							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 1920 ) != nBar ) ) )
 							{
 								n発声位置 = chip.nPlaybackPosition;
 								ms = chip.nPlaybackTimeMs;
 								dbBarLength = 1.0;
 							}
-							nBar = chip.nPlaybackPosition / 384;
+							nBar = chip.nPlaybackPosition / 1920;
 							ch = chip.nChannelNumber;
 							switch ( ch )
 							{
@@ -3833,7 +3865,7 @@ namespace DTXMania
 									{
 										if ( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 										{
-											int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+											int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm / 5 ) );
 											int num22 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listAVIPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
 											chip.n総移動時間 = num22 - num21;
 										}
@@ -3843,7 +3875,7 @@ namespace DTXMania
                                     {
                                         if (this.listAVIPAN.ContainsKey(chip.nIntegerValue))
                                         {
-                                            int num21 = ms + ((int)(((0x271 * (chip.nPlaybackPosition - n発声位置)) * dbBarLength) / bpm));
+                                            int num21 = ms + ((int)(((0x271 * (chip.nPlaybackPosition - n発声位置)) * dbBarLength) / bpm / 5 ));
                                             int num22 = ms + ((int)(((0x271 * ((chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置)) * dbBarLength) / bpm));
                                             chip.n総移動時間 = num22 - num21;
                                         }
@@ -3891,7 +3923,6 @@ namespace DTXMania
 														break;
 													}
                                                 }
-
 												//If candidate start hold survives
 												if(cCandidateStartHold[(int)eChipPart] != null)
                                                 {
@@ -3909,7 +3940,7 @@ namespace DTXMania
 							}
 							if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
 							{
-								int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+								int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm / 5 ) );
 								int num20 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listBGAPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
 								chip.n総移動時間 = num20 - num19;
 							}
@@ -4100,30 +4131,150 @@ namespace DTXMania
 					// BGM:
 					case EChannel.BGM:
 					// Dr playing channels
-					case EChannel.HiHatClose:	case EChannel.Snare:	case EChannel.BassDrum:	case EChannel.HighTom:	case EChannel.LowTom:	case EChannel.Cymbal:	case EChannel.FloorTom:	case EChannel.HiHatOpen:	case EChannel.RideCymbal:	case EChannel.LeftCymbal:  case EChannel.LeftPedal:  case EChannel.LeftBassDrum:
+					case EChannel.HiHatClose:
+					case EChannel.Snare:
+					case EChannel.BassDrum:
+					case EChannel.HighTom:
+					case EChannel.LowTom:
+					case EChannel.Cymbal:
+					case EChannel.FloorTom:
+					case EChannel.HiHatOpen:
+					case EChannel.RideCymbal:
+					case EChannel.LeftCymbal: 
+					case EChannel.LeftPedal:
+					case EChannel.LeftBassDrum:
 					// Gt playing channels
-					case EChannel.Guitar_Open:	case EChannel.Guitar_xxBxx:	case EChannel.Guitar_xGxxx:	case EChannel.Guitar_xGBxx:	case EChannel.Guitar_Rxxxx:	case EChannel.Guitar_RxBxx:	case EChannel.Guitar_RGxxx:	case EChannel.Guitar_RGBxx:	case EChannel.Guitar_Wailing:
-                    case EChannel.Guitar_xxxYx:　case EChannel.Guitar_xxBYx:　case EChannel.Guitar_xGxYx:　case EChannel.Guitar_xGBYx:　case EChannel.Guitar_RxxYx:　case EChannel.Guitar_RxBYx:　case EChannel.Guitar_RGxYx:　case EChannel.Guitar_RGBYx:　case EChannel.Guitar_xxxxP:  case EChannel.Guitar_xxBxP:　case EChannel.Guitar_xGxxP:　case EChannel.Guitar_xGBxP:　case EChannel.Guitar_RxxxP:
-                    case EChannel.Guitar_RxBxP:  case EChannel.Guitar_RGxxP:　case EChannel.Guitar_RGBxP:　case EChannel.Guitar_xxxYP:　case EChannel.Guitar_xxBYP:　case EChannel.Guitar_xGxYP:　case EChannel.Guitar_xGBYP:
-                    case EChannel.Guitar_RxxYP:  case EChannel.Guitar_RxBYP:  case EChannel.Guitar_RGxYP:  case EChannel.Guitar_RGBYP:
+					case EChannel.Guitar_Open:
+					case EChannel.Guitar_xxBxx:
+					case EChannel.Guitar_xGxxx:
+					case EChannel.Guitar_xGBxx:
+					case EChannel.Guitar_Rxxxx:
+					case EChannel.Guitar_RxBxx:
+					case EChannel.Guitar_RGxxx:
+					case EChannel.Guitar_RGBxx:
+					case EChannel.Guitar_Wailing:
+                    case EChannel.Guitar_xxxYx:
+					case EChannel.Guitar_xxBYx:
+					case EChannel.Guitar_xGxYx:
+					case EChannel.Guitar_xGBYx:
+					case EChannel.Guitar_RxxYx:
+					case EChannel.Guitar_RxBYx:
+					case EChannel.Guitar_RGxYx:
+					case EChannel.Guitar_RGBYx:
+					case EChannel.Guitar_xxxxP: 
+					case EChannel.Guitar_xxBxP:
+					case EChannel.Guitar_xGxxP:
+					case EChannel.Guitar_xGBxP:
+					case EChannel.Guitar_RxxxP:
+                    case EChannel.Guitar_RxBxP: 
+					case EChannel.Guitar_RGxxP:
+					case EChannel.Guitar_RGBxP:
+					case EChannel.Guitar_xxxYP:
+					case EChannel.Guitar_xxBYP:
+					case EChannel.Guitar_xGxYP:
+					case EChannel.Guitar_xGBYP:
+                    case EChannel.Guitar_RxxYP:
+					case EChannel.Guitar_RxBYP:
+					case EChannel.Guitar_RGxYP:
+					case EChannel.Guitar_RGBYP:
 					// Bs playing channels
-					case EChannel.Bass_Open:	case EChannel.Bass_xxBxx:	case EChannel.Bass_xGxxx:	case EChannel.Bass_xGBxx:	case EChannel.Bass_Rxxxx:	case EChannel.Bass_RxBxx:	case EChannel.Bass_RGxxx:	case EChannel.Bass_RGBxx:	case EChannel.Bass_Wailing:
-                    case EChannel.Bass_xxxYx:  case EChannel.Bass_xxBYx:  case EChannel.Bass_xGxYx:  case EChannel.Bass_xGBYx:  case EChannel.Bass_RxxYx:  case EChannel.Bass_RxBYx:  case EChannel.Bass_RGxYx:  case EChannel.Bass_RGBYx:  case EChannel.Bass_xxxxP:  case EChannel.Bass_xxBxP:
-                    case EChannel.Bass_xGxxP:  case EChannel.Bass_xGBxP:  case EChannel.Bass_RxxxP:  case EChannel.Bass_RxBxP:  case EChannel.Bass_RGxxP:  case EChannel.Bass_RGBxP:
-                    case EChannel.Bass_xxxYP:  case EChannel.Bass_xxBYP:  case EChannel.Bass_xGxYP:  case EChannel.Bass_xGBYP:  case EChannel.Bass_RxxYP:  case EChannel.Bass_RxBYP:  case EChannel.Bass_RGxYP:  case EChannel.Bass_RGBYP:
+					case EChannel.Bass_Open:
+					case EChannel.Bass_xxBxx:
+					case EChannel.Bass_xGxxx:
+					case EChannel.Bass_xGBxx:
+					case EChannel.Bass_Rxxxx:
+					case EChannel.Bass_RxBxx:
+					case EChannel.Bass_RGxxx:
+					case EChannel.Bass_RGBxx:
+					case EChannel.Bass_Wailing:
+                    case EChannel.Bass_xxxYx:
+					case EChannel.Bass_xxBYx:
+					case EChannel.Bass_xGxYx:
+					case EChannel.Bass_xGBYx:
+					case EChannel.Bass_RxxYx:
+					case EChannel.Bass_RxBYx:
+					case EChannel.Bass_RGxYx:
+					case EChannel.Bass_RGBYx:
+					case EChannel.Bass_xxxxP:
+					case EChannel.Bass_xxBxP:
+                    case EChannel.Bass_xGxxP:
+					case EChannel.Bass_xGBxP:
+					case EChannel.Bass_RxxxP:
+					case EChannel.Bass_RxBxP:
+					case EChannel.Bass_RGxxP:
+					case EChannel.Bass_RGBxP:
+                    case EChannel.Bass_xxxYP:
+					case EChannel.Bass_xxBYP:
+					case EChannel.Bass_xGxYP:
+					case EChannel.Bass_xGBYP:
+					case EChannel.Bass_RxxYP:
+					case EChannel.Bass_RxBYP:
+					case EChannel.Bass_RGxYP:
+					case EChannel.Bass_RGBYP:
 					// Dr invisible chips
-					case EChannel.HiHatClose_Hidden:	case EChannel.Snare_Hidden:	case EChannel.BassDrum_Hidden:	case EChannel.HighTom_Hidden:	case EChannel.LowTom_Hidden:	case EChannel.Cymbal_Hidden:	case EChannel.FloorTom_Hidden:
-					case EChannel.HiHatOpen_Hidden:	case EChannel.RideCymbal_Hidden:	case EChannel.LeftCymbal_Hidden:  case EChannel.LeftPedal_Hidden:　case EChannel.LeftBassDrum_Hidden:
+					case EChannel.HiHatClose_Hidden:
+					case EChannel.Snare_Hidden:
+					case EChannel.BassDrum_Hidden:
+					case EChannel.HighTom_Hidden:
+					case EChannel.LowTom_Hidden:
+					case EChannel.Cymbal_Hidden:
+					case EChannel.FloorTom_Hidden:
+					case EChannel.HiHatOpen_Hidden:
+					case EChannel.RideCymbal_Hidden:
+					case EChannel.LeftCymbal_Hidden:
+					case EChannel.LeftPedal_Hidden:
+					case EChannel.LeftBassDrum_Hidden:
 					// Dr/Gt/Bs blank hits
-					case EChannel.HiHatClose_NoChip:	case EChannel.Snare_NoChip:	case EChannel.BassDrum_NoChip:	case EChannel.HighTom_NoChip:	case EChannel.LowTom_NoChip:	case EChannel.Cymbal_NoChip:	case EChannel.FloorTom_NoChip:	case EChannel.HiHatOpen_NoChip:
-					case EChannel.RideCymbal_NoChip:	case EChannel.Guitar_NoChip:	case EChannel.Bass_NoChip:	case EChannel.LeftCymbal_NoChip:　case EChannel.LeftPedal_NoChip:　case EChannel.LeftBassDrum_NoChip:
+					case EChannel.HiHatClose_NoChip:
+					case EChannel.Snare_NoChip:
+					case EChannel.BassDrum_NoChip:
+					case EChannel.HighTom_NoChip:
+					case EChannel.LowTom_NoChip:
+					case EChannel.Cymbal_NoChip:
+					case EChannel.FloorTom_NoChip:
+					case EChannel.HiHatOpen_NoChip:
+					case EChannel.RideCymbal_NoChip:
+					case EChannel.Guitar_NoChip:
+					case EChannel.Bass_NoChip:
+					case EChannel.LeftCymbal_NoChip:
+					case EChannel.LeftPedal_NoChip:
+					case EChannel.LeftBassDrum_NoChip:
 					// Fill-in sounds
-					case EChannel.DrumsFillin:	case EChannel.Guitar_WailingSound:	//case 0xAF:
+					case EChannel.DrumsFillin:
+					case EChannel.Guitar_WailingSound:	//case 0xAF:
 					// Auto-playing chips
-					case EChannel.SE01:	case EChannel.SE02:	case EChannel.SE03:	case EChannel.SE04:	case EChannel.SE05:	case EChannel.SE06:	case EChannel.SE07:	case EChannel.SE08:	case EChannel.SE09:
-					case EChannel.SE10:	case EChannel.SE11:	case EChannel.SE12:	case EChannel.SE13:	case EChannel.SE14:	case EChannel.SE15:	case EChannel.SE16:	case EChannel.SE17:	case EChannel.SE18:	case EChannel.SE19:
-					case EChannel.SE20:	case EChannel.SE21:	case EChannel.SE22:	case EChannel.SE23:	case EChannel.SE24:	case EChannel.SE25:	case EChannel.SE26:	case EChannel.SE27:	case EChannel.SE28:	case EChannel.SE29:
-					case EChannel.SE30:	case EChannel.SE31:	case EChannel.SE32:
+					case EChannel.SE01:
+					case EChannel.SE02:
+					case EChannel.SE03:
+					case EChannel.SE04:
+					case EChannel.SE05:
+					case EChannel.SE06:
+					case EChannel.SE07:
+					case EChannel.SE08:
+					case EChannel.SE09:
+					case EChannel.SE10:
+					case EChannel.SE11:
+					case EChannel.SE12:
+					case EChannel.SE13:
+					case EChannel.SE14:
+					case EChannel.SE15:
+					case EChannel.SE16:
+					case EChannel.SE17:
+					case EChannel.SE18:
+					case EChannel.SE19:
+					case EChannel.SE20:
+					case EChannel.SE21:
+					case EChannel.SE22:
+					case EChannel.SE23:
+					case EChannel.SE24:
+					case EChannel.SE25:
+					case EChannel.SE26:
+					case EChannel.SE27:
+					case EChannel.SE28:
+					case EChannel.SE29:
+					case EChannel.SE30:
+					case EChannel.SE31:
+					case EChannel.SE32:
 
 						#region [ 発音1秒前のタイミングを記録 ]
 						int n発音前余裕ms = 1000, n発音後余裕ms = 800;
@@ -4150,7 +4301,6 @@ namespace DTXMania
 									CDTXMania.SoundManager.AddMixer( wc.rSound[ 0 ] );	// BGMは多重再生しない仕様としているので、1個目だけミキサーに登録すればよい
 								}
 							}
-
 						}
 
 						int nAddMixer時刻ms, nAddMixer位置 = 0;
@@ -4540,7 +4690,6 @@ namespace DTXMania
 				base.OnManagedReleaseResources();
 			}
 		}
-
 
 		// Other
 		
@@ -5028,7 +5177,7 @@ namespace DTXMania
                 else if( strコマンド.StartsWith( "VOL7FTO64" ) )
                 {
                     this.t入力_パラメータ食い込みチェック( "VOL7FTO64", ref strコマンド, ref strパラメータ );
-                    this.bVol137to100 = strパラメータ.ToLower().Equals( "on" );
+                    this.bVol127to100 = strパラメータ.ToLower().Equals( "on" );
                 }
                 #region [ DTXVPLAYSPEED ]
 				//-----------------
@@ -5186,10 +5335,10 @@ namespace DTXMania
 
 			#region [ AVI番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "AVI(VIDEO)番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "AVI(VIDEO)番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5245,10 +5394,10 @@ namespace DTXMania
 
 			#region [ AVIPAN番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "AVIPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "AVIPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5266,7 +5415,7 @@ namespace DTXMania
 			//-----------------
 			if( strParams.Length < 14 )
 			{
-				Trace.TraceError( "AVIPAN: 引数が足りません。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "AVIPAN:引数が足りません。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5279,13 +5428,13 @@ namespace DTXMania
 			//-----------------
 			if( string.IsNullOrEmpty( strParams[ i ] ) || strParams[ i ].Length > 2 )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の数（AVI番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			avipan.nAVI番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
-			if( avipan.nAVI番号 < 1 || avipan.nAVI番号 >= 36 * 36 )
+			avipan.nAVI番号 = CConversion.nConvert2DigitBase62StringToNumber( strParams[ i ] );
+			if( avipan.nAVI番号 < 1 || avipan.nAVI番号 >= 62 * 62 )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の数（AVI番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の数（AVI番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			i++;
@@ -5296,7 +5445,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（開始転送サイズ_幅）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（開始転送サイズ_幅）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.sz開始サイズ.Width = n値;
@@ -5308,7 +5457,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（開始転送サイズ_高さ）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（開始転送サイズ_高さ）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.sz開始サイズ.Height = n値;
@@ -5320,7 +5469,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（終了転送サイズ_幅）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（終了転送サイズ_幅）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.sz終了サイズ.Width = n値;
@@ -5332,7 +5481,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（終了転送サイズ_高さ）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（終了転送サイズ_高さ）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.sz終了サイズ.Height = n値;
@@ -5344,7 +5493,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（動画側開始位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（動画側開始位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt動画側開始位置.X = n値;
@@ -5356,7 +5505,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（動画側開始位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（動画側開始位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt動画側開始位置.Y = n値;
@@ -5368,7 +5517,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（動画側終了位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（動画側終了位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt動画側終了位置.X = n値;
@@ -5380,7 +5529,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（動画側終了位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（動画側終了位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt動画側終了位置.Y = n値;
@@ -5392,7 +5541,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（表示側開始位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（表示側開始位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt表示側開始位置.X = n値;
@@ -5404,7 +5553,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（表示側開始位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（表示側開始位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt表示側開始位置.Y = n値;
@@ -5416,7 +5565,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（表示側終了位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（表示側終了位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt表示側終了位置.X = n値;
@@ -5428,7 +5577,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（表示側終了位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（表示側終了位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			avipan.pt表示側終了位置.Y = n値;
@@ -5440,7 +5589,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "AVIPAN: {2}番目の引数（移動時間）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "AVIPAN:{2}番目の引数（移動時間）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 
@@ -5483,10 +5632,10 @@ namespace DTXMania
 
 			#region [ BGA番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "BGA番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "BGA番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5504,7 +5653,7 @@ namespace DTXMania
 			//-----------------
 			if( strParams.Length < 7 )
 			{
-				Trace.TraceError( "BGA: 引数が足りません。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "BGA:引数が足りません。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5517,13 +5666,13 @@ namespace DTXMania
 			//-----------------
 			if( string.IsNullOrEmpty( strParams[ i ] ) || strParams[ i ].Length > 2 )
 			{
-				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の数（BMP番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bga.nBMP番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
-			if( bga.nBMP番号 < 1 || bga.nBMP番号 >= 36 * 36 )
+			bga.nBMP番号 = CConversion.nConvert2DigitBase62StringToNumber( strParams[ i ] );
+			if( bga.nBMP番号 < 1 || bga.nBMP番号 >= 62 * 62 )
 			{
-				Trace.TraceError( "BGA: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の数（BMP番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			i++;
@@ -5534,7 +5683,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（画像側位置１_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（画像側位置１_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt画像側左上座標.X = n値;
@@ -5546,7 +5695,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（画像側位置１_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（画像側位置１_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt画像側左上座標.Y = n値;
@@ -5558,7 +5707,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（画像側位置２_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（画像側位置２_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt画像側右下座標.X = n値;
@@ -5570,7 +5719,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（画像側座標２_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（画像側座標２_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt画像側右下座標.Y = n値;
@@ -5582,7 +5731,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（表示位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（表示位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt表示座標.X = n値;
@@ -5594,7 +5743,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGA: {2}番目の引数（表示位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGA:{2}番目の引数（表示位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bga.pt表示座標.Y = n値;
@@ -5649,10 +5798,10 @@ namespace DTXMania
 
 			#region [ BGAPAN番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "BGAPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "BGAPAN番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5670,7 +5819,7 @@ namespace DTXMania
 			//-----------------
 			if( strParams.Length < 14 )
 			{
-				Trace.TraceError( "BGAPAN: 引数が足りません。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "BGAPAN:引数が足りません。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -5683,13 +5832,13 @@ namespace DTXMania
 			//-----------------
 			if( string.IsNullOrEmpty( strParams[ i ] ) || strParams[ i ].Length > 2 )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の数（BMP番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
-			bgapan.nBMP番号 = CConversion.nConvert2DigitBase36StringToNumber( strParams[ i ] );
-			if( bgapan.nBMP番号 < 1 || bgapan.nBMP番号 >= 36 * 36 )
+			bgapan.nBMP番号 = CConversion.nConvert2DigitBase62StringToNumber( strParams[ i ] );
+			if( bgapan.nBMP番号 < 1 || bgapan.nBMP番号 >= 62 * 62 )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の数（BMP番号）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の数（BMP番号）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			i++;
@@ -5700,7 +5849,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（開始転送サイズ_幅）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（開始転送サイズ_幅）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.sz開始サイズ.Width = n値;
@@ -5712,7 +5861,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（開始転送サイズ_高さ）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（開始転送サイズ_高さ）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.sz開始サイズ.Height = n値;
@@ -5724,7 +5873,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（終了転送サイズ_幅）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（終了転送サイズ_幅）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.sz終了サイズ.Width = n値;
@@ -5736,7 +5885,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（終了転送サイズ_高さ）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（終了転送サイズ_高さ）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.sz終了サイズ.Height = n値;
@@ -5748,7 +5897,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（画像側開始位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（画像側開始位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt画像側開始位置.X = n値;
@@ -5760,7 +5909,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（画像側開始位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（画像側開始位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt画像側開始位置.Y = n値;
@@ -5772,7 +5921,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（画像側終了位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（画像側終了位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt画像側終了位置.X = n値;
@@ -5784,7 +5933,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（画像側終了位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（画像側終了位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt画像側終了位置.Y = n値;
@@ -5796,7 +5945,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（表示側開始位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（表示側開始位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt表示側開始位置.X = n値;
@@ -5808,7 +5957,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（表示側開始位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（表示側開始位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt表示側開始位置.Y = n値;
@@ -5820,7 +5969,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（表示側終了位置_X）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（表示側終了位置_X）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt表示側終了位置.X = n値;
@@ -5832,7 +5981,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（表示側終了位置_Y）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（表示側終了位置_Y）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 			bgapan.pt表示側終了位置.Y = n値;
@@ -5844,7 +5993,7 @@ namespace DTXMania
 			n値 = 0;
 			if( !int.TryParse( strParams[ i ], out n値 ) )
 			{
-				Trace.TraceError( "BGAPAN: {2}番目の引数（移動時間）が異常です。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
+				Trace.TraceError( "BGAPAN:{2}番目の引数（移動時間）が異常です。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数, i + 1 );
 				return false;
 			}
 
@@ -5898,10 +6047,10 @@ namespace DTXMania
 			{
 				#region [ (B) "#BMPzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-				if( zz < 0 || zz >= 36 * 36 )
+				zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+				if( zz < 0 || zz >= 62 * 62 )
 				{
-					Trace.TraceError( "BMP番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+					Trace.TraceError( "BMP番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 					return false;
 				}
 				//-----------------
@@ -5909,7 +6058,6 @@ namespace DTXMania
 			}
 			//-----------------
 			#endregion
-
 
 			var bmp = new CBMP() {
 				n番号 = zz,
@@ -5948,10 +6096,10 @@ namespace DTXMania
 
 			#region [ BMPTEX番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "BMPTEX番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "BMPTEX番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -6005,10 +6153,10 @@ namespace DTXMania
 			{
 				#region [ (B) "#BPMzz:" の場合 → zz = 00 ～ ZZ ]
 				//-----------------
-				zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-				if( zz < 0 || zz >= 36 * 36 )
+				zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+				if( zz < 0 || zz >= 62 * 62 )
 				{
-					Trace.TraceError( "BPM番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+					Trace.TraceError( "BPM番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 					return false;
 				}
 				//-----------------
@@ -6347,13 +6495,13 @@ namespace DTXMania
 			//-----------------
 			#endregion
 
-			#region [ nWAV番号（36進数2桁）を取得。]
+			#region [ nWAV番号（62進数2桁）を取得。]
 			//-----------------
-			int nWAV番号 = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
+			int nWAV番号 = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
 
-			if( nWAV番号 < 0 || nWAV番号 >= 36 * 36 )
+			if( nWAV番号 < 0 || nWAV番号 >= 62 * 62 )
 			{
-				Trace.TraceError( "SIZEのWAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "SIZEのWAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -6409,10 +6557,10 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -6477,8 +6625,8 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
 				Trace.TraceError( "WAVPAN(PAN)のWAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
@@ -6491,7 +6639,7 @@ namespace DTXMania
 			int n位置;
 			if( int.TryParse( strパラメータ, out n位置 ) )
 			{
-				n位置 = Math.Min( Math.Max( n位置, -100 ), 100 );	// -100～+100 に丸める
+				n位置 = Math.Min( Math.Max( n位置, -127 ), 127 );	// -127～+127 に丸める
 
 				if( this.n無限管理PAN[ zz ] == ( -10000 - zz ) )	// 初期状態では n無限管理PAN[zz] = -10000 - zz である。この場合、#WAVPANzz, #PANzz がまだ出現していないことを意味する。
 				{
@@ -6512,7 +6660,7 @@ namespace DTXMania
 		{
 			// (1) コマンドを処理。
 
-			#region [ "WAVCOL" or "VOLUME" で始まらないコマンドは無効。]
+			#region [ "WAVVOL" or "VOLUME" で始まらないコマンドは無効。]
 			//-----------------
 			if( strコマンド.StartsWith( "WAVVOL", StringComparison.OrdinalIgnoreCase ) )
 				strコマンド = strコマンド.Substring( 6 );		// strコマンド から先頭の"WAVVOL"文字を除去。
@@ -6532,10 +6680,10 @@ namespace DTXMania
 
 			#region [ WAV番号 zz を取得する。]
 			//-----------------
-			int zz = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( zz < 0 || zz >= 36 * 36 )
+			int zz = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( zz < 0 || zz >= 62 * 62 )
 			{
-				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+				Trace.TraceError( "WAV番号に 00～ZZ 以外の値または不正な文字列が指定されました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 				return false;
 			}
 			//-----------------
@@ -6546,8 +6694,8 @@ namespace DTXMania
 			int n音量;
 			if( int.TryParse( strパラメータ, out n音量 ) )
 			{
-                if( !bVol137to100 )
-				    n音量 = Math.Min( Math.Max( n音量, 0 ), 100 );	// 0～100に丸める。
+                if( !bVol127to100 )
+				    n音量 = Math.Min( Math.Max( n音量, 0 ), 127 );	// 0～127に丸める。
 
 				if( this.n無限管理VOL[ zz ] == -zz )	// 初期状態では n無限管理VOL[zz] = - zz である。この場合、#WAVVOLzz, #VOLUMEzz がまだ出現していないことを意味する。
 				{
@@ -6565,11 +6713,11 @@ namespace DTXMania
 			return true;
 		}
 
-        private int tWAVVolMax137toMax100( int nMax137Vol )
+        private int tWAVVolMax127toMax100( int nMax127Vol )
         {
             int nMax100Vol;
 
-            nMax100Vol = (int)( 100.0 / nMax137Vol );
+            nMax100Vol = (int)( 127.0 / nMax127Vol );
 
             return nMax100Vol;
         }
@@ -6581,7 +6729,7 @@ namespace DTXMania
 			if( strコマンド.Length != 5 )	// コマンドは必ず5文字であること。
 				return false;
 
-			#region [ n小節番号 を取得する。]
+			#region [ barlength を取得する。]
 			//-----------------
 			int n小節番号 = CConversion.nConvert3DigitMeasureNumberToNumber( strコマンド.Substring( 0, 3 ) );
 			if( n小節番号 < 0 )
@@ -6705,7 +6853,7 @@ namespace DTXMania
                     this.bチップがある.YPGuitar = true;
                     break;
 
-                case EChannel.Bass_xxxYx:
+				case EChannel.Bass_xxxYx:
                 case EChannel.Bass_xxBYx:
                 case EChannel.Bass_xGxYx:
                 case EChannel.Bass_xGBYx:
@@ -6752,7 +6900,7 @@ namespace DTXMania
 				//if( !double.TryParse( strパラメータ, out result ) )
 				if( !this.TryParse( strパラメータ, out db小節長倍率 ) )			// #23880 2010.12.30 yyagi: alternative TryParse to permit both '.' and ',' for decimal point
 				{
-					Trace.TraceError( "小節長倍率に不正な値を指定しました。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+					Trace.TraceError( "小節長倍率に不正な値を指定しました。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 					return false;
 				}
 
@@ -6763,7 +6911,7 @@ namespace DTXMania
 					new CChip() {
 						nChannelNumber = nChannelNumber,
 						db実数値 = db小節長倍率,
-						nPlaybackPosition = n小節番号 * 384,
+						nPlaybackPosition = n小節番号 * 1920,
 					} );
 
 				return true;	// 配置終了。
@@ -6791,12 +6939,11 @@ namespace DTXMania
 				if( ce.Current == '_' )		// '_' は無視。
 					continue;
 
-				if( CConversion.strBase36Characters.IndexOf( ce.Current ) < 0 )	// オブジェクト記述は36進数文字であること。
+				if( CConversion.strBase62Characters.IndexOf( ce.Current ) < 0 )	// オブジェクト記述は36進数文字であること。
 				{
-					Trace.TraceError( "不正なオブジェクト指定があります。[{0}: {1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
+					Trace.TraceError( "不正なオブジェクト指定があります。[{0}:{1}行]", this.strファイル名の絶対パス, this.n現在の行数 );
 					return false;
 				}
-
 				sb.Append( ce.Current );
 				n文字数++;
 			}
@@ -6825,7 +6972,7 @@ namespace DTXMania
 				else
 				{
 					// その他のチャンネルは36進数2桁。
-					nオブジェクト数値 = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
+					nオブジェクト数値 = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
 				}
 
 				if( nオブジェクト数値 == 0x00 )
@@ -6838,7 +6985,7 @@ namespace DTXMania
 				var chip = new CChip();
 
 				chip.nChannelNumber = nChannelNumber;
-				chip.nPlaybackPosition = ( n小節番号 * 384 ) + ( ( 384 * i ) / ( n文字数 / 2 ) );
+				chip.nPlaybackPosition = ( n小節番号 * 1920 ) + ( ( 1920 * i ) / ( n文字数 / 2 ) );
 				chip.nIntegerValue = nオブジェクト数値;
 				chip.nIntegerValue_InternalNumber = nオブジェクト数値;
 

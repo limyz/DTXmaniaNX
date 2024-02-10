@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Threading;
 using SharpDX;
 using FDK;
-
 using Color = System.Drawing.Color;
 using Rectangle = System.Drawing.Rectangle;
 using RectangleF = System.Drawing.RectangleF;
@@ -66,7 +65,6 @@ namespace DTXMania
         }
         public int nCurrentSelection;
 
-
         // メソッド
         #region [ tSetupItemList_System() ]
         public void tSetupItemList_System()
@@ -77,7 +75,7 @@ namespace DTXMania
             // #27029 2012.1.5 from: 説明文は最大9行→13行に変更。
             //横は13文字が目安。
 
-            this.iSystemReturnToMenu = new CItemBase("<< ReturnTo Menu", CItemBase.EPanelType.Other,
+            this.iSystemReturnToMenu = new CItemBase("<< Return To Menu", CItemBase.EPanelType.Other,
                 "左側のメニューに戻ります。",
                 "Return to left menu.");
             this.listItems.Add(this.iSystemReturnToMenu);
@@ -261,14 +259,14 @@ namespace DTXMania
                 "Note that the score files also contain 'BGM Adjust' parameter, so turn ON to keep adjustment.");
             this.listItems.Add(this.iSystemSaveScore);
 
-            this.iSystemChipVolume = new CItemInteger("ChipVolume", 0, 100, CDTXMania.ConfigIni.n手動再生音量,
-                "打音の音量：\n入力に反応して再生される\nチップの音量を指定します。\n0 ～ 100 % の値が指定可能\nです。\n",
-                "Volume for chips you hit.\nYou can specify from 0 to 100%.");
+            this.iSystemChipVolume = new CItemInteger("ChipVolume", 0, 127, CDTXMania.ConfigIni.n手動再生音量,
+                "打音の音量：\n入力に反応して再生される\nチップの音量を指定します。\n0 ～ 127 % の値が指定可能\nです。\n",
+                "Volume for chips you hit.\nYou can specify from 0 to 127%.");
             this.listItems.Add(this.iSystemChipVolume);
 
-            this.iSystemAutoChipVolume = new CItemInteger("AutoVolume", 0, 100, CDTXMania.ConfigIni.n自動再生音量,
-                "自動再生音の音量：\n自動的に再生される\nチップの音量を指定します。\n0 ～ 100 % の値が指定可能\nです。\n",
-                "Volume for AUTO chips.\nYou can specify from 0 to 100%.");
+            this.iSystemAutoChipVolume = new CItemInteger("AutoVolume", 0, 127, CDTXMania.ConfigIni.n自動再生音量,
+                "自動再生音の音量：\n自動的に再生される\nチップの音量を指定します。\n0 ～ 127 % の値が指定可能\nです。\n",
+                "Volume for AUTO chips.\nYou can specify from 0 to 127%.");
             this.listItems.Add(this.iSystemAutoChipVolume);
 
             /*
@@ -439,13 +437,13 @@ namespace DTXMania
             this.listItems.Add(this.iSystemSoundTimerType);
 
             // #33700 2013.1.3 yyagi
-            this.iSystemMasterVolume = new CItemInteger("MasterVolume", 0, 100, CDTXMania.ConfigIni.nMasterVolume,
+            this.iSystemMasterVolume = new CItemInteger("MasterVolume", 0, 127, CDTXMania.ConfigIni.nMasterVolume,
                 "マスターボリュームの設定:\n" +
                 "全体の音量を設定します。\n" +
-                "0が無音で、100が最大値です。\n" +
+                "0が無音で、127が最大値です。\n" +
                 "(WASAPI/ASIO時のみ有効です)",
                 "Master Volume:\n" +
-                "You can set 0 - 100.\n" +
+                "You can set 0 - 127.\n" +
                 "\n" +
                 "Note:\n" +
                 "Only for WASAPI/ASIO mode.");
@@ -518,6 +516,10 @@ namespace DTXMania
                 "システムのキー入力に関する項目を設定します。",
                 "Settings for the system key/pad inputs.");
             this.listItems.Add(this.iSystemGoToKeyAssign);
+
+            this.iSystemMetronome = new CItemToggle("Metronome", CDTXMania.ConfigIni.bMetronome,
+                "メトロノームを有効にします。", "Enable Metronome.");
+            this.listItems.Add(this.iSystemMetronome);
 
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
@@ -1869,6 +1871,12 @@ namespace DTXMania
                     CDTXMania.actEnumSongs.OnActivate();
                 }
                 #endregion
+                #region [ Metronome ]
+                else if (this.listItems[this.nCurrentSelection] == this.iSystemMetronome)
+                {
+                    CDTXMania.ConfigIni.bMetronome = !CDTXMania.ConfigIni.bMetronome;
+                }
+                #endregion
             }
         }
 
@@ -1910,7 +1918,7 @@ namespace DTXMania
 
             // #27029 2012.1.5 from: 説明文は最大9行→13行に変更。
 
-            this.iKeyAssignSystemReturnToMenu = new CItemBase("<< ReturnTo Menu", CItemBase.EPanelType.Other,
+            this.iKeyAssignSystemReturnToMenu = new CItemBase("<< Return To Menu", CItemBase.EPanelType.Other,
                 "左側のメニューに戻ります。",
                 "Return to left menu.");
             this.listItems.Add(this.iKeyAssignSystemReturnToMenu);
@@ -1981,7 +1989,7 @@ namespace DTXMania
 
             // #27029 2012.1.5 from: 説明文は最大9行→13行に変更。
 
-            this.iKeyAssignDrumsReturnToMenu = new CItemBase("<< ReturnTo Menu", CItemBase.EPanelType.Other,
+            this.iKeyAssignDrumsReturnToMenu = new CItemBase("<< Return To Menu", CItemBase.EPanelType.Other,
                 "左側のメニューに戻ります。",
                 "Return to left menu.");
             this.listItems.Add(this.iKeyAssignDrumsReturnToMenu);
@@ -2057,7 +2065,7 @@ namespace DTXMania
 
             // #27029 2012.1.5 from: 説明文は最大9行→13行に変更。
 
-            this.iKeyAssignGuitarReturnToMenu = new CItemBase("<< ReturnTo Menu", CItemBase.EPanelType.Other,
+            this.iKeyAssignGuitarReturnToMenu = new CItemBase("<< Return To Menu", CItemBase.EPanelType.Other,
                 "左側のメニューに戻ります。",
                 "Return to left menu.");
             this.listItems.Add(this.iKeyAssignGuitarReturnToMenu);
@@ -2118,7 +2126,7 @@ namespace DTXMania
 
             // #27029 2012.1.5 from: 説明文は最大9行→13行に変更。
 
-            this.iKeyAssignBassReturnToMenu = new CItemBase("<< ReturnTo Menu", CItemBase.EPanelType.Other,
+            this.iKeyAssignBassReturnToMenu = new CItemBase("<< Return To Menu", CItemBase.EPanelType.Other,
                 "左側のメニューに戻ります。",
                 "Return to left menu.");
             this.listItems.Add(this.iKeyAssignBassReturnToMenu);
@@ -2935,6 +2943,7 @@ namespace DTXMania
         private CItemBase iGuitarGoToKeyAssign;
         private CItemBase iBassGoToKeyAssign;
         private CItemBase iSystemGoToKeyAssign;		// #24609
+        private CItemBase iSystemMetronome;         // 2023.9.22 henryzx
 
         private CItemList iSystemGRmode;
         private CItemToggle iSystemMusicNameDispDef;

@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 using System.Drawing;
 //using SharpDX;
 using FDK;
-
 using Rectangle = System.Drawing.Rectangle;
 
 namespace DTXMania
@@ -67,7 +66,6 @@ namespace DTXMania
                                     false
                                     );
                             }
-
                             this.db現在選択中の曲の最高スキル値難易度毎[j][i] = c曲リストノード.arScore[j].SongInformation.HighSkill[i];
                             this.b現在選択中の曲がフルコンボ難易度毎[j][i] = c曲リストノード.arScore[j].SongInformation.FullCombo[i];
                             this.b現在選択中の曲に譜面がある[j][i] = c曲リストノード.arScore[j].SongInformation.bScoreExists[i];
@@ -148,7 +146,6 @@ namespace DTXMania
                 this.r直前の曲 = c曲リストノード;
             }
         }
-
 
         // CActivity 実装
 
@@ -396,9 +393,9 @@ namespace DTXMania
                     }
 
                     //this.txBPM画像.tDraw2D(CDTXMania.app.Device, nBPM位置X, nBPM位置Y);
-                    this.tDrawBPM(nBPM位置X + 45, nBPM位置Y + 23, string.Format("{0,3:###}", strBPM));
+                    this.tDrawBPM(nBPM位置X + 45, nBPM位置Y + 20, string.Format("{0,3:###}", strBPM));
                     //Length of Song
-                    this.tDrawBPM(nBPM位置X + 42, nBPM位置Y - 7, strDuration);                
+                    this.tDrawBPM(nBPM位置X + 42, nBPM位置Y - 10, strDuration);                
                 }
                 #endregion
 
@@ -407,15 +404,12 @@ namespace DTXMania
                 {
                     this.txSkillPointPanel.tDraw2D(CDTXMania.app.Device, 32, 180);
                 }
-                
                 if(strSP != "")
                 {
                     this.tDrawSkillPoints(32 + 60, 200, strSP);
                 }
 
                 #endregion
-
-                
 
                 #region [Draw Graphs Panels]
 
@@ -623,7 +617,6 @@ namespace DTXMania
                                         this.tDrawAchievementRate(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                     #endregion
                                 }
-
                             }
                             else if (CDTXMania.stageSongSelection.r現在選択中の曲.eNodeType == CSongListNode.ENodeType.SCORE)
                             {
@@ -699,9 +692,7 @@ namespace DTXMania
                                 else
                                     this.tDrawAchievementRate(nBoxX + nPanelW - 157, nBoxY + nPanelH - 27, string.Format("{0,6:##0.00}%", db変数));
                                 #endregion
-                                
                             }
-
                         }
                     }
 
@@ -737,7 +728,6 @@ namespace DTXMania
                         this.txランク.tDraw2D(CDTXMania.app.Device, nBoxX + 75, nBoxY + 5, new Rectangle(nBadgeWidth * 9, 0, nBadgeWidth, this.txランク.szImageSize.Height));
                     }
                     #endregion
-
                 }
                 #endregion
                 #region [ 難易度文字列の描画 ]
@@ -750,7 +740,6 @@ namespace DTXMania
             }
             return 0;
         }
-
 
         // Other
 
@@ -795,29 +784,27 @@ namespace DTXMania
         private STDGBVALUE<bool>[] b現在選択中の曲に譜面がある = new STDGBVALUE<bool>[5];
         private STDGBVALUE<int>[] n現在選択中の曲のレベル難易度毎DGB = new STDGBVALUE<int>[5];
         private STDGBVALUE<int>[] n現在選択中の曲のレベル小数点難易度毎DGB = new STDGBVALUE<int>[5];
-        private CCounter ct登場アニメ用;
-        private CCounter ct難易度スクロール用;
-        private CCounter ct難易度矢印用;
         private STDGBVALUE<double> db現在選択中の曲の最高スキル値;
         private STDGBVALUE<double>[] db現在選択中の曲の最高スキル値難易度毎 = new STDGBVALUE<double>[5];
-        private double[] db現在選択中の曲の曲別スキル値難易度毎 = new double[5];
         private STDGBVALUE<double> db現在選択中の曲の曲別スキル;
         private STDGBVALUE<int> n現在選択中の曲のレベル;
         private STDGBVALUE<int> n現在選択中の曲のレベル小数点;
-        private int[] n選択中の曲のレベル難易度毎 = new int[5];
         private STDGBVALUE<int> n現在選択中の曲の最高ランク;
         private STDGBVALUE<int>[] n現在選択中の曲の最高ランク難易度毎 = new STDGBVALUE<int>[5];
-        //
+        private CCounter ct登場アニメ用;
+        private CCounter ct難易度スクロール用;
+        private CCounter ct難易度矢印用;
+        private double[] db現在選択中の曲の曲別スキル値難易度毎 = new double[5];
         private double dbDrumSP = 0.0;
-        private int nDrumSPDiffRank = -1;
         private double dbGBSP = 0.0;
+        private int[] n選択中の曲のレベル難易度毎 = new int[5];
+        private int nDrumSPDiffRank = -1;
         private int nGBSPDiffRank = -1;
         private int nSpInGuitarOrBass = 0;//G:0 B:1
-        private bool bHasMultipleDiff = false;
-        private string strCurrentProgressBar = "";
-
         private int n現在選択中の曲の難易度;
         private int n難易度開始文字位置;
+        private bool bHasMultipleDiff = false;
+        private string strCurrentProgressBar = "";
         private const int n難易度表示可能文字数 = 0x24;
         /*
         private readonly Rectangle[] rcランク = new Rectangle[]
@@ -1034,7 +1021,6 @@ namespace DTXMania
                     this.txGBChipsBarLine[i] = CDTXMania.tGenerateTexture(tempBarBitmap);
                 }
             }
-
         }
 
         private int[] nCalculateChipsBarPxHeight(int[] arrChipCount, int nMaxBarLength)

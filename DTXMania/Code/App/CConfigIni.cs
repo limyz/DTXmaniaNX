@@ -687,6 +687,7 @@ namespace DTXMania
         //public int nASIOBufferSizeMs; // #24820 2012.12.28 yyagi ASIOのバッファサイズ
         public int nASIODevice; // #24820 2013.1.17 yyagi ASIOデバイス
 		public bool bEventDrivenWASAPI;
+		public bool bMetronome; // 2023.9.22 henryzx
 		public bool bUseOSTimer;
         public bool bDynamicBassMixerManagement; // #24820
 		public int nMasterVolume;
@@ -1344,8 +1345,8 @@ namespace DTXMania
             this.nPedalLagTime = 0;
 
             this.bAutoAddGage = false;
-			this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = 1000;
-			this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = 100;
+			this.n曲が選択されてからプレビュー音が鳴るまでのウェイトms = 500;
+			this.n曲が選択されてからプレビュー画像が表示開始されるまでのウェイトms = 500;
 			this.bWave再生位置自動調整機能有効 = true;
 			this.bBGM音を発声する = true;
 			this.bドラム打音を発声する = true;
@@ -1359,8 +1360,8 @@ namespace DTXMania
 			this.str選曲リストフォント = "MS PGothic";
 			this.n選曲リストフォントのサイズdot = 20;
 			this.b選曲リストフォントを太字にする = true;
-			this.n自動再生音量 = 80;
-			this.n手動再生音量 = 100;
+			this.n自動再生音量 = 127;
+			this.n手動再生音量 = 127;
 			this.bOutputLogs = true;
             this.b曲名表示をdefのものにする = true;
 			this.b演奏音を強調する = new STDGBVALUE<bool>();
@@ -1501,17 +1502,15 @@ namespace DTXMania
 			this.bEventDrivenWASAPI = false;
 			this.bUseOSTimer = false; ;                 // #33689 2014.6.6 yyagi 初期値はfalse (FDKのタイマー。ＦＲＯＭ氏考案の独自タイマー)
 			this.bDynamicBassMixerManagement = true;    //
-			this.nMasterVolume = 100;
+			this.nMasterVolume = 127;
             this.bTimeStretch = false;                  // #23664 2013.2.24 yyagi 初期値はfalse (再生速度変更を、ピッチ変更にて行う)
 			this.nSkipTimeMs = 5000;
-
 		}
 		public CConfigIni( string iniファイル名 )
 			: this()
 		{
 			this.tReadFromFile( iniファイル名 );
 		}
-
 
 		// メソッド
 
@@ -1540,7 +1539,7 @@ namespace DTXMania
 		}
 		public void tWrite( string iniFilename )
 		{
-			StreamWriter sw = new StreamWriter( iniFilename, false, Encoding.GetEncoding( "unicode" ) );
+			StreamWriter sw = new StreamWriter( iniFilename, false, Encoding.GetEncoding("utf-8") );
 			sw.WriteLine( ";-------------------" );
 			
 			#region [ System ]
@@ -1663,16 +1662,16 @@ namespace DTXMania
             sw.WriteLine("; 非フォーカス時のsleep値[ms]");	    			    // #23568 2011.11.04 ikanick add
 			sw.WriteLine("; A sleep time[ms] while the window is inactive.");	//
 			sw.WriteLine("BackSleep={0}", this.n非フォーカス時スリープms);		// そのまま引用（苦笑）
-            sw.WriteLine();											        			//
+            sw.WriteLine();
             #endregion
             #region [ フレーム処理関連(VSync, フレーム毎のsleep) ]
             sw.WriteLine("; 垂直帰線同期(0:OFF,1:ON)");
 			sw.WriteLine( "VSyncWait={0}", this.bVerticalSyncWait ? 1 : 0 );
             sw.WriteLine();
             sw.WriteLine("; フレーム毎のsleep値[ms] (-1でスリープ無し, 0以上で毎フレームスリープ。動画キャプチャ等で活用下さい)");	// #xxxxx 2011.11.27 yyagi add
-            sw.WriteLine("; A sleep time[ms] per frame.");							//
-            sw.WriteLine("SleepTimePerFrame={0}", this.nフレーム毎スリープms); //
-            sw.WriteLine();											        			//
+            sw.WriteLine("; A sleep time[ms] per frame.");
+            sw.WriteLine("SleepTimePerFrame={0}", this.nフレーム毎スリープms);
+            sw.WriteLine();
             #endregion
             #region [ WASAPI/ASIO関連 ]
             sw.WriteLine("; サウンド出力方式(0=ACM(って今はまだDirectShowですが), 1=ASIO, 2=WASAPI排他, 3=WASAPI共有");
@@ -1726,10 +1725,16 @@ namespace DTXMania
 			sw.WriteLine("EventDrivenWASAPI={0}", this.bEventDrivenWASAPI ? 1 : 0);
 			sw.WriteLine();
 
+			sw.WriteLine("; メトロノームを有効にする");
+			sw.WriteLine("; 現在のスキンのサウンドフォルダにMetronome.oggがあることを確認してください。");
+			sw.WriteLine("; 例:/System/{Skin}/Sounds/Metronome.ogg");
+			sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
+			sw.WriteLine();
+
 			sw.WriteLine("; 全体ボリュームの設定");
-			sw.WriteLine("; (0=無音 ～ 100=最大。WASAPI/ASIO時のみ有効)");
+			sw.WriteLine("; (0=無音 ～ 127=最大。WASAPI/ASIO時のみ有効)");
 			sw.WriteLine("; Master volume settings");
-			sw.WriteLine("; (0=Silent - 100=Max)");
+			sw.WriteLine("; (0=Silent - 127=Max)");
 			sw.WriteLine("MasterVolume={0}", this.nMasterVolume);
 			sw.WriteLine();
 
@@ -1769,8 +1774,8 @@ namespace DTXMania
             sw.WriteLine();
 			sw.WriteLine( "; LP/LBD/BD 打ち分けモード(0:LP|LBD|BD, 1:LP|(LBD&BD), 2:LP&(LBD|BD), 3:LP&LBD&BD)" );		// #27029 2012.1.4 from
             sw.WriteLine( "; LP/LBD/BD Grouping     (0:LP|LBD|BD, 1:LP(LBD&BD), 2:LP&(LBD|BD), 3:LP&LBD&BD)");
-			sw.WriteLine( "BDGroup={0}", (int) this.eBDGroup );				// 
-			sw.WriteLine();													//
+			sw.WriteLine( "BDGroup={0}", (int) this.eBDGroup ); 
+			sw.WriteLine();
 			sw.WriteLine( "; 打ち分け時の再生音の優先順位(HHGroup)(0:Chip>Pad, 1:Pad>Chip)" );
 			sw.WriteLine( "HitSoundPriorityHH={0}", (int) this.eHitSoundPriorityHH );
 			sw.WriteLine();
@@ -1862,8 +1867,8 @@ namespace DTXMania
             sw.WriteLine("; 演奏中の曲情報の表示(0:OFF, 1:ON)");
             sw.WriteLine("ShowMusicInfo={0}", this.bShowMusicInfo ? 1 : 0);
             sw.WriteLine();
-			sw.WriteLine("; Show custom play speed (0:OFF, 1:ON, 2:If changed in game)");    //
-			sw.WriteLine("ShowPlaySpeed={0}", this.nShowPlaySpeed);                         //
+			sw.WriteLine("; Show custom play speed (0:OFF, 1:ON, 2:If changed in game)");
+			sw.WriteLine("ShowPlaySpeed={0}", this.nShowPlaySpeed);
 			sw.WriteLine();
 			sw.WriteLine("; 読み込み画面、演奏画面、ネームプレート、リザルト画面の曲名で使用するフォント名");
             sw.WriteLine("DisplayFontName={0}", this.str曲名表示フォント);
@@ -1887,12 +1892,12 @@ namespace DTXMania
 			sw.WriteLine( "SelectListFontBold={0}", this.b選曲リストフォントを太字にする ? 1 : 0 );
 			sw.WriteLine();
             #endregion
-            sw.WriteLine( "; 打音の音量(0～100%)" );
-            sw.WriteLine( "; Sound volume (you're playing) (0-100%)" );
+            sw.WriteLine( "; 打音の音量(0～127%)" );
+            sw.WriteLine( "; Sound volume (you're playing) (0-127%)" );
 			sw.WriteLine( "ChipVolume={0}", this.n手動再生音量 );
 			sw.WriteLine();
-			sw.WriteLine( "; 自動再生音の音量(0～100%)" );
-            sw.WriteLine( "; Sound volume (auto playing) (0-100%)" );
+			sw.WriteLine( "; 自動再生音の音量(0～127%)" );
+            sw.WriteLine( "; Sound volume (auto playing) (0-127%)" );
 			sw.WriteLine( "AutoChipVolume={0}", this.n自動再生音量 );
 			sw.WriteLine();
 			sw.WriteLine( "; ストイックモード(0:OFF, 1:ON)" );
@@ -2534,13 +2539,12 @@ namespace DTXMania
 			if( this.bConfigIniが存在している )
 			{
 				string str;
-				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "Shift_JIS" ) );
+				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "utf-8" ) );
 				str = reader.ReadToEnd();
 				tReadFromString( str );
 				CDTXVersion version = new CDTXVersion( this.strDTXManiaのバージョン );
 			}
 		}
-
 		private void tReadFromString( string strAllSettings )	// 2011.4.13 yyagi; refactored to make initial KeyConfig easier.
 		{
 			ESectionType unknown = ESectionType.Unknown;
@@ -2819,9 +2823,13 @@ namespace DTXMania
 											{
 												this.bEventDrivenWASAPI = CConversion.bONorOFF(str4[0]);
 											}
+											else if (str3.Equals("Metronome"))
+											{
+												this.bMetronome = CConversion.bONorOFF(str4[0]);
+											}
 											else if (str3.Equals("MasterVolume"))
 											{
-												this.nMasterVolume = CConversion.nGetNumberIfInRange(str4, 0, 100, this.nMasterVolume);
+												this.nMasterVolume = CConversion.nGetNumberIfInRange(str4, 0, 127, this.nMasterVolume);
 											}
 											else if (str3.Equals("VSyncWait"))
                                             {
@@ -3003,11 +3011,11 @@ namespace DTXMania
                                             }
                                             else if (str3.Equals("ChipVolume"))
                                             {
-                                                this.n手動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 100, this.n手動再生音量);
+                                                this.n手動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 127, this.n手動再生音量);
                                             }
                                             else if (str3.Equals("AutoChipVolume"))
                                             {
-                                                this.n自動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 100, this.n自動再生音量);
+                                                this.n自動再生音量 = CConversion.nGetNumberIfInRange(str4, 0, 127, this.n自動再生音量);
                                             }
                                             else if (str3.Equals("StoicMode"))
                                             {

@@ -6,7 +6,6 @@ using System.IO;
 using System.Drawing;
 using SharpDX;
 using FDK;
-
 using Color = System.Drawing.Color;
 using Rectangle = System.Drawing.Rectangle;
 
@@ -59,6 +58,8 @@ namespace DTXMania
             if (!base.bNotActivated)
             {
                 this.txリザルト画像がないときの画像 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\5_preimage default.png"));
+                this.txジャケット枠 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_Jacket_waku.png"));
+                this.tx曲枠 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\8_music_info.png"));
                 if (CDTXMania.ConfigIni.bストイックモード)
                 {
                     this.txリザルト画像 = this.txリザルト画像がないときの画像;
@@ -206,25 +207,29 @@ namespace DTXMania
             this.ct登場用.tUpdate();
             int x = this.n本体X;
             int y = this.n本体Y;
-            this.txジャケットパネル.tDraw2D(CDTXMania.app.Device, 467, 287);
+            this.txジャケット枠.tDraw2D(CDTXMania.app.Device, 447, 127);
+            this.tx曲枠.tDraw2D(CDTXMania.app.Device, 438, 530);
+            //this.txジャケットパネル.tDraw2D(CDTXMania.app.Device, 517, 318);
             if (this.txリザルト画像 != null)
             {
-                Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(245.0f / this.txリザルト画像.szImageSize.Width, 245.0f / this.txリザルト画像.szImageSize.Height, 1f);
-                mat *= Matrix.Translation(-28f, -94.5f, 0f);
-                mat *= Matrix.RotationZ(0.3f);
+                this.txリザルト画像.vcScaleRatio.X = 382.0f / this.txリザルト画像.szImageSize.Width;
+                this.txリザルト画像.vcScaleRatio.Y = 382.0f / this.txリザルト画像.szImageSize.Height;
+                //Matrix mat = Matrix.Identity;
+                //mat *= Matrix.Scaling(245.0f / this.txリザルト画像.szImageSize.Width, 245.0f / this.txリザルト画像.szImageSize.Height, 1f);
+                //mat *= Matrix.Translation(-28f, -94.5f, 0f);
+                //mat *= Matrix.RotationZ(0.3f);
 
-                this.txリザルト画像.tDraw3D(CDTXMania.app.Device, mat);
+                this.txリザルト画像.tDraw2D(CDTXMania.app.Device, 451, 131);
             }
 
-            if (this.txSongName.szImageSize.Width > 320)
-                this.txSongName.vcScaleRatio.X = 320f / this.txSongName.szImageSize.Width;
+            if (this.txSongName.szImageSize.Width > 400)
+                this.txSongName.vcScaleRatio.X = 400f / this.txSongName.szImageSize.Width;
 
-            if (this.txArtistName.szImageSize.Width > 320)
-                this.txArtistName.vcScaleRatio.X = 320f / this.txArtistName.szImageSize.Width;
+            if (this.txArtistName.szImageSize.Width > 400)
+                this.txArtistName.vcScaleRatio.X = 400f / this.txArtistName.szImageSize.Width;
 
-            this.txSongName.tDraw2D(CDTXMania.app.Device, 500, 630);
-            this.txArtistName.tDraw2D(CDTXMania.app.Device, 500, 665);
+            this.txSongName.tDraw2D(CDTXMania.app.Device, 448, 548);
+            this.txArtistName.tDraw2D(CDTXMania.app.Device, 448, 588);
 
             int nDisclaimerY = 360;
             if (CDTXMania.ConfigIni.nPlaySpeed != 20)
@@ -268,7 +273,8 @@ namespace DTXMania
         private CTexture txリザルト画像;
         private CTexture txリザルト画像がないときの画像;
         private CTexture txジャケットパネル;
-
+        private CTexture txジャケット枠;
+        private CTexture tx曲枠;
         private CTexture txSongName;
         private CTexture txArtistName;
         private CTexture txModifiedPlaySpeed;

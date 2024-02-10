@@ -33,7 +33,7 @@ namespace DTXMania
         {
             #region [ 本体位置 ]
 
-            int n中X = 480;
+            int n中X = 840;
             int n中Y = 0;
 
             int n左X = 300;

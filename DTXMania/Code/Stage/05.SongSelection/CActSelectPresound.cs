@@ -122,7 +122,7 @@ namespace DTXMania
 				try
 				{
 					this.sound = CDTXMania.SoundManager.tGenerateSound( strPreviewFilename );
-					this.sound.nVolume = 80;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
+					this.sound.nVolume = 127;	// CDTXMania.ConfigIni.n自動再生音量;			// #25217 changed preview volume from AutoVolume
 					this.sound.tStartPlaying( true );
 					this.str現在のファイル名 = strPreviewFilename;
 					this.tBGMフェードアウト開始();

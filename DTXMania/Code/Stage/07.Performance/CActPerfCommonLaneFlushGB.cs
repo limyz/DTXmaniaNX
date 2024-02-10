@@ -9,29 +9,26 @@ namespace DTXMania
 	{
 		// プロパティ
 
-		protected CCounter[] ctUpdate = new CCounter[ 10 ];
+		protected CCounter[] ctUpdate = (CCounter[])(object)new CCounter[ 10 ];
 		protected CTexture[] txFlush = new CTexture[ 10 ];
-
 
 		// コンストラクタ
 
 		public CActPerfCommonLaneFlushGB()
 		{
-			base.bNotActivated = true;
+			base.bNotActivated = false;
 		}
-
 
 		// メソッド
 
 		public void Start( int nLane )
 		{
-			if( ( nLane < 0 ) || ( nLane > 10 ) )
+			if( nLane < 0  || nLane > 10 ) 
 			{
 				throw new IndexOutOfRangeException( "有効範囲は 0～10 です。" );
 			}
 			this.ctUpdate[ nLane ] = new CCounter( 0, 70, 1, CDTXMania.Timer );
 		}
-
 
 		// CActivity 実装
 

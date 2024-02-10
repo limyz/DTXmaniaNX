@@ -14,7 +14,6 @@ namespace DTXMania
 			base.bNotActivated = true;
 		}
 		
-		
 		// メソッド
 
 		public override void Start( int nLane )
@@ -38,12 +37,11 @@ namespace DTXMania
 			    base.Start( nLane, x, y );
 		}
 
-
 		// Other
 
 		#region [ private ]
 		//-----------------
-        private readonly Point[] pt中央 = new Point[] { new Point(107, 155), new Point(146, 155), new Point(185, 155), new Point(224, 155), new Point(264, 155), new Point(978, 155), new Point(1017, 155), new Point(1056, 155), new Point(1095, 155), new Point(1134, 155) };
+        private readonly Point[] pt中央 = new Point[] { new Point(104, 155), new Point(143, 155), new Point(182, 155), new Point(221, 155), new Point(260, 155), new Point(974, 155), new Point(1013, 155), new Point(1052, 155), new Point(1091, 155), new Point(1130, 155) };
 		//-----------------
 		#endregion
 	}

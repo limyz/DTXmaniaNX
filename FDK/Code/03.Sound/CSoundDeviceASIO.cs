@@ -99,11 +99,11 @@ namespace FDK
 					//Trace.TraceInformation( "ASIO Master Volume Get Success: " + (f音量 * 100) );
 
 				}
-				return (int)(f音量 * 100);
+				return (int)(f音量 * 127);
 			}
 			set
 			{
-				bool b = Bass.BASS_ChannelSetAttribute(this.hMixer, BASSAttribute.BASS_ATTRIB_VOL, (float)(value / 100.0));
+				bool b = Bass.BASS_ChannelSetAttribute(this.hMixer, BASSAttribute.BASS_ATTRIB_VOL, (float)(value / 127.0));
 				if (!b)
 				{
 					BASSError be = Bass.BASS_ErrorGetCode();
