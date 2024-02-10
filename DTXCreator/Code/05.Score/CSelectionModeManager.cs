@@ -24,7 +24,7 @@ namespace DTXCreator.Score
 		}
 		public void t個別選択解除( CChip cc )
 		{
-			CChipPositionUndoRedo redo = new CChipPositionUndoRedo( this.mgr譜面管理者ref.pチップの存在する小節を返す( cc ).n小節番号0to3599, cc.nレーン番号0to, cc.n位置grid, cc.n値_整数1to1295 );
+			CChipPositionUndoRedo redo = new CChipPositionUndoRedo( this.mgr譜面管理者ref.pチップの存在する小節を返す( cc ).n小節番号0to3599, cc.nレーン番号0to, cc.n位置grid, cc.n値_整数1to3843 );
 			this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択解除のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択解除のRedo ), redo, redo ) );
 			this._Form.tUndoRedo用GUIの有効_無効を設定する();
 			cc.b確定選択中 = false;
@@ -83,7 +83,7 @@ namespace DTXCreator.Score
 					CChip cチップ6 = c小節3.listチップ[ n ];
 					if( cチップ6.b確定選択中 )
 					{
-						CChipPositionUndoRedo redo3 = new CChipPositionUndoRedo( c小節3.n小節番号0to3599, cチップ6.nレーン番号0to, cチップ6.n位置grid, cチップ6.n値_整数1to1295 );
+						CChipPositionUndoRedo redo3 = new CChipPositionUndoRedo( c小節3.n小節番号0to3599, cチップ6.nレーン番号0to, cチップ6.n位置grid, cチップ6.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択解除のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択解除のRedo ), redo3, redo3 ) );
 						cチップ6.b移動済 = false;
 						cチップ6.bドラッグで選択中 = false;
@@ -105,7 +105,7 @@ namespace DTXCreator.Score
 					CChip cチップ = c小節.listチップ[ i ];
 					if( !cチップ.b確定選択中 )
 					{
-						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のRedo ), redo, redo ) );
 						cチップ.bドラッグで選択中 = false;
 						cチップ.b確定選択中 = true;
@@ -130,7 +130,7 @@ namespace DTXCreator.Score
 					CChip cチップ = c小節.listチップ[ i ];
 					if ( cチップ.nレーン番号0to == lane && !cチップ.b確定選択中 )
 					{
-						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のRedo ), redo, redo ) );
 						cチップ.bドラッグで選択中 = false;
 						cチップ.b確定選択中 = true;
@@ -151,7 +151,7 @@ namespace DTXCreator.Score
 				CChip cチップ = c小節.listチップ[ i ];
 				if ( !cチップ.b確定選択中 )
 				{
-					CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+					CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 					this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のRedo ), redo, redo ) );
 					cチップ.bドラッグで選択中 = false;
 					cチップ.b確定選択中 = true;
@@ -461,9 +461,9 @@ namespace DTXCreator.Score
 					{
 						CLane cレーン = this.mgr譜面管理者ref.listレーン[ cチップ.nレーン番号0to ];
 						cチップ.nチャンネル番号00toFF = cチップ.b裏 ? cレーン.nチャンネル番号_裏00toFF : cレーン.nチャンネル番号_表00toFF;
-						if( ( cレーン.bパターンレーンである() && ( cチップ.n値_整数1to1295 != 1 ) ) && ( cチップ.n値_整数1to1295 != 2 ) )
+						if( ( cレーン.bパターンレーンである() && ( cチップ.n値_整数1to3843 != 1 ) ) && ( cチップ.n値_整数1to3843 != 2 ) )
 						{
-							cチップ.n値_整数1to1295 = 1;
+							cチップ.n値_整数1to3843 = 1;
 						}
 					}
 				}
@@ -477,8 +477,8 @@ namespace DTXCreator.Score
 					CChip cチップ2 = c小節.listチップ[ j ];
 					if( cチップ2.b確定選択中 && ( ( ( cチップ2.n移動開始時の小節番号0to != c小節.n小節番号0to3599 ) || ( cチップ2.n移動開始時のレーン番号0to != cチップ2.nレーン番号0to ) ) || ( cチップ2.n移動開始時の小節内の位置grid != cチップ2.n位置grid ) ) )
 					{
-						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( cチップ2.n移動開始時の小節番号0to, cチップ2.n移動開始時のレーン番号0to, cチップ2.n移動開始時の小節内の位置grid, cチップ2.n値_整数1to1295 );
-						CChipPositionUndoRedo redo2 = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ2.nレーン番号0to, cチップ2.n位置grid, cチップ2.n値_整数1to1295 );
+						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( cチップ2.n移動開始時の小節番号0to, cチップ2.n移動開始時のレーン番号0to, cチップ2.n移動開始時の小節内の位置grid, cチップ2.n値_整数1to3843 );
+						CChipPositionUndoRedo redo2 = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ2.nレーン番号0to, cチップ2.n位置grid, cチップ2.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.tチップ移動のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.tチップ移動のRedo ), redo, redo2 ) );
 					}
 				}
@@ -607,9 +607,9 @@ namespace DTXCreator.Score
 							for( int k = 0; k < c小節.listチップ.Count; k++ )
 							{
 								CChip cチップ = c小節.listチップ[ k ];
-								if( ( ( !c検索ダイアログ.bレーン指定CheckBoxがチェックされている || c検索ダイアログ.bレーンが検索対象である( cチップ.nレーン番号0to ) ) && ( ( cチップ.n値_整数1to1295 >= num3 ) && ( cチップ.n値_整数1to1295 <= num4 ) ) ) && ( ( c検索ダイアログ.b表チップCheckBoxがチェックされている && !cチップ.b裏 ) || ( c検索ダイアログ.b裏チップCheckBoxがチェックされている && cチップ.b裏 ) ) )
+								if( ( ( !c検索ダイアログ.bレーン指定CheckBoxがチェックされている || c検索ダイアログ.bレーンが検索対象である( cチップ.nレーン番号0to ) ) && ( ( cチップ.n値_整数1to3843 >= num3 ) && ( cチップ.n値_整数1to3843 <= num4 ) ) ) && ( ( c検索ダイアログ.b表チップCheckBoxがチェックされている && !cチップ.b裏 ) || ( c検索ダイアログ.b裏チップCheckBoxがチェックされている && cチップ.b裏 ) ) )
 								{
-									CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+									CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 									this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のRedo ), redo, redo ) );
 									cチップ.b確定選択中 = true;
 									num7++;
@@ -671,12 +671,12 @@ namespace DTXCreator.Score
 					for( int i = 0; i < c小節.listチップ.Count; i++ )
 					{
 						CChip cチップ = c小節.listチップ[ i ];
-						if( cチップ.b確定選択中 && ( cチップ.n値_整数1to1295 == n元番号 ) )
+						if( cチップ.b確定選択中 && ( cチップ.n値_整数1to3843 == n元番号 ) )
 						{
-							CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+							CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 							CChipPositionUndoRedo redo2 = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, n先番号 );
 							this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ番号置換のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ番号置換のRedo ), redo, redo2 ) );
-							cチップ.n値_整数1to1295 = n先番号;
+							cチップ.n値_整数1to3843 = n先番号;
 							num++;
 						}
 					}
@@ -707,7 +707,7 @@ namespace DTXCreator.Score
 					CChip cチップ = c小節.listチップ[ i ];
 					if( cチップ.b確定選択中 )
 					{
-						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ表裏反転のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ表裏反転のRedo ), redo, redo ) );
 						if( cチップ.b裏 )
 						{
@@ -751,9 +751,9 @@ namespace DTXCreator.Score
 					{
 						if( num < 0 )
 						{
-							num = cチップ.n値_整数1to1295;
+							num = cチップ.n値_整数1to3843;
 						}
-						else if( num != cチップ.n値_整数1to1295 )
+						else if( num != cチップ.n値_整数1to3843 )
 						{
 							flag2 = false;
 							break;
@@ -815,7 +815,7 @@ namespace DTXCreator.Score
 					CChip cチップ = c小節.listチップ[ i ];
 					if( cチップ.bドラッグで選択中 && !cチップ.b確定選択中 )
 					{
-						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to1295 );
+						CChipPositionUndoRedo redo = new CChipPositionUndoRedo( c小節.n小節番号0to3599, cチップ.nレーン番号0to, cチップ.n位置grid, cチップ.n値_整数1to3843 );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CChipPositionUndoRedo>( null, new DGUndoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のUndo ), new DGRedoを実行する<CChipPositionUndoRedo>( this.mgr譜面管理者ref.tチップ選択のRedo ), redo, redo ) );
 					}
 				}

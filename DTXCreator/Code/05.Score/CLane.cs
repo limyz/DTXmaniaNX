@@ -7,7 +7,7 @@ namespace DTXCreator.Score
 {
 	public class CLane  // Cレーン
 	{
-		public const int LANEWIDTH = 30;
+		public const int LANEWIDTH = 48;
 
 		public enum E種別
 		{
@@ -22,16 +22,16 @@ namespace DTXCreator.Score
             GtB,
             GtY,
             GtP,
+			GtL,
             GtW,
-			BsV,
+            BsV,
             BsR,
             BsG,
             BsB,
             BsY,
             BsP,
-            BsW, 
-			GtL,			
-			BsL
+			BsL,
+            BsW
         }
 		public enum ELaneType
 		{
@@ -39,7 +39,7 @@ namespace DTXCreator.Score
 			Drums,
 			BGM,
 			SE1_5,
-			SE6_32,
+			SE6_30,
 			Guitar,
 			Bass,
 			AVI1_2,
@@ -53,8 +53,8 @@ namespace DTXCreator.Score
 		public E種別 eレーン種別 = E種別.WAV;
 		public int nチャンネル番号_表00toFF;
 		public int nチャンネル番号_裏00toFF;
-		public int nレーン割付チップ_表0or1to1295;
-		public int nレーン割付チップ_裏0or1to1295;
+		public int nレーン割付チップ_表0or1to3843;
+		public int nレーン割付チップ_裏0or1to3843;
 		public int n位置Xdot;
 		public int n幅dot = 30;
 		public string strレーン名 = "";

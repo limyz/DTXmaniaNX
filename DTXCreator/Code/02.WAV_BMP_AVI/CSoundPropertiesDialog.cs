@@ -35,10 +35,10 @@ namespace DTXCreator.WAV_BMP_AVI
 			}
 			else
 			{
-				num = CConversion.nRoundToRange( num, -100, 100 );
+				num = CConversion.nRoundToRange( num, -127, 127 );
 			}
 			this.textBox位置.Text = num.ToString();
-			this.hScrollBar位置.Value = num + 100;
+			this.hScrollBar位置.Value = num + 127;
 		}
 		public void t音量textBoxの値を範囲修正したのちtextBox音量とhScrollBar音量へ反映させる()
 		{
@@ -53,7 +53,7 @@ namespace DTXCreator.WAV_BMP_AVI
 			}
 			else
 			{
-				num = CConversion.nRoundToRange( num, 0, 100 );
+				num = CConversion.nRoundToRange( num, 0, 127 );
 			}
 			this.textBox音量.Text = num.ToString();
 			this.hScrollBar音量.Value = num;
@@ -110,7 +110,7 @@ namespace DTXCreator.WAV_BMP_AVI
 		}
 		private void hScrollBar音量_ValueChanged( object sender, EventArgs e )
 		{
-			this.textBox音量.Text = CConversion.nRoundToRange( this.hScrollBar音量.Value, 0, 100 ).ToString();
+			this.textBox音量.Text = CConversion.nRoundToRange( this.hScrollBar音量.Value, 0, 127 ).ToString();
 		}
 		private void textBox音量_KeyDown( object sender, KeyEventArgs e )
 		{
@@ -146,7 +146,7 @@ namespace DTXCreator.WAV_BMP_AVI
 		}
 		private void hScrollBar位置_ValueChanged( object sender, EventArgs e )
 		{
-			this.textBox位置.Text = ( CConversion.nRoundToRange( this.hScrollBar位置.Value, 0, 200 ) - 100 ).ToString();
+			this.textBox位置.Text = ( CConversion.nRoundToRange( this.hScrollBar位置.Value, 0, 254 ) - 127).ToString();
 		}
 		private void button背景色_Click( object sender, EventArgs e )
 		{
@@ -204,7 +204,7 @@ namespace DTXCreator.WAV_BMP_AVI
 		}
 		private void button試聴_Click( object sender, EventArgs e )
 		{
-			int num = CConversion.nConvert2DigitBase36StringToNumber( this.textBoxWAV番号.Text );
+			int num = CConversion.nConvert2DigitBase62StringToNumber( this.textBoxWAV番号.Text );
 			this.dgサウンドを再生する( num );
 		}
 		private void button試聴_KeyDown( object sender, KeyEventArgs e )

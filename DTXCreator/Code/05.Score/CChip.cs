@@ -16,7 +16,7 @@ namespace DTXCreator.Score
 		public int n移動開始時のレーン番号0to;
 		public int n移動開始時の小節内の位置grid;
 		public int n移動開始時の小節番号0to;
-		public int n読み込み時の解像度 = 0xc0;
+		public int n読み込み時の解像度 = 1920;
 		public int n枠外レーン数;
 		public int nチャンネル番号00toFF
 		{
@@ -59,19 +59,19 @@ namespace DTXCreator.Score
 				this._n位置grid = value;
 			}
 		}
-		public int n値_整数1to1295
+		public int n値_整数1to3843
 		{
 			get
 			{
-				return this._n値_整数1to1295;
+				return this._n値_整数1to3843;
 			}
 			set
 			{
-				if( ( value < 0 ) || ( value > 36 * 36 - 1 ) )
+				if( ( value < 0 ) || ( value > 62 * 62 - 1 ) )
 				{
-					throw new Exception( "値が範囲(0～1295)を超えています。-->[" + value + "]" );
+					throw new Exception( "値が範囲(0～3843)を超えています。-->[" + value + "]" );
 				}
-				this._n値_整数1to1295 = value;
+				this._n値_整数1to3843 = value;
 			}
 		}
 		public static readonly int nチップの高さdot = 9;
@@ -90,7 +90,7 @@ namespace DTXCreator.Score
 		{
 			this._nチャンネル番号00toFF = ccコピー元._nチャンネル番号00toFF;
 			this._nレーン番号0to = ccコピー元._nレーン番号0to;
-			this._n値_整数1to1295 = ccコピー元._n値_整数1to1295;
+			this._n値_整数1to3843 = ccコピー元._n値_整数1to3843;
 			this.f値_浮動小数 = ccコピー元.f値_浮動小数;
 			this._n位置grid = ccコピー元._n位置grid;
 			this.b裏 = ccコピー元.b裏;
@@ -114,7 +114,7 @@ namespace DTXCreator.Score
 			t表チップを描画する_本体( g, rcチップ描画領域, col色 );
 			if( nチップ番号 >= 0 )
 			{
-				string str = CConversion.strConvertNumberTo2DigitBase36String( nチップ番号 );
+				string str = CConversion.strConvertNumberTo2DigitBase62String( nチップ番号 );
 				str = str[ 0 ] + " " + str[ 1 ];
 				t表チップを描画する_番号( g, rcチップ描画領域, str );
 			}
@@ -133,7 +133,7 @@ namespace DTXCreator.Score
 			t裏チップを描画する_本体( g, rcチップ描画領域, col色 );
 			if( nチップ番号 >= 0 )
 			{
-				string str = CConversion.strConvertNumberTo2DigitBase36String( nチップ番号 );
+				string str = CConversion.strConvertNumberTo2DigitBase62String( nチップ番号 );
 				str = str[ 0 ] + " " + str[ 1 ];
 				t裏チップを描画する_番号( g, rcチップ描画領域, str );
 			}
@@ -155,7 +155,7 @@ namespace DTXCreator.Score
 		private int _nチャンネル番号00toFF;
 		private int _nレーン番号0to;
 		private int _n位置grid;
-		private int _n値_整数1to1295;
+		private int _n値_整数1to3843;
 
 		private static void t表チップを描画する_番号( Graphics g, Rectangle rcチップ描画領域, string str番号文字列 )
 		{

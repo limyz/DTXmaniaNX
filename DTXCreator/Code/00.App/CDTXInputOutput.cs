@@ -43,16 +43,39 @@ namespace DTXCreator
 			this.tDTX出力_AVIリスト色設定( sw );
 			this.tDTX出力_チップパレット( sw );
 		}
-		public void tDTX入力( E種別 e種別, ref string str全入力文字列 )
+
+        public void tDTX入力( E種別 e種別, ref string str全入力文字列 )
 		{
 			this._Form.hScrollBarDLEVEL.Value = 0;
 			this._Form.textBoxDLEVEL.Text = "0";
 
+			this._Form.hScrollBarDLVDEC.Value = 0;
+			this._Form.textBoxDLVDEC.Text = "0";
+
 			this._Form.hScrollBarGLEVEL.Value = 0;
 			this._Form.textBoxGLEVEL.Text = "0";
 
+			this._Form.hScrollBarGLVDEC.Value = 0;
+			this._Form.textBoxGLVDEC.Text = "0";
+
 			this._Form.hScrollBarBLEVEL.Value = 0;
 			this._Form.textBoxBLEVEL.Text = "0";
+
+			this._Form.hScrollBarBLVDEC.Value = 0;
+			this._Form.textBoxBLVDEC.Text = "0";
+
+			this._Form.textBoxHH.Text = "";
+			this._Form.textBoxSN.Text = "";
+			this._Form.textBoxBD.Text = "";
+			this._Form.textBoxHT.Text = "";
+			this._Form.textBoxLT.Text = "";
+			this._Form.textBoxCY.Text = "";
+			this._Form.textBoxFT.Text = "";
+			this._Form.textBoxHO.Text = "";
+			this._Form.textBoxRC.Text = "";
+			this._Form.textBoxLC.Text = "";
+			this._Form.textBoxLP.Text = "";
+			this._Form.textBoxLB.Text = "";
 
 			this.e種別 = e種別;
 			if( str全入力文字列.Length != 0 )
@@ -92,7 +115,7 @@ namespace DTXCreator
 										{
 											if( !this.tDTX入力_行解析( ref builder2, ref builder3, ref builder4 ) )
 											{
-												builder.Append( string.Concat( new object[] { "#", builder2, ": ", builder3 } ) );
+												builder.Append( string.Concat( new object[] { "#", builder2, ":", builder3 } ) );
 												if( builder4.Length > 0 )
 												{
 													builder.Append( "\t;" + builder4 );
@@ -133,6 +156,7 @@ namespace DTXCreator
 		{
 			DTX,
 			GDA,
+			GDN,
 			G2D,
 			BMS,
 			BME
@@ -142,11 +166,12 @@ namespace DTXCreator
 		//-----------------
 		private CMainForm _Form;
 		private int[] arr素数リスト = new int[] {
-			2, 3, 5, 7, 11, 13, 0x11, 0x13, 0x17, 0x1d, 0x1f, 0x25, 0x29, 0x2b, 0x2f, 0x35, 
-			0x3b, 0x3d, 0x43, 0x47, 0x49, 0x4f, 0x53, 0x59, 0x61, 0x65, 0x67, 0x6b, 0x6d, 0x71, 0x7f, 0x83, 
-			0x89, 0x8b, 0x95, 0x97, 0x9d, 0xa3, 0xa7, 0xad, 0xb3, 0xb5, 0xbf, 0xc1, 0xc5, 0xc7, 0xd3, 0xdf, 
-			0xe3, 0xe5, 0xe9, 0xef, 0xf1, 0xfb, 0x101, 0x107, 0x10d, 0x10f, 0x115, 0x119, 0x11b, 0x125, 0x133, 0x137, 
-			0x139, 0x13d, 0x14b, 0x151, 0x15b, 0x15d, 0x161, 0x167, 0x16f, 0x175, 0x17b, 0x17f
+			2, 3, 5, 7, 11, 13, 0x11, 0x13, 0x17, 0x1d, 0x1f, 0x25, 0x29, 0x2b, 0x2c, 0x2d, 0x2f, 0x35, 
+			0x3b, 0x3d, 0x43, 0x47, 0x49, 0x4f, 0x50, 0x51, 0x53, 0x59, 0x61, 0x65, 0x67, 0x6b, 0x6d, 0x71, 0x7f, 0x83, 
+			0x88, 0x89, 0x8b, 0x95, 0x97, 0x9d, 0xa3, 0xa7, 0xad, 0xb1, 0xb2, 0xb3, 0xb4, 0xb5, 0xb6, 0xb7, 0xb8, 0xb9,
+			0xbc, 0xbd, 0xbe, 0xbf, 0xc1, 0xc2, 0xc5, 0xc7, 0xd3, 0xdf, 0xe3, 0xe5, 0xe9, 0xef, 0xf1, 0xfb, 0x101, 0x107,
+			0x10d, 0x10f, 0x115, 0x119, 0x11b, 0x125, 0x133, 0x137, 0x139, 0x13d, 0x14b, 0x151, 0x15b, 0x15d, 0x161, 0x167,
+			0x16f, 0x175, 0x17b, 0x17f
 		};
 #region [ #25990; for BMS/BME to DTX conversion ]
 		// #25990 2011.8.12 yyagi: DTXのBGM用ch群(正確には効果音用ch群)
@@ -204,21 +229,21 @@ namespace DTXCreator
 				{
 					CChip cチップ = c小節.listチップ[ i ];
 					float num2 = 0f;
-					if( ( cチップ.nチャンネル番号00toFF == 8 ) && this._Form.mgr譜面管理者.dicBPx.TryGetValue( cチップ.n値_整数1to1295, out num2 ) )
+					if( ( cチップ.nチャンネル番号00toFF == 8 ) && this._Form.mgr譜面管理者.dicBPx.TryGetValue( cチップ.n値_整数1to3843, out num2 ) )
 					{
 						cチップ.f値_浮動小数 = num2;
 					}
 					if( cチップ.nチャンネル番号00toFF == 3 )
 					{
 						cチップ.nチャンネル番号00toFF = 8;
-						cチップ.f値_浮動小数 = cチップ.n値_整数1to1295;
+						cチップ.f値_浮動小数 = cチップ.n値_整数1to3843;
 						cチップ.b裏 = false;
-						for( int j = 1; j <= 36 * 36 - 1; j++ )
+						for( int j = 1; j <= 62 * 62 - 1; j++ )
 						{
 							if( !this._Form.mgr譜面管理者.dicBPx.ContainsKey( j ) )
 							{
 								this._Form.mgr譜面管理者.dicBPx.Add( j, cチップ.f値_浮動小数 );
-								cチップ.n値_整数1to1295 = j;
+								cチップ.n値_整数1to3843 = j;
 								break;
 							}
 						}
@@ -228,7 +253,7 @@ namespace DTXCreator
 		}
 		private void tDTX入力_キャッシュからListViewを一括構築する()
 		{
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CWAV cwav = this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す( i );
 				if( cwav != null )
@@ -320,7 +345,7 @@ namespace DTXCreator
 							if( cwav != null )
 							{
 								items[ 0 ] = cwav.strラベル名;
-								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase36String( num3 );
+								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase62String( num3 );
 								items[ 2 ] = cwav.strファイル名;
 								ListViewItem item = new ListViewItem( items );
 								item.ImageIndex = num2;
@@ -336,7 +361,7 @@ namespace DTXCreator
 							if( cbmp != null )
 							{
 								items[ 0 ] = cbmp.strラベル名;
-								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase36String( num3 );
+								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase62String( num3 );
 								items[ 2 ] = cbmp.strファイル名;
 								ListViewItem item2 = new ListViewItem( items );
 								item2.ImageIndex = num2;
@@ -352,7 +377,7 @@ namespace DTXCreator
 							if( cavi != null )
 							{
 								items[ 0 ] = cavi.strラベル名;
-								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase36String( num3 );
+								items[ 1 ] = CConversion.strConvertNumberTo2DigitBase62String( num3 );
 								items[ 2 ] = cavi.strファイル名;
 								ListViewItem item3 = new ListViewItem( items );
 								item3.ImageIndex = num2;
@@ -420,8 +445,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int num = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( ( num < 1 ) || ( num > 36 * 36 - 1 ) )
+			int num = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( ( num < 1 ) || ( num > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -440,8 +465,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int num = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( 0, 2 ) );
-			if( ( num < 1 ) || ( num > 36 * 36 - 1 ) )
+			int num = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( 0, 2 ) );
+			if( ( num < 1 ) || ( num > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -458,8 +483,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int num = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( ( num < 1 ) || ( num > 36 * 36 - 1 ) )
+			int num = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( ( num < 1 ) || ( num > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -479,8 +504,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int num = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( ( num < 1 ) || ( num > 36 * 36 - 1 ) )
+			int num = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( ( num < 1 ) || ( num > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -500,8 +525,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int key = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( ( key < 1 ) || ( key > 36 * 36 - 1 ) )
+			int key = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( ( key < 1 ) || ( key > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -529,12 +554,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrAVIリスト管理者.tAVIをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col背景色 = color;
 			}
@@ -556,12 +581,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrAVIリスト管理者.tAVIをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col文字色 = color;
 			}
@@ -583,12 +608,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrBMPリスト管理者.tBMPをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col背景色 = color;
 			}
@@ -610,12 +635,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrBMPリスト管理者.tBMPをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col文字色 = color;
 			}
@@ -633,8 +658,8 @@ namespace DTXCreator
 				string[] strArray2 = str.Split( new char[] { ',' } );
 				if( ( ( strArray2.Length == 2 ) && int.TryParse( strArray2[ 0 ], out num ) ) && ( ( num >= 0 ) && ( num <= 2 ) ) )
 				{
-					int item = CConversion.nConvert2DigitBase36StringToNumber( strArray2[ 1 ] );
-					if( ( item >= 1 ) && ( item <= 36 * 36 - 1 ) )
+					int item = CConversion.nConvert2DigitBase62StringToNumber( strArray2[ 1 ] );
+					if( ( item >= 1 ) && ( item <= 62 * 62 - 1 ) )
 					{
 						this.listチップパレット.Add( num );
 						this.listチップパレット.Add( item );
@@ -652,13 +677,13 @@ namespace DTXCreator
 				{
 					return false;
 				}
-				int nChipNoFore = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( 3, 2 ) );
-				if( ( nChipNoFore < 0 ) || ( nChipNoFore > 36 * 36 - 1 ) )
+				int nChipNoFore = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( 3, 2 ) );
+				if( ( nChipNoFore < 0 ) || ( nChipNoFore > 62 * 62 - 1 ) )
 				{
 					return false;
 				}
-				int nChipNoBack = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( 6, 2 ) );
-				if( ( nChipNoBack < 0 ) || ( nChipNoBack > 36 * 36 - 1 ) )
+				int nChipNoBack = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( 6, 2 ) );
+				if( ( nChipNoBack < 0 ) || ( nChipNoBack > 62 * 62 - 1 ) )
 				{
 					return false;
 				}
@@ -666,11 +691,11 @@ namespace DTXCreator
 				{
 					if( nChipNoFore != 0 )
 					{
-						this._Form.mgr譜面管理者.listレーン[ nLaneNo ].nレーン割付チップ_表0or1to1295 = nChipNoFore;
+						this._Form.mgr譜面管理者.listレーン[ nLaneNo ].nレーン割付チップ_表0or1to3843 = nChipNoFore;
 					}
 					if( nChipNoBack != 0 )
 					{
-						this._Form.mgr譜面管理者.listレーン[ nLaneNo ].nレーン割付チップ_裏0or1to1295 = nChipNoBack;
+						this._Form.mgr譜面管理者.listレーン[ nLaneNo ].nレーン割付チップ_裏0or1to3843 = nChipNoBack;
 					}
 					return true;
 				}
@@ -693,12 +718,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col背景色 = color;
 			}
@@ -720,12 +745,12 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			if( ( nChipNo < 0 ) || ( nChipNo > 36 * 36 - 2 ) )
+			if( ( nChipNo < 0 ) || ( nChipNo > 62 * 62 - 2 ) )
 			{
 				return false;
 			}
 			Color color = ColorTranslator.FromHtml( strArray[ 1 ] );
-			if( ( nChipNo >= 0 ) && ( nChipNo <= 36 * 36 - 2 ) )
+			if( ( nChipNo >= 0 ) && ( nChipNo <= 62 * 62 - 2 ) )
 			{
 				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo + 1 ).col文字色 = color;
 			}
@@ -791,7 +816,13 @@ namespace DTXCreator
 				this._Form.textBoxRESULTIMAGE.Text = strパラメータ.Trim();
 				return true;
 			}
-			if( strコマンド.Equals( "BPM", StringComparison.OrdinalIgnoreCase ) )
+			if (strコマンド.Equals("PREMOVIE", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxPREMOVIE.Text = strパラメータ.Trim();
+				return true;
+			}
+			if ( strコマンド.Equals( "BPM", StringComparison.OrdinalIgnoreCase ) )
 			{
 				decimal dBpm;
 				if( !this.TryParse( strパラメータ, out dBpm ) )		// #23880 2011.1.6 yyagi
@@ -813,9 +844,9 @@ namespace DTXCreator
 				{
 					nLevel = 0;
 				}
-				else if( nLevel > 999 )
+				else if( nLevel > 99 )
 				{
-					nLevel = 999;
+					nLevel = 99;
 				}
 				CUndoRedoManager.bUndoRedoした直後 = true;
 				this._Form.hScrollBarDLEVEL.Value = nLevel;
@@ -834,9 +865,9 @@ namespace DTXCreator
 				{
 					nLevel = 0;
 				}
-				else if( nLevel > 999 )
+				else if( nLevel > 99 )
 				{
-					nLevel = 999;
+					nLevel = 99;
 				}
 				CUndoRedoManager.bUndoRedoした直後 = true;
 				this._Form.hScrollBarGLEVEL.Value = nLevel;
@@ -855,9 +886,9 @@ namespace DTXCreator
 				{
 					nLevel = 0;
 				}
-				else if( nLevel > 999 )
+				else if( nLevel > 99 )
 				{
-					nLevel = 999;
+					nLevel = 99;
 				}
 				CUndoRedoManager.bUndoRedoした直後 = true;
 				this._Form.hScrollBarBLEVEL.Value = nLevel;
@@ -865,7 +896,142 @@ namespace DTXCreator
 				this._Form.textBoxBLEVEL.Text = nLevel.ToString();
 				return true;
 			}
-			if( strコマンド.Equals( "DTXVPLAYSPEED", StringComparison.OrdinalIgnoreCase ) )
+			if (strコマンド.Equals("DLVDEC", StringComparison.OrdinalIgnoreCase))
+			{
+				int nLevel;
+				if (!int.TryParse(strパラメータ, out nLevel))
+				{
+					nLevel = 0;
+				}
+				else if (nLevel < 0)
+				{
+					nLevel = 0;
+				}
+				else if (nLevel > 9)
+				{
+					nLevel = 9;
+				}
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.hScrollBarDLVDEC.Value = nLevel;
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxDLVDEC.Text = nLevel.ToString();
+				return true;
+			}
+			if (strコマンド.Equals("GLVDEC", StringComparison.OrdinalIgnoreCase))
+			{
+				int nLevel;
+				if (!int.TryParse(strパラメータ, out nLevel))
+				{
+					nLevel = 0;
+				}
+				else if (nLevel < 0)
+				{
+					nLevel = 0;
+				}
+				else if (nLevel > 9)
+				{
+					nLevel = 9;
+				}
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.hScrollBarGLVDEC.Value = nLevel;
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxGLVDEC.Text = nLevel.ToString();
+				return true;
+			}
+			if (strコマンド.Equals("BLVDEC", StringComparison.OrdinalIgnoreCase))
+			{
+				int nLevel;
+				if (!int.TryParse(strパラメータ, out nLevel))
+				{
+					nLevel = 0;
+				}
+				else if (nLevel < 0)
+				{
+					nLevel = 0;
+				}
+				else if (nLevel > 9)
+				{
+					nLevel = 9;
+				}
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.hScrollBarBLVDEC.Value = nLevel;
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxBLVDEC.Text = nLevel.ToString();
+				return true;
+			}
+			if (strコマンド.Equals("000B1", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxHH.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B2", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxSN.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B3", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxBD.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B4", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxHT.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B5", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxLT.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B6", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxCY.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B7", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxFT.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B8", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxHO.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000B9", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxRC.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000BC", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxLC.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000BD", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxLP.Text = strパラメータ.Trim();
+				return true;
+			}
+			if (strコマンド.Equals("000BE", StringComparison.OrdinalIgnoreCase))
+			{
+				CUndoRedoManager.bUndoRedoした直後 = true;
+				this._Form.textBoxLB.Text = strパラメータ.Trim();
+				return true;
+			}
+			if ( strコマンド.Equals( "DTXVPLAYSPEED", StringComparison.OrdinalIgnoreCase ) )
 			{
 				decimal dPlaySpeed;
 //				if ( !this.TryParse( strパラメータ, out num5 ) )		// #24790 2011.4.8 yyagi
@@ -908,8 +1074,8 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int nChipNo = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
-			if( ( nChipNo < 1 ) || ( nChipNo > 36 * 36 - 1 ) )
+			int nChipNo = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
+			if( ( nChipNo < 1 ) || ( nChipNo > 62 * 62 - 1 ) )
 			{
 				return false;
 			}
@@ -937,18 +1103,18 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int nChipNo = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
+			int nChipNo = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( int.TryParse( strパラメータ, out nPan ) )
 			{
-				if( nPan < -100 )
+				if( nPan < -127 )
 				{
-					nPan = -100;
+					nPan = -127;
 				}
-				else if( nPan >= 100 )
+				else if( nPan >= 127 )
 				{
-					nPan = 100;
+					nPan = 127;
 				}
-				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo ).n位置_100to100 = nPan;
+				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo ).n位置_0to127 = nPan;
 			}
 			return true;
 		}
@@ -971,18 +1137,18 @@ namespace DTXCreator
 			{
 				return false;
 			}
-			int nChipNo = CConversion.nConvert2DigitBase36StringToNumber( strコマンド.Substring( 0, 2 ) );
+			int nChipNo = CConversion.nConvert2DigitBase62StringToNumber( strコマンド.Substring( 0, 2 ) );
 			if( int.TryParse( strパラメータ, out nVol ) )
 			{
 				if( nVol < 0 )
 				{
 					nVol = 0;
 				}
-				else if( nVol >= 100 )
+				else if( nVol >= 127 )
 				{
-					nVol = 100;
+					nVol = 127;
 				}
-				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo ).n音量0to100 = nVol;
+				this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す_なければ新規生成する( nChipNo ).n音量0to127 = nVol;
 			}
 			return true;
 		}
@@ -1014,7 +1180,7 @@ namespace DTXCreator
 				int nChips = strパラメータ.Length / 2;
 				for( int i = 0; i < nChips; i++ )
 				{
-					int nChipNo = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
+					int nChipNo = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
                     if (nChipNo != 0)
                     {
                         int nLaneGtV = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す("GtV");
@@ -1023,10 +1189,11 @@ namespace DTXCreator
                         int nLaneGtB = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す("GtB");
                         int nLaneGtY = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す("GtY");
                         int nLaneGtP = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す("GtP");
-                        CChip item = new CChip();
+						int nLaneGtL = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す("GtL");
+						CChip item = new CChip();
                         item.nレーン番号0to = nLaneGtV;
                         item.n位置grid = i;
-                        item.n値_整数1to1295 = nChipNo;
+                        item.n値_整数1to3843 = nChipNo;
                         item.n読み込み時の解像度 = nChips;
                         c小節.listチップ.Add(item);
                         switch (nCh)
@@ -1035,7 +1202,7 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 2;
+                                item.n値_整数1to3843 = 2;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1044,7 +1211,7 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1053,7 +1220,7 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1062,13 +1229,13 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1077,7 +1244,7 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1086,13 +1253,13 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1101,13 +1268,13 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
@@ -1116,488 +1283,497 @@ namespace DTXCreator
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                        }
+
+							case 0x2c:
+								item = new CChip();
+								item.nレーン番号0to = nLaneGtL;
+								item.n位置grid = i;
+								item.n値_整数1to3843 = 1;
+								item.n読み込み時の解像度 = nChips;
+								c小節.listチップ.Add(item);
+								break;
+						}
                         switch ( nCh )
                         {
-                            case 147:
+                            case 0x93:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 148:
+                            case 0x94:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 149:
+                            case 0x95:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 150:
+                            case 0x96:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 151:
+                            case 0x97:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 152:
+                            case 0x98:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 153:
+                            case 0x99:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 154:
+                            case 0x9a:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 155:
+                            case 0x9b:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 156:
+                            case 0x9c:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 157:
+                            case 0x9d:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 158:
+                            case 0x9e:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 159:
+                            case 0x9f:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 160:
-                            case 161:
-                            case 162:
-                            case 163:
-                            case 164:
-                            case 165:
-                            case 166:
-                            case 167:
-                            case 168:
+                            case 0xa0:
+                            case 0xa1:
+                            case 0xa2:
+                            case 0xa3:
+                            case 0xa4:
+                            case 0xa5:
+                            case 0xa6:
+                            case 0xa7:
+                            case 0xa8:
                                 break;
-                            case 169:
+                            case 0xa9:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 170:
+                            case 0xaa:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 171:
+                            case 0xab:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtR;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 172:
+                            case 0xac:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 173:
+                            case 0xad:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 174:
+                            case 0xae:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                            case 175:
+                            case 0xaf:
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtG;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtB;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtY;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 item = new CChip();
                                 item.nレーン番号0to = nLaneGtP;
                                 item.n位置grid = i;
-                                item.n値_整数1to1295 = 1;
+                                item.n値_整数1to3843 = 1;
                                 item.n読み込み時の解像度 = nChips;
                                 c小節.listチップ.Add(item);
                                 break;
-                             case 208:
+                             case 0xd0:
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtR;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtY;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtP;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         break;
-                                    case 209:
+                                    case 0xd1:
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtR;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtB;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtY;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtP;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         break;
-                                    case 210:
+                                    case 0xd2:
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtR;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtG;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtY;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtP;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         break;
-                                    case 211:
+                                    case 0xd3:
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtR;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtG;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtB;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtY;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                         item = new CChip();
                                         item.nレーン番号0to = nLaneGtP;
                                         item.n位置grid = i;
-                                        item.n値_整数1to1295 = 1;
+                                        item.n値_整数1to3843 = 1;
                                         item.n読み込み時の解像度 = nChips;
                                         c小節.listチップ.Add(item);
                                 break;
@@ -1617,7 +1793,7 @@ namespace DTXCreator
 				int nChips = strパラメータ.Length / 2;
 				for( int j = 0; j < nChips; j++ )
 				{
-					int nChipNo = CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( j * 2, 2 ) );
+					int nChipNo = CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( j * 2, 2 ) );
 					if( nChipNo != 0 )
 					{
 						int nLaneBsV = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す( "BsV" );
@@ -1626,10 +1802,11 @@ namespace DTXCreator
 						int nLaneBsB = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す( "BsB" );
                         int nLaneBsY = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す( "BsY" );
                         int nLaneBsP = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す( "BsP" );
-                        CChip cチップ2 = new CChip();
+						int nLaneBsL = this._Form.mgr譜面管理者.nレーン名に対応するレーン番号を返す( "BsL" );
+						CChip cチップ2 = new CChip();
 						cチップ2.nレーン番号0to = nLaneBsV;
 						cチップ2.n位置grid = j;
-						cチップ2.n値_整数1to1295 = nChipNo;
+						cチップ2.n値_整数1to3843 = nChipNo;
 						cチップ2.n読み込み時の解像度 = nChips;
 						c小節2.listチップ.Add( cチップ2 );
                         switch (nCh)
@@ -1638,7 +1815,7 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsR;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 2;
+                                cチップ2.n値_整数1to3843 = 2;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1646,7 +1823,7 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsB;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1654,7 +1831,7 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsG;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1662,13 +1839,13 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsG;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsB;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1676,7 +1853,7 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsR;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1684,13 +1861,13 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsR;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsB;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1698,13 +1875,13 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsR;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsG;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
@@ -1712,30 +1889,38 @@ namespace DTXCreator
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsR;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsG;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 cチップ2 = new CChip();
                                 cチップ2.nレーン番号0to = nLaneBsB;
                                 cチップ2.n位置grid = j;
-                                cチップ2.n値_整数1to1295 = 1;
+                                cチップ2.n値_整数1to3843 = 1;
                                 cチップ2.n読み込み時の解像度 = nChips;
                                 c小節2.listチップ.Add(cチップ2);
                                 break;
-                            default:
+							 case 0x2d:
+								cチップ2 = new CChip();
+								cチップ2.nレーン番号0to = nLaneBsL;
+								cチップ2.n位置grid = j;
+								cチップ2.n値_整数1to3843 = 1;
+								cチップ2.n読み込み時の解像度 = nChips;
+								c小節2.listチップ.Add(cチップ2);
+								break;
+							default:
                                 switch (nCh)
                                 {
                                     case 197:
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1743,13 +1928,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1757,13 +1942,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1771,19 +1956,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1791,13 +1976,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1805,19 +1990,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1825,19 +2010,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1845,25 +2030,25 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1871,7 +2056,7 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1879,13 +2064,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1893,13 +2078,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1907,19 +2092,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1927,13 +2112,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1941,19 +2126,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1961,19 +2146,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -1981,25 +2166,25 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2007,13 +2192,13 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2021,19 +2206,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2041,19 +2226,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2061,25 +2246,25 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2087,19 +2272,19 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2107,25 +2292,25 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2133,25 +2318,25 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2159,31 +2344,31 @@ namespace DTXCreator
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsR;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsG;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsB;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsY;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         cチップ2 = new CChip();
                                         cチップ2.nレーン番号0to = nLaneBsP;
                                         cチップ2.n位置grid = j;
-                                        cチップ2.n値_整数1to1295 = 1;
+                                        cチップ2.n値_整数1to3843 = 1;
                                         cチップ2.n読み込み時の解像度 = nChips;
                                         c小節2.listチップ.Add(cチップ2);
                                         break;
@@ -2207,7 +2392,7 @@ namespace DTXCreator
 				int nChips = strパラメータ.Length / 2;
 				for( int i = 0; i < nChips; i++ )
 				{
-					int nChipNo = ( nCh == 3 ) ? CConversion.nConvert2DigitHexadecimalStringToNumber( strパラメータ.Substring( i * 2, 2 ) ) : CConversion.nConvert2DigitBase36StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
+					int nChipNo = ( nCh == 3 ) ? CConversion.nConvert2DigitHexadecimalStringToNumber( strパラメータ.Substring( i * 2, 2 ) ) : CConversion.nConvert2DigitBase62StringToNumber( strパラメータ.Substring( i * 2, 2 ) );
 					if( nChipNo > 0 )
 					{
 						CChip cチップ3 = new CChip();
@@ -2215,7 +2400,7 @@ namespace DTXCreator
 						cチップ3.nレーン番号0to = num20;
 						cチップ3.n位置grid = i;
 						cチップ3.n読み込み時の解像度 = nChips;
-						cチップ3.n値_整数1to1295 = nChipNo;
+						cチップ3.n値_整数1to3843 = nChipNo;
 						cチップ3.b裏 = flag;
 						c小節3.listチップ.Add( cチップ3 );
 					}
@@ -2223,7 +2408,7 @@ namespace DTXCreator
 				return true;
 			}
 			StringBuilder builder = new StringBuilder( 0x400 );
-			builder.Append( "#" + CConversion.strConvertNumberTo3DigitMeasureNumber( nBar ) + CConversion.strConvertNumberTo2DigitHexadecimalString( nCh ) + ": " + strパラメータ );
+			builder.Append( "#" + CConversion.strConvertNumberTo3DigitMeasureNumber( nBar ) + CConversion.strConvertNumberTo2DigitHexadecimalString( nCh ) + ":" + strパラメータ );
 			if( strコメント.Length > 0 )
 			{
 				builder.Append( " ;" + strコメント );
@@ -2292,6 +2477,9 @@ namespace DTXCreator
 
 					case "G7":
 						return 0x27;
+
+					case "GL":
+						return 0x2c;
 
 					case "GW":
 						return 0x28;
@@ -2413,6 +2601,9 @@ namespace DTXCreator
 					case "B7":
 						return 0xa7;
 
+					case "B8":
+						return 0x2d;
+
 					case "BW":
 						return 0xa8;
 
@@ -2421,6 +2612,205 @@ namespace DTXCreator
 
 					case "B0":
 						return 0xa0;
+				}
+			}
+			return -1;
+		}
+
+		private int tDTX入力_行解析_チャンネル_GDNチャンネル文字列２桁をチャンネル番号にして返す(string strチャンネル文字列２桁)
+		{
+			if (strチャンネル文字列２桁.Length == 2)
+			{
+				switch (strチャンネル文字列２桁.ToUpper())
+				{
+					case "BL":
+						return 2;
+
+					case "GS":
+						return 0x29;
+
+					case "DS":
+						return 0x30;
+
+					case "FI":
+						return 0x53;
+
+					case "HH":
+						return 0x11;
+
+					case "SD":
+						return 0x12;
+
+					case "BD":
+						return 0x13;
+
+					case "HT":
+						return 0x14;
+
+					case "LT":
+						return 0x15;
+
+					case "CY":
+						return 0x16;
+
+					case "G1":
+						return 0x21;
+
+					case "G2":
+						return 0x22;
+
+					case "G3":
+						return 0x23;
+
+					case "G4":
+						return 0x24;
+
+					case "G5":
+						return 0x25;
+
+					case "G6":
+						return 0x26;
+
+					case "G7":
+						return 0x27;
+
+					case "GL":
+						return 0x2c;
+
+					case "GW":
+						return 0x28;
+
+					case "01":
+						return 0x61;
+
+					case "02":
+						return 0x62;
+
+					case "03":
+						return 0x63;
+
+					case "04":
+						return 0x64;
+
+					case "05":
+						return 0x65;
+
+					case "06":
+						return 0x66;
+
+					case "07":
+						return 0x67;
+
+					case "08":
+						return 0x68;
+
+					case "09":
+						return 0x69;
+
+					case "0A":
+						return 0x70;
+
+					case "0B":
+						return 0x71;
+
+					case "0C":
+						return 0x72;
+
+					case "0D":
+						return 0x73;
+
+					case "0E":
+						return 0x74;
+
+					case "0F":
+						return 0x75;
+
+					case "10":
+						return 0x76;
+
+					case "11":
+						return 0x77;
+
+					case "12":
+						return 0x78;
+
+					case "13":
+						return 0x79;
+
+					case "14":
+						return 0x80;
+
+					case "15":
+						return 0x81;
+
+					case "16":
+						return 0x82;
+
+					case "17":
+						return 0x83;
+
+					case "18":
+						return 0x84;
+
+					case "19":
+						return 0x85;
+
+					case "1A":
+						return 0x86;
+
+					case "1B":
+						return 0x87;
+
+					case "1C":
+						return 0x88;
+
+					case "1D":
+						return 0x89;
+
+					case "1E":
+						return 0x90;
+
+					case "1F":
+						return 0x91;
+
+					case "20":
+						return 0x92;
+
+					case "B1":
+						return 0xa1;
+
+					case "B2":
+						return 0xa2;
+
+					case "B3":
+						return 0xa3;
+
+					case "B4":
+						return 0xa4;
+
+					case "B5":
+						return 0xa5;
+
+					case "B6":
+						return 0xa6;
+
+					case "B7":
+						return 0xa7;
+
+					case "B8":
+						return 0x2d;
+
+					case "BW":
+						return 0xa8;
+
+					case "G0":
+						return 0x20;
+
+					case "B0":
+						return 0xa0;
+
+					case "BN":
+						return 0x51;
 				}
 			}
 			return -1;
@@ -2462,17 +2852,21 @@ namespace DTXCreator
 			if( strコマンド.Length >= 5 )
 			{
 				n小節番号 = CConversion.nConvert3DigitMeasureNumberToNumber( strコマンド.Substring( 0, 3 ) );
-				if( ( this.e種別 == E種別.GDA ) || ( this.e種別 == E種別.G2D ) )
+				if ((this.e種別 == E種別.GDA) || (this.e種別 == E種別.G2D))
 				{
-					nチャンネル番号 = this.tDTX入力_行解析_チャンネル_GDAチャンネル文字列２桁をチャンネル番号にして返す( strコマンド.Substring( 3, 2 ) );
+					nチャンネル番号 = this.tDTX入力_行解析_チャンネル_GDAチャンネル文字列２桁をチャンネル番号にして返す(strコマンド.Substring(3, 2));
 				}
-				else if( ( this.e種別 == E種別.BMS ) || ( this.e種別 == E種別.BME ) )	// #25990 2011.8.12 yyagi
+				else if ((this.e種別 == E種別.GDN) || (this.e種別 == E種別.G2D))
 				{
-					nチャンネル番号 = this.tDTX入力_行解析_チャンネル_BMSチャンネル文字列２桁をチャンネル番号にして返す( strコマンド.Substring( 3, 2 ), n小節番号, this.e種別 );
+					nチャンネル番号 = this.tDTX入力_行解析_チャンネル_GDNチャンネル文字列２桁をチャンネル番号にして返す(strコマンド.Substring(3, 2));
+				}
+				else if ((this.e種別 == E種別.BMS) || (this.e種別 == E種別.BME))    // #25990 2011.8.12 yyagi
+				{
+					nチャンネル番号 = this.tDTX入力_行解析_チャンネル_BMSチャンネル文字列２桁をチャンネル番号にして返す(strコマンド.Substring(3, 2), n小節番号, this.e種別);
 				}
 				else
 				{
-					nチャンネル番号 = CConversion.nConvert2DigitHexadecimalStringToNumber( strコマンド.Substring( 3, 2 ) );
+					nチャンネル番号 = CConversion.nConvert2DigitHexadecimalStringToNumber(strコマンド.Substring(3, 2));
 				}
 				return ( ( n小節番号 >= 0 ) && ( nチャンネル番号 > 0 ) );
 			}
@@ -2480,6 +2874,7 @@ namespace DTXCreator
 			nチャンネル番号 = -1;
 			return false;
 		}
+
 		private bool tDTX入力_行解析_チャンネル_チャンネルに該当するレーン番号を返す( int nチャンネル番号, out int nレーン番号, out bool b裏 )
 		{
 			nレーン番号 = -1;
@@ -2552,13 +2947,13 @@ namespace DTXCreator
 		private void tDTX出力_AVIリスト( StreamWriter sw )
 		{
 			sw.WriteLine();
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CAVI cavi = this._Form.mgrAVIリスト管理者.tAVIをキャッシュから検索して返す( i );
 				if( ( cavi != null ) && ( cavi.strファイル名.Length > 0 ) )
 				{
-					string str = CConversion.strConvertNumberTo2DigitBase36String( cavi.nAVI番号1to1295 );
-					sw.Write( "#AVI{0}: {1}", str, cavi.strファイル名 );
+					string str = CConversion.strConvertNumberTo2DigitBase62String( cavi.nAVI番号1to3843 );
+					sw.Write( "#AVI{0}:{1}", str, cavi.strファイル名 );
 					if( cavi.strラベル名.Length > 0 )
 					{
 						sw.Write( "\t;{0}", cavi.strラベル名 );
@@ -2571,18 +2966,18 @@ namespace DTXCreator
 		{
 			Color color = ColorTranslator.FromHtml( "window" );
 			Color color2 = ColorTranslator.FromHtml( "windowtext" );
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CAVI cavi = this._Form.mgrAVIリスト管理者.tAVIをキャッシュから検索して返す( i );
 				if( cavi != null )
 				{
 					if( cavi.col文字色 != color2 )
 					{
-						sw.WriteLine( "#DTXC_AVIFORECOLOR: {0} {1}", i, ColorTranslator.ToHtml( cavi.col文字色 ) );
+						sw.WriteLine( "#DTXC_AVIFORECOLOR:{0} {1}", i, ColorTranslator.ToHtml( cavi.col文字色 ) );
 					}
 					if( cavi.col背景色 != color )
 					{
-						sw.WriteLine( "#DTXC_AVIBACKCOLOR: {0} {1}", i, ColorTranslator.ToHtml( cavi.col背景色 ) );
+						sw.WriteLine( "#DTXC_AVIBACKCOLOR:{0} {1}", i, ColorTranslator.ToHtml( cavi.col背景色 ) );
 					}
 				}
 			}
@@ -2590,15 +2985,15 @@ namespace DTXCreator
 		private void tDTX出力_BMPリスト( StreamWriter sw )
 		{
 			sw.WriteLine();
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CBMP cbmp = this._Form.mgrBMPリスト管理者.tBMPをキャッシュから検索して返す( i );
 				if( ( cbmp != null ) && ( cbmp.strファイル名.Length > 0 ) )
 				{
-					string str = CConversion.strConvertNumberTo2DigitBase36String( cbmp.nBMP番号1to1295 );
+					string str = CConversion.strConvertNumberTo2DigitBase62String( cbmp.nBMP番号1to3843 );
 					if( !cbmp.bテクスチャ )
 					{
-						sw.Write( "#BMP{0}: {1}", str, cbmp.strファイル名 );
+						sw.Write( "#BMP{0}:{1}", str, cbmp.strファイル名 );
 						if( cbmp.strラベル名.Length > 0 )
 						{
 							sw.Write( "\t;{0}", cbmp.strラベル名 );
@@ -2607,7 +3002,7 @@ namespace DTXCreator
 					}
 					else
 					{
-						sw.Write( "#BMPTEX{0}: {1}", str, cbmp.strファイル名 );
+						sw.Write( "#BMPTEX{0}:{1}", str, cbmp.strファイル名 );
 						if( cbmp.strラベル名.Length > 0 )
 						{
 							sw.Write( "\t;{0}", cbmp.strラベル名 );
@@ -2621,18 +3016,18 @@ namespace DTXCreator
 		{
 			Color color = ColorTranslator.FromHtml( "window" );
 			Color color2 = ColorTranslator.FromHtml( "windowtext" );
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CBMP cbmp = this._Form.mgrBMPリスト管理者.tBMPをキャッシュから検索して返す( i );
 				if( cbmp != null )
 				{
 					if( cbmp.col文字色 != color2 )
 					{
-						sw.WriteLine( "#DTXC_BMPFORECOLOR: {0} {1}", i, ColorTranslator.ToHtml( cbmp.col文字色 ) );
+						sw.WriteLine( "#DTXC_BMPFORECOLOR:{0} {1}", i, ColorTranslator.ToHtml( cbmp.col文字色 ) );
 					}
 					if( cbmp.col背景色 != color )
 					{
-						sw.WriteLine( "#DTXC_BMPBACKCOLOR: {0} {1}", i, ColorTranslator.ToHtml( cbmp.col背景色 ) );
+						sw.WriteLine( "#DTXC_BMPBACKCOLOR:{0} {1}", i, ColorTranslator.ToHtml( cbmp.col背景色 ) );
 					}
 				}
 			}
@@ -2642,35 +3037,35 @@ namespace DTXCreator
 			sw.WriteLine();
 			foreach( KeyValuePair<int, float> pair in this._Form.mgr譜面管理者.dicBPx )
 			{
-				sw.WriteLine( "#BPM{0}: {1}", CConversion.strConvertNumberTo2DigitBase36String( pair.Key ), pair.Value );
+				sw.WriteLine( "#BPM{0}:{1}", CConversion.strConvertNumberTo2DigitBase62String( pair.Key ), pair.Value );
 			}
 		}
 		private void tDTX出力_WAVリスト( StreamWriter sw, bool bBGMのみ出力 )
 		{
 			sw.WriteLine();
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CWAV cwav = this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す( i );
 				if( ( ( cwav != null ) && ( cwav.strファイル名.Length > 0 ) ) && ( !bBGMのみ出力 || cwav.bBGMとして使用 ) )
 				{
-					string str = CConversion.strConvertNumberTo2DigitBase36String( cwav.nWAV番号1to1295 );
-					sw.Write( "#WAV{0}: {1}", str, cwav.strファイル名 );
+					string str = CConversion.strConvertNumberTo2DigitBase62String( cwav.nWAV番号1to3843 );
+					sw.Write( "#WAV{0}:{1}", str, cwav.strファイル名 );
 					if( cwav.strラベル名.Length > 0 )
 					{
 						sw.Write( "\t;{0}", cwav.strラベル名 );
 					}
 					sw.WriteLine();
-					if( cwav.n音量0to100 != 100 )
+					if( cwav.n音量0to127 != 128 )
 					{
-						sw.WriteLine( "#VOLUME{0}: {1}", str, cwav.n音量0to100.ToString() );
+						sw.WriteLine( "#VOLUME{0}:{1}", str, cwav.n音量0to127.ToString() );
 					}
-					if( cwav.n位置_100to100 != 0 )
+					if( cwav.n位置_0to127 != 0 )
 					{
-						sw.WriteLine( "#PAN{0}: {1}", str, cwav.n位置_100to100.ToString() );
+						sw.WriteLine( "#PAN{0}:{1}", str, cwav.n位置_0to127.ToString() );
 					}
 					if( cwav.bBGMとして使用 )
 					{
-						sw.WriteLine( "#BGMWAV: {0}", str );
+						sw.WriteLine( "#BGMWAV:{0}", str );
 					}
 				}
 			}
@@ -2679,18 +3074,18 @@ namespace DTXCreator
 		{
 			Color color = ColorTranslator.FromHtml( "window" );
 			Color color2 = ColorTranslator.FromHtml( "windowtext" );
-			for( int i = 1; i <= 36 * 36 - 1; i++ )
+			for( int i = 1; i <= 62 * 62 - 1; i++ )
 			{
 				CWAV cwav = this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す( i );
 				if( cwav != null )
 				{
 					if( cwav.col文字色 != color2 )
 					{
-						sw.WriteLine( "#DTXC_WAVFORECOLOR: {0} {1}", i, ColorTranslator.ToHtml( cwav.col文字色 ) );
+						sw.WriteLine( "#DTXC_WAVFORECOLOR:{0} {1}", i, ColorTranslator.ToHtml( cwav.col文字色 ) );
 					}
 					if( cwav.col背景色 != color )
 					{
-						sw.WriteLine( "#DTXC_WAVBACKCOLOR: {0} {1}", i, ColorTranslator.ToHtml( cwav.col背景色 ) );
+						sw.WriteLine( "#DTXC_WAVBACKCOLOR:{0} {1}", i, ColorTranslator.ToHtml( cwav.col背景色 ) );
 					}
 				}
 			}
@@ -2700,72 +3095,136 @@ namespace DTXCreator
 			sw.WriteLine();
 			if( this._Form.textBox曲名.Text.Length == 0 )
 			{
-				sw.WriteLine( "#TITLE: (no title)" );
+				sw.WriteLine( "#TITLE:(no title)" );
 			}
 			else
 			{
-				sw.WriteLine( "#TITLE: " + this._Form.textBox曲名.Text );
+				sw.WriteLine( "#TITLE:" + this._Form.textBox曲名.Text );
 			}
 			if( this._Form.textBox製作者.Text.Length > 0 )
 			{
-				sw.WriteLine( "#ARTIST: " + this._Form.textBox製作者.Text );
+				sw.WriteLine( "#ARTIST:" + this._Form.textBox製作者.Text );
 			}
 			if( this._Form.textBoxコメント.Text.Length > 0 )
 			{
-				sw.WriteLine( "#COMMENT: " + this._Form.textBoxコメント.Text );
+				sw.WriteLine( "#COMMENT:" + this._Form.textBoxコメント.Text );
 			}
 			if( this._Form.textBoxパネル.Text.Length > 0 )
 			{
-				sw.WriteLine( "#PANEL: " + this._Form.textBoxパネル.Text );
+				sw.WriteLine( "#PANEL:" + this._Form.textBoxパネル.Text );
 			}
 			if( this._Form.textBoxPREVIEW.Text.Length > 0 )
 			{
-				sw.WriteLine( "#PREVIEW: " + this._Form.textBoxPREVIEW.Text );
+				sw.WriteLine( "#PREVIEW:" + this._Form.textBoxPREVIEW.Text );
 			}
 			if( this._Form.textBoxPREIMAGE.Text.Length > 0 )
 			{
-				sw.WriteLine( "#PREIMAGE: " + this._Form.textBoxPREIMAGE.Text );
+				sw.WriteLine( "#PREIMAGE:" + this._Form.textBoxPREIMAGE.Text );
 			}
 			if( this._Form.textBoxSTAGEFILE.Text.Length > 0 )
 			{
-				sw.WriteLine( "#STAGEFILE: " + this._Form.textBoxSTAGEFILE.Text );
+				sw.WriteLine( "#STAGEFILE:" + this._Form.textBoxSTAGEFILE.Text );
 			}
 			if( this._Form.textBoxBACKGROUND.Text.Length > 0 )
 			{
-				sw.WriteLine( "#BACKGROUND: " + this._Form.textBoxBACKGROUND.Text );
+				sw.WriteLine( "#BACKGROUND:" + this._Form.textBoxBACKGROUND.Text );
 			}
 			if( this._Form.textBoxRESULTIMAGE.Text.Length > 0 )
 			{
-				sw.WriteLine( "#RESULTIMAGE: " + this._Form.textBoxRESULTIMAGE.Text );
+				sw.WriteLine( "#RESULTIMAGE:" + this._Form.textBoxRESULTIMAGE.Text );
 			}
-			if( this._Form.numericUpDownBPM.Value != 0M )
+			if (this._Form.textBoxPREMOVIE.Text.Length > 0)
 			{
-				sw.WriteLine( "#BPM: " + this._Form.numericUpDownBPM.Value );
+				sw.WriteLine("#PREMOVIE:" + this._Form.textBoxPREMOVIE.Text);
+			}
+			if ( this._Form.numericUpDownBPM.Value != 0M )
+			{
+				sw.WriteLine( "#BPM:" + this._Form.numericUpDownBPM.Value );
 			}
 			if( this._Form.hScrollBarDLEVEL.Value != 0 )
 			{
-				sw.WriteLine( "#DLEVEL: " + this._Form.hScrollBarDLEVEL.Value );
+				sw.WriteLine( "#DLEVEL:" + this._Form.hScrollBarDLEVEL.Value );
 			}
 			if( this._Form.hScrollBarGLEVEL.Value != 0 )
 			{
-				sw.WriteLine( "#GLEVEL: " + this._Form.hScrollBarGLEVEL.Value );
+				sw.WriteLine( "#GLEVEL:" + this._Form.hScrollBarGLEVEL.Value );
 			}
 			if( this._Form.hScrollBarBLEVEL.Value != 0 )
 			{
-				sw.WriteLine( "#BLEVEL: " + this._Form.hScrollBarBLEVEL.Value );
+				sw.WriteLine( "#BLEVEL:" + this._Form.hScrollBarBLEVEL.Value );
 			}
-			if( this._Form.mgr譜面管理者.strPATH_WAV.Length != 0 )
+			if (this._Form.hScrollBarDLVDEC.Value != 0)
 			{
-				sw.WriteLine( "#PATH_WAV: " + this._Form.mgr譜面管理者.strPATH_WAV );
+				sw.WriteLine( "#DLVDEC:" + this._Form.hScrollBarDLVDEC.Value);
 			}
-			if( this._Form.toolStripComboBox演奏速度.SelectedIndex != 5 )
+			if (this._Form.hScrollBarGLVDEC.Value != 0)
 			{
-				sw.WriteLine( "#DTXVPLAYSPEED: " + ( 1.5f - ( this._Form.toolStripComboBox演奏速度.SelectedIndex * 0.1f ) ) );
+				sw.WriteLine( "#GLVDEC:" + this._Form.hScrollBarGLVDEC.Value);
+			}
+			if (this._Form.hScrollBarBLVDEC.Value != 0)
+			{
+				sw.WriteLine( "#BLVDEC:" + this._Form.hScrollBarBLVDEC.Value);
+			}
+			if ( this._Form.mgr譜面管理者.strPATH_WAV.Length != 0 )
+			{
+				sw.WriteLine( "#PATH_WAV:" + this._Form.mgr譜面管理者.strPATH_WAV );
+			}
+			if (this._Form.textBoxHH.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B1:" + this._Form.textBoxHH.Text);
+			}
+			if (this._Form.textBoxSN.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B2:" + this._Form.textBoxSN.Text);
+			}
+			if (this._Form.textBoxBD.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B3:" + this._Form.textBoxBD.Text);
+			}
+			if (this._Form.textBoxHT.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B4:" + this._Form.textBoxHT.Text);
+			}
+			if (this._Form.textBoxLT.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B5:" + this._Form.textBoxLT.Text);
+			}
+			if (this._Form.textBoxCY.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B6:" + this._Form.textBoxCY.Text);
+			}
+			if (this._Form.textBoxFT.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B7:" + this._Form.textBoxFT.Text);
+			}
+			if (this._Form.textBoxHO.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B8:" + this._Form.textBoxHO.Text);
+			}
+			if (this._Form.textBoxRC.Text.Length > 0)
+			{
+				sw.WriteLine( "#000B9:" + this._Form.textBoxRC.Text);
+			}
+			if (this._Form.textBoxLC.Text.Length > 0)
+			{
+				sw.WriteLine( "#000BC:" + this._Form.textBoxLC.Text);
+			}
+			if (this._Form.textBoxLP.Text.Length > 0)
+			{
+				sw.WriteLine( "#000BD:" + this._Form.textBoxLP.Text);
+			}
+			if (this._Form.textBoxLB.Text.Length > 0)
+			{
+				sw.WriteLine( "#000BE:" + this._Form.textBoxLB.Text);
+			}
+			if ( this._Form.toolStripComboBox演奏速度.SelectedIndex != 5 )
+			{
+				sw.WriteLine( "#DTXVPLAYSPEED:" + ( 1.5f - ( this._Form.toolStripComboBox演奏速度.SelectedIndex * 0.1f ) ) );
 			}
 		}
 		private void tDTX出力_チップパレット( StreamWriter sw )
 		{
-			sw.Write( "#DTXC_CHIPPALETTE: " );
+			sw.Write( "#DTXC_CHIPPALETTE:" );
 			foreach( ListViewItem item in this._Form.dlgチップパレット.listViewチップリスト.Items )
 			{
 				sw.Write( " {0},{1}", item.ImageIndex, item.SubItems[ 1 ].Text );
@@ -2778,9 +3237,9 @@ namespace DTXCreator
 			for( int i = 0; i < this._Form.mgr譜面管理者.listレーン.Count; i++ )
 			{
 				CLane cレーン = this._Form.mgr譜面管理者.listレーン[ i ];
-				if( ( cレーン.nレーン割付チップ_表0or1to1295 > 0 ) || ( cレーン.nレーン割付チップ_裏0or1to1295 > 0 ) )
+				if( ( cレーン.nレーン割付チップ_表0or1to3843 > 0 ) || ( cレーン.nレーン割付チップ_裏0or1to3843 > 0 ) )
 				{
-					sw.WriteLine( "#DTXC_LANEBINDEDCHIP: {0} {1} {2}", i.ToString( "00" ), CConversion.strConvertNumberTo2DigitBase36String( cレーン.nレーン割付チップ_表0or1to1295 ), CConversion.strConvertNumberTo2DigitBase36String( cレーン.nレーン割付チップ_裏0or1to1295 ) );
+					sw.WriteLine( "#DTXC_LANEBINDEDCHIP:{0} {1} {2}", i.ToString( "00" ), CConversion.strConvertNumberTo2DigitBase62String( cレーン.nレーン割付チップ_表0or1to3843 ), CConversion.strConvertNumberTo2DigitBase62String( cレーン.nレーン割付チップ_裏0or1to3843 ) );
 				}
 			}
 		}
@@ -2804,7 +3263,7 @@ namespace DTXCreator
 				if( c小節.f小節長倍率 != num )
 				{
 					num = c小節.f小節長倍率;
-					sw.WriteLine( "#{0}02: {1}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), num );
+					sw.WriteLine( "#{0}02:{1}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), num );
 				}
 			}
 		}
@@ -2835,7 +3294,7 @@ namespace DTXCreator
 						{
 							if( cチップ2.nチャンネル番号00toFF == num )
 							{
-								numArray[ cチップ2.n位置grid, 0 ] = cチップ2.n値_整数1to1295;
+								numArray[ cチップ2.n位置grid, 0 ] = cチップ2.n値_整数1to3843;
 							}
 						}
 						int num3 = 0;
@@ -2866,10 +3325,10 @@ namespace DTXCreator
 								}
 								else
 								{
-									builder.Append( CConversion.strConvertNumberTo2DigitBase36String( numArray[ num8, 0 ] ) );
+									builder.Append( CConversion.strConvertNumberTo2DigitBase62String( numArray[ num8, 0 ] ) );
 								}
 							}
-							sw.WriteLine( "#{0}{1}: {2}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), CConversion.strConvertNumberTo2DigitHexadecimalString( num ), builder.ToString() );
+							sw.WriteLine( "#{0}{1}:{2}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), CConversion.strConvertNumberTo2DigitHexadecimalString( num ), builder.ToString() );
 						}
 					}
 				}
@@ -2884,12 +3343,12 @@ namespace DTXCreator
 					{
 						case CLane.E種別.GtV:
 							{
-								numArray[ cチップ3.n位置grid, 0 ] = cチップ3.n値_整数1to1295;
+								numArray[ cチップ3.n位置grid, 0 ] = cチップ3.n値_整数1to3843;
 								continue;
 							}
 						case CLane.E種別.GtR:
 							{
-								numArray[ cチップ3.n位置grid, 1 ] |= ( cチップ3.n値_整数1to1295 == 1 ) ? 0x04 : 0xFF; // OPEN = 0xFF
+								numArray[ cチップ3.n位置grid, 1 ] |= ( cチップ3.n値_整数1to3843 == 1 ) ? 0x04 : 0xFF; // OPEN = 0xFF
 								continue;
 							}
 						case CLane.E種別.GtG:
@@ -2965,7 +3424,7 @@ namespace DTXCreator
 						{
 							if( num19 == ( num18 - 0x20 ) )
 							{
-								builderArray[ num19 ].Append( CConversion.strConvertNumberTo2DigitBase36String( numArray[ num17, 0 ] ) );
+								builderArray[ num19 ].Append( CConversion.strConvertNumberTo2DigitBase62String( numArray[ num17, 0 ] ) );
 							}
 							else
 							{
@@ -3080,7 +3539,7 @@ namespace DTXCreator
                             num16 = 211;
                         }
 
-						sw.WriteLine( "#{0}{1}: {2}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), CConversion.strConvertNumberTo2DigitHexadecimalString( num16 ), builderArray[ num20 ].ToString() );
+						sw.WriteLine( "#{0}{1}:{2}", CConversion.strConvertNumberTo3DigitMeasureNumber( c小節.n小節番号0to3599 ), CConversion.strConvertNumberTo2DigitHexadecimalString( num16 ), builderArray[ num20 ].ToString() );
 					}
 				}
 				for( int num21 = 0; num21 < c小節.n小節長倍率を考慮した現在の小節の高さgrid; num21++ )
@@ -3094,12 +3553,12 @@ namespace DTXCreator
 					{
 						case CLane.E種別.BsV:
 							{
-								numArray[ cチップ4.n位置grid, 0 ] = cチップ4.n値_整数1to1295;
+								numArray[ cチップ4.n位置grid, 0 ] = cチップ4.n値_整数1to3843;
 								continue;
 							}
 						case CLane.E種別.BsR:
 							{
-								numArray[ cチップ4.n位置grid, 1 ] |= ( cチップ4.n値_整数1to1295 == 1 ) ? 4 : 0xff;	// OPEN = 0xFF
+								numArray[ cチップ4.n位置grid, 1 ] |= ( cチップ4.n値_整数1to3843 == 1 ) ? 4 : 0xff;	// OPEN = 0xFF
 								continue;
 							}
 						case CLane.E種別.BsG:
@@ -3176,7 +3635,7 @@ namespace DTXCreator
 						{
 							if( num31 == ( num30 - 160 ) )
 							{
-								builderArray2[ num31 ].Append( CConversion.strConvertNumberTo2DigitBase36String( numArray[ num29, 0 ] ) );
+								builderArray2[ num31 ].Append( CConversion.strConvertNumberTo2DigitBase62String( numArray[ num29, 0 ] ) );
 							}
 							else
 							{
@@ -3290,7 +3749,7 @@ namespace DTXCreator
                         {
                             num33 = 232;
                         }
-                        sw.WriteLine("#{0}{1}: {2}", CConversion.strConvertNumberTo3DigitMeasureNumber(c小節.n小節番号0to3599), CConversion.strConvertNumberTo2DigitHexadecimalString(num33), builderArray2[num32].ToString());
+                        sw.WriteLine("#{0}{1}:{2}", CConversion.strConvertNumberTo3DigitMeasureNumber(c小節.n小節番号0to3599), CConversion.strConvertNumberTo2DigitHexadecimalString(num33), builderArray2[num32].ToString());
                     }
                 }
             }

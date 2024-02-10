@@ -32,14 +32,14 @@ namespace DTXCreator.チップパレット関連
 				ListViewItem item = this.listViewチップリスト.Items[ i ];
 				if( item.ImageIndex == nImageIndex )
 				{
-					int num2 = CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 1 ].Text );
+					int num2 = CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 1 ].Text );
 					if( num2 == n置換番号1 )
 					{
-						item.SubItems[ 1 ].Text = CConversion.strConvertNumberTo2DigitBase36String( n置換番号2 );
+						item.SubItems[ 1 ].Text = CConversion.strConvertNumberTo2DigitBase62String( n置換番号2 );
 					}
 					else if( num2 == n置換番号2 )
 					{
-						item.SubItems[ 1 ].Text = CConversion.strConvertNumberTo2DigitBase36String( n置換番号1 );
+						item.SubItems[ 1 ].Text = CConversion.strConvertNumberTo2DigitBase62String( n置換番号1 );
 					}
 				}
 			}
@@ -76,10 +76,10 @@ namespace DTXCreator.チップパレット関連
 		private bool _b表示ON;
 		private CMainForm formメインフォーム;
 
-		private void tチップの行交換( int n移動元Index0to1294, int n移動先Index0to1294 )
+		private void tチップの行交換( int n移動元Index0to3843, int n移動先Index0to3843 )
 		{
-			ListViewItem item = this.listViewチップリスト.Items[ n移動元Index0to1294 ];
-			ListViewItem item2 = this.listViewチップリスト.Items[ n移動先Index0to1294 ];
+			ListViewItem item = this.listViewチップリスト.Items[ n移動元Index0to3843 ];
+			ListViewItem item2 = this.listViewチップリスト.Items[ n移動先Index0to3843 ];
 			for( int i = 0; i < 3; i++ )
 			{
 				string text = item.SubItems[ i ].Text;
@@ -112,7 +112,7 @@ namespace DTXCreator.チップパレット関連
 			if( e.Data.GetDataPresent( typeof( CDataForChipPaletteDragDrop ) ) )
 			{
 				CDataForChipPaletteDragDrop data = (CDataForChipPaletteDragDrop) e.Data.GetData( typeof( CDataForChipPaletteDragDrop ) );
-				ListViewItem item = new ListViewItem( new string[] { data.strラベル名, CConversion.strConvertNumberTo2DigitBase36String( data.n番号1to1295 ), data.strファイル名 } );
+				ListViewItem item = new ListViewItem( new string[] { data.strラベル名, CConversion.strConvertNumberTo2DigitBase62String( data.n番号1to3843 ), data.strファイル名 } );
 				item.ImageIndex = data.n種類;
 				item.ForeColor = data.col文字色;
 				item.BackColor = data.col背景色;
@@ -189,7 +189,7 @@ namespace DTXCreator.チップパレット関連
 			if( this.listViewチップリスト.SelectedIndices.Count != 0 )
 			{
 				ListViewItem item = this.listViewチップリスト.Items[ this.listViewチップリスト.SelectedIndices[ 0 ] ];
-				int num = CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 1 ].Text );
+				int num = CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 1 ].Text );
 				this.formメインフォーム.tWAV_BMP_AVIリストのカーソルを全部同じ行に合わせる( num - 1 );
 				this.formメインフォーム.tタブを選択する( (CMainForm.Eタブ種別) ( item.ImageIndex + 1 ) );
 			}

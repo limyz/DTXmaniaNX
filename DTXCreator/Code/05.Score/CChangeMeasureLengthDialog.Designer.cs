@@ -41,7 +41,7 @@
 			// 
 			// numericUpDown小節長の倍率
 			// 
-			this.numericUpDown小節長の倍率.DecimalPlaces = 3;
+			this.numericUpDown小節長の倍率.DecimalPlaces = 4;
 			resources.ApplyResources( this.numericUpDown小節長の倍率, "numericUpDown小節長の倍率" );
 			this.numericUpDown小節長の倍率.Increment = new decimal( new int[] {
             5,

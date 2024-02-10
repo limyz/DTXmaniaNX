@@ -126,5 +126,30 @@ namespace DTXCreator.Options  // オプション関連
 				textBox_DTXViewerPath.Text = openFileDialog_DTXViewerPath.FileName;
 			}
         }
-	}
+
+        private void groupBox_DTXManiaSettings_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxDefaultOperationMode_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox最近使用したファイル_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label個まで表示する_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void COptionsDialog_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

@@ -75,7 +75,7 @@ namespace DTXCreator.Score
 					{
 						num = "0" + num;
 					}
-					return CConversion.nConvert2DigitBase36StringToNumber( num );
+					return CConversion.nConvert2DigitBase62StringToNumber( num );
 				}
 				if( this.textBoxチップ範囲終了.Text.Length <= 0 )
 				{
@@ -86,7 +86,7 @@ namespace DTXCreator.Score
 				{
 					text = "0" + text;
 				}
-				return CConversion.nConvert2DigitBase36StringToNumber( text );
+				return CConversion.nConvert2DigitBase62StringToNumber( text );
 			}
 		}
 		public int nチップ範囲終了番号
@@ -100,7 +100,7 @@ namespace DTXCreator.Score
 					{
 						num = "0" + num;
 					}
-					return CConversion.nConvert2DigitBase36StringToNumber( num );
+					return CConversion.nConvert2DigitBase62StringToNumber( num );
 				}
 				if( this.textBoxチップ範囲開始.Text.Length <= 0 )
 				{
@@ -111,7 +111,7 @@ namespace DTXCreator.Score
 				{
 					text = "0" + text;
 				}
-				return CConversion.nConvert2DigitBase36StringToNumber( text );
+				return CConversion.nConvert2DigitBase62StringToNumber( text );
 			}
 		}
 		public int n小節範囲開始番号
@@ -228,7 +228,7 @@ namespace DTXCreator.Score
 				{
 					text = "0" + text;
 				}
-				if( ( text.Length > 0 ) && ( ( text.Length > 2 ) || ( CConversion.nConvert2DigitBase36StringToNumber( text ) == -1 ) ) )
+				if( ( text.Length > 0 ) && ( ( text.Length > 2 ) || ( CConversion.nConvert2DigitBase62StringToNumber( text ) == -1 ) ) )
 				{
 					MessageBox.Show( Resources.strチップ番号に誤りがありますMSG + Environment.NewLine + "'" + text + "'", Resources.strエラーダイアログのタイトル, MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
 					this.textBoxチップ範囲開始.Focus();
@@ -242,7 +242,7 @@ namespace DTXCreator.Score
 					{
 						text = "0" + text;
 					}
-					if( ( text.Length > 0 ) && ( ( text.Length > 2 ) || ( CConversion.nConvert2DigitBase36StringToNumber( text ) == -1 ) ) )
+					if( ( text.Length > 0 ) && ( ( text.Length > 2 ) || ( CConversion.nConvert2DigitBase62StringToNumber( text ) == -1 ) ) )
 					{
 						MessageBox.Show( Resources.strチップ番号に誤りがありますMSG + Environment.NewLine + "'" + text + "'", Resources.strエラーダイアログのタイトル, MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1 );
 						this.textBoxチップ範囲終了.Focus();

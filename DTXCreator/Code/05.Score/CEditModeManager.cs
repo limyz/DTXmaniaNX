@@ -28,26 +28,26 @@ namespace DTXCreator.Score
 				}
 				if( ( Control.ModifierKeys & Keys.Control ) != Keys.Control )
 				{
-					int num = ( e.Button == MouseButtons.Left ) ? ( this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1 ) : 0;
-					if( num != lc.nレーン割付チップ_表0or1to1295 )
+					int num = ( e.Button == MouseButtons.Left ) ? ( this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1 ) : 0;
+					if( num != lc.nレーン割付チップ_表0or1to3843 )
 					{
-						CLaneAllocationUndoRedo redo = new CLaneAllocationUndoRedo( lc, lc.nレーン割付チップ_表0or1to1295, false );
+						CLaneAllocationUndoRedo redo = new CLaneAllocationUndoRedo( lc, lc.nレーン割付チップ_表0or1to3843, false );
 						CLaneAllocationUndoRedo redo2 = new CLaneAllocationUndoRedo( lc, num, false );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CLaneAllocationUndoRedo>( null, new DGUndoを実行する<CLaneAllocationUndoRedo>( this.tレーン割付のUndo ), new DGRedoを実行する<CLaneAllocationUndoRedo>( this.tレーン割付のRedo ), redo, redo2 ) );
 						this._Form.tUndoRedo用GUIの有効_無効を設定する();
-						lc.nレーン割付チップ_表0or1to1295 = num;
+						lc.nレーン割付チップ_表0or1to3843 = num;
 					}
 				}
 				else
 				{
-					int num2 = ( e.Button == MouseButtons.Left ) ? ( this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1 ) : 0;
-					if( num2 != lc.nレーン割付チップ_裏0or1to1295 )
+					int num2 = ( e.Button == MouseButtons.Left ) ? ( this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1 ) : 0;
+					if( num2 != lc.nレーン割付チップ_裏0or1to3843 )
 					{
-						CLaneAllocationUndoRedo redo3 = new CLaneAllocationUndoRedo( lc, lc.nレーン割付チップ_裏0or1to1295, true );
+						CLaneAllocationUndoRedo redo3 = new CLaneAllocationUndoRedo( lc, lc.nレーン割付チップ_裏0or1to3843, true );
 						CLaneAllocationUndoRedo redo4 = new CLaneAllocationUndoRedo( lc, num2, true );
 						this._Form.mgrUndoRedo管理者.tノードを追加する( new CUndoRedoCell<CLaneAllocationUndoRedo>( null, new DGUndoを実行する<CLaneAllocationUndoRedo>( this.tレーン割付のUndo ), new DGRedoを実行する<CLaneAllocationUndoRedo>( this.tレーン割付のRedo ), redo3, redo4 ) );
 						this._Form.tUndoRedo用GUIの有効_無効を設定する();
-						lc.nレーン割付チップ_裏0or1to1295 = num2;
+						lc.nレーン割付チップ_裏0or1to3843 = num2;
 					}
 				}
 			}
@@ -138,20 +138,24 @@ namespace DTXCreator.Score
 					case CLane.E種別.GtB:
                     case CLane.E種別.GtY:
                     case CLane.E種別.GtP:
-                    case CLane.E種別.BsR:
+					case CLane.E種別.GtL:
+					case CLane.E種別.GtW:
+					case CLane.E種別.BsR:
 					case CLane.E種別.BsG:
 					case CLane.E種別.BsB:
                     case CLane.E種別.BsY:
                     case CLane.E種別.BsP:
-                    case CLane.E種別.BPM:
+					case CLane.E種別.BsL:
+					case CLane.E種別.BsW:
+					case CLane.E種別.BPM:
 						num = -1;
 						break;
 
 					default:
-						num = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1;
+						num = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1;
 						if( ( Control.ModifierKeys & Keys.Shift ) != Keys.Shift )
 						{
-							int num2 = flag ? cレーン.nレーン割付チップ_裏0or1to1295 : cレーン.nレーン割付チップ_表0or1to1295;
+							int num2 = flag ? cレーン.nレーン割付チップ_裏0or1to3843 : cレーン.nレーン割付チップ_表0or1to3843;
 							if( num2 != 0 )
 							{
 								num = num2;
@@ -183,10 +187,10 @@ namespace DTXCreator.Score
 					{
 						if( ( cレーン.eレーン種別 == CLane.E種別.GtV ) || ( cレーン.eレーン種別 == CLane.E種別.BsV ) )
 						{
-							int num5 = flag ? cレーン.nレーン割付チップ_裏0or1to1295 : cレーン.nレーン割付チップ_表0or1to1295;
+							int num5 = flag ? cレーン.nレーン割付チップ_裏0or1to3843 : cレーン.nレーン割付チップ_表0or1to3843;
 							if( ( num5 == 0 ) || flag2 )
 							{
-								num5 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1;
+								num5 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1;
 							}
 							this._Form.mgrUndoRedo管理者.tトランザクション記録を開始する();
 							this.mgr譜面管理者ref.tチップを配置または置換する( this.n現在のチップカーソルがあるレーン番号0to, this.n現在のチップカーソルの譜面先頭からの位置grid, num5, 0f, flag );
@@ -236,10 +240,10 @@ namespace DTXCreator.Score
 						}
 						else
 						{
-							int num8 = flag ? cレーン.nレーン割付チップ_裏0or1to1295 : cレーン.nレーン割付チップ_表0or1to1295;
+							int num8 = flag ? cレーン.nレーン割付チップ_裏0or1to3843 : cレーン.nレーン割付チップ_表0or1to3843;
 							if( ( num8 == 0 ) || flag2 )
 							{
-								num8 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1;
+								num8 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1;
 							}
 							this.mgr譜面管理者ref.tチップを配置または置換する( this.n現在のチップカーソルがあるレーン番号0to, this.n現在のチップカーソルの譜面先頭からの位置grid, num8, 0f, flag );
 						}
@@ -269,7 +273,7 @@ namespace DTXCreator.Score
 						}
 						if( key == -1 )
 						{
-							for( int k = 1; k < 36 * 36; k++ )
+							for( int k = 1; k < 62 * 62; k++ )
 							{
 								if( !this.mgr譜面管理者ref.dicBPx.ContainsKey( k ) )
 								{
@@ -283,10 +287,10 @@ namespace DTXCreator.Score
 					}
 					if( this._Form.appアプリ設定.PlaySoundOnWAVChipAllocated && ( ( ( cレーン.eレーン種別 == CLane.E種別.WAV ) || ( cレーン.eレーン種別 == CLane.E種別.GtV ) ) || ( cレーン.eレーン種別 == CLane.E種別.BsV ) ) )
 					{
-						int num9 = flag ? cレーン.nレーン割付チップ_裏0or1to1295 : cレーン.nレーン割付チップ_表0or1to1295;
+						int num9 = flag ? cレーン.nレーン割付チップ_裏0or1to3843 : cレーン.nレーン割付チップ_表0or1to3843;
 						if( ( num9 == 0 ) || flag2 )
 						{
-							num9 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 + 1;
+							num9 = this._Form.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 + 1;
 						}
 						CWAV wc = this._Form.mgrWAVリスト管理者.tWAVをキャッシュから検索して返す( num9 );
 						if( ( wc != null ) && ( !this._Form.appアプリ設定.NoPreviewBGM || !wc.bBGMとして使用 ) )
@@ -305,11 +309,11 @@ namespace DTXCreator.Score
 		{
 			if( !lur変更前.b裏 )
 			{
-				lur変更前.lc.nレーン割付チップ_表0or1to1295 = lur変更後.n番号0or1to1295;
+				lur変更前.lc.nレーン割付チップ_表0or1to3843 = lur変更後.n番号0or1to3843;
 			}
 			else
 			{
-				lur変更前.lc.nレーン割付チップ_裏0or1to1295 = lur変更後.n番号0or1to1295;
+				lur変更前.lc.nレーン割付チップ_裏0or1to3843 = lur変更後.n番号0or1to3843;
 			}
 			this._Form.pictureBox譜面パネル.Refresh();
 		}
@@ -317,11 +321,11 @@ namespace DTXCreator.Score
 		{
 			if( !lur変更前.b裏 )
 			{
-				lur変更前.lc.nレーン割付チップ_表0or1to1295 = lur変更前.n番号0or1to1295;
+				lur変更前.lc.nレーン割付チップ_表0or1to3843 = lur変更前.n番号0or1to3843;
 			}
 			else
 			{
-				lur変更前.lc.nレーン割付チップ_裏0or1to1295 = lur変更前.n番号0or1to1295;
+				lur変更前.lc.nレーン割付チップ_裏0or1to3843 = lur変更前.n番号0or1to3843;
 			}
 			this._Form.pictureBox譜面パネル.Refresh();
 		}

@@ -125,7 +125,7 @@
     <value>..\Code\99.Resources\DTXC.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DTXC_VERSION" xml:space="preserve">
-    <value>025(verK)</value>
+    <value>027(sizuku Edition)</value>
   </data>
   <data name="Redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Code\99.Resources\edit_redohs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -195,6 +195,12 @@
   </data>
   <data name="str動画ファイル選択ダイアログのフィルタ" xml:space="preserve">
     <value>Movie files(*.avi;*.mp4)|*.avi;*.mp4|All files(*.*)|*.*</value>
+  </data>
+  <data name="strプレビュー動画ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>動画ファイルの選択</value>
+  </data>
+  <data name="strプレビュー動画ファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>動画ファイル(*.avi;*.mp4)|*.avi;*.mp4|すべてのファイル(*.*)|*.*</value>
   </data>
   <data name="str名前を付けて保存ダイアログのタイトル" xml:space="preserve">
     <value>Save As</value>

@@ -183,6 +183,12 @@
   <data name="str動画ファイル選択ダイアログのフィルタ" xml:space="preserve">
     <value>動画ファイル(*.avi;*.mp4)|*.avi;*.mp4|すべてのファイル(*.*)|*.*</value>
   </data>
+  <data name="strプレビュー動画ファイル選択ダイアログのタイトル" xml:space="preserve">
+    <value>動画ファイルの選択</value>
+  </data>
+  <data name="strプレビュー動画ファイル選択ダイアログのフィルタ" xml:space="preserve">
+    <value>動画ファイル(*.avi;*.mp4)|*.avi;*.mp4|すべてのファイル(*.*)|*.*</value>
+  </data>
   <data name="str名前を付けて保存ダイアログのタイトル" xml:space="preserve">
     <value>名前を付けて保存</value>
   </data>

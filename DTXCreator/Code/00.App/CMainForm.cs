@@ -48,6 +48,7 @@ namespace DTXCreator
 		internal CWAVListManager mgrWAVリスト管理者 = null;
 		internal CBMPListManager mgrBMPリスト管理者 = null;
 		internal CAVIListManager mgrAVIリスト管理者 = null;
+		//internal CBPMListManager mgrBPMリスト管理者 = null;
 		internal CUndoRedoManager mgrUndoRedo管理者 = null;
 		internal CClipBoard cbクリップボード = null;
 
@@ -82,7 +83,7 @@ namespace DTXCreator
 				return this.numericUpDownBPM.Value;
 			}
 		}
-		internal int n現在選択中のWAV_BMP_AVIリストの行番号0to1294;
+		internal int n現在選択中のWAV_BMP_AVIリストの行番号0to3842;
 
 		/// <summary>
 		/// DTXC.exe のあるフォルダの絶対パス。
@@ -329,6 +330,7 @@ namespace DTXCreator
 
 			for( int i = 0; i < 3; i++ )
 				this.listViewAVIリスト.Columns[ i ].Width = this.appアプリ設定.MovieListColumnWidth[ i ];
+
 			//-----------------
 			#endregion
 			#region [ 譜面拡大率 ]
@@ -437,6 +439,7 @@ namespace DTXCreator
 
 			for( int i = 0; i < 3; i++ )
 				this.appアプリ設定.MovieListColumnWidth[ i ] = this.listViewAVIリスト.Columns[ i ].Width;
+			
 			//-----------------
 			#endregion
 			#region [ 譜面拡大率 ]
@@ -526,25 +529,41 @@ namespace DTXCreator
 
 			#region [ 基本情報タブの初期化 ]
 			//-----------------
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBox曲名.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBox製作者.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxコメント.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.numericUpDownBPM.Value = 120.0M;
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxDLEVEL.Text = "50";
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxGLEVEL.Text = "0";
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxBLEVEL.Text = "0";
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.hScrollBarDLEVEL.Value = 50;
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.hScrollBarGLEVEL.Value = 0;
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.hScrollBarBLEVEL.Value = 0;
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxパネル.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxPREVIEW.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxPREIMAGE.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxSTAGEFILE.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxBACKGROUND.Clear();
-			CUndoRedoManager.bUndoRedoした直後 = true;	this.textBoxRESULTIMAGE.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBox曲名.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBox製作者.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxコメント.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.numericUpDownBPM.Value = 120.0M;
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxDLEVEL.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxDLVDEC.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxGLEVEL.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxGLVDEC.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxBLEVEL.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxBLVDEC.Text = "0";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.hScrollBarDLEVEL.Value = 0;
+			CUndoRedoManager.bUndoRedoした直後 = true; this.hScrollBarGLEVEL.Value = 0;
+			CUndoRedoManager.bUndoRedoした直後 = true; this.hScrollBarBLEVEL.Value = 0;
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxパネル.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxPREVIEW.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxPREIMAGE.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxSTAGEFILE.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxBACKGROUND.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxRESULTIMAGE.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxPREMOVIE.Clear();
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxHH.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxSN.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxBD.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxHT.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxLT.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxCY.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxFT.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxHO.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxRC.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxLC.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxLP.Text = "";
+			CUndoRedoManager.bUndoRedoした直後 = true; this.textBoxLB.Text = "";
 			//-----------------
 			#endregion
-			
+
 			#region [ WAVタブ_BMPタブ_AVIタブの初期化 ]
 			//-----------------
 			this.listViewWAVリスト.Items.Clear();
@@ -555,6 +574,9 @@ namespace DTXCreator
 
 			this.listViewAVIリスト.Items.Clear();
 			this.mgrAVIリスト管理者 = new CAVIListManager( this, this.listViewAVIリスト );
+
+			//this.listViewBPMリスト.Items.Clear();
+			//this.mgrBPMリスト管理者 = new CBPMListManager(this, this.listViewBPMリスト);
 
 			this.tWAV_BMP_AVIリストのカーソルを全部同じ行に合わせる( 0 );
 			//-----------------
@@ -770,6 +792,10 @@ namespace DTXCreator
 			{
 				e種別 = CDTXInputOutput.E種別.GDA;
 			}
+			else if (str拡張子.Equals(".gdn", StringComparison.OrdinalIgnoreCase))
+			{
+				e種別 = CDTXInputOutput.E種別.GDN;
+			}
 			else if( str拡張子.Equals( ".g2d", StringComparison.OrdinalIgnoreCase ) )
 			{
 				e種別 = CDTXInputOutput.E種別.G2D;
@@ -904,6 +930,7 @@ namespace DTXCreator
 				this.mgrWAVリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
 				this.mgrBMPリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
 				this.mgrAVIリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
+				//this.mgrBPMリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名);
 			}
 			//-----------------
 			#endregion
@@ -921,7 +948,7 @@ namespace DTXCreator
 
 			#region [ DTXファイルを出力する。]
 			//-----------------
-			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding( 932/*Shift-JIS*/ ) );
+			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding( 65001/*Shift-JIS*/ ) );
 			new CDTXInputOutput( this ).tDTX出力( sw );
 			sw.Close();
 			//-----------------
@@ -976,12 +1003,13 @@ namespace DTXCreator
 			this.mgrWAVリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
 			this.mgrBMPリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
 			this.mgrAVIリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名 );
+			//this.mgrBPMリスト管理者.tファイル名の相対パス化( this.str作業フォルダ名);
 			//-----------------
 			#endregion
 
 
 			// 保存する。
-			
+
 			this.tシナリオ_上書き保存();
 
 
@@ -1555,7 +1583,7 @@ namespace DTXCreator
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
-				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// DTXManiaNX.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
 				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
 				//-----------------
 				#endregion
@@ -1598,7 +1626,7 @@ namespace DTXCreator
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
-				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// DTXManiaNX.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
 				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
 				//-----------------
 				#endregion
@@ -1645,7 +1673,7 @@ namespace DTXCreator
 
 				#region [ DTXViewer が起動していなければ起動する。]
 				//-----------------
-				// DTXManiaGR.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
+				// DTXManiaNX.exeはコンパクトモードで起動する必要があるため、「一旦起動してから再生オプションを渡す」やり方はやめる
 				// Process.Start( strDTXViewerのパス ).WaitForInputIdle( 20 * 1000 );	// 起動完了まで最大20秒待つ
 				//-----------------
 				#endregion
@@ -1738,7 +1766,7 @@ namespace DTXCreator
 				#endregion
 				#region [ 一時ファイルにDTXを出力する。 ]
 				//-----------------
-				StreamWriter sw = new StreamWriter(this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding(0x3a4));
+				StreamWriter sw = new StreamWriter(this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding("utf-8"));
 				new CDTXInputOutput(this).tDTX出力(sw, bBGMのみ出力);
 				sw.Close();
 				//-----------------
@@ -1831,6 +1859,7 @@ namespace DTXCreator
 			WAV = 1,
 			BMP = 2,
 			AVI = 3,
+			//BPM = 4,
 			自由入力 = 4
 		}
 
@@ -2013,15 +2042,16 @@ namespace DTXCreator
 			//-----------------
 			#endregion
 		}
-		public void tWAV_BMP_AVIリストのカーソルを全部同じ行に合わせる( int nIndex番号0to1294 )
+		public void tWAV_BMP_AVIリストのカーソルを全部同じ行に合わせる( int nIndex番号0to3842 )
 		{
-			if( nIndex番号0to1294 >= 0 && nIndex番号0to1294 <= 1294 )
+			if( nIndex番号0to3842 >= 0 && nIndex番号0to3842 <= 3842 )
 			{
-				this.mgrWAVリスト管理者.tItemを選択する( nIndex番号0to1294 );
-				this.mgrBMPリスト管理者.tItemを選択する( nIndex番号0to1294 );
-				this.mgrAVIリスト管理者.tItemを選択する( nIndex番号0to1294 );
+				this.mgrWAVリスト管理者.tItemを選択する( nIndex番号0to3842 );
+				this.mgrBMPリスト管理者.tItemを選択する( nIndex番号0to3842 );
+				this.mgrAVIリスト管理者.tItemを選択する( nIndex番号0to3842 );
+				//this.mgrBPMリスト管理者.tItemを選択する( nIndex番号0to3842 );
 
-				this.n現在選択中のWAV_BMP_AVIリストの行番号0to1294 = nIndex番号0to1294;
+				this.n現在選択中のWAV_BMP_AVIリストの行番号0to3842 = nIndex番号0to3842;
 			}
 		}
 		public string strファイルの存在するディレクトリを絶対パスで返す( string strファイル )
@@ -2765,9 +2795,945 @@ namespace DTXCreator
 		}
 		//-----------------
 		#endregion
-		
+
 		#region [ GUIイベント：基本情報関連 ]
 		//-----------------
+		private string textBoxHH_以前の値 = "";
+		private void textBoxHH_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxHH))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxHH.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxHH,
+							new DGUndoを実行する<string>(this.textBoxHH_Undo),
+							new DGRedoを実行する<string>(this.textBoxHH_Redo),
+							this.textBoxHH_以前の値, this.textBoxHH.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxHH_以前の値 = this.textBoxHH.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxHH_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxHH);
+		}
+		private void textBoxHH_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHH.Text = str変更前;
+
+			this.textBoxHH.Focus();
+		}
+		private void textBoxHH_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHH.Text = str変更後;
+
+			this.textBoxHH.Focus();
+		}
+
+		private string textBoxSN_以前の値 = "";
+		private void textBoxSN_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxSN))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxSN.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxSN,
+							new DGUndoを実行する<string>(this.textBoxSN_Undo),
+							new DGRedoを実行する<string>(this.textBoxSN_Redo),
+							this.textBoxSN_以前の値, this.textBoxSN.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxSN_以前の値 = this.textBoxSN.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxSN_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxSN);
+		}
+		private void textBoxSN_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxSN.Text = str変更前;
+
+			this.textBoxSN.Focus();
+		}
+		private void textBoxSN_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxSN.Text = str変更後;
+
+			this.textBoxSN.Focus();
+		}
+
+		private string textBoxBD_以前の値 = "";
+		private void textBoxBD_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxBD))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxBD.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxBD,
+							new DGUndoを実行する<string>(this.textBoxBD_Undo),
+							new DGRedoを実行する<string>(this.textBoxBD_Redo),
+							this.textBoxBD_以前の値, this.textBoxBD.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxBD_以前の値 = this.textBoxBD.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxBD_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxBD);
+		}
+		private void textBoxBD_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxBD.Text = str変更前;
+
+			this.textBoxBD.Focus();
+		}
+		private void textBoxBD_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxBD.Text = str変更後;
+
+			this.textBoxBD.Focus();
+		}
+
+		private string textBoxLT_以前の値 = "";
+		private void textBoxLT_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxLT))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxLT.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxLT,
+							new DGUndoを実行する<string>(this.textBoxLT_Undo),
+							new DGRedoを実行する<string>(this.textBoxLT_Redo),
+							this.textBoxLT_以前の値, this.textBoxLT.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxLT_以前の値 = this.textBoxLT.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxLT_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxLT);
+		}
+		private void textBoxLT_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLT.Text = str変更前;
+
+			this.textBoxLT.Focus();
+		}
+		private void textBoxLT_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLT.Text = str変更後;
+
+			this.textBoxLT.Focus();
+		}
+
+		private string textBoxHT_以前の値 = "";
+		private void textBoxHT_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxHT))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxHT.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxHT,
+							new DGUndoを実行する<string>(this.textBoxHT_Undo),
+							new DGRedoを実行する<string>(this.textBoxHT_Redo),
+							this.textBoxHT_以前の値, this.textBoxHT.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxHT_以前の値 = this.textBoxHT.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxHT_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxHT);
+		}
+		private void textBoxHT_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHT.Text = str変更前;
+
+			this.textBoxHT.Focus();
+		}
+		private void textBoxHT_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHT.Text = str変更後;
+
+			this.textBoxHT.Focus();
+		}
+
+		private string textBoxCY_以前の値 = "";
+		private void textBoxCY_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxCY))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxCY.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxCY,
+							new DGUndoを実行する<string>(this.textBoxCY_Undo),
+							new DGRedoを実行する<string>(this.textBoxCY_Redo),
+							this.textBoxCY_以前の値, this.textBoxCY.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxCY_以前の値 = this.textBoxCY.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxCY_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxCY);
+		}
+		private void textBoxCY_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxCY.Text = str変更前;
+
+			this.textBoxCY.Focus();
+		}
+		private void textBoxCY_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxCY.Text = str変更後;
+
+			this.textBoxCY.Focus();
+		}
+
+		private string textBoxFT_以前の値 = "";
+		private void textBoxFT_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxFT))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxFT.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxFT,
+							new DGUndoを実行する<string>(this.textBoxFT_Undo),
+							new DGRedoを実行する<string>(this.textBoxFT_Redo),
+							this.textBoxFT_以前の値, this.textBoxFT.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxFT_以前の値 = this.textBoxFT.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxFT_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxFT);
+		}
+		private void textBoxFT_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxFT.Text = str変更前;
+
+			this.textBoxFT.Focus();
+		}
+		private void textBoxFT_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxFT.Text = str変更後;
+
+			this.textBoxFT.Focus();
+		}
+
+		private string textBoxHO_以前の値 = "";
+		private void textBoxHO_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxHO))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxHO.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxHO,
+							new DGUndoを実行する<string>(this.textBoxHO_Undo),
+							new DGRedoを実行する<string>(this.textBoxHO_Redo),
+							this.textBoxHO_以前の値, this.textBoxHO.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxHO_以前の値 = this.textBoxHO.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxHO_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxHO);
+		}
+		private void textBoxHO_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHO.Text = str変更前;
+
+			this.textBoxHO.Focus();
+		}
+		private void textBoxHO_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxHO.Text = str変更後;
+
+			this.textBoxHO.Focus();
+		}
+
+		private string textBoxRC_以前の値 = "";
+		private void textBoxRC_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxRC))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxRC.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxRC,
+							new DGUndoを実行する<string>(this.textBoxRC_Undo),
+							new DGRedoを実行する<string>(this.textBoxRC_Redo),
+							this.textBoxRC_以前の値, this.textBoxRC.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxRC_以前の値 = this.textBoxRC.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxRC_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxRC);
+		}
+		private void textBoxRC_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxRC.Text = str変更前;
+
+			this.textBoxRC.Focus();
+		}
+		private void textBoxRC_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxRC.Text = str変更後;
+
+			this.textBoxRC.Focus();
+		}
+
+		private string textBoxLC_以前の値 = "";
+		private void textBoxLC_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxLC))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxLC.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxLC,
+							new DGUndoを実行する<string>(this.textBoxLC_Undo),
+							new DGRedoを実行する<string>(this.textBoxLC_Redo),
+							this.textBoxLC_以前の値, this.textBoxLC.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxLC_以前の値 = this.textBoxLC.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxLC_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxLC);
+		}
+		private void textBoxLC_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLC.Text = str変更前;
+
+			this.textBoxLC.Focus();
+		}
+		private void textBoxLC_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLC.Text = str変更後;
+
+			this.textBoxLC.Focus();
+		}
+
+		private string textBoxLP_以前の値 = "";
+		private void textBoxLP_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxLP))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxLP.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxLP,
+							new DGUndoを実行する<string>(this.textBoxLP_Undo),
+							new DGRedoを実行する<string>(this.textBoxLP_Redo),
+							this.textBoxLP_以前の値, this.textBoxLP.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxLP_以前の値 = this.textBoxLP.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxLP_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxLP);
+		}
+		private void textBoxLP_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLP.Text = str変更前;
+
+			this.textBoxLP.Focus();
+		}
+		private void textBoxLP_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLP.Text = str変更後;
+
+			this.textBoxLP.Focus();
+		}
+
+		private string textBoxLB_以前の値 = "";
+		private void textBoxLB_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正する。
+
+			#region [ Undo/Redo リストを修正。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxLB))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxLB.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxLB,
+							new DGUndoを実行する<string>(this.textBoxLB_Undo),
+							new DGRedoを実行する<string>(this.textBoxLB_Redo),
+							this.textBoxLB_以前の値, this.textBoxLB.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxLB_以前の値 = this.textBoxLB.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxLB_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxLB);
+		}
+		private void textBoxLB_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLB.Text = str変更前;
+
+			this.textBoxLB.Focus();
+		}
+		private void textBoxLB_Redo(string str変更前, string str変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxLB.Text = str変更後;
+
+			this.textBoxLB.Focus();
+		}
+
 		private string textBox曲名_以前の値 = "";
 		private void textBox曲名_TextChanged( object sender, EventArgs e )
 		{
@@ -3444,6 +4410,371 @@ namespace DTXCreator
 			this.hScrollBarBLEVEL.Value = n変更後;
 		}
 
+		private int nDLVDEC_以前の値 = 5;
+		private void textBoxDLVDEC_TextChanged(object sender, EventArgs e)
+		{
+			// 何もしない。→ 数字以外が入力されていることもあるため、Leaveまで待つ。
+		}
+		private void textBoxDLVDEC_Leave(object sender, EventArgs e)
+		{
+			if (this.textBoxDLVDEC.Text.Length > 0)
+			{
+				// 数値チェック。
+
+				int n値;
+				if (!int.TryParse(this.textBoxDLVDEC.Text, out n値))
+				{
+					n値 = 0;
+				}
+				else if (n値 < 0)
+				{
+					n値 = 0;
+				}
+				else if (n値 > 10)
+				{
+					n値 = 10;
+				}
+
+
+				// 値を水平スクロールバーにも反映。
+
+				if (this.hScrollBarDLVDEC.Value != n値)
+				{
+					this.t次のプロパティ変更処理がUndoRedoリストに載るようにする();
+					this.hScrollBarDLVDEC.Value = n値;   // ここで hScrollBarDLVDEC_ValueChanged が発動 → UndoRedo処理はそちらで。
+				}
+			}
+		}
+		private void hScrollBarDLVDEC_ValueChanged(object sender, EventArgs e)
+		{
+			// 値をテキストボックスにも反映。
+
+			this.textBoxDLVDEC.Text = this.hScrollBarDLVDEC.Value.ToString();
+
+
+			// Undo/Redo リストを修正。
+
+			#region [ Undo/Redo リストを修正する。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if (oセル仮想 != null && oセル仮想.b所有権がある(this.hScrollBarDLVDEC))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<int>)oセル仮想).変更後の値 = this.hScrollBarDLVDEC.Value;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<int>(
+							this.hScrollBarDLVDEC,
+							new DGUndoを実行する<int>(this.nDLVDEC_Undo),
+							new DGRedoを実行する<int>(this.nDLVDEC_Redo),
+							this.nDLVDEC_以前の値, this.hScrollBarDLVDEC.Value));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.nDLVDEC_以前の値 = this.hScrollBarDLVDEC.Value;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void nDLVDEC_Undo(int n変更前, int n変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxDLVDEC.Text = n変更前.ToString();
+
+			this.textBoxDLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarDLVDEC.Value = n変更前;
+		}
+		private void nDLVDEC_Redo(int n変更前, int n変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxDLVDEC.Text = n変更後.ToString();
+
+			this.textBoxDLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarDLVDEC.Value = n変更後;
+		}
+
+		private int nGLVDEC_以前の値;
+		private void textBoxGLVDEC_TextChanged(object sender, EventArgs e)
+		{
+			// 何もしない。→ 数字以外が入力されていることもあるため、Leaveまで待つ。
+		}
+		private void textBoxGLVDEC_Leave(object sender, EventArgs e)
+		{
+			if (this.textBoxGLVDEC.Text.Length > 0)
+			{
+				// 数値チェック。
+
+				int n値;
+				if (!int.TryParse(this.textBoxGLVDEC.Text, out n値))
+				{
+					n値 = 0;
+				}
+				else if (n値 < 0)
+				{
+					n値 = 0;
+				}
+				else if (n値 > 10)
+				{
+					n値 = 10;
+				}
+
+
+				// 値を水平スクロールバーにも反映。
+
+				if (this.hScrollBarGLVDEC.Value != n値)
+				{
+					this.t次のプロパティ変更処理がUndoRedoリストに載るようにする();
+					this.hScrollBarGLVDEC.Value = n値;       // ここで hScrollBarGLVDEC_ValueChanged が発動 → UndoRedo処理はそちらで。
+				}
+			}
+		}
+		private void hScrollBarGLVDEC_ValueChanged(object sender, EventArgs e)
+		{
+			// 値をテキストボックスにも反映。
+
+			this.textBoxGLVDEC.Text = this.hScrollBarGLVDEC.Value.ToString();
+
+			// Undo/Redo リストを修正。
+
+			#region [ Undo/Redo リストを修正する。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.hScrollBarGLVDEC))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<int>)oセル仮想).変更後の値 = this.hScrollBarGLVDEC.Value;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<int>(
+							this.hScrollBarGLVDEC,
+							new DGUndoを実行する<int>(this.nGLVDEC_Undo),
+							new DGRedoを実行する<int>(this.nGLVDEC_Redo),
+							this.nGLEVEL_以前の値, this.hScrollBarGLVDEC.Value));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.nGLVDEC_以前の値 = this.hScrollBarGLVDEC.Value;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void nGLVDEC_Undo(int n変更前, int n変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxGLVDEC.Text = n変更前.ToString();
+
+			this.textBoxGLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映する。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarGLVDEC.Value = n変更前;
+		}
+		private void nGLVDEC_Redo(int n変更前, int n変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxGLVDEC.Text = n変更後.ToString();
+
+			this.textBoxGLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映する。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarGLVDEC.Value = n変更後;
+		}
+
+		private int nBLVDEC_以前の値;
+		private void textBoxBLVDEC_TextChanged(object sender, EventArgs e)
+		{
+			// 何もしない。→ 数字以外が入力されていることもあるため、Leaveまで待つ。
+		}
+		private void textBoxBLVDEC_Leave(object sender, EventArgs e)
+		{
+			if (this.textBoxBLVDEC.Text.Length > 0)
+			{
+				// 数値チェック。
+
+				int n値;
+				if (!int.TryParse(this.textBoxBLVDEC.Text, out n値))
+				{
+					n値 = 0;
+				}
+				else if (n値 < 0)
+				{
+					n値 = 0;
+				}
+				else if (n値 > 10)
+				{
+					n値 = 10;
+				}
+
+
+				// 値を水平スクロールバーにも反映。
+
+				if (this.hScrollBarBLVDEC.Value != n値)
+				{
+					this.t次のプロパティ変更処理がUndoRedoリストに載るようにする();
+					this.hScrollBarBLVDEC.Value = n値;       // ここで hScrollBarBLVDEC_ValueChanged が発動 → UndoRedo処理はそちらで。
+				}
+			}
+		}
+		private void hScrollBarBLVDEC_ValueChanged(object sender, EventArgs e)
+		{
+			// 値をテキストボックスにも反映。
+
+			this.textBoxBLVDEC.Text = this.hScrollBarBLVDEC.Value.ToString();
+
+
+			// Undo/Redo リストを修正。
+
+			#region [ Undo/Redo リストを修正する。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.hScrollBarBLVDEC))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<int>)oセル仮想).変更後の値 = this.hScrollBarBLVDEC.Value;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<int>(
+							this.hScrollBarBLVDEC,
+							new DGUndoを実行する<int>(this.nBLVDEC_Undo),
+							new DGRedoを実行する<int>(this.nBLVDEC_Redo),
+							this.nBLEVEL_以前の値, this.hScrollBarBLVDEC.Value));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.nBLVDEC_以前の値 = this.hScrollBarBLVDEC.Value;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void nBLVDEC_Undo(int n変更前, int n変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxBLVDEC.Text = n変更前.ToString();
+
+			this.textBoxBLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarBLVDEC.Value = n変更前;
+		}
+		private void nBLVDEC_Redo(int n変更前, int n変更後)
+		{
+			// 変更後の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxBLVDEC.Text = n変更後.ToString();
+
+			this.textBoxBLVDEC.Focus();
+
+
+			// 値を水平スクロールバーにも反映。
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.hScrollBarBLVDEC.Value = n変更後;
+		}
+
 		private string textBoxパネル_以前の値 = "";
 		private void textBoxパネル_TextChanged( object sender, EventArgs e )
 		{
@@ -3598,6 +4929,84 @@ namespace DTXCreator
 			this.textBoxPREVIEW.Text = str変更後;
 
 			this.textBoxPREVIEW.Focus();
+		}
+
+		private string textBoxPREMOVIE_以前の値 = "";
+		private void textBoxPREMOVIE_TextChanged(object sender, EventArgs e)
+		{
+			// Undo/Redo リストを修正。
+
+			#region [ Undo/Redo リストを修正する。]
+			//-----------------
+			if (!CUndoRedoManager.bUndoRedoした直後)
+			{
+				CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+				if ((oセル仮想 != null) && oセル仮想.b所有権がある(this.textBoxPREMOVIE))
+				{
+					// 既存のセルの値を更新。
+
+					((CUndoRedoCell<string>)oセル仮想).変更後の値 = this.textBoxPREMOVIE.Text;
+				}
+				else
+				{
+					// 新しいセルを追加。
+
+					this.mgrUndoRedo管理者.tノードを追加する(
+						new CUndoRedoCell<string>(
+							this.textBoxPREVIEW,
+							new DGUndoを実行する<string>(this.textBoxPREMOVIE_Undo),
+							new DGRedoを実行する<string>(this.textBoxPREMOVIE_Redo),
+							this.textBoxPREMOVIE_以前の値, this.textBoxPREMOVIE.Text));
+
+
+					// Undo ボタンを有効にする。
+
+					this.tUndoRedo用GUIの有効_無効を設定する();
+				}
+			}
+			//-----------------
+			#endregion
+
+
+			// Undo 用に値を保管しておく。
+
+			this.textBoxPREMOVIE_以前の値 = this.textBoxPREMOVIE.Text;
+
+
+			// 完了。
+
+			CUndoRedoManager.bUndoRedoした直後 = false;
+			this.b未保存 = true;
+		}
+		private void textBoxPREMOVIE_Leave(object sender, EventArgs e)
+		{
+			CUndoRedoCellAbstract oセル仮想 = this.mgrUndoRedo管理者.tUndoするノードを取得して返す_見るだけ();
+
+			if (oセル仮想 != null)
+				oセル仮想.t所有権の放棄(this.textBoxPREMOVIE);
+		}
+		private void textBoxPREMOVIE_Undo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxPREMOVIE.Text = str変更前;
+
+			this.textBoxPREMOVIE.Focus();
+		}
+		private void textBoxPREMOVIE_Redo(string str変更前, string str変更後)
+		{
+			// 変更前の値に戻す。
+
+			this.tタブを選択する(Eタブ種別.基本情報);
+
+			this.t次のプロパティ変更処理がUndoRedoリストに載らないようにする();
+			this.textBoxPREMOVIE.Text = str変更後;
+
+			this.textBoxPREMOVIE.Focus();
 		}
 
 		private string textBoxPREIMAGE_以前の値 = "";
@@ -3930,6 +5339,25 @@ namespace DTXCreator
 				this.b未保存 = true;
 			}
 		}
+
+		private void buttonPREMOVIE参照_Click(object sender, EventArgs e)
+		{
+			string str初期フォルダ名 = this.str作業フォルダ名;
+
+			if (this.textBoxPREMOVIE.Text.Length > 0)
+				str初期フォルダ名 = this.strファイルの存在するディレクトリを絶対パスで返す(this.textBoxPREMOVIE.Text);
+
+			string strファイル名 = this.tファイル選択ダイアログでファイルを選択し相対パスにして返す(
+				Resources.strプレビュー動画ファイル選択ダイアログのタイトル,
+				Resources.strプレビュー動画ファイル選択ダイアログのフィルタ,
+				str初期フォルダ名);
+
+			if (strファイル名.Length > 0)
+			{
+				this.textBoxPREMOVIE.Text = strファイル名;
+				this.b未保存 = true;
+			}
+		}
 		private void buttonPREIMAGE参照_Click( object sender, EventArgs e )
 		{
 			string str初期フォルダ名 = this.str作業フォルダ名;
@@ -4013,7 +5441,7 @@ namespace DTXCreator
 			if( this.listViewWAVリスト.SelectedIndices.Count > 0 && this.toolStripButtonWAVリストプレビュースイッチ.Checked )
 			{
 				ListViewItem item = this.listViewWAVリスト.Items[ this.listViewWAVリスト.SelectedIndices[ 0 ] ];
-				this.mgrWAVリスト管理者.tプレビュー音を再生する( CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 1 ].Text ) );
+				this.mgrWAVリスト管理者.tプレビュー音を再生する( CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 1 ].Text ) );
 			}
 			//-----------------
 			#endregion
@@ -4022,10 +5450,10 @@ namespace DTXCreator
 		{
 			#region [ サウンドプロパティを開いて編集する。]
 			//-----------------
-			if( this.mgrWAVリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+			if( this.mgrWAVリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 				return;		// 選択されていない
 
-			this.mgrWAVリスト管理者.tサウンドプロパティを開いて編集する( this.mgrWAVリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+			this.mgrWAVリスト管理者.tサウンドプロパティを開いて編集する( this.mgrWAVリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			//-----------------
 			#endregion
 		}
@@ -4038,7 +5466,7 @@ namespace DTXCreator
 			var data = new CDataForChipPaletteDragDrop() {
 				n種類 = 0,
 				strラベル名 = item.SubItems[ 0 ].Text,
-				n番号1to1295 = CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 1 ].Text ),
+				n番号1to3843 = CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 1 ].Text ),
 				strファイル名 = item.SubItems[ 2 ].Text,
 				col文字色 = item.ForeColor,
 				col背景色 = item.BackColor,
@@ -4055,10 +5483,10 @@ namespace DTXCreator
 			//-----------------
 			if( e.KeyChar == (char) Keys.Return )
 			{
-				if( this.mgrWAVリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+				if( this.mgrWAVリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 					return;		// 選択されていない
 
-				this.mgrWAVリスト管理者.tサウンドプロパティを開いて編集する( this.mgrWAVリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+				this.mgrWAVリスト管理者.tサウンドプロパティを開いて編集する( this.mgrWAVリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			}
 			//-----------------
 			#endregion
@@ -4114,8 +5542,8 @@ namespace DTXCreator
 
             if (b再生有効)
 			{
-				int nWAV番号1to1295 = this.mgrWAVリスト管理者.n現在選択中のItem番号0to1294 + 1;
-				this.mgrWAVリスト管理者.tプレビュー音を再生する( nWAV番号1to1295 );
+				int nWAV番号1to3843 = this.mgrWAVリスト管理者.n現在選択中のItem番号0to3842 + 1;
+				this.mgrWAVリスト管理者.tプレビュー音を再生する( nWAV番号1to3843 );
 			}
 			//-----------------
 			#endregion
@@ -4131,12 +5559,12 @@ namespace DTXCreator
 			if( this.listViewWAVリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewWAVリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewWAVリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 == 0 )
+			if( n選択されたItem番号0to3842 == 0 )
 				return;	// 最上行なので無視
 
-			this.mgrWAVリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 - 1 );
+			this.mgrWAVリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 - 1 );
 			//-----------------
 			#endregion
 		}
@@ -4145,12 +5573,12 @@ namespace DTXCreator
 			if( this.listViewWAVリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewWAVリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewWAVリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 >= 1294 )
+			if( n選択されたItem番号0to3842 >= 3842 )
 				return; // 最下行なので無視
 
-			this.mgrWAVリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 + 1 );
+			this.mgrWAVリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 + 1 );
 		}
 		//-----------------
 		#endregion
@@ -4164,10 +5592,10 @@ namespace DTXCreator
 		{
 			#region [ 画像プロパティを開いて編集する。]
 			//-----------------
-			if( this.mgrBMPリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+			if( this.mgrBMPリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 				return;		// 選択されていない
 
-			this.mgrBMPリスト管理者.t画像プロパティを開いて編集する( this.mgrBMPリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+			this.mgrBMPリスト管理者.t画像プロパティを開いて編集する( this.mgrBMPリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			//-----------------
 			#endregion
 		}
@@ -4180,7 +5608,7 @@ namespace DTXCreator
 			var data = new CDataForChipPaletteDragDrop() {
 				n種類 = 1,
 				strラベル名 = item.SubItems[ 1 ].Text,
-				n番号1to1295 = CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 2 ].Text ),
+				n番号1to3843 = CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 2 ].Text ),
 				strファイル名 = item.SubItems[ 3 ].Text,
 				col文字色 = item.ForeColor,
 				col背景色 = item.BackColor,
@@ -4196,10 +5624,10 @@ namespace DTXCreator
 			//-----------------
 			if( e.KeyChar == (char) Keys.Return )
 			{
-				if( this.mgrBMPリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+				if( this.mgrBMPリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 					return;		// 選択されていない
 
-				this.mgrBMPリスト管理者.t画像プロパティを開いて編集する( this.mgrBMPリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+				this.mgrBMPリスト管理者.t画像プロパティを開いて編集する( this.mgrBMPリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			}
 			//-----------------
 			#endregion
@@ -4234,10 +5662,10 @@ namespace DTXCreator
 			if( this.listViewBMPリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewBMPリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewBMPリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 != 0 )
-				this.mgrBMPリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 - 1 );
+			if( n選択されたItem番号0to3842 != 0 )
+				this.mgrBMPリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 - 1 );
 			//-----------------
 			#endregion
 		}
@@ -4248,12 +5676,12 @@ namespace DTXCreator
 			if( this.listViewBMPリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewBMPリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewBMPリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 >= 1294 )
+			if( n選択されたItem番号0to3842 >= 3842 )
 				return; // 最下行なので無視
 
-			this.mgrBMPリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 + 1 );
+			this.mgrBMPリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 + 1 );
 			//-----------------
 			#endregion
 		}
@@ -4269,10 +5697,10 @@ namespace DTXCreator
 		{
 			#region [ 動画プロパティを開いて編集する。]
 			//-----------------
-			if( this.mgrAVIリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+			if( this.mgrAVIリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 				return;	// 選択されていない
 
-			this.mgrAVIリスト管理者.t動画プロパティを開いて編集する( this.mgrAVIリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+			this.mgrAVIリスト管理者.t動画プロパティを開いて編集する( this.mgrAVIリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			//-----------------
 			#endregion
 		}
@@ -4285,7 +5713,7 @@ namespace DTXCreator
 			var data = new CDataForChipPaletteDragDrop() {
 				n種類 = 2,
 				strラベル名 = item.SubItems[ 0 ].Text,
-				n番号1to1295 = CConversion.nConvert2DigitBase36StringToNumber( item.SubItems[ 1 ].Text ),
+				n番号1to3843 = CConversion.nConvert2DigitBase62StringToNumber( item.SubItems[ 1 ].Text ),
 				strファイル名 = item.SubItems[ 2 ].Text,
 				col文字色 = item.ForeColor,
 				col背景色 = item.BackColor,
@@ -4301,10 +5729,10 @@ namespace DTXCreator
 			//-----------------
 			if( e.KeyChar == (char) Keys.Return ) 
 			{
-				if( this.mgrAVIリスト管理者.n現在選択中のItem番号0to1294 < 0 )
+				if( this.mgrAVIリスト管理者.n現在選択中のItem番号0to3842 < 0 )
 					return;		// 選択されてない
 
-				this.mgrAVIリスト管理者.t動画プロパティを開いて編集する( this.mgrAVIリスト管理者.n現在選択中のItem番号0to1294 + 1, this.str作業フォルダ名 );
+				this.mgrAVIリスト管理者.t動画プロパティを開いて編集する( this.mgrAVIリスト管理者.n現在選択中のItem番号0to3842 + 1, this.str作業フォルダ名 );
 			}
 			//-----------------
 			#endregion
@@ -4339,12 +5767,12 @@ namespace DTXCreator
 			if( this.listViewAVIリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewAVIリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewAVIリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 == 0 )
+			if( n選択されたItem番号0to3842 == 0 )
 				return; // 最上行なので無視
 
-			this.mgrAVIリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 - 1 );
+			this.mgrAVIリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 - 1 );
 			//-----------------
 			#endregion
 		}
@@ -4355,17 +5783,20 @@ namespace DTXCreator
 			if( this.listViewAVIリスト.SelectedIndices.Count <= 0 )
 				return; // 選択されていない
 
-			int n選択されたItem番号0to1294 = this.listViewAVIリスト.SelectedIndices[ 0 ];
+			int n選択されたItem番号0to3842 = this.listViewAVIリスト.SelectedIndices[ 0 ];
 
-			if( n選択されたItem番号0to1294 >= 1294 )
+			if( n選択されたItem番号0to3842 >= 3842 )
 				return; // 最下行なので無視
 
-			this.mgrAVIリスト管理者.tItemを交換する( n選択されたItem番号0to1294, n選択されたItem番号0to1294 + 1 );
+			this.mgrAVIリスト管理者.tItemを交換する( n選択されたItem番号0to3842, n選択されたItem番号0to3842 + 1 );
 			//-----------------
 			#endregion
 		}
 		//-----------------
 		#endregion
+
+		#endregion
+
 		#region [ GUIイベント：自由入力関連 ]
 		//-----------------
 		private string textBox自由入力欄_以前の値 = "";
@@ -4772,7 +6203,7 @@ namespace DTXCreator
 		}
 		private void toolStripComboBox譜面拡大率_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			CMeasure.n基準の高さdot = 192 * ( this.toolStripComboBox譜面拡大率.SelectedIndex + 1 );
+			CMeasure.n基準の高さdot = 1920 * ( this.toolStripComboBox譜面拡大率.SelectedIndex + 1);
 			
 			this.pictureBox譜面パネル.Refresh();
 		}
@@ -4844,12 +6275,39 @@ namespace DTXCreator
         //-----------------
         #endregion
 
-        //-----------------
-        #endregion
-
-        private void toolStripComboBox演奏速度_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabPage基本情報_Click(object sender, EventArgs e)
         {
-			this.b再生速度を変更した = true;
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox譜面パネル_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBox譜面拡大率_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripComboBoxガイド間隔_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStripメニューバー_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -125,25 +125,1559 @@
   <data name="splitContainerタブと譜面を分割.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 49</value>
   </data>
+  <data name="textBoxPREMOVIE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxPREMOVIE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 392</value>
+  </data>
+  <data name="textBoxPREMOVIE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="textBoxPREMOVIE.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <metadata name="toolTipツールチップ.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>572, 17</value>
+  </metadata>
+  <data name="textBoxPREMOVIE.ToolTip" xml:space="preserve">
+    <value>プレビュー動画を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREMOVIE.Name" xml:space="preserve">
+    <value>textBoxPREMOVIE</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREMOVIE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREMOVIE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREMOVIE.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="buttonPREMOVIE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="buttonPREMOVIE参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="buttonPREMOVIE参照.Location" type="System.Drawing.Point, System.Drawing">
+    <value>308, 390</value>
+  </data>
+  <data name="buttonPREMOVIE参照.Size" type="System.Drawing.Size, System.Drawing">
+    <value>25, 23</value>
+  </data>
+  <data name="buttonPREMOVIE参照.TabIndex" type="System.Int32, mscorlib">
+    <value>65</value>
+  </data>
+  <data name="buttonPREMOVIE参照.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="buttonPREMOVIE参照.ToolTip" xml:space="preserve">
+    <value>Select file...</value>
+  </data>
+  <data name="&gt;&gt;buttonPREMOVIE参照.Name" xml:space="preserve">
+    <value>buttonPREMOVIE参照</value>
+  </data>
+  <data name="&gt;&gt;buttonPREMOVIE参照.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonPREMOVIE参照.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;buttonPREMOVIE参照.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="labelPREMOVIE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelPREMOVIE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelPREMOVIE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 395</value>
+  </data>
+  <data name="labelPREMOVIE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 12</value>
+  </data>
+  <data name="labelPREMOVIE.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="labelPREMOVIE.Text" xml:space="preserve">
+    <value>Preview動画</value>
+  </data>
+  <data name="labelPREMOVIE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelPREMOVIE.ToolTip" xml:space="preserve">
+    <value>プレビュー動画を設定します。</value>
+  </data>
+  <data name="&gt;&gt;labelPREMOVIE.Name" xml:space="preserve">
+    <value>labelPREMOVIE</value>
+  </data>
+  <data name="&gt;&gt;labelPREMOVIE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelPREMOVIE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelPREMOVIE.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="textBoxLB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxLB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 446</value>
+  </data>
+  <data name="textBoxLB.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxLB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxLB.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="textBoxLB.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxLB.Name" xml:space="preserve">
+    <value>textBoxLB</value>
+  </data>
+  <data name="&gt;&gt;textBoxLB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLB.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxLB.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="textBoxLP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxLP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 484</value>
+  </data>
+  <data name="textBoxLP.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxLP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxLP.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="textBoxLP.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxLP.Name" xml:space="preserve">
+    <value>textBoxLP</value>
+  </data>
+  <data name="&gt;&gt;textBoxLP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLP.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxLP.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="textBoxLC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxLC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 446</value>
+  </data>
+  <data name="textBoxLC.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxLC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxLC.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="textBoxLC.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxLC.Name" xml:space="preserve">
+    <value>textBoxLC</value>
+  </data>
+  <data name="&gt;&gt;textBoxLC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxLC.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="textBoxRC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxRC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 484</value>
+  </data>
+  <data name="textBoxRC.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxRC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxRC.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="textBoxRC.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxRC.Name" xml:space="preserve">
+    <value>textBoxRC</value>
+  </data>
+  <data name="&gt;&gt;textBoxRC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxRC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxRC.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="textBoxHO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxHO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 484</value>
+  </data>
+  <data name="textBoxHO.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxHO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxHO.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="textBoxHO.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxHO.Name" xml:space="preserve">
+    <value>textBoxHO</value>
+  </data>
+  <data name="&gt;&gt;textBoxHO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxHO.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxHO.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="textBoxFT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxFT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>276, 446</value>
+  </data>
+  <data name="textBoxFT.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxFT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxFT.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="textBoxFT.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxFT.Name" xml:space="preserve">
+    <value>textBoxFT</value>
+  </data>
+  <data name="&gt;&gt;textBoxFT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxFT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxFT.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="textBoxCY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxCY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>304, 446</value>
+  </data>
+  <data name="textBoxCY.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxCY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxCY.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="textBoxCY.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxCY.Name" xml:space="preserve">
+    <value>textBoxCY</value>
+  </data>
+  <data name="&gt;&gt;textBoxCY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxCY.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxCY.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="textBoxLT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxLT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 446</value>
+  </data>
+  <data name="textBoxLT.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxLT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxLT.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
+  <data name="textBoxLT.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxLT.Name" xml:space="preserve">
+    <value>textBoxLT</value>
+  </data>
+  <data name="&gt;&gt;textBoxLT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxLT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxLT.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="textBoxHT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxHT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>222, 446</value>
+  </data>
+  <data name="textBoxHT.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxHT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxHT.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="textBoxHT.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxHT.Name" xml:space="preserve">
+    <value>textBoxHT</value>
+  </data>
+  <data name="&gt;&gt;textBoxHT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxHT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxHT.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="textBoxBD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxBD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 446</value>
+  </data>
+  <data name="textBoxBD.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxBD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxBD.TabIndex" type="System.Int32, mscorlib">
+    <value>44</value>
+  </data>
+  <data name="textBoxBD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxBD.Name" xml:space="preserve">
+    <value>textBoxBD</value>
+  </data>
+  <data name="&gt;&gt;textBoxBD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBD.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBD.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="textBoxSN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxSN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 446</value>
+  </data>
+  <data name="textBoxSN.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxSN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxSN.TabIndex" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <data name="textBoxSN.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxSN.Name" xml:space="preserve">
+    <value>textBoxSN</value>
+  </data>
+  <data name="&gt;&gt;textBoxSN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSN.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxSN.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="textBoxHH.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Disable</value>
+  </data>
+  <data name="textBoxHH.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 446</value>
+  </data>
+  <data name="textBoxHH.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxHH.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 19</value>
+  </data>
+  <data name="textBoxHH.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="textBoxHH.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;textBoxHH.Name" xml:space="preserve">
+    <value>textBoxHH</value>
+  </data>
+  <data name="&gt;&gt;textBoxHH.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxHH.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxHH.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="textBoxBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 216</value>
+  </data>
+  <data name="textBoxBLVDEC.MaxLength" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxBLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="textBoxBLVDEC.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxBLVDEC.ToolTip" xml:space="preserve">
+    <value>ベースの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLVDEC.Name" xml:space="preserve">
+    <value>textBoxBLVDEC</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLVDEC.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="textBoxGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 172</value>
+  </data>
+  <data name="textBoxGLVDEC.MaxLength" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxGLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="textBoxGLVDEC.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxGLVDEC.ToolTip" xml:space="preserve">
+    <value>ギターの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLVDEC.Name" xml:space="preserve">
+    <value>textBoxGLVDEC</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLVDEC.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="textBoxDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 128</value>
+  </data>
+  <data name="textBoxDLVDEC.MaxLength" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBoxDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxDLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="textBoxDLVDEC.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxDLVDEC.ToolTip" xml:space="preserve">
+    <value>ドラムの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLVDEC.Name" xml:space="preserve">
+    <value>textBoxDLVDEC</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLVDEC.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 367</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.ToolTip" xml:space="preserve">
+    <value>リザルト画像を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Name" xml:space="preserve">
+    <value>textBoxRESULTIMAGE</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxRESULTIMAGE.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="textBoxBACKGROUND.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 342</value>
+  </data>
+  <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="textBoxBACKGROUND.ToolTip" xml:space="preserve">
+    <value>背景画像を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Name" xml:space="preserve">
+    <value>textBoxBACKGROUND</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBACKGROUND.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 317</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="textBoxSTAGEFILE.ToolTip" xml:space="preserve">
+    <value>STAGEFILEを設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Name" xml:space="preserve">
+    <value>textBoxSTAGEFILE</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxSTAGEFILE.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="textBoxPREIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 292</value>
+  </data>
+  <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="textBoxPREIMAGE.ToolTip" xml:space="preserve">
+    <value>選曲画像を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Name" xml:space="preserve">
+    <value>textBoxPREIMAGE</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREIMAGE.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="textBoxPREVIEW.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 267</value>
+  </data>
+  <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 19</value>
+  </data>
+  <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="textBoxPREVIEW.ToolTip" xml:space="preserve">
+    <value>プレビューサウンドを設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Name" xml:space="preserve">
+    <value>textBoxPREVIEW</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxPREVIEW.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="textBoxパネル.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 241</value>
+  </data>
+  <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 19</value>
+  </data>
+  <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="textBoxパネル.ToolTip" xml:space="preserve">
+    <value>パネル文を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Name" xml:space="preserve">
+    <value>textBoxパネル</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxパネル.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 194</value>
+  </data>
+  <data name="textBoxBLEVEL.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="textBoxBLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxBLEVEL.ToolTip" xml:space="preserve">
+    <value>ベースの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Name" xml:space="preserve">
+    <value>textBoxBLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxBLEVEL.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 150</value>
+  </data>
+  <data name="textBoxGLEVEL.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="textBoxGLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxGLEVEL.ToolTip" xml:space="preserve">
+    <value>ギターの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Name" xml:space="preserve">
+    <value>textBoxGLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxGLEVEL.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 106</value>
+  </data>
+  <data name="textBoxDLEVEL.MaxLength" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 19</value>
+  </data>
+  <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="textBoxDLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="textBoxDLEVEL.ToolTip" xml:space="preserve">
+    <value>ドラムの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Name" xml:space="preserve">
+    <value>textBoxDLEVEL</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxDLEVEL.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="textBoxコメント.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 56</value>
+  </data>
+  <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 19</value>
+  </data>
+  <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="textBoxコメント.ToolTip" xml:space="preserve">
+    <value>演奏データに対するコメント文を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Name" xml:space="preserve">
+    <value>textBoxコメント</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBoxコメント.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="textBox製作者.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 31</value>
+  </data>
+  <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 19</value>
+  </data>
+  <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="textBox製作者.ToolTip" xml:space="preserve">
+    <value>演奏データの製作者名を設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Name" xml:space="preserve">
+    <value>textBox製作者</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBox製作者.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="textBox曲名.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 6</value>
+  </data>
+  <data name="textBox曲名.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>10, 19</value>
+  </data>
+  <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 19</value>
+  </data>
+  <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="textBox曲名.ToolTip" xml:space="preserve">
+    <value>演奏データのタイトルを設定します。</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Name" xml:space="preserve">
+    <value>textBox曲名</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;textBox曲名.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="labelLB.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLB.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelLB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>167, 431</value>
+  </data>
+  <data name="labelLB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 12</value>
+  </data>
+  <data name="labelLB.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="labelLB.Text" xml:space="preserve">
+    <value>LB</value>
+  </data>
+  <data name="labelLB.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelLB.ToolTip" xml:space="preserve">
+    <value>BE</value>
+  </data>
+  <data name="&gt;&gt;labelLB.Name" xml:space="preserve">
+    <value>labelLB</value>
+  </data>
+  <data name="&gt;&gt;labelLB.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLB.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelLB.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="labelLP.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLP.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelLP.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 469</value>
+  </data>
+  <data name="labelLP.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 12</value>
+  </data>
+  <data name="labelLP.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="labelLP.Text" xml:space="preserve">
+    <value>LP</value>
+  </data>
+  <data name="labelLP.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelLP.ToolTip" xml:space="preserve">
+    <value>BD</value>
+  </data>
+  <data name="&gt;&gt;labelLP.Name" xml:space="preserve">
+    <value>labelLP</value>
+  </data>
+  <data name="&gt;&gt;labelLP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLP.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelLP.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="labelLC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelLC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 431</value>
+  </data>
+  <data name="labelLC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 12</value>
+  </data>
+  <data name="labelLC.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="labelLC.Text" xml:space="preserve">
+    <value>LC</value>
+  </data>
+  <data name="labelLC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelLC.ToolTip" xml:space="preserve">
+    <value>BC</value>
+  </data>
+  <data name="&gt;&gt;labelLC.Name" xml:space="preserve">
+    <value>labelLC</value>
+  </data>
+  <data name="&gt;&gt;labelLC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelLC.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="labelRC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelRC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelRC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 469</value>
+  </data>
+  <data name="labelRC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 12</value>
+  </data>
+  <data name="labelRC.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="labelRC.Text" xml:space="preserve">
+    <value>RC</value>
+  </data>
+  <data name="labelRC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelRC.ToolTip" xml:space="preserve">
+    <value>B9</value>
+  </data>
+  <data name="&gt;&gt;labelRC.Name" xml:space="preserve">
+    <value>labelRC</value>
+  </data>
+  <data name="&gt;&gt;labelRC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelRC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelRC.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="labelHO.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelHO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelHO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 469</value>
+  </data>
+  <data name="labelHO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 12</value>
+  </data>
+  <data name="labelHO.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="labelHO.Text" xml:space="preserve">
+    <value>HO</value>
+  </data>
+  <data name="labelHO.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelHO.ToolTip" xml:space="preserve">
+    <value>B8</value>
+  </data>
+  <data name="&gt;&gt;labelHO.Name" xml:space="preserve">
+    <value>labelHO</value>
+  </data>
+  <data name="&gt;&gt;labelHO.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHO.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelHO.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="labelFT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelFT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelFT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 431</value>
+  </data>
+  <data name="labelFT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 12</value>
+  </data>
+  <data name="labelFT.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="labelFT.Text" xml:space="preserve">
+    <value>FT</value>
+  </data>
+  <data name="labelFT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelFT.ToolTip" xml:space="preserve">
+    <value>B7</value>
+  </data>
+  <data name="&gt;&gt;labelFT.Name" xml:space="preserve">
+    <value>labelFT</value>
+  </data>
+  <data name="&gt;&gt;labelFT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelFT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelFT.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="labelCY.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelCY.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelCY.Location" type="System.Drawing.Point, System.Drawing">
+    <value>305, 431</value>
+  </data>
+  <data name="labelCY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 12</value>
+  </data>
+  <data name="labelCY.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="labelCY.Text" xml:space="preserve">
+    <value>CY</value>
+  </data>
+  <data name="labelCY.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelCY.ToolTip" xml:space="preserve">
+    <value>B6</value>
+  </data>
+  <data name="&gt;&gt;labelCY.Name" xml:space="preserve">
+    <value>labelCY</value>
+  </data>
+  <data name="&gt;&gt;labelCY.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelCY.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelCY.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="labelLT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelLT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelLT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 431</value>
+  </data>
+  <data name="labelLT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>18, 12</value>
+  </data>
+  <data name="labelLT.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="labelLT.Text" xml:space="preserve">
+    <value>LT</value>
+  </data>
+  <data name="labelLT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelLT.ToolTip" xml:space="preserve">
+    <value>B5</value>
+  </data>
+  <data name="&gt;&gt;labelLT.Name" xml:space="preserve">
+    <value>labelLT</value>
+  </data>
+  <data name="&gt;&gt;labelLT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelLT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelLT.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="labelHT.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelHT.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelHT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 431</value>
+  </data>
+  <data name="labelHT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 12</value>
+  </data>
+  <data name="labelHT.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="labelHT.Text" xml:space="preserve">
+    <value>HT</value>
+  </data>
+  <data name="labelHT.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelHT.ToolTip" xml:space="preserve">
+    <value>B4</value>
+  </data>
+  <data name="&gt;&gt;labelHT.Name" xml:space="preserve">
+    <value>labelHT</value>
+  </data>
+  <data name="&gt;&gt;labelHT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHT.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelHT.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="labelBD.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBD.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelBD.Location" type="System.Drawing.Point, System.Drawing">
+    <value>195, 431</value>
+  </data>
+  <data name="labelBD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 12</value>
+  </data>
+  <data name="labelBD.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="labelBD.Text" xml:space="preserve">
+    <value>BD</value>
+  </data>
+  <data name="labelBD.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelBD.ToolTip" xml:space="preserve">
+    <value>B3</value>
+  </data>
+  <data name="&gt;&gt;labelBD.Name" xml:space="preserve">
+    <value>labelBD</value>
+  </data>
+  <data name="&gt;&gt;labelBD.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBD.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelBD.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="labelSN.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSN.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 431</value>
+  </data>
+  <data name="labelSN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 12</value>
+  </data>
+  <data name="labelSN.TabIndex" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="labelSN.Text" xml:space="preserve">
+    <value>SN</value>
+  </data>
+  <data name="labelSN.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelSN.ToolTip" xml:space="preserve">
+    <value>B2</value>
+  </data>
+  <data name="&gt;&gt;labelSN.Name" xml:space="preserve">
+    <value>labelSN</value>
+  </data>
+  <data name="&gt;&gt;labelSN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelSN.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelSN.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="labelHH.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelHH.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelHH.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 431</value>
+  </data>
+  <data name="labelHH.Size" type="System.Drawing.Size, System.Drawing">
+    <value>21, 12</value>
+  </data>
+  <data name="labelHH.TabIndex" type="System.Int32, mscorlib">
+    <value>41</value>
+  </data>
+  <data name="labelHH.Text" xml:space="preserve">
+    <value>HH</value>
+  </data>
+  <data name="labelHH.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="labelHH.ToolTip" xml:space="preserve">
+    <value>B1</value>
+  </data>
+  <data name="&gt;&gt;labelHH.Name" xml:space="preserve">
+    <value>labelHH</value>
+  </data>
+  <data name="&gt;&gt;labelHH.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelHH.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelHH.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="空打ちSE.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="空打ちSE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="空打ちSE.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 414</value>
+  </data>
+  <data name="空打ちSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 12</value>
+  </data>
+  <data name="空打ちSE.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="空打ちSE.Text" xml:space="preserve">
+    <value>空打ちSE</value>
+  </data>
+  <data name="空打ちSE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="空打ちSE.ToolTip" xml:space="preserve">
+    <value>空打ちのSEの指定</value>
+  </data>
+  <data name="&gt;&gt;空打ちSE.Name" xml:space="preserve">
+    <value>空打ちSE</value>
+  </data>
+  <data name="&gt;&gt;空打ちSE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;空打ちSE.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;空打ちSE.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="labelBLVDEC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelBLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 219</value>
+  </data>
+  <data name="labelBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 12</value>
+  </data>
+  <data name="labelBLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="labelBLVDEC.Text" xml:space="preserve">
+    <value>BassLvDec.</value>
+  </data>
+  <data name="labelBLVDEC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;labelBLVDEC.Name" xml:space="preserve">
+    <value>labelBLVDEC</value>
+  </data>
+  <data name="&gt;&gt;labelBLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelBLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelBLVDEC.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="hScrollBarBLVDEC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarBLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hScrollBarBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 216</value>
+  </data>
+  <data name="hScrollBarBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="hScrollBarBLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLVDEC.Name" xml:space="preserve">
+    <value>hScrollBarBLVDEC</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarBLVDEC.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="labelGLVDEC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelGLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 175</value>
+  </data>
+  <data name="labelGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 12</value>
+  </data>
+  <data name="labelGLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="labelGLVDEC.Text" xml:space="preserve">
+    <value>GuitarLvDec.
+</value>
+  </data>
+  <data name="labelGLVDEC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;labelGLVDEC.Name" xml:space="preserve">
+    <value>labelGLVDEC</value>
+  </data>
+  <data name="&gt;&gt;labelGLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelGLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelGLVDEC.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="hScrollBarGLVDEC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarGLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hScrollBarGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 172</value>
+  </data>
+  <data name="hScrollBarGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="hScrollBarGLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLVDEC.Name" xml:space="preserve">
+    <value>hScrollBarGLVDEC</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarGLVDEC.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="labelDLVDEC.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelDLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 131</value>
+  </data>
+  <data name="labelDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 12</value>
+  </data>
+  <data name="labelDLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="labelDLVDEC.Text" xml:space="preserve">
+    <value>DrumLvDec.</value>
+  </data>
+  <data name="labelDLVDEC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopRight</value>
+  </data>
+  <data name="&gt;&gt;labelDLVDEC.Name" xml:space="preserve">
+    <value>labelDLVDEC</value>
+  </data>
+  <data name="&gt;&gt;labelDLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelDLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;labelDLVDEC.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="hScrollBarDLVDEC.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="hScrollBarDLVDEC.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hScrollBarDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>124, 128</value>
+  </data>
+  <data name="hScrollBarDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 17</value>
+  </data>
+  <data name="hScrollBarDLVDEC.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLVDEC.Name" xml:space="preserve">
+    <value>hScrollBarDLVDEC</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLVDEC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HScrollBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLVDEC.Parent" xml:space="preserve">
+    <value>tabPage基本情報</value>
+  </data>
+  <data name="&gt;&gt;hScrollBarDLVDEC.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
   <data name="buttonRESULTIMAGE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="buttonRESULTIMAGE参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonRESULTIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 334</value>
+    <value>308, 365</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonRESULTIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Text" xml:space="preserve">
     <value>...</value>
   </data>
-  <metadata name="toolTipツールチップ.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>572, 17</value>
-  </metadata>
   <data name="buttonRESULTIMAGE参照.ToolTip" xml:space="preserve">
     <value>Select file...</value>
   </data>
@@ -157,16 +1691,19 @@
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;buttonRESULTIMAGE参照.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>49</value>
   </data>
   <data name="buttonBACKGROUND参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="buttonBACKGROUND参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonBACKGROUND参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 307</value>
+    <value>308, 340</value>
   </data>
   <data name="buttonBACKGROUND参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 23</value>
   </data>
   <data name="buttonBACKGROUND参照.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -187,16 +1724,19 @@
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;buttonBACKGROUND参照.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>50</value>
   </data>
   <data name="buttonSTAGEFILE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="buttonSTAGEFILE参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonSTAGEFILE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 280</value>
+    <value>308, 315</value>
   </data>
   <data name="buttonSTAGEFILE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 23</value>
   </data>
   <data name="buttonSTAGEFILE参照.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -217,16 +1757,19 @@
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;buttonSTAGEFILE参照.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>51</value>
   </data>
   <data name="buttonPREIMAGE参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="buttonPREIMAGE参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonPREIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 252</value>
+    <value>308, 290</value>
   </data>
   <data name="buttonPREIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 23</value>
   </data>
   <data name="buttonPREIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -247,16 +1790,19 @@
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;buttonPREIMAGE参照.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>52</value>
   </data>
   <data name="buttonPREVIEW参照.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="buttonPREVIEW参照.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="buttonPREVIEW参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 225</value>
+    <value>308, 265</value>
   </data>
   <data name="buttonPREVIEW参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 25</value>
+    <value>25, 23</value>
   </data>
   <data name="buttonPREVIEW参照.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -278,29 +1824,31 @@
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;buttonPREVIEW参照.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>53</value>
   </data>
   <data name="labeRESULTIMAGE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labeRESULTIMAGE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labeRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 337</value>
+    <value>26, 370</value>
   </data>
   <data name="labeRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>53, 12</value>
   </data>
   <data name="labeRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="labeRESULTIMAGE.Text" xml:space="preserve">
-    <value>ResultImage</value>
+    <value>結果画像</value>
   </data>
   <data name="labeRESULTIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labeRESULTIMAGE.ToolTip" xml:space="preserve">
-    <value>An image file shown in result screen.
-The image size is 204x269.</value>
+    <value>リザルト画像を設定します。</value>
   </data>
   <data name="&gt;&gt;labeRESULTIMAGE.Name" xml:space="preserve">
     <value>labeRESULTIMAGE</value>
@@ -312,29 +1860,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labeRESULTIMAGE.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>54</value>
   </data>
   <data name="labelBACKGROUND.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelBACKGROUND.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 310</value>
+    <value>26, 345</value>
   </data>
   <data name="labelBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>53, 12</value>
   </data>
   <data name="labelBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
   <data name="labelBACKGROUND.Text" xml:space="preserve">
-    <value>BackImage</value>
+    <value>背景画像</value>
   </data>
   <data name="labelBACKGROUND.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelBACKGROUND.ToolTip" xml:space="preserve">
-    <value>A background image file drawn on play screen.
-The image size is 640x480.</value>
+    <value>背景画像を設定します。</value>
   </data>
   <data name="&gt;&gt;labelBACKGROUND.Name" xml:space="preserve">
     <value>labelBACKGROUND</value>
@@ -346,29 +1896,31 @@ The image size is 640x480.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelBACKGROUND.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>55</value>
   </data>
   <data name="labelSTAGEFILE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelSTAGEFILE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 283</value>
+    <value>11, 320</value>
   </data>
   <data name="labelSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>68, 12</value>
   </data>
   <data name="labelSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="labelSTAGEFILE.Text" xml:space="preserve">
-    <value>LoadingImage</value>
+    <value>Loading画像</value>
   </data>
   <data name="labelSTAGEFILE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelSTAGEFILE.ToolTip" xml:space="preserve">
-    <value>A background image file drawn at loading song.
-The image size is 640x480.</value>
+    <value>STAGEFILEを設定します。</value>
   </data>
   <data name="&gt;&gt;labelSTAGEFILE.Name" xml:space="preserve">
     <value>labelSTAGEFILE</value>
@@ -380,29 +1932,31 @@ The image size is 640x480.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelSTAGEFILE.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>56</value>
   </data>
   <data name="labelPREIMAGE.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelPREIMAGE.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 256</value>
+    <value>26, 295</value>
   </data>
   <data name="labelPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>53, 12</value>
   </data>
   <data name="labelPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="labelPREIMAGE.Text" xml:space="preserve">
-    <value>Preimage</value>
+    <value>選曲画像</value>
   </data>
   <data name="labelPREIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelPREIMAGE.ToolTip" xml:space="preserve">
-    <value>Preview image shown when song selected.
-The image size is 204x269.</value>
+    <value>選曲画像を設定します。</value>
   </data>
   <data name="&gt;&gt;labelPREIMAGE.Name" xml:space="preserve">
     <value>labelPREIMAGE</value>
@@ -414,28 +1968,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelPREIMAGE.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>57</value>
   </data>
   <data name="labelPREVIEW.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelPREVIEW.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 231</value>
+    <value>22, 272</value>
   </data>
   <data name="labelPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>57, 12</value>
   </data>
   <data name="labelPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
   <data name="labelPREVIEW.Text" xml:space="preserve">
-    <value>Preview</value>
+    <value>Preview音</value>
   </data>
   <data name="labelPREVIEW.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelPREVIEW.ToolTip" xml:space="preserve">
-    <value>Preview sound played when song selected</value>
+    <value>プレビューサウンドを設定します。</value>
   </data>
   <data name="&gt;&gt;labelPREVIEW.Name" xml:space="preserve">
     <value>labelPREVIEW</value>
@@ -447,194 +2004,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelPREVIEW.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="textBoxRESULTIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 334</value>
-  </data>
-  <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
-  </data>
-  <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="textBoxRESULTIMAGE.ToolTip" xml:space="preserve">
-    <value>An image file shown in result screen.
-The image size is 204x269.</value>
-  </data>
-  <data name="&gt;&gt;textBoxRESULTIMAGE.Name" xml:space="preserve">
-    <value>textBoxRESULTIMAGE</value>
-  </data>
-  <data name="&gt;&gt;textBoxRESULTIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxRESULTIMAGE.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxRESULTIMAGE.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="textBoxBACKGROUND.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 307</value>
-  </data>
-  <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
-  </data>
-  <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="textBoxBACKGROUND.ToolTip" xml:space="preserve">
-    <value>A background image file drawn on play screen.
-The image size is 640x480.</value>
-  </data>
-  <data name="&gt;&gt;textBoxBACKGROUND.Name" xml:space="preserve">
-    <value>textBoxBACKGROUND</value>
-  </data>
-  <data name="&gt;&gt;textBoxBACKGROUND.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxBACKGROUND.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxBACKGROUND.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="textBoxSTAGEFILE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 280</value>
-  </data>
-  <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
-  </data>
-  <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="textBoxSTAGEFILE.ToolTip" xml:space="preserve">
-    <value>An image file shown in result screen.
-The image size is 204x269.</value>
-  </data>
-  <data name="&gt;&gt;textBoxSTAGEFILE.Name" xml:space="preserve">
-    <value>textBoxSTAGEFILE</value>
-  </data>
-  <data name="&gt;&gt;textBoxSTAGEFILE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxSTAGEFILE.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxSTAGEFILE.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="textBoxPREIMAGE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 252</value>
-  </data>
-  <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
-  </data>
-  <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="textBoxPREIMAGE.ToolTip" xml:space="preserve">
-    <value>Preview image shown when song selected.
-The image size is 204x269.</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREIMAGE.Name" xml:space="preserve">
-    <value>textBoxPREIMAGE</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREIMAGE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREIMAGE.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREIMAGE.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="textBoxPREVIEW.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 225</value>
-  </data>
-  <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
-  </data>
-  <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="textBoxPREVIEW.ToolTip" xml:space="preserve">
-    <value>Preview sound played when song selected</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREVIEW.Name" xml:space="preserve">
-    <value>textBoxPREVIEW</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREVIEW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREVIEW.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxPREVIEW.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="textBoxパネル.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 197</value>
-  </data>
-  <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
-  </data>
-  <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="textBoxパネル.ToolTip" xml:space="preserve">
-    <value>Panel message shown in playing screen.</value>
-  </data>
-  <data name="&gt;&gt;textBoxパネル.Name" xml:space="preserve">
-    <value>textBoxパネル</value>
-  </data>
-  <data name="&gt;&gt;textBoxパネル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxパネル.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxパネル.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>58</value>
   </data>
   <data name="labelパネル.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelパネル.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 200</value>
+    <value>32, 244</value>
   </data>
   <data name="labelパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>47, 12</value>
   </data>
   <data name="labelパネル.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="labelパネル.Text" xml:space="preserve">
-    <value>Panel msg.</value>
+    <value>パネル文</value>
   </data>
   <data name="labelパネル.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelパネル.ToolTip" xml:space="preserve">
-    <value>Panel message shown in playing screen.</value>
+    <value>パネル文を設定します。</value>
   </data>
   <data name="&gt;&gt;labelパネル.Name" xml:space="preserve">
     <value>labelパネル</value>
@@ -646,16 +2040,19 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelパネル.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>59</value>
   </data>
   <data name="labelBLEVEL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelBLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 170</value>
+    <value>34, 197</value>
   </data>
   <data name="labelBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>45, 12</value>
   </data>
   <data name="labelBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -667,8 +2064,7 @@ The image size is 204x269.</value>
     <value>TopRight</value>
   </data>
   <data name="labelBLEVEL.ToolTip" xml:space="preserve">
-    <value>Bass level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
+    <value>ベースの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
   </data>
   <data name="&gt;&gt;labelBLEVEL.Name" xml:space="preserve">
     <value>labelBLEVEL</value>
@@ -680,51 +2076,22 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelBLEVEL.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 167</value>
-  </data>
-  <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
-  </data>
-  <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="textBoxBLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="textBoxBLEVEL.ToolTip" xml:space="preserve">
-    <value>Bass level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
-  </data>
-  <data name="&gt;&gt;textBoxBLEVEL.Name" xml:space="preserve">
-    <value>textBoxBLEVEL</value>
-  </data>
-  <data name="&gt;&gt;textBoxBLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxBLEVEL.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxBLEVEL.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>60</value>
   </data>
   <data name="hScrollBarBLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="hScrollBarBLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="hScrollBarBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 167</value>
+    <value>124, 194</value>
   </data>
   <data name="hScrollBarBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>209, 17</value>
   </data>
   <data name="hScrollBarBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
-  </data>
-  <data name="hScrollBarBLEVEL.ToolTip" xml:space="preserve">
-    <value>Bass level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
   </data>
   <data name="&gt;&gt;hScrollBarBLEVEL.Name" xml:space="preserve">
     <value>hScrollBarBLEVEL</value>
@@ -736,30 +2103,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;hScrollBarBLEVEL.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>61</value>
   </data>
   <data name="labelGLEVEL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelGLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 147</value>
+    <value>29, 153</value>
   </data>
   <data name="labelGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>50, 12</value>
   </data>
   <data name="labelGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="labelGLEVEL.Text" xml:space="preserve">
-    <value>GuitarLv.
-</value>
+    <value>GuitarLv.</value>
   </data>
   <data name="labelGLEVEL.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelGLEVEL.ToolTip" xml:space="preserve">
-    <value>Guitar level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
+    <value>ギターの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
   </data>
   <data name="&gt;&gt;labelGLEVEL.Name" xml:space="preserve">
     <value>labelGLEVEL</value>
@@ -771,51 +2139,22 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelGLEVEL.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 144</value>
-  </data>
-  <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
-  </data>
-  <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="textBoxGLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="textBoxGLEVEL.ToolTip" xml:space="preserve">
-    <value>Guitar level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
-  </data>
-  <data name="&gt;&gt;textBoxGLEVEL.Name" xml:space="preserve">
-    <value>textBoxGLEVEL</value>
-  </data>
-  <data name="&gt;&gt;textBoxGLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxGLEVEL.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxGLEVEL.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>62</value>
   </data>
   <data name="hScrollBarGLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="hScrollBarGLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="hScrollBarGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 144</value>
+    <value>124, 150</value>
   </data>
   <data name="hScrollBarGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>209, 17</value>
   </data>
   <data name="hScrollBarGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
-  </data>
-  <data name="hScrollBarGLEVEL.ToolTip" xml:space="preserve">
-    <value>Guitar level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
   </data>
   <data name="&gt;&gt;hScrollBarGLEVEL.Name" xml:space="preserve">
     <value>hScrollBarGLEVEL</value>
@@ -827,16 +2166,19 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;hScrollBarGLEVEL.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>63</value>
   </data>
   <data name="labelDLEVEL.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelDLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 125</value>
+    <value>33, 109</value>
   </data>
   <data name="labelDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>46, 12</value>
   </data>
   <data name="labelDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -848,8 +2190,7 @@ The image size is 204x269.</value>
     <value>TopRight</value>
   </data>
   <data name="labelDLEVEL.ToolTip" xml:space="preserve">
-    <value>Drums level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
+    <value>ドラムの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
   </data>
   <data name="&gt;&gt;labelDLEVEL.Name" xml:space="preserve">
     <value>labelDLEVEL</value>
@@ -861,51 +2202,22 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelDLEVEL.ZOrder" xml:space="preserve">
-    <value>23</value>
-  </data>
-  <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 121</value>
-  </data>
-  <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
-  </data>
-  <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="textBoxDLEVEL.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="textBoxDLEVEL.ToolTip" xml:space="preserve">
-    <value>Drums level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
-  </data>
-  <data name="&gt;&gt;textBoxDLEVEL.Name" xml:space="preserve">
-    <value>textBoxDLEVEL</value>
-  </data>
-  <data name="&gt;&gt;textBoxDLEVEL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxDLEVEL.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxDLEVEL.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>64</value>
   </data>
   <data name="hScrollBarDLEVEL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="hScrollBarDLEVEL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="hScrollBarDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 121</value>
+    <value>124, 106</value>
   </data>
   <data name="hScrollBarDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>209, 17</value>
   </data>
   <data name="hScrollBarDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="hScrollBarDLEVEL.ToolTip" xml:space="preserve">
-    <value>Drums level, (easy) 1 to 100 (Hard). 
-0 means no drums.</value>
   </data>
   <data name="&gt;&gt;hScrollBarDLEVEL.Name" xml:space="preserve">
     <value>hScrollBarDLEVEL</value>
@@ -917,16 +2229,19 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;hScrollBarDLEVEL.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>65</value>
   </data>
   <data name="labelBPM.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelBPM.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 90</value>
+    <value>50, 83</value>
   </data>
   <data name="labelBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>29, 12</value>
   </data>
   <data name="labelBPM.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -938,7 +2253,7 @@ The image size is 204x269.</value>
     <value>TopRight</value>
   </data>
   <data name="labelBPM.ToolTip" xml:space="preserve">
-    <value>Song's BGM (Beats Per Minute)</value>
+    <value>曲の速さをBPM (Beats / Minute) で設定します。</value>
   </data>
   <data name="&gt;&gt;labelBPM.Name" xml:space="preserve">
     <value>labelBPM</value>
@@ -950,28 +2265,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelBPM.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>66</value>
   </data>
   <data name="labelコメント.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="labelコメント.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="labelコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 64</value>
+    <value>41, 59</value>
   </data>
   <data name="labelコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>38, 12</value>
   </data>
   <data name="labelコメント.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="labelコメント.Text" xml:space="preserve">
-    <value>Comment</value>
+    <value>コメント</value>
   </data>
   <data name="labelコメント.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelコメント.ToolTip" xml:space="preserve">
-    <value>Comment</value>
+    <value>コメント</value>
   </data>
   <data name="&gt;&gt;labelコメント.Name" xml:space="preserve">
     <value>labelコメント</value>
@@ -983,28 +2301,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;labelコメント.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>67</value>
   </data>
   <data name="label製作者.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label製作者.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 37</value>
+    <value>38, 34</value>
   </data>
   <data name="label製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>41, 12</value>
   </data>
   <data name="label製作者.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label製作者.Text" xml:space="preserve">
-    <value>Artist</value>
+    <value>製作者</value>
   </data>
   <data name="label製作者.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="label製作者.ToolTip" xml:space="preserve">
-    <value>Artist name</value>
+    <value>製作者</value>
   </data>
   <data name="&gt;&gt;label製作者.Name" xml:space="preserve">
     <value>label製作者</value>
@@ -1016,28 +2337,31 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;label製作者.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>68</value>
   </data>
   <data name="label曲名.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label曲名.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 10</value>
+    <value>50, 9</value>
   </data>
   <data name="label曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 13</value>
+    <value>29, 12</value>
   </data>
   <data name="label曲名.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="label曲名.Text" xml:space="preserve">
-    <value>Title</value>
+    <value>曲名</value>
   </data>
   <data name="label曲名.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="label曲名.ToolTip" xml:space="preserve">
-    <value>Song title</value>
+    <value>演奏データのタイトルを設定します。</value>
   </data>
   <data name="&gt;&gt;label曲名.Name" xml:space="preserve">
     <value>label曲名</value>
@@ -1049,13 +2373,13 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;label曲名.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>69</value>
   </data>
   <data name="numericUpDownBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 88</value>
+    <value>85, 81</value>
   </data>
   <data name="numericUpDownBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 20</value>
+    <value>68, 19</value>
   </data>
   <data name="numericUpDownBPM.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1064,7 +2388,7 @@ The image size is 204x269.</value>
     <value>Center</value>
   </data>
   <data name="numericUpDownBPM.ToolTip" xml:space="preserve">
-    <value>Song's BGM (Beats Per Minute)</value>
+    <value>曲の速さをBPM (Beats / Minute) で設定します。</value>
   </data>
   <data name="&gt;&gt;numericUpDownBPM.Name" xml:space="preserve">
     <value>numericUpDownBPM</value>
@@ -1076,91 +2400,7 @@ The image size is 204x269.</value>
     <value>tabPage基本情報</value>
   </data>
   <data name="&gt;&gt;numericUpDownBPM.ZOrder" xml:space="preserve">
-    <value>30</value>
-  </data>
-  <data name="textBoxコメント.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 61</value>
-  </data>
-  <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
-  </data>
-  <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="textBoxコメント.ToolTip" xml:space="preserve">
-    <value>Comment</value>
-  </data>
-  <data name="&gt;&gt;textBoxコメント.Name" xml:space="preserve">
-    <value>textBoxコメント</value>
-  </data>
-  <data name="&gt;&gt;textBoxコメント.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBoxコメント.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBoxコメント.ZOrder" xml:space="preserve">
-    <value>31</value>
-  </data>
-  <data name="textBox製作者.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 34</value>
-  </data>
-  <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
-  </data>
-  <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="textBox製作者.ToolTip" xml:space="preserve">
-    <value>Artist name</value>
-  </data>
-  <data name="&gt;&gt;textBox製作者.Name" xml:space="preserve">
-    <value>textBox製作者</value>
-  </data>
-  <data name="&gt;&gt;textBox製作者.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBox製作者.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBox製作者.ZOrder" xml:space="preserve">
-    <value>32</value>
-  </data>
-  <data name="textBox曲名.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 7</value>
-  </data>
-  <data name="textBox曲名.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10, 19</value>
-  </data>
-  <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
-  </data>
-  <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="textBox曲名.ToolTip" xml:space="preserve">
-    <value>Song title</value>
-  </data>
-  <data name="&gt;&gt;textBox曲名.Name" xml:space="preserve">
-    <value>textBox曲名</value>
-  </data>
-  <data name="&gt;&gt;textBox曲名.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textBox曲名.Parent" xml:space="preserve">
-    <value>tabPage基本情報</value>
-  </data>
-  <data name="&gt;&gt;textBox曲名.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>70</value>
   </data>
   <data name="tabPage基本情報.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1169,13 +2409,13 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage基本情報.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 461</value>
+    <value>339, 764</value>
   </data>
   <data name="tabPage基本情報.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="tabPage基本情報.Text" xml:space="preserve">
-    <value>Main</value>
+    <value>基本情報</value>
   </data>
   <data name="&gt;&gt;tabPage基本情報.Name" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -1190,7 +2430,7 @@ The image size is 204x269.</value>
     <value>0</value>
   </data>
   <data name="columnHeaderWAV_ラベル.Text" xml:space="preserve">
-    <value>Label</value>
+    <value>ラベル</value>
   </data>
   <data name="columnHeaderWAV_ラベル.Width" type="System.Int32, mscorlib">
     <value>80</value>
@@ -1202,19 +2442,19 @@ The image size is 204x269.</value>
     <value>28</value>
   </data>
   <data name="columnHeaderWAV_ファイル名.Text" xml:space="preserve">
-    <value>File</value>
+    <value>ファイル</value>
   </data>
   <data name="columnHeaderWAV_ファイル名.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
   <data name="columnHeaderWAV_音量.Text" xml:space="preserve">
-    <value>Vol.</value>
+    <value>音量</value>
   </data>
   <data name="columnHeaderWAV_音量.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
   <data name="columnHeaderWAV_位置.Text" xml:space="preserve">
-    <value>Pos.</value>
+    <value>位置</value>
   </data>
   <data name="columnHeaderWAV_位置.Width" type="System.Int32, mscorlib">
     <value>40</value>
@@ -1229,13 +2469,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewWAVリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
+    <value>ＭＳ ゴシック, 9pt</value>
   </data>
   <data name="listViewWAVリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewWAVリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>333, 733</value>
   </data>
   <data name="listViewWAVリスト.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1268,7 +2508,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリスト上移動.ToolTipText" xml:space="preserve">
-    <value>Move up</value>
+    <value>選択行を１つ上に移動します。</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1280,7 +2520,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.ToolTipText" xml:space="preserve">
-    <value>Move down</value>
+    <value>選択行を１つ下に移動します。</value>
   </data>
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -1295,7 +2535,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生開始.ToolTipText" xml:space="preserve">
-    <value>Play the current wave sound</value>
+    <value>選択されている行のプレビュー音を再生します。</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1307,7 +2547,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.ToolTipText" xml:space="preserve">
-    <value>Stop sound</value>
+    <value>プレビュー音の再生を停止します。</value>
   </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -1322,13 +2562,13 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュースイッチ.ToolTipText" xml:space="preserve">
-    <value>Play sound on click</value>
+    <value>行をクリックしたときにプレビュー音を再生します。</value>
   </data>
   <data name="toolStripWAVツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 736</value>
   </data>
   <data name="toolStripWAVツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 25</value>
+    <value>333, 25</value>
   </data>
   <data name="toolStripWAVツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1356,7 +2596,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageWAV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>339, 764</value>
   </data>
   <data name="tabPageWAV.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1395,7 +2635,7 @@ The image size is 204x269.</value>
     <value>28</value>
   </data>
   <data name="columnHeaderBMP_ファイル名.Text" xml:space="preserve">
-    <value>File</value>
+    <value>ファイル</value>
   </data>
   <data name="columnHeaderBMP_ファイル名.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -1404,13 +2644,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewBMPリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
+    <value>ＭＳ ゴシック, 9pt</value>
   </data>
   <data name="listViewBMPリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewBMPリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>333, 733</value>
   </data>
   <data name="listViewBMPリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1452,10 +2692,10 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripBMPツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 736</value>
   </data>
   <data name="toolStripBMPツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 25</value>
+    <value>333, 25</value>
   </data>
   <data name="toolStripBMPツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1483,7 +2723,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageBMP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>339, 764</value>
   </data>
   <data name="tabPageBMP.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1504,7 +2744,7 @@ The image size is 204x269.</value>
     <value>2</value>
   </data>
   <data name="columnHeaderAVI_ラベル.Text" xml:space="preserve">
-    <value>Label</value>
+    <value>ラベル</value>
   </data>
   <data name="columnHeaderAVI_ラベル.Width" type="System.Int32, mscorlib">
     <value>127</value>
@@ -1516,7 +2756,7 @@ The image size is 204x269.</value>
     <value>28</value>
   </data>
   <data name="columnHeaderAVI_ファイル名.Text" xml:space="preserve">
-    <value>File</value>
+    <value>ファイル</value>
   </data>
   <data name="columnHeaderAVI_ファイル名.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -1525,13 +2765,13 @@ The image size is 204x269.</value>
     <value>Fill</value>
   </data>
   <data name="listViewAVIリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
+    <value>ＭＳ ゴシック, 9pt</value>
   </data>
   <data name="listViewAVIリスト.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
   <data name="listViewAVIリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>333, 733</value>
   </data>
   <data name="listViewAVIリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1564,7 +2804,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonAVIリスト上移動.ToolTipText" xml:space="preserve">
-    <value>Move up</value>
+    <value>選択行を１つ上に移動します。</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -1576,13 +2816,13 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.ToolTipText" xml:space="preserve">
-    <value>Move down</value>
+    <value>選択行を１つ下に移動します。</value>
   </data>
   <data name="toolStripAVIツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 736</value>
   </data>
   <data name="toolStripAVIツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 25</value>
+    <value>333, 25</value>
   </data>
   <data name="toolStripAVIツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1609,7 +2849,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageAVI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>339, 764</value>
   </data>
   <data name="tabPageAVI.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1636,7 +2876,7 @@ The image size is 204x269.</value>
     <value>3, 3</value>
   </data>
   <data name="textBox自由入力欄.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 11, 10, 11</value>
+    <value>10, 10, 10, 10</value>
   </data>
   <data name="textBox自由入力欄.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1645,7 +2885,7 @@ The image size is 204x269.</value>
     <value>Both</value>
   </data>
   <data name="textBox自由入力欄.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 446</value>
+    <value>333, 758</value>
   </data>
   <data name="textBox自由入力欄.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1669,7 +2909,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage自由入力.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>339, 764</value>
   </data>
   <data name="tabPage自由入力.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1696,7 +2936,7 @@ The image size is 204x269.</value>
     <value>0, 0</value>
   </data>
   <data name="tabControl情報パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 487</value>
+    <value>347, 790</value>
   </data>
   <data name="tabControl情報パネル.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1735,7 +2975,7 @@ The image size is 204x269.</value>
     <value>0, 0, 0, 0</value>
   </data>
   <data name="pictureBox譜面パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 468</value>
+    <value>184, 773</value>
   </data>
   <data name="pictureBox譜面パネル.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1756,10 +2996,10 @@ The image size is 204x269.</value>
     <value>Bottom</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 470</value>
+    <value>0, 773</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>424, 17</value>
+    <value>516, 17</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1789,10 +3029,10 @@ The image size is 204x269.</value>
     <value>1</value>
   </data>
   <data name="splitContainerタブと譜面を分割.Size" type="System.Drawing.Size, System.Drawing">
-    <value>714, 487</value>
+    <value>867, 790</value>
   </data>
   <data name="splitContainerタブと譜面を分割.SplitterDistance" type="System.Int32, mscorlib">
-    <value>286</value>
+    <value>347</value>
   </data>
   <data name="splitContainerタブと譜面を分割.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1813,10 +3053,10 @@ The image size is 204x269.</value>
     <value>0, 493</value>
   </metadata>
   <data name="statusStripステータスバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 536</value>
+    <value>0, 839</value>
   </data>
   <data name="statusStripステータスバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 22</value>
+    <value>884, 22</value>
   </data>
   <data name="statusStripステータスバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1843,70 +3083,70 @@ The image size is 204x269.</value>
     <value>Ctrl+N</value>
   </data>
   <data name="toolStripMenuItem新規.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem新規.Text" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>新規(&amp;N)</value>
   </data>
   <data name="toolStripMenuItem開く.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
   <data name="toolStripMenuItem開く.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem開く.Text" xml:space="preserve">
-    <value>&amp;Open...</value>
+    <value>開く(&amp;O)</value>
   </data>
   <data name="toolStripMenuItem上書き保存.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Text" xml:space="preserve">
-    <value>&amp;Save</value>
+    <value>上書き保存(&amp;S)</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Text" xml:space="preserve">
-    <value>Save &amp;As ...</value>
+    <value>名前を付けて保存(&amp;A)</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 6</value>
+    <value>181, 6</value>
   </data>
   <data name="toolStripMenuItem終了.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem終了.Text" xml:space="preserve">
-    <value>E&amp;xit</value>
+    <value>終了(&amp;X)</value>
   </data>
   <data name="toolStripMenuItemファイル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+    <value>67, 20</value>
   </data>
   <data name="toolStripMenuItemファイル.Text" xml:space="preserve">
-    <value>&amp;File</value>
+    <value>ファイル(&amp;F)</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Z</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Text" xml:space="preserve">
-    <value>&amp;Undo</value>
+    <value>元に戻す(&amp;U)</value>
   </data>
   <data name="toolStripMenuItemリドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Y</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Text" xml:space="preserve">
-    <value>&amp;Redo</value>
+    <value>やり直す(&amp;R)</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 6</value>
+    <value>181, 6</value>
   </data>
   <data name="toolStripMenuItem切り取り.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1915,7 +3155,7 @@ The image size is 204x269.</value>
     <value>Ctrl+X</value>
   </data>
   <data name="toolStripMenuItem切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem切り取り.Text" xml:space="preserve">
     <value>Cu&amp;t</value>
@@ -1927,10 +3167,10 @@ The image size is 204x269.</value>
     <value>Ctrl+C</value>
   </data>
   <data name="toolStripMenuItemコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItemコピー.Text" xml:space="preserve">
-    <value>&amp;Copy</value>
+    <value>コピー(&amp;C)</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1939,10 +3179,10 @@ The image size is 204x269.</value>
     <value>Ctrl+V</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Text" xml:space="preserve">
-    <value>&amp;Paste</value>
+    <value>貼り付け(&amp;P)</value>
   </data>
   <data name="toolStripMenuItem削除.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1951,244 +3191,244 @@ The image size is 204x269.</value>
     <value>Del</value>
   </data>
   <data name="toolStripMenuItem削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem削除.Text" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>削除(&amp;D)</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 6</value>
+    <value>181, 6</value>
   </data>
   <data name="toolStripMenuItemすべて選択.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+A</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Text" xml:space="preserve">
-    <value>Select &amp;All</value>
+    <value>すべて選択(&amp;A)</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 6</value>
+    <value>181, 6</value>
   </data>
   <data name="toolStripMenuItem選択モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem選択モード.Text" xml:space="preserve">
-    <value>&amp;Select mode</value>
+    <value>選択モード(&amp;S)</value>
   </data>
   <data name="toolStripMenuItem編集モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem編集モード.Text" xml:space="preserve">
-    <value>&amp;Edit mode</value>
+    <value>編集モード(&amp;E)</value>
   </data>
   <data name="toolStripMenuItemモード切替.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+Space</value>
+    <value>F8</value>
   </data>
   <data name="toolStripMenuItemモード切替.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItemモード切替.Text" xml:space="preserve">
-    <value>Switch &amp;Mode</value>
+    <value>モード切替(&amp;M)</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 6</value>
+    <value>181, 6</value>
   </data>
   <data name="toolStripMenuItem検索.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
   </data>
   <data name="toolStripMenuItem検索.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem検索.Text" xml:space="preserve">
-    <value>&amp;Find...</value>
+    <value>検索(&amp;F)</value>
   </data>
   <data name="toolStripMenuItem置換.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+H</value>
   </data>
   <data name="toolStripMenuItem置換.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="toolStripMenuItem置換.Text" xml:space="preserve">
-    <value>Replace(&amp;Q)</value>
+    <value>置換(&amp;Q)</value>
   </data>
   <data name="toolStripMenuItem編集.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
+    <value>57, 20</value>
   </data>
   <data name="toolStripMenuItem編集.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
+    <value>編集(&amp;E)</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Text" xml:space="preserve">
-    <value>Chip &amp;palette</value>
+    <value>チップパレット(&amp;P)</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Text" xml:space="preserve">
     <value>1/&amp;4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Text" xml:space="preserve">
     <value>1/&amp;8</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Text" xml:space="preserve">
     <value>1/1&amp;2</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Text" xml:space="preserve">
     <value>1/1&amp;6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Text" xml:space="preserve">
     <value>1/24</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Text" xml:space="preserve">
     <value>1/&amp;32</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Text" xml:space="preserve">
     <value>1/48</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Text" xml:space="preserve">
     <value>1/64</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Text" xml:space="preserve">
-    <value>&amp;Free</value>
+    <value>フリー</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 6</value>
+    <value>133, 6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Text" xml:space="preserve">
-    <value>&amp;Wide</value>
+    <value>拡大(&amp;W)</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Size" type="System.Drawing.Size, System.Drawing">
-    <value>132, 22</value>
+    <value>136, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Text" xml:space="preserve">
-    <value>&amp;Narrow</value>
+    <value>縮小(&amp;N)</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Text" xml:space="preserve">
-    <value>&amp;Guide margin</value>
+    <value>ガイド間隔(&amp;G)</value>
   </data>
   <data name="toolStripMenuItem表示.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>58, 20</value>
   </data>
   <data name="toolStripMenuItem表示.Text" xml:space="preserve">
-    <value>&amp;View</value>
+    <value>表示(&amp;V)</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F5</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>237, 22</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Text" xml:space="preserve">
-    <value>Play from &amp;top</value>
+    <value>先頭から再生(&amp;T)</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F6</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>237, 22</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Text" xml:space="preserve">
-    <value>&amp;Play from current part</value>
+    <value>現在の位置から再生(&amp;P)</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>237, 22</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Text" xml:space="preserve">
-    <value>Play &amp;BGM from current part</value>
+    <value>現在の位置からBGMのみ再生(&amp;B)</value>
   </data>
   <data name="toolStripMenuItem再生停止.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F7</value>
   </data>
   <data name="toolStripMenuItem再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>237, 22</value>
   </data>
   <data name="toolStripMenuItem再生停止.Text" xml:space="preserve">
-    <value>&amp;Stop</value>
+    <value>再生停止(&amp;S)</value>
   </data>
   <data name="toolStripMenuItem再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+    <value>58, 20</value>
   </data>
   <data name="toolStripMenuItem再生.Text" xml:space="preserve">
-    <value>&amp;Play</value>
+    <value>再生(&amp;P)</value>
   </data>
   <data name="toolStripMenuItemオプション.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="toolStripMenuItemオプション.Text" xml:space="preserve">
-    <value>&amp;Option</value>
+    <value>オプション(&amp;O)</value>
   </data>
   <data name="toolStripMenuItemツール.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+    <value>60, 20</value>
   </data>
   <data name="toolStripMenuItemツール.Text" xml:space="preserve">
-    <value>&amp;Tool</value>
+    <value>ツール(&amp;T)</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F1</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Text" xml:space="preserve">
-    <value>DTXCreator &amp;Manual</value>
+    <value>DTXCreator マニュアル(&amp;M)</value>
   </data>
   <data name="toolStripMenuItemバージョン.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>219, 22</value>
   </data>
   <data name="toolStripMenuItemバージョン.Text" xml:space="preserve">
-    <value>&amp;Version</value>
+    <value>バージョン情報(&amp;V)</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>65, 20</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+    <value>ヘルプ(&amp;H)</value>
   </data>
   <data name="menuStripメニューバー.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="menuStripメニューバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 24</value>
+    <value>884, 24</value>
   </data>
   <data name="menuStripメニューバー.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2221,7 +3461,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton新規作成.ToolTipText" xml:space="preserve">
-    <value>Create a new file</value>
+    <value>新しい譜面を作成します。</value>
   </data>
   <data name="toolStripButton開く.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2233,8 +3473,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton開く.ToolTipText" xml:space="preserve">
-    <value>Open a file
-</value>
+    <value>新しいDTXファイルを開きます。</value>
   </data>
   <data name="toolStripButton上書き保存.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2246,7 +3485,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton上書き保存.ToolTipText" xml:space="preserve">
-    <value>Save to file</value>
+    <value>上書き保存します。</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2264,8 +3503,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton切り取り.ToolTipText" xml:space="preserve">
-    <value>Cut selected chip(s)
-</value>
+    <value>選択されているチップをクリップボードへ切り取ります。</value>
   </data>
   <data name="toolStripButtonコピー.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2280,8 +3518,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonコピー.ToolTipText" xml:space="preserve">
-    <value>Copy selected chip(s)
-</value>
+    <value>選択されているチップをクリップボードへコピーします。</value>
   </data>
   <data name="toolStripButton貼り付け.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2296,8 +3533,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton貼り付け.ToolTipText" xml:space="preserve">
-    <value>Paste chip(s)
-</value>
+    <value>クリップボードのチップを譜面に貼り付けます。</value>
   </data>
   <data name="toolStripButton削除.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2312,8 +3548,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton削除.ToolTipText" xml:space="preserve">
-    <value>Delete selected chip(s)
-</value>
+    <value>選択されているチップを削除します。</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2331,7 +3566,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonアンドゥ.ToolTipText" xml:space="preserve">
-    <value>Undo</value>
+    <value>作業を１つ元に戻します。</value>
   </data>
   <data name="toolStripButtonリドゥ.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2346,8 +3581,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonリドゥ.ToolTipText" xml:space="preserve">
-    <value>Redo
-</value>
+    <value>作業を１つやり直します。</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2362,7 +3596,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonチップパレット.ToolTipText" xml:space="preserve">
-    <value>Chip palette</value>
+    <value>チップパレットを表示します。</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2404,7 +3638,7 @@ The image size is 204x269.</value>
     <value>75, 25</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.ToolTipText" xml:space="preserve">
-    <value>Vertical sizing</value>
+    <value>譜面の縦方向の表示倍率を指定します。</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.Items" xml:space="preserve">
     <value>1/4</value>
@@ -2440,7 +3674,7 @@ The image size is 204x269.</value>
     <value>75, 25</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.ToolTipText" xml:space="preserve">
-    <value>Guide margin</value>
+    <value>ガイド線の間隔を指定します。</value>
   </data>
   <data name="toolStripButton選択モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2452,8 +3686,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton選択モード.ToolTipText" xml:space="preserve">
-    <value>Select mode
-</value>
+    <value>選択モードに切り替えます。</value>
   </data>
   <data name="toolStripButton編集モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2465,7 +3698,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton編集モード.ToolTipText" xml:space="preserve">
-    <value>Edit mode</value>
+    <value>編集モードに切り替えます。</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2480,7 +3713,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton先頭から再生.ToolTipText" xml:space="preserve">
-    <value>Play from top with a viewer</value>
+    <value>DTXViewerで先頭から再生します。</value>
   </data>
   <data name="toolStripButton現在位置から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2492,7 +3725,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton現在位置から再生.ToolTipText" xml:space="preserve">
-    <value>Play from current part with a viewer</value>
+    <value>DTXViewerで現在の位置から再生します。</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2504,7 +3737,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.ToolTipText" xml:space="preserve">
-    <value>Play BGM from currect part with a viewer</value>
+    <value>DTXViewerで現在の位置からBGMのみ再生します。</value>
   </data>
   <data name="toolStripButton再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -2516,7 +3749,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton再生停止.ToolTipText" xml:space="preserve">
-    <value>Stop playing</value>
+    <value>DTXViewerでの再生を停止します。</value>
   </data>
   <data name="toolStripComboBox演奏速度.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -2558,7 +3791,7 @@ The image size is 204x269.</value>
     <value>75, 25</value>
   </data>
   <data name="toolStripComboBox演奏速度.ToolTipText" xml:space="preserve">
-    <value>Play speed (#DTXVPLAYSPEED)</value>
+    <value>DTXViewerでの再生速度を指定します。 (#DTXVPLAYSPEED)</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
@@ -2567,7 +3800,7 @@ The image size is 204x269.</value>
     <value>0, 24</value>
   </data>
   <data name="toolStripツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>731, 25</value>
+    <value>884, 25</value>
   </data>
   <data name="toolStripツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2591,10 +3824,10 @@ The image size is 204x269.</value>
     <value>Right</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>714, 49</value>
+    <value>867, 49</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 487</value>
+    <value>17, 790</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2615,76 +3848,76 @@ The image size is 204x269.</value>
     <value>203, 39</value>
   </metadata>
   <data name="toolStripMenuItem選択チップの切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの切り取り.Text" xml:space="preserve">
-    <value>Cu&amp;t selected chip(s)</value>
+    <value>選択チップの切り取り(&amp;T)</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Text" xml:space="preserve">
-    <value>&amp;Copy selected chip(s)</value>
+    <value>選択チップのコピー(&amp;C)</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Text" xml:space="preserve">
-    <value>&amp;Paste chip(s)</value>
+    <value>選択チップの貼り付け(&amp;P)</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Text" xml:space="preserve">
-    <value>&amp;Delete selected chip(s)</value>
+    <value>選択チップの削除(&amp;D)</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>243, 6</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Text" xml:space="preserve">
-    <value>Select &amp;All</value>
+    <value>すべてのチップの選択(&amp;A)</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Text" xml:space="preserve">
-    <value>Select all in the &amp;lane []</value>
+    <value>レーン内のすべてのチップの選択(&amp;L) []</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Text" xml:space="preserve">
-    <value>Select all in the pa&amp;rt []</value>
+    <value>小節内のすべてのチップの選択(&amp;R) []</value>
   </data>
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>243, 6</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Text" xml:space="preserve">
-    <value>Change part length(&amp;B)</value>
+    <value>小節長の変更(&amp;B)</value>
   </data>
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 6</value>
+    <value>243, 6</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Text" xml:space="preserve">
-    <value>&amp;Insert part</value>
+    <value>小節の挿入(&amp;I)</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
+    <value>246, 22</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Text" xml:space="preserve">
-    <value>D&amp;elete part</value>
+    <value>小節の削除(&amp;D)</value>
   </data>
   <data name="contextMenuStrip譜面右メニュー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 242</value>
+    <value>247, 242</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Name" xml:space="preserve">
     <value>contextMenuStrip譜面右メニュー</value>
@@ -2696,10 +3929,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>6, 12</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>731, 558</value>
+    <value>884, 861</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

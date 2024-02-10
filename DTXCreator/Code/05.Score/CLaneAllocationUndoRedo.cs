@@ -8,12 +8,12 @@ namespace DTXCreator.Score
 	{
 		public bool b裏;
 		public CLane lc;
-		public int n番号0or1to1295;
+		public int n番号0or1to3843;
 
-		public CLaneAllocationUndoRedo( CLane lc, int n番号0or1to1295, bool b裏 )
+		public CLaneAllocationUndoRedo( CLane lc, int n番号0or1to3843, bool b裏 )
 		{
 			this.lc = lc;
-			this.n番号0or1to1295 = n番号0or1to1295;
+			this.n番号0or1to3843 = n番号0or1to3843;
 			this.b裏 = b裏;
 		}
 	}

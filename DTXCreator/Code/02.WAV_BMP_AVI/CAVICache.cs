@@ -20,54 +20,54 @@ namespace DTXCreator.WAV_BMP_AVI
 			}
 		}
 
-		public CAVI tAVIをキャッシュから検索して返す( int nAVI番号1to1295 )
+		public CAVI tAVIをキャッシュから検索して返す( int nAVI番号1to3843 )
 		{
 			CAVI cavi;
-			if( ( nAVI番号1to1295 < 1 ) || ( nAVI番号1to1295 > 36 * 36 - 1 ) )
+			if( ( nAVI番号1to3843 < 1 ) || ( nAVI番号1to3843 > 62 * 62 - 1 ) )
 			{
-				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to1295 + "]" );
+				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to3843 + "]" );
 			}
-			if( this.dicAVIディクショナリ.TryGetValue( nAVI番号1to1295, out cavi ) )
+			if( this.dicAVIディクショナリ.TryGetValue( nAVI番号1to3843, out cavi ) )
 			{
 				return cavi;
 			}
 			return null;
 		}
-		public CAVI tAVIをキャッシュから検索して返す_なければ新規生成する( int nAVI番号1to1295 )
+		public CAVI tAVIをキャッシュから検索して返す_なければ新規生成する( int nAVI番号1to3843 )
 		{
-			if( ( nAVI番号1to1295 < 1 ) || ( nAVI番号1to1295 > 36 * 36 - 1 ) )
+			if( ( nAVI番号1to3843 < 1 ) || ( nAVI番号1to3843 > 62 * 62 - 1 ) )
 			{
-				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to1295 + "]" );
+				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to3843 + "]" );
 			}
 			CAVI cavi = null;
-			if( !this.dicAVIディクショナリ.TryGetValue( nAVI番号1to1295, out cavi ) )
+			if( !this.dicAVIディクショナリ.TryGetValue( nAVI番号1to3843, out cavi ) )
 			{
 				cavi = new CAVI();
-				cavi.nAVI番号1to1295 = nAVI番号1to1295;
+				cavi.nAVI番号1to3843 = nAVI番号1to3843;
 				this.tキャッシュに追加する( cavi );
 			}
 			return cavi;
 		}
-		public void tAVIをキャッシュから削除する( int nAVI番号1to1295 )
+		public void tAVIをキャッシュから削除する( int nAVI番号1to3843 )
 		{
-			if( ( nAVI番号1to1295 < 1 ) || ( nAVI番号1to1295 > 36 * 36 - 1 ) )
+			if( ( nAVI番号1to3843 < 1 ) || ( nAVI番号1to3843 > 62 * 62 - 1 ) )
 			{
-				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to1295 + "]" );
+				throw new Exception( "AVI番号が範囲を超えています。-> [" + nAVI番号1to3843 + "]" );
 			}
 			CAVI cavi = null;
-			if( this.dicAVIディクショナリ.TryGetValue( nAVI番号1to1295, out cavi ) )
+			if( this.dicAVIディクショナリ.TryGetValue( nAVI番号1to3843, out cavi ) )
 			{
-				this.dicAVIディクショナリ.Remove( nAVI番号1to1295 );
+				this.dicAVIディクショナリ.Remove( nAVI番号1to3843 );
 			}
 		}
 		public void tキャッシュに追加する( CAVI ac追加するAVI )
 		{
 			CAVI cavi;
-			if( this.dicAVIディクショナリ.TryGetValue( ac追加するAVI.nAVI番号1to1295, out cavi ) )
+			if( this.dicAVIディクショナリ.TryGetValue( ac追加するAVI.nAVI番号1to3843, out cavi ) )
 			{
-				this.dicAVIディクショナリ.Remove( ac追加するAVI.nAVI番号1to1295 );
+				this.dicAVIディクショナリ.Remove( ac追加するAVI.nAVI番号1to3843 );
 			}
-			this.dicAVIディクショナリ.Add( ac追加するAVI.nAVI番号1to1295, ac追加するAVI );
+			this.dicAVIディクショナリ.Add( ac追加するAVI.nAVI番号1to3843, ac追加するAVI );
 		}
 		public void tキャッシュに追加する( ListViewItem lvi )
 		{

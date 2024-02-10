@@ -37,11 +37,11 @@ namespace DTXCreator.Score
 				{
 					text = "0" + text;
 				}
-				return CConversion.nConvert2DigitBase36StringToNumber( text );
+				return CConversion.nConvert2DigitBase62StringToNumber( text );
 			}
 			set
 			{
-				this.textBox元番号.Text = CConversion.strConvertNumberTo2DigitBase36String( value );
+				this.textBox元番号.Text = CConversion.strConvertNumberTo2DigitBase62String( value );
 			}
 		}
 		public int n先番号
@@ -57,7 +57,7 @@ namespace DTXCreator.Score
 				{
 					text = "0" + text;
 				}
-				return CConversion.nConvert2DigitBase36StringToNumber( text );
+				return CConversion.nConvert2DigitBase62StringToNumber( text );
 			}
 		}
 

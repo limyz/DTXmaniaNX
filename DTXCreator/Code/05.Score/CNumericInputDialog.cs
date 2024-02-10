@@ -27,9 +27,25 @@ namespace DTXCreator.Score
 			this.numericUpDown数値.Value = dc開始値;
 			this.numericUpDown数値.Minimum = dc最小値;
 			this.numericUpDown数値.Maximum = dc最大値;
+
+
+			#region [ 数値入力欄を全選択状態にする ]
+			int lenIntpart = this.numericUpDown数値.Value.ToString().Length;
+			string m = this.numericUpDown数値.Minimum.ToString();
+			int lenDecpart = m.Length;
+			int len = lenIntpart + lenDecpart;
+ 
+            if (m.Contains(".") || m.Contains(","))
+            {
+                len -= 1;		// -2: "0.001"のピリオドのところ分の長さを削除
+            }
+            if (len< 2) len = 1;
+
+			this.numericUpDown数値.Select(0, len);
+			#endregion
 		}
 
-		private void numericUpDown数値_KeyDown( object sender, KeyEventArgs e )
+	private void numericUpDown数値_KeyDown( object sender, KeyEventArgs e )
 		{
 			if( e.KeyCode == Keys.Return )
 			{

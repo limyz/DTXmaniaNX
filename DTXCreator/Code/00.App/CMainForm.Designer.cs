@@ -33,6 +33,55 @@
             this.splitContainerタブと譜面を分割 = new System.Windows.Forms.SplitContainer();
             this.tabControl情報パネル = new System.Windows.Forms.TabControl();
             this.tabPage基本情報 = new System.Windows.Forms.TabPage();
+            this.textBoxPREMOVIE = new System.Windows.Forms.TextBox();
+            this.buttonPREMOVIE参照 = new System.Windows.Forms.Button();
+            this.labelPREMOVIE = new System.Windows.Forms.Label();
+            this.textBoxLB = new System.Windows.Forms.TextBox();
+            this.textBoxLP = new System.Windows.Forms.TextBox();
+            this.textBoxLC = new System.Windows.Forms.TextBox();
+            this.textBoxRC = new System.Windows.Forms.TextBox();
+            this.textBoxHO = new System.Windows.Forms.TextBox();
+            this.textBoxFT = new System.Windows.Forms.TextBox();
+            this.textBoxCY = new System.Windows.Forms.TextBox();
+            this.textBoxLT = new System.Windows.Forms.TextBox();
+            this.textBoxHT = new System.Windows.Forms.TextBox();
+            this.textBoxBD = new System.Windows.Forms.TextBox();
+            this.textBoxSN = new System.Windows.Forms.TextBox();
+            this.textBoxHH = new System.Windows.Forms.TextBox();
+            this.textBoxBLVDEC = new System.Windows.Forms.TextBox();
+            this.textBoxGLVDEC = new System.Windows.Forms.TextBox();
+            this.textBoxDLVDEC = new System.Windows.Forms.TextBox();
+            this.textBoxRESULTIMAGE = new System.Windows.Forms.TextBox();
+            this.textBoxBACKGROUND = new System.Windows.Forms.TextBox();
+            this.textBoxSTAGEFILE = new System.Windows.Forms.TextBox();
+            this.textBoxPREIMAGE = new System.Windows.Forms.TextBox();
+            this.textBoxPREVIEW = new System.Windows.Forms.TextBox();
+            this.textBoxパネル = new System.Windows.Forms.TextBox();
+            this.textBoxBLEVEL = new System.Windows.Forms.TextBox();
+            this.textBoxGLEVEL = new System.Windows.Forms.TextBox();
+            this.textBoxDLEVEL = new System.Windows.Forms.TextBox();
+            this.textBoxコメント = new System.Windows.Forms.TextBox();
+            this.textBox製作者 = new System.Windows.Forms.TextBox();
+            this.textBox曲名 = new System.Windows.Forms.TextBox();
+            this.labelLB = new System.Windows.Forms.Label();
+            this.labelLP = new System.Windows.Forms.Label();
+            this.labelLC = new System.Windows.Forms.Label();
+            this.labelRC = new System.Windows.Forms.Label();
+            this.labelHO = new System.Windows.Forms.Label();
+            this.labelFT = new System.Windows.Forms.Label();
+            this.labelCY = new System.Windows.Forms.Label();
+            this.labelLT = new System.Windows.Forms.Label();
+            this.labelHT = new System.Windows.Forms.Label();
+            this.labelBD = new System.Windows.Forms.Label();
+            this.labelSN = new System.Windows.Forms.Label();
+            this.labelHH = new System.Windows.Forms.Label();
+            this.空打ちSE = new System.Windows.Forms.Label();
+            this.labelBLVDEC = new System.Windows.Forms.Label();
+            this.hScrollBarBLVDEC = new System.Windows.Forms.HScrollBar();
+            this.labelGLVDEC = new System.Windows.Forms.Label();
+            this.hScrollBarGLVDEC = new System.Windows.Forms.HScrollBar();
+            this.labelDLVDEC = new System.Windows.Forms.Label();
+            this.hScrollBarDLVDEC = new System.Windows.Forms.HScrollBar();
             this.buttonRESULTIMAGE参照 = new System.Windows.Forms.Button();
             this.buttonBACKGROUND参照 = new System.Windows.Forms.Button();
             this.buttonSTAGEFILE参照 = new System.Windows.Forms.Button();
@@ -43,30 +92,18 @@
             this.labelSTAGEFILE = new System.Windows.Forms.Label();
             this.labelPREIMAGE = new System.Windows.Forms.Label();
             this.labelPREVIEW = new System.Windows.Forms.Label();
-            this.textBoxRESULTIMAGE = new System.Windows.Forms.TextBox();
-            this.textBoxBACKGROUND = new System.Windows.Forms.TextBox();
-            this.textBoxSTAGEFILE = new System.Windows.Forms.TextBox();
-            this.textBoxPREIMAGE = new System.Windows.Forms.TextBox();
-            this.textBoxPREVIEW = new System.Windows.Forms.TextBox();
-            this.textBoxパネル = new System.Windows.Forms.TextBox();
             this.labelパネル = new System.Windows.Forms.Label();
             this.labelBLEVEL = new System.Windows.Forms.Label();
-            this.textBoxBLEVEL = new System.Windows.Forms.TextBox();
             this.hScrollBarBLEVEL = new System.Windows.Forms.HScrollBar();
             this.labelGLEVEL = new System.Windows.Forms.Label();
-            this.textBoxGLEVEL = new System.Windows.Forms.TextBox();
             this.hScrollBarGLEVEL = new System.Windows.Forms.HScrollBar();
             this.labelDLEVEL = new System.Windows.Forms.Label();
-            this.textBoxDLEVEL = new System.Windows.Forms.TextBox();
             this.hScrollBarDLEVEL = new System.Windows.Forms.HScrollBar();
             this.labelBPM = new System.Windows.Forms.Label();
             this.labelコメント = new System.Windows.Forms.Label();
             this.label製作者 = new System.Windows.Forms.Label();
             this.label曲名 = new System.Windows.Forms.Label();
             this.numericUpDownBPM = new System.Windows.Forms.NumericUpDown();
-            this.textBoxコメント = new System.Windows.Forms.TextBox();
-            this.textBox製作者 = new System.Windows.Forms.TextBox();
-            this.textBox曲名 = new System.Windows.Forms.TextBox();
             this.tabPageWAV = new System.Windows.Forms.TabPage();
             this.listViewWAVリスト = new System.Windows.Forms.ListView();
             this.columnHeaderWAV_ラベル = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -242,10 +279,60 @@
             resources.ApplyResources(this.tabControl情報パネル, "tabControl情報パネル");
             this.tabControl情報パネル.Name = "tabControl情報パネル";
             this.tabControl情報パネル.SelectedIndex = 0;
+            this.tabControl情報パネル.Tag = "tab";
             // 
             // tabPage基本情報
             // 
             this.tabPage基本情報.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPage基本情報.Controls.Add(this.textBoxPREMOVIE);
+            this.tabPage基本情報.Controls.Add(this.buttonPREMOVIE参照);
+            this.tabPage基本情報.Controls.Add(this.labelPREMOVIE);
+            this.tabPage基本情報.Controls.Add(this.textBoxLB);
+            this.tabPage基本情報.Controls.Add(this.textBoxLP);
+            this.tabPage基本情報.Controls.Add(this.textBoxLC);
+            this.tabPage基本情報.Controls.Add(this.textBoxRC);
+            this.tabPage基本情報.Controls.Add(this.textBoxHO);
+            this.tabPage基本情報.Controls.Add(this.textBoxFT);
+            this.tabPage基本情報.Controls.Add(this.textBoxCY);
+            this.tabPage基本情報.Controls.Add(this.textBoxLT);
+            this.tabPage基本情報.Controls.Add(this.textBoxHT);
+            this.tabPage基本情報.Controls.Add(this.textBoxBD);
+            this.tabPage基本情報.Controls.Add(this.textBoxSN);
+            this.tabPage基本情報.Controls.Add(this.textBoxHH);
+            this.tabPage基本情報.Controls.Add(this.textBoxBLVDEC);
+            this.tabPage基本情報.Controls.Add(this.textBoxGLVDEC);
+            this.tabPage基本情報.Controls.Add(this.textBoxDLVDEC);
+            this.tabPage基本情報.Controls.Add(this.textBoxRESULTIMAGE);
+            this.tabPage基本情報.Controls.Add(this.textBoxBACKGROUND);
+            this.tabPage基本情報.Controls.Add(this.textBoxSTAGEFILE);
+            this.tabPage基本情報.Controls.Add(this.textBoxPREIMAGE);
+            this.tabPage基本情報.Controls.Add(this.textBoxPREVIEW);
+            this.tabPage基本情報.Controls.Add(this.textBoxパネル);
+            this.tabPage基本情報.Controls.Add(this.textBoxBLEVEL);
+            this.tabPage基本情報.Controls.Add(this.textBoxGLEVEL);
+            this.tabPage基本情報.Controls.Add(this.textBoxDLEVEL);
+            this.tabPage基本情報.Controls.Add(this.textBoxコメント);
+            this.tabPage基本情報.Controls.Add(this.textBox製作者);
+            this.tabPage基本情報.Controls.Add(this.textBox曲名);
+            this.tabPage基本情報.Controls.Add(this.labelLB);
+            this.tabPage基本情報.Controls.Add(this.labelLP);
+            this.tabPage基本情報.Controls.Add(this.labelLC);
+            this.tabPage基本情報.Controls.Add(this.labelRC);
+            this.tabPage基本情報.Controls.Add(this.labelHO);
+            this.tabPage基本情報.Controls.Add(this.labelFT);
+            this.tabPage基本情報.Controls.Add(this.labelCY);
+            this.tabPage基本情報.Controls.Add(this.labelLT);
+            this.tabPage基本情報.Controls.Add(this.labelHT);
+            this.tabPage基本情報.Controls.Add(this.labelBD);
+            this.tabPage基本情報.Controls.Add(this.labelSN);
+            this.tabPage基本情報.Controls.Add(this.labelHH);
+            this.tabPage基本情報.Controls.Add(this.空打ちSE);
+            this.tabPage基本情報.Controls.Add(this.labelBLVDEC);
+            this.tabPage基本情報.Controls.Add(this.hScrollBarBLVDEC);
+            this.tabPage基本情報.Controls.Add(this.labelGLVDEC);
+            this.tabPage基本情報.Controls.Add(this.hScrollBarGLVDEC);
+            this.tabPage基本情報.Controls.Add(this.labelDLVDEC);
+            this.tabPage基本情報.Controls.Add(this.hScrollBarDLVDEC);
             this.tabPage基本情報.Controls.Add(this.buttonRESULTIMAGE参照);
             this.tabPage基本情報.Controls.Add(this.buttonBACKGROUND参照);
             this.tabPage基本情報.Controls.Add(this.buttonSTAGEFILE参照);
@@ -256,32 +343,360 @@
             this.tabPage基本情報.Controls.Add(this.labelSTAGEFILE);
             this.tabPage基本情報.Controls.Add(this.labelPREIMAGE);
             this.tabPage基本情報.Controls.Add(this.labelPREVIEW);
-            this.tabPage基本情報.Controls.Add(this.textBoxRESULTIMAGE);
-            this.tabPage基本情報.Controls.Add(this.textBoxBACKGROUND);
-            this.tabPage基本情報.Controls.Add(this.textBoxSTAGEFILE);
-            this.tabPage基本情報.Controls.Add(this.textBoxPREIMAGE);
-            this.tabPage基本情報.Controls.Add(this.textBoxPREVIEW);
-            this.tabPage基本情報.Controls.Add(this.textBoxパネル);
             this.tabPage基本情報.Controls.Add(this.labelパネル);
             this.tabPage基本情報.Controls.Add(this.labelBLEVEL);
-            this.tabPage基本情報.Controls.Add(this.textBoxBLEVEL);
             this.tabPage基本情報.Controls.Add(this.hScrollBarBLEVEL);
             this.tabPage基本情報.Controls.Add(this.labelGLEVEL);
-            this.tabPage基本情報.Controls.Add(this.textBoxGLEVEL);
             this.tabPage基本情報.Controls.Add(this.hScrollBarGLEVEL);
             this.tabPage基本情報.Controls.Add(this.labelDLEVEL);
-            this.tabPage基本情報.Controls.Add(this.textBoxDLEVEL);
             this.tabPage基本情報.Controls.Add(this.hScrollBarDLEVEL);
             this.tabPage基本情報.Controls.Add(this.labelBPM);
             this.tabPage基本情報.Controls.Add(this.labelコメント);
             this.tabPage基本情報.Controls.Add(this.label製作者);
             this.tabPage基本情報.Controls.Add(this.label曲名);
             this.tabPage基本情報.Controls.Add(this.numericUpDownBPM);
-            this.tabPage基本情報.Controls.Add(this.textBoxコメント);
-            this.tabPage基本情報.Controls.Add(this.textBox製作者);
-            this.tabPage基本情報.Controls.Add(this.textBox曲名);
             resources.ApplyResources(this.tabPage基本情報, "tabPage基本情報");
             this.tabPage基本情報.Name = "tabPage基本情報";
+            this.tabPage基本情報.Click += new System.EventHandler(this.tabPage基本情報_Click);
+            // 
+            // textBoxPREMOVIE
+            // 
+            resources.ApplyResources(this.textBoxPREMOVIE, "textBoxPREMOVIE");
+            this.textBoxPREMOVIE.Name = "textBoxPREMOVIE";
+            this.toolTipツールチップ.SetToolTip(this.textBoxPREMOVIE, resources.GetString("textBoxPREMOVIE.ToolTip"));
+            // 
+            // buttonPREMOVIE参照
+            // 
+            resources.ApplyResources(this.buttonPREMOVIE参照, "buttonPREMOVIE参照");
+            this.buttonPREMOVIE参照.Name = "buttonPREMOVIE参照";
+            this.toolTipツールチップ.SetToolTip(this.buttonPREMOVIE参照, resources.GetString("buttonPREMOVIE参照.ToolTip"));
+            this.buttonPREMOVIE参照.UseVisualStyleBackColor = true;
+            this.buttonPREMOVIE参照.Click += new System.EventHandler(this.buttonPREMOVIE参照_Click);
+            // 
+            // labelPREMOVIE
+            // 
+            resources.ApplyResources(this.labelPREMOVIE, "labelPREMOVIE");
+            this.labelPREMOVIE.Name = "labelPREMOVIE";
+            this.toolTipツールチップ.SetToolTip(this.labelPREMOVIE, resources.GetString("labelPREMOVIE.ToolTip"));
+            // 
+            // textBoxLB
+            // 
+            resources.ApplyResources(this.textBoxLB, "textBoxLB");
+            this.textBoxLB.Name = "textBoxLB";
+            this.textBoxLB.TextChanged += new System.EventHandler(this.textBoxLB_TextChanged);
+            this.textBoxLB.Leave += new System.EventHandler(this.textBoxLB_Leave);
+            // 
+            // textBoxLP
+            // 
+            resources.ApplyResources(this.textBoxLP, "textBoxLP");
+            this.textBoxLP.Name = "textBoxLP";
+            this.textBoxLP.TextChanged += new System.EventHandler(this.textBoxLP_TextChanged);
+            this.textBoxLP.Leave += new System.EventHandler(this.textBoxLP_Leave);
+            // 
+            // textBoxLC
+            // 
+            resources.ApplyResources(this.textBoxLC, "textBoxLC");
+            this.textBoxLC.Name = "textBoxLC";
+            this.textBoxLC.TextChanged += new System.EventHandler(this.textBoxLC_TextChanged);
+            this.textBoxLC.Leave += new System.EventHandler(this.textBoxLC_Leave);
+            // 
+            // textBoxRC
+            // 
+            resources.ApplyResources(this.textBoxRC, "textBoxRC");
+            this.textBoxRC.Name = "textBoxRC";
+            this.textBoxRC.TextChanged += new System.EventHandler(this.textBoxRC_TextChanged);
+            this.textBoxRC.Leave += new System.EventHandler(this.textBoxRC_Leave);
+            // 
+            // textBoxHO
+            // 
+            resources.ApplyResources(this.textBoxHO, "textBoxHO");
+            this.textBoxHO.Name = "textBoxHO";
+            this.textBoxHO.TextChanged += new System.EventHandler(this.textBoxHO_TextChanged);
+            this.textBoxHO.Leave += new System.EventHandler(this.textBoxHO_Leave);
+            // 
+            // textBoxFT
+            // 
+            resources.ApplyResources(this.textBoxFT, "textBoxFT");
+            this.textBoxFT.Name = "textBoxFT";
+            this.textBoxFT.TextChanged += new System.EventHandler(this.textBoxFT_TextChanged);
+            this.textBoxFT.Leave += new System.EventHandler(this.textBoxFT_Leave);
+            // 
+            // textBoxCY
+            // 
+            resources.ApplyResources(this.textBoxCY, "textBoxCY");
+            this.textBoxCY.Name = "textBoxCY";
+            this.textBoxCY.TextChanged += new System.EventHandler(this.textBoxCY_TextChanged);
+            this.textBoxCY.Leave += new System.EventHandler(this.textBoxCY_Leave);
+            // 
+            // textBoxLT
+            // 
+            resources.ApplyResources(this.textBoxLT, "textBoxLT");
+            this.textBoxLT.Name = "textBoxLT";
+            this.textBoxLT.TextChanged += new System.EventHandler(this.textBoxLT_TextChanged);
+            this.textBoxLT.Leave += new System.EventHandler(this.textBoxLT_Leave);
+            // 
+            // textBoxHT
+            // 
+            resources.ApplyResources(this.textBoxHT, "textBoxHT");
+            this.textBoxHT.Name = "textBoxHT";
+            this.textBoxHT.TextChanged += new System.EventHandler(this.textBoxHT_TextChanged);
+            this.textBoxHT.Leave += new System.EventHandler(this.textBoxHT_Leave);
+            // 
+            // textBoxBD
+            // 
+            resources.ApplyResources(this.textBoxBD, "textBoxBD");
+            this.textBoxBD.Name = "textBoxBD";
+            this.textBoxBD.TextChanged += new System.EventHandler(this.textBoxBD_TextChanged);
+            this.textBoxBD.Leave += new System.EventHandler(this.textBoxBD_Leave);
+            // 
+            // textBoxSN
+            // 
+            resources.ApplyResources(this.textBoxSN, "textBoxSN");
+            this.textBoxSN.Name = "textBoxSN";
+            this.textBoxSN.TextChanged += new System.EventHandler(this.textBoxSN_TextChanged);
+            this.textBoxSN.Leave += new System.EventHandler(this.textBoxSN_Leave);
+            // 
+            // textBoxHH
+            // 
+            resources.ApplyResources(this.textBoxHH, "textBoxHH");
+            this.textBoxHH.Name = "textBoxHH";
+            this.textBoxHH.TextChanged += new System.EventHandler(this.textBoxHH_TextChanged);
+            this.textBoxHH.Leave += new System.EventHandler(this.textBoxHH_Leave);
+            // 
+            // textBoxBLVDEC
+            // 
+            resources.ApplyResources(this.textBoxBLVDEC, "textBoxBLVDEC");
+            this.textBoxBLVDEC.Name = "textBoxBLVDEC";
+            this.toolTipツールチップ.SetToolTip(this.textBoxBLVDEC, resources.GetString("textBoxBLVDEC.ToolTip"));
+            this.textBoxBLVDEC.TextChanged += new System.EventHandler(this.textBoxBLVDEC_TextChanged);
+            this.textBoxBLVDEC.Leave += new System.EventHandler(this.textBoxBLVDEC_Leave);
+            // 
+            // textBoxGLVDEC
+            // 
+            resources.ApplyResources(this.textBoxGLVDEC, "textBoxGLVDEC");
+            this.textBoxGLVDEC.Name = "textBoxGLVDEC";
+            this.toolTipツールチップ.SetToolTip(this.textBoxGLVDEC, resources.GetString("textBoxGLVDEC.ToolTip"));
+            this.textBoxGLVDEC.TextChanged += new System.EventHandler(this.textBoxGLVDEC_TextChanged);
+            this.textBoxGLVDEC.Leave += new System.EventHandler(this.textBoxGLVDEC_Leave);
+            // 
+            // textBoxDLVDEC
+            // 
+            resources.ApplyResources(this.textBoxDLVDEC, "textBoxDLVDEC");
+            this.textBoxDLVDEC.Name = "textBoxDLVDEC";
+            this.toolTipツールチップ.SetToolTip(this.textBoxDLVDEC, resources.GetString("textBoxDLVDEC.ToolTip"));
+            this.textBoxDLVDEC.TextChanged += new System.EventHandler(this.textBoxDLVDEC_TextChanged);
+            this.textBoxDLVDEC.Leave += new System.EventHandler(this.textBoxDLVDEC_Leave);
+            // 
+            // textBoxRESULTIMAGE
+            // 
+            resources.ApplyResources(this.textBoxRESULTIMAGE, "textBoxRESULTIMAGE");
+            this.textBoxRESULTIMAGE.Name = "textBoxRESULTIMAGE";
+            this.toolTipツールチップ.SetToolTip(this.textBoxRESULTIMAGE, resources.GetString("textBoxRESULTIMAGE.ToolTip"));
+            this.textBoxRESULTIMAGE.TextChanged += new System.EventHandler(this.textBoxRESULTIMAGE_TextChanged);
+            this.textBoxRESULTIMAGE.Leave += new System.EventHandler(this.textBoxRESULTIMAGE_Leave);
+            // 
+            // textBoxBACKGROUND
+            // 
+            resources.ApplyResources(this.textBoxBACKGROUND, "textBoxBACKGROUND");
+            this.textBoxBACKGROUND.Name = "textBoxBACKGROUND";
+            this.toolTipツールチップ.SetToolTip(this.textBoxBACKGROUND, resources.GetString("textBoxBACKGROUND.ToolTip"));
+            this.textBoxBACKGROUND.TextChanged += new System.EventHandler(this.textBoxBACKGROUND_TextChanged);
+            this.textBoxBACKGROUND.Leave += new System.EventHandler(this.textBoxBACKGROUND_Leave);
+            // 
+            // textBoxSTAGEFILE
+            // 
+            resources.ApplyResources(this.textBoxSTAGEFILE, "textBoxSTAGEFILE");
+            this.textBoxSTAGEFILE.Name = "textBoxSTAGEFILE";
+            this.toolTipツールチップ.SetToolTip(this.textBoxSTAGEFILE, resources.GetString("textBoxSTAGEFILE.ToolTip"));
+            this.textBoxSTAGEFILE.TextChanged += new System.EventHandler(this.textBoxSTAGEFILE_TextChanged);
+            this.textBoxSTAGEFILE.Leave += new System.EventHandler(this.textBoxSTAGEFILE_Leave);
+            // 
+            // textBoxPREIMAGE
+            // 
+            resources.ApplyResources(this.textBoxPREIMAGE, "textBoxPREIMAGE");
+            this.textBoxPREIMAGE.Name = "textBoxPREIMAGE";
+            this.toolTipツールチップ.SetToolTip(this.textBoxPREIMAGE, resources.GetString("textBoxPREIMAGE.ToolTip"));
+            this.textBoxPREIMAGE.TextChanged += new System.EventHandler(this.textBoxPREIMAGE_TextChanged);
+            this.textBoxPREIMAGE.Leave += new System.EventHandler(this.textBoxPREIMAGE_Leave);
+            // 
+            // textBoxPREVIEW
+            // 
+            resources.ApplyResources(this.textBoxPREVIEW, "textBoxPREVIEW");
+            this.textBoxPREVIEW.Name = "textBoxPREVIEW";
+            this.toolTipツールチップ.SetToolTip(this.textBoxPREVIEW, resources.GetString("textBoxPREVIEW.ToolTip"));
+            this.textBoxPREVIEW.TextChanged += new System.EventHandler(this.textBoxPREVIEW_TextChanged);
+            this.textBoxPREVIEW.Leave += new System.EventHandler(this.textBoxPREVIEW_Leave);
+            // 
+            // textBoxパネル
+            // 
+            resources.ApplyResources(this.textBoxパネル, "textBoxパネル");
+            this.textBoxパネル.Name = "textBoxパネル";
+            this.toolTipツールチップ.SetToolTip(this.textBoxパネル, resources.GetString("textBoxパネル.ToolTip"));
+            this.textBoxパネル.TextChanged += new System.EventHandler(this.textBoxパネル_TextChanged);
+            this.textBoxパネル.Leave += new System.EventHandler(this.textBoxパネル_Leave);
+            // 
+            // textBoxBLEVEL
+            // 
+            resources.ApplyResources(this.textBoxBLEVEL, "textBoxBLEVEL");
+            this.textBoxBLEVEL.Name = "textBoxBLEVEL";
+            this.toolTipツールチップ.SetToolTip(this.textBoxBLEVEL, resources.GetString("textBoxBLEVEL.ToolTip"));
+            this.textBoxBLEVEL.TextChanged += new System.EventHandler(this.textBoxBLEVEL_TextChanged);
+            this.textBoxBLEVEL.Leave += new System.EventHandler(this.textBoxBLEVEL_Leave);
+            // 
+            // textBoxGLEVEL
+            // 
+            resources.ApplyResources(this.textBoxGLEVEL, "textBoxGLEVEL");
+            this.textBoxGLEVEL.Name = "textBoxGLEVEL";
+            this.toolTipツールチップ.SetToolTip(this.textBoxGLEVEL, resources.GetString("textBoxGLEVEL.ToolTip"));
+            this.textBoxGLEVEL.TextChanged += new System.EventHandler(this.textBoxGLEVEL_TextChanged);
+            this.textBoxGLEVEL.Leave += new System.EventHandler(this.textBoxGLEVEL_Leave);
+            // 
+            // textBoxDLEVEL
+            // 
+            resources.ApplyResources(this.textBoxDLEVEL, "textBoxDLEVEL");
+            this.textBoxDLEVEL.Name = "textBoxDLEVEL";
+            this.toolTipツールチップ.SetToolTip(this.textBoxDLEVEL, resources.GetString("textBoxDLEVEL.ToolTip"));
+            this.textBoxDLEVEL.TextChanged += new System.EventHandler(this.textBoxDLEVEL_TextChanged);
+            this.textBoxDLEVEL.Leave += new System.EventHandler(this.textBoxDLEVEL_Leave);
+            // 
+            // textBoxコメント
+            // 
+            resources.ApplyResources(this.textBoxコメント, "textBoxコメント");
+            this.textBoxコメント.Name = "textBoxコメント";
+            this.toolTipツールチップ.SetToolTip(this.textBoxコメント, resources.GetString("textBoxコメント.ToolTip"));
+            this.textBoxコメント.TextChanged += new System.EventHandler(this.textBoxコメント_TextChanged);
+            this.textBoxコメント.Leave += new System.EventHandler(this.textBoxコメント_Leave);
+            // 
+            // textBox製作者
+            // 
+            resources.ApplyResources(this.textBox製作者, "textBox製作者");
+            this.textBox製作者.Name = "textBox製作者";
+            this.toolTipツールチップ.SetToolTip(this.textBox製作者, resources.GetString("textBox製作者.ToolTip"));
+            this.textBox製作者.TextChanged += new System.EventHandler(this.textBox製作者_TextChanged);
+            this.textBox製作者.Leave += new System.EventHandler(this.textBox製作者_Leave);
+            // 
+            // textBox曲名
+            // 
+            resources.ApplyResources(this.textBox曲名, "textBox曲名");
+            this.textBox曲名.Name = "textBox曲名";
+            this.toolTipツールチップ.SetToolTip(this.textBox曲名, resources.GetString("textBox曲名.ToolTip"));
+            this.textBox曲名.TextChanged += new System.EventHandler(this.textBox曲名_TextChanged);
+            this.textBox曲名.Leave += new System.EventHandler(this.textBox曲名_Leave);
+            // 
+            // labelLB
+            // 
+            resources.ApplyResources(this.labelLB, "labelLB");
+            this.labelLB.Name = "labelLB";
+            this.toolTipツールチップ.SetToolTip(this.labelLB, resources.GetString("labelLB.ToolTip"));
+            // 
+            // labelLP
+            // 
+            resources.ApplyResources(this.labelLP, "labelLP");
+            this.labelLP.Name = "labelLP";
+            this.toolTipツールチップ.SetToolTip(this.labelLP, resources.GetString("labelLP.ToolTip"));
+            // 
+            // labelLC
+            // 
+            resources.ApplyResources(this.labelLC, "labelLC");
+            this.labelLC.Name = "labelLC";
+            this.toolTipツールチップ.SetToolTip(this.labelLC, resources.GetString("labelLC.ToolTip"));
+            // 
+            // labelRC
+            // 
+            resources.ApplyResources(this.labelRC, "labelRC");
+            this.labelRC.Name = "labelRC";
+            this.toolTipツールチップ.SetToolTip(this.labelRC, resources.GetString("labelRC.ToolTip"));
+            // 
+            // labelHO
+            // 
+            resources.ApplyResources(this.labelHO, "labelHO");
+            this.labelHO.Name = "labelHO";
+            this.toolTipツールチップ.SetToolTip(this.labelHO, resources.GetString("labelHO.ToolTip"));
+            // 
+            // labelFT
+            // 
+            resources.ApplyResources(this.labelFT, "labelFT");
+            this.labelFT.Name = "labelFT";
+            this.toolTipツールチップ.SetToolTip(this.labelFT, resources.GetString("labelFT.ToolTip"));
+            // 
+            // labelCY
+            // 
+            resources.ApplyResources(this.labelCY, "labelCY");
+            this.labelCY.Name = "labelCY";
+            this.toolTipツールチップ.SetToolTip(this.labelCY, resources.GetString("labelCY.ToolTip"));
+            // 
+            // labelLT
+            // 
+            resources.ApplyResources(this.labelLT, "labelLT");
+            this.labelLT.Name = "labelLT";
+            this.toolTipツールチップ.SetToolTip(this.labelLT, resources.GetString("labelLT.ToolTip"));
+            // 
+            // labelHT
+            // 
+            resources.ApplyResources(this.labelHT, "labelHT");
+            this.labelHT.Name = "labelHT";
+            this.toolTipツールチップ.SetToolTip(this.labelHT, resources.GetString("labelHT.ToolTip"));
+            // 
+            // labelBD
+            // 
+            resources.ApplyResources(this.labelBD, "labelBD");
+            this.labelBD.Name = "labelBD";
+            this.toolTipツールチップ.SetToolTip(this.labelBD, resources.GetString("labelBD.ToolTip"));
+            // 
+            // labelSN
+            // 
+            resources.ApplyResources(this.labelSN, "labelSN");
+            this.labelSN.Name = "labelSN";
+            this.toolTipツールチップ.SetToolTip(this.labelSN, resources.GetString("labelSN.ToolTip"));
+            // 
+            // labelHH
+            // 
+            resources.ApplyResources(this.labelHH, "labelHH");
+            this.labelHH.Name = "labelHH";
+            this.toolTipツールチップ.SetToolTip(this.labelHH, resources.GetString("labelHH.ToolTip"));
+            // 
+            // 空打ちSE
+            // 
+            resources.ApplyResources(this.空打ちSE, "空打ちSE");
+            this.空打ちSE.Name = "空打ちSE";
+            this.toolTipツールチップ.SetToolTip(this.空打ちSE, resources.GetString("空打ちSE.ToolTip"));
+            this.空打ちSE.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // labelBLVDEC
+            // 
+            resources.ApplyResources(this.labelBLVDEC, "labelBLVDEC");
+            this.labelBLVDEC.Name = "labelBLVDEC";
+            // 
+            // hScrollBarBLVDEC
+            // 
+            resources.ApplyResources(this.hScrollBarBLVDEC, "hScrollBarBLVDEC");
+            this.hScrollBarBLVDEC.Maximum = 18;
+            this.hScrollBarBLVDEC.Name = "hScrollBarBLVDEC";
+            this.hScrollBarBLVDEC.ValueChanged += new System.EventHandler(this.hScrollBarBLVDEC_ValueChanged);
+            // 
+            // labelGLVDEC
+            // 
+            resources.ApplyResources(this.labelGLVDEC, "labelGLVDEC");
+            this.labelGLVDEC.Name = "labelGLVDEC";
+            // 
+            // hScrollBarGLVDEC
+            // 
+            resources.ApplyResources(this.hScrollBarGLVDEC, "hScrollBarGLVDEC");
+            this.hScrollBarGLVDEC.Maximum = 18;
+            this.hScrollBarGLVDEC.Name = "hScrollBarGLVDEC";
+            this.hScrollBarGLVDEC.ValueChanged += new System.EventHandler(this.hScrollBarGLVDEC_ValueChanged);
+            // 
+            // labelDLVDEC
+            // 
+            resources.ApplyResources(this.labelDLVDEC, "labelDLVDEC");
+            this.labelDLVDEC.Name = "labelDLVDEC";
+            // 
+            // hScrollBarDLVDEC
+            // 
+            resources.ApplyResources(this.hScrollBarDLVDEC, "hScrollBarDLVDEC");
+            this.hScrollBarDLVDEC.Maximum = 18;
+            this.hScrollBarDLVDEC.Name = "hScrollBarDLVDEC";
+            this.hScrollBarDLVDEC.ValueChanged += new System.EventHandler(this.hScrollBarDLVDEC_ValueChanged);
             // 
             // buttonRESULTIMAGE参照
             // 
@@ -353,54 +768,6 @@
             this.labelPREVIEW.Name = "labelPREVIEW";
             this.toolTipツールチップ.SetToolTip(this.labelPREVIEW, resources.GetString("labelPREVIEW.ToolTip"));
             // 
-            // textBoxRESULTIMAGE
-            // 
-            resources.ApplyResources(this.textBoxRESULTIMAGE, "textBoxRESULTIMAGE");
-            this.textBoxRESULTIMAGE.Name = "textBoxRESULTIMAGE";
-            this.toolTipツールチップ.SetToolTip(this.textBoxRESULTIMAGE, resources.GetString("textBoxRESULTIMAGE.ToolTip"));
-            this.textBoxRESULTIMAGE.TextChanged += new System.EventHandler(this.textBoxRESULTIMAGE_TextChanged);
-            this.textBoxRESULTIMAGE.Leave += new System.EventHandler(this.textBoxRESULTIMAGE_Leave);
-            // 
-            // textBoxBACKGROUND
-            // 
-            resources.ApplyResources(this.textBoxBACKGROUND, "textBoxBACKGROUND");
-            this.textBoxBACKGROUND.Name = "textBoxBACKGROUND";
-            this.toolTipツールチップ.SetToolTip(this.textBoxBACKGROUND, resources.GetString("textBoxBACKGROUND.ToolTip"));
-            this.textBoxBACKGROUND.TextChanged += new System.EventHandler(this.textBoxBACKGROUND_TextChanged);
-            this.textBoxBACKGROUND.Leave += new System.EventHandler(this.textBoxBACKGROUND_Leave);
-            // 
-            // textBoxSTAGEFILE
-            // 
-            resources.ApplyResources(this.textBoxSTAGEFILE, "textBoxSTAGEFILE");
-            this.textBoxSTAGEFILE.Name = "textBoxSTAGEFILE";
-            this.toolTipツールチップ.SetToolTip(this.textBoxSTAGEFILE, resources.GetString("textBoxSTAGEFILE.ToolTip"));
-            this.textBoxSTAGEFILE.TextChanged += new System.EventHandler(this.textBoxSTAGEFILE_TextChanged);
-            this.textBoxSTAGEFILE.Leave += new System.EventHandler(this.textBoxSTAGEFILE_Leave);
-            // 
-            // textBoxPREIMAGE
-            // 
-            resources.ApplyResources(this.textBoxPREIMAGE, "textBoxPREIMAGE");
-            this.textBoxPREIMAGE.Name = "textBoxPREIMAGE";
-            this.toolTipツールチップ.SetToolTip(this.textBoxPREIMAGE, resources.GetString("textBoxPREIMAGE.ToolTip"));
-            this.textBoxPREIMAGE.TextChanged += new System.EventHandler(this.textBoxPREIMAGE_TextChanged);
-            this.textBoxPREIMAGE.Leave += new System.EventHandler(this.textBoxPREIMAGE_Leave);
-            // 
-            // textBoxPREVIEW
-            // 
-            resources.ApplyResources(this.textBoxPREVIEW, "textBoxPREVIEW");
-            this.textBoxPREVIEW.Name = "textBoxPREVIEW";
-            this.toolTipツールチップ.SetToolTip(this.textBoxPREVIEW, resources.GetString("textBoxPREVIEW.ToolTip"));
-            this.textBoxPREVIEW.TextChanged += new System.EventHandler(this.textBoxPREVIEW_TextChanged);
-            this.textBoxPREVIEW.Leave += new System.EventHandler(this.textBoxPREVIEW_Leave);
-            // 
-            // textBoxパネル
-            // 
-            resources.ApplyResources(this.textBoxパネル, "textBoxパネル");
-            this.textBoxパネル.Name = "textBoxパネル";
-            this.toolTipツールチップ.SetToolTip(this.textBoxパネル, resources.GetString("textBoxパネル.ToolTip"));
-            this.textBoxパネル.TextChanged += new System.EventHandler(this.textBoxパネル_TextChanged);
-            this.textBoxパネル.Leave += new System.EventHandler(this.textBoxパネル_Leave);
-            // 
             // labelパネル
             // 
             resources.ApplyResources(this.labelパネル, "labelパネル");
@@ -413,20 +780,11 @@
             this.labelBLEVEL.Name = "labelBLEVEL";
             this.toolTipツールチップ.SetToolTip(this.labelBLEVEL, resources.GetString("labelBLEVEL.ToolTip"));
             // 
-            // textBoxBLEVEL
-            // 
-            resources.ApplyResources(this.textBoxBLEVEL, "textBoxBLEVEL");
-            this.textBoxBLEVEL.Name = "textBoxBLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.textBoxBLEVEL, resources.GetString("textBoxBLEVEL.ToolTip"));
-            this.textBoxBLEVEL.TextChanged += new System.EventHandler(this.textBoxBLEVEL_TextChanged);
-            this.textBoxBLEVEL.Leave += new System.EventHandler(this.textBoxBLEVEL_Leave);
-            // 
             // hScrollBarBLEVEL
             // 
             resources.ApplyResources(this.hScrollBarBLEVEL, "hScrollBarBLEVEL");
-            this.hScrollBarBLEVEL.Maximum = 999;
+            this.hScrollBarBLEVEL.Maximum = 108;
             this.hScrollBarBLEVEL.Name = "hScrollBarBLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.hScrollBarBLEVEL, resources.GetString("hScrollBarBLEVEL.ToolTip"));
             this.hScrollBarBLEVEL.ValueChanged += new System.EventHandler(this.hScrollBarBLEVEL_ValueChanged);
             // 
             // labelGLEVEL
@@ -435,20 +793,11 @@
             this.labelGLEVEL.Name = "labelGLEVEL";
             this.toolTipツールチップ.SetToolTip(this.labelGLEVEL, resources.GetString("labelGLEVEL.ToolTip"));
             // 
-            // textBoxGLEVEL
-            // 
-            resources.ApplyResources(this.textBoxGLEVEL, "textBoxGLEVEL");
-            this.textBoxGLEVEL.Name = "textBoxGLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.textBoxGLEVEL, resources.GetString("textBoxGLEVEL.ToolTip"));
-            this.textBoxGLEVEL.TextChanged += new System.EventHandler(this.textBoxGLEVEL_TextChanged);
-            this.textBoxGLEVEL.Leave += new System.EventHandler(this.textBoxGLEVEL_Leave);
-            // 
             // hScrollBarGLEVEL
             // 
             resources.ApplyResources(this.hScrollBarGLEVEL, "hScrollBarGLEVEL");
-            this.hScrollBarGLEVEL.Maximum = 999;
+            this.hScrollBarGLEVEL.Maximum = 108;
             this.hScrollBarGLEVEL.Name = "hScrollBarGLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.hScrollBarGLEVEL, resources.GetString("hScrollBarGLEVEL.ToolTip"));
             this.hScrollBarGLEVEL.ValueChanged += new System.EventHandler(this.hScrollBarGLEVEL_ValueChanged);
             // 
             // labelDLEVEL
@@ -457,20 +806,11 @@
             this.labelDLEVEL.Name = "labelDLEVEL";
             this.toolTipツールチップ.SetToolTip(this.labelDLEVEL, resources.GetString("labelDLEVEL.ToolTip"));
             // 
-            // textBoxDLEVEL
-            // 
-            resources.ApplyResources(this.textBoxDLEVEL, "textBoxDLEVEL");
-            this.textBoxDLEVEL.Name = "textBoxDLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.textBoxDLEVEL, resources.GetString("textBoxDLEVEL.ToolTip"));
-            this.textBoxDLEVEL.TextChanged += new System.EventHandler(this.textBoxDLEVEL_TextChanged);
-            this.textBoxDLEVEL.Leave += new System.EventHandler(this.textBoxDLEVEL_Leave);
-            // 
             // hScrollBarDLEVEL
             // 
             resources.ApplyResources(this.hScrollBarDLEVEL, "hScrollBarDLEVEL");
-            this.hScrollBarDLEVEL.Maximum = 999;
+            this.hScrollBarDLEVEL.Maximum = 108;
             this.hScrollBarDLEVEL.Name = "hScrollBarDLEVEL";
-            this.toolTipツールチップ.SetToolTip(this.hScrollBarDLEVEL, resources.GetString("hScrollBarDLEVEL.ToolTip"));
             this.hScrollBarDLEVEL.ValueChanged += new System.EventHandler(this.hScrollBarDLEVEL_ValueChanged);
             // 
             // labelBPM
@@ -499,7 +839,7 @@
             // 
             // numericUpDownBPM
             // 
-            this.numericUpDownBPM.DecimalPlaces = 2;
+            this.numericUpDownBPM.DecimalPlaces = 4;
             resources.ApplyResources(this.numericUpDownBPM, "numericUpDownBPM");
             this.numericUpDownBPM.Maximum = new decimal(new int[] {
             9999,
@@ -515,30 +855,6 @@
             0});
             this.numericUpDownBPM.ValueChanged += new System.EventHandler(this.numericUpDownBPM_ValueChanged);
             this.numericUpDownBPM.Leave += new System.EventHandler(this.numericUpDownBPM_Leave);
-            // 
-            // textBoxコメント
-            // 
-            resources.ApplyResources(this.textBoxコメント, "textBoxコメント");
-            this.textBoxコメント.Name = "textBoxコメント";
-            this.toolTipツールチップ.SetToolTip(this.textBoxコメント, resources.GetString("textBoxコメント.ToolTip"));
-            this.textBoxコメント.TextChanged += new System.EventHandler(this.textBoxコメント_TextChanged);
-            this.textBoxコメント.Leave += new System.EventHandler(this.textBoxコメント_Leave);
-            // 
-            // textBox製作者
-            // 
-            resources.ApplyResources(this.textBox製作者, "textBox製作者");
-            this.textBox製作者.Name = "textBox製作者";
-            this.toolTipツールチップ.SetToolTip(this.textBox製作者, resources.GetString("textBox製作者.ToolTip"));
-            this.textBox製作者.TextChanged += new System.EventHandler(this.textBox製作者_TextChanged);
-            this.textBox製作者.Leave += new System.EventHandler(this.textBox製作者_Leave);
-            // 
-            // textBox曲名
-            // 
-            resources.ApplyResources(this.textBox曲名, "textBox曲名");
-            this.textBox曲名.Name = "textBox曲名";
-            this.toolTipツールチップ.SetToolTip(this.textBox曲名, resources.GetString("textBox曲名.ToolTip"));
-            this.textBox曲名.TextChanged += new System.EventHandler(this.textBox曲名_TextChanged);
-            this.textBox曲名.Leave += new System.EventHandler(this.textBox曲名_Leave);
             // 
             // tabPageWAV
             // 
@@ -565,7 +881,7 @@
             this.listViewWAVリスト.Name = "listViewWAVリスト";
             this.listViewWAVリスト.UseCompatibleStateImageBehavior = false;
             this.listViewWAVリスト.View = System.Windows.Forms.View.Details;
-            this.listViewWAVリスト.VirtualListSize = 1295;
+            this.listViewWAVリスト.VirtualListSize = 3843;
             this.listViewWAVリスト.VirtualMode = true;
             this.listViewWAVリスト.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewWAVリスト_ItemDrag);
             this.listViewWAVリスト.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.listViewWAVリスト_RetrieveVirtualItem);
@@ -689,7 +1005,7 @@
             this.listViewBMPリスト.Name = "listViewBMPリスト";
             this.listViewBMPリスト.UseCompatibleStateImageBehavior = false;
             this.listViewBMPリスト.View = System.Windows.Forms.View.Details;
-            this.listViewBMPリスト.VirtualListSize = 1295;
+            this.listViewBMPリスト.VirtualListSize = 3843;
             this.listViewBMPリスト.VirtualMode = true;
             this.listViewBMPリスト.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewBMPリスト_ItemDrag);
             this.listViewBMPリスト.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.listViewBMPリスト_RetrieveVirtualItem);
@@ -763,7 +1079,7 @@
             this.listViewAVIリスト.Name = "listViewAVIリスト";
             this.listViewAVIリスト.UseCompatibleStateImageBehavior = false;
             this.listViewAVIリスト.View = System.Windows.Forms.View.Details;
-            this.listViewAVIリスト.VirtualListSize = 1295;
+            this.listViewAVIリスト.VirtualListSize = 3843;
             this.listViewAVIリスト.VirtualMode = true;
             this.listViewAVIリスト.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listViewAVIリスト_ItemDrag);
             this.listViewAVIリスト.RetrieveVirtualItem += new System.Windows.Forms.RetrieveVirtualItemEventHandler(this.listViewAVIリスト_RetrieveVirtualItem);
@@ -832,6 +1148,7 @@
             this.pictureBox譜面パネル.BackColor = System.Drawing.Color.Black;
             this.pictureBox譜面パネル.Name = "pictureBox譜面パネル";
             this.pictureBox譜面パネル.TabStop = false;
+            this.pictureBox譜面パネル.Click += new System.EventHandler(this.pictureBox譜面パネル_Click);
             this.pictureBox譜面パネル.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox譜面パネル_Paint);
             this.pictureBox譜面パネル.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox譜面パネル_MouseClick);
             this.pictureBox譜面パネル.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox譜面パネル_MouseDown);
@@ -863,6 +1180,7 @@
             this.toolStripMenuItemヘルプ});
             resources.ApplyResources(this.menuStripメニューバー, "menuStripメニューバー");
             this.menuStripメニューバー.Name = "menuStripメニューバー";
+            this.menuStripメニューバー.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStripメニューバー_ItemClicked);
             // 
             // toolStripMenuItemファイル
             // 
@@ -1363,6 +1681,7 @@
             resources.GetString("toolStripComboBox譜面拡大率.Items9")});
             this.toolStripComboBox譜面拡大率.Name = "toolStripComboBox譜面拡大率";
             this.toolStripComboBox譜面拡大率.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox譜面拡大率_SelectedIndexChanged);
+            this.toolStripComboBox譜面拡大率.Click += new System.EventHandler(this.toolStripComboBox譜面拡大率_Click);
             // 
             // toolStripComboBoxガイド間隔
             // 
@@ -1380,6 +1699,7 @@
             resources.ApplyResources(this.toolStripComboBoxガイド間隔, "toolStripComboBoxガイド間隔");
             this.toolStripComboBoxガイド間隔.Name = "toolStripComboBoxガイド間隔";
             this.toolStripComboBoxガイド間隔.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxガイド間隔_SelectedIndexChanged);
+            this.toolStripComboBoxガイド間隔.Click += new System.EventHandler(this.toolStripComboBoxガイド間隔_Click);
             // 
             // toolStripButton選択モード
             // 
@@ -1436,7 +1756,7 @@
             // 
             // toolStripComboBox演奏速度
             // 
-            this.toolStripComboBox演奏速度.DropDownHeight = 150;
+            this.toolStripComboBox演奏速度.DropDownHeight = 220;
             this.toolStripComboBox演奏速度.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripComboBox演奏速度.DropDownWidth = 35;
             resources.ApplyResources(this.toolStripComboBox演奏速度, "toolStripComboBox演奏速度");
@@ -1453,7 +1773,6 @@
             resources.GetString("toolStripComboBox演奏速度.Items9"),
             resources.GetString("toolStripComboBox演奏速度.Items10")});
             this.toolStripComboBox演奏速度.Name = "toolStripComboBox演奏速度";
-            this.toolStripComboBox演奏速度.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox演奏速度_SelectedIndexChanged);
             // 
             // toolStripSeparator12
             // 
@@ -1696,80 +2015,9 @@
 		internal System.Windows.Forms.ToolStripComboBox toolStripComboBox演奏速度;
 		internal System.Windows.Forms.VScrollBar vScrollBar譜面用垂直スクロールバー;
 		internal System.Windows.Forms.SplitContainer splitContainerタブと譜面を分割;
-		private System.Windows.Forms.TabControl tabControl情報パネル;
-		private System.Windows.Forms.TabPage tabPage基本情報;
-		private System.Windows.Forms.TabPage tabPageWAV;
 		internal System.Windows.Forms.HScrollBar hScrollBar譜面用水平スクロールバー;
 		internal System.Windows.Forms.PictureBox pictureBox譜面パネル;
-		private System.Windows.Forms.TabPage tabPageBMP;
-		private System.Windows.Forms.TabPage tabPageAVI;
-		private System.Windows.Forms.TabPage tabPage自由入力;
-		internal System.Windows.Forms.TextBox textBox曲名;
 		private System.Windows.Forms.ToolTip toolTipツールチップ;
-		internal System.Windows.Forms.TextBox textBox製作者;
-		internal System.Windows.Forms.TextBox textBoxコメント;
-		internal System.Windows.Forms.NumericUpDown numericUpDownBPM;
-		private System.Windows.Forms.Label label曲名;
-		private System.Windows.Forms.Label label製作者;
-		private System.Windows.Forms.Label labelコメント;
-		private System.Windows.Forms.Label labelBPM;
-		internal System.Windows.Forms.HScrollBar hScrollBarDLEVEL;
-		internal System.Windows.Forms.TextBox textBoxDLEVEL;
-		private System.Windows.Forms.Label labelDLEVEL;
-		internal System.Windows.Forms.HScrollBar hScrollBarGLEVEL;
-		internal System.Windows.Forms.TextBox textBoxGLEVEL;
-		private System.Windows.Forms.Label labelGLEVEL;
-		internal System.Windows.Forms.HScrollBar hScrollBarBLEVEL;
-		internal System.Windows.Forms.TextBox textBoxBLEVEL;
-		private System.Windows.Forms.Label labelBLEVEL;
-		private System.Windows.Forms.Label labelパネル;
-		internal System.Windows.Forms.TextBox textBoxパネル;
-		internal System.Windows.Forms.TextBox textBoxPREVIEW;
-		internal System.Windows.Forms.TextBox textBoxPREIMAGE;
-		internal System.Windows.Forms.TextBox textBoxSTAGEFILE;
-		internal System.Windows.Forms.TextBox textBoxBACKGROUND;
-		internal System.Windows.Forms.TextBox textBoxRESULTIMAGE;
-		private System.Windows.Forms.Label labelPREVIEW;
-		private System.Windows.Forms.Label labelPREIMAGE;
-		private System.Windows.Forms.Label labelSTAGEFILE;
-		private System.Windows.Forms.Label labelBACKGROUND;
-		private System.Windows.Forms.Label labeRESULTIMAGE;
-		private System.Windows.Forms.Button buttonPREVIEW参照;
-		private System.Windows.Forms.Button buttonPREIMAGE参照;
-		private System.Windows.Forms.Button buttonSTAGEFILE参照;
-		private System.Windows.Forms.Button buttonBACKGROUND参照;
-		private System.Windows.Forms.Button buttonRESULTIMAGE参照;
-		private System.Windows.Forms.ToolStrip toolStripWAVツールバー;
-		private System.Windows.Forms.ToolStripButton toolStripButtonWAVリスト上移動;
-		private System.Windows.Forms.ToolStripButton toolStripButtonWAVリスト下移動;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-		private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュー再生開始;
-		private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュー再生停止;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
-		private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュースイッチ;
-		internal System.Windows.Forms.ListView listViewWAVリスト;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_ラベル;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_番号;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_ファイル名;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_音量;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_位置;
-		private System.Windows.Forms.ColumnHeader columnHeaderWAV_BGM;
-		private System.Windows.Forms.ToolStrip toolStripBMPツールバー;
-		private System.Windows.Forms.ToolStripButton toolStripButtonBMPリスト上移動;
-		private System.Windows.Forms.ToolStripButton toolStripButtonBMPリスト下移動;
-		internal System.Windows.Forms.ListView listViewBMPリスト;
-		private System.Windows.Forms.ColumnHeader columnHeaderBMP_TEX;
-		private System.Windows.Forms.ColumnHeader columnHeaderBMP_ラベル;
-		private System.Windows.Forms.ColumnHeader columnHeaderBMP_BMP番号;
-		private System.Windows.Forms.ColumnHeader columnHeaderBMP_ファイル名;
-		private System.Windows.Forms.ToolStrip toolStripAVIツールバー;
-		private System.Windows.Forms.ToolStripButton toolStripButtonAVIリスト上移動;
-		private System.Windows.Forms.ToolStripButton toolStripButtonAVIリスト下移動;
-		internal System.Windows.Forms.ListView listViewAVIリスト;
-		private System.Windows.Forms.ColumnHeader columnHeaderAVI_ラベル;
-		private System.Windows.Forms.ColumnHeader columnHeaderAVI_AVI番号;
-		private System.Windows.Forms.ColumnHeader columnHeaderAVI_ファイル名;
-		internal System.Windows.Forms.TextBox textBox自由入力欄;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip譜面右メニュー;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem選択チップの切り取り;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem選択チップのコピー;
@@ -1784,5 +2032,113 @@
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem小節の削除;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemレーン内のすべてのチップの選択;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem小節内のすべてのチップの選択;
-	}
+        private System.Windows.Forms.TabControl tabControl情報パネル;
+        private System.Windows.Forms.TabPage tabPage基本情報;
+        private System.Windows.Forms.Label labelLB;
+        internal System.Windows.Forms.TextBox textBoxLB;
+        internal System.Windows.Forms.TextBox textBoxLP;
+        internal System.Windows.Forms.TextBox textBoxLC;
+        internal System.Windows.Forms.TextBox textBoxRC;
+        internal System.Windows.Forms.TextBox textBoxHO;
+        internal System.Windows.Forms.TextBox textBoxFT;
+        internal System.Windows.Forms.TextBox textBoxCY;
+        internal System.Windows.Forms.TextBox textBoxLT;
+        internal System.Windows.Forms.TextBox textBoxHT;
+        internal System.Windows.Forms.TextBox textBoxBD;
+        internal System.Windows.Forms.TextBox textBoxSN;
+        internal System.Windows.Forms.TextBox textBoxHH;
+        internal System.Windows.Forms.TextBox textBoxBLVDEC;
+        internal System.Windows.Forms.TextBox textBoxGLVDEC;
+        internal System.Windows.Forms.TextBox textBoxDLVDEC;
+        internal System.Windows.Forms.TextBox textBoxRESULTIMAGE;
+        internal System.Windows.Forms.TextBox textBoxBACKGROUND;
+        internal System.Windows.Forms.TextBox textBoxSTAGEFILE;
+        internal System.Windows.Forms.TextBox textBoxPREIMAGE;
+        internal System.Windows.Forms.TextBox textBoxPREVIEW;
+        internal System.Windows.Forms.TextBox textBoxPREMOVIE;
+        internal System.Windows.Forms.TextBox textBoxパネル;
+        internal System.Windows.Forms.TextBox textBoxBLEVEL;
+        internal System.Windows.Forms.TextBox textBoxGLEVEL;
+        internal System.Windows.Forms.TextBox textBoxDLEVEL;
+        internal System.Windows.Forms.TextBox textBoxコメント;
+        internal System.Windows.Forms.TextBox textBox製作者;
+        internal System.Windows.Forms.TextBox textBox曲名;
+        private System.Windows.Forms.Label labelLP;
+        private System.Windows.Forms.Label labelLC;
+        private System.Windows.Forms.Label labelRC;
+        private System.Windows.Forms.Label labelHO;
+        private System.Windows.Forms.Label labelFT;
+        private System.Windows.Forms.Label labelCY;
+        private System.Windows.Forms.Label labelLT;
+        private System.Windows.Forms.Label labelHT;
+        private System.Windows.Forms.Label labelBD;
+        private System.Windows.Forms.Label labelSN;
+        private System.Windows.Forms.Label labelHH;
+        private System.Windows.Forms.Label 空打ちSE;
+        private System.Windows.Forms.Label labelBLVDEC;
+        internal System.Windows.Forms.HScrollBar hScrollBarBLVDEC;
+        private System.Windows.Forms.Label labelGLVDEC;
+        internal System.Windows.Forms.HScrollBar hScrollBarGLVDEC;
+        private System.Windows.Forms.Label labelDLVDEC;
+        internal System.Windows.Forms.HScrollBar hScrollBarDLVDEC;
+        private System.Windows.Forms.Button buttonRESULTIMAGE参照;
+        private System.Windows.Forms.Button buttonBACKGROUND参照;
+        private System.Windows.Forms.Button buttonSTAGEFILE参照;
+        private System.Windows.Forms.Button buttonPREIMAGE参照;
+        private System.Windows.Forms.Button buttonPREVIEW参照;
+        private System.Windows.Forms.Button buttonPREMOVIE参照;
+        private System.Windows.Forms.Label labeRESULTIMAGE;
+        private System.Windows.Forms.Label labelBACKGROUND;
+        private System.Windows.Forms.Label labelSTAGEFILE;
+        private System.Windows.Forms.Label labelPREIMAGE;
+        private System.Windows.Forms.Label labelPREVIEW;
+        private System.Windows.Forms.Label labelPREMOVIE;
+        private System.Windows.Forms.Label labelパネル;
+        private System.Windows.Forms.Label labelBLEVEL;
+        internal System.Windows.Forms.HScrollBar hScrollBarBLEVEL;
+        private System.Windows.Forms.Label labelGLEVEL;
+        internal System.Windows.Forms.HScrollBar hScrollBarGLEVEL;
+        private System.Windows.Forms.Label labelDLEVEL;
+        internal System.Windows.Forms.HScrollBar hScrollBarDLEVEL;
+        private System.Windows.Forms.Label labelBPM;
+        private System.Windows.Forms.Label labelコメント;
+        private System.Windows.Forms.Label label製作者;
+        private System.Windows.Forms.Label label曲名;
+        internal System.Windows.Forms.NumericUpDown numericUpDownBPM;
+        private System.Windows.Forms.TabPage tabPageWAV;
+        internal System.Windows.Forms.ListView listViewWAVリスト;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_ラベル;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_番号;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_ファイル名;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_音量;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_位置;
+        private System.Windows.Forms.ColumnHeader columnHeaderWAV_BGM;
+        private System.Windows.Forms.ToolStrip toolStripWAVツールバー;
+        private System.Windows.Forms.ToolStripButton toolStripButtonWAVリスト上移動;
+        private System.Windows.Forms.ToolStripButton toolStripButtonWAVリスト下移動;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュー再生開始;
+        private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュー再生停止;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripButton toolStripButtonWAVリストプレビュースイッチ;
+        private System.Windows.Forms.TabPage tabPageBMP;
+        internal System.Windows.Forms.ListView listViewBMPリスト;
+        private System.Windows.Forms.ColumnHeader columnHeaderBMP_TEX;
+        private System.Windows.Forms.ColumnHeader columnHeaderBMP_ラベル;
+        private System.Windows.Forms.ColumnHeader columnHeaderBMP_BMP番号;
+        private System.Windows.Forms.ColumnHeader columnHeaderBMP_ファイル名;
+        private System.Windows.Forms.ToolStrip toolStripBMPツールバー;
+        private System.Windows.Forms.ToolStripButton toolStripButtonBMPリスト上移動;
+        private System.Windows.Forms.ToolStripButton toolStripButtonBMPリスト下移動;
+        private System.Windows.Forms.TabPage tabPageAVI;
+        internal System.Windows.Forms.ListView listViewAVIリスト;
+        private System.Windows.Forms.ColumnHeader columnHeaderAVI_ラベル;
+        private System.Windows.Forms.ColumnHeader columnHeaderAVI_AVI番号;
+        private System.Windows.Forms.ColumnHeader columnHeaderAVI_ファイル名;
+        private System.Windows.Forms.ToolStrip toolStripAVIツールバー;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAVIリスト上移動;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAVIリスト下移動;
+        private System.Windows.Forms.TabPage tabPage自由入力;
+        internal System.Windows.Forms.TextBox textBox自由入力欄;
+    }
 }

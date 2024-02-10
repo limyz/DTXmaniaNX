@@ -8,8 +8,8 @@ namespace DTXCreator.Score
 	{
 		public float f小節長倍率 = 1f;
 		public List<CChip> listチップ = new List<CChip>();
-		public static int n基準の高さdot = 0xc0;
-		public static readonly int n基準の高さgrid = 0xc0;
+		public static int n基準の高さdot = 1920;
+		public static readonly int n基準の高さgrid = 1920;
 		public static int n１グリッドの高さdot
 		{
 			get
@@ -57,7 +57,7 @@ namespace DTXCreator.Score
 		}
 		public int n位置変換count2grid( int nCount )
 		{
-			return (int) ( ( ( n基準の高さgrid * this.f小節長倍率 ) * nCount ) / 384f );
+			return (int) ( ( ( n基準の高さgrid * this.f小節長倍率 ) * nCount ) / 1920f );
 		}
 		public static int n位置変換dot2grid( int nDot )
 		{
@@ -65,7 +65,7 @@ namespace DTXCreator.Score
 		}
 		public int n位置変換grid2count( int nGrid )
 		{
-			return (int) ( ( nGrid * 384f ) / ( n基準の高さgrid * this.f小節長倍率 ) );
+			return (int) ( ( nGrid * 1920f ) / ( n基準の高さgrid * this.f小節長倍率 ) );
 		}
 		public static int n位置変換grid2dot( int nGrid )
 		{

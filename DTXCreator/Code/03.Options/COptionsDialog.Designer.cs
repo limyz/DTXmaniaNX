@@ -101,6 +101,7 @@
             resources.ApplyResources(this.groupBoxDefaultOperationMode, "groupBoxDefaultOperationMode");
             this.groupBoxDefaultOperationMode.Name = "groupBoxDefaultOperationMode";
             this.groupBoxDefaultOperationMode.TabStop = false;
+            this.groupBoxDefaultOperationMode.Enter += new System.EventHandler(this.groupBoxDefaultOperationMode_Enter);
             // 
             // pictureBox_EditMode
             // 
@@ -154,12 +155,14 @@
             // 
             resources.ApplyResources(this.label個まで表示する, "label個まで表示する");
             this.label個まで表示する.Name = "label個まで表示する";
+            this.label個まで表示する.Click += new System.EventHandler(this.label個まで表示する_Click);
             // 
             // checkBox最近使用したファイル
             // 
             resources.ApplyResources(this.checkBox最近使用したファイル, "checkBox最近使用したファイル");
             this.checkBox最近使用したファイル.Name = "checkBox最近使用したファイル";
             this.checkBox最近使用したファイル.UseVisualStyleBackColor = true;
+            this.checkBox最近使用したファイル.CheckedChanged += new System.EventHandler(this.checkBox最近使用したファイル_CheckedChanged);
             // 
             // numericUpDown最近使用したファイルの最大表示個数
             // 
@@ -251,6 +254,7 @@
             resources.ApplyResources(this.groupBox_DTXManiaSettings, "groupBox_DTXManiaSettings");
             this.groupBox_DTXManiaSettings.Name = "groupBox_DTXManiaSettings";
             this.groupBox_DTXManiaSettings.TabStop = false;
+            this.groupBox_DTXManiaSettings.Enter += new System.EventHandler(this.groupBox_DTXManiaSettings_Enter);
             // 
             // label1
             // 
@@ -364,7 +368,6 @@
             // 
             // openFileDialog_DTXViewerPath
             // 
-            resources.ApplyResources(this.openFileDialog_DTXViewerPath, "openFileDialog_DTXViewerPath");
             this.openFileDialog_DTXViewerPath.SupportMultiDottedExtensions = true;
             // 
             // COptionsDialog
@@ -378,6 +381,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "COptionsDialog";
+            this.Load += new System.EventHandler(this.COptionsDialog_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Cオプションダイアログ_KeyDown);
             this.tabPage全般.ResumeLayout(false);
             this.tabPage全般.PerformLayout();
