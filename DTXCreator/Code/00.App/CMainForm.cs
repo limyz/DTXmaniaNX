@@ -843,7 +843,7 @@ namespace DTXCreator
 
 			// 全部を１つの string として読み込む。
 
-			StreamReader reader = new StreamReader( strファイル名, Encoding.GetEncoding( 932/*Shift-JIS*/ ) );
+			StreamReader reader = new StreamReader( strファイル名, Encoding.GetEncoding("shift-jis") );
 			string str全入力文字列 = reader.ReadToEnd();
 			reader.Close();
 
@@ -948,7 +948,7 @@ namespace DTXCreator
 
 			#region [ DTXファイルを出力する。]
 			//-----------------
-			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding( 932/*Shift-JIS*/ ) );
+			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding("shift-jis") );
 			new CDTXInputOutput( this ).tDTX出力( sw );
 			sw.Close();
 			//-----------------
