@@ -948,7 +948,7 @@ namespace DTXCreator
 
 			#region [ DTXファイルを出力する。]
 			//-----------------
-			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding( 65001/*Shift-JIS*/ ) );
+			var sw = new StreamWriter( this.str作業フォルダ名 + this.strDTXファイル名, false, Encoding.GetEncoding( 932/*Shift-JIS*/ ) );
 			new CDTXInputOutput( this ).tDTX出力( sw );
 			sw.Close();
 			//-----------------
@@ -1766,7 +1766,7 @@ namespace DTXCreator
 				#endregion
 				#region [ 一時ファイルにDTXを出力する。 ]
 				//-----------------
-				StreamWriter sw = new StreamWriter(this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding("utf-8"));
+				StreamWriter sw = new StreamWriter(this.strViewer演奏用一時ファイル名, false, Encoding.GetEncoding("shift-jis"));
 				new CDTXInputOutput(this).tDTX出力(sw, bBGMのみ出力);
 				sw.Close();
 				//-----------------

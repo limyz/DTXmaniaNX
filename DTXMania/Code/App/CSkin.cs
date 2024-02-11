@@ -904,7 +904,7 @@ namespace DTXMania
             {
                 string str;
 				//this.tClearAllKeyAssignments();
-				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding( "utf-8" ) ) )
+				using ( StreamReader reader = new StreamReader( CSkin.Path( @"SkinConfig.ini" ), Encoding.GetEncoding("shift-jis") ) )
                 {
 				    str = reader.ReadToEnd();
                 }
@@ -919,7 +919,7 @@ namespace DTXMania
         {
             if( File.Exists( CSkin.Path( @"SkinConfig.ini" ) ) )
             {
-                StreamWriter sw = new StreamWriter( CSkin.Path( @"SkinConfig.ini" ), false, Encoding.GetEncoding( "utf-8" ) );
+                StreamWriter sw = new StreamWriter( CSkin.Path( @"SkinConfig.ini" ), false, Encoding.GetEncoding("shift-jis") );
                 sw.WriteLine( "; スキンごとでの設定ファイル。現在テスト段階です。" );
                 sw.WriteLine( "; ここで設定した数値が優先的に使用されます。" );
                 sw.WriteLine( ";" );

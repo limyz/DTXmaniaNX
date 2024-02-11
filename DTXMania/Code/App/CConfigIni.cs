@@ -1539,7 +1539,7 @@ namespace DTXMania
 		}
 		public void tWrite( string iniFilename )
 		{
-			StreamWriter sw = new StreamWriter( iniFilename, false, Encoding.GetEncoding("utf-8") );
+			StreamWriter sw = new StreamWriter( iniFilename, false, Encoding.GetEncoding("shift-jis") );
 			sw.WriteLine( ";-------------------" );
 			
 			#region [ System ]
@@ -2539,7 +2539,7 @@ namespace DTXMania
 			if( this.bConfigIniが存在している )
 			{
 				string str;
-				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding( "utf-8" ) );
+				StreamReader reader = new StreamReader( this.ConfigIniファイル名, Encoding.GetEncoding("shift-jis") );
 				str = reader.ReadToEnd();
 				tReadFromString( str );
 				CDTXVersion version = new CDTXVersion( this.strDTXManiaのバージョン );

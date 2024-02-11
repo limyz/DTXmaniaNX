@@ -128,7 +128,7 @@ namespace DTXMania
 
 		public void t読み込み( string setdefファイル名 )
 		{
-			var reader = new StreamReader(setdefファイル名, Encoding.GetEncoding("utf-8"));
+			var reader = new StreamReader(setdefファイル名, Encoding.GetEncoding("shift-jis"));
 			CBlock block = new CBlock();
 			string str = null;
 			while( ( str = reader.ReadLine() ) != null )

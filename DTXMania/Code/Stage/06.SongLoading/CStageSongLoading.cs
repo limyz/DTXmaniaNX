@@ -1119,7 +1119,7 @@ namespace DTXMania
             if ( File.Exists( CSkin.Path( @"Script\difficult.dtxs" ) ) )
             {
                 //スクリプトを開く
-                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding("Shift_JIS") );
+                StreamReader reader = new StreamReader( CSkin.Path( @"Script\difficult.dtxs" ), Encoding.GetEncoding("shift-jis") );
                 strRawScriptFile = reader.ReadToEnd();
 
                 strRawScriptFile = strRawScriptFile.Replace( Environment.NewLine, "\n" );

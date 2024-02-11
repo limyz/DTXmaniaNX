@@ -83,7 +83,7 @@ namespace DTXMania
 
 		public void t読み込み( string boxdefファイル名 )
 		{
-			StreamReader reader = new StreamReader( boxdefファイル名, Encoding.GetEncoding("utf-8") );
+			StreamReader reader = new StreamReader( boxdefファイル名, Encoding.GetEncoding("shift-jis") );
 			string str = null;
 			while( ( str = reader.ReadLine() ) != null )
 			{
