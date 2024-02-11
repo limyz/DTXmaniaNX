@@ -1374,7 +1374,7 @@ namespace DTXMania
                         CDTXMania.DTX.tPlayChip(pChip, n再生開始システム時刻ms, (int)ELane.Bass, n音量, bモニタ, b音程をずらして再生);
                         this.nLastPlayedWAVNumber.Bass = pChip.nIntegerValue_InternalNumber;
                         return;
-                        #endregion
+                    #endregion
 
                     default:
                         break;
@@ -4889,7 +4889,7 @@ namespace DTXMania
                     matrix2.Matrix00 = 1f;
                     matrix2.Matrix11 = 1f;
                     matrix2.Matrix22 = 1f;
-                    matrix2.Matrix33 = ((float)CDTXMania.ConfigIni.n背景の透過度) / 255f;
+                    matrix2.Matrix33 = ((float)CDTXMania.ConfigIni.nBackgroundTransparency) / 255f;
                     matrix2.Matrix44 = 1f;
                     ColorMatrix newColorMatrix = matrix2;
                     ImageAttributes imageAttr = new ImageAttributes();

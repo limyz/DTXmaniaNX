@@ -969,7 +969,7 @@ namespace DTXMania
 				this.b演奏情報を表示する = !value;
 			}
 		}
-		public int n背景の透過度
+		public int nBackgroundTransparency
 		{
 			get
 			{
@@ -1725,10 +1725,10 @@ namespace DTXMania
 			sw.WriteLine("EventDrivenWASAPI={0}", this.bEventDrivenWASAPI ? 1 : 0);
 			sw.WriteLine();
 
-			sw.WriteLine("; メトロノームを有効にする");
-			sw.WriteLine("; 現在のスキンのサウンドフォルダにMetronome.oggがあることを確認してください。");
-			sw.WriteLine("; 例:/System/{Skin}/Sounds/Metronome.ogg");
-			sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
+			sw.WriteLine("; Enable Embedded Metronome");
+			sw.WriteLine("; Please make sure Metronome.ogg exists in Your current skin sounds folder");
+            sw.WriteLine("; e.g. ./System/{Skin}/Sounds/Metronome.ogg");
+            sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
 			sw.WriteLine();
 
 			sw.WriteLine("; 全体ボリュームの設定");
@@ -2853,7 +2853,7 @@ namespace DTXMania
                                             }                                            
                                             else if (str3.Equals("BGAlpha"))
                                             {
-                                                this.n背景の透過度 = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.n背景の透過度);
+                                                this.nBackgroundTransparency = CConversion.nGetNumberIfInRange(str4, 0, 0xff, this.nBackgroundTransparency);
                                             }
                                             else if (str3.Equals("DamageLevel"))
                                             {

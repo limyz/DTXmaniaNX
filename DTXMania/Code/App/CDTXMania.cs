@@ -25,7 +25,7 @@ namespace DTXMania
     {
         // プロパティ
 
-        public static readonly string VERSION = "v1.5.2 2023123100 -sizuku Edition-";
+        public static readonly string VERSION = "v1.4.1 20231231";
         public static readonly string D3DXDLL = "d3dx9_43.dll";		// June 2010
         //public static readonly string D3DXDLL = "d3dx9_42.dll";	// February 2010
         //public static readonly string D3DXDLL = "d3dx9_41.dll";	// March 2009
@@ -53,7 +53,7 @@ namespace DTXMania
         public static CConfigIni ConfigIni
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -719,7 +719,7 @@ namespace DTXMania
                                 actEnumSongs.OnActivate();
                                 CDTXMania.stageSongSelection.bIsEnumeratingSongs = true;
                                 EnumSongs.Init(CDTXMania.SongManager.listSongsDB, CDTXMania.SongManager.nNbScoresFromSongsDB);	// songs.db情報と、取得した曲数を、新インスタンスにも与える
-                                EnumSongs.StartEnumFromDisk();		// 曲検索スレッドの起動_開始
+                                EnumSongs.StartEnumFromDisk(false);		// 曲検索スレッドの起動_開始
                                 if (CDTXMania.SongManager.nNbScoresFromSongsDB == 0)	// もし初回起動なら、検索スレッドのプライオリティをLowestでなくNormalにする
                                 {
                                     EnumSongs.ChangeEnumeratePriority(ThreadPriority.Normal);

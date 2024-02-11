@@ -179,37 +179,29 @@ namespace DTXMania
             this.n本体Y = 250;
             
             #endregion
-
-            this.prv表示用フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 20, FontStyle.Regular );
-            this.prv称号フォント = new CPrivateFastFont( new FontFamily( CDTXMania.ConfigIni.str曲名表示フォント ), 12, FontStyle.Regular );
-            this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
-            this.txパネル文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
-            this.txパネル文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
-            this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
-            this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
-            //Load new textures
-            this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
-            this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
-            this.txLagHitCount = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_lag numbers.png"));
+                        
             base.OnActivate();
         }
         public override void OnDeactivate()
-        {
-            CDTXMania.tReleaseTexture(ref this.txスキルパネル);
-            CDTXMania.tReleaseTexture(ref this.txパネル文字[0]);
-            CDTXMania.tReleaseTexture(ref this.txパネル文字[1]);
-            CDTXMania.tReleaseTexture(ref this.tx難易度パネル);
-            CDTXMania.tReleaseTexture(ref this.tx難易度用数字);
-            //Free new texture
-            CDTXMania.tReleaseTexture(ref this.txPercent);
-            CDTXMania.tReleaseTexture(ref this.txSkillMax);
-            CDTXMania.tReleaseTexture(ref this.txLagHitCount);
+        {            
             base.OnDeactivate();
         }
         public override void OnManagedCreateResources()
         {
             if( !base.bNotActivated )
             {
+                this.prv表示用フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 20, FontStyle.Regular);
+                this.prv称号フォント = new CPrivateFastFont(new FontFamily(CDTXMania.ConfigIni.str曲名表示フォント), 12, FontStyle.Regular);
+                this.txスキルパネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_SkillPanel.png"));
+                this.txパネル文字[0] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_s.png"));
+                this.txパネル文字[1] = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Ratenumber_l.png"));
+                this.tx難易度パネル = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_Difficulty.png"));
+                this.tx難易度用数字 = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_LevelNumber.png"));
+                //Load new textures
+                this.txPercent = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_RatePercent_l.png"));
+                this.txSkillMax = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_skill max.png"));
+                this.txLagHitCount = CDTXMania.tGenerateTexture(CSkin.Path(@"Graphics\7_lag numbers.png"));
+
                 this.strPlayerName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strCardName[ 0 ] ) ? "GUEST" : CDTXMania.ConfigIni.strCardName[ 0 ];
                 this.strTitleName = string.IsNullOrEmpty( CDTXMania.ConfigIni.strGroupName[ 0 ] ) ? "" : CDTXMania.ConfigIni.strGroupName[ 0 ];
 
@@ -304,9 +296,7 @@ namespace DTXMania
                 graネームプレート用.DrawImage( bmpCardName, -2f, 26f );
                 graネームプレート用.DrawImage( bmpTitleName, 6f, 8f );
                 #endregion
-
-                this.prv表示用フォント.Dispose();
-                this.prv称号フォント.Dispose();
+                                
                 bmpCardName.Dispose();
                 bmpTitleName.Dispose();
                 this.txネームプレート用文字 = new CTexture( CDTXMania.app.Device, image2, CDTXMania.TextureFormat, false );
@@ -321,6 +311,18 @@ namespace DTXMania
         {
             if( !base.bNotActivated )
             {
+                CDTXMania.t安全にDisposeする(ref this.prv表示用フォント);
+                CDTXMania.t安全にDisposeする(ref this.prv称号フォント);
+                CDTXMania.tReleaseTexture(ref this.txスキルパネル);
+                CDTXMania.tReleaseTexture(ref this.txパネル文字[0]);
+                CDTXMania.tReleaseTexture(ref this.txパネル文字[1]);
+                CDTXMania.tReleaseTexture(ref this.tx難易度パネル);
+                CDTXMania.tReleaseTexture(ref this.tx難易度用数字);
+                //Free new texture
+                CDTXMania.tReleaseTexture(ref this.txPercent);
+                CDTXMania.tReleaseTexture(ref this.txSkillMax);
+                CDTXMania.tReleaseTexture(ref this.txLagHitCount);
+
                 CDTXMania.tReleaseTexture( ref this.txネームプレート用文字 );
                 base.OnManagedReleaseResources();
             }
