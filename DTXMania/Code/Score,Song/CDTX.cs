@@ -7035,11 +7035,11 @@ namespace DTXMania
 
 					if( ( nオブジェクト数値 > 0 ) && ( nオブジェクト数値 < 2 ) )
 					{
-						chip.nPlaybackPosition -= 32;	// 384÷32＝12 ということで、フィルインONチップは12分音符ほど前へ移動。
+						chip.nPlaybackPosition -= 160;	// 1920÷160＝12 ということで、フィルインONチップは12分音符ほど前へ移動。
 					}
 					else if( nオブジェクト数値 == 2 )
 					{
-						chip.nPlaybackPosition += 32;	// 同じく、フィルインOFFチップは12分音符ほど後ろへ移動。
+						chip.nPlaybackPosition += 160;	// 同じく、フィルインOFFチップは12分音符ほど後ろへ移動。
 					}
 				}
 				//-----------------

@@ -7,7 +7,7 @@ namespace DTXCreator.Score
 {
 	public class CLane  // Cレーン
 	{
-		public const int LANEWIDTH = 48;
+		public const int LANEWIDTH = 30;
 
 		public enum E種別
 		{

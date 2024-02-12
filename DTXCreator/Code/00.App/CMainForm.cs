@@ -6203,7 +6203,7 @@ namespace DTXCreator
 		}
 		private void toolStripComboBox譜面拡大率_SelectedIndexChanged( object sender, EventArgs e )
 		{
-			CMeasure.n基準の高さdot = 1920 * ( this.toolStripComboBox譜面拡大率.SelectedIndex + 1);
+			CMeasure.n基準の高さdot = 192 * ( this.toolStripComboBox譜面拡大率.SelectedIndex + 1);
 			
 			this.pictureBox譜面パネル.Refresh();
 		}

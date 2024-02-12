@@ -8,8 +8,8 @@ namespace DTXCreator.Score
 	{
 		public float f小節長倍率 = 1f;
 		public List<CChip> listチップ = new List<CChip>();
-		public static int n基準の高さdot = 1920;
-		public static readonly int n基準の高さgrid = 1920;
+		public static int n基準の高さdot = 192;
+		public static readonly int n基準の高さgrid = 192;
 		public static int n１グリッドの高さdot
 		{
 			get
