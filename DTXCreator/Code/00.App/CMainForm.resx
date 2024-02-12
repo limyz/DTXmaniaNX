@@ -123,16 +123,22 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainerタブと譜面を分割.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 49</value>
+    <value>0, 58</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxPREMOVIE.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREMOVIE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 392</value>
+    <value>113, 523</value>
+  </data>
+  <data name="textBoxPREMOVIE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxPREMOVIE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textBoxPREMOVIE.TabIndex" type="System.Int32, mscorlib">
@@ -142,7 +148,8 @@
     <value>572, 17</value>
   </metadata>
   <data name="textBoxPREMOVIE.ToolTip" xml:space="preserve">
-    <value>プレビュー動画を設定します。</value>
+    <value>Preview video played when song is selected
+</value>
   </data>
   <data name="&gt;&gt;textBoxPREMOVIE.Name" xml:space="preserve">
     <value>textBoxPREMOVIE</value>
@@ -163,10 +170,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPREMOVIE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 390</value>
+    <value>413, 520</value>
+  </data>
+  <data name="buttonPREMOVIE参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonPREMOVIE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonPREMOVIE参照.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -196,22 +206,25 @@
     <value>NoControl</value>
   </data>
   <data name="labelPREMOVIE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 395</value>
+    <value>10, 527</value>
+  </data>
+  <data name="labelPREMOVIE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelPREMOVIE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 12</value>
+    <value>91, 16</value>
   </data>
   <data name="labelPREMOVIE.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
   <data name="labelPREMOVIE.Text" xml:space="preserve">
-    <value>Preview動画</value>
+    <value>PreviewVideo</value>
   </data>
   <data name="labelPREMOVIE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelPREMOVIE.ToolTip" xml:space="preserve">
-    <value>プレビュー動画を設定します。</value>
+    <value>Preview video played when song is selected</value>
   </data>
   <data name="&gt;&gt;labelPREMOVIE.Name" xml:space="preserve">
     <value>labelPREMOVIE</value>
@@ -229,13 +242,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxLB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 446</value>
+    <value>221, 595</value>
+  </data>
+  <data name="textBoxLB.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxLB.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxLB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxLB.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -259,13 +275,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxLP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 484</value>
+    <value>221, 645</value>
+  </data>
+  <data name="textBoxLP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxLP.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxLP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxLP.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
@@ -289,13 +308,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxLC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 446</value>
+    <value>112, 595</value>
+  </data>
+  <data name="textBoxLC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxLC.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxLC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxLC.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
@@ -319,13 +341,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxRC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 484</value>
+    <value>405, 645</value>
+  </data>
+  <data name="textBoxRC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxRC.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxRC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxRC.TabIndex" type="System.Int32, mscorlib">
     <value>56</value>
@@ -349,13 +374,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxHO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 484</value>
+    <value>148, 645</value>
+  </data>
+  <data name="textBoxHO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxHO.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxHO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxHO.TabIndex" type="System.Int32, mscorlib">
     <value>54</value>
@@ -379,13 +407,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxFT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 446</value>
+    <value>368, 595</value>
+  </data>
+  <data name="textBoxFT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxFT.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxFT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxFT.TabIndex" type="System.Int32, mscorlib">
     <value>52</value>
@@ -409,13 +440,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxCY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 446</value>
+    <value>405, 595</value>
+  </data>
+  <data name="textBoxCY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxCY.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxCY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxCY.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -439,13 +473,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxLT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 446</value>
+    <value>332, 595</value>
+  </data>
+  <data name="textBoxLT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxLT.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxLT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxLT.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -469,13 +506,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxHT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 446</value>
+    <value>296, 595</value>
+  </data>
+  <data name="textBoxHT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxHT.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxHT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxHT.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -499,13 +539,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxBD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 446</value>
+    <value>259, 595</value>
+  </data>
+  <data name="textBoxBD.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxBD.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxBD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxBD.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -529,13 +572,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxSN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 446</value>
+    <value>184, 595</value>
+  </data>
+  <data name="textBoxSN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxSN.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxSN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxSN.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -559,13 +605,16 @@
     <value>Disable</value>
   </data>
   <data name="textBoxHH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 446</value>
+    <value>148, 595</value>
+  </data>
+  <data name="textBoxHH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxHH.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxHH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>22, 19</value>
+    <value>28, 22</value>
   </data>
   <data name="textBoxHH.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -586,13 +635,16 @@
     <value>14</value>
   </data>
   <data name="textBoxBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 216</value>
+    <value>113, 288</value>
+  </data>
+  <data name="textBoxBLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxBLVDEC.MaxLength" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="textBoxBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxBLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -601,7 +653,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxBLVDEC.ToolTip" xml:space="preserve">
-    <value>ベースの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets the decimal part of Bass difficulty from 1 to 9</value>
   </data>
   <data name="&gt;&gt;textBoxBLVDEC.Name" xml:space="preserve">
     <value>textBoxBLVDEC</value>
@@ -616,13 +668,16 @@
     <value>15</value>
   </data>
   <data name="textBoxGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 172</value>
+    <value>113, 229</value>
+  </data>
+  <data name="textBoxGLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxGLVDEC.MaxLength" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="textBoxGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxGLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -631,7 +686,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxGLVDEC.ToolTip" xml:space="preserve">
-    <value>ギターの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets the decimal part of Guitar difficulty from 1 to 9</value>
   </data>
   <data name="&gt;&gt;textBoxGLVDEC.Name" xml:space="preserve">
     <value>textBoxGLVDEC</value>
@@ -646,13 +701,16 @@
     <value>16</value>
   </data>
   <data name="textBoxDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 128</value>
+    <value>113, 171</value>
+  </data>
+  <data name="textBoxDLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxDLVDEC.MaxLength" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="textBoxDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxDLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -661,7 +719,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxDLVDEC.ToolTip" xml:space="preserve">
-    <value>ドラムの難易度を、(易) 1～9 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets the decimal part of Drum difficulty from 1 to 9</value>
   </data>
   <data name="&gt;&gt;textBoxDLVDEC.Name" xml:space="preserve">
     <value>textBoxDLVDEC</value>
@@ -679,16 +737,21 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 367</value>
+    <value>113, 489</value>
+  </data>
+  <data name="textBoxRESULTIMAGE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
   </data>
   <data name="textBoxRESULTIMAGE.ToolTip" xml:space="preserve">
-    <value>リザルト画像を設定します。</value>
+    <value>An image file shown in result screen.
+The image size is 204x269.
+</value>
   </data>
   <data name="&gt;&gt;textBoxRESULTIMAGE.Name" xml:space="preserve">
     <value>textBoxRESULTIMAGE</value>
@@ -706,16 +769,21 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 342</value>
+    <value>113, 456</value>
+  </data>
+  <data name="textBoxBACKGROUND.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
   <data name="textBoxBACKGROUND.ToolTip" xml:space="preserve">
-    <value>背景画像を設定します。</value>
+    <value>A background image file drawn on play screen.
+The image size is 640x480.
+</value>
   </data>
   <data name="&gt;&gt;textBoxBACKGROUND.Name" xml:space="preserve">
     <value>textBoxBACKGROUND</value>
@@ -733,16 +801,21 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 317</value>
+    <value>113, 423</value>
+  </data>
+  <data name="textBoxSTAGEFILE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
   <data name="textBoxSTAGEFILE.ToolTip" xml:space="preserve">
-    <value>STAGEFILEを設定します。</value>
+    <value>A background image file drawn at loading song.
+The image size is 640x480.
+</value>
   </data>
   <data name="&gt;&gt;textBoxSTAGEFILE.Name" xml:space="preserve">
     <value>textBoxSTAGEFILE</value>
@@ -760,16 +833,21 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 292</value>
+    <value>113, 389</value>
+  </data>
+  <data name="textBoxPREIMAGE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
   <data name="textBoxPREIMAGE.ToolTip" xml:space="preserve">
-    <value>選曲画像を設定します。</value>
+    <value>Preview image shown when song is selected.
+The image size is 400x400.
+</value>
   </data>
   <data name="&gt;&gt;textBoxPREIMAGE.Name" xml:space="preserve">
     <value>textBoxPREIMAGE</value>
@@ -787,16 +865,19 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 267</value>
+    <value>113, 356</value>
+  </data>
+  <data name="textBoxPREVIEW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>290, 22</value>
   </data>
   <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
   <data name="textBoxPREVIEW.ToolTip" xml:space="preserve">
-    <value>プレビューサウンドを設定します。</value>
+    <value>Preview sound played when song is selected</value>
   </data>
   <data name="&gt;&gt;textBoxPREVIEW.Name" xml:space="preserve">
     <value>textBoxPREVIEW</value>
@@ -814,16 +895,19 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 241</value>
+    <value>113, 321</value>
+  </data>
+  <data name="textBoxパネル.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 19</value>
+    <value>331, 22</value>
   </data>
   <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="textBoxパネル.ToolTip" xml:space="preserve">
-    <value>パネル文を設定します。</value>
+    <value>Panel message shown in playing screen.</value>
   </data>
   <data name="&gt;&gt;textBoxパネル.Name" xml:space="preserve">
     <value>textBoxパネル</value>
@@ -838,13 +922,16 @@
     <value>23</value>
   </data>
   <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 194</value>
+    <value>113, 259</value>
+  </data>
+  <data name="textBoxBLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxBLEVEL.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -853,7 +940,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxBLEVEL.ToolTip" xml:space="preserve">
-    <value>ベースの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets Bass difficulty from 1 (easy) to 99 (hard)</value>
   </data>
   <data name="&gt;&gt;textBoxBLEVEL.Name" xml:space="preserve">
     <value>textBoxBLEVEL</value>
@@ -868,13 +955,16 @@
     <value>24</value>
   </data>
   <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 150</value>
+    <value>113, 200</value>
+  </data>
+  <data name="textBoxGLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxGLEVEL.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -883,7 +973,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxGLEVEL.ToolTip" xml:space="preserve">
-    <value>ギターの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets Guitar difficulty from 1 (easy) to 99 (hard)</value>
   </data>
   <data name="&gt;&gt;textBoxGLEVEL.Name" xml:space="preserve">
     <value>textBoxGLEVEL</value>
@@ -898,13 +988,16 @@
     <value>25</value>
   </data>
   <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 106</value>
+    <value>113, 141</value>
+  </data>
+  <data name="textBoxDLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxDLEVEL.MaxLength" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 19</value>
+    <value>47, 22</value>
   </data>
   <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -913,7 +1006,7 @@
     <value>Center</value>
   </data>
   <data name="textBoxDLEVEL.ToolTip" xml:space="preserve">
-    <value>ドラムの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Sets Drum difficulty from 1 (easy) to 99 (hard)</value>
   </data>
   <data name="&gt;&gt;textBoxDLEVEL.Name" xml:space="preserve">
     <value>textBoxDLEVEL</value>
@@ -931,16 +1024,19 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 56</value>
+    <value>113, 75</value>
+  </data>
+  <data name="textBoxコメント.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 19</value>
+    <value>331, 22</value>
   </data>
   <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="textBoxコメント.ToolTip" xml:space="preserve">
-    <value>演奏データに対するコメント文を設定します。</value>
+    <value>Comment</value>
   </data>
   <data name="&gt;&gt;textBoxコメント.Name" xml:space="preserve">
     <value>textBoxコメント</value>
@@ -958,16 +1054,19 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 31</value>
+    <value>113, 41</value>
+  </data>
+  <data name="textBox製作者.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 19</value>
+    <value>331, 22</value>
   </data>
   <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="textBox製作者.ToolTip" xml:space="preserve">
-    <value>演奏データの製作者名を設定します。</value>
+    <value>Artist name</value>
   </data>
   <data name="&gt;&gt;textBox製作者.Name" xml:space="preserve">
     <value>textBox製作者</value>
@@ -985,19 +1084,22 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 6</value>
+    <value>113, 8</value>
+  </data>
+  <data name="textBox曲名.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="textBox曲名.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>10, 19</value>
+    <value>12, 19</value>
   </data>
   <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 19</value>
+    <value>331, 22</value>
   </data>
   <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="textBox曲名.ToolTip" xml:space="preserve">
-    <value>演奏データのタイトルを設定します。</value>
+    <value>Song title</value>
   </data>
   <data name="&gt;&gt;textBox曲名.Name" xml:space="preserve">
     <value>textBox曲名</value>
@@ -1018,10 +1120,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelLB.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 431</value>
+    <value>223, 575</value>
+  </data>
+  <data name="labelLB.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelLB.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 12</value>
+    <value>23, 16</value>
   </data>
   <data name="labelLB.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -1054,10 +1159,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelLP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 469</value>
+    <value>224, 625</value>
+  </data>
+  <data name="labelLP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelLP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 12</value>
+    <value>23, 16</value>
   </data>
   <data name="labelLP.TabIndex" type="System.Int32, mscorlib">
     <value>61</value>
@@ -1090,10 +1198,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelLC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 431</value>
+    <value>113, 575</value>
+  </data>
+  <data name="labelLC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelLC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 12</value>
+    <value>23, 16</value>
   </data>
   <data name="labelLC.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
@@ -1126,10 +1237,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelRC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 469</value>
+    <value>407, 625</value>
+  </data>
+  <data name="labelRC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelRC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 12</value>
+    <value>26, 16</value>
   </data>
   <data name="labelRC.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -1162,10 +1276,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelHO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 469</value>
+    <value>149, 625</value>
+  </data>
+  <data name="labelHO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelHO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 12</value>
+    <value>27, 16</value>
   </data>
   <data name="labelHO.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -1198,10 +1315,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelFT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 431</value>
+    <value>369, 575</value>
+  </data>
+  <data name="labelFT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelFT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>19, 12</value>
+    <value>24, 16</value>
   </data>
   <data name="labelFT.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
@@ -1234,10 +1354,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelCY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 431</value>
+    <value>407, 575</value>
+  </data>
+  <data name="labelCY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelCY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 12</value>
+    <value>25, 16</value>
   </data>
   <data name="labelCY.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -1270,10 +1393,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelLT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 431</value>
+    <value>335, 575</value>
+  </data>
+  <data name="labelLT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelLT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>18, 12</value>
+    <value>23, 16</value>
   </data>
   <data name="labelLT.TabIndex" type="System.Int32, mscorlib">
     <value>49</value>
@@ -1306,10 +1432,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelHT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 431</value>
+    <value>297, 575</value>
+  </data>
+  <data name="labelHT.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelHT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 12</value>
+    <value>26, 16</value>
   </data>
   <data name="labelHT.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1342,10 +1471,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelBD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 431</value>
+    <value>260, 575</value>
+  </data>
+  <data name="labelBD.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelBD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 12</value>
+    <value>26, 16</value>
   </data>
   <data name="labelBD.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1378,10 +1510,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelSN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 431</value>
+    <value>187, 575</value>
+  </data>
+  <data name="labelSN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelSN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>20, 12</value>
+    <value>26, 16</value>
   </data>
   <data name="labelSN.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -1414,10 +1549,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelHH.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 431</value>
+    <value>149, 575</value>
+  </data>
+  <data name="labelHH.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelHH.Size" type="System.Drawing.Size, System.Drawing">
-    <value>21, 12</value>
+    <value>27, 16</value>
   </data>
   <data name="labelHH.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -1450,22 +1588,25 @@
     <value>NoControl</value>
   </data>
   <data name="空打ちSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 414</value>
+    <value>208, 552</value>
+  </data>
+  <data name="空打ちSE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="空打ちSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 12</value>
+    <value>65, 16</value>
   </data>
   <data name="空打ちSE.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
   <data name="空打ちSE.Text" xml:space="preserve">
-    <value>空打ちSE</value>
+    <value>No Hit SE</value>
   </data>
   <data name="空打ちSE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="空打ちSE.ToolTip" xml:space="preserve">
-    <value>空打ちのSEの指定</value>
+    <value>No Hit Sound Effect Value</value>
   </data>
   <data name="&gt;&gt;空打ちSE.Name" xml:space="preserve">
     <value>空打ちSE</value>
@@ -1486,10 +1627,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 219</value>
+    <value>22, 292</value>
+  </data>
+  <data name="labelBLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 12</value>
+    <value>80, 16</value>
   </data>
   <data name="labelBLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -1519,10 +1663,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarBLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 216</value>
+    <value>165, 288</value>
   </data>
   <data name="hScrollBarBLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarBLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -1546,10 +1690,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 175</value>
+    <value>19, 233</value>
+  </data>
+  <data name="labelGLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 12</value>
+    <value>84, 16</value>
   </data>
   <data name="labelGLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -1580,10 +1727,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarGLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 172</value>
+    <value>165, 229</value>
   </data>
   <data name="hScrollBarGLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarGLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1607,10 +1754,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 131</value>
+    <value>23, 175</value>
+  </data>
+  <data name="labelDLVDEC.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 12</value>
+    <value>81, 16</value>
   </data>
   <data name="labelDLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -1640,10 +1790,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarDLVDEC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 128</value>
+    <value>165, 171</value>
   </data>
   <data name="hScrollBarDLVDEC.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarDLVDEC.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -1667,10 +1817,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 365</value>
+    <value>413, 487</value>
+  </data>
+  <data name="buttonRESULTIMAGE参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonRESULTIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -1700,10 +1853,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonBACKGROUND参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 340</value>
+    <value>413, 453</value>
+  </data>
+  <data name="buttonBACKGROUND参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonBACKGROUND参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonBACKGROUND参照.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1733,10 +1889,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonSTAGEFILE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 315</value>
+    <value>413, 420</value>
+  </data>
+  <data name="buttonSTAGEFILE参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonSTAGEFILE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonSTAGEFILE参照.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1766,10 +1925,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPREIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 290</value>
+    <value>413, 387</value>
+  </data>
+  <data name="buttonPREIMAGE参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonPREIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonPREIMAGE参照.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1799,10 +1961,13 @@
     <value>NoControl</value>
   </data>
   <data name="buttonPREVIEW参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>308, 265</value>
+    <value>413, 353</value>
+  </data>
+  <data name="buttonPREVIEW参照.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="buttonPREVIEW参照.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 23</value>
+    <value>33, 31</value>
   </data>
   <data name="buttonPREVIEW参照.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1833,22 +1998,26 @@
     <value>NoControl</value>
   </data>
   <data name="labeRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 370</value>
+    <value>18, 493</value>
+  </data>
+  <data name="labeRESULTIMAGE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labeRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>83, 16</value>
   </data>
   <data name="labeRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="labeRESULTIMAGE.Text" xml:space="preserve">
-    <value>結果画像</value>
+    <value>ResultImage</value>
   </data>
   <data name="labeRESULTIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labeRESULTIMAGE.ToolTip" xml:space="preserve">
-    <value>リザルト画像を設定します。</value>
+    <value>An image file shown in result screen.
+The image size is 204x269.</value>
   </data>
   <data name="&gt;&gt;labeRESULTIMAGE.Name" xml:space="preserve">
     <value>labeRESULTIMAGE</value>
@@ -1869,22 +2038,26 @@
     <value>NoControl</value>
   </data>
   <data name="labelBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 345</value>
+    <value>24, 460</value>
+  </data>
+  <data name="labelBACKGROUND.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>76, 16</value>
   </data>
   <data name="labelBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
   <data name="labelBACKGROUND.Text" xml:space="preserve">
-    <value>背景画像</value>
+    <value>BackImage</value>
   </data>
   <data name="labelBACKGROUND.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelBACKGROUND.ToolTip" xml:space="preserve">
-    <value>背景画像を設定します。</value>
+    <value>A background image file drawn on play screen.
+The image size is 640x480.</value>
   </data>
   <data name="&gt;&gt;labelBACKGROUND.Name" xml:space="preserve">
     <value>labelBACKGROUND</value>
@@ -1905,22 +2078,26 @@
     <value>NoControl</value>
   </data>
   <data name="labelSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 320</value>
+    <value>6, 427</value>
+  </data>
+  <data name="labelSTAGEFILE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 12</value>
+    <value>94, 16</value>
   </data>
   <data name="labelSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="labelSTAGEFILE.Text" xml:space="preserve">
-    <value>Loading画像</value>
+    <value>LoadingImage</value>
   </data>
   <data name="labelSTAGEFILE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelSTAGEFILE.ToolTip" xml:space="preserve">
-    <value>STAGEFILEを設定します。</value>
+    <value>A background image file drawn at loading song.
+The image size is 640x480.</value>
   </data>
   <data name="&gt;&gt;labelSTAGEFILE.Name" xml:space="preserve">
     <value>labelSTAGEFILE</value>
@@ -1941,22 +2118,26 @@
     <value>NoControl</value>
   </data>
   <data name="labelPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 295</value>
+    <value>7, 393</value>
+  </data>
+  <data name="labelPREIMAGE.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>93, 16</value>
   </data>
   <data name="labelPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
   <data name="labelPREIMAGE.Text" xml:space="preserve">
-    <value>選曲画像</value>
+    <value>PreviewImage</value>
   </data>
   <data name="labelPREIMAGE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelPREIMAGE.ToolTip" xml:space="preserve">
-    <value>選曲画像を設定します。</value>
+    <value>Preview image shown when song is selected.
+The image size is 400x400.</value>
   </data>
   <data name="&gt;&gt;labelPREIMAGE.Name" xml:space="preserve">
     <value>labelPREIMAGE</value>
@@ -1977,22 +2158,25 @@
     <value>NoControl</value>
   </data>
   <data name="labelPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>22, 272</value>
+    <value>45, 362</value>
+  </data>
+  <data name="labelPREVIEW.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 12</value>
+    <value>55, 16</value>
   </data>
   <data name="labelPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
   </data>
   <data name="labelPREVIEW.Text" xml:space="preserve">
-    <value>Preview音</value>
+    <value>Preview</value>
   </data>
   <data name="labelPREVIEW.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelPREVIEW.ToolTip" xml:space="preserve">
-    <value>プレビューサウンドを設定します。</value>
+    <value>Preview sound played when song is selected</value>
   </data>
   <data name="&gt;&gt;labelPREVIEW.Name" xml:space="preserve">
     <value>labelPREVIEW</value>
@@ -2013,22 +2197,25 @@
     <value>NoControl</value>
   </data>
   <data name="labelパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 244</value>
+    <value>28, 325</value>
+  </data>
+  <data name="labelパネル.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 12</value>
+    <value>74, 16</value>
   </data>
   <data name="labelパネル.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
   <data name="labelパネル.Text" xml:space="preserve">
-    <value>パネル文</value>
+    <value>Panel msg.</value>
   </data>
   <data name="labelパネル.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelパネル.ToolTip" xml:space="preserve">
-    <value>パネル文を設定します。</value>
+    <value>Panel message shown in playing screen.</value>
   </data>
   <data name="&gt;&gt;labelパネル.Name" xml:space="preserve">
     <value>labelパネル</value>
@@ -2049,10 +2236,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>34, 197</value>
+    <value>47, 263</value>
+  </data>
+  <data name="labelBLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 12</value>
+    <value>55, 16</value>
   </data>
   <data name="labelBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2064,7 +2254,7 @@
     <value>TopRight</value>
   </data>
   <data name="labelBLEVEL.ToolTip" xml:space="preserve">
-    <value>ベースの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Bass level, (easy) 1 to 99 (Hard).</value>
   </data>
   <data name="&gt;&gt;labelBLEVEL.Name" xml:space="preserve">
     <value>labelBLEVEL</value>
@@ -2085,10 +2275,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 194</value>
+    <value>165, 259</value>
   </data>
   <data name="hScrollBarBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2112,10 +2302,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 153</value>
+    <value>44, 204</value>
+  </data>
+  <data name="labelGLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 12</value>
+    <value>59, 16</value>
   </data>
   <data name="labelGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -2127,7 +2320,7 @@
     <value>TopRight</value>
   </data>
   <data name="labelGLEVEL.ToolTip" xml:space="preserve">
-    <value>ギターの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Guitar level, (easy) 1 to 99 (Hard)</value>
   </data>
   <data name="&gt;&gt;labelGLEVEL.Name" xml:space="preserve">
     <value>labelGLEVEL</value>
@@ -2148,10 +2341,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 150</value>
+    <value>165, 200</value>
   </data>
   <data name="hScrollBarGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2175,10 +2368,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 109</value>
+    <value>48, 145</value>
+  </data>
+  <data name="labelDLEVEL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 12</value>
+    <value>56, 16</value>
   </data>
   <data name="labelDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -2190,7 +2386,7 @@
     <value>TopRight</value>
   </data>
   <data name="labelDLEVEL.ToolTip" xml:space="preserve">
-    <value>ドラムの難易度を、(易) 1～99 (難) で設定します。999まで設定することもできます。</value>
+    <value>Drums level, (easy) 1 to 99 (Hard).</value>
   </data>
   <data name="&gt;&gt;labelDLEVEL.Name" xml:space="preserve">
     <value>labelDLEVEL</value>
@@ -2211,10 +2407,10 @@
     <value>NoControl</value>
   </data>
   <data name="hScrollBarDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 106</value>
+    <value>165, 141</value>
   </data>
   <data name="hScrollBarDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 17</value>
+    <value>281, 17</value>
   </data>
   <data name="hScrollBarDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2238,10 +2434,13 @@
     <value>NoControl</value>
   </data>
   <data name="labelBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 83</value>
+    <value>67, 111</value>
+  </data>
+  <data name="labelBPM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>36, 16</value>
   </data>
   <data name="labelBPM.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2253,7 +2452,7 @@
     <value>TopRight</value>
   </data>
   <data name="labelBPM.ToolTip" xml:space="preserve">
-    <value>曲の速さをBPM (Beats / Minute) で設定します。</value>
+    <value>Song's BGM (Beats Per Minute)</value>
   </data>
   <data name="&gt;&gt;labelBPM.Name" xml:space="preserve">
     <value>labelBPM</value>
@@ -2274,22 +2473,25 @@
     <value>NoControl</value>
   </data>
   <data name="labelコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 59</value>
+    <value>38, 79</value>
+  </data>
+  <data name="labelコメント.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="labelコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>38, 12</value>
+    <value>64, 16</value>
   </data>
   <data name="labelコメント.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="labelコメント.Text" xml:space="preserve">
-    <value>コメント</value>
+    <value>Comment</value>
   </data>
   <data name="labelコメント.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="labelコメント.ToolTip" xml:space="preserve">
-    <value>コメント</value>
+    <value>Comment</value>
   </data>
   <data name="&gt;&gt;labelコメント.Name" xml:space="preserve">
     <value>labelコメント</value>
@@ -2310,22 +2512,25 @@
     <value>NoControl</value>
   </data>
   <data name="label製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 34</value>
+    <value>65, 45</value>
+  </data>
+  <data name="label製作者.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 12</value>
+    <value>36, 16</value>
   </data>
   <data name="label製作者.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="label製作者.Text" xml:space="preserve">
-    <value>製作者</value>
+    <value>Artist</value>
   </data>
   <data name="label製作者.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="label製作者.ToolTip" xml:space="preserve">
-    <value>製作者</value>
+    <value>Artist name</value>
   </data>
   <data name="&gt;&gt;label製作者.Name" xml:space="preserve">
     <value>label製作者</value>
@@ -2346,22 +2551,25 @@
     <value>NoControl</value>
   </data>
   <data name="label曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 9</value>
+    <value>70, 12</value>
+  </data>
+  <data name="label曲名.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 12</value>
+    <value>33, 16</value>
   </data>
   <data name="label曲名.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="label曲名.Text" xml:space="preserve">
-    <value>曲名</value>
+    <value>Title</value>
   </data>
   <data name="label曲名.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
   </data>
   <data name="label曲名.ToolTip" xml:space="preserve">
-    <value>演奏データのタイトルを設定します。</value>
+    <value>Song title</value>
   </data>
   <data name="&gt;&gt;label曲名.Name" xml:space="preserve">
     <value>label曲名</value>
@@ -2376,10 +2584,13 @@
     <value>69</value>
   </data>
   <data name="numericUpDownBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 81</value>
+    <value>113, 108</value>
+  </data>
+  <data name="numericUpDownBPM.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="numericUpDownBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 19</value>
+    <value>91, 22</value>
   </data>
   <data name="numericUpDownBPM.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2388,7 +2599,7 @@
     <value>Center</value>
   </data>
   <data name="numericUpDownBPM.ToolTip" xml:space="preserve">
-    <value>曲の速さをBPM (Beats / Minute) で設定します。</value>
+    <value>Song's BGM (Beats Per Minute)</value>
   </data>
   <data name="&gt;&gt;numericUpDownBPM.Name" xml:space="preserve">
     <value>numericUpDownBPM</value>
@@ -2403,19 +2614,22 @@
     <value>70</value>
   </data>
   <data name="tabPage基本情報.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 25</value>
+  </data>
+  <data name="tabPage基本情報.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage基本情報.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage基本情報.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 764</value>
+    <value>457, 946</value>
   </data>
   <data name="tabPage基本情報.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="tabPage基本情報.Text" xml:space="preserve">
-    <value>基本情報</value>
+    <value>Main</value>
   </data>
   <data name="&gt;&gt;tabPage基本情報.Name" xml:space="preserve">
     <value>tabPage基本情報</value>
@@ -2430,7 +2644,7 @@
     <value>0</value>
   </data>
   <data name="columnHeaderWAV_ラベル.Text" xml:space="preserve">
-    <value>ラベル</value>
+    <value>Label</value>
   </data>
   <data name="columnHeaderWAV_ラベル.Width" type="System.Int32, mscorlib">
     <value>80</value>
@@ -2442,19 +2656,19 @@
     <value>28</value>
   </data>
   <data name="columnHeaderWAV_ファイル名.Text" xml:space="preserve">
-    <value>ファイル</value>
+    <value>File</value>
   </data>
   <data name="columnHeaderWAV_ファイル名.Width" type="System.Int32, mscorlib">
     <value>80</value>
   </data>
   <data name="columnHeaderWAV_音量.Text" xml:space="preserve">
-    <value>音量</value>
+    <value>Vol.</value>
   </data>
   <data name="columnHeaderWAV_音量.Width" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
   <data name="columnHeaderWAV_位置.Text" xml:space="preserve">
-    <value>位置</value>
+    <value>Pos.</value>
   </data>
   <data name="columnHeaderWAV_位置.Width" type="System.Int32, mscorlib">
     <value>40</value>
@@ -2469,13 +2683,16 @@
     <value>Fill</value>
   </data>
   <data name="listViewWAVリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewWAVリスト.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="listViewWAVリスト.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="listViewWAVリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 733</value>
+    <value>449, 911</value>
   </data>
   <data name="listViewWAVリスト.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2502,73 +2719,73 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonWAVリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonWAVリスト上移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリスト上移動.ToolTipText" xml:space="preserve">
-    <value>選択行を１つ上に移動します。</value>
+    <value>Move up</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリスト下移動.ToolTipText" xml:space="preserve">
-    <value>選択行を１つ下に移動します。</value>
+    <value>Move down</value>
   </data>
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生開始.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生開始.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生開始.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生開始.ToolTipText" xml:space="preserve">
-    <value>選択されている行のプレビュー音を再生します。</value>
+    <value>Play the current wave sound</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュー再生停止.ToolTipText" xml:space="preserve">
-    <value>プレビュー音の再生を停止します。</value>
+    <value>Stop sound</value>
   </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュースイッチ.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュースイッチ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュースイッチ.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonWAVリストプレビュースイッチ.ToolTipText" xml:space="preserve">
-    <value>行をクリックしたときにプレビュー音を再生します。</value>
+    <value>Play sound on click</value>
   </data>
   <data name="toolStripWAVツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 736</value>
+    <value>4, 915</value>
   </data>
   <data name="toolStripWAVツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 25</value>
+    <value>449, 27</value>
   </data>
   <data name="toolStripWAVツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2590,13 +2807,16 @@
     <value>1</value>
   </data>
   <data name="tabPageWAV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 25</value>
+  </data>
+  <data name="tabPageWAV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageWAV.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageWAV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 764</value>
+    <value>457, 946</value>
   </data>
   <data name="tabPageWAV.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2635,7 +2855,7 @@
     <value>28</value>
   </data>
   <data name="columnHeaderBMP_ファイル名.Text" xml:space="preserve">
-    <value>ファイル</value>
+    <value>File</value>
   </data>
   <data name="columnHeaderBMP_ファイル名.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -2644,13 +2864,16 @@
     <value>Fill</value>
   </data>
   <data name="listViewBMPリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewBMPリスト.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="listViewBMPリスト.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="listViewBMPリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 733</value>
+    <value>449, 911</value>
   </data>
   <data name="listViewBMPリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2677,7 +2900,7 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonBMPリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonBMPリスト上移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -2686,16 +2909,16 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonBMPリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonBMPリスト下移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripBMPツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 736</value>
+    <value>4, 915</value>
   </data>
   <data name="toolStripBMPツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 25</value>
+    <value>449, 27</value>
   </data>
   <data name="toolStripBMPツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2717,13 +2940,16 @@
     <value>1</value>
   </data>
   <data name="tabPageBMP.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 25</value>
+  </data>
+  <data name="tabPageBMP.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageBMP.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageBMP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 764</value>
+    <value>457, 946</value>
   </data>
   <data name="tabPageBMP.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2744,7 +2970,7 @@
     <value>2</value>
   </data>
   <data name="columnHeaderAVI_ラベル.Text" xml:space="preserve">
-    <value>ラベル</value>
+    <value>Label</value>
   </data>
   <data name="columnHeaderAVI_ラベル.Width" type="System.Int32, mscorlib">
     <value>127</value>
@@ -2756,7 +2982,7 @@
     <value>28</value>
   </data>
   <data name="columnHeaderAVI_ファイル名.Text" xml:space="preserve">
-    <value>ファイル</value>
+    <value>File</value>
   </data>
   <data name="columnHeaderAVI_ファイル名.Width" type="System.Int32, mscorlib">
     <value>120</value>
@@ -2765,13 +2991,16 @@
     <value>Fill</value>
   </data>
   <data name="listViewAVIリスト.Font" type="System.Drawing.Font, System.Drawing">
-    <value>ＭＳ ゴシック, 9pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="listViewAVIリスト.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
+  </data>
+  <data name="listViewAVIリスト.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="listViewAVIリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 733</value>
+    <value>449, 911</value>
   </data>
   <data name="listViewAVIリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2798,31 +3027,31 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonAVIリスト上移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonAVIリスト上移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonAVIリスト上移動.ToolTipText" xml:space="preserve">
-    <value>選択行を１つ上に移動します。</value>
+    <value>Move up</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonAVIリスト下移動.ToolTipText" xml:space="preserve">
-    <value>選択行を１つ下に移動します。</value>
+    <value>Move down</value>
   </data>
   <data name="toolStripAVIツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 736</value>
+    <value>4, 915</value>
   </data>
   <data name="toolStripAVIツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 25</value>
+    <value>449, 27</value>
   </data>
   <data name="toolStripAVIツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2843,13 +3072,16 @@
     <value>1</value>
   </data>
   <data name="tabPageAVI.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 25</value>
+  </data>
+  <data name="tabPageAVI.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageAVI.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPageAVI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 764</value>
+    <value>457, 946</value>
   </data>
   <data name="tabPageAVI.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2873,10 +3105,10 @@
     <value>Fill</value>
   </data>
   <data name="textBox自由入力欄.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>4, 4</value>
   </data>
   <data name="textBox自由入力欄.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 10, 10, 10</value>
+    <value>13, 13, 13, 13</value>
   </data>
   <data name="textBox自由入力欄.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2885,7 +3117,7 @@
     <value>Both</value>
   </data>
   <data name="textBox自由入力欄.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 758</value>
+    <value>449, 938</value>
   </data>
   <data name="textBox自由入力欄.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2903,13 +3135,16 @@
     <value>0</value>
   </data>
   <data name="tabPage自由入力.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+    <value>4, 25</value>
+  </data>
+  <data name="tabPage自由入力.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage自由入力.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+    <value>4, 4, 4, 4</value>
   </data>
   <data name="tabPage自由入力.Size" type="System.Drawing.Size, System.Drawing">
-    <value>339, 764</value>
+    <value>457, 946</value>
   </data>
   <data name="tabPage自由入力.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2935,8 +3170,11 @@
   <data name="tabControl情報パネル.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="tabControl情報パネル.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="tabControl情報パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 790</value>
+    <value>465, 975</value>
   </data>
   <data name="tabControl情報パネル.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2975,7 +3213,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="pictureBox譜面パネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 773</value>
+    <value>245, 953</value>
   </data>
   <data name="pictureBox譜面パネル.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2996,10 +3234,10 @@
     <value>Bottom</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 773</value>
+    <value>0, 958</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>516, 17</value>
+    <value>692, 17</value>
   </data>
   <data name="hScrollBar譜面用水平スクロールバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3029,10 +3267,13 @@
     <value>1</value>
   </data>
   <data name="splitContainerタブと譜面を分割.Size" type="System.Drawing.Size, System.Drawing">
-    <value>867, 790</value>
+    <value>1162, 975</value>
   </data>
   <data name="splitContainerタブと譜面を分割.SplitterDistance" type="System.Int32, mscorlib">
-    <value>347</value>
+    <value>465</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.SplitterWidth" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="splitContainerタブと譜面を分割.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -3053,10 +3294,13 @@
     <value>0, 493</value>
   </metadata>
   <data name="statusStripステータスバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 839</value>
+    <value>0, 1033</value>
+  </data>
+  <data name="statusStripステータスバー.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 19, 0</value>
   </data>
   <data name="statusStripステータスバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>884, 22</value>
+    <value>1179, 22</value>
   </data>
   <data name="statusStripステータスバー.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3083,70 +3327,70 @@
     <value>Ctrl+N</value>
   </data>
   <data name="toolStripMenuItem新規.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>190, 26</value>
   </data>
   <data name="toolStripMenuItem新規.Text" xml:space="preserve">
-    <value>新規(&amp;N)</value>
+    <value>&amp;New</value>
   </data>
   <data name="toolStripMenuItem開く.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
   <data name="toolStripMenuItem開く.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>190, 26</value>
   </data>
   <data name="toolStripMenuItem開く.Text" xml:space="preserve">
-    <value>開く(&amp;O)</value>
+    <value>&amp;Open...</value>
   </data>
   <data name="toolStripMenuItem上書き保存.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>190, 26</value>
   </data>
   <data name="toolStripMenuItem上書き保存.Text" xml:space="preserve">
-    <value>上書き保存(&amp;S)</value>
+    <value>&amp;Save</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>190, 26</value>
   </data>
   <data name="toolStripMenuItem名前を付けて保存.Text" xml:space="preserve">
-    <value>名前を付けて保存(&amp;A)</value>
+    <value>Save &amp;As ...</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>187, 6</value>
   </data>
   <data name="toolStripMenuItem終了.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>190, 26</value>
   </data>
   <data name="toolStripMenuItem終了.Text" xml:space="preserve">
-    <value>終了(&amp;X)</value>
+    <value>E&amp;xit</value>
   </data>
   <data name="toolStripMenuItemファイル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 20</value>
+    <value>46, 24</value>
   </data>
   <data name="toolStripMenuItemファイル.Text" xml:space="preserve">
-    <value>ファイル(&amp;F)</value>
+    <value>&amp;File</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Z</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItemアンドゥ.Text" xml:space="preserve">
-    <value>元に戻す(&amp;U)</value>
+    <value>&amp;Undo</value>
   </data>
   <data name="toolStripMenuItemリドゥ.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Y</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItemリドゥ.Text" xml:space="preserve">
-    <value>やり直す(&amp;R)</value>
+    <value>&amp;Redo</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>216, 6</value>
   </data>
   <data name="toolStripMenuItem切り取り.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3155,7 +3399,7 @@
     <value>Ctrl+X</value>
   </data>
   <data name="toolStripMenuItem切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem切り取り.Text" xml:space="preserve">
     <value>Cu&amp;t</value>
@@ -3167,10 +3411,10 @@
     <value>Ctrl+C</value>
   </data>
   <data name="toolStripMenuItemコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItemコピー.Text" xml:space="preserve">
-    <value>コピー(&amp;C)</value>
+    <value>&amp;Copy</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3179,10 +3423,10 @@
     <value>Ctrl+V</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem貼り付け.Text" xml:space="preserve">
-    <value>貼り付け(&amp;P)</value>
+    <value>&amp;Paste</value>
   </data>
   <data name="toolStripMenuItem削除.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3191,244 +3435,247 @@
     <value>Del</value>
   </data>
   <data name="toolStripMenuItem削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem削除.Text" xml:space="preserve">
-    <value>削除(&amp;D)</value>
+    <value>&amp;Delete</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>216, 6</value>
   </data>
   <data name="toolStripMenuItemすべて選択.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+A</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItemすべて選択.Text" xml:space="preserve">
-    <value>すべて選択(&amp;A)</value>
+    <value>Select &amp;All</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>216, 6</value>
   </data>
   <data name="toolStripMenuItem選択モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem選択モード.Text" xml:space="preserve">
-    <value>選択モード(&amp;S)</value>
+    <value>&amp;Select mode</value>
   </data>
   <data name="toolStripMenuItem編集モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem編集モード.Text" xml:space="preserve">
-    <value>編集モード(&amp;E)</value>
+    <value>&amp;Edit mode</value>
   </data>
   <data name="toolStripMenuItemモード切替.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F8</value>
   </data>
   <data name="toolStripMenuItemモード切替.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItemモード切替.Text" xml:space="preserve">
-    <value>モード切替(&amp;M)</value>
+    <value>Switch &amp;Mode</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+    <value>216, 6</value>
   </data>
   <data name="toolStripMenuItem検索.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
   </data>
   <data name="toolStripMenuItem検索.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem検索.Text" xml:space="preserve">
-    <value>検索(&amp;F)</value>
+    <value>&amp;Find...</value>
   </data>
   <data name="toolStripMenuItem置換.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+H</value>
   </data>
   <data name="toolStripMenuItem置換.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
+    <value>219, 26</value>
   </data>
   <data name="toolStripMenuItem置換.Text" xml:space="preserve">
-    <value>置換(&amp;Q)</value>
+    <value>Replace(&amp;Q)</value>
   </data>
   <data name="toolStripMenuItem編集.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 20</value>
+    <value>49, 24</value>
   </data>
   <data name="toolStripMenuItem編集.Text" xml:space="preserve">
-    <value>編集(&amp;E)</value>
+    <value>&amp;Edit</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>182, 26</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Text" xml:space="preserve">
-    <value>チップパレット(&amp;P)</value>
+    <value>Chip &amp;palette</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔4分.Text" xml:space="preserve">
     <value>1/&amp;4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔8分.Text" xml:space="preserve">
     <value>1/&amp;8</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔12分.Text" xml:space="preserve">
     <value>1/1&amp;2</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔16分.Text" xml:space="preserve">
     <value>1/1&amp;6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔24分.Text" xml:space="preserve">
     <value>1/24</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔32分.Text" xml:space="preserve">
     <value>1/&amp;32</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔48分.Text" xml:space="preserve">
     <value>1/48</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔64分.Text" xml:space="preserve">
     <value>1/64</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔フリー.Text" xml:space="preserve">
-    <value>フリー</value>
+    <value>&amp;Free</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 6</value>
+    <value>162, 6</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F3</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔拡大.Text" xml:space="preserve">
-    <value>拡大(&amp;W)</value>
+    <value>&amp;Wide</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F4</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 22</value>
+    <value>165, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔縮小.Text" xml:space="preserve">
-    <value>縮小(&amp;N)</value>
+    <value>&amp;Narrow</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 22</value>
+    <value>182, 26</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Text" xml:space="preserve">
-    <value>ガイド間隔(&amp;G)</value>
+    <value>&amp;Guide margin</value>
   </data>
   <data name="toolStripMenuItem表示.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+    <value>55, 24</value>
   </data>
   <data name="toolStripMenuItem表示.Text" xml:space="preserve">
-    <value>表示(&amp;V)</value>
+    <value>&amp;View</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F5</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>272, 26</value>
   </data>
   <data name="toolStripMenuItem先頭から再生.Text" xml:space="preserve">
-    <value>先頭から再生(&amp;T)</value>
+    <value>Play from &amp;top</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F6</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>272, 26</value>
   </data>
   <data name="toolStripMenuItem現在位置から再生.Text" xml:space="preserve">
-    <value>現在の位置から再生(&amp;P)</value>
+    <value>&amp;Play from current part</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>272, 26</value>
   </data>
   <data name="toolStripMenuItem現在位置からBGMのみ再生.Text" xml:space="preserve">
-    <value>現在の位置からBGMのみ再生(&amp;B)</value>
+    <value>Play &amp;BGM from current part</value>
   </data>
   <data name="toolStripMenuItem再生停止.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F7</value>
   </data>
   <data name="toolStripMenuItem再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+    <value>272, 26</value>
   </data>
   <data name="toolStripMenuItem再生停止.Text" xml:space="preserve">
-    <value>再生停止(&amp;S)</value>
+    <value>&amp;Stop</value>
   </data>
   <data name="toolStripMenuItem再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+    <value>50, 24</value>
   </data>
   <data name="toolStripMenuItem再生.Text" xml:space="preserve">
-    <value>再生(&amp;P)</value>
+    <value>&amp;Play</value>
   </data>
   <data name="toolStripMenuItemオプション.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 22</value>
+    <value>138, 26</value>
   </data>
   <data name="toolStripMenuItemオプション.Text" xml:space="preserve">
-    <value>オプション(&amp;O)</value>
+    <value>&amp;Option</value>
   </data>
   <data name="toolStripMenuItemツール.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
+    <value>52, 24</value>
   </data>
   <data name="toolStripMenuItemツール.Text" xml:space="preserve">
-    <value>ツール(&amp;T)</value>
+    <value>&amp;Tool</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>F1</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>245, 26</value>
   </data>
   <data name="toolStripMenuItemDTXCreaterマニュアル.Text" xml:space="preserve">
-    <value>DTXCreator マニュアル(&amp;M)</value>
+    <value>DTXCreator &amp;Manual</value>
   </data>
   <data name="toolStripMenuItemバージョン.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 22</value>
+    <value>245, 26</value>
   </data>
   <data name="toolStripMenuItemバージョン.Text" xml:space="preserve">
-    <value>バージョン情報(&amp;V)</value>
+    <value>&amp;Version</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
+    <value>55, 24</value>
   </data>
   <data name="toolStripMenuItemヘルプ.Text" xml:space="preserve">
-    <value>ヘルプ(&amp;H)</value>
+    <value>&amp;Help</value>
   </data>
   <data name="menuStripメニューバー.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="menuStripメニューバー.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 3, 0, 3</value>
+  </data>
   <data name="menuStripメニューバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>884, 24</value>
+    <value>1179, 30</value>
   </data>
   <data name="menuStripメニューバー.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -3455,40 +3702,41 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton新規作成.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton新規作成.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton新規作成.ToolTipText" xml:space="preserve">
-    <value>新しい譜面を作成します。</value>
+    <value>Create a new file</value>
   </data>
   <data name="toolStripButton開く.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton開く.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton開く.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton開く.ToolTipText" xml:space="preserve">
-    <value>新しいDTXファイルを開きます。</value>
+    <value>Open a file
+</value>
   </data>
   <data name="toolStripButton上書き保存.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton上書き保存.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton上書き保存.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton上書き保存.ToolTipText" xml:space="preserve">
-    <value>上書き保存します。</value>
+    <value>Save to file</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripButton切り取り.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3497,13 +3745,14 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton切り取り.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton切り取り.ToolTipText" xml:space="preserve">
-    <value>選択されているチップをクリップボードへ切り取ります。</value>
+    <value>Cut selected chip(s)
+</value>
   </data>
   <data name="toolStripButtonコピー.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3512,13 +3761,14 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButtonコピー.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonコピー.ToolTipText" xml:space="preserve">
-    <value>選択されているチップをクリップボードへコピーします。</value>
+    <value>Copy selected chip(s)
+</value>
   </data>
   <data name="toolStripButton貼り付け.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3527,13 +3777,14 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton貼り付け.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton貼り付け.ToolTipText" xml:space="preserve">
-    <value>クリップボードのチップを譜面に貼り付けます。</value>
+    <value>Paste chip(s)
+</value>
   </data>
   <data name="toolStripButton削除.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3542,16 +3793,17 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButton削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton削除.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton削除.ToolTipText" xml:space="preserve">
-    <value>選択されているチップを削除します。</value>
+    <value>Delete selected chip(s)
+</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripButtonアンドゥ.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3560,13 +3812,13 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonアンドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButtonアンドゥ.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonアンドゥ.ToolTipText" xml:space="preserve">
-    <value>作業を１つ元に戻します。</value>
+    <value>Undo</value>
   </data>
   <data name="toolStripButtonリドゥ.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3575,31 +3827,32 @@
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonリドゥ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButtonリドゥ.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonリドゥ.ToolTipText" xml:space="preserve">
-    <value>作業を１つやり直します。</value>
+    <value>Redo
+</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripButtonチップパレット.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButtonチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButtonチップパレット.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButtonチップパレット.ToolTipText" xml:space="preserve">
-    <value>チップパレットを表示します。</value>
+    <value>Chip palette</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3635,10 +3888,10 @@
     <value>x10</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 25</value>
+    <value>99, 28</value>
   </data>
   <data name="toolStripComboBox譜面拡大率.ToolTipText" xml:space="preserve">
-    <value>譜面の縦方向の表示倍率を指定します。</value>
+    <value>Vertical sizing</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.Items" xml:space="preserve">
     <value>1/4</value>
@@ -3671,85 +3924,86 @@
     <value>20</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 25</value>
+    <value>99, 28</value>
   </data>
   <data name="toolStripComboBoxガイド間隔.ToolTipText" xml:space="preserve">
-    <value>ガイド線の間隔を指定します。</value>
+    <value>Guide margin</value>
   </data>
   <data name="toolStripButton選択モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton選択モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton選択モード.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton選択モード.ToolTipText" xml:space="preserve">
-    <value>選択モードに切り替えます。</value>
+    <value>Select mode
+</value>
   </data>
   <data name="toolStripButton編集モード.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton編集モード.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton編集モード.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton編集モード.ToolTipText" xml:space="preserve">
-    <value>編集モードに切り替えます。</value>
+    <value>Edit mode</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripButton先頭から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton先頭から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton先頭から再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton先頭から再生.ToolTipText" xml:space="preserve">
-    <value>DTXViewerで先頭から再生します。</value>
+    <value>Play from top with a viewer</value>
   </data>
   <data name="toolStripButton現在位置から再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton現在位置から再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton現在位置から再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton現在位置から再生.ToolTipText" xml:space="preserve">
-    <value>DTXViewerで現在の位置から再生します。</value>
+    <value>Play from current part with a viewer</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton現在位置からBGMのみ再生.ToolTipText" xml:space="preserve">
-    <value>DTXViewerで現在の位置からBGMのみ再生します。</value>
+    <value>Play BGM from currect part with a viewer</value>
   </data>
   <data name="toolStripButton再生停止.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripButton再生停止.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 25</value>
   </data>
   <data name="toolStripButton再生停止.Text" xml:space="preserve">
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripButton再生停止.ToolTipText" xml:space="preserve">
-    <value>DTXViewerでの再生を停止します。</value>
+    <value>Stop playing</value>
   </data>
   <data name="toolStripComboBox演奏速度.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -3788,19 +4042,19 @@
     <value>x0.5</value>
   </data>
   <data name="toolStripComboBox演奏速度.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 25</value>
+    <value>99, 28</value>
   </data>
   <data name="toolStripComboBox演奏速度.ToolTipText" xml:space="preserve">
-    <value>DTXViewerでの再生速度を指定します。 (#DTXVPLAYSPEED)</value>
+    <value>Play speed (#DTXVPLAYSPEED)</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 28</value>
   </data>
   <data name="toolStripツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+    <value>0, 30</value>
   </data>
   <data name="toolStripツールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>884, 25</value>
+    <value>1179, 28</value>
   </data>
   <data name="toolStripツールバー.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -3824,10 +4078,10 @@
     <value>Right</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>867, 49</value>
+    <value>1162, 58</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 790</value>
+    <value>17, 975</value>
   </data>
   <data name="vScrollBar譜面用垂直スクロールバー.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -3848,76 +4102,76 @@
     <value>203, 39</value>
   </metadata>
   <data name="toolStripMenuItem選択チップの切り取り.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem選択チップの切り取り.Text" xml:space="preserve">
-    <value>選択チップの切り取り(&amp;T)</value>
+    <value>Cu&amp;t selected chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem選択チップのコピー.Text" xml:space="preserve">
-    <value>選択チップのコピー(&amp;C)</value>
+    <value>&amp;Copy selected chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem選択チップの貼り付け.Text" xml:space="preserve">
-    <value>選択チップの貼り付け(&amp;P)</value>
+    <value>&amp;Paste chip(s)</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem選択チップの削除.Text" xml:space="preserve">
-    <value>選択チップの削除(&amp;D)</value>
+    <value>&amp;Delete selected chip(s)</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>230, 6</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItemすべてのチップの選択.Text" xml:space="preserve">
-    <value>すべてのチップの選択(&amp;A)</value>
+    <value>Select &amp;All</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItemレーン内のすべてのチップの選択.Text" xml:space="preserve">
-    <value>レーン内のすべてのチップの選択(&amp;L) []</value>
+    <value>Select all in the &amp;lane []</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem小節内のすべてのチップの選択.Text" xml:space="preserve">
-    <value>小節内のすべてのチップの選択(&amp;R) []</value>
+    <value>Select all in the pa&amp;rt []</value>
   </data>
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>230, 6</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem小節長変更.Text" xml:space="preserve">
-    <value>小節長の変更(&amp;B)</value>
+    <value>Change part length(&amp;B)</value>
   </data>
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 6</value>
+    <value>230, 6</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem小節の挿入.Text" xml:space="preserve">
-    <value>小節の挿入(&amp;I)</value>
+    <value>&amp;Insert part</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 22</value>
+    <value>233, 26</value>
   </data>
   <data name="toolStripMenuItem小節の削除.Text" xml:space="preserve">
-    <value>小節の削除(&amp;D)</value>
+    <value>D&amp;elete part</value>
   </data>
   <data name="contextMenuStrip譜面右メニュー.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 242</value>
+    <value>234, 282</value>
   </data>
   <data name="&gt;&gt;contextMenuStrip譜面右メニュー.Name" xml:space="preserve">
     <value>contextMenuStrip譜面右メニュー</value>
@@ -3928,11 +4182,14 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>884, 861</value>
+    <value>1179, 1055</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4359,8 +4616,11 @@
         AACH/wAAh/8AAI//AAA=
 </value>
   </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 39</value>
+    <value>18, 47</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>DTXCreator</value>

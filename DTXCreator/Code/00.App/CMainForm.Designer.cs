@@ -919,6 +919,7 @@
             // 
             resources.ApplyResources(this.toolStripWAVツールバー, "toolStripWAVツールバー");
             this.toolStripWAVツールバー.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripWAVツールバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripWAVツールバー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonWAVリスト上移動,
             this.toolStripButtonWAVリスト下移動,
@@ -1035,6 +1036,7 @@
             // 
             resources.ApplyResources(this.toolStripBMPツールバー, "toolStripBMPツールバー");
             this.toolStripBMPツールバー.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripBMPツールバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripBMPツールバー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonBMPリスト上移動,
             this.toolStripButtonBMPリスト下移動});
@@ -1105,6 +1107,7 @@
             // 
             resources.ApplyResources(this.toolStripAVIツールバー, "toolStripAVIツールバー");
             this.toolStripAVIツールバー.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStripAVIツールバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripAVIツールバー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAVIリスト上移動,
             this.toolStripButtonAVIリスト下移動});
@@ -1166,11 +1169,13 @@
             // 
             // statusStripステータスバー
             // 
+            this.statusStripステータスバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             resources.ApplyResources(this.statusStripステータスバー, "statusStripステータスバー");
             this.statusStripステータスバー.Name = "statusStripステータスバー";
             // 
             // menuStripメニューバー
             // 
+            this.menuStripメニューバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStripメニューバー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemファイル,
             this.toolStripMenuItem編集,
@@ -1533,6 +1538,7 @@
             // 
             // toolStripツールバー
             // 
+            this.toolStripツールバー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripツールバー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton新規作成,
             this.toolStripButton開く,
@@ -1789,6 +1795,7 @@
             // 
             // contextMenuStrip譜面右メニュー
             // 
+            this.contextMenuStrip譜面右メニュー.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip譜面右メニュー.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem選択チップの切り取り,
             this.toolStripMenuItem選択チップのコピー,
