@@ -423,8 +423,8 @@ namespace DTXMania
                         #region [ 00) songlist.dbの読み込みによる曲リストの構築  ]
                         //-----------------------------
                         //CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動00_songlistから曲リストを作成する;
-
-                        Trace.TraceInformation("1) songlist.dbを読み込みます。");
+                        DateTime start1 = DateTime.Now;
+                        Trace.TraceInformation("1) Loading songlist.db ...");
                         Trace.Indent();
 
                         try
@@ -451,6 +451,8 @@ namespace DTXMania
                         finally
                         {
                             Trace.Unindent();
+                            TimeSpan currSpan = (TimeSpan)(DateTime.Now - start1);
+                            Trace.TraceInformation("Duration of Loading songlist.db: {0}", currSpan.ToString());
                         }
 
                         #endregion
@@ -458,8 +460,8 @@ namespace DTXMania
                         #region [ 1) songs.db の読み込み ]
                         //-----------------------------
                         //CDTXMania.stageStartup.ePhaseID = CStage.EPhase.起動1_SongsDBからスコアキャッシュを構築;
-
-                        Trace.TraceInformation("2) songs.db を読み込みます。");
+                        start1 = DateTime.Now;
+                        Trace.TraceInformation("2) Loading songs.db ...");
                         Trace.Indent();
 
                         try
@@ -488,6 +490,8 @@ namespace DTXMania
                         finally
                         {
                             Trace.Unindent();
+                            TimeSpan currSpan = (TimeSpan)(DateTime.Now - start1);
+                            Trace.TraceInformation("Duration of Loading songs.db: {0}", currSpan.ToString());
                         }
                         //-----------------------------
                         #endregion
@@ -507,7 +511,8 @@ namespace DTXMania
                 #region [ 2) 曲データの検索 ]
                 //-----------------------------
                 //	base.ePhaseID = CStage.EPhase.起動2_曲を検索してリストを作成する;
-                Trace.TraceInformation("enum2) 曲データを検索します。");                
+                DateTime start = DateTime.Now;
+                Trace.TraceInformation("enum2) Searching Song Data ...");                
                 Trace.Indent();
 
                 try
@@ -528,7 +533,7 @@ namespace DTXMania
 
                                 if (!string.IsNullOrEmpty(path))
                                 {
-                                    Trace.TraceInformation("検索パス: " + path);
+                                    Trace.TraceInformation("Search Path: " + path);
                                     Trace.Indent();
 
                                     try
@@ -539,11 +544,11 @@ namespace DTXMania
                                     {
                                         Trace.TraceError(e.Message);
                                         Trace.TraceError(e.StackTrace);
-                                        Trace.TraceError("例外が発生しましたが処理を継続します。");
+                                        Trace.TraceError("An exception occurred but processing will continue.");
                                     }
                                     finally
                                     {
-                                        Trace.Unindent();
+                                        Trace.Unindent();                                        
                                     }
                                 }
                             }
@@ -551,13 +556,15 @@ namespace DTXMania
                     }
                     else
                     {
-                        Trace.TraceWarning("曲データの検索パス(DTXPath)の指定がありません。");
+                        Trace.TraceWarning("No song data search path (DTXPath) specified in config.ini file. ");
                     }
                 }
                 finally
                 {
-                    Trace.TraceInformation("曲データの検索を完了しました。[{0}曲{1}スコア]", this.Songs管理.nNbSongNodesFound, this.Songs管理.nNbScoresFound);
+                    Trace.TraceInformation("Song Data search complete. [{0} songs {1} scores]", this.Songs管理.nNbSongNodesFound, this.Songs管理.nNbScoresFound);
                     Trace.Unindent();
+                    TimeSpan currSpan = (TimeSpan)(DateTime.Now - start);
+                    Trace.TraceInformation("Duration of enum2) Searching Song Data : {0}", currSpan.ToString());
                 }
                 //	lock ( this.list進行文字列 )
                 //	{
@@ -568,7 +575,8 @@ namespace DTXMania
                 #region [ 3) songs.db 情報の曲リストへの反映 ]
                 //-----------------------------
                 //					base.ePhaseID = CStage.EPhase.起動3_スコアキャッシュをリストに反映する;
-                Trace.TraceInformation("enum3) songs.db の情報を曲リストへ反映します。");
+                start = DateTime.Now;
+                Trace.TraceInformation("enum3) Loading score cache into songs.db. ");
                 Trace.Indent();
 
                 try
@@ -582,12 +590,14 @@ namespace DTXMania
                 {
                     Trace.TraceError(e.Message);
                     Trace.TraceError(e.StackTrace);
-                    Trace.TraceError("例外が発生しましたが処理を継続します。");
+                    Trace.TraceError("An exception has occurred, but processing will continue.");
                 }
                 finally
                 {
-                    Trace.TraceInformation("曲リストへの反映を完了しました。[{0}/{1}スコア]", this.Songs管理.nNbScoresFromScoreCache, this.Songs管理.nNbScoresFound);
+                    Trace.TraceInformation("Score cache loading complete. [{0}/{1}スコア]", this.Songs管理.nNbScoresFromScoreCache, this.Songs管理.nNbScoresFound);
                     Trace.Unindent();
+                    TimeSpan currSpan = (TimeSpan)(DateTime.Now - start);
+                    Trace.TraceInformation("Duration of enum3) Loading score cache into songs.db. : {0}", currSpan.ToString());
                 }
                 //	lock ( this.list進行文字列 )
                 //	{
@@ -602,23 +612,27 @@ namespace DTXMania
                 int num2 = this.Songs管理.nNbScoresFound - this.Songs管理.nNbScoresFromScoreCache;
 
                 Trace.TraceInformation("{0}, {1}", this.Songs管理.nNbScoresFound, this.Songs管理.nNbScoresFromScoreCache);
-                Trace.TraceInformation("enum4) songs.db になかった曲データ[{0}スコア]の情報をファイルから読み込んで反映します。", num2);
+                start = DateTime.Now;
+                Trace.TraceInformation("enum4) Reads and copy song data information from files [{0} scores] that were not in songs.db. ", num2);
                 Trace.Indent();
 
                 try
                 {
+                    //NOTE: This is the most time consuming step in Song Loading. To be optimized
                     this.Songs管理.tSongsDBになかった曲をファイルから読み込んで反映する();
                 }
                 catch (Exception e)
                 {
                     Trace.TraceError(e.Message);
                     Trace.TraceError(e.StackTrace);
-                    Trace.TraceError("例外が発生しましたが処理を継続します。");
+                    Trace.TraceError("An exception has occurred, but processing will continue.");
                 }
                 finally
                 {
-                    Trace.TraceInformation("曲データへの反映を完了しました。[{0}/{1}スコア]", this.Songs管理.nNbScoresFromFile, num2);
+                    Trace.TraceInformation("Copying into song data complete. [{0}/{1} scores]", this.Songs管理.nNbScoresFromFile, num2);
                     Trace.Unindent();
+                    TimeSpan currSpan = (TimeSpan)(DateTime.Now - start);
+                    Trace.TraceInformation("Duration of enum4) Reads and copy song data: {0}", currSpan.ToString());
                 }
                 //					lock ( this.list進行文字列 )
                 //					{
@@ -629,8 +643,8 @@ namespace DTXMania
                 #region [ 5) 曲リストへの後処理の適用 ]
                 //-----------------------------
                 //					base.ePhaseID = CStage.EPhase.起動5_曲リストへ後処理を適用する;
-
-                Trace.TraceInformation("enum5) 曲リストへの後処理を適用します。");
+                start = DateTime.Now;
+                Trace.TraceInformation("enum5) Apply post-processing to song list.");
                 Trace.Indent();
 
                 try
@@ -641,12 +655,14 @@ namespace DTXMania
                 {
                     Trace.TraceError(e.Message);
                     Trace.TraceError(e.StackTrace);
-                    Trace.TraceError("例外が発生しましたが処理を継続します。");
+                    Trace.TraceError("An exception has occurred, but processing will continue.");
                 }
                 finally
                 {
-                    Trace.TraceInformation("曲リストへの後処理を完了しました。");
+                    Trace.TraceInformation("Post-processing to song list completed.");
                     Trace.Unindent();
+                    TimeSpan currSpan = (TimeSpan)(DateTime.Now - start);
+                    Trace.TraceInformation("Duration of enum5) Apply post-processing to song list: {0}", currSpan.ToString());
                 }
                 //					lock ( this.list進行文字列 )
                 //					{
@@ -657,8 +673,8 @@ namespace DTXMania
                 #region [ 6) songs.db への保存 ]
                 //-----------------------------
                 //					base.ePhaseID = CStage.EPhase.起動6_スコアキャッシュをSongsDBに出力する;
-
-                Trace.TraceInformation("enum6) 曲データの情報を songs.db へ出力します。");
+                start = DateTime.Now;
+                Trace.TraceInformation("enum6) Saving song metadata into songs.db.");
                 Trace.Indent();
 
                 try
@@ -669,12 +685,14 @@ namespace DTXMania
                 {
                     Trace.TraceError(e.Message);
                     Trace.TraceError(e.StackTrace);
-                    Trace.TraceError("例外が発生しましたが処理を継続します。");
+                    Trace.TraceError("An exception has occurred, but processing will continue.");
                 }
                 finally
                 {
-                    Trace.TraceInformation("songs.db への出力を完了しました。[{0}スコア]", this.Songs管理.nNbScoresForSongsDB);
+                    Trace.TraceInformation("Saving into songs.db complete.[{0} scores]", this.Songs管理.nNbScoresForSongsDB);
                     Trace.Unindent();
+                    TimeSpan currSpan = (TimeSpan)(DateTime.Now - start);
+                    Trace.TraceInformation("Duration of enum6) Saving song metadata into songs.db: {0}", currSpan.ToString());
                 }
                 //					lock ( this.list進行文字列 )
                 //					{
@@ -684,12 +702,15 @@ namespace DTXMania
 
                 //				if ( !bSucceededFastBoot )	// songs2.db読み込みに成功したなら、songs2.dbを新たに作らない
                 #region [ 7) songs2.db への保存 ]		// #27060 2012.1.26 yyagi
-                Trace.TraceInformation("enum7) 曲データの情報を songlist.db へ出力します。");
+                start = DateTime.Now;
+                Trace.TraceInformation("enum7) Saving additional song data into songlist.db.");
                 Trace.Indent();
 
                 SerializeSongList(this.Songs管理, strPathSongList);
-                Trace.TraceInformation("songlist.db への出力を完了しました。[{0}スコア]", this.Songs管理.nNbScoresForSongsDB);
+                Trace.TraceInformation("Saving into songlist.db complete. [{0} scores]", this.Songs管理.nNbScoresForSongsDB);
                 Trace.Unindent();
+                TimeSpan span = (TimeSpan)(DateTime.Now - start);
+                Trace.TraceInformation("Duration of enum7) Saving additional song data into songlist.db: {0}", span.ToString());
                 //-----------------------------
                 #endregion
                 //				}
@@ -699,7 +720,7 @@ namespace DTXMania
             {
                 //				base.ePhaseID = CStage.EPhase.起動7_完了;
                 TimeSpan span = (TimeSpan)(DateTime.Now - now);
-                Trace.TraceInformation("曲探索所要時間: {0}", span.ToString());
+                Trace.TraceInformation("Duration of full Song Enumerating: {0}", span.ToString());
             }
             lock (this)
             {
