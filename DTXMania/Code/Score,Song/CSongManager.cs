@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Drawing;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace DTXMania
 {
@@ -688,7 +689,7 @@ namespace DTXMania
 //Trace.TraceInformation( "songs.db に存在しません。({0})", node.arScore[ lv ].FileInformation.AbsoluteFilePath );
 									if ( CDTXMania.ConfigIni.bLogSongSearch )
 									{
-										Trace.TraceInformation( "songs.db に存在しません。({0})", node.arScore[ lv ].FileInformation.AbsoluteFilePath );
+										Trace.TraceInformation( "Not found in songs.db. ({0})", node.arScore[ lv ].FileInformation.AbsoluteFilePath );
 									}
 								}
 								else
@@ -697,7 +698,7 @@ namespace DTXMania
 									node.arScore[ lv ].bHadACacheInSongDB = true;
 									if( CDTXMania.ConfigIni.bLogSongSearch )
 									{
-										Trace.TraceInformation( "songs.db から転記しました。({0})", node.arScore[ lv ].FileInformation.AbsoluteFilePath );
+										Trace.TraceInformation( "Transcribing data from songs.db. ({0})", node.arScore[ lv ].FileInformation.AbsoluteFilePath );
 									}
 									this.nNbScoresFromScoreCache++;
 									if( node.arScore[ lv ].ScoreIniInformation.LastModified != this.listSongsDB[ nMatched ].ScoreIniInformation.LastModified )
@@ -745,12 +746,12 @@ namespace DTXMania
 											}
 											if( CDTXMania.ConfigIni.bLogSongSearch )
 											{
-												Trace.TraceInformation( "演奏記録ファイルから HiSkill 情報と演奏履歴を取得しました。({0})", strFileNameScoreIni );
+												Trace.TraceInformation("HiSkill information and performance history were retrieved from the performance record file. ({0})", strFileNameScoreIni );
 											}
 										}
 										catch
 										{
-											Trace.TraceError( "演奏記録ファイルの読み込みに失敗しました。({0})", strFileNameScoreIni );
+											Trace.TraceError("Failed to read the performance record file. ({0})", strFileNameScoreIni );
 										}
 									}
 								}
@@ -857,7 +858,8 @@ namespace DTXMania
 		}
 		private void tSongsDBになかった曲をファイルから読み込んで反映する( List<CSongListNode> ノードリスト )
 		{
-			foreach( CSongListNode c曲リストノード in ノードリスト )
+            List<Task> taskList = new List<Task>();
+            foreach ( CSongListNode c曲リストノード in ノードリスト )
 			{
 				SlowOrSuspendSearchTask();		// #27060 中断要求があったら、解除要求が来るまで待機, #PREMOVIE再生中は検索負荷を落とす
 
@@ -868,130 +870,136 @@ namespace DTXMania
 				else if( ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE )
 					  || ( c曲リストノード.eNodeType == CSongListNode.ENodeType.SCORE_MIDI ) )
 				{
-					for( int i = 0; i < 5; i++ )
-					{
-						if( ( c曲リストノード.arScore[ i ] != null ) && !c曲リストノード.arScore[ i ].bHadACacheInSongDB )
-						{
-							#region [ DTX ファイルのヘッダだけ読み込み、Cスコア.譜面情報 を設定する ]
-							//-----------------
-							string path = c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath;
-							if( File.Exists( path ) )
-							{
-								try
-								{
-									CDTX cdtx = new CDTX( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath, false );    //2013.06.04 kairera0467 ここの「ヘッダのみ読み込む」をfalseにすると、選曲画面のBPM表示が狂う場合があるので注意。
-                                    //CDTX cdtx2 = new CDTX( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath, false );
-									c曲リストノード.arScore[ i ].SongInformation.Title = cdtx.TITLE;
-									c曲リストノード.arScore[ i ].SongInformation.ArtistName = cdtx.ARTIST;
-									c曲リストノード.arScore[ i ].SongInformation.Comment = cdtx.COMMENT;
-									c曲リストノード.arScore[ i ].SongInformation.Genre = cdtx.GENRE;
-									c曲リストノード.arScore[ i ].SongInformation.Preimage = cdtx.PREIMAGE;
-									c曲リストノード.arScore[ i ].SongInformation.Premovie = cdtx.PREMOVIE;
-									c曲リストノード.arScore[ i ].SongInformation.Presound = cdtx.PREVIEW;
-									c曲リストノード.arScore[ i ].SongInformation.Backgound = ( ( cdtx.BACKGROUND != null ) && ( cdtx.BACKGROUND.Length > 0 ) ) ? cdtx.BACKGROUND : cdtx.BACKGROUND_GR;
-									c曲リストノード.arScore[ i ].SongInformation.Level.Drums = cdtx.LEVEL.Drums;
-									c曲リストノード.arScore[ i ].SongInformation.Level.Guitar = cdtx.LEVEL.Guitar;
-									c曲リストノード.arScore[ i ].SongInformation.Level.Bass = cdtx.LEVEL.Bass;
-                                    c曲リストノード.arScore[ i ].SongInformation.LevelDec.Drums = cdtx.LEVELDEC.Drums;
-                                    c曲リストノード.arScore[ i ].SongInformation.LevelDec.Guitar = cdtx.LEVELDEC.Guitar;
-                                    c曲リストノード.arScore[ i ].SongInformation.LevelDec.Bass = cdtx.LEVELDEC.Bass;
-									c曲リストノード.arScore[ i ].SongInformation.bHiddenLevel = cdtx.HIDDENLEVEL;
-                                    c曲リストノード.arScore[ i ].SongInformation.b完全にCLASSIC譜面である.Drums = (cdtx.bチップがある.LeftCymbal == false && cdtx.bチップがある.LP == false && cdtx.bチップがある.LBD == false && cdtx.bチップがある.FT == false && cdtx.bチップがある.Ride == false) ? true : false;
-                                    c曲リストノード.arScore[ i ].SongInformation.b完全にCLASSIC譜面である.Guitar = !cdtx.bチップがある.YPGuitar ? true : false;
-                                    c曲リストノード.arScore[ i ].SongInformation.b完全にCLASSIC譜面である.Bass = !cdtx.bチップがある.YPBass ? true : false;
-                                    c曲リストノード.arScore[ i ].SongInformation.bScoreExists.Drums = cdtx.bチップがある.Drums;
-                                    c曲リストノード.arScore[ i ].SongInformation.bScoreExists.Guitar = cdtx.bチップがある.Guitar;
-                                    c曲リストノード.arScore[ i ].SongInformation.bScoreExists.Bass = cdtx.bチップがある.Bass;
-									c曲リストノード.arScore[ i ].SongInformation.SongType = cdtx.e種別;
-									c曲リストノード.arScore[ i ].SongInformation.Bpm = cdtx.BPM;
-									c曲リストノード.arScore[ i ].SongInformation.Duration = (cdtx.listChip == null)? 0 : cdtx.listChip[ cdtx.listChip.Count - 1 ].nPlaybackTimeMs;
+					Task task = Task.Run(delegate {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            if ((c曲リストノード.arScore[i] != null) && !c曲リストノード.arScore[i].bHadACacheInSongDB)
+                            {
+                                #region [ DTX ファイルのヘッダだけ読み込み、Cスコア.譜面情報 を設定する ]
+                                //-----------------
+                                string path = c曲リストノード.arScore[i].FileInformation.AbsoluteFilePath;
+                                if (File.Exists(path))
+                                {
+                                    try
+                                    {
+                                        CDTX cdtx = new CDTX(c曲リストノード.arScore[i].FileInformation.AbsoluteFilePath, false);    //2013.06.04 kairera0467 ここの「ヘッダのみ読み込む」をfalseにすると、選曲画面のBPM表示が狂う場合があるので注意。
+                                                                                                                              //CDTX cdtx2 = new CDTX( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath, false );
+                                        c曲リストノード.arScore[i].SongInformation.Title = cdtx.TITLE;
+                                        c曲リストノード.arScore[i].SongInformation.ArtistName = cdtx.ARTIST;
+                                        c曲リストノード.arScore[i].SongInformation.Comment = cdtx.COMMENT;
+                                        c曲リストノード.arScore[i].SongInformation.Genre = cdtx.GENRE;
+                                        c曲リストノード.arScore[i].SongInformation.Preimage = cdtx.PREIMAGE;
+                                        c曲リストノード.arScore[i].SongInformation.Premovie = cdtx.PREMOVIE;
+                                        c曲リストノード.arScore[i].SongInformation.Presound = cdtx.PREVIEW;
+                                        c曲リストノード.arScore[i].SongInformation.Backgound = ((cdtx.BACKGROUND != null) && (cdtx.BACKGROUND.Length > 0)) ? cdtx.BACKGROUND : cdtx.BACKGROUND_GR;
+                                        c曲リストノード.arScore[i].SongInformation.Level.Drums = cdtx.LEVEL.Drums;
+                                        c曲リストノード.arScore[i].SongInformation.Level.Guitar = cdtx.LEVEL.Guitar;
+                                        c曲リストノード.arScore[i].SongInformation.Level.Bass = cdtx.LEVEL.Bass;
+                                        c曲リストノード.arScore[i].SongInformation.LevelDec.Drums = cdtx.LEVELDEC.Drums;
+                                        c曲リストノード.arScore[i].SongInformation.LevelDec.Guitar = cdtx.LEVELDEC.Guitar;
+                                        c曲リストノード.arScore[i].SongInformation.LevelDec.Bass = cdtx.LEVELDEC.Bass;
+                                        c曲リストノード.arScore[i].SongInformation.bHiddenLevel = cdtx.HIDDENLEVEL;
+                                        c曲リストノード.arScore[i].SongInformation.b完全にCLASSIC譜面である.Drums = (cdtx.bチップがある.LeftCymbal == false && cdtx.bチップがある.LP == false && cdtx.bチップがある.LBD == false && cdtx.bチップがある.FT == false && cdtx.bチップがある.Ride == false) ? true : false;
+                                        c曲リストノード.arScore[i].SongInformation.b完全にCLASSIC譜面である.Guitar = !cdtx.bチップがある.YPGuitar ? true : false;
+                                        c曲リストノード.arScore[i].SongInformation.b完全にCLASSIC譜面である.Bass = !cdtx.bチップがある.YPBass ? true : false;
+                                        c曲リストノード.arScore[i].SongInformation.bScoreExists.Drums = cdtx.bチップがある.Drums;
+                                        c曲リストノード.arScore[i].SongInformation.bScoreExists.Guitar = cdtx.bチップがある.Guitar;
+                                        c曲リストノード.arScore[i].SongInformation.bScoreExists.Bass = cdtx.bチップがある.Bass;
+                                        c曲リストノード.arScore[i].SongInformation.SongType = cdtx.e種別;
+                                        c曲リストノード.arScore[i].SongInformation.Bpm = cdtx.BPM;
+                                        c曲リストノード.arScore[i].SongInformation.Duration = (cdtx.listChip == null) ? 0 : cdtx.listChip[cdtx.listChip.Count - 1].nPlaybackTimeMs;
 
-									//
-									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Drums = cdtx.nVisibleChipsCount.Drums;
-									{
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LC] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LC);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HH] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HH);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.SD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.SD);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LP);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HT);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BD);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LT);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.FT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.FT);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.CY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.CY);
-									}
+                                        //
+                                        c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Drums = cdtx.nVisibleChipsCount.Drums;
+                                        {
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LC] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LC);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HH] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HH);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.SD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.SD);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LP);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.HT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.HT);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BD] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BD);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.LT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.LT);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.FT] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.FT);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.CY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.CY);
+                                        }
 
-									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Guitar = cdtx.nVisibleChipsCount.Guitar;
-									{
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtR);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtG);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtB);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtY);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtP);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtPick);
-									}
+                                        c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Guitar = cdtx.nVisibleChipsCount.Guitar;
+                                        {
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtR);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtG);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtB);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtY);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtP);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.GtPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.GtPick);
+                                        }
 
-									c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Bass = cdtx.nVisibleChipsCount.Bass;
-									{
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsR);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsG);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsB);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsY);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsP);
-										c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsPick);
-									}
+                                        c曲リストノード.arScore[i].SongInformation.chipCountByInstrument.Bass = cdtx.nVisibleChipsCount.Bass;
+                                        {
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsR] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsR);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsG] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsG);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsB] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsB);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsY] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsY);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsP] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsP);
+                                            c曲リストノード.arScore[i].SongInformation.chipCountByLane[ELane.BsPick] = cdtx.nVisibleChipsCount.chipCountInLane(ELane.BsPick);
+                                        }
 
-									this.nNbScoresFromFile++;
-									cdtx.OnDeactivate();
-//Debug.WriteLine( "★" + this.nNbScoresFromFile + " " + c曲リストノード.arScore[ i ].SongInformation.Title );
-									#region [ 曲検索ログ出力 ]
-									//-----------------
-									if( CDTXMania.ConfigIni.bLogSongSearch )
-									{
-										StringBuilder sb = new StringBuilder( 0x400 );
-										sb.Append( string.Format( "曲データファイルから譜面情報を転記しました。({0})", path ) );
-										sb.Append( "(title=" + c曲リストノード.arScore[ i ].SongInformation.Title );
-										sb.Append( ", artist=" + c曲リストノード.arScore[ i ].SongInformation.ArtistName );
-										sb.Append( ", comment=" + c曲リストノード.arScore[ i ].SongInformation.Comment );
-										sb.Append( ", genre=" + c曲リストノード.arScore[ i ].SongInformation.Genre );
-										sb.Append( ", preimage=" + c曲リストノード.arScore[ i ].SongInformation.Preimage );
-										sb.Append( ", premovie=" + c曲リストノード.arScore[ i ].SongInformation.Premovie );
-										sb.Append( ", presound=" + c曲リストノード.arScore[ i ].SongInformation.Presound );
-										sb.Append( ", background=" + c曲リストノード.arScore[ i ].SongInformation.Backgound );
-										sb.Append( ", lvDr=" + c曲リストノード.arScore[ i ].SongInformation.Level.Drums );
-										sb.Append( ", lvGt=" + c曲リストノード.arScore[ i ].SongInformation.Level.Guitar );
-										sb.Append( ", lvBs=" + c曲リストノード.arScore[ i ].SongInformation.Level.Bass );
-										sb.Append( ", lvHide=" + c曲リストノード.arScore[ i ].SongInformation.bHiddenLevel );
-                                        sb.Append( ", classic=" + c曲リストノード.arScore[ i ].SongInformation.b完全にCLASSIC譜面である );
-										sb.Append( ", type=" + c曲リストノード.arScore[ i ].SongInformation.SongType );
-										sb.Append( ", bpm=" + c曲リストノード.arScore[ i ].SongInformation.Bpm );
-									//	sb.Append( ", duration=" + c曲リストノード.arScore[ i ].SongInformation.Duration );
-										Trace.TraceInformation( sb.ToString() );
-									}
-									//-----------------
-									#endregion
-								}
-								catch( Exception exception )
-								{
-									Trace.TraceError( exception.Message );
-									c曲リストノード.arScore[ i ] = null;
-									c曲リストノード.nスコア数--;
-									this.nNbScoresFound--;
-									Trace.TraceError( "曲データファイルの読み込みに失敗しました。({0})", path );
-								}
-							}
-							//-----------------
-							#endregion
+                                        this.nNbScoresFromFile++;
+                                        cdtx.OnDeactivate();
+                                        //Debug.WriteLine( "★" + this.nNbScoresFromFile + " " + c曲リストノード.arScore[ i ].SongInformation.Title );
+                                        #region [ 曲検索ログ出力 ]
+                                        //-----------------
+                                        if (CDTXMania.ConfigIni.bLogSongSearch)
+                                        {
+                                            StringBuilder sb = new StringBuilder(0x400);
+                                            sb.Append(string.Format("曲データファイルから譜面情報を転記しました。({0})", path));
+                                            sb.Append("(title=" + c曲リストノード.arScore[i].SongInformation.Title);
+                                            sb.Append(", artist=" + c曲リストノード.arScore[i].SongInformation.ArtistName);
+                                            sb.Append(", comment=" + c曲リストノード.arScore[i].SongInformation.Comment);
+                                            sb.Append(", genre=" + c曲リストノード.arScore[i].SongInformation.Genre);
+                                            sb.Append(", preimage=" + c曲リストノード.arScore[i].SongInformation.Preimage);
+                                            sb.Append(", premovie=" + c曲リストノード.arScore[i].SongInformation.Premovie);
+                                            sb.Append(", presound=" + c曲リストノード.arScore[i].SongInformation.Presound);
+                                            sb.Append(", background=" + c曲リストノード.arScore[i].SongInformation.Backgound);
+                                            sb.Append(", lvDr=" + c曲リストノード.arScore[i].SongInformation.Level.Drums);
+                                            sb.Append(", lvGt=" + c曲リストノード.arScore[i].SongInformation.Level.Guitar);
+                                            sb.Append(", lvBs=" + c曲リストノード.arScore[i].SongInformation.Level.Bass);
+                                            sb.Append(", lvHide=" + c曲リストノード.arScore[i].SongInformation.bHiddenLevel);
+                                            sb.Append(", classic=" + c曲リストノード.arScore[i].SongInformation.b完全にCLASSIC譜面である);
+                                            sb.Append(", type=" + c曲リストノード.arScore[i].SongInformation.SongType);
+                                            sb.Append(", bpm=" + c曲リストノード.arScore[i].SongInformation.Bpm);
+                                            //	sb.Append( ", duration=" + c曲リストノード.arScore[ i ].SongInformation.Duration );
+                                            Trace.TraceInformation(sb.ToString());
+                                        }
+                                        //-----------------
+                                        #endregion
+                                    }
+                                    catch (Exception exception)
+                                    {
+                                        Trace.TraceError(exception.Message);
+                                        c曲リストノード.arScore[i] = null;
+                                        c曲リストノード.nスコア数--;
+                                        this.nNbScoresFound--;
+                                        Trace.TraceError("曲データファイルの読み込みに失敗しました。({0})", path);
+                                    }
+                                }
+                                //-----------------
+                                #endregion
 
-							#region [ 対応する .score.ini が存在していれば読み込み、Cスコア.譜面情報 に追加設定する ]
-							//-----------------
-							this.tReadScoreIniAndSetScoreInformation( c曲リストノード.arScore[ i ].FileInformation.AbsoluteFilePath + ".score.ini", ref c曲リストノード.arScore[ i ] );
-							//-----------------
-							#endregion
-						}
-					}
-				}
+                                #region [ 対応する .score.ini が存在していれば読み込み、Cスコア.譜面情報 に追加設定する ]
+                                //-----------------
+                                this.tReadScoreIniAndSetScoreInformation(c曲リストノード.arScore[i].FileInformation.AbsoluteFilePath + ".score.ini", ref c曲リストノード.arScore[i]);
+                                //-----------------
+                                #endregion
+                            }
+                        }
+                    });
+
+					taskList.Add(task);
+                }
 			}
-		}
+
+            Task.WaitAll(taskList.ToArray());
+        }
 		//-----------------
 		#endregion
 		#region [ 曲リストへ後処理を適用する ]
