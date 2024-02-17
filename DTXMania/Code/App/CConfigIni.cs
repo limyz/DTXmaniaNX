@@ -691,6 +691,7 @@ namespace DTXMania
 		public bool bUseOSTimer;
         public bool bDynamicBassMixerManagement; // #24820
 		public int nMasterVolume;
+		public int nChipPlayTimeComputeMode; // 2024.2.17 fisyher (0=Original, 1=Accurate)
 
         public STDGBVALUE<EType> eAttackEffect;
         public STDGBVALUE<EType> eNumOfLanes;
@@ -1505,6 +1506,7 @@ namespace DTXMania
 			this.nMasterVolume = 100;
             this.bTimeStretch = false;                  // #23664 2013.2.24 yyagi 初期値はfalse (再生速度変更を、ピッチ変更にて行う)
 			this.nSkipTimeMs = 5000;
+			this.nChipPlayTimeComputeMode = 1;			// 2024.2.17 fisyher Set to Accurate by default
 
 		}
 		public CConfigIni( string iniファイル名 )
@@ -1733,7 +1735,15 @@ namespace DTXMania
             sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
 			sw.WriteLine();
 
-			sw.WriteLine("; 全体ボリュームの設定");
+            sw.WriteLine("; Chip PlayTime Compute Mode");
+            sw.WriteLine("; Select which method of Chip PlayTime Computation to use: (0=Original, 1=Accurate)");
+            sw.WriteLine("; Original method is compatible with other DTXMania players but loses time due to integer truncation");
+            sw.WriteLine("; Accurate method improves overall accuracy by using proper number rounding");
+            sw.WriteLine("; NOTE: Only songs with many BPM changes will have observable difference in either mode. Single BPM songs are not affected");
+            sw.WriteLine("ChipPlayTimeComputeMode={0}", nChipPlayTimeComputeMode);
+            sw.WriteLine();
+
+            sw.WriteLine("; 全体ボリュームの設定");
 			sw.WriteLine("; (0=無音 ～ 100=最大。WASAPI/ASIO時のみ有効)");
 			sw.WriteLine("; Master volume settings");
 			sw.WriteLine("; (0=Silent - 100=Max)");
@@ -2830,7 +2840,11 @@ namespace DTXMania
 											{
 												this.bMetronome = CConversion.bONorOFF(str4[0]);
 											}
-											else if (str3.Equals("MasterVolume"))
+                                            else if (str3.Equals("ChipPlayTimeComputeMode"))
+                                            {
+                                                this.nChipPlayTimeComputeMode = CConversion.nGetNumberIfInRange(str4, 0, 1, this.nChipPlayTimeComputeMode);
+                                            }
+                                            else if (str3.Equals("MasterVolume"))
 											{
 												this.nMasterVolume = CConversion.nGetNumberIfInRange(str4, 0, 100, this.nMasterVolume);
 											}

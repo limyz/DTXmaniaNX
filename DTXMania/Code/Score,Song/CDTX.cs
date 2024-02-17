@@ -3773,8 +3773,19 @@ namespace DTXMania
 						cCandidateStartHold.Bass = null;
 						foreach ( CChip chip in this.listChip )
 						{
-							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
-							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
+							//Original
+							if (CDTXMania.ConfigIni.nChipPlayTimeComputeMode == 0)
+							{
+                                chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+                            }
+							//Accurate
+                            else 
+							{
+                                double playbackTimeMs = ms + (0x271 * (chip.nPlaybackPosition - n発声位置) * dbBarLength / bpm);
+                                chip.nPlaybackTimeMs = (int)Math.Round(playbackTimeMs);
+                            }
+                            
+                            if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
 							{
 								n発声位置 = chip.nPlaybackPosition;
 								ms = chip.nPlaybackTimeMs;
