@@ -2119,11 +2119,7 @@ namespace DTXMania
                                         {
                                             chip.nChannelNumber = EChannel.HighTom;
                                         }
-                                    }
-                                    if (num3 == EChannel.LowTom)
-                                    {
-                                        chip.nChannelNumber = EChannel.HighTom;
-                                    }
+                                    }                                    
                                     num3 = chip.nChannelNumber;
                                     num5 = chip.nPlaybackPosition;
                                     continue;
