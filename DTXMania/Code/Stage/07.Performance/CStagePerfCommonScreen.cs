@@ -3859,9 +3859,14 @@ namespace DTXMania
             }
             if (pChip.eInstrumentPart == EInstrumentPart.DRUMS)
             {
-                if (bIsAutoPlay[this.nチャンネル0Atoレーン07[pChip.nChannelNumber - EChannel.HiHatClose]])
+                bPChipIsAutoPlay = true;
+                int offsetIndex = pChip.nChannelNumber - EChannel.HiHatClose;
+                if (offsetIndex >= 0 && offsetIndex < this.nチャンネル0Atoレーン07.Length) 
                 {
-                    bPChipIsAutoPlay = true;
+                    if (bIsAutoPlay[this.nチャンネル0Atoレーン07[offsetIndex]] == false) 
+                    {
+                        bPChipIsAutoPlay = false;
+                    }
                 }
             }
             else if (pChip.eInstrumentPart == EInstrumentPart.GUITAR)
