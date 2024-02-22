@@ -649,6 +649,7 @@ namespace DTXMania
 		public STDGBVALUE<bool> bHidden;
 		public STDGBVALUE<bool> bLeft;
 		public STDGBVALUE<bool> bLight;
+		public STDGBVALUE<bool> bSpecialist; // 2024.02.22 Add Specialist mode for Guitar/Bass
 		public bool bLogDTX詳細ログ出力;
 		public bool bLogSongSearch;
 		public bool bLog作成解放ログ出力;
@@ -1371,6 +1372,7 @@ namespace DTXMania
 			this.bReverse = new STDGBVALUE<bool>();
 			this.eRandom = new STDGBVALUE<ERandomMode>();
 			this.bLight = new STDGBVALUE<bool>();
+			this.bSpecialist = new STDGBVALUE<bool>();
 			this.bLeft = new STDGBVALUE<bool>();
             this.JudgementStringPosition = new STDGBVALUE<EType>();
 			this.nScrollSpeed = new STDGBVALUE<int>();
@@ -1385,6 +1387,7 @@ namespace DTXMania
 				this.bReverse[ i ] = false;
 				this.eRandom[ i ] = ERandomMode.OFF;
 				this.bLight[ i ] = true; //fisyher: Change to default true, following actual game
+				this.bSpecialist[ i ] = false;
 				this.bLeft[ i ] = false;
 				this.JudgementStringPosition[ i ] = EType.A;
 				this.nScrollSpeed[ i ] = 1;
@@ -2037,7 +2040,11 @@ namespace DTXMania
 			sw.WriteLine( "GuitarLight={0}", this.bLight.Guitar ? 1 : 0 );
 			sw.WriteLine( "BassLight={0}", this.bLight.Bass ? 1 : 0 );
 			sw.WriteLine();
-			sw.WriteLine( "; ギター/ベースLEFTモード(0:OFF, 1:ON)" );
+            sw.WriteLine("; ギター/ベース演奏モード(0:Normal, 1:Specialist)");
+            sw.WriteLine("GuitarSpecialist={0}", this.bSpecialist.Guitar ? 1 : 0);
+            sw.WriteLine("BassSpecialist={0}", this.bSpecialist.Bass ? 1 : 0);
+            sw.WriteLine();
+            sw.WriteLine( "; ギター/ベースLEFTモード(0:OFF, 1:ON)" );
 			sw.WriteLine( "GuitarLeft={0}", this.bLeft.Guitar ? 1 : 0 );
 			sw.WriteLine( "BassLeft={0}", this.bLeft.Bass ? 1 : 0 );
 			sw.WriteLine();
@@ -3246,7 +3253,15 @@ namespace DTXMania
 											{
 												this.bLight.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
-											else if( str3.Equals( "GuitarLeft" ) )
+                                            else if (str3.Equals("GuitarSpecialist"))
+                                            {
+                                                this.bSpecialist.Guitar = CConversion.bONorOFF(str4[0]);
+                                            }
+                                            else if (str3.Equals("BassSpecialist"))
+                                            {
+                                                this.bSpecialist.Bass = CConversion.bONorOFF(str4[0]);
+                                            }
+                                            else if( str3.Equals( "GuitarLeft" ) )
 											{
 												this.bLeft.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}
