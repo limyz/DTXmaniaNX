@@ -371,7 +371,7 @@ namespace DTXMania
                     {
                         EDarkMode d = (EDarkMode)GetIndex((int)EOrder.Dark);
                         CDTXMania.ConfigIni.eDark = d;
-                        //SetValueToAllTarget((int)EOrder.Dark, (int)d);		// 全楽器で共有する値のため、全targetに値を展開する
+                        SetValueToAllTarget((int)EOrder.Dark, (int)d);		// 全楽器で共有する値のため、全targetに値を展開する
 
                         if (d == EDarkMode.FULL)
                         {
