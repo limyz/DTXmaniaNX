@@ -292,8 +292,8 @@ namespace DTXMania
 				}
 				if ( this.tx文字列パネル != null )
 				{
-					int x = ( nCurrentTarget == (int) EInstrumentPart.DRUMS ) ? 486 : 100;
-					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 20, 330 );
+					int x = ( nCurrentTarget == (int) EInstrumentPart.DRUMS ) ? 486 : 525;
+					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 25, 330 );
 				}
             }
         }
