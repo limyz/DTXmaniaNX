@@ -542,15 +542,15 @@ namespace DTXMania
                 "メトロノームを有効にします。", "Enable Metronome.");
             this.listItems.Add( this.iSystemMetronome );
 
-            this.iSystemChipPlayTimeComputeMode = new CItemList("ChipPlayTime Compute Mode", CItemList.EPanelType.Other, CDTXMania.ConfigIni.nChipPlayTimeComputeMode,
+            this.iSystemChipPlayTimeComputeMode = new CItemList("Chip Timing Mode", CItemList.EPanelType.Other, CDTXMania.ConfigIni.nChipPlayTimeComputeMode,
                 "発声時刻の計算方式を選択\n" +
                 "します。\n" +
                 "Original: 原発声時刻の計算方式\n" +
                 "Accurate: BPM変更の時刻偏差修正",
                 "Select method of computing Chip Play Time:\n" +
                 "Original: Compatible with other DTXMania players\n" +
-                "Accurate: Fixes time loss issue of BPM Changes\n" +
-                "NOTE: Only songs with many BPM changes have observable time differences. Single BPM songs are not affected by this option.",
+                "Accurate: Fixes time loss issue of BPM/Bar-Length Changes\n" +
+                "NOTE: Only songs with many BPM/Bar-Length changes have observable time differences. Most songs are not affected by this option.",
                 new string[] { "Original", "Accurate" });
             this.listItems.Add(this.iSystemChipPlayTimeComputeMode);
 
