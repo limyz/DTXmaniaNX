@@ -73,7 +73,8 @@ namespace DTXMania
                 {
                     base.txフレーム.Drums.tDraw2D(CDTXMania.app.Device, base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 28 : 626), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width, 47));
                     base.txハイスピ.vcScaleRatio = new Vector3(0.76190476190476190476190476190476f, 0.66666666666666666666666666666667f, 1.0f);
-                    base.txハイスピ.tDraw2D(CDTXMania.app.Device, -37 + base.n本体X.Drums + base.txフレーム.Drums.szImageSize.Width, (CDTXMania.ConfigIni.bReverse.Drums ? 35 : 634), new Rectangle(0, CDTXMania.ConfigIni.nScrollSpeed.Drums * 48, 42, 48));
+                    int speedTexturePosY = CDTXMania.ConfigIni.nScrollSpeed.Drums * 48 > 20 * 48 ? 20 * 48 : CDTXMania.ConfigIni.nScrollSpeed.Drums * 48;
+                    base.txハイスピ.tDraw2D(CDTXMania.app.Device, -37 + base.n本体X.Drums + base.txフレーム.Drums.szImageSize.Width, (CDTXMania.ConfigIni.bReverse.Drums ? 35 : 634), new Rectangle(0, speedTexturePosY, 42, 48));
                     if (base.db現在のゲージ値.Drums == 1.0 && base.txフルゲージ != null)
                     {
                         base.txフルゲージ.tDraw2D(CDTXMania.app.Device, 20 + base.n本体X.Drums, (CDTXMania.ConfigIni.bReverse.Drums ? 37 : 635), new Rectangle(0, 0, base.txフレーム.Drums.szImageSize.Width - 63, 31));
