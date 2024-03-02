@@ -18,10 +18,11 @@ namespace DTXMania
 
         public CActSelectQuickConfig()
         {
-            CActSelectQuickConfigMain();
+            //Set Quick config default target to DRUMS
+            CActSelectQuickConfigMain(EInstrumentPart.DRUMS);
         }
 
-        private void CActSelectQuickConfigMain()
+        private void CActSelectQuickConfigMain(EInstrumentPart inst)
         {
             /*
             •Target: Drums/Guitar/Bass 
@@ -45,7 +46,7 @@ namespace DTXMania
                     lci[nConfSet][nInst] = MakeListCItemBase(nConfSet, nInst);
                 }
             }
-            base.Initialize(lci[nCurrentConfigSet][0], true, QuickCfgTitle, 2);	// ConfSet=0, nInst=Drums
+            base.Initialize(lci[nCurrentConfigSet][(int)inst], true, QuickCfgTitle, 2);	// ConfSet=0, nInst=Drums
         }
 
         private List<CItemBase> MakeListCItemBase(int nConfigSet, int nInst)
@@ -265,7 +266,10 @@ namespace DTXMania
         // メソッド
         public override void tActivatePopupMenu(EInstrumentPart einst)
         {
-            this.CActSelectQuickConfigMain();
+            //2024.2.23 fisyher: Add in update to nCurrentTarget and AutoPlay config panel here to fix state de-sync
+            this.nCurrentTarget = (int)einst;
+            this.MakeAutoPanel();
+            this.CActSelectQuickConfigMain(einst);
             base.tActivatePopupMenu(einst);
         }
         //public void tDeativatePopupMenu()
@@ -292,8 +296,8 @@ namespace DTXMania
 				}
 				if ( this.tx文字列パネル != null )
 				{
-					int x = ( nCurrentTarget == (int) EInstrumentPart.DRUMS ) ? 486 : 100;
-					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 20, 330 );
+					int x = ( nCurrentTarget == (int) EInstrumentPart.DRUMS ) ? 486 : 525;
+					this.tx文字列パネル.tDraw2D( CDTXMania.app.Device, x + 25, 330 );
 				}
             }
         }

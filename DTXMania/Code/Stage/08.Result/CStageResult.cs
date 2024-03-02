@@ -80,6 +80,9 @@ namespace DTXMania
 					this.bNewRecordSkill[ i ] = false;
                     this.bNewRecordScore[ i ] = false;
                     this.bNewRecordRank[ i ] = false;
+					//Initialize to empty string so that the Progress Bar texture can be drawn correctly
+					this.strBestProgressBarRecord[i] = "";
+					this.strCurrProgressBarRecord[i] = "";
 				}
 				//---------------------
 				#endregion

@@ -57,7 +57,7 @@ namespace DTXMania
                     CDTXMania.actDisplayString.tPrint( x, y, CCharacterConsole.EFontType.White, string.Format( "BGMAdjCommon : {0:####0} ms", CDTXMania.ConfigIni.nCommonBGMAdjustMs ) );
                     y -= 0x10;
                     int num = (CDTXMania.DTX.listChip.Count > 0) ? CDTXMania.DTX.listChip[CDTXMania.DTX.listChip.Count - 1].nPlaybackTimeMs : 0;
-                    string str = "Time: " + ((((double)CDTXMania.Timer.nCurrentTime) / 1000.0)).ToString("####0.00") + " / " + ((((double)num) / 1000.0)).ToString("####0.00");
+                    string str = "Time: " + ((((double)CDTXMania.Timer.nCurrentTime) / 1000.0)).ToString("####0.000") + " / " + ((((double)num) / 1000.0)).ToString("####0.000");
                     CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, str);
                     y -= 0x10;
                     CDTXMania.actDisplayString.tPrint(x, y, CCharacterConsole.EFontType.White, string.Format("Part:          {0:####0}", this.n小節番号));

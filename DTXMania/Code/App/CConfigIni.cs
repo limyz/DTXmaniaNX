@@ -649,6 +649,7 @@ namespace DTXMania
 		public STDGBVALUE<bool> bHidden;
 		public STDGBVALUE<bool> bLeft;
 		public STDGBVALUE<bool> bLight;
+		public STDGBVALUE<bool> bSpecialist; // 2024.02.22 Add Specialist mode for Guitar/Bass
 		public bool bLogDTX詳細ログ出力;
 		public bool bLogSongSearch;
 		public bool bLog作成解放ログ出力;
@@ -691,6 +692,7 @@ namespace DTXMania
 		public bool bUseOSTimer;
         public bool bDynamicBassMixerManagement; // #24820
 		public int nMasterVolume;
+		public int nChipPlayTimeComputeMode; // 2024.2.17 fisyher (0=Original, 1=Accurate)
 
         public STDGBVALUE<EType> eAttackEffect;
         public STDGBVALUE<EType> eNumOfLanes;
@@ -1370,6 +1372,7 @@ namespace DTXMania
 			this.bReverse = new STDGBVALUE<bool>();
 			this.eRandom = new STDGBVALUE<ERandomMode>();
 			this.bLight = new STDGBVALUE<bool>();
+			this.bSpecialist = new STDGBVALUE<bool>();
 			this.bLeft = new STDGBVALUE<bool>();
             this.JudgementStringPosition = new STDGBVALUE<EType>();
 			this.nScrollSpeed = new STDGBVALUE<int>();
@@ -1384,6 +1387,7 @@ namespace DTXMania
 				this.bReverse[ i ] = false;
 				this.eRandom[ i ] = ERandomMode.OFF;
 				this.bLight[ i ] = true; //fisyher: Change to default true, following actual game
+				this.bSpecialist[ i ] = false;
 				this.bLeft[ i ] = false;
 				this.JudgementStringPosition[ i ] = EType.A;
 				this.nScrollSpeed[ i ] = 1;
@@ -1505,6 +1509,7 @@ namespace DTXMania
 			this.nMasterVolume = 100;
             this.bTimeStretch = false;                  // #23664 2013.2.24 yyagi 初期値はfalse (再生速度変更を、ピッチ変更にて行う)
 			this.nSkipTimeMs = 5000;
+			this.nChipPlayTimeComputeMode = 1;			// 2024.2.17 fisyher Set to Accurate by default
 
 		}
 		public CConfigIni( string iniファイル名 )
@@ -1733,7 +1738,15 @@ namespace DTXMania
             sw.WriteLine("Metronome={0}", this.bMetronome ? 1 : 0);
 			sw.WriteLine();
 
-			sw.WriteLine("; 全体ボリュームの設定");
+            sw.WriteLine("; Chip PlayTime Compute Mode");
+            sw.WriteLine("; Select which method of Chip PlayTime Computation to use: (0=Original, 1=Accurate)");
+            sw.WriteLine("; Original method is compatible with other DTXMania players but loses time due to integer truncation");
+            sw.WriteLine("; Accurate method improves overall accuracy by using proper number rounding");
+            sw.WriteLine("; NOTE: Only songs with many BPM changes will have observable difference in either mode. Single BPM songs are not affected");
+            sw.WriteLine("ChipPlayTimeComputeMode={0}", nChipPlayTimeComputeMode);
+            sw.WriteLine();
+
+            sw.WriteLine("; 全体ボリュームの設定");
 			sw.WriteLine("; (0=無音 ～ 100=最大。WASAPI/ASIO時のみ有効)");
 			sw.WriteLine("; Master volume settings");
 			sw.WriteLine("; (0=Silent - 100=Max)");
@@ -2027,7 +2040,11 @@ namespace DTXMania
 			sw.WriteLine( "GuitarLight={0}", this.bLight.Guitar ? 1 : 0 );
 			sw.WriteLine( "BassLight={0}", this.bLight.Bass ? 1 : 0 );
 			sw.WriteLine();
-			sw.WriteLine( "; ギター/ベースLEFTモード(0:OFF, 1:ON)" );
+            sw.WriteLine("; ギター/ベース演奏モード(0:Normal, 1:Specialist)");
+            sw.WriteLine("GuitarSpecialist={0}", this.bSpecialist.Guitar ? 1 : 0);
+            sw.WriteLine("BassSpecialist={0}", this.bSpecialist.Bass ? 1 : 0);
+            sw.WriteLine();
+            sw.WriteLine( "; ギター/ベースLEFTモード(0:OFF, 1:ON)" );
 			sw.WriteLine( "GuitarLeft={0}", this.bLeft.Guitar ? 1 : 0 );
 			sw.WriteLine( "BassLeft={0}", this.bLeft.Bass ? 1 : 0 );
 			sw.WriteLine();
@@ -2830,7 +2847,11 @@ namespace DTXMania
 											{
 												this.bMetronome = CConversion.bONorOFF(str4[0]);
 											}
-											else if (str3.Equals("MasterVolume"))
+                                            else if (str3.Equals("ChipPlayTimeComputeMode"))
+                                            {
+                                                this.nChipPlayTimeComputeMode = CConversion.nGetNumberIfInRange(str4, 0, 1, this.nChipPlayTimeComputeMode);
+                                            }
+                                            else if (str3.Equals("MasterVolume"))
 											{
 												this.nMasterVolume = CConversion.nGetNumberIfInRange(str4, 0, 100, this.nMasterVolume);
 											}
@@ -3232,7 +3253,15 @@ namespace DTXMania
 											{
 												this.bLight.Bass = CConversion.bONorOFF( str4[ 0 ] );
 											}
-											else if( str3.Equals( "GuitarLeft" ) )
+                                            else if (str3.Equals("GuitarSpecialist"))
+                                            {
+                                                this.bSpecialist.Guitar = CConversion.bONorOFF(str4[0]);
+                                            }
+                                            else if (str3.Equals("BassSpecialist"))
+                                            {
+                                                this.bSpecialist.Bass = CConversion.bONorOFF(str4[0]);
+                                            }
+                                            else if( str3.Equals( "GuitarLeft" ) )
 											{
 												this.bLeft.Guitar = CConversion.bONorOFF( str4[ 0 ] );
 											}

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
-using System.Reflection;
 using System.Globalization;
 using System.Threading;
 using FDK;
@@ -2120,11 +2119,7 @@ namespace DTXMania
                                         {
                                             chip.nChannelNumber = EChannel.HighTom;
                                         }
-                                    }
-                                    if (num3 == EChannel.LowTom)
-                                    {
-                                        chip.nChannelNumber = EChannel.HighTom;
-                                    }
+                                    }                                    
                                     num3 = chip.nChannelNumber;
                                     num5 = chip.nPlaybackPosition;
                                     continue;
@@ -3764,7 +3759,8 @@ namespace DTXMania
 						double bpm = 120.0;
 						double dbBarLength = 1.0;
 						int n発声位置 = 0;
-						int ms = 0;
+						//int ms = 0;
+						double currTimeMs = 0.0; // 2024.2.18 fisyher Fix Time Drift issue due to int truncation
 						int nBar = 0;
 						//
 						STDGBVALUE<CChip> cCandidateStartHold = default(STDGBVALUE<CChip>);
@@ -3773,11 +3769,14 @@ namespace DTXMania
 						cCandidateStartHold.Bass = null;
 						foreach ( CChip chip in this.listChip )
 						{
-							chip.nPlaybackTimeMs = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
-							if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
+							double currChipPlaybackTimeMs = tComputeChipPlayTimeMs(currTimeMs, chip.nPlaybackPosition - n発声位置, dbBarLength, bpm);
+							chip.nPlaybackTimeMs = tConvertFromDoubleToIntBasedOnComputeMode(currChipPlaybackTimeMs);
+
+                            if ( ( ( this.e種別 == EType.BMS ) || ( this.e種別 == EType.BME ) ) && ( ( dbBarLength != 1.0 ) && ( ( chip.nPlaybackPosition / 384 ) != nBar ) ) )
 							{
 								n発声位置 = chip.nPlaybackPosition;
-								ms = chip.nPlaybackTimeMs;
+								currTimeMs = currChipPlaybackTimeMs;
+                                //ms = chip.nPlaybackTimeMs;
 								dbBarLength = 1.0;
 							}
 							nBar = chip.nPlaybackPosition / 384;
@@ -3787,14 +3786,16 @@ namespace DTXMania
 								case EChannel.BarLength:	// BarLength
 									{
 										n発声位置 = chip.nPlaybackPosition;
-										ms = chip.nPlaybackTimeMs;
+                                        currTimeMs = currChipPlaybackTimeMs;
+                                        //ms = chip.nPlaybackTimeMs;
 										dbBarLength = chip.db実数値;
 										continue;
 									}
 								case EChannel.BPM:	// BPM
 									{
 										n発声位置 = chip.nPlaybackPosition;
-										ms = chip.nPlaybackTimeMs;
+                                        currTimeMs = currChipPlaybackTimeMs;
+                                        //ms = chip.nPlaybackTimeMs;
 										bpm = this.BASEBPM + chip.nIntegerValue;
 										continue;
 									}
@@ -3822,7 +3823,8 @@ namespace DTXMania
 								case EChannel.BPMEx:	// 拡張BPM
 									{
 										n発声位置 = chip.nPlaybackPosition;
-										ms = chip.nPlaybackTimeMs;
+                                        currTimeMs = currChipPlaybackTimeMs;
+                                        //ms = chip.nPlaybackTimeMs;
 										if ( this.listBPM.ContainsKey( chip.nIntegerValue_InternalNumber ) )
 										{
 											bpm = ( ( this.listBPM[ chip.nIntegerValue_InternalNumber ].n表記上の番号 == 0 ) ? 0.0 : this.BASEBPM ) + this.listBPM[ chip.nIntegerValue_InternalNumber ].dbBPM値;
@@ -3833,9 +3835,11 @@ namespace DTXMania
 									{
 										if ( this.listAVIPAN.ContainsKey( chip.nIntegerValue ) )
 										{
-											int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
-											int num22 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listAVIPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
-											chip.n総移動時間 = num22 - num21;
+											//int num21 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+											//int num22 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listAVIPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
+											double num21 = tComputeChipPlayTimeMs(currTimeMs, chip.nPlaybackPosition - n発声位置, dbBarLength, bpm);
+                                            double num22 = tComputeChipPlayTimeMs(currTimeMs, (chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置, dbBarLength, bpm);
+                                            chip.n総移動時間 = (int)Math.Round(num22 - num21);
 										}
 										continue;
 									}
@@ -3843,9 +3847,11 @@ namespace DTXMania
                                     {
                                         if (this.listAVIPAN.ContainsKey(chip.nIntegerValue))
                                         {
-                                            int num21 = ms + ((int)(((0x271 * (chip.nPlaybackPosition - n発声位置)) * dbBarLength) / bpm));
-                                            int num22 = ms + ((int)(((0x271 * ((chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置)) * dbBarLength) / bpm));
-                                            chip.n総移動時間 = num22 - num21;
+                                            //int num21 = ms + ((int)(((0x271 * (chip.nPlaybackPosition - n発声位置)) * dbBarLength) / bpm));
+                                            //int num22 = ms + ((int)(((0x271 * ((chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置)) * dbBarLength) / bpm));
+                                            double num21 = tComputeChipPlayTimeMs(currTimeMs, chip.nPlaybackPosition - n発声位置, dbBarLength, bpm);
+                                            double num22 = tComputeChipPlayTimeMs(currTimeMs, (chip.nPlaybackPosition + this.listAVIPAN[chip.nIntegerValue].n移動時間ct) - n発声位置, dbBarLength, bpm);
+                                            chip.n総移動時間 = (int)Math.Round(num22 - num21);
                                         }
                                         continue;
                                     }
@@ -3909,17 +3915,20 @@ namespace DTXMania
 							}
 							if ( this.listBGAPAN.ContainsKey( chip.nIntegerValue ) )
 							{
-								int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
-								int num20 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listBGAPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
-								chip.n総移動時間 = num20 - num19;
+                                //int num19 = ms + ( (int) ( ( ( 0x271 * ( chip.nPlaybackPosition - n発声位置 ) ) * dbBarLength ) / bpm ) );
+                                //int num20 = ms + ( (int) ( ( ( 0x271 * ( ( chip.nPlaybackPosition + this.listBGAPAN[ chip.nIntegerValue ].n移動時間ct ) - n発声位置 ) ) * dbBarLength ) / bpm ) );
+                                double num19 = tComputeChipPlayTimeMs(currTimeMs, chip.nPlaybackPosition - n発声位置, dbBarLength, bpm);
+                                double num20 = tComputeChipPlayTimeMs(currTimeMs, (chip.nPlaybackPosition + this.listBGAPAN[chip.nIntegerValue].n移動時間ct) - n発声位置, dbBarLength, bpm);
+                                chip.n総移動時間 = (int)Math.Round(num20 - num19);
 							}
 						}
 						if ( this.db再生速度 > 0.0 )
 						{
 							foreach ( CChip chip in this.listChip )
 							{
-								chip.nPlaybackTimeMs = (int) ( ( (double) chip.nPlaybackTimeMs ) / this.db再生速度 );
-							}
+								//chip.nPlaybackTimeMs = (int) ( ( (double) chip.nPlaybackTimeMs ) / this.db再生速度 );
+								chip.nPlaybackTimeMs = tConvertFromDoubleToIntBasedOnComputeMode(((double)chip.nPlaybackTimeMs) / this.db再生速度);
+                            }
 						}
 						#endregion
 						//span = (TimeSpan) ( DateTime.Now - timeBeginLoad );
@@ -6572,6 +6581,33 @@ namespace DTXMania
             nMax100Vol = (int)( 100.0 / nMax137Vol );
 
             return nMax100Vol;
+        }
+
+		private double tComputeChipPlayTimeMs(double startTimePosition, int positionDelta, double currBarLength, double currBPM) 
+		{
+            //Emulate Original method by using Math.Floor
+            if (CDTXMania.ConfigIni.nChipPlayTimeComputeMode == 0)
+			{
+                return Math.Floor(startTimePosition + ((int)(((0x271 * (positionDelta)) * currBarLength) / currBPM)));
+            }
+            //Accurate Method returning double
+            else
+			{
+                return startTimePosition + (0x271 * (positionDelta) * currBarLength / currBPM);
+            }
+        }
+
+		private int tConvertFromDoubleToIntBasedOnComputeMode(double input) {
+            //Original method truncate by casting to int
+            if (CDTXMania.ConfigIni.nChipPlayTimeComputeMode == 0)
+            {
+				return (int)input;
+            }
+            //Accurate Method using Math.Round
+            else
+            {
+                return (int)Math.Round(input);
+            }
         }
 
 		private bool tInput_LineAnalysis_ChipLocation( string strコマンド, string strパラメータ, string strコメント )

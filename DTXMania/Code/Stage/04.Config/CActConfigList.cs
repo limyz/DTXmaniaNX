@@ -542,6 +542,18 @@ namespace DTXMania
                 "メトロノームを有効にします。", "Enable Metronome.");
             this.listItems.Add( this.iSystemMetronome );
 
+            this.iSystemChipPlayTimeComputeMode = new CItemList("Chip Timing Mode", CItemList.EPanelType.Normal, CDTXMania.ConfigIni.nChipPlayTimeComputeMode,
+                "発声時刻の計算方式を選択\n" +
+                "します。\n" +
+                "Original: 原発声時刻の計算方式\n" +
+                "Accurate: BPM変更の時刻偏差修正",
+                "Select Chip Timing Mode:\n" +
+                "Original: Compatible with other DTXMania players\n" +
+                "Accurate: Fixes time loss issue of BPM/Bar-Length Changes\n" +
+                "NOTE: Only songs with many BPM/Bar-Length changes have observable time differences. Most songs are not affected by this option.",
+                new string[] { "Original", "Accurate" });
+            this.listItems.Add(this.iSystemChipPlayTimeComputeMode);
+
             OnListMenuの初期化();
             this.nCurrentSelection = 0;
             this.eMenuType = EMenuType.System;
@@ -1235,6 +1247,12 @@ namespace DTXMania
                 "Even if you pick without any chips,\nit doesn't become BAD.");
             this.listItems.Add(this.iGuitarLight);
 
+            this.iGuitarSpecialist = new CItemList("Performance Mode", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.bSpecialist.Guitar ? 1 : 0,
+                "ギターの演奏・モード\nします。\n  Normal: 通常の演奏モードです\n  Specialist: 間違えると違う音が流れます",
+                "Turn on/off Specialist Mode for Guitar\n Normal: Default Performance mode\n Specialist: Different sound is played when you make a mistake",
+                new string[] { "Normal", "Specialist" });
+            this.listItems.Add(this.iGuitarSpecialist);
+
             this.iGuitarRandom = new CItemList("Random", CItemBase.EPanelType.Normal, (int)CDTXMania.ConfigIni.eRandom.Guitar,
                 "ギターのチップがランダムに降ってきます。\n  Mirror: ミラーをかけます\n  Part: 小節_レーン単位で交換\n  Super: チップ単位で交換\n  Hyper: 全部完全に変更",
                 "Guitar chips come randomly.\n Mirror: \n Part: swapping lanes randomly for each\n  measures.\n Super: swapping chip randomly\n Hyper: swapping randomly\n  (number of lanes also changes)",
@@ -1448,6 +1466,12 @@ namespace DTXMania
                 "ベースチップのないところでピッキングしても\n BAD になりません。",
                 "Even if you pick without any chips,\nit doesn't become BAD.");
             this.listItems.Add(this.iBassLight);
+
+            this.iBassSpecialist = new CItemList("Performance Mode", CItemBase.EPanelType.Normal, CDTXMania.ConfigIni.bSpecialist.Bass ? 1 : 0,
+                "ベースの演奏・モード\nします。\n  Normal: 通常の演奏モードです\n  Specialist: 間違えると違う音が流れます",
+                "Turn on/off Specialist Mode for Bass\n Normal: Default Performance mode\n Specialist: Different sound is played when you make a mistake",
+                new string[] { "Normal", "Specialist" });
+            this.listItems.Add(this.iBassSpecialist);
 
             this.iBassLeft = new CItemToggle("Left", CDTXMania.ConfigIni.bLeft.Bass,
                 "ベースの RGBYP の並びが左右反転します。\n（左利きモード）",
@@ -3080,6 +3104,7 @@ namespace DTXMania
         private CItemBase iBassGoToKeyAssign;
         private CItemBase iSystemGoToKeyAssign;		// #24609
         private CItemToggle iSystemMetronome;         // 2023.9.22 henryzx // 2023.12.30 Changed to CItemToggle
+        private CItemList iSystemChipPlayTimeComputeMode; // 2024.2.17 fisyher
 
         private CItemList iSystemGRmode;
         private CItemToggle iSystemMusicNameDispDef;
@@ -3097,6 +3122,7 @@ namespace DTXMania
         private CItemList iBassHIDSUD;
         private CItemToggle iBassLeft;
         private CItemToggle iBassLight;
+        private CItemList iBassSpecialist; // 2024.2.22 fisyher
         private CItemList iBassPosition;
         private CItemList iBassRandom;
         private CItemBase iBassReturnToMenu;
@@ -3168,6 +3194,7 @@ namespace DTXMania
         private CItemList iGuitarHIDSUD;
         private CItemToggle iGuitarLeft;
         private CItemToggle iGuitarLight;
+        private CItemList iGuitarSpecialist; // 2024.2.22 fisyher
         private CItemList iGuitarPosition;
         private CItemList iGuitarRandom;
         private CItemBase iGuitarReturnToMenu;
@@ -3308,6 +3335,7 @@ namespace DTXMania
             this.iSystemMusicNameDispDef.bON = CDTXMania.ConfigIni.b曲名表示をdefのものにする;
             this.iSystemBGMAdjust.nCurrentValue = CDTXMania.ConfigIni.nCommonBGMAdjustMs;
             this.iSystemMetronome.bON = CDTXMania.ConfigIni.bMetronome;
+            this.iSystemChipPlayTimeComputeMode.n現在選択されている項目番号 = CDTXMania.ConfigIni.nChipPlayTimeComputeMode;
 
             #endregion
 
@@ -3325,6 +3353,7 @@ namespace DTXMania
             this.iBassPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.JudgementStringPosition.Bass;
             this.iBassRandom.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandom.Bass;
             this.iBassLight.bON = CDTXMania.ConfigIni.bLight.Bass;
+            this.iBassSpecialist.n現在選択されている項目番号 = CDTXMania.ConfigIni.bSpecialist.Bass ? 1 : 0;
             this.iBassLeft.bON = CDTXMania.ConfigIni.bLeft.Bass;
             this.iBassInputAdjustTimeMs.nCurrentValue = CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass;		// #23580 2011.1.3 yyagi
 
@@ -3355,6 +3384,7 @@ namespace DTXMania
             this.iGuitarPosition.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.JudgementStringPosition.Guitar;
             this.iGuitarRandom.n現在選択されている項目番号 = (int)CDTXMania.ConfigIni.eRandom.Guitar;
             this.iGuitarLight.bON = CDTXMania.ConfigIni.bLight.Guitar;
+            this.iGuitarSpecialist.n現在選択されている項目番号 = CDTXMania.ConfigIni.bSpecialist.Guitar ? 1 : 0;
             this.iGuitarLeft.bON = CDTXMania.ConfigIni.bLeft.Guitar;
             this.iGuitarInputAdjustTimeMs.nCurrentValue = CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar;
 
@@ -3510,9 +3540,10 @@ namespace DTXMania
             CDTXMania.ConfigIni.nInfoType = this.iInfoType.n現在選択されている項目番号;
             CDTXMania.ConfigIni.nRisky = this.iSystemRisky.nCurrentValue;										// #23559 2911.7.27 yyagi
             CDTXMania.ConfigIni.bMetronome = this.iSystemMetronome.bON;     // 2023.12.30 fisyher
+            CDTXMania.ConfigIni.nChipPlayTimeComputeMode = this.iSystemChipPlayTimeComputeMode.n現在選択されている項目番号; // 2024.2.17 fisyher
 
             #region [ GDオプション ]
-            
+
             CDTXMania.ConfigIni.b難易度表示をXG表示にする = this.iSystemDifficulty.bON;
             CDTXMania.ConfigIni.bShowScore = this.iSystemShowScore.bON;
             CDTXMania.ConfigIni.bShowMusicInfo = this.iSystemShowMusicInfo.bON;
@@ -3558,6 +3589,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.JudgementStringPosition.Bass = (EType)this.iBassPosition.n現在選択されている項目番号;
             CDTXMania.ConfigIni.eRandom.Bass = (ERandomMode)this.iBassRandom.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bLight.Bass = this.iBassLight.bON;
+            CDTXMania.ConfigIni.bSpecialist.Bass = this.iBassSpecialist.n現在選択されている項目番号 == 1;
             CDTXMania.ConfigIni.bLeft.Bass = this.iBassLeft.bON;
             CDTXMania.ConfigIni.nInputAdjustTimeMs.Bass = this.iBassInputAdjustTimeMs.nCurrentValue;		// #23580 2011.1.3 yyagi
 
@@ -3648,6 +3680,7 @@ namespace DTXMania
             CDTXMania.ConfigIni.JudgementStringPosition.Guitar = (EType)this.iGuitarPosition.n現在選択されている項目番号;
             CDTXMania.ConfigIni.eRandom.Guitar = (ERandomMode)this.iGuitarRandom.n現在選択されている項目番号;
             CDTXMania.ConfigIni.bLight.Guitar = this.iGuitarLight.bON;
+            CDTXMania.ConfigIni.bSpecialist.Guitar = this.iGuitarSpecialist.n現在選択されている項目番号 == 1;
             CDTXMania.ConfigIni.bLeft.Guitar = this.iGuitarLeft.bON;
             CDTXMania.ConfigIni.nInputAdjustTimeMs.Guitar = this.iGuitarInputAdjustTimeMs.nCurrentValue;	// #23580 2011.1.3 yyagi
 

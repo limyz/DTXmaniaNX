@@ -3859,9 +3859,14 @@ namespace DTXMania
             }
             if (pChip.eInstrumentPart == EInstrumentPart.DRUMS)
             {
-                if (bIsAutoPlay[this.nチャンネル0Atoレーン07[pChip.nChannelNumber - EChannel.HiHatClose]])
+                bPChipIsAutoPlay = true;
+                int offsetIndex = pChip.nChannelNumber - EChannel.HiHatClose;
+                if (offsetIndex >= 0 && offsetIndex < this.nチャンネル0Atoレーン07.Length) 
                 {
-                    bPChipIsAutoPlay = true;
+                    if (bIsAutoPlay[this.nチャンネル0Atoレーン07[offsetIndex]] == false) 
+                    {
+                        bPChipIsAutoPlay = false;
+                    }
                 }
             }
             else if (pChip.eInstrumentPart == EInstrumentPart.GUITAR)
@@ -4507,8 +4512,9 @@ namespace DTXMania
 						{
 							bMiss = false;
 						}
-						pChip.bHit = true;
-						this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs + ghostLag, inst, dTX.nモニタを考慮した音量( inst ), false, bMiss );
+                        bool bCurrInstrumentSpecialist = (inst == EInstrumentPart.GUITAR) ? CDTXMania.ConfigIni.bSpecialist.Guitar : CDTXMania.ConfigIni.bSpecialist.Bass;
+                        pChip.bHit = true;
+						this.tPlaySound( pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs + ghostLag, inst, dTX.nモニタを考慮した音量( inst ), false, bMiss && bCurrInstrumentSpecialist);
 						this.rNextGuitarChip = null;
 						if ( !bMiss )
 						{
@@ -4975,6 +4981,7 @@ namespace DTXMania
 
         protected virtual void tHandleInput_GuitarBass(EInstrumentPart inst)
         {
+            bool bCurrInstrumentSpecialist = (inst == EInstrumentPart.GUITAR) ? CDTXMania.ConfigIni.bSpecialist.Guitar : CDTXMania.ConfigIni.bSpecialist.Bass;
             int indexInst = (int)inst;
             #region [ スクロール速度変更 ]
             if (CDTXMania.Pad.bPressing(inst, EPad.Decide) && CDTXMania.Pad.bPressed(inst, EPad.B))
@@ -5888,7 +5895,7 @@ namespace DTXMania
                                     this.actChipFireGB.Start(P);
                                 }
                                 this.tProcessChipHit(nTime, pChip);
-                                this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], e判定 == EJudgement.Poor);
+                                this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], e判定 == EJudgement.Poor && bCurrInstrumentSpecialist);
                                 int chWailingChip = (inst == EInstrumentPart.GUITAR) ? 0x28 : 0xA8;
                                 CChip item = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingChip, this.nInputAdjustTimeMs[indexInst], 140);
                                 if (item != null)
@@ -5903,7 +5910,7 @@ namespace DTXMania
                         CChip NoChipPicked = (inst == EInstrumentPart.GUITAR) ? this.r現在の空うちギターChip : this.r現在の空うちベースChip;
                         if ((NoChipPicked != null) || ((NoChipPicked = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst])) != null))
                         {
-                            this.tPlaySound(NoChipPicked, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], true);
+                            this.tPlaySound(NoChipPicked, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], bCurrInstrumentSpecialist);                   
                         }
                         if (!CDTXMania.ConfigIni.bLight[indexInst])
                         {
