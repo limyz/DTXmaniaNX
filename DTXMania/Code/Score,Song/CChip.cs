@@ -33,7 +33,8 @@ namespace DTXMania
 		internal CDTX.CBGAPAN rBGAPan;
 		internal CDTX.CBMP rBMP;
 		internal CDTX.CBMPTEX rBMPTEX;
-		public bool bBPMチップである
+
+        public bool bBPMチップである
 		{
 			get
 			{
@@ -150,7 +151,83 @@ namespace DTXMania
 			}
         }
 
-		public bool bWAVを使うチャンネルである
+        public bool bDrums可視チップ
+        {
+            get
+            {
+                if (EChannel.HiHatClose <= nChannelNumber)
+                {
+                    return nChannelNumber <= EChannel.LeftBassDrum;
+                }
+                return false;
+            }
+        }
+
+        public bool bGuitar可視チップ
+        {
+            get
+            {
+                if ((EChannel.Guitar_Open > nChannelNumber || nChannelNumber > EChannel.Guitar_RGBxx) && (EChannel.Guitar_xxxYx > nChannelNumber || nChannelNumber > EChannel.Guitar_RxxxP) && (EChannel.Guitar_RxBxP > nChannelNumber || nChannelNumber > EChannel.Guitar_xGBYP))
+                {
+                    if (EChannel.Guitar_RxxYP <= nChannelNumber)
+                    {
+                        return nChannelNumber <= EChannel.Guitar_RGBYP;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool bGuitar可視チップ_Wailing含む
+        {
+            get
+            {
+                if ((EChannel.Guitar_Open > nChannelNumber || nChannelNumber > EChannel.Guitar_Wailing) && (EChannel.Guitar_xxxYx > nChannelNumber || nChannelNumber > EChannel.Guitar_RxxxP) && (EChannel.Guitar_RxBxP > nChannelNumber || nChannelNumber > EChannel.Guitar_xGBYP))
+                {
+                    if (EChannel.Guitar_RxxYP <= nChannelNumber)
+                    {
+                        return nChannelNumber <= EChannel.Guitar_RGBYP;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool bBass可視チップ
+        {
+            get
+            {
+                if ((EChannel.Bass_Open > nChannelNumber || nChannelNumber > EChannel.Bass_RGBxx) && (EChannel.Bass_xxxYx > nChannelNumber || nChannelNumber > EChannel.Bass_xxBYx) && (EChannel.Bass_xGxYx > nChannelNumber || nChannelNumber > EChannel.Bass_xxBxP))
+                {
+                    if (EChannel.Bass_xGxxP <= nChannelNumber)
+                    {
+                        return nChannelNumber <= EChannel.Bass_RGBYP;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool bBass可視チップ_Wailing含む
+        {
+            get
+            {
+                if ((EChannel.Bass_Open > nChannelNumber || nChannelNumber > EChannel.Bass_Wailing) && (EChannel.Bass_xxxYx > nChannelNumber || nChannelNumber > EChannel.Bass_xxBYx) && (EChannel.Bass_xGxYx > nChannelNumber || nChannelNumber > EChannel.Bass_xxBxP))
+                {
+                    if (EChannel.Bass_xGxxP <= nChannelNumber)
+                    {
+                        return nChannelNumber <= EChannel.Bass_RGBYP;
+                    }
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool bWAVを使うチャンネルである
 		{
 			get
 			{
@@ -321,12 +398,45 @@ namespace DTXMania
 		public int n楽器パートでの出現順;                // #35411 2015.08.20 chnmr0
 		public bool bTargetGhost判定済み;               // #35411 2015.08.22 chnmr0
 
-		//Long Notes Data members
-		public CChip chipロングノート終端 { get; set; }
+		//New property for no chip
+        //public bool b空打ちチップである { get; private set; }
+
+        //Long Notes Data members
+        public CChip chipロングノート終端 { get; set; }
 		public bool bロングノートである => chipロングノート終端 != null;
 		public bool bロングノートHit中 { get; set; }
 
-		public CChip()
+		//New property for empty chip
+        public bool bIsEmptyChip
+        {
+            get
+            {
+                bool retResult = false;
+                if (EChannel.HiHatClose_NoChip <= nChannelNumber && nChannelNumber <= EChannel.RideCymbal_NoChip)
+                {
+                    retResult = true;
+                }
+                else if (nChannelNumber == EChannel.Guitar_NoChip || nChannelNumber == EChannel.Bass_NoChip)
+                {
+                    retResult = true;
+                }
+                else if (nChannelNumber == EChannel.LeftCymbal_NoChip)
+                {
+                    retResult = true;
+                }
+                else if (nChannelNumber == EChannel.LeftPedal_NoChip)
+                {
+                    retResult = true;
+                }
+                else if (nChannelNumber == EChannel.LeftBassDrum_NoChip)
+                {
+                    retResult = true;
+                }
+                return retResult;
+            }
+        }
+
+        public CChip()
 		{
 			this.nDistanceFromBar = new STDGBVALUE<int>()
 			{
@@ -441,7 +551,9 @@ namespace DTXMania
 			return (int)(nDuration / _db再生速度);
 		}
 
-		public void ComputeDistanceFromBar(long nCurrentTime, STDGBVALUE<double> dbPerformanceScrollSpeed) 
+		
+
+        public void ComputeDistanceFromBar(long nCurrentTime, STDGBVALUE<double> dbPerformanceScrollSpeed) 
 		{
 			const double speed = 286;   // BPM150の時の1小節の長さ[dot]
 										//XGのHS4.5が1289。思えばBPMじゃなくて拍の長さが関係あるよね。

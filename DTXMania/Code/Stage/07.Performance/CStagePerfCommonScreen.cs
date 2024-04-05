@@ -762,6 +762,13 @@ namespace DTXMania
             internal bool b演奏終了後も再生が続くチップである;
         };
 
+        protected enum HitState
+        {
+            NotHit,
+            Hit,
+            DontCare
+        }
+
         public CActPerfAVI actAVI;
         public CActPerfBGA actBGA;
 
@@ -1973,12 +1980,113 @@ namespace DTXMania
             }
         }
 
-        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int nChannelFlag, int nInputAdjustTime)
+        //From AL
+        protected CChip r指定時刻に一番近いChip(long nTime, EChannel search, int nInputAdjustTime, int n検索範囲時間ms = 0, bool b過去優先 = true, HitState hs = HitState.NotHit, EInstrumentPart inst = EInstrumentPart.UNKNOWN)
         {
-            return this.r指定時刻に一番近い未ヒットChip(nTime, nChannelFlag, nInputAdjustTime, 0);
+            CChip cChip = null;
+            nTime += nInputAdjustTime;
+            if (this.nCurrentTopChip >= 0 && this.nCurrentTopChip <= this.listChip.Count)
+            {
+                int num = -1;
+                int num2 = -1;
+                int num3 = this.listChip.Count - 1;
+                for (int i = this.nCurrentTopChip; i < this.listChip.Count; i++)
+                {
+                    CChip chip2 = this.listChip[i];
+                    if (Future(chip2) && OutOfRange(chip2))
+                    {
+                        break;
+                    }
+                    if (Found(chip2, Future))
+                    {
+                        num = i;
+                        num3 = i;
+                        break;
+                    }
+                }
+                for (int num4 = num3; num4 >= 0; num4--)
+                {
+                    CChip chip3 = this.listChip[num4];
+                    if (Past(chip3) && OutOfRange(chip3))
+                    {
+                        break;
+                    }
+                    if (Found(chip3, Past))
+                    {
+                        num2 = num4;
+                        break;
+                    }
+                }
+                if (num >= 0 || num2 >= 0)
+                {
+                    if (num2 >= 0)
+                    {
+                        cChip = this.listChip[num2];
+                    }
+                    else if (num >= 0)
+                    {
+                        cChip = this.listChip[num];
+                    }
+                }
+                if (!b過去優先 && num >= 0 && num2 >= 0)
+                {
+                    long num5 = Math.Abs(nTime - this.listChip[num].nPlaybackTimeMs);
+                    long num6 = Math.Abs(nTime - this.listChip[num2].nPlaybackTimeMs);
+                    cChip = ((num5 >= num6) ? this.listChip[num2] : this.listChip[num]);
+                }
+                if (cChip != null && OutOfRange(cChip))
+                {
+                    cChip = null;
+                }
+            }
+            return cChip;
+            bool Found(CChip chip, Func<CChip, bool> futureOrPast)
+            {
+                if (futureOrPast(chip) && ((hs == HitState.NotHit && !chip.bHit) || (hs == HitState.Hit && chip.bHit) || hs == HitState.DontCare) && !chip.bIsEmptyChip)
+                {
+                    if (((search != chip.nChannelNumber && search + 32 != chip.nChannelNumber) || !chip.bDrums可視チップ) && (search != chip.nChannelNumber || !chip.bGuitar可視チップ_Wailing含む) && (search != chip.nChannelNumber || !chip.bBass可視チップ_Wailing含む) && (inst != EInstrumentPart.GUITAR || !chip.bGuitar可視チップ))
+                    {
+                        if (inst == EInstrumentPart.BASS)
+                        {
+                            return chip.bBass可視チップ;
+                        }
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+            bool Future(CChip chip)
+            {
+                return chip.nPlaybackTimeMs > nTime;
+            }
+            bool OutOfRange(CChip chip)
+            {
+                if (n検索範囲時間ms > 0)
+                {
+                    return Math.Abs(nTime - chip.nPlaybackTimeMs) > n検索範囲時間ms;
+                }
+                return false;
+            }
+            bool Past(CChip chip)
+            {
+                return chip.nPlaybackTimeMs <= nTime;
+            }
         }
-        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int int_nChannel, int nInputAdjustTime, int n検索範囲時間ms)
+
+        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int nChannelFlag, int nInputAdjustTime, bool enableTrace = false)
         {
+            return this.r指定時刻に一番近い未ヒットChip(nTime, nChannelFlag, nInputAdjustTime, 0, enableTrace);
+        }
+               
+        //This method occassionally returns non-hittable chip!
+        protected CChip r指定時刻に一番近い未ヒットChip(long nTime, int int_nChannel, int nInputAdjustTime, int n検索範囲時間ms, bool enableTrace = false)
+        {
+            if (enableTrace) 
+            {
+                Trace.TraceInformation("r指定時刻に一番近い未ヒットChip arg: int_nChannel={0:x2}", int_nChannel);
+            }
+
             EChannel nChannel = (EChannel)int_nChannel;
             sw2.Start();
             //Trace.TraceInformation( "nTime={0}, nChannel={1:x2}, 現在のTop={2}", nTime, nChannel,CDTXMania.DTX.listChip[ this.nCurrentTopChip ].nPlaybackTimeMs );
@@ -2016,7 +2124,8 @@ namespace DTXMania
                         }
                         continue;
                     }
-                    else if ((nChannel == EChannel.Guitar_WailingSound && chip.eInstrumentPart == EInstrumentPart.GUITAR) || (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
+                    else if ((nChannel == EChannel.Guitar_WailingSound && chip.eInstrumentPart == EInstrumentPart.GUITAR) || 
+                        (((EChannel.Guitar_Open <= nChannel && nChannel <= EChannel.Guitar_Wailing) || (EChannel.Guitar_xxxYx <= nChannel && nChannel <= EChannel.Guitar_RxxxP) || (EChannel.Guitar_RxBxP <= nChannel && nChannel <= EChannel.Guitar_xGBYP) || (EChannel.Guitar_RxxYP <= nChannel && nChannel <= EChannel.Guitar_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
                         if (chip.nPlaybackTimeMs > nTime)
                         {
@@ -2026,11 +2135,19 @@ namespace DTXMania
                     }
                     else if ((nChannel == EChannel.Guitar_xGBYP && chip.eInstrumentPart == EInstrumentPart.BASS) || (((nChannel >= EChannel.Bass_Open && nChannel <= EChannel.Bass_Wailing) || (EChannel.Bass_xxxYx == nChannel) || (nChannel == EChannel.Bass_xxBYx) || (nChannel >= EChannel.Bass_xGxYx && nChannel <= EChannel.Bass_xxBxP) || (nChannel >= EChannel.Bass_xGxxP && nChannel <= EChannel.Bass_RGBxP) || (nChannel >= EChannel.Bass_xxxYP && nChannel <= EChannel.Bass_RGBYP)) && chip.nChannelNumber == nChannel))
                     {
-                        if (chip.nPlaybackTimeMs > nTime)
-                        {
-                            break;
+                        EChannel currChipChannel = chip.nChannelNumber;
+                        if ((currChipChannel >= EChannel.Bass_Open && currChipChannel <= EChannel.Bass_Wailing) || (EChannel.Bass_xxxYx == currChipChannel) || (currChipChannel == EChannel.Bass_xxBYx) || (currChipChannel >= EChannel.Bass_xGxYx && currChipChannel <= EChannel.Bass_xxBxP) || (currChipChannel >= EChannel.Bass_xGxxP && currChipChannel <= EChannel.Bass_RGBxP) || (currChipChannel >= EChannel.Bass_xxxYP && currChipChannel <= EChannel.Bass_RGBYP)) {
+                            if (enableTrace)
+                            {
+                                Trace.TraceInformation("r指定時刻に一番近い未ヒットChip 1st condition met: chip_channel={0:x2}, nIndexPast={1}, nIndexNearestChipFuture={2}", (int)chip.nChannelNumber, nIndex_InitialPositionSearchingToPast, nIndex_NearestChip_Future);
+                            }
+
+                            if (chip.nPlaybackTimeMs > nTime)
+                            {
+                                break;
+                            }
+                            nIndex_InitialPositionSearchingToPast = nIndex_NearestChip_Future;
                         }
-                        nIndex_InitialPositionSearchingToPast = nIndex_NearestChip_Future;
                     }
                 }
                 //				nIndex_NearestChip_Future++;
@@ -2067,7 +2184,31 @@ namespace DTXMania
                         )
                     )
                 {
-                    break;
+                    if (chip.eInstrumentPart == EInstrumentPart.BASS)
+                    {
+                        EChannel currChipChannel = chip.nChannelNumber;
+                        
+
+                        if (((currChipChannel >= EChannel.Bass_Open) && (currChipChannel <= EChannel.Bass_Wailing)) ||
+                                (EChannel.Bass_xxxYx <= currChipChannel && currChipChannel <= EChannel.Bass_xxBYx) ||
+                                (EChannel.Bass_xGxYx <= currChipChannel && currChipChannel <= EChannel.Bass_xxBxP) ||
+                                (EChannel.Bass_xGxxP <= currChipChannel && currChipChannel <= EChannel.Bass_RGBxP) ||
+                                (EChannel.Bass_xxxYP <= currChipChannel && currChipChannel <= EChannel.Bass_RGBYP)) 
+                        {
+                            if (enableTrace)
+                            {
+                                Trace.TraceInformation("r指定時刻に一番近い未ヒットChip 2nd condition met: chip_channel={0:x2}", (int)chip.nChannelNumber);
+                            }
+                            break;                        
+                        }
+
+                        //break;
+                    }
+                    else 
+                    {
+                        break;
+                    }
+                    
                 }
                 //				nIndex_NearestChip_Past--;
             }
@@ -2079,11 +2220,19 @@ namespace DTXMania
             CChip nearestChip;	// = null;	// 以下のifブロックのいずれかで必ずnearestChipには非nullが代入されるので、null初期化を削除
             if (nIndex_NearestChip_Future >= count)											// 検索対象が未来方向には見つからなかった(しかし過去方向には見つかった)場合
             {
+                if (enableTrace)
+                {
+                    Trace.TraceInformation("r指定時刻に一番近い未ヒットChip Nearest Chip Assign 1: nIndex_NearestChip_Past={0}", nIndex_NearestChip_Past);
+                }
                 nearestChip = listChip[nIndex_NearestChip_Past];
                 //				nTimeDiff = Math.Abs( (int) ( nTime - nearestChip.nPlaybackTimeMs ) );
             }
             else if (nIndex_NearestChip_Past < 0)												// 検索対象が過去方向には見つからなかった(しかし未来方向には見つかった)場合
             {
+                if (enableTrace)
+                {
+                    Trace.TraceInformation("r指定時刻に一番近い未ヒットChip Nearest Chip Assign 2: nIndex_NearestChip_Future={0}", nIndex_NearestChip_Future);
+                }
                 nearestChip = listChip[nIndex_NearestChip_Future];
                 //				nTimeDiff = Math.Abs( (int) ( nTime - nearestChip.nPlaybackTimeMs ) );
             }
@@ -2093,11 +2242,19 @@ namespace DTXMania
                 int nTimeDiff_Past = Math.Abs((int)(nTime - listChip[nIndex_NearestChip_Past].nPlaybackTimeMs));
                 if (nTimeDiff_Future < nTimeDiff_Past)
                 {
+                    if (enableTrace)
+                    {
+                        Trace.TraceInformation("r指定時刻に一番近い未ヒットChip Nearest Chip Assign 3: nIndex_NearestChip_Future={0}", nIndex_NearestChip_Future);
+                    }
                     nearestChip = listChip[nIndex_NearestChip_Future];
                     //					nTimeDiff = Math.Abs( (int) ( nTime - nearestChip.nPlaybackTimeMs ) );
                 }
                 else
                 {
+                    if (enableTrace)
+                    {
+                        Trace.TraceInformation("r指定時刻に一番近い未ヒットChip Nearest Chip Assign 4: nIndex_NearestChip_Past={0}", nIndex_NearestChip_Past);
+                    }
                     nearestChip = listChip[nIndex_NearestChip_Past];
                     //					nTimeDiff = Math.Abs( (int) ( nTime - nearestChip.nPlaybackTimeMs ) );
                 }
@@ -2109,6 +2266,16 @@ namespace DTXMania
                 return null;
             }
             sw2.Stop();
+
+            if (!nearestChip.bChannelWithVisibleChip && nearestChip.nChannelNumber != EChannel.Guitar_Wailing && nearestChip.nChannelNumber != EChannel.Bass_Wailing)
+            {
+                if (enableTrace)
+                {
+                    Trace.TraceWarning("Nearest chip is not a visible chip!!! ch={0:x2}", (int)nearestChip.nChannelNumber);
+                    Trace.TraceWarning("r指定時刻に一番近い未ヒットChip arguments: nTime (adjusted):{0}, int_nChannel:{1:x2}, nInputAdjustTime:{2}, n検索範囲時間ms:{3}", nTime, int_nChannel, nInputAdjustTime, n検索範囲時間ms);
+                }
+            }
+
             return nearestChip;
         }
 
@@ -2127,13 +2294,15 @@ namespace DTXMania
         protected CChip r次にくるギターChipを更新して返す()
         {
             int nInputAdjustTime = this.bIsAutoPlay.GtPick ? 0 : this.nInputAdjustTimeMs.Guitar;
-            this.rNextGuitarChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0x2f, nInputAdjustTime, 500);
+            this.rNextGuitarChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, (int)EChannel.Guitar_WailingSound, nInputAdjustTime, 500);
+            //this.rNextGuitarChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0x2f, nInputAdjustTime, 500);
             return this.rNextGuitarChip;
         }
         protected CChip r次にくるベースChipを更新して返す()  // r次にくるベースChipを更新して返す
         {
-            int nInputAdjustTime = this.bIsAutoPlay.BsPick ? 0 : this.nInputAdjustTimeMs.Bass;
-            this.rNextBassChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0xaf, nInputAdjustTime, 500);
+            int nInputAdjustTime = this.bIsAutoPlay.BsPick ? 0 : this.nInputAdjustTimeMs.Bass;//Guitar_xGBYP
+            this.rNextBassChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, (int)EChannel.Guitar_xGBYP, nInputAdjustTime, 500);
+            //this.rNextBassChip = this.r指定時刻に一番近い未ヒットChip(CSoundManager.rcPerformanceTimer.nCurrentTime, 0xaf, nInputAdjustTime, 500);
             return this.rNextBassChip;
         }
 
@@ -4525,7 +4694,7 @@ namespace DTXMania
 							pChip.nLag = 0;		// tProcessChipHit()の引数最後がfalseの時はpChip.nLagを計算しないため、ここでAutoPickかつMissのLag=0を代入
 							this.tProcessChipHit( pChip.nPlaybackTimeMs + ghostLag, pChip, false );
 						}
-						int chWailingChip = ( inst == EInstrumentPart.GUITAR ) ? 0x28 : 0xA8;
+						int chWailingChip = ( inst == EInstrumentPart.GUITAR ) ? (int)EChannel.Guitar_Wailing : (int)EChannel.Bass_Wailing;
 						CChip item = this.r指定時刻に一番近い未ヒットChip( pChip.nPlaybackTimeMs + ghostLag, chWailingChip, this.nInputAdjustTimeMs[ instIndex ], 140 );
 						if ( item != null && !bMiss )
 						{
@@ -5538,13 +5707,20 @@ namespace DTXMania
                             continue;
                         }
                         this.tSaveInputMethod(inst);
+                        Trace.TraceInformation("Pick Event: {0} with Timestamp: {1}", eventPick.nKey, eventPick.nTimeStamp);
                         long nTime = eventPick.nTimeStamp - CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻;
-                        int chWailingSound = (inst == EInstrumentPart.GUITAR) ? 0x2F : 0xAF;
-                        CChip pChip = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst]);	// EInstrumentPart.GUITARなチップ全てにヒットする
+                        //int chWailingSound = (inst == EInstrumentPart.GUITAR) ? 0x2F : 0xAF;
+                        int chWailingSound = (inst == EInstrumentPart.GUITAR) ? (int)EChannel.Guitar_Wailing : (int)EChannel.Guitar_xGBYP;
+                        CChip pChip = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst], true);	// EInstrumentPart.GUITARなチップ全てにヒットする
                         EJudgement e判定 = this.e指定時刻からChipのJUDGEを返す(nTime, pChip, this.nInputAdjustTimeMs[indexInst]);
                         //Trace.TraceInformation("ch={0:x2}, mask1={1:x1}, mask2={2:x2}", pChip.nChannelNumber,  ( pChip.nChannelNumber & ~nAutoMask ) & 0x0F, ( flagRGB & ~nAutoMask) & 0x0F );
                         if (pChip != null)
-                        {
+                        {                            
+                            Trace.TraceInformation("ch={0:x2}, Judgement={1}", (int)pChip.nChannelNumber, e判定);
+                            if (!pChip.bChannelWithVisibleChip && pChip.nChannelNumber != EChannel.Guitar_Wailing && pChip.nChannelNumber != EChannel.Bass_Wailing)
+                            {
+                                Trace.TraceWarning("ch={0:x2} is an invisible chip!", (int)pChip.nChannelNumber);
+                            }
                             bool bChipHasR = false;
                             bool bChipHasG = false;
                             bool bChipHasB = false;
@@ -5873,7 +6049,7 @@ namespace DTXMania
                             int num17 = (bChipHasR ? 4 : 0) | (bChipHasG ? 2 : 0) | (bChipHasB ? 1 : 0) | (bChipHasY ? 16 : 0) | (bChipHasP ? 32 : 0);
                             if (pChip != null && (num17 & ~nAutoMask & 0x3F) == (nKeyPressRGBFlag & ~nAutoMask & 0x3F) && e判定 != EJudgement.Miss)
                             {
-
+                                Trace.TraceInformation("After successful mask check: ch={0:x2}, Judgement={1}, num17={2:x2}, nKeyPressRGBFlag={3:x2}, nAutoMask={4:x2}", (int)pChip.nChannelNumber, e判定, num17, nKeyPressRGBFlag, nAutoMask);
                                 if ((bChipHasR && (autoR || pushingR != 0)) || bSuccessOPEN)
                                 {
                                     this.actChipFireGB.Start(R);
@@ -5896,13 +6072,17 @@ namespace DTXMania
                                 }
                                 this.tProcessChipHit(nTime, pChip);
                                 this.tPlaySound(pChip, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], e判定 == EJudgement.Poor && bCurrInstrumentSpecialist);
-                                int chWailingChip = (inst == EInstrumentPart.GUITAR) ? 0x28 : 0xA8;
+                                int chWailingChip = (inst == EInstrumentPart.GUITAR) ? (int)EChannel.Guitar_Wailing : (int)EChannel.Bass_Wailing;
                                 CChip item = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingChip, this.nInputAdjustTimeMs[indexInst], 140);
                                 if (item != null)
                                 {
                                     this.queWailing[indexInst].Enqueue(item);
                                 }
                                 continue;
+                            }
+                            else 
+                            {
+                                //Mis-hits seems to coincide with 3 channels: 80 (BarLine), 81 (BeatLine) and 45 (Bass_LongNote)
                             }
                         }
 
