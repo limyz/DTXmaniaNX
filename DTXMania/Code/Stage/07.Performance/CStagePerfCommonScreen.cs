@@ -1279,6 +1279,12 @@ namespace DTXMania
             sw2.Stop();
             return nearestChip_Future;
         }
+
+        //NOTE: Implementation is from AL, which is completely different from its overloaded sibling method
+        protected CChip r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(long nTime, EChannel eChannel, int nInputAdjustTime, EInstrumentPart inst = EInstrumentPart.UNKNOWN) {
+            return r指定時刻に一番近いChip(nTime, eChannel, nInputAdjustTime, 0, b過去優先: false, HitState.DontCare, inst);
+        }
+
         protected void tPlaySound(CChip rChip, long n再生開始システム時刻ms, EInstrumentPart part)
         {
             this.tPlaySound(rChip, n再生開始システム時刻ms, part, CDTXMania.ConfigIni.n手動再生音量, false, false);
@@ -5733,7 +5739,8 @@ namespace DTXMania
                         //Test new method to find next hittable chip
                         //CChip pChip = this.r指定時刻に一番近い未ヒットChip(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst], true);	// EInstrumentPart.GUITARなチップ全てにヒットする
                         EChannel eChannelFromInstAndArrayBool = EnumConverter.GetEChannelFromInstAndArrayBool(inst, buttonPressArray);
-                        CChip pChip = r指定時刻に一番近いChip(nTime, eChannelFromInstAndArrayBool, this.nInputAdjustTimeMs[indexInst], 0, b過去優先: true, HitState.NotHit, inst);
+                        int nCurrPoorRangeMs = (inst == EInstrumentPart.GUITAR) ? CDTXMania.stGuitarHitRanges.nPoorSizeMs : CDTXMania.stBassHitRanges.nPoorSizeMs;
+                        CChip pChip = r指定時刻に一番近いChip(nTime, eChannelFromInstAndArrayBool, this.nInputAdjustTimeMs[indexInst], nCurrPoorRangeMs, b過去優先: true, HitState.NotHit, inst);
 
                         EJudgement e判定 = this.e指定時刻からChipのJUDGEを返す(nTime, pChip, this.nInputAdjustTimeMs[indexInst]);
                         //Trace.TraceInformation("ch={0:x2}, mask1={1:x1}, mask2={2:x2}", pChip.nChannelNumber,  ( pChip.nChannelNumber & ~nAutoMask ) & 0x0F, ( flagRGB & ~nAutoMask) & 0x0F );
@@ -6119,7 +6126,7 @@ namespace DTXMania
 
                         // 以下、間違いレーンでのピック時
                         CChip NoChipPicked = (inst == EInstrumentPart.GUITAR) ? this.r現在の空うちギターChip : this.r現在の空うちベースChip;
-                        if ((NoChipPicked != null) || ((NoChipPicked = this.r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(nTime, chWailingSound, this.nInputAdjustTimeMs[indexInst])) != null))
+                        if ((NoChipPicked != null) || ((NoChipPicked = r指定時刻に一番近いChip_ヒット未済問わず不可視考慮(nTime, EChannel.Guitar_Open, this.nInputAdjustTimeMs[indexInst], inst)) != null))
                         {
                             this.tPlaySound(NoChipPicked, CSoundManager.rcPerformanceTimer.nシステム時刻, inst, CDTXMania.ConfigIni.n手動再生音量, CDTXMania.ConfigIni.b演奏音を強調する[indexInst], bCurrInstrumentSpecialist);                   
                         }
