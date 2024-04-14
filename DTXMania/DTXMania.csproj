@@ -140,6 +140,7 @@
     <Compile Include="Code\App\CIMEHook.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Score,Song\EnumConverter.cs" />
     <Compile Include="Code\Score,Song\CChip.cs" />
     <Compile Include="Code\Score,Song\CProgress.cs" />
     <Compile Include="Code\Score,Song\EChannel.cs" />

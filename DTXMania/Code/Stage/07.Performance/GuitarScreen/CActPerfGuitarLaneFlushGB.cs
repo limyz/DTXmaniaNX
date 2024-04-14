@@ -106,7 +106,6 @@ namespace DTXMania
                 {
                     this.txLaneFlush.tDraw2D(CDTXMania.app.Device, ( CDTXMania.ConfigIni.bLeft.Guitar ? 86 : 242 ), 104, new Rectangle(156, 0, 41, 566));
                 }
-
                 if( !base.ctUpdate[ 5 ].b停止中 && CDTXMania.ConfigIni.bLaneFlush.Bass )
                 {
                     this.txLaneFlush.tDraw2D(CDTXMania.app.Device, ( CDTXMania.ConfigIni.bLeft.Bass ? 1112 : 957 ), 104, new Rectangle(0, 0, 41, 566));
