@@ -178,5 +178,36 @@ namespace DTXMania
             }
             return (b[0], b[1], b[2], b[3], b[4]);
         }
+
+        public static bool[] GetArrayBoolRGBYPFromTupleBool((bool R, bool G, bool B, bool Y, bool P) tupleb)
+        {
+            return new bool[5] { tupleb.R, tupleb.G, tupleb.B, tupleb.Y, tupleb.P };
+        }
+
+        public static bool[] GetArrayBoolFromEChannel(EChannel ch)
+        {
+            return GetArrayBoolRGBYPFromTupleBool(GetTupleBoolFromEChannel(ch));
+        }
+
+        public static (bool R, bool G, bool B, bool Y, bool P) GetTupleBoolFromEChannel(EChannel ch)
+        {
+            (bool, bool, bool, bool, bool) result = (false, false, false, false, false);
+            bool flag = false;
+            foreach (KeyValuePair<(bool, bool, bool, bool, bool), (EChannel, EChannel)> dicBoolTupleAsEChannel in dicBoolTupleAsEChannels)
+            {
+                var (eChannel, eChannel2) = dicBoolTupleAsEChannel.Value;
+                if (eChannel == ch || eChannel2 == ch)
+                {
+                    result = dicBoolTupleAsEChannel.Key;
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                return result;
+            }
+            throw new NotImplementedException();
+        }
     }
 }

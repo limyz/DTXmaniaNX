@@ -63,6 +63,19 @@ namespace DTXMania
 			}
         }
 
+		public bool bChipIsWailingNote {
+            get
+            {
+                switch (this.nChannelNumber)
+                {
+                    case EChannel.Guitar_Wailing:
+                    case EChannel.Bass_Wailing:
+                        return true;
+                }
+                return false;
+            }
+        }
+
 		public bool bChannelWithVisibleChip
         {
             get
