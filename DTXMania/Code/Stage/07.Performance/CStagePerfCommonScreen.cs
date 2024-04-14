@@ -5854,7 +5854,9 @@ namespace DTXMania
                                             bChipHasP = true;
                                             break;
                                         //OK
-
+                                        case EChannel.Bass_Open:
+                                            bChipIsO = true;
+                                            break;
                                         case EChannel.Bass_xxBxx:
                                             bChipHasB = true;
                                             break;
