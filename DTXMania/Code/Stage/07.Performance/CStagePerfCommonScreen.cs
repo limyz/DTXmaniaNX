@@ -5608,14 +5608,7 @@ namespace DTXMania
                     CDTXMania.Pad.bPressing(inst, EPad.Y),
                     CDTXMania.Pad.bPressing(inst, EPad.P)
                 };
-                bool[] buttonPressIncludingAutoArray = new bool[5]
-                {
-                    buttonPressArray[0] || autoR,
-                    buttonPressArray[1] || autoG,
-                    buttonPressArray[2] || autoB,
-                    buttonPressArray[3] || autoY,
-                    buttonPressArray[4] || autoP
-                };
+                
                 int pushingR = buttonPressArray[0] ? 4 : 0;
                 this.tSaveInputMethod(inst);
                 int pushingG = buttonPressArray[1] ? 2 : 0;
@@ -5746,10 +5739,8 @@ namespace DTXMania
                         //Trace.TraceInformation("ch={0:x2}, mask1={1:x1}, mask2={2:x2}", pChip.nChannelNumber,  ( pChip.nChannelNumber & ~nAutoMask ) & 0x0F, ( flagRGB & ~nAutoMask) & 0x0F );
                         if (pChip != null)
                         {
-                            if (!pChip.bChannelWithVisibleChip && pChip.nChannelNumber != EChannel.Guitar_Wailing && pChip.nChannelNumber != EChannel.Bass_Wailing)
-                            {
-                                Trace.TraceWarning("ch={0:x2} is an invisible chip!", (int)pChip.nChannelNumber);
-                            }
+
+                            
                             bool bChipHasR = false;
                             bool bChipHasG = false;
                             bool bChipHasB = false;
@@ -6080,7 +6071,7 @@ namespace DTXMania
                             int num17 = (bChipHasR ? 4 : 0) | (bChipHasG ? 2 : 0) | (bChipHasB ? 1 : 0) | (bChipHasY ? 16 : 0) | (bChipHasP ? 32 : 0);
                             if (pChip != null && (num17 & ~nAutoMask & 0x3F) == (nKeyPressRGBFlag & ~nAutoMask & 0x3F) && e判定 != EJudgement.Miss)
                             {
-                                Trace.TraceInformation("After successful mask check: ch={0:x2}, Judgement={1}, num17={2:x2}, nKeyPressRGBFlag={3:x2}, nAutoMask={4:x2}", (int)pChip.nChannelNumber, e判定, num17, nKeyPressRGBFlag, nAutoMask);
+                                //Trace.TraceInformation("After successful mask check: ch={0:x2}, Judgement={1}, num17={2:x2}, nKeyPressRGBFlag={3:x2}, nAutoMask={4:x2}", (int)pChip.nChannelNumber, e判定, num17, nKeyPressRGBFlag, nAutoMask);
                                 if ((bChipHasR && (autoR || pushingR != 0)) || bSuccessOPEN)
                                 {
                                     this.actChipFireGB.Start(R);
@@ -6123,7 +6114,7 @@ namespace DTXMania
                         }
                         else 
                         {
-                            Trace.TraceInformation("pChip is null");
+                            //Trace.TraceInformation("pChip is null");
                         }
 
                         // 以下、間違いレーンでのピック時
