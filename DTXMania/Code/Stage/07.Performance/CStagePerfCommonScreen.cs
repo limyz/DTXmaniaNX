@@ -1488,7 +1488,7 @@ namespace DTXMania
             //Update progressBar
             if (!bPChipIsAutoPlay && (eJudgeResult == EJudgement.Perfect || eJudgeResult == EJudgement.Great || eJudgeResult == EJudgement.Good))
             {
-                this.actProgressBar.Hit(screenmode, pChip.nPlaybackTimeMs, eJudgeResult);
+                this.actProgressBar.Hit(pChip.eInstrumentPart, pChip.nPlaybackTimeMs, eJudgeResult);
             }
 
             //Update Lag Timing Counter data
