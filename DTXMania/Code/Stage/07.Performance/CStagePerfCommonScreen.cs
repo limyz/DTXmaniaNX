@@ -2267,9 +2267,9 @@ namespace DTXMania
             }
             sw2.Stop();
 
-            if (!nearestChip.bChannelWithVisibleChip && nearestChip.nChannelNumber != EChannel.Guitar_Wailing && nearestChip.nChannelNumber != EChannel.Bass_Wailing)
+            if (enableTrace)                
             {
-                if (enableTrace)
+                if (!nearestChip.bChannelWithVisibleChip && nearestChip.nChannelNumber != EChannel.Guitar_Wailing && nearestChip.nChannelNumber != EChannel.Bass_Wailing)
                 {
                     Trace.TraceWarning("Nearest chip is not a visible chip!!! ch={0:x2}", (int)nearestChip.nChannelNumber);
                     Trace.TraceWarning("r指定時刻に一番近い未ヒットChip arguments: nTime (adjusted):{0}, int_nChannel:{1:x2}, nInputAdjustTime:{2}, n検索範囲時間ms:{3}", nTime, int_nChannel, nInputAdjustTime, n検索範囲時間ms);
