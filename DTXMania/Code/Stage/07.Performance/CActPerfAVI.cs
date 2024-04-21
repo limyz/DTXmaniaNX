@@ -303,6 +303,7 @@ namespace DTXMania
             {  
                 this.n移動開始時刻ms = -1;
                 this.rAVI.avi.Stop();
+                this.rAVI.avi.Seek(0);
             }
             //if (this.dsBGV != null && CDTXMania.ConfigIni.bDirectShowMode == true)
             //{

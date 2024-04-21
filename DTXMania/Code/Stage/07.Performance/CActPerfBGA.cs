@@ -68,7 +68,7 @@ namespace DTXMania
 				CChip chip = CDTXMania.DTX.listChip[ i ];
 				if( chip.nPlaybackTimeMs > n移動開始時刻ms )
 				{
-					return;
+					break;
 				}
 				switch( chip.eBGA種別 )
 				{
