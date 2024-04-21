@@ -2104,7 +2104,7 @@ for (int i = 0; i < 3; i++) {
                     CDTXMania.ConfigIni.eRandomPedal.Drums = ERandomMode.OFF;
 
                     //Set scroll speed to fixed values
-                    CDTXMania.ConfigIni.nScrollSpeed.Drums = 3;//1.5
+                    CDTXMania.ConfigIni.nScrollSpeed.Drums = 4;//2.0
                     CDTXMania.ConfigIni.nScrollSpeed.Guitar = 4;//2.0
                     CDTXMania.ConfigIni.nScrollSpeed.Bass = 4;//2.0
 
