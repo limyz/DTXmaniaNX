@@ -2086,9 +2086,9 @@ for (int i = 0; i < 3; i++) {
                     CDTXMania.ConfigIni.bFullScreenMode = false;
                     CDTXMania.ConfigIni.nMovieMode = 2;
 
-                    //Set windows size to 640 x 360 and set its position to a fixed location
-                    CDTXMania.ConfigIni.nウインドウwidth = 640;
-                    CDTXMania.ConfigIni.nウインドウheight = 360;
+                    //Set windows size to selected Window Size and set its position to a fixed location
+                    CDTXMania.ConfigIni.nウインドウwidth = DTXVmode.widthResolution;
+                    CDTXMania.ConfigIni.nウインドウheight = DTXVmode.heightResolution;
                     CDTXMania.ConfigIni.n初期ウィンドウ開始位置X = 5;
                     CDTXMania.ConfigIni.n初期ウィンドウ開始位置Y = 100;
 

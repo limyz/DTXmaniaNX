@@ -73,7 +73,8 @@ namespace DTXCreator.Options  // オプション関連
 			this.radioButton_ASIO.Enabled = false;
 			this.comboBox_ASIOdevices.Enabled = false;
 			this.groupBox_SoundDeviceSettings.Enabled = false;
-			this.textBox_DTXViewerPath.Enabled = true;
+            this.groupBox_WindowsSizeSettings.Enabled = false;
+            this.textBox_DTXViewerPath.Enabled = true;
 			this.button_DTXViewerPath.Enabled = true;
 		}
 
@@ -85,7 +86,8 @@ namespace DTXCreator.Options  // オプション関連
 			this.radioButton_ASIO.Enabled = true;
 			this.comboBox_ASIOdevices.Enabled = true;
 			this.groupBox_SoundDeviceSettings.Enabled = true;
-			this.textBox_DTXViewerPath.Enabled = false;
+            this.groupBox_WindowsSizeSettings.Enabled = true;
+            this.textBox_DTXViewerPath.Enabled = false;
 			this.button_DTXViewerPath.Enabled = false;
 		}
 
@@ -126,5 +128,6 @@ namespace DTXCreator.Options  // オプション関連
 				textBox_DTXViewerPath.Text = openFileDialog_DTXViewerPath.FileName;
 			}
         }
+
 	}
 }

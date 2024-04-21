@@ -392,6 +392,7 @@ namespace DTXCreator
 			public bool GRmode;
 			public bool TimeStretch;
 			public bool VSyncWait = true;
+			public int ViewerHeightResolution = 360;
 
 			// 引数無しのコンストラクタがないとSerializeできないのでダミー定義する
 			public Viewer()
@@ -437,7 +438,7 @@ namespace DTXCreator
 								soundtypeopt += ASIODeviceNo.ToString();
 								break;
 						}
-
+						
 						opt = "-D" + soundtypeopt;
 						opt += GRmode ? "Y" : "N";  // この辺は手抜き
 						opt += TimeStretch ? "Y" : "N"; //
@@ -446,6 +447,23 @@ namespace DTXCreator
 					return opt;
 				}
 			}
+		
+			public string PlayViewerOption 
+			{
+                get
+                {
+                    string opt = "";
+                    if (bViewerIsDTXV)
+                    {
+                        opt = "";
+                    }
+                    else
+                    {
+                        opt = "-R" + ViewerHeightResolution.ToString();
+                    }
+                    return opt;
+                }
+            }
 		}
 
 		/// <summary>

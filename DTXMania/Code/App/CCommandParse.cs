@@ -6,7 +6,7 @@ using System.IO;
 using System.Threading;
 using System.Text.RegularExpressions;
 using FDK;
-
+using DirectShowLib.DMO;
 
 namespace DTXMania
 {
@@ -281,8 +281,37 @@ namespace DTXMania
 						ret = ECommandType.DTX2WAV;
 						arg = arg.Substring(2);
 					}
-					else
+                    //New -R option for specifying resolution of DTXViewerNX
+                    #region [ DTXViewerNX Viewer Resolution ]
+                    else if (arg.StartsWith("-R", StringComparison.OrdinalIgnoreCase))
 					{
+                        //cdtxv.Enabled = true;
+                        //cdtxv.Command = CDTXVmode.ECommand.Preview;
+                        //cdtxv.Refreshed = true;
+                        ret = ECommandType.DTXV;
+                        arg = arg.Substring(2);
+						//Assumes -R is not the last argument!
+						int indexOfFirstHyphen = arg.IndexOf('-');
+						string resolutionText = arg.Substring(0, indexOfFirstHyphen);
+
+						int heightResolution;
+
+						if (!int.TryParse(resolutionText, out heightResolution))
+						{
+							heightResolution = 360;
+                        }
+
+                        int widthResolution = heightResolution * 16 / 9; //Maintain 16:9 ratio
+
+                        cdtxv.widthResolution = widthResolution;
+                        cdtxv.heightResolution = heightResolution;
+
+                        arg = arg.Substring(indexOfFirstHyphen);
+
+                    }
+                    #endregion
+                    else
+                    {
 						analyzing = false;
 					}
 				}
