@@ -117,204 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Name" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPlaySoundOnChip.Name" xml:space="preserve">
-    <value>checkBoxPlaySoundOnChip</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPlaySoundOnChip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPlaySoundOnChip.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPlaySoundOnChip.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPreviewBGM.Name" xml:space="preserve">
-    <value>checkBoxPreviewBGM</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPreviewBGM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPreviewBGM.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;checkBoxPreviewBGM.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;checkBoxオートフォーカス.Name" xml:space="preserve">
-    <value>checkBoxオートフォーカス</value>
-  </data>
-  <data name="&gt;&gt;checkBoxオートフォーカス.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBoxオートフォーカス.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;checkBoxオートフォーカス.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label個まで表示する.Name" xml:space="preserve">
-    <value>label個まで表示する</value>
-  </data>
-  <data name="&gt;&gt;label個まで表示する.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label個まで表示する.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;label個まで表示する.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;checkBox最近使用したファイル.Name" xml:space="preserve">
-    <value>checkBox最近使用したファイル</value>
-  </data>
-  <data name="&gt;&gt;checkBox最近使用したファイル.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox最近使用したファイル.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;checkBox最近使用したファイル.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown最近使用したファイルの最大表示個数.Name" xml:space="preserve">
-    <value>numericUpDown最近使用したファイルの最大表示個数</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown最近使用したファイルの最大表示個数.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown最近使用したファイルの最大表示個数.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;numericUpDown最近使用したファイルの最大表示個数.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tabPage全般.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 46</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabPage全般.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="tabPage全般.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="tabPage全般.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1129, 911</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tabPage全般.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="tabPage全般.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="&gt;&gt;tabPage全般.Name" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;tabPage全般.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage全般.Parent" xml:space="preserve">
-    <value>tabControlオプション</value>
-  </data>
-  <data name="&gt;&gt;tabPage全般.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EditMode.Name" xml:space="preserve">
-    <value>pictureBox_EditMode</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EditMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EditMode.Parent" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_EditMode.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_SelectMode.Name" xml:space="preserve">
-    <value>pictureBox_SelectMode</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_SelectMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_SelectMode.Parent" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;pictureBox_SelectMode.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;radioButton_EditMode.Name" xml:space="preserve">
-    <value>radioButton_EditMode</value>
-  </data>
-  <data name="&gt;&gt;radioButton_EditMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_EditMode.Parent" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;radioButton_EditMode.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;radioButton_SelectMode.Name" xml:space="preserve">
-    <value>radioButton_SelectMode</value>
-  </data>
-  <data name="&gt;&gt;radioButton_SelectMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_SelectMode.Parent" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;radioButton_SelectMode.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 293</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 211</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="groupBoxDefaultOperationMode.Text" xml:space="preserve">
-    <value>Initial Operation Mode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Name" xml:space="preserve">
-    <value>groupBoxDefaultOperationMode</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.Parent" xml:space="preserve">
-    <value>tabPage全般</value>
-  </data>
-  <data name="&gt;&gt;groupBoxDefaultOperationMode.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="pictureBox_EditMode.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 122</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox_EditMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>10, 9, 10, 9</value>
   </data>
@@ -324,6 +131,7 @@
   <data name="pictureBox_EditMode.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox_EditMode.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -416,6 +224,36 @@
   </data>
   <data name="&gt;&gt;radioButton_SelectMode.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 293</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 211</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="groupBoxDefaultOperationMode.Text" xml:space="preserve">
+    <value>Initial Operation Mode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxDefaultOperationMode.Name" xml:space="preserve">
+    <value>groupBoxDefaultOperationMode</value>
+  </data>
+  <data name="&gt;&gt;groupBoxDefaultOperationMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBoxDefaultOperationMode.Parent" xml:space="preserve">
+    <value>tabPage全般</value>
+  </data>
+  <data name="&gt;&gt;groupBoxDefaultOperationMode.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="checkBoxPlaySoundOnChip.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -591,8 +429,59 @@
   <data name="&gt;&gt;numericUpDown最近使用したファイルの最大表示個数.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="tabPage全般.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 46</value>
+  </data>
+  <data name="tabPage全般.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="tabPage全般.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="tabPage全般.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1129, 911</value>
+  </data>
+  <data name="tabPage全般.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage全般.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="&gt;&gt;tabPage全般.Name" xml:space="preserve">
+    <value>tabPage全般</value>
+  </data>
+  <data name="&gt;&gt;tabPage全般.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage全般.Parent" xml:space="preserve">
+    <value>tabControlオプション</value>
+  </data>
+  <data name="&gt;&gt;tabPage全般.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tabControlオプション.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="labelSelectLanes.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="labelSelectLanes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="labelSelectLanes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 23</value>
+  </data>
+  <data name="labelSelectLanes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 10, 0</value>
+  </data>
+  <data name="labelSelectLanes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>446, 37</value>
+  </data>
+  <data name="labelSelectLanes.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="labelSelectLanes.Text" xml:space="preserve">
+    <value>Select Lanes you'd like to use.</value>
   </data>
   <data name="&gt;&gt;labelSelectLanes.Name" xml:space="preserve">
     <value>labelSelectLanes</value>
@@ -604,6 +493,18 @@
     <value>tabPageLanes</value>
   </data>
   <data name="&gt;&gt;labelSelectLanes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="checkedListBoxLaneSelectList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 20</value>
+  </data>
+  <data name="checkedListBoxLaneSelectList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="checkedListBoxLaneSelectList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>371, 667</value>
+  </data>
+  <data name="checkedListBoxLaneSelectList.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;checkedListBoxLaneSelectList.Name" xml:space="preserve">
@@ -675,34 +576,34 @@
   <data name="&gt;&gt;radioButton_WinSize360.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="radioButton_WinSize504.AutoSize" type="System.Boolean, mscorlib">
+  <data name="radioButton_WinSize540.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioButton_WinSize504.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="radioButton_WinSize540.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="radioButton_WinSize504.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="radioButton_WinSize540.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 106</value>
   </data>
-  <data name="radioButton_WinSize504.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="radioButton_WinSize540.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 41</value>
   </data>
-  <data name="radioButton_WinSize504.TabIndex" type="System.Int32, mscorlib">
+  <data name="radioButton_WinSize540.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="radioButton_WinSize504.Text" xml:space="preserve">
-    <value>896 x 504</value>
+  <data name="radioButton_WinSize540.Text" xml:space="preserve">
+    <value>960 x 540</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize504.Name" xml:space="preserve">
-    <value>radioButton_WinSize504</value>
+  <data name="&gt;&gt;radioButton_WinSize540.Name" xml:space="preserve">
+    <value>radioButton_WinSize540</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize504.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize540.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize504.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize540.Parent" xml:space="preserve">
     <value>groupBox_WindowsSizeSettings</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize504.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize540.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="radioButton_WinSize720.AutoSize" type="System.Boolean, mscorlib">
@@ -712,7 +613,7 @@
     <value>NoControl</value>
   </data>
   <data name="radioButton_WinSize720.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 203</value>
+    <value>41, 153</value>
   </data>
   <data name="radioButton_WinSize720.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 41</value>
@@ -735,34 +636,34 @@
   <data name="&gt;&gt;radioButton_WinSize720.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="radioButton_WinSize576.AutoSize" type="System.Boolean, mscorlib">
+  <data name="radioButton_WinSize1080.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="radioButton_WinSize576.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="radioButton_WinSize1080.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="radioButton_WinSize576.Location" type="System.Drawing.Point, System.Drawing">
-    <value>41, 156</value>
+  <data name="radioButton_WinSize1080.Location" type="System.Drawing.Point, System.Drawing">
+    <value>41, 200</value>
   </data>
-  <data name="radioButton_WinSize576.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 41</value>
+  <data name="radioButton_WinSize1080.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 41</value>
   </data>
-  <data name="radioButton_WinSize576.TabIndex" type="System.Int32, mscorlib">
+  <data name="radioButton_WinSize1080.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="radioButton_WinSize576.Text" xml:space="preserve">
-    <value>1024 x 576</value>
+  <data name="radioButton_WinSize1080.Text" xml:space="preserve">
+    <value>1920 x 1080</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize576.Name" xml:space="preserve">
-    <value>radioButton_WinSize576</value>
+  <data name="&gt;&gt;radioButton_WinSize1080.Name" xml:space="preserve">
+    <value>radioButton_WinSize1080</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize576.Type" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize1080.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize576.Parent" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize1080.Parent" xml:space="preserve">
     <value>groupBox_WindowsSizeSettings</value>
   </data>
-  <data name="&gt;&gt;radioButton_WinSize576.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;radioButton_WinSize1080.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="groupBox_WindowsSizeSettings.Location" type="System.Drawing.Point, System.Drawing">
@@ -840,6 +741,26 @@
   <data name="&gt;&gt;textBox_DTXViewerPath.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>453, 105</value>
+  </data>
+  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 0, 10, 0</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>463, 111</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>(You can use it only when
+ WASAPI/ASIO is used,
+ within PlaySpeed = x0.8 - x1.2)</value>
+  </data>
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
@@ -851,6 +772,27 @@
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="checkBox_TimeStretch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox_TimeStretch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox_TimeStretch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>402, 57</value>
+  </data>
+  <data name="checkBox_TimeStretch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="checkBox_TimeStretch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 41</value>
+  </data>
+  <data name="checkBox_TimeStretch.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="checkBox_TimeStretch.Text" xml:space="preserve">
+    <value>&amp;TimeStretch</value>
   </data>
   <data name="&gt;&gt;checkBox_TimeStretch.Name" xml:space="preserve">
     <value>checkBox_TimeStretch</value>
@@ -864,6 +806,27 @@
   <data name="&gt;&gt;checkBox_TimeStretch.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="checkBox_VSyncWait.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox_VSyncWait.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="checkBox_VSyncWait.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 122</value>
+  </data>
+  <data name="checkBox_VSyncWait.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="checkBox_VSyncWait.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 41</value>
+  </data>
+  <data name="checkBox_VSyncWait.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="checkBox_VSyncWait.Text" xml:space="preserve">
+    <value>V&amp;SyncWait</value>
+  </data>
   <data name="&gt;&gt;checkBox_VSyncWait.Name" xml:space="preserve">
     <value>checkBox_VSyncWait</value>
   </data>
@@ -875,6 +838,24 @@
   </data>
   <data name="&gt;&gt;checkBox_VSyncWait.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="checkBox_GRmode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="checkBox_GRmode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 57</value>
+  </data>
+  <data name="checkBox_GRmode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="checkBox_GRmode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 41</value>
+  </data>
+  <data name="checkBox_GRmode.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="checkBox_GRmode.Text" xml:space="preserve">
+    <value>&amp;GR mode</value>
   </data>
   <data name="&gt;&gt;checkBox_GRmode.Name" xml:space="preserve">
     <value>checkBox_GRmode</value>
@@ -954,6 +935,27 @@ parameters.</value>
   <data name="&gt;&gt;label_Notice.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="radioButton_WASAPI_Shared.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 192</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.Size" type="System.Drawing.Size, System.Drawing">
+    <value>272, 41</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="radioButton_WASAPI_Shared.Text" xml:space="preserve">
+    <value>WASAPI S&amp;hared</value>
+  </data>
   <data name="&gt;&gt;radioButton_WASAPI_Shared.Name" xml:space="preserve">
     <value>radioButton_WASAPI_Shared</value>
   </data>
@@ -965,6 +967,24 @@ parameters.</value>
   </data>
   <data name="&gt;&gt;radioButton_WASAPI_Shared.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="radioButton_DirectSound.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton_DirectSound.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 55</value>
+  </data>
+  <data name="radioButton_DirectSound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="radioButton_DirectSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 41</value>
+  </data>
+  <data name="radioButton_DirectSound.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="radioButton_DirectSound.Text" xml:space="preserve">
+    <value>&amp;DirectSound</value>
   </data>
   <data name="&gt;&gt;radioButton_DirectSound.Name" xml:space="preserve">
     <value>radioButton_DirectSound</value>
@@ -978,6 +998,27 @@ parameters.</value>
   <data name="&gt;&gt;radioButton_DirectSound.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="radioButton_WASAPI_Exclusive.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 120</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 41</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="radioButton_WASAPI_Exclusive.Text" xml:space="preserve">
+    <value>&amp;WASAPI Exclusive</value>
+  </data>
   <data name="&gt;&gt;radioButton_WASAPI_Exclusive.Name" xml:space="preserve">
     <value>radioButton_WASAPI_Exclusive</value>
   </data>
@@ -990,6 +1031,18 @@ parameters.</value>
   <data name="&gt;&gt;radioButton_WASAPI_Exclusive.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="comboBox_ASIOdevices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 328</value>
+  </data>
+  <data name="comboBox_ASIOdevices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="comboBox_ASIOdevices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>374, 45</value>
+  </data>
+  <data name="comboBox_ASIOdevices.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;comboBox_ASIOdevices.Name" xml:space="preserve">
     <value>comboBox_ASIOdevices</value>
   </data>
@@ -1001,6 +1054,27 @@ parameters.</value>
   </data>
   <data name="&gt;&gt;comboBox_ASIOdevices.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="radioButton_ASIO.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="radioButton_ASIO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radioButton_ASIO.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 260</value>
+  </data>
+  <data name="radioButton_ASIO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>10, 9, 10, 9</value>
+  </data>
+  <data name="radioButton_ASIO.Size" type="System.Drawing.Size, System.Drawing">
+    <value>400, 41</value>
+  </data>
+  <data name="radioButton_ASIO.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="radioButton_ASIO.Text" xml:space="preserve">
+    <value>&amp;ASIO (ASIO devices only)</value>
   </data>
   <data name="&gt;&gt;radioButton_ASIO.Name" xml:space="preserve">
     <value>radioButton_ASIO</value>
@@ -1190,344 +1264,6 @@ parameters.</value>
   </data>
   <data name="&gt;&gt;tabControlオプション.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="labelSelectLanes.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="labelSelectLanes.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="labelSelectLanes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>421, 23</value>
-  </data>
-  <data name="labelSelectLanes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 10, 0</value>
-  </data>
-  <data name="labelSelectLanes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>446, 37</value>
-  </data>
-  <data name="labelSelectLanes.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="labelSelectLanes.Text" xml:space="preserve">
-    <value>Select Lanes you'd like to use.</value>
-  </data>
-  <data name="&gt;&gt;labelSelectLanes.Name" xml:space="preserve">
-    <value>labelSelectLanes</value>
-  </data>
-  <data name="&gt;&gt;labelSelectLanes.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelSelectLanes.Parent" xml:space="preserve">
-    <value>tabPageLanes</value>
-  </data>
-  <data name="&gt;&gt;labelSelectLanes.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="checkedListBoxLaneSelectList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 20</value>
-  </data>
-  <data name="checkedListBoxLaneSelectList.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="checkedListBoxLaneSelectList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 667</value>
-  </data>
-  <data name="checkedListBoxLaneSelectList.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxLaneSelectList.Name" xml:space="preserve">
-    <value>checkedListBoxLaneSelectList</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxLaneSelectList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxLaneSelectList.Parent" xml:space="preserve">
-    <value>tabPageLanes</value>
-  </data>
-  <data name="&gt;&gt;checkedListBoxLaneSelectList.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>453, 105</value>
-  </data>
-  <data name="label1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 0, 10, 0</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>463, 111</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>(You can use it only when
- WASAPI/ASIO is used,
- within PlaySpeed = x0.8 - x1.2)</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox_DTXManiaSettings</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="checkBox_TimeStretch.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox_TimeStretch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox_TimeStretch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>402, 57</value>
-  </data>
-  <data name="checkBox_TimeStretch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="checkBox_TimeStretch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 41</value>
-  </data>
-  <data name="checkBox_TimeStretch.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="checkBox_TimeStretch.Text" xml:space="preserve">
-    <value>&amp;TimeStretch</value>
-  </data>
-  <data name="&gt;&gt;checkBox_TimeStretch.Name" xml:space="preserve">
-    <value>checkBox_TimeStretch</value>
-  </data>
-  <data name="&gt;&gt;checkBox_TimeStretch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox_TimeStretch.Parent" xml:space="preserve">
-    <value>groupBox_DTXManiaSettings</value>
-  </data>
-  <data name="&gt;&gt;checkBox_TimeStretch.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="checkBox_VSyncWait.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox_VSyncWait.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="checkBox_VSyncWait.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 122</value>
-  </data>
-  <data name="checkBox_VSyncWait.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="checkBox_VSyncWait.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 41</value>
-  </data>
-  <data name="checkBox_VSyncWait.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="checkBox_VSyncWait.Text" xml:space="preserve">
-    <value>V&amp;SyncWait</value>
-  </data>
-  <data name="&gt;&gt;checkBox_VSyncWait.Name" xml:space="preserve">
-    <value>checkBox_VSyncWait</value>
-  </data>
-  <data name="&gt;&gt;checkBox_VSyncWait.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox_VSyncWait.Parent" xml:space="preserve">
-    <value>groupBox_DTXManiaSettings</value>
-  </data>
-  <data name="&gt;&gt;checkBox_VSyncWait.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="checkBox_GRmode.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="checkBox_GRmode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 57</value>
-  </data>
-  <data name="checkBox_GRmode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="checkBox_GRmode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 41</value>
-  </data>
-  <data name="checkBox_GRmode.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="checkBox_GRmode.Text" xml:space="preserve">
-    <value>&amp;GR mode</value>
-  </data>
-  <data name="&gt;&gt;checkBox_GRmode.Name" xml:space="preserve">
-    <value>checkBox_GRmode</value>
-  </data>
-  <data name="&gt;&gt;checkBox_GRmode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;checkBox_GRmode.Parent" xml:space="preserve">
-    <value>groupBox_DTXManiaSettings</value>
-  </data>
-  <data name="&gt;&gt;checkBox_GRmode.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 192</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 41</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="radioButton_WASAPI_Shared.Text" xml:space="preserve">
-    <value>WASAPI S&amp;hared</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Shared.Name" xml:space="preserve">
-    <value>radioButton_WASAPI_Shared</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Shared.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Shared.Parent" xml:space="preserve">
-    <value>groupBox_SoundDeviceSettings</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Shared.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="radioButton_DirectSound.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButton_DirectSound.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 55</value>
-  </data>
-  <data name="radioButton_DirectSound.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="radioButton_DirectSound.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 41</value>
-  </data>
-  <data name="radioButton_DirectSound.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="radioButton_DirectSound.Text" xml:space="preserve">
-    <value>&amp;DirectSound</value>
-  </data>
-  <data name="&gt;&gt;radioButton_DirectSound.Name" xml:space="preserve">
-    <value>radioButton_DirectSound</value>
-  </data>
-  <data name="&gt;&gt;radioButton_DirectSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_DirectSound.Parent" xml:space="preserve">
-    <value>groupBox_SoundDeviceSettings</value>
-  </data>
-  <data name="&gt;&gt;radioButton_DirectSound.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 120</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 41</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="radioButton_WASAPI_Exclusive.Text" xml:space="preserve">
-    <value>&amp;WASAPI Exclusive</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Exclusive.Name" xml:space="preserve">
-    <value>radioButton_WASAPI_Exclusive</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Exclusive.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Exclusive.Parent" xml:space="preserve">
-    <value>groupBox_SoundDeviceSettings</value>
-  </data>
-  <data name="&gt;&gt;radioButton_WASAPI_Exclusive.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="comboBox_ASIOdevices.Location" type="System.Drawing.Point, System.Drawing">
-    <value>95, 328</value>
-  </data>
-  <data name="comboBox_ASIOdevices.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="comboBox_ASIOdevices.Size" type="System.Drawing.Size, System.Drawing">
-    <value>374, 45</value>
-  </data>
-  <data name="comboBox_ASIOdevices.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;comboBox_ASIOdevices.Name" xml:space="preserve">
-    <value>comboBox_ASIOdevices</value>
-  </data>
-  <data name="&gt;&gt;comboBox_ASIOdevices.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBox_ASIOdevices.Parent" xml:space="preserve">
-    <value>groupBox_SoundDeviceSettings</value>
-  </data>
-  <data name="&gt;&gt;comboBox_ASIOdevices.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="radioButton_ASIO.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="radioButton_ASIO.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radioButton_ASIO.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 260</value>
-  </data>
-  <data name="radioButton_ASIO.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>10, 9, 10, 9</value>
-  </data>
-  <data name="radioButton_ASIO.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 41</value>
-  </data>
-  <data name="radioButton_ASIO.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="radioButton_ASIO.Text" xml:space="preserve">
-    <value>&amp;ASIO (ASIO devices only)</value>
-  </data>
-  <data name="&gt;&gt;radioButton_ASIO.Name" xml:space="preserve">
-    <value>radioButton_ASIO</value>
-  </data>
-  <data name="&gt;&gt;radioButton_ASIO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioButton_ASIO.Parent" xml:space="preserve">
-    <value>groupBox_SoundDeviceSettings</value>
-  </data>
-  <data name="&gt;&gt;radioButton_ASIO.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="button1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>

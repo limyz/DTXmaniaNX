@@ -49,9 +49,9 @@
             this.groupBox_SelectViewer = new System.Windows.Forms.GroupBox();
             this.groupBox_WindowsSizeSettings = new System.Windows.Forms.GroupBox();
             this.radioButton_WinSize360 = new System.Windows.Forms.RadioButton();
-            this.radioButton_WinSize504 = new System.Windows.Forms.RadioButton();
+            this.radioButton_WinSize540 = new System.Windows.Forms.RadioButton();
             this.radioButton_WinSize720 = new System.Windows.Forms.RadioButton();
-            this.radioButton_WinSize576 = new System.Windows.Forms.RadioButton();
+            this.radioButton_WinSize1080 = new System.Windows.Forms.RadioButton();
             this.button_DTXViewerPath = new System.Windows.Forms.Button();
             this.textBox_DTXViewerPath = new System.Windows.Forms.TextBox();
             this.groupBox_DTXManiaSettings = new System.Windows.Forms.GroupBox();
@@ -241,9 +241,9 @@
             // groupBox_WindowsSizeSettings
             // 
             this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize360);
-            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize504);
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize540);
             this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize720);
-            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize576);
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize1080);
             resources.ApplyResources(this.groupBox_WindowsSizeSettings, "groupBox_WindowsSizeSettings");
             this.groupBox_WindowsSizeSettings.Name = "groupBox_WindowsSizeSettings";
             this.groupBox_WindowsSizeSettings.TabStop = false;
@@ -255,12 +255,12 @@
             this.radioButton_WinSize360.TabStop = true;
             this.radioButton_WinSize360.UseVisualStyleBackColor = true;
             // 
-            // radioButton_WinSize504
+            // radioButton_WinSize540
             // 
-            resources.ApplyResources(this.radioButton_WinSize504, "radioButton_WinSize504");
-            this.radioButton_WinSize504.Name = "radioButton_WinSize504";
-            this.radioButton_WinSize504.TabStop = true;
-            this.radioButton_WinSize504.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.radioButton_WinSize540, "radioButton_WinSize540");
+            this.radioButton_WinSize540.Name = "radioButton_WinSize540";
+            this.radioButton_WinSize540.TabStop = true;
+            this.radioButton_WinSize540.UseVisualStyleBackColor = true;
             // 
             // radioButton_WinSize720
             // 
@@ -269,12 +269,12 @@
             this.radioButton_WinSize720.TabStop = true;
             this.radioButton_WinSize720.UseVisualStyleBackColor = true;
             // 
-            // radioButton_WinSize576
+            // radioButton_WinSize1080
             // 
-            resources.ApplyResources(this.radioButton_WinSize576, "radioButton_WinSize576");
-            this.radioButton_WinSize576.Name = "radioButton_WinSize576";
-            this.radioButton_WinSize576.TabStop = true;
-            this.radioButton_WinSize576.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.radioButton_WinSize1080, "radioButton_WinSize1080");
+            this.radioButton_WinSize1080.Name = "radioButton_WinSize1080";
+            this.radioButton_WinSize1080.TabStop = true;
+            this.radioButton_WinSize1080.UseVisualStyleBackColor = true;
             // 
             // button_DTXViewerPath
             // 
@@ -486,8 +486,8 @@
         internal System.Windows.Forms.OpenFileDialog openFileDialog_DTXViewerPath;
         private System.Windows.Forms.Button button_DTXViewerPath;
         internal System.Windows.Forms.RadioButton radioButton_WinSize720;
-        internal System.Windows.Forms.RadioButton radioButton_WinSize576;
-        internal System.Windows.Forms.RadioButton radioButton_WinSize504;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize1080;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize540;
         internal System.Windows.Forms.RadioButton radioButton_WinSize360;
         internal System.Windows.Forms.GroupBox groupBox_WindowsSizeSettings;
     }

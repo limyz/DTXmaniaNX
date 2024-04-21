@@ -40,12 +40,12 @@ namespace DTXCreator.Options  // オプション関連
 			cオプションダイアログ.radioButton_WASAPI_Shared.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.SoundType == FDK.ESoundDeviceType.SharedWASAPI;
 			cオプションダイアログ.radioButton_ASIO.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.SoundType == FDK.ESoundDeviceType.ASIO;
 
-			int[] supportedWindowHeightSize = { 360, 504, 576, 720 };
+			int[] supportedWindowHeightSize = { 360, 540, 720, 1080 };
 			cオプションダイアログ.groupBox_WindowsSizeSettings.Enabled = !this.formメインフォーム.appアプリ設定.ViewerInfo.bViewerIsDTXV;
 			cオプションダイアログ.radioButton_WinSize360.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[0];
-            cオプションダイアログ.radioButton_WinSize504.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[1];
-            cオプションダイアログ.radioButton_WinSize576.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[2];
-            cオプションダイアログ.radioButton_WinSize720.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[3];
+            cオプションダイアログ.radioButton_WinSize540.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[1];
+            cオプションダイアログ.radioButton_WinSize720.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[2];
+            cオプションダイアログ.radioButton_WinSize1080.Checked = this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution == supportedWindowHeightSize[3];
 
             int nASIOdevs = cオプションダイアログ.tASIOデバイスリストの内訳を生成する();
 			if (nASIOdevs <= this.formメインフォーム.appアプリ設定.ViewerInfo.ASIODeviceNo) // ASIOの構成が変わった(機器が減った)場合は、ASIOを使わない
@@ -124,18 +124,19 @@ namespace DTXCreator.Options  // オプション関連
 				{
 					this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution = supportedWindowHeightSize[0];
 				}
-				else if (cオプションダイアログ.radioButton_WinSize504.Checked) 
+				else if (cオプションダイアログ.radioButton_WinSize540.Checked) 
 				{
 					this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution = supportedWindowHeightSize[1];
 				}
-                else if (cオプションダイアログ.radioButton_WinSize576.Checked)
+                else if (cオプションダイアログ.radioButton_WinSize720.Checked)
                 {
                     this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution = supportedWindowHeightSize[2];
                 }
-                else if (cオプションダイアログ.radioButton_WinSize720.Checked)
+                else if (cオプションダイアログ.radioButton_WinSize1080.Checked)
                 {
                     this.formメインフォーム.appアプリ設定.ViewerInfo.ViewerHeightResolution = supportedWindowHeightSize[3];
                 }
+                
 
                 this.formメインフォーム.tDTXV演奏関連のボタンとメニューのEnabledの設定();
 
