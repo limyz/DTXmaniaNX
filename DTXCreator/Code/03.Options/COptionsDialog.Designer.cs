@@ -47,6 +47,11 @@
             this.checkedListBoxLaneSelectList = new System.Windows.Forms.CheckedListBox();
             this.tabPageViewer = new System.Windows.Forms.TabPage();
             this.groupBox_SelectViewer = new System.Windows.Forms.GroupBox();
+            this.groupBox_WindowsSizeSettings = new System.Windows.Forms.GroupBox();
+            this.radioButton_WinSize360 = new System.Windows.Forms.RadioButton();
+            this.radioButton_WinSize540 = new System.Windows.Forms.RadioButton();
+            this.radioButton_WinSize720 = new System.Windows.Forms.RadioButton();
+            this.radioButton_WinSize1080 = new System.Windows.Forms.RadioButton();
             this.button_DTXViewerPath = new System.Windows.Forms.Button();
             this.textBox_DTXViewerPath = new System.Windows.Forms.TextBox();
             this.groupBox_DTXManiaSettings = new System.Windows.Forms.GroupBox();
@@ -54,9 +59,9 @@
             this.checkBox_TimeStretch = new System.Windows.Forms.CheckBox();
             this.checkBox_VSyncWait = new System.Windows.Forms.CheckBox();
             this.checkBox_GRmode = new System.Windows.Forms.CheckBox();
+            this.label_Notice = new System.Windows.Forms.Label();
             this.groupBox_SoundDeviceSettings = new System.Windows.Forms.GroupBox();
             this.radioButton_WASAPI_Shared = new System.Windows.Forms.RadioButton();
-            this.label_Notice = new System.Windows.Forms.Label();
             this.radioButton_DirectSound = new System.Windows.Forms.RadioButton();
             this.radioButton_WASAPI_Exclusive = new System.Windows.Forms.RadioButton();
             this.comboBox_ASIOdevices = new System.Windows.Forms.ComboBox();
@@ -75,6 +80,7 @@
             this.tabPageLanes.SuspendLayout();
             this.tabPageViewer.SuspendLayout();
             this.groupBox_SelectViewer.SuspendLayout();
+            this.groupBox_WindowsSizeSettings.SuspendLayout();
             this.groupBox_DTXManiaSettings.SuspendLayout();
             this.groupBox_SoundDeviceSettings.SuspendLayout();
             this.SuspendLayout();
@@ -220,15 +226,55 @@
             // 
             // groupBox_SelectViewer
             // 
+            this.groupBox_SelectViewer.Controls.Add(this.groupBox_WindowsSizeSettings);
             this.groupBox_SelectViewer.Controls.Add(this.button_DTXViewerPath);
             this.groupBox_SelectViewer.Controls.Add(this.textBox_DTXViewerPath);
             this.groupBox_SelectViewer.Controls.Add(this.groupBox_DTXManiaSettings);
+            this.groupBox_SelectViewer.Controls.Add(this.label_Notice);
             this.groupBox_SelectViewer.Controls.Add(this.groupBox_SoundDeviceSettings);
             this.groupBox_SelectViewer.Controls.Add(this.radioButton_UseDTXViewer);
             this.groupBox_SelectViewer.Controls.Add(this.radioButton_UseDTXManiaGR);
             resources.ApplyResources(this.groupBox_SelectViewer, "groupBox_SelectViewer");
             this.groupBox_SelectViewer.Name = "groupBox_SelectViewer";
             this.groupBox_SelectViewer.TabStop = false;
+            // 
+            // groupBox_WindowsSizeSettings
+            // 
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize360);
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize540);
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize720);
+            this.groupBox_WindowsSizeSettings.Controls.Add(this.radioButton_WinSize1080);
+            resources.ApplyResources(this.groupBox_WindowsSizeSettings, "groupBox_WindowsSizeSettings");
+            this.groupBox_WindowsSizeSettings.Name = "groupBox_WindowsSizeSettings";
+            this.groupBox_WindowsSizeSettings.TabStop = false;
+            // 
+            // radioButton_WinSize360
+            // 
+            resources.ApplyResources(this.radioButton_WinSize360, "radioButton_WinSize360");
+            this.radioButton_WinSize360.Name = "radioButton_WinSize360";
+            this.radioButton_WinSize360.TabStop = true;
+            this.radioButton_WinSize360.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_WinSize540
+            // 
+            resources.ApplyResources(this.radioButton_WinSize540, "radioButton_WinSize540");
+            this.radioButton_WinSize540.Name = "radioButton_WinSize540";
+            this.radioButton_WinSize540.TabStop = true;
+            this.radioButton_WinSize540.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_WinSize720
+            // 
+            resources.ApplyResources(this.radioButton_WinSize720, "radioButton_WinSize720");
+            this.radioButton_WinSize720.Name = "radioButton_WinSize720";
+            this.radioButton_WinSize720.TabStop = true;
+            this.radioButton_WinSize720.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_WinSize1080
+            // 
+            resources.ApplyResources(this.radioButton_WinSize1080, "radioButton_WinSize1080");
+            this.radioButton_WinSize1080.Name = "radioButton_WinSize1080";
+            this.radioButton_WinSize1080.TabStop = true;
+            this.radioButton_WinSize1080.UseVisualStyleBackColor = true;
             // 
             // button_DTXViewerPath
             // 
@@ -275,10 +321,15 @@
             this.checkBox_GRmode.Name = "checkBox_GRmode";
             this.checkBox_GRmode.UseVisualStyleBackColor = true;
             // 
+            // label_Notice
+            // 
+            resources.ApplyResources(this.label_Notice, "label_Notice");
+            this.label_Notice.AutoEllipsis = true;
+            this.label_Notice.Name = "label_Notice";
+            // 
             // groupBox_SoundDeviceSettings
             // 
             this.groupBox_SoundDeviceSettings.Controls.Add(this.radioButton_WASAPI_Shared);
-            this.groupBox_SoundDeviceSettings.Controls.Add(this.label_Notice);
             this.groupBox_SoundDeviceSettings.Controls.Add(this.radioButton_DirectSound);
             this.groupBox_SoundDeviceSettings.Controls.Add(this.radioButton_WASAPI_Exclusive);
             this.groupBox_SoundDeviceSettings.Controls.Add(this.comboBox_ASIOdevices);
@@ -294,12 +345,6 @@
             this.radioButton_WASAPI_Shared.TabStop = true;
             this.radioButton_WASAPI_Shared.UseVisualStyleBackColor = true;
             this.radioButton_WASAPI_Shared.CheckedChanged += new System.EventHandler(this.radioButton_WASAPI_Shared_CheckedChanged);
-            // 
-            // label_Notice
-            // 
-            resources.ApplyResources(this.label_Notice, "label_Notice");
-            this.label_Notice.AutoEllipsis = true;
-            this.label_Notice.Name = "label_Notice";
             // 
             // radioButton_DirectSound
             // 
@@ -391,6 +436,8 @@
             this.tabPageViewer.ResumeLayout(false);
             this.groupBox_SelectViewer.ResumeLayout(false);
             this.groupBox_SelectViewer.PerformLayout();
+            this.groupBox_WindowsSizeSettings.ResumeLayout(false);
+            this.groupBox_WindowsSizeSettings.PerformLayout();
             this.groupBox_DTXManiaSettings.ResumeLayout(false);
             this.groupBox_DTXManiaSettings.PerformLayout();
             this.groupBox_SoundDeviceSettings.ResumeLayout(false);
@@ -438,5 +485,10 @@
         internal System.Windows.Forms.TextBox textBox_DTXViewerPath;
         internal System.Windows.Forms.OpenFileDialog openFileDialog_DTXViewerPath;
         private System.Windows.Forms.Button button_DTXViewerPath;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize720;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize1080;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize540;
+        internal System.Windows.Forms.RadioButton radioButton_WinSize360;
+        internal System.Windows.Forms.GroupBox groupBox_WindowsSizeSettings;
     }
 }

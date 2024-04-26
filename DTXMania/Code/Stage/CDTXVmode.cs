@@ -146,11 +146,23 @@ namespace DTXMania
 			private set;
 		}
 
+        public int heightResolution
+        {
+            get;
+            set;
+        }
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		public CDTXVmode()
+        public int widthResolution
+        {
+            get;
+            set;
+        }
+
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public CDTXVmode()
 		{
 			this.last_path = "";
 			this.last_timestamp = DateTime.MinValue;
@@ -165,6 +177,8 @@ namespace DTXMania
 			this.lastTimeStretch = false;
 			this.VSyncWait = true;
 			this.lastVSyncWait = true;
+			this.heightResolution = 360;
+			this.widthResolution = 640;
 		}
 
 		/// <summary>

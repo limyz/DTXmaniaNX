@@ -40,6 +40,7 @@ namespace DTXMania
             Trace.TraceInformation("CActPerfAVI: Start(): " + rAVI.strファイル名);
 
             this.rAVI = rAVI;
+            
             #region[ アスペクト比からどっちを使うか判別 ]
             // 旧DShowモードを使っていて、旧規格クリップだったら新DShowモードを使う。
             //if( CDTXMania.ConfigIni.bDirectShowMode == false )
@@ -271,6 +272,9 @@ namespace DTXMania
                             {
                                 if (chip.rAVI != null)
                                 {
+                                    if (chip.rAVI.avi != null) {
+                                        chip.rAVI.avi.Seek(n移動開始時刻ms - chip.nPlaybackTimeMs);
+                                    }
                                     this.Start(chip.nChannelNumber, chip.rAVI, 1280, 720, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, chip.nPlaybackTimeMs);
                                 }
                                 continue;
@@ -279,6 +283,10 @@ namespace DTXMania
                             {
                                 if (chip.rAVIPan != null)
                                 {
+                                    if (chip.rAVI != null && chip.rAVI.avi != null)
+                                    {
+                                        chip.rAVI.avi.Seek(n移動開始時刻ms - chip.nPlaybackTimeMs);
+                                    }
                                     this.Start(chip.nChannelNumber, chip.rAVI, chip.rAVIPan.sz開始サイズ.Width, chip.rAVIPan.sz開始サイズ.Height, chip.rAVIPan.sz終了サイズ.Width, chip.rAVIPan.sz終了サイズ.Height, chip.rAVIPan.pt動画側開始位置.X, chip.rAVIPan.pt動画側開始位置.Y, chip.rAVIPan.pt動画側終了位置.X, chip.rAVIPan.pt動画側終了位置.Y, chip.rAVIPan.pt表示側開始位置.X, chip.rAVIPan.pt表示側開始位置.Y, chip.rAVIPan.pt表示側終了位置.X, chip.rAVIPan.pt表示側終了位置.Y, chip.n総移動時間, chip.nPlaybackTimeMs);
                                 }
                                 continue;
@@ -292,8 +300,10 @@ namespace DTXMania
         {
             Trace.TraceInformation("CActPerfAVI: Stop()");
             if ((this.rAVI != null) && (this.rAVI.avi != null))
-            {
+            {  
                 this.n移動開始時刻ms = -1;
+                this.rAVI.avi.Stop();
+                this.rAVI.avi.Seek(0);
             }
             //if (this.dsBGV != null && CDTXMania.ConfigIni.bDirectShowMode == true)
             //{

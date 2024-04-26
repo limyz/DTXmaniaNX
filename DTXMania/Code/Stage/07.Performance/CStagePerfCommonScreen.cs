@@ -5690,10 +5690,9 @@ namespace DTXMania
             }
             #endregion
             #region [ 演奏開始時点で既に表示されているBGAとAVIの、シークと再生 ]
-            // Currently the SkipStart functions don't do what they are supposed to do, they don't adjust the specified playback position
-            // SkipStart work as expected in the new DirectShow implementation from core DTXMania, so once we migrate, we can uncomment.
-            //this.actBGA.SkipStart((int)nNewPosition);
-            //this.actAVI.SkipStart((int)nNewPosition);
+            //Re-enable SkipStart now that we have migrated to AVI renderer 
+            this.actBGA.SkipStart((int)nNewPosition);
+            this.actAVI.SkipStart((int)nNewPosition);
             #endregion
             #region [ PAUSEしていたサウンドを一斉に再生再開する(ただしタイマを止めているので、ここではまだ再生開始しない) ]
             foreach (CSound cs in pausedCSound)
@@ -5816,6 +5815,7 @@ namespace DTXMania
 
         public void t停止()
         {
+            Trace.TraceInformation("Stop command received");
             CDTXMania.DTX.tStopPlayingAllChips();
             this.actAVI.Stop();
             this.actBGA.Stop();
