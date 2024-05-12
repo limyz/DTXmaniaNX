@@ -161,19 +161,25 @@ namespace DTXMania
 
                 SharpDX.Matrix mat = SharpDX.Matrix.Identity;
 
+                //
+                float fScalingFactor;
+                float jacketOnScreenSize = 245.0f;
+                //Maintain aspect ratio by scaling only to the smaller scalingFactor
+                if (jacketOnScreenSize / this.txジャケット画像.szImageSize.Width > jacketOnScreenSize / this.txジャケット画像.szImageSize.Height)
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txジャケット画像.szImageSize.Height;
+                }
+                else
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txジャケット画像.szImageSize.Width;
+                }
+
                 if (CDTXMania.ConfigIni.bDrumsEnabled)
                 {
                     this.nジャケットX = 915;
                     this.nジャケットY = 287;
-
-                    /*
-                    this.txジャケット画像.vcScaleRatio.X = 245.0f / ((float)this.txジャケット画像.szImageSize.Width);
-                    this.txジャケット画像.vcScaleRatio.Y = 245.0f / ((float)this.txジャケット画像.szImageSize.Height);
-                    this.txジャケット画像.fZAxisRotation = 0.3f;
-                    this.txジャケット画像.tDraw2D(CDTXMania.app.Device, 960, 350, new Rectangle(0, 0, this.txジャケット画像.szImageSize.Width, this.txジャケット画像.szImageSize.Height));
-                     */
-
-                    mat *= SharpDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
+                   
+                    mat *= SharpDX.Matrix.Scaling(fScalingFactor, fScalingFactor, 1f);
                     mat *= SharpDX.Matrix.Translation(400f, -227f, 0f);
                     mat *= SharpDX.Matrix.RotationZ(0.3f);
                 }
@@ -183,7 +189,7 @@ namespace DTXMania
                     this.nジャケットX = 467;
                     this.nジャケットY = 287;
 
-                    mat *= SharpDX.Matrix.Scaling(245.0f / this.txジャケット画像.szImageSize.Width, 245.0f / this.txジャケット画像.szImageSize.Height, 1f);
+                    mat *= SharpDX.Matrix.Scaling(fScalingFactor, fScalingFactor, 1f);
                     mat *= SharpDX.Matrix.Translation(-28f, -94.5f, 0f);
                     mat *= SharpDX.Matrix.RotationZ(0.3f);
                 }
