@@ -463,9 +463,20 @@ namespace DTXMania
             int y = 184;
 
             if( this.txJacket != null )
-            {
+            {  
                 Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(384.0f / this.txJacket.szImageSize.Width, 384.0f / this.txJacket.szImageSize.Height, 1f);
+                float fScalingFactor;
+                float jacketOnScreenSize = 384.0f;
+                //Maintain aspect ratio by scaling only to the smaller scalingFactor
+                if (jacketOnScreenSize / this.txJacket.szImageSize.Width > jacketOnScreenSize / this.txJacket.szImageSize.Height) 
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txJacket.szImageSize.Height;
+                }
+                else
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txJacket.szImageSize.Width;
+                }
+                mat *= Matrix.Scaling(fScalingFactor, fScalingFactor, 1f);
                 mat *= Matrix.Translation(206f, 66f, 0f);
                 mat *= Matrix.RotationZ(0.28f);
 
