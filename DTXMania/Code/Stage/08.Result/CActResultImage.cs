@@ -212,7 +212,18 @@ namespace DTXMania
             if (this.txリザルト画像 != null)
             {
                 Matrix mat = Matrix.Identity;
-                mat *= Matrix.Scaling(245.0f / this.txリザルト画像.szImageSize.Width, 245.0f / this.txリザルト画像.szImageSize.Height, 1f);
+                float fScalingFactor;
+                float jacketOnScreenSize = 245.0f;
+                //Maintain aspect ratio by scaling only to the smaller scalingFactor
+                if (jacketOnScreenSize / this.txリザルト画像.szImageSize.Width > jacketOnScreenSize / this.txリザルト画像.szImageSize.Height)
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txリザルト画像.szImageSize.Height;
+                }
+                else
+                {
+                    fScalingFactor = jacketOnScreenSize / this.txリザルト画像.szImageSize.Width;
+                }
+                mat *= Matrix.Scaling(fScalingFactor, fScalingFactor, 1f);
                 mat *= Matrix.Translation(-28f, -94.5f, 0f);
                 mat *= Matrix.RotationZ(0.3f);
 

@@ -15,6 +15,7 @@ using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 using Rectangle = System.Drawing.Rectangle;
 using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace DTXMania
 {
@@ -1674,9 +1675,30 @@ namespace DTXMania
 					{
 						using (Bitmap preImage = new Bitmap(strSelectedPreviewImagePath))
 						{
-							graphics.SmoothingMode = SmoothingMode.HighQuality;
+							//Set default value first
+							float imageWidth = 44.0f;
+							float imageHeight = 44.0f;
+							//Calculate imageAspect
+                            float imageAspect = (float)preImage.Width / preImage.Height;
+                            if (imageAspect > 1.0)
+							{
+								// Fit based on width                                
+                                imageHeight = (int)(imageWidth / imageAspect);
+                            }
+                            else
+                            {
+								// Fit based on height                                
+                                imageWidth = (int)(imageHeight * imageAspect);
+                            }
+
+                            // Calculate position to center the image in the frame
+							int imageX = (int)((44.0f - imageWidth) / 2);
+                            int imageY = (int)((44.0f - imageHeight) / 2);
+
+                            graphics.SmoothingMode = SmoothingMode.HighQuality;
 							graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
-							graphics.DrawImage(preImage, 0, 0, 44, 44);
+							
+							graphics.DrawImage(preImage, imageX, imageY, imageWidth, imageHeight);
 						}
 
 						this.stBarInformation[nBarIndex].txPreviewImage = CDTXMania.tGenerateTexture(bitmap);
