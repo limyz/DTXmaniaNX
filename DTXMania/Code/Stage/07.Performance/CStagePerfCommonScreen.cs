@@ -3224,7 +3224,7 @@ namespace DTXMania
                         break;
                     #endregion
                     #region [ 61-65: 自動再生(BGM) ]
-                    //SE01-05 are reserved as extra BGM channel, one chip can be played at any one time per channel
+                    //SE01-05 are reserved as extra BGM channels, only one wav can be played at any given time per channel
                     case EChannel.SE01:
                     case EChannel.SE02:
                     case EChannel.SE03:
