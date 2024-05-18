@@ -93,7 +93,7 @@ namespace DTXMania
 		SE17 = 119,
 		SE18 = 120,
 		SE19 = 121,
-		SE20 = 0x80,
+		SE20 = 128,
 		SE21 = 129,
 		SE22 = 130,
 		SE23 = 131,
