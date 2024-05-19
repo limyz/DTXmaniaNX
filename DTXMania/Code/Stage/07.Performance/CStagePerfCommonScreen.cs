@@ -3223,8 +3223,8 @@ namespace DTXMania
                         }
                         break;
                     #endregion
-                    #region [ 61-65: 自動再生(BGM) ]
-                    //SE01-05 are reserved as extra BGM channels, only one wav can be played at any given time per channel
+                    #region [ 61-65: 自動再生(Muting SE) ]
+                    //SE01-05 are reserved as additional Muting channels i.e. only one wav can be played at any given time per channel
                     case EChannel.SE01:
                     case EChannel.SE02:
                     case EChannel.SE03:
@@ -3235,7 +3235,6 @@ namespace DTXMania
                             pChip.bHit = true;
                             if (configIni.bBGM音を発声する)
                             {   
-                                //Force stop playing current wav in this channel
                                 dTX.tStopPlayingWav(this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01]);
                                 dTX.tPlayChip(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
                                 this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01] = pChip.nIntegerValue_InternalNumber;
@@ -3243,9 +3242,8 @@ namespace DTXMania
                         }
                         break;
                     #endregion
-                    #region [ 66-92: 自動再生(SE) ]
-                    //SE06 to SE23, SE30 to SE32 can be used for additional auto-play chips containing short sound effects
-                    //Current wav are not stopped 
+                    #region [ 66-92: 自動再生(Non-muting SE) ]
+                    //SE06 to SE23, SE30 to SE32 are updated to be non-muting SE channels
                     case EChannel.SE06:
                     case EChannel.SE07:
                     case EChannel.SE08:
