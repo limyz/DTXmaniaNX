@@ -3223,12 +3223,27 @@ namespace DTXMania
                         }
                         break;
                     #endregion
-                    #region [ 61-92: 自動再生(BGM, SE) ]
+                    #region [ 61-65: 自動再生(Muting SE) ]
+                    //SE01-05 are reserved as additional Muting channels i.e. only one wav can be played at any given time per channel
                     case EChannel.SE01:
                     case EChannel.SE02:
                     case EChannel.SE03:
-                    case EChannel.SE04:	// 自動再生(BGM, SE)
+                    case EChannel.SE04:	
                     case EChannel.SE05:
+                        if (!pChip.bHit && (pChip.nDistanceFromBar.Drums < 0))
+                        {
+                            pChip.bHit = true;
+                            if (configIni.bBGM音を発声する)
+                            {   
+                                dTX.tStopPlayingWav(this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01]);
+                                dTX.tPlayChip(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
+                                this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01] = pChip.nIntegerValue_InternalNumber;
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region [ 66-92: 自動再生(Non-muting SE) ]
+                    //SE06 to SE23, SE30 to SE32 are updated to be non-muting SE channels
                     case EChannel.SE06:
                     case EChannel.SE07:
                     case EChannel.SE08:
@@ -3255,9 +3270,7 @@ namespace DTXMania
                             pChip.bHit = true;
                             if (configIni.bBGM音を発声する)
                             {
-                                dTX.tStopPlayingWav(this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01]);
                                 dTX.tPlayChip(pChip, CSoundManager.rcPerformanceTimer.n前回リセットした時のシステム時刻 + pChip.nPlaybackTimeMs, (int)ELane.BGM, dTX.nモニタを考慮した音量(EInstrumentPart.UNKNOWN));
-                                this.nLastPlayedBGMWAVNumber[pChip.nChannelNumber - EChannel.SE01] = pChip.nIntegerValue_InternalNumber;
                             }
                         }
                         break;

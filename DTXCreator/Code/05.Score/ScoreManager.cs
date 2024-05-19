@@ -782,7 +782,7 @@ namespace DTXCreator.Score
 			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE5", 0x65, 0x65, false, Color.FromArgb( alpha, 160, 160, 160 ), 0, width, CLane.ELaneType.SE1_5, true ) );
 
 			// SE6～32は、初期状態では非表示とする。(n幅dotを0にし、bIsVisibleをfalseにする)
-			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE6", 0x66, 0x66, false, Color.FromArgb( alpha, 160, 160, 160 ), 0, 0, CLane.ELaneType.SE6_32, false ) );
+			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE6", 0x66, 0x66, true, Color.FromArgb( alpha, 160, 160, 160 ), 0, 0, CLane.ELaneType.SE6_32, false ) );
 			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE7", 0x67, 0x67, false, Color.FromArgb( alpha, 160, 160, 160 ), 0, 0, CLane.ELaneType.SE6_32, false ) );
 			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE8", 0x68, 0x68, false, Color.FromArgb( alpha, 160, 160, 160 ), 0, 0, CLane.ELaneType.SE6_32, false ) );
 			this.listレーン.Add( new CLane( CLane.E種別.WAV, "SE9", 0x69, 0x69, false, Color.FromArgb( alpha, 160, 160, 160 ), 0, 0, CLane.ELaneType.SE6_32, false ) );

@@ -397,11 +397,17 @@ namespace DTXMania
 			get
 			{
 				EChannel num = this.nChannelNumber;
-				if ((((num != EChannel.BGM) && ((EChannel.SE01 > num) || (num > EChannel.SE09))) && ((EChannel.SE10 > num) || (num > EChannel.SE19))) && ((EChannel.SE20 > num) || (num > EChannel.SE29)))
+				if (num == EChannel.BGM ||
+					(EChannel.SE01 <= num && num <= EChannel.SE09) ||
+					(EChannel.SE10 <= num && num <= EChannel.SE19) ||
+					(EChannel.SE20 <= num && num <= EChannel.SE29) ||
+					(EChannel.SE30 <= num && num <= EChannel.SE32)
+					)
 				{
-					return ((EChannel.SE30 <= num) && (num <= EChannel.SE32));
+					return true;
 				}
-				return true;
+
+				return false;
 			}
 		}
 		public bool bIsAutoPlayed;                      // 2011.6.10 yyagi
