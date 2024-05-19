@@ -130,7 +130,7 @@ namespace DTXCreator
 					{
 						// 変更ありかつ未保存なら「*」を付ける
 
-						this.Text = "DTXC* [" + strタイトル + "]";
+						this.Text = "DTXC NX *[" + strタイトル + "]";
 						this.toolStripMenuItem上書き保存.Enabled = true;
 						this.toolStripButton上書き保存.Enabled = true;
 					}
@@ -138,7 +138,7 @@ namespace DTXCreator
 					{
 						// 保存後変更がないなら「*」なない
 
-						this.Text = "DTXC [" + strタイトル + "]";
+						this.Text = "DTXC NX [" + strタイトル + "]";
 						this.toolStripMenuItem上書き保存.Enabled = false;
 						this.toolStripButton上書き保存.Enabled = false;
 					}
@@ -4851,5 +4851,5 @@ namespace DTXCreator
         {
 			this.b再生速度を変更した = true;
         }
-    }
+	}
 }

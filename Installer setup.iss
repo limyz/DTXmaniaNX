@@ -11,12 +11,12 @@
 
 // custom setup info
 #define MyAppSetupName "DTXManiaNX"
-#define MyAppVersion "1.4.1"
+#define MyAppVersion "1.4.2"
 #define MyAppPublisher "limyz"
 #define MyAppURL "https://github.com/limyz/DTXmaniaNX"
 #define MyAppSupportURL "https://discord.gg/Q8xeugf"
 #define MyAppExeName "DTXManiaNX.exe"
-#define MyAppCopyright "Copyright © 2020-2023 DTXManiaNX"
+#define MyAppCopyright "Copyright © 2020-2024 DTXManiaNX"
 
 [Setup]
 AppId={{235AD645-2C6B-4FA5-911F-0BCA5D539F97}

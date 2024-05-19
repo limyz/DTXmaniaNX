@@ -129,7 +129,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 334</value>
+    <value>247, 357</value>
   </data>
   <data name="buttonRESULTIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -163,7 +163,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonBACKGROUND参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 307</value>
+    <value>247, 330</value>
   </data>
   <data name="buttonBACKGROUND参照.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -193,7 +193,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonSTAGEFILE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 280</value>
+    <value>247, 303</value>
   </data>
   <data name="buttonSTAGEFILE参照.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -223,7 +223,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonPREIMAGE参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 252</value>
+    <value>247, 275</value>
   </data>
   <data name="buttonPREIMAGE参照.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -253,7 +253,7 @@
     <value>Top, Right</value>
   </data>
   <data name="buttonPREVIEW参照.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 225</value>
+    <value>247, 248</value>
   </data>
   <data name="buttonPREVIEW参照.Size" type="System.Drawing.Size, System.Drawing">
     <value>25, 25</value>
@@ -284,10 +284,10 @@
     <value>True</value>
   </data>
   <data name="labeRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 337</value>
+    <value>11, 360</value>
   </data>
   <data name="labeRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
+    <value>77, 15</value>
   </data>
   <data name="labeRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -318,10 +318,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 310</value>
+    <value>19, 333</value>
   </data>
   <data name="labelBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>69, 15</value>
   </data>
   <data name="labelBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -352,16 +352,16 @@ The image size is 640x480.</value>
     <value>True</value>
   </data>
   <data name="labelSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 283</value>
+    <value>18, 306</value>
   </data>
   <data name="labelSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 13</value>
+    <value>70, 15</value>
   </data>
   <data name="labelSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
   <data name="labelSTAGEFILE.Text" xml:space="preserve">
-    <value>LoadingImage</value>
+    <value>LoadImage</value>
   </data>
   <data name="labelSTAGEFILE.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>TopRight</value>
@@ -386,10 +386,10 @@ The image size is 640x480.</value>
     <value>True</value>
   </data>
   <data name="labelPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 256</value>
+    <value>27, 278</value>
   </data>
   <data name="labelPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>61, 15</value>
   </data>
   <data name="labelPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -420,10 +420,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 231</value>
+    <value>38, 251</value>
   </data>
   <data name="labelPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>50, 15</value>
   </data>
   <data name="labelPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -453,10 +453,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxRESULTIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 334</value>
+    <value>94, 357</value>
   </data>
   <data name="textBoxRESULTIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>147, 21</value>
   </data>
   <data name="textBoxRESULTIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -481,10 +481,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxBACKGROUND.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 307</value>
+    <value>94, 330</value>
   </data>
   <data name="textBoxBACKGROUND.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>147, 21</value>
   </data>
   <data name="textBoxBACKGROUND.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -509,10 +509,10 @@ The image size is 640x480.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxSTAGEFILE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 280</value>
+    <value>94, 303</value>
   </data>
   <data name="textBoxSTAGEFILE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>147, 21</value>
   </data>
   <data name="textBoxSTAGEFILE.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -537,10 +537,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREIMAGE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 252</value>
+    <value>94, 275</value>
   </data>
   <data name="textBoxPREIMAGE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>147, 21</value>
   </data>
   <data name="textBoxPREIMAGE.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -565,10 +565,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxPREVIEW.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 225</value>
+    <value>94, 248</value>
   </data>
   <data name="textBoxPREVIEW.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>147, 21</value>
   </data>
   <data name="textBoxPREVIEW.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -592,10 +592,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 197</value>
+    <value>94, 220</value>
   </data>
   <data name="textBoxパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
+    <value>178, 21</value>
   </data>
   <data name="textBoxパネル.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -619,10 +619,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelパネル.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 200</value>
+    <value>19, 223</value>
   </data>
   <data name="labelパネル.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
+    <value>69, 15</value>
   </data>
   <data name="labelパネル.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -652,10 +652,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 170</value>
+    <value>39, 180</value>
   </data>
   <data name="labelBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 13</value>
+    <value>49, 15</value>
   </data>
   <data name="labelBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -683,10 +683,10 @@ The image size is 204x269.</value>
     <value>17</value>
   </data>
   <data name="textBoxBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 167</value>
+    <value>94, 177</value>
   </data>
   <data name="textBoxBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>36, 21</value>
   </data>
   <data name="textBoxBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -714,10 +714,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarBLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 167</value>
+    <value>133, 177</value>
   </data>
   <data name="hScrollBarBLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>139, 18</value>
   </data>
   <data name="hScrollBarBLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -742,10 +742,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>29, 147</value>
+    <value>33, 157</value>
   </data>
   <data name="labelGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+    <value>55, 15</value>
   </data>
   <data name="labelGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -774,10 +774,10 @@ The image size is 204x269.</value>
     <value>20</value>
   </data>
   <data name="textBoxGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 144</value>
+    <value>94, 154</value>
   </data>
   <data name="textBoxGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>36, 21</value>
   </data>
   <data name="textBoxGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -805,10 +805,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarGLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 144</value>
+    <value>133, 154</value>
   </data>
   <data name="hScrollBarGLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>139, 18</value>
   </data>
   <data name="hScrollBarGLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -833,10 +833,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 125</value>
+    <value>35, 134</value>
   </data>
   <data name="labelDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
+    <value>53, 15</value>
   </data>
   <data name="labelDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -864,10 +864,10 @@ The image size is 204x269.</value>
     <value>23</value>
   </data>
   <data name="textBoxDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 121</value>
+    <value>94, 131</value>
   </data>
   <data name="textBoxDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 20</value>
+    <value>36, 21</value>
   </data>
   <data name="textBoxDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -895,10 +895,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="hScrollBarDLEVEL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 121</value>
+    <value>133, 131</value>
   </data>
   <data name="hScrollBarDLEVEL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 17</value>
+    <value>139, 19</value>
   </data>
   <data name="hScrollBarDLEVEL.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -923,10 +923,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 90</value>
+    <value>54, 90</value>
   </data>
   <data name="labelBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>34, 15</value>
   </data>
   <data name="labelBPM.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -956,10 +956,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="labelコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 64</value>
+    <value>27, 64</value>
   </data>
   <data name="labelコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+    <value>61, 15</value>
   </data>
   <data name="labelコメント.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -989,10 +989,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="label製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 37</value>
+    <value>55, 37</value>
   </data>
   <data name="label製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 13</value>
+    <value>33, 15</value>
   </data>
   <data name="label製作者.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1022,10 +1022,10 @@ The image size is 204x269.</value>
     <value>True</value>
   </data>
   <data name="label曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 10</value>
+    <value>58, 10</value>
   </data>
   <data name="label曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 13</value>
+    <value>30, 15</value>
   </data>
   <data name="label曲名.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1052,10 +1052,10 @@ The image size is 204x269.</value>
     <value>29</value>
   </data>
   <data name="numericUpDownBPM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 88</value>
+    <value>94, 88</value>
   </data>
   <data name="numericUpDownBPM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 20</value>
+    <value>68, 21</value>
   </data>
   <data name="numericUpDownBPM.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1082,10 +1082,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBoxコメント.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 61</value>
+    <value>94, 61</value>
   </data>
   <data name="textBoxコメント.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
+    <value>178, 21</value>
   </data>
   <data name="textBoxコメント.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1109,10 +1109,10 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox製作者.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 34</value>
+    <value>94, 34</value>
   </data>
   <data name="textBox製作者.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
+    <value>178, 21</value>
   </data>
   <data name="textBox製作者.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1136,13 +1136,13 @@ The image size is 204x269.</value>
     <value>Top, Left, Right</value>
   </data>
   <data name="textBox曲名.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 7</value>
+    <value>94, 7</value>
   </data>
   <data name="textBox曲名.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>10, 19</value>
   </data>
   <data name="textBox曲名.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 20</value>
+    <value>178, 21</value>
   </data>
   <data name="textBox曲名.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1161,6 +1161,9 @@ The image size is 204x269.</value>
   </data>
   <data name="&gt;&gt;textBox曲名.ZOrder" xml:space="preserve">
     <value>33</value>
+  </data>
+  <data name="tabPage基本情報.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="tabPage基本情報.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1235,7 +1238,7 @@ The image size is 204x269.</value>
     <value>3, 3</value>
   </data>
   <data name="listViewWAVリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>272, 430</value>
   </data>
   <data name="listViewWAVリスト.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1325,7 +1328,7 @@ The image size is 204x269.</value>
     <value>Play sound on click</value>
   </data>
   <data name="toolStripWAVツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 433</value>
   </data>
   <data name="toolStripWAVツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1356,7 +1359,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageWAV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>278, 461</value>
   </data>
   <data name="tabPageWAV.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1410,7 +1413,7 @@ The image size is 204x269.</value>
     <value>3, 3</value>
   </data>
   <data name="listViewBMPリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>272, 430</value>
   </data>
   <data name="listViewBMPリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1452,7 +1455,7 @@ The image size is 204x269.</value>
     <value>toolStripButton1</value>
   </data>
   <data name="toolStripBMPツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 433</value>
   </data>
   <data name="toolStripBMPツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1483,7 +1486,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageBMP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>278, 461</value>
   </data>
   <data name="tabPageBMP.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1531,7 +1534,7 @@ The image size is 204x269.</value>
     <value>3, 3</value>
   </data>
   <data name="listViewAVIリスト.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 421</value>
+    <value>272, 430</value>
   </data>
   <data name="listViewAVIリスト.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1579,7 +1582,7 @@ The image size is 204x269.</value>
     <value>Move down</value>
   </data>
   <data name="toolStripAVIツールバー.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 424</value>
+    <value>3, 433</value>
   </data>
   <data name="toolStripAVIツールバー.Size" type="System.Drawing.Size, System.Drawing">
     <value>272, 25</value>
@@ -1609,7 +1612,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPageAVI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>278, 461</value>
   </data>
   <data name="tabPageAVI.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1645,7 +1648,7 @@ The image size is 204x269.</value>
     <value>Both</value>
   </data>
   <data name="textBox自由入力欄.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 446</value>
+    <value>272, 455</value>
   </data>
   <data name="textBox自由入力欄.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1669,7 +1672,7 @@ The image size is 204x269.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage自由入力.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 452</value>
+    <value>278, 461</value>
   </data>
   <data name="tabPage自由入力.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1775,6 +1778,9 @@ The image size is 204x269.</value>
   </data>
   <data name="&gt;&gt;hScrollBar譜面用水平スクロールバー.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="splitContainerタブと譜面を分割.Panel2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="&gt;&gt;splitContainerタブと譜面を分割.Panel2.Name" xml:space="preserve">
     <value>splitContainerタブと譜面を分割.Panel2</value>
@@ -2020,7 +2026,7 @@ The image size is 204x269.</value>
     <value>&amp;Edit</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="toolStripMenuItemチップパレット.Text" xml:space="preserve">
     <value>Chip &amp;palette</value>
@@ -2101,7 +2107,7 @@ The image size is 204x269.</value>
     <value>&amp;Narrow</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>146, 22</value>
   </data>
   <data name="toolStripMenuItemガイド間隔.Text" xml:space="preserve">
     <value>&amp;Guide margin</value>
@@ -2700,6 +2706,9 @@ The image size is 204x269.</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>731, 558</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.5pt</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

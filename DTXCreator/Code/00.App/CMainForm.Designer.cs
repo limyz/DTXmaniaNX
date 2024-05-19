@@ -230,6 +230,7 @@
             // 
             this.splitContainerタブと譜面を分割.Panel2.Controls.Add(this.pictureBox譜面パネル);
             this.splitContainerタブと譜面を分割.Panel2.Controls.Add(this.hScrollBar譜面用水平スクロールバー);
+            resources.ApplyResources(this.splitContainerタブと譜面を分割.Panel2, "splitContainerタブと譜面を分割.Panel2");
             this.splitContainerタブと譜面を分割.Panel2.SizeChanged += new System.EventHandler(this.splitContainerタブと譜面を分割_Panel2_SizeChanged);
             // 
             // tabControl情報パネル
