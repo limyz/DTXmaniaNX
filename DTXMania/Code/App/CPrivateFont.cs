@@ -85,6 +85,7 @@ namespace DTXMania
 				}
 				catch (System.IO.FileNotFoundException)
 				{
+					if (this._pfc != null) { this._pfc.Dispose(); this._pfc = null; }
 					Trace.TraceError("プライベートフォントの追加に失敗しました。({0})", fontpath);
 					throw new FileNotFoundException("プライベートフォントの追加に失敗しました。({0})", Path.GetFileName(fontpath));
 					//return;
@@ -358,8 +359,12 @@ namespace DTXMania
 				System.Windows.Forms.TextRenderer.DrawText(g, drawstr, _font, new Point(0, 0), fontColor);
 			}
 #if debug表示
-			g.DrawRectangle( new Pen( Color.White, 1 ), new Rectangle( 1, 1, stringSize.Width-1, stringSize.Height-1 ) );
-			g.DrawRectangle( new Pen( Color.Green, 1 ), new Rectangle( 0, 0, bmp.Width - 1, bmp.Height - 1 ) );
+			using (var penW = new Pen( Color.White, 1 ))
+			using (var penG = new Pen( Color.Green, 1 ))
+			{
+				g.DrawRectangle( penW, new Rectangle( 1, 1, stringSize.Width-1, stringSize.Height-1 ) );
+				g.DrawRectangle( penG, new Rectangle( 0, 0, bmp.Width - 1, bmp.Height - 1 ) );
+			}
 #endif
 			_rectStrings = new Rectangle(0, 0, stringSize.Width, stringSize.Height);
 			_ptOrigin = new Point(nEdgePt * 2, nEdgePt * 2);
@@ -447,6 +452,7 @@ namespace DTXMania
 				g.FillPath(br, gp);
 
 				if (br != null) br.Dispose(); br = null;
+				if (br縁 != null) br縁.Dispose(); br縁 = null;
 				if (p != null) p.Dispose(); p = null;
 				if (gp != null) gp.Dispose(); gp = null;
 			}
@@ -456,8 +462,12 @@ namespace DTXMania
 				System.Windows.Forms.TextRenderer.DrawText(g, drawstr, _font, new Point(0, 0), fontColor);
 			}
 #if debug表示
-			g.DrawRectangle( new Pen( Color.White, 1 ), new Rectangle( 1, 1, stringSize.Width-1, stringSize.Height-1 ) );
-			g.DrawRectangle( new Pen( Color.Green, 1 ), new Rectangle( 0, 0, bmp.Width - 1, bmp.Height - 1 ) );
+			using (var penW = new Pen( Color.White, 1 ))
+			using (var penG = new Pen( Color.Green, 1 ))
+			{
+				g.DrawRectangle( penW, new Rectangle( 1, 1, stringSize.Width-1, stringSize.Height-1 ) );
+				g.DrawRectangle( penG, new Rectangle( 0, 0, bmp.Width - 1, bmp.Height - 1 ) );
+			}
 #endif
 			_rectStrings = new Rectangle(0, 0, stringSize.Width, stringSize.Height);
 			_ptOrigin = new Point(nEdgePt * 2, nEdgePt * 2);
@@ -516,6 +526,7 @@ namespace DTXMania
 
 				this.bDispose完了済み = true;
 			}
+			GC.SuppressFinalize(this);
 		}
 		//-----------------
 		#endregion

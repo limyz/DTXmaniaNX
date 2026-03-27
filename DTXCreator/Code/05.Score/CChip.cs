@@ -159,7 +159,8 @@ namespace DTXCreator.Score
 
 		private static void t表チップを描画する_番号( Graphics g, Rectangle rcチップ描画領域, string str番号文字列 )
 		{
-			StringFormat format = new StringFormat();
+			using (var format = new StringFormat())
+			{
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Near;
 			RectangleF layoutRectangle = new RectangleF();
@@ -171,6 +172,7 @@ namespace DTXCreator.Score
 			layoutRectangle.X--;
 			layoutRectangle.Y--;
 			g.DrawString( str番号文字列, ftチップ文字用フォント, Brushes.White, layoutRectangle, format );
+			}
 		}
 		private static void t表チップを描画する_本体( Graphics g, Rectangle rcチップ描画領域, Color col色 )
 		{
@@ -188,7 +190,8 @@ namespace DTXCreator.Score
 		}
 		private static void t裏チップを描画する_番号( Graphics g, Rectangle rcチップ描画領域, string str番号文字列 )
 		{
-			StringFormat format = new StringFormat();
+			using (var format = new StringFormat())
+			{
 			format.Alignment = StringAlignment.Center;
 			format.LineAlignment = StringAlignment.Near;
 			RectangleF layoutRectangle = new RectangleF();
@@ -200,6 +203,7 @@ namespace DTXCreator.Score
 			layoutRectangle.X--;
 			layoutRectangle.Y--;
 			g.DrawString( str番号文字列, ftチップ文字用フォント, Brushes.White, layoutRectangle, format );
+			}
 		}
 		private static void t裏チップを描画する_本体( Graphics g, Rectangle rcチップ描画領域, Color col色 )
 		{

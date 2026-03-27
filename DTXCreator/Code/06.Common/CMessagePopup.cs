@@ -30,13 +30,14 @@ namespace DTXCreator.汎用
 		}
 		private void panelメッセージ_Paint( object sender, PaintEventArgs e )
 		{
-			SolidBrush brush = new SolidBrush( Color.Black );
+			using (var brush = new SolidBrush( Color.Black ))
+			using (var format = new StringFormat())
+			{
 			RectangleF layoutRectangle = new RectangleF( 0f, 0f, (float) this.panelメッセージ.ClientSize.Width, (float) this.panelメッセージ.ClientSize.Height );
-			StringFormat format = new StringFormat();
 			format.LineAlignment = StringAlignment.Center;
 			format.Alignment = StringAlignment.Near;
 			e.Graphics.DrawString( this.strメッセージ, this.ftフォント, brush, layoutRectangle, format );
-			brush.Dispose();
+			}
 		}
 	}
 }
