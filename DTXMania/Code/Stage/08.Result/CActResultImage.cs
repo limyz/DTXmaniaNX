@@ -113,62 +113,67 @@ namespace DTXMania
                 pfResultsNotSaved.Dispose();
                 #endregion
 
-                Bitmap bitmap2 = new Bitmap(0x3a, 0x12);
-                Graphics graphics = Graphics.FromImage(bitmap2);
-
-                graphics.Dispose();
-                this.txSongDifficulty = new CTexture(CDTXMania.app.Device, bitmap2, CDTXMania.TextureFormat, false);
-                bitmap2.Dispose();
-                Bitmap bitmap3 = new Bitmap(100, 100);
-                graphics = Graphics.FromImage(bitmap3);
-                float num;
-                //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
-                    (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
-                    (CDTXMania.DTX.bチップがある.LP == false) && 
-                    (CDTXMania.DTX.bチップがある.LBD == false) && 
-                    (CDTXMania.DTX.bチップがある.FT == false) && 
-                    (CDTXMania.DTX.bチップがある.Ride == false)))
+                using (var bitmap2 = new Bitmap(0x3a, 0x12))
                 {
-                    num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
+                    using (var graphics2 = Graphics.FromImage(bitmap2)) {
+                        this.txSongDifficulty = new CTexture(CDTXMania.app.Device, bitmap2, CDTXMania.TextureFormat, false);
+                    }                 
                 }
-                else
+                using (var bitmap3 = new Bitmap(100, 100))
                 {
-                    if (CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums > 100)
+                    using (var graphics3 = Graphics.FromImage(bitmap3))
                     {
-                        num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
+                        float num;
+                        //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                            (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
+                            (CDTXMania.DTX.bチップがある.LP == false) &&
+                            (CDTXMania.DTX.bチップがある.LBD == false) &&
+                            (CDTXMania.DTX.bチップがある.FT == false) &&
+                            (CDTXMania.DTX.bチップがある.Ride == false)))
+                        {
+                            num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
+                        }
+                        else
+                        {
+                            if (CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums > 100)
+                            {
+                                num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums);
+                            }
+                            else
+                            {
+                                num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums) / 10f;
+                            }
+                        }
+                        //If Skill Mode is CLASSIC, always display lvl as Classic Style
+                        if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする &&
+                            (CDTXMania.DTX.bチップがある.LeftCymbal == false) &&
+                            (CDTXMania.DTX.bチップがある.LP == false) &&
+                            (CDTXMania.DTX.bチップがある.LBD == false) &&
+                            (CDTXMania.DTX.bチップがある.FT == false) &&
+                            (CDTXMania.DTX.bチップがある.Ride == false) &&
+                            (CDTXMania.DTX.b強制的にXG譜面にする == false)))
+                        {
+                            using (var brLevel = new SolidBrush(Color.FromArgb(0xba, 0xba, 0xba)))
+                                graphics3.DrawString(string.Format("{0:00}", num), this.ftSongDifficultyFont, brLevel, (float)0f, (float)-4f);
+                        }
+                        else
+                        {
+                            using (var brLevel = new SolidBrush(Color.FromArgb(0xba, 0xba, 0xba)))
+                                graphics3.DrawString(string.Format("{0:0.00}", num), this.ftSongDifficultyFont, brLevel, (float)0f, (float)-4f);
+                        }
                     }
-                    else
+                    this.txSongLevel = new CTexture(CDTXMania.app.Device, bitmap3, CDTXMania.TextureFormat, false);
+                }
+                using (var bitmap4 = new Bitmap(0x2a, 0x30))
+                {
+                    using (var graphics4 = Graphics.FromImage(bitmap4))
                     {
-                        num = ((float)CDTXMania.stageSongSelection.rChosenScore.SongInformation.Level.Drums) / 10f;
+                        int speedTexturePosY = CDTXMania.ConfigIni.nScrollSpeed.Drums * 48 > 20 * 48 ? 20 * 48 : CDTXMania.ConfigIni.nScrollSpeed.Drums * 48;
+                        graphics4.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, speedTexturePosY, 0x2a, 0x30), GraphicsUnit.Pixel);
                     }
+                    this.txDrumSpeed = new CTexture(CDTXMania.app.Device, bitmap4, CDTXMania.TextureFormat, false);
                 }
-                //If Skill Mode is CLASSIC, always display lvl as Classic Style
-                if (CDTXMania.ConfigIni.nSkillMode == 0 || (CDTXMania.ConfigIni.bCLASSIC譜面判別を有効にする && 
-                    (CDTXMania.DTX.bチップがある.LeftCymbal == false) && 
-                    (CDTXMania.DTX.bチップがある.LP == false) && 
-                    (CDTXMania.DTX.bチップがある.LBD == false) && 
-                    (CDTXMania.DTX.bチップがある.FT == false) && 
-                    (CDTXMania.DTX.bチップがある.Ride == false) &&
-                    (CDTXMania.DTX.b強制的にXG譜面にする == false)))
-                {
-                    graphics.DrawString(string.Format("{0:00}", num), this.ftSongDifficultyFont, new SolidBrush(Color.FromArgb(0xba, 0xba, 0xba)), (float)0f, (float)-4f);
-                }
-                else
-                {
-                    graphics.DrawString(string.Format("{0:0.00}", num), this.ftSongDifficultyFont, new SolidBrush(Color.FromArgb(0xba, 0xba, 0xba)), (float)0f, (float)-4f);
-                }
-                this.txSongLevel = new CTexture(CDTXMania.app.Device, bitmap3, CDTXMania.TextureFormat, false);
-                graphics.Dispose();
-                bitmap3.Dispose();
-                Bitmap bitmap4 = new Bitmap(0x2a, 0x30);
-                graphics = Graphics.FromImage(bitmap4);
-                int speedTexturePosY = CDTXMania.ConfigIni.nScrollSpeed.Drums * 48 > 20 * 48 ? 20 * 48 : CDTXMania.ConfigIni.nScrollSpeed.Drums * 48;
-                graphics.DrawImage(this.iDrumSpeed, new Rectangle(0, 0, 0x2a, 0x30), new Rectangle(0, speedTexturePosY, 0x2a, 0x30), GraphicsUnit.Pixel);
-                this.txDrumSpeed = new CTexture(CDTXMania.app.Device, bitmap4, CDTXMania.TextureFormat, false);
-                graphics.Dispose();
-                //graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
-                bitmap4.Dispose();
                 base.OnManagedCreateResources();
             }
         }

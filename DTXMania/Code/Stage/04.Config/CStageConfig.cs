@@ -594,10 +594,12 @@ namespace DTXMania
 		{
 			try
 			{
-				var image = new Bitmap( (int)(220 * 2 ), (int)(192 * 2 ) );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
-				var graphics = Graphics.FromImage( image );
+				using (var image = new Bitmap( (int)(220 * 2 ), (int)(192 * 2 ) ))		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
+				{
+				using (var graphics = Graphics.FromImage( image ))
+				{
 				graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-				
+
 				string[,] str = new string[ 2, 2 ];
 				switch( this.nCurrentMenuNumber )
 				{
@@ -655,13 +657,13 @@ namespace DTXMania
 						str[ 1, 1 ] = "";
 						break;
 				}
-				
+
 				int c = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ? 0 : 1;
 				for (int i = 0; i < 2; i++)
 				{
 					graphics.DrawString( str[ c, i ], this.ftFont, Brushes.Black, new PointF( 4f , ( i * 30 ) ) );
 				}
-				graphics.Dispose();
+				}
 				if( this.txDescriptionPanel != null )
 				{
 					this.txDescriptionPanel.Dispose();
@@ -669,7 +671,7 @@ namespace DTXMania
 				//this.txDescriptionPanel = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
 				// this.txDescriptionPanel.vcScaleRatio.X = 0.5f;
 				// this.txDescriptionPanel.vcScaleRatio.Y = 0.5f;
-				image.Dispose();
+				}
 			}
 			catch( CTextureCreateFailedException )
 			{
@@ -681,8 +683,10 @@ namespace DTXMania
 		{
 			try
 			{
-				var image = new Bitmap( (int)(400), (int)(192) );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する___のは中止。処理速度向上のため。）
-				var graphics = Graphics.FromImage( image );
+				using (var image = new Bitmap( (int)(400), (int)(192) ))		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する___のは中止。処理速度向上のため。）
+				{
+				using (var graphics = Graphics.FromImage( image ))
+				{
 				graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
 				CItemBase item = this.actList.ibCurrentSelection;
@@ -696,7 +700,7 @@ namespace DTXMania
 					//}
 					graphics.DrawString( item.str説明文, this.ftFont, Brushes.Black, new RectangleF( 4f, (float) 0, 230, 430 ) );
 				}
-				graphics.Dispose();
+				}
 				if( this.txDescriptionPanel != null )
 				{
 					this.txDescriptionPanel.Dispose();
@@ -704,7 +708,7 @@ namespace DTXMania
 				this.txDescriptionPanel = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat, false );
 				//this.txDescriptionPanel.vcScaleRatio.X = 0.58f;
 				//this.txDescriptionPanel.vcScaleRatio.Y = 0.58f;
-				image.Dispose();
+				}
 			}
 			catch( CTextureCreateFailedException )
 			{

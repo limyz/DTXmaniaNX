@@ -104,7 +104,6 @@ namespace FDK
 			// バイナリ(Byte配列)をBitmapに変換
 			MemoryStream mms = new MemoryStream( _txData );
 			Bitmap bmpOrg = new Bitmap( mms );
-			mms.Close();
 
 			Bitmap bmpNew = new Bitmap( w, h );
 			Graphics g = Graphics.FromImage( bmpNew );
@@ -140,6 +139,8 @@ namespace FDK
 			g = null;
 			bmpOrg.Dispose();
 			bmpOrg = null;
+			mms.Dispose();
+			mms = null;
 			base.MakeTexture( device, bmpNew, format, b黒を透過する, pool );
 			bmpNew.Dispose();
 			bmpNew = null;

@@ -1626,8 +1626,10 @@ namespace DTXMania
 				{
 					g.TextRenderingHint = TextRenderingHint.AntiAlias;
 					float y = ( ( ( float ) bmp.Height ) / 2f ) - ( ( CDTXMania.ConfigIni.n選曲リストフォントのサイズdot * 2f ) / 2f );
-					g.DrawString( str曲名, this.ftSongListFont, new SolidBrush( this.color文字影 ), (float) 2f, (float) ( y + 2f ) );
-					g.DrawString( str曲名, this.ftSongListFont, new SolidBrush( color ), 0f, y );
+					using (var brShadow = new SolidBrush( this.color文字影 ))
+						g.DrawString( str曲名, this.ftSongListFont, brShadow, (float) 2f, (float) ( y + 2f ) );
+					using (var brText = new SolidBrush( color ))
+						g.DrawString( str曲名, this.ftSongListFont, brText, 0f, y );
 
 					CDTXMania.t安全にDisposeする( ref this.stBarInformation[ nバー番号 ].txTitleName );
 

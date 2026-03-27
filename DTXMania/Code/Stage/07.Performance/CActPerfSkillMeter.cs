@@ -426,13 +426,13 @@ namespace DTXMania
                     };
                 }
 
-                Pen penMybest = new Pen( Color.Pink, 2 );
-                g.DrawLines( penMybest, posMybest );
+                using (var penMybest = new Pen( Color.Pink, 2 ))
+                    g.DrawLines( penMybest, posMybest );
 
                 if( CDTXMania.listTargetGhsotLag[ this.nGraphUsePart ] != null && CDTXMania.listTargetGhostScoreData[ this.nGraphUsePart ] != null )
                 {
-                    Pen penTarget = new Pen( Color.Orange, 2 );
-                    g.DrawLines( penTarget, posTarget );
+                    using (var penTarget = new Pen( Color.Orange, 2 ))
+                        g.DrawLines( penTarget, posTarget );
                 }
 
                 g.Dispose();

@@ -538,10 +538,12 @@ namespace DTXMania
 		{
 			try
 			{
-				var image = new Bitmap( 220 * 2, 192 * 2 );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
-				var graphics = Graphics.FromImage( image );
+				using (var image = new Bitmap( 220 * 2, 192 * 2 ))		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
+				{
+				using (var graphics = Graphics.FromImage( image ))
+				{
 				graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-				
+
 				string[,] str = new string[ 2, 2 ];
 				switch( this.nCurrentMenuNumber )
 				{
@@ -599,13 +601,13 @@ namespace DTXMania
 						str[ 1, 1 ] = "CONFIGURATION menu.";
 						break;
 				}
-				
+
 				int c = (CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "ja") ? 0 : 1;
 				for (int i = 0; i < 2; i++)
 				{
 					graphics.DrawString( str[ c, i ], this.ftFont, Brushes.White, new PointF( 4f, ( i * 30 ) ) );
 				}
-				graphics.Dispose();
+				}
 				if( this.txDescriptionPanel != null )
 				{
 					this.txDescriptionPanel.Dispose();
@@ -613,7 +615,7 @@ namespace DTXMania
 				this.txDescriptionPanel = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
 				this.txDescriptionPanel.vcScaleRatio.X = 0.8f;
 				this.txDescriptionPanel.vcScaleRatio.Y = 0.8f;
-				image.Dispose();
+				}
 			}
 			catch( CTextureCreateFailedException )
 			{
@@ -625,8 +627,10 @@ namespace DTXMania
 		{
 			try
 			{
-				var image = new Bitmap( 440, 0x100 );		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
-				var graphics = Graphics.FromImage( image );
+				using (var image = new Bitmap( 440, 0x100 ))		// 説明文領域サイズの縦横 2 倍。（描画時に 0.5 倍で表示する。）
+				{
+				using (var graphics = Graphics.FromImage( image ))
+				{
 				graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
 				CItemBase item = this.actList.ibCurrentSelection;
@@ -639,7 +643,7 @@ namespace DTXMania
 						num += 30;
 					}
 				}
-				graphics.Dispose();
+				}
 				if( this.txDescriptionPanel != null )
 				{
 					this.txDescriptionPanel.Dispose();
@@ -647,7 +651,7 @@ namespace DTXMania
 				this.txDescriptionPanel = new CTexture( CDTXMania.app.Device, image, CDTXMania.TextureFormat );
 				this.txDescriptionPanel.vcScaleRatio.X = 0.8f;
 				this.txDescriptionPanel.vcScaleRatio.Y = 0.8f;
-				image.Dispose();
+				}
 			}
 			catch( CTextureCreateFailedException )
 			{
