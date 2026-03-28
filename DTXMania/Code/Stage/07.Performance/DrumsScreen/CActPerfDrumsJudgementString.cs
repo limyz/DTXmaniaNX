@@ -1286,35 +1286,14 @@ namespace DTXMania
                             {
                                 if (CDTXMania.ConfigIni.nJudgeFrames > 1 && CDTXMania.stagePerfDrumsScreen.tx判定画像anime != null)
                                 {
-                                    if (base.st状態[j].judge == EJudgement.Perfect)
+                                    // Sprite index lookup: Perfect=0, Great=1, Good=2, Poor=3, Miss=4, Auto=5
+                                    // EJudgement.Bad (5) is unused here; EJudgement.Auto (6) maps to sprite index 5
+                                    int[] judgeSpriteIndex = { 0, 1, 2, 3, 4, -1, 5 };
+                                    int spriteIdx = judgeSpriteIndex[(int)base.st状態[j].judge];
+                                    if (spriteIdx >= 0)
                                     {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(0, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                    }
-                                    if (base.st状態[j].judge == EJudgement.Great)
-                                    {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 1, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                    }
-                                    if (base.st状態[j].judge == EJudgement.Good)
-                                    {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 2, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                    }
-                                    if (base.st状態[j].judge == EJudgement.Poor)
-                                    {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 3, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                    }
-                                    if (base.st状態[j].judge == EJudgement.Miss)
-                                    {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 4, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                    }
-                                    if (base.st状態[j].judge == EJudgement.Auto)
-                                    {
-                                        //base.tx判定文字列[num4].tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
-                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y, new Rectangle(nRectX * 5, nRectY * base.st状態[j].nRect, nRectX, nRectY));
+                                        CDTXMania.stagePerfDrumsScreen.tx判定画像anime.tDraw2D(CDTXMania.app.Device, x, y,
+                                            new Rectangle(nRectX * spriteIdx, nRectY * base.st状態[j].nRect, nRectX, nRectY));
                                     }
                                 }
                                 else if (base.tx判定文字列[num4] != null)

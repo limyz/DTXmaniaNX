@@ -33,7 +33,9 @@ namespace DTXMania
                 var stSongInformation = CDTXMania.stageSongSelection.rSelectedScore.SongInformation;
                 var rConfirmedSong = CDTXMania.stageSongSelection.rConfirmedSong;
                 var nConfirmedDifficulty = CDTXMania.stageSongSelection.nConfirmedSongDifficulty;
-                var nEndTimeMs = CDTXMania.DTX.listChip.OrderBy(c => c.nPlaybackTimeMs).LastOrDefault()?.nPlaybackTimeMs ?? 0;
+                var nEndTimeMs = CDTXMania.DTX.listChip.Count > 0
+                    ? CDTXMania.DTX.listChip.Max(c => c.nPlaybackTimeMs)
+                    : 0;
 
                 //Shorten details string to avoid hitting max of 128 bytes
                 string detailsString = $"{rConfirmedSong.strタイトル}";
